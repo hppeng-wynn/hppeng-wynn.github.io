@@ -11,10 +11,16 @@ function skillPointsToPercentage(skp){
 }
 
 
-for (i = 0; i < 151; i++) {
-  console.log(i, ", ",skillPointsToPercentage(i));
-}
-
 class Build{
-    
+    constructor(helmet,chestplate,leggings,boots,ring1,ring2,bracelet,necklace,level){
+        this.helmet = helmet;
+        this.chestplate = chestplate;
+        this.leggings = leggings;
+        this.boots = boots;
+        this.ring1 = ring1;
+        this.ring2 = ring2;
+        this.bracelet = bracelet;
+        this.necklace = necklace;
+        this.level = level;
+    }
 }
