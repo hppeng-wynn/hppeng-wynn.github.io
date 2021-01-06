@@ -1,12 +1,11 @@
 import {Build} from "./build.js"
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
-
-//const item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "armorType", "color", "lore", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expoding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "accessoryType", "fixID", "skin", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd" ]
 
 let db;
 let items;
 let reload = false;
+// Set up item lists for quick access later.
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
@@ -17,6 +16,10 @@ for (const it of itemTypes) {
 }
 let itemMap = new Map();
 
+/*
+ * Function that takes an item list and populates its corresponding dropdown.
+ * Used for armors and bracelet/necklace.
+ */
 function populateItemList(type) {
     let item_list = document.getElementById(type+"-items");
     for (const item of itemLists.get(type)) {
@@ -26,15 +29,19 @@ function populateItemList(type) {
     }
 }
 
+/*
+ * Populate dropdowns, add listeners, etc.
+ */
 function init() {
     console.log(items);
     for (const item of items) {
-        itemLists.get(item.type).push(item.name);
-        itemMap.set(item.name, item);
+        itemLists.get(item.type).push(item.displayName);
+        itemMap.set(item.displayName, item);
     }
     
     for (const armorType of armorTypes) {
         populateItemList(armorType);
+        // Add change listener to update armor slots.
         document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
             let item = itemMap.get(event.target.value);
             if (item !== undefined) {
@@ -68,6 +75,8 @@ function init() {
             weapon_list.appendChild(el);
         }
     }
+
+    // Add change listener to update weapon slots.
     document.getElementById("weapon-choice").addEventListener("change", (event) => {
         let item = itemMap.get(event.target.value);
         if (item !== undefined) {
@@ -79,6 +88,9 @@ function init() {
     });
 }
 
+/*
+ * Load item set from local DB. Calls init() on success.
+ */
 async function load_local() {
     let get_tx = db.transaction('item_db', 'readonly');
     let get_store = get_tx.objectStore('item_db');
@@ -95,12 +107,18 @@ async function load_local() {
     db.close();
 }
 
+/*
+ * Clean bad item data. For now just assigns display name if it isn't already assigned.
+ */
 function clean_item(item) {
-    if (item.displayName === null) {
+    if (item.displayName === undefined) {
         item.displayName = item.name;
     }
 }
 
+/*
+ * Load item set from remote DB (aka a big json file). Calls init() on success.
+ */
 async function load() {
     let url = "https://hppeng-wynn.github.io/compress.json";
     let result = await (await fetch(url)).json();
@@ -117,6 +135,7 @@ async function load() {
     let add_store = add_tx.objectStore('item_db');
     let add_promises = [];
     for (const item of items) {
+        clean_item(item);
         add_promises.push(add_store.add(item, item.name));
     }
     add_promises.push(add_tx.complete);
@@ -149,6 +168,12 @@ request.onupgradeneeded = function(e) {
 
     let db = e.target.result;
     
+    try {
+        db.deleteObjectStore('item_db');
+    }
+    catch (error) {
+        console.log("Could not delete DB. This is probably fine");
+    }
     let objectStore = db.createObjectStore('item_db');
 
     objectStore.createIndex('item', 'item', {unique: false});
