@@ -9,6 +9,9 @@ function skillPointsToPercentage(skp){
         //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
     }       
 }
+for (i = 0; i < 151; i++) {
+    console.log(i, ", ",skillPointsToPercentage(i));
+  }
 
 
 class Build{

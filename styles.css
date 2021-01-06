@@ -1,0 +1,24 @@
+.header {
+    padding: 2%;
+    text-align: center;  
+}
+
+.equipment {
+    padding: 4%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.skillpoints {
+    padding: 4%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.center {
+    text-align: center;  
+}
