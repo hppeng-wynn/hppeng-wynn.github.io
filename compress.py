@@ -13,7 +13,7 @@ translate_mappings = {
     #"set": "set",
     "sockets": "slots",
     #"type": "type",
-    # UNUSED? "armorType": "armorType",
+    #"armorType": "armorType",
     "armorColor": "color",
     "addedLore": "lore",
     #"material": "material",

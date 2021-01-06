@@ -1,11 +1,10 @@
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
-
-//const item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "armorType", "color", "lore", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expoding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "accessoryType", "fixID", "skin", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd" ]
 
 let db;
 let items;
 let reload = false;
+// Set up item lists for quick access later.
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
@@ -16,6 +15,10 @@ for (const it of itemTypes) {
 }
 let itemMap = new Map();
 
+/*
+ * Function that takes an item list and populates its corresponding dropdown.
+ * Used for armors and bracelet/necklace.
+ */
 function populateItemList(type) {
     let item_list = document.getElementById(type+"-items");
     for (const item of itemLists.get(type)) {
@@ -25,6 +28,9 @@ function populateItemList(type) {
     }
 }
 
+/*
+ * Populate dropdowns, add listeners, etc.
+ */
 function init() {
     let noneItems = [
         {name: "No Helmet", category: "armor", type: "helmet", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
@@ -39,8 +45,8 @@ function init() {
     ]
     console.log(items);
     for (const item of items) {
-        itemLists.get(item.type).push(item.name);
-        itemMap.set(item.name, item);
+        itemLists.get(item.type).push(item.displayName);
+        itemMap.set(item.displayName, item);
     }
     for (const item of noneItems){
         itemLists.get(item.type).push(item.name);
@@ -49,6 +55,7 @@ function init() {
     
     for (const armorType of armorTypes) {
         populateItemList(armorType);
+        // Add change listener to update armor slots.
         document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
             let item = itemMap.get(event.target.value);
             if (item !== undefined) {
@@ -82,6 +89,8 @@ function init() {
             weapon_list.appendChild(el);
         }
     }
+
+    // Add change listener to update weapon slots.
     document.getElementById("weapon-choice").addEventListener("change", (event) => {
         let item = itemMap.get(event.target.value);
         if (item !== undefined) {
@@ -93,6 +102,9 @@ function init() {
     });
 }
 
+/*
+ * Load item set from local DB. Calls init() on success.
+ */
 async function load_local() {
     let get_tx = db.transaction('item_db', 'readonly');
     let get_store = get_tx.objectStore('item_db');
@@ -109,12 +121,18 @@ async function load_local() {
     db.close();
 }
 
+/*
+ * Clean bad item data. For now just assigns display name if it isn't already assigned.
+ */
 function clean_item(item) {
-    if (item.displayName === null) {
+    if (item.displayName === undefined) {
         item.displayName = item.name;
     }
 }
 
+/*
+ * Load item set from remote DB (aka a big json file). Calls init() on success.
+ */
 async function load() {
     let url = "https://hppeng-wynn.github.io/compress.json";
     let result = await (await fetch(url)).json();
@@ -131,6 +149,7 @@ async function load() {
     let add_store = add_tx.objectStore('item_db');
     let add_promises = [];
     for (const item of items) {
+        clean_item(item);
         add_promises.push(add_store.add(item, item.name));
     }
     add_promises.push(add_tx.complete);
@@ -163,6 +182,12 @@ request.onupgradeneeded = function(e) {
 
     let db = e.target.result;
     
+    try {
+        db.deleteObjectStore('item_db');
+    }
+    catch (error) {
+        console.log("Could not delete DB. This is probably fine");
+    }
     let objectStore = db.createObjectStore('item_db');
 
     objectStore.createIndex('item', 'item', {unique: false});
@@ -219,7 +244,6 @@ function resetFields(){
     document.getElementById("def-skp").value = "";
     document.getElementById("agi-skp").value = "";
 }
-
 
 /*Class that represents a wynn player's build.
 */
