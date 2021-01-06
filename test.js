@@ -199,19 +199,19 @@ function calculateBuild(){
 }
 
 function resetFields(){
-    document.getElementById("helmet-choice").value = "";
+    document.getElementById("helmet-choice").value = "No Helmet";
     document.getElementById("helmet-powder").value = "";
-    document.getElementById("chestplate-choice").value = "";
+    document.getElementById("chestplate-choice").value = "No Chestplate";
     document.getElementById("chestplate-powder").value = "";
-    document.getElementById("leggings-choice").value = "";
+    document.getElementById("leggings-choice").value = "No Leggings";
     document.getElementById("leggings-powder").value = "";
-    document.getElementById("boots-choice").value = "";
+    document.getElementById("boots-choice").value = "No Boots";
     document.getElementById("boots-powder").value = "";
-    document.getElementById("ring1-choice").value = "";
-    document.getElementById("ring2-choice").value = "";
-    document.getElementById("bracelet-choice").value = "";
-    document.getElementById("necklace-choice").value = "";
-    document.getElementById("weapon-choice").value = "";
+    document.getElementById("ring1-choice").value = "No Ring 1";
+    document.getElementById("ring2-choice").value = "No Ring 2";
+    document.getElementById("bracelet-choice").value = "No Bracelet";
+    document.getElementById("necklace-choice").value = "No Necklace";
+    document.getElementById("weapon-choice").value = "No Weapon";
     document.getElementById("weapon-powder").value = "";
     document.getElementById("str-skp").value = "";
     document.getElementById("dex-skp").value = "";
