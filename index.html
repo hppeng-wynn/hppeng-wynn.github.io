@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="favicon.png">
+        <link rel="manifest" href="manifest.json">
+        <title>Wynn Clientside</title>
+    </head>
+    <body>
+        <div class="header">
+            Wynn build calculator
+        </div>
+        <div class="equipment">
+            <div class="center" style="grid-column:1;grid-row:1">
+                <div>
+                    <label for="helmet-choice">Helmet:</label>
+                    <input list="helmet-items" id="helmet-choice" name="helmet-choice" />
+                    <datalist id="helmet-items">
+                    </datalist>
+                </div>
+                <div id="helmet-slots">
+                    X slots
+                </div>
+                <div>
+                    <label for="helmet-powder">Powdering:</label>
+                    <input type="text" id="helmet-powder" name="helmet-powder" />
+                </div>
+            </div>
+            <div class="center" style="grid-column:2;grid-row:1">
+                <div>
+                    <label for="chestplate-choice">Chestplate:</label>
+                    <input list="chestplate-items" id="chestplate-choice" name="chestplate-choice" />
+                    <datalist id="chestplate-items">
+                    </datalist>
+                </div>
+                <div id="chestplate-slots">
+                    X slots
+                </div>
+                <div>
+                    <label for="chestplate-powder">Powdering:</label>
+                    <input type="text" id="chestplate-powder" name="chestplate-powder" />
+                </div>
+            </div>
+            <div class="center" style="grid-column:3;grid-row:1">
+                <div>
+                    <label for="leggings-choice">Leggings:</label>
+                    <input list="leggings-items" id="leggings-choice" name="leggings-choice" />
+                    <datalist id="leggings-items">
+                    </datalist>
+                </div>
+                <div id="leggings-slots">
+                    X slots
+                </div>
+                <div>
+                    <label for="leggings-powder">Powdering:</label>
+                    <input type="text" id="leggings-powder" name="leggings-powder" />
+                </div>
+            </div>
+            <div class="center" style="grid-column:4;grid-row:1">
+                <div id="boots">
+                    <label for="boots-choice">Boots:</label>
+                    <input list="boots-items" id="boots-choice" name="boots-choice" />
+                    <datalist id="boots-items">
+                    </datalist>
+                </div>
+                <div id="boots-slots">
+                    X slots
+                </div>
+                <div>
+                    <label for="boots-powder">Powdering:</label>
+                    <input type="text" id="boots-powder" name="boots-powder" />
+                </div>
+            </div>
+            <div class="center" style="grid-column:1;grid-row:2">
+                <label for="ring1-choice">Ring 1:</label>
+                <input list="ring1-items" id="ring1-choice" name="ring1-choice" />
+                <datalist id="ring1-items">
+                </datalist>
+            </div>
+            <div class="center" style="grid-column:2;grid-row:2">
+                <label for="ring2-choice">Ring 2:</label>
+                <input list="ring2-items" id="ring2-choice" name="ring2-choice" />
+                <datalist id="ring2-items">
+                </datalist>
+            </div>
+            <div class="center" style="grid-column:3;grid-row:2">
+                <label for="bracelet-choice">Bracelet:</label>
+                <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" />
+                <datalist id="bracelet-items">
+                </datalist>
+            </div>
+            <div class="center" style="grid-column:4;grid-row:2">
+                <label for="necklace-choice">Necklace:</label>
+                <input list="necklace-items" id="necklace-choice" name="necklace-choice" />
+                <datalist id="necklace-items">
+                </datalist>
+            </div>
+            <div class="center" style="grid-column:1;grid-row:3">
+                <label for="weapon-choice">Weapon:</label>
+                <input list="weapon-items" id="weapon-choice" name="weapon-choice" />
+                <datalist id="weapon-items">
+                </datalist>
+            </div>
+            <div class="center" style="grid-column:2;grid-row:3">
+                <div id="weapon-slots">
+                    X slots
+                </div>
+                <div>
+                    <label for="weapon-powder">Weapon powder:</label>
+                    <input type="text" id="weapon-powder" name="weapon-powder" />
+                </div>
+            </div>
+            <div class="center" style="grid-column:3;grid-row:3">
+                Calculate
+            </div>
+            <div class="center" style="grid-column:4;grid-row:3">
+                Reset
+            </div>
+        </div>
+        <div class="skillpoints">
+            <div class="center" style="grid-column:1;grid-row:1">
+                <label for="str-skp">Strength:</label>
+                <input type="text" id="str-skp" name="str-skp" />
+            </div>
+            <div class="center" style="grid-column:2;grid-row:1">
+                <label for="dex-skp">Dexterity:</label>
+                <input type="text" id="dex-skp" name="dex-skp" />
+            </div>
+            <div class="center" style="grid-column:3;grid-row:1">
+                <label for="int-skp">Intelligence:</label>
+                <input type="text" id="int-skp" name="int-skp" />
+            </div>
+            <div class="center" style="grid-column:4;grid-row:1">
+                <label for="def-skp">Defense:</label>
+                <input type="text" id="def-skp" name="def-skp" />
+            </div>
+            <div class="center" style="grid-column:5;grid-row:1">
+                <label for="agi-skp">Agility:</label>
+                <input type="text" id="agi-skp" name="agi-skp" />
+            </div>
+
+        </div>
+        <script src="test.js"></script>
+    </body>
+</html>
