@@ -111,10 +111,14 @@
                 </div>
             </div>
             <div class="center" style="grid-column:3;grid-row:3">
-                Calculate
+                <button class = "button" id = "calc-button" onclick = "calculateBuild()">
+                    Calculate
+                </button>
             </div>
             <div class="center" style="grid-column:4;grid-row:3">
-                Reset
+                <button class = "reset" id = "reset-button" onclick = "resetFields()">
+                    Reset
+                </button>
             </div>
         </div>
         <div class="skillpoints">
@@ -140,6 +144,7 @@
             </div>
 
         </div>
-        <script src="test.js"></script>
+        <script type="module" src="build.js"></script>
+        <script type="module" src="test.js"></script>
     </body>
 </html>

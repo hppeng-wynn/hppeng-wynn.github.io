@@ -1,3 +1,4 @@
+import {Build} from "./build.js"
 const DB_VERSION = 1;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -155,3 +156,41 @@ request.onupgradeneeded = function(e) {
     console.log("DB setup complete...");
 }
 
+function calculateBuild(){
+    //TODO: implement level changing
+    let player_build = new Build(
+        106,
+        itemMap.get(document.getElementById("helmet-choice").value),
+        itemMap.get(document.getElementById("chestplate-choice").value),
+        itemMap.get(document.getElementById("leggings-choice").value),
+        itemMap.get(document.getElementById("boots-choice").value),
+        itemMap.get(document.getElementById("ring1-choice").value),
+        itemMap.get(document.getElementById("ring2-choice").value),
+        itemMap.get(document.getElementById("bracelet-choice").value),
+        itemMap.get(document.getElementById("necklace-choice").value),
+        itemMap.get(document.getElementById("weapon-choice").value),
+        );
+    console.log(player_build.toString())
+}
+
+function resetFields(){
+    document.getElementById("helmet-choice").value = "";
+    document.getElementById("helmet-powder").value = "";
+    document.getElementById("chestplate-choice").value = "";
+    document.getElementById("chestplate-powder").value = "";
+    document.getElementById("leggings-choice").value = "";
+    document.getElementById("leggings-powder").value = "";
+    document.getElementById("boots-choice").value = "";
+    document.getElementById("boots-powder").value = "";
+    document.getElementById("ring1-choice").value = "";
+    document.getElementById("ring2-choice").value = "";
+    document.getElementById("bracelet-choice").value = "";
+    document.getElementById("necklace-choice").value = "";
+    document.getElementById("weapon-choice").value = "";
+    document.getElementById("weapon-powder").value = "";
+    document.getElementById("str-skp").value = "";
+    document.getElementById("dex-skp").value = "";
+    document.getElementById("int-skp").value = "";
+    document.getElementById("def-skp").value = "";
+    document.getElementById("agi-skp").value = "";
+}
