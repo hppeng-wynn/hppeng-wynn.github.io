@@ -22,3 +22,12 @@
 .center {
     text-align: center;  
 }
+
+.build{
+    padding: 4%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(60px, auto);
+    width: 100vw;
+}

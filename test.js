@@ -1,3 +1,5 @@
+
+let player_build;
 // Set up item lists for quick access later.
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
@@ -138,7 +140,7 @@ function calculateBuild(){
     if(weapon===""){
         weapon = "No Weapon";
     }
-    let player_build = new Build(
+    player_build = new Build(
         106,
         itemMap.get(helmet),
         itemMap.get(chestplate),
@@ -151,6 +153,15 @@ function calculateBuild(){
         itemMap.get(weapon),
         );
     console.log(player_build.toString());
+    document.getElementById("build-helmet").innerHTML = player_build.helmet.name;
+    document.getElementById("build-chestplate").innerHTML = player_build.chestplate.name;
+    document.getElementById("build-leggings").innerHTML = player_build.helmet.name;
+    document.getElementById("build-boots").innerHTML = player_build.helmet.name;
+    document.getElementById("build-ring1").innerHTML = player_build.ring1.name;
+    document.getElementById("build-ring2").innerHTML = player_build.ring2.name;
+    document.getElementById("build-bracelet").innerHTML = player_build.bracelet.name;
+    document.getElementById("build-necklace").innerHTML = player_build.necklace.name;
+    document.getElementById("build-weapon").innerHTML = player_build.weapon.name;
 }
 
 function resetFields(){
