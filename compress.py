@@ -13,10 +13,10 @@ translate_mappings = {
     #"set": "set",
     "sockets": "slots",
     #"type": "type",
-    #"armorType": "armorType",
-    "armorColor": "color",
-    "addedLore": "lore",
-    #"material": "material",
+    #"armorType": "armorType", (deleted)
+    #"armorColor": "color", (deleted)
+    #"addedLore": "lore", (deleted)
+    #"material": "material", (deleted)
     "dropType": "drop",
     #"quest": "quest",
     "restrictions": "restrict",
@@ -55,7 +55,7 @@ translate_mappings = {
     "agilityPoints": "agi",
     "defensePoints": "def",
     #"thorns": "thorns",
-    #"exploding": "expoding",
+    #"exploding": "exploding",
     "speed": "spd",
     "attackSpeedBonus": "atkTier",
     #"poison": "poison",
@@ -103,7 +103,8 @@ delete_keys = [
     "addedLore",
     "skin",
     "armorType",
-    "armorColor"
+    "armorColor",
+    "material"
 ]
 
 for item in items:

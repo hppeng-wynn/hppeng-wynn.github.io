@@ -99,16 +99,25 @@ class Build{
         }else{
             this.level = level;
         }
-        this.skillpoints = levelToSkillPoints(this.level)
+        this.availableSkillpoints = levelToSkillPoints(this.level);
+        this.equipment = [ helmet, chestplate, leggings, boots, ring1, ring2, bracelet, necklace ];
+
+        // return [equip_order, best_skillpoints, final_skillpoints, best_total];
+        let result = calculate_skillpoints(this.equipment, weapon);
+        console.log(result);
+        this.equip_order = result[0];
+        this.base_skillpoints = result[1];
+        this.total_skillpoints = result[2];
+        this.assigned_skillpoints = result[3];
     }  
 
     /*Returns build in string format
-    */ TODO
+    */
     toString(){
         return this.helmet.name + ", " + this.chestplate.name + ", " + this.leggings.name + ", " + this.boots.name + ", " + this.ring1.name + ", " + this.ring2.name + ", " + this.bracelet.name + ", " + this.necklace.name + ", " + this.weapon.name;
     }
 
-    /* Getters */ TODO
+    /* Getters */
     getHealth(){
         health = parseInt(this.helmet.hp,10) + parseInt(this.helmet.hpBonus,10) + parseInt(this.chestplate.hp,10) + parseInt(this.chestplate.hpBonus,10) + parseInt(this.leggings.hp,10) + parseInt(this.leggings.hpBonus,10) + parseInt(this.boots.hp,10) + parseInt(this.boots.hpBonus,10) + parseInt(this.ring1.hp,10) + parseInt(this.ring1.hpBonus,10) + parseInt(this.ring2.hp,10) + parseInt(this.ring2.hpBonus,10) + parseInt(this.bracelet.hp,10) + parseInt(this.bracelet.hpBonus,10) + parseInt(this.necklace.hp,10) + parseInt(this.necklace.hpBonus,10) + parseInt(this.weapon.hp,10) + parseInt(this.weapon.hpBonus,10) + levelToHPBase(this.level);
         if(health<5){
@@ -117,6 +126,8 @@ class Build{
             return health;
         }
     }
-    /* Setters */ TODO
+
+    /* Setters */
+
 
 }

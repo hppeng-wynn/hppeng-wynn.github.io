@@ -1,4 +1,4 @@
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -31,6 +31,9 @@ function clean_item(item) {
     if (item.displayName === undefined) {
         item.displayName = item.name;
     }
+    item.skillpoints = [item.str, item.dex, item.int, item.def, item.agi];
+    item.has_negstat = item.str < 0 || item.dex < 0 || item.int < 0 || item.def < 0 || item.agi < 0;
+    item.reqs = [item.strReq, item.dexReq, item.intReq, item.defReq, item.agiReq];
 }
 
 /*
