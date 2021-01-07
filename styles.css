@@ -24,10 +24,15 @@
 }
 
 .build{
-    padding: 4%;
+    padding: 1%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     grid-auto-rows: minmax(60px, auto);
-    width: 100vw;
+    width: 90vw;
+}
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon {
+    border: 2px solid black;
+    border-radius: 3px;
+    width: 20vw;
 }

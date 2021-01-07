@@ -10,3 +10,6 @@ Damage calculation
 
 Skillpoint engine
 - Make it work...
+
+Item DB searcher
+- Make it

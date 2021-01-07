@@ -1,16 +1,12 @@
 
-const DB_VERSION = 2;
-// @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
-
-let db;
-let items;
 let player_build;
-let reload = false;
 // Set up item lists for quick access later.
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
-let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expoding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "type", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd" ];
+let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd" ];
+let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq","str", "dex", "int", "agi", "def", "fixID", "category"];
+let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let itemLists = new Map();
 for (const it of itemTypes) {
@@ -37,7 +33,7 @@ function populateItemList(type) {
 function init() {
     let noneItems = [
         {displayName:"No Helmet", name: "No Helmet", category: "armor", type: "helmet", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
-        {displayName:"No Chestplate", name: "No Chesptlate", category: "armor", type: "chestplate", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
+        {displayName:"No Chestplate", name: "No Chestplate", category: "armor", type: "chestplate", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
         {displayName:"No Leggings", name: "No Leggings", category: "armor", type: "leggings", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
         {displayName:"No Boots", name: "No Boots", category: "armor", type: "boots", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
         {displayName:"No Ring 1", name: "No Ring 1", category: "accessory", type: "ring", aDamPct: 0 ,aDef: 0, aDefPct: 0, agi: 0, agiReq: 0, atkTier: 0, classReq: null, def: 0, defReq: 0, dex: 0, dexReq: 0, drop: "never", eDamPct: 0, eDef: 0, eDefPct: 0, eSteal: 0, exploding: 0, fDamPct: 0, fDef: 0, fDefPct: 0, fixID: true, gSpd: 0, gXp: 0, hp: 0, hpBonus: 0, hprPct: 0, hprRaw: 0, int: 0, intReq: 0, jh: 0, lb: 0, lq: 0, ls: 0, lvl: 0, material: null, mdPct: 0, mdRaw: 0, mr: 0, ms: 0, poison: 0, quest: null, rainbowRaw: 0, ref: 0, sdPct: 0, sdRaw: 0, set: null, slots: 0, spPct1: 0, spPct2: 0, spPct3: 0, spPct4: 0, spRaw1: 0, spRaw2: 0, spRaw3: 0, spRaw4: 0, spRegen: 0, spd: 0, sprintReg: 0, str: 0, strReq: 0, tDamPct: 0, tDef: 0, tDefPct: 0, thorns: 0, tier: null, wDamPct: 0, wDef: 0, wDefPct: 0, xpb: 0},
@@ -106,99 +102,6 @@ function init() {
     });
 }
 
-/*
- * Load item set from local DB. Calls init() on success.
- */
-async function load_local() {
-    let get_tx = db.transaction('item_db', 'readonly');
-    let get_store = get_tx.objectStore('item_db');
-    let request = get_store.getAll();
-    request.onerror = function(event) {
-        console.log("Could not read local db...");
-    }
-    request.onsuccess = function(event) {
-        console.log("Successfully read local db.");
-        items = request.result;
-        init();
-    }
-    await get_tx.complete;
-    db.close();
-}
-
-/*
- * Clean bad item data. For now just assigns display name if it isn't already assigned.
- */
-function clean_item(item) {
-    if (item.displayName === undefined) {
-        item.displayName = item.name;
-    }
-}
-
-/*
- * Load item set from remote DB (aka a big json file). Calls init() on success.
- */
-async function load() {
-    let url = "https://hppeng-wynn.github.io/compress.json";
-    let result = await (await fetch(url)).json();
-    items = result.items;
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/clear
-    let clear_tx = db.transaction('item_db', 'readwrite');
-    let clear_store = clear_tx.objectStore('item_db');
-
-    await clear_store.clear();
-    await clear_tx.complete;
-
-    let add_tx = db.transaction('item_db', 'readwrite');
-    let add_store = add_tx.objectStore('item_db');
-    let add_promises = [];
-    for (const item of items) {
-        clean_item(item);
-        add_promises.push(add_store.add(item, item.name));
-    }
-    add_promises.push(add_tx.complete);
-    Promise.all(add_promises).then((values) => {
-        db.close();
-        init();
-    });
-}
-
-let request = window.indexedDB.open('item_db', DB_VERSION);
-
-request.onerror = function() {
-    console.log("DB failed to open...");
-};
-
-request.onsuccess = function() {
-    db = request.result;
-    if (!reload) {
-        console.log("Using stored data...")
-        load_local();
-    }
-    else {
-        console.log("Using new data...")
-        load();
-    }
-}
-
-request.onupgradeneeded = function(e) {
-    reload = true;
-
-    let db = e.target.result;
-    
-    try {
-        db.deleteObjectStore('item_db');
-    }
-    catch (error) {
-        console.log("Could not delete DB. This is probably fine");
-    }
-    let objectStore = db.createObjectStore('item_db');
-
-    objectStore.createIndex('item', 'item', {unique: false});
-
-    console.log("DB setup complete...");
-}
-
 function calculateBuild(){
     /*  TODO: implement level changing
         Make this entire function prettier
@@ -252,15 +155,112 @@ function calculateBuild(){
         itemMap.get(weapon),
         );
     console.log(player_build.toString());
-    document.getElementById("build-helmet").innerHTML = player_build.helmet.name;
-    document.getElementById("build-chestplate").innerHTML = player_build.chestplate.name;
-    document.getElementById("build-leggings").innerHTML = player_build.helmet.name;
-    document.getElementById("build-boots").innerHTML = player_build.helmet.name;
-    document.getElementById("build-ring1").innerHTML = player_build.ring1.name;
-    document.getElementById("build-ring2").innerHTML = player_build.ring2.name;
-    document.getElementById("build-bracelet").innerHTML = player_build.bracelet.name;
-    document.getElementById("build-necklace").innerHTML = player_build.necklace.name;
-    document.getElementById("build-weapon").innerHTML = player_build.weapon.name;
+    document.getElementById("build-helmet-stats").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.helmet.name)));
+    document.getElementById("build-chestplate").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.chestplate.name)));
+    document.getElementById("build-leggings").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.leggings.name)));
+    document.getElementById("build-boots").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.boots.name)));
+    document.getElementById("build-ring1").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.ring1.name)));
+    document.getElementById("build-ring2").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.ring2.name)));
+    document.getElementById("build-bracelet").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.bracelet.name)));
+    document.getElementById("build-necklace").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.necklace.name)));
+    document.getElementById("build-weapon").innerHTML = expandedItemToString(expandItem(itemMap.get(player_build.weapon.name)));
+}
+/*  Helper function that gets stats ranges for wearable items.
+    @param item - an item in Object format.
+*/
+function expandItem(item){
+    let minRolls = new Map();
+    let maxRolls = new Map();
+    let expandedItem = new Map();
+    if(item.fixID){ //The item has fixed IDs.
+        expandedItem.set("fixID",true);
+        for (const id in rolledIDs){ //all rolled IDs are numerical
+            if(item[rolledIDs[id]]){
+                minRolls.set(rolledIDs[id],item[rolledIDs[id]]);
+                maxRolls.set(rolledIDs[id],item[rolledIDs[id]]);
+            }
+        }
+        for (id in nonRolledIDs){
+            if(item[nonRolledIDs[id]]){
+                expandedItem.set(nonRolledIDs[id],item[nonRolledIDs[id]]);
+            }
+        }
+    }else{ //The item does not have fixed IDs.
+        for (const id in rolledIDs){
+            console.log(id);
+            if(item[rolledIDs[id]]){
+                if(item[rolledIDs[id]] > 0){ // positive rolled IDs                   
+                    minRolls.set(rolledIDs[id],item[rolledIDs[id]]*0.3);
+                    maxRolls.set(rolledIDs[id],item[rolledIDs[id]]*1.3);
+                }else if(item[rolledIDs[id]] < 0){ //negative rolled IDs
+                    minRolls.set(rolledIDs[id],item[rolledIDs[id]]*1.3);
+                    maxRolls.set(rolledIDs[id],item[rolledIDs[id]]*0.7);
+                }else{//Id = 0
+                    minRolls.set(rolledIDs[id],0);
+                    maxRolls.set(rolledIDs[id],0);
+                }
+            }
+        }
+        for (const id in nonRolledIDs){
+            if(item[nonRolledIDs[id]]){
+                expandedItem.set(nonRolledIDs[id],item[nonRolledIDs[id]]);
+            }
+        }
+    }
+    expandedItem.set("minRolls",minRolls);
+    expandedItem.set("maxRolls",maxRolls);
+    console.log(expandedItem)
+    return expandedItem;
+}
+/*  A second helper function that takes items from expandItem() and stringifies them.
+    @param item - a map with non-rolled Ids as normal key:value pairs and all rolled IDs as 2 separate key:value pairs in the minRoll and maxRoll keys that are mapped to maps.
+    TODO: write the function
+*/
+function expandedItemToString(item){
+    console.log(item);
+    let ids = ["lvl", "classReq","strReq", "dexReq", "intReq", "defReq","agiReq", "nDam", "eDam", "tDam", "wDam", "tDam", "aDam", "atkSpd", "hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "agi", "def", "hpBonus", "hprRaw", "hprPct", "sdRaw", "sdPct", "mdRaw", "mdPct", "mr", "ms", "ref", "ls", "poison", "thorns", "exploding", "spd", "atkTier",  "eDamPct", "tDamPct", "wDamPct", "fDamPct", "aDamPct", "eDefPct", "tDefPct", "wDefPct", "fDefPct", "aDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "xpb", "lb", "lq", "spRegen", "eSteal", "gXp", "gSpd", "slots", "set", "quest", "restrict"];
+    let idPrefixes = {"lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam":"Neutral Damage: ", "eDam":"Earth Damage: ", "tDam":"Thunder Damage: ", "wDam":"Water Damage: ", "fDam":"Fire Damage: ", "aDam":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health: ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Main Attack Neutral Damage: ", "mdPct":"Main Attack Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "exploding":"Expoding: ", "spd":"Walk Speed Bonus:", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"This item belongs to the ", "quest":"This item is the ", "restrict":""};
+    let idSuffixes = {"lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam":"", "eDam":"", "tDam":"", "wDam":"", "fDam":"", "aDam":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/4s", "ms":"/4s", "ref":"%", "ls":"/4s", "poison":"/3s", "thorns":"%", "exploding":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":" quest.", "restrict":""};
+    let itemString = "";
+    itemString = itemString.concat(item.get("name"),"<br><br>");
+    if(item.has("fixID") && item.get("fixID")){//fixed IDs
+        for(i = 0; i < ids.length; i++){ //iterate the ids
+            if(nonRolledIDs.includes(ids[i]) && item.get(ids[i])){//nonRolledID & non-0/non-null/non-und ID
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(item.get(ids[i]), idSuffixes[ids[i]],"<br>");
+            }
+            if(rolledIDs.includes(ids[i])&& item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
+                console.log("hi");
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(idRound(item.get("minRolls").get(ids[i])), idSuffixes[ids[i]],"<br>");
+            }//Just don't do anything if else
+        }
+    }else{//non-fixed IDs
+        for(i = 0; i < ids.length; i++){ //iterate the ids
+            if(nonRolledIDs.includes(ids[i]) && item.get(ids[i])){//nonRolledID & non-0/non-null/non-und ID
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(item.get(ids[i]), idSuffixes[ids[i]],"<br>");
+            }
+            if(rolledIDs.includes(ids[i])&& item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
+                console.log("hi");
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(idRound(item.get("minRolls").get(ids[i])), idSuffixes[ids[i]], " -> ", idRound(item.get("maxRolls").get(ids[i])),idSuffixes[ids[i]],"<br>");
+            }//Just don't do anything if else
+        }
+    }
+    itemString = itemString.concat("<br>",item.get("tier")," ", item.get("type"));
+    return itemString;
+}
+/*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
+* @param id
+*/
+function idRound(id){
+    rounded = Math.round(id);
+    if(rounded == 0){
+        return 1;
+    }else{
+        return rounded;
+    }
 }
 
 function resetFields(){
@@ -285,44 +285,4 @@ function resetFields(){
     document.getElementById("agi-skp").value = "";
 }
 
-
-/*Turns the input amount of skill points into a float precision percentage.
-* @param skp - the integer skillpoint count to be converted
-*/
-function skillPointsToPercentage(skp){
-    if (skp<=0){
-        return 0.0;
-    }else if(skp>=150){
-        return 0.808;
-    }else{
-        return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
-        //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
-    }       
-}
-
-/*Turns the input amount of levels into skillpoints available.
-*
-* @param level - the integer level count te be converted
-*/
-function levelToSkillPoints(level){
-    if(level < 1){
-        return 0;
-    }else if(level >= 101){
-        return 200;
-    }else{
-        return (level - 1) * 2;
-    }
-}
-
-/*Turns the input amount of levels in to base HP.
-* @param level - the integer level count to be converted
-*/
-function levelToHPBase(level){
-    if(level < 1){ //bad level
-        return this.levelToHPBase(1);
-    }else if (level > 106){ //also bad level
-        return this.levelToHPBase(106);
-    }else{ //good level
-        return 5*level + 5;
-    }
-}
+load_init(init);
