@@ -11,6 +11,10 @@ console.log(url_tag);
  * END testing section
  */
 
+const BUILD_VERSION = "1.0";
+
+document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+
 let player_build;
 // Set up item lists for quick access later.
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
@@ -149,7 +153,7 @@ function populateFromURL() {
         let bracelet;
         let necklace;
         let weapon;
-        let info = url_tag.split("|");
+        let info = url_tag.split("_");
         let version = info[0];
         if (version === "0") {
             let equipments = info[1];
@@ -189,7 +193,7 @@ function populateFromURL() {
 
 function encodeBuild() {
     if (player_build) {
-        let build_string = "0|" + Base64.fromIntN(player_build.helmet.id, 3) +
+        let build_string = "0_" + Base64.fromIntN(player_build.helmet.id, 3) +
                             Base64.fromIntN(player_build.chestplate.id, 3) +
                             Base64.fromIntN(player_build.leggings.id, 3) +
                             Base64.fromIntN(player_build.boots.id, 3) +
@@ -309,7 +313,7 @@ function expandItem(item){
             }
         }
     }else{ //The item does not have fixed IDs.
-        for (const id in rolledIDs){
+        for (const id in rolledID-){
             console.log(id);
             if(item[rolledIDs[id]]){
                 if(item[rolledIDs[id]] > 0){ // positive rolled IDs                   
