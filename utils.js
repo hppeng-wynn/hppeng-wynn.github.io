@@ -27,11 +27,14 @@ function setHTML(id, html) {
 }
 
 function setValue(id, value) {
-    document.getElementById(id).value = value;
+    let el = document.getElementById(id);
+    el.value = value;
+    el.dispatchEvent(new Event("change"));
 }
 
 // Base 64 encoding tools
 // https://stackoverflow.com/a/27696695
+// Modified for fixed precision
 
 Base64 = (function () {
     var digitsStr = 
@@ -44,13 +47,21 @@ Base64 = (function () {
         digitsMap[digits[i]] = i;
     }
     return {
-        fromInt: function(int32) {
+        fromIntV: function(int32) {
             var result = '';
             while (true) {
                 result = digits[int32 & 0x3f] + result;
                 int32 >>>= 6;
                 if (int32 === 0)
                     break;
+            }
+            return result;
+        },
+        fromIntN: function(int32, n) {
+            var result = '';
+            for (let i = 0; i < n; ++i) {
+                result = digits[int32 & 0x3f] + result;
+                int32 >>>= 6;
             }
             return result;
         },
@@ -61,7 +72,7 @@ Base64 = (function () {
                 result = (result << 6) + digitsMap[digits[i]];
             }
             return result;
-        }
+        },
     };
 })();
 
