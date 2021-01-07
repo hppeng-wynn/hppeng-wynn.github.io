@@ -101,7 +101,7 @@ class Build{
         }
         this.availableSkillpoints = levelToSkillPoints(this.level);
         this.equipment = [ helmet, chestplate, leggings, boots, ring1, ring2, bracelet, necklace ];
-
+        this.items = [helmet, chestplate, leggings, boots, ring1, ring2, bracelet, necklace, weapon];
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
         let result = calculate_skillpoints(this.equipment, weapon);
         console.log(result);
@@ -118,6 +118,9 @@ class Build{
     }
 
     /* Getters */
+
+    /*  Get total health for build.
+    */
     getHealth(){
         health = parseInt(this.helmet.hp,10) + parseInt(this.helmet.hpBonus,10) + parseInt(this.chestplate.hp,10) + parseInt(this.chestplate.hpBonus,10) + parseInt(this.leggings.hp,10) + parseInt(this.leggings.hpBonus,10) + parseInt(this.boots.hp,10) + parseInt(this.boots.hpBonus,10) + parseInt(this.ring1.hp,10) + parseInt(this.ring1.hpBonus,10) + parseInt(this.ring2.hp,10) + parseInt(this.ring2.hpBonus,10) + parseInt(this.bracelet.hp,10) + parseInt(this.bracelet.hpBonus,10) + parseInt(this.necklace.hp,10) + parseInt(this.necklace.hpBonus,10) + parseInt(this.weapon.hp,10) + parseInt(this.weapon.hpBonus,10) + levelToHPBase(this.level);
         if(health<5){
@@ -125,6 +128,60 @@ class Build{
         }else{
             return health;
         }
+    }
+    /*  Get total melee dps for build.
+    */
+    getMeleeDPS(){
+        let meleeMult = {
+            "SUPER_SLOW":"0.51",
+            "VERY_SLOW":"0.83",
+            "SLOW":"1.5",
+            "NORMAL":"2.05",
+            "FAST":"2.5",
+            "VERY_FAST":"3.1",
+            "SUPER_FAST":"4.3",
+        }
+        let stats = this.getBuildStats();
+        let nDam = stats.get("nDam");
+
+        return [];
+    }
+
+    /*  Get all stats for this build. Returns a map w/ sums of all IDs.
+        @dep test.js.item_fields
+        @dep test.js.rolledIDs
+        @dep test.js.nonRolledIDs   
+        @dep test.js.expandItem()
+        @pre The build itself should be valid. No checking of validity of pieces is done here.
+        @post The map returned will contain non-stacking IDs w/ a value null.
+    */
+    getBuildStats(){
+        //Create a map of this build's stats
+        //This is universal for every possible build, so it's possible to move this elsewhere.
+        let statMap = new Map();
+        for (const i in item_fields){ 
+            let id = item_fields[i];
+            if(stackingIDs.includes(id)){ //IDs stack - make it number
+                statMap.set(id,0);
+            }else if(standaloneIDs.includes(id)){ //IDs do not stack - string
+                statMap.set(id,"");
+            }
+        }
+        for (const i in this.items){
+            let item = expandItem(this.items[i]);
+            console.log(item,type(item));
+            if(item.has("fixID") && item.get("fixID")){//item has fixed IDs
+                for(const [key,value] in item.entries()){
+                    console.log(key,value);
+                }
+            }else{//item does not have fixed IDs
+                for (const i in item) {
+                    console.log(entry,": ",item.get(entry));
+                  }
+            }
+        }
+
+        return statMap;
     }
 
     /* Setters */
