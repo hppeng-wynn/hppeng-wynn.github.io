@@ -313,7 +313,7 @@ function expandItem(item){
             }
         }
     }else{ //The item does not have fixed IDs.
-        for (const id in rolledID-){
+        for (const id in rolledIDs){
             console.log(id);
             if(item[rolledIDs[id]]){
                 if(item[rolledIDs[id]] > 0){ // positive rolled IDs                   
