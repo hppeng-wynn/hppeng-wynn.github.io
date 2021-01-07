@@ -10,3 +10,10 @@ Damage calculation
 
 Skillpoint engine
 - Make it work...
+
+Build encoding
+- Allow exporting/importing builds to strings
+
+LATER STUFF:
+- Custom items integration
+    - wynndata parse? And/or google sheets

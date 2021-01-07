@@ -1,3 +1,12 @@
+/*
+ * TESTING SECTION
+ */
+
+console.log(location.href);
+
+/*
+ * END testing section
+ */
 
 let player_build;
 // Set up item lists for quick access later.
