@@ -190,6 +190,8 @@ function calculateBuild(){
     console.log(skillpoints);
     player_build.assigned_skillpoints;
 
+    setHTML("summary-box", "Summary: Assigned " + player_build.assigned_skillpoints + " skillpoints.");
+
     setHTML("build-helmet", player_build.helmet.name);
     setHTML("build-chestplate", player_build.chestplate.name);
     setHTML("build-leggings", player_build.helmet.name);

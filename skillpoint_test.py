@@ -92,6 +92,8 @@ def apply_to_fit(skillpoints, item):
     applied = [0, 0, 0, 0, 0]
     total = 0
     for i, req, cur in zip(range(5), item["reqs"], skillpoints):
+        if (item["reqs"][i] == 0):
+            continue
         if req > cur:
             diff = req - cur
             applied[i] += diff

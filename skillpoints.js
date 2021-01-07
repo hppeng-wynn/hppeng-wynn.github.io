@@ -34,6 +34,7 @@ function calculate_skillpoints(equipment, weapon) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
         for (let i = 0; i < 5; i++) {
+            if (item.reqs[i] == 0) continue;
             const req = item.reqs[i];
             const cur = skillpoints[i];
             if (req > cur) {
@@ -87,8 +88,14 @@ function calculate_skillpoints(equipment, weapon) {
                 }
             }
             if (total_applied < best_total) {
+                console.log(total_applied);
+                console.log(skillpoints_applied);
+                console.log("Iteration 2");
                 for (const item of permutation) {
+                    console.log(item);
+
                     remove_skillpoints(skillpoints, item);
+                    console.log(skillpoints);
                     result = apply_to_fit(skillpoints, item);
                     needed_skillpoints = result[0];
                     total_diff = result[1];
@@ -96,7 +103,10 @@ function calculate_skillpoints(equipment, weapon) {
                         skillpoints_applied[i] += needed_skillpoints[i];
                         skillpoints[i] += needed_skillpoints[i];
                     }
+
                     apply_skillpoints(skillpoints, item);
+                    console.log(skillpoints);
+                    console.log(total_diff);
                     total_applied += total_diff;
                     if (total_applied >= best_total) {
                         break;
