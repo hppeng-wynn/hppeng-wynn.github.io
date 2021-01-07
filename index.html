@@ -14,7 +14,7 @@
             <div class="center" style="grid-column:1;grid-row:1">
                 <div>
                     <label for="helmet-choice">Helmet:</label>
-                    <input list="helmet-items" id="helmet-choice" name="helmet-choice" value="No Helmet"/>
+                    <input list="helmet-items" id="helmet-choice" name="helmet-choice" value=""/>
                     <datalist id="helmet-items">
                     </datalist>
                 </div>
@@ -29,7 +29,7 @@
             <div class="center" style="grid-column:2;grid-row:1">
                 <div>
                     <label for="chestplate-choice">Chestplate:</label>
-                    <input list="chestplate-items" id="chestplate-choice" name="chestplate-choice" value="No Chestplate" />
+                    <input list="chestplate-items" id="chestplate-choice" name="chestplate-choice" value=""/>
                     <datalist id="chestplate-items">
                     </datalist>
                 </div>
@@ -44,7 +44,7 @@
             <div class="center" style="grid-column:3;grid-row:1">
                 <div>
                     <label for="leggings-choice">Leggings:</label>
-                    <input list="leggings-items" id="leggings-choice" name="leggings-choice" value="No Leggings"/>
+                    <input list="leggings-items" id="leggings-choice" name="leggings-choice" value=""/>
                     <datalist id="leggings-items">
                     </datalist>
                 </div>
@@ -59,7 +59,7 @@
             <div class="center" style="grid-column:4;grid-row:1">
                 <div id="boots">
                     <label for="boots-choice">Boots:</label>
-                    <input list="boots-items" id="boots-choice" name="boots-choice" value="No Boots"/>
+                    <input list="boots-items" id="boots-choice" name="boots-choice" value=""/>
                     <datalist id="boots-items">
                     </datalist>
                 </div>
@@ -73,31 +73,31 @@
             </div>
             <div class="center" style="grid-column:1;grid-row:2">
                 <label for="ring1-choice">Ring 1:</label>
-                <input list="ring1-items" id="ring1-choice" name="ring1-choice" value="No Ring 1"/>
+                <input list="ring1-items" id="ring1-choice" name="ring1-choice" value=""/>
                 <datalist id="ring1-items">
                 </datalist>
             </div>
             <div class="center" style="grid-column:2;grid-row:2">
                 <label for="ring2-choice">Ring 2:</label>
-                <input list="ring2-items" id="ring2-choice" name="ring2-choice" value="No Ring 2"/>
+                <input list="ring2-items" id="ring2-choice" name="ring2-choice" value=""/>
                 <datalist id="ring2-items">
                 </datalist>
             </div>
             <div class="center" style="grid-column:3;grid-row:2">
                 <label for="bracelet-choice">Bracelet:</label>
-                <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" value="No Bracelet"/>
+                <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" value=""/>
                 <datalist id="bracelet-items">
                 </datalist>
             </div>
             <div class="center" style="grid-column:4;grid-row:2">
                 <label for="necklace-choice">Necklace:</label>
-                <input list="necklace-items" id="necklace-choice" name="necklace-choice" value="No Necklace" />
+                <input list="necklace-items" id="necklace-choice" name="necklace-choice" value="" />
                 <datalist id="necklace-items">
                 </datalist>
             </div>
             <div class="center" style="grid-column:1;grid-row:3">
-                <label for="weapon-choice">Weapon:</label>
-                <input list="weapon-items" id="weapon-choice" name="weapon-choice" value="No Weapon"/>
+                <label for="weapon-choice">Weapon:</label><br>
+                <input list="weapon-items" id="weapon-choice" name="weapon-choice" value=""/>
                 <datalist id="weapon-items">
                 </datalist>
             </div>
@@ -172,25 +172,34 @@
             </div>
         </div>
         <div class = "build">
-            <div class = "center" id = "build-helmet" style = "grid-column:1;grid-row:1">
+            <div class = "center build-helmet" id = "build-helmet" style = "grid-column:1;grid-row:1">
+                <div class = "center" id = "build-helmet-stats"></div>
             </div>
-            <div class = "center" id = "build-chestplate" style = "grid-column:2;grid-row:1">
+            <div class = "center build-chestplate" id = "build-chestplate" style = "grid-column:2;grid-row:1">
+                <div class = "center" id = "build-chestplate-stats"></div>
             </div>
-            <div class = "center" id = "build-leggings" style = "grid-column:3;grid-row:1">
+            <div class = "center build-leggings" id = "build-leggings" style = "grid-column:3;grid-row:1">
+                <div class = "center" id = "build-leggings-stats"></div>
             </div>
-            <div class = "center" id = "build-boots" style = "grid-column:4;grid-row:1">
+            <div class = "center build-boots" id = "build-boots" style = "grid-column:4;grid-row:1">
+                <div class = "center" id = "build-boots-stats"></div>
             </div>
-            <div class = "center" id = "build-ring1" style = "grid-column:1;grid-row:2">
+            <div class = "center build-ring1" id = "build-ring1" style = "grid-column:1;grid-row:2">
+                <div class = "center" id = "build-ring1-stats"></div>
             </div>
-            <div class = "center" id = "build-ring2" style = "grid-column:2;grid-row:2">
+            <div class = "center build-ring2" id = "build-ring2" style = "grid-column:2;grid-row:2">
+                <div class = "center" id = "build-ring2-stats"></div>
             </div>
-            <div class = "center" id = "build-bracelet" style = "grid-column:3;grid-row:2">
+            <div class = "center build-leggings" id = "build-bracelet" style = "grid-column:3;grid-row:2">
+                <div class = "center" id = "build-bracelet-stats"></div>
             </div>
-            <div class = "center" id = "build-necklace" style = "grid-column:4;grid-row:2">
+            <div class = "center build-boots" id = "build-necklace" style = "grid-column:4;grid-row:2">
+                <div class = "center" id = "build-necklace-stats"></div>
             </div>
-            <div class = "center" id = "build-weapon" style = "grid-column:1;grid-row:3">
+            <div class = "center build-weapon" id = "build-weapon" style = "grid-column:1;grid-row:3">
+                <div class = "center" id = "build-weapon-stats"></div>
             </div>
-            <div class = "center" id = "build-order" style = "grid-column:2;grid-row:3">
+            <div class = "center build-order" id = "build-order" style = "grid-column:2;grid-row:3">
             </div>
             <div class = "center" id = "build-cumulative-stats" style = "grid-column:3;grid-row:3">
             </div>
