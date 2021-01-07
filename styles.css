@@ -20,7 +20,17 @@
 }
 
 .center {
-    text-align: center;  
+    text-align: center;
+}
+
+.itemcenter {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.itemleft {
+    text-align: left;
+    margin-bottom: 16px;
 }
 
 .build{
