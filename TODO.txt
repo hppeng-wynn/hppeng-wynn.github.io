@@ -1,0 +1,12 @@
+Item identifications
+- Base max/min, rounding correctly, and handling pre-ID
+
+Damage calculation
+- General calculation framework
+- Weapon powdering
+- Spell multipler
+- Melee dps and multiplier
+- Poison calculations
+
+Skillpoint engine
+- Make it work...

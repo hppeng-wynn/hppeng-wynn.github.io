@@ -1,4 +1,3 @@
-
 /*Class that represents a wynn player's build.
 */
 class Build{
