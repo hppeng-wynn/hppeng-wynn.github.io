@@ -179,7 +179,12 @@ function calculateBuild(){
         );
     console.log(player_build.toString());
 
-    player_build.equip_order;
+    let equip_order_text = "Equip order: <br>";
+    for (const item of player_build.equip_order) {
+        equip_order_text += item.displayName + "<br>";
+    }
+    setHTML("build-order", equip_order_text);
+
     player_build.base_skillpoints;
     let skillpoints = player_build.total_skillpoints;
     setValue("str-skp", skillpoints[0]);
@@ -189,6 +194,7 @@ function calculateBuild(){
     setValue("agi-skp", skillpoints[4]);
     console.log(skillpoints);
     player_build.assigned_skillpoints;
+
 
     setHTML("summary-box", "Summary: Assigned " + player_build.assigned_skillpoints + " skillpoints.");
 

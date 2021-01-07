@@ -5,7 +5,14 @@ function calculate_skillpoints(equipment, weapon) {
     let fixed = [];
     let consider = [];
     let noboost = [];
+    let has_skillpoint = [false, false, false, false, false];
+
     for (const item of equipment) {
+        for (let i = 0; i < 5; ++i) {
+            if (item.reqs[i] > 0) {
+                has_skillpoint[i] = true;
+            }
+        }
         if (item.reqs.every(x => x === 0)) {
             fixed.push(item);
         }
@@ -30,10 +37,14 @@ function calculate_skillpoints(equipment, weapon) {
 
     // Figure out (naively) how many skillpoints need to be applied to get the current item to fit.
     // Doesn't handle -skp.
-    function apply_to_fit(skillpoints, item) {
+    function apply_to_fit(skillpoints, item, skillpoint_filter) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
         for (let i = 0; i < 5; i++) {
+            if (item.skillpoints[i] < 0 && skillpoint_filter[i]) {
+                applied[i] -= item.skillpoints[i];
+                total -= item.skillpoints[i];
+            }
             if (item.reqs[i] == 0) continue;
             const req = item.reqs[i];
             const cur = skillpoints[i];
@@ -73,7 +84,7 @@ function calculate_skillpoints(equipment, weapon) {
             let needed_skillpoints;
             let total_diff;
             for (const item of permutation) {
-                result = apply_to_fit(skillpoints, item);
+                result = apply_to_fit(skillpoints, item, has_skillpoint);
                 needed_skillpoints = result[0];
                 total_diff = result[1];
 
@@ -87,32 +98,32 @@ function calculate_skillpoints(equipment, weapon) {
                     break;
                 }
             }
-            if (total_applied < best_total) {
-                console.log(total_applied);
-                console.log(skillpoints_applied);
-                console.log("Iteration 2");
-                for (const item of permutation) {
-                    console.log(item);
-
-                    remove_skillpoints(skillpoints, item);
-                    console.log(skillpoints);
-                    result = apply_to_fit(skillpoints, item);
-                    needed_skillpoints = result[0];
-                    total_diff = result[1];
-                    for (let i = 0; i < 5; ++i) {
-                        skillpoints_applied[i] += needed_skillpoints[i];
-                        skillpoints[i] += needed_skillpoints[i];
-                    }
-
-                    apply_skillpoints(skillpoints, item);
-                    console.log(skillpoints);
-                    console.log(total_diff);
-                    total_applied += total_diff;
-                    if (total_applied >= best_total) {
-                        break;
-                    }
-                }
-            }
+//            if (total_applied < best_total) {
+//                console.log(total_applied);
+//                console.log(skillpoints_applied);
+//                console.log("Iteration 2");
+//                for (const item of permutation) {
+//                    console.log(item);
+//
+//                    remove_skillpoints(skillpoints, item);
+//                    console.log(skillpoints);
+//                    result = apply_to_fit(skillpoints, item, has_skillpoint);
+//                    needed_skillpoints = result[0];
+//                    total_diff = result[1];
+//                    for (let i = 0; i < 5; ++i) {
+//                        skillpoints_applied[i] += needed_skillpoints[i];
+//                        skillpoints[i] += needed_skillpoints[i];
+//                    }
+//
+//                    apply_skillpoints(skillpoints, item);
+//                    console.log(skillpoints);
+//                    console.log(total_diff);
+//                    total_applied += total_diff;
+//                    if (total_applied >= best_total) {
+//                        break;
+//                    }
+//                }
+//            }
             result = apply_to_fit(skillpoints, weapon);
             needed_skillpoints = result[0];
             total_diff = result[1];

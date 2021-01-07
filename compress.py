@@ -107,6 +107,14 @@ delete_keys = [
     "material"
 ]
 
+import os
+if os.path.exists("id_map.json"):
+    with open("id_map.json","r") as id_mapfile:
+        id_map = json.load(id_mapfile)
+else:
+    id_map = {item["name"]: i for i, item in enumerate(items)}
+        
+
 for item in items:
     for key in delete_keys:
         if key in item:
@@ -117,9 +125,16 @@ for item in items:
             item[v] = item[k]
             del item[k]
 
+    if not (item["name"] in id_map):
+        id_ma[item["name"]] = len(id_map)
+        print(f'New item: {item["name"]}')
+    item["id"] = id_map[item["name"]]
+
     item["type"] = item["type"].lower()
 
+with open("id_map.json","w") as id_mapfile:
+    json.dump(id_map, id_mapfile, indent=2)
 with open("clean.json", "w") as outfile:
-    outfile.write(json.dumps(data, indent=2))
+    json.dump(data, outfile, indent=2)
 with open("compress.json", "w") as outfile:
-    outfile.write(json.dumps(data))
+    json.dump(data, outfile)

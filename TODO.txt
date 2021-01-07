@@ -9,7 +9,7 @@ Damage calculation
 - Poison calculations
 
 Skillpoint engine
-- Make it work...
+- Make it work... DONE! SURPRISINGLY!
 
 Build encoding
 - Allow exporting/importing builds to strings
