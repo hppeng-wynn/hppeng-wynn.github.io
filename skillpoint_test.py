@@ -36,6 +36,7 @@ print(build_weapon)
 def is_reqless(item):
     return all(x == 0 for x in item["reqs"])
 
+# Consolidate skillpoint and req into arrays for ease of processing.
 def setup(item):
     item["skillpoints"] = [item["str"], item["dex"], item["int"], item["def"], item["agi"]]
     item["has_negstat"] = any(x < 0 for x in item["skillpoints"])
@@ -52,13 +53,13 @@ for item in build_items:
         consider.append(item)
 setup(build_weapon)
 
+# Apply the skillpoints an item gives to the build.
 def apply_skillpoints(skillpoints, item):
-    skillpoints[0] += item["str"]
-    skillpoints[1] += item["dex"]
-    skillpoints[2] += item["int"]
-    skillpoints[3] += item["def"]
-    skillpoints[4] += item["agi"]
+    for i in range(5):
+        skillpoints[i] += item["skillpoints"][i]
 
+# Figure out (naively) how many skillpoints need to be applied to get the current item to fit.
+# Doesn't handle -skp.
 def apply_to_fit(skillpoints, item):
     applied = [0, 0, 0, 0, 0]
     for i, req, cur in zip(range(5), item["reqs"], skillpoints):
@@ -71,6 +72,7 @@ def apply_to_fit(skillpoints, item):
 
 static_skillpoints_base = [0, 0, 0, 0, 0]
 
+# Separate out the no req items and add them to the static skillpoint base.
 for item in fixed:
     apply_skillpoints(static_skillpoints_base, item)
 
@@ -78,6 +80,7 @@ best = None
 best_skillpoints = [0, 0, 0, 0, 0]
 best_total = math.inf
 
+# Try every combination and pick the best one.
 import itertools
 for permutation in itertools.permutations(consider):
 
