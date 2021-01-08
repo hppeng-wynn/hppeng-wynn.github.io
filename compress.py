@@ -126,7 +126,7 @@ for item in items:
             del item[k]
 
     if not (item["name"] in id_map):
-        id_ma[item["name"]] = len(id_map)
+        id_map[item["name"]] = len(id_map)
         print(f'New item: {item["name"]}')
     item["id"] = id_map[item["name"]]
 
