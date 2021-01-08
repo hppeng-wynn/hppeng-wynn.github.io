@@ -48,23 +48,24 @@ function populateItemList(type) {
  */
 function init() {
     let noneItems = [
-        ["helmet", "No Helmet"],
-        ["chestplate", "No Chestplate"],
-        ["leggings", "No Leggings"],
-        ["boots", "No Boots"],
-        ["ring", "No Ring 1"],
-        ["ring", "No Ring 2"],
-        ["bracelet", "No Bracelet"],
-        ["necklace", "No Necklace"],
-        ["wand", "No Weapon"],
+        ["armor", "helmet", "No Helmet"],
+        ["armor", "chestplate", "No Chestplate"],
+        ["armor", "leggings", "No Leggings"],
+        ["armor", "boots", "No Boots"],
+        ["accessory", "ring", "No Ring 1"],
+        ["accessory", "ring", "No Ring 2"],
+        ["accessory", "bracelet", "No Bracelet"],
+        ["accessory", "necklace", "No Necklace"],
+        ["weapon", "wand", "No Weapon"],
     ];
     for (let i = 0; i < 9; i++) {
         let item = Object();
         for (const field of item_fields) {
             item[field] = 0;
         }
-        item.type = noneItems[i][0];
-        item.name = noneItems[i][1];
+        item.category = noneItems[i][0];
+        item.type = noneItems[i][1];
+        item.name = noneItems[i][2];
         item.displayName = item.name;
         item.set = null;
         item.quest = null;
