@@ -8,10 +8,10 @@ function expandItem(item){
     if(item.fixID){ //The item has fixed IDs.
         expandedItem.set("fixID",true);
         for (const id of rolledIDs){ //all rolled IDs are numerical
-            if(item[id]) {
+            //if(item[id]) {
                 minRolls.set(id,item[id]);
                 maxRolls.set(id,item[id]);
-            }
+            //}
         }
     }else{ //The item does not have fixed IDs.
         for (const id of rolledIDs){
