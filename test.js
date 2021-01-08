@@ -333,6 +333,7 @@ function resetFields(){
     setValue("int-skp", "0");
     setValue("def-skp", "0");
     setValue("agi-skp", "0");
+    location.hash = "";
 }
 
 load_init(init);
