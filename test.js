@@ -271,31 +271,26 @@ function calculateBuild(){
     setHTML("build-order", equip_order_text);
     
     const assigned = player_build.base_skillpoints;
-    setText("str-skp-assign", "Before Boosts: " + assigned[0]);
-    setText("dex-skp-assign", "Before Boosts: " + assigned[1]);
-    setText("int-skp-assign", "Before Boosts: " + assigned[2]);
-    setText("def-skp-assign", "Before Boosts: " + assigned[3]);
-    setText("agi-skp-assign", "Before Boosts: " + assigned[4]);
-
     const skillpoints = player_build.total_skillpoints;
-    setValue("str-skp", skillpoints[0]);
-    setValue("dex-skp", skillpoints[1]);
-    setValue("int-skp", skillpoints[2]);
-    setValue("def-skp", skillpoints[3]);
-    setValue("agi-skp", skillpoints[4]);
-    setText("str-skp-base", "Original Value: " + skillpoints[0]);
-    setText("dex-skp-base", "Original Value: " + skillpoints[1]);
-    setText("int-skp-base", "Original Value: " + skillpoints[2]);
-    setText("def-skp-base", "Original Value: " + skillpoints[3]);
-    setText("agi-skp-base", "Original Value: " + skillpoints[4]);
-    console.log("????");
-    setHTML("str-skp-pct", (skillPointsToPercentage(skillpoints[0])*100).toFixed(1).concat("% more damage dealt."));
-    setHTML("dex-skp-pct", (skillPointsToPercentage(skillpoints[1])*100).toFixed(1).concat("% chance to crit."));
-    setHTML("int-skp-pct", (skillPointsToPercentage(skillpoints[2])*100).toFixed(1).concat("% spell cost reduction."));
-    setHTML("def-skp-pct", (skillPointsToPercentage(skillpoints[3])*100).toFixed(1).concat("% less damage taken."));
-    setHTML("agi-skp-pct", (skillPointsToPercentage(skillpoints[4])*100).toFixed(1).concat("% chance to dodge."));
-
-    setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
+    let skp_order = ["str","dex","int","def","agi"];
+    let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
+    for (let i in skp_order){ //big bren
+        setText(skp_order[i] + "-skp-assign", "Before Boosts: " + assigned[i]);
+        setValue(skp_order[i] + "-skp", skillpoints[i]);
+        if(assigned[i] <= 100){
+            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+        }else{
+            setHTML(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i] + "<br>WARNING: cannot assign " + assigned[i] + " skillpoints naturally.");
+        }
+        setHTML(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+    }
+    console.log(skillpoints);
+    if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
+        setHTML("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.<br>" + "WARNING: Too many skillpoints need to be assigned!<br> For level " + player_build.level + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.");
+    }else{
+        setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
+    }
+    
 
     displayExpandedItem(expandItem(player_build.helmet), "build-helmet");
     displayExpandedItem(expandItem(player_build.chestplate), "build-chestplate");
@@ -310,10 +305,12 @@ function calculateBuild(){
     //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
     let meleeSummary = "";
     meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
-    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br><br>");
+    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br>");
+    let attackSpeeds = ["SUPER SLOW", "VERY SLOW", "SLOW", "NORMAL", "FAST", "VERY FAST", "SUPER FAST"];
+    meleeSummary = meleeSummary.concat("<b>Attack Speed: ",attackSpeeds[meleeStats[11]],"</b><br><br>");
     meleeSummary = meleeSummary.concat("<b>Non-Crit Stats: </b><br>");
     let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
-    for (const i in meleeStats){
+    for (let i = 0; i < 6; i++){
         if(meleeStats[i][0] > 0){
             meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][0]," -> ",meleeStats[i][1],"<br>");
         }
@@ -321,14 +318,17 @@ function calculateBuild(){
     meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[6][0]," -> ",meleeStats[6][1],"<br>");
     meleeSummary = meleeSummary.concat("Normal DPS: ",Math.round(meleeStats[8]),"<br><br>");
     meleeSummary = meleeSummary.concat("<b>Crit Stats: </b><br>");
-    for (const i in meleeStats){
+    for (let i = 0; i < 6; i++){
         if(meleeStats[i][2] > 0){
             meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][2]," -> ",meleeStats[i][3],"<br>");
         }
     }
     meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
     meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
-    setHTML("build-cumulative-stats", "".concat(meleeSummary)); //Incomplete function
+    setHTML("build-melee-stats", "".concat(meleeSummary)); //basically complete function
+    let defenseStats = "";
+
+    setHTML("build-defense-stats", "".concat(defenseStats));
     location.hash = encodeBuild();
 }
 

@@ -137,7 +137,6 @@ class Build{
         Returns an array in the order:
     */
     getMeleeStats(){
-
         const stats = this.statMap;
         // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
         let damages = [];
@@ -168,10 +167,8 @@ class Build{
         for (let i in this.total_skillpoints) {
             skillBoost.push(skillPointsToPercentage(this.total_skillpoints[i]) + stats.get("damageBonus")[i] / 100.);
         }
-        console.log(skillBoost);
         for (let i in damages) {
             let damageBoost = 1 + skillBoost[i] + staticBoost;
-            console.log(damageBoost);
             damages_results.push([
                 Math.round(damages[i][0] * damageBoost),        // Normal min
                 Math.round(damages[i][1] * damageBoost),        // Normal max
@@ -192,7 +189,7 @@ class Build{
         let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex))) + (poison / 3.0 * (1 + skillPointsToPercentage(str)));
         //console.log([nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
-        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
+        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]);
     }
 
     /*  Get all stats for this build. Stores in this.statMap.
