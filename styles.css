@@ -87,28 +87,51 @@
     color: #0a0;
     /*text-shadow: 2px 2px 0 #002a00;*/
 }
+.Earth:before {
+    content: "\2724" ' ';
+}
 
 .Thunder {
     color: #ff5;
     /*text-shadow: 2px 2px 0 #3f3f15;*/
+}
+.Thunder:before {
+    content: "\2726" ' ';
 }
 
 .Water {
     color: #5ff;
     /*text-shadow: 2px 2px 0 #153f3f;*/
 }
+.Water:before {
+    content: "\2749" ' ';
+}
 
 .Fire {
     color: #f55;
     /*text-shadow: 2px 2px 0 #1f1515;*/
+}
+.Fire:before {
+    content: "\2739" ' ';
 }
 
 .Air {
     color: #fff;
     /*text-shadow: 2px 2px 0 #3f3f3f;*/
 }
+.Air:before {
+    content: "\274b" ' ';
+}
 
 .Neutral {
     color: #fa0;
     /*text-shadow: 2px 2px 0 #2a2a00;*/
+}
+
+.Health {
+    color: #a00;
+    /*text-shadow: 2px 2px 0 #2a0000;*/
+}
+.Health:before {
+    content: "\2764" ' ';
 }
