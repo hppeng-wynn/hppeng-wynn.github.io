@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "1.2";
+const BUILD_VERSION = "1.3";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -270,14 +270,14 @@ function calculateBuild(){
     }
     setHTML("build-order", equip_order_text);
     
-    let assigned = player_build.base_skillpoints;
+    const assigned = player_build.base_skillpoints;
     setText("str-skp-assign", "Before Boosts: " + assigned[0]);
     setText("dex-skp-assign", "Before Boosts: " + assigned[1]);
     setText("int-skp-assign", "Before Boosts: " + assigned[2]);
     setText("def-skp-assign", "Before Boosts: " + assigned[3]);
     setText("agi-skp-assign", "Before Boosts: " + assigned[4]);
 
-    let skillpoints = player_build.total_skillpoints;
+    const skillpoints = player_build.total_skillpoints;
     setValue("str-skp", skillpoints[0]);
     setValue("dex-skp", skillpoints[1]);
     setValue("int-skp", skillpoints[2]);

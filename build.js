@@ -40,15 +40,7 @@ function levelToHPBase(level){
 }
 
 
-const baseDamageMultiplier = {
-        SUPER_SLOW: 0.51,
-        VERY_SLOW: 0.83,
-        SLOW: 1.5,
-        NORMAL: 2.05,
-        FAST: 2.5,
-        VERY_FAST: 3.1,
-        SUPER_FAST: 4.3
-    };
+const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
 
 /*Class that represents a wynn player's build.
@@ -146,75 +138,66 @@ class Build{
     */
     getMeleeStats(){
 
-        let stats = this.getBuildStats();
-        let nDam = stats.get("nDam").split("-").map(Number);
-        let damages = []
-        let eDam = stats.get("eDam").split("-").map(Number);
-        let tDam = stats.get("tDam").split("-").map(Number);
-        let wDam = stats.get("wDam").split("-").map(Number);
-        let fDam = stats.get("fDam").split("-").map(Number);
-        let aDam = stats.get("aDam").split("-").map(Number);
-        let mdRaw = stats.get("maxStats").get("mdRaw");
-        
-        let mdPct = stats.get("maxStats").get("mdPct");
-        let eDamPct = stats.get("maxStats").get("eDamPct");
-        let tDamPct = stats.get("maxStats").get("tDamPct");
-        let wDamPct = stats.get("maxStats").get("wDamPct");
-        let fDamPct = stats.get("maxStats").get("fDamPct");
-        let aDamPct = stats.get("maxStats").get("aDamPct");
-        
-        let baseAtkTier = stats.get("atkSpd");
-        let atkTier = stats.get("maxStats").get("atkTier");
-        let adjAtkSpd = atkSpdToNum.get(baseAtkTier) + atkTier;
-        if(adjAtkSpd > 3){
-            adjAtkSpd = 3;
-        }else if(adjAtkSpd < -3){
-            adjAtkSpd = -3;
+        const stats = this.statMap;
+        // Array of neutral + ewtf damages. Each entry is a pair (min, max).
+        let damages = [];
+        for (const damage_string of stats.get("damageRaw")) {
+            const damage_vals = damage_string.split("-").map(Number);
+            damages.push(damage_vals);
         }
-        adjAtkSpd = numToAtkSpd.get(adjAtkSpd);
-        let str = stats.get("str");
-        let strReq = stats.get("strReq");
-        str = str + strReq;
-        let dex = stats.get("dex");
-        let dexReq = stats.get("dexReq");
-        dex = dex + dexReq;
-        let int = stats.get("int");
-        let intReq = stats.get("intReq");
-        int = int + intReq;
-        let def = stats.get("def");
-        let defReq = stats.get("defReq");
-        def = def + defReq;
-        let agi = stats.get("agi");
-        let agiReq = stats.get("agiReq");
-        agi = agi + agiReq;
-        let poison = stats.get("maxStats").get("poison");
+        let mdRaw = stats.get("mdRaw");
+        
+        let mdPct = stats.get("mdPct");
+        
+        let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+        if(adjAtkSpd > 6){
+            adjAtkSpd = 6;
+        }else if(adjAtkSpd < 0){
+            adjAtkSpd = 0;
+        }
+        let poison = stats.get("poison");
 
-        console.log(str);
-        console.log(dex);
+        let totalDamNorm = [mdRaw, mdRaw];
+        let totalDamCrit = [mdRaw, mdRaw];
+        let damages_results = [];
+        // 0th skillpoint is strength, 1st is dex.
+        let str = this.total_skillpoints[0];
+        let dex = this.total_skillpoints[1];
+        let staticBoost = (mdPct / 100.)  + skillPointsToPercentage(str);
+        let skillBoost = [0];
+        for (let i in this.total_skillpoints) {
+            skillBoost.push(skillPointsToPercentage(this.total_skillpoints[i]) + stats.get("damageBonus")[i] / 100.);
+        }
+        console.log(skillBoost);
+        for (let i in damages) {
+            let damageBoost = 1 + skillBoost[i] + staticBoost;
+            console.log(damageBoost);
+            damages_results.push([
+                Math.round(damages[i][0] * damageBoost),        // Normal min
+                Math.round(damages[i][1] * damageBoost),        // Normal max
+                Math.round(damages[i][0] * (1 + damageBoost)),  // Crit min
+                Math.round(damages[i][1] * (1 + damageBoost)),  // Crit max
+            ]);
+            totalDamNorm[0] += damages_results[i][0];
+            totalDamNorm[1] += damages_results[i][1];
+            totalDamCrit[0] += damages_results[i][2];
+            totalDamCrit[1] += damages_results[i][3];
+        }
+        for (let i in damages_results[0]) {
+            damages_results[0][i] += mdRaw;
+        }
 
         //Now do math
-        let nDamAdj = [Math.round(nDam[0] * ((100 + mdPct + skillPointsToPercentage(str) * 100) / 100.) + mdRaw), Math.round(nDam[1] * ((100 + mdPct + skillPointsToPercentage(str) * 100) / 100.) + mdRaw), Math.round(nDam[0] * ((200 + mdPct + skillPointsToPercentage(str) * 100) / 100.) + mdRaw), Math.round(nDam[1] * ((200 + mdPct + skillPointsToPercentage(str) * 100) / 100.) + mdRaw)];
-        let eDamAdj = [Math.round(eDam[0] * ((100 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.)), Math.round(eDam[1] * ((100 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.)), Math.round(eDam[0] * ((200 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.)), Math.round(eDam[1] * ((200 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.))];
-        let tDamAdj = [Math.round(tDam[0] * ((100 + mdPct + tDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(dex) * 100) / 100.)), Math.round(tDam[1] * ((100 + mdPct + tDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(dex) * 100) / 100.)), Math.round(tDam[0] * ((200 + mdPct + tDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(dex) * 100) / 100.)), Math.round(tDam[1] * ((200 + mdPct + tDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(dex) * 100) / 100.))];
-        let wDamAdj = [Math.round(wDam[0] * ((100 + mdPct + wDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(int) * 100) / 100.)), Math.round(wDam[1] * ((100 + mdPct + wDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(int) * 100) / 100.)), Math.round(wDam[0] * ((200 + mdPct + wDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(int) * 100) / 100.)), Math.round(wDam[1] * ((200 + mdPct + wDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(int) * 100) / 100.))];
-        let fDamAdj = [Math.round(fDam[0] * ((100 + mdPct + fDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(def) * 100) / 100.)), Math.round(fDam[1] * ((100 + mdPct + fDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(def) * 100) / 100.)), Math.round(fDam[0] * ((200 + mdPct + fDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(def) * 100) / 100.)), Math.round(fDam[1] * ((200 + mdPct + fDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(def) * 100) / 100.))];
-        let aDamAdj = [Math.round(aDam[0] * ((100 + mdPct + aDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(agi) * 100) / 100.)), Math.round(aDam[1] * ((100 + mdPct + aDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(agi) * 100) / 100.)), Math.round(aDam[0] * ((200 + mdPct + aDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(agi) * 100) / 100.)), Math.round(aDam[1] * ((200 + mdPct + aDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(agi) * 100) / 100.))];
-        let totalDamNorm = [nDamAdj[0]+eDamAdj[0]+tDamAdj[0]+wDamAdj[0]+fDamAdj[0]+aDamAdj[0], nDamAdj[1]+eDamAdj[1]+tDamAdj[1]+wDamAdj[1]+fDamAdj[1]+aDamAdj[1]];
-        let totalDamCrit = [nDamAdj[2]+eDamAdj[2]+tDamAdj[2]+wDamAdj[2]+fDamAdj[2]+aDamAdj[2], nDamAdj[3]+eDamAdj[3]+tDamAdj[3]+wDamAdj[3]+fDamAdj[3]+aDamAdj[3]];
-        let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * meleeMult.get(adjAtkSpd);
-        let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * meleeMult.get(adjAtkSpd);
+        let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * baseDamageMultiplier[adjAtkSpd];
+        let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex))) + (poison / 3.0 * (1 + skillPointsToPercentage(str)));
         //console.log([nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
-        return [nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS];
+        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
     }
 
-    /*  Get all stats for this build. Returns a map w/ sums of all IDs.
-        @dep test.js.item_fields
-        @dep test.js.rolledIDs
-        @dep test.js.nonRolledIDs   
+    /*  Get all stats for this build. Stores in this.statMap.
         @dep test.js.expandItem()
         @pre The build itself should be valid. No checking of validity of pieces is done here.
-        @post The map returned will contain non-stacking IDs w/ a value null.
     */
     initBuildStats(){
 
@@ -241,10 +224,10 @@ class Build{
 
         // The stuff relevant for damage calculation!!! @ferricles
         statMap.set("atkSpd", this.weapon["atkSpd"]);
-        statMap.set("damageRaw", [this.weapon["nDam"], this.weapon["fDam"], this.weapon["wDam"], this.weapon["aDam"], this.weapon["tDam"], this.weapon["eDam"]]);
-        statMap.set("damageBonus", [statMap.get("fDamPct"), statMap.get("wDamPct"), statMap.get("aDamPct"), statMap.get("tDamPct"), statMap.get("eDamPct")]);
-        statMap.set("defRaw", [statMap.get("fDef"), statMap.get("wDef"), statMap.get("aDef"), statMap.get("tDef"), statMap.get("eDef")]);
-        statMap.set("defBonus", [statMap.get("fDefPct"), statMap.get("wDefPct"), statMap.get("aDefPct"), statMap.get("tDefPct"), statMap.get("eDefPct")]);
+        statMap.set("damageRaw", [this.weapon["nDam"], this.weapon["eDam"], this.weapon["tDam"], this.weapon["wDam"], this.weapon["fDam"], this.weapon["aDam"]]);
+        statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
+        statMap.set("defRaw", [statMap.get("eDam"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
+        statMap.set("defBonus", [statMap.get("eDamPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
 
         console.log(statMap);
 
