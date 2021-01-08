@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "1.0";
+const BUILD_VERSION = "1.1";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -290,15 +290,15 @@ function calculateBuild(){
 
     setHTML("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
 
-    setHTML("build-helmet", expandedItemToString(expandItem(player_build.helmet)));
-    setHTML("build-chestplate", expandedItemToString(expandItem(player_build.chestplate)));
-    setHTML("build-leggings", expandedItemToString(expandItem(player_build.leggings)));
-    setHTML("build-boots", expandedItemToString(expandItem(player_build.boots)));
-    setHTML("build-ring1", expandedItemToString(expandItem(player_build.ring1)));
-    setHTML("build-ring2", expandedItemToString(expandItem(player_build.ring2)));
-    setHTML("build-bracelet", expandedItemToString(expandItem(player_build.bracelet)));
-    setHTML("build-necklace", expandedItemToString(expandItem(player_build.necklace)));
-    setHTML("build-weapon", expandedItemToString(expandItem(player_build.weapon)));
+    displayExpandedItem(expandItem(player_build.helmet), "build-helmet");
+    displayExpandedItem(expandItem(player_build.chestplate), "build-chestplate");
+    displayExpandedItem(expandItem(player_build.leggings), "build-leggings");
+    displayExpandedItem(expandItem(player_build.boots), "build-boots");
+    displayExpandedItem(expandItem(player_build.ring1), "build-ring1");
+    displayExpandedItem(expandItem(player_build.ring2), "build-ring2");
+    displayExpandedItem(expandItem(player_build.bracelet), "build-bracelet");
+    displayExpandedItem(expandItem(player_build.necklace), "build-necklace");
+    displayExpandedItem(expandItem(player_build.weapon), "build-weapon");
     let meleeStats = player_build.getMeleeStats();
     //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
     let meleeSummary = "";
@@ -352,48 +352,6 @@ function calculateBuild(){
 /*  Helper function that gets stats ranges for wearable items.
     @param item - an item in Object format.
 */
-function expandItem(item){
-    let minRolls = new Map();
-    let maxRolls = new Map();
-    let expandedItem = new Map();
-    if(item.fixID){ //The item has fixed IDs.
-        expandedItem.set("fixID",true);
-        for (const id in rolledIDs){ //all rolled IDs are numerical
-            if(item[rolledIDs[id]]){
-                minRolls.set(rolledIDs[id],item[rolledIDs[id]]);
-                maxRolls.set(rolledIDs[id],item[rolledIDs[id]]);
-            }
-        }
-        for (id in nonRolledIDs){
-            if(item[nonRolledIDs[id]]){
-                expandedItem.set(nonRolledIDs[id],item[nonRolledIDs[id]]);
-            }
-        }
-    }else{ //The item does not have fixed IDs.
-        for (const id in rolledIDs){
-            if(item[rolledIDs[id]]){
-                if(item[rolledIDs[id]] > 0){ // positive rolled IDs                   
-                    minRolls.set(rolledIDs[id],idRound(item[rolledIDs[id]]*0.3));
-                    maxRolls.set(rolledIDs[id],idRound(item[rolledIDs[id]]*1.3));
-                }else if(item[rolledIDs[id]] < 0){ //negative rolled IDs
-                    minRolls.set(rolledIDs[id],idRound(item[rolledIDs[id]]*1.3));
-                    maxRolls.set(rolledIDs[id],idRound(item[rolledIDs[id]]*0.7));
-                }else{//Id = 0
-                    minRolls.set(rolledIDs[id],0);
-                    maxRolls.set(rolledIDs[id],0);
-                }
-            }
-        }
-        for (const id in nonRolledIDs){
-            if(item[nonRolledIDs[id]]){
-                expandedItem.set(nonRolledIDs[id],item[nonRolledIDs[id]]);
-            }
-        }
-    }
-    expandedItem.set("minRolls",minRolls);
-    expandedItem.set("maxRolls",maxRolls);
-    return expandedItem;
-}
 /*  A second helper function that takes items from expandItem() and stringifies them.
     @param item - a map with non-rolled Ids as normal key:value pairs and all rolled IDs as 2 separate key:value pairs in the minRoll and maxRoll keys that are mapped to maps.
     TODO: write the function
@@ -464,6 +422,7 @@ function resetFields(){
     setValue("int-skp", "0");
     setValue("def-skp", "0");
     setValue("agi-skp", "0");
+    location.hash = "";
 }
 
 load_init(init);

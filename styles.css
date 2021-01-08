@@ -3,6 +3,11 @@
     text-align: center;  
 }
 
+.all {
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+}
+
 .equipment {
     padding: 4%;
     display: grid;
@@ -20,7 +25,15 @@
 }
 
 .center {
-    text-align: center;  
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
 }
 
 .build{
@@ -29,10 +42,96 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     grid-auto-rows: minmax(60px, auto);
-    width: 90vw;
+    width: 98%;
 }
 .build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order {
+    color: #aaa;
+    background: #110110;
     border: 2px solid black;
     border-radius: 3px;
-    width: 20vw;
+    width: 100%;
+}
+
+.itemcenter {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.itemleft {
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.itemtable {
+    margin: 2px 2%;
+    width: 96%;
+    margin-bottom: 16px;
+}
+
+.itemp {
+    margin: 2px 2%;
+    padding: 0;
+}
+
+.positive {
+    color: #5f5;
+    /*text-shadow: 2px 2px 0 #153f15;*/
+}
+
+.negative {
+    color: #f55;
+    /*text-shadow: 2px 2px 0 #1f1515;*/
+}
+
+.Earth {
+    color: #0a0;
+    /*text-shadow: 2px 2px 0 #002a00;*/
+}
+.Earth:before {
+    content: "\2724" ' ';
+}
+
+.Thunder {
+    color: #ff5;
+    /*text-shadow: 2px 2px 0 #3f3f15;*/
+}
+.Thunder:before {
+    content: "\2726" ' ';
+}
+
+.Water {
+    color: #5ff;
+    /*text-shadow: 2px 2px 0 #153f3f;*/
+}
+.Water:before {
+    content: "\2749" ' ';
+}
+
+.Fire {
+    color: #f55;
+    /*text-shadow: 2px 2px 0 #1f1515;*/
+}
+.Fire:before {
+    content: "\2739" ' ';
+}
+
+.Air {
+    color: #fff;
+    /*text-shadow: 2px 2px 0 #3f3f3f;*/
+}
+.Air:before {
+    content: "\274b" ' ';
+}
+
+.Neutral {
+    color: #fa0;
+    /*text-shadow: 2px 2px 0 #2a2a00;*/
+}
+
+.Health {
+    color: #a00;
+    /*text-shadow: 2px 2px 0 #2a0000;*/
+}
+.Health:before {
+    content: "\2764" ' ';
 }
