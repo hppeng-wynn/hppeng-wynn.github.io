@@ -40,7 +40,7 @@ function calculate_skillpoints(equipment, weapon) {
                 total -= item.skillpoints[i];
             }
             if (item.reqs[i] == 0) continue;
-            skillpoint_filter[i] = true;
+            if (skillpoint_filter) skillpoint_filter[i] = true;
             const req = item.reqs[i];
             const cur = skillpoints[i];
             if (req > cur) {

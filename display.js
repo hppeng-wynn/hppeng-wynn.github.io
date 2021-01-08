@@ -54,7 +54,7 @@ function displayExpandedItem(item, parent_id){
         "#ldiv",
         "!elemental",
         "hp",
-        "nDam", "eDam", "tDam", "wDam", "tDam", "aDam",
+        "nDam", "eDam", "tDam", "wDam", "fDam", "aDam",
         "eDef", "tDef", "wDef", "fDef", "aDef",
         "!elemental",
         "#ldiv",
@@ -62,7 +62,7 @@ function displayExpandedItem(item, parent_id){
         "lvl",
         "strReq", "dexReq", "intReq", "defReq","agiReq",
         "#ldiv",
-        "str", "dex", "int", "agi", "def",
+        "str", "dex", "int", "def", "agi",
         "#table",
         "hpBonus",
         "hprRaw", "hprPct",
@@ -147,6 +147,10 @@ function displayExpandedItem(item, parent_id){
                 let p_elem = document.createElement('p');
                 p_elem.classList.add('itemp');
                 if (elemental_format) {
+                    // HACK TO AVOID DISPLAYING ZERO DAMAGE! TODO
+                    if (item.get(id) === "0-0") {
+                        continue;
+                    }
                     apply_elemental_format(p_elem, id, item.get(id));
                 }
                 else {
