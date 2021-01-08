@@ -40,6 +40,17 @@ function levelToHPBase(level){
 }
 
 
+const baseDamageMultiplier = {
+        SUPER_SLOW: 0.51,
+        VERY_SLOW: 0.83,
+        SLOW: 1.5,
+        NORMAL: 2.05,
+        FAST: 2.5,
+        VERY_FAST: 3.1,
+        SUPER_FAST: 4.3
+    };
+const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
+
 /*Class that represents a wynn player's build.
 */
 class Build{
@@ -101,13 +112,15 @@ class Build{
         }
         this.availableSkillpoints = levelToSkillPoints(this.level);
         this.equipment = [ helmet, chestplate, leggings, boots, ring1, ring2, bracelet, necklace ];
-        this.items = [helmet, chestplate, leggings, boots, ring1, ring2, bracelet, necklace, weapon];
+        this.items = this.equipment.concat([weapon]);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
         let result = calculate_skillpoints(this.equipment, weapon);
         this.equip_order = result[0];
         this.base_skillpoints = result[1];
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
+
+        this.initBuildStats();
     }  
 
     /*Returns build in string format
@@ -130,37 +143,12 @@ class Build{
     }
     /*  Get melee stats for build.
         Returns an array in the order:
-        
     */
     getMeleeStats(){
-        //Establish vars
-        let meleeMult = new Map();
-        meleeMult.set("SUPER_SLOW",0.51);
-        meleeMult.set("VERY_SLOW",0.83);
-        meleeMult.set("SLOW",1.5);
-        meleeMult.set("NORMAL",2.05);
-        meleeMult.set("FAST",2.5); 
-        meleeMult.set("VERY_FAST",3.1);
-        meleeMult.set("SUPER_FAST",4.3);
-        let atkSpdToNum = new Map();
-        atkSpdToNum.set("SUPER_SLOW",-3);
-        atkSpdToNum.set("VERY_SLOW",-2);
-        atkSpdToNum.set("SLOW",-1);
-        atkSpdToNum.set("NORMAL",0);
-        atkSpdToNum.set("FAST",1);
-        atkSpdToNum.set("VERY_FAST",2);
-        atkSpdToNum.set("SUPER_FAST",3);
-        let numToAtkSpd = new Map();
-        numToAtkSpd.set(-3,"SUPER_SLOW");
-        numToAtkSpd.set(-2,"VERY_SLOW");
-        numToAtkSpd.set(-1,"SLOW");
-        numToAtkSpd.set(0,"NORMAL");
-        numToAtkSpd.set(1,"FAST");
-        numToAtkSpd.set(2,"VERY_FAST");
-        numToAtkSpd.set(3,"SUPER_FAST");
 
         let stats = this.getBuildStats();
         let nDam = stats.get("nDam").split("-").map(Number);
+        let damages = []
         let eDam = stats.get("eDam").split("-").map(Number);
         let tDam = stats.get("tDam").split("-").map(Number);
         let wDam = stats.get("wDam").split("-").map(Number);
@@ -201,6 +189,9 @@ class Build{
         agi = agi + agiReq;
         let poison = stats.get("maxStats").get("poison");
 
+        console.log(str);
+        console.log(dex);
+
         //Now do math
         let nDamAdj = [Math.round(nDam[0] * (100 + mdPct + skillPointsToPercentage(str) * 100) / 100. + mdRaw), Math.round(nDam[1] * (100 + mdPct + skillPointsToPercentage(str) * 100) / 100. + mdRaw), Math.round(nDam[0] * (200 + mdPct + skillPointsToPercentage(str) * 100) / 100. + mdRaw), Math.round(nDam[1] * (200 + mdPct + skillPointsToPercentage(str) * 100) / 100. + mdRaw)];
         let eDamAdj = [Math.round(eDam[0] * (100 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.), Math.round(eDam[1] * (100 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.), Math.round(eDam[0] * (200 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.), Math.round(eDam[1] * (200 + mdPct + eDamPct + skillPointsToPercentage(str) * 100 + skillPointsToPercentage(str) * 100) / 100.)];
@@ -225,70 +216,39 @@ class Build{
         @pre The build itself should be valid. No checking of validity of pieces is done here.
         @post The map returned will contain non-stacking IDs w/ a value null.
     */
-    getBuildStats(){
+    initBuildStats(){
+
+        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef"];
+
         //Create a map of this build's stats
         //This is universal for every possible build, so it's possible to move this elsewhere.
         let statMap = new Map();
-        let minStats = new Map(); //for rolled mins
-        let maxStats = new Map(); //for rolled maxs
-        for (const i in item_fields){ 
-            let id = item_fields[i];
-            if(rolledIDs.includes(id)){ //ID is rolled - put the min and max rolls in min and max stats
-                if(stackingIDs.includes(id)){ //IDs stack - make it number
-                    minStats.set(id,0);
-                    maxStats.set(id,0);
-                }//if standaloneIDs includes id, something's wrong.
-            }else{ //ID is not rolled - just set w/ default
-                 if(stackingIDs.includes(id)){//stacking but not rolled: ex skill points
-                    statMap.set(id,0);
-                 }else if(standaloneIDs.includes(id)){
-                    statMap.set(id,"");
-                 }else if(skpReqs.includes(id)){
-                    statMap.set(id,0);
-                 }
-            }    
+
+        for (const staticID of staticIDs) {
+            statMap.set(staticID, 0);
         }
-        statMap.set("minStats",minStats);
-        statMap.set("maxStats",maxStats);
+        statMap.set("hp", 505); //TODO: Add player base health
         
-        for (const i in this.items){
-            let item = expandItem(this.items[i]);
-            console.log(item);
-            for(const [key,value] of item){ //for each key:value pair in item
-                if(key === "minRolls"){ 
-                    for (const [id,roll] of value){ //for each id:roll pair in minRolls
-                        statMap.get("minStats").set(id,statMap.get("minStats").get(id) + roll); //we know they must stack
-                    }
-                }else if(key==="maxRolls"){
-                    for (const [id,roll] of value){ //for each id:roll pair in maxRolls
-                        statMap.get("maxStats").set(id,statMap.get("maxStats").get(id) + roll); //we know they must stack
-                    }
-                }else if(typeof value === "undefined"){ //does not stack - convert to string
-                    statMap.set(key,statMap.get(key).concat("undefined,"));
-                }else if(typeof value === "null"){ //does not stack - convert to string
-                    statMap.set(key,statMap.get(key).concat("null,"));
-                }else if(typeof value === "number"){ //although the value is not rolled, it stacks b/c it's a number.
-                    if(key === "strReq" || key === "dexReq" || key === "intReq" || key === "defReq" || key === "agiReq" ){
-                        if(value > statMap.get(key)){
-                            statMap.set(key,value);
-                        }
-                    }else{
-                        statMap.set(key,statMap.get(key)+value);
-                    }
-                }else if(typeof value === "string"){ //does not stack
-                    if(key === "nDam" || key === "eDam" || key === "tDam" || key === "wDam" || key === "fDam" || key === "aDam" || key === "atkSpd"){
-                        statMap.set(key,statMap.get(key).concat(value));
-                    }else{
-                        statMap.set(key,statMap.get(key).concat(value.concat(",")));
-                    }
-                }
+        for (const _item of this.items){
+            let item = expandItem(_item);
+            for (let [id, value] of item.get("maxRolls")) {
+                statMap.set(id,(statMap.get(id) || 0)+value);
+            }
+            for (const staticID of staticIDs) {
+                if (item[staticID]) { statMap.set(statMap.get(staticID) + item[staticID]); }
             }
         }
+
+        // The stuff relevant for damage calculation!!! @ferricles
+        statMap.set("atkSpd", this.weapon["atkSpd"]);
+        statMap.set("damageRaw", [this.weapon["nDam"], this.weapon["fDam"], this.weapon["wDam"], this.weapon["aDam"], this.weapon["tDam"], this.weapon["eDam"]]);
+        statMap.set("damageBonus", [statMap.get("fDamPct"), statMap.get("wDamPct"), statMap.get("aDamPct"), statMap.get("tDamPct"), statMap.get("eDamPct")]);
+        statMap.set("defRaw", [statMap.get("fDef"), statMap.get("wDef"), statMap.get("aDef"), statMap.get("tDef"), statMap.get("eDef")]);
+        statMap.set("defBonus", [statMap.get("fDefPct"), statMap.get("wDefPct"), statMap.get("aDefPct"), statMap.get("tDefPct"), statMap.get("eDefPct")]);
+
         console.log(statMap);
-        return statMap;
+
+        this.statMap = statMap;
     }
-
-    /* Setters */
-
 
 }
