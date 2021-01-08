@@ -139,7 +139,7 @@ class Build{
     getMeleeStats(){
 
         const stats = this.statMap;
-        // Array of neutral + ewtf damages. Each entry is a pair (min, max).
+        // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
         let damages = [];
         for (const damage_string of stats.get("damageRaw")) {
             const damage_vals = damage_string.split("-").map(Number);

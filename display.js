@@ -38,7 +38,17 @@ function expandItem(item){
     expandedItem.set("maxRolls",maxRolls);
     return expandedItem;
 }
-
+/*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
+* @param id
+*/
+function idRound(id){
+    rounded = Math.round(id);
+    if(rounded == 0){
+        return 1;
+    }else{
+        return rounded;
+    }
+}
 function displayExpandedItem(item, parent_id){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
