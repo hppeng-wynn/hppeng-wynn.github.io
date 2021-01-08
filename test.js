@@ -20,11 +20,12 @@ let player_build;
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
-let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
-let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq","str", "dex", "int", "agi", "def", "fixID", "category", "id"];
+let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
+let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 let stackingIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "fDef", "wDef", "aDef", "tDef", "eDef", "str", "dex", "int", "agi", "def"];
-let standaloneIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "fixID", "category", "id"];
+let standaloneIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "lvl", "classReq", "fixID", "category", "id"];
+let skpReqs = ["strReq", "dexReq", "intReq", "defReq", "agiReq"];
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let itemLists = new Map();
 for (const it of itemTypes) {
@@ -281,6 +282,11 @@ function calculateBuild(){
     setValue("agi-skp", skillpoints[4]);
     console.log(skillpoints);
     player_build.assigned_skillpoints;
+    setHTML("str-skp-pct", skillPointsToPercentage(skillpoints[0])*100 );
+    setHTML("dex-skp-pct", skillPointsToPercentage(skillpoints[1])*100 );
+    setHTML("int-skp-pct", skillPointsToPercentage(skillpoints[2])*100 );
+    setHTML("def-skp-pct", skillPointsToPercentage(skillpoints[3])*100 );
+    setHTML("agi-skp-pct", skillPointsToPercentage(skillpoints[4])*100 );
 
     setHTML("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
 
@@ -293,7 +299,54 @@ function calculateBuild(){
     setHTML("build-bracelet", expandedItemToString(expandItem(player_build.bracelet)));
     setHTML("build-necklace", expandedItemToString(expandItem(player_build.necklace)));
     setHTML("build-weapon", expandedItemToString(expandItem(player_build.weapon)));
-    setHTML("build-cumulative-stats", player_build.getMeleeDPS()); //Incomplete function
+    let meleeStats = player_build.getMeleeStats();
+    //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
+    let meleeSummary = "";
+    meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
+    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br><br>");
+    meleeSummary = meleeSummary.concat("<b>Non-Crit Stats: </b><br>");
+    if(meleeStats[0][0] > 0){
+        meleeSummary = meleeSummary.concat("Neutral Damage: ",meleeStats[0][0]," -> ",meleeStats[0][1],"<br>");
+    }
+    if(meleeStats[1][0] > 0){
+        meleeSummary = meleeSummary.concat("Earth Damage: ",meleeStats[1][0]," -> ",meleeStats[1][1],"<br>");
+    }
+    if(meleeStats[2][0] > 0){
+        meleeSummary = meleeSummary.concat("Thunder Damage: ",meleeStats[2][0]," -> ",meleeStats[2][1],"<br>");
+    }
+    if(meleeStats[3][0] > 0){
+        meleeSummary = meleeSummary.concat("Water Damage: ",meleeStats[3][0]," -> ",meleeStats[3][1],"<br>");
+    }
+    if(meleeStats[4][0] > 0){
+        meleeSummary = meleeSummary.concat("Fire Damage: ",meleeStats[4][0]," -> ",meleeStats[4][1],"<br>");
+    }
+    if(meleeStats[5][0] > 0){
+        meleeSummary = meleeSummary.concat("Air Damage: ",meleeStats[5][0]," -> ",meleeStats[5][1],"<br>");
+    }
+    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[6][0]," -> ",meleeStats[6][1],"<br>");
+    meleeSummary = meleeSummary.concat("Normal DPS: ",Math.round(meleeStats[8]),"<br><br>");
+    meleeSummary = meleeSummary.concat("<b>Crit Stats: </b><br>");
+    if(meleeStats[0][2] > 0){
+        meleeSummary = meleeSummary.concat("Neutral Damage: ",meleeStats[0][2]," -> ",meleeStats[0][3],"<br>");
+    }
+    if(meleeStats[1][2] > 0){
+        meleeSummary = meleeSummary.concat("Earth Damage: ",meleeStats[1][2]," -> ",meleeStats[1][3],"<br>");
+    }
+    if(meleeStats[2][2] > 0){
+        meleeSummary = meleeSummary.concat("Thunder Damage: ",meleeStats[2][2]," -> ",meleeStats[2][3],"<br>");
+    }
+    if(meleeStats[3][2] > 0){
+        meleeSummary = meleeSummary.concat("Water Damage: ",meleeStats[3][2]," -> ",meleeStats[3][3],"<br>");
+    }
+    if(meleeStats[4][2] > 0){
+        meleeSummary = meleeSummary.concat("Fire Damage: ",meleeStats[4][2]," -> ",meleeStats[4][3],"<br>");
+    }
+    if(meleeStats[5][2] > 0){
+        meleeSummary = meleeSummary.concat("Air Damage: ",meleeStats[5][2]," -> ",meleeStats[5][3],"<br>");
+    }
+    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
+    meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
+    setHTML("build-cumulative-stats", "".concat(meleeSummary)); //Incomplete function
     location.hash = encodeBuild();
 }
 /*  Helper function that gets stats ranges for wearable items.
@@ -357,7 +410,7 @@ function expandedItemToString(item){
                 itemString = itemString.concat(idPrefixes[ids[i]]);
                 itemString = itemString.concat(item.get(ids[i]), idSuffixes[ids[i]],"<br>");
             }
-            if(rolledIDs.includes(ids[i])&& item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
+            if(rolledIDs.includes(ids[i]) && item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
                 itemString = itemString.concat(idPrefixes[ids[i]]);
                 itemString = itemString.concat(item.get("minRolls").get(ids[i]), idSuffixes[ids[i]],"<br>");
             }//Just don't do anything if else
@@ -368,7 +421,7 @@ function expandedItemToString(item){
                 itemString = itemString.concat(idPrefixes[ids[i]]);
                 itemString = itemString.concat(item.get(ids[i]), idSuffixes[ids[i]],"<br>");
             }
-            if(rolledIDs.includes(ids[i])&& item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
+            if(rolledIDs.includes(ids[i]) && item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
                 itemString = itemString.concat(idPrefixes[ids[i]]);
                 itemString = itemString.concat(item.get("minRolls").get(ids[i]), idSuffixes[ids[i]], " -> ", idRound(item.get("maxRolls").get(ids[i])),idSuffixes[ids[i]],"<br>");
             }//Just don't do anything if else
