@@ -36,6 +36,10 @@ function setValue(id, value) {
     el.dispatchEvent(new Event("change"));
 }
 
+function getValue(id) {
+    return document.getElementById(id).value;
+}
+
 // Base 64 encoding tools
 // https://stackoverflow.com/a/27696695
 // Modified for fixed precision

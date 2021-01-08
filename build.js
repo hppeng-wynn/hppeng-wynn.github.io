@@ -49,26 +49,32 @@ class Build{
     
     /*Construct a build.
     */
-    constructor(level,helmet,chestplate,leggings,boots,ring1,ring2,bracelet,necklace,weapon){
+    constructor(level,helmet,chestplate,leggings,boots,ring1,ring2,bracelet,necklace,weapon,powders){
+        // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
+        this.powders = powders
         if(helmet.type.valueOf() != "helmet".valueOf()){
             throw new TypeError("No such helmet named ", helmet.name);
         }else{
             this.helmet = helmet;
+            this.powders[0] = this.powders[0].slice(0,helmet.slots); 
         }
         if(chestplate.type.valueOf() != "chestplate"){
             throw new TypeError("No such chestplate named ", chestplate.name);
         }else{
             this.chestplate = chestplate;
+            this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
         }
         if(leggings.type.valueOf() != "leggings"){
             throw new TypeError("No such leggings named ", leggings.name);
         }else{
             this.leggings = leggings;
+            this.powders[2] = this.powders[2].slice(0,leggings.slots); 
         }
         if(boots.type.valueOf() != "boots"){
             throw new TypeError("No such boots named ", boots.name);
         }else{
             this.boots = boots;
+            this.powders[3] = this.powders[3].slice(0,boots.slots); 
         }
         if(ring1.type.valueOf() != "ring"){
             throw new TypeError("No such ring named ", ring1.name);
@@ -92,6 +98,7 @@ class Build{
         }
         if(weapon.type.valueOf() == "wand" || weapon.type.valueOf() == "bow" || weapon.type.valueOf() == "dagger" || weapon.type.valueOf() == "spear" || weapon.type.valueOf() == "relik"){
             this.weapon = weapon;
+            this.powders[4] = this.powders[4].slice(0,weapon.slots); 
         }else{
             throw new TypeError("No such weapon named ", weapon.name);
         }
@@ -112,6 +119,9 @@ class Build{
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
 
+        // For strength boosts like warscream, vanish, etc.
+        this.damage_multiplier = 1.0;
+
         this.initBuildStats();
     }  
 
@@ -126,7 +136,11 @@ class Build{
     /*  Get total health for build.
     */
     getHealth(){
-        health = parseInt(this.helmet.hp,10) + parseInt(this.helmet.hpBonus,10) + parseInt(this.chestplate.hp,10) + parseInt(this.chestplate.hpBonus,10) + parseInt(this.leggings.hp,10) + parseInt(this.leggings.hpBonus,10) + parseInt(this.boots.hp,10) + parseInt(this.boots.hpBonus,10) + parseInt(this.ring1.hp,10) + parseInt(this.ring1.hpBonus,10) + parseInt(this.ring2.hp,10) + parseInt(this.ring2.hpBonus,10) + parseInt(this.bracelet.hp,10) + parseInt(this.bracelet.hpBonus,10) + parseInt(this.necklace.hp,10) + parseInt(this.necklace.hpBonus,10) + parseInt(this.weapon.hp,10) + parseInt(this.weapon.hpBonus,10) + levelToHPBase(this.level);
+        let health = levelToHPBase(this.level);
+        for (const item in this.items) {
+            if (item.hp) health += item.hp;
+            if (item.hpBonus) health += item.hpBonus;
+        }
         if(health<5){
             return 5;
         }else{
@@ -168,15 +182,13 @@ class Build{
         for (let i in this.total_skillpoints) {
             skillBoost.push(skillPointsToPercentage(this.total_skillpoints[i]) + stats.get("damageBonus")[i] / 100.);
         }
-        console.log(skillBoost);
         for (let i in damages) {
             let damageBoost = 1 + skillBoost[i] + staticBoost;
-            console.log(damageBoost);
             damages_results.push([
-                Math.round(damages[i][0] * damageBoost),        // Normal min
-                Math.round(damages[i][1] * damageBoost),        // Normal max
-                Math.round(damages[i][0] * (1 + damageBoost)),  // Crit min
-                Math.round(damages[i][1] * (1 + damageBoost)),  // Crit max
+                Math.max(damages[i][0] * damageBoost * this.damage_multiplier, 0),       // Normal min
+                Math.max(damages[i][1] * damageBoost * this.damage_multiplier, 0),       // Normal max
+                Math.max(damages[i][0] * (1 + damageBoost) * this.damage_multiplier, 0), // Crit min
+                Math.max(damages[i][1] * (1 + damageBoost) * this.damage_multiplier, 0), // Crit max
             ]);
             totalDamNorm[0] += damages_results[i][0];
             totalDamNorm[1] += damages_results[i][1];
@@ -184,7 +196,7 @@ class Build{
             totalDamCrit[1] += damages_results[i][3];
         }
         for (let i in damages_results[0]) {
-            damages_results[0][i] += mdRaw;
+            damages_results[0][i] += mdRaw * this.damage_multiplier;
         }
 
         //Now do math
@@ -210,7 +222,7 @@ class Build{
         for (const staticID of staticIDs) {
             statMap.set(staticID, 0);
         }
-        statMap.set("hp", 505); //TODO: Add player base health
+        statMap.set("hp", this.getHealth());
         
         for (const _item of this.items){
             let item = expandItem(_item);
@@ -228,8 +240,6 @@ class Build{
         statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
         statMap.set("defRaw", [statMap.get("eDam"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
         statMap.set("defBonus", [statMap.get("eDamPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
-
-        console.log(statMap);
 
         this.statMap = statMap;
     }

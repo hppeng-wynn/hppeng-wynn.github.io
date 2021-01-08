@@ -22,6 +22,35 @@ let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
 let skpReqs = ["strReq", "dexReq", "intReq", "defReq", "agiReq"];
+
+let powderIDs = new Map();
+let powderNames = new Map();
+let _powderID = 0;
+for (const x of ['e', 't', 'w', 'f', 'a']) {
+    for (let i = 1; i <= 6; ++i) {
+        // Support both upper and lowercase, I guess.
+        powderIDs.set(x.toUpperCase()+i, _powderID);
+        powderIDs.set(x+i, _powderID);
+        powderNames.set(_powderID, x+i);
+        _powderID++;
+    }
+}
+let powderInputs = [
+    "helmet-powder",
+    "chestplate-powder",
+    "leggings-powder",
+    "boots-powder",
+    "weapon-powder",
+];
+// Ordering: [dmgMin, dmgMax, convert, defPlus, defMinus (+6 mod 5)]
+let powderStats = [
+    [3,6,17,2,1], [6,9,21,4,2], [8,14,25,8,3], [11,16,31,14,5], [15,18,38,22,9], [18,22,46,30,13],
+    [1,8,9,3,1], [1,13,11,5,1], [2,18,14,9,2], [3,24,17,14,4], [3,32,22,20,7], [5,40,28,28,10],
+    [3,4,13,3,1], [4,7,15,6,1], [6,10,17,11,2], [8,12,21,18,4], [11,14,26,28,7], [13,17,32,40,10],
+    [2,5,14,3,1], [4,8,16,5,2], [6,10,19,9,3], [9,13,24,16,5], [12,16,30,25,9], [15,19,37,36,13],
+    [2,6,11,3,1], [4,9,14,6,2], [7,10,17,10,3], [9,13,22,16,5], [13,18,28,24,9], [16,18,35,34,13]
+];
+
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let itemLists = new Map();
 for (const it of itemTypes) {
@@ -75,6 +104,12 @@ function init() {
         item.fixID = true;
         item.tier = " ";//do not get rid of this @hpp
         item.id = 10000 + i;
+        item.nDam = "0-0";
+        item.eDam = "0-0";
+        item.tDam = "0-0";
+        item.wDam = "0-0";
+        item.fDam = "0-0";
+        item.aDam = "0-0";
 
         noneItems[i] = item;
     }
@@ -155,9 +190,10 @@ function populateFromURL() {
         let bracelet;
         let necklace;
         let weapon;
+        let powdering = ["", "", "", "", ""];
         let info = url_tag.split("_");
         let version = info[0];
-        if (version === "0") {
+        if (version === "0" || version === "1") {
             let equipments = info[1];
             helmet = idMap.get(Base64.toInt(equipments.slice(0,3)));
             chestplate = idMap.get(Base64.toInt(equipments.slice(3,6)));
@@ -169,21 +205,43 @@ function populateFromURL() {
             necklace = idMap.get(Base64.toInt(equipments.slice(21,24)));
             weapon = idMap.get(Base64.toInt(equipments.slice(24,27)));
         }
+        if (version === "1") {
+            let powder_info = info[1].slice(27);
+            console.log(powder_info);
+            // TODO: Make this run in linear instead of quadratic time...
+            for (let i = 0; i < 5; ++i) {
+                let powders = "";
+                let n_blocks = Base64.toInt(powder_info.charAt(0));
+                console.log(n_blocks + " blocks");
+                powder_info = powder_info.slice(1);
+                for (let j = 0; j < n_blocks; ++j) {
+                    let block = powder_info.slice(0,5);
+                    console.log(block);
+                    let six_powders = Base64.toInt(block);
+                    for (let k = 0; k < 6 && six_powders != 0; ++k) {
+                        powders += powderNames.get((six_powders & 0x1f) - 1);
+                        six_powders >>>= 5;
+                    }
+                    powder_info = powder_info.slice(5);
+                }
+                powdering[i] = powders;
+            }
+        }
 
         setValue("helmet-choice", helmet);
-        setValue("helmet-powder", "");
+        setValue("helmet-powder", powdering[0]);
         setValue("chestplate-choice", chestplate);
-        setValue("chestplate-powder", "");
+        setValue("chestplate-powder", powdering[1]);
         setValue("leggings-choice", leggings);
-        setValue("leggings-powder", "");
+        setValue("leggings-powder", powdering[2]);
         setValue("boots-choice", boots);
-        setValue("boots-powder", "");
+        setValue("boots-powder", powdering[3]);
         setValue("ring1-choice", ring1);
         setValue("ring2-choice", ring2);
         setValue("bracelet-choice", bracelet);
         setValue("necklace-choice", necklace);
         setValue("weapon-choice", weapon);
-        setValue("weapon-powder", "");
+        setValue("weapon-powder", powdering[4]);
         setValue("str-skp", "0");
         setValue("dex-skp", "0");
         setValue("int-skp", "0");
@@ -195,7 +253,16 @@ function populateFromURL() {
 
 function encodeBuild() {
     if (player_build) {
-        let build_string = "0_" + Base64.fromIntN(player_build.helmet.id, 3) +
+//        let build_string = "0_" + Base64.fromIntN(player_build.helmet.id, 3) +
+//                            Base64.fromIntN(player_build.chestplate.id, 3) +
+//                            Base64.fromIntN(player_build.leggings.id, 3) +
+//                            Base64.fromIntN(player_build.boots.id, 3) +
+//                            Base64.fromIntN(player_build.ring1.id, 3) +
+//                            Base64.fromIntN(player_build.ring2.id, 3) +
+//                            Base64.fromIntN(player_build.bracelet.id, 3) +
+//                            Base64.fromIntN(player_build.necklace.id, 3) +
+//                            Base64.fromIntN(player_build.weapon.id, 3);
+        let build_string = "1_" + Base64.fromIntN(player_build.helmet.id, 3) +
                             Base64.fromIntN(player_build.chestplate.id, 3) +
                             Base64.fromIntN(player_build.leggings.id, 3) +
                             Base64.fromIntN(player_build.boots.id, 3) +
@@ -204,6 +271,22 @@ function encodeBuild() {
                             Base64.fromIntN(player_build.bracelet.id, 3) +
                             Base64.fromIntN(player_build.necklace.id, 3) +
                             Base64.fromIntN(player_build.weapon.id, 3);
+
+        for (const _powderset of player_build.powders) {
+            let n_bits = Math.ceil(_powderset.length / 6);
+            build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
+            // Slice copy.
+            let powderset = _powderset.slice();
+            while (powderset.length != 0) {
+                let firstSix = powderset.slice(0,6).reverse();
+                let powder_hash = 0;
+                for (const powder of firstSix) {
+                    powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+                }
+                build_string += Base64.fromIntN(powder_hash, 5);
+                powderset = powderset.slice(6);
+            }
+        }
 
         return build_string;
     }
@@ -214,15 +297,15 @@ function calculateBuild(){
     /*  TODO: implement level changing
         Make this entire function prettier
     */
-    let helmet = document.getElementById("helmet-choice").value;
-    let chestplate = document.getElementById("chestplate-choice").value;
-    let leggings = document.getElementById("leggings-choice").value;
-    let boots = document.getElementById("boots-choice").value;
-    let ring1 = document.getElementById("ring1-choice").value;
-    let ring2 = document.getElementById("ring2-choice").value;
-    let bracelet = document.getElementById("bracelet-choice").value;
-    let necklace = document.getElementById("necklace-choice").value;
-    let weapon = document.getElementById("weapon-choice").value;
+    let helmet = getValue("helmet-choice");
+    let chestplate = getValue("chestplate-choice");
+    let leggings = getValue("leggings-choice");
+    let boots = getValue("boots-choice");
+    let ring1 = getValue("ring1-choice");
+    let ring2 = getValue("ring2-choice");
+    let bracelet = getValue("bracelet-choice");
+    let necklace = getValue("necklace-choice");
+    let weapon = getValue("weapon-choice");
     if(helmet===""){
         helmet = "No Helmet";
     }
@@ -250,6 +333,19 @@ function calculateBuild(){
     if(weapon===""){
         weapon = "No Weapon";
     }
+    let powderings = [];
+    for (const i in powderInputs) {
+        // read in two characters at a time.
+        // TODO: make this more robust.
+        let input = getValue(powderInputs[i]);
+        let powdering = [];
+        while (input) {
+            let first = input.slice(0, 2);
+            powdering.push(powderIDs.get(first));
+            input = input.slice(2);
+        }
+        powderings.push(powdering);
+    }
     player_build = new Build(
         106,
         itemMap.get(helmet),
@@ -261,6 +357,7 @@ function calculateBuild(){
         itemMap.get(bracelet),
         itemMap.get(necklace),
         itemMap.get(weapon),
+        powderings
         );
     console.log(player_build.toString());
 
@@ -288,7 +385,6 @@ function calculateBuild(){
     setText("int-skp-base", "Original Value: " + skillpoints[2]);
     setText("def-skp-base", "Original Value: " + skillpoints[3]);
     setText("agi-skp-base", "Original Value: " + skillpoints[4]);
-    console.log(skillpoints);
 
     setHTML("str-skp-pct", skillPointsToPercentage(skillpoints[0])*100 );
     setHTML("dex-skp-pct", skillPointsToPercentage(skillpoints[1])*100 );
@@ -307,8 +403,23 @@ function calculateBuild(){
     displayExpandedItem(expandItem(player_build.bracelet), "build-bracelet");
     displayExpandedItem(expandItem(player_build.necklace), "build-necklace");
     displayExpandedItem(expandItem(player_build.weapon), "build-weapon");
+
+    calculateBuildStats();
+}
+
+function calculateBuildStats() {
     let meleeStats = player_build.getMeleeStats();
     //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
+    for (let i = 0; i < 6; ++i) {
+        for (let j in meleeStats[i]) {
+            meleeStats[i][j] = Math.round(meleeStats[i][j]);
+        }
+    }
+    for (let i = 6; i < 8; ++i) {
+        for (let j in meleeStats[i]) {
+            meleeStats[i][j] = Math.round(meleeStats[i][j]);
+        }
+    }
     let meleeSummary = "";
     meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
     meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br><br>");
