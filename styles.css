@@ -135,3 +135,8 @@
 .Health:before {
     content: "\2764" ' ';
 }
+
+.skpInput, .skplabel {
+    display: block;
+    margin: auto;
+}

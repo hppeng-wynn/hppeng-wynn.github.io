@@ -151,9 +151,8 @@ class Build{
         Returns an array in the order:
     */
     getMeleeStats(){
-
         const stats = this.statMap;
-        // Array of neutral + ewtf damages. Each entry is a pair (min, max).
+        // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
         let damages = [];
         for (const damage_string of stats.get("damageRaw")) {
             const damage_vals = damage_string.split("-").map(Number);
@@ -204,7 +203,7 @@ class Build{
         let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex))) + (poison / 3.0 * (1 + skillPointsToPercentage(str)));
         //console.log([nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
-        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
+        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]);
     }
 
     /*  Get all stats for this build. Stores in this.statMap.
@@ -222,7 +221,7 @@ class Build{
         for (const staticID of staticIDs) {
             statMap.set(staticID, 0);
         }
-        statMap.set("hp", this.getHealth());
+        statMap.set("hp", levelToHPBase(this.level)); //TODO: Add player base health
         
         for (const _item of this.items){
             let item = expandItem(_item);
