@@ -20,7 +20,12 @@ let player_build;
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
-let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "agiReq", "defReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
+let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
+let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id"];
+let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
+let stackingIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "fDef", "wDef", "aDef", "tDef", "eDef", "str", "dex", "int", "agi", "def"];
+let standaloneIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "lvl", "classReq", "fixID", "category", "id"];
+let skpReqs = ["strReq", "dexReq", "intReq", "defReq", "agiReq"];
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let itemLists = new Map();
 for (const it of itemTypes) {
@@ -286,6 +291,13 @@ function calculateBuild(){
     setText("int-skp-base", "Original Value: " + skillpoints[2]);
     setText("def-skp-base", "Original Value: " + skillpoints[3]);
     setText("agi-skp-base", "Original Value: " + skillpoints[4]);
+    console.log(skillpoints);
+
+    setHTML("str-skp-pct", skillPointsToPercentage(skillpoints[0])*100 );
+    setHTML("dex-skp-pct", skillPointsToPercentage(skillpoints[1])*100 );
+    setHTML("int-skp-pct", skillPointsToPercentage(skillpoints[2])*100 );
+    setHTML("def-skp-pct", skillPointsToPercentage(skillpoints[3])*100 );
+    setHTML("agi-skp-pct", skillPointsToPercentage(skillpoints[4])*100 );
 
     setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
 
@@ -298,7 +310,54 @@ function calculateBuild(){
     displayExpandedItem(expandItem(player_build.bracelet), "build-bracelet");
     displayExpandedItem(expandItem(player_build.necklace), "build-necklace");
     displayExpandedItem(expandItem(player_build.weapon), "build-weapon");
-    //setHTML("build-cumulative-stats", player_build.getMeleeDPS()); //Incomplete function
+    let meleeStats = player_build.getMeleeStats();
+    //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
+    let meleeSummary = "";
+    meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
+    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br><br>");
+    meleeSummary = meleeSummary.concat("<b>Non-Crit Stats: </b><br>");
+    if(meleeStats[0][0] > 0){
+        meleeSummary = meleeSummary.concat("Neutral Damage: ",meleeStats[0][0]," -> ",meleeStats[0][1],"<br>");
+    }
+    if(meleeStats[1][0] > 0){
+        meleeSummary = meleeSummary.concat("Earth Damage: ",meleeStats[1][0]," -> ",meleeStats[1][1],"<br>");
+    }
+    if(meleeStats[2][0] > 0){
+        meleeSummary = meleeSummary.concat("Thunder Damage: ",meleeStats[2][0]," -> ",meleeStats[2][1],"<br>");
+    }
+    if(meleeStats[3][0] > 0){
+        meleeSummary = meleeSummary.concat("Water Damage: ",meleeStats[3][0]," -> ",meleeStats[3][1],"<br>");
+    }
+    if(meleeStats[4][0] > 0){
+        meleeSummary = meleeSummary.concat("Fire Damage: ",meleeStats[4][0]," -> ",meleeStats[4][1],"<br>");
+    }
+    if(meleeStats[5][0] > 0){
+        meleeSummary = meleeSummary.concat("Air Damage: ",meleeStats[5][0]," -> ",meleeStats[5][1],"<br>");
+    }
+    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[6][0]," -> ",meleeStats[6][1],"<br>");
+    meleeSummary = meleeSummary.concat("Normal DPS: ",Math.round(meleeStats[8]),"<br><br>");
+    meleeSummary = meleeSummary.concat("<b>Crit Stats: </b><br>");
+    if(meleeStats[0][2] > 0){
+        meleeSummary = meleeSummary.concat("Neutral Damage: ",meleeStats[0][2]," -> ",meleeStats[0][3],"<br>");
+    }
+    if(meleeStats[1][2] > 0){
+        meleeSummary = meleeSummary.concat("Earth Damage: ",meleeStats[1][2]," -> ",meleeStats[1][3],"<br>");
+    }
+    if(meleeStats[2][2] > 0){
+        meleeSummary = meleeSummary.concat("Thunder Damage: ",meleeStats[2][2]," -> ",meleeStats[2][3],"<br>");
+    }
+    if(meleeStats[3][2] > 0){
+        meleeSummary = meleeSummary.concat("Water Damage: ",meleeStats[3][2]," -> ",meleeStats[3][3],"<br>");
+    }
+    if(meleeStats[4][2] > 0){
+        meleeSummary = meleeSummary.concat("Fire Damage: ",meleeStats[4][2]," -> ",meleeStats[4][3],"<br>");
+    }
+    if(meleeStats[5][2] > 0){
+        meleeSummary = meleeSummary.concat("Air Damage: ",meleeStats[5][2]," -> ",meleeStats[5][3],"<br>");
+    }
+    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
+    meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
+    setHTML("build-cumulative-stats", "".concat(meleeSummary)); //Incomplete function
     location.hash = encodeBuild();
 }
 /*  Helper function that gets stats ranges for wearable items.
@@ -308,6 +367,38 @@ function calculateBuild(){
     @param item - a map with non-rolled Ids as normal key:value pairs and all rolled IDs as 2 separate key:value pairs in the minRoll and maxRoll keys that are mapped to maps.
     TODO: write the function
 */
+function expandedItemToString(item){
+    let ids = ["lvl", "classReq","strReq", "dexReq", "intReq", "defReq","agiReq", "nDam", "eDam", "tDam", "wDam", "tDam", "aDam", "atkSpd", "hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "agi", "def", "hpBonus", "hprRaw", "hprPct", "sdRaw", "sdPct", "mdRaw", "mdPct", "mr", "ms", "ref", "ls", "poison", "thorns", "exploding", "spd", "atkTier",  "eDamPct", "tDamPct", "wDamPct", "fDamPct", "aDamPct", "eDefPct", "tDefPct", "wDefPct", "fDefPct", "aDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "xpb", "lb", "lq", "spRegen", "eSteal", "gXp", "gSpd", "slots", "set", "quest", "restrict"];
+    let idPrefixes = {"lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam":"Neutral Damage: ", "eDam":"Earth Damage: ", "tDam":"Thunder Damage: ", "wDam":"Water Damage: ", "fDam":"Fire Damage: ", "aDam":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health: ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Main Attack Neutral Damage: ", "mdPct":"Main Attack Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "exploding":"Expoding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"This item belongs to the ", "quest":"This item is from the quest<br>", "restrict":""};
+    let idSuffixes = {"lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam":"", "eDam":"", "tDam":"", "wDam":"", "fDam":"", "aDam":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/4s", "ms":"/4s", "ref":"%", "ls":"/4s", "poison":"/3s", "thorns":"%", "exploding":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":".", "restrict":""};
+    let itemString = "";
+    itemString = itemString.concat(item.get("name"),"<br><br>");
+    if(item.has("fixID") && item.get("fixID")){//fixed IDs
+        for(i = 0; i < ids.length; i++){ //iterate the ids
+            if(nonRolledIDs.includes(ids[i]) && item.get(ids[i])){//nonRolledID & non-0/non-null/non-und ID
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(item.get(ids[i]), idSuffixes[ids[i]],"<br>");
+            }
+            if(rolledIDs.includes(ids[i]) && item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(item.get("minRolls").get(ids[i]), idSuffixes[ids[i]],"<br>");
+            }//Just don't do anything if else
+        }
+    }else{//non-fixed IDs
+        for(i = 0; i < ids.length; i++){ //iterate the ids
+            if(nonRolledIDs.includes(ids[i]) && item.get(ids[i])){//nonRolledID & non-0/non-null/non-und ID
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(item.get(ids[i]), idSuffixes[ids[i]],"<br>");
+            }
+            if(rolledIDs.includes(ids[i]) && item.get("minRolls").get(ids[i]) && item.get("maxRolls").get(ids[i]) ){//rolled ID & non-0/non-null/non-und ID
+                itemString = itemString.concat(idPrefixes[ids[i]]);
+                itemString = itemString.concat(item.get("minRolls").get(ids[i]), idSuffixes[ids[i]], " -> ", idRound(item.get("maxRolls").get(ids[i])),idSuffixes[ids[i]],"<br>");
+            }//Just don't do anything if else
+        }
+    }
+    itemString = itemString.concat("<br>",item.get("tier")," ", item.get("type"));
+    return itemString;
+}
 /*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
 * @param id
 */
