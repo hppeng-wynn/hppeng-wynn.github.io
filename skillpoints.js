@@ -5,14 +5,8 @@ function calculate_skillpoints(equipment, weapon) {
     let fixed = [];
     let consider = [];
     let noboost = [];
-    let has_skillpoint = [false, false, false, false, false];
 
     for (const item of equipment) {
-        for (let i = 0; i < 5; ++i) {
-            if (item.reqs[i] > 0) {
-                has_skillpoint[i] = true;
-            }
-        }
         if (item.reqs.every(x => x === 0)) {
             fixed.push(item);
         }
@@ -46,6 +40,7 @@ function calculate_skillpoints(equipment, weapon) {
                 total -= item.skillpoints[i];
             }
             if (item.reqs[i] == 0) continue;
+            skillpoint_filter[i] = true;
             const req = item.reqs[i];
             const cur = skillpoints[i];
             if (req > cur) {
@@ -71,6 +66,8 @@ function calculate_skillpoints(equipment, weapon) {
     if (consider.length > 0 || noboost.length > 0) {
         // Try every combination and pick the best one.
         for (let permutation of perm(consider)) {
+            let has_skillpoint = [false, false, false, false, false];
+
             permutation = permutation.concat(noboost);
             console.log(permutation);
 

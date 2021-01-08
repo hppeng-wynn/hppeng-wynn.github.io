@@ -22,6 +22,10 @@ function perm(a){
     return r;
 }
 
+function setText(id, text) {
+    document.getElementById(id).textContent = text;
+}
+
 function setHTML(id, html) {
     document.getElementById(id).innerHTML = html;
 }

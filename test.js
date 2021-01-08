@@ -268,17 +268,26 @@ function calculateBuild(){
     }
     setHTML("build-order", equip_order_text);
     
-    player_build.base_skillpoints;
+    let assigned = player_build.base_skillpoints;
+    setText("str-skp-assign", "Before Boosts: " + assigned[0]);
+    setText("dex-skp-assign", "Before Boosts: " + assigned[1]);
+    setText("int-skp-assign", "Before Boosts: " + assigned[2]);
+    setText("def-skp-assign", "Before Boosts: " + assigned[3]);
+    setText("agi-skp-assign", "Before Boosts: " + assigned[4]);
+
     let skillpoints = player_build.total_skillpoints;
     setValue("str-skp", skillpoints[0]);
     setValue("dex-skp", skillpoints[1]);
     setValue("int-skp", skillpoints[2]);
     setValue("def-skp", skillpoints[3]);
     setValue("agi-skp", skillpoints[4]);
-    console.log(skillpoints);
-    player_build.assigned_skillpoints;
+    setText("str-skp-base", "Original Value: " + skillpoints[0]);
+    setText("dex-skp-base", "Original Value: " + skillpoints[1]);
+    setText("int-skp-base", "Original Value: " + skillpoints[2]);
+    setText("def-skp-base", "Original Value: " + skillpoints[3]);
+    setText("agi-skp-base", "Original Value: " + skillpoints[4]);
 
-    setHTML("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
+    setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
 
     displayExpandedItem(expandItem(player_build.helmet), "build-helmet");
     displayExpandedItem(expandItem(player_build.chestplate), "build-chestplate");
