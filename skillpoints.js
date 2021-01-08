@@ -58,8 +58,8 @@ function calculate_skillpoints(equipment, weapon) {
         apply_skillpoints(static_skillpoints_base, item);
     }
 
-    let best = null;
-    let final_skillpoints = null;
+    let best = consider.concat(noboost);
+    let final_skillpoints = static_skillpoints_base.slice();
     let best_skillpoints = [0, 0, 0, 0, 0];
     let best_total = Infinity;
 
@@ -139,36 +139,19 @@ function calculate_skillpoints(equipment, weapon) {
             }
         }
 
-        let equip_order = fixed.concat(best);
-        return [equip_order, best_skillpoints, final_skillpoints, best_total];
     }
     else {
-        //Temporary fix: please verify
-        let has_skillpoint =  [false,false,false,false,false]
-        let skillpoints_applied = [0, 0, 0, 0, 0];
-        let skillpoints = static_skillpoints_base.slice();
-        let total_applied = 0;
-        let result;
-        let needed_skillpoints;
-        let total_diff;
-        result = apply_to_fit(skillpoints, weapon, has_skillpoint);
+        best_total = 0;
+        result = apply_to_fit(final_skillpoints, weapon);
         needed_skillpoints = result[0];
         total_diff = result[1];
-
         for (let i = 0; i < 5; ++i) {
-            skillpoints_applied[i] += needed_skillpoints[i];
-            skillpoints[i] += needed_skillpoints[i];
+            best_skillpoints[i] += needed_skillpoints[i];
+            final_skillpoints[i] += needed_skillpoints[i];
         }
-
-        apply_skillpoints(skillpoints, weapon);
-        total_applied += total_diff;
-
-        if (total_applied < best_total) {
-            best = [weapon];
-            final_skillpoints = skillpoints;
-            best_skillpoints = skillpoints_applied;
-            best_total = total_applied;
-        }
-        return [ best ? best : fixed.concat(noboost) , best_skillpoints, final_skillpoints ? final_skillpoints : static_skillpoints_base, best_total ? best_total : 0];
+        apply_skillpoints(final_skillpoints, weapon);
+        best_total += total_diff;
     }
+    let equip_order = fixed.concat(best);
+    return [equip_order, best_skillpoints, final_skillpoints, best_total];
 }
