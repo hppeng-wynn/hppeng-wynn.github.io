@@ -261,6 +261,8 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
     parent_elem.append(title_elem);
     let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
 
+    let save_damages = [];
+
     for (const part of spell.parts) {
         parent_elem.append(document.createElement("br"));
         let part_div = document.createElement("p");
@@ -284,11 +286,12 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             }
             let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2;
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2;
+            let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage;
 
-            let averageDamage = document.createElement("p");
-            averageDamage.textContent = "Average: "+Math.round((1-critChance)*nonCritAverage+critChance*critAverage);
-            averageDamage.classList.add("damageSubtitle");
-            part_div.append(averageDamage);
+            let averageLabel = document.createElement("p");
+            averageLabel.textContent = "Average: "+Math.round(averageDamage);
+            averageLabel.classList.add("damageSubtitle");
+            part_div.append(averageLabel);
 
             let nonCritLabel = document.createElement("p");
             nonCritLabel.textContent = "Non-Crit Average: "+Math.round(nonCritAverage);
@@ -321,6 +324,17 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
                     part_div.append(p);
                 }
             }
+            save_damages.push(averageDamage);
+        }
+        else if (part.type === "total") {
+            let total_damage = 0;
+            for (let i in part.factors) {
+                total_damage += save_damages[i] * factors[i];
+            }
+            let averageLabel = document.createElement("p");
+            averageLabel.textContent = "Average: "+Math.round(total_damage);
+            averageLabel.classList.add("damageSubtitle");
+            part_div.append(averageLabel);
         }
     }
 }

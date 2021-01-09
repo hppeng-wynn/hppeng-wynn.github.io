@@ -142,9 +142,9 @@ const spell_table = {
                 { subtitle: "No Damage", type: "none" }
             ] },
         { title: "Multihit", cost: 8, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 380, conversion: [60, 25, 0, 0, 15, 0] },
-                { subtitle: "1st to 10th Hit", type: "damage", multiplier: 28, conversion: [60, 25, 0, 0, 15, 0] },
-                { subtitle: "Fatality", type: "damage", multiplier: 100, conversion: [20, 0, 30, 50, 0, 0] },
+                { subtitle: "1st to 10th Hit", type: "damage", multiplier: 27, conversion: [100, 0, 0, 0, 0, 0] },
+                { subtitle: "Fatality", type: "damage", multiplier: 120, conversion: [20, 0, 30, 50, 0, 0] },
+                { subtitle: "Total Damage", type: "total", factors: [10, 1] },
             ] },
         { title: "Smoke Bomb", cost: 8, parts: [
                 { subtitle: "Tick Damage", type: "damage", multiplier: 60, conversion: [45, 25, 0, 0, 0, 30] },
