@@ -168,4 +168,4 @@ const spell_table = {
                 { subtitle: "", type: "damage", multiplier: 50, conversion: [70, 30, 0, 0, 0, 0] },
             ] },
     ]
-}
+};

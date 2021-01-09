@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "2.6";
+const BUILD_VERSION = "2.7";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -422,6 +422,8 @@ function calculateBuildStats() {
         displayExpandedItem(player_build.items[i], buildFields[i]);
     }
 
+    displayBuildStats(player_build, "build-overall-stats");
+
     let meleeStats = player_build.getMeleeStats();
     //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
     for (let i = 0; i < 6; ++i) {
@@ -457,9 +459,9 @@ function calculateBuildStats() {
     meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
     meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
     setHTML("build-melee-stats", "".concat(meleeSummary)); //basically complete function
-    let defenseStats = "";
+    //let defenseStats = "";
 
-    setHTML("build-defense-stats", "".concat(defenseStats));
+    //setHTML("build-defense-stats", "".concat(defenseStats));
 
     let spells = spell_table[player_build.weapon.get("type")];
     for (let i = 0; i < 4; ++i) {

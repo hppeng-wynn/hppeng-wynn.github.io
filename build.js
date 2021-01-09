@@ -151,11 +151,7 @@ class Build{
     /*  Get total health for build.
     */
     getHealth(){
-        let health = levelToHPBase(this.level);
-        for (const item of this.items) {
-            if (item.get("hp")) health += item.get("hp");
-            if (item.get("hpBonus")) health += item.get("hpBonus");
-        }
+        let health = this.statMap.get("hp") + this.statMap.get("hpBonus");
         if(health<5){
             return 5;
         }else{
@@ -222,7 +218,7 @@ class Build{
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
             for (const staticID of staticIDs) {
-                if (item[staticID]) { statMap.set(statMap.get(staticID) + item[staticID]); }
+                if (item.get(staticID)) { statMap.set(staticID, statMap.get(staticID) + item.get(staticID)); }
             }
         }
 
