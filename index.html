@@ -22,114 +22,125 @@
             <a href="credits.txt">Additional credits</a>
         </div>
         <div class="equipment">
-            <div class="center" style="grid-column:1;grid-row:1">
+            <div class="right" style="grid-column:1;grid-row:1">
+                <label>Equipments</label>
+                <br>
+                <br>
                 <div>
                     <label for="helmet-choice">Helmet:</label>
                     <input list="helmet-items" id="helmet-choice" name="helmet-choice" value="No Helmet"/>
                     <datalist id="helmet-items">
                     </datalist>
                 </div>
-                <div id="helmet-slots">
-                    X slots
-                </div>
-                <div>
-                    <label for="helmet-powder">Powdering:</label>
-                    <input type="text" id="helmet-powder" name="helmet-powder"/>
-                </div>
-            </div>
-            <div class="center" style="grid-column:2;grid-row:1">
+                <br>
                 <div>
                     <label for="chestplate-choice">Chestplate:</label>
                     <input list="chestplate-items" id="chestplate-choice" name="chestplate-choice" value="No Chestplate"/>
                     <datalist id="chestplate-items">
                     </datalist>
                 </div>
-                <div id="chestplate-slots">
-                    X slots
-                </div>
-                <div>
-                    <label for="chestplate-powder">Powdering:</label>
-                    <input type="text" id="chestplate-powder" name="chestplate-powder" />
-                </div>
-            </div>
-            <div class="center" style="grid-column:3;grid-row:1">
+                <br>
                 <div>
                     <label for="leggings-choice">Leggings:</label>
                     <input list="leggings-items" id="leggings-choice" name="leggings-choice" value="No Leggings"/>
                     <datalist id="leggings-items">
                     </datalist>
                 </div>
-                <div id="leggings-slots">
-                    X slots
-                </div>
-                <div>
-                    <label for="leggings-powder">Powdering:</label>
-                    <input type="text" id="leggings-powder" name="leggings-powder" />
-                </div>
-            </div>
-            <div class="center" style="grid-column:4;grid-row:1">
+                <br>
                 <div id="boots">
                     <label for="boots-choice">Boots:</label>
                     <input list="boots-items" id="boots-choice" name="boots-choice" value="No Boots"/>
                     <datalist id="boots-items">
                     </datalist>
                 </div>
+                <br>
+                <div>
+                    <label for="ring1-choice">Ring 1:</label>
+                    <input list="ring1-items" id="ring1-choice" name="ring1-choice" value="No Ring 1"/>
+                    <datalist id="ring1-items">
+                    </datalist>
+                </div>
+                <br>
+                <div>
+                    <label for="ring2-choice">Ring 2:</label>
+                    <input list="ring2-items" id="ring2-choice" name="ring2-choice" value="No Ring 2"/>
+                    <datalist id="ring2-items">
+                    </datalist>
+                </div>
+                <br>
+                <div>
+                    <label for="bracelet-choice">Bracelet:</label>
+                    <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" value="No Bracelet"/>
+                    <datalist id="bracelet-items">
+                    </datalist>
+                </div>
+                <br>
+                <div>
+                    <label for="necklace-choice">Necklace:</label>
+                    <input list="necklace-items" id="necklace-choice" name="necklace-choice" value="No Necklace"/>
+                    <datalist id="necklace-items">
+                    </datalist>
+                </div>
+                <br>
+                <div>
+                    <label for="weapon-choice">Weapon:</label>
+                    <input list="weapon-items" id="weapon-choice" name="weapon-choice" value=""/>
+                    <datalist id="weapon-items">
+                    </datalist>
+                </div>
+                <br>
+                <div>
+                    <button class = "button" id = "calc-button" onclick = "calculateBuild()">
+                    Update Items (Resets stats)
+                    </button>
+                </div>
+
+            </div>
+            <div class="left" style="grid-column:2;grid-row:1">
+                <label>Powdering:</label>
+                <div id="helmet-slots">
+                    X slots
+                </div>
+                <div>
+                    <input type="text" id="helmet-powder" name="helmet-powder" />
+                </div>
+                <div id="chestplate-slots">
+                    X slots
+                </div>
+                <div>
+                    <input type="text" id="chestplate-powder" name="chestplate-powder" />
+                </div>
+                <div id="leggings-slots">
+                    X slots
+                </div>
+                <div>
+                    <input type="text" id="leggings-powder" name="leggings-powder" />
+                </div>
                 <div id="boots-slots">
                     X slots
                 </div>
                 <div>
-                    <label for="boots-powder">Powdering:</label>
                     <input type="text" id="boots-powder" name="boots-powder" />
                 </div>
-            </div>
-            <div class="center" style="grid-column:1;grid-row:2">
-                <label for="ring1-choice">Ring 1:</label>
-                <input list="ring1-items" id="ring1-choice" name="ring1-choice" value="No Ring 1"/>
-                <datalist id="ring1-items">
-                </datalist>
-            </div>
-            <div class="center" style="grid-column:2;grid-row:2">
-                <label for="ring2-choice">Ring 2:</label>
-                <input list="ring2-items" id="ring2-choice" name="ring2-choice" value="No Ring 2"/>
-                <datalist id="ring2-items">
-                </datalist>
-            </div>
-            <div class="center" style="grid-column:3;grid-row:2">
-                <label for="bracelet-choice">Bracelet:</label>
-                <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" value="No Bracelet"/>
-                <datalist id="bracelet-items">
-                </datalist>
-            </div>
-            <div class="center" style="grid-column:4;grid-row:2">
-                <label for="necklace-choice">Necklace:</label>
-                <input list="necklace-items" id="necklace-choice" name="necklace-choice" value="No Necklace"/>
-                <datalist id="necklace-items">
-                </datalist>
-            </div>
-            <div class="center" style="grid-column:1;grid-row:3">
-                <label for="weapon-choice">Weapon:</label><br>
-                <input list="weapon-items" id="weapon-choice" name="weapon-choice" value=""/>
-                <datalist id="weapon-items">
-                </datalist>
-            </div>
-            <div class="center" style="grid-column:2;grid-row:3">
+                <br><br><br><br><br><br><br><br>
                 <div id="weapon-slots">
                     X slots
                 </div>
                 <div>
-                    <label for="weapon-powder">Weapon powder:</label>
                     <input type="text" id="weapon-powder" name="weapon-powder" />
                 </div>
-            </div>
-            <div class="center" style="grid-column:3;grid-row:3">
-                <button class = "button" id = "calc-button" onclick = "calculateBuild()">
-                    Update Items (Resets stats)
-                </button>
-            </div>
-            <div class="center" style="grid-column:4;grid-row:3">
-                <button class = "reset" id = "reset-button" onclick = "resetFields()">
+                <br>
+                <div>
+                    <button class = "reset" id = "reset-button" onclick = "resetFields()">
                     Reset
-                </button>
+                    </button>
+                </div>
+            </div>
+            <div class="center" style="grid-column:3;grid-row:1">
+                <div class = "center build-overall" id = "build-overall">
+                    <p class="itemcenter">Overall Build Stats:<p>
+                    <div class = "center" id = "build-overall-stats"></div>
+                </div>
             </div>
         </div>
         <div class="center" id="summary-box">
