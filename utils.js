@@ -68,7 +68,6 @@ Base64 = (function () {
         fromIntN: function(int32, n) {
             var result = '';
             for (let i = 0; i < n; ++i) {
-                console.log(int32);
                 result = digits[int32 & 0x3f] + result;
                 int32 >>= 6;
             }

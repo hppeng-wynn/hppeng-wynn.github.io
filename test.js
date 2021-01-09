@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "2.5";
+const BUILD_VERSION = "2.6";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -301,7 +301,6 @@ function encodeBuild() {
                             Base64.fromIntN(player_build.necklace.get("id"), 3) +
                             Base64.fromIntN(player_build.weapon.get("id"), 3);
 
-        console.log("NOW");
         for (const skp of skp_order) {
             build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
         }

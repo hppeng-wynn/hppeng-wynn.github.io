@@ -50,6 +50,7 @@ function idRound(id){
         return rounded;
     }
 }
+
 function displayExpandedItem(item, parent_id){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
@@ -245,6 +246,10 @@ function displayExpandedItem(item, parent_id){
     parent_div.append(item_desc_elem);
 }
 
+function displayFixedID(id, value) {
+
+}
+
 function displaySpellDamage(parent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
@@ -325,6 +330,13 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
                 }
             }
             save_damages.push(averageDamage);
+        }
+        else if (part.type == "heal") {
+            let heal_amount = part.strength * build.getHealth() * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")));
+            let healLabel = document.createElement("p");
+            healLabel.textContent = heal_amount;
+            healLabel.classList.add("damagep");
+            part_div.append(healLabel);
         }
         else if (part.type === "total") {
             let total_damage = 0;

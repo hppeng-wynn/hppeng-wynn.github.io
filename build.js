@@ -152,9 +152,9 @@ class Build{
     */
     getHealth(){
         let health = levelToHPBase(this.level);
-        for (const item in this.items) {
-            if (item.hp) health += item.hp;
-            if (item.hpBonus) health += item.hpBonus;
+        for (const item of this.items) {
+            if (item.get("hp")) health += item.get("hp");
+            if (item.get("hpBonus")) health += item.get("hpBonus");
         }
         if(health<5){
             return 5;
