@@ -54,7 +54,7 @@ a.link{
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     grid-auto-rows: minmax(60px, auto);
-    width: 98%;
+    width: 94%;
     background: #110110;
 }
 
@@ -63,7 +63,7 @@ a.link{
     background: #110110;
     border: 3px solid #BCBCBC;
     border-radius: 3px;
-    width: 100%;
+    width: 96%;
 }
 
 .itemcenter {
@@ -78,7 +78,7 @@ a.link{
 
 .itemtable {
     margin: 2px 2%;
-    width: 96%;
+    width: 94%;
     margin-bottom: 16px;
 }
 
