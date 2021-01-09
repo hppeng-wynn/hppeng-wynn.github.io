@@ -43,13 +43,15 @@ function expandItem(item, powders){
     expandedItem.set("powders", powders);
     return expandedItem;
 }
+
+
 /*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
 * @param id
 */
 function idRound(id){
     rounded = Math.round(id);
     if(rounded == 0){
-        return 1;
+        return 1; //this is a hack, will need changing along w/ rest of ID system if anything changes
     }else{
         return rounded;
     }
@@ -349,7 +351,127 @@ function displayFixedID(active, id, value, elemental_format, style) {
         return p_elem;
     }
 }
+function displayMeleeDamage(parent_elem, meleeStats){
+    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
+    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
+    parent_elem.textContent = "";
+    const stats = meleeStats.slice();
+    
+    for (let i = 0; i < 6; ++i) {
+        for (let j in stats[i]) {
+            stats[i][j] = stats[i][j].toFixed(2);
+        }
+    }
+    for (let i = 6; i < 8; ++i) {
+        for (let j in stats[i]) {
+            stats[i][j] = stats[i][j].toFixed(2);
+        }
+    }
+    for (let i = 8; i < 11; ++i){
+        stats[i] = stats[i].toFixed(2);
+    }
+    
+    //title
+    let title_elem = document.createElement("p");
+    title_elem.classList.add("center");
+    title_elem.textContent = "Melee Stats";
+    parent_elem.append(title_elem);
+    parent_elem.append(document.createElement("br"));
+    
+    //average DPS
+    let averageDamage = document.createElement("p");
+    averageDamage.classList.add("center");
+    averageDamage.textContent = "Average DPS: " + stats[10];
+    parent_elem.append(averageDamage);
+    parent_elem.append(document.createElement("br"));
 
+    //attack speed
+    let atkSpd = document.createElement("p");
+    atkSpd.classList.add("center");
+    atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
+    parent_elem.append(atkSpd);
+    parent_elem.append(document.createElement("br"));
+
+    //Non-Crit: n->elem, total dmg, DPS
+    let nonCritStats = document.createElement("p");
+    nonCritStats.classList.add("center");
+    nonCritStats.textContent = "Non-Crit Stats: ";
+    nonCritStats.append(document.createElement("br"));
+    let dmg = document.createElement("p");
+    for (let i = 0; i < 6; i++){
+        if(stats[i][0] > 0){
+            dmg.textContent = damagePrefixes[i] + stats[i][0] + " - " + stats[i][1];
+            nonCritStats.append(dmg);
+        }
+    }
+    let normalDamage = document.createElement("p");
+    normalDamage.textContent = "Total Damage: " + stats[6][0] + " - " + stats[6][1];
+    nonCritStats.append(normalDamage);
+
+    let normalDPS = document.createElement("p");
+    normalDPS.textContent = "Normal DPS: " + stats[8];
+    normalDPS.append(document.createElement("br"));
+    normalDPS.append(document.createElement("br"));
+    nonCritStats.append(normalDPS);
+
+    parent_elem.append(nonCritStats);
+    parent_elem.append(document.createElement("br"));
+
+    //Crit: n->elem, total dmg, DPS
+    let critStats = document.createElement("p");
+    critStats.classList.add("center");
+    critStats.textContent = "Crit Stats: ";
+    critStats.append(document.createElement("br"));
+    dmg = document.createElement("p");
+    for (let i = 0; i < 6; i++){
+        if(stats[i][2] > 0){
+            dmg.textContent = damagePrefixes[i] + stats[i][2] + " - " + stats[i][3];
+            critStats.append(dmg);
+        }
+    }
+    normalDamage = document.createElement("p");
+    normalDamage.textContent = "Total Damage: " + stats[7][0] + " - " + stats[7][1];
+    critStats.append(normalDamage);
+
+    normalDPS = document.createElement("p");
+    normalDPS.textContent = "Crit DPS: " + stats[9];
+    normalDPS.append(document.createElement("br"));
+    normalDPS.append(document.createElement("br"));
+    critStats.append(normalDPS);
+
+    parent_elem.append(critStats);
+    parent_elem.append(document.createElement("br"));
+    
+    /*
+    //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
+    
+    let meleeSummary = "";
+    meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
+    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br>");
+    let attackSpeeds = ["SUPER SLOW", "VERY SLOW", "SLOW", "NORMAL", "FAST", "VERY FAST", "SUPER FAST"];
+    meleeSummary = meleeSummary.concat("<b>Attack Speed: ",attackSpeeds[meleeStats[11]],"</b><br><br>");
+    meleeSummary = meleeSummary.concat("<b>Non-Crit Stats: </b><br>");
+    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
+    for (let i = 0; i < 6; i++){
+        if(meleeStats[i][0] > 0){
+            meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][0]," -> ",meleeStats[i][1],"<br>");
+        }
+    }
+    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[6][0]," -> ",meleeStats[6][1],"<br>");
+    meleeSummary = meleeSummary.concat("Normal DPS: ",Math.round(meleeStats[8]),"<br><br>");
+    meleeSummary = meleeSummary.concat("<b>Crit Stats: </b><br>");
+    for (let i = 0; i < 6; i++){
+        if(meleeStats[i][2] > 0){
+            meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][2]," -> ",meleeStats[i][3],"<br>");
+        }
+    }
+    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
+    meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
+    setHTML("build-melee-stats", "".concat(meleeSummary)); //basically complete function
+    */
+
+    
+}
 function displaySpellDamage(parent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
