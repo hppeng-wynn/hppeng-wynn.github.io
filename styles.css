@@ -46,12 +46,14 @@
 }
 
 .spell-info {
+    color: #aaa;
+    background: #110110;
     border: 2px solid black;
     border-radius: 3px;
     width: 100%;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall {
     color: #aaa;
     background: #110110;
     border: 2px solid black;
@@ -75,10 +77,18 @@
     margin-bottom: 16px;
 }
 
-.itemp {
+.itemp, .damagep {
     margin: 2px 2%;
     padding: 0;
 }
+
+.damageSubtitle {
+    text-align: center;
+    margin: 12px 2% 4px;
+    /*margin-bottom: 16px;*/
+    /*margin-top: 16px;*/
+}
+
 
 .positive {
     color: #5f5;
@@ -133,6 +143,9 @@
 .Neutral {
     color: #fa0;
     /*text-shadow: 2px 2px 0 #2a2a00;*/
+}
+.Neutral:before {
+    content: "\2724" ' ';
 }
 
 .Health {

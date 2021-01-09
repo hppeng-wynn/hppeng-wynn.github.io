@@ -63,10 +63,11 @@ function calculate_skillpoints(equipment, weapon) {
     let best_skillpoints = [0, 0, 0, 0, 0];
     let best_total = Infinity;
 
+    let allFalse = [false, false, false, false, false];
     if (consider.length > 0 || noboost.length > 0) {
         // Try every combination and pick the best one.
         for (let permutation of perm(consider)) {
-            let has_skillpoint = [false, false, false, false, false];
+            let has_skillpoint = allFalse.slice();
 
             permutation = permutation.concat(noboost);
 
@@ -120,7 +121,7 @@ function calculate_skillpoints(equipment, weapon) {
 //                    }
 //                }
 //            }
-            result = apply_to_fit(skillpoints, weapon);
+            result = apply_to_fit(skillpoints, weapon, allFalse);
             needed_skillpoints = result[0];
             total_diff = result[1];
             for (let i = 0; i < 5; ++i) {
