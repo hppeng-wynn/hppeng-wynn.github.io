@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "2.1";
+const BUILD_VERSION = "2.2";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -254,7 +254,7 @@ function populateFromURL() {
             save_skp = true;
             let skillpoint_info = info[1].slice(27, 37);
             for (let i = 0; i < 5; ++i ) {
-                skillpoints[i] = Base64.toInt(skillpoint_info.slice(i*2,i*2+2));
+                skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
             }
 
             let powder_info = info[1].slice(37);
@@ -301,8 +301,9 @@ function encodeBuild() {
                             Base64.fromIntN(player_build.necklace.get("id"), 3) +
                             Base64.fromIntN(player_build.weapon.get("id"), 3);
 
+        console.log("NOW");
         for (const skp of skp_order) {
-            build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 4096
+            build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
         }
 
         for (const _powderset of player_build.powders) {

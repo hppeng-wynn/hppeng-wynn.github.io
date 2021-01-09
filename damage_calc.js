@@ -46,8 +46,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     else {
         damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(stats.get("atkSpd"))];
     }
-    console.log(damages);
-    console.log(damageMult);
+    //console.log(damages);
+    //console.log(damageMult);
 
     rawModifier *= spellMultiplier;
 

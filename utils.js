@@ -68,8 +68,9 @@ Base64 = (function () {
         fromIntN: function(int32, n) {
             var result = '';
             for (let i = 0; i < n; ++i) {
+                console.log(int32);
                 result = digits[int32 & 0x3f] + result;
-                int32 >>>= 6;
+                int32 >>= 6;
             }
             return result;
         },
@@ -81,6 +82,17 @@ Base64 = (function () {
             }
             return result;
         },
+        toIntSigned: function(digitsStr) {
+            var result = 0;
+            var digits = digitsStr.split('');
+            if (digits[0] && (digitsMap[digits[0]] & 0x20)) {
+                result = -1;
+            }
+            for (var i = 0; i < digits.length; i++) {
+                result = (result << 6) + digitsMap[digits[i]];
+            }
+            return result;
+        }
     };
 })();
 
