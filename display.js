@@ -329,7 +329,7 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
         else if (part.type === "total") {
             let total_damage = 0;
             for (let i in part.factors) {
-                total_damage += save_damages[i] * factors[i];
+                total_damage += save_damages[i] * part.factors[i];
             }
             let averageLabel = document.createElement("p");
             averageLabel.textContent = "Average: "+Math.round(total_damage);
