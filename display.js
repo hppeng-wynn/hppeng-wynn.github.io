@@ -38,9 +38,7 @@ function expandItem(item, powders){
         }
     }
     for (const id of nonRolledIDs){
-        if(item[id]){
-            expandedItem.set(id,item[id]);
-        }
+        expandedItem.set(id,item[id]);
     }
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
@@ -408,7 +406,6 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             part_div.append(nonCritLabel);
 
             let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
-            console.log(results);
             for (let i = 0; i < 6; i++){
                 if (results[i][1] > 0){
                     let p = document.createElement("p");

@@ -20,7 +20,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         neutralRemainingRaw[0] = Math.floor(neutralRemainingRaw[0] - min_diff);
         neutralRemainingRaw[1] = Math.floor(neutralRemainingRaw[1] - max_diff);
     }
-    console.log(damages);
+    //console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
     for (const powderID of weapon.get("powders")) {
         const powder = powderStats[powderID];
