@@ -20,8 +20,34 @@ let player_build;
 let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
+// THIS IS SUPER DANGEROUS, WE SHOULD NOT BE KEEPING THIS IN SO MANY PLACES
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "exploding", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
 let skpReqs = ["strReq", "dexReq", "intReq", "defReq", "agiReq"];
+
+let equipment_fields = [
+    "helmet",
+    "chestplate",
+    "leggings",
+    "boots",
+    "ring1",
+    "ring2",
+    "bracelet",
+    "necklace",
+    "weapon"
+];
+let equipment_names = [
+    "Helmet",
+    "Chestplate",
+    "Leggings",
+    "Boots",
+    "Ring 1",
+    "Ring 2",
+    "Bracelet",
+    "Necklace",
+    "Weapon"
+];
+let equipmentInputs = equipment_fields.map(x => x + "-choice");
+let buildFields = equipment_fields.map(x => "build-"+x);
 
 let powderIDs = new Map();
 let powderNames = new Map();
@@ -131,10 +157,6 @@ function init() {
         itemMap.set(item.displayName, item);
         idMap.set(item.id, item.displayName);
     }
-    /*for (const item of noneItems){
-        itemLists.get(item.type).push(item.name);
-        itemMap.set(item.name, item);
-    }*/
     
     for (const armorType of armorTypes) {
         populateItemList(armorType);
@@ -192,29 +214,15 @@ function init() {
  */
 function populateFromURL() {
     if (url_tag) {
-        let helmet;
-        let chestplate;
-        let leggings;
-        let boots;
-        let ring1;
-        let ring2;
-        let bracelet;
-        let necklace;
-        let weapon;
+        let equipment = [null, null, null, null, null, null, null, null, null];
         let powdering = ["", "", "", "", ""];
         let info = url_tag.split("_");
         let version = info[0];
         if (version === "0" || version === "1") {
             let equipments = info[1];
-            helmet = idMap.get(Base64.toInt(equipments.slice(0,3)));
-            chestplate = idMap.get(Base64.toInt(equipments.slice(3,6)));
-            leggings = idMap.get(Base64.toInt(equipments.slice(6,9)));
-            boots = idMap.get(Base64.toInt(equipments.slice(9,12)));
-            ring1 = idMap.get(Base64.toInt(equipments.slice(12,15)));
-            ring2 = idMap.get(Base64.toInt(equipments.slice(15,18)));
-            bracelet = idMap.get(Base64.toInt(equipments.slice(18,21)));
-            necklace = idMap.get(Base64.toInt(equipments.slice(21,24)));
-            weapon = idMap.get(Base64.toInt(equipments.slice(24,27)));
+            for (let i = 0; i < 9; ++i ) {
+                equipment[i] = idMap.get(Base64.toInt(equipments.slice(i*3,i*3+3)));
+            }
         }
         if (version === "1") {
             let powder_info = info[1].slice(27);
@@ -239,20 +247,12 @@ function populateFromURL() {
             }
         }
 
-        setValue("helmet-choice", helmet);
-        setValue("helmet-powder", powdering[0]);
-        setValue("chestplate-choice", chestplate);
-        setValue("chestplate-powder", powdering[1]);
-        setValue("leggings-choice", leggings);
-        setValue("leggings-powder", powdering[2]);
-        setValue("boots-choice", boots);
-        setValue("boots-powder", powdering[3]);
-        setValue("ring1-choice", ring1);
-        setValue("ring2-choice", ring2);
-        setValue("bracelet-choice", bracelet);
-        setValue("necklace-choice", necklace);
-        setValue("weapon-choice", weapon);
-        setValue("weapon-powder", powdering[4]);
+        for (let i in powderInputs) {
+            setValue(powderInputs[i], powdering[i]);
+        }
+        for (let i in equipment) {
+            setValue(equipmentInputs[i], equipment[i]);
+        }
         setValue("str-skp", "0");
         setValue("dex-skp", "0");
         setValue("int-skp", "0");
@@ -308,41 +308,11 @@ function calculateBuild(){
     /*  TODO: implement level changing
         Make this entire function prettier
     */
-    let helmet = getValue("helmet-choice");
-    let chestplate = getValue("chestplate-choice");
-    let leggings = getValue("leggings-choice");
-    let boots = getValue("boots-choice");
-    let ring1 = getValue("ring1-choice");
-    let ring2 = getValue("ring2-choice");
-    let bracelet = getValue("bracelet-choice");
-    let necklace = getValue("necklace-choice");
-    let weapon = getValue("weapon-choice");
-    if(helmet===""){
-        helmet = "No Helmet";
-    }
-    if(chestplate===""){
-        chestplate = "No Chestplate";
-    }
-    if(leggings===""){
-        leggings = "No Leggings";
-    }
-    if(boots===""){
-        boots = "No Boots";
-    }
-    if(ring1===""){
-        ring1 = "No Ring 1";
-    }
-    if(ring2===""){
-        ring2 = "No Ring 2";
-    }
-    if(bracelet===""){
-        bracelet = "No Bracelet";
-    }
-    if(necklace===""){
-        necklace = "No Necklace";
-    }
-    if(weapon===""){
-        weapon = "No Weapon";
+    let equipment = [ null, null, null, null, null, null, null, null, null ];
+    for (let i in equipment) {
+        let equip = getValue(equipmentInputs[i]);
+        if (equip === "") equip = "No " + equipment_names[i];
+        equipment[i] = equip;
     }
     let powderings = [];
     for (const i in powderInputs) {
@@ -357,19 +327,8 @@ function calculateBuild(){
         }
         powderings.push(powdering);
     }
-    player_build = new Build(
-        106,
-        itemMap.get(helmet),
-        itemMap.get(chestplate),
-        itemMap.get(leggings),
-        itemMap.get(boots),
-        itemMap.get(ring1),
-        itemMap.get(ring2),
-        itemMap.get(bracelet),
-        itemMap.get(necklace),
-        itemMap.get(weapon),
-        powderings
-        );
+    console.log(equipment);
+    player_build = new Build(106, equipment, powderings);
     console.log(player_build.toString());
 
     let equip_order_text = "Equip order: <br>";
@@ -399,16 +358,9 @@ function calculateBuild(){
         setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
     }
 
-    displayExpandedItem(player_build.helmet, "build-helmet");
-    displayExpandedItem(player_build.chestplate, "build-chestplate");
-    displayExpandedItem(player_build.leggings, "build-leggings");
-    displayExpandedItem(player_build.boots, "build-boots");
-    displayExpandedItem(player_build.ring1, "build-ring1");
-    displayExpandedItem(player_build.ring2, "build-ring2");
-    displayExpandedItem(player_build.bracelet, "build-bracelet");
-    displayExpandedItem(player_build.necklace, "build-necklace");
-    displayExpandedItem(player_build.weapon, "build-weapon");
-
+    for (let i in player_build.items) {
+        displayExpandedItem(player_build.items[i], buildFields[i]);
+    }
     calculateBuildStats();
 }
 
@@ -454,25 +406,13 @@ function calculateBuildStats() {
     location.hash = encodeBuild();
 }
 
-
-
-
-
 function resetFields(){
-    setValue("helmet-choice", "");
-    setValue("helmet-powder", "");
-    setValue("chestplate-choice", "");
-    setValue("chestplate-powder", "");
-    setValue("leggings-choice", "");
-    setValue("leggings-powder", "");
-    setValue("boots-choice", "");
-    setValue("boots-powder", "");
-    setValue("ring1-choice", "");
-    setValue("ring2-choice", "");
-    setValue("bracelet-choice", "");
-    setValue("necklace-choice", "");
-    setValue("weapon-choice", "");
-    setValue("weapon-powder", "");
+    for (let i in powderInputs) {
+        setValue(powderInputs[i], "");
+    }
+    for (let i in equipment) {
+        setValue(equipmentInputs[i], "");
+    }
     setValue("str-skp", "0");
     setValue("dex-skp", "0");
     setValue("int-skp", "0");

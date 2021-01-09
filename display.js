@@ -60,7 +60,7 @@ function displayExpandedItem(item, parent_id){
         stats.set("atkSpd", item.get("atkSpd"));
         stats.set("damageBonus", [0, 0, 0, 0, 0]);
         stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, 1, [0, 0, 0, 0, 0]);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0]);
         let damages = results[2];
         let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
         for (const i in damage_keys) {
@@ -76,8 +76,8 @@ function displayExpandedItem(item, parent_id){
         "#ldiv",
         "!elemental",
         "hp",
-        "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_",
-        "eDef", "tDef", "wDef", "fDef", "aDef",
+        "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_",
+        "fDef", "wDef", "aDef", "tDef", "eDef",
         "!elemental",
         "#ldiv",
         "classReq",
@@ -98,8 +98,8 @@ function displayExpandedItem(item, parent_id){
         "spd",
         "atkTier",
         "!elemental",
-        "eDamPct", "tDamPct", "wDamPct", "fDamPct", "aDamPct",
-        "eDefPct", "tDefPct", "wDefPct", "fDefPct", "aDefPct",
+        "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
+        "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
         "!elemental",
         "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
         "rainbowRaw",
@@ -115,7 +115,7 @@ function displayExpandedItem(item, parent_id){
         "quest",
         "restrict"];
 
-    let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Main Attack Neutral Damage: ", "mdPct":"Main Attack Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "exploding":"Expoding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":""};
+    let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Main Attack Neutral Damage: ", "mdPct":"Main Attack Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "exploding":"Exploding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":""};
     let idSuffixes = {"displayName": "", "lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam_":"", "eDam_":"", "tDam_":"", "wDam_":"", "fDam_":"", "aDam_":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/4s", "ms":"/4s", "ref":"%", "ls":"/4s", "poison":"/3s", "thorns":"%", "exploding":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":"", "restrict":""};
 
     function apply_elemental_format(p_elem, id, suffix) {
@@ -176,7 +176,14 @@ function displayExpandedItem(item, parent_id){
                     apply_elemental_format(p_elem, id, item.get(id));
                 }
                 else {
-                    p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]);
+                    if (id === "slots") {
+                        // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
+                        p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
+                        " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
+                    }
+                    else {
+                        p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]);
+                    }
                 }
                 active_elem.appendChild(p_elem);
             }
@@ -212,6 +219,7 @@ function displayExpandedItem(item, parent_id){
 
                     let desc_elem = document.createElement('td');
                     desc_elem.classList.add('center');
+                    //TODO elemental format jank
                     if (elemental_format) {
                         apply_elemental_format(desc_elem, id);
                     }

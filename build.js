@@ -49,58 +49,67 @@ class Build{
     
     /*Construct a build.
     */
-    constructor(level,helmet,chestplate,leggings,boots,ring1,ring2,bracelet,necklace,weapon,powders){
+    constructor(level,equipment, powders){
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
         this.powders = powders
-        if(helmet.type.valueOf() != "helmet".valueOf()){
-            throw new TypeError("No such helmet named ", helmet.name);
-        }else{
+        if(itemMap.get(equipment[0]) && itemMap.get(equipment[0]).type === "helmet") {
+            const helmet = itemMap.get(equipment[0]);
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
             this.helmet = expandItem(helmet, this.powders[0]);
-        }
-        if(chestplate.type.valueOf() != "chestplate"){
-            throw new TypeError("No such chestplate named ", chestplate.name);
         }else{
+            throw new TypeError("No such helmet named ", equipment[0]);
+        }
+        if(itemMap.get(equipment[1]).type === "chestplate") {
+            const chestplate = itemMap.get(equipment[1]);
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
             this.chestplate = expandItem(chestplate, this.powders[1]);
-        }
-        if(leggings.type.valueOf() != "leggings"){
-            throw new TypeError("No such leggings named ", leggings.name);
         }else{
+            throw new TypeError("No such chestplate named ", equipment[1]);
+        }
+        if(itemMap.get(equipment[2]).type === "leggings") {
+            const leggings = itemMap.get(equipment[2]);
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
-        }
-        if(boots.type.valueOf() != "boots"){
-            throw new TypeError("No such boots named ", boots.name);
         }else{
+            throw new TypeError("No such leggings named ", equipment[2]);
+        }
+        if(itemMap.get(equipment[3]).type === "boots") {
+            const boots = itemMap.get(equipment[3]);
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
             this.boots = expandItem(boots, this.powders[3]);
-        }
-        if(ring1.type.valueOf() != "ring"){
-            throw new TypeError("No such ring named ", ring1.name);
         }else{
-            this.ring1 = expandItem(ring1, []);
+            throw new TypeError("No such boots named ", equipment[3]);
         }
-        if(ring2.type.valueOf() != "ring"){
-            throw new TypeError("No such ring named ", ring2.name);
+        if(itemMap.get(equipment[4]).type === "ring") {
+            const ring = itemMap.get(equipment[4]);
+            this.ring1 = expandItem(ring, [])
         }else{
-            this.ring2 = expandItem(ring2, []);
+            throw new TypeError("No such ring named ", equipment[4]);
         }
-        if(bracelet.type.valueOf() != "bracelet"){
-            throw new TypeError("No such bracelet named ", bracelet.name);
+        if(itemMap.get(equipment[5]).type === "ring") {
+            const ring = itemMap.get(equipment[5]);
+            this.ring2 = expandItem(ring, [])
         }else{
-            this.bracelet = expandItem(bracelet, []);
+            throw new TypeError("No such ring named ", equipment[5]);
         }
-        if(necklace.type.valueOf() != "necklace"){
-            throw new TypeError("No such necklace named ", necklace.name);
+        if(itemMap.get(equipment[6]).type === "bracelet") {
+            const bracelet = itemMap.get(equipment[6]);
+            this.bracelet = expandItem(bracelet, [])
         }else{
-            this.necklace = expandItem(necklace, []);
+            throw new TypeError("No such bracelet named ", equipment[6]);
         }
-        if(weapon.type.valueOf() == "wand" || weapon.type.valueOf() == "bow" || weapon.type.valueOf() == "dagger" || weapon.type.valueOf() == "spear" || weapon.type.valueOf() == "relik"){
+        if(itemMap.get(equipment[7]).type === "necklace") {
+            const necklace = itemMap.get(equipment[7]);
+            this.necklace = expandItem(necklace, [])
+        }else{
+            throw new TypeError("No such necklace named ", equipment[7]);
+        }
+        if(itemMap.get(equipment[8]).category === "weapon") {
+            const weapon = itemMap.get(equipment[8]);
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
             this.weapon = expandItem(weapon, this.powders[4]);
         }else{
-            throw new TypeError("No such weapon named ", weapon.name);
+            throw new TypeError("No such weapon named ", equipment[8]);
         }
         if(level < 1){ //Should these be constants?
             this.level = 1;
@@ -162,7 +171,10 @@ class Build{
         }
 
         // 0 for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.damageMultiplier, this.total_skillpoints);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.total_skillpoints);
+    
+        //TODO: Account for strength (this.damageMultiplier).
+
         let totalDamNorm = results[0];
         let totalDamCrit = results[1];
         let damages_results = results[2];

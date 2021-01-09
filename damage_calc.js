@@ -1,6 +1,6 @@
 // Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
-function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, damageMultiplier, total_skillpoints) {
+function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints) {
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     let damages = [];
     for (const damage_string of stats.get("damageRaw")) {
@@ -42,7 +42,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     damages[0][1] *= neutralRemaining / 100;
     console.log(damages);
 
-    let damageMult = damageMultiplier;
+    let damageMult = 1;
     // If we are doing melee calculations:
     if (spellMultiplier == 0) {
         spellMultiplier = 1;
@@ -77,9 +77,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
-    for (let i in damages_results[0]) {
-        // Never account for attack speed.
-        damages_results[0][i] += rawModifier * damageMultiplier;
-    }
+    damages_results[0][0] += rawModifier;
+    damages_results[0][1] += rawModifier;
     return [totalDamNorm, totalDamCrit, damages_results];
 }

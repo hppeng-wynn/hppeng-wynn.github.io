@@ -36,7 +36,7 @@
     text-align: left;
 }
 
-.build{
+.build, .spells {
     padding: 1%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -44,6 +44,13 @@
     grid-auto-rows: minmax(60px, auto);
     width: 98%;
 }
+
+.spell-info {
+    border: 2px solid black;
+    border-radius: 3px;
+    width: 100%;
+}
+
 .build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order {
     color: #aaa;
     background: #110110;
