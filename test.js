@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "2.4";
+const BUILD_VERSION = "2.5";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -360,6 +360,16 @@ function calculateBuild(save_skp, skp){
         equip_order_text += item.get("displayName") + "<br>";
     }
     setHTML("build-order", equip_order_text);
+
+    const assigned = player_build.base_skillpoints;
+    const skillpoints = player_build.total_skillpoints;
+    for (let i in skp_order){ //big bren
+        if(assigned[i] <= 100){
+            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+        }else{
+            setHTML(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i] + "<br>WARNING: cannot assign " + assigned[i] + " skillpoints naturally.");
+        }
+    }
     if (save_skp) {
         // TODO: reduce duplicated code, @updateStats
         let skillpoints = player_build.total_skillpoints;
@@ -398,13 +408,8 @@ function calculateBuildStats() {
     const skillpoints = player_build.total_skillpoints;
     let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
     for (let i in skp_order){ //big bren
-        setText(skp_order[i] + "-skp-assign", "Base assigned: " + assigned[i]);
+        setText(skp_order[i] + "-skp-assign", "Manually Assigned: " + assigned[i]);
         setValue(skp_order[i] + "-skp", skillpoints[i]);
-        if(assigned[i] <= 100){
-            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
-        }else{
-            setHTML(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i] + "<br>WARNING: cannot assign " + assigned[i] + " skillpoints naturally.");
-        }
         setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
     }
 
