@@ -55,50 +55,50 @@ class Build{
         if(helmet.type.valueOf() != "helmet".valueOf()){
             throw new TypeError("No such helmet named ", helmet.name);
         }else{
-            this.helmet = helmet;
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
+            this.helmet = expandItem(helmet, this.powders[0]);
         }
         if(chestplate.type.valueOf() != "chestplate"){
             throw new TypeError("No such chestplate named ", chestplate.name);
         }else{
-            this.chestplate = chestplate;
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
+            this.chestplate = expandItem(chestplate, this.powders[1]);
         }
         if(leggings.type.valueOf() != "leggings"){
             throw new TypeError("No such leggings named ", leggings.name);
         }else{
-            this.leggings = leggings;
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
+            this.leggings = expandItem(leggings, this.powders[2]);
         }
         if(boots.type.valueOf() != "boots"){
             throw new TypeError("No such boots named ", boots.name);
         }else{
-            this.boots = boots;
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
+            this.boots = expandItem(boots, this.powders[3]);
         }
         if(ring1.type.valueOf() != "ring"){
             throw new TypeError("No such ring named ", ring1.name);
         }else{
-            this.ring1 = ring1;
+            this.ring1 = expandItem(ring1, []);
         }
         if(ring2.type.valueOf() != "ring"){
             throw new TypeError("No such ring named ", ring2.name);
         }else{
-            this.ring2 = ring2;
+            this.ring2 = expandItem(ring2, []);
         }
         if(bracelet.type.valueOf() != "bracelet"){
             throw new TypeError("No such bracelet named ", bracelet.name);
         }else{
-            this.bracelet = bracelet;
+            this.bracelet = expandItem(bracelet, []);
         }
         if(necklace.type.valueOf() != "necklace"){
             throw new TypeError("No such necklace named ", necklace.name);
         }else{
-            this.necklace = necklace;
+            this.necklace = expandItem(necklace, []);
         }
         if(weapon.type.valueOf() == "wand" || weapon.type.valueOf() == "bow" || weapon.type.valueOf() == "dagger" || weapon.type.valueOf() == "spear" || weapon.type.valueOf() == "relik"){
-            this.weapon = weapon;
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
+            this.weapon = expandItem(weapon, this.powders[4]);
         }else{
             throw new TypeError("No such weapon named ", weapon.name);
         }
@@ -110,17 +110,17 @@ class Build{
             this.level = level;
         }
         this.availableSkillpoints = levelToSkillPoints(this.level);
-        this.equipment = [ helmet, chestplate, leggings, boots, ring1, ring2, bracelet, necklace ];
-        this.items = this.equipment.concat([weapon]);
+        this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
+        this.items = this.equipment.concat([this.weapon]);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
-        let result = calculate_skillpoints(this.equipment, weapon);
+        let result = calculate_skillpoints(this.equipment, this.weapon);
         this.equip_order = result[0];
         this.base_skillpoints = result[1];
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
 
         // For strength boosts like warscream, vanish, etc.
-        this.damage_multiplier = 1.0;
+        this.damageMultiplier = 1.0;
 
         this.initBuildStats();
     }  
@@ -128,7 +128,7 @@ class Build{
     /*Returns build in string format
     */
     toString(){
-        return this.helmet.name + ", " + this.chestplate.name + ", " + this.leggings.name + ", " + this.boots.name + ", " + this.ring1.name + ", " + this.ring2.name + ", " + this.bracelet.name + ", " + this.necklace.name + ", " + this.weapon.name;
+        return this.helmet.get("name") + ", " + this.chestplate.get("name") + ", " + this.leggings.get("name") + ", " + this.boots.get("name") + ", " + this.ring1.get("name") + ", " + this.ring2.get("name") + ", " + this.bracelet.get("name") + ", " + this.necklace.get("name") + ", " + this.weapon.get("name");
     }
 
     /* Getters */
@@ -147,67 +147,37 @@ class Build{
             return health;
         }
     }
+    
+
     /*  Get melee stats for build.
         Returns an array in the order:
     */
     getMeleeStats(){
         const stats = this.statMap;
-        // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
-        let damages = [];
-        for (const damage_string of stats.get("damageRaw")) {
-            const damage_vals = damage_string.split("-").map(Number);
-            damages.push(damage_vals);
-        }
-        let mdRaw = stats.get("mdRaw");
-        
-        let mdPct = stats.get("mdPct");
-        
         let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
         if(adjAtkSpd > 6){
             adjAtkSpd = 6;
         }else if(adjAtkSpd < 0){
             adjAtkSpd = 0;
         }
-        let poison = stats.get("poison");
 
-        let totalDamNorm = [mdRaw, mdRaw];
-        let totalDamCrit = [mdRaw, mdRaw];
-        let damages_results = [];
-        // 0th skillpoint is strength, 1st is dex.
-        let str = this.total_skillpoints[0];
+        // 0 for melee damage.
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.damageMultiplier, this.total_skillpoints);
+        let totalDamNorm = results[0];
+        let totalDamCrit = results[1];
+        let damages_results = results[2];
+
         let dex = this.total_skillpoints[1];
-        let staticBoost = (mdPct / 100.)  + skillPointsToPercentage(str);
-        let skillBoost = [0];
-        for (let i in this.total_skillpoints) {
-            skillBoost.push(skillPointsToPercentage(this.total_skillpoints[i]) + stats.get("damageBonus")[i] / 100.);
-        }
-        for (let i in damages) {
-            let damageBoost = 1 + skillBoost[i] + staticBoost;
-            damages_results.push([
-                Math.max(damages[i][0] * damageBoost * this.damage_multiplier, 0),       // Normal min
-                Math.max(damages[i][1] * damageBoost * this.damage_multiplier, 0),       // Normal max
-                Math.max(damages[i][0] * (1 + damageBoost) * this.damage_multiplier, 0), // Crit min
-                Math.max(damages[i][1] * (1 + damageBoost) * this.damage_multiplier, 0), // Crit max
-            ]);
-            totalDamNorm[0] += damages_results[i][0];
-            totalDamNorm[1] += damages_results[i][1];
-            totalDamCrit[0] += damages_results[i][2];
-            totalDamCrit[1] += damages_results[i][3];
-        }
-        for (let i in damages_results[0]) {
-            damages_results[0][i] += mdRaw * this.damage_multiplier;
-        }
 
         //Now do math
         let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
-        let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex))) + (poison / 3.0 * (1 + skillPointsToPercentage(str)));
+        let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex)));
         //console.log([nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
         return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]);
     }
 
     /*  Get all stats for this build. Stores in this.statMap.
-        @dep test.js.expandItem()
         @pre The build itself should be valid. No checking of validity of pieces is done here.
     */
     initBuildStats(){
@@ -223,8 +193,7 @@ class Build{
         }
         statMap.set("hp", levelToHPBase(this.level)); //TODO: Add player base health
         
-        for (const _item of this.items){
-            let item = expandItem(_item);
+        for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
@@ -234,8 +203,8 @@ class Build{
         }
 
         // The stuff relevant for damage calculation!!! @ferricles
-        statMap.set("atkSpd", this.weapon["atkSpd"]);
-        statMap.set("damageRaw", [this.weapon["nDam"], this.weapon["eDam"], this.weapon["tDam"], this.weapon["wDam"], this.weapon["fDam"], this.weapon["aDam"]]);
+        statMap.set("atkSpd", this.weapon.get("atkSpd"));
+        statMap.set("damageRaw", [this.weapon.get("nDam"), this.weapon.get("eDam"), this.weapon.get("tDam"), this.weapon.get("wDam"), this.weapon.get("fDam"), this.weapon.get("aDam")]);
         statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
         statMap.set("defRaw", [statMap.get("eDam"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
         statMap.set("defBonus", [statMap.get("eDamPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);

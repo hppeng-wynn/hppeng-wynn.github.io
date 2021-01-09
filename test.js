@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "1.3";
+const BUILD_VERSION = "1.4";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -43,12 +43,23 @@ let powderInputs = [
     "weapon-powder",
 ];
 // Ordering: [dmgMin, dmgMax, convert, defPlus, defMinus (+6 mod 5)]
+class Powder {
+    constructor(min, max, convert, defPlus, defMinus) {
+        this.min = min;
+        this.max = max;
+        this.convert = convert;
+        this.defPlus = defPlus;
+        this.defMinus = defMinus;
+    }
+}
+function _p(a,b,c,d,e) { return new Powder(a,b,c,d,e); }
+
 let powderStats = [
-    [3,6,17,2,1], [6,9,21,4,2], [8,14,25,8,3], [11,16,31,14,5], [15,18,38,22,9], [18,22,46,30,13],
-    [1,8,9,3,1], [1,13,11,5,1], [2,18,14,9,2], [3,24,17,14,4], [3,32,22,20,7], [5,40,28,28,10],
-    [3,4,13,3,1], [4,7,15,6,1], [6,10,17,11,2], [8,12,21,18,4], [11,14,26,28,7], [13,17,32,40,10],
-    [2,5,14,3,1], [4,8,16,5,2], [6,10,19,9,3], [9,13,24,16,5], [12,16,30,25,9], [15,19,37,36,13],
-    [2,6,11,3,1], [4,9,14,6,2], [7,10,17,10,3], [9,13,22,16,5], [13,18,28,24,9], [16,18,35,34,13]
+    _p(3,6,17,2,1), _p(6,9,21,4,2), _p(8,14,25,8,3), _p(11,16,31,14,5), _p(15,18,38,22,9), _p(18,22,46,30,13),
+    _p(1,8,9,3,1), _p(1,13,11,5,1), _p(2,18,14,9,2), _p(3,24,17,14,4), _p(3,32,22,20,7), _p(5,40,28,28,10),
+    _p(3,4,13,3,1), _p(4,7,15,6,1), _p(6,10,17,11,2), _p(8,12,21,18,4), _p(11,14,26,28,7), _p(13,17,32,40,10),
+    _p(2,5,14,3,1), _p(4,8,16,5,2), _p(6,10,19,9,3), _p(9,13,24,16,5), _p(12,16,30,25,9), _p(15,19,37,36,13),
+    _p(2,6,11,3,1), _p(4,9,14,6,2), _p(7,10,17,10,3), _p(9,13,22,16,5), _p(13,18,28,24,9), _p(16,18,35,34,13)
 ];
 
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
@@ -262,15 +273,15 @@ function encodeBuild() {
 //                            Base64.fromIntN(player_build.bracelet.id, 3) +
 //                            Base64.fromIntN(player_build.necklace.id, 3) +
 //                            Base64.fromIntN(player_build.weapon.id, 3);
-        let build_string = "1_" + Base64.fromIntN(player_build.helmet.id, 3) +
-                            Base64.fromIntN(player_build.chestplate.id, 3) +
-                            Base64.fromIntN(player_build.leggings.id, 3) +
-                            Base64.fromIntN(player_build.boots.id, 3) +
-                            Base64.fromIntN(player_build.ring1.id, 3) +
-                            Base64.fromIntN(player_build.ring2.id, 3) +
-                            Base64.fromIntN(player_build.bracelet.id, 3) +
-                            Base64.fromIntN(player_build.necklace.id, 3) +
-                            Base64.fromIntN(player_build.weapon.id, 3);
+        let build_string = "1_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
+                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
+                            Base64.fromIntN(player_build.leggings.get("id"), 3) +
+                            Base64.fromIntN(player_build.boots.get("id"), 3) +
+                            Base64.fromIntN(player_build.ring1.get("id"), 3) +
+                            Base64.fromIntN(player_build.ring2.get("id"), 3) +
+                            Base64.fromIntN(player_build.bracelet.get("id"), 3) +
+                            Base64.fromIntN(player_build.necklace.get("id"), 3) +
+                            Base64.fromIntN(player_build.weapon.get("id"), 3);
 
         for (const _powderset of player_build.powders) {
             let n_bits = Math.ceil(_powderset.length / 6);
@@ -363,7 +374,7 @@ function calculateBuild(){
 
     let equip_order_text = "Equip order: <br>";
     for (const item of player_build.equip_order) {
-        equip_order_text += item.displayName + "<br>";
+        equip_order_text += item.get("displayName") + "<br>";
     }
     setHTML("build-order", equip_order_text);
     
@@ -382,22 +393,21 @@ function calculateBuild(){
         }
         setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
     }
-    console.log(skillpoints);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
         setHTML("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.<br>" + "WARNING: Too many skillpoints need to be assigned!<br> For level " + player_build.level + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.");
     }else{
         setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
     }
 
-    displayExpandedItem(expandItem(player_build.helmet), "build-helmet");
-    displayExpandedItem(expandItem(player_build.chestplate), "build-chestplate");
-    displayExpandedItem(expandItem(player_build.leggings), "build-leggings");
-    displayExpandedItem(expandItem(player_build.boots), "build-boots");
-    displayExpandedItem(expandItem(player_build.ring1), "build-ring1");
-    displayExpandedItem(expandItem(player_build.ring2), "build-ring2");
-    displayExpandedItem(expandItem(player_build.bracelet), "build-bracelet");
-    displayExpandedItem(expandItem(player_build.necklace), "build-necklace");
-    displayExpandedItem(expandItem(player_build.weapon), "build-weapon");
+    displayExpandedItem(player_build.helmet, "build-helmet");
+    displayExpandedItem(player_build.chestplate, "build-chestplate");
+    displayExpandedItem(player_build.leggings, "build-leggings");
+    displayExpandedItem(player_build.boots, "build-boots");
+    displayExpandedItem(player_build.ring1, "build-ring1");
+    displayExpandedItem(player_build.ring2, "build-ring2");
+    displayExpandedItem(player_build.bracelet, "build-bracelet");
+    displayExpandedItem(player_build.necklace, "build-necklace");
+    displayExpandedItem(player_build.weapon, "build-weapon");
 
     calculateBuildStats();
 }

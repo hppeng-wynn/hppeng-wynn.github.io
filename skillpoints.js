@@ -7,10 +7,10 @@ function calculate_skillpoints(equipment, weapon) {
     let noboost = [];
     console.log(equipment);
     for (const item of equipment) {
-        if (item.reqs.every(x => x === 0)) {
+        if (item.get("reqs").every(x => x === 0)) {
             fixed.push(item);
         }
-        else if (item.skillpoints.every(x => x === 0)) {
+        else if (item.get("skillpoints").every(x => x === 0)) {
             noboost.push(item);
         }
         else {
@@ -19,13 +19,13 @@ function calculate_skillpoints(equipment, weapon) {
     }
     function apply_skillpoints(skillpoints, item) {
         for (let i = 0; i < 5; i++) {
-            skillpoints[i] += item.skillpoints[i];
+            skillpoints[i] += item.get("skillpoints")[i];
         }
     }
 
     function remove_skillpoints(skillpoints, item) {
         for (let i = 0; i < 5; i++) {
-            skillpoints[i] -= item.skillpoints[i];
+            skillpoints[i] -= item.get("skillpoints")[i];
         }
     }
 
@@ -35,13 +35,13 @@ function calculate_skillpoints(equipment, weapon) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
         for (let i = 0; i < 5; i++) {
-            if (item.skillpoints[i] < 0 && skillpoint_filter[i]) {
-                applied[i] -= item.skillpoints[i];
-                total -= item.skillpoints[i];
+            if (item.get("skillpoints")[i] < 0 && skillpoint_filter[i]) {
+                applied[i] -= item.get("skillpoints")[i];
+                total -= item.get("skillpoints")[i];
             }
-            if (item.reqs[i] == 0) continue;
+            if (item.get("reqs")[i] == 0) continue;
             if (skillpoint_filter) skillpoint_filter[i] = true;
-            const req = item.reqs[i];
+            const req = item.get("reqs")[i];
             const cur = skillpoints[i];
             if (req > cur) {
                 const diff = req - cur;

@@ -14,8 +14,11 @@
         <div class="header" id="header">
             Wynn build calculator
         </div>
-        <div class="center" id="header">
-            <a href="credits.txt">Credits</a>
+        <div class="center" id="header2">
+            Made by: hppeng and ferricles
+        </div>
+        <div class="center" id="credits">
+            <a href="credits.txt">Additional credits</a>
         </div>
         <div class="equipment">
             <div class="center" style="grid-column:1;grid-row:1">
@@ -133,12 +136,12 @@
         </div>
         <div class="skillpoints">
             <div class="center" style="grid-column:1;grid-row:1">
-                <div id="str-skp-assign">
-                    Before Boosts: 0
-                </div>
                 <div>
                     <label for="str-skp" class="skpLabel">Strength:</label>
                     <input type="number" id="str-skp" name="str-skp" value="0" class="skpInput"/>
+                </div>
+                <div id="str-skp-assign">
+                    Before Boosts: 0
                 </div>
                 <div id="str-skp-base">
                     Original Value: 0
@@ -147,12 +150,12 @@
                 </div>
             </div>
             <div class="center" style="grid-column:2;grid-row:1">
-                <div id="dex-skp-assign">
-                    Before Boosts: 0
-                </div>
                 <div>
                     <label for="dex-skp" class="skpLabel">Dexterity:</label>
                     <input type="number" id="dex-skp" name="dex-skp" value="0" class="skpInput"/>
+                </div>
+                <div id="dex-skp-assign">
+                    Before Boosts: 0
                 </div>
                 <div id="dex-skp-base">
                     Original Value: 0
@@ -161,12 +164,12 @@
                 </div>
             </div>
             <div class="center" style="grid-column:3;grid-row:1">
-                <div id="int-skp-assign">
-                    Before Boosts: 0
-                </div>
                 <div>
                     <label for="int-skp" class="skpLabel">Intelligence:</label>
                     <input type="number" id="int-skp" name="int-skp" value="0" class="skpInput"/>
+                </div>
+                <div id="int-skp-assign">
+                    Before Boosts: 0
                 </div>
                 <div id="int-skp-base">
                     Original Value: 0
@@ -175,12 +178,12 @@
                 </div>
             </div>
             <div class="center" style="grid-column:4;grid-row:1">
-                <div id="def-skp-assign">
-                    Before Boosts: 0
-                </div>
                 <div>
                     <label for="def-skp" class="skpLabel">Defense:</label>
                     <input type="number" id="def-skp" name="def-skp" value="0" class="skpInput"/>
+                </div>
+                <div id="def-skp-assign">
+                    Before Boosts: 0
                 </div>
                 <div id="def-skp-base">
                     Original Value: 0
@@ -189,12 +192,12 @@
                 </div>
             </div>
             <div class="center" style="grid-column:5;grid-row:1">
-                <div id="agi-skp-assign">
-                    Before Boosts: 0
-                </div>
                 <div>
                     <label for="agi-skp" class="skpLabel">Agility:</label>
                     <input type="number" id="agi-skp" name="agi-skp" value="0" class="skpInput"/>
+                </div>
+                <div id="agi-skp-assign">
+                    Before Boosts: 0
                 </div>
                 <div id="agi-skp-base">
                     Original Value: 0
@@ -241,6 +244,7 @@
 
         <script type="text/javascript" src="utils.js"></script>
         <script type="text/javascript" src="skillpoints.js"></script>
+        <script type="text/javascript" src="damage_calc.js"></script>
         <script type="text/javascript" src="display.js"></script>
         <script type="text/javascript" src="build.js"></script>
         <script type="text/javascript" src="load.js"></script>
