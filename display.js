@@ -383,7 +383,6 @@ function displayMeleeDamage(parent_elem, meleeStats){
     averageDamage.classList.add("center");
     averageDamage.textContent = "Average DPS: " + stats[10];
     parent_elem.append(averageDamage);
-    parent_elem.append(document.createElement("br"));
 
     //attack speed
     let atkSpd = document.createElement("p");
@@ -442,33 +441,6 @@ function displayMeleeDamage(parent_elem, meleeStats){
     parent_elem.append(critStats);
     parent_elem.append(document.createElement("br"));
     
-    /*
-    //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
-    
-    let meleeSummary = "";
-    meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
-    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br>");
-    let attackSpeeds = ["SUPER SLOW", "VERY SLOW", "SLOW", "NORMAL", "FAST", "VERY FAST", "SUPER FAST"];
-    meleeSummary = meleeSummary.concat("<b>Attack Speed: ",attackSpeeds[meleeStats[11]],"</b><br><br>");
-    meleeSummary = meleeSummary.concat("<b>Non-Crit Stats: </b><br>");
-    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
-    for (let i = 0; i < 6; i++){
-        if(meleeStats[i][0] > 0){
-            meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][0]," -> ",meleeStats[i][1],"<br>");
-        }
-    }
-    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[6][0]," -> ",meleeStats[6][1],"<br>");
-    meleeSummary = meleeSummary.concat("Normal DPS: ",Math.round(meleeStats[8]),"<br><br>");
-    meleeSummary = meleeSummary.concat("<b>Crit Stats: </b><br>");
-    for (let i = 0; i < 6; i++){
-        if(meleeStats[i][2] > 0){
-            meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][2]," -> ",meleeStats[i][3],"<br>");
-        }
-    }
-    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
-    meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
-    setHTML("build-melee-stats", "".concat(meleeSummary)); //basically complete function
-    */
 
     
 }
