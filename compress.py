@@ -55,7 +55,7 @@ translate_mappings = {
     "agilityPoints": "agi",
     "defensePoints": "def",
     #"thorns": "thorns",
-    #"exploding": "exploding",
+    "exploding": "expd",
     "speed": "spd",
     "attackSpeedBonus": "atkTier",
     #"poison": "poison",
