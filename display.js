@@ -1,7 +1,7 @@
 let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 
-let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
+let reversedIDs = [ "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 function expandItem(item, powders){
     let minRolls = new Map();
@@ -260,7 +260,12 @@ function displayExpandedItem(item, parent_id){
         else {
             let id = command;
             if(nonRolledIDs.includes(id) && item.get(id)){//nonRolledID & non-0/non-null/non-und ID
-                displayFixedID(active_elem, id, item.get(id), elemental_format);
+                let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
+                if (id === "slots") {
+                    // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
+                    p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
+                    " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
+                }
             }
             else if(rolledIDs.includes(id)&& item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
@@ -268,12 +273,7 @@ function displayExpandedItem(item, parent_id){
                     style = "negative";
                 }
                 if (fix_id) {
-                    let p_elem = displayFixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
-                    if (id === "slots") {
-                        // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
-                        p_elem.textContent = idPrefixes[id].concat(value, idSuffixes[id]) + 
-                        " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
-                    }
+                    displayFixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
                 }
                 else {
                     let row = document.createElement('tr');
