@@ -51,7 +51,7 @@ class Build{
     */
     constructor(level,equipment, powders){
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
-        this.powders = powders
+        this.powders = powders;
         if(itemMap.get(equipment[0]) && itemMap.get(equipment[0]).type === "helmet") {
             const helmet = itemMap.get(equipment[0]);
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
@@ -82,25 +82,25 @@ class Build{
         }
         if(itemMap.get(equipment[4]).type === "ring") {
             const ring = itemMap.get(equipment[4]);
-            this.ring1 = expandItem(ring, [])
+            this.ring1 = expandItem(ring, []);
         }else{
             throw new TypeError("No such ring named ", equipment[4]);
         }
         if(itemMap.get(equipment[5]).type === "ring") {
             const ring = itemMap.get(equipment[5]);
-            this.ring2 = expandItem(ring, [])
+            this.ring2 = expandItem(ring, []);
         }else{
             throw new TypeError("No such ring named ", equipment[5]);
         }
         if(itemMap.get(equipment[6]).type === "bracelet") {
             const bracelet = itemMap.get(equipment[6]);
-            this.bracelet = expandItem(bracelet, [])
+            this.bracelet = expandItem(bracelet, []);
         }else{
             throw new TypeError("No such bracelet named ", equipment[6]);
         }
         if(itemMap.get(equipment[7]).type === "necklace") {
             const necklace = itemMap.get(equipment[7]);
-            this.necklace = expandItem(necklace, [])
+            this.necklace = expandItem(necklace, []);
         }else{
             throw new TypeError("No such necklace named ", equipment[7]);
         }
