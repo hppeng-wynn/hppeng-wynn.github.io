@@ -244,3 +244,83 @@ function displayExpandedItem(item, parent_id){
     item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
     parent_div.append(item_desc_elem);
 }
+
+function displaySpellDamage(parent_elem, build, spell, spellIdx) {
+    parent_elem.textContent = "";
+
+    const stats = build.statMap;
+    let title_elem = document.createElement("p");
+    title_elem.classList.add('center');
+    if (spellIdx != 0) {
+        title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
+    }
+    else {
+        title_elem.textContent = spell.title;
+    }
+
+    parent_elem.append(title_elem);
+    let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
+
+    for (const part of spell.parts) {
+        parent_elem.append(document.createElement("br"));
+        let part_div = document.createElement("p");
+        parent_elem.append(part_div);
+
+        let subtitle_elem = document.createElement("p");
+        subtitle_elem.textContent = part.subtitle;
+        part_div.append(subtitle_elem);
+        if (part.type === "damage") {
+
+            let _results = calculateSpellDamage(stats, part.conversion,
+                                    stats.get("sdRaw"), stats.get("sdPct"), 
+                                    part.multiplier / 100, build.weapon, build.total_skillpoints);
+            let totalDamNormal = _results[0];
+            let totalDamCrit = _results[1];
+            let results = _results[2];
+            for (let i = 0; i < 6; ++i) {
+                for (let j in results[i]) {
+                    results[i][j] = Math.round(results[i][j]);
+                }
+            }
+            let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2;
+            let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2;
+
+            let averageDamage = document.createElement("p");
+            averageDamage.textContent = "Average: "+Math.round((1-critChance)*nonCritAverage+critChance*critAverage);
+            averageDamage.classList.add("damageSubtitle");
+            part_div.append(averageDamage);
+
+            let nonCritLabel = document.createElement("p");
+            nonCritLabel.textContent = "Non-Crit Average: "+Math.round(nonCritAverage);
+            nonCritLabel.classList.add("damageSubtitle");
+            part_div.append(nonCritLabel);
+
+            let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
+            console.log(results);
+            for (let i = 0; i < 6; i++){
+                if (results[i][0] > 0){
+                    let p = document.createElement("p");
+                    p.classList.add("damagep");
+                    p.classList.add(damageClasses[i]);
+                    p.textContent = results[i][0]+"-"+results[i][1];
+                    part_div.append(p);
+                }
+            }
+            //part_div.append(document.createElement("br"));
+            let critLabel = document.createElement("p");
+            critLabel.textContent = "Crit Average: "+Math.round(critAverage);
+            critLabel.classList.add("damageSubtitle");
+            part_div.append(critLabel);
+
+            for (let i = 0; i < 6; i++){
+                if (results[i][0] > 0){
+                    let p = document.createElement("p");
+                    p.classList.add("damagep");
+                    p.classList.add(damageClasses[i]);
+                    p.textContent = results[i][2]+"-"+results[i][3];
+                    part_div.append(p);
+                }
+            }
+        }
+    }
+}

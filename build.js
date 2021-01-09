@@ -47,8 +47,14 @@ const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY
 */
 class Build{
     
-    /*Construct a build.
-    */
+    /*
+     * Construct a build.
+     * @param level : Level of the player.
+     * @param equipment : List of equipment names that make up the build.
+     *                    In order: Helmet, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Weapon.
+     * @param powders : Powder application. List of lists of integers (powder IDs).
+     *                  In order: Helmet, Chestplate, Leggings, Boots, Weapon.
+     */
     constructor(level,equipment, powders){
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
         this.powders = powders
@@ -155,6 +161,12 @@ class Build{
         }else{
             return health;
         }
+    }
+
+    getSpellCost(spellIdx, cost) {
+        cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
+        cost += this.statMap.get("spRaw"+spellIdx);
+        return Math.max(1, Math.floor(cost * (1 - this.statMap.get("spPct"+spellIdx))))
     }
     
 

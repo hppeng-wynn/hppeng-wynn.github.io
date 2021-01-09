@@ -9,7 +9,6 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
 
     // Applying powder.
-    let neutralRemaining = spellConversions[0];
     let neutralBase = damages[0].slice();
     let neutralRemainingRaw = damages[0];
     for (let i = 0; i < 5; ++i) {
@@ -38,9 +37,6 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
     }
-    damages[0][0] *= neutralRemaining / 100;
-    damages[0][1] *= neutralRemaining / 100;
-    console.log(damages);
 
     let damageMult = 1;
     // If we are doing melee calculations:
@@ -50,6 +46,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     else {
         damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(stats.get("atkSpd"))];
     }
+    console.log(damages);
+    console.log(damageMult);
 
     rawModifier *= spellMultiplier;
 
@@ -79,5 +77,94 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
     damages_results[0][0] += rawModifier;
     damages_results[0][1] += rawModifier;
+    damages_results[0][2] += rawModifier;
+    damages_results[0][3] += rawModifier;
     return [totalDamNorm, totalDamCrit, damages_results];
+}
+
+const spell_table = {
+    "wand": [
+        { title: "Heal", cost: 6, parts: [
+                { subtitle: "First Pulse", type: "heal", strength: 0.2 },
+                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.05 },
+                { subtitle: "Total Heal", type: "heal", strength: 0.3 }
+            ] },
+        { title: "Teleport", cost: 4, parts: [
+                { subtitle: "", type: "damage", multiplier: 100, conversion: [60, 0, 40, 0, 0, 0] },
+            ] },
+        { title: "Meteor", cost: 8, parts: [
+                { subtitle: "Blast Damage", type: "damage", multiplier: 500, conversion: [40, 30, 0, 0, 30, 0] },
+                { subtitle: "Burn Damage", type: "damage", multiplier: 125, conversion: [40, 30, 0, 0, 30, 0] },
+            ] },
+        { title: "Ice Snake", cost: 4, parts: [
+                { subtitle: "", type: "damage", multiplier: 70, conversion: [50, 0, 0, 50, 0, 0] },
+            ] },
+    ],
+    "spear": [
+        { title: "Bash", cost: 6, parts: [
+                { subtitle: "First Damage", type: "damage", multiplier: 130, conversion: [60, 40, 0, 0, 0, 0]},
+                { subtitle: "Explosion Damage", type: "damage", multiplier: 130, conversion: [100, 0, 0, 0, 0, 0]},
+            ] },
+        { title: "Charge", cost: 4, parts: [
+                { subtitle: "", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0] },
+            ] },
+        { title: "Uppercut", cost: 10, parts: [
+                { subtitle: "First Damage", type: "damage", multiplier: 300, conversion: [70, 20, 10, 0, 0, 0] },
+                { subtitle: "Fireworks Damage", type: "damage", multiplier: 50, conversion: [60, 0, 40, 0, 0, 0] },
+                { subtitle: "Crash Damage", type: "damage", multiplier: 50, conversion: [80, 0, 20, 0, 0, 0] },
+            ] },
+        { title: "War Scream", cost: 6, parts: [
+                { subtitle: "Area Damage", type: "damage", multiplier: 50, conversion: [0, 0, 0, 0, 75, 25] },
+                { subtitle: "Air Shout (Per Hit)", type: "damage", multiplier: 30, conversion: [0, 0, 0, 0, 75, 25] },
+            ] },
+    ],
+    "bow": [
+        { title: "Arrow Storm", cost: 6, parts: [
+                { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [60, 0, 25, 0, 15, 0]},
+                { subtitle: "Per Arrow", type: "damage", multiplier: 10, conversion: [60, 0, 25, 0, 15, 0]},
+            ] },
+        { title: "Escape", cost: 3, parts: [
+                { subtitle: "Landing Damage", type: "damage", multiplier: 100, conversion: [50, 0, 0, 0, 0, 50] },
+            ] },
+        { title: "Bomb Arrow", cost: 8, parts: [
+                { subtitle: "", type: "damage", multiplier: 250, conversion: [60, 25, 0, 0, 15, 0] },
+            ] },
+        { title: "Arrow Shield", cost: 10, parts: [
+                { subtitle: "Shield Damage", type: "damage", multiplier: 100, conversion: [70, 0, 0, 0, 0, 30] },
+                { subtitle: "Arrow Rain Damage", type: "damage", multiplier: 200, conversion: [70, 0, 0, 0, 0, 30] },
+            ] },
+    ],
+    "dagger": [
+        { title: "Spin Attack", cost: 6, parts: [
+                { subtitle: "", type: "damage", multiplier: 150, conversion: [70, 0, 30, 0, 0, 0]},
+            ] },
+        { title: "Vanish", cost: 1, parts: [
+                { subtitle: "No Damage", type: "none" }
+            ] },
+        { title: "Multihit", cost: 8, parts: [
+                { subtitle: "Total Damage", type: "damage", multiplier: 380, conversion: [60, 25, 0, 0, 15, 0] },
+                { subtitle: "1st to 10th Hit", type: "damage", multiplier: 28, conversion: [60, 25, 0, 0, 15, 0] },
+                { subtitle: "Fatality", type: "damage", multiplier: 100, conversion: [20, 0, 30, 50, 0, 0] },
+            ] },
+        { title: "Smoke Bomb", cost: 8, parts: [
+                { subtitle: "Tick Damage", type: "damage", multiplier: 60, conversion: [45, 25, 0, 0, 0, 30] },
+                { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [45, 25, 0, 0, 0, 30] },
+            ] },
+    ],
+    "relik": [
+        { title: "Totem", cost: 4, parts: [
+                { subtitle: "Smash Damage", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 20, 0]},
+                { subtitle: "Damage Tick", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 0, 20]},
+                { subtitle: "Heal Tick", type: "heal", strength: 0.04 },
+            ] },
+        { title: "Haul", cost: 1, parts: [
+                { subtitle: "", type: "damage", multiplier: 100, conversion: [80, 0, 20, 0, 0, 0] },
+            ] },
+        { title: "Aura", cost: 8, parts: [
+                { subtitle: "One Wave", type: "damage", multiplier: 200, conversion: [70, 0, 0, 30, 0, 0] },
+            ] },
+        { title: "Uproot", cost: 6, parts: [
+                { subtitle: "", type: "damage", multiplier: 50, conversion: [70, 30, 0, 0, 0, 0] },
+            ] },
+    ]
 }

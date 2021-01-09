@@ -122,7 +122,7 @@
             </div>
             <div class="center" style="grid-column:3;grid-row:3">
                 <button class = "button" id = "calc-button" onclick = "calculateBuild()">
-                    Calculate
+                    Update Items (Resets stats)
                 </button>
             </div>
             <div class="center" style="grid-column:4;grid-row:3">
@@ -206,6 +206,11 @@
                 </div>
             </div>
         </div>
+        <div class="center">
+            <button class = "button" id = "update-button" onclick = "updateStats()">
+                Update Stats
+            </button>
+        </div>
         <div class = "build">
             <div class = "center build-helmet" id = "build-helmet" style = "grid-column:1;grid-row:1">
                 <div class = "center" id = "build-helmet-stats"></div>
@@ -242,21 +247,21 @@
             </div>
         </div>
         <div class = "spells">
-            <div class = "center spell-info" id = "spell1" style = "grid-column:1;grid-row:1">
-                <div class = "center" id = "spell1-name">Spell 1</div>
-                <div class = "center" id = "spell1-info"></div>
+            <div class = "center spell-info" id = "spell0" style = "grid-column:1;grid-row:1">
+                <!--div class = "center" id = "spell0-name">Spell 1</div-->
+                <div class = "center" id = "spell0-info">Spell 1</div>
             </div>
-            <div class = "center spell-info" id = "spell2" style = "grid-column:2;grid-row:1">
-                <div class = "center" id = "spell2-name">Spell 2</div>
-                <div class = "center" id = "spell2-info"></div>
+            <div class = "center spell-info" id = "spell1" style = "grid-column:2;grid-row:1">
+                <!--div class = "center" id = "spell1-name">Spell 2</div-->
+                <div class = "center" id = "spell1-info">Spell 2</div>
             </div>
-            <div class = "center spell-info" id = "spell3" style = "grid-column:3;grid-row:1">
-                <div class = "center" id = "spell3-name">Spell 3</div>
-                <div class = "center" id = "spell3-info"></div>
+            <div class = "center spell-info" id = "spell2" style = "grid-column:3;grid-row:1">
+                <!--div class = "center" id = "spell2-name">Spell 3</div-->
+                <div class = "center" id = "spell2-info">Spell 3</div>
             </div>
-            <div class = "center spell-info" id = "spell4" style = "grid-column:4;grid-row:1">
-                <div class = "center" id = "spell4-name">Spell 4</div>
-                <div class = "center" id = "spell4-info"></div>
+            <div class = "center spell-info" id = "spell3" style = "grid-column:4;grid-row:1">
+                <!--div class = "center" id = "spell3-name">Spell 4</div-->
+                <div class = "center" id = "spell3-info">Spell 4</div>
             </div>
         </div>
 
