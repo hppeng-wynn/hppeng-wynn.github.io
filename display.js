@@ -281,7 +281,7 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             let results = _results[2];
             for (let i = 0; i < 6; ++i) {
                 for (let j in results[i]) {
-                    results[i][j] = Math.round(results[i][j]);
+                    results[i][j] = results[i][j].toFixed(2);
                 }
             }
             let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2;
@@ -289,19 +289,19 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage;
 
             let averageLabel = document.createElement("p");
-            averageLabel.textContent = "Average: "+Math.round(averageDamage);
+            averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
 
             let nonCritLabel = document.createElement("p");
-            nonCritLabel.textContent = "Non-Crit Average: "+Math.round(nonCritAverage);
+            nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
             nonCritLabel.classList.add("damageSubtitle");
             part_div.append(nonCritLabel);
 
             let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
             console.log(results);
             for (let i = 0; i < 6; i++){
-                if (results[i][0] > 0){
+                if (results[i][1] > 0){
                     let p = document.createElement("p");
                     p.classList.add("damagep");
                     p.classList.add(damageClasses[i]);
@@ -311,12 +311,12 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             }
             //part_div.append(document.createElement("br"));
             let critLabel = document.createElement("p");
-            critLabel.textContent = "Crit Average: "+Math.round(critAverage);
+            critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
             critLabel.classList.add("damageSubtitle");
             part_div.append(critLabel);
 
             for (let i = 0; i < 6; i++){
-                if (results[i][0] > 0){
+                if (results[i][1] > 0){
                     let p = document.createElement("p");
                     p.classList.add("damagep");
                     p.classList.add(damageClasses[i]);
@@ -332,7 +332,7 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
                 total_damage += save_damages[i] * part.factors[i];
             }
             let averageLabel = document.createElement("p");
-            averageLabel.textContent = "Average: "+Math.round(total_damage);
+            averageLabel.textContent = "Average: "+total_damage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
         }

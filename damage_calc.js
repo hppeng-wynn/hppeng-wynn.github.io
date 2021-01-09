@@ -20,6 +20,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         neutralRemainingRaw[0] = Math.floor(neutralRemainingRaw[0] - min_diff);
         neutralRemainingRaw[1] = Math.floor(neutralRemainingRaw[1] - max_diff);
     }
+    console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
     for (const powderID of weapon.get("powders")) {
         const powder = powderStats[powderID];
@@ -154,7 +155,7 @@ const spell_table = {
     "relik": [
         { title: "Totem", cost: 4, parts: [
                 { subtitle: "Smash Damage", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 20, 0]},
-                { subtitle: "Damage Tick", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 0, 20]},
+                { subtitle: "Damage Tick", type: "damage", multiplier: 20, conversion: [80, 0, 0, 0, 0, 20]},
                 { subtitle: "Heal Tick", type: "heal", strength: 0.04 },
             ] },
         { title: "Haul", cost: 1, parts: [
