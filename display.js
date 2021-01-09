@@ -17,23 +17,21 @@ function expandItem(item, powders){
         }
     }else{ //The item does not have fixed IDs.
         for (const id of rolledIDs){
-            if(item[id]){
-                if(item[id] > 0){ // positive rolled IDs                   
-                    minRolls.set(id,idRound(item[id]*0.3));
+            if(item[id] > 0){ // positive rolled IDs                   
+                minRolls.set(id,idRound(item[id]*0.3));
+                maxRolls.set(id,idRound(item[id]*1.3));
+            }else if(item[id] < 0){ //negative rolled IDs
+                if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(item[id]*1.3));
-                }else if(item[id] < 0){ //negative rolled IDs
-                    if (reversedIDs.includes(id)) {
-                        maxRolls.set(id,idRound(item[id]*1.3));
-                        minRolls.set(id,idRound(item[id]*0.7));
-                    }
-                    else {
-                        minRolls.set(id,idRound(item[id]*1.3));
-                        maxRolls.set(id,idRound(item[id]*0.7));
-                    }
-                }else{//Id = 0
-                    minRolls.set(id,0);
-                    maxRolls.set(id,0);
+                    minRolls.set(id,idRound(item[id]*0.7));
                 }
+                else {
+                    minRolls.set(id,idRound(item[id]*1.3));
+                    maxRolls.set(id,idRound(item[id]*0.7));
+                }
+            }else{//Id = 0
+                minRolls.set(id,0);
+                maxRolls.set(id,0);
             }
         }
     }
