@@ -1,0 +1,24 @@
+{
+  "items": [
+    "Skien Boots",
+    "Skien Leggings",
+    "Skien's Fatigues"
+  ],
+  "bonuses": [
+    {},
+    {
+      "sdPct": -10,
+      "mdPct": 12,
+      "sdRaw": -40,
+      "mdRaw": 30
+    },
+    {
+      "sdPct": -35,
+      "mdPct": 30,
+      "dex": 15,
+      "spd": 8,
+      "sdRaw": -90,
+      "mdRaw": 125
+    }
+  ]
+}

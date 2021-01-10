@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "2.9";
+const BUILD_VERSION = "3.2";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -424,41 +424,11 @@ function calculateBuildStats() {
 
     displayBuildStats(player_build, "build-overall-stats");
 
+    let parent_elem = document.getElementById("build-melee-stats");
     let meleeStats = player_build.getMeleeStats();
-    //nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS
-    for (let i = 0; i < 6; ++i) {
-        for (let j in meleeStats[i]) {
-            meleeStats[i][j] = Math.round(meleeStats[i][j]);
-        }
-    }
-    for (let i = 6; i < 8; ++i) {
-        for (let j in meleeStats[i]) {
-            meleeStats[i][j] = Math.round(meleeStats[i][j]);
-        }
-    }
-    let meleeSummary = "";
-    meleeSummary = meleeSummary.concat("<h1><u>Melee Stats</u></h1>");
-    meleeSummary = meleeSummary.concat("<h2>Average DPS: ",Math.round(meleeStats[10]),"</h2> <br>");
-    let attackSpeeds = ["SUPER SLOW", "VERY SLOW", "SLOW", "NORMAL", "FAST", "VERY FAST", "SUPER FAST"];
-    meleeSummary = meleeSummary.concat("<b>Attack Speed: ",attackSpeeds[meleeStats[11]],"</b><br><br>");
-    meleeSummary = meleeSummary.concat("<b>Non-Crit Stats: </b><br>");
-    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
-    for (let i = 0; i < 6; i++){
-        if(meleeStats[i][0] > 0){
-            meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][0]," -> ",meleeStats[i][1],"<br>");
-        }
-    }
-    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[6][0]," -> ",meleeStats[6][1],"<br>");
-    meleeSummary = meleeSummary.concat("Normal DPS: ",Math.round(meleeStats[8]),"<br><br>");
-    meleeSummary = meleeSummary.concat("<b>Crit Stats: </b><br>");
-    for (let i = 0; i < 6; i++){
-        if(meleeStats[i][2] > 0){
-            meleeSummary = meleeSummary.concat(damagePrefixes[i],meleeStats[i][2]," -> ",meleeStats[i][3],"<br>");
-        }
-    }
-    meleeSummary = meleeSummary.concat("<br>Total Damage: ",meleeStats[7][0]," -> ",meleeStats[7][1],"<br>");
-    meleeSummary = meleeSummary.concat("Crit DPS: ",Math.round(meleeStats[9]),"<br><br>");
-    setHTML("build-melee-stats", "".concat(meleeSummary)); //basically complete function
+    displayMeleeDamage(parent_elem,meleeStats);
+
+    
     //let defenseStats = "";
 
     //setHTML("build-defense-stats", "".concat(defenseStats));

@@ -1,0 +1,14 @@
+{
+  "items": [
+    "Villager Pants",
+    "Villager Mail"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 20,
+      "lb": 60,
+      "eSteal": 8
+    }
+  ]
+}

@@ -35,7 +35,7 @@ function calculate_skillpoints(equipment, weapon) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
         for (let i = 0; i < 5; i++) {
-            if (item.get("skillpoints")[i] < 0 && skillpoint_filter[i]) {
+            if (item.get("skillpoints")[i] < 0 && skillpoint_filter[i] === true) {
                 applied[i] -= item.get("skillpoints")[i];
                 total -= item.get("skillpoints")[i];
             }
@@ -121,7 +121,8 @@ function calculate_skillpoints(equipment, weapon) {
 //                    }
 //                }
 //            }
-            result = apply_to_fit(skillpoints, weapon, allFalse);
+            let pre = skillpoints.slice();
+            result = apply_to_fit(skillpoints, weapon, allFalse.slice());
             needed_skillpoints = result[0];
             total_diff = result[1];
             for (let i = 0; i < 5; ++i) {
@@ -133,6 +134,8 @@ function calculate_skillpoints(equipment, weapon) {
             total_applied += total_diff;
 
             if (total_applied < best_total) {
+                console.log(pre);
+                console.log(skillpoints);
                 best = permutation;
                 final_skillpoints = skillpoints;
                 best_skillpoints = skillpoints_applied;
@@ -143,7 +146,7 @@ function calculate_skillpoints(equipment, weapon) {
     }
     else {
         best_total = 0;
-        result = apply_to_fit(final_skillpoints, weapon);
+        result = apply_to_fit(final_skillpoints, weapon, allFalse.slice());
         needed_skillpoints = result[0];
         total_diff = result[1];
         for (let i = 0; i < 5; ++i) {

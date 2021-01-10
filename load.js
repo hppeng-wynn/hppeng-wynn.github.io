@@ -1,24 +1,44 @@
-const DB_VERSION = 5;
+const DB_VERSION = 7;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
 let reload = false;
 let items;
+let sets;
 
 /*
  * Load item set from local DB. Calls init() on success.
  */
 async function load_local(init_func) {
-    let get_tx = db.transaction('item_db', 'readonly');
+    let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
+    let sets_store = get_tx.objectStore('set_db');
     let get_store = get_tx.objectStore('item_db');
     let request = get_store.getAll();
     request.onerror = function(event) {
-        console.log("Could not read local db...");
+        console.log("Could not read local item db...");
     }
     request.onsuccess = function(event) {
-        console.log("Successfully read local db.");
+        console.log("Successfully read local item db.");
         items = request.result;
-        init_func();
+        let request2 = sets_store.openCursor();
+
+        sets = {};
+        request2.onerror = function(event) {
+            console.log("Could not read local set db...");
+        }
+
+        request2.onsuccess = function(event) {
+            let cursor = event.target.result;
+            if (cursor) {
+                sets[cursor.primaryKey] = cursor.value;
+                cursor.continue();
+            }
+            else {
+                console.log("Successfully read local set db.");
+                console.log(sets);
+                init_func();
+            }
+        }
     }
     await get_tx.complete;
     db.close();
@@ -43,20 +63,27 @@ async function load(init_func) {
     let url = "https://hppeng-wynn.github.io/compress.json";
     let result = await (await fetch(url)).json();
     items = result.items;
+    sets = result.sets;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/clear
-    let clear_tx = db.transaction('item_db', 'readwrite');
-    let clear_store = clear_tx.objectStore('item_db');
+    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
+    let clear_items = clear_tx.objectStore('item_db');
+    let clear_sets = clear_tx.objectStore('item_db');
 
-    await clear_store.clear();
+    await clear_items.clear();
+    await clear_sets.clear();
     await clear_tx.complete;
 
-    let add_tx = db.transaction('item_db', 'readwrite');
-    let add_store = add_tx.objectStore('item_db');
+    let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
+    let items_store = add_tx.objectStore('item_db');
     let add_promises = [];
     for (const item of items) {
         clean_item(item);
-        add_promises.push(add_store.add(item, item.name));
+        add_promises.push(items_store.add(item, item.name));
+    }
+    let sets_store = add_tx.objectStore('set_db');
+    for (const set in sets) {
+        add_promises.push(sets_store.add(sets[set], set));
     }
     add_promises.push(add_tx.complete);
     Promise.all(add_promises).then((values) => {
@@ -93,11 +120,17 @@ function load_init(init_func) {
             db.deleteObjectStore('item_db');
         }
         catch (error) {
-            console.log("Could not delete DB. This is probably fine");
+            console.log("Could not delete item DB. This is probably fine");
         }
-        let objectStore = db.createObjectStore('item_db');
+        try {
+            db.deleteObjectStore('set_db');
+        }
+        catch (error) {
+            console.log("Could not delete set DB. This is probably fine");
+        }
 
-        objectStore.createIndex('item', 'item', {unique: false});
+        db.createObjectStore('item_db');
+        db.createObjectStore('set_db');
 
         console.log("DB setup complete...");
     }

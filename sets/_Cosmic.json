@@ -1,0 +1,44 @@
+{
+  "items": [
+    "Cosmic Visor",
+    "Cosmic Walkers",
+    "Cosmic Ward",
+    "Cosmic Vest"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 15,
+      "lb": 15,
+      "ref": 5,
+      "spRegen": 15,
+      "fDefPct": 10,
+      "wDefPct": 10,
+      "aDefPct": 10,
+      "tDefPct": 10,
+      "eDefPct": 10
+    },
+    {
+      "xpb": 35,
+      "lb": 35,
+      "ref": 15,
+      "spRegen": 35,
+      "fDefPct": 20,
+      "wDefPct": 20,
+      "aDefPct": 20,
+      "tDefPct": 20,
+      "eDefPct": 20
+    },
+    {
+      "xpb": 50,
+      "lb": 50,
+      "ref": 30,
+      "spRegen": 50,
+      "fDefPct": 30,
+      "wDefPct": 30,
+      "aDefPct": 30,
+      "tDefPct": 30,
+      "eDefPct": 30
+    }
+  ]
+}

@@ -15,11 +15,11 @@
             Wynn build calculator
         </div>
         <div class="center" id="header2">
-            <p>Made by: hppeng and ferricles (JavaScript required to function, nothing works without js)</p>
+            <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with Atlas Inc (JavaScript required to function, nothing works without js)</p>
             <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
         </div>
         <div class="center" id="credits">
-            <a href="credits.txt">Additional credits</a>
+            <a href="credits.txt" class="link">Additional credits</a>
         </div>
         <div class="equipment">
             <div class="right" style="grid-column:1;grid-row:1">
@@ -28,56 +28,56 @@
                 <br>
                 <div>
                     <label for="helmet-choice">Helmet:</label>
-                    <input list="helmet-items" id="helmet-choice" name="helmet-choice" value="No Helmet"/>
+                    <input list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet"/>
                     <datalist id="helmet-items">
                     </datalist>
                 </div>
                 <br>
                 <div>
                     <label for="chestplate-choice">Chestplate:</label>
-                    <input list="chestplate-items" id="chestplate-choice" name="chestplate-choice" value="No Chestplate"/>
+                    <input list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No Chestplate"/>
                     <datalist id="chestplate-items">
                     </datalist>
                 </div>
                 <br>
                 <div>
                     <label for="leggings-choice">Leggings:</label>
-                    <input list="leggings-items" id="leggings-choice" name="leggings-choice" value="No Leggings"/>
+                    <input list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No Leggings"/>
                     <datalist id="leggings-items">
                     </datalist>
                 </div>
                 <br>
                 <div id="boots">
                     <label for="boots-choice">Boots:</label>
-                    <input list="boots-items" id="boots-choice" name="boots-choice" value="No Boots"/>
+                    <input list="boots-items" id="boots-choice" name="boots-choice" placeholder="No Boots"/>
                     <datalist id="boots-items">
                     </datalist>
                 </div>
                 <br>
                 <div>
                     <label for="ring1-choice">Ring 1:</label>
-                    <input list="ring1-items" id="ring1-choice" name="ring1-choice" value="No Ring 1"/>
+                    <input list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No Ring 1"/>
                     <datalist id="ring1-items">
                     </datalist>
                 </div>
                 <br>
                 <div>
                     <label for="ring2-choice">Ring 2:</label>
-                    <input list="ring2-items" id="ring2-choice" name="ring2-choice" value="No Ring 2"/>
+                    <input list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No Ring 2"/>
                     <datalist id="ring2-items">
                     </datalist>
                 </div>
                 <br>
                 <div>
                     <label for="bracelet-choice">Bracelet:</label>
-                    <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" value="No Bracelet"/>
+                    <input list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No Bracelet"/>
                     <datalist id="bracelet-items">
                     </datalist>
                 </div>
                 <br>
                 <div>
                     <label for="necklace-choice">Necklace:</label>
-                    <input list="necklace-items" id="necklace-choice" name="necklace-choice" value="No Necklace"/>
+                    <input list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No Necklace"/>
                     <datalist id="necklace-items">
                     </datalist>
                 </div>
@@ -250,13 +250,13 @@
             <div class = "center build-weapon" id = "build-weapon" style = "grid-column:1;grid-row:3">
                 <div class = "center" id = "build-weapon-stats"></div>
             </div>
-            <div class = "center build-order" id = "build-order" style = "grid-column:2;grid-row:3">
-            </div>
-            <div class = "center" id = "build-melee-stats" style = "grid-column:3;grid-row:3">
-            </div>
             <div class = "center build-overall" id = "build-overall" style = "grid-column:4;grid-row:3">
                 <p class="itemcenter">Overall Build Stats:<p>
                 <div class = "center" id = "build-overall-stats"></div>
+            </div>
+            <div class = "center build-melee-stats" id = "build-melee-stats" style = "grid-column:3;grid-row:3">
+            </div>
+            <div class = "center build-order" id = "build-order" style = "grid-column:2;grid-row:3">
             </div>
             <!--div class = "center" id = "build-defense-stats" style = "grid-column:4;grid-row:3">
             </div-->

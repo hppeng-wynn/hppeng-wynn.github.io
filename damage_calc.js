@@ -64,7 +64,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
 
     for (let i in damages) {
-        let damageBoost = 1 + skillBoost[i] + staticBoost;
+        let damageBoost = Math.max(1 + skillBoost[i] + staticBoost, 0);
         damages_results.push([
             Math.max(damages[i][0] * damageBoost * damageMult, 0),       // Normal min
             Math.max(damages[i][1] * damageBoost * damageMult, 0),       // Normal max
@@ -80,6 +80,10 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     damages_results[0][1] += rawModifier;
     damages_results[0][2] += rawModifier;
     damages_results[0][3] += rawModifier;
+    if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
+    if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
+    if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
+    if (totalDamCrit[1] < 0) totalDamCrit[1] = 0;
     return [totalDamNorm, totalDamCrit, damages_results];
 }
 

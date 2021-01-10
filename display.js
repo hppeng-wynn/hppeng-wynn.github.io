@@ -1,7 +1,7 @@
 let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 
-let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
+let reversedIDs = [ "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 function expandItem(item, powders){
     let minRolls = new Map();
@@ -43,13 +43,15 @@ function expandItem(item, powders){
     expandedItem.set("powders", powders);
     return expandedItem;
 }
+
+
 /*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
 * @param id
 */
 function idRound(id){
     rounded = Math.round(id);
     if(rounded == 0){
-        return 1;
+        return 1; //this is a hack, will need changing along w/ rest of ID system if anything changes
     }else{
         return rounded;
     }
@@ -260,7 +262,12 @@ function displayExpandedItem(item, parent_id){
         else {
             let id = command;
             if(nonRolledIDs.includes(id) && item.get(id)){//nonRolledID & non-0/non-null/non-und ID
-                displayFixedID(active_elem, id, item.get(id), elemental_format);
+                let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
+                if (id === "slots") {
+                    // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
+                    p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
+                    " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
+                }
             }
             else if(rolledIDs.includes(id)&& item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
@@ -268,12 +275,7 @@ function displayExpandedItem(item, parent_id){
                     style = "negative";
                 }
                 if (fix_id) {
-                    let p_elem = displayFixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
-                    if (id === "slots") {
-                        // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
-                        p_elem.textContent = idPrefixes[id].concat(value, idSuffixes[id]) + 
-                        " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
-                    }
+                    displayFixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
                 }
                 else {
                     let row = document.createElement('tr');
@@ -349,7 +351,99 @@ function displayFixedID(active, id, value, elemental_format, style) {
         return p_elem;
     }
 }
+function displayMeleeDamage(parent_elem, meleeStats){
+    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
+    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
+    parent_elem.textContent = "";
+    const stats = meleeStats.slice();
+    
+    for (let i = 0; i < 6; ++i) {
+        for (let j in stats[i]) {
+            stats[i][j] = stats[i][j].toFixed(2);
+        }
+    }
+    for (let i = 6; i < 8; ++i) {
+        for (let j in stats[i]) {
+            stats[i][j] = stats[i][j].toFixed(2);
+        }
+    }
+    for (let i = 8; i < 11; ++i){
+        stats[i] = stats[i].toFixed(2);
+    }
+    
+    //title
+    let title_elem = document.createElement("p");
+    title_elem.classList.add("center");
+    title_elem.textContent = "Melee Stats";
+    parent_elem.append(title_elem);
+    parent_elem.append(document.createElement("br"));
+    
+    //average DPS
+    let averageDamage = document.createElement("p");
+    averageDamage.classList.add("center");
+    averageDamage.textContent = "Average DPS: " + stats[10];
+    parent_elem.append(averageDamage);
 
+    //attack speed
+    let atkSpd = document.createElement("p");
+    atkSpd.classList.add("center");
+    atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
+    parent_elem.append(atkSpd);
+    parent_elem.append(document.createElement("br"));
+
+    //Non-Crit: n->elem, total dmg, DPS
+    let nonCritStats = document.createElement("p");
+    nonCritStats.classList.add("center");
+    nonCritStats.textContent = "Non-Crit Stats: ";
+    nonCritStats.append(document.createElement("br"));
+    let dmg = document.createElement("p");
+    for (let i = 0; i < 6; i++){
+        if(stats[i][0] > 0){
+            dmg.textContent = damagePrefixes[i] + stats[i][0] + " - " + stats[i][1];
+            nonCritStats.append(dmg);
+        }
+    }
+    let normalDamage = document.createElement("p");
+    normalDamage.textContent = "Total Damage: " + stats[6][0] + " - " + stats[6][1];
+    nonCritStats.append(normalDamage);
+
+    let normalDPS = document.createElement("p");
+    normalDPS.textContent = "Normal DPS: " + stats[8];
+    normalDPS.append(document.createElement("br"));
+    normalDPS.append(document.createElement("br"));
+    nonCritStats.append(normalDPS);
+
+    parent_elem.append(nonCritStats);
+    parent_elem.append(document.createElement("br"));
+
+    //Crit: n->elem, total dmg, DPS
+    let critStats = document.createElement("p");
+    critStats.classList.add("center");
+    critStats.textContent = "Crit Stats: ";
+    critStats.append(document.createElement("br"));
+    dmg = document.createElement("p");
+    for (let i = 0; i < 6; i++){
+        if(stats[i][2] > 0){
+            dmg.textContent = damagePrefixes[i] + stats[i][2] + " - " + stats[i][3];
+            critStats.append(dmg);
+        }
+    }
+    normalDamage = document.createElement("p");
+    normalDamage.textContent = "Total Damage: " + stats[7][0] + " - " + stats[7][1];
+    critStats.append(normalDamage);
+
+    normalDPS = document.createElement("p");
+    normalDPS.textContent = "Crit DPS: " + stats[9];
+    normalDPS.append(document.createElement("br"));
+    normalDPS.append(document.createElement("br"));
+    critStats.append(normalDPS);
+
+    parent_elem.append(critStats);
+    parent_elem.append(document.createElement("br"));
+    
+
+    
+}
 function displaySpellDamage(parent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 

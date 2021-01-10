@@ -1,0 +1,38 @@
+{
+  "items": [
+    "Snail Helm",
+    "Snail Boots",
+    "Snail Leggings",
+    "Snail Mail"
+  ],
+  "bonuses": [
+    {},
+    {
+      "str": 7,
+      "agi": -5,
+      "thorns": 10,
+      "spd": -5,
+      "poison": 880,
+      "hpBonus": 1100,
+      "hprRaw": 125
+    },
+    {
+      "str": 14,
+      "agi": -10,
+      "thorns": 20,
+      "spd": -10,
+      "poison": 2650,
+      "hpBonus": 2675,
+      "hprRaw": 275
+    },
+    {
+      "str": 21,
+      "agi": -15,
+      "thorns": 40,
+      "spd": -15,
+      "poison": 5500,
+      "hpBonus": 5500,
+      "hprRaw": 575
+    }
+  ]
+}

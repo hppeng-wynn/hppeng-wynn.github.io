@@ -1,0 +1,20 @@
+{
+  "items": [
+    "GM's Helmet",
+    "GM's Boots",
+    "GM's Trousers",
+    "GM's Breastplate"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 5
+    },
+    {
+      "xpb": 10
+    },
+    {
+      "xpb": 15
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "items": [
+    "Visceral Skullcap",
+    "Visceral Toe",
+    "Visceral Legs",
+    "Visceral Chest"
+  ],
+  "bonuses": [
+    {},
+    {
+      "hprPct": 30,
+      "mdPct": 10,
+      "ls": 45,
+      "hpBonus": -1000,
+      "hprRaw": 35,
+      "mdRaw": 40
+    },
+    {
+      "hprPct": 100,
+      "mdPct": 25,
+      "ls": 90,
+      "hpBonus": -2500,
+      "hprRaw": 75,
+      "mdRaw": 80
+    },
+    {
+      "hprPct": 350,
+      "mdPct": 50,
+      "ls": 180,
+      "hpBonus": -4000,
+      "hprRaw": 145,
+      "mdRaw": 165
+    }
+  ]
+}

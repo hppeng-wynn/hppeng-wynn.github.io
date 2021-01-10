@@ -1,0 +1,24 @@
+{
+  "items": [
+    "Corrupted Nii Mukluk",
+    "Corrupted Nii Plate",
+    "Corrupted Nii Shako"
+  ],
+  "bonuses": [
+    {},
+    {
+      "int": 3,
+      "def": 3,
+      "hprRaw": 60
+    },
+    {
+      "mr": 4,
+      "int": 15,
+      "def": 15,
+      "hpBonus": 1500,
+      "hprRaw": 270,
+      "fDefPct": 60,
+      "wDefPct": 60
+    }
+  ]
+}

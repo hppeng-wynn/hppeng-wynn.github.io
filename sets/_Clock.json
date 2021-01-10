@@ -1,0 +1,58 @@
+{
+  "items": [
+    "Clock Helm",
+    "Clock Amulet",
+    "Watch Bracelet",
+    "Clockwork Ring",
+    "Time Ring",
+    "Clock Boots",
+    "Clock Leggings",
+    "Clock Mail"
+  ],
+  "bonuses": [
+    {},
+    {
+      "fDamPct": 15,
+      "wDamPct": 6,
+      "aDamPct": 5,
+      "tDamPct": 18,
+      "eDamPct": 8
+    },
+    {
+      "fDamPct": 14,
+      "wDamPct": 12,
+      "aDamPct": 13
+    },
+    {
+      "fDamPct": 13,
+      "wDamPct": 18,
+      "aDamPct": 20,
+      "tDamPct": 18,
+      "eDamPct": 14
+    },
+    {
+      "fDamPct": 12,
+      "wDamPct": 24,
+      "aDamPct": 28
+    },
+    {
+      "fDamPct": 11,
+      "wDamPct": 24,
+      "aDamPct": 24,
+      "tDamPct": 18,
+      "eDamPct": 22
+    },
+    {
+      "fDamPct": 10,
+      "wDamPct": 24,
+      "aDamPct": 19
+    },
+    {
+      "fDamPct": 9,
+      "wDamPct": 24,
+      "aDamPct": 14,
+      "tDamPct": 18,
+      "eDamPct": 34
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "items": [
+    "Saint's Shawl",
+    "Saint's Sandals",
+    "Saint's Leggings",
+    "Saint's Tunic"
+  ],
+  "bonuses": [
+    {},
+    {
+      "mr": 1,
+      "sdPct": -5,
+      "mdPct": -10,
+      "def": 5,
+      "spRegen": 5,
+      "wDamPct": 10,
+      "aDamPct": 10
+    },
+    {
+      "mr": 3,
+      "sdPct": -10,
+      "mdPct": -20,
+      "def": 10,
+      "spRegen": 10,
+      "wDamPct": 20,
+      "aDamPct": 20
+    },
+    {
+      "mr": 5,
+      "sdPct": -15,
+      "mdPct": -35,
+      "def": 30,
+      "spRegen": 100,
+      "wDamPct": 35,
+      "aDamPct": 35
+    }
+  ]
+}

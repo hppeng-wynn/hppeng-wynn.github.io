@@ -1,0 +1,30 @@
+{
+  "items": [
+    "Earth Relic Helmet",
+    "Earth Relic Boots",
+    "Earth Relic Leggings",
+    "Earth Relic Chestplate"
+  ],
+  "bonuses": [
+    {},
+    {
+      "mdPct": 10,
+      "xpb": 5,
+      "lb": 10,
+      "hpBonus": 65
+    },
+    {
+      "mdPct": 20,
+      "xpb": 10,
+      "lb": 25,
+      "hpBonus": 200
+    },
+    {
+      "mdPct": 45,
+      "xpb": 25,
+      "lb": 50,
+      "str": 20,
+      "hpBonus": 425
+    }
+  ]
+}

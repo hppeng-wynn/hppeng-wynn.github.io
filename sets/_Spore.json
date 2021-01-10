@@ -1,0 +1,14 @@
+{
+  "items": [
+    "Spore Cap",
+    "Spore Shortsword"
+  ],
+  "bonuses": [
+    {},
+    {
+      "ls": 20,
+      "expd": 20,
+      "poison": 70
+    }
+  ]
+}

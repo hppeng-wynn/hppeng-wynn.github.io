@@ -1,0 +1,24 @@
+{
+  "items": [
+    "Spinneret",
+    "Abdomen",
+    "Cephalothorax"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 10,
+      "dex": 2,
+      "agi": 2,
+      "spd": 7,
+      "poison": 35
+    },
+    {
+      "xpb": 25,
+      "dex": 6,
+      "agi": 6,
+      "spd": 19,
+      "poison": 130
+    }
+  ]
+}

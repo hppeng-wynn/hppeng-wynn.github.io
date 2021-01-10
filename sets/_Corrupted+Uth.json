@@ -1,0 +1,24 @@
+{
+  "items": [
+    "Corrupted Uth Sandals",
+    "Corrupted Uth Belt",
+    "Corrupted Uth Plume"
+  ],
+  "bonuses": [
+    {},
+    {
+      "ls": 125,
+      "agi": 3,
+      "def": 3
+    },
+    {
+      "ls": 375,
+      "ref": 70,
+      "agi": 15,
+      "def": 15,
+      "thorns": 70,
+      "fDefPct": 75,
+      "aDefPct": 75
+    }
+  ]
+}

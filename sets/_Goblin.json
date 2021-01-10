@@ -1,0 +1,30 @@
+{
+  "items": [
+    "Goblin Hood",
+    "Goblin Runners",
+    "Goblin Cloak"
+  ],
+  "bonuses": [
+    {
+      "sdPct": -6,
+      "mdPct": -6,
+      "sdRaw": 15,
+      "mdRaw": 10
+    },
+    {
+      "sdPct": -12,
+      "mdPct": -12,
+      "ls": 22,
+      "sdRaw": 55,
+      "mdRaw": 45
+    },
+    {
+      "sdPct": -23,
+      "mdPct": -23,
+      "ls": 51,
+      "ms": 2,
+      "sdRaw": 130,
+      "mdRaw": 105
+    }
+  ]
+}

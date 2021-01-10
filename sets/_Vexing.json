@@ -1,0 +1,16 @@
+{
+  "items": [
+    "Mask of the Dark Vexations",
+    "Staff of the Dark Vexations"
+  ],
+  "bonuses": [
+    {},
+    {
+      "mr": 2,
+      "sdPct": 15,
+      "mdPct": -15,
+      "sdRaw": 30,
+      "spPct2": -50
+    }
+  ]
+}

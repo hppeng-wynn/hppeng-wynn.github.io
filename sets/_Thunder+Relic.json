@@ -1,0 +1,30 @@
+{
+  "items": [
+    "Thunder Relic Helmet",
+    "Thunder Relic Boots",
+    "Thunder Relic Leggings",
+    "Thunder Relic Chestplate"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 5,
+      "lb": 10,
+      "hpBonus": 55,
+      "mdRaw": 12
+    },
+    {
+      "xpb": 10,
+      "lb": 25,
+      "hpBonus": 180,
+      "mdRaw": 32
+    },
+    {
+      "xpb": 25,
+      "lb": 50,
+      "dex": 20,
+      "hpBonus": 380,
+      "mdRaw": 105
+    }
+  ]
+}

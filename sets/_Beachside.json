@@ -1,0 +1,14 @@
+{
+  "items": [
+    "Beachside Headwrap",
+    "Beachside Conch"
+  ],
+  "bonuses": [
+    {},
+    {
+      "lb": 20,
+      "wDamPct": 35,
+      "wDefPct": 25
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "items": [
+    "Outlaw Cap",
+    "Outlaw Boots",
+    "Outlaw Pants",
+    "Outlaw Tunic"
+  ],
+  "bonuses": [
+    {},
+    {
+      "ls": 11,
+      "xpb": 5,
+      "agi": 4,
+      "eSteal": 2
+    },
+    {
+      "ls": 22,
+      "xpb": 10,
+      "agi": 8,
+      "eSteal": 4
+    },
+    {
+      "ls": 45,
+      "xpb": 25,
+      "agi": 28,
+      "eSteal": 8
+    }
+  ]
+}
