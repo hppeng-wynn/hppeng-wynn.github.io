@@ -7,9 +7,19 @@ items = data["items"]
 del data["request"]
 
 import os
+sets = dict()
+item_set_map = dict()
 for filename in os.listdir('sets'):
-    print(filename)
-exit(0)
+    if "json" not in filename:
+        continue
+    set_name = filename[1:].split(".")[0]
+    with open("sets/"+filename) as set_info:
+        set_obj = json.load(set_info)
+        for item in set_obj["items"]:
+            item_set_map[item] = set_name
+        sets[set_name] = set_obj
+
+data["sets"] = sets
 
 translate_mappings = {
     #"name": "name",
@@ -136,6 +146,8 @@ for item in items:
     item["id"] = id_map[item["name"]]
 
     item["type"] = item["type"].lower()
+    if item["name"] in item_set_map:
+        item["set"] = item_set_map[item["name"]]
 
 with open("id_map.json","w") as id_mapfile:
     json.dump(id_map, id_mapfile, indent=2)
