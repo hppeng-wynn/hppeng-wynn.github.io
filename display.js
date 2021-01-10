@@ -499,6 +499,7 @@ function displayEquipOrder(parent_elem,buildOrder){
         parent_elem.append(p_elem);
     }
 }
+
 function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
@@ -681,9 +682,9 @@ function displayDefenseStats(parent_elem,defenseStats){
     hpr.classList.add("left");
     hpr.textContent = "HP Regen:";  
     boost = document.createElement("td");
-    boost.textContent =stats[2];
+    boost.textContent = stats[2];
     boost.classList.add("right");
-    
+
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
     statsTable.appendChild(hprRow);
@@ -729,7 +730,6 @@ function displayDefenseStats(parent_elem,defenseStats){
         row.appendChild(boost);
         statsTable.appendChild(row);
     }
-    
     //skp
     let defRow = document.createElement("tr");
     let defElem = document.createElement("td");

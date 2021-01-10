@@ -213,7 +213,7 @@ class Build{
         defenseStats.push(totalHpr);
         //EHPR
         let ehpr = totalHpr;
-        ehp /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
+        ehpr /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
         defenseStats.push(ehpr);
         //skp stats
         defenseStats.push([def_pct*100, agi_pct*100]);
