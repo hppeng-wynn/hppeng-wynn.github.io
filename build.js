@@ -197,10 +197,28 @@ class Build{
         return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]);
     }
 
+    /*
+     * Gets a list of active sets and set counts.
+     */
+    getSetBonuses() {
+        let activeSetCounts = new Map()
+        for (const item of this.items) {
+            console.log(item.get("name"));
+            const setName = setMap.get(item.get("name"));
+            if (setName) { // undefined/null means no set.
+                activeSetCounts.set(setName, (activeSetCounts.get(setName) || 0) + 1);
+            }
+        }
+        return activeSetCounts;
+    }
+
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The build itself should be valid. No checking of validity of pieces is done here.
     */
     initBuildStats(){
+
+        let activeSetCounts = this.getSetBonuses();
+        this.activeSetCounts = activeSetCounts;
 
         let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef"];
 
@@ -219,6 +237,12 @@ class Build{
             }
             for (const staticID of staticIDs) {
                 if (item.get(staticID)) { statMap.set(staticID, statMap.get(staticID) + item.get(staticID)); }
+            }
+        }
+        for (const [setName, count] of activeSetCounts) {
+            const bonus = sets[setName].bonuses[count-1];
+            for (const id in bonus) {
+                statMap.set(id,(statMap.get(id) || 0)+bonus[id]);
             }
         }
 

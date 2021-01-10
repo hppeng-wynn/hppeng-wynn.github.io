@@ -119,6 +119,19 @@ function displayBuildStats(build, parent_id){
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
 
+    let set_summary_elem = document.createElement('p');
+    set_summary_elem.classList.add('itemp');
+    set_summary_elem.classList.add('left');
+    set_summary_elem.textContent = "Set Summary:";
+    parent_div.append(set_summary_elem);
+    for (const [setName, count] of build.activeSetCounts) {
+        let set_elem = document.createElement('p');
+        set_elem.classList.add('itemp');
+        set_elem.classList.add('left');
+        set_elem.textContent = "    "+setName+" Set: "+count+"/"+sets[setName].items.length;
+        set_summary_elem.append(set_elem);
+    }
+
     let stats = build.statMap;
     
     let active_elem;
