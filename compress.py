@@ -6,6 +6,11 @@ with open("dump.json", "r") as infile:
 items = data["items"]
 del data["request"]
 
+import os
+for filename in os.listdir('sets'):
+    print(filename)
+exit(0)
+
 translate_mappings = {
     #"name": "name",
     #"displayName": "displayName",

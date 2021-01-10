@@ -1,0 +1,17 @@
+{
+  "items": [
+    "Silverfish Helm",
+    "Silverfish Boots"
+  ],
+  "bonuses": [
+    {
+      "spd": 5
+    },
+    {
+      "agi": 10,
+      "thorns": 20,
+      "spd": 20,
+      "poison": 290
+    }
+  ]
+}

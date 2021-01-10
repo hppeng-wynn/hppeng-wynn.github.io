@@ -1,0 +1,14 @@
+{
+  "items": [
+    "Treat",
+    "Trick"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 15,
+      "spRegen": 10,
+      "eSteal": 5
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "items": [
+    "Kaerynn's Mind",
+    "Kaerynn's Body"
+  ],
+  "bonuses": [
+    {},
+    {
+      "mr": 2,
+      "xpb": 12,
+      "str": 4,
+      "hpBonus": 400,
+      "sdRaw": 100,
+      "mdRaw": 50
+    }
+  ]
+}

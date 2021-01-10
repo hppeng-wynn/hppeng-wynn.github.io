@@ -1,0 +1,35 @@
+{
+  "items": [
+    "Ultramarine Crown",
+    "Ultramarine Boots",
+    "Ultramarine Belt",
+    "Ultramarine Cape"
+  ],
+  "bonuses": [
+    {},
+    {
+      "mr": 2,
+      "mdPct": -24,
+      "int": 5,
+      "wDamPct": 10,
+      "tDamPct": -8,
+      "wDefPct": 16
+    },
+    {
+      "mr": 5,
+      "mdPct": -54,
+      "int": 15,
+      "wDamPct": 20,
+      "tDamPct": -18,
+      "wDefPct": 36
+    },
+    {
+      "mr": 8,
+      "mdPct": -90,
+      "int": 25,
+      "wDamPct": 40,
+      "tDamPct": -30,
+      "wDefPct": 56
+    }
+  ]
+}

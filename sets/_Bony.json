@@ -1,0 +1,14 @@
+{
+  "items": [
+    "Bony Circlet",
+    "Bony Bow"
+  ],
+  "bonuses": [
+    {},
+    {
+      "agi": 8,
+      "mdRaw": 45,
+      "aDamPct": 15
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "items": [
+    "Bear Mask",
+    "Bear Head",
+    "Bear Body"
+  ],
+  "bonuses": [
+    {},
+    {
+      "mdPct": 14,
+      "hpBonus": 30,
+      "mdRaw": 20
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "items": [
+    "Builder's Helmet",
+    "Builder's Boots",
+    "Builder's Trousers",
+    "Builder's Breastplate"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 5
+    },
+    {
+      "xpb": 10
+    },
+    {
+      "xpb": 15
+    }
+  ]
+}

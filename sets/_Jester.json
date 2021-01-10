@@ -1,0 +1,37 @@
+{
+  "items": [
+    "Jester Necklace",
+    "Jester Bracelet",
+    "Jester Ring"
+  ],
+  "bonuses": [
+    {
+      "xpb": -25,
+      "lb": -25
+    },
+    {
+      "xpb": -50,
+      "lb": -50,
+      "spd": -10,
+      "hpBonus": 300,
+      "sdRaw": -110,
+      "mdRaw": 60
+    },
+    {
+      "xpb": -75,
+      "lb": -75,
+      "spd": 5,
+      "hpBonus": -150,
+      "sdRaw": 100,
+      "mdRaw": -75
+    },
+    {
+      "xpb": -100,
+      "lb": -100,
+      "spd": 5,
+      "hpBonus": -150,
+      "sdRaw": 100,
+      "mdRaw": -75
+    }
+  ]
+}

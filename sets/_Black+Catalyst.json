@@ -1,0 +1,19 @@
+{
+  "items": [
+    "Black Catalyst"
+  ],
+  "bonuses": [
+    {
+      "xpb": -5
+    },
+    {
+      "mr": 1,
+      "sdPct": 10,
+      "xpb": 30,
+      "expd": 10,
+      "hpBonus": 325,
+      "spRegen": 10,
+      "sdRaw": 90
+    }
+  ]
+}

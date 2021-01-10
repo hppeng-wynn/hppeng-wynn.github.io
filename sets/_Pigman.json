@@ -1,0 +1,13 @@
+{
+  "items": [
+    "Pigman Helmet",
+    "Pigman Battle Hammer"
+  ],
+  "bonuses": [
+    {},
+    {
+      "str": 20,
+      "eDamPct": 40
+    }
+  ]
+}

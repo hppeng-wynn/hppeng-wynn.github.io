@@ -1,0 +1,30 @@
+{
+  "items": [
+    "Fire Relic Helmet",
+    "Fire Relic Boots",
+    "Fire Relic Leggings",
+    "Fire Relic Chestplate"
+  ],
+  "bonuses": [
+    {},
+    {
+      "xpb": 5,
+      "lb": 10,
+      "hpBonus": 90,
+      "hprRaw": 12
+    },
+    {
+      "xpb": 10,
+      "lb": 25,
+      "hpBonus": 270,
+      "hprRaw": 40
+    },
+    {
+      "xpb": 25,
+      "lb": 50,
+      "def": 20,
+      "hpBonus": 570,
+      "hprRaw": 100
+    }
+  ]
+}

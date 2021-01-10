@@ -4,6 +4,7 @@ const DB_VERSION = 5;
 let db;
 let reload = false;
 let items;
+let sets;
 
 /*
  * Load item set from local DB. Calls init() on success.
@@ -43,6 +44,7 @@ async function load(init_func) {
     let url = "https://hppeng-wynn.github.io/compress.json";
     let result = await (await fetch(url)).json();
     items = result.items;
+    sets = result.sets;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/clear
     let clear_tx = db.transaction('item_db', 'readwrite');

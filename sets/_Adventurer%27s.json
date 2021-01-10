@@ -1,0 +1,39 @@
+{
+  "items": [
+    "Adventurer's Cap",
+    "Adventurer's Boots",
+    "Adventurer's Pants",
+    "Adventurer's Tunic"
+  ],
+  "bonuses": [
+    {},
+    {
+      "sdPct": 4,
+      "mdPct": 4,
+      "xpb": 10,
+      "lb": 5,
+      "spd": 2,
+      "hpBonus": 15,
+      "spRegen": 5
+    },
+    {
+      "sdPct": 12,
+      "mdPct": 12,
+      "xpb": 20,
+      "lb": 10,
+      "spd": 5,
+      "hpBonus": 40,
+      "spRegen": 15
+    },
+    {
+      "mr": 2,
+      "sdPct": 25,
+      "mdPct": 25,
+      "xpb": 50,
+      "lb": 30,
+      "spd": 15,
+      "hpBonus": 175,
+      "spRegen": 50
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "items": [
+    "Champion Helmet",
+    "Champion Boots",
+    "Champion Leggings",
+    "Champion Chestplate"
+  ],
+  "bonuses": [
+    {},
+    {},
+    {},
+    {
+      "mr": 5,
+      "sdPct": 75,
+      "mdPct": 75,
+      "ms": 5,
+      "ls": 400,
+      "hprRaw": 600
+    }
+  ]
+}
