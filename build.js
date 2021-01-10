@@ -133,6 +133,7 @@ class Build{
         this.base_skillpoints = result[1];
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
+        this.activeSetCounts = result[4];
 
         // For strength boosts like warscream, vanish, etc.
         this.damageMultiplier = 1.0;
@@ -219,6 +220,17 @@ class Build{
             }
             for (const staticID of staticIDs) {
                 if (item.get(staticID)) { statMap.set(staticID, statMap.get(staticID) + item.get(staticID)); }
+            }
+        }
+        for (const [setName, count] of this.activeSetCounts) {
+            const bonus = sets[setName].bonuses[count-1];
+            for (const id in bonus) {
+                if (skp_order.includes(id)) {
+                    // pass. Don't include skillpoints in ids
+                }
+                else {
+                    statMap.set(id,(statMap.get(id) || 0)+bonus[id]);
+                }
             }
         }
 

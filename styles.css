@@ -48,7 +48,7 @@ a.link{
     text-align: left;
 }
 
-.build, .spells {
+.build, .spells, .misc {
     padding: 2%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -58,7 +58,7 @@ a.link{
     background: #110110;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .spell-info {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .spell-info, .set-info {
     color: #aaa;
     background: #110110;
     border: 3px solid #BCBCBC;

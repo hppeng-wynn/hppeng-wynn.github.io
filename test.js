@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "3.2";
+const BUILD_VERSION = "4.0";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -96,6 +96,7 @@ for (const it of itemTypes) {
     itemLists.set(it, []);
 }
 let itemMap = new Map();
+/* Mapping from item names to set names. */
 let idMap = new Map();
 
 /*
@@ -423,6 +424,7 @@ function calculateBuildStats() {
     }
 
     displayBuildStats(player_build, "build-overall-stats");
+    displaySetBonuses(player_build, "set-info");
 
     let parent_elem = document.getElementById("build-melee-stats");
     let meleeStats = player_build.getMeleeStats();
