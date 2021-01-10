@@ -44,8 +44,6 @@ function calculate_skillpoints(equipment, weapon) {
         }
     }
 
-    // Figure out (naively) how many skillpoints need to be applied to get the current item to fit.
-    // Doesn't handle -skp.
     function apply_to_fit(skillpoints, item, skillpoint_filter, activeSetCounts) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
@@ -145,8 +143,6 @@ function calculate_skillpoints(equipment, weapon) {
             total_applied += total_diff;
 
             if (total_applied < best_total) {
-                console.log(pre);
-                console.log(skillpoints);
                 best = permutation;
                 final_skillpoints = skillpoints;
                 best_skillpoints = skillpoints_applied;
@@ -165,7 +161,7 @@ function calculate_skillpoints(equipment, weapon) {
             best_skillpoints[i] += needed_skillpoints[i];
             final_skillpoints[i] += needed_skillpoints[i];
         }
-        apply_skillpoints(final_skillpoints, weapon);
+        apply_skillpoints(final_skillpoints, weapon, best_activeSetCounts);
         best_total += total_diff;
     }
     let equip_order = fixed.concat(best);
