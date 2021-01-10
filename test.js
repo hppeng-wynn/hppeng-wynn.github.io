@@ -80,7 +80,7 @@ class Powder {
         this.defMinus = defMinus;
     }
 }
-function _p(a,b,c,d,e) { return new Powder(a,b,c,d,e); }
+function _p(a,b,c,d,e) { return new Powder(a,b,c,d,e); } //bruh moment
 
 let powderStats = [
     _p(3,6,17,2,1), _p(6,9,21,4,2), _p(8,14,25,8,3), _p(11,16,31,14,5), _p(15,18,38,22,9), _p(18,22,46,30,13),
