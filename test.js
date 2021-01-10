@@ -96,6 +96,8 @@ for (const it of itemTypes) {
     itemLists.set(it, []);
 }
 let itemMap = new Map();
+/* Mapping from item names to set names. */
+let setMap = new Map();
 let idMap = new Map();
 
 /*
@@ -158,6 +160,13 @@ function init() {
         itemLists.get(item.type).push(item.displayName);
         itemMap.set(item.displayName, item);
         idMap.set(item.id, item.displayName);
+    }
+
+    for (const setName in sets) {
+        const set = sets[setName];
+        for (const itemName of set.items) {
+            setMap.set(itemName, setName);
+        }
     }
     
     for (const armorType of armorTypes) {
