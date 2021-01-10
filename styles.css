@@ -8,6 +8,10 @@
     font-weight: 700;
 }
 
+th, td {
+    padding-right: 20px;
+}
+
 .equipment {
     padding: 4%;
     display: grid;
@@ -69,6 +73,10 @@ a.link{
     border: 3px solid #BCBCBC;
     border-radius: 3px;
     width: 96%;
+}
+
+.spell-info {
+    margin-bottom: 10px;
 }
 
 .itemcenter {
