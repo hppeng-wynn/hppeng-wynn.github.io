@@ -24,6 +24,7 @@ let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
 
 let skp_order = ["str","dex","int","def","agi"];
+let skp_elements = ["e","t","w","f","a"];
 let skpReqs = skp_order.map(x => x + "Req");
 
 let equipment_fields = [
@@ -54,7 +55,7 @@ let buildFields = equipment_fields.map(x => "build-"+x);
 let powderIDs = new Map();
 let powderNames = new Map();
 let _powderID = 0;
-for (const x of ['e', 't', 'w', 'f', 'a']) {
+for (const x of skp_elements) {
     for (let i = 1; i <= 6; ++i) {
         // Support both upper and lowercase, I guess.
         powderIDs.set(x.toUpperCase()+i, _powderID);
@@ -125,7 +126,7 @@ function init() {
         ["accessory", "ring", "No Ring 2"],
         ["accessory", "bracelet", "No Bracelet"],
         ["accessory", "necklace", "No Necklace"],
-        ["weapon", "wand", "No Weapon"],
+        ["weapon", "dagger", "No Weapon"],
     ];
     for (let i = 0; i < 9; i++) {
         let item = Object();
@@ -354,12 +355,9 @@ function calculateBuild(save_skp, skp){
     console.log(equipment);
     player_build = new Build(106, equipment, powderings);
     console.log(player_build.toString());
+    displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
-    let equip_order_text = "Equip order: <br>";
-    for (const item of player_build.equip_order) {
-        equip_order_text += item.get("displayName") + "<br>";
-    }
-    setHTML("build-order", equip_order_text);
+    
 
     const assigned = player_build.base_skillpoints;
     const skillpoints = player_build.total_skillpoints;
@@ -426,9 +424,11 @@ function calculateBuildStats() {
     displayBuildStats(player_build, "build-overall-stats");
     displaySetBonuses(player_build, "set-info");
 
-    let parent_elem = document.getElementById("build-melee-stats");
     let meleeStats = player_build.getMeleeStats();
-    displayMeleeDamage(parent_elem,meleeStats);
+    displayMeleeDamage(document.getElementById("build-melee-stats") ,meleeStats);
+
+    let defenseStats = player_build.getDefenseStats();
+    displayDefenseStats(document.getElementById("build-defense-stats"),defenseStats);
 
     
     //let defenseStats = "";
