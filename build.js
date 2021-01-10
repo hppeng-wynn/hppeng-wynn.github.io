@@ -201,6 +201,7 @@ class Build{
         let agi_pct = skillPointsToPercentage(this.total_skillpoints[4]);
         //total hp
         let totalHp = stats.get("hp") + stats.get("hpBonus");
+        if (totalHp < 5) totalHp = 5;
         defenseStats.push(totalHp);
         //EHP
         let ehp = totalHp;
