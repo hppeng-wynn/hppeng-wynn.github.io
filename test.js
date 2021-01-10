@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "3.2";
+const BUILD_VERSION = "4.6";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -24,6 +24,7 @@ let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
 
 let skp_order = ["str","dex","int","def","agi"];
+let skp_elements = ["e","t","w","f","a"];
 let skpReqs = skp_order.map(x => x + "Req");
 
 let equipment_fields = [
@@ -54,7 +55,7 @@ let buildFields = equipment_fields.map(x => "build-"+x);
 let powderIDs = new Map();
 let powderNames = new Map();
 let _powderID = 0;
-for (const x of ['e', 't', 'w', 'f', 'a']) {
+for (const x of skp_elements) {
     for (let i = 1; i <= 6; ++i) {
         // Support both upper and lowercase, I guess.
         powderIDs.set(x.toUpperCase()+i, _powderID);
@@ -80,7 +81,7 @@ class Powder {
         this.defMinus = defMinus;
     }
 }
-function _p(a,b,c,d,e) { return new Powder(a,b,c,d,e); }
+function _p(a,b,c,d,e) { return new Powder(a,b,c,d,e); } //bruh moment
 
 let powderStats = [
     _p(3,6,17,2,1), _p(6,9,21,4,2), _p(8,14,25,8,3), _p(11,16,31,14,5), _p(15,18,38,22,9), _p(18,22,46,30,13),
@@ -96,6 +97,7 @@ for (const it of itemTypes) {
     itemLists.set(it, []);
 }
 let itemMap = new Map();
+/* Mapping from item names to set names. */
 let idMap = new Map();
 
 /*
@@ -124,13 +126,11 @@ function init() {
         ["accessory", "ring", "No Ring 2"],
         ["accessory", "bracelet", "No Bracelet"],
         ["accessory", "necklace", "No Necklace"],
-        ["weapon", "wand", "No Weapon"],
+        ["weapon", "dagger", "No Weapon"],
     ];
     for (let i = 0; i < 9; i++) {
         let item = Object();
-        for (const field of item_fields) {
-            item[field] = 0;
-        }
+        item.slots = 0;
         item.category = noneItems[i][0];
         item.type = noneItems[i][1];
         item.name = noneItems[i][2];
@@ -353,12 +353,9 @@ function calculateBuild(save_skp, skp){
     console.log(equipment);
     player_build = new Build(106, equipment, powderings);
     console.log(player_build.toString());
+    displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
-    let equip_order_text = "Equip order: <br>";
-    for (const item of player_build.equip_order) {
-        equip_order_text += item.get("displayName") + "<br>";
-    }
-    setHTML("build-order", equip_order_text);
+    
 
     const assigned = player_build.base_skillpoints;
     const skillpoints = player_build.total_skillpoints;
@@ -423,10 +420,13 @@ function calculateBuildStats() {
     }
 
     displayBuildStats(player_build, "build-overall-stats");
+    displaySetBonuses(player_build, "set-info");
 
-    let parent_elem = document.getElementById("build-melee-stats");
     let meleeStats = player_build.getMeleeStats();
-    displayMeleeDamage(parent_elem,meleeStats);
+    displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
+
+    let defenseStats = player_build.getDefenseStats();
+    displayDefenseStats(document.getElementById("build-defense-stats"),defenseStats);
 
     
     //let defenseStats = "";
@@ -436,7 +436,8 @@ function calculateBuildStats() {
     let spells = spell_table[player_build.weapon.get("type")];
     for (let i = 0; i < 4; ++i) {
         let parent_elem = document.getElementById("spell"+i+"-info");
-        displaySpellDamage(parent_elem, player_build, spells[i], i+1);
+        let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
+        displaySpellDamage(parent_elem, overallparent_elem, player_build, spells[i], i+1);
     }
 
     location.hash = encodeBuild();

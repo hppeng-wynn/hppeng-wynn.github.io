@@ -1,3 +1,8 @@
+
+const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
+const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
+const classDefenseMultipliers = new Map([ ["relik",0.60], ["bow",0.60], ["wand", 0.80], ["assassin", 1.0], ["spear",1.20] ]);
+
 /*Turns the input amount of skill points into a float precision percentage.
 * @param skp - the integer skillpoint count to be converted
 */
@@ -38,10 +43,6 @@ function levelToHPBase(level){
         return 5*level + 5;
     }
 }
-
-
-const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
-const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
 
 /*Class that represents a wynn player's build.
 */
@@ -133,6 +134,7 @@ class Build{
         this.base_skillpoints = result[1];
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
+        this.activeSetCounts = result[4];
 
         // For strength boosts like warscream, vanish, etc.
         this.damageMultiplier = 1.0;
@@ -150,14 +152,6 @@ class Build{
 
     /*  Get total health for build.
     */
-    getHealth(){
-        let health = this.statMap.get("hp") + this.statMap.get("hpBonus");
-        if(health<5){
-            return 5;
-        }else{
-            return health;
-        }
-    }
 
     getSpellCost(spellIdx, cost) {
         cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
@@ -197,6 +191,43 @@ class Build{
         return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]);
     }
 
+    /*
+        Get all defensive stats for this build.
+    */
+    getDefenseStats(){
+        const stats = this.statMap;
+        let defenseStats = [];
+        let def_pct = skillPointsToPercentage(this.total_skillpoints[3]);
+        let agi_pct = skillPointsToPercentage(this.total_skillpoints[4]);
+        //total hp
+        let totalHp = stats.get("hp") + stats.get("hpBonus");
+        if (totalHp < 5) totalHp = 5;
+        defenseStats.push(totalHp);
+        //EHP
+        let ehp = totalHp;
+        let defMult = classDefenseMultipliers.get(this.weapon.get("type"));
+        ehp /= ((1-def_pct)*(1-agi_pct)*(2-defMult));         
+        defenseStats.push(ehp);
+        //HPR
+        let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
+        defenseStats.push(totalHpr);
+        //EHPR
+        let ehpr = totalHpr;
+        ehp /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
+        defenseStats.push(ehpr);
+        //skp stats
+        defenseStats.push([def_pct*100, agi_pct*100]);
+        //eledefs - TODO POWDERS
+        let eledefs = [0, 0, 0, 0, 0];
+        for(const i in skp_elements){ //kinda jank but ok
+            eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), stats.get(skp_elements[i] + "DefPct")/100.);
+        }
+        defenseStats.push(eledefs);
+        
+        //[total hp, ehp, total hpr, ehpr, [def%, agi%], [edef,tdef,wdef,fdef,adef]]
+        return defenseStats;
+    }
+
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The build itself should be valid. No checking of validity of pieces is done here.
     */
@@ -218,7 +249,20 @@ class Build{
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
             for (const staticID of staticIDs) {
-                if (item.get(staticID)) { statMap.set(staticID, statMap.get(staticID) + item.get(staticID)); }
+                if (item.get(staticID)) {
+                    statMap.set(staticID, statMap.get(staticID) + item.get(staticID));
+                }
+            }
+        }
+        for (const [setName, count] of this.activeSetCounts) {
+            const bonus = sets[setName].bonuses[count-1];
+            for (const id in bonus) {
+                if (skp_order.includes(id)) {
+                    // pass. Don't include skillpoints in ids
+                }
+                else {
+                    statMap.set(id,(statMap.get(id) || 0)+bonus[id]);
+                }
             }
         }
 

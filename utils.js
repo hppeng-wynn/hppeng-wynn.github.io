@@ -97,3 +97,18 @@ Base64 = (function () {
 
 // Base64.fromInt(-2147483648); // gives "200000"
 // Base64.toInt("200000"); // gives -2147483648
+
+/*
+    Turns a raw stat and a % stat into a final stat on the basis that - raw and >= 100% becomes 0 and + raw and <=-100% becomes 0.
+    Pct would be 0.80 for 80%, -1.20 for 120%, etc
+*/
+function rawToPct(raw, pct){
+    final = 0;
+    if (raw < 0){
+        final = (Math.min(0, raw - (raw * pct) ));
+    }else if(raw > 0){
+        final = (Math.max(0, raw + (raw * pct)));
+    }else{ //do nothing - final's already 0
+    }
+    return final;
+}

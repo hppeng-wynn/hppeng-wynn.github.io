@@ -1,6 +1,6 @@
 let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
-
+let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
 let reversedIDs = [ "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 function expandItem(item, powders){
@@ -10,24 +10,26 @@ function expandItem(item, powders){
     if(item.fixID){ //The item has fixed IDs.
         expandedItem.set("fixID",true);
         for (const id of rolledIDs){ //all rolled IDs are numerical
+            let val = (item[id] || 0);
             //if(item[id]) {
-                minRolls.set(id,item[id]);
-                maxRolls.set(id,item[id]);
+                minRolls.set(id,val);
+                maxRolls.set(id,val);
             //}
         }
     }else{ //The item does not have fixed IDs.
         for (const id of rolledIDs){
-            if(item[id] > 0){ // positive rolled IDs                   
-                minRolls.set(id,idRound(item[id]*0.3));
-                maxRolls.set(id,idRound(item[id]*1.3));
-            }else if(item[id] < 0){ //negative rolled IDs
+            let val = (item[id] || 0);
+            if(val > 0){ // positive rolled IDs                   
+                minRolls.set(id,idRound(val*0.3));
+                maxRolls.set(id,idRound(val*1.3));
+            }else if(val < 0){ //negative rolled IDs
                 if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(item[id]*1.3));
-                    minRolls.set(id,idRound(item[id]*0.7));
+                    maxRolls.set(id,idRound(val*1.3));
+                    minRolls.set(id,idRound(val*0.7));
                 }
                 else {
-                    minRolls.set(id,idRound(item[id]*1.3));
-                    maxRolls.set(id,idRound(item[id]*0.7));
+                    minRolls.set(id,idRound(val*1.3));
+                    maxRolls.set(id,idRound(val*0.7));
                 }
             }else{//Id = 0
                 minRolls.set(id,0);
@@ -76,6 +78,38 @@ function apply_elemental_format(p_elem, id, suffix) {
     p_elem.appendChild(i_elem2);
 }
 
+function displaySetBonuses(build, parent_id) {
+    setHTML(parent_id, "");
+    let parent_div = document.getElementById(parent_id);
+
+    let set_summary_elem = document.createElement('p');
+    set_summary_elem.classList.add('itemcenter');
+    set_summary_elem.textContent = "Set Bonuses:";
+    parent_div.append(set_summary_elem);
+
+    for (const [setName, count] of build.activeSetCounts) {
+        let set_elem = document.createElement('p');
+        set_elem.id = "set-"+setName;
+        set_summary_elem.append(set_elem);
+        
+        const bonus = sets[setName].bonuses[count-1];
+        let mock_item = new Map();
+        mock_item.set("fixID", true);
+        mock_item.set("displayName", setName+" Set: "+count+"/"+sets[setName].items.length);
+        let mock_minRolls = new Map();
+        mock_item.set("minRolls", mock_minRolls);
+        for (const id in bonus) {
+            if (rolledIDs.includes(id)) {
+                mock_minRolls.set(id, bonus[id]);
+            }
+            else {
+                mock_item.set(id, bonus[id]);
+            }
+        }
+        displayExpandedItem(mock_item, set_elem.id);
+    }
+}
+
 function displayBuildStats(build, parent_id){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
@@ -119,7 +153,21 @@ function displayBuildStats(build, parent_id){
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
 
+    let set_summary_elem = document.createElement('p');
+    set_summary_elem.classList.add('itemp');
+    set_summary_elem.classList.add('left');
+    set_summary_elem.textContent = "Set Summary:";
+    parent_div.append(set_summary_elem);
+    for (const [setName, count] of build.activeSetCounts) {
+        let set_elem = document.createElement('p');
+        set_elem.classList.add('itemp');
+        set_elem.classList.add('left');
+        set_elem.textContent = "    "+setName+" Set: "+count+"/"+sets[setName].items.length;
+        set_summary_elem.append(set_elem);
+    }
+
     let stats = build.statMap;
+    console.log(build.statMap);
     
     let active_elem;
     let elemental_format = false;
@@ -265,11 +313,18 @@ function displayExpandedItem(item, parent_id){
                 let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
                 if (id === "slots") {
                     // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
+                    //let powderMap = new Map([ ["e", "Earth"], ["t", "Thunder"], ["w", "Water"], ["f", "Fire"], ["a", "Air"]]);
                     p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
+                }else if(id === "displayName"){
+                    p_elem.classList.add("title");
+                    if(item.get("tier") !== " "){
+                        p_elem.classList.add(item.get("tier"));
+                    }
+                   
                 }
             }
-            else if(rolledIDs.includes(id)&& item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
+            else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
@@ -306,11 +361,14 @@ function displayExpandedItem(item, parent_id){
             }//Just don't do anything if else
         }
     }
-    let item_desc_elem = document.createElement('p');
-    item_desc_elem.classList.add('itemp');
-    item_desc_elem.classList.add('left');
-    item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
-    parent_div.append(item_desc_elem);
+    if (item.get("tier") & item.get("tier") !== " ") {
+        let item_desc_elem = document.createElement('p');
+        item_desc_elem.classList.add('itemp');
+        item_desc_elem.classList.add('left');
+        item_desc_elem.classList.add(item.get("tier"));
+        item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
+        parent_div.append(item_desc_elem);
+    }
 }
 
 function displayFixedID(active, id, value, elemental_format, style) {
@@ -351,10 +409,26 @@ function displayFixedID(active, id, value, elemental_format, style) {
         return p_elem;
     }
 }
-function displayMeleeDamage(parent_elem, meleeStats){
-    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
-    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
+function displayEquipOrder(parent_elem,buildOrder){
     parent_elem.textContent = "";
+    const order = buildOrder.slice();
+    let title_elem = document.createElement("p");
+    title_elem.textContent = "Equip order ";
+    title_elem.classList.add("title");
+    parent_elem.append(title_elem);
+    for (const item of order) {
+        let p_elem = document.createElement("p");
+        p_elem.classList.add("itemp");
+        p_elem.classList.add("left");
+        p_elem.textContent = item.get("displayName");
+        parent_elem.append(p_elem);
+    }
+}
+function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
+    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
+    //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
+    parent_elem.textContent = "";
+    overallparent_elem.textContent = "";
     const stats = meleeStats.slice();
     
     for (let i = 0; i < 6; ++i) {
@@ -373,44 +447,73 @@ function displayMeleeDamage(parent_elem, meleeStats){
     
     //title
     let title_elem = document.createElement("p");
-    title_elem.classList.add("center");
+    title_elem.classList.add("title");
     title_elem.textContent = "Melee Stats";
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
-    
+
+    //overall title
+    let title_elemavg = document.createElement("p");
+    title_elemavg.classList.add("title");
+    title_elemavg.textContent = "Melee Stats";
+    overallparent_elem.append(title_elemavg);
+
     //average DPS
     let averageDamage = document.createElement("p");
+
     averageDamage.classList.add("center");
+    averageDamage.classList.add("itemp");
     averageDamage.textContent = "Average DPS: " + stats[10];
     parent_elem.append(averageDamage);
+
+    //overall average DPS
+    let overallaverageDamage = document.createElement("p");
+    overallaverageDamage.classList.add("itemp");
+    overallaverageDamage.textContent = "Average DPS: " + stats[10];
+    overallparent_elem.append(overallaverageDamage);
+    overallparent_elem.append(document.createElement("br"));
 
     //attack speed
     let atkSpd = document.createElement("p");
     atkSpd.classList.add("center");
+    atkSpd.classList.add("itemp");
     atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
     parent_elem.append(atkSpd);
     parent_elem.append(document.createElement("br"));
 
+    //overall attack speed
+    let overallatkSpd = document.createElement("p");
+    overallatkSpd.classList.add("center");
+    overallatkSpd.classList.add("itemp");
+    overallatkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
+    overallparent_elem.append(overallatkSpd);
+    overallparent_elem.append(document.createElement("br"));
+
     //Non-Crit: n->elem, total dmg, DPS
     let nonCritStats = document.createElement("p");
     nonCritStats.classList.add("center");
+    nonCritStats.classList.add("itemp");
     nonCritStats.textContent = "Non-Crit Stats: ";
     nonCritStats.append(document.createElement("br"));
-    let dmg = document.createElement("p");
     for (let i = 0; i < 6; i++){
         if(stats[i][0] > 0){
-            dmg.textContent = damagePrefixes[i] + stats[i][0] + " - " + stats[i][1];
+            let dmg = document.createElement("p");
+            dmg.textContent = stats[i][0] + "-" + stats[i][1];
+            dmg.classList.add(damageClasses[i]);
+            dmg.classList.add("itemp");
             nonCritStats.append(dmg);
         }
     }
     let normalDamage = document.createElement("p");
-    normalDamage.textContent = "Total Damage: " + stats[6][0] + " - " + stats[6][1];
+    normalDamage.textContent = "Total: " + stats[6][0] + "-" + stats[6][1];
+    normalDamage.classList.add("itemp");
     nonCritStats.append(normalDamage);
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
     normalDPS.append(document.createElement("br"));
     normalDPS.append(document.createElement("br"));
+    normalDPS.classList.add("itemp");
     nonCritStats.append(normalDPS);
 
     parent_elem.append(nonCritStats);
@@ -419,45 +522,128 @@ function displayMeleeDamage(parent_elem, meleeStats){
     //Crit: n->elem, total dmg, DPS
     let critStats = document.createElement("p");
     critStats.classList.add("center");
+    critStats.classList.add("itemp");
     critStats.textContent = "Crit Stats: ";
     critStats.append(document.createElement("br"));
-    dmg = document.createElement("p");
     for (let i = 0; i < 6; i++){
         if(stats[i][2] > 0){
-            dmg.textContent = damagePrefixes[i] + stats[i][2] + " - " + stats[i][3];
+            dmg = document.createElement("p");
+            dmg.textContent = stats[i][2] + "-" + stats[i][3];
+            dmg.classList.add(damageClasses[i]);
+            dmg.classList.add("itemp");
             critStats.append(dmg);
         }
     }
-    normalDamage = document.createElement("p");
-    normalDamage.textContent = "Total Damage: " + stats[7][0] + " - " + stats[7][1];
-    critStats.append(normalDamage);
+    let critDamage = document.createElement("p");
+    critDamage.textContent = "Total: " + stats[7][0] + "-" + stats[7][1];
+    critDamage.classList.add("itemp");
+    critStats.append(critDamage);
 
-    normalDPS = document.createElement("p");
-    normalDPS.textContent = "Crit DPS: " + stats[9];
-    normalDPS.append(document.createElement("br"));
-    normalDPS.append(document.createElement("br"));
-    critStats.append(normalDPS);
+    let critDPS = document.createElement("p");
+    critDPS.textContent = "Crit DPS: " + stats[9];
+    critDPS.classList.add("itemp");
+    critDPS.append(document.createElement("br"));
+    critDPS.append(document.createElement("br"));
+    critStats.append(critDPS);
 
     parent_elem.append(critStats);
+}
+function displayDefenseStats(parent_elem,defenseStats){
+    parent_elem.textContent = "";
+    const stats = defenseStats.slice();    
+    let title_elem = document.createElement("p");
+    title_elem.textContent = "Defense Stats";
+    title_elem.classList.add("title");
+    parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
-    
+
+    //[total hp, ehp, total hpr, ehpr, [def%, agi%], [edef,tdef,wdef,fdef,adef]]
+    for(const i in stats){
+        if(typeof stats[i] === "number"){
+            stats[i] = stats[i].toFixed(2);
+        }else{
+            for(const j in stats[i]){
+                stats[i][j] = stats[i][j].toFixed(2);
+            }
+        }
+    }
+    //total HP
+    let hpElem = document.createElement("p");
+    hpElem.textContent = "HP: " + stats[0];
+    hpElem.classList.add("left");
+    hpElem.classList.add("Health");
+    parent_elem.append(hpElem);
+    //EHP
+    let ehpElem = document.createElement("p");
+    ehpElem.textContent = "Effective HP: " + stats[1];
+    ehpElem.classList.add("left");
+    parent_elem.append(ehpElem);
+    //total HPR
+    let hprElem = document.createElement("p");
+    hprElem.textContent = "HP Regen: " + stats[2];
+    hprElem.classList.add("left");
+    hprElem.classList.add("Health");
+    parent_elem.append(hprElem);
+    //EHPR
+    let ehprElem = document.createElement("p");
+    ehprElem.textContent = "Effective HP Regen: " + stats[3];
+    ehprElem.classList.add("left");
+    parent_elem.append(ehprElem);
+    //eledefs
+    let eledefs = stats[5];
+    for (let i = 0; i < eledefs.length; i++){
+        /* TODO: make this comment work
+        let eledefElem = document.createElement("p");
+        let ele = document.createElement("b");
+        ele.classList.add(damageClasses[i+1]);
+        ele.textContent = damageClasses[i+1];
+        eledefElem.textContent = " Defense: " + eledefs[i];
+        //eledefElem.classList.add(damageClasses[i+1]);
+        eledefElem.classList.add("left");
+        parent_elem.append(ele);
+        parent_elem.append(eledefElem);
+        */
+        let eledefElem = document.createElement("p");
+        eledefElem.textContent =  damageClasses[i+1] + " Defense: " + eledefs[i];
+        eledefElem.classList.add(damageClasses[i+1]);
+        eledefElem.classList.add("left");
+        parent_elem.append(eledefElem);
+    }
+    //skp
+    let defElem = document.createElement("p");
+    defElem.textContent = "Damage Absorbed %: " + stats[4][0] + "%";
+    defElem.classList.add("left");
+    parent_elem.append(defElem);
+    let agiElem = document.createElement("p");
+    agiElem.textContent = "Dodge Chance %: " + stats[4][1] + "%";
+    agiElem.classList.add("left");
+    parent_elem.append(agiElem);
 
     
 }
-function displaySpellDamage(parent_elem, build, spell, spellIdx) {
+
+function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
     const stats = build.statMap;
     let title_elem = document.createElement("p");
-    title_elem.classList.add('center');
+    title_elem.classList.add('title');
+
+    overallparent_elem.textContent = "";
+    let title_elemavg = document.createElement("p");
+    title_elemavg.classList.add('title');
     if (spellIdx != 0) {
         title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
+        title_elemavg.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
     }
     else {
         title_elem.textContent = spell.title;
+        title_elemavg.textContent = spell.title;
     }
 
     parent_elem.append(title_elem);
+    overallparent_elem.append(title_elemavg);
+
     let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
 
     let save_damages = [];
@@ -467,13 +653,21 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
+        let part_divavg = document.createElement("p");
+        overallparent_elem.append(part_divavg);
+
         let subtitle_elem = document.createElement("p");
         subtitle_elem.textContent = part.subtitle;
         part_div.append(subtitle_elem);
+
+        let subtitle_elemavg = document.createElement("p");
+        subtitle_elemavg.textContent = part.subtitle;
+        part_divavg.append(subtitle_elemavg);
+
         if (part.type === "damage") {
 
             let _results = calculateSpellDamage(stats, part.conversion,
-                                    stats.get("sdRaw"), stats.get("sdPct"), 
+                                    stats.get("sdRaw"), stats.get("sdPct"),
                                     part.multiplier / 100, build.weapon, build.total_skillpoints);
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
@@ -492,12 +686,17 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
 
+            let overallaverageLabel = document.createElement("p");
+            overallaverageLabel.textContent = "Average: "+averageDamage.toFixed(2);
+            overallaverageLabel.classList.add("damageSubtitle");
+            part_divavg.append(overallaverageLabel);
+
             let nonCritLabel = document.createElement("p");
             nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
             nonCritLabel.classList.add("damageSubtitle");
             part_div.append(nonCritLabel);
 
-            let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
+
             for (let i = 0; i < 6; i++){
                 if (results[i][1] > 0){
                     let p = document.createElement("p");
@@ -525,11 +724,17 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             save_damages.push(averageDamage);
         }
         else if (part.type == "heal") {
-            let heal_amount = part.strength * build.getHealth() * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")));
+            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
             part_div.append(healLabel);
+
+
+            let overallhealLabel = document.createElement("p");
+            overallhealLabel.textContent = heal_amount;
+            overallhealLabel.classList.add("damagep")
+            part_divavg.append(overallhealLabel);
         }
         else if (part.type === "total") {
             let total_damage = 0;
@@ -540,6 +745,12 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             averageLabel.textContent = "Average: "+total_damage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
+
+
+            let overallaverageLabel = document.createElement("p");
+            overallaverageLabel.textContent = "Average: "+total_damage.toFixed(2);
+            overallaverageLabel.classList.add("damageSubtitle");
+            part_divavg.append(averageLabel);
         }
     }
 }

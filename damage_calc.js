@@ -99,7 +99,7 @@ const spell_table = {
             ] },
         { title: "Meteor", cost: 8, parts: [
                 { subtitle: "Blast Damage", type: "damage", multiplier: 500, conversion: [40, 30, 0, 0, 30, 0] },
-                { subtitle: "Burn Damage", type: "damage", multiplier: 125, conversion: [40, 30, 0, 0, 30, 0] },
+                { subtitle: "Burn Damage", type: "damage", multiplier: 125, conversion: [100, 0, 0, 0, 0, 0] },
             ] },
         { title: "Ice Snake", cost: 4, parts: [
                 { subtitle: "", type: "damage", multiplier: 70, conversion: [50, 0, 0, 50, 0, 0] },
