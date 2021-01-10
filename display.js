@@ -157,6 +157,7 @@ function displayBuildStats(build, parent_id){
     title.classList.add("itemcenter");
     title.classList.add("itemp");
     title.classList.add("title");
+    title.classList.add("Normal");
     title.textContent = "Overall Build Stats";
     parent_div.append(title);
     parent_div.append(document.createElement("br"));
@@ -392,12 +393,17 @@ function displayExpandedItem(item, parent_id){
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
                 }
+                //let flipPosNeg = ["spRaw1","spRaw2","spRaw3","spRaw4","spPct1","spPct2","spPct3","spPct4"];
+                if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+                    style === "positive" ? style = "negative" : style = "positive"; 
+                }
                 if (fix_id) {
                     displayFixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
                 }
                 else {
                     let row = document.createElement('tr');
                     let min_elem = document.createElement('td');
+                    
                     min_elem.classList.add('left');
                     min_elem.classList.add(style);
                     min_elem.textContent = item.get("minRolls").get(id) + idSuffixes[id];
@@ -436,6 +442,9 @@ function displayExpandedItem(item, parent_id){
 
 function displayFixedID(active, id, value, elemental_format, style) {
     if (style) {
+        if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+            style === "positive" ? style = "negative" : style = "positive"; 
+        }
         let row = document.createElement('tr');
         let desc_elem = document.createElement('td');
         desc_elem.classList.add('left');
@@ -478,6 +487,7 @@ function displayEquipOrder(parent_elem,buildOrder){
     let title_elem = document.createElement("p");
     title_elem.textContent = "Equip order ";
     title_elem.classList.add("title");
+    title_elem.classList.add("Normal");
     title_elem.classList.add("itemp");
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
@@ -512,6 +522,7 @@ function displayMeleeDamage(parent_elem, meleeStats){
     //title
     let title_elem = document.createElement("p");
     title_elem.classList.add("title");
+    title_elem.classList.add("Normal");
     title_elem.classList.add("itemp");
     title_elem.textContent = "Melee Stats";
     parent_elem.append(title_elem);
@@ -597,6 +608,7 @@ function displayDefenseStats(parent_elem,defenseStats){
     let title_elem = document.createElement("p");
     title_elem.textContent = "Defense Stats";
     title_elem.classList.add("title");
+    title_elem.classList.add("Normal");
     title_elem.classList.add("itemp");
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
@@ -725,7 +737,8 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
 
     const stats = build.statMap;
     let title_elem = document.createElement("p");
-    title_elem.classList.add('title');
+    title_elem.classList.add("title");
+    title_elem.classList.add("Normal");
     if (spellIdx != 0) {
         title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
     }
