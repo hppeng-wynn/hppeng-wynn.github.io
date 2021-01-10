@@ -3,3 +3,5 @@ Damage calculator checking: https://its0x7.cf/build/
 Theme and overall inspiration: Wynndata (Dukio)
     - https://wynndata.tk
 
+Additional Contributors:
+ - QuantumNep (Layout code/layout ideas)
