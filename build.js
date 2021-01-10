@@ -249,7 +249,9 @@ class Build{
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
             for (const staticID of staticIDs) {
-                if (item.get(staticID)) { statMap.set(staticID, statMap.get(staticID) + item.get(staticID)); }
+                if (item.get(staticID)) {
+                    statMap.set(staticID, statMap.get(staticID) + item.get(staticID));
+                }
             }
         }
         for (const [setName, count] of this.activeSetCounts) {

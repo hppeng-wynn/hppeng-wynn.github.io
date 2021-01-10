@@ -10,24 +10,26 @@ function expandItem(item, powders){
     if(item.fixID){ //The item has fixed IDs.
         expandedItem.set("fixID",true);
         for (const id of rolledIDs){ //all rolled IDs are numerical
+            let val = (item[id] || 0);
             //if(item[id]) {
-                minRolls.set(id,item[id]);
-                maxRolls.set(id,item[id]);
+                minRolls.set(id,val);
+                maxRolls.set(id,val);
             //}
         }
     }else{ //The item does not have fixed IDs.
         for (const id of rolledIDs){
-            if(item[id] > 0){ // positive rolled IDs                   
-                minRolls.set(id,idRound(item[id]*0.3));
-                maxRolls.set(id,idRound(item[id]*1.3));
-            }else if(item[id] < 0){ //negative rolled IDs
+            let val = (item[id] || 0);
+            if(val > 0){ // positive rolled IDs                   
+                minRolls.set(id,idRound(val*0.3));
+                maxRolls.set(id,idRound(val*1.3));
+            }else if(val < 0){ //negative rolled IDs
                 if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(item[id]*1.3));
-                    minRolls.set(id,idRound(item[id]*0.7));
+                    maxRolls.set(id,idRound(val*1.3));
+                    minRolls.set(id,idRound(val*0.7));
                 }
                 else {
-                    minRolls.set(id,idRound(item[id]*1.3));
-                    maxRolls.set(id,idRound(item[id]*0.7));
+                    minRolls.set(id,idRound(val*1.3));
+                    maxRolls.set(id,idRound(val*0.7));
                 }
             }else{//Id = 0
                 minRolls.set(id,0);
@@ -165,6 +167,7 @@ function displayBuildStats(build, parent_id){
     }
 
     let stats = build.statMap;
+    console.log(build.statMap);
     
     let active_elem;
     let elemental_format = false;
