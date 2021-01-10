@@ -76,6 +76,38 @@ function apply_elemental_format(p_elem, id, suffix) {
     p_elem.appendChild(i_elem2);
 }
 
+function displaySetBonuses(build, parent_id) {
+    setHTML(parent_id, "");
+    let parent_div = document.getElementById(parent_id);
+
+    let set_summary_elem = document.createElement('p');
+    set_summary_elem.classList.add('itemcenter');
+    set_summary_elem.textContent = "Set Bonuses:";
+    parent_div.append(set_summary_elem);
+
+    for (const [setName, count] of build.activeSetCounts) {
+        let set_elem = document.createElement('p');
+        set_elem.id = "set-"+setName;
+        set_summary_elem.append(set_elem);
+        
+        const bonus = sets[setName].bonuses[count-1];
+        let mock_item = new Map();
+        mock_item.set("fixID", true);
+        mock_item.set("displayName", setName+" Set: "+count+"/"+sets[setName].items.length);
+        let mock_minRolls = new Map();
+        mock_item.set("minRolls", mock_minRolls);
+        for (const id in bonus) {
+            if (rolledIDs.includes(id)) {
+                mock_minRolls.set(id, bonus[id]);
+            }
+            else {
+                mock_item.set(id, bonus[id]);
+            }
+        }
+        displayExpandedItem(mock_item, set_elem.id);
+    }
+}
+
 function displayBuildStats(build, parent_id){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
@@ -282,7 +314,7 @@ function displayExpandedItem(item, parent_id){
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
                 }
             }
-            else if(rolledIDs.includes(id)&& item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
+            else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
@@ -319,11 +351,13 @@ function displayExpandedItem(item, parent_id){
             }//Just don't do anything if else
         }
     }
-    let item_desc_elem = document.createElement('p');
-    item_desc_elem.classList.add('itemp');
-    item_desc_elem.classList.add('left');
-    item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
-    parent_div.append(item_desc_elem);
+    if (item.get("tier")) {
+        let item_desc_elem = document.createElement('p');
+        item_desc_elem.classList.add('itemp');
+        item_desc_elem.classList.add('left');
+        item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
+        parent_div.append(item_desc_elem);
+    }
 }
 
 function displayFixedID(active, id, value, elemental_format, style) {
@@ -538,7 +572,7 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             save_damages.push(averageDamage);
         }
         else if (part.type == "heal") {
-            let heal_amount = part.strength * build.getHealth() * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")));
+            let heal_amount = (part.strength * build.getHealth() * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");

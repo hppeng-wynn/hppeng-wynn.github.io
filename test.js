@@ -424,6 +424,7 @@ function calculateBuildStats() {
     }
 
     displayBuildStats(player_build, "build-overall-stats");
+    displaySetBonuses(player_build, "set-info");
 
     let parent_elem = document.getElementById("build-melee-stats");
     let meleeStats = player_build.getMeleeStats();
