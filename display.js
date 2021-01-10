@@ -3,6 +3,7 @@ let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref
 let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
 let reversedIDs = [ "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
+
 function expandItem(item, powders){
     let minRolls = new Map();
     let maxRolls = new Map();
@@ -152,6 +153,13 @@ function displayBuildStats(build, parent_id){
     // Clear the parent div.
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
+    let title = document.createElement("p");
+    title.classList.add("itemcenter");
+    title.classList.add("itemp");
+    title.classList.add("title");
+    title.textContent = "Overall Build Stats";
+    parent_div.append(title);
+    parent_div.append(document.createElement("br"));
 
     let set_summary_elem = document.createElement('p');
     set_summary_elem.classList.add('itemp');
@@ -273,7 +281,9 @@ function displayExpandedItem(item, parent_id){
         "eSteal",
         "gXp", "gSpd",
         "#ldiv",
+        "!elemental",
         "slots",
+        "!elemental",
         "set",
         "quest",
         "restrict"];
@@ -312,16 +322,69 @@ function displayExpandedItem(item, parent_id){
             if(nonRolledIDs.includes(id) && item.get(id)){//nonRolledID & non-0/non-null/non-und ID
                 let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
                 if (id === "slots") {
-                    // HACK TO MAKE POWDERS DISPLAY NICE!! TODO
-                    //let powderMap = new Map([ ["e", "Earth"], ["t", "Thunder"], ["w", "Water"], ["f", "Fire"], ["a", "Air"]]);
-                    p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
-                    " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
+                    // PROPER POWDER DISPLAYING EZ CLAP 
+                    p_elem.textContent = "";
+                    let powderMap = new Map([ ["e", "Earth"], ["t", "Thunder"], ["w", "Water"], ["f", "Fire"], ["a", "Air"]]);
+                    let numerals = new Map([["1", "I"], ["2", "II"], ["3", "III"], ["4", "IV"], ["5", "V"], ["6", "VI"]]);
+                    /*p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
+                    " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
+                    let wrapper = document.createElement("p");
+                    p_elem.classList.add("itemtable");
+                    let row = document.createElement("tr");
+
+                    let powderPrefix = document.createElement("td");
+                    powderPrefix.classList.add("itemp");
+                    powderPrefix.classList.add("left");
+                    powderPrefix.textContent = "Powders: " + " [";
+                    row.appendChild(powderPrefix);
+                    
+                    let spaceElem = document.createElement("td");
+                    //spaceElem.textContent = " ";
+                    spaceElem.classList.add("itemp");
+                    spaceElem.classList.add("left");
+
+                    let powderList = item.get("powders").map(x => powderNames.get(x))
+                    for(let i = 0; i < powderList.length; i++){
+                        let powder = document.createElement("td");
+                        let powderStr = powderList[i];
+                        console.log(powderStr);
+                        powder.textContent = numerals.get(powderStr.charAt(1), 10);
+                        powder.classList.add(powderMap.get(powderStr.charAt(0)));
+                        row.appendChild(powder);
+                    }
+
+                    let powderSuffix = document.createElement("td");
+                    powderSuffix.classList.add("itemp");
+                    powderSuffix.classList.add("left"); 
+                    powderSuffix.textContent = " ]";
+                    row.appendChild(powderSuffix);
+
+                    wrapper.appendChild(row);
+                    p_elem.appendChild(wrapper);
                 }else if(id === "displayName"){
                     p_elem.classList.add("title");
                     if(item.get("tier") !== " "){
                         p_elem.classList.add(item.get("tier"));
                     }
-                   
+                }else if(skp_order.includes(id)){ //id = str, dex, int, def, or agi
+                    p_elem.textContent = "";
+                    p_elem.classList.add("itemtable");
+                    let row = document.createElement("tr");
+                    let title = document.createElement("td");
+                    title.textContent = idPrefixes[id] + " ";
+                    let boost = document.createElement("td");
+                    if(item.get(id) < 0){
+                        boost.classList.add("negative");
+                    }else{ //boost = 0 SHOULD not come up
+                        boost.classList.add("positive");
+                    }
+                    boost.classList.add("spaceLeft");
+                    boost.textContent = item.get(id);
+                    row.appendChild(title);
+                    row.appendChild(boost);
+                    p_elem.appendChild(row);
+                }else if(id === "restrict"){
+                    p_elem.classList.add("restrict");
                 }
             }
             else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
@@ -415,7 +478,9 @@ function displayEquipOrder(parent_elem,buildOrder){
     let title_elem = document.createElement("p");
     title_elem.textContent = "Equip order ";
     title_elem.classList.add("title");
+    title_elem.classList.add("itemp");
     parent_elem.append(title_elem);
+    parent_elem.append(document.createElement("br"));
     for (const item of order) {
         let p_elem = document.createElement("p");
         p_elem.classList.add("itemp");
@@ -447,20 +512,21 @@ function displayMeleeDamage(parent_elem, meleeStats){
     //title
     let title_elem = document.createElement("p");
     title_elem.classList.add("title");
+    title_elem.classList.add("itemp");
     title_elem.textContent = "Melee Stats";
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
     
     //average DPS
     let averageDamage = document.createElement("p");
-    averageDamage.classList.add("center");
+    averageDamage.classList.add("left");
     averageDamage.classList.add("itemp");
     averageDamage.textContent = "Average DPS: " + stats[10];
     parent_elem.append(averageDamage);
 
     //attack speed
     let atkSpd = document.createElement("p");
-    atkSpd.classList.add("center");
+    atkSpd.classList.add("left");
     atkSpd.classList.add("itemp");
     atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
     parent_elem.append(atkSpd);
@@ -468,7 +534,7 @@ function displayMeleeDamage(parent_elem, meleeStats){
 
     //Non-Crit: n->elem, total dmg, DPS
     let nonCritStats = document.createElement("p");
-    nonCritStats.classList.add("center");
+    nonCritStats.classList.add("left");
     nonCritStats.classList.add("itemp");
     nonCritStats.textContent = "Non-Crit Stats: ";
     nonCritStats.append(document.createElement("br"));
@@ -498,7 +564,7 @@ function displayMeleeDamage(parent_elem, meleeStats){
 
     //Crit: n->elem, total dmg, DPS
     let critStats = document.createElement("p");
-    critStats.classList.add("center");
+    critStats.classList.add("left");
     critStats.classList.add("itemp");
     critStats.textContent = "Crit Stats: ";
     critStats.append(document.createElement("br"));
@@ -531,8 +597,11 @@ function displayDefenseStats(parent_elem,defenseStats){
     let title_elem = document.createElement("p");
     title_elem.textContent = "Defense Stats";
     title_elem.classList.add("title");
+    title_elem.classList.add("itemp");
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
+    let statsTable = document.createElement("table");
+    statsTable.classList.add("itemtable");
 
     //[total hp, ehp, total hpr, ehpr, [def%, agi%], [edef,tdef,wdef,fdef,adef]]
     for(const i in stats){
@@ -545,58 +614,111 @@ function displayDefenseStats(parent_elem,defenseStats){
         }
     }
     //total HP
-    let hpElem = document.createElement("p");
-    hpElem.textContent = "HP: " + stats[0];
-    hpElem.classList.add("left");
-    hpElem.classList.add("Health");
-    parent_elem.append(hpElem);
+    let hpRow = document.createElement("tr");
+    let hp = document.createElement("td");
+    hp.classList.add("Health");
+    hp.classList.add("left");
+    hp.textContent = "HP:";  
+    let boost = document.createElement("td");
+    boost.textContent = stats[0];
+    boost.classList.add("right");
+    
+    hpRow.appendChild(hp);
+    hpRow.append(boost);
+    statsTable.appendChild(hpRow);
     //EHP
-    let ehpElem = document.createElement("p");
-    ehpElem.textContent = "Effective HP: " + stats[1];
-    ehpElem.classList.add("left");
-    parent_elem.append(ehpElem);
+    let ehpRow = document.createElement("tr");
+    let ehp = document.createElement("td");
+    ehp.classList.add("left");
+    ehp.textContent = "Effective HP:";
+
+    boost = document.createElement("td");
+    boost.textContent = stats[1];
+    boost.classList.add("right");
+
+    ehpRow.appendChild(ehp);
+    ehpRow.append(boost);
+    statsTable.append(ehpRow);
     //total HPR
-    let hprElem = document.createElement("p");
-    hprElem.textContent = "HP Regen: " + stats[2];
-    hprElem.classList.add("left");
-    hprElem.classList.add("Health");
-    parent_elem.append(hprElem);
+    let hprRow = document.createElement("tr");
+    let hpr = document.createElement("td");
+    hpr.classList.add("Health");
+    hpr.classList.add("left");
+    hpr.textContent = "HP Regen:";  
+    boost = document.createElement("td");
+    boost.textContent =stats[2];
+    boost.classList.add("right");
+    
+    hprRow.appendChild(hpr);
+    hprRow.appendChild(boost);
+    statsTable.appendChild(hprRow);
     //EHPR
-    let ehprElem = document.createElement("p");
-    ehprElem.textContent = "Effective HP Regen: " + stats[3];
-    ehprElem.classList.add("left");
-    parent_elem.append(ehprElem);
+    let ehprRow = document.createElement("tr");
+    let ehpr = document.createElement("td");
+    ehpr.classList.add("left");
+    ehpr.textContent = "Effective HP Regen:";
+
+    boost = document.createElement("td");
+    boost.textContent = stats[3];
+    boost.classList.add("right");
+
+    ehprRow.appendChild(ehpr);
+    ehprRow.append(boost);
+    statsTable.append(ehprRow);
     //eledefs
     let eledefs = stats[5];
     for (let i = 0; i < eledefs.length; i++){
-        /* TODO: make this comment work
+        let row = document.createElement("tr");
         let eledefElem = document.createElement("p");
-        let ele = document.createElement("b");
-        ele.classList.add(damageClasses[i+1]);
-        ele.textContent = damageClasses[i+1];
-        eledefElem.textContent = " Defense: " + eledefs[i];
-        //eledefElem.classList.add(damageClasses[i+1]);
-        eledefElem.classList.add("left");
-        parent_elem.append(ele);
-        parent_elem.append(eledefElem);
-        */
-        let eledefElem = document.createElement("p");
-        eledefElem.textContent =  damageClasses[i+1] + " Defense: " + eledefs[i];
-        eledefElem.classList.add(damageClasses[i+1]);
-        eledefElem.classList.add("left");
-        parent_elem.append(eledefElem);
-    }
-    //skp
-    let defElem = document.createElement("p");
-    defElem.textContent = "Damage Absorbed %: " + stats[4][0] + "%";
-    defElem.classList.add("left");
-    parent_elem.append(defElem);
-    let agiElem = document.createElement("p");
-    agiElem.textContent = "Dodge Chance %: " + stats[4][1] + "%";
-    agiElem.classList.add("left");
-    parent_elem.append(agiElem);
+        eledefElem.classList.add("itemtable");
+        eledefElem.classList.add("itemp");
+        let eledefElemRow = document.createElement("tr");
 
+        let eledefTitle = document.createElement("td");
+        eledefTitle.textContent = damageClasses[i+1];
+        eledefTitle.classList.add(damageClasses[i+1]);
+
+        let defense = document.createElement("td");
+        defense.textContent = "Defense: ";
+        defense.classList.add("spaceLeft");
+
+        eledefElemRow.appendChild(eledefTitle);
+        eledefElemRow.appendChild(defense);
+        eledefElem.appendChild(eledefElemRow);
+        //"Defense: ";
+        let boost = document.createElement("td");
+        boost.textContent = eledefs[i];
+        boost.classList.add("right");
+
+        row.appendChild(eledefElem);
+        row.appendChild(boost);
+        statsTable.appendChild(row);
+    }
     
+    //skp
+    let defRow = document.createElement("tr");
+    let defElem = document.createElement("td");
+    defElem.classList.add("left");
+    defElem.textContent = "Damage Absorbed %:";
+    boost = document.createElement("td");
+    boost.classList.add("right");
+    boost.textContent = stats[4][0] + "%";
+    defRow.appendChild(defElem);
+    defRow.appendChild(boost);
+    statsTable.append(defRow);
+
+    let agiRow = document.createElement("tr");
+    let agiElem = document.createElement("td");
+    agiElem.classList.add("left");
+    agiElem.textContent = "Dodge Chance %:";
+    boost = document.createElement("td");
+    boost.classList.add("right");
+    boost.textContent = stats[4][1] + "%";
+    agiRow.appendChild(agiElem);
+    agiRow.appendChild(boost);
+    statsTable.append(agiRow);
+
+    parent_elem.append(statsTable);
 }
 function displaySpellDamage(parent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";

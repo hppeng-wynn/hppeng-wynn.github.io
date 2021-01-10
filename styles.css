@@ -86,6 +86,10 @@ a.link{
     width: 94%;
     margin-bottom: 16px;
 }
+/* VERY BAD. NEED FIX. */
+.spaceLeft {
+    padding-left: 5px;
+}
 
 .itemp, .damagep {
     margin: 2px 2%;
@@ -240,5 +244,8 @@ input {
     color:#a0a;
 }
 .Set{
-    color:#5f5
+    color:#5f5;
+}
+.restrict{
+    color: #ff006a;
 }
