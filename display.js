@@ -1,6 +1,6 @@
 let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
-
+let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
 let reversedIDs = [ "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 function expandItem(item, powders){
@@ -400,7 +400,7 @@ function displayFixedID(active, id, value, elemental_format, style) {
 }
 function displayMeleeDamage(parent_elem, meleeStats){
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
-    let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
+    //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
     parent_elem.textContent = "";
     const stats = meleeStats.slice();
     
@@ -443,10 +443,11 @@ function displayMeleeDamage(parent_elem, meleeStats){
     nonCritStats.classList.add("center");
     nonCritStats.textContent = "Non-Crit Stats: ";
     nonCritStats.append(document.createElement("br"));
-    let dmg = document.createElement("p");
     for (let i = 0; i < 6; i++){
         if(stats[i][0] > 0){
-            dmg.textContent = damagePrefixes[i] + stats[i][0] + " - " + stats[i][1];
+            let dmg = document.createElement("p");
+            dmg.textContent = stats[i][0] + " - " + stats[i][1];
+            dmg.classList.add(damageClasses[i]);
             nonCritStats.append(dmg);
         }
     }
@@ -468,10 +469,11 @@ function displayMeleeDamage(parent_elem, meleeStats){
     critStats.classList.add("center");
     critStats.textContent = "Crit Stats: ";
     critStats.append(document.createElement("br"));
-    dmg = document.createElement("p");
     for (let i = 0; i < 6; i++){
         if(stats[i][2] > 0){
-            dmg.textContent = damagePrefixes[i] + stats[i][2] + " - " + stats[i][3];
+            dmg = document.createElement("p");
+            dmg.textContent = stats[i][2] + " - " + stats[i][3];
+            dmg.classList.add(damageClasses[i]);
             critStats.append(dmg);
         }
     }
@@ -544,7 +546,7 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             nonCritLabel.classList.add("damageSubtitle");
             part_div.append(nonCritLabel);
 
-            let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
+            
             for (let i = 0; i < 6; i++){
                 if (results[i][1] > 0){
                     let p = document.createElement("p");
