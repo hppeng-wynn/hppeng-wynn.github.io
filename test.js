@@ -130,9 +130,7 @@ function init() {
     ];
     for (let i = 0; i < 9; i++) {
         let item = Object();
-        for (const field of item_fields) {
-            item[field] = 0;
-        }
+        item.slots = 0;
         item.category = noneItems[i][0];
         item.type = noneItems[i][1];
         item.name = noneItems[i][2];

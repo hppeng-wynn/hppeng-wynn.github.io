@@ -149,6 +149,10 @@ for item in items:
     if item["name"] in item_set_map:
         item["set"] = item_set_map[item["name"]]
 
+with open("1_20_ci.json", "r") as ci_file:
+    ci_items = json.load(ci_file)
+    items.extend(ci_items)
+
 with open("id_map.json","w") as id_mapfile:
     json.dump(id_map, id_mapfile, indent=2)
 with open("clean.json", "w") as outfile:
