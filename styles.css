@@ -73,6 +73,9 @@ a.link{
     border: 3px solid #BCBCBC;
     border-radius: 3px;
     width: 96%;
+}
+
+.spell-info {
     margin-bottom: 10px;
 }
 
@@ -90,6 +93,10 @@ a.link{
     margin: 2px 2%;
     width: 94%;
     margin-bottom: 16px;
+}
+/* VERY BAD. NEED FIX. */
+.spaceLeft {
+    padding-left: 5px;
 }
 
 .itemp, .damagep {
@@ -245,5 +252,8 @@ input {
     color:#a0a;
 }
 .Set{
-    color:#5f5
+    color:#5f5;
+}
+.restrict{
+    color: #ff006a;
 }
