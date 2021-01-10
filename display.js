@@ -314,8 +314,11 @@ function displayExpandedItem(item, parent_id){
                     p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";
                 }else if(id === "displayName"){
-                   p_elem.classList.add("title");
-                   p_elem.classList.add(item.get("tier"));
+                    p_elem.classList.add("title");
+                    if(item.get("tier") !== " "){
+                        p_elem.classList.add(item.get("tier"));
+                    }
+                   
                 }
             }
             else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
@@ -355,7 +358,7 @@ function displayExpandedItem(item, parent_id){
             }//Just don't do anything if else
         }
     }
-    if (item.get("tier")) {
+    if (item.get("tier") & item.get("tier") !== " ") {
         let item_desc_elem = document.createElement('p');
         item_desc_elem.classList.add('itemp');
         item_desc_elem.classList.add('left');
@@ -469,14 +472,14 @@ function displayMeleeDamage(parent_elem, meleeStats){
     for (let i = 0; i < 6; i++){
         if(stats[i][0] > 0){
             let dmg = document.createElement("p");
-            dmg.textContent = stats[i][0] + " - " + stats[i][1];
+            dmg.textContent = stats[i][0] + "-" + stats[i][1];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
             nonCritStats.append(dmg);
         }
     }
     let normalDamage = document.createElement("p");
-    normalDamage.textContent = "Total: " + stats[6][0] + " - " + stats[6][1];
+    normalDamage.textContent = "Total: " + stats[6][0] + "-" + stats[6][1];
     normalDamage.classList.add("itemp");
     nonCritStats.append(normalDamage);
 
@@ -499,14 +502,14 @@ function displayMeleeDamage(parent_elem, meleeStats){
     for (let i = 0; i < 6; i++){
         if(stats[i][2] > 0){
             dmg = document.createElement("p");
-            dmg.textContent = stats[i][2] + " - " + stats[i][3];
+            dmg.textContent = stats[i][2] + "-" + stats[i][3];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
             critStats.append(dmg);
         }
     }
     let critDamage = document.createElement("p");
-    critDamage.textContent = "Total: " + stats[7][0] + " - " + stats[7][1];
+    critDamage.textContent = "Total: " + stats[7][0] + "-" + stats[7][1];
     critDamage.classList.add("itemp");
     critStats.append(critDamage);
 

@@ -217,6 +217,9 @@ input {
     font-weight: 700;
     display: inline-block;
 }
+::placeholder{
+    color: #ddd;
+}
 /* Tier colors tier colors */
 .Normal{
     color: #fff;
