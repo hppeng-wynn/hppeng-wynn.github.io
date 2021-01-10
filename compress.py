@@ -12,7 +12,7 @@ item_set_map = dict()
 for filename in os.listdir('sets'):
     if "json" not in filename:
         continue
-    set_name = filename[1:].split(".")[0]
+    set_name = filename[1:].split(".")[0].replace("+", " ").replace("%27", "'")
     with open("sets/"+filename) as set_info:
         set_obj = json.load(set_info)
         for item in set_obj["items"]:
