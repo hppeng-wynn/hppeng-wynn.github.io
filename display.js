@@ -44,6 +44,17 @@ function expandItem(item, powders){
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
     expandedItem.set("powders", powders);
+    
+    if(expandedItem.has("eDef")){ //item is armor
+        for(const id of powders){
+            //console.log(powderStats[id]);
+            let powder = powderStats[id];
+            let name = powderNames.get(id);
+            expandedItem.set(name.charAt(0) + "Def", expandedItem.get(name.charAt(0)+"Def") + powder["defPlus"]);
+            expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 6 )% 5] + "Def", expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 6 )% 5]+"Def") - powder["defMinus"]);
+        }
+    }
+    
     return expandedItem;
 }
 
@@ -348,7 +359,6 @@ function displayExpandedItem(item, parent_id){
                     for(let i = 0; i < powderList.length; i++){
                         let powder = document.createElement("td");
                         let powderStr = powderList[i];
-                        console.log(powderStr);
                         powder.textContent = numerals.get(powderStr.charAt(1), 10);
                         powder.classList.add(powderMap.get(powderStr.charAt(0)));
                         powder.classList.add("nopadding");
@@ -432,6 +442,39 @@ function displayExpandedItem(item, parent_id){
             }//Just don't do anything if else
         }
     }
+    //Show powder specials ;-;
+    let powder_special = document.createElement("p");
+    powder_special.classList.add("left");
+    powder_special.classList.add("itemp");
+    let powders = item.get("powders");
+    let element = "";
+    let power = 0;
+    for (let i = 0; i < powders.length; i++) {
+        let firstPowderType = skp_elements[Math.floor(powders[i]/6)];
+        if (element !== "") break;
+        else if (powders[i]%6 > 2) { //t4+
+            for (let j = i+1; j < powders.length; j++) {
+                let currentPowderType = skp_elements[Math.floor(powders[j]/6)]
+                if (powders[j] % 6 > 2 && firstPowderType === currentPowderType) {
+                    element = currentPowderType;
+                    power = Math.round(((powders[i] % 6 + powders[j] % 6 + 2) / 2 - 4) * 2);
+                    break;
+                }
+            }
+        }
+    }
+    if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
+        console.log(skp_elements.indexOf(element));
+        let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
+        let attackSpecialTitle = document.createElement("p");
+        attackSpecialTitle.classList.add("left");
+        attackSpecialTitle.textContent = powderSpecial["weaponSpecialName"];
+        powder_special.appendChild(attackSpecialTitle);
+
+        parent_div.append(powder_special);
+    }
+
+    //Show item tier
     if (item.get("tier") & item.get("tier") !== " ") {
         let item_desc_elem = document.createElement('p');
         item_desc_elem.classList.add('itemp');
