@@ -1,0 +1,32 @@
+.build-overall-container {
+    grid-column:3;
+}
+.spell-info-container {
+    grid-column:4;
+}
+.summary {
+    padding: 2% 4% 4%;
+    display: grid;
+    grid-template-columns: 1.25fr 1.25fr 1fr 1fr;
+    grid-auto-columns: minmax(200px, auto);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.build, .spells, .misc {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    grid-auto-rows: minmax(60px, auto);
+    width: 94%;
+    background: #121516;
+}
+
+.iteminput {
+
+}
+
+.skp-input {
+
+}
