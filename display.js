@@ -130,18 +130,16 @@ function displayBuildStats(build, parent_id){
     // normals just display a thing.
 
     let display_commands = [
-        "#ldiv",
-        "!elemental",
-        "hp",
-        "fDef", "wDef", "aDef", "tDef", "eDef",
-        "!elemental",
+//        "#ldiv",
+//        "!elemental",
+//        "hp",
+//        "fDef", "wDef", "aDef", "tDef", "eDef",
+//        "!elemental",
         "#table",
-        "str", "dex", "int", "def", "agi",
-        "hpBonus",
-        "hprRaw", "hprPct",
+        "mr", "ms",
+//        "hprRaw", "hprPct",
         "sdRaw", "sdPct",
         "mdRaw", "mdPct",
-        "mr", "ms",
         "ref", "thorns",
         "ls",
         "poison",
@@ -150,7 +148,7 @@ function displayBuildStats(build, parent_id){
         "atkTier",
         "!elemental",
         "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
-        "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
+//        "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
         "!elemental",
         "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
         "rainbowRaw",
@@ -189,8 +187,10 @@ function displayBuildStats(build, parent_id){
         }
     }
 
+    displayDefenseStats(parent_div, build, true);
+
     let stats = build.statMap;
-    console.log(build.statMap);
+    //console.log(build.statMap);
     
     let active_elem;
     let elemental_format = false;
@@ -231,7 +231,7 @@ function displayBuildStats(build, parent_id){
                     }
                 }
                 let id_val = stats.get(id);
-                if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+                if (reversedIDs.filter(e => e !== "atkTier").includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 displayFixedID(active_elem, id, id_val, elemental_format, style);
@@ -744,15 +744,45 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     parent_elem.append(critStats);
 }
-function displayDefenseStats(parent_elem,defenseStats){
-    parent_elem.textContent = "";
+function displayDefenseStats(parent_elem, build, insertSummary){
+    let defenseStats = build.getDefenseStats();
+    insertSummary = (typeof insertSummary !== 'undefined') ? insertSummary : false;
+    if (!insertSummary) {
+        parent_elem.textContent = "";
+    }
     const stats = defenseStats.slice();    
-    let title_elem = document.createElement("p");
-    title_elem.textContent = "Defense Stats";
-    title_elem.classList.add("title");
-    title_elem.classList.add("Normal");
-    title_elem.classList.add("itemp");
-    parent_elem.append(title_elem);
+
+    if (!insertSummary) {
+        let title_elem = document.createElement("p");
+        title_elem.textContent = "Defense Stats";
+        title_elem.classList.add("title");
+        title_elem.classList.add("Normal");
+        title_elem.classList.add("itemp");
+        parent_elem.append(title_elem);
+
+        let base_stat_elem = document.createElement("p");
+        base_stat_elem.id = "base-stat";
+        parent_elem.append(base_stat_elem);
+
+        let mock_item = new Map();
+
+        mock_item.set("fixID", true);
+        let mock_minRolls = new Map();
+        mock_item.set("minRolls", mock_minRolls);
+        const stats = ["hp", "hpBonus", "fDef", "wDef", "aDef", "tDef", "eDef",
+                        "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct"];
+        for (const stat of stats) {
+            if (rolledIDs.includes(stat)) {
+                mock_minRolls.set(stat, build.statMap.get(stat));
+            }
+            else {
+                mock_item.set(stat, build.statMap.get(stat));
+            }
+        }
+        mock_item.set("powders", []);
+        displayExpandedItem(mock_item, base_stat_elem.id);
+    }
+
     parent_elem.append(document.createElement("br"));
     let statsTable = document.createElement("table");
     statsTable.classList.add("itemtable");
@@ -767,12 +797,13 @@ function displayDefenseStats(parent_elem,defenseStats){
             }
         }
     }
+    
     //total HP
     let hpRow = document.createElement("tr");
     let hp = document.createElement("td");
     hp.classList.add("Health");
     hp.classList.add("left");
-    hp.textContent = "HP:";  
+    hp.textContent = "Total HP:";  
     let boost = document.createElement("td");
     boost.textContent = stats[0];
     boost.classList.add("right");
@@ -780,6 +811,7 @@ function displayDefenseStats(parent_elem,defenseStats){
     hpRow.appendChild(hp);
     hpRow.append(boost);
     statsTable.appendChild(hpRow);
+
     //EHP
     let ehpRow = document.createElement("tr");
     let ehp = document.createElement("td");
@@ -812,7 +844,7 @@ function displayDefenseStats(parent_elem,defenseStats){
     let hpr = document.createElement("td");
     hpr.classList.add("Health");
     hpr.classList.add("left");
-    hpr.textContent = "HP Regen:";  
+    hpr.textContent = "HP Regen (Total):";
     boost = document.createElement("td");
     boost.textContent = stats[2];
     boost.classList.add("right");
@@ -820,7 +852,7 @@ function displayDefenseStats(parent_elem,defenseStats){
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
     statsTable.appendChild(hprRow);
-    //EHPR
+    /*//EHPR
     let ehprRow = document.createElement("tr");
     let ehpr = document.createElement("td");
     ehpr.classList.add("left");
@@ -845,7 +877,8 @@ function displayDefenseStats(parent_elem,defenseStats){
 
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
-    statsTable.append(ehprRow);
+    statsTable.append(ehprRow);*/
+
     //eledefs
     let eledefs = stats[5];
     for (let i = 0; i < eledefs.length; i++){
@@ -858,7 +891,7 @@ function displayDefenseStats(parent_elem,defenseStats){
         eledefTitle.classList.add(damageClasses[i+1]);
 
         let defense = document.createElement("b");
-        defense.textContent = " Def: ";
+        defense.textContent = " Def (Total): ";
 
         eledef.appendChild(eledefTitle);
         eledef.appendChild(defense);
@@ -871,28 +904,31 @@ function displayDefenseStats(parent_elem,defenseStats){
 
         statsTable.appendChild(eledefElemRow);
     }
-    //skp
-    let defRow = document.createElement("tr");
-    let defElem = document.createElement("td");
-    defElem.classList.add("left");
-    defElem.textContent = "Damage Absorbed %:";
-    boost = document.createElement("td");
-    boost.classList.add("right");
-    boost.textContent = stats[4][0] + "%";
-    defRow.appendChild(defElem);
-    defRow.appendChild(boost);
-    statsTable.append(defRow);
 
-    let agiRow = document.createElement("tr");
-    let agiElem = document.createElement("td");
-    agiElem.classList.add("left");
-    agiElem.textContent = "Dodge Chance %:";
-    boost = document.createElement("td");
-    boost.classList.add("right");
-    boost.textContent = stats[4][1] + "%";
-    agiRow.appendChild(agiElem);
-    agiRow.appendChild(boost);
-    statsTable.append(agiRow);
+    if (!insertSummary) {
+        //skp
+        let defRow = document.createElement("tr");
+        let defElem = document.createElement("td");
+        defElem.classList.add("left");
+        defElem.textContent = "Damage Absorbed %:";
+        boost = document.createElement("td");
+        boost.classList.add("right");
+        boost.textContent = stats[4][0] + "%";
+        defRow.appendChild(defElem);
+        defRow.appendChild(boost);
+        statsTable.append(defRow);
+
+        let agiRow = document.createElement("tr");
+        let agiElem = document.createElement("td");
+        agiElem.classList.add("left");
+        agiElem.textContent = "Dodge Chance %:";
+        boost = document.createElement("td");
+        boost.classList.add("right");
+        boost.textContent = stats[4][1] + "%";
+        agiRow.appendChild(agiElem);
+        agiRow.appendChild(boost);
+        statsTable.append(agiRow);
+    }
 
     parent_elem.append(statsTable);
 }
@@ -1003,7 +1039,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             save_damages.push(averageDamage);
         }
         else if (part.type === "heal") {
-            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)).toFixed(2));
+            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");

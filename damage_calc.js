@@ -27,7 +27,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         // Bitwise to force conversion to integer (integer division).
         const element = (powderID/6) | 0;
         let conversionRatio = powder.convert/100;
-        if (neutralRemainingRaw[0] > 0) {
+        if (neutralRemainingRaw[1] > 0) {
             let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
             let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
             damages[element+1][0] = Math.floor(damages[element+1][0] + min_diff);

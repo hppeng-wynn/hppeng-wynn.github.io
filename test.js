@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.3";
+const BUILD_VERSION = "6.5";
 
 document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -566,8 +566,7 @@ function calculateBuildStats() {
     let meleeStats = player_build.getMeleeStats();
     displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
-    let defenseStats = player_build.getDefenseStats();
-    displayDefenseStats(document.getElementById("build-defense-stats"),defenseStats);
+    displayDefenseStats(document.getElementById("build-defense-stats"),player_build);
 
     displayPoisonDamage(document.getElementById("build-poison-stats"),player_build);
 
