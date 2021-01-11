@@ -102,9 +102,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
 const spell_table = {
     "wand": [
         { title: "Heal", cost: 6, parts: [
-                { subtitle: "First Pulse", type: "heal", strength: 0.2 },
-                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.05 },
-                { subtitle: "Total Heal", type: "heal", strength: 0.3, summary: true }
+                { subtitle: "First Pulse", type: "heal", strength: 0.12 },
+                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.06 },
+                { subtitle: "Total Heal", type: "heal", strength: 0.24, summary: true }
             ] },
         { title: "Teleport", cost: 4, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [60, 0, 40, 0, 0, 0], summary: true },
