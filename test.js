@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.7";
+const BUILD_VERSION = "6.8";
 
 document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -423,6 +423,9 @@ function calculateBuild(save_skp, skp){
 
     const assigned = player_build.base_skillpoints;
     const skillpoints = player_build.total_skillpoints;
+    for (let i in skp_order){ //big bren
+        setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+    }
     
     if (save_skp) {
         // TODO: reduce duplicated code, @updateStats
@@ -467,7 +470,7 @@ function calculateBuildStats() {
         setValue(skp_order[i] + "-skp", skillpoints[i]);
         let linebreak = document.createElement("br");
         linebreak.classList.add("itemp");
-        document.getElementById(skp_order[i] + "-skp-label").append(document.createElement("br"));
+        document.getElementById(skp_order[i] + "-skp-label");
         setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
         if (assigned[i] > 100) {
             let skp_warning = document.createElement("p");

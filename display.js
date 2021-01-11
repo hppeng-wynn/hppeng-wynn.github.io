@@ -775,7 +775,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         mock_item.set("fixID", true);
         let mock_minRolls = new Map();
         mock_item.set("minRolls", mock_minRolls);
-        const stats = ["hp", "hpBonus", "fDef", "wDef", "aDef", "tDef", "eDef",
+        const stats = ["hp", "hpBonus", "hprRaw", "hprPct", "fDef", "wDef", "aDef", "tDef", "eDef",
                         "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct"];
         for (const stat of stats) {
             if (rolledIDs.includes(stat)) {
