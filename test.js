@@ -592,15 +592,15 @@ function shareBuild() {
     if (player_build) {
         let text = url_base+location.hash+"\n"+
             "WynnBuilder build:\n"+
-            player_build.helmet.get("displayName")+"\n"+
-            player_build.chestplate.get("displayName")+"\n"+
-            player_build.leggings.get("displayName")+"\n"+
-            player_build.boots.get("displayName")+"\n"+
-            player_build.ring1.get("displayName")+"\n"+
-            player_build.ring2.get("displayName")+"\n"+
-            player_build.bracelet.get("displayName")+"\n"+
-            player_build.necklace.get("displayName")+"\n"+
-            player_build.weapon.get("displayName");
+            "> "+player_build.helmet.get("displayName")+"\n"+
+            "> "+player_build.chestplate.get("displayName")+"\n"+
+            "> "+player_build.leggings.get("displayName")+"\n"+
+            "> "+player_build.boots.get("displayName")+"\n"+
+            "> "+player_build.ring1.get("displayName")+"\n"+
+            "> "+player_build.ring2.get("displayName")+"\n"+
+            "> "+player_build.bracelet.get("displayName")+"\n"+
+            "> "+player_build.necklace.get("displayName")+"\n"+
+            "> "+player_build.weapon.get("displayName")+" ["+player_build.weapon.get("powders").map(x => powderNames.get(x)).join("")+"]";
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }

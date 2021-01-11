@@ -1002,8 +1002,8 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             }
             save_damages.push(averageDamage);
         }
-        else if (part.type == "heal") {
-            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0, Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
+        else if (part.type === "heal") {
+            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)).toFixed(2));
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
