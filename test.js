@@ -11,9 +11,9 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "5.5";
+const BUILD_VERSION = "5.6";
 
-document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
 let player_build;
 // Set up item lists for quick access later.
@@ -554,6 +554,10 @@ function calculateBuildStats() {
     }
 
     location.hash = encodeBuild();
+}
+
+function copyBuild() {
+    
 }
 
 function resetFields(){
