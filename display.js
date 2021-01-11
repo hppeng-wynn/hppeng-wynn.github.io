@@ -466,10 +466,45 @@ function displayExpandedItem(item, parent_id){
     if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
         console.log(skp_elements.indexOf(element));
         let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
-        let attackSpecialTitle = document.createElement("p");
-        attackSpecialTitle.classList.add("left");
-        attackSpecialTitle.textContent = powderSpecial["weaponSpecialName"];
-        powder_special.appendChild(attackSpecialTitle);
+        let specialSuffixes = new Map([ ["Duration", " seconds"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
+        let specialTitle = document.createElement("p");
+        let specialEffects = document.createElement("p");
+        specialTitle.classList.add("left");
+        specialTitle.classList.add("itemp");
+        specialTitle.classList.add(damageClasses[skp_elements.indexOf(element) + 1]);
+        specialEffects.classList.add("left");
+        specialEffects.classList.add("itemp");
+        specialEffects.classList.add("nocolor");
+
+        if (item.get("category") === "weapon") {//weapon
+            specialTitle.textContent = powderSpecial["weaponSpecialName"];
+            let effects = powderSpecial["weaponSpecialEffects"];
+            for (const [key,value] of effects) {
+                let effect = document.createElement("p");
+                effect.classList.add("itemp");
+                effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
+                specialEffects.appendChild(effect);
+            }
+            specialTitle.append(specialEffects); 
+            powder_special.appendChild(specialTitle);
+        }else if (item.get("category") === "armor") {//armor
+            let effects = powderSpecial["armorSpecialEffects"];
+            specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
+            
+            for (const [key,value] of effects) {
+                if (key !== "Description") {
+                    let effect = document.createElement("p");
+                    effect.classList.add("itemp");
+                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
+                    specialEffects.appendChild(effect);
+                }else{
+                    specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
+                }
+            }
+            specialTitle.append(specialEffects); 
+            powder_special.appendChild(specialTitle);
+        }
+        
 
         parent_div.append(powder_special);
     }

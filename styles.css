@@ -43,7 +43,7 @@ div {
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
-.equipment, .skillpoints, .center, .header, .all{
+.equipment, .skillpoints, .center, .header, .all, .nocolor{
     background: #121516;
     color: #aaa;
 }
