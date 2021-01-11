@@ -26,6 +26,8 @@
 
 .iteminput {
     width: 25vw;
+    height: 10vw;
+    max-height: 50px;
 }
 
 .skp-input {
