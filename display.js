@@ -358,7 +358,8 @@ function displayExpandedItem(item, parent_id){
                     let powderSuffix = document.createElement("td");
                     powderSuffix.classList.add("itemp");
                     powderSuffix.classList.add("left"); 
-                    powderSuffix.textContent = " ]";
+                    powderSuffix.classList.add("nopadding");
+                    powderSuffix.textContent = "]";
                     row.appendChild(powderSuffix);
 
                     wrapper.appendChild(row);
@@ -514,7 +515,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
         }
     }
     for (let i = 6; i < 8; ++i) {
-        for (let j in stats[i]) {
+        for (let j = 0; j < 2; j++) {
             stats[i][j] = stats[i][j].toFixed(2);
         }
     }
@@ -590,10 +591,15 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
-    normalDPS.append(document.createElement("br"));
-    normalDPS.append(document.createElement("br"));
     normalDPS.classList.add("itemp");
     nonCritStats.append(normalDPS);
+    
+    let normalChance = document.createElement("p");
+    normalChance.textContent = "Non-Crit Chance: " + (stats[6][2]*100).toFixed(2) + "%"; 
+    normalChance.classList.add("itemp");
+    normalChance.append(document.createElement("br"));
+    normalChance.append(document.createElement("br"));
+    nonCritStats.append(normalChance);
 
     parent_elem.append(nonCritStats);
     parent_elem.append(document.createElement("br"));
@@ -621,9 +627,14 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let critDPS = document.createElement("p");
     critDPS.textContent = "Crit DPS: " + stats[9];
     critDPS.classList.add("itemp");
-    critDPS.append(document.createElement("br"));
-    critDPS.append(document.createElement("br"));
     critStats.append(critDPS);
+
+    let critChance = document.createElement("p");
+    critChance.textContent = "Crit Chance: " + (stats[7][2]*100).toFixed(2) + "%";
+    critChance.classList.add("itemp");
+    critChance.append(document.createElement("br"));
+    critChance.append(document.createElement("br"));
+    critStats.append(critChance);
 
     parent_elem.append(critStats);
 }

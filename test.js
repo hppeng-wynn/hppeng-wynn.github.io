@@ -454,10 +454,38 @@ function calculateBuildStats() {
 
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
-    let skpSummary = document.createElement("p");
-    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: ( " + player_build.total_skillpoints.join(" | ") + " )";
+    let skpRow = document.createElement("tr");
+    //let skpSummary = document.createElement("p");
+    //skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: ( " + player_build.total_skillpoints.join(" | ") + " )";
+    let skpSummary = document.createElement("td");
+    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: (";
     skpSummary.classList.add("itemp");
-    summarybox.append(skpSummary);
+    skpRow.appendChild(skpSummary);
+    for (let i = 0; i < skp_order.length; i++){
+        let skp = document.createElement("td");
+        let boost = document.createElement("td");
+        let separator = document.createElement("td");
+        skp.classList.add("itemp");
+        skp.classList.add("nopadding");
+        skp.classList.add(damageClasses[i+1]);
+        boost.classList.add("itemp");
+        boost.classList.add("nopadding");
+        boost.textContent = player_build.total_skillpoints[i];
+        skpRow.appendChild(skp);
+        skpRow.appendChild(document.createElement("br"));
+        skpRow.appendChild(boost);
+        if(i < 4){
+            skpRow.appendChild(separator);
+        }
+    }
+    //summarybox.append(skpSummary);
+
+    let skpEnd = document.createElement("td");
+    skpEnd.textContent = ")";
+    skpEnd.classList.add("itemp");
+    skpRow.append(skpEnd);
+
+    summarybox.append(skpRow);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
         let skpWarning = document.createElement("p");
         skpWarning.classList.add("itemp");
