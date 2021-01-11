@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "5.2";
+const BUILD_VERSION = "5.3";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -543,6 +543,8 @@ function calculateBuildStats() {
 
     //setHTML("build-defense-stats", "".concat(defenseStats));
 
+    displayPoisonDamage(document.getElementById("build-poison-stats"),player_build);
+
     let spells = spell_table[player_build.weapon.get("type")];
     for (let i = 0; i < 4; ++i) {
         let parent_elem = document.getElementById("spell"+i+"-info");
@@ -565,6 +567,7 @@ function resetFields(){
     setValue("int-skp", "0");
     setValue("def-skp", "0");
     setValue("agi-skp", "0");
+    setValue("level-choice", "");
     location.hash = "";
 }
 
