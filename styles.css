@@ -11,7 +11,12 @@
 th, td {
     padding-right: 10px;
 }
-
+.nomargin{
+    margin: 0;
+}
+.nopadding{
+    padding: 0;
+}
 .equipment {
     padding: 4%;
     display: grid;

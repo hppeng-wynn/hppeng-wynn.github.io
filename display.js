@@ -336,13 +336,13 @@ function displayExpandedItem(item, parent_id){
                     let powderPrefix = document.createElement("td");
                     powderPrefix.classList.add("itemp");
                     powderPrefix.classList.add("left");
-                    powderPrefix.textContent = "Powders: " + " [";
+                    powderPrefix.textContent = "Powders: [";
                     row.appendChild(powderPrefix);
                     
                     let spaceElem = document.createElement("td");
                     //spaceElem.textContent = " ";
                     spaceElem.classList.add("itemp");
-                    spaceElem.classList.add("left");
+                    
 
                     let powderList = item.get("powders").map(x => powderNames.get(x))
                     for(let i = 0; i < powderList.length; i++){
@@ -351,6 +351,7 @@ function displayExpandedItem(item, parent_id){
                         console.log(powderStr);
                         powder.textContent = numerals.get(powderStr.charAt(1), 10);
                         powder.classList.add(powderMap.get(powderStr.charAt(0)));
+                        powder.classList.add("nopadding");
                         row.appendChild(powder);
                     }
 
