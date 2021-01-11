@@ -229,8 +229,11 @@ function displayBuildStats(build, parent_id){
                     }
                 }
                 let id_val = stats.get(id);
-                if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+                if (reversedIDs.filter(e => e !== "atkTier").includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
+                }
+                if (id === "hp" && stats.has("hpBonus") && stats.get("hpBonus") > 0) {
+                    id_val = (stats.get("hp")+stats.get("hpBonus"));
                 }
                 displayFixedID(active_elem, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
@@ -818,7 +821,7 @@ function displayDefenseStats(parent_elem,defenseStats){
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
     statsTable.appendChild(hprRow);
-    //EHPR
+    /*//EHPR
     let ehprRow = document.createElement("tr");
     let ehpr = document.createElement("td");
     ehpr.classList.add("left");
@@ -843,7 +846,7 @@ function displayDefenseStats(parent_elem,defenseStats){
 
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
-    statsTable.append(ehprRow);
+    statsTable.append(ehprRow);*/
     //eledefs
     let eledefs = stats[5];
     for (let i = 0; i < eledefs.length; i++){
@@ -1001,7 +1004,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             save_damages.push(averageDamage);
         }
         else if (part.type === "heal") {
-            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0,  Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2));
+            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0,  Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
