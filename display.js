@@ -174,17 +174,19 @@ function displayBuildStats(build, parent_id){
     parent_div.append(title);
     parent_div.append(document.createElement("br"));
 
-    let set_summary_elem = document.createElement('p');
-    set_summary_elem.classList.add('itemp');
-    set_summary_elem.classList.add('left');
-    set_summary_elem.textContent = "Set Summary:";
-    parent_div.append(set_summary_elem);
-    for (const [setName, count] of build.activeSetCounts) {
-        let set_elem = document.createElement('p');
-        set_elem.classList.add('itemp');
-        set_elem.classList.add('left');
-        set_elem.textContent = "    "+setName+" Set: "+count+"/"+sets[setName].items.length;
-        set_summary_elem.append(set_elem);
+    if (build.activeSetCounts.size > 0) {
+        let set_summary_elem = document.createElement('p');
+        set_summary_elem.classList.add('itemp');
+        set_summary_elem.classList.add('left');
+        set_summary_elem.textContent = "Set Summary:";
+        parent_div.append(set_summary_elem);
+        for (const [setName, count] of build.activeSetCounts) {
+            let set_elem = document.createElement('p');
+            set_elem.classList.add('itemp');
+            set_elem.classList.add('left');
+            set_elem.textContent = "    "+setName+" Set: "+count+"/"+sets[setName].items.length;
+            set_summary_elem.append(set_elem);
+        }
     }
 
     let stats = build.statMap;
@@ -1001,7 +1003,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             save_damages.push(averageDamage);
         }
         else if (part.type == "heal") {
-            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")/100))).toFixed(2);
+            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0, Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
