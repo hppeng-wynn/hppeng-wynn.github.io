@@ -118,6 +118,7 @@ function displaySetBonuses(build, parent_id) {
                 mock_item.set(id, bonus[id]);
             }
         }
+        mock_item.set("powders", []);
         displayExpandedItem(mock_item, set_elem.id);
     }
 }
