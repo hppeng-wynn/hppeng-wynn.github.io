@@ -669,12 +669,26 @@ function displayDefenseStats(parent_elem,defenseStats){
     ehp.textContent = "Effective HP:";
 
     boost = document.createElement("td");
-    boost.textContent = stats[1];
+    boost.textContent = stats[1][0];
     boost.classList.add("right");
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
     statsTable.append(ehpRow);
+
+    ehpRow = document.createElement("tr");
+    ehp = document.createElement("td");
+    ehp.classList.add("left");
+    ehp.textContent = "Effective HP (no agi):";
+
+    boost = document.createElement("td");
+    boost.textContent = stats[1][1];
+    boost.classList.add("right");
+
+    ehpRow.appendChild(ehp);
+    ehpRow.append(boost);
+    statsTable.append(ehpRow);
+
     //total HPR
     let hprRow = document.createElement("tr");
     let hpr = document.createElement("td");
@@ -695,7 +709,20 @@ function displayDefenseStats(parent_elem,defenseStats){
     ehpr.textContent = "Effective HP Regen:";
 
     boost = document.createElement("td");
-    boost.textContent = stats[3];
+    boost.textContent = stats[3][0];
+    boost.classList.add("right");
+
+    ehprRow.appendChild(ehpr);
+    ehprRow.append(boost);
+    statsTable.append(ehprRow);
+
+    ehprRow = document.createElement("tr");
+    ehpr = document.createElement("td");
+    ehpr.classList.add("left");
+    ehpr.textContent = "Effective HP Regen (no agi):";
+
+    boost = document.createElement("td");
+    boost.textContent = stats[3][1];
     boost.classList.add("right");
 
     ehprRow.appendChild(ehpr);
@@ -713,7 +740,7 @@ function displayDefenseStats(parent_elem,defenseStats){
         eledefTitle.classList.add(damageClasses[i+1]);
 
         let defense = document.createElement("b");
-        defense.textContent = " Defense: ";
+        defense.textContent = " Def: ";
 
         eledef.appendChild(eledefTitle);
         eledef.appendChild(defense);
