@@ -204,16 +204,18 @@ class Build{
         if (totalHp < 5) totalHp = 5;
         defenseStats.push(totalHp);
         //EHP
-        let ehp = totalHp;
+        let ehp = [totalHp, totalHp];
         let defMult = classDefenseMultipliers.get(this.weapon.get("type"));
-        ehp /= ((1-def_pct)*(1-agi_pct)*(2-defMult));         
+        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult));         
+        ehp[1] /= ((1-def_pct)*(2-defMult));    
         defenseStats.push(ehp);
         //HPR
         let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
         defenseStats.push(totalHpr);
         //EHPR
-        let ehpr = totalHpr;
-        ehpr /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
+        let ehpr = [totalHpr, totalHpr];
+        ehpr[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
+        ehpr[1] /= ((1-def_pct)*(2-defMult)); 
         defenseStats.push(ehpr);
         //skp stats
         defenseStats.push([def_pct*100, agi_pct*100]);
@@ -224,7 +226,7 @@ class Build{
         }
         defenseStats.push(eledefs);
         
-        //[total hp, ehp, total hpr, ehpr, [def%, agi%], [edef,tdef,wdef,fdef,adef]]
+        //[total hp, [ehp w/ agi, ehp w/o agi], total hpr, [ehpr w/ agi, ehpr w/o agi], [def%, agi%], [edef,tdef,wdef,fdef,adef]]
         return defenseStats;
     }
 
