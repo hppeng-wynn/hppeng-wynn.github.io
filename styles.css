@@ -16,14 +16,6 @@ th, td {
     padding: 0px;
 }
 
-.summary {
-    padding: 2% 4% 4%;
-    display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr;
-    gap: 5px;
-    grid-auto-rows: minmax(60px, auto);
-}
-
 div {
     padding: 0%;
 }
@@ -43,6 +35,7 @@ div {
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
+
 .equipment, .skillpoints, .center, .header, .all, .nocolor{
     background: #121516;
     color: #aaa;
@@ -75,16 +68,6 @@ a.link{
 .left {
     margin: 2px 2%;
     text-align: left;
-}
-
-.build, .spells, .misc {
-    padding: 2%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    grid-auto-rows: minmax(60px, auto);
-    width: 94%;
-    background: #121516;
 }
 
 .build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info {
