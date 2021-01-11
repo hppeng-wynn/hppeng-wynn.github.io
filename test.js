@@ -91,6 +91,26 @@ let powderStats = [
     _p(2,6,11,3,1), _p(4,9,14,6,2), _p(7,10,17,10,3), _p(9,13,22,16,5), _p(13,18,28,24,9), _p(16,18,35,34,13)
 ];
 
+//Ordering: [weapon special name, weapon special effects, armor special name, armor special effects]
+class PowderSpecial{
+    constructor(wSpName, wSpEff, aSpName, aSpEff, cap){
+        this.weaponSpecialName = wSpName;
+        this.weaponSpecialEffects = wSpEff;
+        this.armorSpecialName = aSpName;
+        this.armorSpecialEffects = aSpEff;
+        this.cap = cap;
+    }
+}
+function _ps(a,b,c,d,e) { return new PowderSpecial(a,b,c,d,e); } //bruh moment
+
+let powderSpecialStats = [
+    _ps("Quake",new Map([["Radius",[5,5.5,6,6.5,7]], ["Damage",[155,220,285,350,415]] ]),"Rage",new Map([ ["Damage", [0.3,0.4,0.5,0.7,1.0]],["Description", "% \2764 Missing"] ]),400), //e
+    _ps("Chain Lightning",new Map([ ["Chains", [5,6,7,8,9]], ["Damage", [80,120,160,200,240]] ]),"Kill Streak",new Map([ ["Damage", [3,4.5,6,7.5,9]],["Duration", [5,5,5,5,5]],["Description", "Mob Killed"] ]),200), //t
+    _ps("Curse",new Map([ ["Duration", [7,7.5,8,8.5,9]],["Damage", [90,120,150,180,210]] ]),"Concentration",new Map([ ["Damage", [1,2,3,4,5]],["Duration",[1,1,1,1,1]],["Description", "Mana Used"] ]),150), //w
+    _ps("Courage",new Map([ ["Duration", [6,6.5,7,7.5,8]],["Damage", [75,87.5,100,112.5,125]],["Damage Boost", [70,90,110,130,150]] ]),"Endurance",new Map([ ["Damage", [2,3,4,5,6]],["Duration", [8,8,8,8,8]],["Description", "Hit Taken"] ]),200), //f
+    _ps("Air Prison",new Map([ ["Duration", [3,3.5,4,4.5,5]],["Damage Boost", [400,450,500,550,600]],["Knockback", [8,12,16,20,24]] ]),"Dodge",new Map([ ["Damage",[2,3,4,5,6]],["Duration",[2,3,4,5,6]],["Description","Near Mobs"] ]),150) //a
+];
+
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let itemLists = new Map();
 for (const it of itemTypes) {
@@ -454,10 +474,38 @@ function calculateBuildStats() {
 
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
-    let skpSummary = document.createElement("p");
-    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: ( " + player_build.total_skillpoints.join(" | ") + " )";
+    let skpRow = document.createElement("tr");
+    //let skpSummary = document.createElement("p");
+    //skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: ( " + player_build.total_skillpoints.join(" | ") + " )";
+    let skpSummary = document.createElement("td");
+    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: (";
     skpSummary.classList.add("itemp");
-    summarybox.append(skpSummary);
+    skpRow.appendChild(skpSummary);
+    for (let i = 0; i < skp_order.length; i++){
+        let skp = document.createElement("td");
+        let boost = document.createElement("td");
+        let separator = document.createElement("td");
+        skp.classList.add("itemp");
+        skp.classList.add("nopadding");
+        skp.classList.add(damageClasses[i+1]);
+        boost.classList.add("itemp");
+        boost.classList.add("nopadding");
+        boost.textContent = player_build.total_skillpoints[i];
+        skpRow.appendChild(skp);
+        skpRow.appendChild(document.createElement("br"));
+        skpRow.appendChild(boost);
+        if(i < 4){
+            skpRow.appendChild(separator);
+        }
+    }
+    //summarybox.append(skpSummary);
+
+    let skpEnd = document.createElement("td");
+    skpEnd.textContent = ")";
+    skpEnd.classList.add("itemp");
+    skpRow.append(skpEnd);
+
+    summarybox.append(skpRow);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
         let skpWarning = document.createElement("p");
         skpWarning.classList.add("itemp");

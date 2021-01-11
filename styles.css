@@ -138,53 +138,33 @@ a.link{
     /*text-shadow: 2px 2px 0 #1f1515;*/
 }
 
-.Earth {
-    color: #0a0;
-    /*text-shadow: 2px 2px 0 #002a00;*/
-}
-.Earth:before {
-    content: "\2724" ' ';
-}
+.Earth { color: #0a0; }
+.Earth:before { content: "\2724" ' '; }
+.Earth_powder { color: #0a0; }
+.Earth_powder:before { content: "\2724"; }
 
-.Thunder {
-    color: #ff5;
-    /*text-shadow: 2px 2px 0 #3f3f15;*/
-}
-.Thunder:before {
-    content: "\2726" ' ';
-}
+.Thunder { color: #ff5; }
+.Thunder:before { content: "\2726" ' '; }
+.Thunder_powder { color: #ff5; }
+.Thunder_powder:before { content: "\2726"; }
 
-.Water {
-    color: #5ff;
-    /*text-shadow: 2px 2px 0 #153f3f;*/
-}
-.Water:before {
-    content: "\2749" ' ';
-}
+.Water { color: #5ff; }
+.Water:before { content: "\2749" ' '; }
+.Water_powder { color: #5ff; }
+.Water_powder:before { content: "\2749"; }
 
-.Fire {
-    color: #f55;
-    /*text-shadow: 2px 2px 0 #1f1515;*/
-}
-.Fire:before {
-    content: "\2739" ' ';
-}
+.Fire { color: #f55; }
+.Fire:before { content: "\2739" ' '; }
+.Fire_powder { color: #f55; }
+.Fire_powder:before { content: "\2739"; }
 
-.Air {
-    color: #fff;
-    /*text-shadow: 2px 2px 0 #3f3f3f;*/
-}
-.Air:before {
-    content: "\274b" ' ';
-}
+.Air { color: #fff; }
+.Air:before { content: "\274b" ' '; }
+.Air_powder { color: #fff; }
+.Air_powder:before { content: "\274b"; }
 
-.Neutral {
-    color: #fa0;
-    /*text-shadow: 2px 2px 0 #2a2a00;*/
-}
-.Neutral:before {
-    content: "\2724" ' ';
-}
+.Neutral { color: #fa0; }
+.Neutral:before { content: "\2724" ' '; }
 
 .Health {
     color: #a00;
@@ -270,6 +250,6 @@ input {
 .Set{
     color:#5f5;
 }
-.restrict{
+.restrict {
     color: #ff006a;
 }

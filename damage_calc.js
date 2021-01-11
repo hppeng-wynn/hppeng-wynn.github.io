@@ -40,9 +40,11 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
 
     let damageMult = 1;
+    let melee = false;
     // If we are doing melee calculations:
     if (spellMultiplier == 0) {
         spellMultiplier = 1;
+        melee = true;
     }
     else {
         damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(stats.get("atkSpd"))];
@@ -51,9 +53,12 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     //console.log(damageMult);
 
     rawModifier *= spellMultiplier;
-
-    let totalDamNorm = [rawModifier, rawModifier];
-    let totalDamCrit = [rawModifier, rawModifier];
+    let totalDamNorm = [0, 0];
+    let totalDamCrit = [0, 0];
+    if(!melee){       
+        totalDamNorm = [rawModifier, rawModifier];
+        totalDamCrit = [rawModifier, rawModifier];
+    }
     let damages_results = [];
     // 0th skillpoint is strength, 1st is dex.
     let str = total_skillpoints[0];

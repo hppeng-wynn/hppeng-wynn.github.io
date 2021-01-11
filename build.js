@@ -1,7 +1,7 @@
 
 const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
-const classDefenseMultipliers = new Map([ ["relik",0.60], ["bow",0.60], ["wand", 0.80], ["assassin", 1.0], ["spear",1.20] ]);
+const classDefenseMultipliers = new Map([ ["relik",0.60], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.20] ]);
 
 /*Turns the input amount of skill points into a float precision percentage.
 * @param skp - the integer skillpoint count to be converted
@@ -174,20 +174,22 @@ class Build{
 
         // 0 for melee damage.
         let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.total_skillpoints);
-    
-        //TODO: Account for strength (this.damageMultiplier).
+        
+        let dex = this.total_skillpoints[1];
 
         let totalDamNorm = results[0];
         let totalDamCrit = results[1];
+        totalDamNorm.push(1-skillPointsToPercentage(dex));
+        totalDamCrit.push(skillPointsToPercentage(dex));
         let damages_results = results[2];
-
-        let dex = this.total_skillpoints[1];
+        
 
         //Now do math
         let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex)));
-        //console.log([nDamAdj,eDamAdj,tDamAdj,wDamAdj,fDamAdj,aDamAdj,totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS]);
+        //[[n n n n] [e e e e] [t t t t] [w w w w] [f f f f] [a a a a] [lowtotal hightotal normalChance] [critlowtotal crithightotal critChance] normalDPS critCPS averageDPS adjAttackSpeed] 
+        //console.log(damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]));
         return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd]);
     }
 

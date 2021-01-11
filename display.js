@@ -44,6 +44,17 @@ function expandItem(item, powders){
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
     expandedItem.set("powders", powders);
+    
+    if(expandedItem.has("eDef")){ //item is armor
+        for(const id of powders){
+            //console.log(powderStats[id]);
+            let powder = powderStats[id];
+            let name = powderNames.get(id);
+            expandedItem.set(name.charAt(0) + "Def", expandedItem.get(name.charAt(0)+"Def") + powder["defPlus"]);
+            expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 6 )% 5] + "Def", expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 6 )% 5]+"Def") - powder["defMinus"]);
+        }
+    }
+    
     return expandedItem;
 }
 
@@ -340,43 +351,33 @@ function displayExpandedItem(item, parent_id){
             let id = command;
             if(nonRolledIDs.includes(id) && item.get(id)){//nonRolledID & non-0/non-null/non-und ID
                 if (id === "slots") {
-                    continue;
+                    let p_elem = document.createElement("p");
                     // PROPER POWDER DISPLAYING EZ CLAP 
-                    p_elem.textContent = "";
-                    let numerals = new Map([["1", "I"], ["2", "II"], ["3", "III"], ["4", "IV"], ["5", "V"], ["6", "VI"]]);
+                    let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
                     /*p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
-                    let wrapper = document.createElement("p");
 
                     let powderPrefix = document.createElement("b");
                     powderPrefix.classList.add("itemp");
                     powderPrefix.classList.add("left");
-                    powderPrefix.textContent = "[";
-                    row.appendChild(powderPrefix);
+                    powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
+                    p_elem.appendChild(powderPrefix);
                     
-                    let spaceElem = document.createElement("td");
-                    //spaceElem.textContent = " ";
-                    spaceElem.classList.add("itemp");
-                    spaceElem.classList.add("left");
-
-                    let powderList = item.get("powders").map(x => powderNames.get(x))
-                    for (let i = 0; i < powderList.length; i++) {
-                        let powder = document.createElement("td");
-                        let powderStr = powderList[i];
-                        console.log(powderStr);
-                        powder.textContent = numerals.get(powderStr.charAt(1), 10);
-                        powder.classList.add(powderMap.get(powderStr.charAt(0)));
-                        row.appendChild(powder);
+                    let powders = item.get("powders");
+                    console.log(powders);
+                    for (let i = 0; i < powders.length; i++) {
+                        let powder = document.createElement("b");
+                        powder.textContent = numerals.get((powders[i]%6)+1)+" ";
+                        powder.classList.add(damageClasses[Math.floor(powders[i]/6)+1]+"_powder");
+                        p_elem.appendChild(powder);
                     }
 
-                    let powderSuffix = document.createElement("td");
+                    let powderSuffix = document.createElement("b");
                     powderSuffix.classList.add("itemp");
                     powderSuffix.classList.add("left"); 
-                    powderSuffix.textContent = " ]";
-                    row.appendChild(powderSuffix);
-
-                    wrapper.appendChild(row);
-                    p_elem.appendChild(wrapper);
+                    powderSuffix.textContent = "]";
+                    p_elem.appendChild(powderSuffix);
+                    active_elem.appendChild(p_elem);
                 }
                 else {
                     let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
@@ -449,6 +450,39 @@ function displayExpandedItem(item, parent_id){
             }//Just don't do anything if else
         }
     }
+    //Show powder specials ;-;
+    let powder_special = document.createElement("p");
+    powder_special.classList.add("left");
+    powder_special.classList.add("itemp");
+    let powders = item.get("powders");
+    let element = "";
+    let power = 0;
+    for (let i = 0; i < powders.length; i++) {
+        let firstPowderType = skp_elements[Math.floor(powders[i]/6)];
+        if (element !== "") break;
+        else if (powders[i]%6 > 2) { //t4+
+            for (let j = i+1; j < powders.length; j++) {
+                let currentPowderType = skp_elements[Math.floor(powders[j]/6)]
+                if (powders[j] % 6 > 2 && firstPowderType === currentPowderType) {
+                    element = currentPowderType;
+                    power = Math.round(((powders[i] % 6 + powders[j] % 6 + 2) / 2 - 4) * 2);
+                    break;
+                }
+            }
+        }
+    }
+    if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
+        console.log(skp_elements.indexOf(element));
+        let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
+        let attackSpecialTitle = document.createElement("p");
+        attackSpecialTitle.classList.add("left");
+        attackSpecialTitle.textContent = powderSpecial["weaponSpecialName"];
+        powder_special.appendChild(attackSpecialTitle);
+
+        parent_div.append(powder_special);
+    }
+
+    //Show item tier
     if (item.get("tier") & item.get("tier") !== " ") {
         let item_desc_elem = document.createElement('p');
         item_desc_elem.classList.add('itemp');
@@ -550,7 +584,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
         }
     }
     for (let i = 6; i < 8; ++i) {
-        for (let j in stats[i]) {
+        for (let j = 0; j < 2; j++) {
             stats[i][j] = stats[i][j].toFixed(2);
         }
     }
@@ -626,10 +660,15 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
-    normalDPS.append(document.createElement("br"));
-    normalDPS.append(document.createElement("br"));
     normalDPS.classList.add("itemp");
     nonCritStats.append(normalDPS);
+    
+    let normalChance = document.createElement("p");
+    normalChance.textContent = "Non-Crit Chance: " + (stats[6][2]*100).toFixed(2) + "%"; 
+    normalChance.classList.add("itemp");
+    normalChance.append(document.createElement("br"));
+    normalChance.append(document.createElement("br"));
+    nonCritStats.append(normalChance);
 
     parent_elem.append(nonCritStats);
     parent_elem.append(document.createElement("br"));
@@ -657,9 +696,14 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let critDPS = document.createElement("p");
     critDPS.textContent = "Crit DPS: " + stats[9];
     critDPS.classList.add("itemp");
-    critDPS.append(document.createElement("br"));
-    critDPS.append(document.createElement("br"));
     critStats.append(critDPS);
+
+    let critChance = document.createElement("p");
+    critChance.textContent = "Crit Chance: " + (stats[7][2]*100).toFixed(2) + "%";
+    critChance.classList.add("itemp");
+    critChance.append(document.createElement("br"));
+    critChance.append(document.createElement("br"));
+    critStats.append(critChance);
 
     parent_elem.append(critStats);
 }
