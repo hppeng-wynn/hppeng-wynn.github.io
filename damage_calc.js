@@ -81,10 +81,17 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
+    if (melee) {
+        totalDamNorm[0] += Math.max(rawModifier, -damages_results[0][0]);
+        totalDamNorm[1] += Math.max(rawModifier, -damages_results[0][1]);
+        totalDamCrit[0] += Math.max(rawModifier, -damages_results[0][2]);
+        totalDamCrit[1] += Math.max(rawModifier, -damages_results[0][3]);
+    }
     damages_results[0][0] += rawModifier;
     damages_results[0][1] += rawModifier;
     damages_results[0][2] += rawModifier;
     damages_results[0][3] += rawModifier;
+
     if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
     if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
     if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
