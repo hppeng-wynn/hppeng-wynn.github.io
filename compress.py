@@ -105,7 +105,7 @@ translate_mappings = {
     "spellCostRaw4": "spRaw4",
 
     "rainbowSpellDamageRaw": "rainbowRaw",
-    "sprint": "sprint",
+    #"sprint": "sprint",
     "sprintRegen": "sprintReg",
     "jumpHeight": "jh",
     "lootQuality": "lq",

@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "4.6";
+const BUILD_VERSION = "5.0";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -480,7 +480,7 @@ function calculateBuildStats() {
     displaySetBonuses(player_build, "set-info");
 
     let meleeStats = player_build.getMeleeStats();
-    displayMeleeDamage(document.getElementById("build-melee-stats") ,meleeStats);
+    displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
     let defenseStats = player_build.getDefenseStats();
     displayDefenseStats(document.getElementById("build-defense-stats"),defenseStats);
@@ -493,7 +493,8 @@ function calculateBuildStats() {
     let spells = spell_table[player_build.weapon.get("type")];
     for (let i = 0; i < 4; ++i) {
         let parent_elem = document.getElementById("spell"+i+"-info");
-        displaySpellDamage(parent_elem, player_build, spells[i], i+1);
+        let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
+        displaySpellDamage(parent_elem, overallparent_elem, player_build, spells[i], i+1);
     }
 
     location.hash = encodeBuild();

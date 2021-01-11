@@ -60,7 +60,7 @@ function idRound(id){
     }
 }
 
-let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Main Attack Neutral Damage: ", "mdPct":"Main Attack Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "expd":"Exploding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":""};
+let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Raw Melee Damage: ", "mdPct":"Melee Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "expd":"Exploding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":""};
 let idSuffixes = {"displayName": "", "lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam_":"", "eDam_":"", "tDam_":"", "wDam_":"", "fDam_":"", "aDam_":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/4s", "ms":"/4s", "ref":"%", "ls":"/4s", "poison":"/3s", "thorns":"%", "expd":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":"", "restrict":""};
 
 function apply_elemental_format(p_elem, id, suffix) {
@@ -499,10 +499,12 @@ function displayEquipOrder(parent_elem,buildOrder){
         parent_elem.append(p_elem);
     }
 }
-function displayMeleeDamage(parent_elem, meleeStats){
+
+function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
     parent_elem.textContent = "";
+    overallparent_elem.textContent = "";
     const stats = meleeStats.slice();
     
     for (let i = 0; i < 6; ++i) {
@@ -527,6 +529,13 @@ function displayMeleeDamage(parent_elem, meleeStats){
     title_elem.textContent = "Melee Stats";
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
+
+    //overall title
+    let title_elemavg = document.createElement("p");
+    title_elemavg.classList.add("title");
+    title_elemavg.classList.add("Normal");
+    title_elemavg.textContent = "Melee Stats";
+    overallparent_elem.append(title_elemavg);
     
     //average DPS
     let averageDamage = document.createElement("p");
@@ -535,6 +544,13 @@ function displayMeleeDamage(parent_elem, meleeStats){
     averageDamage.textContent = "Average DPS: " + stats[10];
     parent_elem.append(averageDamage);
 
+    //overall average DPS
+    let overallaverageDamage = document.createElement("p");
+    overallaverageDamage.classList.add("itemp");
+    overallaverageDamage.textContent = "Average DPS: " + stats[10];
+    overallparent_elem.append(overallaverageDamage);
+    overallparent_elem.append(document.createElement("br"));
+
     //attack speed
     let atkSpd = document.createElement("p");
     atkSpd.classList.add("left");
@@ -542,6 +558,14 @@ function displayMeleeDamage(parent_elem, meleeStats){
     atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
     parent_elem.append(atkSpd);
     parent_elem.append(document.createElement("br"));
+
+    //overall attack speed
+    let overallatkSpd = document.createElement("p");
+    overallatkSpd.classList.add("center");
+    overallatkSpd.classList.add("itemp");
+    overallatkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
+    overallparent_elem.append(overallatkSpd);
+    overallparent_elem.append(document.createElement("br"));
 
     //Non-Crit: n->elem, total dmg, DPS
     let nonCritStats = document.createElement("p");
@@ -658,9 +682,9 @@ function displayDefenseStats(parent_elem,defenseStats){
     hpr.classList.add("left");
     hpr.textContent = "HP Regen:";  
     boost = document.createElement("td");
-    boost.textContent =stats[2];
+    boost.textContent = stats[2];
     boost.classList.add("right");
-    
+
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
     statsTable.appendChild(hprRow);
@@ -706,7 +730,6 @@ function displayDefenseStats(parent_elem,defenseStats){
         row.appendChild(boost);
         statsTable.appendChild(row);
     }
-    
     //skp
     let defRow = document.createElement("tr");
     let defElem = document.createElement("td");
@@ -732,21 +755,31 @@ function displayDefenseStats(parent_elem,defenseStats){
 
     parent_elem.append(statsTable);
 }
-function displaySpellDamage(parent_elem, build, spell, spellIdx) {
+function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
     const stats = build.statMap;
     let title_elem = document.createElement("p");
     title_elem.classList.add("title");
     title_elem.classList.add("Normal");
+
+    overallparent_elem.textContent = "";
+    let title_elemavg = document.createElement("p");
+    title_elemavg.classList.add('title');
+    title_elemavg.classList.add('Normal');
+
     if (spellIdx != 0) {
         title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
+        title_elemavg.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
     }
     else {
         title_elem.textContent = spell.title;
+        title_elemavg.textContent = spell.title;
     }
 
     parent_elem.append(title_elem);
+    overallparent_elem.append(title_elemavg);
+
     let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
 
     let save_damages = [];
@@ -756,9 +789,18 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
+        let part_divavg = document.createElement("p");
+        overallparent_elem.append(part_divavg);
+
         let subtitle_elem = document.createElement("p");
         subtitle_elem.textContent = part.subtitle;
         part_div.append(subtitle_elem);
+
+        if (part.summary == true) {
+            let subtitle_elemavg = document.createElement("p");
+            subtitle_elemavg.textContent = part.subtitle;
+            part_divavg.append(subtitle_elemavg);
+        }
         if (part.type === "damage") {
 
             let _results = calculateSpellDamage(stats, part.conversion,
@@ -781,11 +823,17 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
 
+            if (part.summary == true) {
+                let overallaverageLabel = document.createElement("p");
+                overallaverageLabel.textContent = "Average: "+averageDamage.toFixed(2);
+                overallaverageLabel.classList.add("damageSubtitle");
+                part_divavg.append(overallaverageLabel);
+            }
+
             let nonCritLabel = document.createElement("p");
             nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
             nonCritLabel.classList.add("damageSubtitle");
             part_div.append(nonCritLabel);
-
             
             for (let i = 0; i < 6; i++){
                 if (results[i][1] > 0){
@@ -819,6 +867,12 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
             part_div.append(healLabel);
+            if (part.summary == true) {
+                let overallhealLabel = document.createElement("p");
+                overallhealLabel.textContent = heal_amount;
+                overallhealLabel.classList.add("damagep")
+                part_divavg.append(overallhealLabel);
+            }
         }
         else if (part.type === "total") {
             let total_damage = 0;
@@ -829,6 +883,11 @@ function displaySpellDamage(parent_elem, build, spell, spellIdx) {
             averageLabel.textContent = "Average: "+total_damage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
+
+            let overallaverageLabel = document.createElement("p");
+            overallaverageLabel.textContent = "Average: "+total_damage.toFixed(2);
+            overallaverageLabel.classList.add("damageSubtitle");
+            part_divavg.append(overallaverageLabel);
         }
     }
 }

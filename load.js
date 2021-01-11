@@ -1,4 +1,4 @@
-const DB_VERSION = 11;
+const DB_VERSION = 12;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -60,7 +60,10 @@ function clean_item(item) {
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
 async function load(init_func) {
-    let url = "https://hppeng-wynn.github.io/compress.json";
+
+    let getUrl = window.location;
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    let url = baseUrl + "/compress.json";
     let result = await (await fetch(url)).json();
     items = result.items;
     sets = result.sets;
