@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "5.0";
+const BUILD_VERSION = "5.1";
 
 document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
@@ -157,7 +157,12 @@ function init() {
     for (const item of items) {
         itemLists.get(item.type).push(item.displayName);
         itemMap.set(item.displayName, item);
-        idMap.set(item.id, item.displayName);
+        if (noneItems.includes(item)) {
+            idMap.set(item.id, "");
+        }
+        else {
+            idMap.set(item.id, item.displayName);
+        }
     }
     
     for (const armorType of armorTypes) {
@@ -450,7 +455,7 @@ function calculateBuildStats() {
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpSummary = document.createElement("p");
-    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.";
+    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: ( " + player_build.total_skillpoints.join(" | ") + " )";
     skpSummary.classList.add("itemp");
     summarybox.append(skpSummary);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){

@@ -732,31 +732,27 @@ function displayDefenseStats(parent_elem,defenseStats){
     //eledefs
     let eledefs = stats[5];
     for (let i = 0; i < eledefs.length; i++){
-        let row = document.createElement("tr");
-        let eledefElem = document.createElement("p");
-        eledefElem.classList.add("itemtable");
-        eledefElem.classList.add("itemp");
         let eledefElemRow = document.createElement("tr");
 
-        let eledefTitle = document.createElement("td");
+        let eledef = document.createElement("td");
+        eledef.classList.add("left")
+        let eledefTitle = document.createElement("b");
         eledefTitle.textContent = damageClasses[i+1];
         eledefTitle.classList.add(damageClasses[i+1]);
 
-        let defense = document.createElement("td");
-        defense.textContent = "Def: ";
-        //defense.classList.add("spaceLeft");
+        let defense = document.createElement("b");
+        defense.textContent = " Def: ";
 
-        eledefElemRow.appendChild(eledefTitle);
-        eledefElemRow.appendChild(defense);
-        eledefElem.appendChild(eledefElemRow);
-        //"Defense: ";
+        eledef.appendChild(eledefTitle);
+        eledef.appendChild(defense);
+        eledefElemRow.appendChild(eledef);
+
         let boost = document.createElement("td");
         boost.textContent = eledefs[i];
         boost.classList.add("right");
+        eledefElemRow.appendChild(boost);
 
-        row.appendChild(eledefElem);
-        row.appendChild(boost);
-        statsTable.appendChild(row);
+        statsTable.appendChild(eledefElemRow);
     }
     //skp
     let defRow = document.createElement("tr");
@@ -890,7 +886,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             save_damages.push(averageDamage);
         }
         else if (part.type == "heal") {
-            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")))).toFixed(2);
+            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0, Math.min(1.5, 1 + 0.05 * stats.get("wDamPct")/100))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
