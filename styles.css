@@ -60,6 +60,10 @@ a.link{
     text-align: center;
     font-size: 150%;
 }
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+}
 .center {
     text-align: center;
 }

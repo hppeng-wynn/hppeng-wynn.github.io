@@ -216,7 +216,25 @@ function displayBuildStats(build, parent_id){
                         style = "negative";
                     }
                 }
-                displayFixedID(active_elem, id, stats.get(id), elemental_format, style);
+                let id_val = stats.get(id);
+                displayFixedID(active_elem, id, id_val, elemental_format, style);
+                if (id === "poison" && id_val > 0) {
+                    let style = "positive";
+                    let row = document.createElement('tr');
+                    let value_elem = document.createElement('td');
+                    value_elem.classList.add('right');
+                    value_elem.setAttribute("colspan", "2");
+                    let prefix_elem = document.createElement('b');
+                    prefix_elem.textContent = "-> With Strength: ";
+                    let number_elem = document.createElement('b');
+                    number_elem.classList.add(style);
+                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(build.total_skillpoints[0]))).toFixed(0) + idSuffixes[id];
+                    value_elem.append(prefix_elem);
+                    value_elem.append(number_elem);
+                    row.appendChild(value_elem);
+
+                    active_elem.appendChild(row);
+                }
             }
         }
     }
@@ -321,22 +339,19 @@ function displayExpandedItem(item, parent_id){
         else {
             let id = command;
             if(nonRolledIDs.includes(id) && item.get(id)){//nonRolledID & non-0/non-null/non-und ID
-                let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
                 if (id === "slots") {
+                    continue;
                     // PROPER POWDER DISPLAYING EZ CLAP 
                     p_elem.textContent = "";
-                    let powderMap = new Map([ ["e", "Earth"], ["t", "Thunder"], ["w", "Water"], ["f", "Fire"], ["a", "Air"]]);
                     let numerals = new Map([["1", "I"], ["2", "II"], ["3", "III"], ["4", "IV"], ["5", "V"], ["6", "VI"]]);
                     /*p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
                     let wrapper = document.createElement("p");
-                    p_elem.classList.add("itemtable");
-                    let row = document.createElement("tr");
 
-                    let powderPrefix = document.createElement("td");
+                    let powderPrefix = document.createElement("b");
                     powderPrefix.classList.add("itemp");
                     powderPrefix.classList.add("left");
-                    powderPrefix.textContent = "Powders: " + " [";
+                    powderPrefix.textContent = "[";
                     row.appendChild(powderPrefix);
                     
                     let spaceElem = document.createElement("td");
@@ -345,7 +360,7 @@ function displayExpandedItem(item, parent_id){
                     spaceElem.classList.add("left");
 
                     let powderList = item.get("powders").map(x => powderNames.get(x))
-                    for(let i = 0; i < powderList.length; i++){
+                    for (let i = 0; i < powderList.length; i++) {
                         let powder = document.createElement("td");
                         let powderStr = powderList[i];
                         console.log(powderStr);
@@ -362,30 +377,34 @@ function displayExpandedItem(item, parent_id){
 
                     wrapper.appendChild(row);
                     p_elem.appendChild(wrapper);
-                }else if(id === "displayName"){
-                    p_elem.classList.add("title");
-                    if(item.get("tier") !== " "){
-                        p_elem.classList.add(item.get("tier"));
+                }
+                else {
+                    let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
+                    if (id === "displayName") {
+                        p_elem.classList.add("title");
+                        if (item.get("tier") !== " ") {
+                            p_elem.classList.add(item.get("tier"));
+                        }
+                    } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
+                        p_elem.textContent = "";
+                        p_elem.classList.add("itemtable");
+                        let row = document.createElement("tr");
+                        let title = document.createElement("td");
+                        title.textContent = idPrefixes[id] + " ";
+                        let boost = document.createElement("td");
+                        if (item.get(id) < 0) {
+                            boost.classList.add("negative");
+                        } else { //boost = 0 SHOULD not come up
+                            boost.classList.add("positive");
+                        }
+                        boost.classList.add("spaceLeft");
+                        boost.textContent = item.get(id);
+                        row.appendChild(title);
+                        row.appendChild(boost);
+                        p_elem.appendChild(row);
+                    } else if (id === "restrict") {
+                        p_elem.classList.add("restrict");
                     }
-                }else if(skp_order.includes(id)){ //id = str, dex, int, def, or agi
-                    p_elem.textContent = "";
-                    p_elem.classList.add("itemtable");
-                    let row = document.createElement("tr");
-                    let title = document.createElement("td");
-                    title.textContent = idPrefixes[id] + " ";
-                    let boost = document.createElement("td");
-                    if(item.get(id) < 0){
-                        boost.classList.add("negative");
-                    }else{ //boost = 0 SHOULD not come up
-                        boost.classList.add("positive");
-                    }
-                    boost.classList.add("spaceLeft");
-                    boost.textContent = item.get(id);
-                    row.appendChild(title);
-                    row.appendChild(boost);
-                    p_elem.appendChild(row);
-                }else if(id === "restrict"){
-                    p_elem.classList.add("restrict");
                 }
             }
             else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
@@ -500,6 +519,24 @@ function displayEquipOrder(parent_elem,buildOrder){
     }
 }
 
+function displayPoisonDamage(overallparent_elem, build) {
+    overallparent_elem.textContent = "";
+
+    //Title
+    let title_elemavg = document.createElement("p");
+    title_elemavg.classList.add("smalltitle");
+    title_elemavg.classList.add("Normal");
+    title_elemavg.textContent = "Poison Stats";
+    overallparent_elem.append(title_elemavg);
+
+    let overallpoisonDamage = document.createElement("p");
+    overallpoisonDamage.classList.add("itemp");
+    let poison_tick = Math.floor(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0]))/3);
+    overallpoisonDamage.textContent = "Poison Tick: " + poison_tick;
+    overallparent_elem.append(overallpoisonDamage);
+    overallparent_elem.append(document.createElement("br"));
+}
+
 function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
@@ -532,7 +569,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     //overall title
     let title_elemavg = document.createElement("p");
-    title_elemavg.classList.add("title");
+    title_elemavg.classList.add("smalltitle");
     title_elemavg.classList.add("Normal");
     title_elemavg.textContent = "Melee Stats";
     overallparent_elem.append(title_elemavg);
@@ -783,12 +820,12 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
     const stats = build.statMap;
     let title_elem = document.createElement("p");
-    title_elem.classList.add("title");
+    title_elem.classList.add("smalltitle");
     title_elem.classList.add("Normal");
 
     overallparent_elem.textContent = "";
     let title_elemavg = document.createElement("p");
-    title_elemavg.classList.add('title');
+    title_elemavg.classList.add('smalltitle');
     title_elemavg.classList.add('Normal');
 
     if (spellIdx != 0) {
