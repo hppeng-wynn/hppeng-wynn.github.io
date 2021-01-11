@@ -19,7 +19,7 @@ th, td {
 .summary {
     padding: 2% 4% 4%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 2.5fr 1fr 1fr;
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
@@ -31,9 +31,9 @@ div {
 .equipment {
     padding: 0%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: min-content min-content min-content;
     gap: 5px;
-    grid-template-rows: min-content auto;
+    grid-template-rows: min-content min-content auto;
 }
 
 .skillpoints {
