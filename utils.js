@@ -101,6 +101,18 @@ Base64 = (function () {
 /*
     Turns a raw stat and a % stat into a final stat on the basis that - raw and >= 100% becomes 0 and + raw and <=-100% becomes 0.
     Pct would be 0.80 for 80%, -1.20 for 120%, etc
+    Example Outputs:
+    raw: -100
+    pct: +0.20, output = -80
+    pct: +1.20, output = 0
+    pct: -0.20, output = -120
+    pct: -1.20, output = -220
+
+    raw: +100
+    pct: +0.20, output = 120
+    pct: +1.20, output = 220
+    pct: -0.20, output = 80
+    pct: -1.20, output = 0
 */
 function rawToPct(raw, pct){
     final = 0;

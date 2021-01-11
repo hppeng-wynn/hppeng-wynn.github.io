@@ -222,7 +222,8 @@ function populateFromURL() {
         let version = info[0];
         let save_skp = false;
         let skillpoints = [0, 0, 0, 0, 0];
-        if (version === "0" || version === "1" || version === "2") {
+        let level = 106;
+        if (version === "0" || version === "1" || version === "2" || version === "3") {
             let equipments = info[1];
             for (let i = 0; i < 9; ++i ) {
                 equipment[i] = idMap.get(Base64.toInt(equipments.slice(i*3,i*3+3)));
@@ -231,7 +232,7 @@ function populateFromURL() {
         if (version === "1") {
             let powder_info = info[1].slice(27);
             console.log(powder_info);
-            // TODO: Make this run in linear instead of quadratic time...
+            // TODO: Make this run in linear instead of quadratic time... ew
             for (let i = 0; i < 5; ++i) {
                 let powders = "";
                 let n_blocks = Base64.toInt(powder_info.charAt(0));
@@ -278,7 +279,36 @@ function populateFromURL() {
                 powdering[i] = powders;
             }
         }
+        if(version === "3"){
+            level = Base64.toInt(info[1].slice(37,39));
+            setValue("level-choice",level);
+            save_skp = true;
+            let skillpoint_info = info[1].slice(27, 37);
+            for (let i = 0; i < 5; ++i ) {
+                skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
+            }
 
+            let powder_info = info[1].slice(39);
+            console.log(powder_info);
+            // TODO: Make this run in linear instead of quadratic time...
+            for (let i = 0; i < 5; ++i) {
+                let powders = "";
+                let n_blocks = Base64.toInt(powder_info.charAt(0));
+                console.log(n_blocks + " blocks");
+                powder_info = powder_info.slice(1);
+                for (let j = 0; j < n_blocks; ++j) {
+                    let block = powder_info.slice(0,5);
+                    console.log(block);
+                    let six_powders = Base64.toInt(block);
+                    for (let k = 0; k < 6 && six_powders != 0; ++k) {
+                        powders += powderNames.get((six_powders & 0x1f) - 1);
+                        six_powders >>>= 5;
+                    }
+                    powder_info = powder_info.slice(5);
+                }
+                powdering[i] = powders;
+            }
+        }
         for (let i in powderInputs) {
             setValue(powderInputs[i], powdering[i]);
         }
@@ -291,7 +321,7 @@ function populateFromURL() {
 
 function encodeBuild() {
     if (player_build) {
-        let build_string = "2_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
+        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
                             Base64.fromIntN(player_build.chestplate.get("id"), 3) +
                             Base64.fromIntN(player_build.leggings.get("id"), 3) +
                             Base64.fromIntN(player_build.boots.get("id"), 3) +
@@ -304,7 +334,8 @@ function encodeBuild() {
         for (const skp of skp_order) {
             build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
         }
-
+        build_string += Base64.fromIntN(player_build.level, 2);
+        console.log(Base64.fromIntN(player_build.level, 2));
         for (const _powderset of player_build.powders) {
             let n_bits = Math.ceil(_powderset.length / 6);
             build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
@@ -320,7 +351,7 @@ function encodeBuild() {
                 powderset = powderset.slice(6);
             }
         }
-
+        
         return build_string;
     }
     return "";
@@ -350,8 +381,15 @@ function calculateBuild(save_skp, skp){
         }
         powderings.push(powdering);
     }
+    //level setting
+    let level = document.getElementById("level-choice").value;
+    if(level === ""){
+        level = 106;
+    }
+    document.getElementById("level-choice").value = level;
+
     console.log(equipment);
-    player_build = new Build(106, equipment, powderings);
+    player_build = new Build(level, equipment, powderings);
     console.log(player_build.toString());
     displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
@@ -409,10 +447,29 @@ function calculateBuildStats() {
         setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
     }
 
+    let summarybox = document.getElementById("summary-box");
+    summarybox.textContent = "";
+    let skpSummary = document.createElement("p");
+    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.";
+    skpSummary.classList.add("itemp");
+    summarybox.append(skpSummary);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
-        setHTML("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.<br>" + "WARNING: Too many skillpoints need to be assigned!<br> For level " + player_build.level + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.");
-    }else{
-        setText("summary-box", "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints.");
+        let skpWarning = document.createElement("p");
+        skpWarning.classList.add("itemp");
+        skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
+        let skpCount = document.createElement("p");
+        skpCount.classList.add("itemp");
+        skpCount.textContent = "For level " + player_build.level + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
+        summarybox.append(skpWarning);
+        summarybox.append(skpCount);
+    }
+    for(const item of player_build.items){
+        if(player_build.level < item.get("lvl")){
+            let lvlWarning = document.createElement("p");
+            lvlWarning.classList.add("itemp");
+            lvlWarning.textContent = "WARNING: The build is level " + player_build.level + " but " + item.get("name") + " requires level " + item.get("lvl") + " to use.";
+            summarybox.append(lvlWarning);
+        }
     }
 
     for (let i in player_build.items) {
