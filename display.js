@@ -138,6 +138,7 @@ function displayBuildStats(build, parent_id){
         "#table",
         "mr", "ms",
 //        "hprRaw", "hprPct",
+        "#table",
         "sdRaw", "sdPct",
         "mdRaw", "mdPct",
         "ref", "thorns",
