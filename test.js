@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.0";
+const BUILD_VERSION = "6.1";
 
 document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
