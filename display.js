@@ -24,7 +24,7 @@ function expandItem(item, powders){
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*1.3));
                     minRolls.set(id,idRound(val*0.3));
-                else {
+                } else {
                     minRolls.set(id,idRound(val*0.3));
                     maxRolls.set(id,idRound(val*1.3));
                 }
