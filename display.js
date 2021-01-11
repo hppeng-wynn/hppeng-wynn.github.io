@@ -1,7 +1,7 @@
 let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
-let reversedIDs = [ "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
+let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 
 function expandItem(item, powders){
@@ -21,8 +21,13 @@ function expandItem(item, powders){
         for (const id of rolledIDs){
             let val = (item[id] || 0);
             if(val > 0){ // positive rolled IDs                   
-                minRolls.set(id,idRound(val*0.3));
-                maxRolls.set(id,idRound(val*1.3));
+                if (reversedIDs.includes(id)) {
+                    maxRolls.set(id,idRound(val*1.3));
+                    minRolls.set(id,idRound(val*0.3));
+                else {
+                    minRolls.set(id,idRound(val*0.3));
+                    maxRolls.set(id,idRound(val*1.3));
+                }
             }else if(val < 0){ //negative rolled IDs
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*1.3));
