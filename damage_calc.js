@@ -81,10 +81,17 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
+    if (melee) {
+        totalDamNorm[0] += Math.max(rawModifier, -damages_results[0][0]);
+        totalDamNorm[1] += Math.max(rawModifier, -damages_results[0][1]);
+        totalDamCrit[0] += Math.max(rawModifier, -damages_results[0][2]);
+        totalDamCrit[1] += Math.max(rawModifier, -damages_results[0][3]);
+    }
     damages_results[0][0] += rawModifier;
     damages_results[0][1] += rawModifier;
     damages_results[0][2] += rawModifier;
     damages_results[0][3] += rawModifier;
+
     if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
     if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
     if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
@@ -95,9 +102,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
 const spell_table = {
     "wand": [
         { title: "Heal", cost: 6, parts: [
-                { subtitle: "First Pulse", type: "heal", strength: 0.2 },
-                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.05 },
-                { subtitle: "Total Heal", type: "heal", strength: 0.3, summary: true }
+                { subtitle: "First Pulse", type: "heal", strength: 0.12 },
+                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.06 },
+                { subtitle: "Total Heal", type: "heal", strength: 0.24, summary: true }
             ] },
         { title: "Teleport", cost: 4, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [60, 0, 40, 0, 0, 0], summary: true },

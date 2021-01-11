@@ -1,0 +1,35 @@
+.build-overall-container {
+    grid-column: 1;
+    grid-row: 2;
+}
+.spell-info-container {
+    grid-column: 2;
+    grid-row: 2;
+}
+.summary {
+    padding: 2% 4% 4%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.build, .spells .misc {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-auto-rows: minmax(60px, auto);
+    width: 94%;
+    background: #121516;
+}
+
+.iteminput {
+    width: 25vw;
+    height: 10vw;
+    max-height: 50px;
+}
+
+.skp-input {
+
+}

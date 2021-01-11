@@ -11,9 +11,9 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "5.4";
+const BUILD_VERSION = "6.3";
 
-document.getElementById("header").textContent = "Wynn build calculator "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
 
 let player_build;
 // Set up item lists for quick access later.
@@ -234,13 +234,13 @@ function init() {
         }
     });
 
-    populateFromURL();
+    decodeBuild(url_tag);
 }
 
 /*
  * Populate fields based on url, and calculate build.
  */
-function populateFromURL() {
+function decodeBuild(url_tag) {
     if (url_tag) {
         let equipment = [null, null, null, null, null, null, null, null, null];
         let powdering = ["", "", "", "", ""];
@@ -554,6 +554,31 @@ function calculateBuildStats() {
     }
 
     location.hash = encodeBuild();
+}
+
+function copyBuild() {
+    if (player_build) {
+        copyTextToClipboard(url_base+location.hash);
+        document.getElementById("copy-button").textContent = "Copied!";
+    }
+}
+
+function shareBuild() {
+    if (player_build) {
+        let text = url_base+location.hash+"\n"+
+            "WynnBuilder build:\n"+
+            player_build.helmet.get("displayName")+"\n"+
+            player_build.chestplate.get("displayName")+"\n"+
+            player_build.leggings.get("displayName")+"\n"+
+            player_build.boots.get("displayName")+"\n"+
+            player_build.ring1.get("displayName")+"\n"+
+            player_build.ring2.get("displayName")+"\n"+
+            player_build.bracelet.get("displayName")+"\n"+
+            player_build.necklace.get("displayName")+"\n"+
+            player_build.weapon.get("displayName");
+        copyTextToClipboard(text);
+        document.getElementById("share-button").textContent = "Copied!";
+    }
 }
 
 function resetFields(){

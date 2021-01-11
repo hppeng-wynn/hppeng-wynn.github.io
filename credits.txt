@@ -1,7 +1,9 @@
-Damage calculator checking: https://its0x7.cf/build/
-
 Theme and overall inspiration: Wynndata (Dukio)
     - https://wynndata.tk
 
+The game, of course
+    - wynncraft.com
+
 Additional Contributors:
  - QuantumNep (Layout code/layout ideas)
+ - Atlas Inc discord (feedback, ideas, etc)

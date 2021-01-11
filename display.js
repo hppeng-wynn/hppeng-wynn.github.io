@@ -118,6 +118,7 @@ function displaySetBonuses(build, parent_id) {
                 mock_item.set(id, bonus[id]);
             }
         }
+        mock_item.set("powders", []);
         displayExpandedItem(mock_item, set_elem.id);
     }
 }
@@ -661,6 +662,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //overall average DPS
     let overallaverageDamage = document.createElement("p");
     overallaverageDamage.classList.add("itemp");
+    console.log(stats);
     overallaverageDamage.textContent = "Average DPS: " + stats[10];
     overallparent_elem.append(overallaverageDamage);
     overallparent_elem.append(document.createElement("br"));
