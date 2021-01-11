@@ -25,6 +25,7 @@ let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "mate
 
 let skp_order = ["str","dex","int","def","agi"];
 let skp_elements = ["e","t","w","f","a"];
+let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
 
 let equipment_fields = [
