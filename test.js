@@ -423,13 +423,7 @@ function calculateBuild(save_skp, skp){
 
     const assigned = player_build.base_skillpoints;
     const skillpoints = player_build.total_skillpoints;
-    for (let i in skp_order){ //big bren
-        if(assigned[i] <= 100){
-            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
-        }else{
-            setHTML(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i] + "<br>WARNING: cannot assign " + assigned[i] + " skillpoints naturally.");
-        }
-    }
+    
     if (save_skp) {
         // TODO: reduce duplicated code, @updateStats
         let skillpoints = player_build.total_skillpoints;
@@ -449,6 +443,7 @@ function calculateBuild(save_skp, skp){
 }
 
 function updateStats() {
+    //WILL BREAK WEBSITE IF NO BUILD HAS BEEN INITIALIZED! @HPP
     let skillpoints = player_build.total_skillpoints;
     let delta_total = 0;
     for (let i in skp_order) {
@@ -470,16 +465,23 @@ function calculateBuildStats() {
     for (let i in skp_order){ //big bren
         setText(skp_order[i] + "-skp-assign", "Manually Assigned: " + assigned[i]);
         setValue(skp_order[i] + "-skp", skillpoints[i]);
+        let linebreak = document.createElement("br");
+        linebreak.classList.add("itemp");
+        document.getElementById(skp_order[i] + "-skp-label").append(document.createElement("br"));
         setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+        if (assigned[i] > 100) {
+            let skp_warning = document.createElement("p");
+            skp_warning.classList.add("warning");
+            skp_warning.textContent += "WARNING: Cannot assign " + assigned[i] + " skillpoints in " + ["Strength","Dexterity","Intelligence","Defense","Agility"][i] + " manually.";
+            document.getElementById(skp_order[i]+"-skp-pct").appendChild(skp_warning);
+        }
     }
 
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpRow = document.createElement("tr");
-    //let skpSummary = document.createElement("p");
-    //skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: ( " + player_build.total_skillpoints.join(" | ") + " )";
     let skpSummary = document.createElement("td");
-    skpSummary.textContent = "Summary: Assigned "+player_build.assigned_skillpoints+" skillpoints. Total: (";
+    skpSummary.textContent = "Summary: Assigned " + player_build.assigned_skillpoints + " skillpoints. Total: (";
     skpSummary.classList.add("itemp");
     skpRow.appendChild(skpSummary);
     for (let i = 0; i < skp_order.length; i++){
@@ -499,31 +501,59 @@ function calculateBuildStats() {
             skpRow.appendChild(separator);
         }
     }
-    //summarybox.append(skpSummary);
-
+   
     let skpEnd = document.createElement("td");
     skpEnd.textContent = ")";
     skpEnd.classList.add("itemp");
     skpRow.append(skpEnd);
 
+    let remainingRow = document.createElement("tr");
+    remainingRow.classList.add("itemp");
+    let remainingSkp = document.createElement("td");
+    remainingSkp.classList.add("left");
+    let remainingSkpTitle = document.createElement("b");
+    remainingSkpTitle.textContent = "Remaining skillpoints: ";
+    let remainingSkpContent = document.createElement("b");
+    remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "< 0" : levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
+    remainingSkpContent.classList.add(levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "negative" : "positive");
+
+    remainingSkp.appendChild(remainingSkpTitle);
+    remainingSkp.appendChild(remainingSkpContent);
+
+    remainingRow.appendChild(remainingSkp);
+
     summarybox.append(skpRow);
+    summarybox.append(remainingRow);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
         let skpWarning = document.createElement("p");
+        //skpWarning.classList.add("itemp");
+        skpWarning.classList.add("warning");
         skpWarning.classList.add("itemp");
         skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
         let skpCount = document.createElement("p");
         skpCount.classList.add("itemp");
-        skpCount.textContent = "For level " + player_build.level + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
+        skpCount.textContent = "For level " + (player_build.level>101 ? "101+" : player_build.level)  + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
         summarybox.append(skpWarning);
         summarybox.append(skpCount);
     }
-    for(const item of player_build.items){
-        if(player_build.level < item.get("lvl")){
-            let lvlWarning = document.createElement("p");
-            lvlWarning.classList.add("itemp");
-            lvlWarning.textContent = "WARNING: The build is level " + player_build.level + " but " + item.get("name") + " requires level " + item.get("lvl") + " to use.";
-            summarybox.append(lvlWarning);
+    let lvlWarning;
+    for (const item of player_build.items) {
+        if (player_build.level < item.get("lvl")) {
+            if (!lvlWarning) {
+                lvlWarning = document.createElement("p");
+                lvlWarning.classList.add("itemp");
+                lvlWarning.classList.add("warning");
+                lvlWarning.textContent = "WARNING: A level 50 player cannot use some piece(s) of this build."
+            }
+            let baditem = document.createElement("p"); 
+                baditem.classList.add("nocolor");
+                baditem.classList.add("itemp"); 
+                baditem.textContent = item.get("name") + " requires level " + item.get("lvl") + " to use.";
+                lvlWarning.appendChild(baditem);
         }
+    }
+    if(lvlWarning){
+        summarybox.append(lvlWarning);
     }
 
     for (let i in player_build.items) {
@@ -538,11 +568,6 @@ function calculateBuildStats() {
 
     let defenseStats = player_build.getDefenseStats();
     displayDefenseStats(document.getElementById("build-defense-stats"),defenseStats);
-
-    
-    //let defenseStats = "";
-
-    //setHTML("build-defense-stats", "".concat(defenseStats));
 
     displayPoisonDamage(document.getElementById("build-poison-stats"),player_build);
 

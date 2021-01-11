@@ -229,6 +229,9 @@ function displayBuildStats(build, parent_id){
                     }
                 }
                 let id_val = stats.get(id);
+                if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+                    style === "positive" ? style = "negative" : style = "positive"; 
+                }
                 displayFixedID(active_elem, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
                     let style = "positive";
@@ -454,7 +457,6 @@ function displayExpandedItem(item, parent_id){
     //Show powder specials ;-;
     let powder_special = document.createElement("p");
     powder_special.classList.add("left");
-    powder_special.classList.add("itemp");
     let powders = item.get("powders");
     let element = "";
     let power = 0;
@@ -488,17 +490,6 @@ function displayExpandedItem(item, parent_id){
         if (item.get("category") === "weapon") {//weapon
             effects = powderSpecial["weaponSpecialEffects"];
             specialTitle.textContent = powderSpecial["weaponSpecialName"];
-            /*for (const [key,value] of effects) {
-                let effect = document.createElement("p");
-                effect.classList.add("itemp");
-                effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
-                if(key === "Damage"){
-                    effect.textContent += elementIcons[skp_elements.indexOf(element)];
-                }
-                specialEffects.appendChild(effect);
-            }
-            specialTitle.append(specialEffects); 
-            powder_special.appendChild(specialTitle);*/
         }else if (item.get("category") === "armor") {//armor
             effects = powderSpecial["armorSpecialEffects"];
             specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
@@ -527,9 +518,8 @@ function displayExpandedItem(item, parent_id){
     }
 
     //Show item tier
-    if (item.get("tier") & item.get("tier") !== " ") {
+    if (item.get("tier") && item.get("tier") !== " ") {
         let item_desc_elem = document.createElement('p');
-        item_desc_elem.classList.add('itemp');
         item_desc_elem.classList.add('left');
         item_desc_elem.classList.add(item.get("tier"));
         item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
@@ -539,9 +529,9 @@ function displayExpandedItem(item, parent_id){
 
 function displayFixedID(active, id, value, elemental_format, style) {
     if (style) {
-        if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+        /*if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
             style === "positive" ? style = "negative" : style = "positive"; 
-        }
+        }*/
         let row = document.createElement('tr');
         let desc_elem = document.createElement('td');
         desc_elem.classList.add('left');
