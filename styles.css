@@ -1,5 +1,5 @@
 .header {
-    padding: 2%;
+    padding: 2% 0% 0%;
     text-align: center;  
 }
 
@@ -12,16 +12,32 @@ th, td {
     padding-right: 20px;
 }
 
-.equipment {
-    padding: 4%;
+.nomargin {
+    padding: 0px;
+}
+
+.summary {
+    padding: 2% 4% 4%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
 
+div {
+    padding: 0%;
+}
+
+.equipment {
+    padding: 0%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    grid-template-rows: min-content auto;
+}
+
 .skillpoints {
-    padding: 4%;
+    padding: 0% 4% 2%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
@@ -93,10 +109,6 @@ a.link{
     margin: 2px 2%;
     width: 94%;
     margin-bottom: 16px;
-}
-/* VERY BAD. NEED FIX. */
-.spaceLeft {
-    padding-left: 5px;
 }
 
 .itemp, .damagep {
@@ -230,7 +242,7 @@ input {
     display: inline-block;
 }
 ::placeholder{
-    color: #ddd;
+    color: #aaa;
 }
 /* Tier colors tier colors */
 .Normal{
