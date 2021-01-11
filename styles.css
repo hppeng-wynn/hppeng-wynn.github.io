@@ -233,6 +233,6 @@ input {
 .Set{
     color:#5f5;
 }
-.restrict {
+.restrict, .warning {
     color: #ff8180;
 }
