@@ -694,6 +694,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
             nonCritStats.append(dmg);
         }
     }
+
     let normalDamage = document.createElement("p");
     normalDamage.textContent = "Total: " + stats[6][0] + "-" + stats[6][1];
     normalDamage.classList.add("itemp");
@@ -703,6 +704,14 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     normalDPS.textContent = "Normal DPS: " + stats[8];
     normalDPS.classList.add("itemp");
     nonCritStats.append(normalDPS);
+
+    //overall average DPS
+    let singleHitDamage = document.createElement("p");
+    singleHitDamage.classList.add("itemp");
+    console.log(stats);
+    singleHitDamage.textContent = "Single Hit Average: " + stats[12].toFixed(2);
+    overallparent_elem.append(singleHitDamage);
+    overallparent_elem.append(document.createElement("br"));
     
     let normalChance = document.createElement("p");
     normalChance.textContent = "Non-Crit Chance: " + (stats[6][2]*100).toFixed(2) + "%"; 

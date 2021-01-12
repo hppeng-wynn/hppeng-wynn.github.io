@@ -1,4 +1,4 @@
-const damageMultipliers = new Map([ ["allytotem", .35], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10] ]);
+const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10] ]);
 // Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
 function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier) {
@@ -53,7 +53,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     //console.log(damages);
     //console.log(damageMult);
 
-    rawModifier *= spellMultiplier;
+    rawModifier *= spellMultiplier * damageMultiplier;
     let totalDamNorm = [0, 0];
     let totalDamCrit = [0, 0];
     if(!melee){       
