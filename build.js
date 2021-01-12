@@ -173,7 +173,7 @@ class Build{
         }
 
         // 0 for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.total_skillpoints);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.total_skillpoints, this.damageMultiplier);
         
         let dex = this.total_skillpoints[1];
 

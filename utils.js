@@ -119,7 +119,7 @@ function rawToPct(raw, pct){
     if (raw < 0){
         final = (Math.min(0, raw - (raw * pct) ));
     }else if(raw > 0){
-        final = (Math.max(0, raw + (raw * pct)));
+        final = raw + (raw * pct);
     }else{ //do nothing - final's already 0
     }
     return final;

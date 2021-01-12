@@ -273,7 +273,7 @@ function displayExpandedItem(item, parent_id){
         stats.set("atkSpd", item.get("atkSpd"));
         stats.set("damageBonus", [0, 0, 0, 0, 0]);
         stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0]);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1);
         let damages = results[2];
         let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
         for (const i in damage_keys) {
@@ -988,7 +988,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
             let _results = calculateSpellDamage(stats, part.conversion,
                                     stats.get("sdRaw"), stats.get("sdPct"), 
-                                    part.multiplier / 100, build.weapon, build.total_skillpoints);
+                                    part.multiplier / 100, build.weapon, build.total_skillpoints, build.damageMultiplier);
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
             let results = _results[2];

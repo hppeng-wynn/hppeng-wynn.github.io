@@ -345,6 +345,8 @@ function decodeBuild(url_tag) {
     }
 }
 
+/*  Stores the entire build in a string using B64 encryption and adds it to the URL.
+*/
 function encodeBuild() {
     if (player_build) {
         let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
@@ -445,6 +447,8 @@ function calculateBuild(save_skp, skp){
 
 }
 
+/* Updates all build statistics based on (for now) the skillpoint input fields and then calculates build stats.
+*/
 function updateStats() {
     //WILL BREAK WEBSITE IF NO BUILD HAS BEEN INITIALIZED! @HPP
     let skillpoints = player_build.total_skillpoints;
@@ -459,9 +463,26 @@ function updateStats() {
     player_build.assigned_skillpoints += delta_total;
     calculateBuildStats();
 }
+/* Updates all external boosts (boosts from spells + powders)
+*/
+function updateBoosts(buttonId) {
+    let elem = document.getElementById(buttonId);
+    if (elem.classList.contains("toggleOn")) {
+        player_build.damageMultiplier -= damageMultipliers.get(buttonId.split("-")[0]);
+        elem.classList.remove("toggleOn");
+        elem.classList.add("toggleOff");
+    }else{
+        player_build.damageMultiplier += damageMultipliers.get(buttonId.split("-")[0]);
+        elem.classList.remove("toggleOff");
+        elem.classList.add("toggleOn");
+    }
+    //displayPowderBoosts(); TODO WRITE
+    calculateBuildStats();
+}
 
+/* Calculates all build statistics and updates the entire display.
+*/
 function calculateBuildStats() {
-
     const assigned = player_build.base_skillpoints;
     const skillpoints = player_build.total_skillpoints;
     let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];

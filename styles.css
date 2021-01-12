@@ -236,3 +236,8 @@ input {
 .restrict, .warning {
     color: #ff8180;
 }
+
+button.toggleOn{
+    background-color:#0a0;
+    border: 3 px solid rgb(0, 70, 0); 
+}

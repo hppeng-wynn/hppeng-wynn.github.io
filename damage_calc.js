@@ -1,6 +1,7 @@
+const damageMultipliers = new Map([ ["allytotem", .35], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10] ]);
 // Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
-function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints) {
+function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier) {
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     let damages = [];
     for (const damage_string of stats.get("damageRaw")) {
@@ -39,7 +40,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages[element+1][1] += powder.max;
     }
 
-    let damageMult = 1;
+    let damageMult = damageMultiplier;
     let melee = false;
     // If we are doing melee calculations:
     if (spellMultiplier == 0) {
@@ -98,6 +99,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     if (totalDamCrit[1] < 0) totalDamCrit[1] = 0;
     return [totalDamNorm, totalDamCrit, damages_results];
 }
+
+
 
 const spell_table = {
     "wand": [
