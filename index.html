@@ -185,27 +185,206 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <button class = "button toggleOff" id = "vanish-boost" onclick = "updateBoosts('vanish-boost')">
+                                    <button class = "button" id = "vanish-boost" onclick = "updateBoosts('vanish-boost')">
                                         Vanish Boost (+80%)
                                     </button>
                                 </td>
                                 <td>
-                                    <button class = "button toggleOff" id = "warscream-boost" onclick = "updateBoosts('warscream-boost')">
+                                    <button class = "button" id = "warscream-boost" onclick = "updateBoosts('warscream-boost')">
                                         War Scream (+10%)
                                     </button>
                                 </td>
                                 <td>
-                                    <button class = "button toggleOff" id = "yourtotem-boost" onclick = "updateBoosts('yourtotem-boost')">
+                                    <button class = "button" id = "yourtotem-boost" onclick = "updateBoosts('yourtotem-boost')">
                                         Your Totem (+35%)
                                     </button>
                                 </td>
                                 <td>
-                                    <button class = "button toggleOff" id = "allytotem-boost" onclick = "updateBoosts('allytotem-boost')">
+                                    <button class = "button" id = "allytotem-boost" onclick = "updateBoosts('allytotem-boost')">
                                         Ally Totem (+15%)
                                     </button>
                                 </td>
                             </tr>
                         </table>
+                        <div class = "powder-specials">
+                            <div class = "powder-special-stats" style = "grid-column:1;grid-row:1">
+                                <div class = "center" id = "powder-special-stats">
+                                    <p class = "itemp">Powder Specials</p>
+                                </div>
+                            </div>
+                            <div style = "grid-column:2;grid-row:1">
+                                <div class = "powder-special" style = "grid-column:2;grid-row:1">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Earth">
+                                            Quake
+                                        </p>
+                                        <p class = "Quake itemp" id = "Quake">
+                                            <b>
+                                                <button class = "button" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1')">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2')">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3')">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4')">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5')">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:2">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Thunder">
+                                            Chain Lightning
+                                        </p>
+                                        <p class = "Chain_Lightning itemp" id = "Chain_Lightning">
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1')">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2')">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3')">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4')">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5')">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:3">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Water">
+                                            Curse
+                                        </p>
+                                        <p class = "Curse itemp" id = "Curse">
+                                            <b>
+                                                <button class = "button" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1')">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2')">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3')">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4')">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5')">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:4">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Fire">
+                                            Courage
+                                        </p>
+                                        <p class = "Courage itemp" id = "Courage">
+                                            <b>
+                                                <button class = "button" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1')">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2')">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3')">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4')">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5')">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:5">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Air">
+                                            Air Prison
+                                        </p>
+                                        <p class = "Air_Prison itemp" id = "Air_Prison">
+                                            <b>
+                                                <button class = "button" id = "Air_Prison-1" onclick = "updatePowderSpecials('Air_Prison-1')">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Air_Prison-2" onclick = "updatePowderSpecials('Air_Prison-2')">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Air_Prison-3" onclick = "updatePowderSpecials('Air_Prison-3')">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Air_Prison-4" onclick = "updatePowderSpecials('Air_Prison-4')">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Air_Prison-5" onclick = "updatePowderSpecials('Air_Prison-5')">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

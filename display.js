@@ -376,7 +376,7 @@ function displayExpandedItem(item, parent_id){
                     p_elem.appendChild(powderPrefix);
                     
                     let powders = item.get("powders");
-                    console.log(powders);
+                    //console.log(powders);
                     for (let i = 0; i < powders.length; i++) {
                         let powder = document.createElement("b");
                         powder.textContent = numerals.get((powders[i]%6)+1)+" ";
@@ -483,7 +483,6 @@ function displayExpandedItem(item, parent_id){
         }
     }
     if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
-        console.log(skp_elements.indexOf(element));
         let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
         let specialTitle = document.createElement("p");
@@ -660,7 +659,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //overall average DPS
     let overallaverageDamage = document.createElement("p");
     overallaverageDamage.classList.add("itemp");
-    console.log(stats);
     overallaverageDamage.textContent = "Average DPS: " + stats[10];
     overallparent_elem.append(overallaverageDamage);
     overallparent_elem.append(document.createElement("br"));
@@ -937,6 +935,65 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     }
 
     parent_elem.append(statsTable);
+}
+function displayPowderSpecials(parent_elem, powderSpecials) {
+    parent_elem.textContent = "Powder Specials";
+    let specials = powderSpecials.slice();
+    //each entry of powderSpecials is [ps, power]
+    for (special of specials) {
+        //iterate through the special and display it warp
+        let powder_special = document.createElement("p");
+        powder_special.classList.add("left");
+        let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
+        let specialTitle = document.createElement("p");
+        let specialEffects = document.createElement("p");
+        specialTitle.classList.add("left");
+        specialTitle.classList.add("itemp");
+        specialTitle.classList.add(damageClasses[powderSpecialStats.indexOf(special[0]) + 1]);
+        specialEffects.classList.add("left");
+        specialEffects.classList.add("itemp");
+        specialEffects.classList.add("nocolor");
+        let effects = special["weaponSpecialEffects"];
+        specialTitle.textContent = "bruh";  
+        //specialTitle.textContent = special["weaponSpecialName"];
+        /* 
+        if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
+            let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
+            let effects;
+            if (item.get("category") === "weapon") {//weapon
+                
+            }else if (item.get("category") === "armor") {//armor
+                effects = powderSpecial["armorSpecialEffects"];
+                specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
+            }
+            for (const [key,value] of effects) {
+                if (key !== "Description") {
+                    let effect = document.createElement("p");
+                    effect.classList.add("itemp");
+                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
+                    if(key === "Damage"){
+                        effect.textContent += elementIcons[skp_elements.indexOf(element)];
+                    }
+                    if (element === "w") {
+                        effect.textContent += " / Mana Used";
+                    }
+                    specialEffects.appendChild(effect);
+                }else{
+                    specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
+                }
+            }
+            specialTitle.append(specialEffects); 
+            powder_special.appendChild(specialTitle);
+            
+
+            parent_div.append(powder_special);
+        }
+        */
+       powder_special.appendChild(specialTitle);
+       powder_special.appendChild(specialEffects);
+       parent_elem.appendChild(powder_special);
+    }
+
 }
 function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";

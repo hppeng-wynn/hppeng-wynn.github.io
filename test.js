@@ -315,12 +315,10 @@ function decodeBuild(url_tag) {
             }
 
             let powder_info = info[1].slice(39);
-            console.log(powder_info);
             // TODO: Make this run in linear instead of quadratic time...
             for (let i = 0; i < 5; ++i) {
                 let powders = "";
                 let n_blocks = Base64.toInt(powder_info.charAt(0));
-                console.log(n_blocks + " blocks");
                 powder_info = powder_info.slice(1);
                 for (let j = 0; j < n_blocks; ++j) {
                     let block = powder_info.slice(0,5);
@@ -363,7 +361,6 @@ function encodeBuild() {
             build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
         }
         build_string += Base64.fromIntN(player_build.level, 2);
-        console.log(Base64.fromIntN(player_build.level, 2));
         for (const _powderset of player_build.powders) {
             let n_bits = Math.ceil(_powderset.length / 6);
             build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
@@ -463,23 +460,49 @@ function updateStats() {
     player_build.assigned_skillpoints += delta_total;
     calculateBuildStats();
 }
-/* Updates all external boosts (boosts from spells + powders)
+/* Updates all spell boosts
 */
 function updateBoosts(buttonId) {
     let elem = document.getElementById(buttonId);
     if (elem.classList.contains("toggleOn")) {
         player_build.damageMultiplier -= damageMultipliers.get(buttonId.split("-")[0]);
         elem.classList.remove("toggleOn");
-        elem.classList.add("toggleOff");
     }else{
         player_build.damageMultiplier += damageMultipliers.get(buttonId.split("-")[0]);
-        elem.classList.remove("toggleOff");
         elem.classList.add("toggleOn");
     }
-    //displayPowderBoosts(); TODO WRITE
     calculateBuildStats();
 }
 
+/* Updates all powder special boosts 
+*/
+function updatePowderSpecials(buttonId){
+    let name = (buttonId).split("-")[0];
+    let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Air Prison"];
+    let powderSpecials = []; // [ [special, power], [special, power]]
+    let elem = document.getElementById(buttonId);
+    if (elem.classList.contains("toggleOn")) {
+        elem.classList.remove("toggleOn");
+    }else {
+        for (let i = 1;i < 6; i++) {
+            document.getElementById(name + "-" + i).classList.remove("toggleOn");
+        }
+        elem.classList.add("toggleOn");
+    }
+    for (const sName of specialNames) {
+        for (let i = 1;i < 6; i++) {
+            if (document.getElementById(sName.replace(" ","_") + "-" + i).classList.contains("toggleOn")) {
+                let powderSpecial = powderSpecialStats[specialNames.indexOf(sName.replace("_"," "))]; 
+                powderSpecials.push([powderSpecial, i]);
+                break;
+            }   
+        }
+    }
+
+    //console.log(powderSpecials);
+    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials); 
+    calculateBuildStats(); //also make damage boosts apply ;-;
+}
 /* Calculates all build statistics and updates the entire display.
 */
 function calculateBuildStats() {

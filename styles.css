@@ -20,7 +20,7 @@ div {
     padding: 0%;
 }
 
-.equipment {
+.equipment{
     padding: 0%;
     display: grid;
     grid-template-columns: min-content min-content min-content;
@@ -32,6 +32,14 @@ div {
     padding: 0% 4% 2%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.powder-specials{
+    padding: 0% 4% 2%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
@@ -70,7 +78,7 @@ a.link{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
