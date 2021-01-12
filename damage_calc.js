@@ -188,5 +188,16 @@ const spell_table = {
         { title: "Uproot", cost: 6, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 50, conversion: [70, 30, 0, 0, 0, 0], summary: true },
             ] },
+    ],
+    "powder": [ //This is how instant-damage powder specials are implemented. To view time-boosted damage powder specials (curse, 2nd courage, air prison, view @TODO)
+        { title: "Quake", cost: 0, parts:[
+                {type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
+            ] },
+        { title: "Chain Lightning", cost: 0, parts: [
+                {type: "damage", multiplier: [80, 120, 160, 200, 240], conversion: [0,0,100,0,0,0], summary: true},
+            ]},
+        { title: "Courage", cost: 0, parts: [
+                {type: "damage", multiplier: [75,87.5,100,112.5,125], conversion: [0,0,0,0,100,0], summary: true},
+            ]},
     ]
 };
