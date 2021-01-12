@@ -151,8 +151,6 @@ for item in items:
             item[v] = item[k]
             del item[k]
 
-    if "skin" in item:
-
     if not (item["name"] in id_map):
         id_map[item["name"]] = len(id_map)
         print(f'New item: {item["name"]}')
@@ -161,8 +159,6 @@ for item in items:
     item["type"] = item["type"].lower()
     if item["name"] in item_set_map:
         item["set"] = item_set_map[item["name"]]
-
-exit(1)
 
 with open("1_20_ci.json", "r") as ci_file:
     ci_items = json.load(ci_file)
