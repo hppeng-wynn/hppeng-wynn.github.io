@@ -953,8 +953,21 @@ function displayPowderSpecials(parent_elem, powderSpecials) {
         specialEffects.classList.add("left");
         specialEffects.classList.add("itemp");
         specialEffects.classList.add("nocolor");
-        let effects = special["weaponSpecialEffects"];
-        specialTitle.textContent = "bruh";  
+        let effects = special[0]["weaponSpecialEffects"];
+        let power = special[1];
+        specialTitle.textContent = special[0]["weaponSpecialName"] + " " + power;  
+        for (const [key,value] of effects) {
+            let effect = document.createElement("p");
+            effect.classList.add("itemp");
+            effect.textContent += key + ": " + value[power-1] + specialSuffixes.get(key);
+            if(key === "Damage"){
+                effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
+            }
+            if (powderSpecials.indexOf(special[0]) == 2) {
+                effect.textContent += " / Mana Used";
+            }
+            specialEffects.appendChild(effect);
+        }
         //specialTitle.textContent = special["weaponSpecialName"];
         /* 
         if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
@@ -966,22 +979,7 @@ function displayPowderSpecials(parent_elem, powderSpecials) {
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            for (const [key,value] of effects) {
-                if (key !== "Description") {
-                    let effect = document.createElement("p");
-                    effect.classList.add("itemp");
-                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
-                    if(key === "Damage"){
-                        effect.textContent += elementIcons[skp_elements.indexOf(element)];
-                    }
-                    if (element === "w") {
-                        effect.textContent += " / Mana Used";
-                    }
-                    specialEffects.appendChild(effect);
-                }else{
-                    specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
-                }
-            }
+            
             specialTitle.append(specialEffects); 
             powder_special.appendChild(specialTitle);
             
