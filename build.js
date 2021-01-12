@@ -64,59 +64,59 @@ class Build{
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
             this.helmet = expandItem(helmet, this.powders[0]);
         }else{
-            throw new TypeError("No such helmet named ", equipment[0]);
+            throw new TypeError("No such helmet named "+ equipment[0]);
         }
-        if(itemMap.get(equipment[1]).type === "chestplate") {
+        if(itemMap.get(equipment[1]) && itemMap.get(equipment[1]).type === "chestplate") {
             const chestplate = itemMap.get(equipment[1]);
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
             this.chestplate = expandItem(chestplate, this.powders[1]);
         }else{
-            throw new TypeError("No such chestplate named ", equipment[1]);
+            throw new TypeError("No such chestplate named "+ equipment[1]);
         }
-        if(itemMap.get(equipment[2]).type === "leggings") {
+        if(itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
             const leggings = itemMap.get(equipment[2]);
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
         }else{
-            throw new TypeError("No such leggings named ", equipment[2]);
+            throw new TypeError("No such leggings named "+ equipment[2]);
         }
-        if(itemMap.get(equipment[3]).type === "boots") {
+        if(itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
             const boots = itemMap.get(equipment[3]);
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
             this.boots = expandItem(boots, this.powders[3]);
         }else{
-            throw new TypeError("No such boots named ", equipment[3]);
+            throw new TypeError("No such boots named "+ equipment[3]);
         }
-        if(itemMap.get(equipment[4]).type === "ring") {
+        if(itemMap.get(equipment[4]) && itemMap.get(equipment[4]).type === "ring") {
             const ring = itemMap.get(equipment[4]);
             this.ring1 = expandItem(ring, []);
         }else{
-            throw new TypeError("No such ring named ", equipment[4]);
+            throw new TypeError("No such ring named "+ equipment[4]);
         }
-        if(itemMap.get(equipment[5]).type === "ring") {
+        if(itemMap.get(equipment[5]) && itemMap.get(equipment[5]).type === "ring") {
             const ring = itemMap.get(equipment[5]);
             this.ring2 = expandItem(ring, []);
         }else{
-            throw new TypeError("No such ring named ", equipment[5]);
+            throw new TypeError("No such ring named "+ equipment[5]);
         }
-        if(itemMap.get(equipment[6]).type === "bracelet") {
+        if(itemMap.get(equipment[6]) && itemMap.get(equipment[6]).type === "bracelet") {
             const bracelet = itemMap.get(equipment[6]);
             this.bracelet = expandItem(bracelet, []);
         }else{
-            throw new TypeError("No such bracelet named ", equipment[6]);
+            throw new TypeError("No such bracelet named "+ equipment[6]);
         }
-        if(itemMap.get(equipment[7]).type === "necklace") {
+        if(itemMap.get(equipment[7]) && itemMap.get(equipment[7]).type === "necklace") {
             const necklace = itemMap.get(equipment[7]);
             this.necklace = expandItem(necklace, []);
         }else{
-            throw new TypeError("No such necklace named ", equipment[7]);
+            throw new TypeError("No such necklace named "+ equipment[7]);
         }
-        if(itemMap.get(equipment[8]).category === "weapon") {
+        if(itemMap.get(equipment[8]) && itemMap.get(equipment[8]).category === "weapon") {
             const weapon = itemMap.get(equipment[8]);
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
             this.weapon = expandItem(weapon, this.powders[4]);
         }else{
-            throw new TypeError("No such weapon named ", equipment[8]);
+            throw new TypeError("No such weapon named "+ equipment[8]);
         }
         if(level < 1){ //Should these be constants?
             this.level = 1;

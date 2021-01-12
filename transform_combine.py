@@ -4,6 +4,8 @@ NOTE!!!!!!!
 
 DEMON TIDE 1.20 IS HARD CODED!
 
+AMBIVALENCE IS REMOVED!
+
 """
 
 import json

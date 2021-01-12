@@ -11,9 +11,13 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.8.2";
+const BUILD_VERSION = "6.8.3";
 
-document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+function setTitle() {
+    document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+}
+
+setTitle();
 
 let player_build;
 // Set up item lists for quick access later.
@@ -383,65 +387,91 @@ function encodeBuild() {
 }
 
 function calculateBuild(save_skp, skp){
-    save_skp = (typeof save_skp !== 'undefined') ?  save_skp : false;
-    /*  TODO: implement level changing
-        Make this entire function prettier
-    */
-    let equipment = [ null, null, null, null, null, null, null, null, null ];
-    for (let i in equipment) {
-        let equip = getValue(equipmentInputs[i]);
-        if (equip === "") equip = "No " + equipment_names[i];
-        equipment[i] = equip;
-    }
-    let powderings = [];
-    for (const i in powderInputs) {
-        // read in two characters at a time.
-        // TODO: make this more robust.
-        let input = getValue(powderInputs[i]);
-        let powdering = [];
-        while (input) {
-            let first = input.slice(0, 2);
-            powdering.push(powderIDs.get(first));
-            input = input.slice(2);
+    try {
+        for (const boost of ["vanish", "warscream", "yourtotem", "allytotem"]) {
+            let elem = document.getElementById(boost+"-boost");
+            elem.classList.remove("toggleOn");
         }
-        powderings.push(powdering);
-    }
-    //level setting
-    let level = document.getElementById("level-choice").value;
-    if(level === ""){
-        level = 106;
-    }
-    document.getElementById("level-choice").value = level;
-
-    console.log(equipment);
-    player_build = new Build(level, equipment, powderings);
-    console.log(player_build.toString());
-    displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
-
-    
-
-    const assigned = player_build.base_skillpoints;
-    const skillpoints = player_build.total_skillpoints;
-    for (let i in skp_order){ //big bren
-        setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
-    }
-    
-    if (save_skp) {
-        // TODO: reduce duplicated code, @updateStats
-        let skillpoints = player_build.total_skillpoints;
-        let delta_total = 0;
-        for (let i in skp_order) {
-            let manual_assigned = skp[i];
-            let delta = manual_assigned - skillpoints[i];
-            skillpoints[i] = manual_assigned;
-            player_build.base_skillpoints[i] += delta;
-            delta_total += delta;
+        save_skp = (typeof save_skp !== 'undefined') ?  save_skp : false;
+        /*  TODO: implement level changing
+            Make this entire function prettier
+        */
+        let equipment = [ null, null, null, null, null, null, null, null, null ];
+        for (let i in equipment) {
+            let equip = getValue(equipmentInputs[i]);
+            if (equip === "") equip = "No " + equipment_names[i];
+            equipment[i] = equip;
         }
-        player_build.assigned_skillpoints += delta_total;
-    }
-    
-    calculateBuildStats();
+        let powderings = [];
+        for (const i in powderInputs) {
+            // read in two characters at a time.
+            // TODO: make this more robust.
+            let input = getValue(powderInputs[i]);
+            let powdering = [];
+            while (input) {
+                let first = input.slice(0, 2);
+                let powder = powderIDs.get(first);
+                console.log(powder);
+                if (powder === undefined) {
+                    throw new TypeError("Invalid powder " + powder + " in slot " + i);
+                }
+                powdering.push(powder);
+                input = input.slice(2);
+            }
+            powderings.push(powdering);
+        }
+        //level setting
+        let level = document.getElementById("level-choice").value;
+        if(level === ""){
+            level = 106;
+        }
+        document.getElementById("level-choice").value = level;
 
+        console.log(equipment);
+        player_build = new Build(level, equipment, powderings);
+        console.log(player_build.toString());
+        displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
+
+        
+
+        const assigned = player_build.base_skillpoints;
+        const skillpoints = player_build.total_skillpoints;
+        for (let i in skp_order){ //big bren
+            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+        }
+        
+        if (save_skp) {
+            // TODO: reduce duplicated code, @updateStats
+            let skillpoints = player_build.total_skillpoints;
+            let delta_total = 0;
+            for (let i in skp_order) {
+                let manual_assigned = skp[i];
+                let delta = manual_assigned - skillpoints[i];
+                skillpoints[i] = manual_assigned;
+                player_build.base_skillpoints[i] += delta;
+                delta_total += delta;
+            }
+            player_build.assigned_skillpoints += delta_total;
+        }
+        
+        calculateBuildStats();
+        setTitle();
+    }
+    catch (error) {
+        let msg = error.stack;
+        let lines = msg.split("\n");
+        let header = document.getElementById("header");
+        header.textContent = "";
+        for (const line of lines) {
+            let p = document.createElement("p");
+            p.classList.add("itemp");
+            p.textContent = line;
+            header.appendChild(p);
+        }
+        let p2 = document.createElement("p");
+        p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+        header.appendChild(p2);
+    }
 }
 
 /* Updates all build statistics based on (for now) the skillpoint input fields and then calculates build stats.

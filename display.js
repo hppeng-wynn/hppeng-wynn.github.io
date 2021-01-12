@@ -50,7 +50,7 @@ function expandItem(item, powders){
     expandedItem.set("maxRolls",maxRolls);
     expandedItem.set("powders", powders);
     
-    if(expandedItem.has("eDef")){ //item is armor
+    if(expandedItem.get("category") == "armor"){ //item is armor
         for(const id of powders){
             //console.log(powderStats[id]);
             let powder = powderStats[id];
@@ -708,7 +708,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //overall average DPS
     let singleHitDamage = document.createElement("p");
     singleHitDamage.classList.add("itemp");
-    console.log(stats);
     singleHitDamage.textContent = "Single Hit Average: " + stats[12].toFixed(2);
     overallparent_elem.append(singleHitDamage);
     overallparent_elem.append(document.createElement("br"));
