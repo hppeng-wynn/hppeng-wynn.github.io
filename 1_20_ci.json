@@ -169,9 +169,9 @@
     "hprRaw": 150,
     "ls": 220,
     "ref": 17,
-    "spPct1": -13,
-    "spPct2": -26,
-    "spPct3": -19,
+    "spPct1": -10,
+    "spPct2": -20,
+    "spPct3": -15,
     "id": 10104
   },
   {
@@ -1008,10 +1008,10 @@
     "mr": -5,
     "ms": -5,
     "sdPct": 30,
-    "spPct1": -39,
-    "spPct2": -39,
-    "spPct3": -39,
-    "spPct4": -39,
+    "spPct1": -38,
+    "spPct2": -38,
+    "spPct3": -38,
+    "spPct4": -38,
     "id": 10129
   },
   {
@@ -1548,9 +1548,9 @@
     "atkTier": -1,
     "poison": 1000,
     "sdPct": 30,
-    "spPct2": -60,
-    "spPct3": -39,
-    "spPct4": -45,
+    "spPct2": -46,
+    "spPct3": -30,
+    "spPct4": -35,
     "id": 10144
   },
   {
@@ -2852,8 +2852,8 @@
     "agi": 0,
     "mr": 6,
     "sdPct": 75,
-    "spPct3": 73,
-    "spPct4": 73,
+    "spPct3": 56,
+    "spPct4": 56,
     "spRaw3": 1,
     "spRaw4": 1,
     "id": 10182
@@ -4624,7 +4624,7 @@
     "fDamPct": 20,
     "eDefPct": 45,
     "tDefPct": 45,
-    "spRaw1": -5,
+    "spRaw1": -4,
     "id": 10233
   },
   {
@@ -4661,9 +4661,9 @@
     "atkTier": 3,
     "hpBonus": -5000,
     "tDamPct": -30,
-    "spPct1": -130,
-    "spPct2": -130,
-    "spPct3": -130,
+    "spPct1": -100,
+    "spPct2": -100,
+    "spPct3": -100,
     "id": 10234
   },
   {
@@ -4836,7 +4836,7 @@
     "fDamPct": 10,
     "fDefPct": 100,
     "aDefPct": 50,
-    "spPct4": -65,
+    "spPct4": -50,
     "id": 10239
   },
   {
@@ -5834,7 +5834,7 @@
     "ms": 1,
     "atkTier": -2,
     "sdPct": 6,
-    "spPct3": 13,
+    "spPct3": 10,
     "id": 10269
   },
   {
@@ -6814,7 +6814,7 @@
     "ref": 30,
     "aDamPct": 25,
     "aDefPct": 10,
-    "spRaw2": -4,
+    "spRaw2": -3,
     "jh": 2,
     "id": 10297
   },
@@ -7194,8 +7194,8 @@
     "sdPct": 10,
     "mdPct": -10,
     "wDamPct": -10,
-    "spPct1": -26,
-    "spPct2": -13,
+    "spPct1": -20,
+    "spPct2": -10,
     "sprint": 11,
     "sprintReg": 11,
     "id": 10308
@@ -8253,8 +8253,8 @@
     "tDamPct": 30,
     "eDefPct": -55,
     "wDefPct": -45,
-    "spPct2": -26,
-    "spPct3": -19,
+    "spPct2": -20,
+    "spPct3": -15,
     "id": 10338
   },
   {
@@ -8537,8 +8537,8 @@
     "ls": 150,
     "xpb": 25,
     "lb": 25,
-    "spPct2": -58,
-    "spPct4": -19,
+    "spPct2": -45,
+    "spPct4": -15,
     "jh": 2,
     "id": 10346
   },
@@ -8777,9 +8777,9 @@
     "hprRaw": -40,
     "ms": 3,
     "sdPct": 20,
-    "spPct1": 390,
-    "spPct3": -104,
-    "spRaw4": 3,
+    "spPct1": 300,
+    "spPct3": -80,
+    "spRaw4": 2,
     "id": 10353
   },
   {
@@ -9588,7 +9588,7 @@
     "ref": 90,
     "aDamPct": 15,
     "spRaw1": 1,
-    "spRaw2": -130,
+    "spRaw2": -100,
     "id": 10376
   },
   {
