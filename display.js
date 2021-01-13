@@ -103,6 +103,12 @@ function displaySetBonuses(build, parent_id) {
     set_summary_elem.classList.add('itemcenter');
     set_summary_elem.textContent = "Set Bonuses:";
     parent_div.append(set_summary_elem);
+    
+    if (build.activeSetCounts.size) {
+        parent_div.parentElement.style.visibility = "visible";
+    } else {
+        parent_div.parentElement.style.visibility = "hidden";
+    }
 
     for (const [setName, count] of build.activeSetCounts) {
         let set_elem = document.createElement('p');
@@ -1060,9 +1066,9 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                     results[i][j] = results[i][j].toFixed(2);
                 }
             }
-            let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2;
-            let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2;
-            let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage;
+            let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
+            let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
+            let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
 
             let averageLabel = document.createElement("p");
             averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
