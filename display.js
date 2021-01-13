@@ -944,9 +944,10 @@ function displayDefenseStats(parent_elem, build, insertSummary){
 
     parent_elem.append(statsTable);
 }
-function displayPowderSpecials(parent_elem, powderSpecials) {
+function displayPowderSpecials(parent_elem, powderSpecials, build) {
     parent_elem.textContent = "Powder Specials";
     let specials = powderSpecials.slice();
+    let stats = build.statMap;
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
         //iterate through the special and display it warp
@@ -963,7 +964,7 @@ function displayPowderSpecials(parent_elem, powderSpecials) {
         specialEffects.classList.add("nocolor");
         let effects = special[0]["weaponSpecialEffects"];
         let power = special[1];
-        specialTitle.textContent = special[0]["weaponSpecialName"] + " " + power;  
+        specialTitle.textContent = special[0]["weaponSpecialName"] + " " + Math.floor((power-1)*0.5 + 4) + (power % 2 == 0 ? ".5" : "");  
         for (const [key,value] of effects) {
             let effect = document.createElement("p");
             effect.classList.add("itemp");
@@ -976,25 +977,6 @@ function displayPowderSpecials(parent_elem, powderSpecials) {
             }
             specialEffects.appendChild(effect);
         }
-        //specialTitle.textContent = special["weaponSpecialName"];
-        /* 
-        if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
-            let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
-            let effects;
-            if (item.get("category") === "weapon") {//weapon
-                
-            }else if (item.get("category") === "armor") {//armor
-                effects = powderSpecial["armorSpecialEffects"];
-                specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
-            }
-            
-            specialTitle.append(specialEffects); 
-            powder_special.appendChild(specialTitle);
-            
-
-            parent_div.append(powder_special);
-        }
-        */
        powder_special.appendChild(specialTitle);
        powder_special.appendChild(specialEffects);
        parent_elem.appendChild(powder_special);

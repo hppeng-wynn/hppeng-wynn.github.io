@@ -530,7 +530,7 @@ function updatePowderSpecials(buttonId){
     }
 
     //console.log(powderSpecials);
-    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials); 
+    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
     calculateBuildStats(); //also make damage boosts apply ;-;
 }
 /* Calculates all build statistics and updates the entire display.
