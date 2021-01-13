@@ -956,7 +956,7 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
     let stats = build.statMap;
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
-        //iterate through the special and display it warp
+        //iterate through the special and display its effects.
         let powder_special = document.createElement("p");
         powder_special.classList.add("left");
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
@@ -978,16 +978,28 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
             if(key === "Damage"){
                 effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
             }
-            if (powderSpecials.indexOf(special[0]) == 2) {
-                effect.textContent += " / Mana Used";
-            }
             specialEffects.appendChild(effect);
         }
-       powder_special.appendChild(specialTitle);
-       powder_special.appendChild(specialEffects);
-       parent_elem.appendChild(powder_special);
-    }
 
+        powder_special.appendChild(specialTitle);
+        powder_special.appendChild(specialEffects);
+
+        //if this special is an instant-damage special (Quake, Chain Lightning, Courage Burst), display the damage.
+        let specialDamage = document.createElement("p");
+        console.log(special[0]);
+        if (powderSpecialStats.indexOf(special[0]) == 0) { //Quake
+            displaySpellDamage(0, specialDamage, build, spell_table["powder"][0], 0);
+            powder_special.append(specialDamage);
+        } else if (powderSpecialStats.indexOf(special[0]) == 1) { //Chain Lightning
+            displaySpellDamage(0, specialDamage, build, spell_table["powder"][1], 0);
+            powder_special.append(specialDamage);
+        } else if (powderSpecialStats.indexOf(special[0]) == 3) { //Courage
+            displaySpellDamage(0, specialDamage, build, spell_table["powder"][2], 0);
+            powder_special.append(specialDamage);
+        }
+
+        parent_elem.appendChild(powder_special);
+    }
 }
 function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";

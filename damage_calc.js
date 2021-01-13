@@ -194,10 +194,10 @@ const spell_table = {
                 {type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
             ] },
         { title: "Chain Lightning", cost: 0, parts: [
-                {type: "damage", multiplier: [80, 120, 160, 200, 240], conversion: [0,0,100,0,0,0], summary: true},
+                {type: "damage", multiplier: [200, 225, 250, 275, 300], conversion: [0,0,100,0,0,0], summary: true},
             ]},
         { title: "Courage", cost: 0, parts: [
-                {type: "damage", multiplier: [75,87.5,100,112.5,125], conversion: [0,0,0,0,100,0], summary: true},
+                {type: "damage", multiplier: [75, 87.5, 100, 112.5, 125], conversion: [0,0,0,0,100,0], summary: true},
             ]},
     ]
 };
