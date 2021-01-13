@@ -986,17 +986,85 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
 
         //if this special is an instant-damage special (Quake, Chain Lightning, Courage Burst), display the damage.
         let specialDamage = document.createElement("p");
-        console.log(special[0]);
-        if (powderSpecialStats.indexOf(special[0]) == 0) { //Quake
-            displaySpellDamage(0, specialDamage, build, spell_table["powder"][0], 0);
+        let spells = spell_table["powder"];
+        if (powderSpecialStats.indexOf(special[0]) == 0 || powderSpecialStats.indexOf(special[0]) == 1 || powderSpecialStats.indexOf(special[0]) == 3) { //Quake
+            let spell = (powderSpecialStats.indexOf(special[0]) == 3 ? spells[2] : spells[powderSpecialStats.indexOf(special[0])]);
+            let part = spell["parts"][0];
+            let _results = calculateSpellDamage(stats, part.conversion,
+                stats.get("mdRaw"), stats.get("mdPct"), 
+                0, build.weapon, build.total_skillpoints, build.damageMultiplier * part.multiplier[power-1] / 100);//part.multiplier[power] / 100
+
+            let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
+            let save_damages = [];
+            
+            let totalDamNormal = _results[0];
+            let totalDamCrit = _results[1];
+            let results = _results[2];
+            for (let i = 0; i < 6; ++i) {
+                for (let j in results[i]) {
+                    results[i][j] = results[i][j].toFixed(2);
+                }
+            }
+            let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
+            let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
+            let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
+
+            let averageLabel = document.createElement("p");
+            averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
+            averageLabel.classList.add("damageSubtitle");
+            specialDamage.append(averageLabel);
+
+
+            let nonCritLabel = document.createElement("p");
+            nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
+            nonCritLabel.classList.add("damageSubtitle");
+            specialDamage.append(nonCritLabel);
+            
+            for (let i = 0; i < 6; i++){
+                if (results[i][1] > 0){
+                    let p = document.createElement("p");
+                    p.classList.add("damagep");
+                    p.classList.add(damageClasses[i]);
+                    p.textContent = results[i][0]+"-"+results[i][1];
+                    specialDamage.append(p);
+                }
+            }
+            let normalDamage = document.createElement("p");
+            normalDamage.textContent = "Total: " + totalDamNormal[0].toFixed(2) + "-" + totalDamNormal[1].toFixed(2);
+            normalDamage.classList.add("itemp");
+            specialDamage.append(normalDamage);
+
+            let nonCritChanceLabel = document.createElement("p");
+            nonCritChanceLabel.textContent = "Non-Crit Chance: " + ((1-critChance)*100).toFixed(2)  + "%";
+            specialDamage.append(nonCritChanceLabel);
+
+            let critLabel = document.createElement("p");
+            critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
+            critLabel.classList.add("damageSubtitle");
+            
+            specialDamage.append(critLabel);
+            for (let i = 0; i < 6; i++){
+                if (results[i][1] > 0){
+                    let p = document.createElement("p");
+                    p.classList.add("damagep");
+                    p.classList.add(damageClasses[i]);
+                    p.textContent = results[i][2]+"-"+results[i][3];
+                    specialDamage.append(p);
+                }
+            }
+            let critDamage = document.createElement("p");
+            critDamage.textContent = "Total: " + totalDamCrit[0].toFixed(2) + "-" + totalDamCrit[1].toFixed(2);
+            critDamage.classList.add("itemp");
+            specialDamage.append(critDamage);
+
+            let critChanceLabel = document.createElement("p");
+            critChanceLabel.textContent = "Crit Chance: " + (critChance*100).toFixed(2) + "%";
+            specialDamage.append(critChanceLabel);
+
+            save_damages.push(averageDamage);
+
             powder_special.append(specialDamage);
-        } else if (powderSpecialStats.indexOf(special[0]) == 1) { //Chain Lightning
-            displaySpellDamage(0, specialDamage, build, spell_table["powder"][1], 0);
-            powder_special.append(specialDamage);
-        } else if (powderSpecialStats.indexOf(special[0]) == 3) { //Courage
-            displaySpellDamage(0, specialDamage, build, spell_table["powder"][2], 0);
-            powder_special.append(specialDamage);
-        }
+        } 
 
         parent_elem.appendChild(powder_special);
     }

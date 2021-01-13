@@ -505,6 +505,7 @@ function updateBoosts(buttonId) {
         player_build.damageMultiplier += damageMultipliers.get(buttonId.split("-")[0]);
         elem.classList.add("toggleOn");
     }
+    updatePowderSpecials("skip"); //jank pt 1
     calculateBuildStats();
 }
 
@@ -514,15 +515,18 @@ function updatePowderSpecials(buttonId){
     let name = (buttonId).split("-")[0];
     let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Air Prison"];
     let powderSpecials = []; // [ [special, power], [special, power]]
-    let elem = document.getElementById(buttonId);
-    if (elem.classList.contains("toggleOn")) {
-        elem.classList.remove("toggleOn");
-    }else {
-        for (let i = 1;i < 6; i++) {
-            document.getElementById(name + "-" + i).classList.remove("toggleOn");
+    if(name !== "skip"){
+        let elem = document.getElementById(buttonId);
+        if (elem.classList.contains("toggleOn")) {
+            elem.classList.remove("toggleOn");
+        }else {
+            for (let i = 1;i < 6; i++) {
+                document.getElementById(name + "-" + i).classList.remove("toggleOn");
+            }
+            elem.classList.add("toggleOn");
         }
-        elem.classList.add("toggleOn");
     }
+   
     for (const sName of specialNames) {
         for (let i = 1;i < 6; i++) {
             if (document.getElementById(sName.replace(" ","_") + "-" + i).classList.contains("toggleOn")) {
