@@ -427,6 +427,10 @@ function calculateBuild(save_skp, skp){
         }
         document.getElementById("level-choice").value = level;
 
+        for (let i of document.getElementsByClassName("hide-container")) {
+			i.style.visibility = "visible";
+		}
+
         console.log(equipment);
         player_build = new Build(level, equipment, powderings);
         console.log(player_build.toString());
