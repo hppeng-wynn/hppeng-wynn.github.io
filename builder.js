@@ -15,6 +15,7 @@ const BUILD_VERSION = "6.9";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+    document.getElementById("header").classList.add("funnynumber");
 }
 
 setTitle();
@@ -406,6 +407,7 @@ function calculateBuild(save_skp, skp){
                             //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
                             player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                            player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         } else if (name === "Air Prison") {
                             player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
@@ -525,6 +527,7 @@ function updateStats() {
                         //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
                         player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                        player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                     }  else if (name === "Air Prison") {
                         player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
@@ -541,7 +544,21 @@ function updateStats() {
     let skillpoints = player_build.total_skillpoints;
     let delta_total = 0;
     for (let i in skp_order) {
-        let manual_assigned = getValue(skp_order[i] + "-skp");
+        let value = document.getElementById(skp_order[i] + "-skp").value;
+        let manual_assigned = 0;
+        if (value.includes("+")) {
+            let skp = value.split("+");
+            for (const s of skp) {
+                manual_assigned += parseInt(s,10);
+            }
+        } else if (value.includes("-")) {
+            let skp = value.split("-");
+            for (const s of skp) {
+                manual_assigned -= parseInt(s,10);
+            }
+        } else {
+            manual_assigned = parseInt(value,10);
+        }
         let delta = manual_assigned - skillpoints[i];
         skillpoints[i] = manual_assigned;
         player_build.base_skillpoints[i] += delta;
@@ -554,11 +571,18 @@ function updateStats() {
 */
 function updateBoosts(buttonId) {
         let elem = document.getElementById(buttonId);
+        let name = buttonId.split("-")[0];
         if (elem.classList.contains("toggleOn")) {
-            player_build.damageMultiplier -= damageMultipliers.get(buttonId.split("-")[0]);
+            player_build.damageMultiplier -= damageMultipliers.get(name);
+            if (name === "warscream") {
+                player_build.defenseMultiplier -= .10;
+            }
             elem.classList.remove("toggleOn");
         }else{
-            player_build.damageMultiplier += damageMultipliers.get(buttonId.split("-")[0]);
+            player_build.damageMultiplier += damageMultipliers.get(name);
+            if (name === "warscream") {
+                player_build.defenseMultiplier += .10;
+            }
             elem.classList.add("toggleOn");
         }
         updatePowderSpecials("skip"); //jank pt 1
@@ -585,6 +609,7 @@ function updatePowderSpecials(buttonId){
                 if (name === "Courage" || name === "Curse") { //courage and curse are universal damage boost
                     player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     //poison?
                 } else if (name === "Air Prison") {
                     player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
@@ -603,6 +628,7 @@ function updatePowderSpecials(buttonId){
                             //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
                             player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                            player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         } else if (name === "Air Prison") {
                             player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
@@ -635,6 +661,7 @@ function updatePowderSpecials(buttonId){
                 if (name === "Courage" || name === "Curse") { //courage and curse are is universal damage boost
                     player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                 } else if (name === "Air Prison") {
                     player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.get("damageBonus")[4] += special.weaponSpecialEffects.get("Damage Boost")[power-1];
@@ -644,7 +671,9 @@ function updatePowderSpecials(buttonId){
     }
 
     displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
-    calculateBuildStats(); //also make damage boosts apply ;-;
+    if (name !== "skip") {
+        calculateBuildStats(); //also make damage boosts apply ;-;
+    }
 }
 /* Calculates all build statistics and updates the entire display.
 */

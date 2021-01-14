@@ -138,6 +138,7 @@ class Build{
         
         // For strength boosts like warscream, vanish, etc.
         this.damageMultiplier = 1.0;
+        this.defenseMultiplier = 1.0;
 
         // For other external boosts ;-;
         this.externalStats = externalStats;
@@ -212,19 +213,19 @@ class Build{
         //EHP
         let ehp = [totalHp, totalHp];
         let defMult = classDefenseMultipliers.get(this.weapon.get("type"));
-        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult));         
-        ehp[1] /= ((1-def_pct)*(2-defMult));    
+        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier));         
+        ehp[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier));    
         defenseStats.push(ehp);
         //HPR
         let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
         defenseStats.push(totalHpr);
         //EHPR
         let ehpr = [totalHpr, totalHpr];
-        ehpr[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
-        ehpr[1] /= ((1-def_pct)*(2-defMult)); 
+        ehpr[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier)); 
+        ehpr[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier)); 
         defenseStats.push(ehpr);
         //skp stats
-        defenseStats.push([def_pct*100, agi_pct*100]);
+        defenseStats.push([ (1 - ((1-def_pct) * (2 - this.defenseMultiplier)))*100, agi_pct*100]);
         //eledefs - TODO POWDERS
         let eledefs = [0, 0, 0, 0, 0];
         for(const i in skp_elements){ //kinda jank but ok
@@ -251,7 +252,7 @@ class Build{
             statMap.set(staticID, 0);
         }
         statMap.set("hp", levelToHPBase(this.level)); //TODO: Add player base health
-        
+
         for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
                 statMap.set(id,(statMap.get(id) || 0)+value);
@@ -280,6 +281,8 @@ class Build{
         statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
         statMap.set("defRaw", [statMap.get("eDam"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
         statMap.set("defBonus", [statMap.get("eDamPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
+        statMap.set("poisonPct", 100);
+
         for (const x of skp_elements) {
             this.externalStats.set(x + "DamPct", 0);
         }
@@ -287,6 +290,7 @@ class Build{
         this.externalStats.set("sdPct", 0);
         this.externalStats.set("damageBonus", [0, 0, 0, 0, 0]);
         this.externalStats.set("defBonus",[0, 0, 0, 0, 0]);
+        this.externalStats.set("poisonPct", 0);
         this.statMap = statMap;
     }
 

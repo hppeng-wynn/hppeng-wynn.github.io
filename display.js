@@ -246,6 +246,9 @@ function displayBuildStats(build, parent_id){
                 if (reversedIDs.filter(e => e !== "atkTier").includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
+                if (id === "poison" && id_val > 0) {
+                    id_val = Math.round(id_val*(build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100);
+                }
                 displayFixedID(active_elem, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
                     let style = "positive";
@@ -257,7 +260,7 @@ function displayBuildStats(build, parent_id){
                     prefix_elem.textContent = "-> With Strength: ";
                     let number_elem = document.createElement('b');
                     number_elem.classList.add(style);
-                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(build.total_skillpoints[0]))).toFixed(0) + idSuffixes[id];
+                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(build.total_skillpoints[0])) ).toFixed(0) + idSuffixes[id];
                     value_elem.append(prefix_elem);
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
@@ -612,7 +615,7 @@ function displayPoisonDamage(overallparent_elem, build) {
 
     let overallpoisonDamage = document.createElement("p");
     overallpoisonDamage.classList.add("itemp");
-    let poison_tick = Math.floor(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0]))/3);
+    let poison_tick = Math.round(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
     overallpoisonDamage.textContent = "Poison Tick: " + Math.max(poison_tick,0);
     overallparent_elem.append(overallpoisonDamage);
     overallparent_elem.append(document.createElement("br"));
