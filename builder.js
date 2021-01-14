@@ -427,8 +427,11 @@ function calculateBuild(save_skp, skp){
         }
         document.getElementById("level-choice").value = level;
 
-        for (let i of document.getElementsByClassName("hide-container")) {
-			i.style.visibility = "visible";
+        for (let i of document.getElementsByClassName("hide-container-block")) {
+			i.style.display = "block";
+        }
+        for (let i of document.getElementsByClassName("hide-container-grid")) {
+			i.style.display = "grid";
 		}
 
         console.log(equipment);

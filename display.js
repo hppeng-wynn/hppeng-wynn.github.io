@@ -105,9 +105,9 @@ function displaySetBonuses(build, parent_id) {
     parent_div.append(set_summary_elem);
     
     if (build.activeSetCounts.size) {
-        parent_div.parentElement.style.visibility = "visible";
+        parent_div.parentElement.style.display = "block";
     } else {
-        parent_div.parentElement.style.visibility = "hidden";
+        parent_div.parentElement.style.display = "none";
     }
 
     for (const [setName, count] of build.activeSetCounts) {
