@@ -551,12 +551,7 @@ function updateStats() {
             for (const s of skp) {
                 manual_assigned += parseInt(s,10);
             }
-        } else if (value.includes("-")) {
-            let skp = value.split("-");
-            for (const s of skp) {
-                manual_assigned -= parseInt(s,10);
-            }
-        } else {
+        }  else {
             manual_assigned = parseInt(value,10);
         }
         let delta = manual_assigned - skillpoints[i];
