@@ -279,7 +279,7 @@ function displayExpandedItem(item, parent_id){
         stats.set("atkSpd", item.get("atkSpd"));
         stats.set("damageBonus", [0, 0, 0, 0, 0]);
         stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
         let damages = results[2];
         let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
         for (const i in damage_keys) {
@@ -954,6 +954,7 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
     parent_elem.textContent = "Powder Specials";
     let specials = powderSpecials.slice();
     let stats = build.statMap;
+    let expandedStats = new Map();
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
         //iterate through the special and display its effects.
@@ -978,6 +979,9 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
             if(key === "Damage"){
                 effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
             }
+            if(special[0]["weaponSpecialName"] === "Air Prison" && key === "Damage Boost") {
+                effect.textContent += " (only 1st hit)";
+            }
             specialEffects.appendChild(effect);
         }
 
@@ -987,12 +991,12 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
         //if this special is an instant-damage special (Quake, Chain Lightning, Courage Burst), display the damage.
         let specialDamage = document.createElement("p");
         let spells = spell_table["powder"];
-        if (powderSpecialStats.indexOf(special[0]) == 0 || powderSpecialStats.indexOf(special[0]) == 1 || powderSpecialStats.indexOf(special[0]) == 3) { //Quake
+        if (powderSpecialStats.indexOf(special[0]) == 0 || powderSpecialStats.indexOf(special[0]) == 1 || powderSpecialStats.indexOf(special[0]) == 3) { //Quake, Chain Lightning, or Courage
             let spell = (powderSpecialStats.indexOf(special[0]) == 3 ? spells[2] : spells[powderSpecialStats.indexOf(special[0])]);
             let part = spell["parts"][0];
             let _results = calculateSpellDamage(stats, part.conversion,
-                stats.get("mdRaw"), stats.get("mdPct"), 
-                0, build.weapon, build.total_skillpoints, build.damageMultiplier * part.multiplier[power-1] / 100);//part.multiplier[power] / 100
+                stats.get("mdRaw"), stats.get("mdPct") + build.externalStats.get("mdPct"), 
+                0, build.weapon, build.total_skillpoints, build.damageMultiplier * ((part.multiplier[power-1] / 100)), build.externalStats);//part.multiplier[power] / 100
 
             let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
             let save_damages = [];
@@ -1116,10 +1120,10 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             part_divavg.append(subtitle_elemavg);
         }
         if (part.type === "damage") {
-
+            //console.log(build.expandedStats);
             let _results = calculateSpellDamage(stats, part.conversion,
-                                    stats.get("sdRaw"), stats.get("sdPct"), 
-                                    part.multiplier / 100, build.weapon, build.total_skillpoints, build.damageMultiplier);
+                                    stats.get("sdRaw"), stats.get("sdPct") + build.externalStats.get("sdPct"), 
+                                    part.multiplier / 100, build.weapon, build.total_skillpoints, build.damageMultiplier, build.externalStats);
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
             let results = _results[2];

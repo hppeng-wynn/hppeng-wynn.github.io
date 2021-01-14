@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.8.5";
+const BUILD_VERSION = "6.9";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -402,14 +402,13 @@ function calculateBuild(save_skp, skp){
                     let special = powderSpecialStats[specialNames.indexOf(sName)];
                     console.log(special);
                     if (special["weaponSpecialEffects"].has("Damage Boost")) { 
-                        if (name === "Courage") { //courage is universal damage boost
-                            player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
-                        } else if (name === "Curse") {
-                            player_build.statMap.set("wDamPct", player_build.statMap.get("wDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.statMap.get("damageBonus")[2] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
+                        if (name === "Courage" || name === "Curse") { //courage is universal damage boost
+                            //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
+                            player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                            player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         } else if (name === "Air Prison") {
-                            player_build.statMap.set("aDamPct", player_build.statMap.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.statMap.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
+                            player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                            player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
                         }
                     }
                 }
@@ -458,9 +457,8 @@ function calculateBuild(save_skp, skp){
 			i.style.visibility = "visible";
 		}
 
-        console.log(equipment);
-        player_build = new Build(level, equipment, powderings);
-        console.log(player_build.toString());
+        player_build = new Build(level, equipment, powderings, new Map());
+        //console.log(player_build.toString());
         displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
         
@@ -508,6 +506,37 @@ function calculateBuild(save_skp, skp){
 /* Updates all build statistics based on (for now) the skillpoint input fields and then calculates build stats.
 */
 function updateStats() {
+    //direct copy of the ext buff un-check code from calculateBuild(). Redo if possible.
+    for (const boost of ["vanish", "warscream", "yourtotem", "allytotem"]) {
+        let elem = document.getElementById(boost+"-boost");
+        elem.classList.remove("toggleOn");
+    }
+    let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
+    for (const sName of specialNames) {
+        for (let i = 1; i < 6; i++) {
+            let elem = document.getElementById(sName + "-" + i);
+            let name = sName.replace("_", " ");
+            if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
+                elem.classList.remove("toggleOn");
+                let special = powderSpecialStats[specialNames.indexOf(sName)];
+                console.log(special);
+                if (special["weaponSpecialEffects"].has("Damage Boost")) { 
+                    if (name === "Courage" || name === "Curse") { //courage is universal damage boost
+                        //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
+                        player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                        player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                    }  else if (name === "Air Prison") {
+                        player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                        player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
+                    }
+                }
+            }
+        }
+    }
+    if(player_build){
+        updatePowderSpecials("skip");
+    }
+
     //WILL BREAK WEBSITE IF NO BUILD HAS BEEN INITIALIZED! @HPP
     let skillpoints = player_build.total_skillpoints;
     let delta_total = 0;
@@ -539,7 +568,7 @@ function updateBoosts(buttonId) {
 /* Updates all powder special boosts 
 */
 function updatePowderSpecials(buttonId){
-    console.log(player_build.statMap);
+    //console.log(player_build.statMap);
     let name = (buttonId).split("-")[0];
     let power = (buttonId).split("-")[1]; // [1, 5]
     let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Air Prison"];
@@ -553,14 +582,13 @@ function updatePowderSpecials(buttonId){
             let special = powderSpecialStats[specialNames.indexOf(name.replace("_", " "))];
             if (special.weaponSpecialEffects.has("Damage Boost")) { 
                 name = name.replace("_", " ");
-                if (name === "Courage") { //courage is universal damage boost
-                    player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[power-1]/100;
-                } else if (name === "Curse") {
-                    player_build.statMap.set("wDamPct", player_build.statMap.get("wDamPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                    player_build.statMap.get("damageBonus")[2] -= special.weaponSpecialEffects.get("Damage Boost")[power-1];
+                if (name === "Courage" || name === "Curse") { //courage and curse are universal damage boost
+                    player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    //poison?
                 } else if (name === "Air Prison") {
-                    player_build.statMap.set("aDamPct", player_build.statMap.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                    player_build.statMap.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[power-1];
+                    player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[power-1];
                 }
             }
         } else {
@@ -571,14 +599,13 @@ function updatePowderSpecials(buttonId){
                     let special = powderSpecialStats[specialNames.indexOf(name.replace("_", " "))];
                     if (special.weaponSpecialEffects.has("Damage Boost")) { 
                         name = name.replace("_", " "); //might be redundant
-                        if (name === "Courage") { //courage is universal damage boost
-                            player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
-                        } else if (name === "Curse") {
-                            player_build.statMap.set("wDamPct", player_build.statMap.get("wDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.statMap.get("damageBonus")[2] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
+                        if (name === "Courage" || name === "Curse") { //courage is universal damage boost
+                            //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
+                            player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                            player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         } else if (name === "Air Prison") {
-                            player_build.statMap.set("aDamPct", player_build.statMap.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.statMap.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
+                            player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
+                            player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
                         }
                     }
                 }
@@ -597,8 +624,7 @@ function updatePowderSpecials(buttonId){
             }   
         }
     }
-    //displayPowderSpecials() runs on build stats. It therefore must run before any duration damage boost is applied.
-    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
+    
 
     if (name !== "skip") {
         let elem = document.getElementById(buttonId);
@@ -606,19 +632,18 @@ function updatePowderSpecials(buttonId){
             let special = powderSpecialStats[specialNames.indexOf(name.replace("_", " "))];
             if (special["weaponSpecialEffects"].has("Damage Boost")) { 
                 let name = special["weaponSpecialName"];
-                if (name === "Courage") { //courage is universal damage boost
-                    player_build.damageMultiplier += special.weaponSpecialEffects.get("Damage Boost")[power-1]/100;
-                } else if (name === "Curse") {
-                    player_build.statMap.set("wDamPct", player_build.statMap.get("wDamPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                    player_build.statMap.get("damageBonus")[2] += special.weaponSpecialEffects.get("Damage Boost")[power-1];
+                if (name === "Courage" || name === "Curse") { //courage and curse are is universal damage boost
+                    player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                 } else if (name === "Air Prison") {
-                    player_build.statMap.set("aDamPct", player_build.statMap.get("aDamPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                    player_build.statMap.get("damageBonus")[4] += special.weaponSpecialEffects.get("Damage Boost")[power-1];
+                    player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    player_build.externalStats.get("damageBonus")[4] += special.weaponSpecialEffects.get("Damage Boost")[power-1];
                 }
             }
         }
     }
 
+    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
     calculateBuildStats(); //also make damage boosts apply ;-;
 }
 /* Calculates all build statistics and updates the entire display.
@@ -644,38 +669,33 @@ function calculateBuildStats() {
 
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
-    let skpRow = document.createElement("tr");
-    let skpSummary = document.createElement("td");
-    skpSummary.textContent = "Summary: Assigned " + player_build.assigned_skillpoints + " skillpoints. Total: (";
-    skpSummary.classList.add("itemp");
-    skpRow.appendChild(skpSummary);
+    let skpRow = document.createElement("p");
+    //skpRow.classList.add("left");
+    let td = document.createElement("p");
+    //td.classList.add("left");
+    let skpSummary = document.createElement("b");
+    skpSummary.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Total: (";
+    //skpSummary.classList.add("itemp");
+    td.appendChild(skpSummary);
     for (let i = 0; i < skp_order.length; i++){
-        let skp = document.createElement("td");
-        let boost = document.createElement("td");
-        let separator = document.createElement("td");
-        skp.classList.add("itemp");
-        skp.classList.add("nopadding");
+        let skp = document.createElement("b");
+        let boost = document.createElement("b");
         skp.classList.add(damageClasses[i+1]);
-        boost.classList.add("itemp");
-        boost.classList.add("nopadding");
         boost.textContent = player_build.total_skillpoints[i];
-        skpRow.appendChild(skp);
-        skpRow.appendChild(document.createElement("br"));
-        skpRow.appendChild(boost);
-        if(i < 4){
-            skpRow.appendChild(separator);
+        if (i < 4) {
+            boost.classList.add("space");
         }
+        td.appendChild(skp);
+        td.appendChild(boost);
     }
    
-    let skpEnd = document.createElement("td");
+    let skpEnd = document.createElement("b");
     skpEnd.textContent = ")";
-    skpEnd.classList.add("itemp");
-    skpRow.append(skpEnd);
+    td.appendChild(skpEnd);
+    skpRow.append(td);
 
-    let remainingRow = document.createElement("tr");
-    remainingRow.classList.add("itemp");
-    let remainingSkp = document.createElement("td");
-    remainingSkp.classList.add("left");
+    let remainingSkp = document.createElement("p");
+    remainingSkp.classList.add("center");
     let remainingSkpTitle = document.createElement("b");
     remainingSkpTitle.textContent = "Remaining skillpoints: ";
     let remainingSkpContent = document.createElement("b");
@@ -685,10 +705,9 @@ function calculateBuildStats() {
     remainingSkp.appendChild(remainingSkpTitle);
     remainingSkp.appendChild(remainingSkpContent);
 
-    remainingRow.appendChild(remainingSkp);
 
     summarybox.append(skpRow);
-    summarybox.append(remainingRow);
+    summarybox.append(remainingSkp);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
         let skpWarning = document.createElement("p");
         //skpWarning.classList.add("itemp");
@@ -784,6 +803,7 @@ function resetFields(){
     setValue("agi-skp", "0");
     setValue("level-choice", "");
     location.hash = "";
+    calculateBuild();
 }
 
 load_init(init);

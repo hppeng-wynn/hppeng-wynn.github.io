@@ -56,7 +56,7 @@ class Build{
      * @param powders : Powder application. List of lists of integers (powder IDs).
      *                  In order: Helmet, Chestplate, Leggings, Boots, Weapon.
      */
-    constructor(level,equipment, powders){
+    constructor(level,equipment, powders, externalStats){
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
         this.powders = powders;
         if(itemMap.get(equipment[0]) && itemMap.get(equipment[0]).type === "helmet") {
@@ -135,9 +135,12 @@ class Build{
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
         this.activeSetCounts = result[4];
-
+        
         // For strength boosts like warscream, vanish, etc.
         this.damageMultiplier = 1.0;
+
+        // For other external boosts ;-;
+        this.externalStats = externalStats;
 
         this.initBuildStats();
     }  
@@ -173,7 +176,7 @@ class Build{
         }
 
         // 0 for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.total_skillpoints, this.damageMultiplier);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct") + this.externalStats.get("mdPct"), 0, this.weapon, this.total_skillpoints, this.damageMultiplier, this.externalStats);
         
         let dex = this.total_skillpoints[1];
 
@@ -277,7 +280,13 @@ class Build{
         statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
         statMap.set("defRaw", [statMap.get("eDam"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
         statMap.set("defBonus", [statMap.get("eDamPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
-
+        for (const x of skp_elements) {
+            this.externalStats.set(x + "DamPct", 0);
+        }
+        this.externalStats.set("mdPct", 0);
+        this.externalStats.set("sdPct", 0);
+        this.externalStats.set("damageBonus", [0, 0, 0, 0, 0]);
+        this.externalStats.set("defBonus",[0, 0, 0, 0, 0]);
         this.statMap = statMap;
     }
 

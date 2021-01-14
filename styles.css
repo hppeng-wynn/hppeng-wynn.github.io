@@ -110,6 +110,9 @@ a.link{
     margin: 2px 2%;
     padding: 0;
 }
+.space {
+    margin-right: 5px;
+}
 
 .damageSubtitle {
     text-align: center;
