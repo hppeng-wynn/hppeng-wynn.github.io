@@ -558,7 +558,6 @@ function displayExpandedItem(item, parent_id){
 
 function displayNextCosts(parent_id, build) { 
     let p_elem = document.getElementById(parent_id);
-    let stats = build.statMap;
     let int = build.total_skillpoints[2];
     let spells = spell_table[build.weapon.get("type")];
 
@@ -589,11 +588,24 @@ function displayNextCosts(parent_id, build) {
         let arrow = document.createElement("b");
         arrow.textContent = "\u279C";
         let next_cost = document.createElement("b");
-        next_cost.textContent = (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) == 1 ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
+        next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
         next_cost.classList.add("Mana");
         let int_needed = document.createElement("b");
-        int_needed.textContent = ": " + (0) + " int"; //DO MATH
-
+        if (init_cost.textContent === "1") {
+            int_needed.textContent = ": n/a (+0)";
+        }else { //do math
+            let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
+            let needed = int;
+            //forgive me... I couldn't inverse ceil, floor, and max.
+            while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) != target) {
+                needed++;
+                build.total_skillpoints[2] = needed;
+            }
+            let missing = needed - int;  
+            build.total_skillpoints[2] = int;//forgive me pt 2
+            int_needed.textContent = ": " + needed + " int (+" + missing + ")"; 
+        }
+        
         row.appendChild(init_cost);
         row.appendChild(arrow);
         row.appendChild(next_cost);
