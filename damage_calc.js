@@ -87,18 +87,19 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
 
     for (let i in damages) {
-        let damageBoost = Math.max(1 + skillBoost[i] + staticBoost, 0);
+        let damageBoost = 1 + skillBoost[i] + staticBoost;
         damages_results.push([
-            Math.max(damages[i][0] * damageBoost * damageMult, 0),       // Normal min
-            Math.max(damages[i][1] * damageBoost * damageMult, 0),       // Normal max
-            Math.max(damages[i][0] * (1 + damageBoost) * damageMult, 0), // Crit min
-            Math.max(damages[i][1] * (1 + damageBoost) * damageMult, 0), // Crit max
+            Math.max(damages[i][0] * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
+            Math.max(damages[i][1] * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
+            Math.max(damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit min
+            Math.max(damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit max
         ]);
         totalDamNorm[0] += damages_results[i][0];
         totalDamNorm[1] += damages_results[i][1];
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
+    console.log(damages_results);
     if (melee) {
         totalDamNorm[0] += Math.max(rawModifier, -damages_results[0][0]);
         totalDamNorm[1] += Math.max(rawModifier, -damages_results[0][1]);

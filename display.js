@@ -293,6 +293,7 @@ function displayExpandedItem(item, parent_id){
     let display_commands = [
         "#cdiv",
         "displayName",
+        //"type", //REPLACE THIS WITH SKIN
         "#ldiv",
         "atkSpd",
         "#ldiv",
@@ -407,6 +408,18 @@ function displayExpandedItem(item, parent_id){
                         if (item.get("tier") !== " ") {
                             p_elem.classList.add(item.get("tier"));
                         }
+                        /*let validTypes = ["helmet", "chestplate", "leggings", "boots", "relik", "wand", "bow", "spear", "dagger", "ring", "bracelet", "necklace"];
+                        if (item.has("type") && validTypes.includes(item.get("type"))) {
+                            p = document.createElement("p");
+                            img = document.createElement("img");
+                            img.src = "./media/items/generic-"+item.get("type")+".png";
+                            img.alt = "image no display :(";
+                            img.classList.add("center");
+                            p.append(img);
+                            p.classList.add("itemp");
+
+                            p_elem.append(p);
+                        }*/
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
                         p_elem.textContent = "";
                         p_elem.classList.add("itemtable");
@@ -426,7 +439,7 @@ function displayExpandedItem(item, parent_id){
                         p_elem.appendChild(row);
                     } else if (id === "restrict") {
                         p_elem.classList.add("restrict");
-                    }
+                    } 
                 }
             }
             else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
