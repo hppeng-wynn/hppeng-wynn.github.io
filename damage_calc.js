@@ -1,10 +1,27 @@
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10] ]);
+const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
 // Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
-function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier) {
+// externalStats should be a map
+function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
+    
+    let buildStats = new Map(stats);
+    if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
+        for (const [key,value] of externalStats) {
+            if (typeof value === "number") {
+                buildStats.set(key, buildStats.get(key) + value);
+            } else if (Array.isArray(value)) {
+                arr = [];
+                for (let i = 0; i < value.length; i++) {
+                    arr[i] = buildStats.get(key)[i] + value[i];
+                }
+                buildStats.set(key, arr);
+            }
+        }
+    }
+    
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     let damages = [];
-    for (const damage_string of stats.get("damageRaw")) {
+    for (const damage_string of buildStats.get("damageRaw")) {
         const damage_vals = damage_string.split("-").map(Number);
         damages.push(damage_vals);
     }
@@ -48,7 +65,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         melee = true;
     }
     else {
-        damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(stats.get("atkSpd"))];
+        damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(buildStats.get("atkSpd"))];
     }
     //console.log(damages);
     //console.log(damageMult);
@@ -66,22 +83,23 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let staticBoost = (pctModifier / 100.)  + skillPointsToPercentage(str);
     let skillBoost = [0];
     for (let i in total_skillpoints) {
-        skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + stats.get("damageBonus")[i] / 100.);
+        skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get("damageBonus")[i] / 100.);
     }
 
     for (let i in damages) {
-        let damageBoost = Math.max(1 + skillBoost[i] + staticBoost, 0);
+        let damageBoost = 1 + skillBoost[i] + staticBoost;
         damages_results.push([
-            Math.max(damages[i][0] * damageBoost * damageMult, 0),       // Normal min
-            Math.max(damages[i][1] * damageBoost * damageMult, 0),       // Normal max
-            Math.max(damages[i][0] * (1 + damageBoost) * damageMult, 0), // Crit min
-            Math.max(damages[i][1] * (1 + damageBoost) * damageMult, 0), // Crit max
+            Math.max(damages[i][0] * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
+            Math.max(damages[i][1] * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
+            Math.max(damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit min
+            Math.max(damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit max
         ]);
         totalDamNorm[0] += damages_results[i][0];
         totalDamNorm[1] += damages_results[i][1];
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
+    console.log(damages_results);
     if (melee) {
         totalDamNorm[0] += Math.max(rawModifier, -damages_results[0][0]);
         totalDamNorm[1] += Math.max(rawModifier, -damages_results[0][1]);
@@ -191,13 +209,13 @@ const spell_table = {
     ],
     "powder": [ //This is how instant-damage powder specials are implemented. To view time-boosted damage powder specials (curse, 2nd courage, air prison, view @TODO)
         { title: "Quake", cost: 0, parts:[
-                {type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
+                { subtitle: "Total Damage", type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
             ] },
         { title: "Chain Lightning", cost: 0, parts: [
-                {type: "damage", multiplier: [80, 120, 160, 200, 240], conversion: [0,0,100,0,0,0], summary: true},
+                { subtitle: "Total Damage", type: "damage", multiplier: [200, 225, 250, 275, 300], conversion: [0,0,100,0,0,0], summary: true},
             ]},
         { title: "Courage", cost: 0, parts: [
-                {type: "damage", multiplier: [75,87.5,100,112.5,125], conversion: [0,0,0,0,100,0], summary: true},
-            ]},
+                { subtitle: "Total Damage", type: "damage", multiplier: [75, 87.5, 100, 112.5, 125], conversion: [0,0,0,0,100,0], summary: true},
+            ]}, //[75, 87.5, 100, 112.5, 125]
     ]
 };
