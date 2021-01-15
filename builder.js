@@ -11,7 +11,7 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.9.1";
+const BUILD_VERSION = "6.9.2";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -389,10 +389,6 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
-        for (const boost of ["vanish", "warscream", "yourtotem", "allytotem", "bash"]) {
-            let elem = document.getElementById(boost+"-boost");
-            elem.classList.remove("toggleOn");
-        }
         let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
         for (const sName of specialNames) {
             for (let i = 1; i < 6; i++) {
@@ -417,6 +413,7 @@ function calculateBuild(save_skp, skp){
             }
         }
         if(player_build){
+            updateBoosts("skip");
             updatePowderSpecials("skip");
         }
         //updatePowderSpecials("skip"); //jank pt 1
@@ -508,11 +505,7 @@ function calculateBuild(save_skp, skp){
 /* Updates all build statistics based on (for now) the skillpoint input fields and then calculates build stats.
 */
 function updateStats() {
-    //direct copy of the ext buff un-check code from calculateBuild(). Redo if possible.
-    for (const boost of ["vanish", "warscream", "yourtotem", "allytotem", "bash"]) {
-        let elem = document.getElementById(boost+"-boost");
-        elem.classList.remove("toggleOn");
-    }
+    
     let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
     for (const sName of specialNames) {
         for (let i = 1; i < 6; i++) {
@@ -536,9 +529,7 @@ function updateStats() {
             }
         }
     }
-    if(player_build){
-        updatePowderSpecials("skip");
-    }
+    
 
     //WILL BREAK WEBSITE IF NO BUILD HAS BEEN INITIALIZED! @HPP
     let skillpoints = player_build.total_skillpoints;
@@ -561,12 +552,17 @@ function updateStats() {
     }
     player_build.assigned_skillpoints += delta_total;
     calculateBuildStats();
+    if(player_build){
+        updatePowderSpecials("skip");
+        updateBoosts("skip");
+    }
 }
 /* Updates all spell boosts
 */
 function updateBoosts(buttonId) {
-        let elem = document.getElementById(buttonId);
-        let name = buttonId.split("-")[0];
+    let elem = document.getElementById(buttonId);
+    let name = buttonId.split("-")[0];
+    if(buttonId !== "skip") {
         if (elem.classList.contains("toggleOn")) {
             player_build.damageMultiplier -= damageMultipliers.get(name);
             if (name === "warscream") {
@@ -581,6 +577,16 @@ function updateBoosts(buttonId) {
             elem.classList.add("toggleOn");
         }
         updatePowderSpecials("skip"); //jank pt 1
+    } else {
+        for (const [key, value] of damageMultipliers) {
+            let elem = document.getElementById(key + "-boost")
+            if (elem.classList.contains("toggleOn")) {
+                elem.classList.remove("toggleOn");
+                player_build.damageMultiplier -= value;
+                if (key === "warscream") { player_build.defenseMultiplier -= .10 }
+            }
+        }
+    }
     calculateBuildStats();
 }
 
@@ -588,6 +594,7 @@ function updateBoosts(buttonId) {
 */
 function updatePowderSpecials(buttonId){
     //console.log(player_build.statMap);
+   
     let name = (buttonId).split("-")[0];
     let power = (buttonId).split("-")[1]; // [1, 5]
     let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Air Prison"];
@@ -666,9 +673,7 @@ function updatePowderSpecials(buttonId){
     }
 
     displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
-    if (name !== "skip") {
-        calculateBuildStats(); //also make damage boosts apply ;-;
-    }
+    calculateBuildStats(); //also make damage boosts apply ;-;
 }
 /* Calculates all build statistics and updates the entire display.
 */
@@ -769,8 +774,9 @@ function calculateBuildStats() {
         displayExpandedItem(player_build.items[i], buildFields[i]);
     }
 
-    displayBuildStats(player_build, "build-overall-stats");
-    displaySetBonuses(player_build, "set-info");
+    displayBuildStats("build-overall-stats",player_build);
+    displaySetBonuses("set-info",player_build);
+    displayNextCosts("int-info",player_build);
 
     let meleeStats = player_build.getMeleeStats();
     displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
