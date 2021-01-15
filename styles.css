@@ -78,7 +78,7 @@ a.link{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
@@ -160,6 +160,9 @@ a.link{
 .Neutral { color: #fa0; }
 .Neutral:before { content: "\2724" ' '; }
 .Damage { color: rgb(255, 198, 85)}
+
+.Mana { color: #5ff;}
+.Mana:after { content: "\2749"}
 
 .Health {
     color: #a00;

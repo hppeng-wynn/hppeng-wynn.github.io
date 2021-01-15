@@ -95,7 +95,7 @@ function apply_elemental_format(p_elem, id, suffix) {
     p_elem.appendChild(i_elem2);
 }
 
-function displaySetBonuses(build, parent_id) {
+function displaySetBonuses(parent_id,build) {
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
 
@@ -134,7 +134,7 @@ function displaySetBonuses(build, parent_id) {
     }
 }
 
-function displayBuildStats(build, parent_id){
+function displayBuildStats(parent_id,build){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
     // !elemental is some janky hack for elemental damage.
@@ -553,6 +553,54 @@ function displayExpandedItem(item, parent_id){
         item_desc_elem.classList.add(item.get("tier"));
         item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
         parent_div.append(item_desc_elem);
+    }
+}
+
+function displayNextCosts(parent_id, build) { 
+    let p_elem = document.getElementById(parent_id);
+    let stats = build.statMap;
+    let int = build.total_skillpoints[2];
+    let spells = spell_table[build.weapon.get("type")];
+
+    p_elem.textContent = "";
+    
+    let title = document.createElement("p");
+    title.classList.add("smalltitle");
+    title.textContent = "Next Spell Costs";
+    
+    let int_title = document.createElement("p");
+    int_title.classList.add("itemp");
+    int_title.textContent = int + " Intelligence points.";
+
+    p_elem.append(title);
+    p_elem.append(int_title);
+
+    for (const spell of spells) { //warp
+        let spellp = document.createElement("p");
+        let spelltitle = document.createElement("p");
+        spelltitle.classList.add("itemp");
+        spelltitle.textContent = spell.title;
+        spellp.appendChild(spelltitle);
+        let row = document.createElement("p");
+        row.classList.add("itemp");
+        let init_cost = document.createElement("b");
+        init_cost.textContent = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost);
+        init_cost.classList.add("Mana");
+        let arrow = document.createElement("b");
+        arrow.textContent = "\u279C";
+        let next_cost = document.createElement("b");
+        next_cost.textContent = (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) == 1 ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
+        next_cost.classList.add("Mana");
+        let int_needed = document.createElement("b");
+        int_needed.textContent = ": " + (0) + " int"; //DO MATH
+
+        row.appendChild(init_cost);
+        row.appendChild(arrow);
+        row.appendChild(next_cost);
+        row.appendChild(int_needed);
+        spellp.appendChild(row);
+
+        p_elem.append(spellp);
     }
 }
 
@@ -1132,17 +1180,13 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
     if (spellIdx != 0) {
         title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
-        let first = document.createElement("b");
-        first.classList.add("space");
+        let first = document.createElement("b");    
         first.textContent = spell.title + " (";
         title_elemavg.appendChild(first);
         let second = document.createElement("b");
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
-        second.classList.add("Legendary");
+        second.classList.add("Mana");
         title_elemavg.appendChild(second);
-        let third = document.createElement("b");
-        third.classList.add("Water");
-        title_elemavg.appendChild(third);
         let fourth = document.createElement("b");
         fourth.textContent = ")";
         title_elemavg.appendChild(fourth);
@@ -1270,8 +1314,16 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             part_div.append(averageLabel);
 
             let overallaverageLabel = document.createElement("p");
-            overallaverageLabel.textContent = "Average: "+total_damage.toFixed(2);
             overallaverageLabel.classList.add("damageSubtitle");
+            let overallaverageLabelFirst = document.createElement("b");
+            let overallaverageLabelSecond = document.createElement("b");
+            overallaverageLabelFirst.textContent = "Average: ";
+            overallaverageLabelSecond.textContent = total_damage.toFixed(2);
+            overallaverageLabelSecond.classList.add("Damage");
+
+
+            overallaverageLabel.appendChild(overallaverageLabelFirst);
+            overallaverageLabel.appendChild(overallaverageLabelSecond);
             part_divavg.append(overallaverageLabel);
         }
     }
