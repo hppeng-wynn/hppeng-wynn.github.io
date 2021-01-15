@@ -628,8 +628,15 @@ function displayPoisonDamage(overallparent_elem, build) {
 
     let overallpoisonDamage = document.createElement("p");
     overallpoisonDamage.classList.add("itemp");
+    let overallpoisonDamageFirst = document.createElement("b");
+    let overallpoisonDamageSecond = document.createElement("b");
     let poison_tick = Math.round(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
-    overallpoisonDamage.textContent = "Poison Tick: " + Math.max(poison_tick,0);
+    overallpoisonDamageFirst.textContent = "Poison Tick: ";
+    overallpoisonDamageSecond.textContent = Math.max(poison_tick,0);
+    overallpoisonDamageSecond.classList.add("Damage");
+
+    overallpoisonDamage.appendChild(overallpoisonDamageFirst);
+    overallpoisonDamage.appendChild(overallpoisonDamageSecond);
     overallparent_elem.append(overallpoisonDamage);
     overallparent_elem.append(document.createElement("br"));
 }
@@ -681,7 +688,15 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //overall average DPS
     let overallaverageDamage = document.createElement("p");
     overallaverageDamage.classList.add("itemp");
-    overallaverageDamage.textContent = "Average DPS: " + stats[10];
+    let overallaverageDamageFirst = document.createElement("b");
+    overallaverageDamageFirst.textContent = "Average DPS: "
+
+    let overallaverageDamageSecond = document.createElement("b");
+    overallaverageDamageSecond.classList.add("Damage");
+    overallaverageDamageSecond.textContent = stats[10];
+    overallaverageDamage.appendChild(overallaverageDamageFirst);
+    overallaverageDamage.appendChild(overallaverageDamageSecond);
+
     overallparent_elem.append(overallaverageDamage);
     overallparent_elem.append(document.createElement("br"));
 
@@ -697,7 +712,13 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let overallatkSpd = document.createElement("p");
     overallatkSpd.classList.add("center");
     overallatkSpd.classList.add("itemp");
-    overallatkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
+    let overallatkSpdFirst = document.createElement("b");
+    overallatkSpdFirst.textContent = "Attack Speed: ";
+    let overallatkSpdSecond = document.createElement("b");
+    overallatkSpdSecond.classList.add("Damage");
+    overallatkSpdSecond.textContent =  attackSpeeds[stats[11]];
+    overallatkSpd.appendChild(overallatkSpdFirst);
+    overallatkSpd.appendChild(overallatkSpdSecond);
     overallparent_elem.append(overallatkSpd);
     overallparent_elem.append(document.createElement("br"));
 
@@ -730,7 +751,14 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //overall average DPS
     let singleHitDamage = document.createElement("p");
     singleHitDamage.classList.add("itemp");
-    singleHitDamage.textContent = "Single Hit Average: " + stats[12].toFixed(2);
+    let singleHitDamageFirst = document.createElement("b");
+    singleHitDamageFirst.textContent = "Single Hit Average: ";
+    let singleHitDamageSecond = document.createElement("b");
+    singleHitDamageSecond.classList.add("Damage");
+    singleHitDamageSecond.textContent = stats[12].toFixed(2);
+
+    singleHitDamage.appendChild(singleHitDamageFirst);
+    singleHitDamage.appendChild(singleHitDamageSecond);
     overallparent_elem.append(singleHitDamage);
     overallparent_elem.append(document.createElement("br"));
     
@@ -1104,7 +1132,22 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
     if (spellIdx != 0) {
         title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
-        title_elemavg.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
+        let first = document.createElement("b");
+        first.classList.add("space");
+        first.textContent = spell.title + " (";
+        title_elemavg.appendChild(first);
+        let second = document.createElement("b");
+        second.textContent = build.getSpellCost(spellIdx, spell.cost);
+        second.classList.add("Legendary");
+        title_elemavg.appendChild(second);
+        let third = document.createElement("b");
+        third.classList.add("Water");
+        title_elemavg.appendChild(third);
+        let fourth = document.createElement("b");
+        fourth.textContent = ")";
+        title_elemavg.appendChild(fourth);
+
+        //title_elemavg.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
     }
     else {
         title_elem.textContent = spell.title;
@@ -1124,6 +1167,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         parent_elem.append(part_div);
 
         let part_divavg = document.createElement("p");
+        //part_divavg.classList.add("Normal");
         overallparent_elem.append(part_divavg);
 
         let subtitle_elem = document.createElement("p");
@@ -1159,7 +1203,13 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
             if (part.summary == true) {
                 let overallaverageLabel = document.createElement("p");
-                overallaverageLabel.textContent = "Average: "+averageDamage.toFixed(2);
+                let first = document.createElement("b");
+                let second = document.createElement("b");
+                first.textContent = "Average: "; 
+                second.textContent = averageDamage.toFixed(2);
+                overallaverageLabel.appendChild(first);
+                overallaverageLabel.appendChild(second);
+                second.classList.add("Damage");
                 overallaverageLabel.classList.add("damageSubtitle");
                 part_divavg.append(overallaverageLabel);
             }
@@ -1204,7 +1254,8 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             if (part.summary == true) {
                 let overallhealLabel = document.createElement("p");
                 overallhealLabel.textContent = heal_amount;
-                overallhealLabel.classList.add("damagep")
+                overallhealLabel.classList.add("damagep");
+                overallhealLabel.classList.add("Set");
                 part_divavg.append(overallhealLabel);
             }
         }

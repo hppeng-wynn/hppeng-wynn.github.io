@@ -12,7 +12,7 @@ function skillPointsToPercentage(skp){
     }else if(skp>=150){
         return 0.808;
     }else{
-        return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
+        return (-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
         //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
     }       
 }

@@ -159,6 +159,7 @@ a.link{
 
 .Neutral { color: #fa0; }
 .Neutral:before { content: "\2724" ' '; }
+.Damage { color: rgb(255, 198, 85)}
 
 .Health {
     color: #a00;
@@ -227,7 +228,7 @@ button:hover {
 
 button:active {
   background-color: #558;
-  box-shadow: 0 5px #666;
+  box-shadow: 0 3px #666;
   transform: translateY(1px);
 }
 input {
