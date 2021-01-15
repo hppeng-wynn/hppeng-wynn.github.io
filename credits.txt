@@ -6,4 +6,5 @@ The game, of course
 
 Additional Contributors:
  - QuantumNep (Layout code/layout ideas)
+ - dr_carlos (Hiding UI elements, misc. fixes)
  - Atlas Inc discord (feedback, ideas, etc)
