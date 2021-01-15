@@ -597,9 +597,11 @@ function displayNextCosts(parent_id, build) {
         }else { //do math
             let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
             let needed = int;
+            let noUpdate = false;
             //forgive me... I couldn't inverse ceil, floor, and max.
             while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) > target) {
                 if(needed > 150) {
+                    noUpdate = true;
                     break;
                 }
                 needed++;
@@ -607,7 +609,12 @@ function displayNextCosts(parent_id, build) {
             }
             let missing = needed - int;  
             //in rare circumstances, the next spell cost can jump.
-            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
+            if (noUpdate) {
+                next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)-1); 
+            }else {
+                next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
+            }
+            
             
             build.total_skillpoints[2] = int;//forgive me pt 2
             int_needed.textContent = ": " + (needed > 150 ? ">150" : needed) + " int (+" + (needed > 150 ? "n/a" : missing) + ")"; 
