@@ -55,8 +55,8 @@ function expandItem(item, powders){
             //console.log(powderStats[id]);
             let powder = powderStats[id];
             let name = powderNames.get(id);
-            expandedItem.set(name.charAt(0) + "Def", expandedItem.get(name.charAt(0)+"Def") + powder["defPlus"]);
-            expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 6 )% 5] + "Def", expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 6 )% 5]+"Def") - powder["defMinus"]);
+            expandedItem.set(name.charAt(0) + "Def", (expandedItem.get(name.charAt(0)+"Def") || 0) + powder["defPlus"]);
+            expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
         }
     }
     
