@@ -564,7 +564,8 @@ function displayNextCosts(parent_id, build) {
     p_elem.textContent = "";
     
     let title = document.createElement("p");
-    title.classList.add("smalltitle");
+    title.classList.add("title");
+    title.classList.add("Normal");
     title.textContent = "Next Spell Costs";
     
     let int_title = document.createElement("p");
@@ -597,13 +598,19 @@ function displayNextCosts(parent_id, build) {
             let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
             let needed = int;
             //forgive me... I couldn't inverse ceil, floor, and max.
-            while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) != target) {
+            while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) > target) {
+                if(needed > 150) {
+                    break;
+                }
                 needed++;
                 build.total_skillpoints[2] = needed;
             }
             let missing = needed - int;  
+            //in rare circumstances, the next spell cost can jump.
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
+            
             build.total_skillpoints[2] = int;//forgive me pt 2
-            int_needed.textContent = ": " + needed + " int (+" + missing + ")"; 
+            int_needed.textContent = ": " + (needed > 150 ? ">150" : needed) + " int (+" + (needed > 150 ? "n/a" : missing) + ")"; 
         }
         
         row.appendChild(init_cost);

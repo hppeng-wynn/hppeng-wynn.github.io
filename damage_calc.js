@@ -99,7 +99,6 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
-    console.log(damages_results);
     if (melee) {
         totalDamNorm[0] += Math.max(rawModifier, -damages_results[0][0]);
         totalDamNorm[1] += Math.max(rawModifier, -damages_results[0][1]);
