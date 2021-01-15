@@ -1,4 +1,4 @@
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10] ]);
+const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
 // Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
 // externalStats should be a map

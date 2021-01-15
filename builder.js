@@ -389,7 +389,7 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
-        for (const boost of ["vanish", "warscream", "yourtotem", "allytotem"]) {
+        for (const boost of ["vanish", "warscream", "yourtotem", "allytotem", "bash"]) {
             let elem = document.getElementById(boost+"-boost");
             elem.classList.remove("toggleOn");
         }
@@ -509,7 +509,7 @@ function calculateBuild(save_skp, skp){
 */
 function updateStats() {
     //direct copy of the ext buff un-check code from calculateBuild(). Redo if possible.
-    for (const boost of ["vanish", "warscream", "yourtotem", "allytotem"]) {
+    for (const boost of ["vanish", "warscream", "yourtotem", "allytotem", "bash"]) {
         let elem = document.getElementById(boost+"-boost");
         elem.classList.remove("toggleOn");
     }

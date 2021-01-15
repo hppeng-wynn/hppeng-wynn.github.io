@@ -196,6 +196,18 @@ a.link{
 ::-webkit-scrollbar-corner{
     background: #110110;
 }
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 90%;
+    display: inline-block;
+}
 button {
     background-color: #666; 
     border: 2px solid #444;
