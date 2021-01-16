@@ -1205,19 +1205,20 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
     title_elemavg.classList.add('Normal');
 
     if (spellIdx != 0) {
-        title_elem.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
         let first = document.createElement("b");    
         first.textContent = spell.title + " (";
+        title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
         let second = document.createElement("b");
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
         second.classList.add("Mana");
+        title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
-        let fourth = document.createElement("b");
-        fourth.textContent = ")";
-        title_elemavg.appendChild(fourth);
+        let third = document.createElement("b");
+        third.textContent = ")";
+        title_elem.appendChild(third.cloneNode(true));
+        title_elemavg.appendChild(third);
 
-        //title_elemavg.textContent = spell.title + " (" + build.getSpellCost(spellIdx, spell.cost) + ")";
     }
     else {
         title_elem.textContent = spell.title;
