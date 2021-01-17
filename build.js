@@ -44,19 +44,109 @@ function levelToHPBase(level){
     }
 }
 
+/**
+ * @description Error to catch items that don't exist.
+ * @module ItemNotFound
+ */
+class ItemNotFound {
+    /**
+     * @class
+     * @param {String} item the item name entered
+     * @param {String} type the type of item
+     * @param {Boolean} genElement whether to generate an element from inputs
+     * @param {String} override override for item type
+     */
+    constructor(item, type, genElement, override) {
+        /** 
+         * @public 
+         * @type {String}
+         */
+        this.message = `Cannot find ${override||type} named ${item}`;
+        if (genElement)
+            /** 
+             * @public 
+             * @type {Element}
+             */
+            this.element = document.getElementById(`${type}-choice`).parentElement.querySelectorAll("p.error")[0];
+        else
+            this.element = document.createElement("div");
+    }
+}
+
+/**
+ * @description Error to catch incorrect input.
+ * @module IncorrectInput 
+ */
+class IncorrectInput {
+    /**
+     * @class
+     * @param {String} input the inputted text
+     * @param {String} format the correct format
+     * @param {String} sibling the id of the error node's sibling
+     */
+    constructor(input, format, sibling) {
+        /** 
+         * @public
+         * @type {String}
+         */
+        this.message = `${input} is incorrect. Example: ${format}`;
+        /**
+         * @public
+         * @type {String}
+         */
+        this.id = sibling;
+    }
+}
+
+/**
+ * @description Error that inputs an array of items to generate errors of.
+ * @module ListError
+ * @extends Error
+ */
+class ListError extends Error {
+    /**
+     * @class
+     * @param {Array} errors array of errors
+     */
+    constructor(errors) {
+        let ret = [];
+        if (typeof errors[0] == "string") {
+            super(errors[0]);
+        } else {
+            super(errors[0].message);
+        }
+        for (let i of errors) {
+            if (typeof i == "string") {
+                ret.push(new Error(i));
+            } else {
+                ret.push(i);
+            }
+        }
+        /**
+         * @public
+         * @type {Object[]}
+         */
+        this.errors = ret;
+    }
+}
+
 /*Class that represents a wynn player's build.
 */
 class Build{
     
-    /*
-     * Construct a build.
-     * @param level : Level of the player.
-     * @param equipment : List of equipment names that make up the build.
+    /**
+     * @description Construct a build.
+     * @param {Number} level : Level of the player.
+     * @param {String[]} equipment : List of equipment names that make up the build.
      *                    In order: Helmet, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Weapon.
-     * @param powders : Powder application. List of lists of integers (powder IDs).
+     * @param {Number[]} powders : Powder application. List of lists of integers (powder IDs).
      *                  In order: Helmet, Chestplate, Leggings, Boots, Weapon.
+     * @param {Object[]} inputerrors : List of instances of error-like classes.
      */
-    constructor(level,equipment, powders){
+    constructor(level,equipment, powders, inputerrors=[]){
+
+        let errors = inputerrors;
+
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
         this.powders = powders;
         if(itemMap.get(equipment[0]) && itemMap.get(equipment[0]).type === "helmet") {
@@ -64,67 +154,99 @@ class Build{
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
             this.helmet = expandItem(helmet, this.powders[0]);
         }else{
-            throw new TypeError("No such helmet named "+ equipment[0]);
+            const helmet = itemMap.get("No Helmet");
+            this.powders[0] = this.powders[0].slice(0,helmet.slots);
+            this.helmet = expandItem(helmet, this.powders[0]);
+            errors.push(new ItemNotFound(equipment[0], "helmet", true));
         }
         if(itemMap.get(equipment[1]) && itemMap.get(equipment[1]).type === "chestplate") {
             const chestplate = itemMap.get(equipment[1]);
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
             this.chestplate = expandItem(chestplate, this.powders[1]);
         }else{
-            throw new TypeError("No such chestplate named "+ equipment[1]);
+            const chestplate = itemMap.get("No Chestplate");
+            this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
+            this.chestplate = expandItem(chestplate, this.powders[1]);
+            errors.push(new ItemNotFound(equipment[1], "chestplate", true));
         }
         if(itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
             const leggings = itemMap.get(equipment[2]);
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
         }else{
-            throw new TypeError("No such leggings named "+ equipment[2]);
+            const chestplate = itemMap.get("No Leggings");
+            this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
+            this.chestplate = expandItem(chestplate, this.powders[1]);
+            errors.push(new ItemNotFound(equipment[2], "leggings", true));
         }
         if(itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
             const boots = itemMap.get(equipment[3]);
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
             this.boots = expandItem(boots, this.powders[3]);
         }else{
-            throw new TypeError("No such boots named "+ equipment[3]);
+            const boots = itemMap.get("No Boots");
+            this.powders[3] = this.powders[3].slice(0,boots.slots); 
+            this.boots = expandItem(boots, this.powders[3]);
+            errors.push(new ItemNotFound(equipment[3], "boots", true));
         }
         if(itemMap.get(equipment[4]) && itemMap.get(equipment[4]).type === "ring") {
             const ring = itemMap.get(equipment[4]);
             this.ring1 = expandItem(ring, []);
         }else{
-            throw new TypeError("No such ring named "+ equipment[4]);
+            const ring = itemMap.get("No Ring 1");
+            this.ring1 = expandItem(ring, []);
+            errors.push(new ItemNotFound(equipment[4], "ring1", true, "ring"));
         }
         if(itemMap.get(equipment[5]) && itemMap.get(equipment[5]).type === "ring") {
             const ring = itemMap.get(equipment[5]);
             this.ring2 = expandItem(ring, []);
         }else{
-            throw new TypeError("No such ring named "+ equipment[5]);
+            const ring = itemMap.get("No Ring 2");
+            this.ring2 = expandItem(ring, []);
+            errors.push(new ItemNotFound(equipment[5], "ring2", true, "ring"));
         }
         if(itemMap.get(equipment[6]) && itemMap.get(equipment[6]).type === "bracelet") {
             const bracelet = itemMap.get(equipment[6]);
             this.bracelet = expandItem(bracelet, []);
         }else{
-            throw new TypeError("No such bracelet named "+ equipment[6]);
+            const bracelet = itemMap.get("No Bracelet");
+            this.bracelet = expandItem(bracelet, []);
+            errors.push(new ItemNotFound(equipment[6], "bracelet", true));
         }
         if(itemMap.get(equipment[7]) && itemMap.get(equipment[7]).type === "necklace") {
             const necklace = itemMap.get(equipment[7]);
             this.necklace = expandItem(necklace, []);
         }else{
-            throw new TypeError("No such necklace named "+ equipment[7]);
+            const necklace = itemMap.get("No Necklace");
+            this.necklace = expandItem(necklace, []);
+            errors.push(new ItemNotFound(equipment[7], "necklace", true));
         }
         if(itemMap.get(equipment[8]) && itemMap.get(equipment[8]).category === "weapon") {
             const weapon = itemMap.get(equipment[8]);
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
             this.weapon = expandItem(weapon, this.powders[4]);
         }else{
-            throw new TypeError("No such weapon named "+ equipment[8]);
+            const weapon = itemMap.get("No Weapon");
+            this.powders[4] = this.powders[4].slice(0,weapon.slots); 
+            this.weapon = expandItem(weapon, this.powders[4]);
+            errors.push(new ItemNotFound(equipment[8], "weapon", true));
         }
-        if(level < 1){ //Should these be constants?
+
+        if (level < 1) { //Should these be constants?
             this.level = 1;
-        }else if (level > 106){
+        } else if (level > 106) {
             this.level = 106;
-        }else{
+        } else if (level <= 106 && level >= 1) {
             this.level = level;
+        } else if (typeof level === "string") {
+            this.level = level;
+            errors.push(new IncorrectInput(level, "a number", "level-choice"));
+        } else {
+            errors.push("Level is not a string or number.");
         }
+        document.getElementById("level-choice").value = this.level;
+        this.level = 106;
+
         this.availableSkillpoints = levelToSkillPoints(this.level);
         this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
         this.items = this.equipment.concat([this.weapon]);
@@ -140,6 +262,13 @@ class Build{
         this.damageMultiplier = 1.0;
 
         this.initBuildStats();
+
+        // Remove every error before adding specific ones
+        for (let i of document.getElementsByClassName("error")) {
+            i.textContent = "";
+        }
+        this.errors = errors;
+        if (errors.length > 0) this.errored = true;
     }  
 
     /*Returns build in string format

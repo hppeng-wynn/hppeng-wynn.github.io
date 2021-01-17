@@ -403,29 +403,31 @@ function calculateBuild(save_skp, skp){
             equipment[i] = equip;
         }
         let powderings = [];
+        let errors = [];
         for (const i in powderInputs) {
             // read in two characters at a time.
             // TODO: make this more robust.
             let input = getValue(powderInputs[i]);
             let powdering = [];
+            let errored = false;
             while (input) {
                 let first = input.slice(0, 2);
                 let powder = powderIDs.get(first);
                 console.log(powder);
                 if (powder === undefined) {
-                    throw new TypeError("Invalid powder " + powder + " in slot " + i);
+                    errored = true;
                 }
                 powdering.push(powder);
                 input = input.slice(2);
             }
+            if (errored === true) {
+                errors.push(new IncorrectInput(getValue(powderInputs[i]), "t6w6", powderInputs[i]));
+            }
             powderings.push(powdering);
         }
-        //level setting
-        let level = document.getElementById("level-choice").value;
-        if(level === ""){
-            level = 106;
-        }
-        document.getElementById("level-choice").value = level;
+        
+        console.log(equipment);
+        player_build = new Build(document.getElementById("level-choice").value, equipment, powderings, errors);
 
         for (let i of document.getElementsByClassName("hide-container-block")) {
 			i.style.display = "block";
@@ -434,8 +436,6 @@ function calculateBuild(save_skp, skp){
 			i.style.display = "grid";
 		}
 
-        console.log(equipment);
-        player_build = new Build(level, equipment, powderings);
         console.log(player_build.toString());
         displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
@@ -463,21 +463,50 @@ function calculateBuild(save_skp, skp){
         
         calculateBuildStats();
         setTitle();
+        if (player_build.errored)
+            throw new ListError(player_build.errors);
+
     }
     catch (error) {
-        let msg = error.stack;
-        let lines = msg.split("\n");
-        let header = document.getElementById("header");
-        header.textContent = "";
-        for (const line of lines) {
-            let p = document.createElement("p");
-            p.classList.add("itemp");
-            p.textContent = line;
-            header.appendChild(p);
+        if (error instanceof ListError) {
+            for (let i of error.errors) {
+                if (i instanceof ItemNotFound) {
+                    i.element.textContent = i.message;
+                } else if (i instanceof IncorrectInput) {
+                    if (document.getElementById(i.id) !== null) {
+                        document.getElementById(i.id).parentElement.querySelectorAll("p.error")[0].textContent = i.message;
+                    }
+                } else {
+                    let msg = i.stack;
+                    let lines = msg.split("\n");
+                    let header = document.getElementById("header");
+                    header.textContent = "";
+                    for (const line of lines) {
+                        let p = document.createElement("p");
+                        p.classList.add("itemp");
+                        p.textContent = line;
+                        header.appendChild(p);
+                    }
+                    let p2 = document.createElement("p");
+                    p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+                    header.appendChild(p2);
+                }
+            }
+        } else {
+            let msg = error.stack;
+            let lines = msg.split("\n");
+            let header = document.getElementById("header");
+            header.textContent = "";
+            for (const line of lines) {
+                let p = document.createElement("p");
+                p.classList.add("itemp");
+                p.textContent = line;
+                header.appendChild(p);
+            }
+            let p2 = document.createElement("p");
+            p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+            header.appendChild(p2);
         }
-        let p2 = document.createElement("p");
-        p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
-        header.appendChild(p2);
     }
 }
 
