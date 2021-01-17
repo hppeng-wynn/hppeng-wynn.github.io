@@ -12,7 +12,7 @@ function skillPointsToPercentage(skp){
     }else if(skp>=150){
         return 0.808;
     }else{
-        return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
+        return (-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
         //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
     }       
 }
@@ -143,7 +143,7 @@ class Build{
      *                  In order: Helmet, Chestplate, Leggings, Boots, Weapon.
      * @param {Object[]} inputerrors : List of instances of error-like classes.
      */
-    constructor(level,equipment, powders, inputerrors=[]){
+    constructor(level,equipment, powders, externalStats, inputerrors=[]){
 
         let errors = inputerrors;
 
@@ -257,9 +257,13 @@ class Build{
         this.total_skillpoints = result[2];
         this.assigned_skillpoints = result[3];
         this.activeSetCounts = result[4];
-
+        
         // For strength boosts like warscream, vanish, etc.
         this.damageMultiplier = 1.0;
+        this.defenseMultiplier = 1.0;
+
+        // For other external boosts ;-;
+        this.externalStats = externalStats;
 
         this.initBuildStats();
 
@@ -285,7 +289,7 @@ class Build{
     getSpellCost(spellIdx, cost) {
         cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
         cost += this.statMap.get("spRaw"+spellIdx);
-        return Math.max(1, Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100)))
+        return Math.max(1, Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100)));
     }
     
 
@@ -302,7 +306,7 @@ class Build{
         }
 
         // 0 for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon, this.total_skillpoints, this.damageMultiplier);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct") + this.externalStats.get("mdPct"), 0, this.weapon, this.total_skillpoints, this.damageMultiplier, this.externalStats);
         
         let dex = this.total_skillpoints[1];
 
@@ -338,19 +342,19 @@ class Build{
         //EHP
         let ehp = [totalHp, totalHp];
         let defMult = classDefenseMultipliers.get(this.weapon.get("type"));
-        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult));         
-        ehp[1] /= ((1-def_pct)*(2-defMult));    
+        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier));         
+        ehp[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier));    
         defenseStats.push(ehp);
         //HPR
         let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
         defenseStats.push(totalHpr);
         //EHPR
         let ehpr = [totalHpr, totalHpr];
-        ehpr[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)); 
-        ehpr[1] /= ((1-def_pct)*(2-defMult)); 
+        ehpr[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier)); 
+        ehpr[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier)); 
         defenseStats.push(ehpr);
         //skp stats
-        defenseStats.push([def_pct*100, agi_pct*100]);
+        defenseStats.push([ (1 - ((1-def_pct) * (2 - this.defenseMultiplier)))*100, agi_pct*100]);
         //eledefs - TODO POWDERS
         let eledefs = [0, 0, 0, 0, 0];
         for(const i in skp_elements){ //kinda jank but ok
@@ -377,7 +381,7 @@ class Build{
             statMap.set(staticID, 0);
         }
         statMap.set("hp", levelToHPBase(this.level)); //TODO: Add player base health
-        
+
         for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
                 statMap.set(id,(statMap.get(id) || 0)+value);
@@ -406,7 +410,16 @@ class Build{
         statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
         statMap.set("defRaw", [statMap.get("eDam"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
         statMap.set("defBonus", [statMap.get("eDamPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
+        statMap.set("poisonPct", 100);
 
+        for (const x of skp_elements) {
+            this.externalStats.set(x + "DamPct", 0);
+        }
+        this.externalStats.set("mdPct", 0);
+        this.externalStats.set("sdPct", 0);
+        this.externalStats.set("damageBonus", [0, 0, 0, 0, 0]);
+        this.externalStats.set("defBonus",[0, 0, 0, 0, 0]);
+        this.externalStats.set("poisonPct", 0);
         this.statMap = statMap;
     }
 

@@ -78,7 +78,7 @@ a.link{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
@@ -109,6 +109,9 @@ a.link{
 .itemp, .damagep {
     margin: 2px 2%;
     padding: 0;
+}
+.space {
+    margin-right: 5px;
 }
 
 .damageSubtitle {
@@ -156,6 +159,10 @@ a.link{
 
 .Neutral { color: #fa0; }
 .Neutral:before { content: "\2724" ' '; }
+.Damage { color: rgb(255, 198, 85)}
+
+.Mana { color: #5ff;}
+.Mana:after { content: "\2749"}
 
 .Health {
     color: #a00;
@@ -193,6 +200,18 @@ a.link{
 ::-webkit-scrollbar-corner{
     background: #110110;
 }
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 90%;
+    display: inline-block;
+}
 button {
     background-color: #666; 
     border: 2px solid #444;
@@ -204,6 +223,16 @@ button {
     font-weight: 700;
     font-size: 120%;
     display: inline-block;
+}
+button:hover {
+    background-color: #556;
+}
+
+
+button:active {
+  background-color: #558;
+  box-shadow: 0 3px #666;
+  transform: translateY(1px);
 }
 input {
     background-color: #666; 
@@ -248,4 +277,12 @@ input {
 button.toggleOn{
     background-color:#0a0;
     border: 3 px solid rgb(0, 70, 0); 
+}
+
+.funnynumber {
+    background-image: linear-gradient(to left, #f5f, #a0a, #5ff, #5f5, #ff5, #fa0, #a00);   -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    text-align: center;
+    transform: translateX(calc(50vw - 50%));
 }

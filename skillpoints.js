@@ -5,7 +5,7 @@ function calculate_skillpoints(equipment, weapon) {
     let fixed = [];
     let consider = [];
     let noboost = [];
-    console.log(equipment);
+    //console.log(equipment);
     for (const item of equipment) {
         if (item.get("reqs").every(x => x === 0)) {
             fixed.push(item);
