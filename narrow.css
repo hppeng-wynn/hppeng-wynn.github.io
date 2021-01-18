@@ -13,6 +13,9 @@
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
+.container {
+
+}
 
 .build, .spells .misc {
     padding: 2%;
