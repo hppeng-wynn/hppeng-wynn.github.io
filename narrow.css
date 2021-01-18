@@ -33,40 +33,9 @@
     max-height: 50px;
 }
 
-.skp-input {
-    width: 15vw;
+.skpInput, .idInput {
+    width: 90%;
     height: 7vw;
     max-height: 30px;
 }
 
-.hide-container-block {
-    animation-duration: 0.5s;
-    animation-name: fadeInFromNone;
-    animation-fill-mode: forwards;
-}
-
-.hide-container-grid {
-    animation-duration: 0.5s;
-    animation-name: fadeInFromNone;
-    animation-fill-mode: forwards;
-}
-
-.set-info-div {
-    animation-duration: 0.5s;
-    animation-name: fadeInFromNone;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeInFromNone {
-    0% {
-        opacity: 0;
-    }
-
-    1% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}

@@ -28,10 +28,18 @@ div {
     grid-template-rows: min-content min-content auto;
 }
 
-.skillpoints {
+.skillpoints, .id-edit1 {
     padding: 0% 4% 2%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.id-edit2 {
+    padding: 0% 4% 2%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
@@ -67,6 +75,7 @@ a.link{
 }
 .center {
     text-align: center;
+    position: relative;
 }
 table.center{   
     margin: 10px;
@@ -83,7 +92,7 @@ table.center{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .crafter, .recipe-stats, .craft-stats, .ing-stats {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .crafter, .recipe-stats, .craft-stats, .ing-stats, .id-box {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
@@ -177,9 +186,19 @@ table.center{
     content: "\2764" ' ';
 }
 
-.skpInput, .skplabel {
+.skplabel {
     display: block;
     margin: auto;
+}
+
+.idCenter {
+    text-align: center;
+    padding: 1em 0px 0px 0px;
+    position: relative;
+    display: flex;
+}
+.idWrap {
+    align-self: flex-end;
 }
 
 /*Scrollbar*/
@@ -300,4 +319,24 @@ button.toggleOn{
 }
 .externalBuffs {
     width: 100%;
+}
+
+.hide-container-block, .hide-container-grid, .set-info-div, .fade-in {
+    animation-duration: 0.5s;
+    animation-name: fadeInFromNone;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

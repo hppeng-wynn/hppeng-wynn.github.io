@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.3";
+const BUILD_VERSION = "6.9.4";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -19,6 +19,7 @@ let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 // THIS IS SUPER DANGEROUS, WE SHOULD NOT BE KEEPING THIS IN SO MANY PLACES
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
+let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprRaw", "hprPct", "hpBonus", "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 let skp_order = ["str","dex","int","def","agi"];
 let skp_elements = ["e","t","w","f","a"];
@@ -469,6 +470,11 @@ function calculateBuild(save_skp, skp){
         for (let i in skp_order){ //big bren
             setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
         }
+
+        for (let id of editable_item_fields) {
+            setValue(id, player_build.statMap.get(id));
+            setText(id+"-base", "Original Value: " + player_build.statMap.get(id));
+        }
         
         if (save_skp) {
             // TODO: reduce duplicated code, @updateStats
@@ -582,15 +588,20 @@ function updateStats() {
         delta_total += delta;
     }
     player_build.assigned_skillpoints += delta_total;
-    calculateBuildStats();
     if(player_build){
-        updatePowderSpecials("skip");
-        updateBoosts("skip");
+        updatePowderSpecials("skip", false);
+        updateBoosts("skip", false);
     }
+    for (let id of editable_item_fields) {
+        player_build.statMap.set(id, parseInt(getValue(id)));
+    }
+    player_build.aggregateStats();
+    console.log(player_build.statMap);
+    calculateBuildStats();
 }
 /* Updates all spell boosts
 */
-function updateBoosts(buttonId) {
+function updateBoosts(buttonId, recalcStats) {
     let elem = document.getElementById(buttonId);
     let name = buttonId.split("-")[0];
     if(buttonId !== "skip") {
@@ -618,12 +629,14 @@ function updateBoosts(buttonId) {
             }
         }
     }
-    calculateBuildStats();
+    if (recalcStats) {
+        calculateBuildStats();
+    }
 }
 
 /* Updates all powder special boosts 
 */
-function updatePowderSpecials(buttonId){
+function updatePowderSpecials(buttonId, recalcStats) {
     //console.log(player_build.statMap);
    
     let name = (buttonId).split("-")[0];
@@ -703,8 +716,10 @@ function updatePowderSpecials(buttonId){
         }
     }
 
+    if (recalcStats) {
+        calculateBuildStats();
+    }
     displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
-    calculateBuildStats(); //also make damage boosts apply ;-;
 }
 /* Calculates all build statistics and updates the entire display.
 */
@@ -866,6 +881,19 @@ function resetFields(){
     setValue("level-choice", "");
     location.hash = "";
     calculateBuild();
+}
+
+function toggleID() {
+    let button = document.getElementById("show-id-button");
+    let targetDiv = document.getElementById("id-edit");
+    if (button.classList.contains("toggleOn")) { //toggle the pressed button off
+        targetDiv.style.display = "none";
+        button.classList.remove("toggleOn");
+    }
+    else {
+        targetDiv.style.display = "block";
+        button.classList.add("toggleOn");
+    }
 }
 
 load_init(init);
