@@ -569,13 +569,13 @@ function updateBoosts(buttonId) {
         if (elem.classList.contains("toggleOn")) {
             player_build.damageMultiplier -= damageMultipliers.get(name);
             if (name === "warscream") {
-                player_build.defenseMultiplier -= .10;
+                player_build.defenseMultiplier -= .20;
             }
             elem.classList.remove("toggleOn");
         }else{
             player_build.damageMultiplier += damageMultipliers.get(name);
             if (name === "warscream") {
-                player_build.defenseMultiplier += .10;
+                player_build.defenseMultiplier += .20;
             }
             elem.classList.add("toggleOn");
         }
@@ -586,7 +586,7 @@ function updateBoosts(buttonId) {
             if (elem.classList.contains("toggleOn")) {
                 elem.classList.remove("toggleOn");
                 player_build.damageMultiplier -= value;
-                if (key === "warscream") { player_build.defenseMultiplier -= .10 }
+                if (key === "warscream") { player_build.defenseMultiplier -= .20 }
             }
         }
     }
