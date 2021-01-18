@@ -59,10 +59,58 @@ function expandItem(item, powders){
             expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
         }
     }
-    
+    //console.log(expandedItem);
     return expandedItem;
 }
 
+/* Takes in an ingredient object and returns an equivalent Map().
+*/
+function expandIngredient(ing) {
+    let expandedIng = new Map();
+    let mapIds = ['consumableIDs', 'itemIDs', 'posMods'];
+    for (const id of mapIds) {
+        let idMap = new Map();
+        for (const key of Object.keys(ing[id])) {
+            idMap.set(key, ing[id][key]);
+        }
+        expandedIng.set(id, idMap);
+    }
+    let normIds = ['lvl','name','tier','skills'];
+    for (const id of normIds) {
+        expandedIng.set(id, ing[id]);
+    }
+    //now the actually hard one
+    let idMap = new Map();
+    idMap.set("minRolls", new Map());
+    idMap.set("maxRolls", new Map());
+    for (const field of ingFields) {
+        let val = (ing['ids'][field] || 0);
+        idMap.get("minRolls").set(field, val);
+        idMap.get("maxRolls").set(field, val);
+    }
+    expandedIng.set("ids",idMap);
+    //console.log(expandedIng);
+    return expandedIng;
+}
+
+/* Takes in a recipe object and returns an equivalent Map().
+*/
+function expandRecipe(recipe) {
+    let expandedRecipe = new Map();
+    let normIDs = ["id", "skill", "type"];
+    for (const id of normIDs) {
+        expandedRecipe.set(id,recipe[id]);
+    }
+    let rangeIDs = ["durability", "healthOrDamage", "lvl", "duration", "basicDuration"];
+    for (const id of rangeIDs) {
+        if(recipe[id]){
+            expandedRecipe.set(id, [recipe[id]['minimum'], recipe[id]['maximum']]);
+        }   
+    }
+    expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][0]['amount'] ] ]) ]);
+    //console.log(expandedRecipe);
+    return expandedRecipe;
+}
 
 /*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
 * @param id
@@ -271,6 +319,7 @@ function displayBuildStats(parent_id,build){
         }
     }
 }
+
 
 function displayExpandedItem(item, parent_id){
     // Commands to "script" the creation of nice formatting.
@@ -555,6 +604,98 @@ function displayExpandedItem(item, parent_id){
         parent_div.append(item_desc_elem);
     }
 }
+function displayCraftStats(craft, parent_id) {
+
+}
+
+function displayExpandedRecipe(recipe, parent_id) {
+
+}
+
+
+function displayExpandedIngredient(ingred, parent_id) {
+    let elem = document.getElementById(parent_id);
+    let display_order = [
+        "#cdiv",
+        "name", //tier will be displayed w/ name
+        "#table",
+        "ids",
+        "#ldiv",
+        "posMods",
+        "itemIDs",
+        "consumableIDs",
+        "#ldiv",
+        "lvl",
+        "skills",
+    ]
+    let id_display_commands = [ //all center div!
+        "eDefPct", 
+        "tDefPct", 
+        "wDefPct", 
+        "fDefPct", 
+        "aDefPct", 
+        "eDamPct", 
+        "tDamPct", 
+        "wDamPct", 
+        "fDamPct", 
+        "aDamPct", 
+        "str", 
+        "dex", 
+        "int", 
+        "agi", 
+        "def",
+        "hpBonus",
+        "mr", 
+        "ms", 
+        "ls",
+        "hprRaw", 
+        "hprPct", 
+        "sdRaw", 
+        "sdPct", 
+        "mdRaw", 
+        "mdPct",  
+        "xpb",
+        "lb", 
+        "lq", 
+        "ref",  
+        "thorns", 
+        "expd", 
+        "spd", 
+        "atkTier", 
+        "poison",  
+        "spRegen", 
+        "eSteal", 
+        "spRaw1",
+        "spRaw2", 
+        "spRaw3", 
+        "spRaw4", 
+        "spPct1", 
+        "spPct2", 
+        "spPct3", 
+        "spPct4",
+        "jh", 
+        "sprint", 
+        "sprintReg", 
+        "gXp", 
+        "gSpd",
+    ];
+    if (command.charAt(0) === "#") {
+        if (command === "#cdiv") {
+            active_elem = document.createElement('div');
+            active_elem.classList.add('itemcenter');
+        }
+        else if (command === "#ldiv") {
+            active_elem = document.createElement('div');
+            active_elem.classList.add('itemleft');
+        }
+        else if (command === "#table") {
+            active_elem = document.createElement('table');
+            active_elem.classList.add('itemtable');
+        }
+        parent_div.appendChild(active_elem);
+    }
+    
+}
 
 function displayNextCosts(parent_id, build) { 
     let p_elem = document.getElementById(parent_id);
@@ -629,6 +770,7 @@ function displayNextCosts(parent_id, build) {
         p_elem.append(spellp);
     }
 }
+
 
 function displayFixedID(active, id, value, elemental_format, style) {
     if (style) {

@@ -11,7 +11,6 @@ console.log(url_tag);
  * END testing section
  */
 
-const BUILD_VERSION = "6.9.2";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -234,7 +233,7 @@ function init() {
         if (item !== undefined) {
             document.getElementById("weapon-slots").textContent = item.slots + " slots";
         }
-        else {
+        else { 
             document.getElementById("weapon-slots").textContent = "X slots";
         }
     });
