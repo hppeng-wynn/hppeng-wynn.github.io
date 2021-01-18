@@ -44,7 +44,7 @@ div {
     grid-auto-rows: minmax(60px, auto);
 }
 
-.equipment, .skillpoints, .center, .header, .all, .nocolor{
+.equipment, .skillpoints, .center, .header, .all, .nocolor, .crafted, .crafter{
     background: #121516;
     color: #aaa;
 }
@@ -68,7 +68,12 @@ a.link{
 .center {
     text-align: center;
 }
-
+table.center{   
+    margin: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    gap: 10px;
+}
 .right {
     text-align: right;
 }
@@ -78,7 +83,7 @@ a.link{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .crafter, .recipe-stats, .craft-stats, .ing-stats {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
@@ -287,6 +292,12 @@ button.toggleOn{
     transform: translateX(calc(50vw - 50%));
 }
 
+.Star {
+    color:rgb(255, 198, 85);
+}
+.Star:after {
+    content: "\272B";
+}
 .externalBuffs {
     width: 100%;
 }
