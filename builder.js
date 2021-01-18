@@ -434,20 +434,25 @@ function calculateBuild(save_skp, skp){
             // TODO: make this more robust.
             let input = getValue(powderInputs[i]);
             let powdering = [];
-            let errored = false;
+            let errorederrors = [];
             while (input) {
                 let first = input.slice(0, 2);
                 let powder = powderIDs.get(first);
                 console.log(powder);
                 if (powder === undefined) {
-                    errored = true;
+                    errorederrors.push(first);
+                } else {
+                    powdering.push(powder);
                 }
-                powdering.push(powder);
                 input = input.slice(2);
             }
-            if (errored === true) {
-                errors.push(new IncorrectInput(getValue(powderInputs[i]), "t6w6", powderInputs[i]));
+            if (errorederrors.length > 0) {
+                if (errorederrors.length > 1)
+                    errors.push(new IncorrectInput(errorederrors.join(""), "t6w6", powderInputs[i]));
+                else
+                    errors.push(new IncorrectInput(errorederrors[0], "t6 or e3", powderInputs[i]));
             }
+            console.log("POWDERING" + powdering);
             powderings.push(powdering);
         }
         
