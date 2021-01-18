@@ -293,8 +293,11 @@ button.toggleOn{
 }
 
 .Star {
-    color:rgb(255, 198, 85)
+    color:rgb(255, 198, 85);
 }
 .Star:after {
     content: "\272B";
+}
+.externalBuffs {
+    width: 100%;
 }

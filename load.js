@@ -1,4 +1,4 @@
-const DB_VERSION = 19;
+const DB_VERSION = 20;
 const BUILD_VERSION = "6.9.2";
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js

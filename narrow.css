@@ -34,7 +34,9 @@
 }
 
 .skp-input {
-
+    width: 15vw;
+    height: 7vw;
+    max-height: 30px;
 }
 
 .hide-container-block {
