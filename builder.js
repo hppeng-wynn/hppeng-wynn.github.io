@@ -766,7 +766,8 @@ function calculateBuildStats() {
     let remainingSkpTitle = document.createElement("b");
     remainingSkpTitle.textContent = "Remaining skillpoints: ";
     let remainingSkpContent = document.createElement("b");
-    remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "< 0" : levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
+    //remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "< 0" : levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
+    remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
     remainingSkpContent.classList.add(levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "negative" : "positive");
 
     remainingSkp.appendChild(remainingSkpTitle);

@@ -162,7 +162,7 @@ a.link{
 .Damage { color: rgb(255, 198, 85)}
 
 .Mana { color: #5ff;}
-.Mana:after { content: "\2749"}
+.Mana:after { content: "\273A"}
 
 .Health {
     color: #a00;
@@ -285,4 +285,8 @@ button.toggleOn{
     display: inline-block;
     text-align: center;
     transform: translateX(calc(50vw - 50%));
+}
+
+.externalBuffs {
+    width: 100%;
 }
