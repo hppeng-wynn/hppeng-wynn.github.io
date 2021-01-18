@@ -321,7 +321,7 @@ button.toggleOn{
     width: 100%;
 }
 
-.hide-container-block, .hide-container-grid, .set-info-div, .fade-in {
+.hide-container-block, .hide-container-grid, .set-info-div, .fade-in, .misc {
     animation-duration: 0.5s;
     animation-name: fadeInFromNone;
     animation-fill-mode: forwards;

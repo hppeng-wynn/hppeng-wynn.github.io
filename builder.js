@@ -457,8 +457,7 @@ function calculateBuild(save_skp, skp){
         }
         for (let i of document.getElementsByClassName("hide-container-grid")) {
 			i.style.display = "grid";
-		}
-        document.getElementById("int-info-div").style.display = "none";
+        }
 
         console.log(player_build.toString());
         displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
