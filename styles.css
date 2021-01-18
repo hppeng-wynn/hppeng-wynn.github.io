@@ -15,7 +15,10 @@ th, td {
 .nomargin {
     padding: 0px;
 }
-
+.nomarginp {
+    margin: 0px;
+    padding: 0px;
+}
 div {
     padding: 0%;
 }
@@ -83,12 +86,18 @@ table.center{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .crafter, .recipe-stats, .craft-stats, .ing-stats {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
     border-radius: 3px;
     width: 96%;
+}
+.crafter, .recipe-stats, .craft-stats, .ing-stats {
+    color: #aaa;
+    background: #121516;
+    border: 3px solid #BCBCBC;
+    border-radius: 3px;
 }
 
 .spell-info {
@@ -109,8 +118,9 @@ table.center{
     margin: 2px 2%;
     width: 94%;
     margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 .itemp, .damagep {
     margin: 2px 2%;
     padding: 0;
@@ -300,4 +310,29 @@ button.toggleOn{
 }
 .externalBuffs {
     width: 100%;
+}
+
+.T0 {
+    color: #555;
+}
+.T1 {
+    color: #ff5;
+}
+.T2 {
+    color: #f5f;
+}
+.T3 {
+    color: #5ff;
+}
+.T0-bracket {
+    color: #555;
+}   
+.T1-bracket {
+    color: #fa0;
+}
+.T2-bracket {
+    color: #a0a;
+}
+.T3-bracket {
+    color: #0aa;
 }

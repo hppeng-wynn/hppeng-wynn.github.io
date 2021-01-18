@@ -85,8 +85,8 @@ function expandIngredient(ing) {
     idMap.set("maxRolls", new Map());
     for (const field of ingFields) {
         let val = (ing['ids'][field] || 0);
-        idMap.get("minRolls").set(field, val);
-        idMap.get("maxRolls").set(field, val);
+        idMap.get("minRolls").set(field, val['minimum']);
+        idMap.get("maxRolls").set(field, val['maximum']);
     }
     expandedIng.set("ids",idMap);
     //console.log(expandedIng);
@@ -105,7 +105,9 @@ function expandRecipe(recipe) {
     for (const id of rangeIDs) {
         if(recipe[id]){
             expandedRecipe.set(id, [recipe[id]['minimum'], recipe[id]['maximum']]);
-        }   
+        } else {
+            expandedRecipe.set(id, [0,0]);
+        }
     }
     expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][0]['amount'] ] ]) ]);
     //console.log(expandedRecipe);
@@ -124,8 +126,55 @@ function idRound(id){
     }
 }
 
+//Used for item IDs and ingredient id field IDs
 let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Raw Melee Damage: ", "mdPct":"Melee Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "expd":"Exploding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":""};
 let idSuffixes = {"displayName": "", "lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam_":"", "eDam_":"", "tDam_":"", "wDam_":"", "fDam_":"", "aDam_":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/4s", "ms":"/4s", "ref":"%", "ls":"/4s", "poison":"/3s", "thorns":"%", "expd":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":"", "restrict":""};
+//Used for ingredient IDs - name, lvl, tier. As of now, not used.
+/*let ingPrefixes = {"name": "", "lvl": "", "tier": ""};
+let ingSuffixes = {"name": "", "lvl": "", "tier": ""}*/
+//Used for ingredient consumableIDs
+let consumableIDPrefixes = {
+    "charges": "Charges: ",
+    "dura": "Duration: "
+}
+let consumableIDSuffixes = {
+    "charges": "",
+    "dura": " Sec."
+}
+//Used for ingredient itemIDs
+let itemIDPrefixes = {
+    "dura": "Durability: ",
+    "strReq": "Strength Min: ",
+    "dexReq": "Dexterity Min: ",
+    "intReq": "Intelligence Min: ",
+    "defReq": "Defense Min: ",
+    "agiReq": "Agility Min: "
+}
+/*let itemIDSuffixes = {
+    "dura": "",
+    "strReq": "",
+    "dexReq": "",
+    "intReq": "",
+    "defReq": "",
+    "agiReq": ""
+}*/
+//Used for ingredient posMods IDs
+let posModPrefixes = {
+    "left":"Effectiveness Left: ",
+    "right":"EFfectiveness Right: ",
+    "above":"Effectiveness Above: ",
+    "below":"Effectivness Below: ",
+    "touching":"EFfectiveness Touching: ",
+    "notTouching":"Effectiveness Not Touching: "
+}
+let posModSuffixes = {
+    "left":"%",
+    "right":"%",
+    "above":"%",
+    "below":"%",
+    "touching":"%",
+    "notTouching":"%"
+}
 
 function apply_elemental_format(p_elem, id, suffix) {
     suffix = (typeof suffix !== 'undefined') ?  suffix : "";
@@ -451,7 +500,7 @@ function displayExpandedItem(item, parent_id){
                     active_elem.appendChild(p_elem);
                 }
                 else {
-                    let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
+                    let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format); 
                     if (id === "displayName") {
                         p_elem.classList.add("title");
                         if (item.get("tier") !== " ") {
@@ -614,7 +663,9 @@ function displayExpandedRecipe(recipe, parent_id) {
 
 
 function displayExpandedIngredient(ingred, parent_id) {
-    let elem = document.getElementById(parent_id);
+    console.log(ingred);
+    let parent_elem = document.getElementById(parent_id);
+    parent_elem.textContent = "";
     let display_order = [
         "#cdiv",
         "name", //tier will be displayed w/ name
@@ -628,7 +679,27 @@ function displayExpandedIngredient(ingred, parent_id) {
         "lvl",
         "skills",
     ]
-    let id_display_commands = [ //all center div!
+    let item_order = [
+        "dura",
+        "strReq",
+        "dexReq",
+        "intReq",
+        "defReq",
+        "agiReq"
+    ]
+    let consumable_order = [
+        "dura",
+        "charges"
+    ]
+    let posMods_order = [
+        "above",
+        "below",
+        "left",
+        "right",
+        "touching",
+        "notTouching"
+    ];
+    let id_display_order = [ 
         "eDefPct", 
         "tDefPct", 
         "wDefPct", 
@@ -679,22 +750,181 @@ function displayExpandedIngredient(ingred, parent_id) {
         "gXp", 
         "gSpd",
     ];
-    if (command.charAt(0) === "#") {
-        if (command === "#cdiv") {
-            active_elem = document.createElement('div');
-            active_elem.classList.add('itemcenter');
-        }
-        else if (command === "#ldiv") {
-            active_elem = document.createElement('div');
-            active_elem.classList.add('itemleft');
-        }
-        else if (command === "#table") {
-            active_elem = document.createElement('table');
-            active_elem.classList.add('itemtable');
-        }
-        parent_div.appendChild(active_elem);
-    }
+    let active_elem;
+    let elemental_format = false;
+    let style;
+    for (const command of display_order) {
+        if (command.charAt(0) === "#") {
+            if (command === "#cdiv") {
+                active_elem = document.createElement('div');
+                active_elem.classList.add('itemcenter');
+            }
+            else if (command === "#ldiv") {
+                active_elem = document.createElement('div');
+                active_elem.classList.add('itemleft');
+            }
+            else if (command === "#table") {
+                active_elem = document.createElement('table');
+                active_elem.classList.add('itemtable');
+            }
+            parent_elem.appendChild(active_elem);
+        }else {
+            let p_elem =  document.createElement("p");
+            p_elem.classList.add("left");
+            if (command === "name") {
+                p_elem.classList.add("title");
+                p_elem.classList.remove("left");
+                let title_elem = document.createElement("b");
+                title_elem.textContent = ingred.get("name");
+                p_elem.appendChild(title_elem);
+
+                let space = document.createElement("b");
+                space.classList.add("space");
+                p_elem.appendChild(space);
+
+                let tier = ingred.get("tier"); //tier in [0,3]
+                let begin = document.createElement("b");
+                begin.classList.add("T"+tier+"-bracket");
+                begin.textContent = "[";
+                p_elem.appendChild(begin);
+
+                for (let i = 0; i < 3; i++) {
+                    let tier_elem = document.createElement("b");
+                    if(i < tier) {tier_elem.classList.add("T"+tier)}
+                    else {tier_elem.classList.add("T0")}
+                    tier_elem.textContent = "\u272B";
+                    p_elem.appendChild(tier_elem);
+                }
+                let end = document.createElement("b");
+                end.classList.add("T"+tier+"-bracket");
+                end.textContent = "]";
+                p_elem.appendChild(end);
+            }else if (command === "lvl") {
+                p_elem.textContent = "Crafting Lvl Min: " + ingred.get("lvl");
+            }else if (command === "posMods") {
+                for (const [key,value] of ingred.get("posMods")) {
+                    if (value != 0) {
+                        let title = document.createElement("b");
+                        title.textContent = posModPrefixes[key];
+                        let val = document.createElement("b");
+                        val.textContent = value + posModSuffixes[key];
+                        if(value > 0) {
+                            val.classList.add("positive");
+                        } else {
+                            val.classList.add("negative");
+                        }
+                        p_elem.appendChild(title);
+                        p_elem.appendChild(val);
+                    }
+                }
+            } else if (command === "itemIDs") { //dura, reqs
+                for (const [key,value] of ingred.get("itemIDs")) {
+                    let p = document.createElement("p");
+                    p.classList.add("nomarginp");                        
+                    if (value != 0) {
+                        let title = document.createElement("b");
+                        title.textContent = itemIDPrefixes[key];
+                        p.appendChild(title);
+                    }
+                    let desc = document.createElement("b");
+                    if(value > 0) {
+                        if(key !== "dura") {
+                            desc.classList.add("negative");
+                        } else{
+                            desc.classList.add("positive");
+                        }
+                        desc.textContent = "+"+value;
+                    } else if (value < 0){
+                        if(key !== "dura") {
+                            desc.classList.add("positive");
+                        } else{
+                            desc.classList.add("negative");
+                        }
+                        desc.textContent = value; 
+                    }
+                    if(value != 0){
+                        p.appendChild(desc);
+                    }
+                    p_elem.append(p);
+                }
+            } else if (command === "consumableIDs") { //dura, charges
+                for (const [key,value] of ingred.get("consumableIDs")) {
+                    let p = document.createElement("p");
+                    p.classList.add("nomarginp");                        
+                    if (value != 0) {
+                        let title = document.createElement("b");
+                        title.textContent = consumableIDPrefixes[key];
+                        p.appendChild(title);
+                    }
+                    let desc = document.createElement("b");
+                    if(value > 0) {
+                        desc.classList.add("positive");
+                        desc.textContent = "+"+value;
+                    } else if (value < 0){
+                        desc.classList.add("negative");
+                        desc.textContent = value; 
+                    }
+                    if(value != 0){
+                        p.appendChild(desc);
+                        let suffix = document.createElement("b");
+                        suffix.textContent = consumableIDSuffixes[key];
+                        p.appendChild(suffix);
+                    }
+                    p_elem.append(p);
+                }
+            }else if (command === "skills") {
+                p_elem.textContent = "Used in:";
+                for(const skill of ingred.get("skills")) {
+                    let p = document.createElement("p");
+                    p.textContent = skill.charAt(0) + skill.substring(1).toLowerCase();
+                    p.classList.add("left");
+                    p_elem.append(p);
+                }
+            } else if (command === "ids") { //warp
+                for (const [key,value] of ingred.get("ids").get("minRolls")) {
+                    if (ingred.get("ids").get("minRolls").get(key) && value != 0 && ingred.get("ids").get("maxRolls").get(key) != 0){
+                        if(value > 0) {
+                            style = "positive";
+                        } else if (value < 0) {
+                            style = "negative";
+                        }
+                        if(reversedIDs.filter(e => e !== "atkTier").includes(key)){
+                            style === "positive" ? style = "negative" : style = "positive"; 
+                        }
     
+                        let row = document.createElement('tr');
+                        row.classList.add("center");
+                        let min_elem = document.createElement('td');
+                        min_elem.classList.add('left');
+                        min_elem.classList.add(style);
+                        min_elem.textContent = value + idSuffixes[key];
+                        row.appendChild(min_elem);
+        
+                        let desc_elem = document.createElement('td');
+                        desc_elem.classList.add('center');
+                        //TODO elemental format jank
+                        if (elemental_format) {
+                            apply_elemental_format(desc_elem, key);
+                        }
+                        else {
+                            desc_elem.textContent = idPrefixes[key];
+                        }
+                        row.appendChild(desc_elem);
+        
+                        let max_elem = document.createElement('td');
+                        max_elem.classList.add('right');
+                        max_elem.classList.add(style);
+                        max_elem.textContent = ingred.get("ids").get("maxRolls").get(key) + idSuffixes[key];
+                        row.appendChild(max_elem);
+                        active_elem.appendChild(row);
+                    }
+                }
+            } else {//this shouldn't be happening        
+            }
+
+            active_elem.appendChild(p_elem);
+        }
+    }    
 }
 
 function displayNextCosts(parent_id, build) { 
@@ -716,7 +946,7 @@ function displayNextCosts(parent_id, build) {
     p_elem.append(title);
     p_elem.append(int_title);
 
-    for (const spell of spells) { //warp
+    for (const spell of spells) { 
         let spellp = document.createElement("p");
         let spelltitle = document.createElement("p");
         spelltitle.classList.add("itemp");

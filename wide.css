@@ -15,13 +15,12 @@
 .container {
     padding: 2% 4% 4%;
     display: grid;
-    grid-template-columns: 1fr 0.7fr 0.7fr;
+    grid-template-columns: 1fr 1fr;
     grid-auto-columns: minmax(200px, auto);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
 .ingredients {
-    padding: 2% 4% 4%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-columns: minmax(200px, auto);
