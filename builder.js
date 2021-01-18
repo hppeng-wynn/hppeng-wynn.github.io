@@ -1,16 +1,9 @@
-/*
- * TESTING SECTION
- */
-
 const url_base = location.href.split("#")[0];
 const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-/*
- * END testing section
- */
-
+const BUILD_VERSION = "6.9.3";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -464,6 +457,7 @@ function calculateBuild(save_skp, skp){
         for (let i of document.getElementsByClassName("hide-container-grid")) {
 			i.style.display = "grid";
 		}
+        document.getElementById("int-info-div").style.display = "none";
 
         console.log(player_build.toString());
         displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
