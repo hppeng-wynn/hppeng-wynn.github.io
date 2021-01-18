@@ -33,8 +33,8 @@
     max-height: 50px;
 }
 
-.skp-input {
-    width: 15vw;
+.skpInput, .idInput {
+    width: 90%;
     height: 7vw;
     max-height: 30px;
 }
