@@ -9,7 +9,7 @@
     top: 0;
 }
 .summary {
-    padding: 2% 4% 4%;
+    padding: 2% 2% 0%;
     display: grid;
     grid-template-columns: 1.25fr 1.25fr 1fr 1fr;
     grid-auto-columns: minmax(200px, auto);
@@ -44,9 +44,11 @@
 }
 
 .iteminput {
-
+    width: 15vw;
 }
 
 .skpInput, .idInput {
-
+    width: 90%;
+    height: 7vw;
+    max-height: 30px;
 }

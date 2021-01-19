@@ -1,4 +1,4 @@
-const DB_VERSION = 21;
+const DB_VERSION = 22;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;

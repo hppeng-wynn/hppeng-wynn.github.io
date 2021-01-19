@@ -429,7 +429,7 @@ function displayExpandedItem(item, parent_id){
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
 
                     let powderPrefix = document.createElement("b");
-                    powderPrefix.classList.add("itemp");
+                    powderPrefix.classList.add("powderLeft");
                     powderPrefix.classList.add("left");
                     powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
                     p_elem.appendChild(powderPrefix);
@@ -444,7 +444,7 @@ function displayExpandedItem(item, parent_id){
                     }
 
                     let powderSuffix = document.createElement("b");
-                    powderSuffix.classList.add("itemp");
+                    powderSuffix.classList.add("powderRight");
                     powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
@@ -1130,7 +1130,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
     statsTable.appendChild(hprRow);
-    /*//EHPR
+    //EHPR
     let ehprRow = document.createElement("tr");
     let ehpr = document.createElement("td");
     ehpr.classList.add("left");
@@ -1144,7 +1144,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     ehprRow.append(boost);
     statsTable.append(ehprRow);
 
-    ehprRow = document.createElement("tr");
+    /*ehprRow = document.createElement("tr");
     ehpr = document.createElement("td");
     ehpr.classList.add("left");
     ehpr.textContent = "Effective HP Regen (no agi):";

@@ -29,18 +29,17 @@ div {
     grid-template-rows: min-content min-content auto;
 }
 
-.skillpoints, .id-edit1 {
+.id-edit1 {
+
+}
+.idLabel, .skpLabel, .idDesc, .skpDesc {
+    font-size: 80%;
+}
+
+.skillpoints {
     padding: 0% 4% 2%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    grid-auto-rows: minmax(60px, auto);
-}
-
-.id-edit2 {
-    padding: 0% 4% 2%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
@@ -125,6 +124,14 @@ table.center{
 
 .itemp, .damagep {
     margin: 2px 2%;
+    padding: 0;
+}
+.powderLeft {
+    margin: 2px 0% 2px 2%;
+    padding: 0;
+}
+.powderRight {
+    margin: 2px 2% 2px 0%;
     padding: 0;
 }
 .space {
