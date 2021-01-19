@@ -267,6 +267,17 @@ button.toggleOn{
     background-color:#0a0;
     border: 3 px solid rgb(0, 70, 0); 
 }
+.toggleOn:hover {
+    background-color: #585;
+}
+button:hover {
+    background-color: #556;
+}
+button:active {
+  background-color: #558;
+  box-shadow: 0 3px #666;
+  transform: translateY(1px);
+}
 
 .funnynumber {
     background-image: linear-gradient(to left, #f5f, #a0a, #5ff, #5f5, #ff5, #fa0, #a00);   -webkit-background-clip: text;
@@ -304,4 +315,9 @@ button.toggleOn{
     100% {
         opacity: 1;
     }
+}
+
+.highlight {
+    color: #ff5;
+    background-color: #775; 
 }

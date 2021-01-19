@@ -96,13 +96,3 @@ button {
     font-size: 120%;
     display: inline-block;
 }
-button:hover {
-    background-color: #556;
-}
-
-
-button:active {
-  background-color: #558;
-  box-shadow: 0 3px #666;
-  transform: translateY(1px);
-}
