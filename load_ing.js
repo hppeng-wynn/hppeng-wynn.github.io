@@ -29,6 +29,7 @@ async function ing_load_local(init_func) {
     request4.onsuccess = function(event) {
         console.log("Successfully read local recipe db.");
         recipes = request4.result;
+        init_func();
     }
     await get_tx.complete;
     db.close();
@@ -53,15 +54,15 @@ async function load_ings(init_func) {
     recipes = result.recipes;
 
     // https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/clear
-    let clear_tx2 = db.transaction(['ing_db'], 'readwrite');
+    /*let clear_tx2 = db.transaction(['ing_db'], 'readwrite');
     let clear_ings = clear_tx2.objectStore('ing_db');
     let clear_tx3 = db.transaction(['recipe_db'], 'readwrite');
     let clear_recipes = clear_tx3.objectStore('recipe_db');
     await clear_ings.clear();
     await clear_recipes.clear();
     await clear_tx2.complete;
-    await clear_tx3.complete;
-
+    await clear_tx3.complete;*/
+    let add_promises = [];
     let add_tx2 = db.transaction(['ing_db'], 'readwrite');
     let ings_store = add_tx2.objectStore('ing_db');
     for (const ing in ings) {
@@ -82,7 +83,7 @@ async function load_ings(init_func) {
 
 function load_ing_init(init_func) {
     
-    let request = window.indexedDB.open("ing_db", DB_VERSION)
+    let request = window.indexedDB.open("ing_db", ING_DB_VERSION)
     request.onerror = function() {
         console.log("DB failed to open...");
     }
@@ -91,11 +92,11 @@ function load_ing_init(init_func) {
         db = request.result;
         if (!reload) {
             console.log("Using stored data...")
-            load_local(init_func);
+            ing_load_local(init_func);
         }
         else {
             console.log("Using new data...")
-            load(init_func);
+            load_ings(init_func);
         }
     }
 

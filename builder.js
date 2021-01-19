@@ -31,7 +31,6 @@ for (let i of editable_item_fields) {
     editable_elems.push(elem);
 }
 
-let skp_order = ["str","dex","int","def","agi"];
 for (let i of skp_order) {
     let elem = document.getElementById(i+"-skp");
     elem.addEventListener("change", (event) => {
@@ -46,9 +45,6 @@ function clear_highlights() {
     }
 }
 
-let skp_elements = ["e","t","w","f","a"];
-let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
-let skpReqs = skp_order.map(x => x + "Req");
 
 let equipment_fields = [
     "helmet",
@@ -430,8 +426,8 @@ function calculateBuild(save_skp, skp){
             }
         }
         if(player_build){
-            updateBoosts("skip");
-            updatePowderSpecials("skip");
+            updateBoosts("skip", false);
+            updatePowderSpecials("skip", false);
         }
         //updatePowderSpecials("skip"); //jank pt 1
         save_skp = (typeof save_skp !== 'undefined') ?  save_skp : false;

@@ -6,7 +6,6 @@
 .all {
     font-family: 'Nunito',sans-serif;
     font-weight: 700;
-    text-size-adjust: none;
 }
 
 th, td {
@@ -15,9 +14,11 @@ th, td {
 
 .nomargin {
     padding: 0px;
-    margin: 0px;
 }
-
+.nomarginp {
+    margin: 0px;
+    padding: 0px;
+}
 div {
     padding: 0%;
 }
@@ -30,14 +31,18 @@ div {
     grid-template-rows: min-content min-content auto;
 }
 
-.id-edit1 {
-
-}
-
-.skillpoints {
+.skillpoints, .id-edit1 {
     padding: 0% 4% 2%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+
+.id-edit2 {
+    padding: 0% 4% 2%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
@@ -63,6 +68,14 @@ div {
 a.link{
     color: #A5FDFF;
 }
+.title{
+    text-align: center;
+    font-size: 150%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+}
 .center {
     text-align: center;
     position: relative;
@@ -82,12 +95,18 @@ table.center{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .crafter, .recipe-stats, .craft-stats, .ing-stats, .id-box {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .id-box {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
     border-radius: 3px;
     width: 96%;
+}
+.crafter, .recipe-stats, .craft-stats, .ing-stats {
+    color: #aaa;
+    background: #121516;
+    border: 3px solid #BCBCBC;
+    border-radius: 3px;
 }
 
 .spell-info {
@@ -108,22 +127,18 @@ table.center{
     margin: 2px 2%;
     width: 94%;
     margin-bottom: 16px;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 .itemp, .damagep {
     margin: 2px 2%;
     padding: 0;
 }
-.powderLeft {
-    margin: 2px 0% 2px 2%;
-    padding: 0;
-}
-.powderRight {
-    margin: 2px 2% 2px 0%;
-    padding: 0;
-}
 .space {
     margin-right: 5px;
+}
+.spaceleft{
+    margin-left: 5px;
 }
 
 .damageSubtitle {
@@ -189,8 +204,8 @@ table.center{
     margin: auto;
 }
 
-.idLeft {
-    text-align: left;
+.idCenter {
+    text-align: center;
     padding: 1em 0px 0px 0px;
     position: relative;
     display: flex;
@@ -222,7 +237,40 @@ table.center{
 ::-webkit-scrollbar-corner{
     background: #110110;
 }
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 90%;
+    display: inline-block;
+}
+button {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 120%;
+    display: inline-block;
+}
+button:hover {
+    background-color: #556;
+}
 
+
+button:active {
+  background-color: #558;
+  box-shadow: 0 3px #666;
+  transform: translateY(1px);
+}
 input {
     background-color: #666; 
     border: 2px solid #444;
@@ -256,6 +304,12 @@ input {
 .Mythic{
     color:#a0a;
 }
+.Crafted {
+    color: #0aa;
+}
+.Custom {
+    color: #0aa;
+}
 .Set{
     color:#5f5;
 }
@@ -266,17 +320,6 @@ input {
 button.toggleOn{
     background-color:#0a0;
     border: 3 px solid rgb(0, 70, 0); 
-}
-.toggleOn:hover {
-    background-color: #585;
-}
-button:hover {
-    background-color: #556;
-}
-button:active {
-  background-color: #558;
-  box-shadow: 0 3px #666;
-  transform: translateY(1px);
 }
 
 .funnynumber {
@@ -297,7 +340,31 @@ button:active {
     width: 100%;
 }
 
-.hide-container-block, .hide-container-grid, .set-info-div, .fade-in, .misc {
+.T0 {
+    color: #555;
+}
+.T1 {
+    color: #ff5;
+}
+.T2 {
+    color: #f5f;
+}
+.T3 {
+    color: #5ff;
+}
+.T0-bracket {
+    color: #555;
+}   
+.T1-bracket {
+    color: #fa0;
+}
+.T2-bracket {
+    color: #a0a;
+}
+.T3-bracket {
+    color: #0aa;
+}
+.hide-container-block, .hide-container-grid, .set-info-div, .fade-in {
     animation-duration: 0.5s;
     animation-name: fadeInFromNone;
     animation-fill-mode: forwards;
@@ -315,9 +382,4 @@ button:active {
     100% {
         opacity: 1;
     }
-}
-
-.highlight {
-    color: #ff5;
-    background-color: #775; 
 }
