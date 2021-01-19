@@ -108,7 +108,7 @@ function calculateCraft() {
                 break;
             }
         }
-        if (mat_tiers.length < i) { //defualt to t3
+        if (mat_tiers.length < i) { //default to t3
             mat_tiers.push(3);
             document.getElementById("mat-"+i+"-3").classList.add("toggleOn");
         } 

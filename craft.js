@@ -141,6 +141,11 @@ class Craft{
                 }
             }
         }
+        //apply material tiers - the good thing is that this should be symmetric.
+        for (const mat of this.mat_tiers) {
+
+        }
+
         //apply ingredient effectivness - on ids, and reqs (itemIDs). NOT on durability, duration, or charges.
         let eff_flat = eff.flat();
         //console.log(eff_flat);
