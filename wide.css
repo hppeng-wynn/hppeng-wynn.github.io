@@ -52,3 +52,7 @@
     height: 7vw;
     max-height: 30px;
 }
+
+.wide-space {
+    height: 8em;
+}

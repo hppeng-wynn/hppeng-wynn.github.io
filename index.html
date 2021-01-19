@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html scroll-behavior="smooth">
     <head>
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
         <!-- nunito font, copying wynndata -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
@@ -16,7 +19,7 @@
         <div class="header" id="header">
             Wynn build calculator
         </div>
-        <div class="center" id="help">
+        <div class="header" id="help">
             <a href="https://forums.wynncraft.com/threads/wynnbuilder-release-thread-and-some-damage-calculation-updates.281438">Forum thread (instructions/help)</a>
         </div>
         <div class="summary">
@@ -33,7 +36,7 @@
                         </tr>
                         <tr>
                             <td class="left">
-                                <label for="helmet-choice">Helmet:</label>
+                                <label for="helmet-choice">Helmet:</label><br>
                                 <input class="iteminput" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet"/>
                                 <datalist id="helmet-items">
                                 </datalist>
@@ -47,7 +50,7 @@
                         </tr>
                         <tr>
                             <td class="left">
-                                <label for="chestplate-choice">Chestplate:</label>
+                                <label for="chestplate-choice">Chestplate:</label><br>
                                 <input class="iteminput" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No Chestplate" />
                                 <datalist id="chestplate-items">
                                 </datalist>
@@ -61,7 +64,7 @@
                         </tr>
                         <tr>
                             <td class="left">
-                                <label for="leggings-choice">Leggings:</label>
+                                <label for="leggings-choice">Leggings:</label><br>
                                 <input class="iteminput" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No Leggings" />
                                 <datalist id="leggings-items">
                                 </datalist>
@@ -75,7 +78,7 @@
                         </tr>
                         <tr>
                             <td class="left">
-                                <label for="boots-choice">Boots:</label>
+                                <label for="boots-choice">Boots:</label><br>
                                 <input class="iteminput" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No Boots" />
                                 <datalist id="boots-items">
                                 </datalist>
@@ -90,7 +93,7 @@
                         <tr>
                             <td class="left">
                                 <br>
-                                <label for="weapon-choice">Weapon:</label>
+                                <label for="weapon-choice">Weapon:</label><br>
                                 <input class="iteminput" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value=""/>
                                 <datalist id="weapon-items">
                                 </datalist>
@@ -204,7 +207,7 @@
                             <tr>
                                 <td>
                                     <button class = "button-narrow" id = "vanish-boost" onclick = "updateBoosts('vanish-boost')">
-                                        Vanish Boost (+80%)
+                                        Vanish (+80%)
                                     </button>
                                 </td>
                                 <td>
@@ -884,7 +887,7 @@
                 Edit IDs
             </button>
         </div>
-        <br><br><br><br><br><br><br><br>
+        <div class="wide-space"></div>
                 </div>
             </div>
             <div class="build-overall-container hide-container-block" style="display: none;">
