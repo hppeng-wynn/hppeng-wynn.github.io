@@ -191,8 +191,8 @@ table.center{
     margin: auto;
 }
 
-.idCenter {
-    text-align: center;
+.idLeft {
+    text-align: left;
     padding: 1em 0px 0px 0px;
     position: relative;
     display: flex;
@@ -321,7 +321,7 @@ button.toggleOn{
     width: 100%;
 }
 
-.hide-container-block, .hide-container-grid, .set-info-div, .fade-in, .misc {
+.hide-container-block, .hide-container-grid, .set-info-div, .fade-in {
     animation-duration: 0.5s;
     animation-name: fadeInFromNone;
     animation-fill-mode: forwards;
