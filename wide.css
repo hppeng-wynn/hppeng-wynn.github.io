@@ -56,3 +56,53 @@
 .wide-space {
     height: 8em;
 }
+
+.idLabel, .skpLabel, .idDesc, .skpDesc {
+    font-size: 80%;
+}
+
+.title{
+    text-align: center;
+    font-size: 150%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 90%;
+    display: inline-block;
+}
+button {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 120%;
+    display: inline-block;
+}
+button:hover {
+    background-color: #556;
+}
+
+
+button:active {
+  background-color: #558;
+  box-shadow: 0 3px #666;
+  transform: translateY(1px);
+}
