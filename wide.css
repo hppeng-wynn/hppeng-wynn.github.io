@@ -4,6 +4,10 @@
 .spell-info-container {
     grid-column:4;
 }
+.sticky-box {
+    position: sticky;
+    top: 0;
+}
 .summary {
     padding: 2% 4% 4%;
     display: grid;
