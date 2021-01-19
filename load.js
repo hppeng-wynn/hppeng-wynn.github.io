@@ -1,4 +1,4 @@
-const DB_VERSION = 23;
+const DB_VERSION = 24;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -68,12 +68,27 @@ async function load(init_func) {
     items = result.items;
     sets = result.sets;
 
+    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
+    let clear_items = clear_tx.objectStore('item_db');
+    let clear_sets = clear_tx.objectStore('item_db');
+
+    await clear_items.clear();
+    await clear_sets.clear();
+    await clear_tx.complete;
+
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
+    add_tx.onabort = function() {
+        console.log("Not enough space...");
+    };
     let items_store = add_tx.objectStore('item_db');
     let add_promises = [];
     for (const item of items) {
         clean_item(item);
-        add_promises.push(items_store.add(item, item.name));
+        let req = items_store.add(item, item.name);
+        req.onerror = function() {
+            console.log("ADD ITEM ERROR? " + item.name);
+        };
+        add_promises.push(req);
     }
     let sets_store = add_tx.objectStore('set_db');
     for (const set in sets) {
