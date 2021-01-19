@@ -3,47 +3,6 @@ const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
 const classDefenseMultipliers = new Map([ ["relik",0.50], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.20] ]);
 
-/*Turns the input amount of skill points into a float precision percentage.
-* @param skp - the integer skillpoint count to be converted
-*/
-function skillPointsToPercentage(skp){
-    if (skp<=0){
-        return 0.0;
-    }else if(skp>=150){
-        return 0.808;
-    }else{
-        return (-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
-        //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
-    }       
-}
-
-/*Turns the input amount of levels into skillpoints available.
-*
-* @param level - the integer level count te be converted
-*/
-function levelToSkillPoints(level){
-    if(level < 1){
-        return 0;
-    }else if(level >= 101){
-        return 200;
-    }else{
-        return (level - 1) * 2;
-    }
-}
-
-/*Turns the input amount of levels in to base HP.
-* @param level - the integer level count to be converted
-*/
-function levelToHPBase(level){
-    if(level < 1){ //bad level
-        return this.levelToHPBase(1);
-    }else if (level > 106){ //also bad level
-        return this.levelToHPBase(106);
-    }else{ //good level
-        return 5*level + 5;
-    }
-}
-
 /**
  * @description Error to catch items that don't exist.
  * @module ItemNotFound
@@ -284,7 +243,7 @@ class Build{
     /*Returns build in string format
     */
     toString(){
-        return this.helmet.get("name") + ", " + this.chestplate.get("name") + ", " + this.leggings.get("name") + ", " + this.boots.get("name") + ", " + this.ring1.get("name") + ", " + this.ring2.get("name") + ", " + this.bracelet.get("name") + ", " + this.necklace.get("name") + ", " + this.weapon.get("name");
+        return [this.equipment,this.weapon].flat();
     }
 
     /* Getters */
