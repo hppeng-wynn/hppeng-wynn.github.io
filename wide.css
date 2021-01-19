@@ -4,8 +4,12 @@
 .spell-info-container {
     grid-column:4;
 }
+.sticky-box {
+    position: sticky;
+    top: 0;
+}
 .summary {
-    padding: 2% 4% 4%;
+    padding: 2% 2% 0%;
     display: grid;
     grid-template-columns: 1.25fr 1.25fr 1fr 1fr;
     grid-auto-columns: minmax(200px, auto);
@@ -39,10 +43,55 @@
 }
 
 .iteminput {
-
+    width: 15vw;
 }
 
 .skpInput, .idInput {
-
+    width: 90%;
+    height: 7vw;
+    max-height: 30px;
 }
 
+.wide-space {
+    height: 8em;
+}
+
+.idLabel, .skpLabel, .idDesc, .skpDesc {
+    font-size: 80%;
+}
+
+.title{
+    text-align: center;
+    font-size: 150%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 90%;
+    display: inline-block;
+}
+button {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 120%;
+    display: inline-block;
+}

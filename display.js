@@ -479,7 +479,7 @@ function displayExpandedItem(item, parent_id){
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
 
                     let powderPrefix = document.createElement("b");
-                    powderPrefix.classList.add("itemp");
+                    powderPrefix.classList.add("powderLeft");
                     powderPrefix.classList.add("left");
                     powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
                     p_elem.appendChild(powderPrefix);
@@ -494,7 +494,7 @@ function displayExpandedItem(item, parent_id){
                     }
 
                     let powderSuffix = document.createElement("b");
-                    powderSuffix.classList.add("itemp");
+                    powderSuffix.classList.add("powderRight");
                     powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
@@ -1199,7 +1199,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     overallaverageDamage.appendChild(overallaverageDamageSecond);
 
     overallparent_elem.append(overallaverageDamage);
-    overallparent_elem.append(document.createElement("br"));
+    //overallparent_elem.append(document.createElement("br"));
 
     //attack speed
     let atkSpd = document.createElement("p");
@@ -1221,7 +1221,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     overallatkSpd.appendChild(overallatkSpdFirst);
     overallatkSpd.appendChild(overallatkSpdSecond);
     overallparent_elem.append(overallatkSpd);
-    overallparent_elem.append(document.createElement("br"));
+    //overallparent_elem.append(document.createElement("br"));
 
     //Non-Crit: n->elem, total dmg, DPS
     let nonCritStats = document.createElement("p");
@@ -1415,7 +1415,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
     statsTable.appendChild(hprRow);
-    /*//EHPR
+    //EHPR
     let ehprRow = document.createElement("tr");
     let ehpr = document.createElement("td");
     ehpr.classList.add("left");
@@ -1429,7 +1429,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     ehprRow.append(boost);
     statsTable.append(ehprRow);
 
-    ehprRow = document.createElement("tr");
+    /*ehprRow = document.createElement("tr");
     ehpr = document.createElement("td");
     ehpr.classList.add("left");
     ehpr.textContent = "Effective HP Regen (no agi):";
@@ -1659,24 +1659,20 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
     let save_damages = [];
 
+    let part_divavg = document.createElement("p");
+    part_divavg.classList.add("nomargin");
+    overallparent_elem.append(part_divavg);
+
     for (const part of spell.parts) {
         parent_elem.append(document.createElement("br"));
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
-        let part_divavg = document.createElement("p");
-        //part_divavg.classList.add("Normal");
-        overallparent_elem.append(part_divavg);
-
         let subtitle_elem = document.createElement("p");
         subtitle_elem.textContent = part.subtitle;
+        subtitle_elem.classList.add("nomargin");
         part_div.append(subtitle_elem);
 
-        if (part.summary == true) {
-            let subtitle_elemavg = document.createElement("p");
-            subtitle_elemavg.textContent = part.subtitle;
-            part_divavg.append(subtitle_elemavg);
-        }
         if (part.type === "damage") {
             //console.log(build.expandedStats);
             let _results = calculateSpellDamage(stats, part.conversion,
@@ -1703,12 +1699,12 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 let overallaverageLabel = document.createElement("p");
                 let first = document.createElement("b");
                 let second = document.createElement("b");
-                first.textContent = "Average: "; 
+                first.textContent = part.subtitle + " Average: "; 
                 second.textContent = averageDamage.toFixed(2);
                 overallaverageLabel.appendChild(first);
                 overallaverageLabel.appendChild(second);
                 second.classList.add("Damage");
-                overallaverageLabel.classList.add("damageSubtitle");
+                overallaverageLabel.classList.add("overallp");
                 part_divavg.append(overallaverageLabel);
             }
 
@@ -1751,9 +1747,14 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             part_div.append(healLabel);
             if (part.summary == true) {
                 let overallhealLabel = document.createElement("p");
-                overallhealLabel.textContent = heal_amount;
-                overallhealLabel.classList.add("damagep");
-                overallhealLabel.classList.add("Set");
+                let first = document.createElement("b");
+                let second = document.createElement("b");
+                first.textContent = part.subtitle + ":";
+                second.textContent = heal_amount;
+                overallhealLabel.appendChild(first);
+                second.classList.add("Set");
+                overallhealLabel.appendChild(second);
+                overallhealLabel.classList.add("overallp");
                 part_divavg.append(overallhealLabel);
             }
         }

@@ -39,3 +39,46 @@
     max-height: 30px;
 }
 
+.wide-space {
+    height: 1em;
+}
+
+.idLabel, .skpLabel, .idDesc, .skpDesc {
+    font-size: 100%;
+}
+
+.title{
+    text-align: center;
+    font-size: 190%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 155%;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 113%;
+    display: inline-block;
+}
+button {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 150%;
+    display: inline-block;
+}

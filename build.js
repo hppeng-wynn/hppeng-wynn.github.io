@@ -184,10 +184,16 @@ class Build{
             const weapon = itemMap.get(equipment[8]);
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
             this.weapon = expandItem(weapon, this.powders[4]);
+            if (equipment[8] !== "No Weapon") {
+                document.getElementsByClassName("powder-specials")[0].style.display = "grid";
+            } else {
+                document.getElementsByClassName("powder-specials")[0].style.display = "none";
+            }
         }else{
             const weapon = itemMap.get("No Weapon");
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
             this.weapon = expandItem(weapon, this.powders[4]);
+            document.getElementsByClassName("powder-specials")[0].style.display = "none";
             errors.push(new ItemNotFound(equipment[8], "weapon", true));
         }
 

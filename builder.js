@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.4";
+const BUILD_VERSION = "6.9.6";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -21,6 +21,29 @@ let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
 let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprRaw", "hprPct", "hpBonus", "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
+let editable_elems = [];
+
+for (let i of editable_item_fields) {
+    let elem = document.getElementById(i);
+    elem.addEventListener("change", (event) => {
+        elem.classList.add("highlight");
+    });
+    editable_elems.push(elem);
+}
+
+for (let i of skp_order) {
+    let elem = document.getElementById(i+"-skp");
+    elem.addEventListener("change", (event) => {
+        elem.classList.add("highlight");
+    });
+    editable_elems.push(elem);
+}
+
+function clear_highlights() {
+    for (let i of editable_elems) {
+        i.classList.remove("highlight");
+    }
+}
 
 
 let equipment_fields = [
@@ -403,8 +426,8 @@ function calculateBuild(save_skp, skp){
             }
         }
         if(player_build){
-            updateBoosts("skip");
-            updatePowderSpecials("skip");
+            updateBoosts("skip", false);
+            updatePowderSpecials("skip", false);
         }
         //updatePowderSpecials("skip"); //jank pt 1
         save_skp = (typeof save_skp !== 'undefined') ?  save_skp : false;
@@ -454,8 +477,7 @@ function calculateBuild(save_skp, skp){
         }
         for (let i of document.getElementsByClassName("hide-container-grid")) {
 			i.style.display = "grid";
-		}
-        document.getElementById("int-info-div").style.display = "none";
+        }
 
         console.log(player_build.toString());
         displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
@@ -836,6 +858,7 @@ function calculateBuildStats() {
     }
 
     location.hash = encodeBuild();
+    clear_highlights();
 }
 
 function copyBuild() {
