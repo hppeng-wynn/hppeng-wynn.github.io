@@ -15,7 +15,7 @@
 .container {
     padding: 2% 4% 4%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.4fr 0.6fr;
     grid-auto-columns: minmax(200px, auto);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
@@ -42,38 +42,7 @@
 
 }
 
-.skp-input {
+.skpInput, .idInput {
 
 }
 
-.hide-container-block {
-    animation-duration: 0.5s;
-    animation-name: fadeInFromNone;
-    animation-fill-mode: forwards;
-}
-
-.hide-container-grid {
-    animation-duration: 0.5s;
-    animation-name: fadeInFromNone;
-    animation-fill-mode: forwards;
-}
-
-.set-info-div {
-    animation-duration: 0.5s;
-    animation-name: fadeInFromNone;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeInFromNone {
-    0% {
-        opacity: 0;
-    }
-
-    1% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}

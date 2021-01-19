@@ -1,16 +1,9 @@
-/*
- * TESTING SECTION
- */
-
 const url_base = location.href.split("#")[0];
 const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-/*
- * END testing section
- */
-
+const BUILD_VERSION = "6.9.4";
 
 function setTitle() {
     document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
@@ -26,6 +19,7 @@ let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 // THIS IS SUPER DANGEROUS, WE SHOULD NOT BE KEEPING THIS IN SO MANY PLACES
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
+let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprRaw", "hprPct", "hpBonus", "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 
 
@@ -424,29 +418,36 @@ function calculateBuild(save_skp, skp){
             equipment[i] = equip;
         }
         let powderings = [];
+        let errors = [];
         for (const i in powderInputs) {
             // read in two characters at a time.
             // TODO: make this more robust.
             let input = getValue(powderInputs[i]);
             let powdering = [];
+            let errorederrors = [];
             while (input) {
                 let first = input.slice(0, 2);
                 let powder = powderIDs.get(first);
                 console.log(powder);
                 if (powder === undefined) {
-                    throw new TypeError("Invalid powder " + powder + " in slot " + i);
+                    errorederrors.push(first);
+                } else {
+                    powdering.push(powder);
                 }
-                powdering.push(powder);
                 input = input.slice(2);
             }
+            if (errorederrors.length > 0) {
+                if (errorederrors.length > 1)
+                    errors.push(new IncorrectInput(errorederrors.join(""), "t6w6", powderInputs[i]));
+                else
+                    errors.push(new IncorrectInput(errorederrors[0], "t6 or e3", powderInputs[i]));
+            }
+            console.log("POWDERING" + powdering);
             powderings.push(powdering);
         }
-        //level setting
-        let level = document.getElementById("level-choice").value;
-        if(level === ""){
-            level = 106;
-        }
-        document.getElementById("level-choice").value = level;
+        
+        console.log(equipment);
+        player_build = new Build(document.getElementById("level-choice").value, equipment, powderings, new Map(), errors);
 
         for (let i of document.getElementsByClassName("hide-container-block")) {
 			i.style.display = "block";
@@ -454,9 +455,9 @@ function calculateBuild(save_skp, skp){
         for (let i of document.getElementsByClassName("hide-container-grid")) {
 			i.style.display = "grid";
 		}
+        document.getElementById("int-info-div").style.display = "none";
 
-        player_build = new Build(level, equipment, powderings, new Map());
-        //console.log(player_build.toString());
+        console.log(player_build.toString());
         displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
         
@@ -465,6 +466,11 @@ function calculateBuild(save_skp, skp){
         const skillpoints = player_build.total_skillpoints;
         for (let i in skp_order){ //big bren
             setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+        }
+
+        for (let id of editable_item_fields) {
+            setValue(id, player_build.statMap.get(id));
+            setText(id+"-base", "Original Value: " + player_build.statMap.get(id));
         }
         
         if (save_skp) {
@@ -483,21 +489,50 @@ function calculateBuild(save_skp, skp){
         
         calculateBuildStats();
         setTitle();
+        if (player_build.errored)
+            throw new ListError(player_build.errors);
+
     }
     catch (error) {
-        let msg = error.stack;
-        let lines = msg.split("\n");
-        let header = document.getElementById("header");
-        header.textContent = "";
-        for (const line of lines) {
-            let p = document.createElement("p");
-            p.classList.add("itemp");
-            p.textContent = line;
-            header.appendChild(p);
+        if (error instanceof ListError) {
+            for (let i of error.errors) {
+                if (i instanceof ItemNotFound) {
+                    i.element.textContent = i.message;
+                } else if (i instanceof IncorrectInput) {
+                    if (document.getElementById(i.id) !== null) {
+                        document.getElementById(i.id).parentElement.querySelectorAll("p.error")[0].textContent = i.message;
+                    }
+                } else {
+                    let msg = i.stack;
+                    let lines = msg.split("\n");
+                    let header = document.getElementById("header");
+                    header.textContent = "";
+                    for (const line of lines) {
+                        let p = document.createElement("p");
+                        p.classList.add("itemp");
+                        p.textContent = line;
+                        header.appendChild(p);
+                    }
+                    let p2 = document.createElement("p");
+                    p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+                    header.appendChild(p2);
+                }
+            }
+        } else {
+            let msg = error.stack;
+            let lines = msg.split("\n");
+            let header = document.getElementById("header");
+            header.textContent = "";
+            for (const line of lines) {
+                let p = document.createElement("p");
+                p.classList.add("itemp");
+                p.textContent = line;
+                header.appendChild(p);
+            }
+            let p2 = document.createElement("p");
+            p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+            header.appendChild(p2);
         }
-        let p2 = document.createElement("p");
-        p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
-        header.appendChild(p2);
     }
 }
 
@@ -550,28 +585,33 @@ function updateStats() {
         delta_total += delta;
     }
     player_build.assigned_skillpoints += delta_total;
-    calculateBuildStats();
     if(player_build){
-        updatePowderSpecials("skip");
-        updateBoosts("skip");
+        updatePowderSpecials("skip", false);
+        updateBoosts("skip", false);
     }
+    for (let id of editable_item_fields) {
+        player_build.statMap.set(id, parseInt(getValue(id)));
+    }
+    player_build.aggregateStats();
+    console.log(player_build.statMap);
+    calculateBuildStats();
 }
 /* Updates all spell boosts
 */
-function updateBoosts(buttonId) {
+function updateBoosts(buttonId, recalcStats) {
     let elem = document.getElementById(buttonId);
     let name = buttonId.split("-")[0];
     if(buttonId !== "skip") {
         if (elem.classList.contains("toggleOn")) {
             player_build.damageMultiplier -= damageMultipliers.get(name);
             if (name === "warscream") {
-                player_build.defenseMultiplier -= .10;
+                player_build.defenseMultiplier -= .20;
             }
             elem.classList.remove("toggleOn");
         }else{
             player_build.damageMultiplier += damageMultipliers.get(name);
             if (name === "warscream") {
-                player_build.defenseMultiplier += .10;
+                player_build.defenseMultiplier += .20;
             }
             elem.classList.add("toggleOn");
         }
@@ -582,16 +622,18 @@ function updateBoosts(buttonId) {
             if (elem.classList.contains("toggleOn")) {
                 elem.classList.remove("toggleOn");
                 player_build.damageMultiplier -= value;
-                if (key === "warscream") { player_build.defenseMultiplier -= .10 }
+                if (key === "warscream") { player_build.defenseMultiplier -= .20 }
             }
         }
     }
-    calculateBuildStats();
+    if (recalcStats) {
+        calculateBuildStats();
+    }
 }
 
 /* Updates all powder special boosts 
 */
-function updatePowderSpecials(buttonId){
+function updatePowderSpecials(buttonId, recalcStats) {
     //console.log(player_build.statMap);
    
     let name = (buttonId).split("-")[0];
@@ -671,8 +713,10 @@ function updatePowderSpecials(buttonId){
         }
     }
 
+    if (recalcStats) {
+        calculateBuildStats();
+    }
     displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
-    calculateBuildStats(); //also make damage boosts apply ;-;
 }
 /* Calculates all build statistics and updates the entire display.
 */
@@ -834,6 +878,19 @@ function resetFields(){
     setValue("level-choice", "");
     location.hash = "";
     calculateBuild();
+}
+
+function toggleID() {
+    let button = document.getElementById("show-id-button");
+    let targetDiv = document.getElementById("id-edit");
+    if (button.classList.contains("toggleOn")) { //toggle the pressed button off
+        targetDiv.style.display = "none";
+        button.classList.remove("toggleOn");
+    }
+    else {
+        targetDiv.style.display = "block";
+        button.classList.add("toggleOn");
+    }
 }
 
 load_init(init);

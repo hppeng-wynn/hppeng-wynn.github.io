@@ -139,7 +139,7 @@ let consumableIDPrefixes = {
 }
 let consumableIDSuffixes = {
     "charges": "",
-    "dura": " Sec."
+    "dura": " sec."
 }
 //Used for ingredient itemIDs
 let itemIDPrefixes = {
@@ -163,7 +163,7 @@ let posModPrefixes = {
     "left":"Effectiveness Left: ",
     "right":"EFfectiveness Right: ",
     "above":"Effectiveness Above: ",
-    "below":"Effectivness Below: ",
+    "under":"Effectiveness Under: ",
     "touching":"EFfectiveness Touching: ",
     "notTouching":"Effectiveness Not Touching: "
 }
@@ -171,7 +171,7 @@ let posModSuffixes = {
     "left":"%",
     "right":"%",
     "above":"%",
-    "below":"%",
+    "under":"%",
     "touching":"%",
     "notTouching":"%"
 }
@@ -407,6 +407,7 @@ function displayExpandedItem(item, parent_id){
         "#ldiv",
         "str", "dex", "int", "def", "agi",
         "#table",
+        "str", "dex", "int", "def", "agi", //jank lmao
         "hpBonus",
         "hprRaw", "hprPct",
         "sdRaw", "sdPct",
@@ -469,7 +470,7 @@ function displayExpandedItem(item, parent_id){
         }
         else {
             let id = command;
-            if(nonRolledIDs.includes(id) && item.get(id)){//nonRolledID & non-0/non-null/non-und ID
+            if(( nonRolledIDs.includes(id) && item.get(id))){//nonRolledID & non-0/non-null/non-und ID
                 if (id === "slots") {
                     let p_elem = document.createElement("p");
                     // PROPER POWDER DISPLAYING EZ CLAP 
@@ -498,14 +499,23 @@ function displayExpandedItem(item, parent_id){
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
                     active_elem.appendChild(p_elem);
-                }
-                else {
-                    let p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format); 
+                } else {
+                    let p_elem;
+                    if (!(skp_order.includes(id) && item.get("tier") === "Crafted")) {
+                        p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
+                    } 
                     if (id === "displayName") {
                         p_elem.classList.add("title");
                         if (item.get("tier") !== " ") {
                             p_elem.classList.add(item.get("tier"));
                         }
+                        if (["potion", "scroll", "food"].includes(item.get("type"))){ //must have access to craft.js
+                            let b = document.createElement("b");
+                            b.textContent = "[" + item.get("charges") + "/" + item.get("charges") + "]";
+                            b.classList.add("spaceleft");
+                            p_elem.appendChild(b);
+                        } 
+
                         /*let validTypes = ["helmet", "chestplate", "leggings", "boots", "relik", "wand", "bow", "spear", "dagger", "ring", "bracelet", "necklace"];
                         if (item.has("type") && validTypes.includes(item.get("type"))) {
                             p = document.createElement("p");
@@ -519,28 +529,52 @@ function displayExpandedItem(item, parent_id){
                             p_elem.append(p);
                         }*/
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
-                        p_elem.textContent = "";
-                        p_elem.classList.add("itemtable");
-                        let row = document.createElement("tr");
-                        let title = document.createElement("td");
-                        title.textContent = idPrefixes[id] + " ";
-                        let boost = document.createElement("td");
-                        if (item.get(id) < 0) {
-                            boost.classList.add("negative");
-                        } else { //boost = 0 SHOULD not come up
-                            boost.classList.add("positive");
+                        if ( item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") {
+                            p_elem.textContent = "";
+                            p_elem.classList.add("itemp");
+                            row = document.createElement("p");
+                            row.classList.add("left");
+                            
+                            let title = document.createElement("b");
+                            title.textContent = idPrefixes[id] + " ";
+                            let boost = document.createElement("b");
+                            if (item.get(id) < 0) {
+                                boost.classList.add("negative");
+                            } else { //boost = 0 SHOULD not come up
+                                boost.classList.add("positive");
+                            }
+                            boost.textContent = item.get(id);
+                            row.appendChild(title);
+                            row.appendChild(boost);
+                            p_elem.appendChild(row);
+                        } else if ( item.get("tier") === "Crafted" && active_elem.nodeName === "TABLE") {
+                            let row = document.createElement('tr');
+                            let min_elem = document.createElement('td');
+                            
+                            min_elem.classList.add('left');
+                            min_elem.classList.add( item.get("minRolls").get(id) < 0 ? "negative" : "positive");
+                            min_elem.textContent = item.get("minRolls").get(id) + idSuffixes[id];
+                            row.appendChild(min_elem);
+    
+                            let desc_elem = document.createElement('td');
+                            desc_elem.classList.add('center');
+                            //TODO elemental format jank
+                            desc_elem.textContent = idPrefixes[id];
+                            row.appendChild(desc_elem);
+    
+                            let max_elem = document.createElement('td');
+                            max_elem.classList.add('right');
+                            max_elem.classList.add( item.get("maxRolls").get(id) < 0 ? "negative" : "positive");
+                            max_elem.textContent = item.get("maxRolls").get(id) + idSuffixes[id];
+                            row.appendChild(max_elem);
+                            active_elem.appendChild(row);
                         }
-                        boost.classList.add("spaceLeft");
-                        boost.textContent = item.get(id);
-                        row.appendChild(title);
-                        row.appendChild(boost);
-                        p_elem.appendChild(row);
-                    } else if (id === "restrict") {
+                    }  else if (id === "restrict") {
                         p_elem.classList.add("restrict");
                     } 
                 }
             }
-            else if (rolledIDs.includes(id) && item.get("minRolls").get(id)){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
+            else if ( (rolledIDs.includes(id) && item.get("minRolls").get(id)) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
@@ -579,74 +613,95 @@ function displayExpandedItem(item, parent_id){
                     row.appendChild(max_elem);
                     active_elem.appendChild(row);
                 }
-            }//Just don't do anything if else
+            }else{
+              // :/  
+            }
         }
     }
     //Show powder specials ;-;
-    let powder_special = document.createElement("p");
-    powder_special.classList.add("left");
-    let powders = item.get("powders");
-    let element = "";
-    let power = 0;
-    for (let i = 0; i < powders.length; i++) {
-        let firstPowderType = skp_elements[Math.floor(powders[i]/6)];
-        if (element !== "") break;
-        else if (powders[i]%6 > 2) { //t4+
-            for (let j = i+1; j < powders.length; j++) {
-                let currentPowderType = skp_elements[Math.floor(powders[j]/6)]
-                if (powders[j] % 6 > 2 && firstPowderType === currentPowderType) {
-                    element = currentPowderType;
-                    power = Math.round(((powders[i] % 6 + powders[j] % 6 + 2) / 2 - 4) * 2);
-                    break;
+    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots", "ring", "bracelet", "necklace"];
+    if(nonConsumables.includes(item.get("type"))) {
+        let powder_special = document.createElement("p");
+        powder_special.classList.add("left");
+        let powders = item.get("powders");
+        let element = "";
+        let power = 0;
+        for (let i = 0; i < powders.length; i++) {
+            let firstPowderType = skp_elements[Math.floor(powders[i]/6)];
+            if (element !== "") break;
+            else if (powders[i]%6 > 2) { //t4+
+                for (let j = i+1; j < powders.length; j++) {
+                    let currentPowderType = skp_elements[Math.floor(powders[j]/6)]
+                    if (powders[j] % 6 > 2 && firstPowderType === currentPowderType) {
+                        element = currentPowderType;
+                        power = Math.round(((powders[i] % 6 + powders[j] % 6 + 2) / 2 - 4) * 2);
+                        break;
+                    }
                 }
             }
         }
-    }
-    if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
-        let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
-        let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
-        let specialTitle = document.createElement("p");
-        let specialEffects = document.createElement("p");
-        specialTitle.classList.add("left");
-        specialTitle.classList.add("itemp");
-        specialTitle.classList.add(damageClasses[skp_elements.indexOf(element) + 1]);
-        specialEffects.classList.add("left");
-        specialEffects.classList.add("itemp");
-        specialEffects.classList.add("nocolor");
-        let effects;
-        if (item.get("category") === "weapon") {//weapon
-            effects = powderSpecial["weaponSpecialEffects"];
-            specialTitle.textContent = powderSpecial["weaponSpecialName"];
-        }else if (item.get("category") === "armor") {//armor
-            effects = powderSpecial["armorSpecialEffects"];
-            specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
-        }
-        for (const [key,value] of effects) {
-            if (key !== "Description") {
-                let effect = document.createElement("p");
-                effect.classList.add("itemp");
-                effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
-                if(key === "Damage"){
-                    effect.textContent += elementIcons[skp_elements.indexOf(element)];
-                }
-                if (element === "w") {
-                    effect.textContent += " / Mana Used";
-                }
-                specialEffects.appendChild(effect);
-            }else{
-                specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
+        if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
+            let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
+            let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
+            let specialTitle = document.createElement("p");
+            let specialEffects = document.createElement("p");
+            specialTitle.classList.add("left");
+            specialTitle.classList.add("itemp");
+            specialTitle.classList.add(damageClasses[skp_elements.indexOf(element) + 1]);
+            specialEffects.classList.add("left");
+            specialEffects.classList.add("itemp");
+            specialEffects.classList.add("nocolor");
+            let effects;
+            if (item.get("category") === "weapon") {//weapon
+                effects = powderSpecial["weaponSpecialEffects"];
+                specialTitle.textContent = powderSpecial["weaponSpecialName"];
+            }else if (item.get("category") === "armor") {//armor
+                effects = powderSpecial["armorSpecialEffects"];
+                specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
+            for (const [key,value] of effects) {
+                if (key !== "Description") {
+                    let effect = document.createElement("p");
+                    effect.classList.add("itemp");
+                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
+                    if(key === "Damage"){
+                        effect.textContent += elementIcons[skp_elements.indexOf(element)];
+                    }
+                    if (element === "w") {
+                        effect.textContent += " / Mana Used";
+                    }
+                    specialEffects.appendChild(effect);
+                }else{
+                    specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
+                }
+            }
+            specialTitle.append(specialEffects); 
+            powder_special.appendChild(specialTitle);
+            
+    
+            parent_div.append(powder_special);
         }
-        specialTitle.append(specialEffects); 
-        powder_special.appendChild(specialTitle);
-        
-
-        parent_div.append(powder_special);
     }
-
+    
+    if(item.get("tier") && item.get("tier") === "Crafted") {
+        let dura_elem = document.createElement("p");
+        dura_elem.classList.add("left");
+        let dura = [];
+        let suffix = "";
+        if(nonConsumables.includes(item.get("type"))) {
+            dura = item.get("durability");
+            dura_elem.textContent = "Durability: "
+        } else {
+            dura = item.get("duration");
+            dura_elem.textContent = "Duration: "
+            suffix = " sec."
+        }
+        dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
+        parent_div.append(dura_elem);
+    }
     //Show item tier
     if (item.get("tier") && item.get("tier") !== " ") {
-        let item_desc_elem = document.createElement('p');
+        let item_desc_elem = document.createElement("p");
         item_desc_elem.classList.add('left');
         item_desc_elem.classList.add(item.get("tier"));
         item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
@@ -654,11 +709,8 @@ function displayExpandedItem(item, parent_id){
     }
 }
 function displayCraftStats(craft, parent_id) {
-
-}
-
-function displayExpandedRecipe(recipe, parent_id) {
-
+    let mock_item = craft.statMap;
+    displayExpandedItem(mock_item,parent_id);
 }
 
 
@@ -693,7 +745,7 @@ function displayExpandedIngredient(ingred, parent_id) {
     ]
     let posMods_order = [
         "above",
-        "below",
+        "under",
         "left",
         "right",
         "touching",
@@ -803,6 +855,8 @@ function displayExpandedIngredient(ingred, parent_id) {
                 p_elem.textContent = "Crafting Lvl Min: " + ingred.get("lvl");
             }else if (command === "posMods") {
                 for (const [key,value] of ingred.get("posMods")) {
+                    let p = document.createElement("p");
+                    p.classList.add("nomarginp");
                     if (value != 0) {
                         let title = document.createElement("b");
                         title.textContent = posModPrefixes[key];
@@ -813,8 +867,9 @@ function displayExpandedIngredient(ingred, parent_id) {
                         } else {
                             val.classList.add("negative");
                         }
-                        p_elem.appendChild(title);
-                        p_elem.appendChild(val);
+                        p.appendChild(title);
+                        p.appendChild(val);
+                        p_elem.appendChild(p);
                     }
                 }
             } else if (command === "itemIDs") { //dura, reqs

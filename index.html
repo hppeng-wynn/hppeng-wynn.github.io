@@ -16,6 +16,9 @@
         <div class="header" id="header">
             Wynn build calculator
         </div>
+        <div class="center" id="help">
+            <a href="https://forums.wynncraft.com/threads/wynnbuilder-release-thread-and-some-damage-calculation-updates.281438">Forum thread (instructions/help)</a>
+        </div>
         <div class="summary">
             <div class="equipment" style="grid-column:1/span 2;grid-row:1">
                 <div style="grid-column:1/span 2;grid-row:1">
@@ -34,10 +37,12 @@
                                 <input class="iteminput" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet"/>
                                 <datalist id="helmet-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
                                 <label id="helmet-slots" for="helmet-powder">X slots</label>
                                 <input class="iteminput" type="text" id="helmet-powder" name="helmet-powder" placeholder="Example: t6t6"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -46,10 +51,12 @@
                                 <input class="iteminput" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No Chestplate" />
                                 <datalist id="chestplate-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
                                 <label id="chestplate-slots" for="chestplate-powder">X slots</label>
                                 <input class="iteminput" type="text" id="chestplate-powder" name="chestplate-powder" />
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -58,10 +65,12 @@
                                 <input class="iteminput" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No Leggings" />
                                 <datalist id="leggings-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
                                 <label id="leggings-slots" for="leggings-powder">X slots</label>
                                 <input class="iteminput" type="text" id="leggings-powder" name="leggings-powder" />
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -70,10 +79,12 @@
                                 <input class="iteminput" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No Boots" />
                                 <datalist id="boots-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
                                 <label id="boots-slots" for="boots-powder">X slots</label>
                                 <input class="iteminput" type="text" id="boots-powder" name="boots-powder" />
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -83,11 +94,13 @@
                                 <input class="iteminput" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value=""/>
                                 <datalist id="weapon-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
                                 <br>
                                 <label id="weapon-slots" for="weapon-powder">X slots</label>
                                 <input class="iteminput" type="text" id="weapon-powder" name="weapon-powder" />
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                     </table>
@@ -105,6 +118,7 @@
                                 <input class="iteminput" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No Ring 1"/>
                                 <datalist id="ring1-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -113,6 +127,7 @@
                                 <input class="iteminput" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No Ring 2" />
                                 <datalist id="ring2-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -121,6 +136,7 @@
                                 <input class="iteminput" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No Bracelet" />
                                 <datalist id="bracelet-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -129,6 +145,7 @@
                                 <input class="iteminput" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No Necklace"/>
                                 <datalist id="necklace-items">
                                 </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -136,6 +153,7 @@
                                 <br/>
                                 <label for="level-choice">Level:</label>
                                 <input class="iteminput" id="level-choice" name="level-choice" placeholder="106" value=""/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
                             </td>
                         </tr>
                     </table>
@@ -424,7 +442,7 @@
             <div class="center" style="grid-column:1;grid-row:1">
                 <div>
                     <label for="str-skp" class="skpLabel" id="str-skp-label">Strength:</label><br>
-                    <input class="skp-input" type="string" id="str-skp" name="str-skp" value="0" class="skpInput"/>
+                    <input type="string" id="str-skp" name="str-skp" value="0" class="skpInput"/>
                 </div>
                 <div id="str-skp-assign">
                     Manually Assigned: 0
@@ -438,7 +456,7 @@
             <div class="center" style="grid-column:2;grid-row:1">
                 <div>
                     <label for="dex-skp" class="skpLabel" id="dex-skp-label">Dexterity:</label><br>
-                    <input class="skp-input" type="string" id="dex-skp" name="dex-skp" value="0" class="skpInput"/>
+                    <input type="string" id="dex-skp" name="dex-skp" value="0" class="skpInput"/>
                 </div>
                 <div id="dex-skp-assign">
                     Manually Assigned: 0
@@ -452,7 +470,7 @@
             <div class="center" style="grid-column:3;grid-row:1">
                 <div>
                     <label for="int-skp" class="skpLabel" id="int-skp-label">Intelligence:</label><br>
-                    <input class="skp-input" type="string" id="int-skp" name="int-skp" value="0" class="skpInput"/>
+                    <input type="string" id="int-skp" name="int-skp" value="0" class="skpInput"/>
                 </div>
                 <div id="int-skp-assign">
                     Manually Assigned: 0
@@ -466,7 +484,7 @@
             <div class="center" style="grid-column:4;grid-row:1">
                 <div>
                     <label for="def-skp" class="skpLabel" id="def-skp-label">Defense:</label><br>
-                    <input class="skp-input" type="string" id="def-skp" name="def-skp" value="0" class="skpInput"/>
+                    <input type="string" id="def-skp" name="def-skp" value="0" class="skpInput"/>
                 </div>
                 <div id="def-skp-assign">
                     Manually Assigned: 0
@@ -480,7 +498,7 @@
             <div class="center" style="grid-column:5;grid-row:1">
                 <div>
                     <label for="agi-skp" class="skpLabel" id="agi-skp-label">Agility:</label><br>
-                    <input class="skp-input" type="string" id="agi-skp" name="agi-skp" value="0" class="skpInput"/>
+                    <input type="string" id="agi-skp" name="agi-skp" value="0" class="skpInput"/>
                 </div>
                 <div id="agi-skp-assign">
                     Manually Assigned: 0
@@ -492,9 +510,316 @@
                 </div>
             </div>
         </div>
+        <div class="id-box fade-in" id="id-edit" style="display: none">
+            <div class="id-edit1">
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="sdPct" class="idLabel" id="sdPct-label">Spell Damage %:</label><br>
+                            <input type="number" id="sdPct" name="sdPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="sdPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="sdRaw" class="idLabel" id="sdRaw-label">Spell Damage Raw:</label><br>
+                            <input type="number" id="sdRaw" name="sdRaw" value="0" class="idInput"/>
+                        </div>
+                        <div id="sdRaw-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="mdPct" class="idLabel" id="mdPct-label">Melee Damage %:</label><br>
+                            <input type="number" id="mdPct" name="mdPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="mdPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="mdRaw" class="idLabel" id="mdRaw-label">Melee Damage Raw:</label><br>
+                            <input type="number" id="mdRaw" name="mdRaw" value="0" class="idInput"/>
+                        </div>
+                        <div id="mdRaw-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="poison" class="idLabel" id="poison-label">Poison:</label><br>
+                            <input type="number" id="poison" name="poison" value="0" class="idInput"/>
+                        </div>
+                        <div id="poison-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="eDamPct" class="idLabel" id="eDamPct-label">Earth Damage %:</label><br>
+                            <input type="number" id="eDamPct" name="eDamPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="eDamPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="tDamPct" class="idLabel" id="tDamPct-label">Thunder Damage %:</label><br>
+                            <input type="number" id="tDamPct" name="tDamPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="tDamPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="wDamPct" class="idLabel" id="wDamPct-label">Water Damage %:</label><br>
+                            <input type="number" id="wDamPct" name="wDamPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="wDamPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="fDamPct" class="idLabel" id="fDamPct-label">Fire Damage %:</label><br>
+                            <input type="number" id="fDamPct" name="fDamPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="fDamPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="aDamPct" class="idLabel" id="aDamPct-label">Air Damage %:</label><br>
+                            <input type="number" id="aDamPct" name="aDamPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="aDamPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="eDefPct" class="idLabel" id="eDefPct-label">Earth Defense %:</label><br>
+                            <input type="number" id="eDefPct" name="eDefPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="eDefPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="tDefPct" class="idLabel" id="tDefPct-label">Thunder Defense %:</label><br>
+                            <input type="number" id="tDefPct" name="tDefPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="tDefPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="wDefPct" class="idLabel" id="wDefPct-label">Water Defense %:</label><br>
+                            <input type="number" id="wDefPct" name="wDefPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="wDefPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="fDefPct" class="idLabel" id="fDefPct-label">Fire Defense %:</label><br>
+                            <input type="number" id="fDefPct" name="fDefPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="fDefPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="aDefPct" class="idLabel" id="aDefPct-label">Air Defense %:</label><br>
+                            <input type="number" id="aDefPct" name="aDefPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="aDefPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="id-edit2">
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="hprRaw" class="idLabel" id="hprRaw-label">Health Regen Raw:</label><br>
+                            <input type="number" id="hprRaw" name="hprRaw" value="0" class="idInput"/>
+                        </div>
+                        <div id="hprRaw-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="hprPct" class="idLabel" id="hprPct-label">Health Regen %:</label><br>
+                            <input type="number" id="hprPct" name="hprPct" value="0" class="idInput"/>
+                        </div>
+                        <div id="hprPct-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="hpBonus" class="idLabel" id="hpBonus-label">Health Bonus:</label><br>
+                            <input type="number" id="hpBonus" name="hpBonus" value="0" class="idInput"/>
+                        </div>
+                        <div id="hpBonus-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="atkTier" class="idLabel" id="atkTier-label">Attack Speed Bonus:</label><br>
+                            <input type="number" id="atkTier" name="atkTier" value="0" class="idInput"/>
+                        </div>
+                        <div id="atkTier-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spPct1" class="idLabel" id="spPct1-label">1st Spell Cost %:</label><br>
+                            <input type="number" id="spPct1" name="spPct1" value="0" class="idInput"/>
+                        </div>
+                        <div id="spPct1-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spPct2" class="idLabel" id="spPct2-label">2nd Spell Cost %:</label><br>
+                            <input type="number" id="spPct2" name="spPct2" value="0" class="idInput"/>
+                        </div>
+                        <div id="spPct2-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spPct3" class="idLabel" id="spPct3-label">3rd Spell Cost %:</label><br>
+                            <input type="number" id="spPct3" name="spPct3" value="0" class="idInput"/>
+                        </div>
+                        <div id="spPct3-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spPct4" class="idLabel" id="spPct4-label">4th Spell Cost %:</label><br>
+                            <input type="number" id="spPct4" name="spPct4" value="0" class="idInput"/>
+                        </div>
+                        <div id="spPct4-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spRaw1" class="idLabel" id="spRaw1-label">1st Spell Cost Raw:</label><br>
+                            <input type="number" id="spRaw1" name="spRaw1" value="0" class="idInput"/>
+                        </div>
+                        <div id="spRaw1-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spRaw2" class="idLabel" id="spRaw2-label">2nd Spell Cost Raw:</label><br>
+                            <input type="number" id="spRaw2" name="spRaw2" value="0" class="idInput"/>
+                        </div>
+                        <div id="spRaw2-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spRaw3" class="idLabel" id="spRaw3-label">3rd Spell Cost Raw:</label><br>
+                            <input type="number" id="spRaw3" name="spRaw3" value="0" class="idInput"/>
+                        </div>
+                        <div id="spRaw3-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="idCenter">
+                    <div class="idWrap">
+                        <div>
+                            <label for="spRaw4" class="idLabel" id="spRaw4-label">4th Spell Cost Raw:</label><br>
+                            <input type="number" id="spRaw4" name="spRaw4" value="0" class="idInput"/>
+                        </div>
+                        <div id="spRaw4-base">
+                            Original Value: 0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="center">
             <button class = "button" id = "update-button" onclick = "updateStats()">
                 Update Stats
+            </button>
+            <button class = "button" id = "show-id-button" onclick = "toggleID()">
+                Edit IDs
             </button>
         </div>
         <div class = "build hide-container-grid" style="display: none;">
@@ -554,24 +879,23 @@
             <div class = "center set-info" id = "set-info-div" style = "grid-column:1;grid-row:1; display: none;">
                 <div class = "center" id = "set-info">Set info</div>
             </div>
-            <div class = "center int-info" id = "int-info-div" style = "grid-column:4;grid-row:1;visibility:visible;">
+            <div class = "center int-info" id = "int-info-div" style = "grid-column:4;grid-row:1; display: none;">
                 <div class = "center" id = "int-info">Next Spell Costs</div> 
             </div>
         </div>
         <div class="center" id="header2">
             <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with Atlas Inc (JavaScript required to function, nothing works without js)</p>
-            <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
         </div>
         <div class="center" id="credits">
             <a href="credits.txt" class="link">Additional credits</a>
         </div>
 
         <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="build_utils.js"></script>
         <script type="text/javascript" src="skillpoints.js"></script>
         <script type="text/javascript" src="damage_calc.js"></script>
         <script type="text/javascript" src="display.js"></script>
         <script type="text/javascript" src="build.js"></script>
-        <script type="text/javascript" src="craft.js"></script>
         <script type="text/javascript" src="load.js"></script>
         <script type="text/javascript" src="builder.js"></script>
     </body>
