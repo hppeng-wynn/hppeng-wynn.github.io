@@ -31,13 +31,14 @@ div {
     grid-template-rows: min-content min-content auto;
 }
 
-.skillpoints, .id-edit1 {
+.skillpoints{
     padding: 0% 4% 2%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);
 }
+
 
 .id-edit2 {
     padding: 0% 4% 2%;
@@ -89,8 +90,11 @@ table.center{
 .right {
     text-align: right;
 }
-
-.left {
+.idLeft {
+    text-align: left;
+    margin-left: 2px;
+}
+.left{
     margin: 2px 2%;
     text-align: left;
 }
