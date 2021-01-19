@@ -66,6 +66,7 @@ class Craft{
             if (allNone) {
                 statMap.set("charges", 3);
                 statMap.set("hp", this.recipe.get("healthOrDamage").join("-"));
+                statMap.set("duration", this.recipe.get("basicDuration"));
             }
             statMap.set("category","consumable");
         } else {
