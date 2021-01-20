@@ -24,14 +24,6 @@ div {
     padding: 0%;
 }
 
-.equipment{
-    padding: 0%;
-    display: grid;
-    grid-template-columns: min-content min-content min-content;
-    gap: 5px;
-    grid-template-rows: min-content min-content auto;
-}
-
 .skillpoints{
     padding: 0% 4% 2%;
     display: grid;
@@ -92,13 +84,23 @@ table.center{
     text-align: left;
 }
 
-.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .id-box, .box {
+.build-helmet, .build-chestplate, .build-leggings, .build-boots, .build-ring1, .build-ring2, .build-bracelet, .build-necklace, .build-weapon, .build-order, .build-overall, .build-melee-stats, .build-defense-stats, .spell-info, .set-info, .powder-special, .powder-special-stats, .int-info, .box {
     color: #aaa;
     background: #121516;
     border: 3px solid #BCBCBC;
     border-radius: 3px;
     width: 96%;
 }
+
+.id-box {
+    color: #aaa;
+    background: #121516;
+    border: 3px solid #BCBCBC;
+    border-radius: 3px;
+    width: 96%;
+    margin: 1em 0px 0px 0px;
+}
+
 .crafter, .recipe-stats, .craft-stats, .ing-stats {
     color: #aaa;
     background: #121516;
@@ -130,6 +132,12 @@ table.center{
 .itemp, .damagep {
     margin: 2px 2%;
     padding: 0;
+}
+.powderLeft {
+    margin-right: 0px;
+}
+.powderRight {
+    margin-left: 0px;
 }
 .space {
     margin-right: 5px;
