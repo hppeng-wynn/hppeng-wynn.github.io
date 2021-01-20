@@ -723,7 +723,8 @@ function calculateBuildStats() {
     //skpRow.classList.add("left");
     let td = document.createElement("p");
     //td.classList.add("left");
-    let skpSummary = document.createElement("b");
+
+    /* let skpSummary = document.createElement("b");
     skpSummary.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Total: (";
     //skpSummary.classList.add("itemp");
     td.appendChild(skpSummary);
@@ -742,12 +743,12 @@ function calculateBuildStats() {
     let skpEnd = document.createElement("b");
     skpEnd.textContent = ")";
     td.appendChild(skpEnd);
-    skpRow.append(td);
+    skpRow.append(td); */
 
     let remainingSkp = document.createElement("p");
     remainingSkp.classList.add("center");
     let remainingSkpTitle = document.createElement("b");
-    remainingSkpTitle.textContent = "Remaining skillpoints: ";
+    remainingSkpTitle.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Remaining skillpoints: ";
     let remainingSkpContent = document.createElement("b");
     //remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "< 0" : levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
     remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
