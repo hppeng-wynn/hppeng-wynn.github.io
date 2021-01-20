@@ -1882,7 +1882,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 let overallhealLabel = document.createElement("p");
                 let first = document.createElement("b");
                 let second = document.createElement("b");
-                first.textContent = part.subtitle + ":";
+                first.textContent = part.subtitle + ": ";
                 second.textContent = heal_amount;
                 overallhealLabel.appendChild(first);
                 second.classList.add("Set");
