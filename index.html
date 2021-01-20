@@ -24,15 +24,13 @@
         </div>
         <div class="summary">
             <div class="equipment" style="grid-column:1/span 2;grid-row:1">
-                <div style="grid-column:1/span 2;grid-row:1">
-                    <table>
+                <div style="grid-column:1/span 2;grid-row:1;width: 40vw">
+                    <table class="center">
                         <tr>
                             <th class="center smalltitle">
                                 <label>Equipment</label>
                             </th>
-                            <th class="center smalltitle">
-                                <label>Powdering</label>
-                            </th>
+                            <th></th>
                             <th class="center smalltitle">
                                 <label>Accessories</label>
                             </th>
@@ -46,12 +44,12 @@
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label id="helmet-slots" for="helmet-powder">X slots</label>
-                                <input class="iteminput" type="text" id="helmet-powder" name="helmet-powder" placeholder="Example: t6t6"/>
+                                <label id="helmet-slots" for="helmet-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="helmet-powder" name="helmet-powder" placeholder="Example: t6t6"/>
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label for="ring1-choice">Ring 1:</label>
+                                <label for="ring1-choice">Ring 1:</label><br>
                                 <input class="iteminput" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No Ring 1"/>
                                 <datalist id="ring1-items">
                                 </datalist>
@@ -67,12 +65,12 @@
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label id="chestplate-slots" for="chestplate-powder">X slots</label>
-                                <input class="iteminput" type="text" id="chestplate-powder" name="chestplate-powder" />
+                                <label id="chestplate-slots" for="chestplate-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="chestplate-powder" name="chestplate-powder" />
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label for="ring2-choice">Ring 2:</label>
+                                <label for="ring2-choice">Ring 2:</label><br>
                                 <input class="iteminput" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No Ring 2" />
                                 <datalist id="ring2-items">
                                 </datalist>
@@ -88,12 +86,12 @@
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label id="leggings-slots" for="leggings-powder">X slots</label>
-                                <input class="iteminput" type="text" id="leggings-powder" name="leggings-powder" />
+                                <label id="leggings-slots" for="leggings-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="leggings-powder" name="leggings-powder" />
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label for="bracelet-choice">Bracelet:</label>
+                                <label for="bracelet-choice">Bracelet:</label><br>
                                 <input class="iteminput" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No Bracelet" />
                                 <datalist id="bracelet-items">
                                 </datalist>
@@ -109,12 +107,12 @@
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label id="boots-slots" for="boots-powder">X slots</label>
-                                <input class="iteminput" type="text" id="boots-powder" name="boots-powder" />
+                                <label id="boots-slots" for="boots-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="boots-powder" name="boots-powder" />
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
-                                <label for="necklace-choice">Necklace:</label>
+                                <label for="necklace-choice">Necklace:</label><br>
                                 <input class="iteminput" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No Necklace"/>
                                 <datalist id="necklace-items">
                                 </datalist>
@@ -132,13 +130,13 @@
                             </td>
                             <td class="left">
                                 <br>
-                                <label id="weapon-slots" for="weapon-powder">X slots</label>
-                                <input class="iteminput" type="text" id="weapon-powder" name="weapon-powder" />
+                                <label id="weapon-slots" for="weapon-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="weapon-powder" name="weapon-powder" />
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap;"></p>
                             </td>
                             <td class="left">
                                 <br/>
-                                <label for="level-choice">Level:</label>
+                                <label for="level-choice">Level:</label><br>
                                 <input class="iteminput" id="level-choice" name="level-choice" placeholder="106" value=""/>
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
                             </td>
@@ -146,7 +144,7 @@
                     </table>
                 </div>
                 <div class="center" style="grid-column:1/span 3;grid-row:2">
-                    <table>
+                    <table class="center">
                         <tr>
                             <td>
                                 <br/>
