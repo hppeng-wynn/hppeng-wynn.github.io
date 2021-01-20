@@ -501,9 +501,9 @@ function displayExpandedItem(item, parent_id){
                     active_elem.appendChild(p_elem);
                 } else {
                     let p_elem;
-                    if (!(skp_order.includes(id) && item.get("tier") === "Crafted")) {
+                    if( (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") ) { //skp
                         p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
-                    } 
+                    }                       
                     if (id === "displayName") {
                         p_elem.classList.add("title");
                         if (item.get("tier") !== " ") {
@@ -548,6 +548,7 @@ function displayExpandedItem(item, parent_id){
                             row.appendChild(boost);
                             p_elem.appendChild(row);
                         } else if ( item.get("tier") === "Crafted" && active_elem.nodeName === "TABLE") {
+                            console.log("bruh momment");
                             let row = document.createElement('tr');
                             let min_elem = document.createElement('td');
                             
