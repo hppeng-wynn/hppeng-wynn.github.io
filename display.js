@@ -501,9 +501,9 @@ function displayExpandedItem(item, parent_id){
                     active_elem.appendChild(p_elem);
                 } else {
                     let p_elem;
-                    if (!(skp_order.includes(id) && item.get("tier") === "Crafted")) {
+                    if( (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") ) { //skp
                         p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
-                    } 
+                    }                       
                     if (id === "displayName") {
                         p_elem.classList.add("title");
                         if (item.get("tier") !== " ") {
@@ -548,6 +548,7 @@ function displayExpandedItem(item, parent_id){
                             row.appendChild(boost);
                             p_elem.appendChild(row);
                         } else if ( item.get("tier") === "Crafted" && active_elem.nodeName === "TABLE") {
+                            console.log("bruh momment");
                             let row = document.createElement('tr');
                             let min_elem = document.createElement('td');
                             
@@ -685,7 +686,7 @@ function displayExpandedItem(item, parent_id){
     
     if(item.get("tier") && item.get("tier") === "Crafted") {
         let dura_elem = document.createElement("p");
-        dura_elem.classList.add("left");
+        dura_elem.classList.add("itemp");
         let dura = [];
         let suffix = "";
         if(nonConsumables.includes(item.get("type"))) {
@@ -697,15 +698,15 @@ function displayExpandedItem(item, parent_id){
             suffix = " sec."
         }
         dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
-        parent_div.append(dura_elem);
+        active_elem.append(dura_elem);
     }
     //Show item tier
     if (item.get("tier") && item.get("tier") !== " ") {
         let item_desc_elem = document.createElement("p");
-        item_desc_elem.classList.add('left');
+        item_desc_elem.classList.add('itemp');
         item_desc_elem.classList.add(item.get("tier"));
         item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
-        parent_div.append(item_desc_elem);
+        active_elem.append(item_desc_elem);
     }
 }
 function displayCraftStats(craft, parent_id) {
