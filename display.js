@@ -802,11 +802,13 @@ function displayRecipeStats(craft, parent_id) {
 
     let ingredTable = document.createElement("table");
     ingredTable.classList.add("itemtable");
+    ingredTable.style.tableLayout = "fixed";
     for (let i = 0; i < 3; i++) {
         let row = document.createElement("tr");
         for (let j = 0; j < 2; j++) {
             let ingredName = ingreds[2 * i + j];
             let cell = document.createElement("td");
+            cell.style.width = "50%";
             cell.classList.add("center");
             cell.classList.add("box");
             let b = document.createElement("b");
