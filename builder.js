@@ -637,7 +637,7 @@ function updateBoosts(buttonId, recalcStats) {
             }
             elem.classList.add("toggleOn");
         }
-        updatePowderSpecials("skip"); //jank pt 1
+        updatePowderSpecials("skip", false); //jank pt 1
     } else {
         for (const [key, value] of damageMultipliers) {
             let elem = document.getElementById(key + "-boost")
