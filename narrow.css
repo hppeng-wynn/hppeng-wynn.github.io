@@ -49,11 +49,11 @@
 
 .title{
     text-align: center;
-    font-size: 190%;
+    font-size: 150%;
 }
 .smalltitle{
     text-align: center;
-    font-size: 155%;
+    font-size: 125%;
     margin-top: 10px;
     margin-bottom: 4px;
 }
@@ -67,7 +67,7 @@
     text-decoration: none;
     font-family: 'Nunito',sans-serif;
     font-weight: 700;
-    font-size: 113%;
+    font-size: 100%;
     display: inline-block;
 }
 button {
@@ -79,6 +79,6 @@ button {
     text-decoration: none;
     font-family: 'Nunito',sans-serif;
     font-weight: 700;
-    font-size: 150%;
+    font-size: 125%;
     display: inline-block;
 }
