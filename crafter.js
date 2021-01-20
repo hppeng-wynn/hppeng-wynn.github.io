@@ -9,7 +9,7 @@ console.log(url_tag);
 
 
 
-const BUILD_VERSION = "6.9.4";
+const BUILD_VERSION = "6.9.7";
 /*
  * END testing section
  */
@@ -128,13 +128,27 @@ function calculateCraft() {
     document.getElementById("mat-1").textContent = recipe.get("materials")[0].get("item").split(" ").slice(1).join(" ") + " Tier:";
     document.getElementById("mat-2").textContent = recipe.get("materials")[1].get("item").split(" ").slice(1).join(" ") + " Tier:"; 
     
-
+    //Display Recipe Stats
+    displayRecipeStats(player_craft, "recipe-stats");
     //Display Craft Stats
     displayCraftStats(player_craft, "craft-stats");
     //Display Ingredients' Stats
     for (let i = 1; i < 7; i++) {
         displayExpandedIngredient(player_craft.ingreds[i-1] , "ing-"+i+"-stats");
     }
+    //Display Warnings - only ingred type warnings for now
+    let warning_elem = document.getElementById("craft-warnings");
+    warning_elem.textContent = ""; //refresh warnings
+    warning_elem.classList.add("warning");
+    let type = player_craft["recipe"].get("skill");
+    for (const ingred of player_craft["ingreds"]) {
+        if (!(ingred.get("skills").includes(type))) {
+            let p = document.createElement("p");
+            p.textContent = "WARNING: " + ingred.get("name") + " cannot be used for " + type.charAt(0) + type.substring(1).toLowerCase() +"!";
+            warning_elem.appendChild(p);
+        }
+    }
+
     //set the location hash. TODO
     /*let hash = "";
     location.hash = hash;*/

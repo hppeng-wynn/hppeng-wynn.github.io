@@ -217,6 +217,7 @@ class Build{
         this.items = this.equipment.concat([this.weapon]);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
         let result = calculate_skillpoints(this.equipment, this.weapon);
+        console.log(result);
         this.equip_order = result[0];
         this.base_skillpoints = result[1];
         this.total_skillpoints = result[2];

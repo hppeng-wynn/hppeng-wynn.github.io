@@ -243,10 +243,12 @@ function displayBuildStats(parent_id,build){
 //        "hp",
 //        "fDef", "wDef", "aDef", "tDef", "eDef",
 //        "!elemental",
-        "#table",
-        "mr", "ms",
+//        "#table",
+        
 //        "hprRaw", "hprPct",
         "#table",
+        "str", "dex", "int", "def", "agi",
+        "mr", "ms",
         "sdRaw", "sdPct",
         "mdRaw", "mdPct",
         "ref", "thorns",
@@ -363,6 +365,40 @@ function displayBuildStats(parent_id,build){
                     row.appendChild(value_elem);
 
                     active_elem.appendChild(row);
+                } else if (id === "ls" && id_val != 0) {
+                    let style;
+                    if (id_val > 0) {
+                        style = "positive";
+                    } else{
+                        style = "negative";
+                    }
+                    let row = document.createElement("tr");
+                    let title = document.createElement("td");
+                    title.classList.add("left");
+                    title.textContent = "Effective Life Steal:"
+                    let value = document.createElement("td");
+                    let defStats = build.getDefenseStats();
+                    console.log(defStats[1][0]);
+                    console.log(defStats[0]);
+                    value.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/4s";
+                    value.classList.add("right");
+                    value.classList.add(style);
+                    row.appendChild(title);
+                    row.appendChild(value);
+                    active_elem.appendChild(row);
+                }
+            } else if (skp_order.includes(id)) {
+                let total_assigned = build.total_skillpoints[skp_order.indexOf(id)];
+                let base_assigned = build.base_skillpoints[skp_order.indexOf(id)];
+                let diff = total_assigned - base_assigned;
+                let style;
+                if (diff > 0) {
+                    style = "positive";
+                } else if (diff < 0) {
+                    style = "negative";
+                }
+                if (diff != 0) {
+                    displayFixedID(active_elem, id, diff, false, style);
                 }
             }
         }
@@ -548,7 +584,6 @@ function displayExpandedItem(item, parent_id){
                             row.appendChild(boost);
                             p_elem.appendChild(row);
                         } else if ( item.get("tier") === "Crafted" && active_elem.nodeName === "TABLE") {
-                            console.log("bruh momment");
                             let row = document.createElement('tr');
                             let min_elem = document.createElement('td');
                             
@@ -709,12 +744,100 @@ function displayExpandedItem(item, parent_id){
         active_elem.append(item_desc_elem);
     }
 }
+
+/*  Displays stats about a recipe that are NOT displayed in the craft stats. 
+*   Includes: mat name and amounts
+*             ingred names in an "array" with ingred effectiveness
+*/
+function displayRecipeStats(craft, parent_id) {
+    let elem = document.getElementById(parent_id);
+    elem.textContent = "";
+    recipe = craft["recipe"];
+    tiers = craft["mat_tiers"];
+    ingreds = [];
+    for (const n of craft["ingreds"]) {
+        ingreds.push(n.get("name"));
+    }
+    let effectiveness = craft["statMap"].get("ingredEffectiveness");
+
+    let ldiv = document.createElement("div");
+    ldiv.classList.add("itemleft");
+    let title = document.createElement("p");
+    title.classList.add("smalltitle");
+    title.textContent = "Recipe Stats";
+    ldiv.appendChild(title);
+    let mats = document.createElement("p");
+    mats.classList.add("itemp");
+    mats.textContent = "Crafting Materials: ";
+    for (let i = 0; i < 2; i++) {
+        let tier = tiers[i];
+        let row = document.createElement("p");
+        row.classList.add("left");
+        let b = document.createElement("b");
+        let mat = recipe.get("materials")[i];
+        b.textContent = "- " + mat.get("amount") + "x " + mat.get("item").split(" ").slice(1).join(" ");
+        b.classList.add("space");
+        let starsB = document.createElement("b");
+        starsB.classList.add("T1-bracket");
+        starsB.textContent = "[";
+        row.appendChild(b);
+        row.appendChild(starsB);
+        for(let j = 0; j < 3; j ++) {
+            let star = document.createElement("b");
+            star.textContent = "\u272B";
+            if(j < tier) {
+                star.classList.add("T1");
+            } else {
+                star.classList.add("T0");
+            }
+            row.append(star);
+        }
+        let starsE = document.createElement("b");
+        starsE.classList.add("T1-bracket");
+        starsE.textContent = "]";
+        row.appendChild(starsE);
+        mats.appendChild(row);
+    }
+    ldiv.appendChild(mats);
+
+    let ingredTable = document.createElement("table");
+    ingredTable.classList.add("itemtable");
+    for (let i = 0; i < 3; i++) {
+        let row = document.createElement("tr");
+        for (let j = 0; j < 2; j++) {
+            let ingredName = ingreds[2 * i + j];
+            let cell = document.createElement("td");
+            cell.classList.add("center");
+            cell.classList.add("box");
+            let b = document.createElement("b");
+            b.textContent = ingredName;
+            b.classList.add("space");
+            let eff = document.createElement("b");
+            let e = effectiveness[2 * i + j];
+            if (e > 0) {
+                eff.classList.add("positive");
+            } else if (e < 0) {
+                eff.classList.add("negative");
+            }
+            eff.textContent = "[" + e + "%]";
+            cell.appendChild(b);
+            cell.appendChild(eff);
+            row.appendChild(cell);
+        }
+        ingredTable.appendChild(row);
+    }
+
+    elem.appendChild(ldiv);
+    elem.appendChild(ingredTable);
+}
+
+//Displays a craft. If things change, this function should be modified.
 function displayCraftStats(craft, parent_id) {
     let mock_item = craft.statMap;
     displayExpandedItem(mock_item,parent_id);
 }
 
-
+//Displays an ingredient in item format. However, an ingredient is too far from a normal item to display as one.
 function displayExpandedIngredient(ingred, parent_id) {
     console.log(ingred);
     let parent_elem = document.getElementById(parent_id);
@@ -1429,8 +1552,8 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
     statsTable.append(ehprRow);
-
-    /*ehprRow = document.createElement("tr");
+    /*
+    ehprRow = document.createElement("tr");
     ehpr = document.createElement("td");
     ehpr.classList.add("left");
     ehpr.textContent = "Effective HP Regen (no agi):";
@@ -1441,7 +1564,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
 
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
-    statsTable.append(ehprRow);*/
+    statsTable.append(ehprRow); */
 
     //eledefs
     let eledefs = stats[5];

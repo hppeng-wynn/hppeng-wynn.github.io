@@ -148,6 +148,7 @@ class Craft{
 
         //apply ingredient effectivness - on ids, and reqs (itemIDs). NOT on durability, duration, or charges.
         let eff_flat = eff.flat();
+        statMap.set("ingredEffectiveness", eff_flat);
         //console.log(eff_flat);
         //apply ingredient ids
         for (const n in this.ingreds) {
@@ -172,16 +173,21 @@ class Craft{
                 if (value && value != 0) {
                     let rolls = [value,ingred.get("ids").get("maxRolls").get(key)];
                     rolls = rolls.map(x => Math.floor(x * eff_mult)).sort();
-                    console.log(rolls);
                     statMap.get("minRolls").set(key, (statMap.get("minRolls").get(key)) ? statMap.get("minRolls").get(key) + rolls[0] : rolls[0]);
                     statMap.get("maxRolls").set(key, (statMap.get("maxRolls").get(key)) ? statMap.get("maxRolls").get(key) + rolls[1] : rolls[1]);
                 }
             }
         }
-        for(const e of skp_order) {
+        for (const e of skp_order) {
             statMap.set(e,statMap.get("maxRolls").get(e));
         }
-
+        for (const d in statMap.get("durability")) {
+            if(statMap.get("durability")[d] < 1) { statMap.get("durability")[d] = 1;}
+        }
+        for (const d in statMap.get("duration")) {
+            if(statMap.get("duration")[d] < 1) { statMap.get("duration")[d] = 1;}
+        }
+        if(statMap.has("charges") && statMap.get("charges") < 1 ) { statMap.set("charges",1)}
         this.statMap = statMap;
     }
 }
