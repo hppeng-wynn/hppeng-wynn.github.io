@@ -6,8 +6,15 @@ console.log(url_tag);
 const BUILD_VERSION = "6.9.7";
 
 function setTitle() {
-    document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
-    document.getElementById("header").classList.add("funnynumber");
+    let text;
+    if (url_base.includes("hppeng-wynn")) {
+        text = "WynnBuilder UNSTABLE version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+    }
+    else {
+        text = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+        document.getElementById("header").classList.add("funnynumber");
+    }
+    document.getElementById("header").textContent = text;
 }
 
 setTitle();

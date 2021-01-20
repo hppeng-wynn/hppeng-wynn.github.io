@@ -33,6 +33,12 @@
     max-height: 50px;
 }
 
+.powderinput {
+    width: 25vw;
+    height: 10vw;
+    max-height: 50px;
+}
+
 .skpInput, .idInput {
     width: 90%;
     height: 7vw;
