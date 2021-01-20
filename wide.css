@@ -43,7 +43,11 @@
 }
 
 .iteminput {
-    width: 15vw;
+    width: 11vw;
+}
+
+.powderinput {
+    width: 4vw;
 }
 
 .skpInput, .idInput {

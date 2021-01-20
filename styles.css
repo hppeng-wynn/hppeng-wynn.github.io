@@ -70,14 +70,6 @@ div {
 a.link{
     color: #A5FDFF;
 }
-.title{
-    text-align: center;
-    font-size: 150%;
-}
-.smalltitle{
-    text-align: center;
-    font-size: 125%;
-}
 .center {
     text-align: center;
     position: relative;
@@ -270,7 +262,6 @@ button:hover {
     background-color: #556;
 }
 
-
 button:active {
   background-color: #558;
   box-shadow: 0 3px #666;
@@ -325,6 +316,9 @@ input {
 button.toggleOn{
     background-color:#0a0;
     border: 3 px solid rgb(0, 70, 0);
+}
+button.toggleOn:hover {
+    background-color: #575;
 }
 
 .funnynumber {
@@ -387,4 +381,9 @@ button.toggleOn{
     100% {
         opacity: 1;
     }
+}
+
+.highlight {
+    color: #ff0;
+    background: #775;
 }
