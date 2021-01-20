@@ -802,7 +802,7 @@ function displayRecipeStats(craft, parent_id) {
 
     let ingredTable = document.createElement("table");
     ingredTable.classList.add("itemtable");
-    ingredTable.style.tableLayout = "fixed";
+    ingredTable.classList.add("ingredTable");
     for (let i = 0; i < 3; i++) {
         let row = document.createElement("tr");
         for (let j = 0; j < 2; j++) {
@@ -811,6 +811,7 @@ function displayRecipeStats(craft, parent_id) {
             cell.style.width = "50%";
             cell.classList.add("center");
             cell.classList.add("box");
+            cell.classList.add("tooltip");
             let b = document.createElement("b");
             b.textContent = ingredName;
             b.classList.add("space");
@@ -825,10 +826,16 @@ function displayRecipeStats(craft, parent_id) {
             cell.appendChild(b);
             cell.appendChild(eff);
             row.appendChild(cell);
+
+            let tooltip = document.createElement("div");
+            tooltip.classList.add("tooltiptext");
+            tooltip.classList.add("center");
+            tooltip.id = "tooltip-" + (2*i + j);
+            console.log(tooltip.id);
+            cell.appendChild(tooltip);
         }
         ingredTable.appendChild(row);
     }
-
     elem.appendChild(ldiv);
     elem.appendChild(ingredTable);
 }

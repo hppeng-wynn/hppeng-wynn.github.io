@@ -130,6 +130,9 @@ function calculateCraft() {
     
     //Display Recipe Stats
     displayRecipeStats(player_craft, "recipe-stats");
+    for(let i = 0; i < 6; i++) {
+        displayExpandedIngredient(player_craft["ingreds"][i],"tooltip-" + i);
+    }
     //Display Craft Stats
     displayCraftStats(player_craft, "craft-stats");
     //Display Ingredients' Stats

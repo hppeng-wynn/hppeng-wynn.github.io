@@ -17,6 +17,9 @@
 
 }
 
+.ingredTable {
+    table-layout: "fixed";
+}
 .build, .spells .misc {
     padding: 2%;
     display: grid;

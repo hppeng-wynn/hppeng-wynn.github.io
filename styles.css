@@ -387,3 +387,24 @@ button.toggleOn:hover {
     color: #ff0;
     background: #775;
 }
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    color: #aaa;
+    background: #1e2224;
+    width: min(200%, 75vw);
+    text-align: center;
+    border: 5px solid #BCBCBC;
+    border-radius: 10px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+  }
+  .recipe {
+      z-index: 1;
+  }
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
