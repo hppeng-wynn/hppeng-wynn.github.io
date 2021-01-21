@@ -10,12 +10,12 @@ class Craft{
        @param mat_tiers: [1->3, 1->3]. An array with 2 numbers.
        @param ingreds: []. An array with 6 entries, each with an ingredient Map.
     */
-    constructor(recipe, mat_tiers, ingreds) {
+    constructor(recipe, mat_tiers, ingreds, attackSpeed) {
         this.recipe = recipe;
         this.mat_tiers = mat_tiers;
         this.ingreds = ingreds;
         this.statMap = new Map(); //can use the statMap as an expanded Item
-
+        this.atkSpd = attackSpeed;
         this.initCraftStats();
     }
 
@@ -83,6 +83,7 @@ class Craft{
             }
             //statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
             statMap.set("category","weapon");
+            statMap.set("atkSpd",this.atkSpd);
         } 
         statMap.set("powders","");
         /* Change certain IDs based on material tier. 
@@ -142,8 +143,17 @@ class Craft{
             }
         }
         //apply material tiers - the good thing is that this should be symmetric.
+        let matmult = 1;
         for (const mat of this.mat_tiers) {
-
+            
+        }
+        if (statMap.get("category") === "consumable") {
+            //duration modifier
+        } else {
+            //durability modifier
+        }
+        if (statMap.get("category") === "weapon") {
+            //attack damages oh boy
         }
 
         //apply ingredient effectivness - on ids, and reqs (itemIDs). NOT on durability, duration, or charges.

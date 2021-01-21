@@ -146,7 +146,7 @@ const spell_table = {
         { title: "Charge", cost: 4, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true },
             ] },
-        { title: "Uppercut", cost: 10, parts: [
+        { title: "Uppercut", cost: 9, parts: [
                 { subtitle: "First Damage", type: "damage", multiplier: 300, conversion: [70, 20, 10, 0, 0, 0] },
                 { subtitle: "Fireworks Damage", type: "damage", multiplier: 50, conversion: [60, 0, 40, 0, 0, 0] },
                 { subtitle: "Crash Damage", type: "damage", multiplier: 50, conversion: [80, 0, 20, 0, 0, 0] },
@@ -177,7 +177,7 @@ const spell_table = {
         { title: "Spin Attack", cost: 6, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [70, 0, 30, 0, 0, 0], summary: true},
             ] },
-        { title: "Vanish", cost: 1, parts: [
+        { title: "Vanish", cost: 2, parts: [
                 { subtitle: "No Damage", type: "none", summary: true }
             ] },
         { title: "Multihit", cost: 8, parts: [
@@ -194,7 +194,7 @@ const spell_table = {
         { title: "Totem", cost: 4, parts: [
                 { subtitle: "Smash Damage", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 20, 0]},
                 { subtitle: "Damage Tick", type: "damage", multiplier: 20, conversion: [80, 0, 0, 0, 0, 20]},
-                { subtitle: "Heal Tick", type: "heal", strength: 0.04, summary: true },
+                { subtitle: "Heal Tick", type: "heal", strength: 0.03, summary: true },
             ] },
         { title: "Haul", cost: 1, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [80, 0, 20, 0, 0, 0], summary: true },
@@ -203,7 +203,7 @@ const spell_table = {
                 { subtitle: "One Wave", type: "damage", multiplier: 200, conversion: [70, 0, 0, 30, 0, 0], summary: true },
             ] },
         { title: "Uproot", cost: 6, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 50, conversion: [70, 30, 0, 0, 0, 0], summary: true },
+                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [70, 30, 0, 0, 0, 0], summary: true },
             ] },
     ],
     "powder": [ //This is how instant-damage powder specials are implemented. To view time-boosted damage powder specials (curse, 2nd courage, air prison, view @TODO)

@@ -831,7 +831,6 @@ function displayRecipeStats(craft, parent_id) {
             tooltip.classList.add("tooltiptext");
             tooltip.classList.add("center");
             tooltip.id = "tooltip-" + (2*i + j);
-            console.log(tooltip.id);
             cell.appendChild(tooltip);
         }
         ingredTable.appendChild(row);
@@ -848,7 +847,6 @@ function displayCraftStats(craft, parent_id) {
 
 //Displays an ingredient in item format. However, an ingredient is too far from a normal item to display as one.
 function displayExpandedIngredient(ingred, parent_id) {
-    console.log(ingred);
     let parent_elem = document.getElementById(parent_id);
     parent_elem.textContent = "";
     let display_order = [

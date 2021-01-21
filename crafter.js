@@ -86,6 +86,18 @@ function updateMaterials() {
         document.getElementById("mat-2").textContent = "Material 2 Tier:";
     }
 }
+function toggleAtkSpd(buttonId) {
+    let buttons = ["slow-atk-button", "normal-atk-button", "fast-atk-button"];
+    let elem = document.getElementById(buttonId);
+    if (elem.classList.contains("toggleOn")) {
+        elem.classList.remove("toggleOn");
+    } else {
+        for (const button of buttons) {
+            document.getElementById(button).classList.remove("toggleOn");
+        }
+        elem.classList.add("toggleOn");
+    }
+}
 
 function calculateCraft() {
     //Make things display.
@@ -117,9 +129,15 @@ function calculateCraft() {
     for (i = 1; i < 7; i++) {
         getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
     }
-
+    let atkSpd = "NORMAL"; //default attack speed will be normal.
+    for (const b of ["slow-atk-button", "normal-atk-button", "fast-atk-button"]) {
+        button = document.getElementById(b);
+        if (button.classList.contains("toggleOn")) {
+            atkSpd = b.split("-")[0].toUpperCase();
+        }
+    }
     //create the craft
-    player_craft = new Craft(recipe,mat_tiers,ingreds);
+    player_craft = new Craft(recipe,mat_tiers,ingreds,atkSpd);
     console.log(player_craft);
     /*console.log(recipe)
     console.log(levelrange)
