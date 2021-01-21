@@ -249,6 +249,7 @@ function displayBuildStats(parent_id,build){
         "#table",
         "str", "dex", "int", "def", "agi",
         "mr", "ms",
+        "hprRaw", "hprPct",
         "sdRaw", "sdPct",
         "mdRaw", "mdPct",
         "ref", "thorns",

@@ -86,11 +86,57 @@ class Craft{
             statMap.set("atkSpd",this.atkSpd);
         } 
         statMap.set("powders","");
+        
         /* Change certain IDs based on material tier. 
             healthOrDamage changes.
             duration and durability change. (but not basicDuration)
 
         */
+        let matmult = 1;
+        let sorted = this.mat_tiers.sort();
+        //TODO - idfk how this works
+        if( sorted[0] == 1 && sorted[1] == 1) {
+            matmult = 1; 
+        } else if( sorted[0] == 1 && sorted[1] == 2) {
+            matmult = 1.079; 
+        }else if( sorted[0] == 1 && sorted[1] == 3) {
+            matmult = 1.15; 
+        }else if( sorted[0] == 2 && sorted[1] == 2) {
+            matmult = 1.24; 
+        }else if( sorted[0] == 2 && sorted[1] == 3) {
+            matmult = 1.3; 
+        }else if( sorted[0] == 3 && sorted[1] == 3) {
+            matmult = 1.4; 
+        }
+        let low = this.recipe.get("healthOrDamage")[0];
+        let high = this.recipe.get("healthOrDamage")[1];
+        if (statMap.get("category") === "consumable") {
+            //duration modifier
+            if(statMap.has("hp")) { //hack
+                statMap.set("hp", Math.floor( low * matmult )+ "-" + Math.floor( high * matmult ));
+            } else {
+                statMap.set("duration", [Math.floor( statMap.get("duration")[0] * matmult ), Math.floor( statMap.get("duration")[1] * matmult )]);
+            }
+        } else {
+            //durability modifier
+            statMap.set("durability", [Math.floor( statMap.get("durability")[0] * matmult ), Math.floor( statMap.get("durability")[1] * matmult )]);
+        }
+        if (statMap.get("category") === "weapon") {
+            //attack damages oh boy
+            let ratio = 2.05; //UNSURE IF THIS IS HOW IT'S DONE. MIGHT BE DONE WITH SKETCHY FLOORING.
+            if (this.atkSpd === "SLOW") {
+                ratio /= 1.5;
+            } else if (this.atkSpd === "NORMAL") {
+                ratio = 1;
+            } else if (this.atkSpd = "FAST") {
+                ratio /= 2.5;
+            }
+            low *= ratio*matmult;
+            high *= ratio*matmult;
+            this.recipe.get("healthOrDamage")[0] = low;
+            this.recipe.get("healthOrDamage")[1] = high;
+        }
+        /* END SECTION */
 
         //calc ingredient effectivenesses -> see https://wynndata.tk/cr/585765168
         let eff = [[100,100],[100,100],[100,100]];
@@ -141,19 +187,6 @@ class Craft{
                     }
                 }
             }
-        }
-        //apply material tiers - the good thing is that this should be symmetric.
-        let matmult = 1;
-        for (const mat of this.mat_tiers) {
-            
-        }
-        if (statMap.get("category") === "consumable") {
-            //duration modifier
-        } else {
-            //durability modifier
-        }
-        if (statMap.get("category") === "weapon") {
-            //attack damages oh boy
         }
 
         //apply ingredient effectivness - on ids, and reqs (itemIDs). NOT on durability, duration, or charges.
