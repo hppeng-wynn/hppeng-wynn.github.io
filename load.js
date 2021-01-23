@@ -1,4 +1,4 @@
-const DB_VERSION = 26;
+const DB_VERSION = 27;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -79,7 +79,8 @@ async function load(init_func) {
     await clear_tx.complete;
 
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
-    add_tx.onabort = function() {
+    add_tx.onabort = function(e) {
+        console.log(e);
         console.log("Not enough space...");
     };
     let items_store = add_tx.objectStore('item_db');
