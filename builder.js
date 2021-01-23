@@ -94,6 +94,7 @@ for (const it of itemTypes) {
 let itemMap = new Map();
 /* Mapping from item names to set names. */
 let idMap = new Map();
+let redirectMap = new Map();
 
 /*
  * Function that takes an item list and populates its corresponding dropdown.
@@ -150,13 +151,18 @@ function init() {
     items = items.concat(noneItems);
     console.log(items);
     for (const item of items) {
-        itemLists.get(item.type).push(item.displayName);
-        itemMap.set(item.displayName, item);
-        if (noneItems.includes(item)) {
-            idMap.set(item.id, "");
+        if (item.remapID === undefined) {
+            itemLists.get(item.type).push(item.displayName);
+            itemMap.set(item.displayName, item);
+            if (noneItems.includes(item)) {
+                idMap.set(item.id, "");
+            }
+            else {
+                idMap.set(item.id, item.displayName);
+            }
         }
         else {
-            idMap.set(item.id, item.displayName);
+            redirectMap.set(item.id, item.remapID);
         }
     }
     
@@ -211,6 +217,13 @@ function init() {
     decodeBuild(url_tag);
 }
 
+function getItemNameFromID(id) {
+    if (redirectMap.has(id)) {
+        return getItemNameFromID(redirectMap.get(id));
+    }
+    return idMap.get(id);
+}
+
 /*
  * Populate fields based on url, and calculate build.
  */
@@ -226,7 +239,7 @@ function decodeBuild(url_tag) {
         if (version === "0" || version === "1" || version === "2" || version === "3") {
             let equipments = info[1];
             for (let i = 0; i < 9; ++i ) {
-                equipment[i] = idMap.get(Base64.toInt(equipments.slice(i*3,i*3+3)));
+                equipment[i] = getItemNameFromID(Base64.toInt(equipments.slice(i*3,i*3+3)));
             }
         }
         if (version === "1") {
