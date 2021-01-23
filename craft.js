@@ -93,7 +93,7 @@ class Craft{
 
         */
         let matmult = 1;
-        let sorted = this.mat_tiers.sort();
+        let sorted = this.mat_tiers.slice().sort();
         //TODO - idfk how this works
         if( sorted[0] == 1 && sorted[1] == 1) {
             matmult = 1; 

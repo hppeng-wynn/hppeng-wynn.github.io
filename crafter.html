@@ -13,8 +13,32 @@
         <title>WynnCrafter</title>
     </head>
     <body class="all">
-        <div class="header" id="header">
-            WynnBuilder Crafter
+        <div class="center">
+            <header class = "header nomarginp">
+                <div class = "headerleft">         
+                    <a href = "./" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">                    
+                        </img>
+                        <div class = "tooltiptext center">WynnBuilder</div>
+                    </a>    
+                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">   
+                        </img>  
+                        <div class = "tooltiptext center">WynnCrafter</div> 
+                    </a>        
+                </div>
+                <div class = "headercenter">
+                    <div >
+                        <p class = "itemp" id = "header">Wynn build calculator</p>
+                        <p class="itemp" id="help">
+                            <a class = "link" href="https://forums.wynncraft.com/threads/wynnbuilder-release-thread-and-some-damage-calculation-updates.281438">Forum thread (instructions/help)</a>
+                        </p>
+                    </div>
+                </div>    
+                <div class = "headerright">
+
+                </div>
+            </header>
         </div>
         <div class = "container" display = "grid">
             <div class = "crafter center" style = "grid-column:1;grid-row:1" >
@@ -188,15 +212,17 @@
                 </div>
             </div>
         </div>
-        
-        <div class="center" id="header2">
-            <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with Atlas Inc (JavaScript required to function, nothing works without js)</p>
-            <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
+        <div class = "center">
+            <footer>
+                <div class="center" id="header2">
+                    <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with Atlas Inc (JavaScript required to function, nothing works without js)</p>
+                    <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
+                </div>
+                <div class="center" id="credits">
+                    <a href="credits.txt" class="link">Additional credits</a>
+                </div>
+            </footer>
         </div>
-        <div class="center" id="credits">
-            <a href="credits.txt" class="link">Additional credits</a>
-        </div>
-
         <script type="text/javascript" src="utils.js"></script>
         <script type="text/javascript" src="powders.js"></script>
         <script type="text/javascript" src="build_utils.js"></script>

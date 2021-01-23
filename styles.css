@@ -1,8 +1,37 @@
 .header {
     padding: 2% 0% 0%;
-    text-align: center;  
+    text-align: center; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
-
+.headericon {
+    /* JANK FIX IF CAN */
+    max-height: 48px;
+    max-width: 48px;
+}
+.headerleft {
+    display: inline-block;
+    width: 20%;
+    text-align: left;
+}
+.headercenter {
+    display: inline-block;
+    width: 60%;
+    text-align: center;
+}
+.headerright{
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+}
+.iconlink {
+    position: relative;
+    left: 0%;
+    right: 0%;
+    height: 100%;
+    width: 100%;
+}
 .all {
     font-family: 'Nunito',sans-serif;
     font-weight: 700;
@@ -17,7 +46,10 @@ th, td {
     padding: 0px;
 }
 .nomarginp {
-    margin: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
     padding: 0px;
 }
 div {
@@ -128,6 +160,11 @@ table.center{
     margin-bottom: 16px;
     margin-left: auto;
     margin-right: auto;
+}
+.headertable {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 .itemp, .damagep {
     margin: 2px 2%;
@@ -334,7 +371,7 @@ button.toggleOn:hover {
     color: transparent;
     display: inline-block;
     text-align: center;
-    transform: translateX(calc(50vw - 50%));
+    
 }
 
 .Star {
@@ -403,16 +440,16 @@ button.toggleOn:hover {
     background: #110110;
     width: min(200%, 75vw);
     text-align: center;
-    border: 5px solid #BCBCBC;
+    border: 3px solid #BCBCBC;
     border-radius: 10px;
-    padding: 5px 0;
+    padding: 0 0;
     position: absolute;
     z-index: 1;
-  }
-  .recipe {
-      z-index: 1;
-  }
+}
+.recipe {
+    z-index: 1;
+}
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
-  }
+}

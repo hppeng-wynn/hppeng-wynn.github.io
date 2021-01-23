@@ -9,7 +9,7 @@ console.log(url_tag);
 
 
 
-const BUILD_VERSION = "6.9.7";
+const BUILD_VERSION = "6.9.9";
 /*
  * END testing section
  */
