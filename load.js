@@ -1,4 +1,4 @@
-const DB_VERSION = 26;
+const DB_VERSION = 27;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -35,7 +35,7 @@ async function load_local(init_func) {
             }
             else {
                 console.log("Successfully read local set db.");
-                console.log(sets);
+                //console.log(sets);
                 init_func();
             }
         }
