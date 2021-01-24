@@ -16,7 +16,6 @@ const BUILD_VERSION = "6.9.9";
 
 
  /* TODO: 
-    Make it craft
     Make material tier do something
     Double powders
     Integrate to normal builder
@@ -27,8 +26,11 @@ let ingFields = ["fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprPct"
 let player_craft;
 
 function setTitle() {
-    document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
+    document.getElementById("header").textContent = "WynnCrafter version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
+    let disclaimer = document.createElement("p");
+    disclaimer.textContent = "THIS CRAFTER IS INCOMPLETE. The effect of material tiers on crated items is not accurate yet. If you know how the math behind it works, please contact ferricles on forums, discord, or ingame.";
+    document.getElementById("header").append(disclaimer);
 }
 setTitle();
 

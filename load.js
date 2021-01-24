@@ -64,7 +64,7 @@ function clean_item(item) {
 async function load(init_func) {
 
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
     let url = baseUrl + "/compress.json";
     let result = await (await fetch(url)).json();
     items = result.items;

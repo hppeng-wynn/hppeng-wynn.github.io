@@ -2,7 +2,19 @@ let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "mate
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
 let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
-
+let colorMap = new Map(
+    [
+        ["Normal", "#fff"],
+        ["Unique", "#ff5"],
+        ["Rare","#f5f"],
+        ["Legendary","#5ff"],
+        ["Fabled","#f55"],
+        ["Mythic","#a0a"],
+        ["Crafted","#0aa"],
+        ["Custom","#0aa"],
+        ["Set","#5f5"]
+    ]
+);
 
 function expandItem(item, powders){
     let minRolls = new Map();
@@ -546,13 +558,23 @@ function displayExpandedItem(item, parent_id){
                         if (item.get("tier") !== " ") {
                             p_elem.classList.add(item.get("tier"));
                         }
-                        if (["potion", "scroll", "food"].includes(item.get("type"))){ //must have access to craft.js
+                        if (["potion", "scroll", "food"].includes(item.get("type"))){
                             let b = document.createElement("b");
                             b.textContent = "[" + item.get("charges") + "/" + item.get("charges") + "]";
                             b.classList.add("spaceleft");
                             p_elem.appendChild(b);
                         } 
-
+                        p_elem.append(document.createElement("br"));
+                        let img = document.createElement("img");
+                        img.src = "/media/items/generic-" + item.get("type") + ".png";
+                        img.alt = item.get("type");
+                        img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
+                        let bckgrd = document.createElement("p");
+                        bckgrd.style = "width: 96px; height: 96px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
+                        bckgrd.classList.add("center");
+                        bckgrd.classList.add("itemp");
+                        active_elem.appendChild(bckgrd);
+                        bckgrd.appendChild(img);
                         /*let validTypes = ["helmet", "chestplate", "leggings", "boots", "relik", "wand", "bow", "spear", "dagger", "ring", "bracelet", "necklace"];
                         if (item.has("type") && validTypes.includes(item.get("type"))) {
                             p = document.createElement("p");
