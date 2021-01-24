@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html scroll-behavior="smooth">
     <head>
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
         <!-- nunito font, copying wynndata -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" media="screen and (min-width: 1100px)" href="items-wide.css"/>
+        <link rel="stylesheet" media="screen and (max-width: 1099px)" href="items-narrow.css"/>
         <link rel="icon" href="favicon.png">
         <link rel="manifest" href="manifest.json">
         <title>Wynn Clientside</title>
     </head>
     <body class="all">
-        <div class="header" id="header">
-            WynnAtlas
+        <div class="center">
+            <header class = "header nomarginp">
+                <div class = "headerleft">         
+                    <a href = "./" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnBuilder</div>
+                    </a>
+                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnCrafter</div>
+                    </a>
+                    <a href = "./items.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/atlas64.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnAtlas</div>
+                    </a>
+                </div>
+                <div class = "headercenter">
+                    <div >
+                        <p class = "itemp" id = "header">WynnAtlas</p>
+                    </div>
+                </div>    
+                <div class = "headerright">
+
+                </div>
+            </header>
         </div>
-        <div class="center" id="header2">
-            Made by: hppeng and ferricles
-        </div>
-        <div class="center" id="credits">
-            <a href="credits.txt">Additional credits</a>
-        </div>
         <br>
         <br>
         <br>
         <br>
-        <div class="center" id="main">
-            <div class="box" id="test" style="width: 25vw; margin: auto">
-                <div class="center" id="test-inner">item</div>
-            </div>
+        <div class="center items" id="main">
         </div>
         <script type="text/javascript" src="/utils.js"></script>
+        <script type="text/javascript" src="/build_utils.js"></script>
         <script type="text/javascript" src="/damage_calc.js"></script>
         <script type="text/javascript" src="/display.js"></script>
         <script type="text/javascript" src="/query.js"></script>

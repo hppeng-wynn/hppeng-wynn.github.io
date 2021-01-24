@@ -1,0 +1,8 @@
+.items {
+    padding: 0%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    gap: 5px;
+    grid-template-rows: masonry;
+}

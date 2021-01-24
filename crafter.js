@@ -27,7 +27,7 @@ let ingFields = ["fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprPct"
 let player_craft;
 
 function setTitle() {
-    document.getElementById("header").textContent = "WynnBuilder version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
+    document.getElementById("header").textContent = "WynnCrafter version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
 }
 setTitle();
