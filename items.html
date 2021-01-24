@@ -47,9 +47,30 @@
         </div>
         <br>
         <br>
-        <br>
-        <br>
-        <div class="center items" id="main">
+        <div class="itemsearch">
+            <div class="search">
+                <div class="center" id="credits">
+                    <a href="translations.txt" class="link">CLICK FOR ID mapping</a>
+                </div>
+                <p>Basic Dumb JSON search</p>
+                <p>Query types:</p>
+                <p>name, type, category, stat</p>
+                <textarea name="query-json" id="query-json" cols="25" rows="25" tabindex="1">
+[
+  {
+    "queryType": "name",
+    "value": ""
+  }
+]
+                </textarea>
+                <br>
+                <button class = "button" id = "search-button" onclick = "doItemSearch()" tabindex="2">
+                Search Items
+                </button>
+                <p id="summary">hello</p>
+            </div>
+            <div class="center items" id="main">
+            </div>
         </div>
         <script type="text/javascript" src="/utils.js"></script>
         <script type="text/javascript" src="/build_utils.js"></script>

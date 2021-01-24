@@ -15,7 +15,7 @@
 }
 .sticky-box {
     position: sticky;
-    top: 0;
+    top: 10px;
 }
 .summary {
     padding: 2% 2% 0%;
