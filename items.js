@@ -22,7 +22,7 @@ function doItemSearch() {
     let items_copy = items.slice();
     document.getElementById("main").textContent = "";
     for (const _query of input) {
-        const query = queryTypeMap.get(_query.queryType)(_query.value);
+        const query = queryTypeMap.get(_query.queryType)(_query.value, _query.value2);
         items_copy = applyQuery(items_copy, query);
     }
     document.getElementById("summary").textContent = items_copy.length + " results."
