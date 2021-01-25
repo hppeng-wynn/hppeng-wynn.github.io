@@ -147,17 +147,18 @@ class TypeFilter {
             switch (token) {
                 case 'armor':
                 case 'armour':
-                    allowedTypes.push(...TypeFilter.ARMOUR_TYPES);
+                    for (let i = 0; i < TypeFilter.ARMOUR_TYPES.length; i++) allowedTypes.add(TypeFilter.ARMOUR_TYPES[i]);
                     break;
                 case 'weapon':
-                    allowedTypes.push(...TypeFilter.WEAPON_TYPES);
+                    for (let i = 0; i < TypeFilter.WEAPON_TYPES.length; i++) allowedTypes.add(TypeFilter.WEAPON_TYPES[i]);
                     break;
                 case 'accessory':
                 case 'bauble':
-                    allowedTypes.push(...TypeFilter.ACCESSORY_TYPES);
+                    for (let i = 0; i < TypeFilter.ACCESSORY_TYPES.length; i++) allowedTypes.add(TypeFilter.ACCESSORY_TYPES[i]);
                     break;
                 default:
-                    throw new Error(`Unknown item type: ${token.trim()}`);
+                    allowedTypes.add(token.toLowerCase());
+                    break;
             }
         }
         return new TypeFilter(allowedTypes, sortDir);
