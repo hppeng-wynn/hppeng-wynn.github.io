@@ -8,11 +8,11 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="icon" href="favicon.png">
         <link rel="manifest" href="manifest.json">
-        <title>Wynn Clientside</title>
+        <title>WynnBuilder</title>
     </head>
-    <body class="all">
+    <body class="all" style="overflow-y: scroll">
         <div class="header" id="header">
-            WynnAtlas
+            WynnBuilder Item List
         </div>
         <div class="center" id="header2">
             Made by: hppeng and ferricles
@@ -20,20 +20,27 @@
         <div class="center" id="credits">
             <a href="credits.txt">Additional credits</a>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="center" id="main">
-            <div class="box" id="test" style="width: 25vw; margin: auto">
-                <div class="center" id="test-inner">item</div>
+        <div class="center" id="main" style="padding: 2%">
+            <div id="search-container" style="margin-bottom: 1.5%">
+                <div class="left" id="search" style="display: inline-block">
+                    <label for="search-field">Search Items:</label>
+                    <br>
+                    <input id="search-field" type="text" style="width: 50vw; padding: 8px">
+                    <br>
+                    <div id="search-error" style="color: #ff0000"></div>
+                </div>
+            </div>
+            <div id="item-list-container">
+                <div class="left" id="item-list" style="display: inline-block"></div>
+                <div class="center" id="item-list-footer"></div>
             </div>
         </div>
-        <script type="text/javascript" src="/utils.js"></script>
-        <script type="text/javascript" src="/damage_calc.js"></script>
-        <script type="text/javascript" src="/display.js"></script>
-        <script type="text/javascript" src="/query.js"></script>
-        <script type="text/javascript" src="/load.js"></script>
-        <script type="text/javascript" src="/items.js"></script>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="build_utils.js"></script>
+        <script type="text/javascript" src="damage_calc.js"></script>
+        <script type="text/javascript" src="display.js"></script>
+        <script type="text/javascript" src="query.js"></script>
+        <script type="text/javascript" src="load.js"></script>
+        <script type="text/javascript" src="items.js"></script>
     </body>
 </html>
