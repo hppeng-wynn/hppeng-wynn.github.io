@@ -589,7 +589,7 @@ class ItemSearchState {
                 this.getFilter(NameFilter.TYPE).adjoin(filter);
                 return;
             }
-            throw new Error(`Duplicate filters: $[type.name}`);
+            throw new Error(`Duplicate filters: ${type.name}`);
         }
         this.filterList.push(filter);
         this.filterTable.set(type, filter);
