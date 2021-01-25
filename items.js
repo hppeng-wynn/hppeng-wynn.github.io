@@ -60,6 +60,8 @@ function init() {
         }, 300);
     });
     updateSearch();
+
+    searchField.focus();
 }
 
 load_init(init);
