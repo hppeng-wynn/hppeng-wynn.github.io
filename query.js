@@ -268,7 +268,7 @@ class StatType extends Type {
 
     constructor(name, desc, aliases, statExtractor) {
         super(name, desc, aliases);
-        this.statExtractor = statExtractor;
+        this.statExtractor = statExtractor || aliases;
     }
 
     extractStat(item, itemExp) {
@@ -448,7 +448,7 @@ class StringType extends Type {
 
     constructor(name, desc, aliases, stringExtractor) {
         super(name, desc, aliases);
-        this.stringExtractor = stringExtractor;
+        this.stringExtractor = stringExtractor || aliases;
     }
 
     extractString(item, itemExp) {
