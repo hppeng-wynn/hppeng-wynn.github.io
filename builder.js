@@ -439,6 +439,7 @@ function calculateBuild(save_skp, skp){
         }
         
         console.log(equipment);
+        console.log(document.getElementById("level-choice").value);
         player_build = new Build(document.getElementById("level-choice").value, equipment, powderings, new Map(), errors);
 
         for (let i of document.getElementsByClassName("hide-container-block")) {
@@ -763,7 +764,6 @@ function calculateBuildStats() {
     let remainingSkpTitle = document.createElement("b");
     remainingSkpTitle.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Remaining skillpoints: ";
     let remainingSkpContent = document.createElement("b");
-    //remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "< 0" : levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
     remainingSkpContent.textContent = "" + (levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints);
     remainingSkpContent.classList.add(levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints < 0 ? "negative" : "positive");
 
@@ -792,7 +792,7 @@ function calculateBuildStats() {
                 lvlWarning = document.createElement("p");
                 lvlWarning.classList.add("itemp");
                 lvlWarning.classList.add("warning");
-                lvlWarning.textContent = "WARNING: A level 50 player cannot use some piece(s) of this build."
+                lvlWarning.textContent = "WARNING: A level " + player_build.level + " player cannot use some piece(s) of this build."
             }
             let baditem = document.createElement("p"); 
                 baditem.classList.add("nocolor");
