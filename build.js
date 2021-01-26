@@ -210,7 +210,6 @@ class Build{
             errors.push("Level is not a string or number.");
         }
         document.getElementById("level-choice").value = this.level;
-        this.level = 106;
 
         this.availableSkillpoints = levelToSkillPoints(this.level);
         this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];

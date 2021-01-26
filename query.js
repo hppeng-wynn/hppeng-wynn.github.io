@@ -14,33 +14,30 @@ class NameQuery {
 }
 queryTypeMap.set("name", function(s) { return new NameQuery(s); } );
 
-class TypeQuery {
-    constructor(type) { this.type = type; }
+class LevelRangeQuery {
+    constructor(min, max) { this.min = min; this.max = max; }
 
     filter(item) {
         if (item.remapID === undefined) {
-            return (item.type === this.type);
+            return (item.lvl <= this.max && item.lvl >= this.min);
         }
         return false;
     }
 
-    compare(a, b) { return a < b; }
+    compare(a, b) { return a > b; }
 }
-queryTypeMap.set("type", function(s) { return new TypeQuery(s); } );
 
-class CategoryQuery {
-    constructor(category) { this.category = category; }
-
-    filter(item) {
-        if (item.remapID === undefined) {
-            return (item.category === this.category);
-        }
-        return false;
+class NegateQuery {
+    constructor(id) {
+        this.id = id;
+        this.compare = function(a, b) { return 0; };
     }
 
-    compare(a, b) { return a < b; }
+    filter(item) {
+        return (!(this.id in item)) || (item[this.id] == 0);
+    }
 }
-queryTypeMap.set("category", function(s) { return new CategoryQuery(s); } );
+queryTypeMap.set("null", function(s) { return new IdQuery(s); } );
 
 class IdQuery {
     constructor(id) {
@@ -55,3 +52,34 @@ class IdQuery {
     }
 }
 queryTypeMap.set("stat", function(s) { return new IdQuery(s); } );
+
+class IdMatchQuery {
+    constructor(id, value) {
+        this.id = id;
+        this.value = value;
+        this.compare = function(a, b) {
+            return 0;
+        };
+    }
+
+    filter(item) {
+        return (this.id in item) && (item[this.id] == this.value);
+    }
+}
+
+class SumQuery {
+    constructor(ids) {
+        this.compare = function(a, b) {
+            let balance = 0;
+            for (const id of ids) {
+                if (a[id]) { balance -= a[id]; }
+                if (b[id]) { balance += b[id]; }
+            }
+            return balance;
+        };
+    }
+
+    filter(item) {
+        return true;
+    }
+}

@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="items.css">
         <link rel="stylesheet" media="screen and (min-width: 1100px)" href="items-wide.css"/>
         <link rel="stylesheet" media="screen and (max-width: 1099px)" href="items-narrow.css"/>
         <link rel="icon" href="favicon.png">
@@ -24,11 +25,11 @@
                         </img>
                         <div class = "tooltiptext center">WynnBuilder</div>
                     </a>
-                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
+                    <!--a href = "./crafter.html" class = "nomarginp iconlink tooltip">
                         <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
                         </img>
                         <div class = "tooltiptext center">WynnCrafter</div>
-                    </a>
+                    </a-->
                     <a href = "./items.html" class = "nomarginp iconlink tooltip">
                         <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
                         </img>
@@ -48,26 +49,86 @@
         <br>
         <br>
         <div class="itemsearch">
-            <div class="search">
-                <div class="center" id="credits">
-                    <a href="translations.txt" class="link">CLICK FOR ID mapping</a>
+            <div class="searchbox">
+                <div class="left">
+                    <label for="name-choice">Name:</label><br>
+                    <input class="searchinput" type="text" id="name-choice" name="name-choice" placeholder="Item name (case insensitive)" tabindex="1"/>
+                    <p class="error"></p>
                 </div>
-                <p>Basic Dumb JSON search</p>
-                <p>Query types:</p>
-                <p>name, type, category, stat</p>
-                <textarea name="query-json" id="query-json" cols="25" rows="25" tabindex="1">
-[
-  {
-    "queryType": "name",
-    "value": ""
-  }
-]
-                </textarea>
-                <br>
-                <button class = "button" id = "search-button" onclick = "doItemSearch()" tabindex="2">
-                Search Items
-                </button>
-                <p id="summary">hello</p>
+                <div class="left">
+                    <label for="category-choice">Category:</label><br>
+                    <input class="searchinput" list="category-items" id="category-choice" name="category-choice" placeholder="ALL" tabindex="2"/>
+                    <datalist id="category-items">
+                        <option value="ALL">
+                        <option value="armor">
+                        <option value="helmet">
+                        <option value="chestplate">
+                        <option value="leggings">
+                        <option value="boots">
+                        <option value="accessory">
+                        <option value="ring">
+                        <option value="bracelet">
+                        <option value="necklace">
+                        <option value="weapon">
+                        <option value="wand">
+                        <option value="spear">
+                        <option value="bow">
+                        <option value="dagger">
+                        <option value="relik">
+                    </datalist>
+                    <p class="error"></p>
+                </div>
+                <div class="left">
+                    <label for="rarity-choice">Rarity:</label><br>
+                    <input class="searchinput" list="rarity-items" id="rarity-choice" name="rarity-choice" placeholder="ANY" tabindex="3"/>
+                    <datalist id="rarity-items">
+                        <option value="ANY">
+                        <option value="Normal">
+                        <option value="Unique">
+                        <option value="Rare">
+                        <option value="Legendary">
+                        <option value="Fabled">
+                        <option value="Mythic">
+                        <option value="Sane">
+                    </datalist>
+                    <p class="error"></p>
+                </div>
+                <div class="left">
+                    <label for="level-choice">Level:</label><br>
+                    <input class="searchinput" type="text" id="level-choice" name="level-choice" value="1-106" tabindex="4"/>
+                    <p class="error"></p>
+                </div>
+
+                <datalist id="filter-items">
+                </datalist>
+                <div class="left">
+                    <label for="filter1-choice">Filter 1:</label><br>
+                    <input class="searchinput" list="filter-items" id="filter1-choice" name="filter1-choice" placeholder="ANY" tabindex="5"/>
+                    <p class="error"></p>
+                </div>
+                <div class="left">
+                    <label for="filter2-choice">Filter 2:</label><br>
+                    <input class="searchinput" list="filter-items" id="filter2-choice" name="filter2-choice" placeholder="ANY" tabindex="6"/>
+                    <p class="error"></p>
+                </div>
+                <div class="left">
+                    <label for="filter3-choice">Filter 3:</label><br>
+                    <input class="searchinput" list="filter-items" id="filter3-choice" name="filter3-choice" placeholder="ANY" tabindex="7"/>
+                    <p class="error"></p>
+                </div>
+                <div class="left">
+                    <label for="filter4-choice">Filter 4:</label><br>
+                    <input class="searchinput" list="filter-items" id="filter4-choice" name="filter4-choice" placeholder="ANY" tabindex="8"/>
+                    <p class="error"></p>
+                </div>
+                <div class="right" style="grid-column:1/span 2">
+                    <button class = "button" id = "search-button" onclick = "doItemSearch()" tabindex="9">
+                    Search!
+                    </button>
+                </div>
+                <div id="summary" class="left" style="grid-column:3/span 2">
+                    Hello!
+                </div>
             </div>
             <div class="center items" id="main">
             </div>
