@@ -175,7 +175,7 @@ const compileQueryExpr = (function() {
         continue;
       }
       // parse a string literal
-      if ((m = /^"[^"]+"/.exec(exprStr.substring(col))) !== null) {
+      if ((m = /^"([^"]+)"/.exec(exprStr.substring(col))) !== null) {
         tokens.push({ type: 'str', value: m[1] });
         col += m[0].length;
         continue;
@@ -377,6 +377,7 @@ const compileQueryExpr = (function() {
       case 'str': {
         const lit = tokens.here.value;
         tokens.advance();
+        console.log(lit);
         return (i, ie) => lit;
       }
       case 'id':
