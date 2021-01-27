@@ -98,11 +98,11 @@ class Craft{
         if( sorted[0] == 1 && sorted[1] == 1) {
             matmult = 1; 
         } else if( sorted[0] == 1 && sorted[1] == 2) {
-            matmult = 1.079; 
+            matmult = 1.10; 
         }else if( sorted[0] == 1 && sorted[1] == 3) {
             matmult = 1.15; 
         }else if( sorted[0] == 2 && sorted[1] == 2) {
-            matmult = 1.24; 
+            matmult = 1.25; 
         }else if( sorted[0] == 2 && sorted[1] == 3) {
             matmult = 1.3; 
         }else if( sorted[0] == 3 && sorted[1] == 3) {
