@@ -73,27 +73,140 @@ function checkStr(v) {
 // properties of items that can be looked up
 const itemQueryProps = (function() {
   const props = {};
-  function prop(names, prop) {
+  function prop(names, getProp) {
     if (Array.isArray(names)) {
       for (name of names) {
-        props[name] = prop;
+        props[name] = getProp;
       }
     } else {
-      props[names] = prop;
+      props[names] = getProp;
     }
   }
   function maxId(names, idKey) {
-    prop(names, (i, ie) => ie.get('maxRolls').get(idKey));
+    prop(names, (i, ie) => ie.get('maxRolls').get(idKey) || 0);
+  }
+  function minId(names, idKey) {
+    prop(names, (i, ie) => ie.get('minRolls').get(idKey) || 0);
+  }
+  function rangeAvg(names, getProp) {
+    prop(names, (i, ie) => {
+      const range = getProp(i, ie);
+      if (!range) return 0;
+      const ndx = range.indexOf('-');
+      return (parseInt(range.substring(0, ndx), 10) + parseInt(range.substring(ndx + 1), 10)) / 2;
+    });
+  }
+  function map(names, comps, f) {
+    return prop(names, (i, ie) => {
+      const args = [];
+      for (let k = 0; k < comps.length; k++) args.push(comps[k](i, ie));
+      return f.apply(null, args);
+    });
+  }
+  function sum(names, ...comps) {
+    return map(names, comps, (...summands) => {
+      let total = 0;
+      for (let i = 0; i < summands.length; i++) total += summands[i];
+      return total;
+    });
   }
 
   prop('name', (i, ie) => i.displayName || i.name);
+  prop('type', (i, ie) => i.type);
+  prop(['cat', 'category'], (i, ie) => i.category);
+  const tierIndices = { Normal: 0, Unique: 1, Set: 2, Rare: 3, Legendary: 4, Fabled: 5, Mythic: 6 };
+  prop(['rarityname', 'raritystr', 'tiername', 'tierstr'], (i, ie) => i.tier);
+  prop(['rarity', 'tier'], (i, ie) => tierIndices[i.tier]);
+
+  prop(['level', 'lvl', 'combatlevel', 'combatlvl'], (i, ie) => i.lvl);
+  prop(['strmin', 'strreq'], (i, ie) => i.strReq);
+  prop(['dexmin', 'dexreq'], (i, ie) => i.dexReq);
+  prop(['intmin', 'intreq'], (i, ie) => i.intReq);
+  prop(['defmin', 'defreq'], (i, ie) => i.defReq);
+  prop(['agimin', 'agireq'], (i, ie) => i.agiReq);
+  sum(['summin', 'sumreq', 'totalmin', 'totalreq'], props.strmin, props.dexmin, props.intmin, props.defmin, props.agimin);
 
   prop('str', (i, ie) => i.str);
   prop('dex', (i, ie) => i.dex);
   prop('int', (i, ie) => i.int);
   prop('def', (i, ie) => i.def);
   prop('agi', (i, ie) => i.agi);
-  // TODO more properties
+  sum(['skillpoints', 'skillpts', 'attributes', 'attrs'], props.str, props.dex, props.int, props.def, props.agi);
+
+  rangeAvg(['neutraldmg', 'neutraldam', 'ndmg', 'ndam'], (i, ie) => i.nDam);
+  rangeAvg(['earthdmg', 'earthdam', 'edmg', 'edam'], (i, ie) => i.eDam);
+  rangeAvg(['thunderdmg', 'thunderdam', 'tdmg', 'tdam'], (i, ie) => i.tDam);
+  rangeAvg(['waterdmg', 'waterdam', 'wdmg', 'wdam'], (i, ie) => i.wDam);
+  rangeAvg(['firedmg', 'firedam', 'fdmg', 'fdam'], (i, ie) => i.fDam);
+  rangeAvg(['airdmg', 'airdam', 'admg', 'adam'], (i, ie) => i.aDam);
+  sum(['sumdmg', 'sumdam', 'totaldmg', 'totaldam'], props.ndam, props.edam, props.tdam, props.wdam, props.fdam, props.adam);
+
+  maxId(['earthdmg%', 'earthdam%', 'edmg%', 'edam%', 'edampct'], 'eDamPct');
+  maxId(['thunderdmg%', 'thunderdam%', 'tdmg%', 'tdam%', 'tdampct'], 'tDamPct');
+  maxId(['waterdmg%', 'waterdam%', 'wdmg%', 'wdam%', 'wdampct'], 'wDamPct');
+  maxId(['firedmg%', 'firedam%', 'fdmg%', 'fdam%', 'fdampct'], 'fDamPct');
+  maxId(['airdmg%', 'airdam%', 'admg%', 'adam%', 'adampct'], 'aDamPct');
+  sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
+
+  maxId(['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct'], 'mdPct');
+  maxId(['mainatkrawdmg', 'mainatkrawdam', 'mainatkneutraldmg', 'mainatkneutraldam', 'meleerawdmg', 'meleerawdam', 'meleeneutraldmg', 'meleeneutraldam', 'mdraw'], 'mdRaw');
+  maxId(['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct'], 'sdPct');
+  maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
+
+  const atkSpdIndices = { SUPER_SLOW: -3, VERY_SLOW: -2, SLOW: -1, NORMAL: 0, FAST: 1, VERY_FAST: 2, SUPER_FAST: 3 };
+  prop(['attackspeed', 'atkspd'], (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);
+  maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'attackspeed+', 'atkspd+', 'atktier'], 'atkTier');
+  sum(['sumattackspeed', 'totalattackspeed', 'sumatkspd', 'totalatkspd', 'sumatktier', 'totalatktier'], props.atkspd, props.atktier);
+
+  prop(['earthdef', 'edef'], (i, ie) => i.eDef || 0);
+  prop(['thunderdef', 'tdef'], (i, ie) => i.tDef || 0);
+  prop(['waterdef', 'wdef'], (i, ie) => i.wDef || 0);
+  prop(['firedef', 'fdef'], (i, ie) => i.fDef || 0);
+  prop(['airdef', 'adef'], (i, ie) => i.aDef || 0);
+  sum(['sumdef', 'totaldef'], props.edef, props.tdef, props.wdef, props.fdef, props.adef);
+
+  maxId(['earthdef%', 'edef%', 'edefpct'], 'eDefPct');
+  maxId(['thunderdef%', 'tdef%', 'tdefpct'], 'tDefPct');
+  maxId(['waterdef%', 'wdef%', 'wdefpct'], 'wDefPct');
+  maxId(['firedef%', 'fdef%', 'fdefpct'], 'fDefPct');
+  maxId(['airdef%', 'adef%', 'adefpct'], 'aDefPct');
+  sum(['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct'], props.edefpct, props.tdefpct, props.wdefpct, props.fdefpct, props.adefpct);
+
+  prop(['health', 'hp'], (i, ie) => i.hp || 0);
+  maxId(['bonushealth', 'healthid', 'bonushp', 'hpid', 'health+', 'hp+', 'hpbonus'], 'hpBonus');
+  sum(['sumhealth', 'sumhp', 'totalhealth', 'totalhp'], props.hp, props.hpid);
+
+  maxId(['hpregen', 'hpr', 'hr', 'hprraw'], 'hprRaw');
+  maxId(['hpregen%', 'hpr%', 'hr%', 'hprpct'], 'hprPct');
+  maxId(['lifesteal', 'ls'], 'ls');
+  maxId(['manaregen', 'mr'], 'mr');
+  maxId(['manasteal', 'ms'], 'ms');
+
+  maxId(['walkspeed', 'movespeed', 'ws', 'spd'], 'spd');
+  maxId('sprint', 'sprint');
+  maxId(['sprintregen', 'sprintreg'], 'sprintReg');
+  maxId(['jumpheight', 'jh'], 'jh');
+
+  minId(['spellcost1', 'rawspellcost1', 'spcost1', 'spraw1'], 'spRaw1');
+  minId(['spellcost1%', 'spcost1%', 'sppct1'], 'spPct1');
+  minId(['spellcost2', 'rawspellcost2', 'spcost2', 'spraw2'], 'spRaw2');
+  minId(['spellcost2%', 'spcost2%', 'sppct2'], 'spPct2');
+  minId(['spellcost3', 'rawspellcost3', 'spcost3', 'spraw3'], 'spRaw3');
+  minId(['spellcost3%', 'spcost3%', 'sppct3'], 'spPct3');
+  minId(['spellcost4', 'rawspellcost4', 'spcost4', 'spraw4'], 'spRaw4');
+  minId(['spellcost4%', 'spcost4%', 'sppct4'], 'spPct4');
+  sum(['sumspellcost', 'totalspellcost', 'sumrawspellcost', 'totalrawspellcost', 'sumspcost', 'totalspcost', 'sumspraw', 'totalspraw'], props.spraw1, props.spraw2, props.spraw3, props.spraw4);
+  sum(['sumspellcost%', 'totalspellcost%', 'sumspcost%', 'totalspcost%', 'sumsppct', 'totalsppct'], props.sppct1, props.sppct2, props.sppct3, props.sppct4);
+
+  maxId(['exploding', 'expl', 'expd'], 'expd');
+  maxId('poison', 'poison');
+  maxId('thorns', 'thorns');
+  maxId(['reflection', 'refl', 'ref'], 'ref');
+  maxId(['soulpointregen', 'spr', 'spregen'], 'spRegen');
+  maxId(['lootbonus', 'lb'], 'lb');
+  maxId(['xpbonus', 'xpb', 'xb'], 'xpb');
+  maxId(['stealing', 'esteal'], 'eSteal');
+  prop(['powderslots', 'powders', 'slots', 'sockets'], (i, ie) => i.slots || 0);
 
   return props;
 })();
@@ -101,7 +214,7 @@ const itemQueryProps = (function() {
 // functions that can be called in query expressions
 const itemQueryFuncs = {
   max(args) {
-    if (args.length < 1) throw new Error('Not enough args to max()')
+    if (args.length < 1) throw new Error('Not enough args to max()');
     let runningMax = -Infinity;
     for (let i = 0; i < args.length; i++) {
       if (checkNum(args[i]) > runningMax) runningMax = args[i];
@@ -109,7 +222,7 @@ const itemQueryFuncs = {
     return runningMax;
   },
   min(args) {
-    if (args.length < 1) throw new Error('Not enough args to min()')
+    if (args.length < 1) throw new Error('Not enough args to min()');
     let runningMin = Infinity;
     for (let i = 0; i < args.length; i++) {
       if (checkNum(args[i]) < runningMin) runningMin = args[i];
@@ -117,14 +230,42 @@ const itemQueryFuncs = {
     return runningMin;
   },
   floor(args) {
-    if (args.length < 1) throw new Error('Not enough args to floor()')
+    if (args.length < 1) throw new Error('Not enough args to floor()');
     return Math.floor(checkNum(args[0]));
   },
   ceil(args) {
-    if (args.length < 1) throw new Error('Not enough args to ceil()')
+    if (args.length < 1) throw new Error('Not enough args to ceil()');
     return Math.ceil(checkNum(args[0]));
+  },
+  round(args) {
+    if (args.length < 1) throw new Error('Not enough args to ceil()');
+    return Math.round(checkNum(args[0]));
+  },
+  sqrt(args) {
+    if (args.length < 1) throw new Error('Not enough args to ceil()');
+    return Math.sqrt(checkNum(args[0]));
+  },
+  abs(args) {
+    if (args.length < 1) throw new Error('Not enough args to ceil()');
+    return Math.abs(checkNum(args[0]));
+  },
+  contains(args) {
+    if (args.length < 2) throw new Error('Not enough args to contains()');
+    return checkStr(args[0]).toLowerCase().includes(checkStr(args[1]).toLowerCase());
+  },
+  atkspdmod(args) {
+    if (args.length < 1) throw new Error('Not enough args to atkSpdMod()');
+    switch (checkNum(args[0])) {
+      case 2: return 3.1;
+      case 1: return 2.5;
+      case 0: return 2.05;
+      case -1: return 1.5;
+      case -2: return 0.83;
+    }
+    if (args[0] <= -3) return 0.51;
+    if (args[0] >= 3) return 4.3;
+    throw new Error('Invalid argument to atkSpdMod()');
   }
-  // TODO more functions
 };
 
 // the compiler itself
@@ -175,13 +316,18 @@ const compileQueryExpr = (function() {
         continue;
       }
       // parse a string literal
-      if ((m = /^"([^"]+)"/.exec(exprStr.substring(col))) !== null) {
+      if ((m = /^"([^"]+)"/.exec(exprStr.substring(col))) !== null) { // with double-quotes
+        tokens.push({ type: 'str', value: m[1] });
+        col += m[0].length;
+        continue;
+      }
+      if ((m = /^'([^']+)'/.exec(exprStr.substring(col))) !== null) { // with single-quotes
         tokens.push({ type: 'str', value: m[1] });
         col += m[0].length;
         continue;
       }
       // parse an identifier or boolean literal
-      if ((m = /^\w[\w\d_]*/.exec(exprStr.substring(col))) !== null) {
+      if ((m = /^\w[\w\d+%]*/.exec(exprStr.substring(col))) !== null) {
         switch (m[0]) {
           case 'true':
             tokens.push({ type: 'bool', value: true });
@@ -403,7 +549,7 @@ const compileQueryExpr = (function() {
               throw new Error(`Expected "," or ")", but got ${JSON.stringify(tokens.here)}`);
             }
           }
-          const func = itemQueryFuncs[id];
+          const func = itemQueryFuncs[id.toLowerCase()];
           if (!func) throw new Error(`Unknown function: ${id}`);
           return (i, ie) => {
             const args = [];
@@ -411,7 +557,7 @@ const compileQueryExpr = (function() {
             return func(args);
           };
         } else { // not a function call
-          const prop = itemQueryProps[id];
+          const prop = itemQueryProps[id.toLowerCase()];
           if (!prop) throw new Error(`Unknown property: ${id}`);
           return prop;
         }
