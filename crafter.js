@@ -244,7 +244,6 @@ function encodeCraft() {
 }
 function decodeCraft(url_tag) {
     if (url_tag) {
-        console.log(url_tag);
         let info = url_tag.split("_");
         let version = info[0];
         let tag = info[1];
@@ -264,7 +263,6 @@ function decodeCraft(url_tag) {
             toggleMaterial("mat-1-"+mat_tiers[0]);
             toggleMaterial("mat-2-"+mat_tiers[1]);
             atkSpd = Base64.toInt(tag.substring(15));
-            console.log(atkSpd);
             let atkSpdButtons = ["slow-atk-button", "normal-atk-button", "fast-atk-button"];
             toggleAtkSpd(atkSpdButtons[atkSpd]);
             

@@ -22,9 +22,7 @@ class Craft{
 
     setHash(hash) {
         this.hash = hash;
-        console.log(hash);
         this.statMap.set("displayName", "CR-" + this.hash);
-        console.log(this.statMap.get("displayName"));
     }
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The craft itself should be valid. No checking of validity of pieces is done here.
@@ -206,6 +204,9 @@ class Craft{
                     statMap.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (statMap.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
                 }
             }
+            low = Math.floor(low * matmult);
+            high = Math.floor(high * matmult);
+            statMap.set("hp",low+"-"+high);
         }
         /* END SECTION */
 
