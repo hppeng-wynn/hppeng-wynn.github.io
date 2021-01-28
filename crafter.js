@@ -105,7 +105,6 @@ function init() {
     console.log(ings);
     console.log("all recipes");
     console.log(recipes);
-    console.log("e");
     console.log(ingList);
     console.log(recipeList);   
 
@@ -238,7 +237,7 @@ function encodeCraft() {
                             Base64.fromIntN(ingList.indexOf(player_craft.ingreds[5].get("name")), 2) + 
                             Base64.fromIntN(recipeList.indexOf(player_craft.recipe.get("id")),2) + 
                             Base64.fromIntN(player_craft.mat_tiers[0] + (player_craft.mat_tiers[1]-1)*3, 1) +  //this maps tiers [a,b] to a+3b.
-                            Base64.fromIntN(atkSpds.indexOf(player_craft.statMap.get("atkSpd")),1);
+                            Base64.fromIntN(atkSpds.indexOf(player_craft["atkSpd"]),1);
         return craft_string;
     }
     return "";
