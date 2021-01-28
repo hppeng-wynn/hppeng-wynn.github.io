@@ -345,7 +345,7 @@ with open("ingreds_clean.json", "w") as outfile:
     json.dump(ing_data, outfile, indent = 2)
 with open("ingreds_compress2.json", "w") as outfile:
     json.dump(ing_data, outfile)
-with open("recipes_clean.json", "w") as outfile:
+'''with open("recipes_clean.json", "w") as outfile:
     json.dump(recipe_data, outfile, indent = 2)
 with open("recipes_compress2.json", "w") as outfile:
-    json.dump(recipe_data, outfile)
+    json.dump(recipe_data, outfile)'''

@@ -206,7 +206,7 @@ const spell_table = {
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [70, 30, 0, 0, 0, 0], summary: true },
             ] },
     ],
-    "powder": [ //This is how instant-damage powder specials are implemented. To view time-boosted damage powder specials (curse, 2nd courage, air prison, view @TODO)
+    "powder": [ //This is how instant-damage powder specials are implemented. 
         { title: "Quake", cost: 0, parts:[
                 { subtitle: "Total Damage", type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
             ] },

@@ -29,7 +29,7 @@ function setTitle() {
     document.getElementById("header").textContent = "WynnCrafter version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
     let disclaimer = document.createElement("p");
-    disclaimer.textContent = "THIS CRAFTER IS INCOMPLETE. The effect of material tiers on crated items is not accurate yet. If you know how the math behind it works, please contact ferricles on forums, discord, or ingame.";
+    disclaimer.textContent = "THIS CRAFTER IS INCOMPLETE. The effect of material tiers on crated items is not 100% tested and accurate. If you know how the math behind it works, please contact ferricles on forums, discord, or ingame.";
     document.getElementById("header").append(disclaimer);
 }
 setTitle();
@@ -38,6 +38,10 @@ let ingMap = new Map();
 let ingList = [];
 
 let recipeMap = new Map();
+let recipeList = [];
+
+let ingIDMap = new Map();
+let recipeIDMap = new Map();
 function init() {
     //no ing
     let ing = Object();
@@ -48,19 +52,62 @@ function init() {
     ing.ids= {};
     ing.itemIDs = {"dura": 0, "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
     ing.consumableIDs = {"dura": 0, "charges": 0};
-    ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0}
-    ingMap.set(ing["name"], ing);
+    ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
+    ingMap.set(ing["name"], ing);            
+    ingList.push(ing["name"]);
+    ingIDMap.set(ingList.length-1, ing["name"]);
+    let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
+    for (let i = 0; i < 5; i ++) {
+        for (const powderIng of powderIngreds) {
+            let ing = Object();
+            ing.name = "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1);
+            ing.tier = 0;
+            ing.lvl = 0;
+            ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING"];
+            ing.ids = {};
+            ing.isPowder = true;
+            ing.pid = 6*i + powderIngreds.indexOf(powderIng);
+            ing.itemIDs = {"dura": powderIng["durability"], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
+            switch(i) {
+                case 0:
+                    ing.itemIDs["strReq"] = powderIng["skpReq"];
+                    break;
+                case 1:
+                    ing.itemIDs["dexReq"] = powderIng["skpReq"];
+                    break;
+                case 2:
+                    ing.itemIDs["intReq"] = powderIng["skpReq"];
+                    break;
+                case 3:
+                    ing.itemIDs["defReq"] = powderIng["skpReq"];
+                    break;
+                case 4:
+                    ing.itemIDs["agiReq"] = powderIng["skpReq"];
+                    break;
+            }
+            ing.consumableIDs = {"dura": 0, "charges": 0};
+            ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
+            ingMap.set(ing["name"],ing);
+            ingList.push(ing["name"]);
+        }
+    }
+    
+
     for (const ing of ings) {
         ingMap.set(ing["name"], ing);
         ingList.push(ing["name"]);
     }
     for (const recipe of recipes) {
         recipeMap.set(recipe["id"], recipe);
+        recipeList.push(recipe["id"]);
     }
     console.log("all ingredients");
     console.log(ings);
     console.log("all recipes");
     console.log(recipes);
+    console.log("e");
+    console.log(ingList);
+    console.log(recipeList);   
 
     document.getElementById("recipe-choice").addEventListener("change", (event) => {
         updateMaterials();
@@ -70,6 +117,7 @@ function init() {
     });
 
     populateFields();
+    decodeCraft(url_tag);
 }
 function updateMaterials() {
     let recipeName = getValue("recipe-choice") ? getValue("recipe-choice") : "Potion";
@@ -80,7 +128,7 @@ function updateMaterials() {
             document.getElementById("mat-1").textContent = recipe.get("materials")[0].get("item").split(" ").slice(1).join(" ") + " Tier:";
             document.getElementById("mat-2").textContent = recipe.get("materials")[1].get("item").split(" ").slice(1).join(" ") + " Tier:"; 
         } catch (error){
-            //eee
+            //e e e
         }
     }
     else {
@@ -139,7 +187,10 @@ function calculateCraft() {
         }
     }
     //create the craft
-    player_craft = new Craft(recipe,mat_tiers,ingreds,atkSpd);
+    player_craft = new Craft(recipe,mat_tiers,ingreds,atkSpd,"");
+
+    location.hash = encodeCraft();
+    player_craft.setHash(encodeCraft().split("_")[1]);
     console.log(player_craft);
     /*console.log(recipe)
     console.log(levelrange)
@@ -172,10 +223,57 @@ function calculateCraft() {
         }
     }
 
-    //set the location hash. TODO
-    /*let hash = "";
-    location.hash = hash;*/
+    
 }
+
+function encodeCraft() {
+    if (player_craft) {
+        let atkSpds = ["SLOW","NORMAL","FAST"];
+        let craft_string =  "1_" + 
+                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[0].get("name")), 2) + 
+                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[1].get("name")), 2) +
+                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[2].get("name")), 2) +
+                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[3].get("name")), 2) +
+                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[4].get("name")), 2) +
+                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[5].get("name")), 2) + 
+                            Base64.fromIntN(recipeList.indexOf(player_craft.recipe.get("id")),2) + 
+                            Base64.fromIntN(player_craft.mat_tiers[0] + (player_craft.mat_tiers[1]-1)*3, 1) +  //this maps tiers [a,b] to a+3b.
+                            Base64.fromIntN(atkSpds.indexOf(player_craft.statMap.get("atkSpd")),1);
+        return craft_string;
+    }
+    return "";
+}
+function decodeCraft(url_tag) {
+    if (url_tag) {
+        console.log(url_tag);
+        let info = url_tag.split("_");
+        let version = info[0];
+        let tag = info[1];
+        if (version === "1") {
+            ingreds = [];
+            for (let i = 0; i < 6; i ++ ) {
+                setValue("ing-choice-"+(i+1), ingList[Base64.toInt(tag.substring(2*i,2*i+2))]);
+            }
+            recipe = recipeList[Base64.toInt(tag.substring(12,14))];
+            recipesName = recipe.split("-");
+            setValue("recipe-choice",recipesName[0]);
+            setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
+            tierNum = Base64.toInt(tag.substring(14,15));
+            mat_tiers = [];
+            mat_tiers.push(tierNum % 3 == 0 ? 3 : tierNum % 3);
+            mat_tiers.push(Math.floor((tierNum-0.5) / 3)+1); //Trying to prevent round-off error, don't yell at me
+            toggleMaterial("mat-1-"+mat_tiers[0]);
+            toggleMaterial("mat-2-"+mat_tiers[1]);
+            atkSpd = Base64.toInt(tag.substring(15));
+            console.log(atkSpd);
+            let atkSpdButtons = ["slow-atk-button", "normal-atk-button", "fast-atk-button"];
+            toggleAtkSpd(atkSpdButtons[atkSpd]);
+            
+            calculateCraft();
+        }
+    }
+}
+
 function populateFields() {
     let recipe_list = document.getElementById("recipe-choices");
     for (const recipe of recipeTypes) {
@@ -225,7 +323,13 @@ function copyRecipe(){
 */
 function shareRecipe(){
     if (player_craft) {
-        copyTextToClipboard(url_base+location.hash);
+        let copyString = url_base+location.hash + "\n";
+        let name = player_craft.recipe.get("id").split("-");
+        copyString += " > " + name[0] + " " + "Lv. " + name[1] + "-" + name[2] + " (" + player_craft.mat_tiers[0] + "\u272B, " + player_craft.mat_tiers[1] + "\u272B)\n";
+        copyString += " > [" + player_craft.ingreds[0].get("name") + " | " + player_craft.ingreds[1].get("name") + "\n";
+        copyString += " > " + player_craft.ingreds[2].get("name") + " | " + player_craft.ingreds[3].get("name") + "\n";
+        copyString += " > " + player_craft.ingreds[4].get("name") + " | " + player_craft.ingreds[5].get("name") + "]";  
+        copyTextToClipboard(copyString);
         document.getElementById("share-button").textContent = "Copied!";
     } 
 }

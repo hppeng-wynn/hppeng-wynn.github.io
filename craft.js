@@ -10,16 +10,22 @@ class Craft{
        @param mat_tiers: [1->3, 1->3]. An array with 2 numbers.
        @param ingreds: []. An array with 6 entries, each with an ingredient Map.
     */
-    constructor(recipe, mat_tiers, ingreds, attackSpeed) {
+    constructor(recipe, mat_tiers, ingreds, attackSpeed, hash) {
         this.recipe = recipe;
         this.mat_tiers = mat_tiers;
         this.ingreds = ingreds;
         this.statMap = new Map(); //can use the statMap as an expanded Item
         this.atkSpd = attackSpeed;
+        this.hash = hash;
         this.initCraftStats();
     }
 
-    
+    setHash(hash) {
+        this.hash = hash;
+        console.log(hash);
+        this.statMap.set("displayName", "CR-" + this.hash);
+        console.log(this.statMap.get("displayName"));
+    }
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The craft itself should be valid. No checking of validity of pieces is done here.
     */
@@ -28,13 +34,20 @@ class Craft{
         let statMap = new Map();
         statMap.set("minRolls", new Map());
         statMap.set("maxRolls", new Map());
-        statMap.set("displayName", "Crafted Item"); //TODO: DISPLAY THE HASH
+        statMap.set("displayName", "CR-" + this.hash); //TODO: DISPLAY THE HASH
         statMap.set("tier", "Crafted");
         statMap.set("type", this.recipe.get("type").toLowerCase());
         statMap.set("duration", [this.recipe.get("duration")[0], this.recipe.get("duration")[1]]); //[low, high]
         statMap.set("durability", [this.recipe.get("durability")[0], this.recipe.get("durability")[1]]);
         statMap.set("lvl", (this.recipe.get("lvl")[0] + "-" + this.recipe.get("lvl")[1]) );
         statMap.set("nDam", 0);
+        for (const e of skp_elements) {
+            statMap.set(e + "Dam", "0-0");
+            statMap.set(e + "Def", 0);
+        }
+        for (const e of skp_order) {
+            statMap.set(e + "Req", 0)
+        }
 
         if (armorTypes.includes(statMap.get("type")) || weaponTypes.includes(statMap.get("type"))) {
             if(this.recipe.get("lvl")[0] < 30) {
@@ -70,7 +83,7 @@ class Craft{
             }
             statMap.set("category","consumable");
         } else {
-            statMap.set("slots", 0);
+            statMap.set("charges", 0);
         }
 
         if (armorTypes.includes(statMap.get("type"))) {
@@ -80,12 +93,13 @@ class Craft{
             statMap.set("nDam", this.recipe.get("healthOrDamage").join("-"));
             for (const e of skp_elements) {
                 statMap.set(e + "Dam", "0-0");
+                statMap.set(e + "DamLow", "0-0");
             }
             //statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
             statMap.set("category","weapon");
             statMap.set("atkSpd",this.atkSpd);
         } 
-        statMap.set("powders","");
+        statMap.set("powders",[]);
         
         /* Change certain IDs based on material tier. 
             healthOrDamage changes.
@@ -94,7 +108,7 @@ class Craft{
         */
         let matmult = 1;
         let sorted = this.mat_tiers.slice().sort();
-        //TODO - idfk how this works
+        //TODO - MAT MULTIPLIERS ARE SUS FOR NON-MIXING TIERS.
         if( sorted[0] == 1 && sorted[1] == 1) {
             matmult = 1; 
         } else if( sorted[0] == 1 && sorted[1] == 2) {
@@ -123,18 +137,75 @@ class Craft{
         }
         if (statMap.get("category") === "weapon") {
             //attack damages oh boy
-            let ratio = 2.05; //UNSURE IF THIS IS HOW IT'S DONE. MIGHT BE DONE WITH SKETCHY FLOORING.
-            if (this.atkSpd === "SLOW") {
+            let ratio = 2.05; //UNSURE IF THIS IS HOW IT'S DONE. 
+            if (this['atkSpd'] === "SLOW") {
                 ratio /= 1.5;
-            } else if (this.atkSpd === "NORMAL") {
+            } else if (this['atkSpd'] === "NORMAL") {
                 ratio = 1;
-            } else if (this.atkSpd = "FAST") {
+            } else if (this['atkSpd'] === "FAST") {
                 ratio /= 2.5;
             }
-            low *= ratio*matmult;
-            high *= ratio*matmult;
-            this.recipe.get("healthOrDamage")[0] = low;
-            this.recipe.get("healthOrDamage")[1] = high;
+            low = Math.floor(low * matmult);
+            high = Math.floor(high * matmult);
+            low = Math.floor(low * ratio);
+            high = Math.floor(high * ratio);
+            let low1 = Math.floor(low * 0.9);
+            let low2 = Math.floor(low * 1.1);
+            let high1 = Math.floor(high * 0.9);
+            let high2 = Math.floor(high * 1.1);
+
+            statMap.set("nDamLow", low1 + "-" + low2); //jank
+            statMap.set("nDam", high1 + "-" + high2);
+
+            /*
+             * APPLY POWDERS - MAY NOT BE CORRECT
+            */
+            let mockItem = new Map();
+            mockItem.set("type",statMap.get("type"));
+            mockItem.set("atkSpd",statMap.get("atkSpd"));
+            mockItem.set("nDam", high1 + "-" + high2);
+            for (const e of skp_elements) {
+                mockItem.set(e+"Dam","0-0");
+            }
+            mockItem.set("powders",[]); 
+            for (let n in this.ingreds) {
+                let ingred = this.ingreds[n];
+                if (ingred.get("isPowder")) {
+                    mockItem.get("powders").push(ingred.get("pid"));
+                }
+            }
+            let stats = new Map();
+            stats.set("atkSpd", mockItem.get("atkSpd"));
+            stats.set("damageBonus", [0, 0, 0, 0, 0]);
+            stats.set("damageRaw", [mockItem.get("nDam"), mockItem.get("eDam"), mockItem.get("tDam"), mockItem.get("wDam"), mockItem.get("fDam"), mockItem.get("aDam")]);
+            let damage_keys = [ "nDam", "eDam", "tDam", "wDam", "fDam", "aDam" ]; //affects base damage directly.
+            let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, mockItem, [0, 0, 0, 0, 0], 1, undefined);
+            let damages = results[2];
+            for (const i in damage_keys) {
+                statMap.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
+            }
+            //second go-through: for the low roll.
+            mockItem.set("nDam", low1 + "-" + low2);
+            for (const e of skp_elements) {
+                mockItem.set(e+"Dam","0-0");
+            }
+            stats.set("damageRaw", [mockItem.get("nDam"), mockItem.get("eDam"), mockItem.get("tDam"), mockItem.get("wDam"), mockItem.get("fDam"), mockItem.get("aDam")]);
+            results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, mockItem, [0, 0, 0, 0, 0], 1, undefined);
+            damages = results[2];
+            for (const i in damage_keys) {
+                statMap.set(damage_keys[i]+"Low", damages[i][0]+"-"+damages[i][1]);
+            }
+            
+        } else if (statMap.get("category") === "armor") {
+            for (let n in this.ingreds) {
+                let ingred = this.ingreds[n];
+                if (ingred.get("isPowder")) {
+                    let powder = powderStats[ingred.get("pid")];
+                    let name = powderNames.get(ingred.get("pid"));
+                    statMap.set(name.charAt(0) + "Def", (statMap.get(name.charAt(0)+"Def") || 0) + powder["defPlus"]);
+                    statMap.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (statMap.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
+                }
+            }
         }
         /* END SECTION */
 
@@ -199,7 +270,11 @@ class Craft{
             let eff_mult = (eff_flat[n] / 100).toFixed(2);
             for (const [key, value] of ingred.get("itemIDs")) {
                 if(key !== "dura") {
-                    statMap.set(key, statMap.get(key) + Math.floor(value*eff_mult)); //CHECK IF THIS IS CORRECT
+                    if (!ingred.get("isPowder")) {
+                        statMap.set(key, Math.floor(statMap.get(key) + value*eff_mult)); //CHECK IF THIS IS CORRECT
+                    } else {
+                        statMap.set(key, Math.floor(statMap.get(key) + value));
+                    }
                 } else { //durability, NOT affected by effectiveness
                     statMap.set("durability", statMap.get("durability").map(x => x + value));
                 }

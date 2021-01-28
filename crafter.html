@@ -43,137 +43,142 @@
             </header>
         </div>
         <div class = "container" display = "grid">
-            <div class = "crafter center" style = "grid-column:1;grid-row:1" >
-                <table class = "center">
-                    <tr>
-                        <td>
-                            <label for="recipe-choice">Recipe Type:</label>
-                            <br/>
-                            <input class="recipeinput" list="recipe-choices" id="recipe-choice" name="recipe-choice" placeholder="Potion"/>
-                            <datalist id="recipe-choices">
-                            </datalist>
-                        </td>
-                        <td >
-                            <label for="level-choice">Recipe Level:</label>
-                            <br/>
-                            <input class="levelinput" list="level-choices" id="level-choice" name="level-choice" placeholder="103-105" />
-                            <datalist id="level-choices">
-                            </datalist>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="center">
-                            <label id = "mat-1" for="mat-1-tier-choice">Material 1 Tier:</label>
-                            <br/>
-                            <button class = "button Star" id = "mat-1-1" onclick = "toggleMaterial('mat-1-1')">1</button>
-                            <button class = "button Star" id = "mat-1-2" onclick = "toggleMaterial('mat-1-2')">2</button>
-                            <button class = "button Star" id = "mat-1-3" onclick = "toggleMaterial('mat-1-3')">3</button>
-                        </td>
-                        <td class="center">
-                            <label id = "mat-2" for="mat-2-tier-choice">Material 2 Tier:</label>
-                            <br/>
-                            <button class = "button Star" id = "mat-2-1" onclick = "toggleMaterial('mat-2-1')">1</button>
-                            <button class = "button Star" id = "mat-2-2" onclick = "toggleMaterial('mat-2-2')">2</button>
-                            <button class = "button Star" id = "mat-2-3" onclick = "toggleMaterial('mat-2-3')">3</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="center">
-                            <label for="ing-choice-1">Ingredient 1:</label>
-                            <br/>
-                            <input class="inginput" list="ing-choices-1" id="ing-choice-1" name="ing-choice-1" placeholder="No Ingredient" />
-                            <datalist id="ing-choices-1">
-                            </datalist>
-                        </td>
-                        <td class="center">
-                            <label for="ing-choice-2">Ingredient 2:</label>
-                            <br/>
-                            <input class="inginput" list="ing-choices-2" id="ing-choice-2" name="ing-choice-2" placeholder="No Ingredient" />
-                            <datalist id="ing-choices-2">
-                            </datalist>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="center">
-                            <label for="ing-choice-3">Ingredient 3:</label>
-                            <br/>
-                            <input class="inginput" list="ing-choices-3" id="ing-choice-3" name="ing-choice-3" placeholder="No Ingredient" />
-                            <datalist id="ing-choices-3">
-                            </datalist>
-                        </td>
-                        <td class="center">
-                            <label for="ing-choice-4">Ingredient 4:</label>
-                            <br/>
-                            <input class="inginput" list="ing-choices-4" id="ing-choice-4" name="ing-choice-4" placeholder="No Ingredient" />
-                            <datalist id="ing-choices-4">
-                            </datalist>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="center">
-                            <label for="ing-choice-5">Ingredient 5:</label>
-                            <br/>
-                            <input class="inginput" list="ing-choices-5" id="ing-choice-5" name="ing-choice-5" placeholder="No Ingredient" />
-                            <datalist id="ing-choices-5">
-                            </datalist>
-                        </td>
-                        <td class="center">
-                            <label for="ing-choice-6">Ingredient 6:</label>
-                            <br/>
-                            <input class="inginput" list="ing-choices-6" id="ing-choice-6" name="ing-choice-6" placeholder="No Ingredient" />
-                            <datalist id="ing-choices-6">
-                            </datalist>
-                        </td>
-                    </tr>
-                </table>
-                <label for = "atkSpdChoices"> Attack Speed (weapons only):</label>
-                <table class = "center" id = "atkSpdChoices">
-                    <tr>
-                        <td class = "center">
-                            <button class = "button" id = "slow-atk-button" onclick = "toggleAtkSpd('slow-atk-button')">
-                            Slow
-                            </button>
-                        </td>
-                        <td class = "center">
-                            <button class = "button" id = "normal-atk-button" onclick = "toggleAtkSpd('normal-atk-button')">
-                            Normal
-                            </button>
-                        </td>
-                        <td class = "center">
-                            <button class = "button" id = "fast-atk-button" onclick = "toggleAtkSpd('fast-atk-button')">
-                            Fast
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-                <table class = "center">
-                    <tr>
-                        <td class = "center">
-                            <button class = "button" id = "craft-button" onclick = "calculateCraft()">
-                            Craft Item
-                            </button>
-                        </td>
-                        <td class = "center">
-                            <button class = "button" id = "reset-button" onclick = "resetFields()">
-                            Reset
-                            </button>
-                        </td>
-                        <td class = "center">
-                            <button class = "button" id = "copy-button" onclick = "copyRecipe()">
-                            Copy Short
-                            </button>
-                        </td>
-                        <td class = "center">
-                            <button class = "button" id = "share-button" onclick = "shareRecipe()">
-                            Copy Long
-                            </button>
-                        </td>
-                    </tr>
-                </table>
+            <div class = "center" style = "grid-column:1;grid-row:1" >
+                <div class = "crafter">
+                    <table class = "center">
+                        <tr>
+                            <td>
+                                <label for="recipe-choice">Recipe Type:</label>
+                                <br/>
+                                <input class="recipeinput" list="recipe-choices" id="recipe-choice" name="recipe-choice" placeholder="Potion"/>
+                                <datalist id="recipe-choices">
+                                </datalist>
+                            </td>
+                            <td >
+                                <label for="level-choice">Recipe Level:</label>
+                                <br/>
+                                <input class="levelinput" list="level-choices" id="level-choice" name="level-choice" placeholder="103-105" />
+                                <datalist id="level-choices">
+                                </datalist>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center">
+                                <label id = "mat-1" for="mat-1-tier-choice">Material 1 Tier:</label>
+                                <br/>
+                                <button class = "button Star" id = "mat-1-1" onclick = "toggleMaterial('mat-1-1')">1</button>
+                                <button class = "button Star" id = "mat-1-2" onclick = "toggleMaterial('mat-1-2')">2</button>
+                                <button class = "button Star" id = "mat-1-3" onclick = "toggleMaterial('mat-1-3')">3</button>
+                            </td>
+                            <td class="center">
+                                <label id = "mat-2" for="mat-2-tier-choice">Material 2 Tier:</label>
+                                <br/>
+                                <button class = "button Star" id = "mat-2-1" onclick = "toggleMaterial('mat-2-1')">1</button>
+                                <button class = "button Star" id = "mat-2-2" onclick = "toggleMaterial('mat-2-2')">2</button>
+                                <button class = "button Star" id = "mat-2-3" onclick = "toggleMaterial('mat-2-3')">3</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center">
+                                <label for="ing-choice-1">Ingredient 1:</label>
+                                <br/>
+                                <input class="inginput" list="ing-choices-1" id="ing-choice-1" name="ing-choice-1" placeholder="No Ingredient" />
+                                <datalist id="ing-choices-1">
+                                </datalist>
+                            </td>
+                            <td class="center">
+                                <label for="ing-choice-2">Ingredient 2:</label>
+                                <br/>
+                                <input class="inginput" list="ing-choices-2" id="ing-choice-2" name="ing-choice-2" placeholder="No Ingredient" />
+                                <datalist id="ing-choices-2">
+                                </datalist>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center">
+                                <label for="ing-choice-3">Ingredient 3:</label>
+                                <br/>
+                                <input class="inginput" list="ing-choices-3" id="ing-choice-3" name="ing-choice-3" placeholder="No Ingredient" />
+                                <datalist id="ing-choices-3">
+                                </datalist>
+                            </td>
+                            <td class="center">
+                                <label for="ing-choice-4">Ingredient 4:</label>
+                                <br/>
+                                <input class="inginput" list="ing-choices-4" id="ing-choice-4" name="ing-choice-4" placeholder="No Ingredient" />
+                                <datalist id="ing-choices-4">
+                                </datalist>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center">
+                                <label for="ing-choice-5">Ingredient 5:</label>
+                                <br/>
+                                <input class="inginput" list="ing-choices-5" id="ing-choice-5" name="ing-choice-5" placeholder="No Ingredient" />
+                                <datalist id="ing-choices-5">
+                                </datalist>
+                            </td>
+                            <td class="center">
+                                <label for="ing-choice-6">Ingredient 6:</label>
+                                <br/>
+                                <input class="inginput" list="ing-choices-6" id="ing-choice-6" name="ing-choice-6" placeholder="No Ingredient" />
+                                <datalist id="ing-choices-6">
+                                </datalist>
+                            </td>
+                        </tr>
+                    </table>
+                    <label for = "atkSpdChoices"> Attack Speed (weapons only):</label>
+                    <table class = "center" id = "atkSpdChoices">
+                        <tr>
+                            <td class = "center">
+                                <button class = "button" id = "slow-atk-button" onclick = "toggleAtkSpd('slow-atk-button')">
+                                Slow
+                                </button>
+                            </td>
+                            <td class = "center">
+                                <button class = "button" id = "normal-atk-button" onclick = "toggleAtkSpd('normal-atk-button')">
+                                Normal
+                                </button>
+                            </td>
+                            <td class = "center">
+                                <button class = "button" id = "fast-atk-button" onclick = "toggleAtkSpd('fast-atk-button')">
+                                Fast
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class = "center">
+                        <tr>
+                            <td class = "center">
+                                <button class = "button" id = "craft-button" onclick = "calculateCraft()">
+                                Craft Item
+                                </button>
+                            </td>
+                            <td class = "center">
+                                <button class = "button" id = "reset-button" onclick = "resetFields()">
+                                Reset
+                                </button>
+                            </td>
+                            <td class = "center">
+                                <button class = "button" id = "copy-button" onclick = "copyRecipe()">
+                                Copy Short
+                                </button>
+                            </td>
+                            <td class = "center">
+                                <button class = "button" id = "share-button" onclick = "shareRecipe()">
+                                Copy Long
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class = "recipe center hide-container-block" style = "display:none">
                 <div class = "recipe-stats">
                     <div class = "center" id = "recipe-stats"></div>
+                </div>
+                <div class = "craft-warnings">
+                    <div class = "center" id = "craft-warnings"></div>
                 </div>
             </div>
             <div class = "crafted center hide-container-block" style = "display:none">
@@ -183,9 +188,7 @@
             </div>
             
             <!--This is also incredibly janky.-->
-            <div class = "craft-warnings">
-                <div class = "center" id = "craft-warnings"></div>
-            </div>
+            <p></p>
             <p></p>
             <p></p>
             <div class="ingredients-container hide-container-grid" id = "ingreds" style = "display:none">

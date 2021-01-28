@@ -1,6 +1,5 @@
 let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
-let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
 let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 let colorMap = new Map(
     [
@@ -91,6 +90,10 @@ function expandIngredient(ing) {
     for (const id of normIds) {
         expandedIng.set(id, ing[id]);
     }
+    if (ing['isPowder']) {
+        expandedIng.set("isPowder",ing['isPowder']);
+        expandedIng.set("pid",ing['pid']);
+    }
     //now the actually hard one
     let idMap = new Map();
     idMap.set("minRolls", new Map());
@@ -121,7 +124,7 @@ function expandRecipe(recipe) {
             expandedRecipe.set(id, [0,0]);
         }
     }
-    expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][0]['amount'] ] ]) ]);
+    expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][1]['amount'] ] ]) ]);
     //console.log(expandedRecipe);
     return expandedRecipe;
 }
@@ -369,7 +372,7 @@ function displayBuildStats(parent_id,build){
                     value_elem.classList.add('right');
                     value_elem.setAttribute("colspan", "2");
                     let prefix_elem = document.createElement('b');
-                    prefix_elem.textContent = "-> With Strength: ";
+                    prefix_elem.textContent = "\u279C With Strength: ";
                     let number_elem = document.createElement('b');
                     number_elem.classList.add(style);
                     number_elem.textContent = (id_val * (1+skillPointsToPercentage(build.total_skillpoints[0])) ).toFixed(0) + idSuffixes[id];
@@ -428,13 +431,29 @@ function displayExpandedItem(item, parent_id){
         let stats = new Map();
         stats.set("atkSpd", item.get("atkSpd"));
         stats.set("damageBonus", [0, 0, 0, 0, 0]);
-        stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
-        let damages = results[2];
+
+        //SUPER JANK @HPP PLS FIX
         let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
-        for (const i in damage_keys) {
-            item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
+        if (item.get("tier") !== "Crafted") {
+            stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
+            let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
+            let damages = results[2];
+            for (const i in damage_keys) {
+                item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
+            }
+        } else {
+            stats.set("damageRaw", [item.get("nDamLow"), item.get("eDamLow"), item.get("tDamLow"), item.get("wDamLow"), item.get("fDamLow"), item.get("aDamLow")]);
+            let resultsLow = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
+            let damagesLow = resultsLow[2];
+            stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
+            let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
+            let damages = results[2];
+            
+            for (const i in damage_keys) {
+                item.set(damage_keys[i], damagesLow[i][0]+"-"+damagesLow[i][1]+"\u279c"+damages[i][0]+"-"+damages[i][1]);
+            }
         }
+        
     }
 
     let display_commands = [
@@ -518,11 +537,11 @@ function displayExpandedItem(item, parent_id){
             }
         }
         else {
-            let id = command;
+            let id = command; //warp
             if(( nonRolledIDs.includes(id) && item.get(id))){//nonRolledID & non-0/non-null/non-und ID
                 if (id === "slots") {
                     let p_elem = document.createElement("p");
-                    // PROPER POWDER DISPLAYING EZ CLAP 
+                    // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
                     /*p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
                     " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
@@ -757,6 +776,7 @@ function displayExpandedItem(item, parent_id){
         }
         dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
         active_elem.append(dura_elem);
+
     }
     //Show item tier
     if (item.get("tier") && item.get("tier") !== " ") {
@@ -1237,7 +1257,7 @@ function displayFixedID(active, id, value, elemental_format, style) {
     }
     else {
         // HACK TO AVOID DISPLAYING ZERO DAMAGE! TODO
-        if (value === "0-0") {
+        if (value === "0-0" || value === "0-0\u279c0-0") {
             return;
         }
         let p_elem = document.createElement('p');
