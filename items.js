@@ -21,6 +21,32 @@ class ExprField {
     }
 }
 
+function compareLexico(ia, keysA, ib, keysB) {
+    for (let i = 0; i < keysA.length; i++) { // assuming keysA and keysB are the same length
+        let aKey = keysA[i], bKey = keysB[i];
+        if (typeof aKey !== typeof bKey) throw new Error(`Incomparable types ${typeof aKey} and ${typeof bKey}`); // can this even happen?
+        switch (typeof aKey) {
+            case 'string':
+                aKey = aKey.toLowerCase();
+                bKey = bKey.toLowerCase();
+                if (aKey < bKey) return -1;
+                if (aKey > bKey) return 1;
+                break;
+            case 'number': // sort numeric stuff in reverse order
+                if (aKey < bKey) return 1;
+                if (aKey > bKey) return -1;
+                break;
+            default:
+                throw new Error(`Incomparable type ${typeof aKey}`);
+        }
+    }
+    return ib.lvl - ia.lvl;
+}
+
+function stringify(v) {
+    return typeof v === 'number' ? (Math.round(v * 100) / 100).toString() : v;
+}
+
 function init() {
     const itemList = document.getElementById('item-list');
     const itemListFooter = document.getElementById('item-list-footer');
@@ -50,27 +76,11 @@ function init() {
     });
     const searchSortField = new ExprField('search-sort-field', 'search-sort-error', function(exprStr) {
         const subExprs = exprStr.split(';').map(compileQueryExpr).filter(f => f != null);
-        return function(a, ae, b, be) {
-            for (let i = 0; i < subExprs.length; i++) {
-                let aKey = subExprs[i](a, ae), bKey = subExprs[i](b, be);
-                if (typeof aKey !== typeof bKey) throw new Error(`Incomparable types ${typeof aKey} and ${typeof bKey}`); // can this even happen?
-                switch (typeof aKey) {
-                    case 'string':
-                        aKey = aKey.toLowerCase();
-                        bKey = bKey.toLowerCase();
-                        if (aKey < bKey) return -1;
-                        if (aKey > bKey) return 1;
-                        break;
-                    case 'number': // sort numeric stuff in reverse order
-                        if (aKey < bKey) return 1;
-                        if (aKey > bKey) return -1;
-                        break;
-                    default:
-                        throw new Error(`Incomparable type ${typeof aKey}`);
-                }
-            }
-            return b.lvl - a.lvl;
-        }
+        return function(i, ie) {
+            const sortKeys = [];
+            for (let k = 0; k < subExprs.length; k++) sortKeys.push(subExprs[k](i, ie));
+            return sortKeys;
+        };
     });
 
     // updates the current search state from the search query input boxes
@@ -88,7 +98,10 @@ function init() {
         const searchResults = [];
         try {
             for (let i = 0; i < searchDb.length; i++) {
-                if (checkBool(searchFilterField.output(searchDb[i][0], searchDb[i][1]))) searchResults.push(searchDb[i]);
+                const item = searchDb[i][0], itemExp = searchDb[i][1];
+                if (checkBool(searchFilterField.output(item, itemExp))) {
+                    searchResults.push({ item, itemExp, sortKeys: searchSortField.output(item, itemExp) });
+                }
             }
         } catch (e) {
             searchFilterField.errorText.innerText = e.message;
@@ -99,7 +112,7 @@ function init() {
             return;
         }
         try {
-            searchResults.sort((a, b) => searchSortField.output(a[0], a[1], b[0], b[1]));
+            searchResults.sort((a, b) => compareLexico(a.item, a.sortKeys, b.item, b.sortKeys));
         } catch (e) {
             searchSortField.errorText.innerText = e.message;
             return;
@@ -108,8 +121,23 @@ function init() {
         // display search results
         const searchMax = Math.min(searchResults.length, ITEM_LIST_SIZE);
         for (let i = 0; i < searchMax; i++) {
+            const result = searchResults[i];
             itemEntries[i].style.display = 'inline-block';
-            displayExpandedItem(searchResults[i][1], `item-entry-${i}`);
+            displayExpandedItem(result.itemExp, `item-entry-${i}`);
+            if (result.sortKeys.length > 0) {
+                const sortKeyListContainer = document.createElement('div');
+                sortKeyListContainer.classList.add('itemleft');
+                const sortKeyList = document.createElement('ul');
+                sortKeyList.classList.add('itemp', 'T0');
+                sortKeyList.style.marginLeft = '1.75em';
+                sortKeyListContainer.append(sortKeyList);
+                for (let j = 0; j < result.sortKeys.length; j++) {
+                    const sortKeyElem = document.createElement('li');
+                    sortKeyElem.innerText = stringify(result.sortKeys[j]);
+                    sortKeyList.append(sortKeyElem);
+                }
+                itemEntries[i].append(sortKeyListContainer);
+            }
         }
         if (searchMax < searchResults.length) {
             itemListFooter.innerText = `${searchResults.length - searchMax} more...`;
