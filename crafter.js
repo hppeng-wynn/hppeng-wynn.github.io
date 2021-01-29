@@ -125,6 +125,7 @@ function init() {
 
     populateFields();
     decodeCraft(url_tag);
+    
 }
 function updateMaterials() {
     let recipeName = getValue("recipe-choice") ? getValue("recipe-choice") : "Potion";

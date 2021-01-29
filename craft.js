@@ -2,6 +2,33 @@ let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 let consumableTypes = [ "potion", "scroll", "food"]
+
+//constructs a craft from a hash 'CR-qwoefsabaoe' or 'qwoefsaboe'
+function createCraft(hash) {
+    let name = hash;
+    if (name.slice(0,3) === "CR-") {
+        name = name.substring(3);
+    }
+    this.hash = name;
+    ingreds = [];
+    /*for (let i = 0; i < 6; i ++ ) {
+        ingreds.push( ingIDMap.get(Base64.toInt(name.substring(2*i,2*i+2))) );
+    }
+    let recipe = recipeIDMap.get(Base64.toInt(tag.substring(12,14)));
+    recipesName = recipe.split("-");
+    setValue("recipe-choice",recipesName[0]);
+    setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
+    tierNum = Base64.toInt(tag.substring(14,15));
+    let mat_tiers = [];
+    mat_tiers.push(tierNum % 3 == 0 ? 3 : tierNum % 3);
+    mat_tiers.push(Math.floor((tierNum-0.5) / 3)+1); //Trying to prevent round-off error, don't yell at me
+    let atkSpd = Base64.toInt(tag.substring(15));
+    let atkSpds = ["SLOW,NORMAL,FAST"];
+    let attackSpeed atkSpds[atkSpd];
+    */
+}
+
+
 /* Creates a crafted item object.
 */
 class Craft{
@@ -19,6 +46,8 @@ class Craft{
         this.hash = hash;
         this.initCraftStats();
     }
+    
+
 
     setHash(hash) {
         this.hash = hash;
@@ -105,12 +134,12 @@ class Craft{
 
         */
         let matmult = 1;
-        let sorted = this.mat_tiers.slice().sort();
+        let sorted = this.mat_tiers.slice().sort(function(a, b){return a - b});
         //TODO - MAT MULTIPLIERS ARE SUS FOR NON-MIXING TIERS.
         if( sorted[0] == 1 && sorted[1] == 1) {
             matmult = 1; 
         } else if( sorted[0] == 1 && sorted[1] == 2) {
-            matmult = 1.10; 
+            matmult = 1.09; 
         }else if( sorted[0] == 1 && sorted[1] == 3) {
             matmult = 1.15; 
         }else if( sorted[0] == 2 && sorted[1] == 2) {
@@ -143,57 +172,51 @@ class Craft{
             } else if (this['atkSpd'] === "FAST") {
                 ratio /= 2.5;
             }
-            low = Math.floor(low * matmult);
-            high = Math.floor(high * matmult);
-            low = Math.floor(low * ratio);
-            high = Math.floor(high * ratio);
-            let low1 = Math.floor(low * 0.9);
-            let low2 = Math.floor(low * 1.1);
-            let high1 = Math.floor(high * 0.9);
-            let high2 = Math.floor(high * 1.1);
-
-            statMap.set("nDamLow", low1 + "-" + low2); //jank
-            statMap.set("nDam", high1 + "-" + high2);
-
+            let nDamBaseLow = Math.floor(low * matmult);
+            let nDamBaseHigh = Math.floor(high * matmult);
+            nDamBaseLow = Math.floor(nDamBaseLow * ratio);
+            nDamBaseHigh = Math.floor(nDamBaseHigh * ratio);
+            let elemDamBaseLow = [0,0,0,0,0];
+            let elemDamBaseHigh = [0,0,0,0,0];
             /*
              * APPLY POWDERS - MAY NOT BE CORRECT
             */
-            let mockItem = new Map();
-            mockItem.set("type",statMap.get("type"));
-            mockItem.set("atkSpd",statMap.get("atkSpd"));
-            mockItem.set("nDam", high1 + "-" + high2);
-            for (const e of skp_elements) {
-                mockItem.set(e+"Dam","0-0");
-            }
-            mockItem.set("powders",[]); 
+            let powders = []; 
             for (let n in this.ingreds) {
                 let ingred = this.ingreds[n];
                 if (ingred.get("isPowder")) {
-                    mockItem.get("powders").push(ingred.get("pid"));
+                    powders.push(ingred.get("pid"));
                 }
             }
-            let stats = new Map();
-            stats.set("atkSpd", mockItem.get("atkSpd"));
-            stats.set("damageBonus", [0, 0, 0, 0, 0]);
-            stats.set("damageRaw", [mockItem.get("nDam"), mockItem.get("eDam"), mockItem.get("tDam"), mockItem.get("wDam"), mockItem.get("fDam"), mockItem.get("aDam")]);
-            let damage_keys = [ "nDam", "eDam", "tDam", "wDam", "fDam", "aDam" ]; //affects base damage directly.
-            let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, mockItem, [0, 0, 0, 0, 0], 1, undefined);
-            let damages = results[2];
-            for (const i in damage_keys) {
-                statMap.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
-            }
-            //second go-through: for the low roll.
-            mockItem.set("nDam", low1 + "-" + low2);
-            for (const e of skp_elements) {
-                mockItem.set(e+"Dam","0-0");
-            }
-            stats.set("damageRaw", [mockItem.get("nDam"), mockItem.get("eDam"), mockItem.get("tDam"), mockItem.get("wDam"), mockItem.get("fDam"), mockItem.get("aDam")]);
-            results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, mockItem, [0, 0, 0, 0, 0], 1, undefined);
-            damages = results[2];
-            for (const i in damage_keys) {
-                statMap.set(damage_keys[i]+"Low", damages[i][0]+"-"+damages[i][1]);
+            for (const p of powders) {
+                /* Powders as ingredients in crafted weapons are different than powders applied to non-crafted weapons. Thanks to nbcss for showing me the math.
+                */
+                let powder = powderStats[p];  //use min, max, and convert
+                let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
+                let diffLow = Math.floor(nDamBaseLow * powder.convert/100);
+                nDamBaseLow -= diffLow;
+                elemDamBaseLow[element] += diffLow + Math.floor( (powder.min + powder.max) / 2 );
+                let diffHigh = Math.floor(nDamBaseHigh * powder.convert/100);
+                nDamBaseHigh -= diffHigh;
+                elemDamBaseHigh[element] += diffHigh + Math.floor( (powder.min + powder.max) / 2 );
             }
             
+            /* I create a separate variable for each low damage range because we need one damage range to calculate damage with, and it's custom to use the maximum range of the range range.
+            */
+            let low1 = Math.floor(nDamBaseLow * 0.9);
+            let low2 = Math.floor(nDamBaseLow * 1.1);
+            let high1 = Math.floor(nDamBaseHigh * 0.9);
+            let high2 = Math.floor(nDamBaseHigh * 1.1);
+            statMap.set("nDamLow", low1+"-"+low2); 
+            statMap.set("nDam", high1+"-"+high2);
+            for (const e in skp_elements) {
+                low1 = Math.floor(elemDamBaseLow[e] * 0.9);
+                low2 = Math.floor(elemDamBaseLow[e] * 1.1);
+                high1 = Math.floor(elemDamBaseHigh[e] * 0.9);
+                high2 = Math.floor(elemDamBaseHigh[e] * 1.1);
+                statMap.set(skp_elements[e]+"DamLow", low1+"-"+low2);
+                statMap.set(skp_elements[e]+"Dam",high1+"-"+high2);
+            }
         } else if (statMap.get("category") === "armor") {
             for (let n in this.ingreds) {
                 let ingred = this.ingreds[n];
@@ -291,7 +314,7 @@ class Craft{
             for (const [key,value] of ingred.get("ids").get("minRolls")) {
                 if (value && value != 0) {
                     let rolls = [value,ingred.get("ids").get("maxRolls").get(key)];
-                    rolls = rolls.map(x => Math.floor(x * eff_mult)).sort();
+                    rolls = rolls.map(x => Math.floor(x * eff_mult)).sort(function(a, b){return a - b});
                     statMap.get("minRolls").set(key, (statMap.get("minRolls").get(key)) ? statMap.get("minRolls").get(key) + rolls[0] : rolls[0]);
                     statMap.get("maxRolls").set(key, (statMap.get("maxRolls").get(key)) ? statMap.get("maxRolls").get(key) + rolls[1] : rolls[1]);
                 }
