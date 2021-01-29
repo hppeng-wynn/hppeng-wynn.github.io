@@ -7,10 +7,14 @@ class ExprField {
         this.output = null;
         this.text = null;
     }
+    
+    get value() {
+        return this.field.value;
+    }
 
     compile() {
-        if (this.field.value === this.text) return;
-        this.text = this.field.value;
+        if (this.value === this.text) return false;
+        this.text = this.value;
         this.errorText.innerText = '';
         try {
             this.output = this.compiler(this.text);
@@ -18,6 +22,7 @@ class ExprField {
             this.errorText.innerText = e.message;
             this.output = null;
         }
+        return true;
     }
 }
 
@@ -89,10 +94,14 @@ function init() {
         itemListFooter.innerText = '';
         for (const itemEntry of itemEntries) itemEntry.style.display = 'none';
 
-        // compile query expressions, aborting if either fails to compile
-        searchFilterField.compile();
-        searchSortField.compile();
-        if (searchFilterField.output === null || searchSortField.output === null) return;
+        // compile query expressions, aborting if nothing has changed or either fails to compile
+        const changed = searchFilterField.compile() | searchSortField.compile();
+        if (!changed || searchFilterField.output === null || searchSortField.output === null) return;
+
+        // update url query string
+        const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
+            + `?f=${encodeURIComponent(searchFilterField.value)}&s=${encodeURIComponent(searchSortField.value)}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
 
         // index and sort search results
         const searchResults = [];
@@ -158,8 +167,27 @@ function init() {
     searchFilterField.field.addEventListener('input', e => scheduleSearchUpdate());
     searchSortField.field.addEventListener('input', e => scheduleSearchUpdate());
 
-    // display initial items and focus the filter field
+    // parse query string, display initial search results
+    if (window.location.search.startsWith('?')) {
+        for (const entryStr of window.location.search.substring(1).split('&')) {
+            const ndx = entryStr.indexOf('=');
+            if (ndx !== -1) {
+                console.log(entryStr.substring(0, ndx));
+                console.log(entryStr.substring(ndx + 1));
+                switch (entryStr.substring(0, ndx)) {
+                    case 'f':
+                        searchFilterField.field.value = decodeURIComponent(entryStr.substring(ndx + 1));
+                        break;
+                    case 's':
+                        searchSortField.field.value = decodeURIComponent(entryStr.substring(ndx + 1));
+                        break;
+                }
+            }
+        }
+    }
     updateSearch();
+
+    // focus the query filter text box
     searchFilterField.field.focus();
     searchFilterField.field.select();
 }
