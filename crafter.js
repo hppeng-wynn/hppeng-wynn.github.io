@@ -9,7 +9,7 @@ console.log(url_tag);
 
 
 
-const BUILD_VERSION = "6.9.9";
+const BUILD_VERSION = "6.9.11";
 /*
  * END testing section
  */
@@ -29,7 +29,7 @@ function setTitle() {
     document.getElementById("header").textContent = "WynnCrafter version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
     let disclaimer = document.createElement("p");
-    disclaimer.textContent = "THIS CRAFTER IS INCOMPLETE. The effect of material tiers on crated items is not 100% tested and accurate. If you know how the math behind it works, please contact ferricles on forums, discord, or ingame.";
+    disclaimer.textContent = "THIS CRAFTER IS NEARLY COMPLETE. The effect of material tiers on crafted items is not 100% tested and accurate. If you know how the math behind it works OR if you have a crafted item whose stats contradict this crafter, please contact ferricles on forums, discord, or ingame.";
     document.getElementById("header").append(disclaimer);
 }
 setTitle();
@@ -42,6 +42,7 @@ let recipeList = [];
 
 let ingIDMap = new Map();
 let recipeIDMap = new Map();
+
 function init() {
     //no ing
     let ing = Object();
@@ -53,9 +54,10 @@ function init() {
     ing.itemIDs = {"dura": 0, "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
     ing.consumableIDs = {"dura": 0, "charges": 0};
     ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
+    ing.id = 4000;
     ingMap.set(ing["name"], ing);            
     ingList.push(ing["name"]);
-    ingIDMap.set(ingList.length-1, ing["name"]);
+    ingIDMap.set(ing["id"], ing["name"]);
     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
     for (let i = 0; i < 5; i ++) {
         for (const powderIng of powderIngreds) {
@@ -67,6 +69,7 @@ function init() {
             ing.ids = {};
             ing.isPowder = true;
             ing.pid = 6*i + powderIngreds.indexOf(powderIng);
+            ing.id = 4001 + ing.pid;
             ing.itemIDs = {"dura": powderIng["durability"], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
             switch(i) {
                 case 0:
@@ -89,6 +92,7 @@ function init() {
             ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
             ingMap.set(ing["name"],ing);
             ingList.push(ing["name"]);
+            ingIDMap.set(ing["id"], ing["name"]);
         }
     }
     
@@ -96,10 +100,12 @@ function init() {
     for (const ing of ings) {
         ingMap.set(ing["name"], ing);
         ingList.push(ing["name"]);
+        ingIDMap.set(ing["id"], ing["name"]);
     }
     for (const recipe of recipes) {
-        recipeMap.set(recipe["id"], recipe);
-        recipeList.push(recipe["id"]);
+        recipeMap.set(recipe["name"], recipe);
+        recipeList.push(recipe["name"]);
+        recipeIDMap.set(recipe["id"],recipe["name"]);
     }
     console.log("all ingredients");
     console.log(ings);
@@ -107,6 +113,8 @@ function init() {
     console.log(recipes);
     console.log(ingList);
     console.log(recipeList);   
+    console.log(ingIDMap);
+    console.log(recipeIDMap);
 
     document.getElementById("recipe-choice").addEventListener("change", (event) => {
         updateMaterials();
@@ -229,13 +237,13 @@ function encodeCraft() {
     if (player_craft) {
         let atkSpds = ["SLOW","NORMAL","FAST"];
         let craft_string =  "1_" + 
-                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[0].get("name")), 2) + 
-                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[1].get("name")), 2) +
-                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[2].get("name")), 2) +
-                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[3].get("name")), 2) +
-                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[4].get("name")), 2) +
-                            Base64.fromIntN(ingList.indexOf(player_craft.ingreds[5].get("name")), 2) + 
-                            Base64.fromIntN(recipeList.indexOf(player_craft.recipe.get("id")),2) + 
+                            Base64.fromIntN(player_craft.ingreds[0].get("id"), 2) + 
+                            Base64.fromIntN(player_craft.ingreds[1].get("id"), 2) +
+                            Base64.fromIntN(player_craft.ingreds[2].get("id"), 2) +
+                            Base64.fromIntN(player_craft.ingreds[3].get("id"), 2) +
+                            Base64.fromIntN(player_craft.ingreds[4].get("id"), 2) +
+                            Base64.fromIntN(player_craft.ingreds[5].get("id"), 2) + 
+                            Base64.fromIntN(player_craft.recipe.get("id"),2) + 
                             Base64.fromIntN(player_craft.mat_tiers[0] + (player_craft.mat_tiers[1]-1)*3, 1) +  //this maps tiers [a,b] to a+3b.
                             Base64.fromIntN(atkSpds.indexOf(player_craft["atkSpd"]),1);
         return craft_string;
@@ -250,9 +258,11 @@ function decodeCraft(url_tag) {
         if (version === "1") {
             ingreds = [];
             for (let i = 0; i < 6; i ++ ) {
-                setValue("ing-choice-"+(i+1), ingList[Base64.toInt(tag.substring(2*i,2*i+2))]);
+                setValue("ing-choice-"+(i+1), ingIDMap.get(Base64.toInt(tag.substring(2*i,2*i+2))));
+                console.log(Base64.toInt(tag.substring(2*i,2*i+2)));
             }
-            recipe = recipeList[Base64.toInt(tag.substring(12,14))];
+            recipe = recipeIDMap.get(Base64.toInt(tag.substring(12,14)));
+            console.log(Base64.toInt(tag.substring(12,14)));
             recipesName = recipe.split("-");
             setValue("recipe-choice",recipesName[0]);
             setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
@@ -321,11 +331,38 @@ function copyRecipe(){
 function shareRecipe(){
     if (player_craft) {
         let copyString = url_base+location.hash + "\n";
-        let name = player_craft.recipe.get("id").split("-");
+        let name = player_craft.recipe.get("name").split("-");
         copyString += " > " + name[0] + " " + "Lv. " + name[1] + "-" + name[2] + " (" + player_craft.mat_tiers[0] + "\u272B, " + player_craft.mat_tiers[1] + "\u272B)\n";
-        copyString += " > [" + player_craft.ingreds[0].get("name") + " | " + player_craft.ingreds[1].get("name") + "\n";
-        copyString += " > " + player_craft.ingreds[2].get("name") + " | " + player_craft.ingreds[3].get("name") + "\n";
-        copyString += " > " + player_craft.ingreds[4].get("name") + " | " + player_craft.ingreds[5].get("name") + "]";  
+        let names = [
+            player_craft.ingreds[0].get("name"),
+            player_craft.ingreds[1].get("name"),
+            player_craft.ingreds[2].get("name"),
+            player_craft.ingreds[3].get("name"),
+            player_craft.ingreds[4].get("name"),
+            player_craft.ingreds[5].get("name")
+        ];
+        //fancy justify code that doesn't work properly b/c most font isn't monospaced
+        let buffer1 = Math.max(names[0].length,names[2].length,names[4].length);
+        let buffer2 = Math.max(names[1].length,names[3].length,names[5].length);
+        for (let i in names) {
+            let name = names[i];
+            let spaces;
+            if (i % 2 == 0) { //buffer 1
+                spaces = buffer1 - name.length;
+            } else { //buffer 2
+                spaces = buffer2 - name.length;
+            }
+            for (let j = 0; j < spaces; j ++) {
+                if (j % 2 == 0) {
+                    names[i]+="  ";
+                } else {
+                    names[i] = "  "+names[i];
+                }
+            }
+        }
+        copyString += " > [" + names[0] + " | " + names[1] + "\n";
+        copyString += " >  " + names[2] + " | " + names[3] + "\n";
+        copyString += " >  " + names[4] + " | " + names[5] + "]";  
         copyTextToClipboard(copyString);
         document.getElementById("share-button").textContent = "Copied!";
     } 

@@ -21,11 +21,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Boots-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Boots-3-5",
+      "id": 0
     },
     {
       "type": "BOOTS",
@@ -48,11 +49,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Boots-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Boots-5-7",
+      "id": 1
     },
     {
       "type": "BOW",
@@ -75,11 +77,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Bow-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Bow-1-3",
+      "id": 2
     },
     {
       "type": "BOOTS",
@@ -102,11 +105,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Boots-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Boots-7-9",
+      "id": 3
     },
     {
       "type": "BOW",
@@ -129,11 +133,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Bow-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Bow-3-5",
+      "id": 4
     },
     {
       "type": "BOW",
@@ -156,11 +161,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Bow-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Bow-5-7",
+      "id": 5
     },
     {
       "type": "BOW",
@@ -183,11 +189,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Bow-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Bow-7-9",
+      "id": 6
     },
     {
       "type": "BRACELET",
@@ -210,11 +217,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Bracelet-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Bracelet-3-5",
+      "id": 7
     },
     {
       "type": "BRACELET",
@@ -237,11 +245,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Bracelet-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Bracelet-5-7",
+      "id": 8
     },
     {
       "type": "BRACELET",
@@ -264,11 +273,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Bracelet-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Bracelet-1-3",
+      "id": 9
     },
     {
       "type": "CHESTPLATE",
@@ -291,11 +301,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Chestplate-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Chestplate-1-3",
+      "id": 10
     },
     {
       "type": "CHESTPLATE",
@@ -318,11 +329,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Chestplate-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Chestplate-3-5",
+      "id": 11
     },
     {
       "type": "CHESTPLATE",
@@ -345,11 +357,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Chestplate-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Chestplate-7-9",
+      "id": 12
     },
     {
       "type": "CHESTPLATE",
@@ -372,11 +385,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Chestplate-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Chestplate-5-7",
+      "id": 13
     },
     {
       "type": "DAGGER",
@@ -399,11 +413,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Dagger-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Dagger-1-3",
+      "id": 14
     },
     {
       "type": "DAGGER",
@@ -426,11 +441,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Dagger-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Dagger-3-5",
+      "id": 15
     },
     {
       "type": "DAGGER",
@@ -453,11 +469,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Dagger-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Dagger-5-7",
+      "id": 16
     },
     {
       "type": "BRACELET",
@@ -480,11 +497,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Bracelet-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Bracelet-7-9",
+      "id": 17
     },
     {
       "type": "DAGGER",
@@ -507,11 +525,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Dagger-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Dagger-7-9",
+      "id": 18
     },
     {
       "type": "FOOD",
@@ -538,11 +557,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Food-3-5",
+      "id": 19
     },
     {
       "type": "FOOD",
@@ -569,11 +589,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Food-1-3",
+      "id": 20
     },
     {
       "type": "FOOD",
@@ -600,11 +621,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Food-5-7",
+      "id": 21
     },
     {
       "type": "FOOD",
@@ -631,11 +653,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Food-7-9",
+      "id": 22
     },
     {
       "type": "HELMET",
@@ -658,11 +681,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Helmet-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Helmet-1-3",
+      "id": 23
     },
     {
       "type": "HELMET",
@@ -685,11 +709,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Helmet-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Helmet-3-5",
+      "id": 24
     },
     {
       "type": "HELMET",
@@ -712,11 +737,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Helmet-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Helmet-7-9",
+      "id": 25
     },
     {
       "type": "HELMET",
@@ -739,11 +765,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Helmet-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Helmet-5-7",
+      "id": 26
     },
     {
       "type": "NECKLACE",
@@ -766,11 +793,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Necklace-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Necklace-3-5",
+      "id": 27
     },
     {
       "type": "NECKLACE",
@@ -793,11 +821,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Necklace-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Necklace-1-3",
+      "id": 28
     },
     {
       "type": "NECKLACE",
@@ -820,11 +849,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Necklace-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Necklace-7-9",
+      "id": 29
     },
     {
       "type": "NECKLACE",
@@ -847,11 +877,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Necklace-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Necklace-5-7",
+      "id": 30
     },
     {
       "type": "LEGGINGS",
@@ -874,11 +905,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Leggings-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Leggings-1-3",
+      "id": 31
     },
     {
       "type": "LEGGINGS",
@@ -901,11 +933,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Leggings-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Leggings-3-5",
+      "id": 32
     },
     {
       "type": "LEGGINGS",
@@ -928,11 +961,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Leggings-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Leggings-5-7",
+      "id": 33
     },
     {
       "type": "LEGGINGS",
@@ -955,11 +989,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Leggings-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Leggings-7-9",
+      "id": 34
     },
     {
       "type": "POTION",
@@ -986,11 +1021,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Potion-1-3",
+      "id": 35
     },
     {
       "type": "POTION",
@@ -1017,11 +1053,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Potion-3-5",
+      "id": 36
     },
     {
       "type": "POTION",
@@ -1048,11 +1085,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Potion-5-7",
+      "id": 37
     },
     {
       "type": "RELIK",
@@ -1075,11 +1113,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Relik-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Relik-1-3",
+      "id": 38
     },
     {
       "type": "POTION",
@@ -1106,11 +1145,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Potion-7-9",
+      "id": 39
     },
     {
       "type": "RELIK",
@@ -1133,11 +1173,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Relik-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Relik-5-7",
+      "id": 40
     },
     {
       "type": "RELIK",
@@ -1160,11 +1201,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Relik-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Relik-3-5",
+      "id": 41
     },
     {
       "type": "RELIK",
@@ -1187,11 +1229,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Relik-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Relik-7-9",
+      "id": 42
     },
     {
       "type": "BOOTS",
@@ -1214,11 +1257,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Boots-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Boots-1-3",
+      "id": 43
     },
     {
       "type": "RING",
@@ -1241,11 +1285,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Ring-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Ring-3-5",
+      "id": 44
     },
     {
       "type": "RING",
@@ -1268,11 +1313,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Ring-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Ring-5-7",
+      "id": 45
     },
     {
       "type": "RING",
@@ -1295,11 +1341,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Ring-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Ring-7-9",
+      "id": 46
     },
     {
       "type": "SCROLL",
@@ -1326,11 +1373,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Scroll-1-3",
+      "id": 47
     },
     {
       "type": "SCROLL",
@@ -1357,11 +1405,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Scroll-3-5",
+      "id": 48
     },
     {
       "type": "SCROLL",
@@ -1388,11 +1437,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Scroll-5-7",
+      "id": 49
     },
     {
       "type": "SCROLL",
@@ -1419,11 +1469,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Scroll-7-9",
+      "id": 50
     },
     {
       "type": "SPEAR",
@@ -1446,11 +1497,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Spear-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Spear-1-3",
+      "id": 51
     },
     {
       "type": "SPEAR",
@@ -1473,11 +1525,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Spear-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Spear-3-5",
+      "id": 52
     },
     {
       "type": "SPEAR",
@@ -1500,11 +1553,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Spear-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Spear-5-7",
+      "id": 53
     },
     {
       "type": "SPEAR",
@@ -1527,11 +1581,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Spear-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Spear-7-9",
+      "id": 54
     },
     {
       "type": "WAND",
@@ -1554,11 +1609,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Wand-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Wand-1-3",
+      "id": 55
     },
     {
       "type": "WAND",
@@ -1581,11 +1637,12 @@
         "minimum": 182,
         "maximum": 189
       },
-      "id": "Wand-3-5",
       "lvl": {
         "minimum": 3,
         "maximum": 5
-      }
+      },
+      "name": "Wand-3-5",
+      "id": 56
     },
     {
       "type": "WAND",
@@ -1608,11 +1665,12 @@
         "minimum": 189,
         "maximum": 196
       },
-      "id": "Wand-5-7",
       "lvl": {
         "minimum": 5,
         "maximum": 7
-      }
+      },
+      "name": "Wand-5-7",
+      "id": 57
     },
     {
       "type": "WAND",
@@ -1635,11 +1693,12 @@
         "minimum": 196,
         "maximum": 203
       },
-      "id": "Wand-7-9",
       "lvl": {
         "minimum": 7,
         "maximum": 9
-      }
+      },
+      "name": "Wand-7-9",
+      "id": 58
     },
     {
       "type": "BOOTS",
@@ -1662,11 +1721,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Boots-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Boots-10-13",
+      "id": 59
     },
     {
       "type": "BOOTS",
@@ -1689,11 +1749,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Boots-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Boots-13-15",
+      "id": 60
     },
     {
       "type": "BOOTS",
@@ -1716,11 +1777,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Boots-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Boots-15-17",
+      "id": 61
     },
     {
       "type": "BOOTS",
@@ -1743,11 +1805,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Boots-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Boots-17-19",
+      "id": 62
     },
     {
       "type": "BOW",
@@ -1770,11 +1833,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Bow-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Bow-10-13",
+      "id": 63
     },
     {
       "type": "BOW",
@@ -1797,11 +1861,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Bow-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Bow-13-15",
+      "id": 64
     },
     {
       "type": "BRACELET",
@@ -1824,11 +1889,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Bracelet-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Bracelet-10-13",
+      "id": 65
     },
     {
       "type": "BRACELET",
@@ -1851,11 +1917,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Bracelet-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Bracelet-13-15",
+      "id": 66
     },
     {
       "type": "BRACELET",
@@ -1878,11 +1945,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Bracelet-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Bracelet-15-17",
+      "id": 67
     },
     {
       "type": "BOW",
@@ -1905,11 +1973,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Bow-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Bow-17-19",
+      "id": 68
     },
     {
       "type": "BRACELET",
@@ -1932,11 +2001,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Bracelet-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Bracelet-17-19",
+      "id": 69
     },
     {
       "type": "CHESTPLATE",
@@ -1959,11 +2029,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Chestplate-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Chestplate-10-13",
+      "id": 70
     },
     {
       "type": "CHESTPLATE",
@@ -1986,11 +2057,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Chestplate-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Chestplate-13-15",
+      "id": 71
     },
     {
       "type": "CHESTPLATE",
@@ -2013,11 +2085,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Chestplate-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Chestplate-15-17",
+      "id": 72
     },
     {
       "type": "BOW",
@@ -2040,11 +2113,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Bow-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Bow-15-17",
+      "id": 73
     },
     {
       "type": "DAGGER",
@@ -2067,11 +2141,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Dagger-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Dagger-10-13",
+      "id": 74
     },
     {
       "type": "DAGGER",
@@ -2094,11 +2169,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Dagger-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Dagger-13-15",
+      "id": 75
     },
     {
       "type": "CHESTPLATE",
@@ -2121,11 +2197,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Chestplate-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Chestplate-17-19",
+      "id": 76
     },
     {
       "type": "DAGGER",
@@ -2148,11 +2225,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Dagger-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Dagger-17-19",
+      "id": 77
     },
     {
       "type": "FOOD",
@@ -2179,11 +2257,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Food-13-15",
+      "id": 78
     },
     {
       "type": "FOOD",
@@ -2210,11 +2289,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Food-15-17",
+      "id": 79
     },
     {
       "type": "FOOD",
@@ -2241,11 +2321,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Food-10-13",
+      "id": 80
     },
     {
       "type": "FOOD",
@@ -2272,11 +2353,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Food-17-19",
+      "id": 81
     },
     {
       "type": "HELMET",
@@ -2299,11 +2381,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Helmet-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Helmet-10-13",
+      "id": 82
     },
     {
       "type": "HELMET",
@@ -2326,11 +2409,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Helmet-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Helmet-13-15",
+      "id": 83
     },
     {
       "type": "HELMET",
@@ -2353,11 +2437,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Helmet-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Helmet-15-17",
+      "id": 84
     },
     {
       "type": "HELMET",
@@ -2380,11 +2465,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Helmet-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Helmet-17-19",
+      "id": 85
     },
     {
       "type": "NECKLACE",
@@ -2407,11 +2493,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Necklace-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Necklace-10-13",
+      "id": 86
     },
     {
       "type": "DAGGER",
@@ -2434,11 +2521,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Dagger-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Dagger-15-17",
+      "id": 87
     },
     {
       "type": "NECKLACE",
@@ -2461,11 +2549,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Necklace-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Necklace-15-17",
+      "id": 88
     },
     {
       "type": "NECKLACE",
@@ -2488,11 +2577,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Necklace-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Necklace-17-19",
+      "id": 89
     },
     {
       "type": "LEGGINGS",
@@ -2515,11 +2605,12 @@
         "minimum": 207,
         "maximum": 200
       },
-      "id": "Leggings-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Leggings-10-13",
+      "id": 90
     },
     {
       "type": "LEGGINGS",
@@ -2542,11 +2633,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Leggings-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Leggings-13-15",
+      "id": 91
     },
     {
       "type": "LEGGINGS",
@@ -2569,11 +2661,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Leggings-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Leggings-15-17",
+      "id": 92
     },
     {
       "type": "LEGGINGS",
@@ -2596,11 +2689,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Leggings-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Leggings-17-19",
+      "id": 93
     },
     {
       "type": "POTION",
@@ -2627,11 +2721,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Potion-10-13",
+      "id": 94
     },
     {
       "type": "POTION",
@@ -2658,11 +2753,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Potion-13-15",
+      "id": 95
     },
     {
       "type": "POTION",
@@ -2689,11 +2785,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Potion-15-17",
+      "id": 96
     },
     {
       "type": "RELIK",
@@ -2716,11 +2813,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Relik-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Relik-10-13",
+      "id": 97
     },
     {
       "type": "RELIK",
@@ -2743,11 +2841,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Relik-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Relik-13-15",
+      "id": 98
     },
     {
       "type": "RELIK",
@@ -2770,11 +2869,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Relik-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Relik-15-17",
+      "id": 99
     },
     {
       "type": "RELIK",
@@ -2797,11 +2897,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Relik-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Relik-17-19",
+      "id": 100
     },
     {
       "type": "RING",
@@ -2824,11 +2925,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Ring-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Ring-10-13",
+      "id": 101
     },
     {
       "type": "RING",
@@ -2851,11 +2953,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Ring-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Ring-13-15",
+      "id": 102
     },
     {
       "type": "RING",
@@ -2878,11 +2981,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Ring-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Ring-15-17",
+      "id": 103
     },
     {
       "type": "RING",
@@ -2905,11 +3009,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Ring-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Ring-17-19",
+      "id": 104
     },
     {
       "type": "SCROLL",
@@ -2936,11 +3041,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Scroll-10-13",
+      "id": 105
     },
     {
       "type": "POTION",
@@ -2967,11 +3073,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Potion-17-19",
+      "id": 106
     },
     {
       "type": "SCROLL",
@@ -2998,11 +3105,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Scroll-13-15",
+      "id": 107
     },
     {
       "type": "SCROLL",
@@ -3029,11 +3137,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Scroll-15-17",
+      "id": 108
     },
     {
       "type": "SPEAR",
@@ -3056,11 +3165,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Spear-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Spear-10-13",
+      "id": 109
     },
     {
       "type": "SCROLL",
@@ -3087,11 +3197,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Scroll-17-19",
+      "id": 110
     },
     {
       "type": "SPEAR",
@@ -3114,11 +3225,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Spear-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Spear-13-15",
+      "id": 111
     },
     {
       "type": "SPEAR",
@@ -3141,11 +3253,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Spear-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Spear-15-17",
+      "id": 112
     },
     {
       "type": "SPEAR",
@@ -3168,11 +3281,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Spear-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Spear-17-19",
+      "id": 113
     },
     {
       "type": "WAND",
@@ -3195,11 +3309,12 @@
         "minimum": 207,
         "maximum": 217
       },
-      "id": "Wand-10-13",
       "lvl": {
         "minimum": 10,
         "maximum": 13
-      }
+      },
+      "name": "Wand-10-13",
+      "id": 114
     },
     {
       "type": "WAND",
@@ -3222,11 +3337,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Wand-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Wand-13-15",
+      "id": 115
     },
     {
       "type": "WAND",
@@ -3249,11 +3365,12 @@
         "minimum": 224,
         "maximum": 231
       },
-      "id": "Wand-15-17",
       "lvl": {
         "minimum": 15,
         "maximum": 17
-      }
+      },
+      "name": "Wand-15-17",
+      "id": 116
     },
     {
       "type": "WAND",
@@ -3276,11 +3393,12 @@
         "minimum": 231,
         "maximum": 238
       },
-      "id": "Wand-17-19",
       "lvl": {
         "minimum": 17,
         "maximum": 19
-      }
+      },
+      "name": "Wand-17-19",
+      "id": 117
     },
     {
       "type": "BOOTS",
@@ -3303,11 +3421,12 @@
         "minimum": 238,
         "maximum": 252
       },
-      "id": "Boots-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Boots-20-23",
+      "id": 118
     },
     {
       "type": "BOOTS",
@@ -3330,11 +3449,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Boots-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Boots-23-25",
+      "id": 119
     },
     {
       "type": "BOOTS",
@@ -3357,11 +3477,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Boots-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Boots-25-27",
+      "id": 120
     },
     {
       "type": "BOW",
@@ -3384,11 +3505,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Bow-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Bow-23-25",
+      "id": 121
     },
     {
       "type": "BOW",
@@ -3411,11 +3533,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Bow-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Bow-20-23",
+      "id": 122
     },
     {
       "type": "BOOTS",
@@ -3438,11 +3561,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Boots-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Boots-27-29",
+      "id": 123
     },
     {
       "type": "BOW",
@@ -3465,11 +3589,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Bow-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Bow-25-27",
+      "id": 124
     },
     {
       "type": "BOW",
@@ -3492,11 +3617,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Bow-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Bow-27-29",
+      "id": 125
     },
     {
       "type": "BRACELET",
@@ -3519,11 +3645,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Bracelet-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Bracelet-20-23",
+      "id": 126
     },
     {
       "type": "BRACELET",
@@ -3546,11 +3673,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Bracelet-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Bracelet-23-25",
+      "id": 127
     },
     {
       "type": "BRACELET",
@@ -3573,11 +3701,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Bracelet-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Bracelet-25-27",
+      "id": 128
     },
     {
       "type": "BRACELET",
@@ -3600,11 +3729,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Bracelet-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Bracelet-27-29",
+      "id": 129
     },
     {
       "type": "CHESTPLATE",
@@ -3627,11 +3757,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Chestplate-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Chestplate-23-25",
+      "id": 130
     },
     {
       "type": "CHESTPLATE",
@@ -3654,11 +3785,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Chestplate-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Chestplate-25-27",
+      "id": 131
     },
     {
       "type": "CHESTPLATE",
@@ -3681,11 +3813,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Chestplate-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Chestplate-20-23",
+      "id": 132
     },
     {
       "type": "CHESTPLATE",
@@ -3708,11 +3841,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Chestplate-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Chestplate-27-29",
+      "id": 133
     },
     {
       "type": "DAGGER",
@@ -3735,11 +3869,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Dagger-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Dagger-20-23",
+      "id": 134
     },
     {
       "type": "DAGGER",
@@ -3762,11 +3897,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Dagger-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Dagger-23-25",
+      "id": 135
     },
     {
       "type": "DAGGER",
@@ -3789,11 +3925,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Dagger-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Dagger-25-27",
+      "id": 136
     },
     {
       "type": "DAGGER",
@@ -3816,11 +3953,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Dagger-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Dagger-27-29",
+      "id": 137
     },
     {
       "type": "FOOD",
@@ -3847,11 +3985,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Food-20-23",
+      "id": 138
     },
     {
       "type": "FOOD",
@@ -3878,11 +4017,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Food-25-27",
+      "id": 139
     },
     {
       "type": "FOOD",
@@ -3909,11 +4049,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Food-27-29",
+      "id": 140
     },
     {
       "type": "HELMET",
@@ -3936,11 +4077,12 @@
         "minimum": 238,
         "maximum": 252
       },
-      "id": "Helmet-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Helmet-20-23",
+      "id": 141
     },
     {
       "type": "FOOD",
@@ -3967,11 +4109,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Food-23-25",
+      "id": 142
     },
     {
       "type": "HELMET",
@@ -3994,11 +4137,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Helmet-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Helmet-23-25",
+      "id": 143
     },
     {
       "type": "HELMET",
@@ -4021,11 +4165,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Helmet-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Helmet-27-29",
+      "id": 144
     },
     {
       "type": "HELMET",
@@ -4048,11 +4193,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Helmet-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Helmet-25-27",
+      "id": 145
     },
     {
       "type": "NECKLACE",
@@ -4075,11 +4221,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Necklace-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Necklace-20-23",
+      "id": 146
     },
     {
       "type": "NECKLACE",
@@ -4102,11 +4249,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Necklace-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Necklace-23-25",
+      "id": 147
     },
     {
       "type": "NECKLACE",
@@ -4129,11 +4277,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Necklace-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Necklace-27-29",
+      "id": 148
     },
     {
       "type": "LEGGINGS",
@@ -4156,11 +4305,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Leggings-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Leggings-20-23",
+      "id": 149
     },
     {
       "type": "NECKLACE",
@@ -4183,11 +4333,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Necklace-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Necklace-25-27",
+      "id": 150
     },
     {
       "type": "LEGGINGS",
@@ -4210,11 +4361,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Leggings-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Leggings-23-25",
+      "id": 151
     },
     {
       "type": "LEGGINGS",
@@ -4237,11 +4389,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Leggings-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Leggings-25-27",
+      "id": 152
     },
     {
       "type": "LEGGINGS",
@@ -4264,11 +4417,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Leggings-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Leggings-27-29",
+      "id": 153
     },
     {
       "type": "POTION",
@@ -4295,11 +4449,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Potion-20-23",
+      "id": 154
     },
     {
       "type": "POTION",
@@ -4326,11 +4481,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Potion-23-25",
+      "id": 155
     },
     {
       "type": "POTION",
@@ -4357,11 +4513,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Potion-27-29",
+      "id": 156
     },
     {
       "type": "POTION",
@@ -4388,11 +4545,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Potion-25-27",
+      "id": 157
     },
     {
       "type": "RELIK",
@@ -4415,11 +4573,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Relik-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Relik-20-23",
+      "id": 158
     },
     {
       "type": "RELIK",
@@ -4442,11 +4601,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Relik-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Relik-23-25",
+      "id": 159
     },
     {
       "type": "RELIK",
@@ -4469,11 +4629,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Relik-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Relik-25-27",
+      "id": 160
     },
     {
       "type": "RELIK",
@@ -4496,11 +4657,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Relik-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Relik-27-29",
+      "id": 161
     },
     {
       "type": "RING",
@@ -4523,11 +4685,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Ring-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Ring-20-23",
+      "id": 162
     },
     {
       "type": "RING",
@@ -4550,11 +4713,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Ring-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Ring-23-25",
+      "id": 163
     },
     {
       "type": "RING",
@@ -4577,11 +4741,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Ring-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Ring-25-27",
+      "id": 164
     },
     {
       "type": "RING",
@@ -4604,11 +4769,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Ring-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Ring-27-29",
+      "id": 165
     },
     {
       "type": "SCROLL",
@@ -4635,11 +4801,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Scroll-20-23",
+      "id": 166
     },
     {
       "type": "SCROLL",
@@ -4666,11 +4833,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Scroll-23-25",
+      "id": 167
     },
     {
       "type": "SCROLL",
@@ -4697,11 +4865,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Scroll-25-27",
+      "id": 168
     },
     {
       "type": "SCROLL",
@@ -4728,11 +4897,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Scroll-27-29",
+      "id": 169
     },
     {
       "type": "SPEAR",
@@ -4755,11 +4925,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Spear-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Spear-20-23",
+      "id": 170
     },
     {
       "type": "SPEAR",
@@ -4782,11 +4953,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Spear-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Spear-23-25",
+      "id": 171
     },
     {
       "type": "SPEAR",
@@ -4809,11 +4981,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Spear-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Spear-25-27",
+      "id": 172
     },
     {
       "type": "SPEAR",
@@ -4836,11 +5009,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Spear-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Spear-27-29",
+      "id": 173
     },
     {
       "type": "WAND",
@@ -4863,11 +5037,12 @@
         "minimum": 242,
         "maximum": 252
       },
-      "id": "Wand-20-23",
       "lvl": {
         "minimum": 20,
         "maximum": 23
-      }
+      },
+      "name": "Wand-20-23",
+      "id": 174
     },
     {
       "type": "WAND",
@@ -4890,11 +5065,12 @@
         "minimum": 252,
         "maximum": 259
       },
-      "id": "Wand-23-25",
       "lvl": {
         "minimum": 23,
         "maximum": 25
-      }
+      },
+      "name": "Wand-23-25",
+      "id": 175
     },
     {
       "type": "WAND",
@@ -4917,11 +5093,12 @@
         "minimum": 259,
         "maximum": 266
       },
-      "id": "Wand-25-27",
       "lvl": {
         "minimum": 25,
         "maximum": 27
-      }
+      },
+      "name": "Wand-25-27",
+      "id": 176
     },
     {
       "type": "WAND",
@@ -4944,11 +5121,12 @@
         "minimum": 266,
         "maximum": 273
       },
-      "id": "Wand-27-29",
       "lvl": {
         "minimum": 27,
         "maximum": 29
-      }
+      },
+      "name": "Wand-27-29",
+      "id": 177
     },
     {
       "type": "BOOTS",
@@ -4971,11 +5149,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Boots-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Boots-30-33",
+      "id": 178
     },
     {
       "type": "BOOTS",
@@ -4998,11 +5177,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Boots-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Boots-33-35",
+      "id": 179
     },
     {
       "type": "BOOTS",
@@ -5025,11 +5205,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Boots-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Boots-35-37",
+      "id": 180
     },
     {
       "type": "BOOTS",
@@ -5052,11 +5233,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Boots-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Boots-37-39",
+      "id": 181
     },
     {
       "type": "BOW",
@@ -5079,11 +5261,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Bow-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Bow-30-33",
+      "id": 182
     },
     {
       "type": "BOW",
@@ -5106,11 +5289,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Bow-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Bow-33-35",
+      "id": 183
     },
     {
       "type": "BOW",
@@ -5133,11 +5317,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Bow-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Bow-35-37",
+      "id": 184
     },
     {
       "type": "NECKLACE",
@@ -5160,11 +5345,12 @@
         "minimum": 217,
         "maximum": 224
       },
-      "id": "Necklace-13-15",
       "lvl": {
         "minimum": 13,
         "maximum": 15
-      }
+      },
+      "name": "Necklace-13-15",
+      "id": 185
     },
     {
       "type": "BOW",
@@ -5187,11 +5373,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Bow-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Bow-37-39",
+      "id": 186
     },
     {
       "type": "BRACELET",
@@ -5214,11 +5401,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Bracelet-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Bracelet-30-33",
+      "id": 187
     },
     {
       "type": "BRACELET",
@@ -5241,11 +5429,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Bracelet-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Bracelet-33-35",
+      "id": 188
     },
     {
       "type": "BRACELET",
@@ -5268,11 +5457,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Bracelet-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Bracelet-35-37",
+      "id": 189
     },
     {
       "type": "BRACELET",
@@ -5295,11 +5485,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Bracelet-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Bracelet-37-39",
+      "id": 190
     },
     {
       "type": "CHESTPLATE",
@@ -5322,11 +5513,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Chestplate-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Chestplate-30-33",
+      "id": 191
     },
     {
       "type": "CHESTPLATE",
@@ -5349,11 +5541,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Chestplate-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Chestplate-35-37",
+      "id": 192
     },
     {
       "type": "CHESTPLATE",
@@ -5376,11 +5569,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Chestplate-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Chestplate-33-35",
+      "id": 193
     },
     {
       "type": "DAGGER",
@@ -5403,11 +5597,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Dagger-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Dagger-30-33",
+      "id": 194
     },
     {
       "type": "CHESTPLATE",
@@ -5430,11 +5625,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Chestplate-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Chestplate-37-39",
+      "id": 195
     },
     {
       "type": "DAGGER",
@@ -5457,11 +5653,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Dagger-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Dagger-35-37",
+      "id": 196
     },
     {
       "type": "DAGGER",
@@ -5484,11 +5681,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Dagger-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Dagger-37-39",
+      "id": 197
     },
     {
       "type": "FOOD",
@@ -5515,11 +5713,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Food-30-33",
+      "id": 198
     },
     {
       "type": "DAGGER",
@@ -5542,11 +5741,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Dagger-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Dagger-33-35",
+      "id": 199
     },
     {
       "type": "FOOD",
@@ -5573,11 +5773,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Food-33-35",
+      "id": 200
     },
     {
       "type": "FOOD",
@@ -5604,11 +5805,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Food-35-37",
+      "id": 201
     },
     {
       "type": "FOOD",
@@ -5635,11 +5837,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Food-37-39",
+      "id": 202
     },
     {
       "type": "HELMET",
@@ -5662,11 +5865,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Helmet-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Helmet-30-33",
+      "id": 203
     },
     {
       "type": "HELMET",
@@ -5689,11 +5893,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Helmet-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Helmet-33-35",
+      "id": 204
     },
     {
       "type": "HELMET",
@@ -5716,11 +5921,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Helmet-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Helmet-35-37",
+      "id": 205
     },
     {
       "type": "HELMET",
@@ -5743,11 +5949,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Helmet-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Helmet-37-39",
+      "id": 206
     },
     {
       "type": "NECKLACE",
@@ -5770,11 +5977,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Necklace-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Necklace-30-33",
+      "id": 207
     },
     {
       "type": "NECKLACE",
@@ -5797,11 +6005,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Necklace-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Necklace-33-35",
+      "id": 208
     },
     {
       "type": "NECKLACE",
@@ -5824,11 +6033,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Necklace-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Necklace-35-37",
+      "id": 209
     },
     {
       "type": "NECKLACE",
@@ -5851,11 +6061,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Necklace-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Necklace-37-39",
+      "id": 210
     },
     {
       "type": "LEGGINGS",
@@ -5878,11 +6089,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Leggings-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Leggings-33-35",
+      "id": 211
     },
     {
       "type": "LEGGINGS",
@@ -5905,11 +6117,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Leggings-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Leggings-30-33",
+      "id": 212
     },
     {
       "type": "LEGGINGS",
@@ -5932,11 +6145,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Leggings-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Leggings-35-37",
+      "id": 213
     },
     {
       "type": "LEGGINGS",
@@ -5959,11 +6173,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Leggings-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Leggings-37-39",
+      "id": 214
     },
     {
       "type": "POTION",
@@ -5990,11 +6205,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Potion-30-33",
+      "id": 215
     },
     {
       "type": "POTION",
@@ -6021,11 +6237,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Potion-33-35",
+      "id": 216
     },
     {
       "type": "POTION",
@@ -6052,11 +6269,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Potion-35-37",
+      "id": 217
     },
     {
       "type": "POTION",
@@ -6083,11 +6301,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Potion-37-39",
+      "id": 218
     },
     {
       "type": "RELIK",
@@ -6110,11 +6329,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Relik-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Relik-30-33",
+      "id": 219
     },
     {
       "type": "RELIK",
@@ -6137,11 +6357,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Relik-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Relik-33-35",
+      "id": 220
     },
     {
       "type": "RELIK",
@@ -6164,11 +6385,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Relik-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Relik-35-37",
+      "id": 221
     },
     {
       "type": "RING",
@@ -6191,11 +6413,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Ring-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Ring-30-33",
+      "id": 222
     },
     {
       "type": "RELIK",
@@ -6218,11 +6441,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Relik-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Relik-37-39",
+      "id": 223
     },
     {
       "type": "RING",
@@ -6245,11 +6469,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Ring-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Ring-33-35",
+      "id": 224
     },
     {
       "type": "RING",
@@ -6272,11 +6497,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Ring-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Ring-35-37",
+      "id": 225
     },
     {
       "type": "RING",
@@ -6299,11 +6525,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Ring-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Ring-37-39",
+      "id": 226
     },
     {
       "type": "SCROLL",
@@ -6330,11 +6557,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Scroll-30-33",
+      "id": 227
     },
     {
       "type": "SCROLL",
@@ -6361,11 +6589,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Scroll-33-35",
+      "id": 228
     },
     {
       "type": "SCROLL",
@@ -6392,11 +6621,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Scroll-35-37",
+      "id": 229
     },
     {
       "type": "SCROLL",
@@ -6423,11 +6653,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Scroll-37-39",
+      "id": 230
     },
     {
       "type": "SPEAR",
@@ -6450,11 +6681,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Spear-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Spear-30-33",
+      "id": 231
     },
     {
       "type": "SPEAR",
@@ -6477,11 +6709,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Spear-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Spear-33-35",
+      "id": 232
     },
     {
       "type": "SPEAR",
@@ -6504,11 +6737,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Spear-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Spear-35-37",
+      "id": 233
     },
     {
       "type": "SPEAR",
@@ -6531,11 +6765,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Spear-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Spear-37-39",
+      "id": 234
     },
     {
       "type": "WAND",
@@ -6558,11 +6793,12 @@
         "minimum": 277,
         "maximum": 287
       },
-      "id": "Wand-30-33",
       "lvl": {
         "minimum": 30,
         "maximum": 33
-      }
+      },
+      "name": "Wand-30-33",
+      "id": 235
     },
     {
       "type": "WAND",
@@ -6585,11 +6821,12 @@
         "minimum": 287,
         "maximum": 294
       },
-      "id": "Wand-33-35",
       "lvl": {
         "minimum": 33,
         "maximum": 35
-      }
+      },
+      "name": "Wand-33-35",
+      "id": 236
     },
     {
       "type": "WAND",
@@ -6612,11 +6849,12 @@
         "minimum": 294,
         "maximum": 301
       },
-      "id": "Wand-35-37",
       "lvl": {
         "minimum": 35,
         "maximum": 37
-      }
+      },
+      "name": "Wand-35-37",
+      "id": 237
     },
     {
       "type": "BOOTS",
@@ -6639,11 +6877,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Boots-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Boots-40-43",
+      "id": 238
     },
     {
       "type": "WAND",
@@ -6666,11 +6905,12 @@
         "minimum": 301,
         "maximum": 308
       },
-      "id": "Wand-37-39",
       "lvl": {
         "minimum": 37,
         "maximum": 39
-      }
+      },
+      "name": "Wand-37-39",
+      "id": 239
     },
     {
       "type": "BOOTS",
@@ -6693,11 +6933,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Boots-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Boots-45-47",
+      "id": 240
     },
     {
       "type": "BOOTS",
@@ -6720,11 +6961,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Boots-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Boots-47-49",
+      "id": 241
     },
     {
       "type": "BOOTS",
@@ -6747,11 +6989,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Boots-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Boots-43-45",
+      "id": 242
     },
     {
       "type": "BOW",
@@ -6774,11 +7017,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Bow-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Bow-40-43",
+      "id": 243
     },
     {
       "type": "BOW",
@@ -6801,11 +7045,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Bow-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Bow-47-49",
+      "id": 244
     },
     {
       "type": "BOW",
@@ -6828,11 +7073,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Bow-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Bow-43-45",
+      "id": 245
     },
     {
       "type": "BRACELET",
@@ -6855,11 +7101,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Bracelet-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Bracelet-40-43",
+      "id": 246
     },
     {
       "type": "BOW",
@@ -6882,11 +7129,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Bow-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Bow-45-47",
+      "id": 247
     },
     {
       "type": "BRACELET",
@@ -6909,11 +7157,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Bracelet-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Bracelet-45-47",
+      "id": 248
     },
     {
       "type": "BRACELET",
@@ -6936,11 +7185,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Bracelet-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Bracelet-47-49",
+      "id": 249
     },
     {
       "type": "CHESTPLATE",
@@ -6963,11 +7213,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Chestplate-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Chestplate-43-45",
+      "id": 250
     },
     {
       "type": "BRACELET",
@@ -6990,11 +7241,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Bracelet-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Bracelet-43-45",
+      "id": 251
     },
     {
       "type": "CHESTPLATE",
@@ -7017,11 +7269,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Chestplate-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Chestplate-40-43",
+      "id": 252
     },
     {
       "type": "CHESTPLATE",
@@ -7044,11 +7297,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Chestplate-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Chestplate-45-47",
+      "id": 253
     },
     {
       "type": "DAGGER",
@@ -7071,11 +7325,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Dagger-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Dagger-40-43",
+      "id": 254
     },
     {
       "type": "CHESTPLATE",
@@ -7098,11 +7353,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Chestplate-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Chestplate-47-49",
+      "id": 255
     },
     {
       "type": "DAGGER",
@@ -7125,11 +7381,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Dagger-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Dagger-43-45",
+      "id": 256
     },
     {
       "type": "DAGGER",
@@ -7152,11 +7409,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Dagger-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Dagger-47-49",
+      "id": 257
     },
     {
       "type": "DAGGER",
@@ -7179,11 +7437,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Dagger-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Dagger-45-47",
+      "id": 258
     },
     {
       "type": "FOOD",
@@ -7210,11 +7469,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Food-40-43",
+      "id": 259
     },
     {
       "type": "FOOD",
@@ -7241,11 +7501,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Food-43-45",
+      "id": 260
     },
     {
       "type": "FOOD",
@@ -7272,11 +7533,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Food-45-47",
+      "id": 261
     },
     {
       "type": "FOOD",
@@ -7303,11 +7565,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Food-47-49",
+      "id": 262
     },
     {
       "type": "HELMET",
@@ -7330,11 +7593,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Helmet-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Helmet-40-43",
+      "id": 263
     },
     {
       "type": "HELMET",
@@ -7357,11 +7621,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Helmet-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Helmet-43-45",
+      "id": 264
     },
     {
       "type": "HELMET",
@@ -7384,11 +7649,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Helmet-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Helmet-45-47",
+      "id": 265
     },
     {
       "type": "NECKLACE",
@@ -7411,11 +7677,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Necklace-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Necklace-40-43",
+      "id": 266
     },
     {
       "type": "NECKLACE",
@@ -7438,11 +7705,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Necklace-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Necklace-43-45",
+      "id": 267
     },
     {
       "type": "NECKLACE",
@@ -7465,11 +7733,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Necklace-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Necklace-45-47",
+      "id": 268
     },
     {
       "type": "HELMET",
@@ -7492,11 +7761,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Helmet-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Helmet-47-49",
+      "id": 269
     },
     {
       "type": "NECKLACE",
@@ -7519,11 +7789,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Necklace-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Necklace-47-49",
+      "id": 270
     },
     {
       "type": "LEGGINGS",
@@ -7546,11 +7817,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Leggings-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Leggings-40-43",
+      "id": 271
     },
     {
       "type": "LEGGINGS",
@@ -7573,11 +7845,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Leggings-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Leggings-43-45",
+      "id": 272
     },
     {
       "type": "LEGGINGS",
@@ -7600,11 +7873,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Leggings-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Leggings-45-47",
+      "id": 273
     },
     {
       "type": "LEGGINGS",
@@ -7627,11 +7901,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Leggings-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Leggings-47-49",
+      "id": 274
     },
     {
       "type": "POTION",
@@ -7658,11 +7933,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Potion-43-45",
+      "id": 275
     },
     {
       "type": "POTION",
@@ -7689,11 +7965,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Potion-45-47",
+      "id": 276
     },
     {
       "type": "RELIK",
@@ -7716,11 +7993,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Relik-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Relik-40-43",
+      "id": 277
     },
     {
       "type": "POTION",
@@ -7747,11 +8025,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Potion-47-49",
+      "id": 278
     },
     {
       "type": "POTION",
@@ -7778,11 +8057,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Potion-40-43",
+      "id": 279
     },
     {
       "type": "RELIK",
@@ -7805,11 +8085,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Relik-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Relik-45-47",
+      "id": 280
     },
     {
       "type": "RING",
@@ -7832,11 +8113,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Ring-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Ring-40-43",
+      "id": 281
     },
     {
       "type": "RELIK",
@@ -7859,11 +8141,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Relik-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Relik-43-45",
+      "id": 282
     },
     {
       "type": "RING",
@@ -7886,11 +8169,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Ring-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Ring-45-47",
+      "id": 283
     },
     {
       "type": "RELIK",
@@ -7913,11 +8197,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Relik-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Relik-47-49",
+      "id": 284
     },
     {
       "type": "RING",
@@ -7940,11 +8225,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Ring-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Ring-43-45",
+      "id": 285
     },
     {
       "type": "RING",
@@ -7967,11 +8253,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Ring-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Ring-47-49",
+      "id": 286
     },
     {
       "type": "SCROLL",
@@ -7998,11 +8285,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Scroll-40-43",
+      "id": 287
     },
     {
       "type": "SCROLL",
@@ -8029,11 +8317,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Scroll-43-45",
+      "id": 288
     },
     {
       "type": "SCROLL",
@@ -8060,11 +8349,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Scroll-45-47",
+      "id": 289
     },
     {
       "type": "SCROLL",
@@ -8091,11 +8381,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Scroll-47-49",
+      "id": 290
     },
     {
       "type": "SPEAR",
@@ -8118,11 +8409,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Spear-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Spear-43-45",
+      "id": 291
     },
     {
       "type": "SPEAR",
@@ -8145,11 +8437,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Spear-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Spear-40-43",
+      "id": 292
     },
     {
       "type": "SPEAR",
@@ -8172,11 +8465,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Spear-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Spear-45-47",
+      "id": 293
     },
     {
       "type": "SPEAR",
@@ -8199,11 +8493,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Spear-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Spear-47-49",
+      "id": 294
     },
     {
       "type": "WAND",
@@ -8226,11 +8521,12 @@
         "minimum": 312,
         "maximum": 322
       },
-      "id": "Wand-40-43",
       "lvl": {
         "minimum": 40,
         "maximum": 43
-      }
+      },
+      "name": "Wand-40-43",
+      "id": 295
     },
     {
       "type": "WAND",
@@ -8253,11 +8549,12 @@
         "minimum": 322,
         "maximum": 329
       },
-      "id": "Wand-43-45",
       "lvl": {
         "minimum": 43,
         "maximum": 45
-      }
+      },
+      "name": "Wand-43-45",
+      "id": 296
     },
     {
       "type": "WAND",
@@ -8280,11 +8577,12 @@
         "minimum": 329,
         "maximum": 336
       },
-      "id": "Wand-45-47",
       "lvl": {
         "minimum": 45,
         "maximum": 47
-      }
+      },
+      "name": "Wand-45-47",
+      "id": 297
     },
     {
       "type": "WAND",
@@ -8307,11 +8605,12 @@
         "minimum": 336,
         "maximum": 343
       },
-      "id": "Wand-47-49",
       "lvl": {
         "minimum": 47,
         "maximum": 49
-      }
+      },
+      "name": "Wand-47-49",
+      "id": 298
     },
     {
       "type": "BOOTS",
@@ -8334,11 +8633,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Boots-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Boots-50-53",
+      "id": 299
     },
     {
       "type": "BOOTS",
@@ -8361,11 +8661,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Boots-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Boots-53-55",
+      "id": 300
     },
     {
       "type": "BOOTS",
@@ -8388,11 +8689,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Boots-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Boots-55-57",
+      "id": 301
     },
     {
       "type": "BOOTS",
@@ -8415,11 +8717,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Boots-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Boots-57-59",
+      "id": 302
     },
     {
       "type": "BOW",
@@ -8442,11 +8745,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Bow-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Bow-50-53",
+      "id": 303
     },
     {
       "type": "BOW",
@@ -8469,11 +8773,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Bow-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Bow-55-57",
+      "id": 304
     },
     {
       "type": "BOW",
@@ -8496,11 +8801,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Bow-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Bow-53-55",
+      "id": 305
     },
     {
       "type": "BOW",
@@ -8523,11 +8829,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Bow-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Bow-57-59",
+      "id": 306
     },
     {
       "type": "BRACELET",
@@ -8550,11 +8857,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Bracelet-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Bracelet-50-53",
+      "id": 307
     },
     {
       "type": "BRACELET",
@@ -8577,11 +8885,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Bracelet-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Bracelet-53-55",
+      "id": 308
     },
     {
       "type": "BRACELET",
@@ -8604,11 +8913,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Bracelet-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Bracelet-55-57",
+      "id": 309
     },
     {
       "type": "BRACELET",
@@ -8631,11 +8941,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Bracelet-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Bracelet-57-59",
+      "id": 310
     },
     {
       "type": "CHESTPLATE",
@@ -8658,11 +8969,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Chestplate-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Chestplate-50-53",
+      "id": 311
     },
     {
       "type": "CHESTPLATE",
@@ -8685,11 +8997,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Chestplate-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Chestplate-53-55",
+      "id": 312
     },
     {
       "type": "CHESTPLATE",
@@ -8712,11 +9025,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Chestplate-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Chestplate-55-57",
+      "id": 313
     },
     {
       "type": "CHESTPLATE",
@@ -8739,11 +9053,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Chestplate-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Chestplate-57-59",
+      "id": 314
     },
     {
       "type": "DAGGER",
@@ -8766,11 +9081,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Dagger-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Dagger-50-53",
+      "id": 315
     },
     {
       "type": "DAGGER",
@@ -8793,11 +9109,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Dagger-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Dagger-53-55",
+      "id": 316
     },
     {
       "type": "DAGGER",
@@ -8820,11 +9137,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Dagger-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Dagger-55-57",
+      "id": 317
     },
     {
       "type": "FOOD",
@@ -8851,11 +9169,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Food-50-53",
+      "id": 318
     },
     {
       "type": "FOOD",
@@ -8882,11 +9201,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Food-53-55",
+      "id": 319
     },
     {
       "type": "FOOD",
@@ -8913,11 +9233,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Food-55-57",
+      "id": 320
     },
     {
       "type": "DAGGER",
@@ -8940,11 +9261,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Dagger-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Dagger-57-59",
+      "id": 321
     },
     {
       "type": "FOOD",
@@ -8971,11 +9293,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Food-57-59",
+      "id": 322
     },
     {
       "type": "HELMET",
@@ -8998,11 +9321,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Helmet-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Helmet-50-53",
+      "id": 323
     },
     {
       "type": "HELMET",
@@ -9025,11 +9349,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Helmet-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Helmet-53-55",
+      "id": 324
     },
     {
       "type": "HELMET",
@@ -9052,11 +9377,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Helmet-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Helmet-55-57",
+      "id": 325
     },
     {
       "type": "HELMET",
@@ -9079,11 +9405,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Helmet-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Helmet-57-59",
+      "id": 326
     },
     {
       "type": "NECKLACE",
@@ -9106,11 +9433,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Necklace-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Necklace-50-53",
+      "id": 327
     },
     {
       "type": "NECKLACE",
@@ -9133,11 +9461,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Necklace-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Necklace-57-59",
+      "id": 328
     },
     {
       "type": "NECKLACE",
@@ -9160,11 +9489,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Necklace-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Necklace-53-55",
+      "id": 329
     },
     {
       "type": "NECKLACE",
@@ -9187,11 +9517,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Necklace-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Necklace-55-57",
+      "id": 330
     },
     {
       "type": "LEGGINGS",
@@ -9214,11 +9545,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Leggings-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Leggings-53-55",
+      "id": 331
     },
     {
       "type": "LEGGINGS",
@@ -9241,11 +9573,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Leggings-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Leggings-55-57",
+      "id": 332
     },
     {
       "type": "LEGGINGS",
@@ -9268,11 +9601,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Leggings-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Leggings-57-59",
+      "id": 333
     },
     {
       "type": "POTION",
@@ -9299,11 +9633,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Potion-53-55",
+      "id": 334
     },
     {
       "type": "POTION",
@@ -9330,11 +9665,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Potion-50-53",
+      "id": 335
     },
     {
       "type": "POTION",
@@ -9361,11 +9697,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Potion-55-57",
+      "id": 336
     },
     {
       "type": "RELIK",
@@ -9388,11 +9725,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Relik-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Relik-50-53",
+      "id": 337
     },
     {
       "type": "LEGGINGS",
@@ -9415,11 +9753,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Leggings-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Leggings-50-53",
+      "id": 338
     },
     {
       "type": "RELIK",
@@ -9442,11 +9781,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Relik-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Relik-53-55",
+      "id": 339
     },
     {
       "type": "POTION",
@@ -9473,11 +9813,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Potion-57-59",
+      "id": 340
     },
     {
       "type": "RELIK",
@@ -9500,11 +9841,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Relik-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Relik-55-57",
+      "id": 341
     },
     {
       "type": "RELIK",
@@ -9527,11 +9869,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Relik-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Relik-57-59",
+      "id": 342
     },
     {
       "type": "RING",
@@ -9554,11 +9897,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Ring-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Ring-50-53",
+      "id": 343
     },
     {
       "type": "RING",
@@ -9581,11 +9925,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Ring-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Ring-53-55",
+      "id": 344
     },
     {
       "type": "RING",
@@ -9608,11 +9953,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Ring-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Ring-55-57",
+      "id": 345
     },
     {
       "type": "RING",
@@ -9635,11 +9981,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Ring-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Ring-57-59",
+      "id": 346
     },
     {
       "type": "SCROLL",
@@ -9666,11 +10013,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Scroll-50-53",
+      "id": 347
     },
     {
       "type": "SCROLL",
@@ -9697,11 +10045,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Scroll-53-55",
+      "id": 348
     },
     {
       "type": "SCROLL",
@@ -9728,11 +10077,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Scroll-57-59",
+      "id": 349
     },
     {
       "type": "SCROLL",
@@ -9759,11 +10109,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Scroll-55-57",
+      "id": 350
     },
     {
       "type": "SPEAR",
@@ -9786,11 +10137,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Spear-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Spear-50-53",
+      "id": 351
     },
     {
       "type": "SPEAR",
@@ -9813,11 +10165,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Spear-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Spear-53-55",
+      "id": 352
     },
     {
       "type": "SPEAR",
@@ -9840,11 +10193,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Spear-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Spear-55-57",
+      "id": 353
     },
     {
       "type": "WAND",
@@ -9867,11 +10221,12 @@
         "minimum": 347,
         "maximum": 357
       },
-      "id": "Wand-50-53",
       "lvl": {
         "minimum": 50,
         "maximum": 53
-      }
+      },
+      "name": "Wand-50-53",
+      "id": 354
     },
     {
       "type": "SPEAR",
@@ -9894,11 +10249,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Spear-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Spear-57-59",
+      "id": 355
     },
     {
       "type": "WAND",
@@ -9921,11 +10277,12 @@
         "minimum": 364,
         "maximum": 371
       },
-      "id": "Wand-55-57",
       "lvl": {
         "minimum": 55,
         "maximum": 57
-      }
+      },
+      "name": "Wand-55-57",
+      "id": 356
     },
     {
       "type": "WAND",
@@ -9948,11 +10305,12 @@
         "minimum": 357,
         "maximum": 364
       },
-      "id": "Wand-53-55",
       "lvl": {
         "minimum": 53,
         "maximum": 55
-      }
+      },
+      "name": "Wand-53-55",
+      "id": 357
     },
     {
       "type": "WAND",
@@ -9975,11 +10333,12 @@
         "minimum": 371,
         "maximum": 378
       },
-      "id": "Wand-57-59",
       "lvl": {
         "minimum": 57,
         "maximum": 59
-      }
+      },
+      "name": "Wand-57-59",
+      "id": 358
     },
     {
       "type": "BOOTS",
@@ -10002,11 +10361,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Boots-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Boots-60-63",
+      "id": 359
     },
     {
       "type": "BOOTS",
@@ -10029,11 +10389,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Boots-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Boots-65-67",
+      "id": 360
     },
     {
       "type": "BOOTS",
@@ -10056,11 +10417,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Boots-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Boots-63-65",
+      "id": 361
     },
     {
       "type": "BOOTS",
@@ -10083,11 +10445,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Boots-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Boots-67-69",
+      "id": 362
     },
     {
       "type": "BOW",
@@ -10110,11 +10473,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Bow-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Bow-60-63",
+      "id": 363
     },
     {
       "type": "BOW",
@@ -10137,11 +10501,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Bow-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Bow-63-65",
+      "id": 364
     },
     {
       "type": "BOW",
@@ -10164,11 +10529,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Bow-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Bow-67-69",
+      "id": 365
     },
     {
       "type": "BOW",
@@ -10191,11 +10557,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Bow-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Bow-65-67",
+      "id": 366
     },
     {
       "type": "BRACELET",
@@ -10218,11 +10585,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Bracelet-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Bracelet-63-65",
+      "id": 367
     },
     {
       "type": "BRACELET",
@@ -10245,11 +10613,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Bracelet-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Bracelet-60-63",
+      "id": 368
     },
     {
       "type": "BRACELET",
@@ -10272,11 +10641,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Bracelet-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Bracelet-65-67",
+      "id": 369
     },
     {
       "type": "BRACELET",
@@ -10299,11 +10669,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Bracelet-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Bracelet-67-69",
+      "id": 370
     },
     {
       "type": "CHESTPLATE",
@@ -10326,11 +10697,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Chestplate-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Chestplate-63-65",
+      "id": 371
     },
     {
       "type": "CHESTPLATE",
@@ -10353,11 +10725,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Chestplate-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Chestplate-60-63",
+      "id": 372
     },
     {
       "type": "CHESTPLATE",
@@ -10380,11 +10753,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Chestplate-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Chestplate-65-67",
+      "id": 373
     },
     {
       "type": "CHESTPLATE",
@@ -10407,11 +10781,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Chestplate-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Chestplate-67-69",
+      "id": 374
     },
     {
       "type": "DAGGER",
@@ -10434,11 +10809,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Dagger-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Dagger-60-63",
+      "id": 375
     },
     {
       "type": "DAGGER",
@@ -10461,11 +10837,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Dagger-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Dagger-63-65",
+      "id": 376
     },
     {
       "type": "DAGGER",
@@ -10488,11 +10865,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Dagger-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Dagger-65-67",
+      "id": 377
     },
     {
       "type": "DAGGER",
@@ -10515,11 +10893,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Dagger-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Dagger-67-69",
+      "id": 378
     },
     {
       "type": "FOOD",
@@ -10546,11 +10925,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Food-60-63",
+      "id": 379
     },
     {
       "type": "FOOD",
@@ -10577,11 +10957,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Food-63-65",
+      "id": 380
     },
     {
       "type": "FOOD",
@@ -10608,11 +10989,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Food-67-69",
+      "id": 381
     },
     {
       "type": "HELMET",
@@ -10635,11 +11017,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Helmet-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Helmet-60-63",
+      "id": 382
     },
     {
       "type": "HELMET",
@@ -10662,11 +11045,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Helmet-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Helmet-63-65",
+      "id": 383
     },
     {
       "type": "FOOD",
@@ -10693,11 +11077,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Food-65-67",
+      "id": 384
     },
     {
       "type": "HELMET",
@@ -10720,11 +11105,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Helmet-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Helmet-65-67",
+      "id": 385
     },
     {
       "type": "HELMET",
@@ -10747,11 +11133,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Helmet-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Helmet-67-69",
+      "id": 386
     },
     {
       "type": "NECKLACE",
@@ -10774,11 +11161,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Necklace-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Necklace-60-63",
+      "id": 387
     },
     {
       "type": "NECKLACE",
@@ -10801,11 +11189,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Necklace-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Necklace-63-65",
+      "id": 388
     },
     {
       "type": "NECKLACE",
@@ -10828,11 +11217,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Necklace-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Necklace-65-67",
+      "id": 389
     },
     {
       "type": "NECKLACE",
@@ -10855,11 +11245,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Necklace-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Necklace-67-69",
+      "id": 390
     },
     {
       "type": "LEGGINGS",
@@ -10882,11 +11273,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Leggings-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Leggings-63-65",
+      "id": 391
     },
     {
       "type": "LEGGINGS",
@@ -10909,11 +11301,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Leggings-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Leggings-60-63",
+      "id": 392
     },
     {
       "type": "LEGGINGS",
@@ -10936,11 +11329,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Leggings-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Leggings-65-67",
+      "id": 393
     },
     {
       "type": "LEGGINGS",
@@ -10963,11 +11357,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Leggings-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Leggings-67-69",
+      "id": 394
     },
     {
       "type": "POTION",
@@ -10994,11 +11389,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Potion-60-63",
+      "id": 395
     },
     {
       "type": "POTION",
@@ -11025,11 +11421,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Potion-63-65",
+      "id": 396
     },
     {
       "type": "POTION",
@@ -11056,11 +11453,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Potion-67-69",
+      "id": 397
     },
     {
       "type": "RELIK",
@@ -11083,11 +11481,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Relik-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Relik-63-65",
+      "id": 398
     },
     {
       "type": "RELIK",
@@ -11110,11 +11509,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Relik-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Relik-65-67",
+      "id": 399
     },
     {
       "type": "POTION",
@@ -11141,11 +11541,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Potion-65-67",
+      "id": 400
     },
     {
       "type": "RELIK",
@@ -11168,11 +11569,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Relik-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Relik-67-69",
+      "id": 401
     },
     {
       "type": "RELIK",
@@ -11195,11 +11597,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Relik-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Relik-60-63",
+      "id": 402
     },
     {
       "type": "RING",
@@ -11222,11 +11625,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Ring-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Ring-60-63",
+      "id": 403
     },
     {
       "type": "RING",
@@ -11249,11 +11653,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Ring-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Ring-65-67",
+      "id": 404
     },
     {
       "type": "RING",
@@ -11276,11 +11681,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Ring-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Ring-63-65",
+      "id": 405
     },
     {
       "type": "RING",
@@ -11303,11 +11709,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Ring-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Ring-67-69",
+      "id": 406
     },
     {
       "type": "SCROLL",
@@ -11334,11 +11741,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Scroll-60-63",
+      "id": 407
     },
     {
       "type": "SCROLL",
@@ -11365,11 +11773,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Scroll-63-65",
+      "id": 408
     },
     {
       "type": "SCROLL",
@@ -11396,11 +11805,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Scroll-67-69",
+      "id": 409
     },
     {
       "type": "SCROLL",
@@ -11427,11 +11837,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Scroll-65-67",
+      "id": 410
     },
     {
       "type": "SPEAR",
@@ -11454,11 +11865,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Spear-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Spear-63-65",
+      "id": 411
     },
     {
       "type": "SPEAR",
@@ -11481,11 +11893,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Spear-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Spear-60-63",
+      "id": 412
     },
     {
       "type": "SPEAR",
@@ -11508,11 +11921,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Spear-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Spear-67-69",
+      "id": 413
     },
     {
       "type": "WAND",
@@ -11535,11 +11949,12 @@
         "minimum": 382,
         "maximum": 392
       },
-      "id": "Wand-60-63",
       "lvl": {
         "minimum": 60,
         "maximum": 63
-      }
+      },
+      "name": "Wand-60-63",
+      "id": 414
     },
     {
       "type": "WAND",
@@ -11562,11 +11977,12 @@
         "minimum": 392,
         "maximum": 399
       },
-      "id": "Wand-63-65",
       "lvl": {
         "minimum": 63,
         "maximum": 65
-      }
+      },
+      "name": "Wand-63-65",
+      "id": 415
     },
     {
       "type": "SPEAR",
@@ -11589,11 +12005,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Spear-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Spear-65-67",
+      "id": 416
     },
     {
       "type": "WAND",
@@ -11616,11 +12033,12 @@
         "minimum": 399,
         "maximum": 406
       },
-      "id": "Wand-65-67",
       "lvl": {
         "minimum": 65,
         "maximum": 67
-      }
+      },
+      "name": "Wand-65-67",
+      "id": 417
     },
     {
       "type": "WAND",
@@ -11643,11 +12061,12 @@
         "minimum": 406,
         "maximum": 413
       },
-      "id": "Wand-67-69",
       "lvl": {
         "minimum": 67,
         "maximum": 69
-      }
+      },
+      "name": "Wand-67-69",
+      "id": 418
     },
     {
       "type": "BOOTS",
@@ -11670,11 +12089,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Boots-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Boots-70-73",
+      "id": 419
     },
     {
       "type": "BOOTS",
@@ -11697,11 +12117,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Boots-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Boots-73-75",
+      "id": 420
     },
     {
       "type": "BOOTS",
@@ -11724,11 +12145,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Boots-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Boots-77-79",
+      "id": 421
     },
     {
       "type": "BOOTS",
@@ -11751,11 +12173,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Boots-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Boots-75-77",
+      "id": 422
     },
     {
       "type": "BOW",
@@ -11778,11 +12201,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Bow-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Bow-75-77",
+      "id": 423
     },
     {
       "type": "BOW",
@@ -11805,11 +12229,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Bow-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Bow-73-75",
+      "id": 424
     },
     {
       "type": "BRACELET",
@@ -11832,11 +12257,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Bracelet-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Bracelet-70-73",
+      "id": 425
     },
     {
       "type": "BOW",
@@ -11859,11 +12285,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Bow-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Bow-77-79",
+      "id": 426
     },
     {
       "type": "BRACELET",
@@ -11886,11 +12313,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Bracelet-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Bracelet-73-75",
+      "id": 427
     },
     {
       "type": "BOW",
@@ -11913,11 +12341,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Bow-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Bow-70-73",
+      "id": 428
     },
     {
       "type": "BRACELET",
@@ -11940,11 +12369,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Bracelet-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Bracelet-75-77",
+      "id": 429
     },
     {
       "type": "CHESTPLATE",
@@ -11967,11 +12397,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Chestplate-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Chestplate-70-73",
+      "id": 430
     },
     {
       "type": "BRACELET",
@@ -11994,11 +12425,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Bracelet-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Bracelet-77-79",
+      "id": 431
     },
     {
       "type": "CHESTPLATE",
@@ -12021,11 +12453,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Chestplate-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Chestplate-73-75",
+      "id": 432
     },
     {
       "type": "CHESTPLATE",
@@ -12048,11 +12481,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Chestplate-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Chestplate-75-77",
+      "id": 433
     },
     {
       "type": "CHESTPLATE",
@@ -12075,11 +12509,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Chestplate-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Chestplate-77-79",
+      "id": 434
     },
     {
       "type": "DAGGER",
@@ -12102,11 +12537,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Dagger-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Dagger-70-73",
+      "id": 435
     },
     {
       "type": "DAGGER",
@@ -12129,11 +12565,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Dagger-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Dagger-73-75",
+      "id": 436
     },
     {
       "type": "DAGGER",
@@ -12156,11 +12593,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Dagger-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Dagger-75-77",
+      "id": 437
     },
     {
       "type": "FOOD",
@@ -12187,11 +12625,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Food-70-73",
+      "id": 438
     },
     {
       "type": "DAGGER",
@@ -12214,11 +12653,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Dagger-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Dagger-77-79",
+      "id": 439
     },
     {
       "type": "FOOD",
@@ -12245,11 +12685,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Food-73-75",
+      "id": 440
     },
     {
       "type": "FOOD",
@@ -12276,11 +12717,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Food-75-77",
+      "id": 441
     },
     {
       "type": "FOOD",
@@ -12307,11 +12749,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Food-77-79",
+      "id": 442
     },
     {
       "type": "HELMET",
@@ -12334,11 +12777,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Helmet-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Helmet-70-73",
+      "id": 443
     },
     {
       "type": "HELMET",
@@ -12361,11 +12805,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Helmet-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Helmet-73-75",
+      "id": 444
     },
     {
       "type": "HELMET",
@@ -12388,11 +12833,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Helmet-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Helmet-75-77",
+      "id": 445
     },
     {
       "type": "HELMET",
@@ -12415,11 +12861,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Helmet-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Helmet-77-79",
+      "id": 446
     },
     {
       "type": "NECKLACE",
@@ -12442,11 +12889,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Necklace-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Necklace-70-73",
+      "id": 447
     },
     {
       "type": "NECKLACE",
@@ -12469,11 +12917,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Necklace-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Necklace-73-75",
+      "id": 448
     },
     {
       "type": "NECKLACE",
@@ -12496,11 +12945,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Necklace-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Necklace-75-77",
+      "id": 449
     },
     {
       "type": "NECKLACE",
@@ -12523,11 +12973,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Necklace-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Necklace-77-79",
+      "id": 450
     },
     {
       "type": "LEGGINGS",
@@ -12550,11 +13001,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Leggings-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Leggings-73-75",
+      "id": 451
     },
     {
       "type": "LEGGINGS",
@@ -12577,11 +13029,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Leggings-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Leggings-75-77",
+      "id": 452
     },
     {
       "type": "LEGGINGS",
@@ -12604,11 +13057,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Leggings-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Leggings-77-79",
+      "id": 453
     },
     {
       "type": "LEGGINGS",
@@ -12631,11 +13085,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Leggings-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Leggings-70-73",
+      "id": 454
     },
     {
       "type": "POTION",
@@ -12662,11 +13117,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Potion-70-73",
+      "id": 455
     },
     {
       "type": "POTION",
@@ -12693,11 +13149,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Potion-73-75",
+      "id": 456
     },
     {
       "type": "POTION",
@@ -12724,11 +13181,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Potion-75-77",
+      "id": 457
     },
     {
       "type": "POTION",
@@ -12755,11 +13213,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Potion-77-79",
+      "id": 458
     },
     {
       "type": "RELIK",
@@ -12782,11 +13241,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Relik-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Relik-70-73",
+      "id": 459
     },
     {
       "type": "RELIK",
@@ -12809,11 +13269,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Relik-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Relik-73-75",
+      "id": 460
     },
     {
       "type": "RELIK",
@@ -12836,11 +13297,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Relik-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Relik-75-77",
+      "id": 461
     },
     {
       "type": "RELIK",
@@ -12863,11 +13325,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Relik-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Relik-77-79",
+      "id": 462
     },
     {
       "type": "RING",
@@ -12890,11 +13353,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Ring-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Ring-70-73",
+      "id": 463
     },
     {
       "type": "RING",
@@ -12917,11 +13381,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Ring-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Ring-73-75",
+      "id": 464
     },
     {
       "type": "RING",
@@ -12944,11 +13409,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Ring-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Ring-75-77",
+      "id": 465
     },
     {
       "type": "RING",
@@ -12971,11 +13437,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Ring-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Ring-77-79",
+      "id": 466
     },
     {
       "type": "SCROLL",
@@ -13002,11 +13469,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Scroll-70-73",
+      "id": 467
     },
     {
       "type": "SCROLL",
@@ -13033,11 +13501,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Scroll-73-75",
+      "id": 468
     },
     {
       "type": "SCROLL",
@@ -13064,11 +13533,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Scroll-75-77",
+      "id": 469
     },
     {
       "type": "SCROLL",
@@ -13095,11 +13565,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Scroll-77-79",
+      "id": 470
     },
     {
       "type": "SPEAR",
@@ -13122,11 +13593,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Spear-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Spear-70-73",
+      "id": 471
     },
     {
       "type": "SPEAR",
@@ -13149,11 +13621,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Spear-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Spear-73-75",
+      "id": 472
     },
     {
       "type": "SPEAR",
@@ -13176,11 +13649,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Spear-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Spear-75-77",
+      "id": 473
     },
     {
       "type": "SPEAR",
@@ -13203,11 +13677,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Spear-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Spear-77-79",
+      "id": 474
     },
     {
       "type": "WAND",
@@ -13230,11 +13705,12 @@
         "minimum": 417,
         "maximum": 427
       },
-      "id": "Wand-70-73",
       "lvl": {
         "minimum": 70,
         "maximum": 73
-      }
+      },
+      "name": "Wand-70-73",
+      "id": 475
     },
     {
       "type": "WAND",
@@ -13257,11 +13733,12 @@
         "minimum": 427,
         "maximum": 434
       },
-      "id": "Wand-73-75",
       "lvl": {
         "minimum": 73,
         "maximum": 75
-      }
+      },
+      "name": "Wand-73-75",
+      "id": 476
     },
     {
       "type": "WAND",
@@ -13284,11 +13761,12 @@
         "minimum": 434,
         "maximum": 441
       },
-      "id": "Wand-75-77",
       "lvl": {
         "minimum": 75,
         "maximum": 77
-      }
+      },
+      "name": "Wand-75-77",
+      "id": 477
     },
     {
       "type": "WAND",
@@ -13311,11 +13789,12 @@
         "minimum": 441,
         "maximum": 448
       },
-      "id": "Wand-77-79",
       "lvl": {
         "minimum": 77,
         "maximum": 79
-      }
+      },
+      "name": "Wand-77-79",
+      "id": 478
     },
     {
       "type": "BOOTS",
@@ -13338,11 +13817,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Boots-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Boots-80-83",
+      "id": 479
     },
     {
       "type": "BOOTS",
@@ -13365,11 +13845,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Boots-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Boots-83-85",
+      "id": 480
     },
     {
       "type": "BOOTS",
@@ -13392,11 +13873,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Boots-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Boots-85-87",
+      "id": 481
     },
     {
       "type": "BOOTS",
@@ -13419,11 +13901,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Boots-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Boots-87-89",
+      "id": 482
     },
     {
       "type": "BOW",
@@ -13446,11 +13929,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Bow-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Bow-83-85",
+      "id": 483
     },
     {
       "type": "BOW",
@@ -13473,11 +13957,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Bow-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Bow-85-87",
+      "id": 484
     },
     {
       "type": "BOW",
@@ -13500,11 +13985,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Bow-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Bow-80-83",
+      "id": 485
     },
     {
       "type": "BRACELET",
@@ -13527,11 +14013,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Bracelet-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Bracelet-83-85",
+      "id": 486
     },
     {
       "type": "BRACELET",
@@ -13554,11 +14041,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Bracelet-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Bracelet-80-83",
+      "id": 487
     },
     {
       "type": "BRACELET",
@@ -13581,11 +14069,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Bracelet-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Bracelet-85-87",
+      "id": 488
     },
     {
       "type": "BOW",
@@ -13608,11 +14097,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Bow-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Bow-87-89",
+      "id": 489
     },
     {
       "type": "BRACELET",
@@ -13635,11 +14125,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Bracelet-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Bracelet-87-89",
+      "id": 490
     },
     {
       "type": "CHESTPLATE",
@@ -13662,11 +14153,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Chestplate-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Chestplate-80-83",
+      "id": 491
     },
     {
       "type": "CHESTPLATE",
@@ -13689,11 +14181,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Chestplate-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Chestplate-83-85",
+      "id": 492
     },
     {
       "type": "CHESTPLATE",
@@ -13716,11 +14209,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Chestplate-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Chestplate-85-87",
+      "id": 493
     },
     {
       "type": "CHESTPLATE",
@@ -13743,11 +14237,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Chestplate-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Chestplate-87-89",
+      "id": 494
     },
     {
       "type": "DAGGER",
@@ -13770,11 +14265,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Dagger-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Dagger-83-85",
+      "id": 495
     },
     {
       "type": "DAGGER",
@@ -13797,11 +14293,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Dagger-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Dagger-80-83",
+      "id": 496
     },
     {
       "type": "DAGGER",
@@ -13824,11 +14321,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Dagger-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Dagger-85-87",
+      "id": 497
     },
     {
       "type": "DAGGER",
@@ -13851,11 +14349,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Dagger-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Dagger-87-89",
+      "id": 498
     },
     {
       "type": "FOOD",
@@ -13882,11 +14381,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Food-83-85",
+      "id": 499
     },
     {
       "type": "FOOD",
@@ -13913,11 +14413,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Food-80-83",
+      "id": 500
     },
     {
       "type": "FOOD",
@@ -13944,11 +14445,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Food-85-87",
+      "id": 501
     },
     {
       "type": "FOOD",
@@ -13975,11 +14477,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Food-87-89",
+      "id": 502
     },
     {
       "type": "HELMET",
@@ -14002,11 +14505,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Helmet-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Helmet-80-83",
+      "id": 503
     },
     {
       "type": "HELMET",
@@ -14029,11 +14533,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Helmet-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Helmet-83-85",
+      "id": 504
     },
     {
       "type": "HELMET",
@@ -14056,11 +14561,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Helmet-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Helmet-85-87",
+      "id": 505
     },
     {
       "type": "HELMET",
@@ -14083,11 +14589,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Helmet-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Helmet-87-89",
+      "id": 506
     },
     {
       "type": "NECKLACE",
@@ -14110,11 +14617,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Necklace-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Necklace-80-83",
+      "id": 507
     },
     {
       "type": "NECKLACE",
@@ -14137,11 +14645,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Necklace-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Necklace-83-85",
+      "id": 508
     },
     {
       "type": "NECKLACE",
@@ -14164,11 +14673,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Necklace-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Necklace-85-87",
+      "id": 509
     },
     {
       "type": "NECKLACE",
@@ -14191,11 +14701,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Necklace-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Necklace-87-89",
+      "id": 510
     },
     {
       "type": "LEGGINGS",
@@ -14218,11 +14729,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Leggings-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Leggings-80-83",
+      "id": 511
     },
     {
       "type": "LEGGINGS",
@@ -14245,11 +14757,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Leggings-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Leggings-83-85",
+      "id": 512
     },
     {
       "type": "LEGGINGS",
@@ -14272,11 +14785,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Leggings-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Leggings-85-87",
+      "id": 513
     },
     {
       "type": "LEGGINGS",
@@ -14299,11 +14813,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Leggings-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Leggings-87-89",
+      "id": 514
     },
     {
       "type": "POTION",
@@ -14330,11 +14845,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Potion-80-83",
+      "id": 515
     },
     {
       "type": "POTION",
@@ -14361,11 +14877,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Potion-83-85",
+      "id": 516
     },
     {
       "type": "POTION",
@@ -14392,11 +14909,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Potion-85-87",
+      "id": 517
     },
     {
       "type": "POTION",
@@ -14423,11 +14941,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Potion-87-89",
+      "id": 518
     },
     {
       "type": "RELIK",
@@ -14450,11 +14969,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Relik-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Relik-80-83",
+      "id": 519
     },
     {
       "type": "RELIK",
@@ -14477,11 +14997,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Relik-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Relik-83-85",
+      "id": 520
     },
     {
       "type": "RELIK",
@@ -14504,11 +15025,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Relik-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Relik-85-87",
+      "id": 521
     },
     {
       "type": "RING",
@@ -14531,11 +15053,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Ring-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Ring-83-85",
+      "id": 522
     },
     {
       "type": "RELIK",
@@ -14558,11 +15081,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Relik-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Relik-87-89",
+      "id": 523
     },
     {
       "type": "RING",
@@ -14585,11 +15109,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Ring-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Ring-85-87",
+      "id": 524
     },
     {
       "type": "RING",
@@ -14612,11 +15137,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Ring-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Ring-80-83",
+      "id": 525
     },
     {
       "type": "RING",
@@ -14639,11 +15165,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Ring-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Ring-87-89",
+      "id": 526
     },
     {
       "type": "SCROLL",
@@ -14670,11 +15197,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Scroll-80-83",
+      "id": 527
     },
     {
       "type": "SCROLL",
@@ -14701,11 +15229,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Scroll-85-87",
+      "id": 528
     },
     {
       "type": "SCROLL",
@@ -14732,11 +15261,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Scroll-83-85",
+      "id": 529
     },
     {
       "type": "SPEAR",
@@ -14759,11 +15289,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Spear-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Spear-80-83",
+      "id": 530
     },
     {
       "type": "SCROLL",
@@ -14790,11 +15321,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Scroll-87-89",
+      "id": 531
     },
     {
       "type": "SPEAR",
@@ -14817,11 +15349,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Spear-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Spear-85-87",
+      "id": 532
     },
     {
       "type": "WAND",
@@ -14844,11 +15377,12 @@
         "minimum": 452,
         "maximum": 462
       },
-      "id": "Wand-80-83",
       "lvl": {
         "minimum": 80,
         "maximum": 83
-      }
+      },
+      "name": "Wand-80-83",
+      "id": 533
     },
     {
       "type": "SPEAR",
@@ -14871,11 +15405,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Spear-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Spear-87-89",
+      "id": 534
     },
     {
       "type": "WAND",
@@ -14898,11 +15433,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Wand-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Wand-83-85",
+      "id": 535
     },
     {
       "type": "WAND",
@@ -14925,11 +15461,12 @@
         "minimum": 469,
         "maximum": 476
       },
-      "id": "Wand-85-87",
       "lvl": {
         "minimum": 85,
         "maximum": 87
-      }
+      },
+      "name": "Wand-85-87",
+      "id": 536
     },
     {
       "type": "WAND",
@@ -14952,11 +15489,12 @@
         "minimum": 476,
         "maximum": 483
       },
-      "id": "Wand-87-89",
       "lvl": {
         "minimum": 87,
         "maximum": 89
-      }
+      },
+      "name": "Wand-87-89",
+      "id": 537
     },
     {
       "type": "SPEAR",
@@ -14979,11 +15517,12 @@
         "minimum": 462,
         "maximum": 469
       },
-      "id": "Spear-83-85",
       "lvl": {
         "minimum": 83,
         "maximum": 85
-      }
+      },
+      "name": "Spear-83-85",
+      "id": 538
     },
     {
       "type": "BOOTS",
@@ -15006,11 +15545,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Boots-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Boots-93-95",
+      "id": 539
     },
     {
       "type": "BOOTS",
@@ -15033,11 +15573,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Boots-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Boots-95-97",
+      "id": 540
     },
     {
       "type": "BOOTS",
@@ -15060,11 +15601,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Boots-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Boots-90-93",
+      "id": 541
     },
     {
       "type": "BOOTS",
@@ -15087,11 +15629,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Boots-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Boots-97-99",
+      "id": 542
     },
     {
       "type": "BOW",
@@ -15114,11 +15657,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Bow-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Bow-90-93",
+      "id": 543
     },
     {
       "type": "BOW",
@@ -15141,11 +15685,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Bow-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Bow-93-95",
+      "id": 544
     },
     {
       "type": "BOW",
@@ -15168,11 +15713,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Bow-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Bow-95-97",
+      "id": 545
     },
     {
       "type": "BOW",
@@ -15195,11 +15741,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Bow-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Bow-97-99",
+      "id": 546
     },
     {
       "type": "BRACELET",
@@ -15222,11 +15769,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Bracelet-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Bracelet-90-93",
+      "id": 547
     },
     {
       "type": "BRACELET",
@@ -15249,11 +15797,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Bracelet-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Bracelet-93-95",
+      "id": 548
     },
     {
       "type": "BRACELET",
@@ -15276,11 +15825,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Bracelet-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Bracelet-97-99",
+      "id": 549
     },
     {
       "type": "CHESTPLATE",
@@ -15303,11 +15853,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Chestplate-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Chestplate-90-93",
+      "id": 550
     },
     {
       "type": "CHESTPLATE",
@@ -15330,11 +15881,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Chestplate-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Chestplate-93-95",
+      "id": 551
     },
     {
       "type": "BRACELET",
@@ -15357,11 +15909,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Bracelet-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Bracelet-95-97",
+      "id": 552
     },
     {
       "type": "CHESTPLATE",
@@ -15384,11 +15937,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Chestplate-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Chestplate-95-97",
+      "id": 553
     },
     {
       "type": "RING",
@@ -15411,11 +15965,12 @@
         "minimum": 175,
         "maximum": 182
       },
-      "id": "Ring-1-3",
       "lvl": {
         "minimum": 1,
         "maximum": 3
-      }
+      },
+      "name": "Ring-1-3",
+      "id": 554
     },
     {
       "type": "CHESTPLATE",
@@ -15438,11 +15993,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Chestplate-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Chestplate-97-99",
+      "id": 555
     },
     {
       "type": "DAGGER",
@@ -15465,11 +16021,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Dagger-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Dagger-93-95",
+      "id": 556
     },
     {
       "type": "DAGGER",
@@ -15492,11 +16049,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Dagger-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Dagger-90-93",
+      "id": 557
     },
     {
       "type": "DAGGER",
@@ -15519,11 +16077,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Dagger-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Dagger-95-97",
+      "id": 558
     },
     {
       "type": "DAGGER",
@@ -15546,11 +16105,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Dagger-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Dagger-97-99",
+      "id": 559
     },
     {
       "type": "FOOD",
@@ -15577,11 +16137,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Food-90-93",
+      "id": 560
     },
     {
       "type": "FOOD",
@@ -15608,11 +16169,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Food-93-95",
+      "id": 561
     },
     {
       "type": "FOOD",
@@ -15639,11 +16201,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Food-95-97",
+      "id": 562
     },
     {
       "type": "FOOD",
@@ -15670,11 +16233,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Food-97-99",
+      "id": 563
     },
     {
       "type": "HELMET",
@@ -15697,11 +16261,12 @@
         "minimum": 483,
         "maximum": 497
       },
-      "id": "Helmet-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Helmet-90-93",
+      "id": 564
     },
     {
       "type": "HELMET",
@@ -15724,11 +16289,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Helmet-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Helmet-93-95",
+      "id": 565
     },
     {
       "type": "HELMET",
@@ -15751,11 +16317,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Helmet-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Helmet-95-97",
+      "id": 566
     },
     {
       "type": "HELMET",
@@ -15778,11 +16345,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Helmet-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Helmet-97-99",
+      "id": 567
     },
     {
       "type": "NECKLACE",
@@ -15805,11 +16373,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Necklace-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Necklace-93-95",
+      "id": 568
     },
     {
       "type": "NECKLACE",
@@ -15832,11 +16401,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Necklace-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Necklace-95-97",
+      "id": 569
     },
     {
       "type": "NECKLACE",
@@ -15859,11 +16429,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Necklace-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Necklace-97-99",
+      "id": 570
     },
     {
       "type": "LEGGINGS",
@@ -15886,11 +16457,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Leggings-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Leggings-90-93",
+      "id": 571
     },
     {
       "type": "NECKLACE",
@@ -15913,11 +16485,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Necklace-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Necklace-90-93",
+      "id": 572
     },
     {
       "type": "LEGGINGS",
@@ -15940,11 +16513,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Leggings-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Leggings-93-95",
+      "id": 573
     },
     {
       "type": "LEGGINGS",
@@ -15967,11 +16541,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Leggings-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Leggings-97-99",
+      "id": 574
     },
     {
       "type": "POTION",
@@ -15998,11 +16573,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Potion-90-93",
+      "id": 575
     },
     {
       "type": "POTION",
@@ -16029,11 +16605,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Potion-93-95",
+      "id": 576
     },
     {
       "type": "POTION",
@@ -16060,11 +16637,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Potion-95-97",
+      "id": 577
     },
     {
       "type": "RELIK",
@@ -16087,11 +16665,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Relik-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Relik-90-93",
+      "id": 578
     },
     {
       "type": "POTION",
@@ -16118,11 +16697,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Potion-97-99",
+      "id": 579
     },
     {
       "type": "RELIK",
@@ -16145,11 +16725,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Relik-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Relik-93-95",
+      "id": 580
     },
     {
       "type": "RELIK",
@@ -16172,11 +16753,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Relik-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Relik-95-97",
+      "id": 581
     },
     {
       "type": "RING",
@@ -16199,11 +16781,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Ring-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Ring-90-93",
+      "id": 582
     },
     {
       "type": "RING",
@@ -16226,11 +16809,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Ring-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Ring-95-97",
+      "id": 583
     },
     {
       "type": "RING",
@@ -16253,11 +16837,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Ring-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Ring-93-95",
+      "id": 584
     },
     {
       "type": "SCROLL",
@@ -16284,11 +16869,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Scroll-90-93",
+      "id": 585
     },
     {
       "type": "SCROLL",
@@ -16315,11 +16901,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Scroll-93-95",
+      "id": 586
     },
     {
       "type": "RING",
@@ -16342,11 +16929,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Ring-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Ring-97-99",
+      "id": 587
     },
     {
       "type": "SCROLL",
@@ -16373,11 +16961,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Scroll-95-97",
+      "id": 588
     },
     {
       "type": "SPEAR",
@@ -16400,11 +16989,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Spear-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Spear-90-93",
+      "id": 589
     },
     {
       "type": "SPEAR",
@@ -16427,11 +17017,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Spear-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Spear-93-95",
+      "id": 590
     },
     {
       "type": "SPEAR",
@@ -16454,11 +17045,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Spear-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Spear-95-97",
+      "id": 591
     },
     {
       "type": "SPEAR",
@@ -16481,11 +17073,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Spear-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Spear-97-99",
+      "id": 592
     },
     {
       "type": "RELIK",
@@ -16508,11 +17101,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Relik-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Relik-97-99",
+      "id": 593
     },
     {
       "type": "LEGGINGS",
@@ -16535,11 +17129,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Leggings-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Leggings-95-97",
+      "id": 594
     },
     {
       "type": "WAND",
@@ -16562,11 +17157,12 @@
         "minimum": 487,
         "maximum": 497
       },
-      "id": "Wand-90-93",
       "lvl": {
         "minimum": 90,
         "maximum": 93
-      }
+      },
+      "name": "Wand-90-93",
+      "id": 595
     },
     {
       "type": "SCROLL",
@@ -16593,11 +17189,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Scroll-97-99",
+      "id": 596
     },
     {
       "type": "WAND",
@@ -16620,11 +17217,12 @@
         "minimum": 497,
         "maximum": 504
       },
-      "id": "Wand-93-95",
       "lvl": {
         "minimum": 93,
         "maximum": 95
-      }
+      },
+      "name": "Wand-93-95",
+      "id": 597
     },
     {
       "type": "WAND",
@@ -16647,11 +17245,12 @@
         "minimum": 504,
         "maximum": 511
       },
-      "id": "Wand-95-97",
       "lvl": {
         "minimum": 95,
         "maximum": 97
-      }
+      },
+      "name": "Wand-95-97",
+      "id": 598
     },
     {
       "type": "WAND",
@@ -16674,11 +17273,12 @@
         "minimum": 511,
         "maximum": 518
       },
-      "id": "Wand-97-99",
       "lvl": {
         "minimum": 97,
         "maximum": 99
-      }
+      },
+      "name": "Wand-97-99",
+      "id": 599
     },
     {
       "type": "BOOTS",
@@ -16701,11 +17301,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Boots-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Boots-100-103",
+      "id": 600
     },
     {
       "type": "BOW",
@@ -16728,11 +17329,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Bow-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Bow-100-103",
+      "id": 601
     },
     {
       "type": "BRACELET",
@@ -16755,11 +17357,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Bracelet-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Bracelet-100-103",
+      "id": 602
     },
     {
       "type": "CHESTPLATE",
@@ -16782,11 +17385,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Chestplate-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Chestplate-100-103",
+      "id": 603
     },
     {
       "type": "DAGGER",
@@ -16809,11 +17413,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Dagger-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Dagger-100-103",
+      "id": 604
     },
     {
       "type": "NECKLACE",
@@ -16836,11 +17441,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Necklace-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Necklace-100-103",
+      "id": 605
     },
     {
       "type": "POTION",
@@ -16867,11 +17473,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Potion-100-103",
+      "id": 606
     },
     {
       "type": "RELIK",
@@ -16894,11 +17501,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Relik-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Relik-100-103",
+      "id": 607
     },
     {
       "type": "RING",
@@ -16921,11 +17529,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Ring-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Ring-100-103",
+      "id": 608
     },
     {
       "type": "SCROLL",
@@ -16952,11 +17561,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Scroll-100-103",
+      "id": 609
     },
     {
       "type": "SPEAR",
@@ -16979,11 +17589,12 @@
         "minimum": 522,
         "maximum": 529
       },
-      "id": "Spear-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Spear-100-103",
+      "id": 610
     },
     {
       "type": "LEGGINGS",
@@ -17006,11 +17617,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Leggings-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Leggings-100-103",
+      "id": 611
     },
     {
       "type": "BOOTS",
@@ -17033,11 +17645,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Boots-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Boots-103-105",
+      "id": 612
     },
     {
       "type": "BOW",
@@ -17060,11 +17673,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Bow-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Bow-103-105",
+      "id": 613
     },
     {
       "type": "BRACELET",
@@ -17087,11 +17701,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Bracelet-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Bracelet-103-105",
+      "id": 614
     },
     {
       "type": "CHESTPLATE",
@@ -17114,11 +17729,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Chestplate-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Chestplate-103-105",
+      "id": 615
     },
     {
       "type": "DAGGER",
@@ -17141,11 +17757,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Dagger-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Dagger-103-105",
+      "id": 616
     },
     {
       "type": "FOOD",
@@ -17172,11 +17789,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Food-103-105",
+      "id": 617
     },
     {
       "type": "HELMET",
@@ -17199,11 +17817,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Helmet-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Helmet-103-105",
+      "id": 618
     },
     {
       "type": "FOOD",
@@ -17230,11 +17849,12 @@
         "minimum": 60,
         "maximum": 60
       },
-      "id": "Food-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Food-100-103",
+      "id": 619
     },
     {
       "type": "LEGGINGS",
@@ -17257,11 +17877,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Leggings-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Leggings-103-105",
+      "id": 620
     },
     {
       "type": "POTION",
@@ -17288,11 +17909,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Potion-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Potion-103-105",
+      "id": 621
     },
     {
       "type": "RELIK",
@@ -17315,11 +17937,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Relik-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Relik-103-105",
+      "id": 622
     },
     {
       "type": "WAND",
@@ -17342,11 +17965,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Wand-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Wand-100-103",
+      "id": 623
     },
     {
       "type": "RING",
@@ -17369,11 +17993,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Ring-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Ring-103-105",
+      "id": 624
     },
     {
       "type": "NECKLACE",
@@ -17396,11 +18021,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Necklace-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Necklace-103-105",
+      "id": 625
     },
     {
       "type": "SCROLL",
@@ -17427,11 +18053,12 @@
         "minimum": 3,
         "maximum": 3
       },
-      "id": "Scroll-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Scroll-103-105",
+      "id": 626
     },
     {
       "type": "SPEAR",
@@ -17454,11 +18081,12 @@
         "minimum": 529,
         "maximum": 532
       },
-      "id": "Spear-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Spear-103-105",
+      "id": 627
     },
     {
       "type": "WAND",
@@ -17481,11 +18109,12 @@
         "minimum": 525,
         "maximum": 527
       },
-      "id": "Wand-103-105",
       "lvl": {
         "minimum": 103,
         "maximum": 105
-      }
+      },
+      "name": "Wand-103-105",
+      "id": 628
     },
     {
       "type": "HELMET",
@@ -17508,11 +18137,12 @@
         "minimum": 522,
         "maximum": 525
       },
-      "id": "Helmet-100-103",
       "lvl": {
         "minimum": 100,
         "maximum": 103
-      }
+      },
+      "name": "Helmet-100-103",
+      "id": 629
     }
   ]
 }
