@@ -28,7 +28,7 @@
 .container {
     padding: 2% 4% 4%;
     display: grid;
-    grid-template-columns: 0.85fr 0.5fr 0.5fr;
+    grid-template-columns: 0.85fr 0.45fr 0.55fr;
     grid-auto-columns: minmax(200px, auto);
     gap: 5px;
     grid-auto-rows: minmax(60px, auto);

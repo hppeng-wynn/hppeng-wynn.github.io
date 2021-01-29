@@ -96,11 +96,11 @@ const special_mappings = {
     "Sum (Mana Sustain)": new SumQuery(["mr", "ms"]),
     "Sum (Life Sustain)": new SumQuery(["hpr", "ls"]),
     "Sum (Health + Health Bonus)": new SumQuery(["hp", "hpBonus"]),
-    "No Req Strength": new NegateQuery("strReq"),
-    "No Req Dexterity": new NegateQuery("dexReq"),
-    "No Req Intelligence": new NegateQuery("intReq"),
-    "No Req Agility": new NegateQuery("agiReq"),
-    "No Req Defense": new NegateQuery("defReq"),
+    "No Strength Req": new NegateQuery("strReq"),
+    "No Dexterity Req": new NegateQuery("dexReq"),
+    "No Intelligence Req": new NegateQuery("intReq"),
+    "No Agility Req": new NegateQuery("agiReq"),
+    "No Defense Req": new NegateQuery("defReq"),
 };
 
 let itemFilters = document.getElementById("filter-items");
