@@ -868,7 +868,7 @@ function resetFields(){
     setValue("int-skp", "0");
     setValue("def-skp", "0");
     setValue("agi-skp", "0");
-    setValue("level-choice", "");
+    setValue("level-choice", "106");
     location.hash = "";
     calculateBuild();
 }
