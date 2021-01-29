@@ -577,12 +577,10 @@ function displayExpandedItem(item, parent_id){
                         if (item.get("tier") !== " ") {
                             p_elem.classList.add(item.get("tier"));
                         }
-                        if (["potion", "scroll", "food"].includes(item.get("type"))){
-                            let b = document.createElement("b");
-                            b.textContent = "[" + item.get("charges") + "/" + item.get("charges") + "]";
-                            b.classList.add("spaceleft");
-                            p_elem.appendChild(b);
-                        } 
+                        if(item.get("tier") === "Crafted") {
+                            p_elem.classList.add("smalltitle");
+                            p_elem.classList.remove("title");
+                        }
                         p_elem.append(document.createElement("br"));
                         let img = document.createElement("img");
                         img.src = "/media/items/generic-" + item.get("type") + ".png";
@@ -773,6 +771,10 @@ function displayExpandedItem(item, parent_id){
             dura = item.get("duration");
             dura_elem.textContent = "Duration: "
             suffix = " sec."
+            let charges = document.createElement("b");
+            charges.textContent = "Charges: " + item.get("charges");
+            charges.classList.add("spaceleft");
+            active_elem.appendChild(charges);
         }
         dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
         active_elem.append(dura_elem);
