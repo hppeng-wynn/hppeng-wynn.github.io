@@ -90,10 +90,6 @@ function init() {
 
     // updates the current search state from the search query input boxes
     function updateSearch() {
-        // hide old search results
-        itemListFooter.innerText = '';
-        for (const itemEntry of itemEntries) itemEntry.style.display = 'none';
-
         // compile query expressions, aborting if nothing has changed or either fails to compile
         const changed = searchFilterField.compile() | searchSortField.compile();
         if (!changed || searchFilterField.output === null || searchSortField.output === null) return;
@@ -102,6 +98,10 @@ function init() {
         const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
             + `?f=${encodeURIComponent(searchFilterField.value)}&s=${encodeURIComponent(searchSortField.value)}`;
         window.history.pushState({ path: newUrl }, '', newUrl);
+
+        // hide old search results
+        itemListFooter.innerText = '';
+        for (const itemEntry of itemEntries) itemEntry.style.display = 'none';
 
         // index and sort search results
         const searchResults = [];
@@ -172,8 +172,6 @@ function init() {
         for (const entryStr of window.location.search.substring(1).split('&')) {
             const ndx = entryStr.indexOf('=');
             if (ndx !== -1) {
-                console.log(entryStr.substring(0, ndx));
-                console.log(entryStr.substring(ndx + 1));
                 switch (entryStr.substring(0, ndx)) {
                     case 'f':
                         searchFilterField.field.value = decodeURIComponent(entryStr.substring(ndx + 1));
