@@ -369,6 +369,8 @@ class Craft{
                 statMap.get("maxRolls").set(id,0);
             }
         }
+
+        statMap.set("crafted", true);
         this.statMap = statMap;
     }
 }

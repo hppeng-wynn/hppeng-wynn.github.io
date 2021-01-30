@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.20";
+const BUILD_VERSION = "6.9.21";
 
 function setTitle() {
     let text;
@@ -220,6 +220,29 @@ function getItemNameFromID(id) {
     return idMap.get(id);
 }
 
+function parsePowdering(powder_info) {
+    // TODO: Make this run in linear instead of quadratic time... ew
+    let powdering = [];
+    for (let i = 0; i < 5; ++i) {
+        let powders = "";
+        let n_blocks = Base64.toInt(powder_info.charAt(0));
+        console.log(n_blocks + " blocks");
+        powder_info = powder_info.slice(1);
+        for (let j = 0; j < n_blocks; ++j) {
+            let block = powder_info.slice(0,5);
+            console.log(block);
+            let six_powders = Base64.toInt(block);
+            for (let k = 0; k < 6 && six_powders != 0; ++k) {
+                powders += powderNames.get((six_powders & 0x1f) - 1);
+                six_powders >>>= 5;
+            }
+            powder_info = powder_info.slice(5);
+        }
+        powdering[i] = powders;
+    }
+    return powdering;
+}
+
 /*
  * Populate fields based on url, and calculate build.
  */
@@ -235,86 +258,54 @@ function decodeBuild(url_tag) {
         if (version === "0" || version === "1" || version === "2" || version === "3") {
             let equipments = info[1];
             for (let i = 0; i < 9; ++i ) {
-                equipment[i] = getItemNameFromID(Base64.toInt(equipments.slice(i*3,i*3+3)));
+                let equipment_str = equipments.slice(i*3,i*3+3);
+                equipment[i] = getItemNameFromID(Base64.toInt(equipment_str));
             }
-        } else if (version === "1") {
-            let powder_info = info[1].slice(27);
-            console.log(powder_info);
-            // TODO: Make this run in linear instead of quadratic time... ew
-            for (let i = 0; i < 5; ++i) {
-                let powders = "";
-                let n_blocks = Base64.toInt(powder_info.charAt(0));
-                console.log(n_blocks + " blocks");
-                powder_info = powder_info.slice(1);
-                for (let j = 0; j < n_blocks; ++j) {
-                    let block = powder_info.slice(0,5);
-                    console.log(block);
-                    let six_powders = Base64.toInt(block);
-                    for (let k = 0; k < 6 && six_powders != 0; ++k) {
-                        powders += powderNames.get((six_powders & 0x1f) - 1);
-                        six_powders >>>= 5;
-                    }
-                    powder_info = powder_info.slice(5);
+            info[1] = equipments.slice(27);
+        }
+        if (version === "4") {
+            let info_str = info[1];
+            let start_idx = 0;
+            for (let i = 0; i < 9; ++i ) {
+                if (info_str.charAt(start_idx) === "-") {
+                    equipment[i] = "CR-"+info_str.slice(start_idx+1, start_idx+18);
+                    start_idx += 18;
                 }
-                powdering[i] = powders;
+                else {
+                    let equipment_str = info_str.slice(start_idx, start_idx+3);
+                    equipment[i] = getItemNameFromID(Base64.toInt(equipment_str));
+                    start_idx += 3;
+                }
             }
+            info[1] = info_str.slice(start_idx);
+        }
+
+        if (version === "1") {
+            let powder_info = info[1];
+            powdering = parsePowdering(powder_info);
         } else if (version === "2") {
             save_skp = true;
-            let skillpoint_info = info[1].slice(27, 37);
+            let skillpoint_info = info[1].slice(0, 10);
             for (let i = 0; i < 5; ++i ) {
                 skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
             }
 
-            let powder_info = info[1].slice(37);
-            console.log(powder_info);
-            // TODO: Make this run in linear instead of quadratic time...
-            for (let i = 0; i < 5; ++i) {
-                let powders = "";
-                let n_blocks = Base64.toInt(powder_info.charAt(0));
-                console.log(n_blocks + " blocks");
-                powder_info = powder_info.slice(1);
-                for (let j = 0; j < n_blocks; ++j) {
-                    let block = powder_info.slice(0,5);
-                    console.log(block);
-                    let six_powders = Base64.toInt(block);
-                    for (let k = 0; k < 6 && six_powders != 0; ++k) {
-                        powders += powderNames.get((six_powders & 0x1f) - 1);
-                        six_powders >>>= 5;
-                    }
-                    powder_info = powder_info.slice(5);
-                }
-                powdering[i] = powders;
-            }
-        } else if (version === "3"){
-            level = Base64.toInt(info[1].slice(37,39));
+            let powder_info = info[1].slice(10);
+            powdering = parsePowdering(powder_info);
+        } else if (version === "3" || version === "4"){
+            level = Base64.toInt(info[1].slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
-            let skillpoint_info = info[1].slice(27, 37);
+            let skillpoint_info = info[1].slice(0, 10);
             for (let i = 0; i < 5; ++i ) {
                 skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
             }
 
-            let powder_info = info[1].slice(39);
-            // TODO: Make this run in linear instead of quadratic time...
-            for (let i = 0; i < 5; ++i) {
-                let powders = "";
-                let n_blocks = Base64.toInt(powder_info.charAt(0));
-                powder_info = powder_info.slice(1);
-                for (let j = 0; j < n_blocks; ++j) {
-                    let block = powder_info.slice(0,5);
-                    console.log(block);
-                    let six_powders = Base64.toInt(block);
-                    for (let k = 0; k < 6 && six_powders != 0; ++k) {
-                        powders += powderNames.get((six_powders & 0x1f) - 1);
-                        six_powders >>>= 5;
-                    }
-                    powder_info = powder_info.slice(5);
-                }
-                powdering[i] = powders;
-            }
-        } else if (version === "4") { //crafted support
-            //@hpp
+            let powder_info = info[1].slice(12);
+
+            powdering = parsePowdering(powder_info);
         }
+
         for (let i in powderInputs) {
             setValue(powderInputs[i], powdering[i]);
         }
@@ -330,15 +321,26 @@ function decodeBuild(url_tag) {
 function encodeBuild() {
     if (player_build) {
         //@hpp update for 4_
-        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
-                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
-                            Base64.fromIntN(player_build.leggings.get("id"), 3) +
-                            Base64.fromIntN(player_build.boots.get("id"), 3) +
-                            Base64.fromIntN(player_build.ring1.get("id"), 3) +
-                            Base64.fromIntN(player_build.ring2.get("id"), 3) +
-                            Base64.fromIntN(player_build.bracelet.get("id"), 3) +
-                            Base64.fromIntN(player_build.necklace.get("id"), 3) +
-                            Base64.fromIntN(player_build.weapon.get("id"), 3);
+        let build_string = "4_";
+        let crafted_idx = 0;
+        for (const item of player_build.items) {
+            if (item.get("crafted")) {
+                build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx])
+            }
+            else {
+                build_string += Base64.fromIntN(item.get("id"), 3);
+            }
+        }
+//        this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
+//        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
+//                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
+//                            Base64.fromIntN(player_build.leggings.get("id"), 3) +
+//                            Base64.fromIntN(player_build.boots.get("id"), 3) +
+//                            Base64.fromIntN(player_build.ring1.get("id"), 3) +
+//                            Base64.fromIntN(player_build.ring2.get("id"), 3) +
+//                            Base64.fromIntN(player_build.bracelet.get("id"), 3) +
+//                            Base64.fromIntN(player_build.necklace.get("id"), 3) +
+//                            Base64.fromIntN(player_build.weapon.get("id"), 3);
 
         for (const skp of skp_order) {
             build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
@@ -793,7 +795,7 @@ function calculateBuildStats() {
             let baditem = document.createElement("p"); 
                 baditem.classList.add("nocolor");
                 baditem.classList.add("itemp"); 
-                baditem.textContent = item.get("name") + " requires level " + item.get("lvl") + " to use.";
+                baditem.textContent = item.get("displayName") + " requires level " + item.get("lvl") + " to use.";
                 lvlWarning.appendChild(baditem);
         }
     }

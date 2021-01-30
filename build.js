@@ -113,7 +113,7 @@ class Build{
             const helmet = itemMap.get(equipment[0]);
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
             this.helmet = expandItem(helmet, this.powders[0]);
-        }else{
+        } else {
             try {
                 let helmet = getCraftFromHash(equipment[0]);
                 this.powders[0] = this.powders[0].slice(0,helmet.statMap.slots); 
@@ -133,7 +133,7 @@ class Build{
             const chestplate = itemMap.get(equipment[1]);
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
             this.chestplate = expandItem(chestplate, this.powders[1]);
-        }else{
+        } else {
             try {
                 let chestplate = getCraftFromHash(equipment[1]);
                 this.powders[1] = this.powders[1].slice(0,chestplate.statMap.slots);
@@ -148,11 +148,11 @@ class Build{
                 errors.push(new ItemNotFound(equipment[1], "chestplate", true));
             }
         }
-        if(itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
+        if (itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
             const leggings = itemMap.get(equipment[2]);
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
-        }else{
+        } else {
             try {
                 let leggings = getCraftFromHash(equipment[2]);
                 this.powders[2] = this.powders[2].slice(0,leggings.statMap.slots); 
@@ -167,11 +167,11 @@ class Build{
                 errors.push(new ItemNotFound(equipment[2], "leggings", true));
             }
         }
-        if(itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
+        if (itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
             const boots = itemMap.get(equipment[3]);
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
             this.boots = expandItem(boots, this.powders[3]);
-        }else{
+        } else {
             try {
                 let boots = getCraftFromHash(equipment[3]);
                 this.powders[3] = this.powders[3].slice(0,boots.statMap.slots); 
