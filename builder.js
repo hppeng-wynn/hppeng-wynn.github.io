@@ -237,7 +237,8 @@ function decodeBuild(url_tag) {
             for (let i = 0; i < 9; ++i ) {
                 equipment[i] = getItemNameFromID(Base64.toInt(equipments.slice(i*3,i*3+3)));
             }
-        } else if (version === "1") {
+        }
+        if (version === "1") {
             let powder_info = info[1].slice(27);
             console.log(powder_info);
             // TODO: Make this run in linear instead of quadratic time... ew
@@ -258,7 +259,8 @@ function decodeBuild(url_tag) {
                 }
                 powdering[i] = powders;
             }
-        } else if (version === "2") {
+        }
+        if (version === "2") {
             save_skp = true;
             let skillpoint_info = info[1].slice(27, 37);
             for (let i = 0; i < 5; ++i ) {
@@ -285,7 +287,8 @@ function decodeBuild(url_tag) {
                 }
                 powdering[i] = powders;
             }
-        } else if (version === "3"){
+        }
+        if (version === "3"){
             level = Base64.toInt(info[1].slice(37,39));
             setValue("level-choice",level);
             save_skp = true;
@@ -312,7 +315,8 @@ function decodeBuild(url_tag) {
                 }
                 powdering[i] = powders;
             }
-        } else if (version === "4") { //crafted support
+        }
+        if (version === "4") { //crafted support
             //@hpp
         }
         for (let i in powderInputs) {
