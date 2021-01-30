@@ -1,31 +1,30 @@
-let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
-let accessoryTypes = [ "ring", "bracelet", "necklace" ];
-let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
-let consumableTypes = [ "potion", "scroll", "food"]
+
 
 //constructs a craft from a hash 'CR-qwoefsabaoe' or 'qwoefsaboe'
-function createCraft(hash) {
-    let name = hash;
+function getCraftFromHash(hash) {
+    let name = hash.slice();
     if (name.slice(0,3) === "CR-") {
         name = name.substring(3);
     }
-    this.hash = name;
-    ingreds = [];
-    /*for (let i = 0; i < 6; i ++ ) {
-        ingreds.push( ingIDMap.get(Base64.toInt(name.substring(2*i,2*i+2))) );
+    version = name.substring(0,1);
+    name = name.substring(1);
+    if (version === "1") {
+        let ingreds = [];
+        for (let i = 0; i < 6; i ++ ) {
+            ingreds.push( expandIngredient(ingMap.get(ingIDMap.get(Base64.toInt(name.substring(2*i,2*i+2))))) );
+        }
+        let recipe = expandRecipe(recipeMap.get(recipeIDMap.get(Base64.toInt(name.substring(12,14)))));
+        
+        tierNum = Base64.toInt(name.substring(14,15));
+        let mat_tiers = [];
+        mat_tiers.push(tierNum % 3 == 0 ? 3 : tierNum % 3);
+        mat_tiers.push(Math.floor((tierNum-0.5) / 3)+1); //Trying to prevent round-off error, don't yell at me
+        let atkSpd = Base64.toInt(name.substring(15));
+        let atkSpds = ["SLOW","NORMAL","FAST"];
+        let attackSpeed = atkSpds[atkSpd];
+        return new Craft(recipe,mat_tiers,ingreds,attackSpeed,"1"+name);
     }
-    let recipe = recipeIDMap.get(Base64.toInt(tag.substring(12,14)));
-    recipesName = recipe.split("-");
-    setValue("recipe-choice",recipesName[0]);
-    setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
-    tierNum = Base64.toInt(tag.substring(14,15));
-    let mat_tiers = [];
-    mat_tiers.push(tierNum % 3 == 0 ? 3 : tierNum % 3);
-    mat_tiers.push(Math.floor((tierNum-0.5) / 3)+1); //Trying to prevent round-off error, don't yell at me
-    let atkSpd = Base64.toInt(tag.substring(15));
-    let atkSpds = ["SLOW,NORMAL,FAST"];
-    let attackSpeed atkSpds[atkSpd];
-    */
+    
 }
 
 
@@ -48,7 +47,21 @@ class Craft{
     }
     
 
+    applyPowders() {
+        if (this.statMap.get("category") === "armor") {
+            //double apply armor powders
+            for(const id of this.statMap.get("powders")){
+                let powder = powderStats[id];
+                let name = powderNames.get(id);
+                this.statMap.set(name.charAt(0) + "Def", (this.statMap.get(name.charAt(0)+"Def") || 0) + 2 * powder["defPlus"]);
+                this.statMap.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (this.statMap.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - 2 * powder["defMinus"]);
+            }
+        }else if (this.statMap.get("category") === "weapon") {
+            //do nothing - weapon powders are handled in displayExpandedItem
+        }
 
+        
+    }
     setHash(hash) {
         this.hash = hash;
         this.statMap.set("displayName", "CR-" + this.hash);
@@ -57,7 +70,7 @@ class Craft{
         @pre The craft itself should be valid. No checking of validity of pieces is done here.
     */
     initCraftStats(){
-        let consumables = ["POTION", "SCROLL", "FOOD"];
+
         let statMap = new Map();
         statMap.set("minRolls", new Map());
         statMap.set("maxRolls", new Map());
@@ -68,18 +81,22 @@ class Craft{
         statMap.set("durability", [this.recipe.get("durability")[0], this.recipe.get("durability")[1]]);
         statMap.set("lvl", (this.recipe.get("lvl")[0] + "-" + this.recipe.get("lvl")[1]) );
         statMap.set("nDam", 0);
+        statMap.set("hp",0);
+        statMap.set("hpLow",0);
         for (const e of skp_elements) {
             statMap.set(e + "Dam", "0-0");
             statMap.set(e + "Def", 0);
         }
         for (const e of skp_order) {
             statMap.set(e + "Req", 0)
+            statMap.set(e, 0);
         }
-
+        let allNone = true;
         if (armorTypes.includes(statMap.get("type")) || weaponTypes.includes(statMap.get("type"))) {
+            statMap.set("category","weapon");
             if(this.recipe.get("lvl")[0] < 30) {
                 statMap.set("slots", 1);
-            } else if (this.recipe.get("lvl") < 70) {
+            } else if (this.recipe.get("lvl")[0] < 70) {
                 statMap.set("slots", 2);
             } else{
                 statMap.set("slots", 3);
@@ -88,15 +105,16 @@ class Craft{
             statMap.set("slots", 0);
         }
         if (consumableTypes.includes(statMap.get("type"))) {
+            statMap.set("category","consumable");
             if(this.recipe.get("lvl")[0] < 30) {
                 statMap.set("charges", 1);
-            } else if (this.recipe.get("lvl") < 70) {
+            } else if (this.recipe.get("lvl")[0] < 70) {
                 statMap.set("charges", 2);
             } else{
                 statMap.set("charges", 3);
             }
             //no ingredient consumables ALWAYS have 3 charges.
-            let allNone = true;
+            
             for(const ingred of this.ingreds) {
                 if(ingred.get("name") !== "No Ingredient") {
                     allNone = false;
@@ -126,6 +144,9 @@ class Craft{
             statMap.set("category","weapon");
             statMap.set("atkSpd",this.atkSpd);
         } 
+        if (accessoryTypes.includes(statMap.get("type"))) {
+            statMap.set("category", "accessory");
+        }
         statMap.set("powders",[]);
         
         /* Change certain IDs based on material tier. 
@@ -152,8 +173,7 @@ class Craft{
         let low = this.recipe.get("healthOrDamage")[0];
         let high = this.recipe.get("healthOrDamage")[1];
         if (statMap.get("category") === "consumable") {
-            //duration modifier
-            if(statMap.has("hp")) { //hack
+            if(allNone) { 
                 statMap.set("hp", Math.floor( low * matmult )+ "-" + Math.floor( high * matmult ));
             } else {
                 statMap.set("duration", [Math.floor( statMap.get("duration")[0] * matmult ), Math.floor( statMap.get("duration")[1] * matmult )]);
@@ -229,7 +249,8 @@ class Craft{
             }
             low = Math.floor(low * matmult);
             high = Math.floor(high * matmult);
-            statMap.set("hp",low+"-"+high);
+            statMap.set("hp",high);
+            statMap.set("hpLow",low);
         }
         /* END SECTION */
 
@@ -293,11 +314,11 @@ class Craft{
             let ingred = this.ingreds[n];
             let eff_mult = (eff_flat[n] / 100).toFixed(2);
             for (const [key, value] of ingred.get("itemIDs")) {
-                if(key !== "dura") {
+                if(key !== "dura"  && !consumableTypes.includes(statMap.get("type"))) { //consumables NEVER get reqs
                     if (!ingred.get("isPowder")) {
-                        statMap.set(key, Math.floor(statMap.get(key) + value*eff_mult)); //CHECK IF THIS IS CORRECT
+                        statMap.set(key, Math.round(statMap.get(key) + value*eff_mult)); 
                     } else {
-                        statMap.set(key, Math.floor(statMap.get(key) + value));
+                        statMap.set(key, Math.round(statMap.get(key) + value));
                     }
                 } else { //durability, NOT affected by effectiveness
                     statMap.set("durability", statMap.get("durability").map(x => x + value));
@@ -320,16 +341,34 @@ class Craft{
                 }
             }
         }
-        for (const e of skp_order) {
-            statMap.set(e,statMap.get("maxRolls").get(e));
-        }
         for (const d in statMap.get("durability")) {
-            if(statMap.get("durability")[d] < 1) { statMap.get("durability")[d] = 1;}
+            if(statMap.get("durability")[d] < 1) { statMap.get("durability")[d] = 1;} 
+            else {
+                statMap.get("durability")[d] = Math.floor(statMap.get("durability")[d]);
+            }
         }
         for (const d in statMap.get("duration")) {
-            if(statMap.get("duration")[d] < 1) { statMap.get("duration")[d] = 1;}
+            if(statMap.get("duration")[d] < 10) { statMap.get("duration")[d] = 10;}
         }
         if(statMap.has("charges") && statMap.get("charges") < 1 ) { statMap.set("charges",1)}
+
+        statMap.set("reqs",[0,0,0,0,0]);
+        statMap.set("skillpoints", [0,0,0,0,0]);
+        statMap.set("damageBonus",[0,0,0,0,0]);
+        for (const e in skp_order) {
+            statMap.set(skp_order[e], statMap.get("maxRolls").has(skp_order[e]) ? statMap.get("maxRolls").get(skp_order[e]) : 0);
+            statMap.get("skillpoints")[e] = statMap.get("maxRolls").has(skp_order[e]) ? statMap.get("maxRolls").get(skp_order[e]) : 0;
+            statMap.get("reqs")[e] = statMap.has(skp_order[e]+"Req") && !consumableTypes.includes(statMap.get("type"))? statMap.get(skp_order[e]+"Req") : 0;
+            statMap.get("damageBonus")[e] = statMap.has(skp_order[e]+"DamPct") ? statMap.get(skp_order[e]+"DamPct") : 0;
+        }
+        for (const id of rolledIDs) {
+            if (statMap.get("minRolls").has(id)) {
+                continue;
+            } else {
+                statMap.get("minRolls").set(id,0);
+                statMap.get("maxRolls").set(id,0);
+            }
+        }
         this.statMap = statMap;
     }
 }

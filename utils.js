@@ -2,6 +2,12 @@ let skp_order = ["str","dex","int","def","agi"];
 let skill = ["Strength", "Dexterity", "Intelligence", "Defense", "Agility"];
 let skp_elements = ["e","t","w","f","a"];
 let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
+// Set up item lists for quick access later.
+let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
+let accessoryTypes = [ "ring", "bracelet", "necklace" ];
+let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
+let consumableTypes = [ "potion", "scroll", "food"];
+
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
 

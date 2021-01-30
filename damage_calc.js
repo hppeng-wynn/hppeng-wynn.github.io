@@ -40,7 +40,14 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
     //console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
-    for (const powderID of weapon.get("powders")) {
+    //Double powder apply for weapons
+    let powders = weapon.get("powders").slice();
+    if (weapon.get("tier") === "Crafted") {
+        powders = powders.flatMap(x => [x,x]);
+    }
+    
+    //apply powders to weapon
+    for (const powderID of powders) {
         const powder = powderStats[powderID];
         // Bitwise to force conversion to integer (integer division).
         const element = (powderID/6) | 0;

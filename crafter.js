@@ -2,14 +2,14 @@
  * TESTING SECTION
  */
 
-const url_base = location.href.split("#")[0];
-const url_tag = location.hash.slice(1);
-console.log(url_base);
-console.log(url_tag);
+const ing_url_base = location.href.split("#")[0];
+const ing_url_tag = location.hash.slice(1);
+console.log(ing_url_base);
+console.log(ing_url_tag);
 
 
 
-const BUILD_VERSION = "6.9.11";
+const ING_BUILD_VERSION = "6.9.20";
 /*
  * END testing section
  */
@@ -26,13 +26,13 @@ let ingFields = ["fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprPct"
 let player_craft;
 
 function setTitle() {
-    document.getElementById("header").textContent = "WynnCrafter version "+BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
+    document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
     let disclaimer = document.createElement("p");
     disclaimer.textContent = "THIS CRAFTER IS NEARLY COMPLETE. The effect of material tiers on crafted items is not 100% tested and accurate. If you know how the math behind it works OR if you have a crafted item whose stats contradict this crafter, please contact ferricles on forums, discord, or ingame.";
     document.getElementById("header").append(disclaimer);
 }
-setTitle();
+
 
 let ingMap = new Map();
 let ingList = [];
@@ -111,20 +111,25 @@ function init() {
     console.log(ings);
     console.log("all recipes");
     console.log(recipes);
-    console.log(ingList);
+    /*console.log(ingList);
     console.log(recipeList);   
     console.log(ingIDMap);
-    console.log(recipeIDMap);
-
-    document.getElementById("recipe-choice").addEventListener("change", (event) => {
-        updateMaterials();
-    });
-    document.getElementById("level-choice").addEventListener("change", (event) => {
-        updateMaterials();
-    });
-
-    populateFields();
-    decodeCraft(url_tag);
+    console.log(recipeIDMap);*/
+    try {
+        document.getElementById("recipe-choice").addEventListener("change", (event) => {
+            updateMaterials();
+        });
+        document.getElementById("level-choice").addEventListener("change", (event) => {
+            updateMaterials();
+        });
+        
+        populateFields();
+        decodeCraft(ing_url_tag);
+        setTitle();
+    } catch (Error) {
+        console.log("If you are seeing this while building, do not worry. Oherwise, panic! (jk contact ferricles)");
+    }
+    
     
 }
 function updateMaterials() {
@@ -198,7 +203,7 @@ function calculateCraft() {
     player_craft = new Craft(recipe,mat_tiers,ingreds,atkSpd,"");
 
     location.hash = encodeCraft();
-    player_craft.setHash(encodeCraft().split("_")[1]);
+    player_craft.setHash(encodeCraft());
     console.log(player_craft);
     /*console.log(recipe)
     console.log(levelrange)
@@ -237,7 +242,7 @@ function calculateCraft() {
 function encodeCraft() {
     if (player_craft) {
         let atkSpds = ["SLOW","NORMAL","FAST"];
-        let craft_string =  "1_" + 
+        let craft_string =  "1" + 
                             Base64.fromIntN(player_craft.ingreds[0].get("id"), 2) + 
                             Base64.fromIntN(player_craft.ingreds[1].get("id"), 2) +
                             Base64.fromIntN(player_craft.ingreds[2].get("id"), 2) +
@@ -251,19 +256,19 @@ function encodeCraft() {
     }
     return "";
 }
-function decodeCraft(url_tag) {
-    if (url_tag) {
-        let info = url_tag.split("_");
-        let version = info[0];
-        let tag = info[1];
+function decodeCraft(ing_url_tag) {
+    if (ing_url_tag) {
+        console.log(ing_url_tag);
+        let version = ing_url_tag.charAt(0);
+        let tag = ing_url_tag.substring(1);
         if (version === "1") {
             ingreds = [];
             for (let i = 0; i < 6; i ++ ) {
                 setValue("ing-choice-"+(i+1), ingIDMap.get(Base64.toInt(tag.substring(2*i,2*i+2))));
-                console.log(Base64.toInt(tag.substring(2*i,2*i+2)));
+                //console.log(Base64.toInt(tag.substring(2*i,2*i+2)));
             }
             recipe = recipeIDMap.get(Base64.toInt(tag.substring(12,14)));
-            console.log(Base64.toInt(tag.substring(12,14)));
+            //console.log(Base64.toInt(tag.substring(12,14)));
             recipesName = recipe.split("-");
             setValue("recipe-choice",recipesName[0]);
             setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
@@ -322,7 +327,7 @@ function toggleButton(buttonId) {
 */
 function copyRecipe(){
     if (player_craft) {
-        copyTextToClipboard(url_base+location.hash);
+        copyTextToClipboard(ing_url_base+location.hash);
         document.getElementById("copy-button").textContent = "Copied!";
     }
 }
@@ -331,7 +336,7 @@ function copyRecipe(){
 */
 function shareRecipe(){
     if (player_craft) {
-        let copyString = url_base+location.hash + "\n";
+        let copyString = ing_url_base+location.hash + "\n";
         let name = player_craft.recipe.get("name").split("-");
         copyString += " > " + name[0] + " " + "Lv. " + name[1] + "-" + name[2] + " (" + player_craft.mat_tiers[0] + "\u272B, " + player_craft.mat_tiers[1] + "\u272B)\n";
         let names = [

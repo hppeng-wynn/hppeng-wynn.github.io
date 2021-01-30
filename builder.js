@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.11";
+const BUILD_VERSION = "6.9.20";
 
 function setTitle() {
     let text;
@@ -20,10 +20,7 @@ function setTitle() {
 setTitle();
 
 let player_build;
-// Set up item lists for quick access later.
-let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
-let accessoryTypes = [ "ring", "bracelet", "necklace" ];
-let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
+
 // THIS IS SUPER DANGEROUS, WE SHOULD NOT BE KEEPING THIS IN SO MANY PLACES
 let item_fields = [ "name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id" ];
 let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprRaw", "hprPct", "hpBonus", "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
@@ -170,9 +167,9 @@ function init() {
         populateItemList(armorType);
         // Add change listener to update armor slots.
         document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
-            let item = itemMap.get(event.target.value);
-            if (item !== undefined) {
-                document.getElementById(armorType+"-slots").textContent = item.slots + " slots";
+            let item = itemMap.has(event.target.value) ? itemMap.get(event.target.value) : (getCraftFromHash(event.target.value) != undefined ? getCraftFromHash(event.target.value).statMap : undefined);
+            if (item !== undefined && event.target.value !== "") {
+                document.getElementById(armorType+"-slots").textContent = (item["slots"] ? item["slots"] : item.get("slots"))+ " slots";
             }
             else {
                 document.getElementById(armorType+"-slots").textContent = "X slots";
@@ -205,11 +202,10 @@ function init() {
 
     // Add change listener to update weapon slots.
     document.getElementById("weapon-choice").addEventListener("change", (event) => {
-        let item = itemMap.get(event.target.value);
-        if (item !== undefined) {
-            document.getElementById("weapon-slots").textContent = item.slots + " slots";
-        }
-        else { 
+        let item = itemMap.has(event.target.value) ? itemMap.get(event.target.value) : (getCraftFromHash(event.target.value) != undefined ? getCraftFromHash(event.target.value).statMap : undefined);
+        if (item !== undefined && event.target.value !== "") {
+            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : item.get("slots"))+ " slots";
+        } else {
             document.getElementById("weapon-slots").textContent = "X slots";
         }
     });
@@ -241,8 +237,7 @@ function decodeBuild(url_tag) {
             for (let i = 0; i < 9; ++i ) {
                 equipment[i] = getItemNameFromID(Base64.toInt(equipments.slice(i*3,i*3+3)));
             }
-        }
-        if (version === "1") {
+        } else if (version === "1") {
             let powder_info = info[1].slice(27);
             console.log(powder_info);
             // TODO: Make this run in linear instead of quadratic time... ew
@@ -263,8 +258,7 @@ function decodeBuild(url_tag) {
                 }
                 powdering[i] = powders;
             }
-        }
-        if (version === "2") {
+        } else if (version === "2") {
             save_skp = true;
             let skillpoint_info = info[1].slice(27, 37);
             for (let i = 0; i < 5; ++i ) {
@@ -291,8 +285,7 @@ function decodeBuild(url_tag) {
                 }
                 powdering[i] = powders;
             }
-        }
-        if(version === "3"){
+        } else if (version === "3"){
             level = Base64.toInt(info[1].slice(37,39));
             setValue("level-choice",level);
             save_skp = true;
@@ -319,6 +312,8 @@ function decodeBuild(url_tag) {
                 }
                 powdering[i] = powders;
             }
+        } else if (version === "4") { //crafted support
+            //@hpp
         }
         for (let i in powderInputs) {
             setValue(powderInputs[i], powdering[i]);
@@ -334,6 +329,7 @@ function decodeBuild(url_tag) {
 */
 function encodeBuild() {
     if (player_build) {
+        //@hpp update for 4_
         let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
                             Base64.fromIntN(player_build.chestplate.get("id"), 3) +
                             Base64.fromIntN(player_build.leggings.get("id"), 3) +
@@ -406,7 +402,7 @@ function calculateBuild(save_skp, skp){
         let equipment = [ null, null, null, null, null, null, null, null, null ];
         for (let i in equipment) {
             let equip = getValue(equipmentInputs[i]);
-            if (equip === "") equip = "No " + equipment_names[i];
+            if (equip === "") { equip = "No " + equipment_names[i] }
             equipment[i] = equip;
         }
         let powderings = [];
@@ -434,14 +430,14 @@ function calculateBuild(save_skp, skp){
                 else
                     errors.push(new IncorrectInput(errorederrors[0], "t6 or e3", powderInputs[i]));
             }
-            console.log("POWDERING" + powdering);
+            console.log("POWDERING: " + powdering);
             powderings.push(powdering);
         }
         
-        console.log(equipment);
-        console.log(document.getElementById("level-choice").value);
-        player_build = new Build(document.getElementById("level-choice").value, equipment, powderings, new Map(), errors);
 
+        let level = document.getElementById("level-choice").value;
+        player_build = new Build(level, equipment, powderings, new Map(), errors);
+        console.log(player_build);
         for (let i of document.getElementsByClassName("hide-container-block")) {
 			i.style.display = "block";
         }
