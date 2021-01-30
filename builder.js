@@ -326,6 +326,7 @@ function encodeBuild() {
         for (const item of player_build.items) {
             if (item.get("crafted")) {
                 build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx])
+                crafted_idx += 1
             }
             else {
                 build_string += Base64.fromIntN(item.get("id"), 3);
