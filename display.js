@@ -497,12 +497,12 @@ function displayExpandedItem(item, parent_id){
         "eSteal",
         "gXp", "gSpd",
         "#ldiv",
-        "!elemental",
+        "majorIds",
         "slots",
-        "!elemental",
         "set",
         "quest",
-        "restrict"];
+        "restrict"
+        ];
 
     // Clear the parent div.
     setHTML(parent_id, "");
@@ -560,6 +560,11 @@ function displayExpandedItem(item, parent_id){
                     powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
+                    active_elem.appendChild(p_elem);
+                } else if (id === "majorIds") {
+                    let p_elem = document.createElement("p");
+                    p_elem.classList.add("itemp");
+                    p_elem.textContent = "Major IDs: " + item.get(id).toString();
                     active_elem.appendChild(p_elem);
                 } else {
                     let p_elem;
