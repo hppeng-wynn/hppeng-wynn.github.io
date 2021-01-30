@@ -2,8 +2,8 @@ const ING_DB_VERSION = 4;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
-let db;
-let reload = false;
+let idb;
+let ireload = false;
 let ings;
 let recipes;
 
@@ -11,7 +11,7 @@ let recipes;
  * Load item set from local DB. Calls init() on success.
  */
 async function ing_load_local(init_func) {
-    let get_tx = db.transaction(['ing_db', 'recipe_db'], 'readonly');
+    let get_tx = idb.transaction(['ing_db', 'recipe_db'], 'readonly');
     let ings_store = get_tx.objectStore('ing_db');
     let recipes_store = get_tx.objectStore('recipe_db');
     let request3 = ings_store.getAll();
@@ -32,7 +32,7 @@ async function ing_load_local(init_func) {
         init_func();
     }
     await get_tx.complete;
-    db.close();
+    idb.close();
 }
 
 /*
@@ -63,12 +63,12 @@ async function load_ings(init_func) {
     await clear_tx2.complete;
     await clear_tx3.complete;*/
     let add_promises = [];
-    let add_tx2 = db.transaction(['ing_db'], 'readwrite');
+    let add_tx2 = idb.transaction(['ing_db'], 'readwrite');
     let ings_store = add_tx2.objectStore('ing_db');
     for (const ing in ings) {
         add_promises.push(ings_store.add(ings[ing], ing));
     }
-    let add_tx3 = db.transaction(['recipe_db'], 'readwrite');
+    let add_tx3 = idb.transaction(['recipe_db'], 'readwrite');
     let recipes_store = add_tx3.objectStore('recipe_db');
     for (const recipe in recipes) {
         add_promises.push(recipes_store.add(recipes[recipe], recipe));
@@ -76,7 +76,7 @@ async function load_ings(init_func) {
     add_promises.push(add_tx2.complete);
     add_promises.push(add_tx3.complete);
     Promise.all(add_promises).then((values) => {
-        db.close();
+        idb.close();
         init_func();
     });
 }
@@ -89,8 +89,8 @@ function load_ing_init(init_func) {
     }
 
     request.onsuccess = function() {
-        db = request.result;
-        if (!reload) {
+        idb = request.result;
+        if (!ireload) {
             console.log("Using stored data...")
             ing_load_local(init_func);
         }
@@ -101,24 +101,24 @@ function load_ing_init(init_func) {
     }
 
     request.onupgradeneeded = function(e) {
-        reload = true;
+        ireload = true;
 
-        let db = e.target.result;
+        let idb = e.target.result;
         
         try {
-            db.deleteObjectStore('ing_db');
+            idb.deleteObjectStore('ing_db');
         }
         catch (error) {
             console.log("Could not delete ingredient DB. This is probably fine");
         }
         try {
-            db.deleteObjectStore('recipe_db');
+            idb.deleteObjectStore('recipe_db');
         }
         catch (error) {
             console.log("Could not delete recipe DB. This is probably fine");
         }
-        db.createObjectStore('ing_db');
-        db.createObjectStore('recipe_db');
+        idb.createObjectStore('ing_db');
+        idb.createObjectStore('recipe_db');
 
         console.log("DB setup complete...");
     }

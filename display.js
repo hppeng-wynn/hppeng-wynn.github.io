@@ -60,17 +60,14 @@ function expandItem(item, powders){
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
     expandedItem.set("powders", powders);
-    
-    if(expandedItem.get("category") == "armor"){ //item is armor
+    if(item.category === "armor") {
         for(const id of powders){
-            //console.log(powderStats[id]);
             let powder = powderStats[id];
             let name = powderNames.get(id);
             expandedItem.set(name.charAt(0) + "Def", (expandedItem.get(name.charAt(0)+"Def") || 0) + powder["defPlus"]);
             expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
         }
     }
-    //console.log(expandedItem);
     return expandedItem;
 }
 
@@ -453,7 +450,7 @@ function displayExpandedItem(item, parent_id){
                 item.set(damage_keys[i], damagesLow[i][0]+"-"+damagesLow[i][1]+"\u279c"+damages[i][0]+"-"+damages[i][1]);
             }
         }
-        
+    } else if (item.get("category") === "armor") { 
     }
 
     let display_commands = [
@@ -543,8 +540,6 @@ function displayExpandedItem(item, parent_id){
                     let p_elem = document.createElement("p");
                     // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
-                    /*p_elem.textContent = idPrefixes[id].concat(item.get(id), idSuffixes[id]) + 
-                    " [ " + item.get("powders").map(x => powderNames.get(x)) + " ]";*/
 
                     let powderPrefix = document.createElement("b");
                     powderPrefix.classList.add("powderLeft");
@@ -553,7 +548,6 @@ function displayExpandedItem(item, parent_id){
                     p_elem.appendChild(powderPrefix);
                     
                     let powders = item.get("powders");
-                    //console.log(powders);
                     for (let i = 0; i < powders.length; i++) {
                         let powder = document.createElement("b");
                         powder.textContent = numerals.get((powders[i]%6)+1)+" ";
@@ -569,9 +563,11 @@ function displayExpandedItem(item, parent_id){
                     active_elem.appendChild(p_elem);
                 } else {
                     let p_elem;
-                    if( (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") ) { //skp
+                    if ( !(item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") && (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") ) { //skp warp
                         p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
-                    }                       
+                    } else if (item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") {
+                        p_elem = displayFixedID(active_elem, id, item.get(id+"Low")+"-"+item.get(id), elemental_format);
+                    }            
                     if (id === "displayName") {
                         p_elem.classList.add("title");
                         if (item.get("tier") !== " ") {
@@ -592,18 +588,7 @@ function displayExpandedItem(item, parent_id){
                         bckgrd.classList.add("itemp");
                         active_elem.appendChild(bckgrd);
                         bckgrd.appendChild(img);
-                        /*let validTypes = ["helmet", "chestplate", "leggings", "boots", "relik", "wand", "bow", "spear", "dagger", "ring", "bracelet", "necklace"];
-                        if (item.has("type") && validTypes.includes(item.get("type"))) {
-                            p = document.createElement("p");
-                            img = document.createElement("img");
-                            img.src = "./media/items/generic-"+item.get("type")+".png";
-                            img.alt = "image no display :(";
-                            img.classList.add("center");
-                            p.append(img);
-                            p.classList.add("itemp");
-
-                            p_elem.append(p);
-                        }*/
+                        
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
                         if ( item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") {
                             p_elem.textContent = "";

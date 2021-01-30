@@ -105,7 +105,8 @@ class Build{
     constructor(level,equipment, powders, externalStats, inputerrors=[]){
 
         let errors = inputerrors;
-
+        //this contains the Craft objects, if there are any crafted items. this.helmet, etc. will contain the statMap of the Craft (which is built to be an expandedItem).
+        this.craftedItems = [];
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
         this.powders = powders;
         if(itemMap.get(equipment[0]) && itemMap.get(equipment[0]).type === "helmet") {
@@ -113,72 +114,133 @@ class Build{
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
             this.helmet = expandItem(helmet, this.powders[0]);
         }else{
-            const helmet = itemMap.get("No Helmet");
-            this.powders[0] = this.powders[0].slice(0,helmet.slots);
-            this.helmet = expandItem(helmet, this.powders[0]);
-            errors.push(new ItemNotFound(equipment[0], "helmet", true));
+            try {
+                let helmet = getCraftFromHash(equipment[0]);
+                this.powders[0] = this.powders[0].slice(0,helmet.statMap.slots); 
+                helmet.statMap.set("powders",this.powders[0].slice());
+                helmet.applyPowders();
+                this.helmet = helmet.statMap;
+                this.craftedItems.push(helmet);
+            } catch (Error) {
+                //console.log(Error); //fix
+                const helmet = itemMap.get("No Helmet");
+                this.powders[0] = this.powders[0].slice(0,helmet.slots);
+                this.helmet = expandItem(helmet, this.powders[0]);
+                errors.push(new ItemNotFound(equipment[0], "helmet", true));
+            }
         }
         if(itemMap.get(equipment[1]) && itemMap.get(equipment[1]).type === "chestplate") {
             const chestplate = itemMap.get(equipment[1]);
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
             this.chestplate = expandItem(chestplate, this.powders[1]);
         }else{
-            const chestplate = itemMap.get("No Chestplate");
-            this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
-            this.chestplate = expandItem(chestplate, this.powders[1]);
-            errors.push(new ItemNotFound(equipment[1], "chestplate", true));
+            try {
+                let chestplate = getCraftFromHash(equipment[1]);
+                this.powders[1] = this.powders[1].slice(0,chestplate.statMap.slots);
+                chestplate.statMap.set("powders",this.powders[1].slice());
+                chestplate.applyPowders();
+                this.chestplate = chestplate.statMap;
+                this.craftedItems.push(chestplate);
+            } catch (Error) {
+                const chestplate = itemMap.get("No Chestplate");
+                this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
+                this.chestplate = expandItem(chestplate, this.powders[1]);
+                errors.push(new ItemNotFound(equipment[1], "chestplate", true));
+            }
         }
         if(itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
             const leggings = itemMap.get(equipment[2]);
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
         }else{
-            const leggings = itemMap.get("No Leggings");
-            this.powders[2] = this.powders[2].slice(0,leggings.slots); 
-            this.leggings = expandItem(leggings, this.powders[2]);
-            errors.push(new ItemNotFound(equipment[2], "leggings", true));
+            try {
+                let leggings = getCraftFromHash(equipment[2]);
+                this.powders[2] = this.powders[2].slice(0,leggings.statMap.slots); 
+                leggings.statMap.set("powders",this.powders[2].slice());
+                leggings.applyPowders();
+                this.leggings = leggings.statMap;
+                this.craftedItems.push(leggings);
+            } catch (Error) {
+                const leggings = itemMap.get("No Leggings");
+                this.powders[2] = this.powders[2].slice(0,leggings.slots); 
+                this.leggings = expandItem(leggings, this.powders[2]);
+                errors.push(new ItemNotFound(equipment[2], "leggings", true));
+            }
         }
         if(itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
             const boots = itemMap.get(equipment[3]);
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
             this.boots = expandItem(boots, this.powders[3]);
         }else{
-            const boots = itemMap.get("No Boots");
-            this.powders[3] = this.powders[3].slice(0,boots.slots); 
-            this.boots = expandItem(boots, this.powders[3]);
-            errors.push(new ItemNotFound(equipment[3], "boots", true));
+            try {
+                let boots = getCraftFromHash(equipment[3]);
+                this.powders[3] = this.powders[3].slice(0,boots.statMap.slots); 
+                boots.statMap.set("powders",this.powders[3].slice());
+                boots.applyPowders();
+                this.boots = boots.statMap;
+                this.craftedItems.push(boots);
+            } catch (Error) {
+                const boots = itemMap.get("No Boots");
+                this.powders[3] = this.powders[3].slice(0,boots.slots); 
+                this.boots = expandItem(boots, this.powders[3]);
+                errors.push(new ItemNotFound(equipment[3], "boots", true));
+            }
         }
         if(itemMap.get(equipment[4]) && itemMap.get(equipment[4]).type === "ring") {
             const ring = itemMap.get(equipment[4]);
             this.ring1 = expandItem(ring, []);
         }else{
-            const ring = itemMap.get("No Ring 1");
-            this.ring1 = expandItem(ring, []);
-            errors.push(new ItemNotFound(equipment[4], "ring1", true, "ring"));
+            try {
+                let ring = getCraftFromHash(equipment[4]);
+                this.ring1 = ring.statMap;
+                this.craftedItems.push(ring);
+            } catch (Error) {
+                const ring = itemMap.get("No Ring 1");
+                this.ring1 = expandItem(ring, []);
+                errors.push(new ItemNotFound(equipment[4], "ring1", true, "ring"));
+            }
         }
         if(itemMap.get(equipment[5]) && itemMap.get(equipment[5]).type === "ring") {
             const ring = itemMap.get(equipment[5]);
             this.ring2 = expandItem(ring, []);
         }else{
-            const ring = itemMap.get("No Ring 2");
-            this.ring2 = expandItem(ring, []);
-            errors.push(new ItemNotFound(equipment[5], "ring2", true, "ring"));
+            try {
+                let ring = getCraftFromHash(equipment[5]);
+                this.ring2 = ring.statMap;
+                this.craftedItems.push(ring);
+            } catch (Error) {
+                const ring = itemMap.get("No Ring 2");
+                this.ring2 = expandItem(ring, []);
+                errors.push(new ItemNotFound(equipment[5], "ring2", true, "ring"));
+            }
         }
         if(itemMap.get(equipment[6]) && itemMap.get(equipment[6]).type === "bracelet") {
             const bracelet = itemMap.get(equipment[6]);
             this.bracelet = expandItem(bracelet, []);
         }else{
-            const bracelet = itemMap.get("No Bracelet");
-            this.bracelet = expandItem(bracelet, []);
-            errors.push(new ItemNotFound(equipment[6], "bracelet", true));
+            try {
+                let bracelet = getCraftFromHash(equipment[6]);
+                this.bracelet = bracelet.statMap;
+                this.craftedItems.push(bracelet);
+            } catch (Error) {
+                const bracelet = itemMap.get("No Bracelet");
+                this.bracelet = expandItem(bracelet, []);
+                errors.push(new ItemNotFound(equipment[6], "bracelet", true));
+            }
         }
         if(itemMap.get(equipment[7]) && itemMap.get(equipment[7]).type === "necklace") {
             const necklace = itemMap.get(equipment[7]);
             this.necklace = expandItem(necklace, []);
         }else{
-            const necklace = itemMap.get("No Necklace");
-            this.necklace = expandItem(necklace, []);
-            errors.push(new ItemNotFound(equipment[7], "necklace", true));
+            try {
+                let necklace = getCraftFromHash(equipment[7]);
+                this.necklace = necklace.statMap;
+                this.craftedItems.push(necklace);
+            } catch (Error) {
+                const necklace = itemMap.get("No Necklace");
+                this.necklace = expandItem(necklace, []);
+                errors.push(new ItemNotFound(equipment[7], "necklace", true));
+            }
         }
         if(itemMap.get(equipment[8]) && itemMap.get(equipment[8]).category === "weapon") {
             const weapon = itemMap.get(equipment[8]);
@@ -190,11 +252,20 @@ class Build{
                 document.getElementsByClassName("powder-specials")[0].style.display = "none";
             }
         }else{
-            const weapon = itemMap.get("No Weapon");
-            this.powders[4] = this.powders[4].slice(0,weapon.slots); 
-            this.weapon = expandItem(weapon, this.powders[4]);
-            document.getElementsByClassName("powder-specials")[0].style.display = "none";
-            errors.push(new ItemNotFound(equipment[8], "weapon", true));
+            try {
+                let weapon = getCraftFromHash(equipment[8]);
+                this.weapon = weapon.statMap;
+                this.craftedItems.push(weapon);
+                this.powders[4] = this.powders[4].slice(0,this.weapon.slots); 
+                this.weapon.set("powders",this.powders[4].slice());
+                document.getElementsByClassName("powder-specials")[0].style.display = "grid";
+            } catch (Error) {
+                const weapon = itemMap.get("No Weapon");
+                this.powders[4] = this.powders[4].slice(0,weapon.slots); 
+                this.weapon = expandItem(weapon, this.powders[4]);
+                document.getElementsByClassName("powder-specials")[0].style.display = "none";
+                errors.push(new ItemNotFound(equipment[8], "weapon", true));
+            }
         }
 
         if (level < 1) { //Should these be constants?
@@ -339,13 +410,12 @@ class Build{
         let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef"];
 
         //Create a map of this build's stats
-        //This is universal for every possible build, so it's possible to move this elsewhere.
         let statMap = new Map();
 
         for (const staticID of staticIDs) {
             statMap.set(staticID, 0);
         }
-        statMap.set("hp", levelToHPBase(this.level)); //TODO: Add player base health
+        statMap.set("hp", levelToHPBase(this.level)); 
 
         for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
