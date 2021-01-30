@@ -6,6 +6,7 @@
  *       | cmpEq
  *
  * cmpEq := cmpRel "=" cmpEq
+ *        | cmpRel "?=" sLit
  *        | cmpRel "!=" cmpEq
  *
  * cmpRel := sum "<=" cmpRel
@@ -308,6 +309,10 @@ const compileQueryExpr = (function() {
           ++col;
           continue;
       }
+      if (exprStr.slice(col, col+2) === "?=") {
+        pushSymbol("?=");
+        continue;
+      }
       // parse a numeric literal
       let m;
       if ((m = /^\d+(?:\.\d*)?/.exec(exprStr.substring(col))) !== null) {
@@ -404,6 +409,23 @@ const compileQueryExpr = (function() {
                 return a !== b;
               case 'string':
                 return a.toLowerCase() !== b.toLowerCase();
+            }
+            throw new Error('???'); // wtf
+          };
+        }
+        case '?=': {
+          tokens.advance();
+          const right = takeCmpEq(tokens);
+          return (i, ie) => {
+            const a = left(i, ie), b = right(i, ie);
+            if (typeof a !== typeof b) return false;
+            switch (typeof a) {
+              case 'number':
+                return Math.abs(left(i, ie) - right(i, ie)) < 1e-4;
+              case 'boolean':
+                return a === b;
+              case 'string':
+                return a.toLowerCase().includes(b.toLowerCase());
             }
             throw new Error('???'); // wtf
           };
