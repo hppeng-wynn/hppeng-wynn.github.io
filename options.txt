@@ -1,0 +1,152 @@
+Parser specification:
+
+/*
+ * disj := conj "|" disj
+ *       | conj
+ *
+ * conj := cmp "&" conj
+ *       | cmpEq
+ *
+ * cmpEq := cmpRel "=" cmpEq
+ *        | cmpRel "?=" prim
+ *        | cmpRel "!=" cmpEq
+ *
+ * cmpRel := sum "<=" cmpRel
+ *         | sum "<" cmpRel
+ *         | sum ">" cmpRel
+ *         | sum ">=" cmpRel
+ *         | sum
+ *
+ * sum := prod "+" sum
+ *      | prod "-" sum
+ *      | prod
+ *
+ * prod := exp "*" prod
+ *       | exp "/" prod
+ *       | exp
+ *
+ * exp := unary "^" exp
+ *      | unary
+ *
+ * unary := "-" unary
+ *        | "!" unary
+ *        | prim
+ *
+ * prim := nLit
+ *       | bLit
+ *       | sLit
+ *       | ident "(" [disj ["," disj...]] ")"
+ *       | ident
+ *       | "(" disj ")"
+ */
+
+Basically just type math. You can use "-" to negate things (to sort by ascending order for example), use & (and) and | (or) to combine search filters, or use ! (not) to invert filters.
+
+Use spaces between arguments I guess, sometimes its picky
+
+
+
+Special operator: "?=" is used to find a "includes" relation -- for example:
+
+        name ?= "blue"
+
+will find items whose name includes the strong "blue" (not case sensitive).
+
+
+
+Below is a list of all the options.
+Left of colon is what you type into the search bar (sometimes multiple things can alias to the same values), right side is what it represents.
+
+'name':  item name
+'type':  item type (helmet, chestplate, leggings, boots, ring, bracelet, necklace, wand, bow, dagger, spear, relik)
+['cat', 'category']:  item category (armor, accessory, weapon)
+['rarityname', 'raritystr', 'tiername', 'tierstr']: item tier string (normal, unique, set, rare, legendary, fabled, mythic)
+['rarity', 'tier']: item tier number (0 = normal, 6 = mythic
+
+['level', 'lvl', 'combatlevel', 'combatlvl']: item level req
+['strmin', 'strreq']: Item str req
+['dexmin', 'dexreq']: Item dex req
+['intmin', 'intreq']: Item int req
+['defmin', 'defreq']: Item def req
+['agimin', 'agireq']: Item agi req
+['summin', 'sumreq', 'totalmin', 'totalreq']: Item total req
+
+'str': Item str bonus
+'dex': Item dex bonus
+'int': Item int bonus
+'def': Item def bonus
+'agi': Item agi bonus
+['skillpoints', 'skillpts', 'attributes', 'attrs']: Sum(item skill points bonus)
+
+['neutraldmg', 'neutraldam', 'ndmg', 'ndam']: Item Neutral Damage, Average
+['earthdmg', 'earthdam', 'edmg', 'edam']: Item Earth Damage, Average
+['thunderdmg', 'thunderdam', 'tdmg', 'tdam']: Item Thunder Damage, Average
+['waterdmg', 'waterdam', 'wdmg', 'wdam']: Item Water Damage, Average
+['firedmg', 'firedam', 'fdmg', 'fdam']: Item Fire Damage, Average
+['airdmg', 'airdam', 'admg', 'adam']: Item Air Damage, Average
+['sumdmg', 'sumdam', 'totaldmg', 'totaldam']: Item Total Damage, Average
+
+['earthdmg%', 'earthdam%', 'edmg%', 'edam%', 'edampct']: Earth Damage Bonus
+['thunderdmg%', 'thunderdam%', 'tdmg%', 'tdam%', 'tdampct']: Thunder Damage Bonus
+['waterdmg%', 'waterdam%', 'wdmg%', 'wdam%', 'wdampct']: Water Damage Bonus
+['firedmg%', 'firedam%', 'fdmg%', 'fdam%', 'fdampct']: Fire Damage Bonus
+['airdmg%', 'airdam%', 'admg%', 'adam%', 'adampct']: Air Damage Bonus
+['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct']: Sum damages %
+
+['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct']: Melee Damage Bonus (%)
+['mainatkrawdmg', 'mainatkrawdam', 'mainatkneutraldmg', 'mainatkneutraldam','meleerawdmg', 'meleerawdam', 'meleeneutraldmg', 'meleeneutraldam', 'mdraw']: Melee Damage (Raw)
+['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct']: Spell Damage (%)
+['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw']: Spell Damage (Raw)
+['attackspeed', 'atkspd']: Item Attack Speed
+['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'attackspeed+', 'atkspd+', 'atktier']: Attack Speed Bonus
+['sumattackspeed', 'totalattackspeed', 'sumatkspd', 'totalatkspd', 'sumatktier', 'totalatktier']: Total Attack Speed (Base speed + bonus)
+
+['earthdef', 'edef']: Earth Defense Raw
+['thunderdef', 'tdef']: Thunder Defense Raw
+['waterdef', 'wdef']: Water Defense Raw
+['firedef', 'fdef']: Fire Defense Raw
+['airdef', 'adef']: Air Defense Raw
+['sumdef', 'totaldef']: Total Defense Raw
+
+['earthdef%', 'edef%', 'edefpct']: Total Defense %
+['thunderdef%', 'tdef%', 'tdefpct']: Total Defense %
+['waterdef%', 'wdef%', 'wdefpct']: Total Defense %
+['firedef%', 'fdef%', 'fdefpct']: Total Defense %
+['airdef%', 'adef%', 'adefpct']: Total Defense %
+['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct']: Total Defense %
+
+['health', 'hp']: Health
+['bonushealth', 'healthid', 'bonushp', 'hpid', 'health+', 'hp+', 'hpbonus']: Health bonus
+['sumhealth', 'sumhp', 'totalhealth', 'totalhp']: Total Health (health + health bonus)
+
+['hpregen', 'hpr', 'hr', 'hprraw']: Raw Health Regen
+['hpregen%', 'hpr%', 'hr%', 'hprpct']: Health Regen %
+['lifesteal', 'ls']: Lifesteal
+['manaregen', 'mr']: Mana Regen
+['manasteal', 'ms']: Mana Steal
+
+['walkspeed', 'movespeed', 'ws', 'spd']: Walk Speed Bonus
+'sprint': Sprint Bonus
+['sprintregen', 'sprintreg']: Sprint Regen
+['jumpheight', 'jh']: Jump Height
+
+['spellcost1', 'rawspellcost1', 'spcost1', 'spraw1']: 1st Spell Cost Raw (min roll)
+['spellcost1%', 'spcost1%', 'sppct1']: 1st Spell Cost % (min roll)
+['spellcost2', 'rawspellcost2', 'spcost2', 'spraw2']: 2nd Spell Cost Raw (min roll)
+['spellcost2%', 'spcost2%', 'sppct2']: 2nd Spell Cost % (min roll)
+['spellcost3', 'rawspellcost3', 'spcost3', 'spraw3']: 3rd Spell Cost Raw (min roll)
+['spellcost3%', 'spcost3%', 'sppct3']: 3rd Spell Cost % (min roll)
+['spellcost4', 'rawspellcost4', 'spcost4', 'spraw4']: 4th Spell Cost Raw (min roll)
+['spellcost4%', 'spcost4%', 'sppct4']: 4th Spell Cost % (min roll)
+['sumspellcost', 'totalspellcost', 'sumrawspellcost', 'totalrawspellcost', 'sumspcost', 'totalspcost', 'sumspraw', 'totalspraw']: Sum (Spell Cost Raw)
+['sumspellcost%', 'totalspellcost%', 'sumspcost%', 'totalspcost%', 'sumsppct', 'totalsppct']: Sum (Spell Cost %)
+
+['exploding', 'expl', 'expd']: Exploding
+'poison': Poison
+'thorns': Thorns
+['reflection', 'refl', 'ref']: Reflection
+['soulpointregen', 'spr', 'spregen']: Soul Point Regen
+['lootbonus', 'lb']: Loot Bonus
+['xpbonus', 'xpb', 'xb']: XP Bonus
+['stealing', 'esteal']: Stealing
+['powderslots', 'powders', 'slots', 'sockets']: # Powder Slots

@@ -6,7 +6,7 @@
  *       | cmpEq
  *
  * cmpEq := cmpRel "=" cmpEq
- *        | cmpRel "?=" sLit
+ *        | cmpRel "?=" prim
  *        | cmpRel "!=" cmpEq
  *
  * cmpRel := sum "<=" cmpRel
@@ -415,7 +415,7 @@ const compileQueryExpr = (function() {
         }
         case '?=': {
           tokens.advance();
-          const right = takeCmpEq(tokens);
+          const right = takePrim(tokens);
           return (i, ie) => {
             const a = left(i, ie), b = right(i, ie);
             if (typeof a !== typeof b) return false;

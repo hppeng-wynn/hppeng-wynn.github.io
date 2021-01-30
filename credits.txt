@@ -5,6 +5,7 @@ The game, of course
     - wynncraft.com
 
 Additional Contributors:
+ - Phanta (WynnAtlas custom expression parser / item search)
  - QuantumNep (Layout code/layout ideas)
  - dr_carlos (Hiding UI elements properly, fade animations, proper error handling)
  - Atlas Inc discord (feedback, ideas, etc)
