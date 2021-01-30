@@ -133,9 +133,9 @@ class Build{
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
         }else{
-            const chestplate = itemMap.get("No Leggings");
-            this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
-            this.chestplate = expandItem(chestplate, this.powders[1]);
+            const leggings = itemMap.get("No Leggings");
+            this.powders[2] = this.powders[2].slice(0,leggings.slots); 
+            this.leggings = expandItem(leggings, this.powders[2]);
             errors.push(new ItemNotFound(equipment[2], "leggings", true));
         }
         if(itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {

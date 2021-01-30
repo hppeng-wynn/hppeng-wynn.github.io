@@ -1,4 +1,4 @@
-const DB_VERSION = 24;
+const DB_VERSION = 27;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -35,7 +35,7 @@ async function load_local(init_func) {
             }
             else {
                 console.log("Successfully read local set db.");
-                console.log(sets);
+                //console.log(sets);
                 init_func();
             }
         }
@@ -48,12 +48,14 @@ async function load_local(init_func) {
  * Clean bad item data. For now just assigns display name if it isn't already assigned.
  */
 function clean_item(item) {
-    if (item.displayName === undefined) {
-        item.displayName = item.name;
+    if (item.remapID === undefined) {
+        if (item.displayName === undefined) {
+            item.displayName = item.name;
+        }
+        item.skillpoints = [item.str, item.dex, item.int, item.def, item.agi];
+        item.has_negstat = item.str < 0 || item.dex < 0 || item.int < 0 || item.def < 0 || item.agi < 0;
+        item.reqs = [item.strReq, item.dexReq, item.intReq, item.defReq, item.agiReq];
     }
-    item.skillpoints = [item.str, item.dex, item.int, item.def, item.agi];
-    item.has_negstat = item.str < 0 || item.dex < 0 || item.int < 0 || item.def < 0 || item.agi < 0;
-    item.reqs = [item.strReq, item.dexReq, item.intReq, item.defReq, item.agiReq];
 }
 
 /*
@@ -77,7 +79,8 @@ async function load(init_func) {
     await clear_tx.complete;
 
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
-    add_tx.onabort = function() {
+    add_tx.onabort = function(e) {
+        console.log(e);
         console.log("Not enough space...");
     };
     let items_store = add_tx.objectStore('item_db');

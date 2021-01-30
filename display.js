@@ -249,6 +249,7 @@ function displayBuildStats(parent_id,build){
         "#table",
         "str", "dex", "int", "def", "agi",
         "mr", "ms",
+        "hprRaw", "hprPct",
         "sdRaw", "sdPct",
         "mdRaw", "mdPct",
         "ref", "thorns",
@@ -419,7 +420,7 @@ function displayExpandedItem(item, parent_id){
         let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
         let damages = results[2];
         let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
-        for (const i in damage_keys) {
+        for (let i = 0; i < damage_keys.length; i++) {
             item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
         }
     }
@@ -482,7 +483,8 @@ function displayExpandedItem(item, parent_id){
     let active_elem;
     let fix_id = item.has("fixID") && item.get("fixID");
     let elemental_format = false;
-    for (const command of display_commands) {
+    for (let i = 0; i < display_commands.length; i++) {
+        const command = display_commands[i];
         if (command.charAt(0) === "#") {
             if (command === "#cdiv") {
                 active_elem = document.createElement('div');
@@ -695,12 +697,12 @@ function displayExpandedItem(item, parent_id){
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            for (const [key,value] of effects) {
-                if (key !== "Description") {
+            for (let i = 0; i < effects.length; i++) {
+                if (effects[i][0] !== "Description") {
                     let effect = document.createElement("p");
                     effect.classList.add("itemp");
-                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
-                    if(key === "Damage"){
+                    effect.textContent += effects[i][0] + ": " + effects[i][1][power] + specialSuffixes.get(effects[i][0]);
+                    if(effects[i][0] === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
                     if (element === "w") {
@@ -802,7 +804,7 @@ function displayRecipeStats(craft, parent_id) {
 
     let ingredTable = document.createElement("table");
     ingredTable.classList.add("itemtable");
-    ingredTable.style.tableLayout = "fixed";
+    ingredTable.classList.add("ingredTable");
     for (let i = 0; i < 3; i++) {
         let row = document.createElement("tr");
         for (let j = 0; j < 2; j++) {
@@ -811,6 +813,7 @@ function displayRecipeStats(craft, parent_id) {
             cell.style.width = "50%";
             cell.classList.add("center");
             cell.classList.add("box");
+            cell.classList.add("tooltip");
             let b = document.createElement("b");
             b.textContent = ingredName;
             b.classList.add("space");
@@ -825,10 +828,15 @@ function displayRecipeStats(craft, parent_id) {
             cell.appendChild(b);
             cell.appendChild(eff);
             row.appendChild(cell);
+
+            let tooltip = document.createElement("div");
+            tooltip.classList.add("tooltiptext");
+            tooltip.classList.add("center");
+            tooltip.id = "tooltip-" + (2*i + j);
+            cell.appendChild(tooltip);
         }
         ingredTable.appendChild(row);
     }
-
     elem.appendChild(ldiv);
     elem.appendChild(ingredTable);
 }
@@ -841,7 +849,6 @@ function displayCraftStats(craft, parent_id) {
 
 //Displays an ingredient in item format. However, an ingredient is too far from a normal item to display as one.
 function displayExpandedIngredient(ingred, parent_id) {
-    console.log(ingred);
     let parent_elem = document.getElementById(parent_id);
     parent_elem.textContent = "";
     let display_order = [
@@ -1875,7 +1882,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 let overallhealLabel = document.createElement("p");
                 let first = document.createElement("b");
                 let second = document.createElement("b");
-                first.textContent = part.subtitle + ":";
+                first.textContent = part.subtitle + ": ";
                 second.textContent = heal_amount;
                 overallhealLabel.appendChild(first);
                 second.classList.add("Set");

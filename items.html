@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+    <head>
+        <!-- nunito font, copying wynndata -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="favicon.png">
+        <link rel="manifest" href="manifest.json">
+        <title>WynnAtlas</title>
+    </head>
+    <body class="all" style="overflow-y: scroll">
+        <div class="header" id="header">
+            WynnAtlas
+        </div>
+        <div class="center" id="header2">
+            Made by: hppeng and ferricles
+        </div>
+        <div class="center" id="credits">
+            <a href="credits.txt">Additional credits</a>
+        </div>
+        <div class="center" id="main" style="padding: 2%">
+            <div id="search-container" style="margin-bottom: 1.5%">
+                <div class="left" id="search-filter" style="display: inline-block; vertical-align: top">
+                    <label for="search-filter-field">Filter By:</label>
+                    <br>
+                    <input id="search-filter-field" type="text" placeholder="str >= 15 & dex >= 10" style="width: 25vw; padding: 8px">
+                    <br>
+                    <div id="search-filter-error" style="color: #ff0000"></div>
+                </div>
+                <div class="left" id="search-sort" style="display: inline-block; vertical-align: top">
+                    <label for="search-sort-field">Sort By:</label>
+                    <br>
+                    <input id="search-sort-field" type="text" placeholder="str + dex; meleerawdmg + spellrawdmg" style="width: 25vw; padding: 8px">
+                    <br>
+                    <div id="search-sort-error" style="color: #ff0000"></div>
+                </div>
+            </div>
+            <div id="item-list-container">
+                <div class="left" id="item-list" style="display: flex; flex-flow: row wrap"></div>
+                <div class="center" id="item-list-footer"></div>
+            </div>
+        </div>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="build_utils.js"></script>
+        <script type="text/javascript" src="damage_calc.js"></script>
+        <script type="text/javascript" src="display.js"></script>
+        <script type="text/javascript" src="query.js"></script>
+        <script type="text/javascript" src="load.js"></script>
+        <script type="text/javascript" src="items.js"></script>
+    </body>
+</html>

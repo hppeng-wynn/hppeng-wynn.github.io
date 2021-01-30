@@ -6,13 +6,15 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     
     let buildStats = new Map(stats);
     if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
-        for (const [key,value] of externalStats) {
+        for (let i = 0; i < externalStats.length; i++) {
+            const key = externalStats[i][0];
+            const value = externalStats[i][1];
             if (typeof value === "number") {
                 buildStats.set(key, buildStats.get(key) + value);
             } else if (Array.isArray(value)) {
                 arr = [];
-                for (let i = 0; i < value.length; i++) {
-                    arr[i] = buildStats.get(key)[i] + value[i];
+                for (let j = 0; j < value.length; j++) {
+                    arr[j] = buildStats.get(key)[j] + value[j];
                 }
                 buildStats.set(key, arr);
             }
@@ -21,8 +23,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     let damages = [];
-    for (const damage_string of buildStats.get("damageRaw")) {
-        const damage_vals = damage_string.split("-").map(Number);
+    const rawDamages = buildStats.get("damageRaw");
+    for (let i = 0; i < rawDamages.length; i++) {
+        const damage_vals = rawDamages[i].split("-").map(Number);
         damages.push(damage_vals);
     }
 
@@ -40,10 +43,11 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
     //console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
-    for (const powderID of weapon.get("powders")) {
-        const powder = powderStats[powderID];
+    const powders = weapon.get("powders");
+    for (let i = 0; i < powders.length; i++) {
+        const powder = powderStats[powders[i]];
         // Bitwise to force conversion to integer (integer division).
-        const element = (powderID/6) | 0;
+        const element = (powders[i]/6) | 0;
         let conversionRatio = powder.convert/100;
         if (neutralRemainingRaw[1] > 0) {
             let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
@@ -146,7 +150,7 @@ const spell_table = {
         { title: "Charge", cost: 4, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true },
             ] },
-        { title: "Uppercut", cost: 10, parts: [
+        { title: "Uppercut", cost: 9, parts: [
                 { subtitle: "First Damage", type: "damage", multiplier: 300, conversion: [70, 20, 10, 0, 0, 0] },
                 { subtitle: "Fireworks Damage", type: "damage", multiplier: 50, conversion: [60, 0, 40, 0, 0, 0] },
                 { subtitle: "Crash Damage", type: "damage", multiplier: 50, conversion: [80, 0, 20, 0, 0, 0] },
@@ -177,7 +181,7 @@ const spell_table = {
         { title: "Spin Attack", cost: 6, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [70, 0, 30, 0, 0, 0], summary: true},
             ] },
-        { title: "Vanish", cost: 1, parts: [
+        { title: "Vanish", cost: 2, parts: [
                 { subtitle: "No Damage", type: "none", summary: true }
             ] },
         { title: "Multihit", cost: 8, parts: [
@@ -194,7 +198,7 @@ const spell_table = {
         { title: "Totem", cost: 4, parts: [
                 { subtitle: "Smash Damage", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 20, 0]},
                 { subtitle: "Damage Tick", type: "damage", multiplier: 20, conversion: [80, 0, 0, 0, 0, 20]},
-                { subtitle: "Heal Tick", type: "heal", strength: 0.04, summary: true },
+                { subtitle: "Heal Tick", type: "heal", strength: 0.03, summary: true },
             ] },
         { title: "Haul", cost: 1, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [80, 0, 20, 0, 0, 0], summary: true },
@@ -203,7 +207,7 @@ const spell_table = {
                 { subtitle: "One Wave", type: "damage", multiplier: 200, conversion: [70, 0, 0, 30, 0, 0], summary: true },
             ] },
         { title: "Uproot", cost: 6, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 50, conversion: [70, 30, 0, 0, 0, 0], summary: true },
+                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [70, 30, 0, 0, 0, 0], summary: true },
             ] },
     ],
     "powder": [ //This is how instant-damage powder specials are implemented. To view time-boosted damage powder specials (curse, 2nd courage, air prison, view @TODO)
