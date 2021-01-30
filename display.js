@@ -511,7 +511,8 @@ function displayExpandedItem(item, parent_id){
     let active_elem;
     let fix_id = item.has("fixID") && item.get("fixID");
     let elemental_format = false;
-    for (const command of display_commands) {
+    for (let i = 0; i < display_commands.length; i++) {
+        const command = display_commands[i];
         if (command.charAt(0) === "#") {
             if (command === "#cdiv") {
                 active_elem = document.createElement('div');
@@ -725,12 +726,12 @@ function displayExpandedItem(item, parent_id){
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            for (const [key,value] of effects) {
-                if (key !== "Description") {
+            for (let i = 0; i < effects.length; i++) {
+                if (effects[i][0] !== "Description") {
                     let effect = document.createElement("p");
                     effect.classList.add("itemp");
-                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
-                    if(key === "Damage"){
+                    effect.textContent += effects[i][0] + ": " + effects[i][1][power] + specialSuffixes.get(effects[i][0]);
+                    if(effects[i][0] === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
                     if (element === "w") {

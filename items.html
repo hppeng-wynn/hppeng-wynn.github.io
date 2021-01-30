@@ -1,144 +1,53 @@
 <!DOCTYPE html>
 <html scroll-behavior="smooth">
     <head>
-        <meta name="HandheldFriendly" content="true" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
         <!-- nunito font, copying wynndata -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="items.css">
-        <link rel="stylesheet" media="screen and (min-width: 1100px)" href="items-wide.css"/>
-        <link rel="stylesheet" media="screen and (max-width: 1099px)" href="items-narrow.css"/>
         <link rel="icon" href="favicon.png">
         <link rel="manifest" href="manifest.json">
-        <title>Wynn Clientside</title>
+        <title>WynnAtlas</title>
     </head>
-    <body class="all">
-        <div class="center">
-            <header class = "header nomarginp">
-                <div class = "headerleft">         
-                    <a href = "./" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnBuilder</div>
-                    </a>
-                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCrafter</div>
-                    </a>
-                    <a href = "./items.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnAtlas</div>
-                    </a>
-                </div>
-                <div class = "headercenter">
-                    <div >
-                        <p class = "itemp" id = "header">WynnAtlas</p>
-                    </div>
-                </div>    
-                <div class = "headerright">
-
-                </div>
-            </header>
+    <body class="all" style="overflow-y: scroll">
+        <div class="header" id="header">
+            WynnAtlas
         </div>
-        <br>
-        <br>
-        <div class="itemsearch">
-            <div class="searchbox">
-                <div class="left">
-                    <label for="name-choice">Name:</label><br>
-                    <input class="searchinput" type="text" id="name-choice" name="name-choice" placeholder="Item name (case insensitive)" tabindex="1"/>
-                    <p class="error"></p>
+        <div class="center" id="header2">
+            Made by: hppeng and ferricles
+        </div>
+        <div class="center" id="credits">
+            <a href="credits.txt">Additional credits</a>
+        </div>
+        <div class="center" id="main" style="padding: 2%">
+            <div id="search-container" style="margin-bottom: 1.5%">
+                <div class="left" id="search-filter" style="display: inline-block; vertical-align: top">
+                    <label for="search-filter-field">Filter By:</label>
+                    <br>
+                    <input id="search-filter-field" type="text" placeholder="str >= 15 & dex >= 10" style="width: 25vw; padding: 8px">
+                    <br>
+                    <div id="search-filter-error" style="color: #ff0000"></div>
                 </div>
-                <div class="left">
-                    <label for="category-choice">Category:</label><br>
-                    <input class="searchinput" list="category-items" id="category-choice" name="category-choice" placeholder="ALL" tabindex="2"/>
-                    <datalist id="category-items">
-                        <option value="ALL">
-                        <option value="armor">
-                        <option value="helmet">
-                        <option value="chestplate">
-                        <option value="leggings">
-                        <option value="boots">
-                        <option value="accessory">
-                        <option value="ring">
-                        <option value="bracelet">
-                        <option value="necklace">
-                        <option value="weapon">
-                        <option value="wand">
-                        <option value="spear">
-                        <option value="bow">
-                        <option value="dagger">
-                        <option value="relik">
-                    </datalist>
-                    <p class="error"></p>
-                </div>
-                <div class="left">
-                    <label for="rarity-choice">Rarity:</label><br>
-                    <input class="searchinput" list="rarity-items" id="rarity-choice" name="rarity-choice" placeholder="ANY" tabindex="3"/>
-                    <datalist id="rarity-items">
-                        <option value="ANY">
-                        <option value="Normal">
-                        <option value="Unique">
-                        <option value="Rare">
-                        <option value="Legendary">
-                        <option value="Fabled">
-                        <option value="Mythic">
-                        <option value="Sane">
-                    </datalist>
-                    <p class="error"></p>
-                </div>
-                <div class="left">
-                    <label for="level-choice">Level:</label><br>
-                    <input class="searchinput" type="text" id="level-choice" name="level-choice" value="1-106" tabindex="4"/>
-                    <p class="error"></p>
-                </div>
-
-                <datalist id="filter-items">
-                </datalist>
-                <div class="left">
-                    <label for="filter1-choice">Filter 1:</label><br>
-                    <input class="searchinput" list="filter-items" id="filter1-choice" name="filter1-choice" placeholder="ANY" tabindex="5"/>
-                    <p class="error"></p>
-                </div>
-                <div class="left">
-                    <label for="filter2-choice">Filter 2:</label><br>
-                    <input class="searchinput" list="filter-items" id="filter2-choice" name="filter2-choice" placeholder="ANY" tabindex="6"/>
-                    <p class="error"></p>
-                </div>
-                <div class="left">
-                    <label for="filter3-choice">Filter 3:</label><br>
-                    <input class="searchinput" list="filter-items" id="filter3-choice" name="filter3-choice" placeholder="ANY" tabindex="7"/>
-                    <p class="error"></p>
-                </div>
-                <div class="left">
-                    <label for="filter4-choice">Filter 4:</label><br>
-                    <input class="searchinput" list="filter-items" id="filter4-choice" name="filter4-choice" placeholder="ANY" tabindex="8"/>
-                    <p class="error"></p>
-                </div>
-                <div class="right" style="grid-column:1/span 2">
-                    <button class = "button" id = "search-button" onclick = "doItemSearch()" tabindex="9">
-                    Search!
-                    </button>
-                </div>
-                <div id="summary" class="left" style="grid-column:3/span 2">
-                    Hello!
+                <div class="left" id="search-sort" style="display: inline-block; vertical-align: top">
+                    <label for="search-sort-field">Sort By:</label>
+                    <br>
+                    <input id="search-sort-field" type="text" placeholder="str + dex; meleerawdmg + spellrawdmg" style="width: 25vw; padding: 8px">
+                    <br>
+                    <div id="search-sort-error" style="color: #ff0000"></div>
                 </div>
             </div>
-            <div class="center items" id="main">
+            <div id="item-list-container">
+                <div class="left" id="item-list" style="display: flex; flex-flow: row wrap"></div>
+                <div class="center" id="item-list-footer"></div>
             </div>
         </div>
-        <script type="text/javascript" src="/utils.js"></script>
-        <script type="text/javascript" src="/build_utils.js"></script>
-        <script type="text/javascript" src="/damage_calc.js"></script>
-        <script type="text/javascript" src="/display.js"></script>
-        <script type="text/javascript" src="/query.js"></script>
-        <script type="text/javascript" src="/load.js"></script>
-        <script type="text/javascript" src="/items.js"></script>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="build_utils.js"></script>
+        <script type="text/javascript" src="damage_calc.js"></script>
+        <script type="text/javascript" src="display.js"></script>
+        <script type="text/javascript" src="query.js"></script>
+        <script type="text/javascript" src="load.js"></script>
+        <script type="text/javascript" src="items.js"></script>
     </body>
 </html>

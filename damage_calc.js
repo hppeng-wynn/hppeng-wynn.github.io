@@ -6,13 +6,15 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     
     let buildStats = new Map(stats);
     if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
-        for (const [key,value] of externalStats) {
+        for (let i = 0; i < externalStats.length; i++) {
+            const key = externalStats[i][0];
+            const value = externalStats[i][1];
             if (typeof value === "number") {
                 buildStats.set(key, buildStats.get(key) + value);
             } else if (Array.isArray(value)) {
                 arr = [];
-                for (let i = 0; i < value.length; i++) {
-                    arr[i] = buildStats.get(key)[i] + value[i];
+                for (let j = 0; j < value.length; j++) {
+                    arr[j] = buildStats.get(key)[j] + value[j];
                 }
                 buildStats.set(key, arr);
             }
@@ -21,8 +23,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     let damages = [];
-    for (const damage_string of buildStats.get("damageRaw")) {
-        const damage_vals = damage_string.split("-").map(Number);
+    const rawDamages = buildStats.get("damageRaw");
+    for (let i = 0; i < rawDamages.length; i++) {
+        const damage_vals = rawDamages[i].split("-").map(Number);
         damages.push(damage_vals);
     }
 
