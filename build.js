@@ -444,6 +444,7 @@ class Build{
         }
         statMap.set("hp", levelToHPBase(this.level)); 
 
+        let major_ids = new Set();
         for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
                 statMap.set(id,(statMap.get(id) || 0)+value);
@@ -453,7 +454,13 @@ class Build{
                     statMap.set(staticID, statMap.get(staticID) + item.get(staticID));
                 }
             }
+            if (item.get("majorIds")) {
+                for (const majorID of item.get("majorIds")) {
+                    major_ids.add(majorID);
+                }
+            }
         }
+        statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
             const bonus = sets[setName].bonuses[count-1];
             for (const id in bonus) {

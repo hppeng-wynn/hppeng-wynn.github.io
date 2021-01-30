@@ -131,7 +131,10 @@ const spell_table = {
         { title: "Heal", cost: 6, parts: [
                 { subtitle: "First Pulse", type: "heal", strength: 0.12 },
                 { subtitle: "Second and Third Pulses", type: "heal", strength: 0.06 },
-                { subtitle: "Total Heal", type: "heal", strength: 0.24, summary: true }
+                { subtitle: "Total Heal", type: "heal", strength: 0.24, summary: true },
+                { subtitle: "First Pulse (Ally)", type: "heal", strength: 0.20 },
+                { subtitle: "Second and Third Pulses (Ally)", type: "heal", strength: 0.1 },
+                { subtitle: "Total Heal (Ally)", type: "heal", strength: 0.4 }
             ] },
         { title: "Teleport", cost: 4, parts: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [60, 0, 40, 0, 0, 0], summary: true },
@@ -150,9 +153,15 @@ const spell_table = {
                 { subtitle: "Explosion Damage", type: "damage", multiplier: 130, conversion: [100, 0, 0, 0, 0, 0]},
                 { subtitle: "Total Damage", type: "total", factors: [1, 1], summary: true },
             ] },
-        { title: "Charge", cost: 4, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true },
-            ] },
+        { title: "Charge", cost: 4, variants: {
+            DEFAULT: [
+                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true }
+            ],
+            RALLY: [
+                { subtitle: "Self Heal", type: "heal", strength: 0.1, summary: true },
+                { subtitle: "Ally Heal", type: "heal", strength: 0.15 }
+            ]
+            } },
         { title: "Uppercut", cost: 9, parts: [
                 { subtitle: "First Damage", type: "damage", multiplier: 300, conversion: [70, 20, 10, 0, 0, 0] },
                 { subtitle: "Fireworks Damage", type: "damage", multiplier: 50, conversion: [60, 0, 40, 0, 0, 0] },
@@ -165,10 +174,16 @@ const spell_table = {
             ] },
     ],
     "bow": [
-        { title: "Arrow Storm", cost: 6, parts: [
+        { title: "Arrow Storm", cost: 6, variants: {
+            DEFAULT: [
                 { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [60, 0, 25, 0, 15, 0], summary: true },
-                { subtitle: "Per Arrow", type: "damage", multiplier: 10, conversion: [60, 0, 25, 0, 15, 0]},
-            ] },
+                { subtitle: "Per Arrow (60)", type: "damage", multiplier: 10, conversion: [60, 0, 25, 0, 15, 0]}
+            ],
+            HAWKEYE: [
+                { subtitle: "Total Damage (Hawkeye)", type: "damage", multiplier: 400, conversion: [60, 0, 25, 0, 15, 0], summary: true },
+                { subtitle: "Per Arrow (5)", type: "damage", multiplier: 80, conversion: [60, 0, 25, 0, 15, 0]}
+            ],
+            } },
         { title: "Escape", cost: 3, parts: [
                 { subtitle: "Landing Damage", type: "damage", multiplier: 100, conversion: [50, 0, 0, 0, 0, 50], summary: true },
             ] },
@@ -192,10 +207,16 @@ const spell_table = {
                 { subtitle: "Fatality", type: "damage", multiplier: 120, conversion: [20, 0, 30, 50, 0, 0] },
                 { subtitle: "Total Damage", type: "total", factors: [10, 1], summary: true },
             ] },
-        { title: "Smoke Bomb", cost: 8, parts: [
-                { subtitle: "Tick Damage", type: "damage", multiplier: 60, conversion: [45, 25, 0, 0, 0, 30] },
+        { title: "Smoke Bomb", cost: 8, variants: {
+            DEFAULT: [
+                { subtitle: "Tick Damage (10 max)", type: "damage", multiplier: 60, conversion: [45, 25, 0, 0, 0, 30] },
                 { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [45, 25, 0, 0, 0, 30], summary: true },
-            ] },
+            ],
+            CHERRY_BOMBS: [
+                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [45, 25, 0, 0, 0, 30], summary: true },
+                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [45, 25, 0, 0, 0, 30] }
+            ]
+            } },
     ],
     "relik": [
         { title: "Totem", cost: 4, parts: [
