@@ -202,8 +202,9 @@ function calculateCraft() {
     //create the craft
     player_craft = new Craft(recipe,mat_tiers,ingreds,atkSpd,"");
 
-    location.hash = encodeCraft();
-    player_craft.setHash(encodeCraft());
+    let craft_str = encodeCraft(player_craft);
+    location.hash = craft_str;
+    player_craft.setHash(craft_str);
     console.log(player_craft);
     /*console.log(recipe)
     console.log(levelrange)
@@ -239,19 +240,19 @@ function calculateCraft() {
     
 }
 
-function encodeCraft() {
-    if (player_craft) {
+function encodeCraft(craft) {
+    if (craft) {
         let atkSpds = ["SLOW","NORMAL","FAST"];
         let craft_string =  "1" + 
-                            Base64.fromIntN(player_craft.ingreds[0].get("id"), 2) + 
-                            Base64.fromIntN(player_craft.ingreds[1].get("id"), 2) +
-                            Base64.fromIntN(player_craft.ingreds[2].get("id"), 2) +
-                            Base64.fromIntN(player_craft.ingreds[3].get("id"), 2) +
-                            Base64.fromIntN(player_craft.ingreds[4].get("id"), 2) +
-                            Base64.fromIntN(player_craft.ingreds[5].get("id"), 2) + 
-                            Base64.fromIntN(player_craft.recipe.get("id"),2) + 
-                            Base64.fromIntN(player_craft.mat_tiers[0] + (player_craft.mat_tiers[1]-1)*3, 1) +  //this maps tiers [a,b] to a+3b.
-                            Base64.fromIntN(atkSpds.indexOf(player_craft["atkSpd"]),1);
+                            Base64.fromIntN(craft.ingreds[0].get("id"), 2) + 
+                            Base64.fromIntN(craft.ingreds[1].get("id"), 2) +
+                            Base64.fromIntN(craft.ingreds[2].get("id"), 2) +
+                            Base64.fromIntN(craft.ingreds[3].get("id"), 2) +
+                            Base64.fromIntN(craft.ingreds[4].get("id"), 2) +
+                            Base64.fromIntN(craft.ingreds[5].get("id"), 2) + 
+                            Base64.fromIntN(craft.recipe.get("id"),2) + 
+                            Base64.fromIntN(craft.mat_tiers[0] + (craft.mat_tiers[1]-1)*3, 1) +  //this maps tiers [a,b] to a+3b.
+                            Base64.fromIntN(atkSpds.indexOf(craft["atkSpd"]),1);
         return craft_string;
     }
     return "";

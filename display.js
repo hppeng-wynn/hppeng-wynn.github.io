@@ -1,4 +1,4 @@
-let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_"];
+let nonRolledIDs = ["name", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds"];
 let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
 let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 let colorMap = new Map(
@@ -497,12 +497,12 @@ function displayExpandedItem(item, parent_id){
         "eSteal",
         "gXp", "gSpd",
         "#ldiv",
-        "!elemental",
+        "majorIds",
         "slots",
-        "!elemental",
         "set",
         "quest",
-        "restrict"];
+        "restrict"
+        ];
 
     // Clear the parent div.
     setHTML(parent_id, "");
@@ -511,7 +511,8 @@ function displayExpandedItem(item, parent_id){
     let active_elem;
     let fix_id = item.has("fixID") && item.get("fixID");
     let elemental_format = false;
-    for (const command of display_commands) {
+    for (let i = 0; i < display_commands.length; i++) {
+        const command = display_commands[i];
         if (command.charAt(0) === "#") {
             if (command === "#cdiv") {
                 active_elem = document.createElement('div');
@@ -560,6 +561,11 @@ function displayExpandedItem(item, parent_id){
                     powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
+                    active_elem.appendChild(p_elem);
+                } else if (id === "majorIds") {
+                    let p_elem = document.createElement("p");
+                    p_elem.classList.add("itemp");
+                    p_elem.textContent = "Major IDs: " + item.get(id).toString();
                     active_elem.appendChild(p_elem);
                 } else {
                     let p_elem;
@@ -720,12 +726,12 @@ function displayExpandedItem(item, parent_id){
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            for (const [key,value] of effects) {
-                if (key !== "Description") {
+            for (let i = 0; i < effects.length; i++) {
+                if (effects[i][0] !== "Description") {
                     let effect = document.createElement("p");
                     effect.classList.add("itemp");
-                    effect.textContent += key + ": " + value[power] + specialSuffixes.get(key);
-                    if(key === "Damage"){
+                    effect.textContent += effects[i][0] + ": " + effects[i][1][power] + specialSuffixes.get(effects[i][0]);
+                    if(effects[i][0] === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
                     if (element === "w") {
@@ -1824,7 +1830,21 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
     part_divavg.classList.add("nomargin");
     overallparent_elem.append(part_divavg);
 
-    for (const part of spell.parts) {
+    let spell_parts;
+    if (spell.parts) {
+        spell_parts = spell.parts;
+    }
+    else {
+        spell_parts = spell.variants.DEFAULT;
+        for (const majorID of stats.get("activeMajorIDs")) {
+            if (majorID in spell.variants) {
+                spell_parts = spell.variants[majorID];
+                break;
+            }
+        }
+    }
+
+    for (const part of spell_parts) {
         parent_elem.append(document.createElement("br"));
         let part_div = document.createElement("p");
         parent_elem.append(part_div);

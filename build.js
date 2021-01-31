@@ -113,9 +113,12 @@ class Build{
             const helmet = itemMap.get(equipment[0]);
             this.powders[0] = this.powders[0].slice(0,helmet.slots); 
             this.helmet = expandItem(helmet, this.powders[0]);
-        }else{
+        } else {
             try {
                 let helmet = getCraftFromHash(equipment[0]);
+                if (helmet.statMap.get("type") !== "helmet") {
+                    throw new Error("Not a helmet");
+                }
                 this.powders[0] = this.powders[0].slice(0,helmet.statMap.slots); 
                 helmet.statMap.set("powders",this.powders[0].slice());
                 helmet.applyPowders();
@@ -133,9 +136,12 @@ class Build{
             const chestplate = itemMap.get(equipment[1]);
             this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
             this.chestplate = expandItem(chestplate, this.powders[1]);
-        }else{
+        } else {
             try {
                 let chestplate = getCraftFromHash(equipment[1]);
+                if (chestplate.statMap.get("type") !== "chestplate") {
+                    throw new Error("Not a chestplate");
+                }
                 this.powders[1] = this.powders[1].slice(0,chestplate.statMap.slots);
                 chestplate.statMap.set("powders",this.powders[1].slice());
                 chestplate.applyPowders();
@@ -148,13 +154,16 @@ class Build{
                 errors.push(new ItemNotFound(equipment[1], "chestplate", true));
             }
         }
-        if(itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
+        if (itemMap.get(equipment[2]) && itemMap.get(equipment[2]).type === "leggings") {
             const leggings = itemMap.get(equipment[2]);
             this.powders[2] = this.powders[2].slice(0,leggings.slots); 
             this.leggings = expandItem(leggings, this.powders[2]);
-        }else{
+        } else {
             try {
                 let leggings = getCraftFromHash(equipment[2]);
+                if (leggings.statMap.get("type") !== "leggings") {
+                    throw new Error("Not a leggings");
+                }
                 this.powders[2] = this.powders[2].slice(0,leggings.statMap.slots); 
                 leggings.statMap.set("powders",this.powders[2].slice());
                 leggings.applyPowders();
@@ -167,13 +176,16 @@ class Build{
                 errors.push(new ItemNotFound(equipment[2], "leggings", true));
             }
         }
-        if(itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
+        if (itemMap.get(equipment[3]) && itemMap.get(equipment[3]).type === "boots") {
             const boots = itemMap.get(equipment[3]);
             this.powders[3] = this.powders[3].slice(0,boots.slots); 
             this.boots = expandItem(boots, this.powders[3]);
-        }else{
+        } else {
             try {
                 let boots = getCraftFromHash(equipment[3]);
+                if (boots.statMap.get("type") !== "boots") {
+                    throw new Error("Not a boots");
+                }
                 this.powders[3] = this.powders[3].slice(0,boots.statMap.slots); 
                 boots.statMap.set("powders",this.powders[3].slice());
                 boots.applyPowders();
@@ -192,6 +204,9 @@ class Build{
         }else{
             try {
                 let ring = getCraftFromHash(equipment[4]);
+                if (ring.statMap.get("type") !== "ring") {
+                    throw new Error("Not a ring");
+                }
                 this.ring1 = ring.statMap;
                 this.craftedItems.push(ring);
             } catch (Error) {
@@ -206,6 +221,9 @@ class Build{
         }else{
             try {
                 let ring = getCraftFromHash(equipment[5]);
+                if (ring.statMap.get("type") !== "ring") {
+                    throw new Error("Not a ring");
+                }
                 this.ring2 = ring.statMap;
                 this.craftedItems.push(ring);
             } catch (Error) {
@@ -220,6 +238,9 @@ class Build{
         }else{
             try {
                 let bracelet = getCraftFromHash(equipment[6]);
+                if (bracelet.statMap.get("type") !== "bracelet") {
+                    throw new Error("Not a bracelet");
+                }
                 this.bracelet = bracelet.statMap;
                 this.craftedItems.push(bracelet);
             } catch (Error) {
@@ -234,6 +255,9 @@ class Build{
         }else{
             try {
                 let necklace = getCraftFromHash(equipment[7]);
+                if (necklace.statMap.get("type") !== "necklace") {
+                    throw new Error("Not a necklace");
+                }
                 this.necklace = necklace.statMap;
                 this.craftedItems.push(necklace);
             } catch (Error) {
@@ -254,6 +278,9 @@ class Build{
         }else{
             try {
                 let weapon = getCraftFromHash(equipment[8]);
+                if (weapon.statMap.get("category") !== "weapon") {
+                    throw new Error("Not a weapon");
+                }
                 this.weapon = weapon.statMap;
                 this.craftedItems.push(weapon);
                 this.powders[4] = this.powders[4].slice(0,this.weapon.slots); 
@@ -417,6 +444,7 @@ class Build{
         }
         statMap.set("hp", levelToHPBase(this.level)); 
 
+        let major_ids = new Set();
         for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
                 statMap.set(id,(statMap.get(id) || 0)+value);
@@ -426,7 +454,13 @@ class Build{
                     statMap.set(staticID, statMap.get(staticID) + item.get(staticID));
                 }
             }
+            if (item.get("majorIds")) {
+                for (const majorID of item.get("majorIds")) {
+                    major_ids.add(majorID);
+                }
+            }
         }
+        statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
             const bonus = sets[setName].bonuses[count-1];
             for (const id in bonus) {
