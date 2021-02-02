@@ -545,7 +545,6 @@ const compileQueryExpr = (function() {
       case 'str': {
         const lit = tokens.here.value;
         tokens.advance();
-        console.log(lit);
         return (i, ie) => lit;
       }
       case 'id':
