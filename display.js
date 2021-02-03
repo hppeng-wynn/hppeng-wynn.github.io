@@ -726,12 +726,13 @@ function displayExpandedItem(item, parent_id){
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            for (let i = 0; i < effects.length; i++) {
-                if (effects[i][0] !== "Description") {
+            console.log(effects);
+            for (const [key,value] of effects.entries()) {
+                if (key !== "Description") {
                     let effect = document.createElement("p");
                     effect.classList.add("itemp");
-                    effect.textContent += effects[i][0] + ": " + effects[i][1][power] + specialSuffixes.get(effects[i][0]);
-                    if(effects[i][0] === "Damage"){
+                    effect.textContent = key + ": " + value[power] + specialSuffixes.get(key);
+                    if(key === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
                     if (element === "w") {
@@ -742,11 +743,12 @@ function displayExpandedItem(item, parent_id){
                     specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
                 }
             }
-            specialTitle.append(specialEffects); 
+            //specialTitle.append(specialEffects); 
             powder_special.appendChild(specialTitle);
+            powder_special.appendChild(specialEffects);
             
     
-            parent_div.append(powder_special);
+            parent_div.appendChild(powder_special);
         }
     }
     

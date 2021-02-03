@@ -348,7 +348,7 @@ class Craft{
             }
         }
         for (const d in statMap.get("duration")) {
-            if(statMap.get("duration")[d] < 10) { statMap.get("duration")[d] = 10;}
+            if(!allNone && statMap.get("duration")[d] < 10) { statMap.get("duration")[d] = 10;}
         }
         if(statMap.has("charges") && statMap.get("charges") < 1 ) { statMap.set("charges",1)}
 
