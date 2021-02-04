@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.22";
+const BUILD_VERSION = "6.9.23";
 
 function setTitle() {
     let text;
@@ -167,9 +167,21 @@ function init() {
         populateItemList(armorType);
         // Add change listener to update armor slots.
         document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
-            let item = itemMap.has(event.target.value) ? itemMap.get(event.target.value) : (getCraftFromHash(event.target.value) != undefined ? getCraftFromHash(event.target.value).statMap : undefined);
-            if (item !== undefined && event.target.value !== "") {
-                document.getElementById(armorType+"-slots").textContent = (item["slots"] ? item["slots"] : item.get("slots"))+ " slots";
+            let item_name = event.target.value;
+            let nSlots = undefined;
+            if (itemMap.has(item_name)) {
+                let item = itemMap.get(item_name);
+                nSlots = item["slots"];
+                console.log(item);
+            }
+            else {
+                let crafted_item = getCraftFromHash(item_name);
+                if (crafted_item != undefined) {
+                    nSlots = crafted_item.statMap.get("slots");
+                }
+            }
+            if (nSlots !== undefined) {
+                document.getElementById(armorType+"-slots").textContent = nSlots + " slots";
             }
             else {
                 document.getElementById(armorType+"-slots").textContent = "X slots";
@@ -786,7 +798,15 @@ function calculateBuildStats() {
     }
     let lvlWarning;
     for (const item of player_build.items) {
-        if (player_build.level < item.get("lvl")) {
+        let item_lvl;
+        if (item.get("crafted")) {
+            item_lvl = parseInt(item.get("lvl").split("-")[0]);
+        }
+        else {
+            item_lvl = item.get("lvl");
+        }
+
+        if (player_build.level < item_lvl) {
             if (!lvlWarning) {
                 lvlWarning = document.createElement("p");
                 lvlWarning.classList.add("itemp");
@@ -802,6 +822,17 @@ function calculateBuildStats() {
     }
     if(lvlWarning){
         summarybox.append(lvlWarning);
+    }
+    for (const [setName, count] of player_build.activeSetCounts) {
+        const bonus = sets[setName].bonuses[count-1];
+        console.log(setName);
+        if (bonus["illegal"]) {
+            let setWarning = document.createElement("p");
+            setWarning.classList.add("itemp");
+            setWarning.classList.add("warning");
+            setWarning.textContent = "WARNING: illegal item combination: " + setName
+            summarybox.append(setWarning);
+        }
     }
 
     for (let i in player_build.items) {

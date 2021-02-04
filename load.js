@@ -1,4 +1,4 @@
-const DB_VERSION = 32;
+const DB_VERSION = 33;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
 let db;
@@ -68,7 +68,8 @@ async function load(init_func) {
 
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
-    let url = baseUrl + "/compress.json";
+    // "Random" string to prevent caching!
+    let url = baseUrl + "/compress.json?"+new Date();
     let result = await (await fetch(url)).json();
     items = result.items;
     sets = result.sets;

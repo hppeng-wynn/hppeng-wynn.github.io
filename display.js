@@ -220,11 +220,14 @@ function displaySetBonuses(parent_id,build) {
     }
 
     for (const [setName, count] of build.activeSetCounts) {
+        const active_set = sets[setName];
+        if (active_set["hidden"]) { continue; }
+
         let set_elem = document.createElement('p');
         set_elem.id = "set-"+setName;
         set_summary_elem.append(set_elem);
         
-        const bonus = sets[setName].bonuses[count-1];
+        const bonus = active_set.bonuses[count-1];
         let mock_item = new Map();
         mock_item.set("fixID", true);
         mock_item.set("displayName", setName+" Set: "+count+"/"+sets[setName].items.length);
@@ -303,6 +306,9 @@ function displayBuildStats(parent_id,build){
         set_summary_elem.textContent = "Set Summary:";
         parent_div.append(set_summary_elem);
         for (const [setName, count] of build.activeSetCounts) {
+            const active_set = sets[setName];
+            if (active_set["hidden"]) { continue; }
+
             let set_elem = document.createElement('p');
             set_elem.classList.add('itemp');
             set_elem.classList.add('left');
@@ -561,6 +567,13 @@ function displayExpandedItem(item, parent_id){
                     powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
+                    active_elem.appendChild(p_elem);
+                } else if (id === "set") {
+                    if (item.get("hideSet")) { continue; }
+
+                    let p_elem = document.createElement("p");
+                    p_elem.classList.add("itemp");
+                    p_elem.textContent = "Set: " + item.get(id).toString();
                     active_elem.appendChild(p_elem);
                 } else if (id === "majorIds") {
                     let p_elem = document.createElement("p");
