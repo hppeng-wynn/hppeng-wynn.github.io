@@ -98,7 +98,7 @@ Left of colon is what you type into the search bar (sometimes multiple things ca
 ['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct']: Spell Damage (%)
 ['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw']: Spell Damage (Raw)
 ['attackspeed', 'atkspd']: Item Attack Speed
-['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'attackspeed+', 'atkspd+', 'atktier']: Attack Speed Bonus
+['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier']: Attack Speed Bonus
 ['sumattackspeed', 'totalattackspeed', 'sumatkspd', 'totalatkspd', 'sumatktier', 'totalatktier']: Total Attack Speed (Base speed + bonus)
 
 ['earthdef', 'edef']: Earth Defense Raw
@@ -116,7 +116,7 @@ Left of colon is what you type into the search bar (sometimes multiple things ca
 ['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct']: Total Defense %
 
 ['health', 'hp']: Health
-['bonushealth', 'healthid', 'bonushp', 'hpid', 'health+', 'hp+', 'hpbonus']: Health bonus
+['bonushealth', 'healthid', 'bonushp', 'hpid', 'hpbonus']: Health bonus
 ['sumhealth', 'sumhp', 'totalhealth', 'totalhp']: Total Health (health + health bonus)
 
 ['hpregen', 'hpr', 'hr', 'hprraw']: Raw Health Regen

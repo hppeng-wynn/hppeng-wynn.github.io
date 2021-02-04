@@ -156,7 +156,7 @@ const itemQueryProps = (function() {
 
   const atkSpdIndices = { SUPER_SLOW: -3, VERY_SLOW: -2, SLOW: -1, NORMAL: 0, FAST: 1, VERY_FAST: 2, SUPER_FAST: 3 };
   prop(['attackspeed', 'atkspd'], (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);
-  maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'attackspeed+', 'atkspd+', 'atktier'], 'atkTier');
+  maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier'], 'atkTier');
   sum(['sumattackspeed', 'totalattackspeed', 'sumatkspd', 'totalatkspd', 'sumatktier', 'totalatktier'], props.atkspd, props.atktier);
 
   prop(['earthdef', 'edef'], (i, ie) => i.eDef || 0);
@@ -174,7 +174,7 @@ const itemQueryProps = (function() {
   sum(['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct'], props.edefpct, props.tdefpct, props.wdefpct, props.fdefpct, props.adefpct);
 
   prop(['health', 'hp'], (i, ie) => i.hp || 0);
-  maxId(['bonushealth', 'healthid', 'bonushp', 'hpid', 'health+', 'hp+', 'hpbonus'], 'hpBonus');
+  maxId(['bonushealth', 'healthid', 'bonushp', 'hpid', 'hpbonus'], 'hpBonus');
   sum(['sumhealth', 'sumhp', 'totalhealth', 'totalhp'], props.hp, props.hpid);
 
   maxId(['hpregen', 'hpr', 'hr', 'hprraw'], 'hprRaw');
@@ -332,7 +332,7 @@ const compileQueryExpr = (function() {
         continue;
       }
       // parse an identifier or boolean literal
-      if ((m = /^\w[\w\d+%]*/.exec(exprStr.substring(col))) !== null) {
+      if ((m = /^\w[\w\d%]*/.exec(exprStr.substring(col))) !== null) {
         switch (m[0]) {
           case 'true':
             tokens.push({ type: 'bool', value: true });
@@ -545,7 +545,6 @@ const compileQueryExpr = (function() {
       case 'str': {
         const lit = tokens.here.value;
         tokens.advance();
-        console.log(lit);
         return (i, ie) => lit;
       }
       case 'id':
