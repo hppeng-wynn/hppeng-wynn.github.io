@@ -96,7 +96,7 @@ function init() {
 
         // update url query string
         const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
-            + `?f=${encodeURI(searchFilterField.value)}&s=${encodeURI(searchSortField.value)}`;
+            + `?f=${encodeURIComponent(searchFilterField.value)}&s=${encodeURIComponent(searchSortField.value)}`;
         window.history.pushState({ path: newUrl }, '', newUrl);
 
         // hide old search results
@@ -174,10 +174,10 @@ function init() {
             if (ndx !== -1) {
                 switch (entryStr.substring(0, ndx)) {
                     case 'f':
-                        searchFilterField.field.value = decodeURI(entryStr.substring(ndx + 1));
+                        searchFilterField.field.value = decodeURIComponent(entryStr.substring(ndx + 1));
                         break;
                     case 's':
-                        searchSortField.field.value = decodeURI(entryStr.substring(ndx + 1));
+                        searchSortField.field.value = decodeURIComponent(entryStr.substring(ndx + 1));
                         break;
                 }
             }

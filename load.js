@@ -20,6 +20,7 @@ async function load_local(init_func) {
     request.onsuccess = function(event) {
         console.log("Successfully read local item db.");
         items = request.result;
+        console.log(items);
         let request2 = sets_store.openCursor();
 
         sets = {};

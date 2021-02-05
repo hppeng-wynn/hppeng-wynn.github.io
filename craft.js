@@ -157,21 +157,13 @@ class Craft{
 
         */
         let matmult = 1;
-        let sorted = this.mat_tiers.slice().sort(function(a, b){return a - b});
-        //TODO - MAT MULTIPLIERS ARE SUS FOR NON-MIXING TIERS.
-        if( sorted[0] == 1 && sorted[1] == 1) {
-            matmult = 1; 
-        } else if( sorted[0] == 1 && sorted[1] == 2) {
-            matmult = 1.09; 
-        }else if( sorted[0] == 1 && sorted[1] == 3) {
-            matmult = 1.15; 
-        }else if( sorted[0] == 2 && sorted[1] == 2) {
-            matmult = 1.25; 
-        }else if( sorted[0] == 2 && sorted[1] == 3) {
-            matmult = 1.3; 
-        }else if( sorted[0] == 3 && sorted[1] == 3) {
-            matmult = 1.4; 
-        }
+        let tierToMult = [0,1,1.25,1.4];
+        let tiers = this.mat_tiers.slice();
+        let amounts = this.recipe.get("materials").map(x=> x.get("amount"));
+        //Mat Multipliers - should work!
+        matmult = (tierToMult[tiers[0]]*amounts[0] + tierToMult[tiers[1]]*amounts[1]) / (amounts[0]+amounts[1]);
+        console.log(matmult);
+
         let low = this.recipe.get("healthOrDamage")[0];
         let high = this.recipe.get("healthOrDamage")[1];
         if (statMap.get("category") === "consumable") {
