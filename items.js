@@ -130,9 +130,11 @@ function displayItems(items_copy) {
         box.classList.add("box");
         box.id = "item"+i;
         items_parent.appendChild(box);
-        displayExpandedItem(expandItem(item, []), box.id);
+        displayExpandedItem(item, box.id);
     }
 }
+
+let items_expanded;
 
 function doItemSearch() {
     window.scrollTo(0, 0);
@@ -174,26 +176,21 @@ function doItemSearch() {
         }
     }
 
-    let items_copy = items.slice();
+    let items_copy = items_expanded.slice();
     document.getElementById("main").textContent = "";
     for (const query of queries) {
+        console.log(items_copy.length);
+        console.log(query);
+        console.log(query.filter);
         items_copy = applyQuery(items_copy, query);
+        console.log(items_copy.length);
     }
     document.getElementById("summary").textContent = items_copy.length + " results."
     displayItems(items_copy);
 }
 
 function init() {
-    return;
-    let items_copy = items.slice();
-    //let query = new NameQuery("Bob's");
-    let query1 = new IdQuery("sdRaw");
-    items_copy = applyQuery(items_copy, query1);
-
-    let query2 = new TypeQuery("helmet");
-    items_copy = applyQuery(items_copy, query2);
-
-    displayItems(items_copy);
+    items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i, []) );
 }
 
 load_init(init);
