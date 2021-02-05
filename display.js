@@ -592,11 +592,16 @@ function displayExpandedItem(item, parent_id){
                         if (item.get("tier") !== " ") {
                             p_elem.classList.add(item.get("tier"));
                         }
-                        if(item.get("tier") === "Crafted") {
+                        if(item.get("crafted")) {
+                            p_elem.remove();
+                            p_elem = document.createElement("a");
+                            p_elem.classList.add('itemp');
                             p_elem.classList.add("smalltitle");
-                            p_elem.classList.remove("title");
+                            p_elem.classList.add(item.get("tier"));
+                            p_elem.href = url_base + "crafter.html#" + item.get("hash");
+                            p_elem.textContent = item.get(id);
+                            active_elem.appendChild(p_elem);
                         }
-                        p_elem.append(document.createElement("br"));
                         let img = document.createElement("img");
                         img.src = "/media/items/generic-" + item.get("type") + ".png";
                         img.alt = item.get("type");
@@ -607,7 +612,6 @@ function displayExpandedItem(item, parent_id){
                         bckgrd.classList.add("itemp");
                         active_elem.appendChild(bckgrd);
                         bckgrd.appendChild(img);
-                        
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
                         if ( item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") {
                             p_elem.textContent = "";
@@ -748,7 +752,7 @@ function displayExpandedItem(item, parent_id){
                     if(key === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
-                    if (element === "w") {
+                    if (element === "w" && item.get("category") === "armor") {
                         effect.textContent += " / Mana Used";
                     }
                     specialEffects.appendChild(effect);
