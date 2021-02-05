@@ -1,3 +1,6 @@
+let getUrl = window.location;
+const url_base = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
 let skp_order = ["str","dex","int","def","agi"];
 let skill = ["Strength", "Dexterity", "Intelligence", "Defense", "Agility"];
 let skp_elements = ["e","t","w","f","a"];

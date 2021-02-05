@@ -1,9 +1,8 @@
-const url_base = location.href.split("#")[0];
 const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.23";
+const BUILD_VERSION = "6.9.24";
 
 function setTitle() {
     let text;

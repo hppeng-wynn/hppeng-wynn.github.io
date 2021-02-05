@@ -44,6 +44,7 @@ class Craft{
         this.atkSpd = attackSpeed;
         this.hash = hash;
         this.initCraftStats();
+        this.statMap.set("hash", this.hash);
     }
     
 
@@ -65,6 +66,7 @@ class Craft{
     setHash(hash) {
         this.hash = hash;
         this.statMap.set("displayName", "CR-" + this.hash);
+        this.statMap.set("hash", this.hash);
     }
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The craft itself should be valid. No checking of validity of pieces is done here.
