@@ -14,6 +14,10 @@ let consumableTypes = [ "potion", "scroll", "food"];
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
 
+function clamp(num, low, high){
+    return Math.min(Math.max(num, low), high);
+}
+
 // Permutations in js reference (also cool algorithm):
 // https://stackoverflow.com/a/41068709
 function perm(a){

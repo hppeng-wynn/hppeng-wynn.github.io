@@ -178,7 +178,7 @@ class Craft{
         }
         if (statMap.get("category") === "weapon") {
             //attack damages oh boy
-            let ratio = 2.05; //UNSURE IF THIS IS HOW IT'S DONE. 
+            let ratio = 2.05;  
             if (this['atkSpd'] === "SLOW") {
                 ratio /= 1.5;
             } else if (this['atkSpd'] === "NORMAL") {
@@ -248,7 +248,7 @@ class Craft{
         }
         /* END SECTION */
 
-        //calc ingredient effectivenesses -> see https://wynndata.tk/cr/585765168
+        
         let eff = [[100,100],[100,100],[100,100]];
         for (let n in this.ingreds) { 
             let ingred = this.ingreds[n];
