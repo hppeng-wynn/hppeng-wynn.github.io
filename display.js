@@ -1416,7 +1416,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     nonCritStats.textContent = "Non-Crit Stats: ";
     nonCritStats.append(document.createElement("br"));
     for (let i = 0; i < 6; i++){
-        if(stats[i][0] > 0){
+        if(stats[i][1] > 0){
             let dmg = document.createElement("p");
             dmg.textContent = stats[i][0] + "-" + stats[i][1];
             dmg.classList.add(damageClasses[i]);
@@ -1466,7 +1466,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     critStats.textContent = "Crit Stats: ";
     critStats.append(document.createElement("br"));
     for (let i = 0; i < 6; i++){
-        if(stats[i][2] > 0){
+        if(stats[i][3] > 0){
             dmg = document.createElement("p");
             dmg.textContent = stats[i][2] + "-" + stats[i][3];
             dmg.classList.add(damageClasses[i]);

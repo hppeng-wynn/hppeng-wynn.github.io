@@ -7,5 +7,6 @@ The game, of course
 Additional Contributors:
  - Phanta (WynnAtlas custom expression parser / item search)
  - QuantumNep (Layout code/layout ideas)
+ - nbcss (Crafter figuring-out-the-gamifying)
  - dr_carlos (Hiding UI elements properly, fade animations, proper error handling)
  - Atlas Inc discord (feedback, ideas, etc)

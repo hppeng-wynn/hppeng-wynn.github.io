@@ -48,9 +48,9 @@ class IdQuery {
             }
             console.log("QUERY: ID, NONROLL");
         }
-        else if (id in reversedIDs) {
+        else if (reversedIDs.includes(id)) {
             this.compare = function(a, b) {
-                return b.get("maxRolls").get(id) - a.get("maxRolls").get(id);
+                return a.get("maxRolls").get(id) - b.get("maxRolls").get(id);
             };
             this.filter = function(a) {
                 return a.get("maxRolls").get(this.id);
