@@ -5,10 +5,14 @@ function calculate_skillpoints(equipment, weapon) {
     let fixed = [];
     let consider = [];
     let noboost = [];
+    let crafted = [];
     //console.log(equipment);
     for (const item of equipment) {
         if (item.get("reqs").every(x => x === 0)) {
             fixed.push(item);
+        }
+        else if (item.get("crafted")) {
+            crafted.push(item);
         }
         // TODO hack: We will treat ALL set items as unsafe :(
         else if (item.get("skillpoints").every(x => x === 0) && item.get("set") === null) {
@@ -96,8 +100,8 @@ function calculate_skillpoints(equipment, weapon) {
     let best_total = Infinity;
     let best_activeSetCounts = static_activeSetCounts;
 
-    let allFalse = [false, false, false, false, false];
-    if (consider.length > 0 || noboost.length > 0) {
+    let allFalse = [0, 0, 0, 0, 0];
+    if (consider.length > 0 || noboost.length > 0 || crafted.length > 0) {
         // Try every combination and pick the best one.
         for (let permutation of perm(consider)) {
             let activeSetCounts = new Map(static_activeSetCounts);
@@ -130,6 +134,23 @@ function calculate_skillpoints(equipment, weapon) {
                     break;
                 }
             }
+            
+            // Crafted skillpoint does not count initially.
+            for (const item of crafted) {
+                result = apply_to_fit(skillpoints, item, has_skillpoint, activeSetCounts);
+                needed_skillpoints = result[0];
+                total_diff = result[1];
+
+                for (let i = 0; i < 5; ++i) {
+                    skillpoints_applied[i] += needed_skillpoints[i];
+                    skillpoints[i] += needed_skillpoints[i];
+                }
+            }
+
+            if (total_applied >= best_total) {
+                continue;
+            }
+
             let pre = skillpoints.slice();
             result = apply_to_fit(skillpoints, weapon, allFalse.slice(), activeSetCounts);
             needed_skillpoints = result[0];
@@ -141,6 +162,12 @@ function calculate_skillpoints(equipment, weapon) {
 
             apply_skillpoints(skillpoints, weapon, activeSetCounts);
             total_applied += total_diff;
+
+            // Applying crafted item skill points last.
+            for (const item of crafted) {
+                apply_skillpoints(skillpoints, item, activeSetCounts);
+                total_applied += total_diff;
+            }
 
             if (total_applied < best_total) {
                 best = permutation;
