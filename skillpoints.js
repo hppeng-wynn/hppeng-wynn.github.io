@@ -8,11 +8,11 @@ function calculate_skillpoints(equipment, weapon) {
     let crafted = [];
     //console.log(equipment);
     for (const item of equipment) {
-        if (item.get("reqs").every(x => x === 0)) {
-            fixed.push(item);
-        }
-        else if (item.get("crafted")) {
+        if (item.get("crafted")) {
             crafted.push(item);
+        }
+        else if (item.get("reqs").every(x => x === 0)) {
+            fixed.push(item);
         }
         // TODO hack: We will treat ALL set items as unsafe :(
         else if (item.get("skillpoints").every(x => x === 0) && item.get("set") === null) {
@@ -191,6 +191,6 @@ function calculate_skillpoints(equipment, weapon) {
         apply_skillpoints(final_skillpoints, weapon, best_activeSetCounts);
         best_total += total_diff;
     }
-    let equip_order = fixed.concat(best);
+    let equip_order = fixed.concat(best).concat(crafted);
     return [equip_order, best_skillpoints, final_skillpoints, best_total, best_activeSetCounts];
 }
