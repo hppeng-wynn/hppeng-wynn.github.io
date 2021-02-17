@@ -230,8 +230,8 @@ const spell_table = {
                 { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [45, 25, 0, 0, 0, 30], summary: true },
             ],
             CHERRY_BOMBS: [
-                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [45, 25, 0, 0, 0, 30], summary: true },
-                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [45, 25, 0, 0, 0, 30] }
+                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [45, 25, 0, 0, 0, 25], summary: true },
+                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [45, 25, 0, 0, 0, 25] }
             ]
             } },
     ],
