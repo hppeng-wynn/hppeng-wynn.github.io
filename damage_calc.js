@@ -36,10 +36,10 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         let conversionRatio = spellConversions[i+1]/100;
         let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
         let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-        damages[i+1][0] = Math.floor(damages[i+1][0] + min_diff);
-        damages[i+1][1] = Math.floor(damages[i+1][1] + max_diff);
-        neutralRemainingRaw[0] = Math.floor(neutralRemainingRaw[0] - min_diff);
-        neutralRemainingRaw[1] = Math.floor(neutralRemainingRaw[1] - max_diff);
+        damages[i+1][0] = Math.floor(round_near(damages[i+1][0] + min_diff));
+        damages[i+1][1] = Math.floor(round_near(damages[i+1][1] + max_diff));
+        neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+        neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
     }
     //console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
@@ -58,10 +58,10 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         if (neutralRemainingRaw[1] > 0) {
             let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
             let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-            damages[element+1][0] = Math.floor(damages[element+1][0] + min_diff);
-            damages[element+1][1] = Math.floor(damages[element+1][1] + max_diff);
-            neutralRemainingRaw[0] = Math.floor(neutralRemainingRaw[0] - min_diff);
-            neutralRemainingRaw[1] = Math.floor(neutralRemainingRaw[1] - max_diff);
+            damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
+            damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
+            neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+            neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
         }
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
