@@ -29,7 +29,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages.push(damage_vals);
     }
 
-    // Applying powder.
+    // Applying spell conversions
     let neutralBase = damages[0].slice();
     let neutralRemainingRaw = damages[0];
     for (let i = 0; i < 5; ++i) {
@@ -45,11 +45,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
     let powders = weapon.get("powders").slice();
 
-    
-    //Double powder apply for weapons - this implementation is wrong
-    if (weapon.get("tier") === "Crafted") {
-        powders = powders.flatMap(x => [x,x]);
-    }
+
     
     //apply powders to weapon
     for (const powderID of powders) {
@@ -60,13 +56,24 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         if (neutralRemainingRaw[1] > 0) {
             let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
             let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-            damages[element+1][0] = Math.floor(damages[element+1][0] + min_diff);
-            damages[element+1][1] = Math.floor(damages[element+1][1] + max_diff);
-            neutralRemainingRaw[0] = Math.floor(neutralRemainingRaw[0] - min_diff);
-            neutralRemainingRaw[1] = Math.floor(neutralRemainingRaw[1] - max_diff);
+            //Wynnbuilder version (consistent w/ monster)
+            damages[element+1][0] = Math.round(damages[element+1][0] + min_diff);
+            damages[element+1][1] = Math.round(damages[element+1][1] + max_diff);
+            neutralRemainingRaw[0] = Math.round(neutralRemainingRaw[0] - min_diff);
+            neutralRemainingRaw[1] = Math.round(neutralRemainingRaw[1] - max_diff); 
+
+            //NBCSS version (consistent w/ thrundacrack)
+            /*damages[element+1][0] = damages[element+1][0] + Math.floor(min_diff);
+            damages[element+1][1] = damages[element+1][1] + Math.floor(max_diff);
+            neutralRemainingRaw[0] = neutralRemainingRaw[0] - Math.floor(min_diff);
+            neutralRemainingRaw[1] = neutralRemainingRaw[1] - Math.floor(max_diff); */
         }
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
+    }
+    //Double powder apply for weapons - this implementation is wrong
+    if (weapon.get("tier") === "Crafted") {
+        powders = powders.flatMap(x => [x,x]);
     }
 
     let damageMult = damageMultiplier;
