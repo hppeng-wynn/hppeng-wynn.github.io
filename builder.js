@@ -2,7 +2,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.27";
+const BUILD_VERSION = "6.9.31";
 
 function setTitle() {
     let text;
@@ -388,19 +388,6 @@ function calculateBuild(save_skp, skp){
                 let name = sName.replace("_", " ");
                 if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
                     elem.classList.remove("toggleOn");
-                    let special = powderSpecialStats[specialNames.indexOf(sName)];
-                    console.log(special);
-                    if (special["weaponSpecialEffects"].has("Damage Boost")) { 
-                        if (name === "Courage" || name === "Curse") { //courage is universal damage boost
-                            //player_build.damageMultiplier -= special.weaponSpecialEffects.get("Damage Boost")[i-1]/100;
-                            player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                        } else if (name === "Air Prison") {
-                            player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                            player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
-                        }
-                    }
                 }
             }
         }
@@ -408,6 +395,14 @@ function calculateBuild(save_skp, skp){
             updateBoosts("skip", false);
             updatePowderSpecials("skip", false);
         }
+        let weaponName = getValue(equipmentInputs[8]);
+        if (weaponName.startsWith("Morph-")) {
+            let equipment = [ "Morph-Stardust", "Morph-Steel", "Morph-Iron", "Morph-Gold", "Morph-Topaz", "Morph-Emerald", "Morph-Amethyst", "Morph-Ruby", weaponName.substring(6) ];
+            for (let i in equipment) {
+                setValue(equipmentInputs[i], equipment[i]);
+            }
+        }
+
         //updatePowderSpecials("skip"); //jank pt 1
         save_skp = (typeof save_skp !== 'undefined') ?  save_skp : false;
         /*  TODO: implement level changing
@@ -567,7 +562,7 @@ function updateStats() {
     }
     
 
-    //WILL BREAK WEBSITE IF NO BUILD HAS BEEN INITIALIZED! @HPP
+    
     let skillpoints = player_build.total_skillpoints;
     let delta_total = 0;
     for (let i in skp_order) {

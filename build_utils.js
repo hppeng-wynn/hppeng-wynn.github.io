@@ -16,7 +16,7 @@ function skillPointsToPercentage(skp){
 
 /*Turns the input amount of levels into skillpoints available.
 *
-* @param level - the integer level count te be converted
+* @param level - the integer level count to be converted
 */
 function levelToSkillPoints(level){
     if(level < 1){

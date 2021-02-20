@@ -36,10 +36,10 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         let conversionRatio = spellConversions[i+1]/100;
         let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
         let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-        damages[i+1][0] = Math.floor(damages[i+1][0] + min_diff);
-        damages[i+1][1] = Math.floor(damages[i+1][1] + max_diff);
-        neutralRemainingRaw[0] = Math.floor(neutralRemainingRaw[0] - min_diff);
-        neutralRemainingRaw[1] = Math.floor(neutralRemainingRaw[1] - max_diff);
+        damages[i+1][0] = Math.floor(round_near(damages[i+1][0] + min_diff));
+        damages[i+1][1] = Math.floor(round_near(damages[i+1][1] + max_diff));
+        neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+        neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
     }
     //console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
@@ -56,17 +56,10 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         if (neutralRemainingRaw[1] > 0) {
             let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
             let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-            //Wynnbuilder version (consistent w/ monster)
-            damages[element+1][0] = Math.round(damages[element+1][0] + min_diff);
-            damages[element+1][1] = Math.round(damages[element+1][1] + max_diff);
-            neutralRemainingRaw[0] = Math.round(neutralRemainingRaw[0] - min_diff);
-            neutralRemainingRaw[1] = Math.round(neutralRemainingRaw[1] - max_diff); 
-
-            //NBCSS version (consistent w/ thrundacrack)
-            /*damages[element+1][0] = damages[element+1][0] + Math.floor(min_diff);
-            damages[element+1][1] = damages[element+1][1] + Math.floor(max_diff);
-            neutralRemainingRaw[0] = neutralRemainingRaw[0] - Math.floor(min_diff);
-            neutralRemainingRaw[1] = neutralRemainingRaw[1] - Math.floor(max_diff); */
+            damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
+            damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
+            neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+            neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
         }
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
@@ -239,8 +232,8 @@ const spell_table = {
                 { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [45, 25, 0, 0, 0, 30], summary: true },
             ],
             CHERRY_BOMBS: [
-                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [45, 25, 0, 0, 0, 30], summary: true },
-                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [45, 25, 0, 0, 0, 30] }
+                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [45, 25, 0, 0, 0, 25], summary: true },
+                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [45, 25, 0, 0, 0, 25] }
             ]
             } },
     ],

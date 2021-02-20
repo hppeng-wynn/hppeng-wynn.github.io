@@ -190,6 +190,7 @@ class Build{
                 boots.statMap.set("powders",this.powders[3].slice());
                 boots.applyPowders();
                 this.boots = boots.statMap;
+                console.log(boots);
                 this.craftedItems.push(boots);
             } catch (Error) {
                 const boots = itemMap.get("No Boots");
@@ -294,6 +295,7 @@ class Build{
                 errors.push(new ItemNotFound(equipment[8], "weapon", true));
             }
         }
+        console.log(this.craftedItems)
 
         if (level < 1) { //Should these be constants?
             this.level = 1;

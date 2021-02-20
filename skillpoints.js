@@ -6,13 +6,12 @@ function calculate_skillpoints(equipment, weapon) {
     let consider = [];
     let noboost = [];
     let crafted = [];
-    //console.log(equipment);
     for (const item of equipment) {
-        if (item.get("reqs").every(x => x === 0)) {
-            fixed.push(item);
-        }
-        else if (item.get("crafted")) {
+        if (item.get("crafted")) {
             crafted.push(item);
+        }
+        else if (item.get("reqs").every(x => x === 0)) {
+            fixed.push(item);
         }
         // TODO hack: We will treat ALL set items as unsafe :(
         else if (item.get("skillpoints").every(x => x === 0) && item.get("set") === null) {
@@ -137,7 +136,9 @@ function calculate_skillpoints(equipment, weapon) {
             
             // Crafted skillpoint does not count initially.
             for (const item of crafted) {
+                console.log(item)
                 result = apply_to_fit(skillpoints, item, has_skillpoint, activeSetCounts);
+                console.log(result)
                 needed_skillpoints = result[0];
                 total_diff = result[1];
 
@@ -166,7 +167,7 @@ function calculate_skillpoints(equipment, weapon) {
             // Applying crafted item skill points last.
             for (const item of crafted) {
                 apply_skillpoints(skillpoints, item, activeSetCounts);
-                total_applied += total_diff;
+                //total_applied += total_diff;
             }
 
             if (total_applied < best_total) {
@@ -191,6 +192,6 @@ function calculate_skillpoints(equipment, weapon) {
         apply_skillpoints(final_skillpoints, weapon, best_activeSetCounts);
         best_total += total_diff;
     }
-    let equip_order = fixed.concat(best);
+    let equip_order = fixed.concat(best).concat(crafted);
     return [equip_order, best_skillpoints, final_skillpoints, best_total, best_activeSetCounts];
 }

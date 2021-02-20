@@ -397,8 +397,6 @@ function displayBuildStats(parent_id,build){
                     title.textContent = "Effective Life Steal:"
                     let value = document.createElement("td");
                     let defStats = build.getDefenseStats();
-                    console.log(defStats[1][0]);
-                    console.log(defStats[0]);
                     value.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/4s";
                     value.classList.add("right");
                     value.classList.add(style);

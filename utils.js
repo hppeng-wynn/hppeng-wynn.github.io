@@ -42,6 +42,14 @@ function perm(a){
     return r;
 }
 
+function round_near(value) {
+    let eps = 0.00000001;
+    if (Math.abs(value - Math.round(value)) < eps) {
+        return Math.round(value);
+    }
+    return value;
+}
+
 function setText(id, text) {
     document.getElementById(id).textContent = text;
 }
