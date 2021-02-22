@@ -137,7 +137,7 @@ function calculate_skillpoints(equipment, weapon) {
             // Crafted skillpoint does not count initially.
             for (const item of crafted) {
                 console.log(item)
-                result = apply_to_fit(skillpoints, item, has_skillpoint, activeSetCounts);
+                result = apply_to_fit(skillpoints, item, allFalse.slice(), activeSetCounts);
                 console.log(result)
                 needed_skillpoints = result[0];
                 total_diff = result[1];
@@ -146,6 +146,7 @@ function calculate_skillpoints(equipment, weapon) {
                     skillpoints_applied[i] += needed_skillpoints[i];
                     skillpoints[i] += needed_skillpoints[i];
                 }
+                total_applied += total_diff;
             }
 
             if (total_applied >= best_total) {
