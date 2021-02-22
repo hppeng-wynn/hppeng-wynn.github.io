@@ -45,7 +45,10 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
     let powders = weapon.get("powders").slice();
 
-
+    //Double powder apply for weapons - this implementation is wrong
+    if (weapon.get("tier") === "Crafted") {
+        powders = powders.flatMap(x => [x,x]);
+    }
     
     //apply powders to weapon
     for (const powderID of powders) {
