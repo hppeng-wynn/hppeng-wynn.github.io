@@ -656,7 +656,7 @@ function displayExpandedItem(item, parent_id){
                     } 
                 }
             }
-            else if ( (rolledIDs.includes(id) && item.get("minRolls").get(id)) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
+            else if ( (rolledIDs.includes(id) && item.get("maxRolls").get(id)) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
@@ -1120,11 +1120,12 @@ function displayExpandedIngredient(ingred, parent_id) {
                     p_elem.append(p);
                 }
             } else if (command === "ids") { //warp
-                for (const [key,value] of ingred.get("ids").get("minRolls")) {
-                    if (ingred.get("ids").get("minRolls").get(key) && value != 0 && ingred.get("ids").get("maxRolls").get(key) != 0){
+                for (let [key,value] of ingred.get("ids").get("maxRolls")) {
+                    if (value !== undefined && value != 0) {
+                        value = ingred.get("ids").get("minRolls").get(key);
                         if(value > 0) {
                             style = "positive";
-                        } else if (value < 0) {
+                        } else if (value <= 0) {
                             style = "negative";
                         }
                         if(reversedIDs.filter(e => e !== "atkTier").includes(key)){
@@ -1151,9 +1152,18 @@ function displayExpandedIngredient(ingred, parent_id) {
                         row.appendChild(desc_elem);
         
                         let max_elem = document.createElement('td');
+                        value = ingred.get("ids").get("maxRolls").get(key);
+                        if(value > 0) {
+                            style = "positive";
+                        } else if (value <= 0) {
+                            style = "negative";
+                        }
+                        if(reversedIDs.filter(e => e !== "atkTier").includes(key)){
+                            style === "positive" ? style = "negative" : style = "positive"; 
+                        }
                         max_elem.classList.add('right');
                         max_elem.classList.add(style);
-                        max_elem.textContent = ingred.get("ids").get("maxRolls").get(key) + idSuffixes[key];
+                        max_elem.textContent = value + idSuffixes[key];
                         row.appendChild(max_elem);
                         active_elem.appendChild(row);
                     }

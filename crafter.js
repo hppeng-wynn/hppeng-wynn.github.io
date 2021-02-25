@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.20";
+const ING_BUILD_VERSION = "6.9.21";
 /*
  * END testing section
  */
@@ -126,8 +126,9 @@ function init() {
         populateFields();
         decodeCraft(ing_url_tag);
         setTitle();
-    } catch (Error) {
+    } catch (error) {
         console.log("If you are seeing this while building, do not worry. Oherwise, panic! (jk contact ferricles)");
+        console.log(error);
     }
     
     

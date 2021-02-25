@@ -326,9 +326,9 @@ class Craft{
                     statMap.set(key, statMap.get("charges") + value);
                 }
             }
-            for (const [key,value] of ingred.get("ids").get("minRolls")) {
+            for (const [key,value] of ingred.get("ids").get("maxRolls")) {
                 if (value && value != 0) {
-                    let rolls = [value,ingred.get("ids").get("maxRolls").get(key)];
+                    let rolls = [ingred.get("ids").get("minRolls").get(key), value];
                     rolls = rolls.map(x => Math.floor(x * eff_mult)).sort(function(a, b){return a - b});
                     statMap.get("minRolls").set(key, (statMap.get("minRolls").get(key)) ? statMap.get("minRolls").get(key) + rolls[0] : rolls[0]);
                     statMap.get("maxRolls").set(key, (statMap.get("maxRolls").get(key)) ? statMap.get("maxRolls").get(key) + rolls[1] : rolls[1]);
