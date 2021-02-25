@@ -656,7 +656,7 @@ function displayExpandedItem(item, parent_id){
                     } 
                 }
             }
-            else if ( (rolledIDs.includes(id) && item.get("maxRolls").get(id)) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
+            else if ( rolledIDs.includes(id) && item.get("maxRolls") && item.get("maxRolls").get(id) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
                 let style = "positive";
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
