@@ -2,7 +2,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.36";
+const BUILD_VERSION = "6.9.37";
 
 function setTitle() {
     let text;
@@ -819,7 +819,7 @@ function calculateBuildStats() {
     }
     for (const [setName, count] of player_build.activeSetCounts) {
         const bonus = sets[setName].bonuses[count-1];
-        console.log(setName);
+        // console.log(setName);
         if (bonus["illegal"]) {
             let setWarning = document.createElement("p");
             setWarning.classList.add("itemp");

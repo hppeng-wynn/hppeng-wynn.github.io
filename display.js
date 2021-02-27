@@ -741,7 +741,7 @@ function displayExpandedItem(item, parent_id){
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            console.log(effects);
+            // console.log(effects);
             for (const [key,value] of effects.entries()) {
                 if (key !== "Description") {
                     let effect = document.createElement("p");

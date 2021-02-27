@@ -6,9 +6,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     
     let buildStats = new Map(stats);
     if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
-        for (let i = 0; i < externalStats.length; i++) {
-            const key = externalStats[i][0];
-            const value = externalStats[i][1];
+        for (const entry of externalStats) {
+            const key = entry[0];
+            const value = entry[1];
             if (typeof value === "number") {
                 buildStats.set(key, buildStats.get(key) + value);
             } else if (Array.isArray(value)) {
