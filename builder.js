@@ -215,7 +215,7 @@ function init() {
     document.getElementById("weapon-choice").addEventListener("change", (event) => {
         let item = itemMap.has(event.target.value) ? itemMap.get(event.target.value) : (getCraftFromHash(event.target.value) != undefined ? getCraftFromHash(event.target.value).statMap : undefined);
         if (item !== undefined && event.target.value !== "") {
-            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : item.get("slots"))+ " slots";
+            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : (item.get ? item.get("slots") : 0))+ " slots";
         } else {
             document.getElementById("weapon-slots").textContent = "X slots";
         }
