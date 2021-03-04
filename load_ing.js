@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 4;
+const ING_DB_VERSION = 5;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -35,6 +35,14 @@ async function ing_load_local(init_func) {
     idb.close();
 }
 
+function clean_ing(ing) {
+    if (ing.remapID === undefined) {
+        if (ing.displayName === undefined) {
+            ing.displayName = ing.name;
+        }
+    }
+}
+
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
@@ -65,8 +73,9 @@ async function load_ings(init_func) {
     let add_promises = [];
     let add_tx2 = idb.transaction(['ing_db'], 'readwrite');
     let ings_store = add_tx2.objectStore('ing_db');
-    for (const ing in ings) {
-        add_promises.push(ings_store.add(ings[ing], ing));
+    for (const id in ings) {
+        clean_ing(ings[id]);
+        add_promises.push(ings_store.add(ings[id], id));
     }
     let add_tx3 = idb.transaction(['recipe_db'], 'readwrite');
     let recipes_store = add_tx3.objectStore('recipe_db');

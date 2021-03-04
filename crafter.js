@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.23";
+const ING_BUILD_VERSION = "6.9.24";
 /*
  * END testing section
  */
@@ -113,6 +113,7 @@ function init() {
     console.log(ings);
     console.log("all recipes");
     console.log(recipes);
+    console.log(ingMap);
     /*console.log(ingList);
     console.log(recipeList);   
     console.log(ingIDMap);
@@ -193,6 +194,7 @@ function calculateCraft() {
     }
     let ingreds = [];
     for (i = 1; i < 7; i++) {
+        console.log(getValue("ing-choice-"+i));
         getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
     }
     let atkSpd = "NORMAL"; //default attack speed will be normal.
@@ -344,12 +346,12 @@ function shareRecipe(){
         let name = player_craft.recipe.get("name").split("-");
         copyString += " > " + name[0] + " " + "Lv. " + name[1] + "-" + name[2] + " (" + player_craft.mat_tiers[0] + "\u272B, " + player_craft.mat_tiers[1] + "\u272B)\n";
         let names = [
-            player_craft.ingreds[0].get("name"),
-            player_craft.ingreds[1].get("name"),
-            player_craft.ingreds[2].get("name"),
-            player_craft.ingreds[3].get("name"),
-            player_craft.ingreds[4].get("name"),
-            player_craft.ingreds[5].get("name")
+            player_craft.ingreds[0].get("displayName"),
+            player_craft.ingreds[1].get("displayName"),
+            player_craft.ingreds[2].get("displayName"),
+            player_craft.ingreds[3].get("displayName"),
+            player_craft.ingreds[4].get("displayName"),
+            player_craft.ingreds[5].get("displayName")
         ];
         //fancy justify code that doesn't work properly b/c most font isn't monospaced
         let buffer1 = Math.max(names[0].length,names[2].length,names[4].length);
