@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.21";
+const ING_BUILD_VERSION = "6.9.22";
 /*
  * END testing section
  */

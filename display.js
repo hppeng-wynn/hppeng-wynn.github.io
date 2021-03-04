@@ -904,7 +904,7 @@ function displayExpandedIngredient(ingred, parent_id) {
     parent_elem.textContent = "";
     let display_order = [
         "#cdiv",
-        "name", //tier will be displayed w/ name
+        "displayName", //tier will be displayed w/ name
         "#table",
         "ids",
         "#ldiv",
@@ -1007,11 +1007,11 @@ function displayExpandedIngredient(ingred, parent_id) {
         }else {
             let p_elem =  document.createElement("p");
             p_elem.classList.add("left");
-            if (command === "name") {
+            if (command === "displayName") {
                 p_elem.classList.add("title");
                 p_elem.classList.remove("left");
                 let title_elem = document.createElement("b");
-                title_elem.textContent = ingred.get("name");
+                title_elem.textContent = ingred.get("displayName");
                 p_elem.appendChild(title_elem);
 
                 let space = document.createElement("b");
