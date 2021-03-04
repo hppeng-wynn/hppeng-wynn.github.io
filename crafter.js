@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.22";
+const ING_BUILD_VERSION = "6.9.23";
 /*
  * END testing section
  */
@@ -47,6 +47,7 @@ function init() {
     //no ing
     let ing = Object();
     ing.name = "No Ingredient";
+    ing.displayName = "No Ingredient";
     ing.tier = 0;
     ing.lvl = 0;
     ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING", "COOKING", "ALCHEMISM", "SCRIBING"];
@@ -55,14 +56,15 @@ function init() {
     ing.consumableIDs = {"dura": 0, "charges": 0};
     ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
     ing.id = 4000;
-    ingMap.set(ing["name"], ing);            
-    ingList.push(ing["name"]);
-    ingIDMap.set(ing["id"], ing["name"]);
+    ingMap.set(ing["displayName"], ing);
+    ingList.push(ing["displayName"]);
+    ingIDMap.set(ing["id"], ing["displayName"]);
     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
     for (let i = 0; i < 5; i ++) {
         for (const powderIng of powderIngreds) {
             let ing = Object();
             ing.name = "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1);
+            ing.displayName = ing.name
             ing.tier = 0;
             ing.lvl = 0;
             ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING"];
@@ -90,17 +92,17 @@ function init() {
             }
             ing.consumableIDs = {"dura": 0, "charges": 0};
             ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
-            ingMap.set(ing["name"],ing);
-            ingList.push(ing["name"]);
-            ingIDMap.set(ing["id"], ing["name"]);
+            ingMap.set(ing["displayName"],ing);
+            ingList.push(ing["displayName"]);
+            ingIDMap.set(ing["id"], ing["displayName"]);
         }
     }
     
 
     for (const ing of ings) {
-        ingMap.set(ing["name"], ing);
-        ingList.push(ing["name"]);
-        ingIDMap.set(ing["id"], ing["name"]);
+        ingMap.set(ing["displayName"], ing);
+        ingList.push(ing["displayName"]);
+        ingIDMap.set(ing["id"], ing["displayName"]);
     }
     for (const recipe of recipes) {
         recipeMap.set(recipe["name"], recipe);

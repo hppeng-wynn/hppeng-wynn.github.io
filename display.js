@@ -83,7 +83,7 @@ function expandIngredient(ing) {
         }
         expandedIng.set(id, idMap);
     }
-    let normIds = ['lvl','name','tier','skills','id'];
+    let normIds = ['lvl','name', 'displayName','tier','skills','id'];
     for (const id of normIds) {
         expandedIng.set(id, ing[id]);
     }
