@@ -47,6 +47,7 @@ function init() {
     //no ing
     let ing = Object();
     ing.name = "No Ingredient";
+    ing.displayName = "No Ingredient";
     ing.tier = 0;
     ing.lvl = 0;
     ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING", "COOKING", "ALCHEMISM", "SCRIBING"];
@@ -55,14 +56,15 @@ function init() {
     ing.consumableIDs = {"dura": 0, "charges": 0};
     ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
     ing.id = 4000;
-    ingMap.set(ing["name"], ing);            
-    ingList.push(ing["name"]);
-    ingIDMap.set(ing["id"], ing["name"]);
+    ingMap.set(ing["displayName"], ing);
+    ingList.push(ing["displayName"]);
+    ingIDMap.set(ing["id"], ing["displayName"]);
     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
     for (let i = 0; i < 5; i ++) {
         for (const powderIng of powderIngreds) {
             let ing = Object();
             ing.name = "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1);
+            ing.displayName = ing.name
             ing.tier = 0;
             ing.lvl = 0;
             ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING"];
@@ -90,17 +92,17 @@ function init() {
             }
             ing.consumableIDs = {"dura": 0, "charges": 0};
             ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
-            ingMap.set(ing["name"],ing);
-            ingList.push(ing["name"]);
-            ingIDMap.set(ing["id"], ing["name"]);
+            ingMap.set(ing["displayName"],ing);
+            ingList.push(ing["displayName"]);
+            ingIDMap.set(ing["id"], ing["displayName"]);
         }
     }
     
 
     for (const ing of ings) {
-        ingMap.set(ing["name"], ing);
-        ingList.push(ing["name"]);
-        ingIDMap.set(ing["id"], ing["name"]);
+        ingMap.set(ing["displayName"], ing);
+        ingList.push(ing["displayName"]);
+        ingIDMap.set(ing["id"], ing["displayName"]);
     }
     for (const recipe of recipes) {
         recipeMap.set(recipe["name"], recipe);
@@ -111,6 +113,7 @@ function init() {
     console.log(ings);
     console.log("all recipes");
     console.log(recipes);
+    console.log(ingMap);
     /*console.log(ingList);
     console.log(recipeList);   
     console.log(ingIDMap);
@@ -191,6 +194,7 @@ function calculateCraft() {
     }
     let ingreds = [];
     for (i = 1; i < 7; i++) {
+        console.log(getValue("ing-choice-"+i));
         getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
     }
     let atkSpd = "NORMAL"; //default attack speed will be normal.
@@ -342,12 +346,12 @@ function shareRecipe(){
         let name = player_craft.recipe.get("name").split("-");
         copyString += " > " + name[0] + " " + "Lv. " + name[1] + "-" + name[2] + " (" + player_craft.mat_tiers[0] + "\u272B, " + player_craft.mat_tiers[1] + "\u272B)\n";
         let names = [
-            player_craft.ingreds[0].get("name"),
-            player_craft.ingreds[1].get("name"),
-            player_craft.ingreds[2].get("name"),
-            player_craft.ingreds[3].get("name"),
-            player_craft.ingreds[4].get("name"),
-            player_craft.ingreds[5].get("name")
+            player_craft.ingreds[0].get("displayName"),
+            player_craft.ingreds[1].get("displayName"),
+            player_craft.ingreds[2].get("displayName"),
+            player_craft.ingreds[3].get("displayName"),
+            player_craft.ingreds[4].get("displayName"),
+            player_craft.ingreds[5].get("displayName")
         ];
         //fancy justify code that doesn't work properly b/c most font isn't monospaced
         let buffer1 = Math.max(names[0].length,names[2].length,names[4].length);
