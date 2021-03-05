@@ -335,6 +335,9 @@ input {
     font-weight: 700;
     display: inline-block;
 }
+.small-input {
+    width: max(4vw,60px);
+}
 ::placeholder{
     color: #aaa;
 }
@@ -464,4 +467,13 @@ button.toggleOn:hover {
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
+}
+
+.bodydiv{
+    height: 100vh;
+}
+
+.atlas{
+    height: 48px;
+    width: 48px;
 }

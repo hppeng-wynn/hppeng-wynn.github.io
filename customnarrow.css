@@ -1,0 +1,33 @@
+.container{
+    width: 95%;
+    border: 3px solid #BCBCBC;
+    border-radius: 3px;
+    padding: 2% 4% 4%;
+}
+.overall-container {
+    padding: 2%;
+}
+.customchoices{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+.button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    grid-auto-rows: minmax(30px, auto);
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+.title{
+    text-align: center;
+    font-size: 150%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}

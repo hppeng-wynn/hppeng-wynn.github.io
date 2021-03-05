@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.21";
+const ING_BUILD_VERSION = "6.9.40";
 /*
  * END testing section
  */
@@ -29,7 +29,7 @@ function setTitle() {
     document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
     let disclaimer = document.createElement("p");
-    disclaimer.textContent = "THIS CRAFTER IS NEARLY COMPLETE. The effect of material tiers on crafted items is not 100% tested and accurate. If you know how the math behind it works OR if you have a crafted item whose stats contradict this crafter, please contact ferricles on forums, discord, or ingame.";
+    disclaimer.textContent = "THIS CRAFTER IS NEARLY COMPLETE. The effect of powders on crafted weapons is not accurate. If you know how the math behind it works, please contact ferricles on forums, discord, or ingame.";
     document.getElementById("header").append(disclaimer);
 }
 

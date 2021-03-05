@@ -14,6 +14,7 @@
     grid-template-rows: min-content min-content auto;
 }
 .sticky-box {
+    position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 10px;
 }

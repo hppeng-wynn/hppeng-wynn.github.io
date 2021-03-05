@@ -65,6 +65,7 @@ class Craft{
     }
     setHash(hash) {
         this.hash = hash;
+        this.statMap.set("name", "CR-" + this.hash);
         this.statMap.set("displayName", "CR-" + this.hash);
         this.statMap.set("hash", this.hash);
     }
@@ -76,7 +77,8 @@ class Craft{
         let statMap = new Map();
         statMap.set("minRolls", new Map());
         statMap.set("maxRolls", new Map());
-        statMap.set("displayName", "CR-" + this.hash); //TODO: DISPLAY THE HASH
+        statMap.set("name", "CR-" + this.hash);
+        statMap.set("displayName", "CR-" + this.hash);
         statMap.set("tier", "Crafted");
         statMap.set("type", this.recipe.get("type").toLowerCase());
         statMap.set("duration", [this.recipe.get("duration")[0], this.recipe.get("duration")[1]]); //[low, high]
