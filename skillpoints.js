@@ -47,16 +47,20 @@ function calculate_skillpoints(equipment, weapon) {
         }
     }
 
-    function apply_to_fit(skillpoints, item, skillpoint_filter, activeSetCounts) {
+    function apply_to_fit(skillpoints, item, skillpoint_min, activeSetCounts) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
         for (let i = 0; i < 5; i++) {
-            if (item.get("skillpoints")[i] < 0 && skillpoint_filter[i]) {
-                applied[i] -= item.get("skillpoints")[i];
-                total -= item.get("skillpoints")[i];
+            if (item.get("skillpoints")[i] < 0 && skillpoint_min[i]) {
+                unadjusted = skillpoints[i] + item.get("skillpoints")[i];
+                delta = skillpoint_min[i] - unadjusted;
+                if (delta > 0) {
+                    applied[i] += delta;
+                    total += delta;
+                }
             }
             if (item.get("reqs")[i] == 0) continue;
-            if (skillpoint_filter) skillpoint_filter[i] = true;
+            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i] + item.get("skillpoints")[i]);
             const req = item.get("reqs")[i];
             const cur = skillpoints[i];
             if (req > cur) {
@@ -75,7 +79,7 @@ function calculate_skillpoints(equipment, weapon) {
                 //let skp_order = ["str","dex","int","def","agi"];
                 for (const i in skp_order) {
                     const delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);
-                    if (delta < 0 && skillpoint_filter[i]) {
+                    if (delta < 0 && skillpoint_min[i]) {
                         applied[i] -= delta;
                         total -= delta;
                     }
