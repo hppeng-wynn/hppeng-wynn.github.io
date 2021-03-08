@@ -597,8 +597,20 @@ function displayExpandedItem(item, parent_id){
                             p_elem.classList.add('itemp');
                             p_elem.classList.add("smalltitle");
                             p_elem.classList.add(item.get("tier"));
-                            p_elem.href = url_base + "crafter.html#" + item.get("hash");
+                            p_elem.href = url_base.replace("crafter.html","").replace("customizer.html","") + "crafter.html#" + item.get("hash");
+                            p_elem.target = "_blank";
                             p_elem.textContent = item.get(id);
+                            active_elem.appendChild(p_elem);
+                        }
+                        if(item.get("custom")) {
+                            p_elem.remove();
+                            p_elem = document.createElement("a");
+                            p_elem.classList.add('itemp');
+                            p_elem.classList.add("smalltitle");
+                            p_elem.classList.add(item.get("tier"));
+                            p_elem.href = url_base.replace("crafter.html","").replace("customizer.html","") + "customizer.html#" + item.get("hash");
+                            p_elem.target = "_blank";
+                            p_elem.textContent = item.get("displayName");
                             active_elem.appendChild(p_elem);
                         }
                         let img = document.createElement("img");

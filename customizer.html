@@ -105,13 +105,7 @@
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="left" id = "fixID">
-                                <label for="fixID-choice">Fixed IDs:</label>
-                                <button class = "fixID-choice" id = "fixID-choice" onclick = "toggleButton('fixID-choice'); toggleYN('fixID-choice'); toggleFixed({textContent})" tabindex="">no</button>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
-                            </td>
-                        </tr>
+                        
 
                         <tr>
                             <td class="center">
@@ -1842,25 +1836,36 @@
                                 Create 
                             </button>
                         </div>
+                        <div class = "button copy-button" style = "grid-item-3">
+                            <button class = "copy-button" id = "copy-button" onclick = "copyCustom()">
+                                Copy
+                            </button>
+                        </div>
+                        <div class = "button set-button center" style = "grid-item-4">
+                            <div class = "">Fixed IDs:</div>
+                        </div>
                         <div class = "button reset-button" style = "grid-item-2">
                             <button class = "reset-button" id = "reset-button" onclick = "resetFields()">
                                 Reset
                             </button>
                         </div>
-                        <div class = "button copy-button" style = "grid-item-3">
-                            <!--button class = "copy-button" id = "copy-button" onclick = "copyCustom()">
-                                //TODO
-                                Copy
-                            </button-->
+                        <div class = "button copy-button-long" style = "grid-item-6">
+                            <button class = "copy-button-long" id = "copy-button-long" onclick = "copyCustomLong()">
+                                Copy Long
+                            </button>
                         </div>
-                        <div class = "button set-button" style = "grid-item-4">
+                        <div class="button set-button center" id = "fixID" style = "grid-item-5">
+                            <button class = "fixID-choice" id = "fixID-choice" onclick = "toggleButton('fixID-choice'); toggleYN('fixID-choice'); toggleFixed({textContent})" tabindex="">no</button>
+                            <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                        </div>
+                        <div class = "button set-button" style = "grid-item-7">
                             <div class = "">Base Item: </div>
                         </div>
-                        <div class = "button set-button" style = "grid-item-5">
+                        <div class = "button set-button" style = "grid-item-8">
                             <input class = "input" list = "base-list" id = "base-input" value = ""></input>
                             <datalist id = "base-list"></datalist>
                         </div>
-                        <div class = "button set-button" style = "grid-item-6">
+                        <div class = "button set-button" style = "grid-item-9">
                             <button class = "set-button" id = "set-button" onclick = "useBaseItem('base-input')">
                                 Use
                             </button>

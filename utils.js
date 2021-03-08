@@ -70,6 +70,10 @@ function getValue(id) {
     return document.getElementById(id).value;
 }
 
+function log(b, n) {
+    return Math.log(n) / Math.log(b);
+}
+
 // Base 64 encoding tools
 // https://stackoverflow.com/a/27696695
 // Modified for fixed precision

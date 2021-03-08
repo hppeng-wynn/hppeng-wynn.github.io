@@ -8,7 +8,7 @@ const custom_url_tag = location.hash.slice(1);
 console.log(custom_url_base);
 console.log(custom_url_tag);
 
-const BUILD_VERSION = "6.9.40";
+const BUILD_VERSION = "6.9.41";
 
 function setTitle() {
     let text = "WynnCustom version "+BUILD_VERSION;
@@ -30,6 +30,7 @@ let player_custom_item;
 let base_item; //the item that a user starts from, if any
 let pos_range = [0.3,1.3];
 let neg_range = [1.3,0.7];
+
 
 
 let itemMap = new Map();
@@ -120,10 +121,10 @@ function calculateCustom() {
                 if (input.classList.contains("number-input")) {
                     if (parseFloat(input.value)) {
                         if(rolledIDs.includes(id)) {
-                            statMap.get("minRolls").set(id,parseFloat(input.value));
-                            statMap.get("maxRolls").set(id,parseFloat(input.value));
+                            statMap.get("minRolls").set(id,Math.round(parseFloat(input.value)));
+                            statMap.get("maxRolls").set(id,Math.round(parseFloat(input.value)));
                         } else {
-                            statMap.set(id, parseFloat(input.value));
+                            statMap.set(id, Math.round(parseFloat(input.value)));
                         }
                     }
                 } else if (input.classList.contains("string-input")) {
@@ -134,16 +135,16 @@ function calculateCustom() {
                         statMap.set(id, input.value);
                     }
                 } else if (input.classList.contains("array-input")) {
-                    statMap.set(id, input.value.split("-").map(x=>parseFloat(x)));
+                    statMap.set(id, input.value.split("-").map(x=>Math.round(parseFloat(x))));
                 }
 
                 if(input.value === "" && input.placeholder && input.placeholder !== "") {
                     if (input.classList.contains("number-input") && parseFloat(input.placeholder)) {
-                        statMap.set(id, parseFloat(input.placeholder));
+                        statMap.set(id, Math.round(parseFloat(input.placeholder)));
                     } else if (input.classList.contains("string-input")) {
                         statMap.set(id, input.placeholder);
                     } else if (input.classList.contains("array-input")) {
-                        statMap.set(id, input.placeholder.split("-").map(x=>parseFloat(x)));
+                        statMap.set(id, input.placeholder.split("-").map(x=>Math.round(parseFloat(x))));
                     }
                 }
             }
@@ -174,9 +175,9 @@ function calculateCustom() {
                 if (input.classList.contains("number-input")) {
                     if (parseFloat(input.value)) {
                         if (rolledIDs.includes(id)) {
-                            statMap.get(rollMap).set(id, parseFloat(input.value));
+                            statMap.get(rollMap).set(id, Math.round(parseFloat(input.value)));
                         } else {
-                            statMap.set(id, parseFloat(input.value));
+                            statMap.set(id, Math.round(parseFloat(input.value)));
                         }
                     }
                 } else if (input.classList.contains("string-input")) {
@@ -186,15 +187,15 @@ function calculateCustom() {
                         statMap.set(id, input.value);
                     }
                 } else if (input.classList.contains("array-input")) {
-                    statMap.set(id, input.value.split("-").map(x=>parseFloat(x)));
+                    statMap.set(id, input.value.split("-").map(x=>Math.round(parseFloat(x))));
                 }
  
                 if(input.value === "" && input.placeholder && input.placeholder !== "") {
                     if (input.classList.contains("number-input")) {
                         if (rolledIDs.includes(id)) {
-                            statMap.get(rollMap).set(id, parseFloat(input.placeholder));
+                            statMap.get(rollMap).set(id, Math.round(parseFloat(input.placeholder)));
                         } else {
-                            statMap.set(id, parseFloat(input.placeholder));
+                            statMap.set(id, Math.round(parseFloat(input.placeholder)));
                         }
                     } else if (input.classList.contains("string-input")){
                         if (rolledIDs.includes(id)) {
@@ -203,7 +204,7 @@ function calculateCustom() {
                             statMap.set(id, input.placeholder);
                         }
                     } else if (input.classList.contains("array-input")) {
-                        statMap.set(id, input.placeholder.split("-").map(x=>parseFloat(x)));
+                        statMap.set(id, input.placeholder.split("-").map(x=>Math.round(parseFloat(x))));
                     }
                 }
             }
@@ -212,8 +213,16 @@ function calculateCustom() {
 
 
         player_custom_item = new Custom(statMap);
+
+        let custom_str = encodeCustom(player_custom_item.statMap, false);
+        location.hash = custom_str;
+        player_custom_item.setHash(custom_str);
+        console.log(player_custom_item.statMap.get("hash"));
+
+        
         displayExpandedItem(player_custom_item.statMap, "custom-stats");
-        console.log(player_custom_item.statMap);
+
+        //console.log(player_custom_item.statMap);
 
     }catch (error) {
         //USE THE ERROR <p>S!
@@ -235,20 +244,123 @@ function calculateCustom() {
     
 }
 
-function encodeCustom(custom) {
-    
+/**
+ * @param {Map} custom - the statMap of the CI
+ * @param {boolean} verbose - if we want lore and majorIds to display
+ */
+function encodeCustom(custom, verbose) {
+    if (custom) {
+        let hash = "1";
+        //version 1
+        if (custom.has("fixID") && custom.get("fixID")) {
+            hash += "1";
+        } else {
+            hash += "0";
+        }
+        for (const i in ci_save_order) {
+            let id = ci_save_order[i];
+            if (rolledIDs.includes(id)) {
+                let val_min = custom.get("minRolls").has(id) ? custom.get("minRolls").get(id) : 0;
+                let val_max = custom.get("maxRolls").has(id) ? custom.get("maxRolls").get(id) : 0;
+                let min_len = Math.max(1,Math.ceil(log(64,Math.abs(val_min))));
+                let max_len = Math.max(1,Math.ceil(log(64,Math.abs(val_max))));
+                let len = Math.max(min_len,max_len);
+
+                if ( val_min != 0 || val_max != 0 ) {
+                    //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val_min,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + ":" + Base64.fromIntN(val_max,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + "_";
+                    if (custom.get("fixID")) {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + Base64.fromIntN(val_min, len);
+                    } else {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + Base64.fromIntN(val_min, len) + Base64.fromIntN(val_max,len);
+                    }
+                }
+            } else {
+                let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam","nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"];
+                let val = custom.get(id);
+                if (typeof(val) === "string" && val !== "") {
+                    if ((damages.includes(id) && val === "0-0") || (!verbose && (id === "lore" || id === "majorIds"))) { continue; }
+                    if (id === "type") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(types.indexOf(val.substring(0,1).toUpperCase()+val.slice(1)),1);
+                    } else if (id === "tier") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(tiers.indexOf(val),1);
+                    } else if (id === "atkSpd") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(atkSpds.indexOf(val),1);
+                    } else {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(val.replace(" ", "%20").length,2) + val.replace(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
+                    }
+                } else if (typeof(val) === "number" && val != 0) {
+                    let len = Math.max(1,Math.ceil(log(64,Math.abs(val))));
+                    //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val,Math.max(1,Math.ceil(log(64,Math.abs(val))))) + "_";
+                    hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + Base64.fromIntN(val,len);
+                } 
+            }
+        }
+
+        return hash;
+    }
     return "";
 }
 
 function decodeCustom(custom_url_tag) {
     if (custom_url_tag) {
-        console.log(custom_url_tag);
         let version = custom_url_tag.charAt(0);
-        let tag = custom_url_tag.substring(1);
+        let fixID = Boolean(parseInt(custom_url_tag.charAt(1),10));
+        let tag = custom_url_tag.substring(2);
+        let statMap = new Map();
+        statMap.set("minRolls", new Map());
+        statMap.set("maxRolls", new Map());
+
         if (version === "1") {
             //do the things
-            
+            if (fixID) {statMap.set("fixId", "true");}
+            while (tag !== "") {
+                let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
+                let len = Base64.toInt(tag.slice(2,4));
+                if (rolledIDs.includes(id)) {
+                    let minRoll = Base64.toInt(tag.slice(4,4+len));
+                    if (!fixID) {
+                        let maxRoll = Base64.toInt(tag.slice(4+len,4+2*len));
+                        setValue(id+"-choice-min", minRoll);
+                        setValue(id+"-choice-max", maxRoll);
+                        statMap.get("minRolls").set(id,minRoll);
+                        statMap.get("maxRolls").set(id,maxRoll);
+                        tag = tag.slice(4+2*len);
+                    } else {
+                        setValue(id+"-choice-fixed", minRoll);
+                        statMap.get("minRolls").set(id,minRoll);
+                        statMap.get("maxRolls").set(id,minRoll);
+                        tag = tag.slice(4+len);
+                    }
+                } else {
+                    let val;
+                    let elem = document.getElementById(id+"-choice");
+                    if (elem.classList.contains("number-input")) {
+                        val = Base64.toInt(tag.slice(4,4+len));
+                    } else if (elem.classList.contains("string-input") || classList.contains("array-input")) {
+                        if (id === "tier") {
+                            val = tiers[Base64.toInt(tag.charAt(2))];
+                            len = -1;
+                        } else if (id === "type") {
+                            val = types[Base64.toInt(tag.charAt(2))];
+                            len = -1;
+                        } 
+                        else if (id === "atkSpd") {
+                            val = atkSpds[Base64.toInt(tag.charAt(2))];
+                            len = -1;
+                        } else { //general case
+                            val = tag.slice(4,4+len).replace("%20"," ");
+                        }
+                    } else {
+                        val = "";
+                    }
+                    statMap.set(id, val);
+                    setValue(id+"-choice", val);
+                    tag = tag.slice(4+len);
+                }
+            }
+            statMap.set("hash",custom_url_tag);
             calculateCustom();
+            player_custom_item.setHash(custom_url_tag);
         }
     }
 }
@@ -406,13 +518,22 @@ function useBaseItem(elem) {
 
 /* Copy the link
 */
-function copyCustom(){
+function copyCustom() {
     if (player_custom_item) {
         copyTextToClipboard(custom_url_base+location.hash);
         document.getElementById("copy-button").textContent = "Copied!";
     }
 }
 
+function copyCustomLong() {
+    if (player_custom_item) {
+        let hash = encodeCustom(player_custom_item.statMap,true);
+        console.log(hash);
+        location.hash = hash;
+        copyTextToClipboard(custom_url_base+location.hash);
+        document.getElementById("copy-button-long").textContent = "Copied!";
+    }
+}
 
 
 /* Reset all fields

@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.40";
+const ING_BUILD_VERSION = "6.9.41";
 /*
  * END testing section
  */
@@ -262,6 +262,7 @@ function encodeCraft(craft) {
     }
     return "";
 }
+
 function decodeCraft(ing_url_tag) {
     if (ing_url_tag) {
         console.log(ing_url_tag);
