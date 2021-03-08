@@ -312,7 +312,12 @@ function decodeCustom(custom_url_tag) {
 
         if (version === "1") {
             //do the things
-            if (fixID) {statMap.set("fixId", "true");}
+            if (fixID) {
+                statMap.set("fixId", "true");
+                toggleButton("fixID-choice");
+                toggleYN("fixID-choice");
+                toggleFixed(document.getElementById("fixID-choice"));
+            }
             while (tag !== "") {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
                 let len = Base64.toInt(tag.slice(2,4));
@@ -431,7 +436,7 @@ function toggleYN(elemId) {
 }
 
 /**
- * @param fixed : a boolean for the state of the fixID button. True -> make all the variable IDs 2 inputs, False -> make them all 1 input
+ * @param fixed : a boolean for the state of the fixID button.
  */
 function toggleFixed(fixed) {
     for (const id of rolledIDs) {
