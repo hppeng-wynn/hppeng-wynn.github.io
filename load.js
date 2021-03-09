@@ -75,13 +75,13 @@ async function load(init_func) {
     items = result.items;
     sets = result.sets;
 
-    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
-    let clear_items = clear_tx.objectStore('item_db');
-    let clear_sets = clear_tx.objectStore('item_db');
-
-    await clear_items.clear();
-    await clear_sets.clear();
-    await clear_tx.complete;
+//    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
+//    let clear_items = clear_tx.objectStore('item_db');
+//    let clear_sets = clear_tx.objectStore('item_db');
+//
+//    await clear_items.clear();
+//    await clear_sets.clear();
+//    await clear_tx.complete;
 
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
     add_tx.onabort = function(e) {
