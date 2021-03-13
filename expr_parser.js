@@ -147,17 +147,16 @@ const ExprParser = (function() {
   function takeExprList0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case ')':
-        return { type: 'nonterm', name: 'exprList\'', prod: 1, children };
       case ',':
         children.push(tokens.consume(','));
         children.push(takeExpr(tokens));
         children.push(takeExprList0(tokens));
         return { type: 'nonterm', name: 'exprList\'', prod: 0, children };
+      case ')':
       case 'eof':
         return { type: 'nonterm', name: 'exprList\'', prod: 1, children };
       default:
-        throw new Error('Could not parse an expression list!');
+        throw new Error('Could not parse a expression list!');
     }
   }
 
@@ -217,15 +216,14 @@ const ExprParser = (function() {
   function takeDisj0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case '&':
-      case ')':
-      case ',':
-        return { type: 'nonterm', name: 'disj\'', prod: 1, children };
       case '|':
         children.push(tokens.consume('|'));
         children.push(takeCmpEq(tokens));
         children.push(takeDisj0(tokens));
         return { type: 'nonterm', name: 'disj\'', prod: 0, children };
+      case '&':
+      case ')':
+      case ',':
       case 'eof':
         return { type: 'nonterm', name: 'disj\'', prod: 1, children };
       default:
@@ -254,25 +252,24 @@ const ExprParser = (function() {
   function takeCmpEq0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case '!=':
-        children.push(tokens.consume('!='));
-        children.push(takeCmpRel(tokens));
-        children.push(takeCmpEq0(tokens));
-        return { type: 'nonterm', name: 'cmpEq\'', prod: 1, children };
-      case '&':
-      case ')':
-      case ',':
-        return { type: 'nonterm', name: 'cmpEq\'', prod: 3, children };
       case '=':
         children.push(tokens.consume('='));
         children.push(takeCmpRel(tokens));
         children.push(takeCmpEq0(tokens));
         return { type: 'nonterm', name: 'cmpEq\'', prod: 0, children };
+      case '!=':
+        children.push(tokens.consume('!='));
+        children.push(takeCmpRel(tokens));
+        children.push(takeCmpEq0(tokens));
+        return { type: 'nonterm', name: 'cmpEq\'', prod: 1, children };
       case '?=':
         children.push(tokens.consume('?='));
         children.push(takeCmpRel(tokens));
         children.push(takeCmpEq0(tokens));
         return { type: 'nonterm', name: 'cmpEq\'', prod: 2, children };
+      case '&':
+      case ')':
+      case ',':
       case '|':
       case 'eof':
         return { type: 'nonterm', name: 'cmpEq\'', prod: 3, children };
@@ -302,23 +299,16 @@ const ExprParser = (function() {
   function takeCmpRel0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case '!=':
-      case '&':
-      case ')':
-      case ',':
-        return { type: 'nonterm', name: 'cmpRel\'', prod: 4, children };
-      case '<':
-        children.push(tokens.consume('<'));
-        children.push(takeSum(tokens));
-        children.push(takeCmpRel0(tokens));
-        return { type: 'nonterm', name: 'cmpRel\'', prod: 1, children };
       case '<=':
         children.push(tokens.consume('<='));
         children.push(takeSum(tokens));
         children.push(takeCmpRel0(tokens));
         return { type: 'nonterm', name: 'cmpRel\'', prod: 0, children };
-      case '=':
-        return { type: 'nonterm', name: 'cmpRel\'', prod: 4, children };
+      case '<':
+        children.push(tokens.consume('<'));
+        children.push(takeSum(tokens));
+        children.push(takeCmpRel0(tokens));
+        return { type: 'nonterm', name: 'cmpRel\'', prod: 1, children };
       case '>':
         children.push(tokens.consume('>'));
         children.push(takeSum(tokens));
@@ -329,6 +319,11 @@ const ExprParser = (function() {
         children.push(takeSum(tokens));
         children.push(takeCmpRel0(tokens));
         return { type: 'nonterm', name: 'cmpRel\'', prod: 3, children };
+      case '!=':
+      case '&':
+      case ')':
+      case ',':
+      case '=':
       case '?=':
       case '|':
       case 'eof':
@@ -359,22 +354,20 @@ const ExprParser = (function() {
   function takeSum0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case '!=':
-      case '&':
-      case ')':
-        return { type: 'nonterm', name: 'sum\'', prod: 2, children };
       case '+':
         children.push(tokens.consume('+'));
         children.push(takeProd(tokens));
         children.push(takeSum0(tokens));
         return { type: 'nonterm', name: 'sum\'', prod: 0, children };
-      case ',':
-        return { type: 'nonterm', name: 'sum\'', prod: 2, children };
       case '-':
         children.push(tokens.consume('-'));
         children.push(takeProd(tokens));
         children.push(takeSum0(tokens));
         return { type: 'nonterm', name: 'sum\'', prod: 1, children };
+      case '!=':
+      case '&':
+      case ')':
+      case ',':
       case '<':
       case '<=':
       case '=':
@@ -410,24 +403,22 @@ const ExprParser = (function() {
   function takeProd0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case '!=':
-      case '&':
-      case ')':
-        return { type: 'nonterm', name: 'prod\'', prod: 2, children };
       case '*':
         children.push(tokens.consume('*'));
         children.push(takeExp(tokens));
         children.push(takeProd0(tokens));
         return { type: 'nonterm', name: 'prod\'', prod: 0, children };
-      case '+':
-      case ',':
-      case '-':
-        return { type: 'nonterm', name: 'prod\'', prod: 2, children };
       case '/':
         children.push(tokens.consume('/'));
         children.push(takeExp(tokens));
         children.push(takeProd0(tokens));
         return { type: 'nonterm', name: 'prod\'', prod: 1, children };
+      case '!=':
+      case '&':
+      case ')':
+      case '+':
+      case ',':
+      case '-':
       case '<':
       case '<=':
       case '=':
@@ -463,6 +454,11 @@ const ExprParser = (function() {
   function takeExp0(tokens) {
     const children = [];
     switch (tokens.peek.type) {
+      case '^':
+        children.push(tokens.consume('^'));
+        children.push(takeUnary(tokens));
+        children.push(takeExp0(tokens));
+        return { type: 'nonterm', name: 'exp\'', prod: 0, children };
       case '!=':
       case '&':
       case ')':
@@ -477,12 +473,6 @@ const ExprParser = (function() {
       case '>':
       case '>=':
       case '?=':
-        return { type: 'nonterm', name: 'exp\'', prod: 1, children };
-      case '^':
-        children.push(tokens.consume('^'));
-        children.push(takeUnary(tokens));
-        children.push(takeExp0(tokens));
-        return { type: 'nonterm', name: 'exp\'', prod: 0, children };
       case '|':
       case 'eof':
         return { type: 'nonterm', name: 'exp\'', prod: 1, children };
@@ -494,17 +484,15 @@ const ExprParser = (function() {
   function takeUnary(tokens) {
     const children = [];
     switch (tokens.peek.type) {
+      case '-':
+        children.push(tokens.consume('-'));
+        children.push(takeUnary(tokens));
+        return { type: 'nonterm', name: 'unary', prod: 0, children };
       case '!':
         children.push(tokens.consume('!'));
         children.push(takeUnary(tokens));
         return { type: 'nonterm', name: 'unary', prod: 1, children };
       case '(':
-        children.push(takePrim(tokens));
-        return { type: 'nonterm', name: 'unary', prod: 2, children };
-      case '-':
-        children.push(tokens.consume('-'));
-        children.push(takeUnary(tokens));
-        return { type: 'nonterm', name: 'unary', prod: 0, children };
       case 'bLit':
       case 'ident':
       case 'nLit':
@@ -519,24 +507,24 @@ const ExprParser = (function() {
   function takePrim(tokens) {
     const children = [];
     switch (tokens.peek.type) {
+      case 'nLit':
+        children.push(tokens.consume('nLit'));
+        return { type: 'nonterm', name: 'prim', prod: 0, children };
+      case 'bLit':
+        children.push(tokens.consume('bLit'));
+        return { type: 'nonterm', name: 'prim', prod: 1, children };
+      case 'sLit':
+        children.push(tokens.consume('sLit'));
+        return { type: 'nonterm', name: 'prim', prod: 2, children };
+      case 'ident':
+        children.push(tokens.consume('ident'));
+        children.push(takeIdentTail(tokens));
+        return { type: 'nonterm', name: 'prim', prod: 3, children };
       case '(':
         children.push(tokens.consume('('));
         children.push(takeExpr(tokens));
         children.push(tokens.consume(')'));
         return { type: 'nonterm', name: 'prim', prod: 4, children };
-      case 'bLit':
-        children.push(tokens.consume('bLit'));
-        return { type: 'nonterm', name: 'prim', prod: 1, children };
-      case 'ident':
-        children.push(tokens.consume('ident'));
-        children.push(takeIdentTail(tokens));
-        return { type: 'nonterm', name: 'prim', prod: 3, children };
-      case 'nLit':
-        children.push(tokens.consume('nLit'));
-        return { type: 'nonterm', name: 'prim', prod: 0, children };
-      case 'sLit':
-        children.push(tokens.consume('sLit'));
-        return { type: 'nonterm', name: 'prim', prod: 2, children };
       default:
         throw new Error('Could not parse a primitive value!');
     }
@@ -545,14 +533,13 @@ const ExprParser = (function() {
   function takeIdentTail(tokens) {
     const children = [];
     switch (tokens.peek.type) {
-      case '!=':
-      case '&':
-        return { type: 'nonterm', name: 'identTail', prod: 1, children };
       case '(':
         children.push(tokens.consume('('));
         children.push(takeArgs(tokens));
         children.push(tokens.consume(')'));
         return { type: 'nonterm', name: 'identTail', prod: 0, children };
+      case '!=':
+      case '&':
       case ')':
       case '*':
       case '+':
@@ -570,7 +557,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'identTail', prod: 1, children };
       default:
-        throw new Error('Could not parse an identifier or function call!');
+        throw new Error('Could not parse an identifier expression!');
     }
   }
 
@@ -579,10 +566,6 @@ const ExprParser = (function() {
     switch (tokens.peek.type) {
       case '!':
       case '(':
-        children.push(takeExprList(tokens));
-        return { type: 'nonterm', name: 'args', prod: 0, children };
-      case ')':
-        return { type: 'nonterm', name: 'args', prod: 1, children };
       case '-':
       case 'bLit':
       case 'ident':
@@ -590,6 +573,7 @@ const ExprParser = (function() {
       case 'sLit':
         children.push(takeExprList(tokens));
         return { type: 'nonterm', name: 'args', prod: 0, children };
+      case ')':
       case 'eof':
         return { type: 'nonterm', name: 'args', prod: 1, children };
       default:
@@ -635,9 +619,11 @@ const ExprParser = (function() {
     }
     return { ...ast, children: mapFixUp(ast.children) };
   }
+
   function mapFixUp(nodes) {
     return nodes.map(chAst => fixUp(chAst));
   }
+
   function fixUpRightRecurse(ast, maxProd) {
     let nomAst = { type: 'nonterm', name: ast.name, prod: maxProd, children: [fixUp(ast.children[0])] };
     let tree = ast.children[1];
@@ -656,6 +642,7 @@ const ExprParser = (function() {
     function trans(ast) {
       return translate(ast, builtInProps, builtInFuncs);
     }
+
     if (ast.type === 'term') {
       switch (ast.token.type) {
         case 'nLit':
