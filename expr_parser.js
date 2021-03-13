@@ -122,7 +122,7 @@ const ExprParser = (function() {
         children.push(takeConj(tokens));
         return { type: 'nonterm', name: 'expr', prod: 0, children };
       default:
-        throw new Error('Could not parse expr!');
+        throw new Error('Could not parse an expression!');
     }
   }
 
@@ -140,7 +140,7 @@ const ExprParser = (function() {
         children.push(takeExprList0(tokens));
         return { type: 'nonterm', name: 'exprList', prod: 0, children };
       default:
-        throw new Error('Could not parse exprList!');
+        throw new Error('Could not parse an expression list!');
     }
   }
 
@@ -157,7 +157,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'exprList\'', prod: 1, children };
       default:
-        throw new Error('Could not parse exprList\'!');
+        throw new Error('Could not parse an expression list!');
     }
   }
 
@@ -175,7 +175,7 @@ const ExprParser = (function() {
         children.push(takeConj0(tokens));
         return { type: 'nonterm', name: 'conj', prod: 0, children };
       default:
-        throw new Error('Could not parse conj!');
+        throw new Error('Could not parse a conjunction!');
     }
   }
 
@@ -192,7 +192,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'conj\'', prod: 1, children };
       default:
-        throw new Error('Could not parse conj\'!');
+        throw new Error('Could not parse a conjunction!');
     }
   }
 
@@ -210,7 +210,7 @@ const ExprParser = (function() {
         children.push(takeDisj0(tokens));
         return { type: 'nonterm', name: 'disj', prod: 0, children };
       default:
-        throw new Error('Could not parse disj!');
+        throw new Error('Could not parse a disjunction!');
     }
   }
 
@@ -229,7 +229,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'disj\'', prod: 1, children };
       default:
-        throw new Error('Could not parse disj\'!');
+        throw new Error('Could not parse a disjunction!');
     }
   }
 
@@ -247,7 +247,7 @@ const ExprParser = (function() {
         children.push(takeCmpEq0(tokens));
         return { type: 'nonterm', name: 'cmpEq', prod: 0, children };
       default:
-        throw new Error('Could not parse cmpEq!');
+        throw new Error('Could not parse an equality comparison!');
     }
   }
 
@@ -277,7 +277,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'cmpEq\'', prod: 3, children };
       default:
-        throw new Error('Could not parse cmpEq\'!');
+        throw new Error('Could not parse an equality comparison!');
     }
   }
 
@@ -295,7 +295,7 @@ const ExprParser = (function() {
         children.push(takeCmpRel0(tokens));
         return { type: 'nonterm', name: 'cmpRel', prod: 0, children };
       default:
-        throw new Error('Could not parse cmpRel!');
+        throw new Error('Could not parse a relational comparison!');
     }
   }
 
@@ -334,7 +334,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'cmpRel\'', prod: 4, children };
       default:
-        throw new Error('Could not parse cmpRel\'!');
+        throw new Error('Could not parse a relational comparison!');
     }
   }
 
@@ -352,7 +352,7 @@ const ExprParser = (function() {
         children.push(takeSum0(tokens));
         return { type: 'nonterm', name: 'sum', prod: 0, children };
       default:
-        throw new Error('Could not parse sum!');
+        throw new Error('Could not parse an additive expression!');
     }
   }
 
@@ -385,7 +385,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'sum\'', prod: 2, children };
       default:
-        throw new Error('Could not parse sum\'!');
+        throw new Error('Could not parse an additive expression!');
     }
   }
 
@@ -403,7 +403,7 @@ const ExprParser = (function() {
         children.push(takeProd0(tokens));
         return { type: 'nonterm', name: 'prod', prod: 0, children };
       default:
-        throw new Error('Could not parse prod!');
+        throw new Error('Could not parse a multiplicative expression!');
     }
   }
 
@@ -438,7 +438,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'prod\'', prod: 2, children };
       default:
-        throw new Error('Could not parse prod\'!');
+        throw new Error('Could not parse a multiplicative expression!');
     }
   }
 
@@ -456,7 +456,7 @@ const ExprParser = (function() {
         children.push(takeExp0(tokens));
         return { type: 'nonterm', name: 'exp', prod: 0, children };
       default:
-        throw new Error('Could not parse exp!');
+        throw new Error('Could not parse an exponential expression!');
     }
   }
 
@@ -487,7 +487,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'exp\'', prod: 1, children };
       default:
-        throw new Error('Could not parse exp\'!');
+        throw new Error('Could not parse an exponential expression!');
     }
   }
 
@@ -512,7 +512,7 @@ const ExprParser = (function() {
         children.push(takePrim(tokens));
         return { type: 'nonterm', name: 'unary', prod: 2, children };
       default:
-        throw new Error('Could not parse unary!');
+        throw new Error('Could not parse a unary expression!');
     }
   }
 
@@ -538,7 +538,7 @@ const ExprParser = (function() {
         children.push(tokens.consume('sLit'));
         return { type: 'nonterm', name: 'prim', prod: 2, children };
       default:
-        throw new Error('Could not parse prim!');
+        throw new Error('Could not parse a primitive value!');
     }
   }
 
@@ -570,7 +570,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'identTail', prod: 1, children };
       default:
-        throw new Error('Could not parse identTail!');
+        throw new Error('Could not parse an identifier or function call!');
     }
   }
 
@@ -593,7 +593,7 @@ const ExprParser = (function() {
       case 'eof':
         return { type: 'nonterm', name: 'args', prod: 1, children };
       default:
-        throw new Error('Could not parse args!');
+        throw new Error('Could not parse an argument list!');
     }
   }
 
