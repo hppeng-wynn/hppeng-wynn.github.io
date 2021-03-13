@@ -21,7 +21,6 @@ class ExprField {
         } catch (e) {
             this.errorText.innerText = e.message;
             this.output = null;
-            console.error(e);
         }
         return true;
     }
