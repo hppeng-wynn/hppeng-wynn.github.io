@@ -755,13 +755,13 @@ const ExprParser = (function() {
             case 2:
               return new StrLitTerm(ast.children[0].token.value);
             case 3:
-              const fn = builtInFuncs[ast.children[0].token.id];
+              const fn = builtInFuncs[ast.children[0].token.id.toLowerCase()];
               if (!fn) {
                 throw new Error(`Unknown function: ${ast.children[0].token.id}`);
               }
               return new FnCallTerm(fn, trans(ast.children[2]));
             case 4: {
-              const prop = builtInProps[ast.children[0].token.id];
+              const prop = builtInProps[ast.children[0].token.id.toLowerCase()];
               if (!prop) {
                 throw new Error(`Unknown property: ${ast.children[0].token.id}`);
               }
