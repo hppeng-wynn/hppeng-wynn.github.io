@@ -345,7 +345,7 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
-        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
+        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
         for (const sName of specialNames) {
             for (let i = 1; i < 6; i++) {
                 let elem = document.getElementById(sName + "-" + i);
@@ -501,7 +501,7 @@ function calculateBuild(save_skp, skp){
 */
 function updateStats() {
     
-    let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
+    let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
     for (const sName of specialNames) {
         for (let i = 1; i < 6; i++) {
             let elem = document.getElementById(sName + "-" + i);
@@ -516,7 +516,7 @@ function updateStats() {
                         player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                    }  else if (name === "Air Prison") {
+                    }  else if (name === "Wind Prison") {
                         player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
                     }
@@ -599,7 +599,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
    
     let name = (buttonId).split("-")[0];
     let power = (buttonId).split("-")[1]; // [1, 5]
-    let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Air Prison"];
+    let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Wind Prison"];
     let powderSpecials = []; // [ [special, power], [special, power]]
     
 
@@ -615,7 +615,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
                     player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     //poison?
-                } else if (name === "Air Prison") {
+                } else if (name === "Wind Prison") {
                     player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[power-1];
                 }
@@ -633,7 +633,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
                             player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                        } else if (name === "Air Prison") {
+                        } else if (name === "Wind Prison") {
                             player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
                         }
@@ -666,7 +666,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
                     player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                } else if (name === "Air Prison") {
+                } else if (name === "Wind Prison") {
                     player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.get("damageBonus")[4] += special.weaponSpecialEffects.get("Damage Boost")[power-1];
                 }
