@@ -661,7 +661,7 @@ const ExprParser = (function() {
         case 'exprList':
           switch (ast.prod) {
             case 0:
-              return [...ast.children[0], trans(ast.children[2])];
+              return [...trans(ast.children[0]), trans(ast.children[2])];
             case 1:
               return [trans(ast.children[0])];
           }
