@@ -171,7 +171,7 @@ const itemQueryProps = (function() {
 const itemQueryFuncs = {
   max: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to max()');
       let runningMax = -Infinity;
       for (let i = 0; i < args.length; i++) {
@@ -182,7 +182,7 @@ const itemQueryFuncs = {
   },
   min: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to min()');
       let runningMin = Infinity;
       for (let i = 0; i < args.length; i++) {
@@ -193,49 +193,49 @@ const itemQueryFuncs = {
   },
   floor: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to floor()');
       return Math.floor(checkNum(args[0]));
     }
   },
   ceil: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to ceil()');
       return Math.ceil(checkNum(args[0]));
     }
   },
   round: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to round()');
       return Math.round(checkNum(args[0]));
     }
   },
   sqrt: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to sqrt()');
       return Math.sqrt(checkNum(args[0]));
     }
   },
   abs: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to abs()');
       return Math.abs(checkNum(args[0]));
     }
   },
   contains: {
     type: 'boolean',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 2) throw new Error('Not enough args to contains()');
       return checkStr(args[0]).toLowerCase().includes(checkStr(args[1]).toLowerCase());
     }
   },
   atkspdmod: {
     type: 'number',
-    fn: function(args) {
+    fn: function(item, itemExp, args) {
       if (args.length < 1) throw new Error('Not enough args to atkSpdMod()');
       switch (checkNum(args[0])) {
         case 2:
@@ -492,7 +492,7 @@ class FnCallTerm extends Term {
     for (const argExpr of this.argExprs) {
       argVals.push(argExpr.resolve(item, itemExt));
     }
-    return this.fn.fn(argVals);
+    return this.fn.fn(item, itemExt, argVals);
   }
 }
 
