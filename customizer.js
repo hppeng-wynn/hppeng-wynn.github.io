@@ -8,10 +8,10 @@ const custom_url_tag = location.hash.slice(1);
 console.log(custom_url_base);
 console.log(custom_url_tag);
 
-const BUILD_VERSION = "6.9.41";
+const CUSTOM_BUILD_VERSION = "6.9.42.0";
 
 function setTitle() {
-    let text = "WynnCustom version "+BUILD_VERSION;
+    let text = "WynnCustom version "+CUSTOM_BUILD_VERSION;
     document.getElementById("header").classList.add("funnynumber");
     document.getElementById("header").textContent = text;
 }
@@ -33,10 +33,6 @@ let neg_range = [1.3,0.7];
 
 
 
-let itemMap = new Map();
-/* Mapping from item names to set names. */
-let idMap = new Map();
-let redirectMap = new Map();
 
 let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","pos_roll_range-choice-min","pos_roll_range-choice-max"];
         
@@ -44,18 +40,6 @@ let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","p
 function init() {
 
     try {
-        //directly from builder.js. Removed irrelevant materials and no noneitems used here.
-        for (const item of items) {
-            if (item.remapID === undefined) {
-                itemMap.set(item.displayName, item);
-                idMap.set(item.id, item.displayName);
-            }
-            else {
-                redirectMap.set(item.id, item.remapID);
-            }
-        }
-        console.log(itemMap);
-
         populateFields();
         decodeCustom(custom_url_tag);
 
@@ -214,15 +198,18 @@ function calculateCustom() {
 
         player_custom_item = new Custom(statMap);
 
-        let custom_str = encodeCustom(player_custom_item.statMap, false);
+        document.getElementById("right-container").classList.remove("sticky-box");
+        let custom_str = encodeCustom(player_custom_item.statMap, true);
         location.hash = custom_str;
+
+        custom_str = encodeCustom(player_custom_item.statMap, true);
         player_custom_item.setHash(custom_str);
         console.log(player_custom_item.statMap.get("hash"));
 
         
         displayExpandedItem(player_custom_item.statMap, "custom-stats");
 
-        //console.log(player_custom_item.statMap);
+        console.log(player_custom_item.statMap);
 
     }catch (error) {
         //USE THE ERROR <p>S!
@@ -250,6 +237,9 @@ function calculateCustom() {
  */
 function encodeCustom(custom, verbose) {
     if (custom) {
+        if (custom.statMap) {
+            custom = custom.statMap; 
+        }
         let hash = "1";
         //version 1
         if (custom.has("fixID") && custom.get("fixID")) {
@@ -262,36 +252,45 @@ function encodeCustom(custom, verbose) {
             if (rolledIDs.includes(id)) {
                 let val_min = custom.get("minRolls").has(id) ? custom.get("minRolls").get(id) : 0;
                 let val_max = custom.get("maxRolls").has(id) ? custom.get("maxRolls").get(id) : 0;
+                let sign = (Boolean(val_min / Math.abs(val_min) < 0) | 0) + 2*(Boolean(val_max / Math.abs(val_max) < 0) | 0) // 0 - both pos 1 - min neg max pos 2 - min pos max neg (how?) 3 - min neg max neg 
+                //console.log(id + ": " + sign);
                 let min_len = Math.max(1,Math.ceil(log(64,Math.abs(val_min))));
                 let max_len = Math.max(1,Math.ceil(log(64,Math.abs(val_max))));
                 let len = Math.max(min_len,max_len);
+                val_min = Math.abs(val_min);
+                val_max = Math.abs(val_max);
 
                 if ( val_min != 0 || val_max != 0 ) {
                     //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val_min,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + ":" + Base64.fromIntN(val_max,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + "_";
                     if (custom.get("fixID")) {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + Base64.fromIntN(val_min, len);
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len);
                     } else {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + Base64.fromIntN(val_min, len) + Base64.fromIntN(val_max,len);
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len) + Base64.fromIntN(val_max,len);
                     }
                 }
             } else {
                 let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam","nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"];
                 let val = custom.get(id);
+
                 if (typeof(val) === "string" && val !== "") {
-                    if ((damages.includes(id) && val === "0-0") || (!verbose && (id === "lore" || id === "majorIds"))) { continue; }
+                    if ((damages.includes(id) && val === "0-0") || (!verbose && ["lore","majorIds","quest","materials","drop","set"].includes(id))) { continue; }
                     if (id === "type") {
                         hash += Base64.fromIntN(i,2) + Base64.fromIntN(types.indexOf(val.substring(0,1).toUpperCase()+val.slice(1)),1);
                     } else if (id === "tier") {
                         hash += Base64.fromIntN(i,2) + Base64.fromIntN(tiers.indexOf(val),1);
                     } else if (id === "atkSpd") {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(atkSpds.indexOf(val),1);
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(attackSpeeds.indexOf(val),1);
+                    } else if (id === "classReq") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(classes.indexOf(val),1);
                     } else {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(val.replace(" ", "%20").length,2) + val.replace(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(val.replaceAll(" ", "%20").length,2) + val.replaceAll(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
                     }
                 } else if (typeof(val) === "number" && val != 0) {
                     let len = Math.max(1,Math.ceil(log(64,Math.abs(val))));
+                    let sign = Boolean(val / Math.abs(val) < 0) | 0;
+                    //console.log(sign);
                     //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val,Math.max(1,Math.ceil(log(64,Math.abs(val))))) + "_";
-                    hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + Base64.fromIntN(val,len);
+                    hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(Math.abs(val),len);
                 } 
             }
         }
@@ -303,6 +302,10 @@ function encodeCustom(custom, verbose) {
 
 function decodeCustom(custom_url_tag) {
     if (custom_url_tag) {
+        if (custom_url_tag.slice(0,3) === "CI-") {
+            custom_url_tag = custom_url_tag.substring(3);
+            location.hash = location.hash.substring(3);
+        } 
         let version = custom_url_tag.charAt(0);
         let fixID = Boolean(parseInt(custom_url_tag.charAt(1),10));
         let tag = custom_url_tag.substring(2);
@@ -313,7 +316,7 @@ function decodeCustom(custom_url_tag) {
         if (version === "1") {
             //do the things
             if (fixID) {
-                statMap.set("fixId", "true");
+                statMap.set("fixId", true);
                 toggleButton("fixID-choice");
                 toggleYN("fixID-choice");
                 toggleFixed(document.getElementById("fixID-choice"));
@@ -322,45 +325,60 @@ function decodeCustom(custom_url_tag) {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
                 let len = Base64.toInt(tag.slice(2,4));
                 if (rolledIDs.includes(id)) {
-                    let minRoll = Base64.toInt(tag.slice(4,4+len));
+                    let sign = parseInt(tag.slice(4,5),10);
+                    let minRoll = Base64.toInt(tag.slice(5,5+len));
                     if (!fixID) {
-                        let maxRoll = Base64.toInt(tag.slice(4+len,4+2*len));
+                        let maxRoll = Base64.toInt(tag.slice(5+len,5+2*len));
+                        if (sign > 1) {
+                            maxRoll *= -1;
+                        }
+                        if (sign % 2 == 1) {
+                            minRoll *= -1;
+                        }
                         setValue(id+"-choice-min", minRoll);
                         setValue(id+"-choice-max", maxRoll);
                         statMap.get("minRolls").set(id,minRoll);
                         statMap.get("maxRolls").set(id,maxRoll);
-                        tag = tag.slice(4+2*len);
+                        tag = tag.slice(5+2*len);
                     } else {
+                        if (sign != 0) {
+                            minRoll *= -1;
+                        }
                         setValue(id+"-choice-fixed", minRoll);
                         statMap.get("minRolls").set(id,minRoll);
                         statMap.get("maxRolls").set(id,minRoll);
-                        tag = tag.slice(4+len);
+                        tag = tag.slice(5+len);
                     }
                 } else {
                     let val;
-                    let elem = document.getElementById(id+"-choice");
-                    if (elem.classList.contains("number-input")) {
-                        val = Base64.toInt(tag.slice(4,4+len));
-                    } else if (elem.classList.contains("string-input") || classList.contains("array-input")) {
+                    //let elem = document.getElementById(id+"-choice");
+                    if (nonRolled_strings.includes(id)) {
                         if (id === "tier") {
                             val = tiers[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else if (id === "type") {
                             val = types[Base64.toInt(tag.charAt(2))];
                             len = -1;
-                        } 
-                        else if (id === "atkSpd") {
-                            val = atkSpds[Base64.toInt(tag.charAt(2))];
+                        } else if (id === "atkSpd") {
+                            val = attackSpeeds[Base64.toInt(tag.charAt(2))];
+                            len = -1;
+                        } else if (id === "classReq") {
+                            val = classes[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else { //general case
-                            val = tag.slice(4,4+len).replace("%20"," ");
+                            val = tag.slice(4,4+len).replaceAll("%20"," ");
                         }
+                        tag = tag.slice(4+len);
                     } else {
-                        val = "";
+                        let sign = parseInt(tag.slice(4,5),10);
+                        val = Base64.toInt(tag.slice(5,5+len));
+                        if (sign == 1) {
+                            val *= -1;
+                        }
+                        tag = tag.slice(5+len);
                     }
                     statMap.set(id, val);
                     setValue(id+"-choice", val);
-                    tag = tag.slice(4+len);
                 }
             }
             statMap.set("hash",custom_url_tag);
@@ -404,9 +422,9 @@ function populateFields() {
         class_list.appendChild(el);
     }
     let item_list = document.getElementById("base-list");
-    for (const [baseItem,value] of itemMap) {
+    for (const name of itemMap.keys()) {
         let el = document.createElement("option");
-        el.value = baseItem;
+        el.value = name;
         item_list.appendChild(el);
     }
 }
@@ -471,10 +489,10 @@ function useBaseItem(elem) {
 
     //If it starts with CR-, try creating a craft
     if(!baseItem) {
-        baseItem = getCraftFromHash(itemName).statMap;
+        baseItem = getCraftFromHash(itemName) ? getCraftFromHash(itemName) : (getCustomFromHash(itemName) ? getCustomFromHash(itemName) : null);
+        baseItem = baseItem.statMap;    
         console.log(baseItem);
     }
-    //If it starts with CI-, try creating a custom (TODO)
 
     //If the item exists, go through stats and assign to values!
     if(baseItem) {

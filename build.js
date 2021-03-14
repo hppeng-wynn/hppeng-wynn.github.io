@@ -96,16 +96,17 @@ class Build{
      * @description Construct a build.
      * @param {Number} level : Level of the player.
      * @param {String[]} equipment : List of equipment names that make up the build.
-     *                    In order: Helmet, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Weapon.
+     *                    In order: boots, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Weapon.
      * @param {Number[]} powders : Powder application. List of lists of integers (powder IDs).
-     *                  In order: Helmet, Chestplate, Leggings, Boots, Weapon.
+     *                  In order: boots, Chestplate, Leggings, Boots, Weapon.
      * @param {Object[]} inputerrors : List of instances of error-like classes.
      */
     constructor(level,equipment, powders, externalStats, inputerrors=[]){
 
         let errors = inputerrors;
-        //this contains the Craft objects, if there are any crafted items. this.helmet, etc. will contain the statMap of the Craft (which is built to be an expandedItem).
+        //this contains the Craft objects, if there are any crafted items. this.boots, etc. will contain the statMap of the Craft (which is built to be an expandedItem).
         this.craftedItems = [];
+        this.customItems = [];
         // NOTE: powders is just an array of arrays of powder IDs. Not powder objects.
         this.powders = powders;
         if(itemMap.get(equipment[0]) && itemMap.get(equipment[0]).type === "helmet") {
@@ -114,7 +115,8 @@ class Build{
             this.helmet = expandItem(helmet, this.powders[0]);
         } else {
             try {
-                let helmet = getCraftFromHash(equipment[0]);
+                //let boots = getCraftFromHash(equipment[0]) ? getCraftFromHash(equipment[0]) : (getCustomFromHash(equipment[0])? getCustomFromHash(equipment[0]) : undefined);
+                let helmet = getCustomFromHash(equipment[0]) ? getCustomFromHash(equipment[0]) : (getCraftFromHash(equipment[0]) ? getCraftFromHash(equipment[0]) : undefined);
                 if (helmet.statMap.get("type") !== "helmet") {
                     throw new Error("Not a helmet");
                 }
@@ -122,7 +124,12 @@ class Build{
                 helmet.statMap.set("powders",this.powders[0].slice());
                 helmet.applyPowders();
                 this.helmet = helmet.statMap;
-                this.craftedItems.push(helmet);
+                if (this.helmet.get("custom")) {
+                    this.customItems.push(helmet);
+                } else if (this.helmet.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(helmet);
+                }
+                
             } catch (Error) {
                 //console.log(Error); //fix
                 const helmet = itemMap.get("No Helmet");
@@ -137,7 +144,7 @@ class Build{
             this.chestplate = expandItem(chestplate, this.powders[1]);
         } else {
             try {
-                let chestplate = getCraftFromHash(equipment[1]);
+                let chestplate = getCustomFromHash(equipment[1]) ? getCustomFromHash(equipment[1]) : (getCraftFromHash(equipment[1]) ? getCraftFromHash(equipment[1]) : undefined);
                 if (chestplate.statMap.get("type") !== "chestplate") {
                     throw new Error("Not a chestplate");
                 }
@@ -145,7 +152,11 @@ class Build{
                 chestplate.statMap.set("powders",this.powders[1].slice());
                 chestplate.applyPowders();
                 this.chestplate = chestplate.statMap;
-                this.craftedItems.push(chestplate);
+                if (this.chestplate.get("custom")) {
+                    this.customItems.push(chestplate);
+                } else if (this.chestplate.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(chestplate);
+                }
             } catch (Error) {
                 const chestplate = itemMap.get("No Chestplate");
                 this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
@@ -159,7 +170,7 @@ class Build{
             this.leggings = expandItem(leggings, this.powders[2]);
         } else {
             try {
-                let leggings = getCraftFromHash(equipment[2]);
+                let leggings = getCustomFromHash(equipment[2]) ? getCustomFromHash(equipment[2]) : (getCraftFromHash(equipment[2]) ? getCraftFromHash(equipment[2]) : undefined);
                 if (leggings.statMap.get("type") !== "leggings") {
                     throw new Error("Not a leggings");
                 }
@@ -167,7 +178,11 @@ class Build{
                 leggings.statMap.set("powders",this.powders[2].slice());
                 leggings.applyPowders();
                 this.leggings = leggings.statMap;
-                this.craftedItems.push(leggings);
+                if (this.leggings.get("custom")) {
+                    this.customItems.push(leggings);
+                } else if (this.leggings.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(leggings);
+                }
             } catch (Error) {
                 const leggings = itemMap.get("No Leggings");
                 this.powders[2] = this.powders[2].slice(0,leggings.slots); 
@@ -181,7 +196,7 @@ class Build{
             this.boots = expandItem(boots, this.powders[3]);
         } else {
             try {
-                let boots = getCraftFromHash(equipment[3]);
+                let boots = getCustomFromHash(equipment[3]) ? getCustomFromHash(equipment[3]) : (getCraftFromHash(equipment[3]) ? getCraftFromHash(equipment[3]) : undefined);
                 if (boots.statMap.get("type") !== "boots") {
                     throw new Error("Not a boots");
                 }
@@ -190,7 +205,11 @@ class Build{
                 boots.applyPowders();
                 this.boots = boots.statMap;
                 console.log(boots);
-                this.craftedItems.push(boots);
+                if (this.boots.get("custom")) {
+                    this.customItems.push(boots);
+                } else if (this.boots.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(boots);
+                }
             } catch (Error) {
                 const boots = itemMap.get("No Boots");
                 this.powders[3] = this.powders[3].slice(0,boots.slots); 
@@ -203,12 +222,16 @@ class Build{
             this.ring1 = expandItem(ring, []);
         }else{
             try {
-                let ring = getCraftFromHash(equipment[4]);
+                let ring = getCustomFromHash(equipment[4]) ? getCustomFromHash(equipment[4]) : (getCraftFromHash(equipment[4]) ? getCraftFromHash(equipment[4]) : undefined);
                 if (ring.statMap.get("type") !== "ring") {
                     throw new Error("Not a ring");
                 }
                 this.ring1 = ring.statMap;
-                this.craftedItems.push(ring);
+                if (this.ring1.get("custom")) {
+                    this.customItems.push(ring);
+                } else if (this.ring1.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(ring);
+                }
             } catch (Error) {
                 const ring = itemMap.get("No Ring 1");
                 this.ring1 = expandItem(ring, []);
@@ -220,12 +243,16 @@ class Build{
             this.ring2 = expandItem(ring, []);
         }else{
             try {
-                let ring = getCraftFromHash(equipment[5]);
+                let ring = getCustomFromHash(equipment[5]) ? getCustomFromHash(equipment[5]) : (getCraftFromHash(equipment[5]) ? getCraftFromHash(equipment[5]) : undefined);
                 if (ring.statMap.get("type") !== "ring") {
                     throw new Error("Not a ring");
                 }
                 this.ring2 = ring.statMap;
-                this.craftedItems.push(ring);
+                if (this.ring2.get("custom")) {
+                    this.customItems.push(ring);
+                } else if (this.ring2.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(ring);
+                }
             } catch (Error) {
                 const ring = itemMap.get("No Ring 2");
                 this.ring2 = expandItem(ring, []);
@@ -237,12 +264,16 @@ class Build{
             this.bracelet = expandItem(bracelet, []);
         }else{
             try {
-                let bracelet = getCraftFromHash(equipment[6]);
+                let bracelet = getCustomFromHash(equipment[6]) ? getCustomFromHash(equipment[6]) : (getCraftFromHash(equipment[6]) ? getCraftFromHash(equipment[6]) : undefined);
                 if (bracelet.statMap.get("type") !== "bracelet") {
                     throw new Error("Not a bracelet");
                 }
                 this.bracelet = bracelet.statMap;
-                this.craftedItems.push(bracelet);
+                if (this.bracelet.get("custom")) {
+                    this.customItems.push(bracelet);
+                } else if (this.bracelet.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(bracelet);
+                }
             } catch (Error) {
                 const bracelet = itemMap.get("No Bracelet");
                 this.bracelet = expandItem(bracelet, []);
@@ -254,12 +285,16 @@ class Build{
             this.necklace = expandItem(necklace, []);
         }else{
             try {
-                let necklace = getCraftFromHash(equipment[7]);
+                let necklace = getCustomFromHash(equipment[7]) ? getCustomFromHash(equipment[7]) : (getCraftFromHash(equipment[7]) ? getCraftFromHash(equipment[7]) : undefined);
                 if (necklace.statMap.get("type") !== "necklace") {
                     throw new Error("Not a necklace");
                 }
                 this.necklace = necklace.statMap;
-                this.craftedItems.push(necklace);
+                if (this.necklace.get("custom")) {
+                    this.customItems.push(necklace);
+                } else if (this.necklace.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(necklace);
+                }
             } catch (Error) {
                 const necklace = itemMap.get("No Necklace");
                 this.necklace = expandItem(necklace, []);
@@ -277,12 +312,16 @@ class Build{
             }
         }else{
             try {
-                let weapon = getCraftFromHash(equipment[8]);
+                let weapon = getCustomFromHash(equipment[8]) ? getCustomFromHash(equipment[8]) : (getCraftFromHash(equipment[8]) ? getCraftFromHash(equipment[8]) : undefined);
                 if (weapon.statMap.get("category") !== "weapon") {
                     throw new Error("Not a weapon");
                 }
                 this.weapon = weapon.statMap;
-                this.craftedItems.push(weapon);
+                if (this.weapon.get("custom")) {
+                    this.customItems.push(weapon);
+                } else if (this.weapon.get("crafted")) { //customs can also be crafted, but custom takes priority.
+                    this.craftedItems.push(weapon);
+                }
                 this.powders[4] = this.powders[4].slice(0,this.weapon.slots); 
                 this.weapon.set("powders",this.powders[4].slice());
                 document.getElementsByClassName("powder-specials")[0].style.display = "grid";
@@ -294,7 +333,7 @@ class Build{
                 errors.push(new ItemNotFound(equipment[8], "weapon", true));
             }
         }
-        console.log(this.craftedItems)
+        //console.log(this.craftedItems)
 
         if (level < 1) { //Should these be constants?
             this.level = 1;
@@ -362,6 +401,9 @@ class Build{
     */
     getMeleeStats(){
         const stats = this.statMap;
+        if (this.weapon.get("tier") === "Crafted") {
+            stats.set("damageBases", [this.weapon.get("nDamBaseHigh"),this.weapon.get("eDamBaseHigh"),this.weapon.get("tDamBaseHigh"),this.weapon.get("wDamBaseHigh"),this.weapon.get("fDamBaseHigh"),this.weapon.get("aDamBaseHigh")]);
+        }
         let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
         if(adjAtkSpd > 6){
             adjAtkSpd = 6;

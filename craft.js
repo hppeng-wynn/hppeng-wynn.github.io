@@ -3,27 +3,34 @@
 //constructs a craft from a hash 'CR-qwoefsabaoe' or 'qwoefsaboe'
 function getCraftFromHash(hash) {
     let name = hash.slice();
-    if (name.slice(0,3) === "CR-") {
-        name = name.substring(3);
-    }
-    version = name.substring(0,1);
-    name = name.substring(1);
-    if (version === "1") {
-        let ingreds = [];
-        for (let i = 0; i < 6; i ++ ) {
-            ingreds.push( expandIngredient(ingMap.get(ingIDMap.get(Base64.toInt(name.substring(2*i,2*i+2))))) );
+    try {
+        if (name.slice(0,3) === "CR-") {
+            name = name.substring(3);
+        } else {
+            throw new Error("Not a crafted item!");
         }
-        let recipe = expandRecipe(recipeMap.get(recipeIDMap.get(Base64.toInt(name.substring(12,14)))));
-        
-        tierNum = Base64.toInt(name.substring(14,15));
-        let mat_tiers = [];
-        mat_tiers.push(tierNum % 3 == 0 ? 3 : tierNum % 3);
-        mat_tiers.push(Math.floor((tierNum-0.5) / 3)+1); //Trying to prevent round-off error, don't yell at me
-        let atkSpd = Base64.toInt(name.substring(15));
-        let atkSpds = ["SLOW","NORMAL","FAST"];
-        let attackSpeed = atkSpds[atkSpd];
-        return new Craft(recipe,mat_tiers,ingreds,attackSpeed,"1"+name);
+        version = name.substring(0,1);
+        name = name.substring(1);
+        if (version === "1") {
+            let ingreds = [];
+            for (let i = 0; i < 6; i ++ ) {
+                ingreds.push( expandIngredient(ingMap.get(ingIDMap.get(Base64.toInt(name.substring(2*i,2*i+2))))) );
+            }
+            let recipe = expandRecipe(recipeMap.get(recipeIDMap.get(Base64.toInt(name.substring(12,14)))));
+            
+            tierNum = Base64.toInt(name.substring(14,15));
+            let mat_tiers = [];
+            mat_tiers.push(tierNum % 3 == 0 ? 3 : tierNum % 3);
+            mat_tiers.push(Math.floor((tierNum-0.5) / 3)+1); //Trying to prevent round-off error, don't yell at me
+            let atkSpd = Base64.toInt(name.substring(15));
+            let atkSpds = ["SLOW","NORMAL","FAST"];
+            let attackSpeed = atkSpds[atkSpd];
+            return new Craft(recipe,mat_tiers,ingreds,attackSpeed,"1"+name);
+        }
+    } catch (error) {
+        return undefined;
     }
+    
     
 }
 
@@ -42,7 +49,7 @@ class Craft{
         this.ingreds = ingreds;
         this.statMap = new Map(); //can use the statMap as an expanded Item
         this.atkSpd = attackSpeed;
-        this.hash = hash;
+        this.hash = "CR-" + hash;
         this.initCraftStats();
         this.statMap.set("hash", this.hash);
     }
@@ -64,9 +71,9 @@ class Craft{
         
     }
     setHash(hash) {
-        this.hash = hash;
-        this.statMap.set("name", "CR-" + this.hash);
-        this.statMap.set("displayName", "CR-" + this.hash);
+        this.hash = "CR-" + hash;
+        this.statMap.set("name", this.hash);
+        this.statMap.set("displayName", this.hash);
         this.statMap.set("hash", this.hash);
     }
     /*  Get all stats for this build. Stores in this.statMap.
@@ -77,13 +84,14 @@ class Craft{
         let statMap = new Map();
         statMap.set("minRolls", new Map());
         statMap.set("maxRolls", new Map());
-        statMap.set("name", "CR-" + this.hash);
-        statMap.set("displayName", "CR-" + this.hash);
+        statMap.set("name", this.hash);
+        statMap.set("displayName", this.hash);
         statMap.set("tier", "Crafted");
         statMap.set("type", this.recipe.get("type").toLowerCase());
         statMap.set("duration", [this.recipe.get("duration")[0], this.recipe.get("duration")[1]]); //[low, high]
         statMap.set("durability", [this.recipe.get("durability")[0], this.recipe.get("durability")[1]]);
-        statMap.set("lvl", (this.recipe.get("lvl")[0] + "-" + this.recipe.get("lvl")[1]) );
+        statMap.set("lvl", this.recipe.get("lvl")[1]);
+        statMap.set("lvlLow", this.recipe.get("lvl")[0]);
         statMap.set("nDam", 0);
         statMap.set("hp",0);
         statMap.set("hpLow",0);
@@ -223,9 +231,13 @@ class Craft{
             let low2 = Math.floor(nDamBaseLow * 1.1);
             let high1 = Math.floor(nDamBaseHigh * 0.9);
             let high2 = Math.floor(nDamBaseHigh * 1.1);
+            statMap.set("nDamBaseLow", nDamBaseLow);
+            statMap.set("nDamBaseHigh", nDamBaseHigh);
             statMap.set("nDamLow", low1+"-"+low2); 
             statMap.set("nDam", high1+"-"+high2);
             for (const e in skp_elements) {
+                statMap.set(skp_elements[e]+"DamBaseLow", elemDamBaseLow[e]);
+                statMap.set(skp_elements[e]+"DamBaseHigh", elemDamBaseHigh[e]);
                 low1 = Math.floor(elemDamBaseLow[e] * 0.9);
                 low2 = Math.floor(elemDamBaseLow[e] * 1.1);
                 high1 = Math.floor(elemDamBaseHigh[e] * 0.9);

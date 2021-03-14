@@ -1,0 +1,31 @@
+.container{
+    width: 95%;
+    border: 3px solid #BCBCBC;
+    border-radius: 3px;
+    padding: 2% 4% 4%;
+}
+.title{
+    text-align: center;
+    font-size: 150%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+.overall-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+.overall {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    width: 96%;
+}
+.identification-costs {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

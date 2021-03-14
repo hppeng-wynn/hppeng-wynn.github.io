@@ -60,8 +60,8 @@ translate_mappings = {
     "sockets": "slots",
     #"type": "type",
     #"armorType": "armorType", (deleted)
-    #"armorColor": "color", (deleted)
-    #"addedLore": "lore", (deleted)
+    "armorColor": "color", #(deleted)
+    "addedLore": "lore", #(deleted)
     #"material": "material", (deleted)
     "dropType": "drop",
     #"quest": "quest",
@@ -146,8 +146,8 @@ translate_mappings = {
 }
 
 delete_keys = [
-    "addedLore",
-    "skin",
+    #"addedLore",
+    #"skin",
     #"armorType",
     #"armorColor",
     #"material"
