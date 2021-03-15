@@ -54,7 +54,7 @@ const itemQueryProps = (function() {
   function map(names, comps, outType, f) {
     return prop(names, outType, (i, ie) => {
       const args = [];
-      for (let k = 0; k < comps.length; k++) args.push(comps[k](i, ie));
+      for (let k = 0; k < comps.length; k++) args.push(comps[k].resolve(i, ie));
       return f.apply(null, args);
     });
   }
