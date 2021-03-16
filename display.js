@@ -232,10 +232,13 @@ function displaySetBonuses(parent_id,build) {
         mock_item.set("fixID", true);
         mock_item.set("displayName", setName+" Set: "+count+"/"+sets[setName].items.length);
         let mock_minRolls = new Map();
+        let mock_maxRolls = new Map();
         mock_item.set("minRolls", mock_minRolls);
+        mock_item.set("maxRolls", mock_maxRolls);
         for (const id in bonus) {
             if (rolledIDs.includes(id)) {
                 mock_minRolls.set(id, bonus[id]);
+                mock_maxRolls.set(id, bonus[id]);
             }
             else {
                 mock_item.set(id, bonus[id]);
@@ -243,6 +246,7 @@ function displaySetBonuses(parent_id,build) {
         }
         mock_item.set("powders", []);
         displayExpandedItem(mock_item, set_elem.id);
+        console.log(mock_item);
     }
 }
 
@@ -630,15 +634,15 @@ function displayExpandedItem(item, parent_id){
                         let img = document.createElement("img");
                         if (item && item.has("type")) {
                             img.src = "/media/items/generic-" + item.get("type") + ".png";
+                            img.alt = item.get("type");
+                            img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
+                            let bckgrd = document.createElement("p");
+                            bckgrd.style = "width: 96px; height: 96px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
+                            bckgrd.classList.add("center");
+                            bckgrd.classList.add("itemp");
+                            active_elem.appendChild(bckgrd);
+                            bckgrd.appendChild(img);
                         }
-                        img.alt = item.get("type");
-                        img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
-                        let bckgrd = document.createElement("p");
-                        bckgrd.style = "width: 96px; height: 96px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
-                        bckgrd.classList.add("center");
-                        bckgrd.classList.add("itemp");
-                        active_elem.appendChild(bckgrd);
-                        bckgrd.appendChild(img);
                     } else if (id === "lore") {
                         p_elem.style = "font-style: italic";
                         p_elem.classList.add("lore");
