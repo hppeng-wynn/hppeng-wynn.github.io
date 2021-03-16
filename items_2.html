@@ -12,70 +12,74 @@
         <title>WynnAtlas</title>
     </head>
     <body class="all" style="overflow-y: scroll">
-            <header class = "header nomarginp">
-                <div class = "headerleft">         
-                    <a href = "./" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnBuilder</div>
-                    </a>
-                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCrafter</div>
-                    </a>
-                    <a href = "./items_2.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnAtlas</div>
-                    </a>
-                    <a href = "./customizer.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/custom.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCustom</div>
-                    </a>
-                    <a href = "./map.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnGPS</div>
-                    </a>
+        <header class="header nomarginp">
+            <div class="headerleft">
+                <a href="./" class="nomarginp iconlink tooltip">
+                    <img src="/media/icons/builder.png" class="left linkoptions headericon">
+                    </img>
+                    <div class="tooltiptext center">WynnBuilder</div>
+                </a>
+                <a href="./crafter.html" class="nomarginp iconlink tooltip">
+                    <img src="/media/icons/crafter.png" class="left linkoptions headericon">
+                    </img>
+                    <div class="tooltiptext center">WynnCrafter</div>
+                </a>
+                <a href="./items_2.html" class="nomarginp iconlink tooltip">
+                    <img src="/media/icons/searcher.png" class="left linkoptions headericon">
+                    </img>
+                    <div class="tooltiptext center">WynnAtlas</div>
+                </a>
+                <a href="./customizer.html" class="nomarginp iconlink tooltip">
+                    <img src="/media/icons/custom.png" class="left linkoptions headericon">
+                    </img>
+                    <div class="tooltiptext center">WynnCustom</div>
+                </a>
+                <a href = "./map.html" class = "nomarginp iconlink tooltip">
+                    <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
+                    </img>
+                    <div class = "tooltiptext center">WynnGPS</div>
+                </a>
+            </div>
+            <div class="headercenter">
+                <div>
+                    <p class="itemp" id="header">WynnAtlas</p>
                 </div>
-                <div class = "headercenter">
-                    <div >
-                        <p class = "itemp" id = "header">WynnAtlas</p>
-                    </div>
-                </div>    
-                <div class = "headerright">
-                    <div class="center" id="basic">
-                        <a href="./items.html" class = "link">Basic Search</a>
-                    </div>
+            </div>
+            <div class="headerright">
+                <div class="center" id="basic">
+                    <a href="./items.html" class="link">Basic Search</a>
                 </div>
-            </header>
+            </div>
+        </header>
         <div class="center" id="credits">
-            <a href="credits.txt" class = "link">Additional credits</a>
+            <a href="credits.txt" class="link">Additional credits</a>
         </div>
         <div class="center" id="help">
-            <a href="options.txt" class = "link">Search Guide</a>
+            <a href="items_2_help.html" class="link" target="_blank">Search Guide</a>
         </div>
         <div class="center" id="main" style="padding: 2%">
             <div id="search-container" style="margin-bottom: 1.5%">
                 <div class="left" id="search-filter" style="display: inline-block; vertical-align: top">
                     <label for="search-filter-field">Filter By:</label>
                     <br>
-                    <input id="search-filter-field" type="text" placeholder="name ?= &quot;blue&quot; & str >= 15 & dex >= 10" style="width: 25vw; padding: 8px">
+                    <input id="search-filter-field" type="text"
+                           placeholder="name ?= &quot;blue&quot; & str >= 15 & dex >= 10"
+                           style="width: 25vw; padding: 8px">
                     <br>
                     <div id="search-filter-error" style="color: #ff0000"></div>
                 </div>
                 <div class="left" id="search-sort" style="display: inline-block; vertical-align: top">
                     <label for="search-sort-field">Sort By:</label>
                     <br>
-                    <input id="search-sort-field" type="text" placeholder="str + dex; meleerawdmg + spellrawdmg" style="width: 25vw; padding: 8px">
+                    <input id="search-sort-field" type="text" placeholder="str + dex; meleerawdmg + spellrawdmg"
+                           style="width: 25vw; padding: 8px">
                     <br>
                     <div id="search-sort-error" style="color: #ff0000"></div>
                 </div>
             </div>
             <div id="item-list-container">
-                <div class="left" id="item-list" style="display: flex; flex-flow: row wrap"></div>
+                <div class="left" id="item-list"
+                     style="display: flex; flex-flow: row wrap; justify-content: space-evenly"></div>
                 <div class="center" id="item-list-footer"></div>
             </div>
         </div>
@@ -84,6 +88,7 @@
         <script type="text/javascript" src="damage_calc.js"></script>
         <script type="text/javascript" src="display.js"></script>
         <script type="text/javascript" src="query_2.js"></script>
+        <script type="text/javascript" src="expr_parser.js"></script>
         <script type="text/javascript" src="load.js"></script>
         <script type="text/javascript" src="items_2.js"></script>
     </body>

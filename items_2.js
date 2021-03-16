@@ -38,6 +38,8 @@ function compareLexico(ia, keysA, ib, keysB) {
                 if (aKey > bKey) return 1;
                 break;
             case 'number': // sort numeric stuff in reverse order
+                aKey = isNaN(aKey) ? 0 : aKey;
+                bKey = isNaN(bKey) ? 0 : bKey;
                 if (aKey < bKey) return 1;
                 if (aKey > bKey) return -1;
                 break;
@@ -74,17 +76,23 @@ function init() {
         itemEntries.push(itemElem);
     }
 
+    // create the expression parser
+    const exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
+
     // the two search query input boxes
     const searchFilterField = new ExprField('search-filter-field', 'search-filter-error', function(exprStr) {
-        const expr = compileQueryExpr(exprStr);
-        return expr !== null ? expr : (i, ie) => true;
+        const expr = exprParser.parse(exprStr);
+        return expr !== null ? expr : new BoolLitTerm(true);
     });
     const searchSortField = new ExprField('search-sort-field', 'search-sort-error', function(exprStr) {
-        const subExprs = exprStr.split(';').map(compileQueryExpr).filter(f => f != null);
-        return function(i, ie) {
-            const sortKeys = [];
-            for (let k = 0; k < subExprs.length; k++) sortKeys.push(subExprs[k](i, ie));
-            return sortKeys;
+        const subExprs = exprStr.split(';').map(e => exprParser.parse(e)).filter(f => f != null);
+        return {
+            type: 'array',
+            resolve(i, ie) {
+                const sortKeys = [];
+                for (let k = 0; k < subExprs.length; k++) sortKeys.push(subExprs[k].resolve(i, ie));
+                return sortKeys;
+            }
         };
     });
 
@@ -108,8 +116,8 @@ function init() {
         try {
             for (let i = 0; i < searchDb.length; i++) {
                 const item = searchDb[i][0], itemExp = searchDb[i][1];
-                if (checkBool(searchFilterField.output(item, itemExp))) {
-                    searchResults.push({ item, itemExp, sortKeys: searchSortField.output(item, itemExp) });
+                if (checkBool(searchFilterField.output.resolve(item, itemExp))) {
+                    searchResults.push({ item, itemExp, sortKeys: searchSortField.output.resolve(item, itemExp) });
                 }
             }
         } catch (e) {

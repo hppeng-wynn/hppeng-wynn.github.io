@@ -1,0 +1,168 @@
+main {
+    margin: 24px 0 48px;
+}
+
+main h2 {
+    margin: 0 0 8px;
+    color: #bbb;
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+main p {
+    margin: 0 0 8px;
+    line-height: 1.35em;
+    text-indent: 2.5em;
+    text-align: justify;
+    font-size: 13pt;
+    font-weight: normal;
+}
+
+main .footer {
+    font-size: 10pt;
+    text-align: center;
+}
+
+main code {
+    padding: 0 3px;
+    background-color: #1d1f21;
+    color: #de935f;
+    font-family: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
+}
+
+main pre { /* tomorrow night: https://github.com/chriskempson/tomorrow-theme */
+    margin: 14px 2px;
+    padding: 10px 16px;
+    border-left: 4px solid #7f7f7f;
+    background-color: #1d1f21;
+    color: #ddd;
+    font-size: 12pt;
+    font-weight: normal;
+    font-family: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
+}
+
+main pre > .prop {
+    color: #cc6666;
+}
+
+main pre > .fn {
+    color: #f0c674;
+}
+
+main pre > .bool {
+    color: #b294bb;
+}
+
+main pre > .str {
+    color: #b5bd68;
+}
+
+main pre > .num {
+    color: #81a2be;
+}
+
+main pre > .op {
+    color: #ccc;
+}
+
+main strong {
+    color: #ccc;
+    font-weight: bold;
+}
+
+main .rb-text {
+    background-image: linear-gradient(to left, #f5f, #a0a, #5ff, #5f5, #ff5, #fa0, #a00, #f5f);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: scroll-bg 4s linear infinite;
+}
+
+main .math {
+    font-family: 'CMU Serif', 'Cambria Math', 'Times New Roman', serif;
+}
+
+main .heart {
+    color: #e44078;
+}
+
+@keyframes scroll-bg {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 300%;
+    }
+}
+
+.full-width {
+    width: 100%;
+    margin: 4px 0 32px;
+    padding: 0;
+}
+
+.full-width > img {
+    width: 100%;
+    background-color: #000;
+    filter: brightness(0.7) contrast(1.2) grayscale(0.5);
+}
+
+.section {
+    margin: 0 25vw 28px;
+}
+
+.docs {
+    margin: 14px 0;
+}
+
+.docs h3 {
+    margin: 0 0 8px;
+    color: #aaa;
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.docs-entry {
+    margin: 4px 0 16px;
+}
+
+.docs-entry-key {
+    margin-bottom: 6px;
+    padding: 4px 6px;
+    display: flex;
+    flex-flow: row;
+    align-items: baseline;
+    background-color: #1d1f21;
+    font-weight: normal;
+}
+
+.docs-entry-key-id {
+    color: #cc6666;
+    font-size: 16pt;
+    font-family: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
+}
+
+.docs-entry-key-type {
+    flex: 1;
+    margin-left: 8px;
+    color: #de935f;
+    font-size: 11pt;
+    font-family: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
+}
+
+.docs-entry-key-alias {
+    float: right;
+    color: #515356;
+    font-size: 11pt;
+}
+
+.docs-entry-key-alias > .alias {
+    float: none;
+    color: #969896;
+    font-family: 'Source Code Pro', 'Ubuntu Mono', 'Courier New', monospace;
+}
+
+.docs-entry > p {
+    margin-left: 1.5em;
+    text-indent: 0;
+}
