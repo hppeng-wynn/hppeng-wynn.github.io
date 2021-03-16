@@ -115,7 +115,7 @@ for (let x in special_mappings) {
     itemFilters.appendChild(el);
 }
 
-let itemTypes = [ "helmet", "chestplate", "leggings", "boots", "ring", "bracelet", "necklace", "wand", "spear", "bow", "dagger", "relik" ];
+//let itemTypes = [ "helmet", "chestplate", "leggings", "boots", "ring", "bracelet", "necklace", "wand", "spear", "bow", "dagger", "relik" ];
 let itemCategories = [ "armor", "accessory", "weapon" ];
 
 function applyQuery(items, query) {

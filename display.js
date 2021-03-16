@@ -694,7 +694,7 @@ function displayExpandedItem(item, parent_id){
                     style = "negative";
                 }
                 //let flipPosNeg = ["spRaw1","spRaw2","spRaw3","spRaw4","spPct1","spPct2","spPct3","spPct4"];
-                if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
+                if(reversedIDs.includes(id)){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (fix_id) {
@@ -721,9 +721,9 @@ function displayExpandedItem(item, parent_id){
                     row.appendChild(desc_elem);
 
                     if (item.get("maxRolls").get(id) > 0) {
-                        style = "positive";
+                        style = reversedIDs.includes(id) ? "negative" : "positive";
                     } else if (item.get("maxRolls").get(id) < 0 ) {
-                        style = "negative";
+                        style = reversedIDs.includes(id) ? "positive" : "negative";
                     }
                     let max_elem = document.createElement('td');
                     max_elem.classList.add('right');
