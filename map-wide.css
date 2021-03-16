@@ -1,5 +1,5 @@
 .mapdiv{
-    height: 100vh;
+    height: 99vh;
     background: #121516;
 }
 .overall-container {
@@ -7,16 +7,70 @@
     grid-template-columns: 80% 20%;
     grid-column-gap: 5px;
     grid-auto-rows: minmax(60px, auto);
+    margin-bottom: 10px;
 }
 .coord-container {
     display: grid;
     grid-template-columns: 30% 30% 30%;
     grid-column-gap: 5px;
-    grid-auto-rows: minmax(60px, auto);
+    grid-auto-rows: minmax(32px, auto);
 }
 .container{
     width: 95%;
     border: 3px solid #BCBCBC;
-    border-radius: 3px;
-   
+    border-radius: 3px;  
+}
+.leaflet-tooltip.labelp {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1em;
+    white-space: nowrap;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    border: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    box-shadow: none;
+    text-align: center;
+    text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, 0 0 1px #000;
+}
+.labelp {
+    position: relative;
+    overflow-wrap: break-word;
+}
+.leaflet-tooltip-left {
+    border-left-color: transparent;
+}
+.leaflet-tooltip-right{
+    border-right-color: transparent;
+}
+.Emeralds{
+    border:2px solid #4ae024;
+}
+.Ore{
+    border:2px solid #7d7b74;
+}
+.Wood{
+    border:2px solid #855E42;
+}
+.Crops{
+    border:2px solid #e3cea6;
+}
+.Fish{
+    border:2px solid #a6d8e3;
+}
+
+
+.resourceimg {
+    border-radius: 2px;
+    z-index: 20000000;
+}
+
+.marker{
+    z-index: 200000000;
+}
+.nomargin{
+    margin-top: 2px;
+    margin-bottom: 2px;
 }

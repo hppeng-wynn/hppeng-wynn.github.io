@@ -34,8 +34,25 @@ function atlasClick() {
     atlas_img.src = "favicon.png";
     atlas_img.style.width = "100%";
     atlas_img.style.height = "100%";
+    atlas_img.style.maxWidth = "48px";
+    atlas_img.style.maxHeight = "48px";
     atlas_img.style.zIndex = 1;
     atlas.classList.add("atlas");
+    let roll = Math.random();
+    let rollchance = 0.03;
+    if (roll < rollchance) {
+        atlas_img.src = "/media/memes/lmoa.png";
+    } else if (roll < 2*rollchance) {
+        atlas_img.src = "/media/memes/doom.png";
+    } else if (roll < 3*rollchance) {
+        atlas_img.src = "/media/memes/agony.png";
+    } else if (roll < 4*rollchance) {
+        atlas_img.src =  "/media/memes/enraged.png";
+    } else if (roll < 5*rollchance) {
+        atlas_img.src = "/media/memes/sunglaso.png";
+    } else if (roll < 6*rollchance) {
+        atlas_img.src = "/media/memes/thonk.png";
+    }
     atlas.appendChild(atlas_img);
     atlas.style = "background-image: radial-gradient(closest-side, #" + Math.round(255*Math.random()).toString(16)+Math.round(255*Math.random()).toString(16)+Math.round(255*Math.random()).toString(16) + " 0%," + "#121516 120%);";
     

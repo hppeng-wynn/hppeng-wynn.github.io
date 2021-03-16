@@ -61,7 +61,7 @@ async function load_ings(init_func) {
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     let url = baseUrl + "/ingreds_compress.json";
-    url = url.replace("/crafter.html", ""); //JANK
+    url = url.replace(/\w+.html/, "") ; 
     let result = await (await fetch(url)).json();
 
     result = await (await fetch(url)).json();
