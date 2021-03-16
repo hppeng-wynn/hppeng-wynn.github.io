@@ -11,9 +11,9 @@
         
 
         <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" media="screen and (min-width: 1100px)" href="map-wide.css"/>
-        <link rel="stylesheet" media="screen and (max-width: 1099px)" href="map-narrow.css"/>
-        <link rel="icon" href="./favicon.png">
+        <link rel="stylesheet" media="screen and (min-width: 900px)" href="map-wide.css"/>
+        <link rel="stylesheet" media="screen and (max-width: 899px)" href="map-narrow.css"/>
+        <link rel="icon" href="./media/icons/compass2.png">
         <link rel="manifest" href="manifest.json">
 
         <!--Leaflet for map-->
@@ -74,27 +74,75 @@
             </div>
             <div id = "mapoptions-container" class = "container" display = "grid-item-2">
                 <div id = "coord-container" class = "center coord-container" display = "grid">
-                    <div></div>
-                    <p class = "title center">Options</p>
-                    <div></div>
-                    <div display = "grid-item-1">X</div>
-                    <div display = "grid-item-2"></div>
-                    <div display = "grid-item-3">Z</div>
-                    <div id = "coord-x" display = "grid-item-4"></div>
-                    <div id = "coord-img" display = "grid-item-5">
+                    <p class = "nomargin"></p>
+                    <p class = "title center nomargin">Options</p>
+                    <p class = "nomargin"></p>
+                    <p class = "nomargin" display = "grid-item-1">X</p>
+                    <p class = "nomargin" display = "grid-item-2"></p>
+                    <p class = "nomargin" display = "grid-item-3">Z</p>
+                    <p class = "nomargin" id = "coord-x" display = "grid-item-4"></p>
+                    <p class = "nomargin" id = "coord-img" display = "grid-item-5">
                         <img src = "/media/icons/compass2.png" alt style = "max-width:32px; max-height:32px"/>
-                    </div>
-                    <div id = "coord-z" display = "grid-item-6"></div>
-                    <div id = "marker-coord-x" display = "none"></div>
-                    <div id = "marker-coord-img" display = "none">
+                    </p>
+                    <p class = "nomargin" id = "coord-z" display = "grid-item-6"></p>
+                    <p class = "nomargin" id = "marker-coord-x" display = "none"></p>
+                    <p class = "nomargin" id = "marker-coord-img" display = "none">
                         <img src = "/media/icons/marker.png" alt style = "max-width:32px; max-height:32px"/>
-                    </div>
-                    <div id = "marker-coord-z" display = "none"></div>
+                    </p>
+                    <p class = "nomargin" id = "marker-coord-z" display = "none"></p>
+                </div>
+                <div id = "button-choices container">
+                    <button class = "left" id = "territories-button" onclick = "toggleButton('territories-button'); toggleTerritories()">Show Territories</button>
+                    <button class = "left" id = "claims-button" onclick = "toggleButton('claims-button'); toggleClaims()">Show Claims</button>
+                    <button class = "left" id = "routes-button" onclick = "toggleButton('routes-button'); toggleRoutes()">Show Routes</button>
+                    <button class = "left" id = "resources-button" onclick = "toggleButton('resources-button'); toggleResources()">Show Resources</button>
+                    <!--button id = "merchants-button" onclick = "toggleButton('merchants-button'); toggleMerchants()">Show Merchants</button-->
+                    <button class = "left" id = "pull-button" onclick = "refreshData()">Refresh Data</button>
+                    <p class = "left" style = "color:red">Do NOT refresh too often.</p>
+                </div>
+                <div id ="territory-stats">
+
                 </div>
             </div>
         </div>
+        <div id = "key-container" class = "container">
+            <div id = "key-title" class = "center">
+                <p class = "center title"> All Keys </p>
+            </div>
+            <table>
+                <tr>
+                    <td>
+                        <div id = "guild-key" style = "display:none">
+                            <p class = "left">Guild Key:</p>
+                            <ul id = "guildkeylist">
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div id = "resources-key" style = "display:none">
+                            <p class = "left">Resource Key:</p>
+                            <ul id = "resourcelist">
+                                <li><img src= "media/icons/Emeralds.png" style ="max-width:16px;max-height:16px" class = "Emeralds"/> Emeralds</li>
+                                <li><img src= "media/icons/Ore.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Ore</li>
+                                <li><img src= "media/icons/Wood.png" style ="max-width:16px;max-height:16px" class = "Wood"/> Wood</li>
+                                <li><img src= "media/icons/Crops.png" style ="max-width:16px;max-height:16px" class = "Crops"/> Crops</li>
+                                <li><img src= "media/icons/Fish.png" style ="max-width:16px;max-height:16px" class = "Fish"/> Fish</li>
+                                <li><img src= "media/icons/Chest.png" style ="max-width:16px;max-height:16px" class = "Wood"/> Storage</li>
+                                <li><img src= "media/icons/Gears.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Production</li>
+                                <li>Double image means double generation</li>
 
- 
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            
+            
+        </div>
+
+        <script type = "text/javascript" src="utils.js"></script>
+        <script type = "text/javascript" src="load_map.js"></script> 
         <script type = "text/javascript" src="map.js"></script> 
     </body>
 </html>

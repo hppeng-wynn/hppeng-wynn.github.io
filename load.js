@@ -8,7 +8,6 @@ let sets;
 let itemMap;
 let idMap;
 let redirectMap;
-let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let itemLists = new Map();
 /*
  * Load item set from local DB. Calls init() on success.
