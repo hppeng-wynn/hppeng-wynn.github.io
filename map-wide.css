@@ -1,0 +1,22 @@
+.mapdiv{
+    height: 100vh;
+    background: #121516;
+}
+.overall-container {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-column-gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+.coord-container {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+.container{
+    width: 95%;
+    border: 3px solid #BCBCBC;
+    border-radius: 3px;
+   
+}

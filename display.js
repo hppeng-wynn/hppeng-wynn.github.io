@@ -113,7 +113,7 @@ function expandRecipe(recipe) {
     for (const id of normIDs) {
         expandedRecipe.set(id,recipe[id]);
     }
-    let rangeIDs = ["durability", "healthOrDamage", "lvl", "duration", "basicDuration"];
+    let rangeIDs = ["durability","lvl", "healthOrDamage", "duration", "basicDuration"];
     for (const id of rangeIDs) {
         if(recipe[id]){
             expandedRecipe.set(id, [recipe[id]['minimum'], recipe[id]['maximum']]);
@@ -444,9 +444,11 @@ function displayExpandedItem(item, parent_id){
             }
         } else {
             stats.set("damageRaw", [item.get("nDamLow"), item.get("eDamLow"), item.get("tDamLow"), item.get("wDamLow"), item.get("fDamLow"), item.get("aDamLow")]);
+            stats.set("damageBases", [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")]);
             let resultsLow = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
             let damagesLow = resultsLow[2];
             stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
+            stats.set("damageBases", [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")]);
             let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
             let damages = results[2];
             
@@ -531,6 +533,7 @@ function displayExpandedItem(item, parent_id){
                 active_elem = document.createElement('table');
                 active_elem.classList.add('itemtable');
             }
+            active_elem.style.maxWidth = "100%";
             parent_div.appendChild(active_elem);
         }
         else if (command.charAt(0) === "!") {
@@ -540,7 +543,7 @@ function displayExpandedItem(item, parent_id){
             } 
         }
         else {
-            let id = command; //warp
+            let id = command; 
             if(( nonRolledIDs.includes(id) && item.get(id))){//nonRolledID & non-0/non-null/non-und ID
                 if (id === "slots") {
                     let p_elem = document.createElement("p");
@@ -577,7 +580,19 @@ function displayExpandedItem(item, parent_id){
                 } else if (id === "majorIds") {
                     let p_elem = document.createElement("p");
                     p_elem.classList.add("itemp");
-                    p_elem.textContent = "Major IDs: " + item.get(id).toString();
+                    let title_elem = document.createElement("b");
+                    title_elem.textContent = "Major IDs: ";
+                    let b_elem = document.createElement("b");
+                    b_elem.classList.add("Crafted");
+                    b_elem.textContent = item.get(id).toString();
+
+                    p_elem.appendChild(title_elem);
+                    p_elem.appendChild(b_elem);
+                    active_elem.appendChild(p_elem);
+                } else if (id === "lvl" && item.get("tier") === "Crafted") {
+                    let p_elem = document.createElement("p");
+                    p_elem.classList.add("itemp");
+                    p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
                     active_elem.appendChild(p_elem);
                 } else {
                     let p_elem;
@@ -591,30 +606,31 @@ function displayExpandedItem(item, parent_id){
                         if (item.get("tier") !== " ") {
                             p_elem.classList.add(item.get("tier"));
                         }
-                        if(item.get("crafted")) {
-                            p_elem.remove();
-                            p_elem = document.createElement("a");
-                            p_elem.classList.add('itemp');
-                            p_elem.classList.add("smalltitle");
-                            p_elem.classList.add(item.get("tier"));
-                            p_elem.href = url_base.replace("crafter.html","").replace("customizer.html","") + "crafter.html#" + item.get("hash");
-                            p_elem.target = "_blank";
-                            p_elem.textContent = item.get(id);
-                            active_elem.appendChild(p_elem);
-                        }
-                        if(item.get("custom")) {
-                            p_elem.remove();
-                            p_elem = document.createElement("a");
-                            p_elem.classList.add('itemp');
-                            p_elem.classList.add("smalltitle");
-                            p_elem.classList.add(item.get("tier"));
-                            p_elem.href = url_base.replace("crafter.html","").replace("customizer.html","") + "customizer.html#" + item.get("hash");
-                            p_elem.target = "_blank";
+                        
+                        p_elem.remove();
+                        p_elem = document.createElement("a");
+                        p_elem.classList.add('itemp');
+                        p_elem.classList.add("smalltitle");
+                        p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "none");
+                        
+                        if (item.get("custom")) {
+                            p_elem.href = url_base.replace(/\w+.html/, "") + "customizer.html#" + item.get("hash");
                             p_elem.textContent = item.get("displayName");
-                            active_elem.appendChild(p_elem);
+                        } else if (item.get("crafted")) {
+                            p_elem.href = url_base.replace(/\w+.html/, "") + "crafter.html#" + item.get("hash");
+                            p_elem.textContent = item.get(id);
+                        } else {
+                            p_elem.href = url_base.replace(/\w+.html/, "") + "item.html#" + item.get("displayName");
+                            p_elem.textContent = item.get("displayName");
                         }
+                        
+
+                        p_elem.target = "_blank";
+                        active_elem.appendChild(p_elem);
                         let img = document.createElement("img");
-                        img.src = "/media/items/generic-" + item.get("type") + ".png";
+                        if (item && item.has("type")) {
+                            img.src = "/media/items/generic-" + item.get("type") + ".png";
+                        }
                         img.alt = item.get("type");
                         img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
                         let bckgrd = document.createElement("p");
@@ -625,6 +641,7 @@ function displayExpandedItem(item, parent_id){
                         bckgrd.appendChild(img);
                     } else if (id === "lore") {
                         p_elem.style = "font-style: italic";
+                        p_elem.classList.add("lore");
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
                         if ( item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") {
                             p_elem.textContent = "";
@@ -666,9 +683,9 @@ function displayExpandedItem(item, parent_id){
                             row.appendChild(max_elem);
                             active_elem.appendChild(row);
                         }
-                    }  else if (id === "restrict") {
+                    } else if (id === "restrict") {
                         p_elem.classList.add("restrict");
-                    } 
+                    }
                 }
             }
             else if ( rolledIDs.includes(id) && item.get("maxRolls") && item.get("maxRolls").get(id) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
@@ -703,6 +720,11 @@ function displayExpandedItem(item, parent_id){
                     }
                     row.appendChild(desc_elem);
 
+                    if (item.get("maxRolls").get(id) > 0) {
+                        style = "positive";
+                    } else if (item.get("maxRolls").get(id) < 0 ) {
+                        style = "negative";
+                    }
                     let max_elem = document.createElement('td');
                     max_elem.classList.add('right');
                     max_elem.classList.add(style);
@@ -799,7 +821,12 @@ function displayExpandedItem(item, parent_id){
             charges.classList.add("spaceleft");
             active_elem.appendChild(charges);
         }
-        dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
+
+        if (typeof(dura) === "string") {
+            dura_elem.textContent += dura + suffix;
+        } else {
+            dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
+        }
         active_elem.append(dura_elem);
 
     }
@@ -809,6 +836,17 @@ function displayExpandedItem(item, parent_id){
         item_desc_elem.classList.add('itemp');
         item_desc_elem.classList.add(item.get("tier"));
         item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
+        active_elem.append(item_desc_elem);
+    }
+
+    //Show item hash if applicable
+    if (item.get("crafted") || item.get("custom")) {
+        let item_desc_elem = document.createElement("p");
+        item_desc_elem.classList.add('itemp');
+        item_desc_elem.style.maxWidth = "100%";
+        item_desc_elem.style.wordWrap = "break-word";
+        item_desc_elem.style.wordBreak = "break-word";
+        item_desc_elem.textContent = item.get("hash");
         active_elem.append(item_desc_elem);
     }
 }
@@ -821,7 +859,7 @@ function displayRecipeStats(craft, parent_id) {
     let elem = document.getElementById(parent_id);
     elem.textContent = "";
     recipe = craft["recipe"];
-    tiers = craft["mat_tiers"];
+    mat_tiers = craft["mat_tiers"];
     ingreds = [];
     for (const n of craft["ingreds"]) {
         ingreds.push(n.get("name"));
@@ -838,7 +876,7 @@ function displayRecipeStats(craft, parent_id) {
     mats.classList.add("itemp");
     mats.textContent = "Crafting Materials: ";
     for (let i = 0; i < 2; i++) {
-        let tier = tiers[i];
+        let tier = mat_tiers[i];
         let row = document.createElement("p");
         row.classList.add("left");
         let b = document.createElement("b");
@@ -1671,6 +1709,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
 
         let boost = document.createElement("td");
         boost.textContent = eledefs[i];
+        boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("right");
         eledefElemRow.appendChild(boost);
 
@@ -1733,7 +1772,7 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
             if(key === "Damage"){
                 effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
             }
-            if(special[0]["weaponSpecialName"] === "Air Prison" && key === "Damage Boost") {
+            if(special[0]["weaponSpecialName"] === "Wind Prison" && key === "Damage Boost") {
                 effect.textContent += " (only 1st hit)";
             }
             specialEffects.appendChild(effect);
@@ -2005,4 +2044,152 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             part_divavg.append(overallaverageLabel);
         }
     }
+}
+
+/** Displays the ID costs of an item
+ * 
+ * @param {Map} item - the statMap of an item. 
+ * @param {String} elemID - the id of the parent element.
+ */
+function displayIDCosts(item, elemID) {
+    let parent_elem = document.getElementById(elemID);
+    let tier = item.get("tier");
+    if ( (item.has("fixID") && item.get("fixID")) || ["Normal","Crafted","Custom","none", " ",].includes(item.get("tier"))) {
+        return;
+    } else {
+        /** Returns the number of inventory slots minimum an amount of emeralds would take up + the configuration of doing so.
+         * Returns an array of [invSpace, E, EB, LE, Stx LE]
+         * 
+         * @param {number} ems - the total numerical value of emeralds to compact.
+         */
+        function emsToInvSpace(ems) {
+            let stx = Math.floor(ems/262144);
+            ems -= stx*4096*64;
+            let LE = Math.floor(ems/4096);
+            ems -= LE*4096;
+            let EB = Math.floor(ems/64);
+            ems -= EB*64;
+            let e = ems;
+            return [ stx + Math.ceil(LE/64) + Math.ceil(EB/64) + Math.ceil(e/64) , e, EB, LE, stx];
+        }
+        /**
+         * 
+         * @param {String} tier - item tier
+         * @param {Number} lvl - item level 
+         */
+        function getIDCost(tier, lvl) {
+            switch (tier) {
+                case "Unique":
+                    return Math.round(0.5*lvl + 3);
+                case "Rare":
+                    return Math.round(1.2*lvl + 8);
+                case "Legendary":
+                    return Math.round(4.5*lvl + 12);
+                case "Fabled":
+                    return Math.round(12*lvl + 26);
+                case "Mythic":
+                    return Math.round(18*lvl + 90);
+                case "Set":
+                    return Math.round(1.5*lvl + 8)
+                default:
+                    return -1;
+            }
+        }
+
+        parent_elem.style = "display: visible";
+        let lvl = item.get("lvl");
+        if (typeof(lvl) === "string") { lvl = parseFloat(lvl); }
+        
+        let title_elem = document.createElement("p");
+        title_elem.classList.add("smalltitle");
+        title_elem.style.color = "white";
+        title_elem.textContent = "Identification Costs";
+        parent_elem.appendChild(title_elem);
+        parent_elem.appendChild(document.createElement("br"));
+
+        let grid_item = document.createElement("div");
+        grid_item.style.display = "flex";
+        grid_item.style.flexDirection = "rows";
+        grid_item.style.flexWrap = "wrap";
+        grid_item.style.gap = "5px";
+        parent_elem.appendChild(grid_item);
+
+        let IDcost = getIDCost(tier, lvl);
+        let initIDcost = IDcost;
+        let invSpace = emsToInvSpace(IDcost);
+        let rerolls = 0;
+
+        while(invSpace[0] <= 28 && IDcost > 0) {
+            let container = document.createElement("div");
+            container.classList.add("container");
+            container.style = "grid-item-" + (rerolls+1);
+            container.style.maxWidth = "max(120px, 15%)";
+            
+            let container_title = document.createElement("p");
+            container_title.style.color = "white";
+            if (rerolls == 0) {
+                container_title.textContent = "Initial ID Cost: ";
+            } else {
+                container_title.textContent = "Reroll to [" + (rerolls+1) + "] Cost:";
+            }
+            container.appendChild(container_title);
+            let total_cost_container = document.createElement("p");
+            let total_cost_number = document.createElement("b");
+            total_cost_number.classList.add("Set");
+            total_cost_number.textContent = IDcost + " ";
+            let total_cost_suffix = document.createElement("b");
+            total_cost_suffix.textContent = "emeralds."
+            total_cost_container.appendChild(total_cost_number);
+            total_cost_container.appendChild(total_cost_suffix);
+            container.appendChild(total_cost_container);
+
+            let OR = document.createElement("p");
+            OR.classList.add("center");
+            OR.textContent = "OR";
+            container.appendChild(OR);
+
+            let esuffixes = ["", "emeralds.", "EB.", "LE.", "stacks of LE."];
+            for (let i = 4; i > 0; i--) {
+                let n_container = document.createElement("p");
+                let n_number = document.createElement("b");
+                n_number.classList.add("Set");
+                n_number.textContent = invSpace[i] + " ";
+                let n_suffix = document.createElement("b");
+                n_suffix.textContent = esuffixes[i];
+                n_container.appendChild(n_number);
+                n_container.appendChild(n_suffix);
+                container.appendChild(n_container);
+            }
+            grid_item.appendChild(container);
+            
+            rerolls += 1;
+            IDcost = Math.round(initIDcost * (5 ** rerolls));
+            invSpace = emsToInvSpace(IDcost);
+        }
+    }
+}
+
+/** Displays Additional Info for 
+ * 
+ * @param {Map} item - the statMap of the item
+ * @param {String} elemID - the parent element's id 
+ * @returns 
+ */
+function displayAdditionalInfo(item, elemID) {
+    let parent_elem = document.getElementById(elemID);
+    parent_elem.classList.add("left");
+
+    let droptype_elem = document.createElement("div");
+    droptype_elem.classList.add("container");
+    droptype_elem.style.marginBottom = "5px";
+    droptype_elem.textContent = "Drop type: " + (item.has("drop") ? item.get("drop"): "NEVER");
+    parent_elem.appendChild(droptype_elem);
+
+    let warning_elem = document.createElement("div");
+    warning_elem.classList.add("container");
+    warning_elem.style.marginBottom ="5px";
+    warning_elem.textContent = "This page is incomplete. Will work on it later.";
+    parent_elem.appendChild(warning_elem);
+
+    return;
 }

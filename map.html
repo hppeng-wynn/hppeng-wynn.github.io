@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+    <head>
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+        <!-- nunito font, copying wynndata -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+        
+
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" media="screen and (min-width: 1100px)" href="map-wide.css"/>
+        <link rel="stylesheet" media="screen and (max-width: 1099px)" href="map-narrow.css"/>
+        <link rel="icon" href="./favicon.png">
+        <link rel="manifest" href="manifest.json">
+
+        <!--Leaflet for map-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="anonymous"/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin="anonymous"></script>
+
+        <title>WynnGPS</title>
+    </head>
+    <body class="all">
+        <div class="center">
+            <header class = "header nomarginp">
+                <div class = "headerleft">         
+                    <a href = "./" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnBuilder</div>
+                    </a>
+                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnCrafter</div>
+                    </a>
+                    <a href = "./items.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnAtlas</div>
+                    </a>
+                    <a href = "./customizer.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/custom.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnCustom</div>
+                    </a>
+                    <a href = "./map.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnGPS</div>
+                    </a>
+                </div>
+                <div class = "headercenter">
+                    <div>
+                        <p class = "itemp" id = "header">WynnGPS</p>
+                    </div>
+                    
+                </div>    
+                <div class = "headerright">
+                    <p class = "center">Right click to place marker.</p>
+                </div>
+            </header>
+        </div>
+        <br>
+        <div class = "overall-container" display = "grid">
+            <div id = "mapdiv" class ="mapdiv container" display = "grid-item-1">
+                
+            </div>
+            <div id = "mapoptions-container" class = "container" display = "grid-item-2">
+                <div id = "coord-container" class = "center coord-container" display = "grid">
+                    <div></div>
+                    <p class = "title center">Options</p>
+                    <div></div>
+                    <div display = "grid-item-1">X</div>
+                    <div display = "grid-item-2"></div>
+                    <div display = "grid-item-3">Z</div>
+                    <div id = "coord-x" display = "grid-item-4"></div>
+                    <div id = "coord-img" display = "grid-item-5">
+                        <img src = "/media/icons/compass2.png" alt style = "max-width:32px; max-height:32px"/>
+                    </div>
+                    <div id = "coord-z" display = "grid-item-6"></div>
+                    <div id = "marker-coord-x" display = "none"></div>
+                    <div id = "marker-coord-img" display = "none">
+                        <img src = "/media/icons/marker.png" alt style = "max-width:32px; max-height:32px"/>
+                    </div>
+                    <div id = "marker-coord-z" display = "none"></div>
+                </div>
+            </div>
+        </div>
+
+ 
+        <script type = "text/javascript" src="map.js"></script> 
+    </body>
+</html>

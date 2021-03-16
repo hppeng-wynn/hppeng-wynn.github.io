@@ -9,7 +9,7 @@ console.log(ing_url_tag);
 
 
 
-const ING_BUILD_VERSION = "6.9.41";
+const ING_BUILD_VERSION = "6.9.42.0";
 /*
  * END testing section
  */
@@ -28,87 +28,14 @@ let player_craft;
 function setTitle() {
     document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
     document.getElementById("header").classList.add("funnynumber");
-    let disclaimer = document.createElement("p");
-    disclaimer.textContent = "THIS CRAFTER IS NEARLY COMPLETE. The effect of powders on crafted weapons is not accurate. If you know how the math behind it works, please contact ferricles on forums, discord, or ingame.";
-    document.getElementById("header").append(disclaimer);
 }
 
 
-let ingMap = new Map();
-let ingList = [];
 
-let recipeMap = new Map();
-let recipeList = [];
-
-let ingIDMap = new Map();
-let recipeIDMap = new Map();
 
 function init() {
     //no ing
-    let ing = Object();
-    ing.name = "No Ingredient";
-    ing.displayName = "No Ingredient";
-    ing.tier = 0;
-    ing.lvl = 0;
-    ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING", "COOKING", "ALCHEMISM", "SCRIBING"];
-    ing.ids= {};
-    ing.itemIDs = {"dura": 0, "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
-    ing.consumableIDs = {"dura": 0, "charges": 0};
-    ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
-    ing.id = 4000;
-    ingMap.set(ing["displayName"], ing);
-    ingList.push(ing["displayName"]);
-    ingIDMap.set(ing["id"], ing["displayName"]);
-    let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
-    for (let i = 0; i < 5; i ++) {
-        for (const powderIng of powderIngreds) {
-            let ing = Object();
-            ing.name = "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1);
-            ing.displayName = ing.name
-            ing.tier = 0;
-            ing.lvl = 0;
-            ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING"];
-            ing.ids = {};
-            ing.isPowder = true;
-            ing.pid = 6*i + powderIngreds.indexOf(powderIng);
-            ing.id = 4001 + ing.pid;
-            ing.itemIDs = {"dura": powderIng["durability"], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
-            switch(i) {
-                case 0:
-                    ing.itemIDs["strReq"] = powderIng["skpReq"];
-                    break;
-                case 1:
-                    ing.itemIDs["dexReq"] = powderIng["skpReq"];
-                    break;
-                case 2:
-                    ing.itemIDs["intReq"] = powderIng["skpReq"];
-                    break;
-                case 3:
-                    ing.itemIDs["defReq"] = powderIng["skpReq"];
-                    break;
-                case 4:
-                    ing.itemIDs["agiReq"] = powderIng["skpReq"];
-                    break;
-            }
-            ing.consumableIDs = {"dura": 0, "charges": 0};
-            ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
-            ingMap.set(ing["displayName"],ing);
-            ingList.push(ing["displayName"]);
-            ingIDMap.set(ing["id"], ing["displayName"]);
-        }
-    }
     
-
-    for (const ing of ings) {
-        ingMap.set(ing["displayName"], ing);
-        ingList.push(ing["displayName"]);
-        ingIDMap.set(ing["id"], ing["displayName"]);
-    }
-    for (const recipe of recipes) {
-        recipeMap.set(recipe["name"], recipe);
-        recipeList.push(recipe["name"]);
-        recipeIDMap.set(recipe["id"],recipe["name"]);
-    }
     console.log("all ingredients");
     console.log(ings);
     console.log("all recipes");
@@ -265,6 +192,10 @@ function encodeCraft(craft) {
 
 function decodeCraft(ing_url_tag) {
     if (ing_url_tag) {
+        if (ing_url_tag.slice(0,3) === "CR-") {
+            ing_url_tag = ing_url_tag.substring(3);
+            location.hash = location.hash.substring(3);
+        } 
         console.log(ing_url_tag);
         let version = ing_url_tag.charAt(0);
         let tag = ing_url_tag.substring(1);

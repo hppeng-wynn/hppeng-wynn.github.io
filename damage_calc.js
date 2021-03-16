@@ -3,7 +3,6 @@ const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["va
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
 // externalStats should be a map
 function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
-    
     let buildStats = new Map(stats);
     if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
         for (const entry of externalStats) {
@@ -20,6 +19,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
             }
         }
     }
+
+    let powders = weapon.get("powders").slice();
     
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     let damages = [];
@@ -28,10 +29,14 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         const damage_vals = rawDamages[i].split("-").map(Number);
         damages.push(damage_vals);
     }
+    let damageBases = [];
+    if (weapon.get("tier") === "Crafted") {
+        damageBases = buildStats.get("damageBases").slice();
+    }
 
     // Applying spell conversions
     let neutralBase = damages[0].slice();
-    let neutralRemainingRaw = damages[0];
+    let neutralRemainingRaw = damages[0].slice();
     for (let i = 0; i < 5; ++i) {
         let conversionRatio = spellConversions[i+1]/100;
         let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
@@ -43,13 +48,25 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
     //console.log(damages);
     let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
-    let powders = weapon.get("powders").slice();
 
-    //Double powder apply for weapons - this implementation is wrong
+    //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
+    //1st round - apply each as ingred, 2nd round - apply as normal
     if (weapon.get("tier") === "Crafted") {
-        powders = powders.flatMap(x => [x,x]);
+        for (const p of powders) {
+            let powder = powderStats[p];  //use min, max, and convert
+            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
+            let diff = Math.floor(damageBases[0] * powder.convert/100);
+            damageBases[0] -= diff;
+            damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
+        }
+        //update all damages
+        for (let i = 0; i < damages.length; i++) {
+            damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
+        }
+        neutralRemainingRaw = damages[0].slice();
+        neutralBase = damages[0].slice();
     }
-    
+
     //apply powders to weapon
     for (const powderID of powders) {
         const powder = powderStats[powderID];
@@ -64,12 +81,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
             neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
             neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
         }
+        damages[0] = neutralRemainingRaw;
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
-    }
-    //Double powder apply for weapons - this implementation is wrong
-    if (weapon.get("tier") === "Crafted") {
-        powders = powders.flatMap(x => [x,x]);
     }
 
     let damageMult = damageMultiplier;

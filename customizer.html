@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html scroll-behavior="smooth">
     <head>
+        <meta charset="UTF-8" />
         <!-- nunito font, copying wynndata -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
@@ -36,6 +37,11 @@
                         </img>
                         <div class = "tooltiptext center">WynnCustom</div>
                     </a>
+                    <a href = "./map.html" class = "nomarginp iconlink tooltip">
+                        <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
+                        </img>
+                        <div class = "tooltiptext center">WynnGPS</div>
+                    </a>
                 </div>
                 <div class = "headercenter">
                     <div>
@@ -56,14 +62,14 @@
                             <td class="left" id = "name">
                                 <label for="name-choice">Name:</label><br/>
                                 <input class="string-input" id="name-choice" name="name-choice" value="" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "lore">
                                 <label for="name-choice">Lore:</label><br/>
                                 <input class="string-input" id="lore-choice" name="lore-choice" value="" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -72,14 +78,14 @@
                                 <input class="string-input" list="type-list" id="type-choice" name="type-choice" value="" placeholder="Helmet" tabindex=""/>
                                 <datalist id = "type-list">
                                 </datalist>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "lvl">
                                 <label for="tier-choice">Level:</label><br/>
                                 <input class="number-input" id="lvl-choice" name="lvl-choice" value="" placeholder="1" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -88,21 +94,21 @@
                                 <input class="string-input" list="tier-list" id="tier-choice" name="tier-choice" value="" placeholder="Normal" tabindex=""/>
                                 <datalist id = "tier-list">
                                 </datalist>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "slots">
                                 <label for="slots-choice">Powder Slots:</label><br/>
                                 <input class="number-input" id="slots-choice" name="slots-choice" value="" placeholder="0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "majorIds">
                                 <label for="majorIds-choice">Major ID:</label><br/>
                                 <input class="string-input" id="majorIds-choice" name="majorIds-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         
@@ -118,49 +124,49 @@
                                 <input class="string-input" list = "class-list" id="classReq-choice" name="classReq-choice" value="" tabindex=""/>
                                 <datalist id = "class-list">
                                 </datalist>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "quest">
                                 <label for="quest-choice">Quest Requirement:</label><br/>
                                 <input class="string-input" id="quest-choice" name="quest-choice" value="" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "strReq">
                                 <label for="strReq-choice">Strength Requirement:</label><br/>
                                 <input class="number-input" id="strReq-choice" name="strReq-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "dexReq">
                                 <label for="dexReq-choice">Dexterity Requirement:</label><br/>
                                 <input class="number-input" id="dexReq-choice" name="dexReq-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "intReq">
                                 <label for="intReq-choice">Intelligence Requirement:</label><br/>
                                 <input class="number-input" id="intReq-choice" name="intReq-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "defReq">
                                 <label for="defReq-choice">Defense Requirement:</label><br/>
                                 <input class="number-input" id="defReq-choice" name="defReq-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "agiReq">
                                 <label for="agiReq-choice">Agility Requirement:</label><br/>
                                 <input class="number-input" id="agiReq-choice" name="agiReq-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -181,7 +187,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -197,7 +203,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -214,35 +220,35 @@
                             <td class="left" id = "str">
                                 <label for="str-choice">Strength:</label><br/>
                                 <input class="number-input" id="str-choice" name="str-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "dex">
                                 <label for="dex-choice">Dexterity:</label><br/>
                                 <input class="number-input" id="dex-choice" name="dex-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "int">
                                 <label for="int-choice">Intelligence:</label><br/>
                                 <input class="number-input" id="int-choice" name="int-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "def">
                                 <label for="def-choice">Defense:</label><br/>
                                 <input class="number-input" id="def-choice" name="def-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "agi">
                                 <label for="agi-choice">Agility:</label><br/>
                                 <input class="number-input" id="agi-choice" name="agi-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
 
@@ -255,42 +261,42 @@
                             <td class="left" id = "nDam">
                                 <label for="nDam-choice">Neutral Damage:</label><br/>
                                 <input class="string-input" id="nDam-choice" name="nDam-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "eDam">
                                 <label for="eDam-choice">Earth Damage:</label><br/>
                                 <input class="string-input" id="eDam-choice" name="eDam-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "tDam">
                                 <label for="tDam-choice">Thunder Damage:</label><br/>
                                 <input class="string-input" id="tDam-choice" name="tDam-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "wDam">
                                 <label for="wDam-choice">Water Damage:</label><br/>
                                 <input class="string-input" id="wDam-choice" name="wDam-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "fDam">
                                 <label for="fDam-choice">Fire Damage:</label><br/>
                                 <input class="string-input" id="fDam-choice" name="fDam-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "aDam">
                                 <label for="aDam-choice">Air Damage:</label><br/>
                                 <input class="string-input" id="aDam-choice" name="aDam-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
@@ -299,7 +305,7 @@
                                 <input class="string-input" list="atkSpd-list" id="atkSpd-choice" name="atkSpd-choice" value="" placeholder = "NORMAL" tabindex=""/>
                                 <datalist id = "atkSpd-list">
                                 </datalist>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
 
@@ -312,42 +318,42 @@
                             <td class="left" id = "hp">
                                 <label for="hp-choice">Health:</label><br/>
                                 <input class="number-input" id="hp-choice" name="hp-choice" value="" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "eDef">
                                 <label for="eDef-choice">Earth Defense:</label><br/>
                                 <input class="number-input" id="eDef-choice" name="eDef-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "tDef">
                                 <label for="tDef-choice">Thunder Defense:</label><br/>
                                 <input class="number-input" id="tDef-choice" name="tDef-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "wDef">
                                 <label for="wDef-choice">Water Defense:</label><br/>
                                 <input class="number-input" id="wDef-choice" name="wDef-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "fDef">
                                 <label for="fDef-choice">Fire Defense:</label><br/>
                                 <input class="number-input" id="fDef-choice" name="fDef-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "aDef">
                                 <label for="aDef-choice">Air Defense:</label><br/>
                                 <input class="number-input" id="aDef-choice" name="aDef-choice" value=""  tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
 
@@ -360,21 +366,21 @@
                             <td class="left" id = "durability">
                                 <label for="durability-choice">Durability (a-b):</label><br/>
                                 <input class="array-input small-input" id="durability-choice" name="durability-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "duration">
                                 <label for="duration-choice">Duration (a-b):</label><br/>
                                 <input class="array-input small-input" id="duration-choice" name="duration-choice" value="" placeholder="0-0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                         <tr>
                             <td class="left" id = "charges">
                                 <label for="duration-choice">Charges:</label><br/>
                                 <input class="number-input small-input" id="charges-choice" name="charges-choice" value="" placeholder="0" tabindex=""/>
-                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                     </table>
@@ -393,7 +399,7 @@
                                 <div id="eDamPct-choice-fixed-container" style = "display:none" >
                                     <label for="eDamPct-choice-fixed">Earth Damage %:</label><br/>
                                     <input class="number-input" id="eDamPct-choice-fixed" name="eDamPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="eDamPct-choice-container">
                                     <label for = "eDamPct-choice">Earth Damage %:</label><br/>
@@ -402,21 +408,21 @@
                                             <td>
                                                 <label for="eDamPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="eDamPct-choice-base" name="eDamPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="eDamPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="eDamPct-choice-min" name="eDamPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="eDamPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="eDamPct-choice-max" name="eDamPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -425,7 +431,7 @@
                                 <div id="tDamPct-choice-fixed-container" style = "display:none" >
                                     <label for="tDamPct-choice-fixed">Thunder Damage %:</label><br/>
                                     <input class="number-input" id="tDamPct-choice-fixed" name="tDamPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="tDamPct-choice-container">
                                     <label for = "tDamPct-choice">Thunder Damage %:</label><br/>
@@ -434,21 +440,21 @@
                                             <td>
                                                 <label for="tDamPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="tDamPct-choice-base" name="tDamPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="tDamPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="tDamPct-choice-min" name="tDamPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="tDamPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="tDamPct-choice-max" name="tDamPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -458,7 +464,7 @@
                                 <div id="wDamPct-choice-fixed-container" style = "display:none" >
                                     <label for="wDamPct-choice-fixed">Water Damage %:</label><br/>
                                     <input class="number-input" id="wDamPct-choice-fixed" name="wDamPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="wDamPct-choice-container">
                                     <label for = "wDamPct-choice">Water Damage %:</label><br/>
@@ -467,21 +473,21 @@
                                             <td>
                                                 <label for="wDamPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="wDamPct-choice-base" name="wDamPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="wDamPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="wDamPct-choice-min" name="wDamPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="wDamPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="wDamPct-choice-max" name="wDamPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -490,7 +496,7 @@
                                 <div id="fDamPct-choice-fixed-container" style = "display:none" >
                                     <label for="fDamPct-choice-fixed">Fire Damage %:</label><br/>
                                     <input class="number-input" id="fDamPct-choice-fixed" name="fDamPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="fDamPct-choice-container">
                                     <label for = "fDamPct-choice">Fire Damage %:</label><br/>
@@ -499,21 +505,21 @@
                                             <td>
                                                 <label for="fDamPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="fDamPct-choice-base" name="fDamPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="fDamPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="fDamPct-choice-min" name="fDamPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="fDamPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="fDamPct-choice-max" name="fDamPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -522,7 +528,7 @@
                                 <div id="aDamPct-choice-fixed-container" style = "display:none" >
                                     <label for="aDamPct-choice-fixed">Air Damage %:</label><br/>
                                     <input class="number-input" id="aDamPct-choice-fixed" name="aDamPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="aDamPct-choice-container">
                                     <label for = "aDamPct-choice">Air Damage %:</label><br/>
@@ -531,21 +537,21 @@
                                             <td>
                                                 <label for="aDamPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="aDamPct-choice-base" name="aDamPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="aDamPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="aDamPct-choice-min" name="aDamPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="aDamPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="aDamPct-choice-max" name="aDamPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -554,7 +560,7 @@
                                 <div id="mdPct-choice-fixed-container" style = "display:none" >
                                     <label for="mdPct-choice-fixed">Melee Damage %:</label><br/>
                                     <input class="number-input" id="mdPct-choice-fixed" name="mdPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="mdPct-choice-container">
                                     <label for = "mdPct-choice">Melee Damage %:</label><br/>
@@ -563,21 +569,21 @@
                                             <td>
                                                 <label for="mdPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="mdPct-choice-base" name="mdPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="mdPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="mdPct-choice-min" name="mdPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="mdPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="mdPct-choice-max" name="mdPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -586,7 +592,7 @@
                                 <div id="mdRaw-choice-fixed-container" style = "display:none" >
                                     <label for="mdRaw-choice-fixed">Raw Melee Damage:</label><br/>
                                     <input class="number-input" id="mdRaw-choice-fixed" name="mdRaw-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="mdRaw-choice-container">
                                     <label for = "mdRaw-choice">Raw Melee Damage:</label><br/>
@@ -595,21 +601,21 @@
                                             <td>
                                                 <label for="mdRaw-choice-base">base:</label>
                                                 <input class="number-input small-input" id="mdRaw-choice-base" name="mdRaw-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="mdRaw-choice-min">min:</label>
                                                 <input class="number-input small-input" id="mdRaw-choice-min" name="mdRaw-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="mdRaw-choice-max">max:</label>
                                                 <input class="number-input small-input" id="mdRaw-choice-max" name="mdRaw-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -618,7 +624,7 @@
                                 <div id="sdPct-choice-fixed-container" style = "display:none" >
                                     <label for="sdPct-choice-fixed">Spell Damage %:</label><br/>
                                     <input class="number-input" id="sdPct-choice-fixed" name="sdPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="sdPct-choice-container">
                                     <label for = "sdPct-choice">Spell Damage %:</label><br/>
@@ -627,21 +633,21 @@
                                             <td>
                                                 <label for="sdPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="sdPct-choice-base" name="sdPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sdPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="sdPct-choice-min" name="sdPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sdPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="sdPct-choice-max" name="sdPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -650,7 +656,7 @@
                                 <div id="sdRaw-choice-fixed-container" style = "display:none" >
                                     <label for="sdRaw-choice-fixed">Raw Spell Damage:</label><br/>
                                     <input class="number-input" id="sdRaw-choice-fixed" name="sdRaw-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="sdRaw-choice-container">
                                     <label for = "sdRaw-choice">Raw Spell Damage:</label><br/>
@@ -659,21 +665,21 @@
                                             <td>
                                                 <label for="sdRaw-choice-base">base:</label>
                                                 <input class="number-input small-input" id="sdRaw-choice-base" name="sdRaw-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sdRaw-choice-min">min:</label>
                                                 <input class="number-input small-input" id="sdRaw-choice-min" name="sdRaw-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sdRaw-choice-max">max:</label>
                                                 <input class="number-input small-input" id="sdRaw-choice-max" name="sdRaw-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -682,7 +688,7 @@
                                 <div id="atkTier-choice-fixed-container" style = "display:none" >
                                     <label for="atkTier-choice-fixed">Attack Speed Bonus:</label><br/>
                                     <input class="number-input" id="atkTier-choice-fixed" name="atkTier-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="atkTier-choice-container">
                                     <label for = "atkTier-choice">Attack Speed Bonus:</label><br/>
@@ -691,21 +697,21 @@
                                             <td>
                                                 <label for="atkTier-choice-base">base:</label>
                                                 <input class="number-input small-input" id="atkTier-choice-base" name="atkTier-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="atkTier-choice-min">min:</label>
                                                 <input class="number-input small-input" id="atkTier-choice-min" name="atkTier-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="atkTier-choice-max">max:</label>
                                                 <input class="number-input small-input" id="atkTier-choice-max" name="atkTier-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -714,7 +720,7 @@
                                 <div id="poison-choice-fixed-container" style = "display:none" >
                                     <label for="poison-choice-fixed">Poison ( /3s):</label><br/>
                                     <input class="number-input" id="poison-choice-fixed" name="poison-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="poison-choice-container">
                                     <label for = "poison-choice">Poison ( /3s):</label><br/>
@@ -723,21 +729,21 @@
                                             <td>
                                                 <label for="poison-choice-base">base:</label>
                                                 <input class="number-input small-input" id="poison-choice-base" name="poison-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="poison-choice-min">min:</label>
                                                 <input class="number-input small-input" id="poison-choice-min" name="poison-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="poison-choice-max">max:</label>
                                                 <input class="number-input small-input" id="poison-choice-max" name="poison-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -752,7 +758,7 @@
                                 <div id="hpBonus-choice-fixed-container" style = "display:none" >
                                     <label for="hpBonus-choice-fixed">Health Bonus:</label><br/>
                                     <input class="number-input" id="hpBonus-choice-fixed" name="hpBonus-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="hpBonus-choice-container">
                                     <label for = "hpBonus-choice">Health Bonus:</label><br/>
@@ -761,21 +767,21 @@
                                             <td>
                                                 <label for="hpBonus-choice-base">base:</label>
                                                 <input class="number-input small-input" id="hpBonus-choice-base" name="hpBonus-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="hpBonus-choice-min">min:</label>
                                                 <input class="number-input small-input" id="hpBonus-choice-min" name="hpBonus-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="hpBonus-choice-max">max:</label>
                                                 <input class="number-input small-input" id="hpBonus-choice-max" name="hpBonus-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -784,7 +790,7 @@
                                 <div id="eDefPct-choice-fixed-container" style = "display:none" >
                                     <label for="eDefPct-choice-fixed">Earth Defense %:</label><br/>
                                     <input class="number-input" id="eDefPct-choice-fixed" name="eDefPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="eDefPct-choice-container">
                                     <label for = "eDefPct-choice">Earth Defense %:</label><br/>
@@ -793,21 +799,21 @@
                                             <td>
                                                 <label for="eDefPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="eDefPct-choice-base" name="eDefPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="eDefPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="eDefPct-choice-min" name="eDefPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="eDefPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="eDefPct-choice-max" name="eDefPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -816,7 +822,7 @@
                                 <div id="tDefPct-choice-fixed-container" style = "display:none" >
                                     <label for="tDefPct-choice-fixed">Thunder Defense %:</label><br/>
                                     <input class="number-input" id="tDefPct-choice-fixed" name="tDefPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="tDefPct-choice-container">
                                     <label for = "tDefPct-choice">Thunder Defense %:</label><br/>
@@ -825,21 +831,21 @@
                                             <td>
                                                 <label for="tDefPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="tDefPct-choice-base" name="tDefPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="tDefPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="tDefPct-choice-min" name="tDefPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="tDefPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="tDefPct-choice-max" name="tDefPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -848,7 +854,7 @@
                                 <div id="wDefPct-choice-fixed-container" style = "display:none" >
                                     <label for="wDefPct-choice-fixed">Water Defense %:</label><br/>
                                     <input class="number-input" id="wDefPct-choice-fixed" name="wDefPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="wDefPct-choice-container">
                                     <label for = "wDefPct-choice">Water Defense %:</label><br/>
@@ -857,21 +863,21 @@
                                             <td>
                                                 <label for="wDefPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="wDefPct-choice-base" name="wDefPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="wDefPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="wDefPct-choice-min" name="wDefPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="wDefPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="wDefPct-choice-max" name="wDefPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -880,7 +886,7 @@
                                 <div id="fDefPct-choice-fixed-container" style = "display:none" >
                                     <label for="fDefPct-choice-fixed">Fire Defense %:</label><br/>
                                     <input class="number-input" id="fDefPct-choice-fixed" name="fDefPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="fDefPct-choice-container">
                                     <label for = "fDefPct-choice">Fire Defense %:</label><br/>
@@ -889,21 +895,21 @@
                                             <td>
                                                 <label for="fDefPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="fDefPct-choice-base" name="fDefPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="fDefPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="fDefPct-choice-min" name="fDefPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="fDefPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="fDefPct-choice-max" name="fDefPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -912,7 +918,7 @@
                                 <div id="aDefPct-choice-fixed-container" style = "display:none" >
                                     <label for="aDefPct-choice-fixed">Air Defense %:</label><br/>
                                     <input class="number-input" id="aDefPct-choice-fixed" name="aDefPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="aDefPct-choice-container">
                                     <label for = "aDefPct-choice">Air Defense %:</label><br/>
@@ -921,21 +927,21 @@
                                             <td>
                                                 <label for="aDefPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="aDefPct-choice-base" name="aDefPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="aDefPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="aDefPct-choice-min" name="aDefPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="aDefPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="aDefPct-choice-max" name="aDefPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -944,7 +950,7 @@
                                 <div id="hprPct-choice-fixed-container" style = "display:none" >
                                     <label for="hprPct-choice-fixed">Health Regen %:</label><br/>
                                     <input class="number-input" id="hprPct-choice-fixed" name="hprPct-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="hprPct-choice-container">
                                     <label for = "hprPct-choice">Health Regen %:</label><br/>
@@ -953,21 +959,21 @@
                                             <td>
                                                 <label for="hprPct-choice-base">base:</label>
                                                 <input class="number-input small-input" id="hprPct-choice-base" name="hprPct-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="hprPct-choice-min">min:</label>
                                                 <input class="number-input small-input" id="hprPct-choice-min" name="hprPct-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="hprPct-choice-max">max:</label>
                                                 <input class="number-input small-input" id="hprPct-choice-max" name="hprPct-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -976,7 +982,7 @@
                                 <div id="hprRaw-choice-fixed-container" style = "display:none" >
                                     <label for="hprRaw-choice-fixed">Raw Health Regen:</label><br/>
                                     <input class="number-input" id="hprRaw-choice-fixed" name="hprRaw-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="hprRaw-choice-container">
                                     <label for = "hprRaw-choice">Raw Health Regen:</label><br/>
@@ -985,21 +991,21 @@
                                             <td>
                                                 <label for="hprRaw-choice-base">base:</label>
                                                 <input class="number-input small-input" id="hprRaw-choice-base" name="hprRaw-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="hprRaw-choice-min">min:</label>
                                                 <input class="number-input small-input" id="hprRaw-choice-min" name="hprRaw-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="hprRaw-choice-max">max:</label>
                                                 <input class="number-input small-input" id="hprRaw-choice-max" name="hprRaw-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1014,7 +1020,7 @@
                                 <div id="mr-choice-fixed-container" style = "display:none" >
                                     <label for="mr-choice-fixed">Mana Regen ( /4s):</label><br/>
                                     <input class="number-input" id="mr-choice-fixed" name="mr-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="mr-choice-container">
                                     <label for = "mr-choice">Mana Regen ( /4s):</label><br/>
@@ -1023,21 +1029,21 @@
                                             <td>
                                                 <label for="mr-choice-base">base:</label>
                                                 <input class="number-input small-input" id="mr-choice-base" name="mr-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="mr-choice-min">min:</label>
                                                 <input class="number-input small-input" id="mr-choice-min" name="mr-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="mr-choice-max">max:</label>
                                                 <input class="number-input small-input" id="mr-choice-max" name="mr-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1046,7 +1052,7 @@
                                 <div id="ms-choice-fixed-container" style = "display:none" >
                                     <label for="ms-choice-fixed">Mana Steal ( /4s):</label><br/>
                                     <input class="number-input" id="ms-choice-fixed" name="ms-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="ms-choice-container">
                                     <label for = "ms-choice">Mana Steal ( /4s):</label><br/>
@@ -1055,21 +1061,21 @@
                                             <td>
                                                 <label for="ms-choice-base">base:</label>
                                                 <input class="number-input small-input" id="ms-choice-base" name="ms-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="ms-choice-min">min:</label>
                                                 <input class="number-input small-input" id="ms-choice-min" name="ms-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="ms-choice-max">max:</label>
                                                 <input class="number-input small-input" id="ms-choice-max" name="ms-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1078,7 +1084,7 @@
                                 <div id="ls-choice-fixed-container" style = "display:none" >
                                     <label for="ls-choice-fixed">Life Steal ( /4s):</label><br/>
                                     <input class="number-input" id="ls-choice-fixed" name="ls-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="ls-choice-container">
                                     <label for = "ls-choice">Life Steal ( /4s):</label><br/>
@@ -1087,21 +1093,21 @@
                                             <td>
                                                 <label for="ls-choice-base">base:</label>
                                                 <input class="number-input small-input" id="ls-choice-base" name="ls-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="ls-choice-min">min:</label>
                                                 <input class="number-input small-input" id="ls-choice-min" name="ls-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="ls-choice-max">max:</label>
                                                 <input class="number-input small-input" id="ls-choice-max" name="ls-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1110,7 +1116,7 @@
                                 <div id="thorns-choice-fixed-container" style = "display:none" >
                                     <label for="thorns-choice-fixed">Thorns Chance %:</label><br/>
                                     <input class="number-input" id="thorns-choice-fixed" name="thorns-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="thorns-choice-container">
                                     <label for = "thorns-choice">Thorns Chance %:</label><br/>
@@ -1119,21 +1125,21 @@
                                             <td>
                                                 <label for="thorns-choice-base">base:</label>
                                                 <input class="number-input small-input" id="thorns-choice-base" name="thorns-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="thorns-choice-min">min:</label>
                                                 <input class="number-input small-input" id="thorns-choice-min" name="thorns-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="thorns-choice-max">max:</label>
                                                 <input class="number-input small-input" id="thorns-choice-max" name="thorns-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1142,7 +1148,7 @@
                                 <div id="ref-choice-fixed-container" style = "display:none" >
                                     <label for="ref-choice-fixed">Reflection Chance %:</label><br/>
                                     <input class="number-input" id="ref-choice-fixed" name="ref-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="ref-choice-container">
                                     <label for = "ref-choice">Reflection Chance %:</label><br/>
@@ -1151,21 +1157,21 @@
                                             <td>
                                                 <label for="ref-choice-base">base:</label>
                                                 <input class="number-input small-input" id="ref-choice-base" name="ref-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="ref-choice-min">min:</label>
                                                 <input class="number-input small-input" id="ref-choice-min" name="ref-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="ref-choice-max">max:</label>
                                                 <input class="number-input small-input" id="ref-choice-max" name="ref-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1174,7 +1180,7 @@
                                 <div id="expd-choice-fixed-container" style = "display:none" >
                                     <label for="expd-choice-fixed">Exploding Chance %:</label><br/>
                                     <input class="number-input" id="expd-choice-fixed" name="expd-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="expd-choice-container">
                                     <label for = "expd-choice">Exploding Chance %:</label><br/>
@@ -1183,21 +1189,21 @@
                                             <td>
                                                 <label for="expd-choice-base">base:</label>
                                                 <input class="number-input small-input" id="expd-choice-base" name="expd-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="expd-choice-min">min:</label>
                                                 <input class="number-input small-input" id="expd-choice-min" name="expd-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="expd-choice-max">max:</label>
                                                 <input class="number-input small-input" id="expd-choice-max" name="expd-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1206,7 +1212,7 @@
                                 <div id="jh-choice-fixed-container" style = "display:none" >
                                     <label for="jh-choice-fixed">Jump Height:</label><br/>
                                     <input class="number-input" id="jh-choice-fixed" name="jh-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="jh-choice-container">
                                     <label for = "jh-choice">Jump Height:</label><br/>
@@ -1215,21 +1221,21 @@
                                             <td>
                                                 <label for="jh-choice-base">base:</label>
                                                 <input class="number-input small-input" id="jh-choice-base" name="jh-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="jh-choice-min">min:</label>
                                                 <input class="number-input small-input" id="jh-choice-min" name="jh-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="jh-choice-max">max:</label>
                                                 <input class="number-input small-input" id="jh-choice-max" name="jh-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1238,7 +1244,7 @@
                                 <div id="spd-choice-fixed-container" style = "display:none" >
                                     <label for="spd-choice-fixed">Walk Speed %:</label><br/>
                                     <input class="number-input" id="spd-choice-fixed" name="spd-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spd-choice-container">
                                     <label for = "spd-choice">Walk Speed %:</label><br/>
@@ -1247,21 +1253,21 @@
                                             <td>
                                                 <label for="spd-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spd-choice-base" name="spd-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spd-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spd-choice-min" name="spd-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spd-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spd-choice-max" name="spd-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1270,7 +1276,7 @@
                                 <div id="sprint-choice-fixed-container" style = "display:none" >
                                     <label for="sprint-choice-fixed">Sprint Bonus %:</label><br/>
                                     <input class="number-input" id="sprint-choice-fixed" name="sprint-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="sprint-choice-container">
                                     <label for = "sprint-choice">Sprint Bonus %:</label><br/>
@@ -1279,21 +1285,21 @@
                                             <td>
                                                 <label for="sprint-choice-base">base:</label>
                                                 <input class="number-input small-input" id="sprint-choice-base" name="sprint-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sprint-choice-min">min:</label>
                                                 <input class="number-input small-input" id="sprint-choice-min" name="sprint-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sprint-choice-max">max:</label>
                                                 <input class="number-input small-input" id="sprint-choice-max" name="sprint-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1302,7 +1308,7 @@
                                 <div id="sprintReg-choice-fixed-container" style = "display:none" >
                                     <label for="sprintReg-choice-fixed">Sprint Regen %:</label><br/>
                                     <input class="number-input" id="sprintReg-choice-fixed" name="sprintReg-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="sprintReg-choice-container">
                                     <label for = "sprintReg-choice">Sprint Regen %:</label><br/>
@@ -1311,21 +1317,21 @@
                                             <td>
                                                 <label for="sprintReg-choice-base">base:</label>
                                                 <input class="number-input small-input" id="sprintReg-choice-base" name="sprintReg-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sprintReg-choice-min">min:</label>
                                                 <input class="number-input small-input" id="sprintReg-choice-min" name="sprintReg-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="sprintReg-choice-max">max:</label>
                                                 <input class="number-input small-input" id="sprintReg-choice-max" name="sprintReg-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1340,7 +1346,7 @@
                                 <div id="spPct1-choice-fixed-container" style = "display:none" >
                                     <label for="spPct1-choice-fixed">1st Spell Cost %:</label><br/>
                                     <input class="number-input" id="spPct1-choice-fixed" name="spPct1-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spPct1-choice-container">
                                     <label for = "spPct1-choice">1st Spell Cost %:</label><br/>
@@ -1349,21 +1355,21 @@
                                             <td>
                                                 <label for="spPct1-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spPct1-choice-base" name="spPct1-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct1-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spPct1-choice-min" name="spPct1-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct1-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spPct1-choice-max" name="spPct1-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1372,7 +1378,7 @@
                                 <div id="spPct2-choice-fixed-container" style = "display:none" >
                                     <label for="spPct2-choice-fixed">2nd Spell Cost %:</label><br/>
                                     <input class="number-input" id="spPct2-choice-fixed" name="spPct2-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spPct2-choice-container">
                                     <label for = "spPct2-choice">2nd Spell Cost %:</label><br/>
@@ -1381,21 +1387,21 @@
                                             <td>
                                                 <label for="spPct2-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spPct2-choice-base" name="spPct2-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct2-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spPct2-choice-min" name="spPct2-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct2-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spPct2-choice-max" name="spPct2-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1404,7 +1410,7 @@
                                 <div id="spPct3-choice-fixed-container" style = "display:none" >
                                     <label for="spPct3-choice-fixed">3rd Spell Cost %:</label><br/>
                                     <input class="number-input" id="spPct3-choice-fixed" name="spPct3-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spPct3-choice-container">
                                     <label for = "spPct3-choice">3rd Spell Cost %:</label><br/>
@@ -1413,21 +1419,21 @@
                                             <td>
                                                 <label for="spPct3-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spPct3-choice-base" name="spPct3-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct3-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spPct3-choice-min" name="spPct3-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct3-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spPct3-choice-max" name="spPct3-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1436,7 +1442,7 @@
                                 <div id="spPct4-choice-fixed-container" style = "display:none" >
                                     <label for="spPct4-choice-fixed">4th Spell Cost %:</label><br/>
                                     <input class="number-input" id="spPct4-choice-fixed" name="spPct4-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spPct4-choice-container">
                                     <label for = "spPct4-choice">4th Spell Cost %:</label><br/>
@@ -1445,21 +1451,21 @@
                                             <td>
                                                 <label for="spPct4-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spPct4-choice-base" name="spPct4-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct4-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spPct4-choice-min" name="spPct4-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spPct4-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spPct4-choice-max" name="spPct4-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1468,7 +1474,7 @@
                                 <div id="spRaw1-choice-fixed-container" style = "display:none" >
                                     <label for="spRaw1-choice-fixed">1st Spell Cost Raw:</label><br/>
                                     <input class="number-input" id="spRaw1-choice-fixed" name="spRaw1-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spRaw1-choice-container">
                                     <label for = "spRaw1-choice">1st Spell Cost Raw:</label><br/>
@@ -1477,21 +1483,21 @@
                                             <td>
                                                 <label for="spRaw1-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spRaw1-choice-base" name="spRaw1-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw1-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spRaw1-choice-min" name="spRaw1-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw1-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spRaw1-choice-max" name="spRaw1-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1500,7 +1506,7 @@
                                 <div id="spRaw2-choice-fixed-container" style = "display:none" >
                                     <label for="spRaw2-choice-fixed">2nd Spell Cost Raw:</label><br/>
                                     <input class="number-input" id="spRaw2-choice-fixed" name="spRaw2-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spRaw2-choice-container">
                                     <label for = "spRaw2-choice">2nd Spell Cost Raw:</label><br/>
@@ -1509,21 +1515,21 @@
                                             <td>
                                                 <label for="spRaw2-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spRaw2-choice-base" name="spRaw2-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw2-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spRaw2-choice-min" name="spRaw2-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw2-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spRaw2-choice-max" name="spRaw2-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1532,7 +1538,7 @@
                                 <div id="spRaw3-choice-fixed-container" style = "display:none" >
                                     <label for="spRaw3-choice-fixed">3rd Spell Cost Raw:</label><br/>
                                     <input class="number-input" id="spRaw3-choice-fixed" name="spRaw3-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spRaw3-choice-container">
                                     <label for = "spRaw3-choice">3rd Spell Cost Raw:</label><br/>
@@ -1541,21 +1547,21 @@
                                             <td>
                                                 <label for="spRaw3-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spRaw3-choice-base" name="spRaw3-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw3-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spRaw3-choice-min" name="spRaw3-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw3-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spRaw3-choice-max" name="spRaw3-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1564,7 +1570,7 @@
                                 <div id="spRaw4-choice-fixed-container" style = "display:none" >
                                     <label for="spRaw4-choice-fixed">4th Spell Cost Raw:</label><br/>
                                     <input class="number-input" id="spRaw4-choice-fixed" name="spRaw4-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spRaw4-choice-container">
                                     <label for = "spRaw4-choice">4th Spell Cost Raw:</label><br/>
@@ -1573,21 +1579,21 @@
                                             <td>
                                                 <label for="spRaw4-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spRaw4-choice-base" name="spRaw4-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw4-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spRaw4-choice-min" name="spRaw4-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRaw4-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spRaw4-choice-max" name="spRaw4-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1602,7 +1608,7 @@
                                 <div id="xpb-choice-fixed-container" style = "display:none" >
                                     <label for="xpb-choice-fixed">Combat XP Bonus %:</label><br/>
                                     <input class="number-input" id="xpb-choice-fixed" name="xpb-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="xpb-choice-container">
                                     <label for = "xpb-choice">Combat XP Bonus %:</label><br/>
@@ -1611,21 +1617,21 @@
                                             <td>
                                                 <label for="xpb-choice-base">base:</label>
                                                 <input class="number-input small-input" id="xpb-choice-base" name="xpb-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="xpb-choice-min">min:</label>
                                                 <input class="number-input small-input" id="xpb-choice-min" name="xpb-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="xpb-choice-max">max:</label>
                                                 <input class="number-input small-input" id="xpb-choice-max" name="xpb-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1634,7 +1640,7 @@
                                 <div id="gXp-choice-fixed-container" style = "display:none" >
                                     <label for="gXp-choice-fixed">Gathering XP Bonus %:</label><br/>
                                     <input class="number-input" id="gXp-choice-fixed" name="gXp-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="gXp-choice-container">
                                     <label for = "gXp-choice">Gathering XP Bonus %:</label><br/>
@@ -1643,21 +1649,21 @@
                                             <td>
                                                 <label for="gXp-choice-base">base:</label>
                                                 <input class="number-input small-input" id="gXp-choice-base" name="gXp-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="gXp-choice-min">min:</label>
                                                 <input class="number-input small-input" id="gXp-choice-min" name="gXp-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="gXp-choice-max">max:</label>
                                                 <input class="number-input small-input" id="gXp-choice-max" name="gXp-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1666,7 +1672,7 @@
                                 <div id="gSpd-choice-fixed-container" style = "display:none" >
                                     <label for="gSpd-choice-fixed">Gathering Speed Bonus %:</label><br/>
                                     <input class="number-input" id="gSpd-choice-fixed" name="gSpd-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="gSpd-choice-container">
                                     <label for = "gSpd-choice">Gathering Speed Bonus %:</label><br/>
@@ -1675,21 +1681,21 @@
                                             <td>
                                                 <label for="gSpd-choice-base">base:</label>
                                                 <input class="number-input small-input" id="gSpd-choice-base" name="gSpd-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="gSpd-choice-min">min:</label>
                                                 <input class="number-input small-input" id="gSpd-choice-min" name="gSpd-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="gSpd-choice-max">max:</label>
                                                 <input class="number-input small-input" id="gSpd-choice-max" name="gSpd-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1698,7 +1704,7 @@
                                 <div id="eSteal-choice-fixed-container" style = "display:none" >
                                     <label for="eSteal-choice-fixed">Stealing %:</label><br/>
                                     <input class="number-input" id="eSteal-choice-fixed" name="eSteal-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="eSteal-choice-container">
                                     <label for = "eSteal-choice">Stealing %:</label><br/>
@@ -1707,21 +1713,21 @@
                                             <td>
                                                 <label for="eSteal-choice-base">base:</label>
                                                 <input class="number-input small-input" id="eSteal-choice-base" name="eSteal-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="eSteal-choice-min">min:</label>
                                                 <input class="number-input small-input" id="eSteal-choice-min" name="eSteal-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="eSteal-choice-max">max:</label>
                                                 <input class="number-input small-input" id="eSteal-choice-max" name="eSteal-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1730,7 +1736,7 @@
                                 <div id="lb-choice-fixed-container" style = "display:none" >
                                     <label for="lb-choice-fixed">Loot Bonus %:</label><br/>
                                     <input class="number-input" id="lb-choice-fixed" name="lb-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="lb-choice-container">
                                     <label for = "lb-choice">Loot Bonus %:</label><br/>
@@ -1739,21 +1745,21 @@
                                             <td>
                                                 <label for="lb-choice-base">base:</label>
                                                 <input class="number-input small-input" id="lb-choice-base" name="lb-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="lb-choice-min">min:</label>
                                                 <input class="number-input small-input" id="lb-choice-min" name="lb-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="lb-choice-max">max:</label>
                                                 <input class="number-input small-input" id="lb-choice-max" name="lb-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1762,7 +1768,7 @@
                                 <div id="lq-choice-fixed-container" style = "display:none" >
                                     <label for="lq-choice-fixed">Loot Quality %:</label><br/>
                                     <input class="number-input" id="lq-choice-fixed" name="lq-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="lq-choice-container">
                                     <label for = "lq-choice">Loot Quality %:</label><br/>
@@ -1771,21 +1777,21 @@
                                             <td>
                                                 <label for="lq-choice-base">base:</label>
                                                 <input class="number-input small-input" id="lq-choice-base" name="lq-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="lq-choice-min">min:</label>
                                                 <input class="number-input small-input" id="lq-choice-min" name="lq-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="lq-choice-max">max:</label>
                                                 <input class="number-input small-input" id="lq-choice-max" name="lq-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1794,7 +1800,7 @@
                                 <div id="spRegen-choice-fixed-container" style = "display:none" >
                                     <label for="spRegen-choice-fixed">Soul Point Regen %:</label><br/>
                                     <input class="number-input" id="spRegen-choice-fixed" name="spRegen-choice-fixed" value="" tabindex=""/>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>    
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>    
                                 </div>
                                 <div id="spRegen-choice-container">
                                     <label for = "spRegen-choice">Soul Point Regen %:</label><br/>
@@ -1803,21 +1809,21 @@
                                             <td>
                                                 <label for="spRegen-choice-base">base:</label>
                                                 <input class="number-input small-input" id="spRegen-choice-base" name="spRegen-choice-base" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRegen-choice-min">min:</label>
                                                 <input class="number-input small-input" id="spRegen-choice-min" name="spRegen-choice-min" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                             <td>
                                                 <label for="spRegen-choice-max">max:</label>
                                                 <input class="number-input small-input" id="spRegen-choice-max" name="spRegen-choice-max" value="" tabindex=""/>
-                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                             </td>
                                         </tr>
                                     </table>
-                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                                    <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                                 </div>    
                             </td>
                         </tr>
@@ -1826,7 +1832,7 @@
                 </div>
             </div>
             <div class = "right-side-container" style = "grid-item-2">
-                <div class = "sticky-box">
+                <div class = "sticky-box" id = "right-container">
                     <div class = "container button-container">
                         <p></p>
                         <p class = "center smalltitle">Options</p>
@@ -1856,7 +1862,7 @@
                         </div>
                         <div class="button set-button center" id = "fixID" style = "grid-item-5">
                             <button class = "fixID-choice" id = "fixID-choice" onclick = "toggleButton('fixID-choice'); toggleYN('fixID-choice'); toggleFixed({textContent})" tabindex="">no</button>
-                            <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif;"></p>
+                            <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                         </div>
                         <div class = "button set-button" style = "grid-item-7">
                             <div class = "">Base Item: </div>
@@ -1884,7 +1890,7 @@
         <div class = "center">
             <footer>
                 <div class="center" id="header2">
-                    <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with Atlas Inc (JavaScript required to function, nothing works without js)</p>
+                    <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with <a href = "./atlas.html" target = "_blank" class = "link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>
                     <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
                 </div>
                 <div class="center" id="credits">

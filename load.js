@@ -5,7 +5,11 @@ let db;
 let reload = false;
 let items;
 let sets;
-
+let itemMap;
+let idMap;
+let redirectMap;
+let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
+let itemLists = new Map();
 /*
  * Load item set from local DB. Calls init() on success.
  */
@@ -20,7 +24,7 @@ async function load_local(init_func) {
     request.onsuccess = function(event) {
         console.log("Successfully read local item db.");
         items = request.result;
-        console.log(items);
+        //console.log(items);
         let request2 = sets_store.openCursor();
 
         sets = {};
@@ -37,6 +41,7 @@ async function load_local(init_func) {
             else {
                 console.log("Successfully read local set db.");
                 //console.log(sets);
+                init_maps();
                 init_func();
             }
         }
@@ -74,6 +79,8 @@ async function load(init_func) {
     let result = await (await fetch(url)).json();
     items = result.items;
     sets = result.sets;
+    
+
 
 //    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
 //    let clear_items = clear_tx.objectStore('item_db');
@@ -105,6 +112,7 @@ async function load(init_func) {
     add_promises.push(add_tx.complete);
     Promise.all(add_promises).then((values) => {
         db.close();
+        init_maps();
         init_func();
     });
 }
@@ -151,4 +159,69 @@ function load_init(init_func) {
 
         console.log("DB setup complete...");
     }
+}
+
+function init_maps() {
+    //warp
+    itemMap = new Map();
+    /* Mapping from item names to set names. */
+    idMap = new Map();
+    redirectMap = new Map();
+    for (const it of itemTypes) {
+        itemLists.set(it, []);
+    }
+
+    let noneItems = [
+        ["armor", "helmet", "No Helmet"],
+        ["armor", "chestplate", "No Chestplate"],
+        ["armor", "leggings", "No Leggings"],
+        ["armor", "boots", "No Boots"],
+        ["accessory", "ring", "No Ring 1"],
+        ["accessory", "ring", "No Ring 2"],
+        ["accessory", "bracelet", "No Bracelet"],
+        ["accessory", "necklace", "No Necklace"],
+        ["weapon", "dagger", "No Weapon"],
+    ];
+    for (let i = 0; i < 9; i++) {
+        let item = Object();
+        item.slots = 0;
+        item.category = noneItems[i][0];
+        item.type = noneItems[i][1];
+        item.name = noneItems[i][2];
+        item.displayName = item.name;
+        item.set = null;
+        item.quest = null;
+        item.skillpoints = [0, 0, 0, 0, 0];
+        item.has_negstat = false;
+        item.reqs = [0, 0, 0, 0, 0];
+        item.fixID = true;
+        item.tier = "Normal";//do not get rid of this @hpp
+        item.id = 10000 + i;
+        item.nDam = "0-0";
+        item.eDam = "0-0";
+        item.tDam = "0-0";
+        item.wDam = "0-0";
+        item.fDam = "0-0";
+        item.aDam = "0-0";
+
+        noneItems[i] = item;
+    }
+    items = items.concat(noneItems);
+    //console.log(items);
+    for (const item of items) {
+        if (item.remapID === undefined) {
+            itemLists.get(item.type).push(item.displayName);
+            itemMap.set(item.displayName, item);
+            if (noneItems.includes(item)) {
+                idMap.set(item.id, "");
+            }
+            else {
+                idMap.set(item.id, item.displayName);
+            }
+        }
+        else {
+            redirectMap.set(item.id, item.remapID);
+        }
+    }
+    console.log(itemMap);
 }

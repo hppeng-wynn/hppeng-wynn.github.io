@@ -2,7 +2,7 @@ const url_tag = location.hash.slice(1);
 console.log(url_base);
 console.log(url_tag);
 
-const BUILD_VERSION = "6.9.42";
+const BUILD_VERSION = "6.9.42.0";
 
 function setTitle() {
     let text;
@@ -82,15 +82,7 @@ let powderInputs = [
     "weapon-powder",
 ];
 
-let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
-let itemLists = new Map();
-for (const it of itemTypes) {
-    itemLists.set(it, []);
-}
-let itemMap = new Map();
-/* Mapping from item names to set names. */
-let idMap = new Map();
-let redirectMap = new Map();
+
 
 /*
  * Function that takes an item list and populates its corresponding dropdown.
@@ -109,58 +101,7 @@ function populateItemList(type) {
  * Populate dropdowns, add listeners, etc.
  */
 function init() {
-    let noneItems = [
-        ["armor", "helmet", "No Helmet"],
-        ["armor", "chestplate", "No Chestplate"],
-        ["armor", "leggings", "No Leggings"],
-        ["armor", "boots", "No Boots"],
-        ["accessory", "ring", "No Ring 1"],
-        ["accessory", "ring", "No Ring 2"],
-        ["accessory", "bracelet", "No Bracelet"],
-        ["accessory", "necklace", "No Necklace"],
-        ["weapon", "dagger", "No Weapon"],
-    ];
-    for (let i = 0; i < 9; i++) {
-        let item = Object();
-        item.slots = 0;
-        item.category = noneItems[i][0];
-        item.type = noneItems[i][1];
-        item.name = noneItems[i][2];
-        item.displayName = item.name;
-        item.set = null;
-        item.quest = null;
-        item.skillpoints = [0, 0, 0, 0, 0];
-        item.has_negstat = false;
-        item.reqs = [0, 0, 0, 0, 0];
-        item.fixID = true;
-        item.tier = " ";//do not get rid of this @hpp
-        item.id = 10000 + i;
-        item.nDam = "0-0";
-        item.eDam = "0-0";
-        item.tDam = "0-0";
-        item.wDam = "0-0";
-        item.fDam = "0-0";
-        item.aDam = "0-0";
-
-        noneItems[i] = item;
-    }
-    items = items.concat(noneItems);
-    console.log(items);
-    for (const item of items) {
-        if (item.remapID === undefined) {
-            itemLists.get(item.type).push(item.displayName);
-            itemMap.set(item.displayName, item);
-            if (noneItems.includes(item)) {
-                idMap.set(item.id, "");
-            }
-            else {
-                idMap.set(item.id, item.displayName);
-            }
-        }
-        else {
-            redirectMap.set(item.id, item.remapID);
-        }
-    }
+    
     
     for (const armorType of armorTypes) {
         populateItemList(armorType);
@@ -171,13 +112,13 @@ function init() {
             if (itemMap.has(item_name)) {
                 let item = itemMap.get(item_name);
                 nSlots = item["slots"];
-                console.log(item);
+                //console.log(item);
             }
             else {
-                let crafted_item = getCraftFromHash(item_name);
-                if (crafted_item != undefined) {
-                    nSlots = crafted_item.statMap.get("slots");
-                }
+                let crafted_custom_item = getCraftFromHash(item_name) !== undefined ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) !== undefined ? getCustomFromHash(item_name) : undefined);
+                if (crafted_custom_item !== undefined) {
+                    nSlots = crafted_custom_item.statMap.get("slots");
+                } 
             }
             if (nSlots !== undefined) {
                 document.getElementById(armorType+"-slots").textContent = nSlots + " slots";
@@ -213,9 +154,10 @@ function init() {
 
     // Add change listener to update weapon slots.
     document.getElementById("weapon-choice").addEventListener("change", (event) => {
-        let item = itemMap.has(event.target.value) ? itemMap.get(event.target.value) : (getCraftFromHash(event.target.value) != undefined ? getCraftFromHash(event.target.value).statMap : undefined);
+        let item_name = event.target.value;
+        let item = itemMap.has(item_name) ? itemMap.get(item_name) : (getCraftFromHash(item_name) ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) ? getCustomFromHash(item_name) : undefined));
         if (item !== undefined && event.target.value !== "") {
-            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : (item.get ? item.get("slots") : 0))+ " slots";
+            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : (item.statMap !== undefined ? ( item.statMap.has("slots") ? item.statMap.get("slots") : 0): 0) )+ " slots";
         } else {
             document.getElementById("weapon-slots").textContent = "X slots";
         }
@@ -274,7 +216,7 @@ function decodeBuild(url_tag) {
             }
             info[1] = equipments.slice(27);
         }
-        if (version === "4") {
+        if (version === "4") { 
             let info_str = info[1];
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
@@ -290,7 +232,25 @@ function decodeBuild(url_tag) {
             }
             info[1] = info_str.slice(start_idx);
         }
-
+        if (version === "5") {
+            let info_str = info[1];
+            let start_idx = 0;
+            for (let i = 0; i < 9; ++i ) {
+                if (info_str.slice(start_idx,start_idx+3) === "CR-") {
+                    equipment[i] = info_str.slice(start_idx, start_idx+20);
+                    start_idx += 20;
+                } else if (info_str.slice(start_idx+3,start_idx+6) === "CI-") {
+                    let len = Base64.toInt(info_str.slice(start_idx,start_idx+3));
+                    equipment[i] = info_str.slice(start_idx+3,start_idx+3+len);
+                    start_idx += (3+len);
+                } else {
+                    let equipment_str = info_str.slice(start_idx, start_idx+3);
+                    equipment[i] = getItemNameFromID(Base64.toInt(equipment_str));
+                    start_idx += 3;
+                }
+            }
+            info[1] = info_str.slice(start_idx);
+        }
         if (version === "1") {
             let powder_info = info[1];
             powdering = parsePowdering(powder_info);
@@ -303,7 +263,7 @@ function decodeBuild(url_tag) {
 
             let powder_info = info[1].slice(10);
             powdering = parsePowdering(powder_info);
-        } else if (version === "3" || version === "4"){
+        } else if (version === "3" || version === "4" || version === "5"){
             level = Base64.toInt(info[1].slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
@@ -331,15 +291,19 @@ function decodeBuild(url_tag) {
 */
 function encodeBuild() {
     if (player_build) {
-        //@hpp update for 4_
-        let build_string = "4_";
+        let build_string = "5_";
         let crafted_idx = 0;
+        let custom_idx = 0;
         for (const item of player_build.items) {
-            if (item.get("crafted")) {
-                build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx])
-                crafted_idx += 1
-            }
-            else {
+            
+            if (item.get("custom")) {
+                let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
+                build_string += Base64.fromIntN(custom.length, 3) + custom;
+                custom_idx += 1;
+            } else if (item.get("crafted")) {
+                build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
+                crafted_idx += 1;
+            } else {
                 build_string += Base64.fromIntN(item.get("id"), 3);
             }
         }
@@ -381,7 +345,7 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
-        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
+        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
         for (const sName of specialNames) {
             for (let i = 1; i < 6; i++) {
                 let elem = document.getElementById(sName + "-" + i);
@@ -439,7 +403,7 @@ function calculateBuild(save_skp, skp){
                 else
                     errors.push(new IncorrectInput(errorederrors[0], "t6 or e3", powderInputs[i]));
             }
-            console.log("POWDERING: " + powdering);
+            //console.log("POWDERING: " + powdering);
             powderings.push(powdering);
         }
         
@@ -537,7 +501,7 @@ function calculateBuild(save_skp, skp){
 */
 function updateStats() {
     
-    let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Air_Prison"];
+    let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
     for (const sName of specialNames) {
         for (let i = 1; i < 6; i++) {
             let elem = document.getElementById(sName + "-" + i);
@@ -552,7 +516,7 @@ function updateStats() {
                         player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                    }  else if (name === "Air Prison") {
+                    }  else if (name === "Wind Prison") {
                         player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                         player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
                     }
@@ -635,7 +599,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
    
     let name = (buttonId).split("-")[0];
     let power = (buttonId).split("-")[1]; // [1, 5]
-    let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Air Prison"];
+    let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Wind Prison"];
     let powderSpecials = []; // [ [special, power], [special, power]]
     
 
@@ -651,7 +615,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
                     player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     //poison?
-                } else if (name === "Air Prison") {
+                } else if (name === "Wind Prison") {
                     player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[power-1];
                 }
@@ -669,7 +633,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
                             player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
-                        } else if (name === "Air Prison") {
+                        } else if (name === "Wind Prison") {
                             player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") - special.weaponSpecialEffects.get("Damage Boost")[i-1]);
                             player_build.externalStats.get("damageBonus")[4] -= special.weaponSpecialEffects.get("Damage Boost")[i-1];
                         }
@@ -702,7 +666,7 @@ function updatePowderSpecials(buttonId, recalcStats) {
                     player_build.externalStats.set("sdPct", player_build.externalStats.get("sdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("mdPct", player_build.externalStats.get("mdPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.set("poisonPct", player_build.externalStats.get("poisonPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                } else if (name === "Air Prison") {
+                } else if (name === "Wind Prison") {
                     player_build.externalStats.set("aDamPct", player_build.externalStats.get("aDamPct") + special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     player_build.externalStats.get("damageBonus")[4] += special.weaponSpecialEffects.get("Damage Boost")[power-1];
                 }
@@ -794,7 +758,8 @@ function calculateBuildStats() {
     for (const item of player_build.items) {
         let item_lvl;
         if (item.get("crafted")) {
-            item_lvl = parseInt(item.get("lvl").split("-")[0]);
+            //item_lvl = item.get("lvlLow") + "-" + item.get("lvl");
+            item_lvl = item.get("lvlLow");
         }
         else {
             item_lvl = item.get("lvl");
