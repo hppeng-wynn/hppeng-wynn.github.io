@@ -1709,6 +1709,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
 
         let boost = document.createElement("td");
         boost.textContent = eledefs[i];
+        boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("right");
         eledefElemRow.appendChild(boost);
 
