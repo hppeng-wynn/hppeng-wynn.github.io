@@ -361,7 +361,7 @@ function displayBuildStats(parent_id,build){
                     }
                 }
                 let id_val = stats.get(id);
-                if (reversedIDs.filter(e => e !== "atkTier").includes(id)) {
+                if (reversedIDs.includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (id === "poison" && id_val > 0) {
@@ -693,7 +693,6 @@ function displayExpandedItem(item, parent_id){
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
                 }
-                //let flipPosNeg = ["spRaw1","spRaw2","spRaw3","spRaw4","spPct1","spPct2","spPct3","spPct4"];
                 if(reversedIDs.includes(id)){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
@@ -1181,7 +1180,7 @@ function displayExpandedIngredient(ingred, parent_id) {
                         } else if (value <= 0) {
                             style = "negative";
                         }
-                        if(reversedIDs.filter(e => e !== "atkTier").includes(key)){
+                        if(reversedIDs.includes(key)){
                             style === "positive" ? style = "negative" : style = "positive"; 
                         }
     
@@ -1211,7 +1210,7 @@ function displayExpandedIngredient(ingred, parent_id) {
                         } else if (value <= 0) {
                             style = "negative";
                         }
-                        if(reversedIDs.filter(e => e !== "atkTier").includes(key)){
+                        if(reversedIDs.includes(key)){
                             style === "positive" ? style = "negative" : style = "positive"; 
                         }
                         max_elem.classList.add('right');
