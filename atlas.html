@@ -16,42 +16,14 @@
     <body class="all">
         <div class="center">
             <header class = "header nomarginp">
-                <div class = "headerleft">         
-                    <a href = "./" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnBuilder</div>
-                    </a>
-                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCrafter</div>
-                    </a>
-                    <a href = "./items.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnAtlas</div>
-                    </a>
-                    <a href = "./customizer.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/custom.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCustom</div>
-                    </a>
-                    <a href = "./map.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnGPS</div>
-                    </a>
+                <div class = "headerleft" id = "headerleft">  
                 </div>
-                <div class = "headercenter">
+                <div class = "headercenter" id = "headercenter">
                     <div >
                         <p class = "itemp" id = "header">Atlas???</p>
                     </div>
                 </div>    
-                <div class = "headerright">
-                    <button class = "atlas" onclick = "atlasClick()">
-                        <img src = "favicon.png"/>
-                    </button>
+                <div class = "headerright" id = "headerright">
                 </div>
             </header>
         </div>
@@ -61,7 +33,9 @@
         <div class = "center bodydiv" id = "bodydiv">
 
         </div>
-        
+
+        <script type="text/javascript" src="loadheader.js"></script>
+        <script type="text/javascript" src="icons.js"></script>        
         <script type="text/javascript" src="atlas.js"></script>
     </body>
 </html>
