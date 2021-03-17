@@ -12,41 +12,16 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" media="screen and (min-width: 1100px)" href="wide.css"/>
         <link rel="stylesheet" media="screen and (max-width: 1099px)" href="narrow.css"/>
-        <link rel="icon" href="./media/icons/builder.png">
+        <link rel="icon" href="./media/icons/new/builder.png">
         <link rel="manifest" href="manifest.json">
         <title>WynnBuilder</title>
     </head>
     <body class="all">
         <div class="center">
             <header class = "header nomarginp">
-                <div class = "headerleft">      
-                    <a href = "./" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
-                            <div class = "tooltiptext center">WynnBuilder</div>
-                        </img>
-                    </a>
-                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
-                            <div class = "tooltiptext center">WynnCrafter</div>    
-                        </img>
-                    </a>
-                    <a href = "./items.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
-                            <div class = "tooltiptext center">WynnAtlas</div>
-                        </img>
-                    </a>
-                    <a href = "./customizer.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/custom.png" class = "left linkoptions headericon">
-                            <div class = "tooltiptext center">WynnCustom</div>
-                        </img>
-                    </a>
-                    <a href = "./map.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnGPS</div>
-                    </a>
+                <div class = "headerleft" id = "headerleft">   
                 </div>
-                <div class = "headercenter">
+                <div class = "headercenter" id = "headercenter">
                     <div >
                         <p class = "itemp" id = "header">Wynn build calculator</p>
                         <p class="itemp" id="help">
@@ -54,8 +29,7 @@
                         </p>
                     </div>
                 </div>    
-                <div class = "headerright">
-
+                <div class = "headerright" id = "headerright">
                 </div>
             </header>
         </div>
@@ -1009,6 +983,8 @@
         </div>
 
         <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="loadheader.js"></script>
+        <script type="text/javascript" src="icons.js"></script>
         <script type="text/javascript" src="powders.js"></script>
         <script type="text/javascript" src="build_utils.js"></script>
         <script type="text/javascript" src="skillpoints.js"></script>

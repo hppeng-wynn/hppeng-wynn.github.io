@@ -36,9 +36,6 @@
     margin-bottom: 5px;
     padding-bottom: 5px;
 }
-.button {
-    padding: 2%;
-}
 .sticky-box {
     position: -webkit-sticky; /* Safari */
     position: sticky;

@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" media="screen and (min-width: 900px)" href="map-wide.css"/>
         <link rel="stylesheet" media="screen and (max-width: 899px)" href="map-narrow.css"/>
-        <link rel="icon" href="./media/icons/compass2.png">
+        <link rel="icon" href="./media/icons/new/compass2.png">
         <link rel="manifest" href="manifest.json">
 
         <!--Leaflet for map-->
@@ -29,40 +29,14 @@
     <body class="all">
         <div class="center">
             <header class = "header nomarginp">
-                <div class = "headerleft">         
-                    <a href = "./" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/builder.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnBuilder</div>
-                    </a>
-                    <a href = "./crafter.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/crafter.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCrafter</div>
-                    </a>
-                    <a href = "./items.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/searcher.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnAtlas</div>
-                    </a>
-                    <a href = "./customizer.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/custom.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnCustom</div>
-                    </a>
-                    <a href = "./map.html" class = "nomarginp iconlink tooltip">
-                        <img src = "/media/icons/compass.png" class = "left linkoptions headericon">
-                        </img>
-                        <div class = "tooltiptext center">WynnGPS</div>
-                    </a>
+                <div class = "headerleft" id = "headerleft">  
                 </div>
-                <div class = "headercenter">
+                <div class = "headercenter" id = "headercenter">
                     <div>
                         <p class = "itemp" id = "header">WynnGPS</p>
                     </div>
-                    
                 </div>    
-                <div class = "headerright">
+                <div class = "headerright" id = "headerright">
                     <p class = "center">Right click to place marker.</p>
                 </div>
             </header>
@@ -82,12 +56,12 @@
                     <p class = "nomargin" display = "grid-item-3">Z</p>
                     <p class = "nomargin" id = "coord-x" display = "grid-item-4"></p>
                     <p class = "nomargin" id = "coord-img" display = "grid-item-5">
-                        <img src = "/media/icons/compass2.png" alt style = "max-width:32px; max-height:32px"/>
+                        <img src = "/media/icons/new/compass2.png" alt style = "max-width:32px; max-height:32px"/>
                     </p>
                     <p class = "nomargin" id = "coord-z" display = "grid-item-6"></p>
                     <p class = "nomargin" id = "marker-coord-x" display = "none"></p>
                     <p class = "nomargin" id = "marker-coord-img" display = "none">
-                        <img src = "/media/icons/marker.png" alt style = "max-width:32px; max-height:32px"/>
+                        <img src = "/media/icons/new/marker.png" alt style = "max-width:32px; max-height:32px"/>
                     </p>
                     <p class = "nomargin" id = "marker-coord-z" display = "none"></p>
                 </div>
@@ -122,13 +96,13 @@
                         <div id = "resources-key" style = "display:none">
                             <p class = "left">Resource Key:</p>
                             <ul id = "resourcelist">
-                                <li><img src= "media/icons/Emeralds.png" style ="max-width:16px;max-height:16px" class = "Emeralds"/> Emeralds</li>
-                                <li><img src= "media/icons/Ore.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Ore</li>
-                                <li><img src= "media/icons/Wood.png" style ="max-width:16px;max-height:16px" class = "Wood"/> Wood</li>
-                                <li><img src= "media/icons/Crops.png" style ="max-width:16px;max-height:16px" class = "Crops"/> Crops</li>
-                                <li><img src= "media/icons/Fish.png" style ="max-width:16px;max-height:16px" class = "Fish"/> Fish</li>
-                                <li><img src= "media/icons/Chest.png" style ="max-width:16px;max-height:16px" class = "Wood"/> Storage</li>
-                                <li><img src= "media/icons/Gears.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Production</li>
+                                <li><img src= "media/icons/new/Emeralds.png" style ="max-width:16px;max-height:16px" class = "Emeralds"/> Emeralds</li>
+                                <li><img src= "media/icons/new/Ore.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Ore</li>
+                                <li><img src= "media/icons/new/Wood.png" style ="max-width:16px;max-height:16px" class = "Wood"/> Wood</li>
+                                <li><img src= "media/icons/new/Crops.png" style ="max-width:16px;max-height:16px" class = "Crops"/> Crops</li>
+                                <li><img src= "media/icons/new/Fish.png" style ="max-width:16px;max-height:16px" class = "Fish"/> Fish</li>
+                                <li><img src= "media/icons/new/Chest.png" style ="max-width:16px;max-height:16px" class = "Wood"/> Storage</li>
+                                <li><img src= "media/icons/new/Gears.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Production</li>
                                 <li>Double image means double generation</li>
 
                             </ul>
@@ -142,6 +116,8 @@
         </div>
 
         <script type = "text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="loadheader.js"></script>
+        <script type="text/javascript" src="icons.js"></script>
         <script type = "text/javascript" src="load_map.js"></script> 
         <script type = "text/javascript" src="map.js"></script> 
     </body>

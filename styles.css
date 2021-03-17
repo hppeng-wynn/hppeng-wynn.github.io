@@ -398,8 +398,9 @@ button.toggleOn:hover {
 }
 
 .funnynumber {
-    background-image: linear-gradient(to left, #f5f, #a0a, #5ff, #5f5, #ff5, #fa0, #a00);   -webkit-background-clip: text;
+    background-image: linear-gradient(to left, #f5f, #a0a, #5ff, #5f5, #ff5, #fa0, #a00);  
     color: transparent;
+    -webkit-background-clip: text;
     display: inline-block;
     text-align: center;
     

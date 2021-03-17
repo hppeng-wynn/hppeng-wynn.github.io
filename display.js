@@ -633,7 +633,7 @@ function displayExpandedItem(item, parent_id){
                         active_elem.appendChild(p_elem);
                         let img = document.createElement("img");
                         if (item && item.has("type")) {
-                            img.src = "/media/items/generic-" + item.get("type") + ".png";
+                            img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
                             img.alt = item.get("type");
                             img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
                             let bckgrd = document.createElement("p");

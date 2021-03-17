@@ -16,8 +16,11 @@ const tiers = ["Normal", "Unique", "Rare", "Legendary", "Fabled", "Mythic", "Set
 const types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(consumableTypes).map(x => x.substring(0,1).toUpperCase() + x.substring(1));
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 
+
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
+
+
 
 function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);
