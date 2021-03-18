@@ -81,10 +81,11 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
             neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
             neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
         }
-        damages[0] = neutralRemainingRaw;
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
     }
+
+    damages[0] = neutralRemainingRaw;
 
     let damageMult = damageMultiplier;
     let melee = false;
