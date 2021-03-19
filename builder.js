@@ -91,6 +91,10 @@ let powderInputs = [
 function populateItemList(type) {
     let item_list = document.getElementById(type+"-items");
     for (const item of itemLists.get(type)) {
+        let item_obj = itemMap.get(item);
+        if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+            continue;
+        }
         let el = document.createElement("option");
         el.value = item;
         item_list.appendChild(el);
@@ -132,6 +136,10 @@ function init() {
     let ring1_list = document.getElementById("ring1-items");
     let ring2_list = document.getElementById("ring2-items");
     for (const ring of itemLists.get("ring")) {
+        let item_obj = itemMap.get(ring);
+        if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+            continue;
+        }
         let el1 = document.createElement("option");
         let el2 = document.createElement("option");
         el1.value = ring;
@@ -146,6 +154,10 @@ function init() {
     let weapon_list = document.getElementById("weapon-items");
     for (const weaponType of weaponTypes) {
         for (const weapon of itemLists.get(weaponType)) {
+            let item_obj = itemMap.get(weapon);
+            if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+                continue;
+            }
             let el = document.createElement("option");
             el.value = weapon;
             weapon_list.appendChild(el);

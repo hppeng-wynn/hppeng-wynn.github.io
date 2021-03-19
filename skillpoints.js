@@ -52,8 +52,8 @@ function calculate_skillpoints(equipment, weapon) {
         let total = 0;
         for (let i = 0; i < 5; i++) {
             if (item.get("skillpoints")[i] < 0 && skillpoint_min[i]) {
-                unadjusted = skillpoints[i] + item.get("skillpoints")[i];
-                delta = skillpoint_min[i] - unadjusted;
+                const unadjusted = skillpoints[i] + item.get("skillpoints")[i];
+                const delta = skillpoint_min[i] - unadjusted;
                 if (delta > 0) {
                     applied[i] += delta;
                     total += delta;
@@ -78,10 +78,14 @@ function calculate_skillpoints(equipment, weapon) {
                 const new_bonus = sets[setName].bonuses[setCount];
                 //let skp_order = ["str","dex","int","def","agi"];
                 for (const i in skp_order) {
-                    const delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);
-                    if (delta < 0 && skillpoint_min[i]) {
-                        applied[i] -= delta;
-                        total -= delta;
+                    const set_delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);
+                    if (set_delta < 0 && skillpoint_min[i]) {
+                        const unadjusted = skillpoints[i] + set_delta;
+                        const delta = skillpoint_min[i] - unadjusted;
+                        if (delta > 0) {
+                            applied[i] += delta;
+                            total += delta;
+                        }
                     }
                 }
             }
