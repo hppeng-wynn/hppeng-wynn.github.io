@@ -10,7 +10,8 @@ function calculate_skillpoints(equipment, weapon) {
         if (item.get("crafted")) {
             crafted.push(item);
         }
-        else if (item.get("reqs").every(x => x === 0)) {
+        else if (item.get("reqs").every(x => x === 0) && item.get("skillpoints").every(x => x >= 0)) {
+            // All reqless item without -skillpoints.
             fixed.push(item);
         }
         // TODO hack: We will treat ALL set items as unsafe :(
@@ -60,7 +61,7 @@ function calculate_skillpoints(equipment, weapon) {
                 }
             }
             if (item.get("reqs")[i] == 0) continue;
-            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i] + item.get("skillpoints")[i]);
+            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i]);// + item.get("skillpoints")[i]);
             const req = item.get("reqs")[i];
             const cur = skillpoints[i];
             if (req > cur) {
