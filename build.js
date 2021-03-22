@@ -120,7 +120,7 @@ class Build{
                 if (helmet.statMap.get("type") !== "helmet") {
                     throw new Error("Not a helmet");
                 }
-                this.powders[0] = this.powders[0].slice(0,helmet.statMap.slots); 
+                this.powders[0] = this.powders[0].slice(0,helmet.statMap.get("slots")); 
                 helmet.statMap.set("powders",this.powders[0].slice());
                 helmet.applyPowders();
                 this.helmet = helmet.statMap;
@@ -148,7 +148,7 @@ class Build{
                 if (chestplate.statMap.get("type") !== "chestplate") {
                     throw new Error("Not a chestplate");
                 }
-                this.powders[1] = this.powders[1].slice(0,chestplate.statMap.slots);
+                this.powders[1] = this.powders[1].slice(0,chestplate.statMap.get("slots"));
                 chestplate.statMap.set("powders",this.powders[1].slice());
                 chestplate.applyPowders();
                 this.chestplate = chestplate.statMap;
@@ -174,7 +174,7 @@ class Build{
                 if (leggings.statMap.get("type") !== "leggings") {
                     throw new Error("Not a leggings");
                 }
-                this.powders[2] = this.powders[2].slice(0,leggings.statMap.slots); 
+                this.powders[2] = this.powders[2].slice(0,leggings.statMap.get("slots")); 
                 leggings.statMap.set("powders",this.powders[2].slice());
                 leggings.applyPowders();
                 this.leggings = leggings.statMap;
@@ -200,7 +200,7 @@ class Build{
                 if (boots.statMap.get("type") !== "boots") {
                     throw new Error("Not a boots");
                 }
-                this.powders[3] = this.powders[3].slice(0,boots.statMap.slots); 
+                this.powders[3] = this.powders[3].slice(0,boots.statMap.get("slots")); 
                 boots.statMap.set("powders",this.powders[3].slice());
                 boots.applyPowders();
                 this.boots = boots.statMap;
@@ -322,7 +322,7 @@ class Build{
                 } else if (this.weapon.get("crafted")) { //customs can also be crafted, but custom takes priority.
                     this.craftedItems.push(weapon);
                 }
-                this.powders[4] = this.powders[4].slice(0,this.weapon.slots); 
+                this.powders[4] = this.powders[4].slice(0,this.weapon.get("slots")); 
                 this.weapon.set("powders",this.powders[4].slice());
                 document.getElementsByClassName("powder-specials")[0].style.display = "grid";
             } catch (Error) {

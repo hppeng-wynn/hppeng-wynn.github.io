@@ -10,7 +10,8 @@ function calculate_skillpoints(equipment, weapon) {
         if (item.get("crafted")) {
             crafted.push(item);
         }
-        else if (item.get("reqs").every(x => x === 0)) {
+        else if (item.get("reqs").every(x => x === 0) && item.get("skillpoints").every(x => x >= 0)) {
+            // All reqless item without -skillpoints.
             fixed.push(item);
         }
         // TODO hack: We will treat ALL set items as unsafe :(
@@ -52,15 +53,15 @@ function calculate_skillpoints(equipment, weapon) {
         let total = 0;
         for (let i = 0; i < 5; i++) {
             if (item.get("skillpoints")[i] < 0 && skillpoint_min[i]) {
-                unadjusted = skillpoints[i] + item.get("skillpoints")[i];
-                delta = skillpoint_min[i] - unadjusted;
+                const unadjusted = skillpoints[i] + item.get("skillpoints")[i];
+                const delta = skillpoint_min[i] - unadjusted;
                 if (delta > 0) {
                     applied[i] += delta;
                     total += delta;
                 }
             }
             if (item.get("reqs")[i] == 0) continue;
-            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i] + item.get("skillpoints")[i]);
+            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i]);// + item.get("skillpoints")[i]);
             const req = item.get("reqs")[i];
             const cur = skillpoints[i];
             if (req > cur) {
@@ -78,10 +79,14 @@ function calculate_skillpoints(equipment, weapon) {
                 const new_bonus = sets[setName].bonuses[setCount];
                 //let skp_order = ["str","dex","int","def","agi"];
                 for (const i in skp_order) {
-                    const delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);
-                    if (delta < 0 && skillpoint_min[i]) {
-                        applied[i] -= delta;
-                        total -= delta;
+                    const set_delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);
+                    if (set_delta < 0 && skillpoint_min[i]) {
+                        const unadjusted = skillpoints[i] + set_delta;
+                        const delta = skillpoint_min[i] - unadjusted;
+                        if (delta > 0) {
+                            applied[i] += delta;
+                            total += delta;
+                        }
                     }
                 }
             }

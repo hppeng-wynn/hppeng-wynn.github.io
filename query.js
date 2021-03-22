@@ -4,6 +4,9 @@ class NameQuery {
     constructor(string) { this.queryString = string.toLowerCase(); }
 
     filter(item) {
+        if (item.get("restrict") && item.get("restrict") === "DEPRECATED") {
+            return false;
+        }
         return (item.get("displayName").toLowerCase().includes(this.queryString));
     }
 
