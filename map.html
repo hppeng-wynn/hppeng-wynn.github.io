@@ -70,7 +70,7 @@
                     <button class = "left" id = "claims-button" onclick = "toggleButton('claims-button'); toggleClaims()">Show Claims</button>
                     <button class = "left" id = "routes-button" onclick = "toggleButton('routes-button'); toggleRoutes()">Show Routes</button>
                     <button class = "left" id = "resources-button" onclick = "toggleButton('resources-button'); toggleResources()">Show Resources</button>
-                    <!--button id = "merchants-button" onclick = "toggleButton('merchants-button'); toggleMerchants()">Show Merchants</button-->
+                    <button class = "left" id = "locations-button" onclick = "toggleButton('locations-button'); toggleLocations()">Show Locations</button>
                     <button class = "left" id = "pull-button" onclick = "refreshData()">Refresh Data</button>
                     <p class = "left" style = "color:red">Do NOT refresh too often.</p>
                 </div>
@@ -105,6 +105,14 @@
                                 <li><img src= "media/icons/new/Gears.png" style ="max-width:16px;max-height:16px" class = "Ore"/> Production</li>
                                 <li>Double image means double generation</li>
 
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div id = "locations-key" style = "display:none">
+                            <p class = "left">Locations Key:</p>
+                            <ul id = "locationlist">
+                                
                             </ul>
                         </div>
                     </td>

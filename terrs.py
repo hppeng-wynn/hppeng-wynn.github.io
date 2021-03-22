@@ -29,8 +29,8 @@ with open("terrs_clean.json", "w") as outfile:
 '''with open("terrs.json", "r") as infile:
     data = json.load(infile)["territories"]'''
 
-with open("terrs_clean.json", "r") as infile:
-    newdata = json.load(infile)
+'''with open("terrs_clean.json", "r") as infile:
+    newdata = json.load(infile)'''
 
 '''for t in newdata:
     del newdata[t]["attacker"]
@@ -46,8 +46,18 @@ for t in data:
     data[t]["doubleemeralds"] = response[t]["DoubleEmerald"]
     data[t]["doubleresource"] = response[t]["DoubleResource"]'''
 
-with open("terrs_clean.json", "w") as outfile:
+'''with open("terrs_clean.json", "w") as outfile:
     json.dump(newdata,outfile,indent=2) 
 
 with open("terrs_compress.json", "w") as outfile:
-    json.dump(newdata,outfile)
+    json.dump(newdata,outfile)'''
+
+response = requests.get('https://api.wynncraft.com/public_api.php?action=mapLocations').json()
+del response["request"]
+
+with open("maploc.json", "w") as outfile:
+    json.dump(response, outfile)
+with open("maploc_clean.json", "w") as outfile:
+    json.dump(response, outfile, indent = 2)
+with open("maploc_compress.json", "w") as outfile:
+    json.dump(response, outfile)

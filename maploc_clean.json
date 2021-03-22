@@ -1,0 +1,8922 @@
+{
+  "locations": [
+    {
+      "name": "Decrepit Sewers Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": -921,
+      "y": 64,
+      "z": -1888
+    },
+    {
+      "name": "Infested Pit Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": -282,
+      "y": 35,
+      "z": -1829
+    },
+    {
+      "name": "Lost Sanctuary Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": -268,
+      "y": 64,
+      "z": -1051
+    },
+    {
+      "name": "Underworld Crypt Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": 288,
+      "y": 16,
+      "z": -1952
+    },
+    {
+      "name": "Sand-Swept Tomb Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": 1428,
+      "y": 95,
+      "z": -1830
+    },
+    {
+      "name": "Ice Barrows Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": 175,
+      "y": 76,
+      "z": -671
+    },
+    {
+      "name": "Undergrowth Ruins Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": -635,
+      "y": 59,
+      "z": -864
+    },
+    {
+      "name": "Galleon's Graveyard Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": -582,
+      "y": 34,
+      "z": -3496
+    },
+    {
+      "name": "Fallen Factory Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": -1655,
+      "y": 81,
+      "z": -2603
+    },
+    {
+      "name": "Eldritch Outlook Dungeon",
+      "icon": "Content_Dungeon.png",
+      "x": 1285,
+      "y": 87,
+      "z": -753
+    },
+    {
+      "name": "Corrupted Decrepit Sewers Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 3554,
+      "y": 61,
+      "z": 2373
+    },
+    {
+      "name": "Corrupted Infested Pit Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 3435,
+      "y": 35,
+      "z": 3510
+    },
+    {
+      "name": "Corrupted Lost Sanctuary Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 3028.5,
+      "y": 80,
+      "z": 6322.5
+    },
+    {
+      "name": "Corrupted Underworld Crypt Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 3306,
+      "y": 16,
+      "z": 5344
+    },
+    {
+      "name": "Corrupted Sand-Swept Tomb Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 3320,
+      "y": 33,
+      "z": 4184
+    },
+    {
+      "name": "Corrupted Ice Barrows Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 2952.5,
+      "y": 74,
+      "z": 8111.5
+    },
+    {
+      "name": "Corrupted Undergrowth Ruins Dungeon",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": 2861,
+      "y": 81,
+      "z": 8990
+    },
+    {
+      "name": "A Grave Mistake",
+      "icon": "Content_Quest.png",
+      "x": 158,
+      "y": 79,
+      "z": -374
+    },
+    {
+      "name": "A Marauder's Dues",
+      "icon": "Content_Quest.png",
+      "x": 437,
+      "y": 77,
+      "z": -5056
+    },
+    {
+      "name": "A Sandy Scandal",
+      "icon": "Content_Quest.png",
+      "x": 976,
+      "y": 83,
+      "z": -1963
+    },
+    {
+      "name": "Acquiring Credentials",
+      "icon": "Content_Quest.png",
+      "x": -96,
+      "y": 154,
+      "z": -6045
+    },
+    {
+      "name": "Aldorei's Secret Part I",
+      "icon": "Content_Quest.png",
+      "x": -462,
+      "y": 132,
+      "z": -4460
+    },
+    {
+      "name": "Aldorei's Secret Part II",
+      "icon": "Content_Quest.png",
+      "x": -139,
+      "y": 92,
+      "z": -4445
+    },
+    {
+      "name": "An Iron Heart Part I",
+      "icon": "Content_Quest.png",
+      "x": -1613,
+      "y": 51,
+      "z": -4964
+    },
+    {
+      "name": "An Iron Heart Part II",
+      "icon": "Content_Quest.png",
+      "x": -1745,
+      "y": 66,
+      "z": -5479
+    },
+    {
+      "name": "Arachnids' Ascent",
+      "icon": "Content_Quest.png",
+      "x": -192,
+      "y": 44,
+      "z": -1822
+    },
+    {
+      "name": "Beyond the Grave",
+      "icon": "Content_Quest.png",
+      "x": 499,
+      "y": 155,
+      "z": -4778
+    },
+    {
+      "name": "Blazing Retribution",
+      "icon": "Content_Quest.png",
+      "x": -1844,
+      "y": 55,
+      "z": -4951
+    },
+    {
+      "name": "Canyon Condor",
+      "icon": "Content_Quest.png",
+      "x": 1352,
+      "y": 30,
+      "z": -1301
+    },
+    {
+      "name": "Clearing the Camps",
+      "icon": "Content_Quest.png",
+      "x": -1991,
+      "y": 34,
+      "z": -4658
+    },
+    {
+      "name": "Corrupted Betrayal",
+      "icon": "Content_Quest.png",
+      "x": -641,
+      "y": 59,
+      "z": -872
+    },
+    {
+      "name": "Cowfusion",
+      "icon": "Content_Quest.png",
+      "x": 768,
+      "y": 45,
+      "z": -5425
+    },
+    {
+      "name": "Craftmas Chaos",
+      "icon": "Content_Quest.png",
+      "x": 164,
+      "y": 64,
+      "z": -3226
+    },
+    {
+      "name": "Creeper Infiltration",
+      "icon": "Content_Quest.png",
+      "x": -609,
+      "y": 89,
+      "z": -1432
+    },
+    {
+      "name": "Death Whistle",
+      "icon": "Content_Quest.png",
+      "x": -2103,
+      "y": 59,
+      "z": -5427
+    },
+    {
+      "name": "Deja Vu",
+      "icon": "Content_Quest.png",
+      "x": -449,
+      "y": 72,
+      "z": -1153
+    },
+    {
+      "name": "Desperate Metal",
+      "icon": "Content_Quest.png",
+      "x": -1672,
+      "y": 38,
+      "z": -2083
+    },
+    {
+      "name": "Dwarves and Doguns Part I",
+      "icon": "Content_Quest.png",
+      "x": 1021,
+      "y": 18,
+      "z": -5149
+    },
+    {
+      "name": "Dwarves and Doguns Part II",
+      "icon": "Content_Quest.png",
+      "x": 3256,
+      "y": 6,
+      "z": -5627
+    },
+    {
+      "name": "Dwarves and Doguns Part III",
+      "icon": "Content_Quest.png",
+      "x": 1436,
+      "y": 134,
+      "z": -5388
+    },
+    {
+      "name": "Dwarves and Doguns Part IV",
+      "icon": "Content_Quest.png",
+      "x": 3258,
+      "y": 4,
+      "z": -5743
+    },
+    {
+      "name": "Dwelling Walls",
+      "icon": "Content_Quest.png",
+      "x": 201,
+      "y": 38,
+      "z": -2173
+    },
+    {
+      "name": "Elemental Exercise",
+      "icon": "Content_Quest.png",
+      "x": -80,
+      "y": 67,
+      "z": -1391
+    },
+    {
+      "name": "Enter the Dojo",
+      "icon": "Content_Quest.png",
+      "x": 495,
+      "y": 109,
+      "z": -5571
+    },
+    {
+      "name": "Fallen Delivery",
+      "icon": "Content_Quest.png",
+      "x": 65,
+      "y": 42,
+      "z": -4844
+    },
+    {
+      "name": "Fantastic Voyage",
+      "icon": "Content_Quest.png",
+      "x": 1304,
+      "y": 35,
+      "z": -4043
+    },
+    {
+      "name": "Fate of the Fallen",
+      "icon": "Content_Quest.png",
+      "x": 165,
+      "y": 74,
+      "z": -675
+    },
+    {
+      "name": "Flight in Distress",
+      "icon": "Content_Quest.png",
+      "x": -172,
+      "y": 108,
+      "z": -4946
+    },
+    {
+      "name": "From the Bottom",
+      "icon": "Content_Quest.png",
+      "x": 191,
+      "y": 6,
+      "z": -5236
+    },
+    {
+      "name": "From the Mountains",
+      "icon": "Content_Quest.png",
+      "x": -1366,
+      "y": 42,
+      "z": -4543
+    },
+    {
+      "name": "General's Orders",
+      "icon": "Content_Quest.png",
+      "x": 118,
+      "y": 49,
+      "z": -5435
+    },
+    {
+      "name": "Grand Youth",
+      "icon": "Content_Quest.png",
+      "x": -550,
+      "y": 61,
+      "z": -747
+    },
+    {
+      "name": "Green Gloop",
+      "icon": "Content_Quest.png",
+      "x": 1172,
+      "y": 77,
+      "z": -2027
+    },
+    {
+      "name": "Macabre Masquerade ''Hallowynn 2014''",
+      "icon": "Content_Quest.png",
+      "x": -328,
+      "y": 61,
+      "z": -1973
+    },
+    {
+      "name": "Haven Antiquity",
+      "icon": "Content_Quest.png",
+      "x": 770,
+      "y": 36,
+      "z": -3881
+    },
+    {
+      "name": "Realm of Light III - A Headless History",
+      "icon": "Content_Quest.png",
+      "x": -1096,
+      "y": 42,
+      "z": -5384
+    },
+    {
+      "name": "Heart of Llevigar",
+      "icon": "Content_Quest.png",
+      "x": -1872,
+      "y": 55,
+      "z": -4593
+    },
+    {
+      "name": "Infested Plants",
+      "icon": "Content_Quest.png",
+      "x": -316,
+      "y": 72,
+      "z": -1598
+    },
+    {
+      "name": "King's Recruit",
+      "icon": "Content_Quest.png",
+      "x": -939,
+      "y": 67,
+      "z": -1567
+    },
+    {
+      "name": "Lazarus Pit",
+      "icon": "Content_Quest.png",
+      "x": -1139,
+      "y": 44,
+      "z": -5490
+    },
+    {
+      "name": "Lost in the Jungle",
+      "icon": "Content_Quest.png",
+      "x": -753,
+      "y": 79,
+      "z": -663
+    },
+    {
+      "name": "Lost Royalty",
+      "icon": "Content_Quest.png",
+      "x": -848,
+      "y": 85,
+      "z": -875
+    },
+    {
+      "name": "Lost Soles",
+      "icon": "Content_Quest.png",
+      "x": -915,
+      "y": 33,
+      "z": -750
+    },
+    {
+      "name": "The Maiden Tower",
+      "icon": "Content_Quest.png",
+      "x": -2166,
+      "y": 56,
+      "z": -5122
+    },
+    {
+      "name": "Master Piece",
+      "icon": "Content_Quest.png",
+      "x": -1802,
+      "y": 55,
+      "z": -5190
+    },
+    {
+      "name": "Meaningful Holiday",
+      "icon": "Content_Quest.png",
+      "x": 930,
+      "y": 75,
+      "z": -1903
+    },
+    {
+      "name": "Memory Paranoia",
+      "icon": "Content_Quest.png",
+      "x": -1192,
+      "y": 46,
+      "z": -5198
+    },
+    {
+      "name": "Mixed Feelings",
+      "icon": "Content_Quest.png",
+      "x": -1413,
+      "y": 46,
+      "z": -2920
+    },
+    {
+      "name": "Murder Mystery",
+      "icon": "Content_Quest.png",
+      "x": -601,
+      "y": 45,
+      "z": -4963
+    },
+    {
+      "name": "One Thousand Meters Under",
+      "icon": "Content_Quest.png",
+      "x": 1108,
+      "y": 107,
+      "z": -4555
+    },
+    {
+      "name": "Out of my Mind",
+      "icon": "Content_Quest.png",
+      "x": -860,
+      "y": 93,
+      "z": -961
+    },
+    {
+      "name": "Pirate's Trove",
+      "icon": "Content_Quest.png",
+      "x": -1938,
+      "y": 38,
+      "z": -4260
+    },
+    {
+      "name": "Pit of the Dead",
+      "icon": "Content_Quest.png",
+      "x": 345,
+      "y": 59,
+      "z": -1917
+    },
+    {
+      "name": "Poisoning the Pest",
+      "icon": "Content_Quest.png",
+      "x": -748,
+      "y": 67,
+      "z": -1663
+    },
+    {
+      "name": "Potion Making",
+      "icon": "Content_Quest.png",
+      "x": 617,
+      "y": 67,
+      "z": -1612
+    },
+    {
+      "name": "Purple and Blue",
+      "icon": "Content_Quest.png",
+      "x": -239,
+      "y": 34,
+      "z": -5224
+    },
+    {
+      "name": "Recipe For Disaster",
+      "icon": "Content_Quest.png",
+      "x": 949,
+      "y": 129,
+      "z": -4475
+    },
+    {
+      "name": "Reclaiming the House",
+      "icon": "Content_Quest.png",
+      "x": -1388,
+      "y": 45,
+      "z": -5222
+    },
+    {
+      "name": "Recover the Past",
+      "icon": "Content_Quest.png",
+      "x": 103,
+      "y": 90,
+      "z": -1200
+    },
+    {
+      "name": "Redbeard's Booty",
+      "icon": "Content_Quest.png",
+      "x": -608,
+      "y": 40,
+      "z": -3546
+    },
+    {
+      "name": "Rise of the Quartron",
+      "icon": "Content_Quest.png",
+      "x": -1663,
+      "y": 46,
+      "z": -4376
+    },
+    {
+      "name": "Royal Trials",
+      "icon": "Content_Quest.png",
+      "x": 1476,
+      "y": 84,
+      "z": -4336
+    },
+    {
+      "name": "???",
+      "icon": "Content_Quest.png",
+      "x": -183,
+      "y": 6,
+      "z": -6076
+    },
+    {
+      "name": "The Sewers of Ragni",
+      "icon": "Content_Quest.png",
+      "x": -890,
+      "y": 60,
+      "z": -1874
+    },
+    {
+      "name": "Shattered Minds",
+      "icon": "Content_Quest.png",
+      "x": -1058,
+      "y": 44,
+      "z": -5006
+    },
+    {
+      "name": "The Belly of the Beast",
+      "icon": "Content_Quest.png",
+      "x": 50,
+      "y": 15,
+      "z": -5242
+    },
+    {
+      "name": "The Bigger Picture",
+      "icon": "Content_Quest.png",
+      "x": -205,
+      "y": 42,
+      "z": -4308
+    },
+    {
+      "name": "The Canary Calls",
+      "icon": "Content_Quest.png",
+      "x": 676,
+      "y": 78,
+      "z": -5020
+    },
+    {
+      "name": "The Canyon Guides",
+      "icon": "Content_Quest.png",
+      "x": 444,
+      "y": 104,
+      "z": -4805
+    },
+    {
+      "name": "The Corrupted Village",
+      "icon": "Content_Quest.png",
+      "x": 322,
+      "y": 78,
+      "z": -1089
+    },
+    {
+      "name": "The Dark Descent",
+      "icon": "Content_Quest.png",
+      "x": 227,
+      "y": 45,
+      "z": -1958
+    },
+    {
+      "name": "The Envoy Part I",
+      "icon": "Content_Quest.png",
+      "x": 112,
+      "y": 66,
+      "z": -3173
+    },
+    {
+      "name": "The Envoy Part II",
+      "icon": "Content_Quest.png",
+      "x": -1571,
+      "y": 68,
+      "z": -2876
+    },
+    {
+      "name": "The Fortuneteller",
+      "icon": "Content_Quest.png",
+      "x": 746,
+      "y": 150,
+      "z": -4468
+    },
+    {
+      "name": "The Hero of Gavel",
+      "icon": "Content_Quest.png",
+      "x": 1030,
+      "y": 112,
+      "z": -4545
+    },
+    {
+      "name": "The Hidden City",
+      "icon": "Content_Quest.png",
+      "x": 661,
+      "y": 78,
+      "z": -5070
+    },
+    {
+      "name": "The Hunger of Gerts Part 1",
+      "icon": "Content_Quest.png",
+      "x": -35,
+      "y": 68,
+      "z": -5413
+    },
+    {
+      "name": "The Hunger of Gerts Part 2",
+      "icon": "Content_Quest.png",
+      "x": -141,
+      "y": 82,
+      "z": -5607
+    },
+    {
+      "name": "The Lost",
+      "icon": "Content_Quest.png",
+      "x": 437,
+      "y": 73,
+      "z": -4386
+    },
+    {
+      "name": "The Mercenary",
+      "icon": "Content_Quest.png",
+      "x": 184,
+      "y": 54,
+      "z": -2142
+    },
+    {
+      "name": "The Order of the Grook",
+      "icon": "Content_Quest.png",
+      "x": 940,
+      "y": 77,
+      "z": -2866
+    },
+    {
+      "name": "The Qira Hive",
+      "icon": "Content_Quest.png",
+      "x": 372,
+      "y": 64,
+      "z": -5501
+    },
+    {
+      "name": "The Shadow of the Beast",
+      "icon": "Content_Quest.png",
+      "x": -1483,
+      "y": 47,
+      "z": -5218
+    },
+    {
+      "name": "The Thanos Vaults",
+      "icon": "Content_Quest.png",
+      "x": 162,
+      "y": 6,
+      "z": -5176
+    },
+    {
+      "name": "The Ultimate Weapon",
+      "icon": "Content_Quest.png",
+      "x": -987,
+      "y": 42,
+      "z": -4593
+    },
+    {
+      "name": "Tower of Ascension",
+      "icon": "Content_Quest.png",
+      "x": -350,
+      "y": 14,
+      "z": -389
+    },
+    {
+      "name": "Tribal Aggression",
+      "icon": "Content_Quest.png",
+      "x": 1077,
+      "y": 84,
+      "z": -1613
+    },
+    {
+      "name": "Troubled Tribesmen",
+      "icon": "Content_Quest.png",
+      "x": -545,
+      "y": 52,
+      "z": -313
+    },
+    {
+      "name": "Tunnel Trouble",
+      "icon": "Content_Quest.png",
+      "x": 380,
+      "y": 68,
+      "z": -1570
+    },
+    {
+      "name": "Underice\u00c0",
+      "icon": "Content_Quest.png",
+      "x": 157,
+      "y": 73,
+      "z": -812
+    },
+    {
+      "name": "WynnExcavation Site A",
+      "icon": "Content_Quest.png",
+      "x": 1082,
+      "y": 69,
+      "z": -1799
+    },
+    {
+      "name": "WynnExcavation Site B",
+      "icon": "Content_Quest.png",
+      "x": 39,
+      "y": 62,
+      "z": -526
+    },
+    {
+      "name": "WynnExcavation Site C",
+      "icon": "Content_Quest.png",
+      "x": -1067,
+      "y": 42,
+      "z": -3740
+    },
+    {
+      "name": "WynnExcavation Site D",
+      "icon": "Content_Quest.png",
+      "x": -848,
+      "y": 98,
+      "z": -789
+    },
+    {
+      "name": "Zhight Island",
+      "icon": "Content_Quest.png",
+      "x": -542,
+      "y": 38,
+      "z": -2755
+    },
+    {
+      "name": "Mini-Quest - Slay Mooshrooms",
+      "icon": "Content_Miniquest.png",
+      "x": 582,
+      "y": 67,
+      "z": -1588
+    },
+    {
+      "name": "Mini-Quest - Gather Barley",
+      "icon": "Content_Miniquest.png",
+      "x": -539,
+      "y": 102,
+      "z": -1306
+    },
+    {
+      "name": "Mini-Quest - Gather Birch Logs",
+      "icon": "Content_Miniquest.png",
+      "x": 182,
+      "y": 68,
+      "z": -1597
+    },
+    {
+      "name": "Mini-Quest - Gather Granite",
+      "icon": "Content_Miniquest.png",
+      "x": -879,
+      "y": 112,
+      "z": -1330
+    },
+    {
+      "name": "Mini-Quest - Gather Trout",
+      "icon": "Content_Miniquest.png",
+      "x": 53,
+      "y": 60,
+      "z": -1547
+    },
+    {
+      "name": "Mini-Quest - Gather Gold",
+      "icon": "Content_Miniquest.png",
+      "x": 424,
+      "y": 67,
+      "z": -1275
+    },
+    {
+      "name": "Mini-Quest - Gather Oats",
+      "icon": "Content_Miniquest.png",
+      "x": -48,
+      "y": 37,
+      "z": -2500
+    },
+    {
+      "name": "Mini-Quest - Gather Salmon",
+      "icon": "Content_Miniquest.png",
+      "x": 220,
+      "y": 35,
+      "z": -2131
+    },
+    {
+      "name": "Mini-Quest - Gather Willow Logs",
+      "icon": "Content_Miniquest.png",
+      "x": 16,
+      "y": 38,
+      "z": -2203
+    },
+    {
+      "name": "Mini-Quest - Slay Skeletons",
+      "icon": "Content_Miniquest.png",
+      "x": 202,
+      "y": 61,
+      "z": -1787
+    },
+    {
+      "name": "Mini-Quest - Gather Gold II",
+      "icon": "Content_Miniquest.png",
+      "x": 833,
+      "y": 39,
+      "z": -1282
+    },
+    {
+      "name": "Mini-Quest - Gather Oats II",
+      "icon": "Content_Miniquest.png",
+      "x": 788,
+      "y": 72,
+      "z": -1559
+    },
+    {
+      "name": "Mini-Quest - Gather Salmon II",
+      "icon": "Content_Miniquest.png",
+      "x": 371,
+      "y": 36,
+      "z": -2114
+    },
+    {
+      "name": "Mini-Quest - Gather Willow Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": 223,
+      "y": 44,
+      "z": -2047
+    },
+    {
+      "name": "Mini-Quest - Slay Scarabs",
+      "icon": "Content_Miniquest.png",
+      "x": 982,
+      "y": 70,
+      "z": -2073
+    },
+    {
+      "name": "Mini-Quest - Gather Acacia Logs",
+      "icon": "Content_Miniquest.png",
+      "x": 630,
+      "y": 69,
+      "z": -1978
+    },
+    {
+      "name": "Mini-Quest - Gather Carp",
+      "icon": "Content_Miniquest.png",
+      "x": 1317,
+      "y": 75,
+      "z": -1838
+    },
+    {
+      "name": "Mini-Quest - Gather Malt",
+      "icon": "Content_Miniquest.png",
+      "x": 1280,
+      "y": 78,
+      "z": -1981
+    },
+    {
+      "name": "Mini-Quest - Gather Sandstone",
+      "icon": "Content_Miniquest.png",
+      "x": 1162,
+      "y": 76,
+      "z": -1849
+    },
+    {
+      "name": "Mini-Quest - Slay Coyotes",
+      "icon": "Content_Miniquest.png",
+      "x": 1200,
+      "y": 31,
+      "z": -1332
+    },
+    {
+      "name": "Mini-Quest - Gather Acacia Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": 1226,
+      "y": 117,
+      "z": -1391
+    },
+    {
+      "name": "Mini-Quest - Gather Carp II",
+      "icon": "Content_Miniquest.png",
+      "x": 1070,
+      "y": 31,
+      "z": -1423
+    },
+    {
+      "name": "Mini-Quest - Gather Malt II",
+      "icon": "Content_Miniquest.png",
+      "x": 1427,
+      "y": 89,
+      "z": -1607
+    },
+    {
+      "name": "Mini-Quest - Gather Sandstone II",
+      "icon": "Content_Miniquest.png",
+      "x": 1444,
+      "y": 89,
+      "z": -2211
+    },
+    {
+      "name": "Mini-Quest - Slay Creatures of Nesaak Forest",
+      "icon": "Content_Miniquest.png",
+      "x": 82,
+      "y": 70,
+      "z": -725
+    },
+    {
+      "name": "Mini-Quest - Gather Hops",
+      "icon": "Content_Miniquest.png",
+      "x": -1557,
+      "y": 51,
+      "z": -4987
+    },
+    {
+      "name": "Mini-Quest - Gather Icefish",
+      "icon": "Content_Miniquest.png",
+      "x": 84,
+      "y": 67,
+      "z": -921
+    },
+    {
+      "name": "Mini-Quest - Gather Iron",
+      "icon": "Content_Miniquest.png",
+      "x": 1067,
+      "y": 66,
+      "z": -3363
+    },
+    {
+      "name": "Mini-Quest - Gather Spruce Logs",
+      "icon": "Content_Miniquest.png",
+      "x": 46,
+      "y": 68,
+      "z": -813
+    },
+    {
+      "name": "Mini-Quest - Slay Orcs",
+      "icon": "Content_Miniquest.png",
+      "x": -2002,
+      "y": 34,
+      "z": -4653
+    },
+    {
+      "name": "Mini-Quest - Gather Hops II",
+      "icon": "Content_Miniquest.png",
+      "x": -1793,
+      "y": 55,
+      "z": -4938
+    },
+    {
+      "name": "Mini-Quest - Gather Icefish II",
+      "icon": "Content_Miniquest.png",
+      "x": 868,
+      "y": 40,
+      "z": -3369
+    },
+    {
+      "name": "Mini-Quest - Gather Iron II",
+      "icon": "Content_Miniquest.png",
+      "x": -433,
+      "y": 26,
+      "z": -388
+    },
+    {
+      "name": "Mini-Quest - Gather Spruce Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": -175,
+      "y": 67,
+      "z": -923
+    },
+    {
+      "name": "Mini-Quest - Slay Slimes",
+      "icon": "Content_Miniquest.png",
+      "x": -480,
+      "y": 69,
+      "z": -707
+    },
+    {
+      "name": "Mini-Quest - Gather Jungle Logs",
+      "icon": "Content_Miniquest.png",
+      "x": -571,
+      "y": 63,
+      "z": -738
+    },
+    {
+      "name": "Mini-Quest - Gather Piranhas",
+      "icon": "Content_Miniquest.png",
+      "x": -667,
+      "y": 63,
+      "z": -637
+    },
+    {
+      "name": "Mini-Quest - Gather Rye",
+      "icon": "Content_Miniquest.png",
+      "x": -2191,
+      "y": 60,
+      "z": -5416
+    },
+    {
+      "name": "Mini-Quest - Gather Silver",
+      "icon": "Content_Miniquest.png",
+      "x": -1707,
+      "y": 55,
+      "z": -5146
+    },
+    {
+      "name": "Mini-Quest - Slay Lizardmen",
+      "icon": "Content_Miniquest.png",
+      "x": -1786,
+      "y": 61,
+      "z": -5267
+    },
+    {
+      "name": "Mini-Quest - Gather Jungle Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": -685,
+      "y": 59,
+      "z": -884
+    },
+    {
+      "name": "Mini-Quest - Gather Piranhas II",
+      "icon": "Content_Miniquest.png",
+      "x": -731,
+      "y": 84,
+      "z": -748
+    },
+    {
+      "name": "Mini-Quest - Gather Rye II",
+      "icon": "Content_Miniquest.png",
+      "x": -1903,
+      "y": 57,
+      "z": -5278
+    },
+    {
+      "name": "Mini-Quest - Gather Silver II",
+      "icon": "Content_Miniquest.png",
+      "x": -915,
+      "y": 45,
+      "z": -3809
+    },
+    {
+      "name": "Mini-Quest - Slay Spiders",
+      "icon": "Content_Miniquest.png",
+      "x": -362,
+      "y": 68,
+      "z": -1577
+    },
+    {
+      "name": "Mini-Quest - Slay Wraiths & Phantasms",
+      "icon": "Content_Miniquest.png",
+      "x": -1392,
+      "y": 46,
+      "z": -5464
+    },
+    {
+      "name": "Mini-Quest - Gather Cobalt",
+      "icon": "Content_Miniquest.png",
+      "x": -896,
+      "y": 25,
+      "z": -679
+    },
+    {
+      "name": "Mini-Quest - Gather Dark Logs",
+      "icon": "Content_Miniquest.png",
+      "x": -1253,
+      "y": 43,
+      "z": -5385
+    },
+    {
+      "name": "Mini-Quest - Gather Koi",
+      "icon": "Content_Miniquest.png",
+      "x": -623,
+      "y": 23,
+      "z": -531
+    },
+    {
+      "name": "Mini-Quest - Gather Millet",
+      "icon": "Content_Miniquest.png",
+      "x": -1385,
+      "y": 43,
+      "z": -4541
+    },
+    {
+      "name": "Mini-Quest - Gather Cobalt II",
+      "icon": "Content_Miniquest.png",
+      "x": -1277,
+      "y": 26,
+      "z": -5528
+    },
+    {
+      "name": "Mini-Quest - Gather Dark Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": -1066,
+      "y": 44,
+      "z": -5156
+    },
+    {
+      "name": "Mini-Quest - Gather Koi II",
+      "icon": "Content_Miniquest.png",
+      "x": -831,
+      "y": 24,
+      "z": -410
+    },
+    {
+      "name": "Mini-Quest - Gather Millet II",
+      "icon": "Content_Miniquest.png",
+      "x": -1278,
+      "y": 45,
+      "z": -4547
+    },
+    {
+      "name": "Mini-Quest - Slay Idols",
+      "icon": "Content_Miniquest.png",
+      "x": -708,
+      "y": 29,
+      "z": -413
+    },
+    {
+      "name": "Mini-Quest - Gather Cobalt III",
+      "icon": "Content_Miniquest.png",
+      "x": 190,
+      "y": 63,
+      "z": -3986
+    },
+    {
+      "name": "Mini-Quest - Gather Dark Logs III",
+      "icon": "Content_Miniquest.png",
+      "x": 952,
+      "y": 47,
+      "z": -3883
+    },
+    {
+      "name": "Mini-Quest - Gather Koi III",
+      "icon": "Content_Miniquest.png",
+      "x": -1299,
+      "y": 52,
+      "z": -5194
+    },
+    {
+      "name": "Mini-Quest - Gather Millet III",
+      "icon": "Content_Miniquest.png",
+      "x": -733,
+      "y": 76,
+      "z": -4494
+    },
+    {
+      "name": "Mini-Quest - Slay Dead Villagers",
+      "icon": "Content_Miniquest.png",
+      "x": 762,
+      "y": 36,
+      "z": -3890
+    },
+    {
+      "name": "Mini-Quest - Gather Decay Roots",
+      "icon": "Content_Miniquest.png",
+      "x": -951,
+      "y": 47,
+      "z": -5292
+    },
+    {
+      "name": "Mini-Quest - Gather Gylia Fish",
+      "icon": "Content_Miniquest.png",
+      "x": -131,
+      "y": 32,
+      "z": -5115
+    },
+    {
+      "name": "Mini-Quest - Gather Kanderstone",
+      "icon": "Content_Miniquest.png",
+      "x": -557,
+      "y": 59,
+      "z": -5460
+    },
+    {
+      "name": "Mini-Quest - Gather Light Logs",
+      "icon": "Content_Miniquest.png",
+      "x": -1291,
+      "y": 43,
+      "z": -4625
+    },
+    {
+      "name": "Mini-Quest - Gather Decay Roots II",
+      "icon": "Content_Miniquest.png",
+      "x": -624,
+      "y": 42,
+      "z": -5125
+    },
+    {
+      "name": "Mini-Quest - Gather Gylia Fish II",
+      "icon": "Content_Miniquest.png",
+      "x": -244,
+      "y": 29,
+      "z": -5300
+    },
+    {
+      "name": "Mini-Quest - Gather Kanderstone II",
+      "icon": "Content_Miniquest.png",
+      "x": -715,
+      "y": 46,
+      "z": -5551
+    },
+    {
+      "name": "Mini-Quest - Gather Light Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": -1156,
+      "y": 47,
+      "z": -4760
+    },
+    {
+      "name": "Mini-Quest - Slay Myconids",
+      "icon": "Content_Miniquest.png",
+      "x": -984,
+      "y": 43,
+      "z": -4637
+    },
+    {
+      "name": "Mini-Quest - Slay Weirds",
+      "icon": "Content_Miniquest.png",
+      "x": -677,
+      "y": 43,
+      "z": -4948
+    },
+    {
+      "name": "Mini-Quest - Gather Decay Roots III",
+      "icon": "Content_Miniquest.png",
+      "x": -725,
+      "y": 44,
+      "z": -5009
+    },
+    {
+      "name": "Mini-Quest - Gather Gylia Fish III",
+      "icon": "Content_Miniquest.png",
+      "x": 10,
+      "y": 27,
+      "z": -5251
+    },
+    {
+      "name": "Mini-Quest - Gather Kanderstone III",
+      "icon": "Content_Miniquest.png",
+      "x": -767,
+      "y": 45,
+      "z": -5151
+    },
+    {
+      "name": "Mini-Quest - Gather Light Logs III",
+      "icon": "Content_Miniquest.png",
+      "x": -941,
+      "y": 45,
+      "z": -4896
+    },
+    {
+      "name": "Mini-Quest - Slay Felrocs",
+      "icon": "Content_Miniquest.png",
+      "x": -163,
+      "y": 34,
+      "z": -4812
+    },
+    {
+      "name": "Mini-Quest - Slay Hobgoblins",
+      "icon": "Content_Miniquest.png",
+      "x": 562,
+      "y": 27,
+      "z": -5421
+    },
+    {
+      "name": "Mini-Quest - Gather Bass",
+      "icon": "Content_Miniquest.png",
+      "x": 105,
+      "y": 46,
+      "z": -4987
+    },
+    {
+      "name": "Mini-Quest - Gather Diamonds",
+      "icon": "Content_Miniquest.png",
+      "x": 337,
+      "y": 27,
+      "z": -5356
+    },
+    {
+      "name": "Mini-Quest - Gather Pine Logs",
+      "icon": "Content_Miniquest.png",
+      "x": 81,
+      "y": 54,
+      "z": -5289
+    },
+    {
+      "name": "Mini-Quest - Gather Rice",
+      "icon": "Content_Miniquest.png",
+      "x": 366,
+      "y": 31,
+      "z": -5160
+    },
+    {
+      "name": "Mini-Quest - Gather Bass II",
+      "icon": "Content_Miniquest.png",
+      "x": -1729,
+      "y": 38,
+      "z": -2067
+    },
+    {
+      "name": "Mini-Quest - Gather Diamonds II",
+      "icon": "Content_Miniquest.png",
+      "x": 641,
+      "y": 30,
+      "z": -4793
+    },
+    {
+      "name": "Mini-Quest - Gather Pine Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": 646,
+      "y": 78,
+      "z": -5058
+    },
+    {
+      "name": "Mini-Quest - Gather Rice II",
+      "icon": "Content_Miniquest.png",
+      "x": 534,
+      "y": 29,
+      "z": -5157
+    },
+    {
+      "name": "Mini-Quest - Slay Jinkos",
+      "icon": "Content_Miniquest.png",
+      "x": 549,
+      "y": 28,
+      "z": -4996
+    },
+    {
+      "name": "Mini-Quest - Slay Robots",
+      "icon": "Content_Miniquest.png",
+      "x": -1751,
+      "y": 72,
+      "z": -2694
+    },
+    {
+      "name": "Mini-Quest - Gather Bass III",
+      "icon": "Content_Miniquest.png",
+      "x": -1829,
+      "y": 38,
+      "z": -2223
+    },
+    {
+      "name": "Mini-Quest - Gather Diamonds III",
+      "icon": "Content_Miniquest.png",
+      "x": 27,
+      "y": 43,
+      "z": -4672
+    },
+    {
+      "name": "Mini-Quest - Gather Pine Logs III",
+      "icon": "Content_Miniquest.png",
+      "x": -1339,
+      "y": 114,
+      "z": -2870
+    },
+    {
+      "name": "Mini-Quest - Gather Rice III",
+      "icon": "Content_Miniquest.png",
+      "x": 743,
+      "y": 45,
+      "z": -5318
+    },
+    {
+      "name": "Mini-Quest - Gather Bamboo",
+      "icon": "Content_Miniquest.png",
+      "x": 87,
+      "y": 82,
+      "z": -4340
+    },
+    {
+      "name": "Mini-Quest - Gather Bass IV",
+      "icon": "Content_Miniquest.png",
+      "x": -1330,
+      "y": 35,
+      "z": -2732
+    },
+    {
+      "name": "Mini-Quest - Gather Diamonds IV",
+      "icon": "Content_Miniquest.png",
+      "x": 369,
+      "y": 78,
+      "z": -5070
+    },
+    {
+      "name": "Mini-Quest - Gather Rice IV",
+      "icon": "Content_Miniquest.png",
+      "x": 79,
+      "y": 45,
+      "z": -4772
+    },
+    {
+      "name": "Mini-Quest - Slay Ailuropodas",
+      "icon": "Content_Miniquest.png",
+      "x": 139,
+      "y": 58,
+      "z": -4399
+    },
+    {
+      "name": "Mini-Quest - Gather Copper",
+      "icon": "Content_Miniquest.png",
+      "x": -563,
+      "y": 69,
+      "z": -1547
+    },
+    {
+      "name": "Mini-Quest - Gather Gudgeon",
+      "icon": "Content_Miniquest.png",
+      "x": -637,
+      "y": 68,
+      "z": -1558
+    },
+    {
+      "name": "Mini-Quest - Gather Oak Logs",
+      "icon": "Content_Miniquest.png",
+      "x": -433,
+      "y": 68,
+      "z": -1591
+    },
+    {
+      "name": "Mini-Quest - Gather Wheat",
+      "icon": "Content_Miniquest.png",
+      "x": -781,
+      "y": 66,
+      "z": -1742
+    },
+    {
+      "name": "Mini-Quest - Slay Pernix Monkeys",
+      "icon": "Content_Miniquest.png",
+      "x": -1721,
+      "y": 111,
+      "z": -2255
+    },
+    {
+      "name": "Mini-Quest - Gather Avo Logs",
+      "icon": "Content_Miniquest.png",
+      "x": -1710,
+      "y": 68,
+      "z": -2802
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Eel",
+      "icon": "Content_Miniquest.png",
+      "x": 1460,
+      "y": 30,
+      "z": -5558
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Ore",
+      "icon": "Content_Miniquest.png",
+      "x": 1229,
+      "y": 21,
+      "z": -5470
+    },
+    {
+      "name": "Mini-Quest - Gather Sorghum",
+      "icon": "Content_Miniquest.png",
+      "x": -1386,
+      "y": 124,
+      "z": -3023
+    },
+    {
+      "name": "Mini-Quest - Slay Magma Entities",
+      "icon": "Content_Miniquest.png",
+      "x": 1266,
+      "y": 16,
+      "z": -5329
+    },
+    {
+      "name": "Mini-Quest - Slay Frosted Guards & Cryostone Golems",
+      "icon": "Content_Miniquest.png",
+      "x": 1423,
+      "y": 8,
+      "z": -5448
+    },
+    {
+      "name": "Mini-Quest - Gather Avo Logs II",
+      "icon": "Content_Miniquest.png",
+      "x": -1836,
+      "y": 106,
+      "z": -2906
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Eel II",
+      "icon": "Content_Miniquest.png",
+      "x": 1414,
+      "y": 159,
+      "z": -5601
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Ore II",
+      "icon": "Content_Miniquest.png",
+      "x": 1394,
+      "y": 69,
+      "z": -5609
+    },
+    {
+      "name": "Mini-Quest - Gather Sorghum II",
+      "icon": "Content_Miniquest.png",
+      "x": -1433,
+      "y": 72,
+      "z": -2280
+    },
+    {
+      "name": "Mini-Quest - Slay Ifrits",
+      "icon": "Content_Miniquest.png",
+      "x": 1389,
+      "y": 157,
+      "z": -5476
+    },
+    {
+      "name": "Mini-Quest - Slay Astrochelys Manis",
+      "icon": "Content_Miniquest.png",
+      "x": -1422,
+      "y": 139,
+      "z": -3225
+    },
+    {
+      "name": "Mini-Quest - Gather Avo Logs III",
+      "icon": "Content_Miniquest.png",
+      "x": -1739,
+      "y": 76,
+      "z": -2469
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Eel III",
+      "icon": "Content_Miniquest.png",
+      "x": 1199,
+      "y": 153,
+      "z": -5239
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Ore III",
+      "icon": "Content_Miniquest.png",
+      "x": 1352,
+      "y": 156,
+      "z": -5171
+    },
+    {
+      "name": "Mini-Quest - Gather Sorghum III",
+      "icon": "Content_Miniquest.png",
+      "x": -1757,
+      "y": 126,
+      "z": -3330
+    },
+    {
+      "name": "Mini-Quest - Slay Creatures of the Void",
+      "icon": "Content_Miniquest.png",
+      "x": 14028,
+      "y": 119,
+      "z": -4226
+    },
+    {
+      "name": "Mini-Quest - Slay Conures",
+      "icon": "Content_Miniquest.png",
+      "x": 1123,
+      "y": 142,
+      "z": -4436
+    },
+    {
+      "name": "Mini-Quest - Gather Avo Logs IV",
+      "icon": "Content_Miniquest.png",
+      "x": -1686,
+      "y": 76,
+      "z": -2187
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Eel IV",
+      "icon": "Content_Miniquest.png",
+      "x": 1407,
+      "y": 140,
+      "z": -5076
+    },
+    {
+      "name": "Mini-Quest - Gather Molten Ore IV",
+      "icon": "Content_Miniquest.png",
+      "x": 1270,
+      "y": 141,
+      "z": -5339
+    },
+    {
+      "name": "Mini-Quest - Gather Sorghum IV",
+      "icon": "Content_Miniquest.png",
+      "x": -1838,
+      "y": 107,
+      "z": -3282
+    },
+    {
+      "name": "Mini-Quest - Slay Angels",
+      "icon": "Content_Miniquest.png",
+      "x": 1005,
+      "y": 119,
+      "z": -4790
+    },
+    {
+      "name": "Mini-Quest - Slay Dragonlings",
+      "icon": "Content_Miniquest.png",
+      "x": 1348,
+      "y": 125,
+      "z": -4470
+    },
+    {
+      "name": "A Journey Beyond",
+      "icon": "Content_Quest.png",
+      "x": 419,
+      "y": 67,
+      "z": -1533
+    },
+    {
+      "name": "A Journey Further",
+      "icon": "Content_Quest.png",
+      "x": 977,
+      "y": 75,
+      "z": -732
+    },
+    {
+      "name": "A Hunter's Calling",
+      "icon": "Content_Quest.png",
+      "x": 1320,
+      "y": 130,
+      "z": -420
+    },
+    {
+      "name": "Frost Bite",
+      "icon": "Content_Quest.png",
+      "x": -207,
+      "y": 37,
+      "z": -531
+    },
+    {
+      "name": "Kingdom of Sand",
+      "icon": "Content_Quest.png",
+      "x": 1405,
+      "y": 94,
+      "z": -1829
+    },
+    {
+      "name": "Misadventure on the Sea",
+      "icon": "Content_Quest.png",
+      "x": 114,
+      "y": 40,
+      "z": -2176
+    },
+    {
+      "name": "Point of No Return",
+      "icon": "Content_Quest.png",
+      "x": 1013,
+      "y": 77,
+      "z": -676
+    },
+    {
+      "name": "Star Thief",
+      "icon": "Content_Quest.png",
+      "x": -2018,
+      "y": 43,
+      "z": -4822
+    },
+    {
+      "name": "Studying the Corrupt",
+      "icon": "Content_Quest.png",
+      "x": -258,
+      "y": 80,
+      "z": -1046
+    },
+    {
+      "name": "The Olmic Rune",
+      "icon": "Content_Quest.png",
+      "x": 585,
+      "y": 89,
+      "z": -457
+    },
+    {
+      "name": "Acquiring Credentials",
+      "icon": "Content_Quest.png",
+      "x": -256,
+      "y": 57,
+      "z": -4983
+    },
+    {
+      "name": "Crop Failure",
+      "icon": "Content_Quest.png",
+      "x": -1834,
+      "y": 62,
+      "z": -5557
+    },
+    {
+      "name": "Realm of Light IV - Finding the Light",
+      "icon": "Content_Quest.png",
+      "x": -1123,
+      "y": 46,
+      "z": -4771
+    },
+    {
+      "name": "Forbidden Prison",
+      "icon": "Content_Quest.png",
+      "x": -963,
+      "y": 47,
+      "z": -5280
+    },
+    {
+      "name": "Lazarus Pit",
+      "icon": "Content_Quest.png",
+      "x": -1025,
+      "y": 47,
+      "z": -5302
+    },
+    {
+      "name": "Lexdale Witch Trials",
+      "icon": "Content_Quest.png",
+      "x": -604,
+      "y": 45,
+      "z": -5444
+    },
+    {
+      "name": "Realm of Light V - The Realm of Light",
+      "icon": "Content_Quest.png",
+      "x": -1053,
+      "y": 46,
+      "z": -4363
+    },
+    {
+      "name": "Reclaiming the House",
+      "icon": "Content_Quest.png",
+      "x": -1499,
+      "y": 47,
+      "z": -5349
+    },
+    {
+      "name": "The Feathers Fly Part I",
+      "icon": "Content_Quest.png",
+      "x": -1731,
+      "y": 134,
+      "z": -3267
+    },
+    {
+      "name": "The Feathers Fly Part II",
+      "icon": "Content_Quest.png",
+      "x": -1573,
+      "y": 86,
+      "z": -2762
+    },
+    {
+      "name": "Realm of Light I - The Worm Holes",
+      "icon": "Content_Quest.png",
+      "x": -2039,
+      "y": 55,
+      "z": -5434
+    },
+    {
+      "name": "Realm of Light II - Taproot",
+      "icon": "Content_Quest.png",
+      "x": -1257,
+      "y": 43,
+      "z": -5474
+    },
+    {
+      "name": "Nether Portal",
+      "icon": "Special_RootsOfCorruption.png",
+      "x": 340,
+      "y": 50,
+      "z": -1300
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -719,
+      "y": 60,
+      "z": -1585
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 377,
+      "y": 62,
+      "z": -1551
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -208,
+      "y": 105,
+      "z": -4979
+    },
+    {
+      "name": "Light's Secret",
+      "icon": "Special_LightRealm.png",
+      "x": -1050,
+      "y": 13,
+      "z": -4295
+    },
+    {
+      "name": "Uth Shrine",
+      "icon": "Special_Rune.png",
+      "x": -215,
+      "y": 137,
+      "z": -4460
+    },
+    {
+      "name": "Uth Shrine",
+      "icon": "Special_Rune.png",
+      "x": -1911,
+      "y": 113,
+      "z": -3235
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": -227,
+      "y": 69,
+      "z": -1490
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -818,
+      "y": 95,
+      "z": -1051
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -818,
+      "y": 95,
+      "z": -1148
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 414,
+      "y": 83,
+      "z": -1501
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -1575,
+      "y": 104,
+      "z": -2913
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 754,
+      "y": 178,
+      "z": -4397
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 833,
+      "y": 113,
+      "z": -4987
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 932,
+      "y": 119,
+      "z": -5539
+    },
+    {
+      "name": "Key Forge Merchant",
+      "icon": "Merchant_KeyForge.png",
+      "x": -850,
+      "y": 123,
+      "z": -4903
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -845,
+      "y": 123,
+      "z": -4903
+    },
+    {
+      "name": "Corrupted Dungeons",
+      "icon": "Content_CorruptedDungeon.png",
+      "x": -861,
+      "y": 123,
+      "z": -4896
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -1364,
+      "y": 40,
+      "z": -2937
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 152,
+      "y": 38,
+      "z": -3109
+    },
+    {
+      "name": "Guild Master",
+      "icon": "NPC_GuildMaster.png",
+      "x": -292,
+      "y": 47,
+      "z": -4939
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -832,
+      "y": 34,
+      "z": -3686
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -355,
+      "y": 64,
+      "z": -1413
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -54,
+      "y": 66,
+      "z": -1977
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -2147,
+      "y": 56,
+      "z": -4721
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 647,
+      "y": 61,
+      "z": -1530
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 36,
+      "y": 20,
+      "z": -4714
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1324,
+      "y": 99,
+      "z": -4267
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -571,
+      "y": 25,
+      "z": -595
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 753,
+      "y": 30,
+      "z": -1245
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -701,
+      "y": 23,
+      "z": -298
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -843,
+      "y": 67,
+      "z": -242
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -510,
+      "y": 63,
+      "z": -839
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -722,
+      "y": 10,
+      "z": -4642
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1528,
+      "y": 231,
+      "z": -4586
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -1175,
+      "y": 65,
+      "z": -5659
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -347,
+      "y": 21,
+      "z": -251
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -469,
+      "y": 74,
+      "z": -1031
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1306,
+      "y": 85,
+      "z": -2014
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 229,
+      "y": 83,
+      "z": -5061
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -106,
+      "y": 47,
+      "z": -4592
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1538,
+      "y": 88,
+      "z": -5670
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1413,
+      "y": 5,
+      "z": -4951
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 939,
+      "y": 65,
+      "z": -5010
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -626,
+      "y": 68,
+      "z": -1769
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -405,
+      "y": 45,
+      "z": -5441
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -799,
+      "y": 36,
+      "z": -1960
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -637,
+      "y": 48,
+      "z": -4419
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1794,
+      "y": 58,
+      "z": -4682
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 235,
+      "y": 123,
+      "z": -5423
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1049,
+      "y": 45,
+      "z": -4772
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -622,
+      "y": 71,
+      "z": -1567
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -504,
+      "y": 41,
+      "z": -5290
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -115,
+      "y": 67,
+      "z": -924
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -134,
+      "y": 71,
+      "z": -797
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 185,
+      "y": 66,
+      "z": -705
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -744,
+      "y": 34,
+      "z": -5409
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -892,
+      "y": 53,
+      "z": -6218
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -608,
+      "y": 83,
+      "z": -4874
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -864,
+      "y": 55,
+      "z": -6131
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -286,
+      "y": 23,
+      "z": -555
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -119,
+      "y": 33,
+      "z": -292
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -257,
+      "y": 39,
+      "z": -269
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -430,
+      "y": 34,
+      "z": -303
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 112,
+      "y": 44,
+      "z": -1944
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -226,
+      "y": 54,
+      "z": -2097
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 308,
+      "y": 57,
+      "z": -1851
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 392,
+      "y": 42,
+      "z": -1990
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1119,
+      "y": 62,
+      "z": -2175
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1339,
+      "y": 76,
+      "z": -1704
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 974,
+      "y": 62,
+      "z": -2110
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1003,
+      "y": 71,
+      "z": -1705
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1338,
+      "y": 31,
+      "z": -1550
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1303,
+      "y": 30,
+      "z": -1449
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1437,
+      "y": 31,
+      "z": -1365
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1980,
+      "y": 63,
+      "z": -5234
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 735,
+      "y": 67,
+      "z": -1689
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 768,
+      "y": 91,
+      "z": -2213
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 571,
+      "y": 35,
+      "z": -2085
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 486,
+      "y": 36,
+      "z": -2066
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 591,
+      "y": 78,
+      "z": -1864
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 669,
+      "y": 63,
+      "z": -1612
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 925,
+      "y": 73,
+      "z": -1347
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 769,
+      "y": 25,
+      "z": -1277
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 476,
+      "y": 68,
+      "z": -1224
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -299,
+      "y": 35,
+      "z": -971
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -183,
+      "y": 52,
+      "z": -1196
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -361,
+      "y": 64,
+      "z": -1166
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -112,
+      "y": 38,
+      "z": -4622
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -13,
+      "y": 35,
+      "z": -5107
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -410,
+      "y": 36,
+      "z": -5206
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -285,
+      "y": 45,
+      "z": -5556
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 137,
+      "y": 44,
+      "z": -5566
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 535,
+      "y": 29,
+      "z": -5360
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 849,
+      "y": 83,
+      "z": -5098
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 826,
+      "y": 47,
+      "z": -5351
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 643,
+      "y": 91,
+      "z": -5332
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 500,
+      "y": 80,
+      "z": -5300
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -202,
+      "y": 65,
+      "z": -1564
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -142,
+      "y": 75,
+      "z": -1658
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 133,
+      "y": 69,
+      "z": -1685
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1508,
+      "y": 46,
+      "z": -5175
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1250,
+      "y": 46,
+      "z": -5342
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1527,
+      "y": 65,
+      "z": -5425
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1229,
+      "y": 39,
+      "z": -5446
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1464,
+      "y": 172,
+      "z": -5528
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1605,
+      "y": 150,
+      "z": -5066
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1054,
+      "y": 44,
+      "z": -4958
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 743,
+      "y": 86,
+      "z": -4891
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1054,
+      "y": 44,
+      "z": -4958
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1016,
+      "y": 104,
+      "z": -4361
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -955,
+      "y": 64,
+      "z": -4341
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1019,
+      "y": 109,
+      "z": -4695
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1054,
+      "y": 44,
+      "z": -4958
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 591,
+      "y": 31,
+      "z": -4625
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 624,
+      "y": 31,
+      "z": -4693
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 315,
+      "y": 35,
+      "z": -4580
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -559,
+      "y": 71,
+      "z": -959
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -669,
+      "y": 57,
+      "z": -926
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -618,
+      "y": 59,
+      "z": -729
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -725,
+      "y": 60,
+      "z": -731
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -564,
+      "y": 101,
+      "z": -577
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -568,
+      "y": 65,
+      "z": -609
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -558,
+      "y": 29,
+      "z": -460
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -624,
+      "y": 63,
+      "z": -286
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -676,
+      "y": 29,
+      "z": -304
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -930,
+      "y": 28,
+      "z": -409
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -957,
+      "y": 40,
+      "z": -526
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -798,
+      "y": 41,
+      "z": -605
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -809,
+      "y": 19,
+      "z": -444
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1222,
+      "y": 71,
+      "z": -4856
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -756,
+      "y": 43,
+      "z": -4833
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -550,
+      "y": 42,
+      "z": -4689
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1387,
+      "y": 41,
+      "z": -4982
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1109,
+      "y": 44,
+      "z": -5289
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -785,
+      "y": 56,
+      "z": -5034
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1103,
+      "y": 100,
+      "z": -5607
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -997,
+      "y": 42,
+      "z": -5559
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1335,
+      "y": 44,
+      "z": -5082
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -830,
+      "y": 37,
+      "z": -3791
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -251,
+      "y": 35,
+      "z": -2715
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 215,
+      "y": 34,
+      "z": -2413
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 707,
+      "y": 33,
+      "z": -2842
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1203,
+      "y": 33,
+      "z": -2936
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -2060,
+      "y": 56,
+      "z": -5241
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1835,
+      "y": 53,
+      "z": -5171
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1542,
+      "y": 46,
+      "z": -5338
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1852,
+      "y": 43,
+      "z": -2666
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1352,
+      "y": 46,
+      "z": -2231
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1467,
+      "y": 64,
+      "z": -2370
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1364,
+      "y": 124,
+      "z": -3052
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1659,
+      "y": 37,
+      "z": -3069
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -1263,
+      "y": 43,
+      "z": -4460
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -515,
+      "y": 76,
+      "z": -1713
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -433,
+      "y": 67,
+      "z": -1689
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -795,
+      "y": 71,
+      "z": -1409
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": -626,
+      "y": 51,
+      "z": -1959
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 204,
+      "y": 70,
+      "z": -1560
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": -1445,
+      "y": 72,
+      "z": -2522
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 309,
+      "y": 46,
+      "z": -2029
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": 502,
+      "y": 68,
+      "z": -1569
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": -873,
+      "y": 80,
+      "z": -963
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": 105,
+      "y": 66,
+      "z": -3193
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": -2023,
+      "y": 77,
+      "z": -4478
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": -455,
+      "y": 48,
+      "z": -4978
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": -1623,
+      "y": 69,
+      "z": -2932
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": 1001,
+      "y": 113,
+      "z": -4565
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": 1057,
+      "y": 18,
+      "z": -5120
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": 1194,
+      "y": 77,
+      "z": -1923
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": -1884,
+      "y": 80,
+      "z": -4512
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": -2196,
+      "y": 71,
+      "z": -5488
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": -576,
+      "y": 55,
+      "z": -5551
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": -1131,
+      "y": 44,
+      "z": -4492
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": -99,
+      "y": 33,
+      "z": -5315
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": 216,
+      "y": 81,
+      "z": -4934
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": 1469,
+      "y": 21,
+      "z": -5175
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": 1221,
+      "y": 140,
+      "z": -4680
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 160,
+      "y": 36,
+      "z": -2211
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -673,
+      "y": 35,
+      "z": -3136
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 71,
+      "y": 36,
+      "z": -3110
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": 895,
+      "y": 49,
+      "z": -2887
+    },
+    {
+      "name": "Fast Travel",
+      "icon": "Special_FastTravel.png",
+      "x": -1930,
+      "y": 77,
+      "z": -4473
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1079,
+      "y": 133,
+      "z": -350
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 828,
+      "y": 76,
+      "z": -429
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 979,
+      "y": 72,
+      "z": -471
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 857,
+      "y": 78,
+      "z": -668
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1039,
+      "y": 81,
+      "z": -688
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 882,
+      "y": 75,
+      "z": -805
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 951,
+      "y": 90,
+      "z": -1049
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 775,
+      "y": 150,
+      "z": -949
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1137,
+      "y": 31,
+      "z": -1128
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1283,
+      "y": 100,
+      "z": -1056
+    },
+    {
+      "name": "Cave",
+      "icon": "Content_Cave.png",
+      "x": 1394,
+      "y": 160,
+      "z": -1052
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1055,
+      "y": 117,
+      "z": -390
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1538,
+      "y": 190,
+      "z": -4563
+    },
+    {
+      "name": "Grind Spot",
+      "icon": "Content_GrindSpot.png",
+      "x": 1155,
+      "y": 160,
+      "z": -4365
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": 1379,
+      "y": 85,
+      "z": -695
+    },
+    {
+      "name": "Ultimate Discovery",
+      "icon": "Content_UltimateDiscovery.png",
+      "x": 77,
+      "y": 90,
+      "z": -423
+    },
+    {
+      "name": "Trade Market",
+      "icon": "NPC_TradeMarket.png",
+      "x": 997,
+      "y": 75,
+      "z": -712
+    },
+    {
+      "name": "Tol Altar",
+      "icon": "Special_Rune.png",
+      "x": 529,
+      "y": 70,
+      "z": -457
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": 471,
+      "y": 44,
+      "z": -2912
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": 321,
+      "y": 32,
+      "z": -2035
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": 1417,
+      "y": 100,
+      "z": -1462
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": 51,
+      "y": 68,
+      "z": -485
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -1833,
+      "y": 46,
+      "z": -5259
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -711,
+      "y": 58,
+      "z": -657
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -815,
+      "y": 44,
+      "z": -5363
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -911,
+      "y": 24,
+      "z": -623
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -692,
+      "y": 73,
+      "z": -1068
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -1573,
+      "y": 27,
+      "z": -3204
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": -1746,
+      "y": 65,
+      "z": -3069
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": 1332,
+      "y": 11,
+      "z": -516
+    },
+    {
+      "name": "Orphion's Nexus of Light",
+      "icon": "Content_Raid.png",
+      "x": -732,
+      "y": 100,
+      "z": -6412
+    },
+    {
+      "name": "The Canyon Colossus",
+      "icon": "Content_Raid.png",
+      "x": 662,
+      "y": 49,
+      "z": -4448
+    },
+    {
+      "name": "Nest of the Grootslangs",
+      "icon": "Content_Raid.png",
+      "x": -1977,
+      "y": 63,
+      "z": -5615
+    },
+    {
+      "name": "Boss Altar",
+      "icon": "Content_BossAltar.png",
+      "x": 1296,
+      "y": 19,
+      "z": -4670
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 85,
+      "y": 39,
+      "z": -2225
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 96,
+      "y": 39,
+      "z": -2225
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 979,
+      "y": 81,
+      "z": -1992
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 962,
+      "y": 65,
+      "z": -1966
+    },
+    {
+      "name": "Junk Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -69,
+      "y": 72,
+      "z": -851
+    },
+    {
+      "name": "Boat Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 60,
+      "y": 70,
+      "z": -670
+    },
+    {
+      "name": "Boat Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 459,
+      "y": 41,
+      "z": -2905
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 112,
+      "y": 36,
+      "z": -2246
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 116,
+      "y": 36,
+      "z": -2237
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 117,
+      "y": 64,
+      "z": -3158
+    },
+    {
+      "name": "Treasure Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 107,
+      "y": 64,
+      "z": -3158
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 9,
+      "y": 64,
+      "z": -3222
+    },
+    {
+      "name": "Wynnter 2016 Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1156,
+      "y": 41,
+      "z": -3118
+    },
+    {
+      "name": "Fish Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 95,
+      "y": 71,
+      "z": -793
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 89,
+      "y": 71,
+      "z": -822
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 116,
+      "y": 71,
+      "z": -819
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 123,
+      "y": 37,
+      "z": -2208
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 116,
+      "y": 42,
+      "z": -2152
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -574,
+      "y": 46,
+      "z": -1924
+    },
+    {
+      "name": "Egg Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -538,
+      "y": 57,
+      "z": -1830
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 147,
+      "y": 40,
+      "z": -2153
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1875,
+      "y": 51,
+      "z": -4568
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1025,
+      "y": 97,
+      "z": -1977
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1015,
+      "y": 97,
+      "z": -1987
+    },
+    {
+      "name": "Emeralds Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1020,
+      "y": 97,
+      "z": -1925
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1015,
+      "y": 97,
+      "z": -1938
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1025,
+      "y": 97,
+      "z": -1928
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -555,
+      "y": 65,
+      "z": -1589
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 114,
+      "y": 38,
+      "z": -2172
+    },
+    {
+      "name": "Boat Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -3,
+      "y": 56,
+      "z": -1712
+    },
+    {
+      "name": "Pink Wool Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1329,
+      "y": 29,
+      "z": -1272
+    },
+    {
+      "name": "Egg Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1304,
+      "y": 29,
+      "z": -1268
+    },
+    {
+      "name": "Feather Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1296,
+      "y": 29,
+      "z": -1234
+    },
+    {
+      "name": "Mushroom Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1288,
+      "y": 29,
+      "z": -1260
+    },
+    {
+      "name": "Water Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1288,
+      "y": 29,
+      "z": -1268
+    },
+    {
+      "name": "Potato Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1304,
+      "y": 29,
+      "z": -1244
+    },
+    {
+      "name": "Apple Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1304,
+      "y": 29,
+      "z": -1252
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 85,
+      "y": 38,
+      "z": -2179
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 931,
+      "y": 73,
+      "z": -1923
+    },
+    {
+      "name": "~~~~~~~~~",
+      "icon": "",
+      "x": -530,
+      "y": 6,
+      "z": -1722
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 800,
+      "y": 92,
+      "z": -5041
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 801,
+      "y": 92,
+      "z": -5037
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 808,
+      "y": 92,
+      "z": -5033
+    },
+    {
+      "name": "Boat Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -266,
+      "y": 32,
+      "z": -4040
+    },
+    {
+      "name": "Junk",
+      "icon": "Merchant_Other.png",
+      "x": -2156,
+      "y": 50,
+      "z": -4938
+    },
+    {
+      "name": "Junk Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1860,
+      "y": 52,
+      "z": -5369
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1966,
+      "y": 75,
+      "z": -4433
+    },
+    {
+      "name": "Artefact Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -895,
+      "y": 41,
+      "z": -4525
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -1769,
+      "y": 64,
+      "z": -5527
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1966,
+      "y": 75,
+      "z": -4427
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1966,
+      "y": 75,
+      "z": -4422
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -2030,
+      "y": 75,
+      "z": -4432
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -2030,
+      "y": 75,
+      "z": -4428
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -2030,
+      "y": 75,
+      "z": -4422
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 980,
+      "y": 13,
+      "z": -5135
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 980,
+      "y": 13,
+      "z": -5146
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 979,
+      "y": 13,
+      "z": -5124
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 9,
+      "y": 64,
+      "z": -3212
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 116,
+      "y": 71,
+      "z": -778
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1267,
+      "y": 29,
+      "z": -1322
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 102,
+      "y": 71,
+      "z": -784
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 91,
+      "y": 71,
+      "z": -779
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1260,
+      "y": 29,
+      "z": -1341
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1274,
+      "y": 29,
+      "z": -1349
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1267,
+      "y": 29,
+      "z": -1358
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -553,
+      "y": 65,
+      "z": -1581
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1868,
+      "y": 57,
+      "z": -4534
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1735,
+      "y": 64,
+      "z": -5492
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1763,
+      "y": 64,
+      "z": -5520
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 758,
+      "y": 77,
+      "z": -5045
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1099,
+      "y": 11,
+      "z": -5207
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 1035,
+      "y": 17,
+      "z": -5110
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1480,
+      "y": 43,
+      "z": -5275
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 749,
+      "y": 148,
+      "z": -4476
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 744,
+      "y": 148,
+      "z": -4461
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 727,
+      "y": 150,
+      "z": -4479
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -2136,
+      "y": 51,
+      "z": -4563
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1723,
+      "y": 64,
+      "z": -5509
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -1725,
+      "y": 64,
+      "z": -5529
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 776,
+      "y": 77,
+      "z": -5051
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 749,
+      "y": 148,
+      "z": -4462
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 1141,
+      "y": 17,
+      "z": -5174
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -1873,
+      "y": 51,
+      "z": -4567
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -1871,
+      "y": 51,
+      "z": -4571
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -1776,
+      "y": 64,
+      "z": -5532
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 761,
+      "y": 77,
+      "z": -5033
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 772,
+      "y": 77,
+      "z": -5030
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 767,
+      "y": 77,
+      "z": -5062
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 767,
+      "y": 77,
+      "z": -5057
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 763,
+      "y": 77,
+      "z": -5055
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -189,
+      "y": 26,
+      "z": -321
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1121,
+      "y": 105,
+      "z": -4549
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1096,
+      "y": 105,
+      "z": -4543
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 1062,
+      "y": 106,
+      "z": -4549
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 1466,
+      "y": 43,
+      "z": -5264
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 1095,
+      "y": 11,
+      "z": -5099
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 1130,
+      "y": 11,
+      "z": -5096
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -2005,
+      "y": 75,
+      "z": -4462
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -2003,
+      "y": 75,
+      "z": -4484
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -565,
+      "y": 65,
+      "z": -1597
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 745,
+      "y": 145,
+      "z": -4496
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": -1998,
+      "y": 75,
+      "z": -4427
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": -168,
+      "y": 61,
+      "z": -1840
+    },
+    {
+      "name": "Suri Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -92,
+      "y": 65,
+      "z": -1386
+    },
+    {
+      "name": "Stiba Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -75,
+      "y": 65,
+      "z": -1389
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": 1261,
+      "y": 29,
+      "z": -1274
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 1262,
+      "y": 29,
+      "z": -1362
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 1324,
+      "y": 29,
+      "z": -1346
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 1310,
+      "y": 29,
+      "z": -1311
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 1255,
+      "y": 29,
+      "z": -1357
+    },
+    {
+      "name": "Rymek Dealer Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1297,
+      "y": 29,
+      "z": -1318
+    },
+    {
+      "name": "Rymek Dealer Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1288,
+      "y": 29,
+      "z": -1316
+    },
+    {
+      "name": "Rymek Dealer Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1295,
+      "y": 29,
+      "z": -1302
+    },
+    {
+      "name": "Rymek Dealer Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1318,
+      "y": 29,
+      "z": -1315
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -218,
+      "y": 26,
+      "z": -325
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 937,
+      "y": 65,
+      "z": -1970
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 933,
+      "y": 65,
+      "z": -1955
+    },
+    {
+      "name": "Gert Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -46,
+      "y": 56,
+      "z": -5553
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 78,
+      "y": 69,
+      "z": -346
+    },
+    {
+      "name": "Tribal Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -765,
+      "y": 77,
+      "z": -671
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 923,
+      "y": 65,
+      "z": -1955
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -215,
+      "y": 22,
+      "z": -345
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -199,
+      "y": 22,
+      "z": -352
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -219,
+      "y": 21,
+      "z": -363
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 789,
+      "y": 78,
+      "z": -5073
+    },
+    {
+      "name": "Explosives Merchant",
+      "icon": "tnt.png",
+      "x": -201,
+      "y": 44,
+      "z": -282
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -207,
+      "y": 26,
+      "z": -298
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -208,
+      "y": 26,
+      "z": -301
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -212,
+      "y": 26,
+      "z": -301
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -213,
+      "y": 26,
+      "z": -298
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 800,
+      "y": 57,
+      "z": -3326
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 784,
+      "y": 57,
+      "z": -3326
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 992,
+      "y": 36,
+      "z": -3533
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 802,
+      "y": 57,
+      "z": -3389
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -547,
+      "y": 46,
+      "z": -1935
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 801,
+      "y": 57,
+      "z": -3333
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 783,
+      "y": 57,
+      "z": -3334
+    },
+    {
+      "name": "Black Market Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 989,
+      "y": 66,
+      "z": -1919
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 1136,
+      "y": 41,
+      "z": -3117
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1142,
+      "y": 41,
+      "z": -3120
+    },
+    {
+      "name": "Wynnter 2016 Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1128,
+      "y": 39,
+      "z": -3120
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1123,
+      "y": 39,
+      "z": -3121
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 994,
+      "y": 36,
+      "z": -3478
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 994,
+      "y": 36,
+      "z": -3496
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -675,
+      "y": 36,
+      "z": -3048
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -611,
+      "y": 36,
+      "z": -3069
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -717,
+      "y": 37,
+      "z": -3089
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -721,
+      "y": 37,
+      "z": -3089
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -721,
+      "y": 37,
+      "z": -3097
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -717,
+      "y": 37,
+      "z": -3097
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -720,
+      "y": 52,
+      "z": -3091
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -720,
+      "y": 52,
+      "z": -3095
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -611,
+      "y": 51,
+      "z": -3063
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -679,
+      "y": 51,
+      "z": -3050
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -662,
+      "y": 65,
+      "z": -1048
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -662,
+      "y": 65,
+      "z": -1025
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -166,
+      "y": 68,
+      "z": -1632
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 185,
+      "y": 38,
+      "z": -2173
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 948,
+      "y": 73,
+      "z": -1925
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 115,
+      "y": 71,
+      "z": -792
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -1847,
+      "y": 55,
+      "z": -4560
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -1759,
+      "y": 64,
+      "z": -5507
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -1000,
+      "y": 42,
+      "z": -5311
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 777,
+      "y": 77,
+      "z": -5066
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 1133,
+      "y": 11,
+      "z": -5200
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -654,
+      "y": 51,
+      "z": -3070
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -658,
+      "y": 35,
+      "z": -3064
+    },
+    {
+      "name": "Seaskipper Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 153,
+      "y": 33,
+      "z": -2249
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 93,
+      "y": 64,
+      "z": -3167
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 87,
+      "y": 64,
+      "z": -3189
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 140,
+      "y": 64,
+      "z": -3173
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -623,
+      "y": 51,
+      "z": -3081
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -618,
+      "y": 36,
+      "z": -3078
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -627,
+      "y": 36,
+      "z": -3085
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -621,
+      "y": 51,
+      "z": -3078
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 86,
+      "y": 33,
+      "z": -3071
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -1953,
+      "y": 33,
+      "z": -4226
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 159,
+      "y": 33,
+      "z": -3795
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -706,
+      "y": 36,
+      "z": -3180
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -53,
+      "y": 33,
+      "z": -2515
+    },
+    {
+      "name": "Fabrics Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1288,
+      "y": 29,
+      "z": -1252
+    },
+    {
+      "name": "Squid Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 213,
+      "y": 18,
+      "z": -718
+    },
+    {
+      "name": "Siegfried Fan Item Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -2122,
+      "y": 51,
+      "z": -4571
+    },
+    {
+      "name": "Siegfried Fan Item Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1032,
+      "y": 108,
+      "z": -4589
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -657,
+      "y": 35,
+      "z": -3074
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -683,
+      "y": 33,
+      "z": -3163
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -657,
+      "y": 36,
+      "z": -3060
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -618,
+      "y": 51,
+      "z": -3056
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -628,
+      "y": 36,
+      "z": -3046
+    },
+    {
+      "name": "Hook Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -643,
+      "y": 38,
+      "z": -3178
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -690,
+      "y": 51,
+      "z": -3110
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -691,
+      "y": 36,
+      "z": -3116
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 42,
+      "y": 36,
+      "z": -2198
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 861,
+      "y": 65,
+      "z": -1973
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": -174,
+      "y": 98,
+      "z": -4421
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 1234,
+      "y": 29,
+      "z": -1300
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 85,
+      "y": 71,
+      "z": -806
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": 1413,
+      "y": 92,
+      "z": -1838
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -1083,
+      "y": 34,
+      "z": -3792
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 715,
+      "y": 38,
+      "z": -3344
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 570,
+      "y": 34,
+      "z": -3695
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 1253,
+      "y": 34,
+      "z": -4101
+    },
+    {
+      "name": "Recipe Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 917,
+      "y": 51,
+      "z": -4297
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 756,
+      "y": 34,
+      "z": -3874
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -728,
+      "y": 63,
+      "z": -1020
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -142,
+      "y": 65,
+      "z": -1806
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1413,
+      "y": 92,
+      "z": -1824
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -719,
+      "y": 63,
+      "z": -1020
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -646,
+      "y": 63,
+      "z": -1043
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": -646,
+      "y": 63,
+      "z": -1031
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -2044,
+      "y": 75,
+      "z": -4484
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -1697,
+      "y": 64,
+      "z": -5525
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -1005,
+      "y": 44,
+      "z": -5323
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1593,
+      "y": 66,
+      "z": -2943
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -629,
+      "y": 88,
+      "z": -1401
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -618,
+      "y": 87,
+      "z": -1443
+    },
+    {
+      "name": "Wig Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 994,
+      "y": 112,
+      "z": -4509
+    },
+    {
+      "name": "Tribal Armour Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -527,
+      "y": 57,
+      "z": -277
+    },
+    {
+      "name": "Tribal Weapon Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -519,
+      "y": 57,
+      "z": -277
+    },
+    {
+      "name": "Charmcrafter Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -771,
+      "y": 92,
+      "z": -627
+    },
+    {
+      "name": "Mask Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -580,
+      "y": 87,
+      "z": -1426
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -620,
+      "y": 87,
+      "z": -1416
+    },
+    {
+      "name": "Diamond Rewards Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1075,
+      "y": 63,
+      "z": -2374
+    },
+    {
+      "name": "Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1630,
+      "y": 66,
+      "z": -2869
+    },
+    {
+      "name": "Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1634,
+      "y": 66,
+      "z": -2869
+    },
+    {
+      "name": "Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1638,
+      "y": 66,
+      "z": -2869
+    },
+    {
+      "name": "Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1642,
+      "y": 66,
+      "z": -2869
+    },
+    {
+      "name": "Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1646,
+      "y": 66,
+      "z": -2869
+    },
+    {
+      "name": "Powder Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1630,
+      "y": 66,
+      "z": -2891
+    },
+    {
+      "name": "Powder Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1634,
+      "y": 66,
+      "z": -2891
+    },
+    {
+      "name": "Powder Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1638,
+      "y": 66,
+      "z": -2891
+    },
+    {
+      "name": "Powder Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1642,
+      "y": 66,
+      "z": -2891
+    },
+    {
+      "name": "Powder Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1646,
+      "y": 66,
+      "z": -2891
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": 891,
+      "y": 120,
+      "z": -5591
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": 1517,
+      "y": 44,
+      "z": -5284
+    },
+    {
+      "name": "Craftmas Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1150,
+      "y": 59,
+      "z": -3139
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -1626,
+      "y": 67,
+      "z": -2970
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -1643,
+      "y": 67,
+      "z": -2911
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1637,
+      "y": 71,
+      "z": -2946
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1593,
+      "y": 71,
+      "z": -2889
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1598,
+      "y": 71,
+      "z": -2889
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1587,
+      "y": 71,
+      "z": -2889
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1585,
+      "y": 71,
+      "z": -2893
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1601,
+      "y": 71,
+      "z": -2893
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": -1593,
+      "y": 66,
+      "z": -2904
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -1632,
+      "y": 66,
+      "z": -2910
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -1599,
+      "y": 66,
+      "z": -2871
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": -1702,
+      "y": 35,
+      "z": -2331
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -1157,
+      "y": 63,
+      "z": -2382
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1168,
+      "y": 63,
+      "z": -2404
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -1175,
+      "y": 63,
+      "z": -2419
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1170,
+      "y": 63,
+      "z": -2383
+    },
+    {
+      "name": "Bronze Rewards Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1082,
+      "y": 63,
+      "z": -2410
+    },
+    {
+      "name": "Silver Rewards Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1062,
+      "y": 63,
+      "z": -2423
+    },
+    {
+      "name": "Gold Rewards Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1067,
+      "y": 63,
+      "z": -2395
+    },
+    {
+      "name": "Diamond Rewards Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1071,
+      "y": 63,
+      "z": -2378
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": -1683,
+      "y": 75,
+      "z": -2614
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1692,
+      "y": 73,
+      "z": -2595
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1611,
+      "y": 36,
+      "z": -2361
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1602,
+      "y": 35,
+      "z": -2369
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1395,
+      "y": 68,
+      "z": -2852
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -647,
+      "y": 57,
+      "z": -878
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": -631,
+      "y": 57,
+      "z": -878
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": -922,
+      "y": 65,
+      "z": -1875
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 182,
+      "y": 75,
+      "z": -672
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": 171,
+      "y": 77,
+      "z": -661
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -856,
+      "y": 74,
+      "z": -898
+    },
+    {
+      "name": "Wynnter 2016 Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1150,
+      "y": 59,
+      "z": -3136
+    },
+    {
+      "name": "Golden Fish Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -689,
+      "y": 36,
+      "z": -3068
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": -274,
+      "y": 62,
+      "z": -1051
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": 284,
+      "y": 14,
+      "z": -1943
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": -588,
+      "y": 38,
+      "z": -3552
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -864,
+      "y": 65,
+      "z": -1600
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -856,
+      "y": 65,
+      "z": -1599
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -850,
+      "y": 65,
+      "z": -1596
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -808,
+      "y": 66,
+      "z": -1596
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -816,
+      "y": 65,
+      "z": -1561
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -821,
+      "y": 66,
+      "z": -1593
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -572,
+      "y": 37,
+      "z": -3549
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -865,
+      "y": 65,
+      "z": -1561
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -869,
+      "y": 65,
+      "z": -1557
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -835,
+      "y": 76,
+      "z": -942
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -898,
+      "y": 75,
+      "z": -915
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -894,
+      "y": 75,
+      "z": -915
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -894,
+      "y": 75,
+      "z": -923
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -898,
+      "y": 75,
+      "z": -923
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -900,
+      "y": 83,
+      "z": -923
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -896,
+      "y": 83,
+      "z": -923
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": -887,
+      "y": 83,
+      "z": -919
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -900,
+      "y": 83,
+      "z": -915
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -896,
+      "y": 83,
+      "z": -915
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -893,
+      "y": 83,
+      "z": -914
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -893,
+      "y": 83,
+      "z": -924
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -879,
+      "y": 75,
+      "z": -895
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -832,
+      "y": 76,
+      "z": -894
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -859,
+      "y": 76,
+      "z": -944
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -882,
+      "y": 73,
+      "z": -933
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -882,
+      "y": 76,
+      "z": -943
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -833,
+      "y": 65,
+      "z": -1586
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -825,
+      "y": 65,
+      "z": -1495
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -858,
+      "y": 65,
+      "z": -1549
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 284,
+      "y": 14,
+      "z": -1961
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -890,
+      "y": 58,
+      "z": -1883
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -625,
+      "y": 34,
+      "z": -3538
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -269,
+      "y": 61,
+      "z": -1044
+    },
+    {
+      "name": "Glassblowing Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 924,
+      "y": 59,
+      "z": -1979
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 1077,
+      "y": 106,
+      "z": -4549
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 928,
+      "y": 108,
+      "z": -4546
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 925,
+      "y": 108,
+      "z": -4543
+    },
+    {
+      "name": "Wynnter 2017 Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1104,
+      "y": 44,
+      "z": -3126
+    },
+    {
+      "name": "Wynnter 2017 Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1089,
+      "y": 43,
+      "z": -3124
+    },
+    {
+      "name": "Wynnter 2017 Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1090,
+      "y": 43,
+      "z": -3137
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 862,
+      "y": 43,
+      "z": -2874
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 876,
+      "y": 44,
+      "z": -2858
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 849,
+      "y": 40,
+      "z": -2852
+    },
+    {
+      "name": "Souvenir Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -335,
+      "y": 38,
+      "z": -2485
+    },
+    {
+      "name": "Horse Merchant",
+      "icon": "Merchant_Horse.png",
+      "x": 852,
+      "y": 68,
+      "z": -1633
+    },
+    {
+      "name": "Potato Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 651,
+      "y": 60,
+      "z": -2086
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 738,
+      "y": 71,
+      "z": -2106
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 995,
+      "y": 13,
+      "z": -5135
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 112,
+      "y": 71,
+      "z": -834
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 87,
+      "y": 71,
+      "z": -845
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 87,
+      "y": 71,
+      "z": -847
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 89,
+      "y": 71,
+      "z": -850
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 89,
+      "y": 71,
+      "z": -842
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 96,
+      "y": 39,
+      "z": -2215
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 95,
+      "y": 39,
+      "z": -2211
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 95,
+      "y": 39,
+      "z": -2229
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 86,
+      "y": 39,
+      "z": -2229
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 85,
+      "y": 39,
+      "z": -2215
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 86,
+      "y": 39,
+      "z": -2211
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 493,
+      "y": 65,
+      "z": -1621
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 491,
+      "y": 65,
+      "z": -1558
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 488,
+      "y": 65,
+      "z": -1568
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 474,
+      "y": 65,
+      "z": -1554
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 488,
+      "y": 65,
+      "z": -1551
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 484,
+      "y": 65,
+      "z": -1551
+    },
+    {
+      "name": "Emerald",
+      "icon": "Merchant_Emerald.png",
+      "x": 491,
+      "y": 65,
+      "z": -1554
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 452,
+      "y": 65,
+      "z": -1595
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 419,
+      "y": 65,
+      "z": -1610
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 478,
+      "y": 65,
+      "z": -1537
+    },
+    {
+      "name": "Ticket Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 419,
+      "y": 65,
+      "z": -1564
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 507,
+      "y": 65,
+      "z": -1594
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 468,
+      "y": 65,
+      "z": -1581
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -263,
+      "y": 33,
+      "z": -5357
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -589,
+      "y": 62,
+      "z": -711
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -602,
+      "y": 56,
+      "z": -830
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1143,
+      "y": 75,
+      "z": -1997
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1215,
+      "y": 75,
+      "z": -1738
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -774,
+      "y": 21,
+      "z": -534
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -548,
+      "y": 39,
+      "z": -423
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -275,
+      "y": 66,
+      "z": -1408
+    },
+    {
+      "name": "Bowl Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -292,
+      "y": 70,
+      "z": -1377
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": -249,
+      "y": 70,
+      "z": -1409
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -63,
+      "y": 67,
+      "z": -896
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -83,
+      "y": 66,
+      "z": -787
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 47,
+      "y": 69,
+      "z": -678
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 159,
+      "y": 71,
+      "z": -1002
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1725,
+      "y": 46,
+      "z": -4778
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 985,
+      "y": 6,
+      "z": -5032
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 976,
+      "y": 131,
+      "z": -4883
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -655,
+      "y": 103,
+      "z": -1244
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -43,
+      "y": 70,
+      "z": -1155
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -987,
+      "y": 41,
+      "z": -4568
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -122,
+      "y": 69,
+      "z": -1175
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -707,
+      "y": 41,
+      "z": -4838
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1230,
+      "y": 42,
+      "z": -4674
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 725,
+      "y": 59,
+      "z": -1445
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 543,
+      "y": 65,
+      "z": -1353
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 589,
+      "y": 64,
+      "z": -1951
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 296,
+      "y": 79,
+      "z": -1077
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -575,
+      "y": 100,
+      "z": -1300
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -571,
+      "y": 44,
+      "z": -1947
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1049,
+      "y": 50,
+      "z": -5273
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1227,
+      "y": 41,
+      "z": -5390
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1708,
+      "y": 51,
+      "z": -4597
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1377,
+      "y": 141,
+      "z": -5285
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -733,
+      "y": 60,
+      "z": -838
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 108,
+      "y": 33,
+      "z": -3094
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 941,
+      "y": 65,
+      "z": -1957
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1971,
+      "y": 75,
+      "z": -4483
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -850,
+      "y": 74,
+      "z": -917
+    },
+    {
+      "name": "Hive Thunder Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 344,
+      "y": 26,
+      "z": -5500
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 333,
+      "y": 26,
+      "z": -5501
+    },
+    {
+      "name": "Hive Air Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 344,
+      "y": 18,
+      "z": -5530
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 333,
+      "y": 18,
+      "z": -5530
+    },
+    {
+      "name": "Hive Earth Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 343,
+      "y": 14,
+      "z": -5549
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 332,
+      "y": 14,
+      "z": -5550
+    },
+    {
+      "name": "Hive Water Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 343,
+      "y": 10,
+      "z": -5568
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 332,
+      "y": 10,
+      "z": -5568
+    },
+    {
+      "name": "Hive Fire Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 343,
+      "y": 6,
+      "z": -5589
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 333,
+      "y": 6,
+      "z": -5588
+    },
+    {
+      "name": "Master Trinket Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 343,
+      "y": 2,
+      "z": -5613
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 343,
+      "y": 2,
+      "z": -5617
+    },
+    {
+      "name": "Master Armour Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 334,
+      "y": 2,
+      "z": -5613
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 334,
+      "y": 2,
+      "z": -5617
+    },
+    {
+      "name": "Transmutation Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 336,
+      "y": 2,
+      "z": -5623
+    },
+    {
+      "name": "Master Weapon Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 340,
+      "y": 2,
+      "z": -5623
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -303,
+      "y": 34,
+      "z": -2496
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 429,
+      "y": 33,
+      "z": -2946
+    },
+    {
+      "name": "Zhight Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -588,
+      "y": 36,
+      "z": -2780
+    },
+    {
+      "name": "Zhight Exchange Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -592,
+      "y": 36,
+      "z": -2780
+    },
+    {
+      "name": "Zhight Brew Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -576,
+      "y": 36,
+      "z": -2792
+    },
+    {
+      "name": "Brew-it-Yourself Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -580,
+      "y": 36,
+      "z": -2788
+    },
+    {
+      "name": "Treasure Prize Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -640,
+      "y": 39,
+      "z": -2661
+    },
+    {
+      "name": "Treasure Prize Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -644,
+      "y": 39,
+      "z": -2661
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1510,
+      "y": 46,
+      "z": -5251
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1764,
+      "y": 54,
+      "z": -5305
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1473,
+      "y": 43,
+      "z": -5300
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1280,
+      "y": 79,
+      "z": -3168
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1313,
+      "y": 71,
+      "z": -3135
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1828,
+      "y": 115,
+      "z": -3120
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1559,
+      "y": 93,
+      "z": -2671
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1605,
+      "y": 35,
+      "z": -2389
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1683,
+      "y": 35,
+      "z": -2379
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1638,
+      "y": 38,
+      "z": -3453
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1521,
+      "y": 77,
+      "z": -2434
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1372,
+      "y": 90,
+      "z": -2633
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1821,
+      "y": 48,
+      "z": -2960
+    },
+    {
+      "name": "Gift Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1603,
+      "y": 80,
+      "z": -5095
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1002,
+      "y": 36,
+      "z": -3491
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1125,
+      "y": 32,
+      "z": -3097
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -344,
+      "y": 38,
+      "z": -2454
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 217,
+      "y": 43,
+      "z": -2041
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 1092,
+      "y": 11,
+      "z": -5175
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1002,
+      "y": 110,
+      "z": -4538
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 76,
+      "y": 48,
+      "z": -2024
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 20,
+      "y": 36,
+      "z": -2203
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -168,
+      "y": 37,
+      "z": -2208
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1243,
+      "y": 115,
+      "z": -1371
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1203,
+      "y": 29,
+      "z": -1472
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1343,
+      "y": 29,
+      "z": -1418
+    },
+    {
+      "name": "Ingredient Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1487,
+      "y": 43,
+      "z": -5259
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1446,
+      "y": 38,
+      "z": -5272
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 739,
+      "y": 71,
+      "z": -2085
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 423,
+      "y": 26,
+      "z": -4929
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 91,
+      "y": 42,
+      "z": -4669
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 243,
+      "y": 92,
+      "z": -4575
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 182,
+      "y": 66,
+      "z": -1608
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 165,
+      "y": 67,
+      "z": -1535
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1055,
+      "y": 16,
+      "z": -5146
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 530,
+      "y": 27,
+      "z": -4991
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": -515,
+      "y": 33,
+      "z": -2693
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -12,
+      "y": 74,
+      "z": -1135
+    },
+    {
+      "name": "Seasail Merchant",
+      "icon": "Merchant_Seasail.png",
+      "x": 1095,
+      "y": 33,
+      "z": -2550
+    },
+    {
+      "name": "Tour Pass Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -653,
+      "y": 25,
+      "z": -2662
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 96,
+      "y": 36,
+      "z": -2244
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -3,
+      "y": 73,
+      "z": -1184
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -727,
+      "y": 88,
+      "z": -636
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1604,
+      "y": 67,
+      "z": -2915
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1496,
+      "y": 42,
+      "z": -5300
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 135,
+      "y": 64,
+      "z": -3159
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 137,
+      "y": 64,
+      "z": -3161
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 953,
+      "y": 116,
+      "z": -4593
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 968,
+      "y": 108,
+      "z": -4541
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1073,
+      "y": 106,
+      "z": -4562
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1081,
+      "y": 106,
+      "z": -4562
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1081,
+      "y": 106,
+      "z": -4536
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 1073,
+      "y": 106,
+      "z": -4536
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1096,
+      "y": 105,
+      "z": -4555
+    },
+    {
+      "name": "Reset Scroll Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 101,
+      "y": 90,
+      "z": -1205
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1146,
+      "y": 63,
+      "z": -2405
+    },
+    {
+      "name": "Miner Pass Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1535,
+      "y": 59,
+      "z": -5343
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 989,
+      "y": 71,
+      "z": -664
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 988,
+      "y": 74,
+      "z": -744
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1014,
+      "y": 75,
+      "z": -682
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 963,
+      "y": 74,
+      "z": -677
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 975,
+      "y": 71,
+      "z": -692
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 975,
+      "y": 71,
+      "z": -698
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 990,
+      "y": 71,
+      "z": -691
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 991,
+      "y": 71,
+      "z": -696
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 966,
+      "y": 77,
+      "z": -717
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -739,
+      "y": 42,
+      "z": -4897
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -993,
+      "y": 35,
+      "z": -3751
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -649,
+      "y": 65,
+      "z": -1599
+    },
+    {
+      "name": "Dungeon Merchant",
+      "icon": "Merchant_Dungeon.png",
+      "x": 1304,
+      "y": 85,
+      "z": -749
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 1278,
+      "y": 85,
+      "z": -749
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -323,
+      "y": 35,
+      "z": -4630
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 969,
+      "y": 71,
+      "z": -667
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 981,
+      "y": 71,
+      "z": -690
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 729,
+      "y": 151,
+      "z": -4467
+    },
+    {
+      "name": "Mysterious Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 946,
+      "y": 71,
+      "z": -661
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 348,
+      "y": 30,
+      "z": -5481
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 1010,
+      "y": 36,
+      "z": -3487
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 487,
+      "y": 65,
+      "z": -1597
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 457,
+      "y": 65,
+      "z": -1613
+    },
+    {
+      "name": "Siegfried Fan Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 784,
+      "y": 77,
+      "z": -5054
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1751,
+      "y": 66,
+      "z": -5529
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1748,
+      "y": 66,
+      "z": -5526
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1748,
+      "y": 66,
+      "z": -5542
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1751,
+      "y": 66,
+      "z": -5539
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1738,
+      "y": 66,
+      "z": -5526
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1735,
+      "y": 66,
+      "z": -5529
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1735,
+      "y": 66,
+      "z": -5539
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1738,
+      "y": 66,
+      "z": -5542
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1467,
+      "y": 40,
+      "z": -4718
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1467,
+      "y": 40,
+      "z": -4734
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1449,
+      "y": 42,
+      "z": -4736
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1449,
+      "y": 42,
+      "z": -4716
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1431,
+      "y": 40,
+      "z": -4734
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -1479,
+      "y": 40,
+      "z": -4747
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": -1407,
+      "y": 41,
+      "z": -4738
+    },
+    {
+      "name": "Horse Merchant",
+      "icon": "Merchant_Horse.png",
+      "x": -1483,
+      "y": 41,
+      "z": -4715
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1420,
+      "y": 48,
+      "z": -1554
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1952,
+      "y": 55,
+      "z": -5411
+    },
+    {
+      "name": "Bucket Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -805,
+      "y": 65,
+      "z": -1919
+    },
+    {
+      "name": "Bucket Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -805,
+      "y": 65,
+      "z": -1924
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -558,
+      "y": 46,
+      "z": -1914
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -462,
+      "y": 47,
+      "z": -4900
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -467,
+      "y": 47,
+      "z": -4922
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -464,
+      "y": 47,
+      "z": -4918
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -464,
+      "y": 47,
+      "z": -4926
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -431,
+      "y": 45,
+      "z": -4950
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -456,
+      "y": 45,
+      "z": -4957
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": -463,
+      "y": 45,
+      "z": -4957
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -493,
+      "y": 45,
+      "z": -4950
+    },
+    {
+      "name": "Siegfried Fan Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -453,
+      "y": 45,
+      "z": -4981
+    },
+    {
+      "name": "Literature Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 1020,
+      "y": 110,
+      "z": -4534
+    },
+    {
+      "name": "Souvenir T-Shirt Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -211,
+      "y": 55,
+      "z": -4952
+    },
+    {
+      "name": "King's Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -426,
+      "y": 46,
+      "z": -4936
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -868,
+      "y": 120,
+      "z": -4921
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -871,
+      "y": 120,
+      "z": -4910
+    },
+    {
+      "name": "Key Forge Merchant",
+      "icon": "Merchant_KeyForge.png",
+      "x": -873,
+      "y": 120,
+      "z": -4914
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -304,
+      "y": 45,
+      "z": -4980
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 945,
+      "y": 112,
+      "z": -5486
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 216,
+      "y": 27,
+      "z": -5265
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": 206,
+      "y": 27,
+      "z": -5259
+    },
+    {
+      "name": "Powder Master",
+      "icon": "NPC_PowderMaster.png",
+      "x": 208,
+      "y": 27,
+      "z": -5226
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 215,
+      "y": 27,
+      "z": -5219
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": 250,
+      "y": 27,
+      "z": -5225
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": 250,
+      "y": 27,
+      "z": -5259
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": 167,
+      "y": 4,
+      "z": -5324
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 164,
+      "y": 4,
+      "z": -5322
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 170,
+      "y": 4,
+      "z": -5322
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": 914,
+      "y": 112,
+      "z": -5499
+    },
+    {
+      "name": "Necromancy Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 158,
+      "y": 4,
+      "z": -5195
+    },
+    {
+      "name": "Potato Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 181,
+      "y": 4,
+      "z": -5288
+    },
+    {
+      "name": "Platinum Dealer Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 158,
+      "y": 4,
+      "z": -5218
+    },
+    {
+      "name": "Shifty Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 200,
+      "y": 4,
+      "z": -5230
+    },
+    {
+      "name": "Book Merchant",
+      "icon": "Merchant_Other.png",
+      "x": 157,
+      "y": 4,
+      "z": -5209
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 920,
+      "y": 114,
+      "z": -5463
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 1004,
+      "y": 107,
+      "z": -5464
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 918,
+      "y": 114,
+      "z": -5465
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 918,
+      "y": 114,
+      "z": -5473
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 920,
+      "y": 114,
+      "z": -5475
+    },
+    {
+      "name": "Dungeon Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -452,
+      "y": 45,
+      "z": -5007
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": 176,
+      "y": 4,
+      "z": -5194
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": 226,
+      "y": 27,
+      "z": -5268
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -993,
+      "y": 45,
+      "z": -5289
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": -1014,
+      "y": 45,
+      "z": -5286
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1039,
+      "y": 45,
+      "z": -5309
+    },
+    {
+      "name": "Armour Merchant",
+      "icon": "Merchant_Armour.png",
+      "x": -1021,
+      "y": 45,
+      "z": -5294
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -1901,
+      "y": 76,
+      "z": -4499
+    },
+    {
+      "name": "Potion Merchant",
+      "icon": "Merchant_Potion.png",
+      "x": 922,
+      "y": 112,
+      "z": -5489
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -547,
+      "y": 110,
+      "z": -4427
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": 1359,
+      "y": 7,
+      "z": -5168
+    },
+    {
+      "name": "Confectionary Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -252,
+      "y": 55,
+      "z": -4955
+    },
+    {
+      "name": "Charmcrafter Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -1093,
+      "y": 40,
+      "z": -5029
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": 224,
+      "y": 27,
+      "z": -5242
+    },
+    {
+      "name": "Scroll Merchant",
+      "icon": "Merchant_Scroll.png",
+      "x": -1431,
+      "y": 40,
+      "z": -4718
+    },
+    {
+      "name": "Identifier",
+      "icon": "NPC_ItemIdentifier.png",
+      "x": -803,
+      "y": 65,
+      "z": -1569
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -830,
+      "y": 65,
+      "z": -1901
+    },
+    {
+      "name": "Tool Merchant",
+      "icon": "Merchant_Tool.png",
+      "x": -1646,
+      "y": 75,
+      "z": -4325
+    },
+    {
+      "name": "Art Merchant",
+      "icon": "painting.png",
+      "x": -227,
+      "y": 55,
+      "z": -4982
+    },
+    {
+      "name": "Blacksmith",
+      "icon": "NPC_Blacksmith.png",
+      "x": -982,
+      "y": 45,
+      "z": -5282
+    },
+    {
+      "name": "Weapon Merchant",
+      "icon": "Merchant_Weapon.png",
+      "x": -1027,
+      "y": 45,
+      "z": -5298
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1027,
+      "y": 44,
+      "z": -5324
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -1018,
+      "y": 44,
+      "z": -5324
+    },
+    {
+      "name": "Accessory Merchant",
+      "icon": "Merchant_Accessory.png",
+      "x": -580,
+      "y": 59,
+      "z": -5443
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -425,
+      "y": 47,
+      "z": -4910
+    },
+    {
+      "name": "Emerald Merchant",
+      "icon": "Merchant_Emerald.png",
+      "x": -416,
+      "y": 47,
+      "z": -4919
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": -433,
+      "y": 45,
+      "z": -4919
+    },
+    {
+      "name": "Liquid Merchant",
+      "icon": "Merchant_Liquid.png",
+      "x": -425,
+      "y": 45,
+      "z": -4927
+    },
+    {
+      "name": "Water Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -496,
+      "y": 110,
+      "z": -4442
+    },
+    {
+      "name": "Collector Merchant",
+      "icon": "Merchant_Other.png",
+      "x": -235,
+      "y": 55,
+      "z": -4985
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 1000,
+      "y": 110,
+      "z": -4542
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 1006,
+      "y": 110,
+      "z": -4537
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 100,
+      "y": 65,
+      "z": -3155
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 1008,
+      "y": 74,
+      "z": -682
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 1009,
+      "y": 77,
+      "z": -722
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -1010,
+      "y": 45,
+      "z": -5289
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 1011,
+      "y": 111,
+      "z": -4533
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -1011,
+      "y": 44,
+      "z": -5322
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 101,
+      "y": 71,
+      "z": -790
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -1017,
+      "y": 45,
+      "z": -5318
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 1022,
+      "y": 110,
+      "z": -4541
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -1030,
+      "y": 41,
+      "z": -4989
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -1032,
+      "y": 40,
+      "z": -4999
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 103,
+      "y": 71,
+      "z": -807
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -1037,
+      "y": 44,
+      "z": -5317
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 104,
+      "y": 38,
+      "z": -2191
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1048,
+      "y": 40,
+      "z": -4982
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -1051,
+      "y": 40,
+      "z": -4986
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 1053,
+      "y": 16,
+      "z": -5147
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 1053,
+      "y": 16,
+      "z": -5159
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 1057,
+      "y": 18,
+      "z": -5152
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 1064,
+      "y": 16,
+      "z": -5127
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 1070,
+      "y": 16,
+      "z": -5147
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 1071,
+      "y": 16,
+      "z": -5127
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -1072,
+      "y": 40,
+      "z": -4977
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 1077,
+      "y": 17,
+      "z": -5130
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 1078,
+      "y": 16,
+      "z": -5142
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -1086,
+      "y": 40,
+      "z": -4975
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 109,
+      "y": 71,
+      "z": -835
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 1100,
+      "y": 99,
+      "z": -4567
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 110,
+      "y": 34,
+      "z": -3108
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 1108,
+      "y": 100,
+      "z": -4558
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 1112,
+      "y": 99,
+      "z": -4562
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 111,
+      "y": 37,
+      "z": -2220
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 111,
+      "y": 71,
+      "z": -840
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 112,
+      "y": 71,
+      "z": -794
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 113,
+      "y": 34,
+      "z": -3118
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 116,
+      "y": 34,
+      "z": -3116
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 116,
+      "y": 64,
+      "z": -3167
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 116,
+      "y": 64,
+      "z": -3196
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 116,
+      "y": 72,
+      "z": -780
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 120,
+      "y": 42,
+      "z": -2138
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 123,
+      "y": 71,
+      "z": -843
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 1254,
+      "y": 29,
+      "z": -1346
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 1259,
+      "y": 29,
+      "z": -1283
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 1260,
+      "y": 29,
+      "z": -1350
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 126,
+      "y": 42,
+      "z": -2138
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 1267,
+      "y": 29,
+      "z": -1353
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 1294,
+      "y": 30,
+      "z": -1241
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1297,
+      "y": 48,
+      "z": -1577
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 1298,
+      "y": 30,
+      "z": -1241
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -1300,
+      "y": 48,
+      "z": -1571
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 130,
+      "y": 64,
+      "z": -3156
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 1319,
+      "y": 33,
+      "z": -4100
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 1320,
+      "y": 29,
+      "z": -1339
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 1320,
+      "y": 33,
+      "z": -4098
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 1321,
+      "y": 33,
+      "z": -4087
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 1326,
+      "y": 29,
+      "z": -1305
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 132,
+      "y": 64,
+      "z": -3167
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -132,
+      "y": 90,
+      "z": -4451
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 1338,
+      "y": 29,
+      "z": -1284
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -137,
+      "y": 94,
+      "z": -4398
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 1417,
+      "y": 62,
+      "z": -5264
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -141,
+      "y": 94,
+      "z": -4387
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -141,
+      "y": 94,
+      "z": -4395
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -141,
+      "y": 94,
+      "z": -4399
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 1419,
+      "y": 62,
+      "z": -5256
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 142,
+      "y": 38,
+      "z": -2181
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 1426,
+      "y": 62,
+      "z": -5249
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 1443,
+      "y": 62,
+      "z": -5261
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 1460,
+      "y": 41,
+      "z": -5269
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 1466,
+      "y": 56,
+      "z": -5251
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -1574,
+      "y": 67,
+      "z": -2960
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -1577,
+      "y": 66,
+      "z": -2979
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -1582,
+      "y": 66,
+      "z": -2953
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -1586,
+      "y": 66,
+      "z": -2985
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -1600,
+      "y": 66,
+      "z": -2983
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1602,
+      "y": 66,
+      "z": -2955
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -1608,
+      "y": 66,
+      "z": -2959
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -1608,
+      "y": 66,
+      "z": -2978
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -1640,
+      "y": 66,
+      "z": -2913
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -1717,
+      "y": 64,
+      "z": -5541
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -1726,
+      "y": 64,
+      "z": -5502
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -172,
+      "y": 98,
+      "z": -4425
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -1730,
+      "y": 64,
+      "z": -5515
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1,
+      "y": 73,
+      "z": -1195
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -1752,
+      "y": 65,
+      "z": -5506
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1753,
+      "y": 64,
+      "z": -5499
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -1765,
+      "y": 64,
+      "z": -5526
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -176,
+      "y": 98,
+      "z": -4425
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -1781,
+      "y": 64,
+      "z": -5536
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -1850,
+      "y": 62,
+      "z": -4515
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1869,
+      "y": 51,
+      "z": -4574
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 18,
+      "y": 73,
+      "z": -1181
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -1873,
+      "y": 76,
+      "z": -4487
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -1880,
+      "y": 76,
+      "z": -4485
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -1929,
+      "y": 75,
+      "z": -4483
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -195,
+      "y": 27,
+      "z": -323
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -1975,
+      "y": 75,
+      "z": -4464
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -1982,
+      "y": 75,
+      "z": -4493
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -1985,
+      "y": 75,
+      "z": -4450
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -1993,
+      "y": 75,
+      "z": -4496
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -2003,
+      "y": 75,
+      "z": -4496
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -2011,
+      "y": 76,
+      "z": -4450
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -2014,
+      "y": 75,
+      "z": -4493
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -2021,
+      "y": 75,
+      "z": -4464
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -202,
+      "y": 26,
+      "z": -314
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -210,
+      "y": 26,
+      "z": -323
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -2127,
+      "y": 51,
+      "z": -4570
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -2138,
+      "y": 51,
+      "z": -4577
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -21,
+      "y": 74,
+      "z": -1133
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -23,
+      "y": 72,
+      "z": -1165
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -251,
+      "y": 76,
+      "z": -1419
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -280,
+      "y": 66,
+      "z": -1395
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -308,
+      "y": 71,
+      "z": -1400
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 32,
+      "y": 38,
+      "z": -2184
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 3,
+      "y": 73,
+      "z": -1199
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -423,
+      "y": 66,
+      "z": -1593
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -426,
+      "y": 66,
+      "z": -1593
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -433,
+      "y": 45,
+      "z": -4890
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -437,
+      "y": 45,
+      "z": -4881
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -437,
+      "y": 45,
+      "z": -4953
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 441,
+      "y": 65,
+      "z": -1574
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 456,
+      "y": 66,
+      "z": -1592
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -459,
+      "y": 45,
+      "z": -4898
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -459,
+      "y": 45,
+      "z": -4924
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -459,
+      "y": 46,
+      "z": -4974
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 460,
+      "y": 65,
+      "z": -1598
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 461,
+      "y": 65,
+      "z": -1603
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -462,
+      "y": 45,
+      "z": -4932
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 466,
+      "y": 65,
+      "z": -1607
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -46,
+      "y": 70,
+      "z": -1146
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -468,
+      "y": 65,
+      "z": -1600
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 475,
+      "y": 65,
+      "z": -1600
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -476,
+      "y": 65,
+      "z": -1605
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 478,
+      "y": 65,
+      "z": -1572
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 481,
+      "y": 65,
+      "z": -1591
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -493,
+      "y": 46,
+      "z": -4958
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -523,
+      "y": 47,
+      "z": -1920
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -573,
+      "y": 46,
+      "z": -1920
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -599,
+      "y": 44,
+      "z": -5478
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -600,
+      "y": 43,
+      "z": -5453
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -604,
+      "y": 45,
+      "z": -5482
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 647,
+      "y": 61,
+      "z": -2095
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 65,
+      "y": 36,
+      "z": -2213
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 656,
+      "y": 62,
+      "z": -2060
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 663,
+      "y": 60,
+      "z": -2086
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -6,
+      "y": 74,
+      "z": -1137
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 685,
+      "y": 62,
+      "z": -2079
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 694,
+      "y": 68,
+      "z": -2069
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -697,
+      "y": 55,
+      "z": -1828
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 703,
+      "y": 68,
+      "z": -2100
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -724,
+      "y": 88,
+      "z": -635
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 731,
+      "y": 68,
+      "z": -2089
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 732,
+      "y": 68,
+      "z": -2103
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -732,
+      "y": 88,
+      "z": -632
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 734,
+      "y": 148,
+      "z": -4461
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 735,
+      "y": 151,
+      "z": -4480
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 736,
+      "y": 59,
+      "z": -1454
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 737,
+      "y": 59,
+      "z": -1424
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 737,
+      "y": 59,
+      "z": -1442
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 738,
+      "y": 148,
+      "z": -4471
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 738,
+      "y": 59,
+      "z": -1477
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 740,
+      "y": 148,
+      "z": -4464
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 741,
+      "y": 145,
+      "z": -4508
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 744,
+      "y": 145,
+      "z": -4487
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -747,
+      "y": 80,
+      "z": -655
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 748,
+      "y": 145,
+      "z": -4506
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 749,
+      "y": 148,
+      "z": -4458
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -756,
+      "y": 81,
+      "z": -656
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -758,
+      "y": 77,
+      "z": -666
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 763,
+      "y": 77,
+      "z": -5036
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 769,
+      "y": 77,
+      "z": -5032
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 772,
+      "y": 43,
+      "z": -5436
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -7,
+      "y": 73,
+      "z": -1191
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 778,
+      "y": 78,
+      "z": -5062
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -786,
+      "y": 68,
+      "z": -935
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 789,
+      "y": 77,
+      "z": -5078
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 79,
+      "y": 37,
+      "z": -2190
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 797,
+      "y": 71,
+      "z": -1586
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 800,
+      "y": 71,
+      "z": -1601
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -808,
+      "y": 65,
+      "z": -1883
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -808,
+      "y": 66,
+      "z": -1591
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -818,
+      "y": 66,
+      "z": -1593
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -821,
+      "y": 65,
+      "z": -1565
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 821,
+      "y": 71,
+      "z": -1602
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 821,
+      "y": 72,
+      "z": -1589
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -822,
+      "y": 67,
+      "z": -1587
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -841,
+      "y": 65,
+      "z": -1487
+    },
+    {
+      "name": "Tailor Station",
+      "icon": "Merchant_Other.png",
+      "x": -849,
+      "y": 74,
+      "z": -902
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": -851,
+      "y": 65,
+      "z": -1561
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -851,
+      "y": 74,
+      "z": -921
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": -852,
+      "y": 74,
+      "z": -904
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -854,
+      "y": 76,
+      "z": -940
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": -863,
+      "y": 74,
+      "z": -904
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -867,
+      "y": 65,
+      "z": -1493
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": -867,
+      "y": 65,
+      "z": -1564
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 867,
+      "y": 65,
+      "z": -1972
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -873,
+      "y": 65,
+      "z": -1559
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": -873,
+      "y": 75,
+      "z": -937
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": -877,
+      "y": 74,
+      "z": -912
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -879,
+      "y": 74,
+      "z": -915
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": -880,
+      "y": 77,
+      "z": -949
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 882,
+      "y": 65,
+      "z": -1935
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 892,
+      "y": 65,
+      "z": -1935
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 897,
+      "y": 121,
+      "z": -5580
+    },
+    {
+      "name": "Alchemism Station",
+      "icon": "Profession_Alchemism.png",
+      "x": 900,
+      "y": 66,
+      "z": -1948
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 905,
+      "y": 65,
+      "z": -1956
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 928,
+      "y": 65,
+      "z": -1965
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 938,
+      "y": 65,
+      "z": -1959
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 939,
+      "y": 114,
+      "z": -5512
+    },
+    {
+      "name": "Jeweling Station",
+      "icon": "Profession_Jeweling.png",
+      "x": 943,
+      "y": 114,
+      "z": -5511
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 953,
+      "y": 65,
+      "z": -1960
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": 960,
+      "y": 71,
+      "z": -668
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 962,
+      "y": 123,
+      "z": -4474
+    },
+    {
+      "name": "Tailoring Station",
+      "icon": "Profession_Tailoring.png",
+      "x": 965,
+      "y": 71,
+      "z": -663
+    },
+    {
+      "name": "Cooking Station",
+      "icon": "Profession_Cooking.png",
+      "x": 985,
+      "y": 74,
+      "z": -742
+    },
+    {
+      "name": "Weaponsmithing Station",
+      "icon": "Profession_Weaponsmithing.png",
+      "x": 986,
+      "y": 71,
+      "z": -663
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 992,
+      "y": 71,
+      "z": -662
+    },
+    {
+      "name": "Woodworking Station",
+      "icon": "Profession_Woodworking.png",
+      "x": -995,
+      "y": 45,
+      "z": -5277
+    },
+    {
+      "name": "Armouring Station",
+      "icon": "Profession_Armouring.png",
+      "x": 99,
+      "y": 71,
+      "z": -817
+    },
+    {
+      "name": "Scribing Station",
+      "icon": "Profession_Scribing.png",
+      "x": 997,
+      "y": 78,
+      "z": -738
+    }
+  ]
+}

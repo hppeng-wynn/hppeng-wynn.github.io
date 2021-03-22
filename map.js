@@ -39,12 +39,13 @@ let claimObjs = [];
 //let guildObjs = [];
 let routeObjs = [];
 let resourceObjs = [];
+let locationObjs = [];
 
 let drawterrs = false;
 let drawclaims = false;
 let drawroutes = false;
 let drawresources = false;
-let drawmerchants = false;
+let drawlocations = false;
 
 //latitude, longitude is y, x!!!!
 const bounds = [[0,0], [6484, 4090]];
@@ -125,6 +126,7 @@ function init(){ //async just in case we need async stuff
     console.log("Territory Resources", resources);
     console.log("List of guilds on the map:", guilds);
     console.log("Guilds and their guild tags:", guildTags);
+    console.log("Map locations:", maplocs);
 }
 
 /** Places the marker at x, y.
@@ -241,6 +243,70 @@ function pullguilds() {
     }
 }
 
+/** Toggles all location icons/markers on the map.
+ * 
+ */
+ function toggleLocations() {
+    let key_elem = document.getElementById("locationlist");
+    function drawLocations() {
+        let imgs = ["Content_Dungeon.png", "Content_CorruptedDungeon.png", "Content_Quest.png", "Merchant_Emerald.png", "NPC_Blacksmith.png", "NPC_ItemIdentifier.png", "NPC_PowderMaster.png", "Merchant_Potion.png", "Merchant_Armour.png", "Merchant_Weapon.png", "Merchant_Liquid.png", "Merchant_Other.png", "Merchant_Scroll.png", "Merchant_Accessory.png", "Merchant_Tool.png", "painting.png", "Profession_Weaponsmithing.png", "Profession_Armouring.png", "Profession_Alchemism.png", "Profession_Jeweling.png", "Profession_Tailoring.png", "Profession_Scribing.png", "Profession_Cooking.png", "Profession_Woodworking.png", "Content_Miniquest.png", "Special_RootsOfCorruption.png", "Special_FastTravel.png", "Special_LightRealm.png", "Special_Rune.png", "Content_UltimateDiscovery.png", "Merchant_KeyForge.png", "NPC_GuildMaster.png", "Content_GrindSpot.png", "Content_Cave.png", "NPC_TradeMarket.png", "Content_BossAltar.png", "Content_Raid.png", "Merchant_Dungeon.png", "tnt.png", "Merchant_Seasail.png", "Merchant_Horse.png"];
+        
+        for (const loc of maplocs) {
+            //loc has name, icon, x, y, z. don't care about y
+            if (loc.icon) {
+                let latlng = xytolatlng(loc.x,loc.z);
+
+                let locObj = L.marker(latlng, {icon: L.icon({
+                    //iconUrl: '/media/icons/' + (newIcons ? "new/" : "old/" ) + loc.icon,
+                    iconUrl: '/media/icons/maplocstemp/'+ loc.icon,
+                    iconSize: [16,16], 
+                    iconAnchor: [8,8], 
+                    shadowUrl: '/media/icons/' + (newIcons ? "new/" : "old/" ) + 'shadow.png',
+                    shadowSize: [1,1],
+                    shadowAnchor: [8,8],
+                    className: "marker"
+                })});
+                locObj.addTo(map);
+
+                locationObjs.push(locObj);
+            }
+        }
+
+        document.getElementById("locations-key").style.display = "";
+        for (const img of imgs) {
+            let li = document.createElement("li");
+
+            let i = document.createElement("img");
+            i.src = "./media/icons/maplocstemp/" + img;
+            i.style.maxWidth = "16px";
+            i.style.maxHeight = "16px";
+            li.appendChild(i);
+
+            let name = img.replace(".png","");
+            let type = "";
+            if (name.includes("_")) {type = name.split("_")[0]; name = name.split("_")[1]}
+            name = name.replaceAll(/([A-Z])/g, ` $1`).trim() + (type ? " (" + type + ") ": "");
+            li.innerHTML = li.innerHTML + name;
+
+            key_elem.appendChild(li);
+        }
+        console.log("Drew all map locations");
+    }
+    function deleteLocations() {
+        for (const location of locationObjs) {
+            map.removeLayer(location);
+        }
+        locationObjs = [];
+        key_elem.innerHTML = "";
+        document.getElementById("locations-key").style.display = "none";
+        console.log("Erased all map locations");
+    }
+
+    drawlocations = !drawlocations;
+    if (drawlocations) {drawLocations()} 
+    else {deleteLocations()}
+
+}
 
 
 /** These functions toggle drawing of their related objects 
@@ -248,6 +314,7 @@ function pullguilds() {
  */
 
 function toggleTerritories() {
+
     function drawTerritories() {
         for (const [terr,terrbounds] of terrs) {
             let coords = [xytolatlng(terrbounds.startX,terrbounds.startY), xytolatlng(terrbounds.startX,terrbounds.endY), xytolatlng(terrbounds.endX,terrbounds.endY), xytolatlng(terrbounds.endX,terrbounds.startY)];
@@ -513,11 +580,6 @@ function eraseTerritoryStats() {
     terr_stats_elem.innerHTML = ""; //jank
 }
 
-/** Toggles all merchant icons/markers on the map. TODO.
- * 
- */
-function toggleMerchants() {
-
-}
 
 load_map_init(init);
+

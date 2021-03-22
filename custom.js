@@ -27,7 +27,7 @@ function getCustomFromHash(hash) {
         if (version === "1") {
             //do the things
             if (fixID) {
-                statMap.set("fixId", true);
+                statMap.set("fixID", true);
             } 
             while (tag !== "") {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
