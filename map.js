@@ -258,12 +258,12 @@ function pullguilds() {
 
                 let locObj = L.marker(latlng, {icon: L.icon({
                     //iconUrl: '/media/icons/' + (newIcons ? "new/" : "old/" ) + loc.icon,
-                    iconUrl: '/media/icons/maplocstemp/'+ loc.icon,
-                    iconSize: [16,16], 
-                    iconAnchor: [8,8], 
+                    iconUrl: '/media/icons/locations/' + loc.icon,
+                    iconSize: [24,24], 
+                    iconAnchor: [12,12], 
                     shadowUrl: '/media/icons/' + (newIcons ? "new/" : "old/" ) + 'shadow.png',
                     shadowSize: [1,1],
-                    shadowAnchor: [8,8],
+                    shadowAnchor: [12,12],
                     className: "marker"
                 })});
                 locObj.addTo(map);
@@ -277,9 +277,9 @@ function pullguilds() {
             let li = document.createElement("li");
 
             let i = document.createElement("img");
-            i.src = "./media/icons/maplocstemp/" + img;
-            i.style.maxWidth = "16px";
-            i.style.maxHeight = "16px";
+            i.src = "./media/icons/locations/"  + img;
+            i.style.maxWidth = "32px";
+            i.style.maxHeight = "32px";
             li.appendChild(i);
 
             let name = img.replace(".png","");
