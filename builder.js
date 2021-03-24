@@ -302,56 +302,90 @@ function decodeBuild(url_tag) {
 /*  Stores the entire build in a string using B64 encryption and adds it to the URL.
 */
 function encodeBuild() {
-    if (player_build) {
-        let build_string = "5_";
-        let crafted_idx = 0;
-        let custom_idx = 0;
-        for (const item of player_build.items) {
-            
-            if (item.get("custom")) {
-                let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
-                build_string += Base64.fromIntN(custom.length, 3) + custom;
-                custom_idx += 1;
-            } else if (item.get("crafted")) {
-                build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
-                crafted_idx += 1;
-            } else {
-                build_string += Base64.fromIntN(item.get("id"), 3);
-            }
-        }
-//        this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
-//        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
-//                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
-//                            Base64.fromIntN(player_build.leggings.get("id"), 3) +
-//                            Base64.fromIntN(player_build.boots.get("id"), 3) +
-//                            Base64.fromIntN(player_build.ring1.get("id"), 3) +
-//                            Base64.fromIntN(player_build.ring2.get("id"), 3) +
-//                            Base64.fromIntN(player_build.bracelet.get("id"), 3) +
-//                            Base64.fromIntN(player_build.necklace.get("id"), 3) +
-//                            Base64.fromIntN(player_build.weapon.get("id"), 3);
 
-        for (const skp of skp_order) {
-            build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
-        }
-        build_string += Base64.fromIntN(player_build.level, 2);
-        for (const _powderset of player_build.powders) {
-            let n_bits = Math.ceil(_powderset.length / 6);
-            build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
-            // Slice copy.
-            let powderset = _powderset.slice();
-            while (powderset.length != 0) {
-                let firstSix = powderset.slice(0,6).reverse();
-                let powder_hash = 0;
-                for (const powder of firstSix) {
-                    powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+    if (player_build) {
+        let build_string;
+        if (player_build.customItems.length > 0) { //v5 encoding
+            build_string = "5_";
+            let crafted_idx = 0;
+            let custom_idx = 0;
+            for (const item of player_build.items) {
+                
+                if (item.get("custom")) {
+                    let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
+                    build_string += Base64.fromIntN(custom.length, 3) + custom;
+                    custom_idx += 1;
+                } else if (item.get("crafted")) {
+                    build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
+                    crafted_idx += 1;
+                } else {
+                    build_string += Base64.fromIntN(item.get("id"), 3);
                 }
-                build_string += Base64.fromIntN(powder_hash, 5);
-                powderset = powderset.slice(6);
+            }
+    
+            for (const skp of skp_order) {
+                build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
+            }
+            build_string += Base64.fromIntN(player_build.level, 2);
+            for (const _powderset of player_build.powders) {
+                let n_bits = Math.ceil(_powderset.length / 6);
+                build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
+                // Slice copy.
+                let powderset = _powderset.slice();
+                while (powderset.length != 0) {
+                    let firstSix = powderset.slice(0,6).reverse();
+                    let powder_hash = 0;
+                    for (const powder of firstSix) {
+                        powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+                    }
+                    build_string += Base64.fromIntN(powder_hash, 5);
+                    powderset = powderset.slice(6);
+                }
+            }
+        } else { //v4 encoding
+            build_string = "4_";
+            let crafted_idx = 0;
+            for (const item of player_build.items) {
+                if (item.get("crafted")) {
+                    build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx]);
+                    crafted_idx += 1;
+                } else {
+                    build_string += Base64.fromIntN(item.get("id"), 3);
+                }
+            }
+    
+            for (const skp of skp_order) {
+                build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
+            }
+            build_string += Base64.fromIntN(player_build.level, 2);
+            for (const _powderset of player_build.powders) {
+                let n_bits = Math.ceil(_powderset.length / 6);
+                build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
+                // Slice copy.
+                let powderset = _powderset.slice();
+                while (powderset.length != 0) {
+                    let firstSix = powderset.slice(0,6).reverse();
+                    let powder_hash = 0;
+                    for (const powder of firstSix) {
+                        powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+                    }
+                    build_string += Base64.fromIntN(powder_hash, 5);
+                    powderset = powderset.slice(6);
+                }
             }
         }
-        
         return build_string;
     }
+    //        this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
+    //        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.leggings.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.boots.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.ring1.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.ring2.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.bracelet.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.necklace.get("id"), 3) +
+    //                            Base64.fromIntN(player_build.weapon.get("id"), 3);
     return "";
 }
 
