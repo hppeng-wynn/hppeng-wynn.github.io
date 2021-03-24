@@ -140,7 +140,7 @@ function idRound(id){
 
 //Used for item IDs and ingredient id field IDs
 let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Raw Melee Damage: ", "mdPct":"Melee Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "expd":"Exploding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":"", "lore": ""};
-let idSuffixes = {"displayName": "", "lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam_":"", "eDam_":"", "tDam_":"", "wDam_":"", "fDam_":"", "aDam_":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/4s", "ms":"/4s", "ref":"%", "ls":"/4s", "poison":"/3s", "thorns":"%", "expd":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":"", "restrict":"", "lore": ""};
+let idSuffixes = {"displayName": "", "lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam_":"", "eDam_":"", "tDam_":"", "wDam_":"", "fDam_":"", "aDam_":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/5s", "ms":"/3s", "ref":"%", "ls":"/3s", "poison":"/3s", "thorns":"%", "expd":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":"", "restrict":"", "lore": ""};
 //Used for ingredient IDs - name, lvl, tier. As of now, not used.
 /*let ingPrefixes = {"name": "", "lvl": "", "tier": ""};
 let ingSuffixes = {"name": "", "lvl": "", "tier": ""}*/
@@ -249,6 +249,7 @@ function displaySetBonuses(parent_id,build) {
         console.log(mock_item);
     }
 }
+
 
 function displayBuildStats(parent_id,build){
     // Commands to "script" the creation of nice formatting.
@@ -2051,10 +2052,10 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
 /** Displays the ID costs of an item
  * 
- * @param {Map} item - the statMap of an item. 
  * @param {String} elemID - the id of the parent element.
+ * @param {Map} item - the statMap of an item. 
  */
-function displayIDCosts(item, elemID) {
+function displayIDCosts(elemID, item) {
     let parent_elem = document.getElementById(elemID);
     let tier = item.get("tier");
     if ( (item.has("fixID") && item.get("fixID")) || ["Normal","Crafted","Custom","none", " ",].includes(item.get("tier"))) {
@@ -2174,11 +2175,11 @@ function displayIDCosts(item, elemID) {
 
 /** Displays Additional Info for 
  * 
- * @param {Map} item - the statMap of the item
  * @param {String} elemID - the parent element's id 
+ * @param {Map} item - the statMap of the item
  * @returns 
  */
-function displayAdditionalInfo(item, elemID) {
+function displayAdditionalInfo(elemID, item) {
     let parent_elem = document.getElementById(elemID);
     parent_elem.classList.add("left");
 
@@ -2195,4 +2196,75 @@ function displayAdditionalInfo(item, elemID) {
     parent_elem.appendChild(warning_elem);
 
     return;
+}
+
+/** Displays all set bonuses (0/n, 1/n, ... n/n) for a given set
+ * 
+ * @param {String} parent_id - id of the parent element
+ * @param {String} setName - the name of the set
+ */
+ function displayAllSetBonuses(parent_id,setName) {
+    let parent_elem = document.getElementById(parent_id);
+    parent_elem.style.display = ""; 
+    let set = sets[setName];
+    let title_elem = document.createElement("p");
+    title_elem.textContent = setName + " Set Bonuses";
+    title_elem.classList.add("Set");
+    title_elem.classList.add("title");
+    parent_elem.appendChild(title_elem);
+    let grid_elem = document.createElement("div");
+    grid_elem.style.display = "flex";
+    grid_elem.style.flexDirection = "rows";
+    grid_elem.style.flexWrap = "wrap";
+    grid_elem.style.gap = "5px";
+    parent_elem.appendChild(grid_elem);
+
+    for (let i = 0; i < set.items.length; i++) {
+        
+        let set_elem = document.createElement('p');
+        set_elem.classList.add("container");
+        set_elem.style = "grid-item-"+(i+1);
+        set_elem.style.maxWidth = "max(180px, 15%)";
+        set_elem.id = "set-"+setName+"-"+i;
+        grid_elem.appendChild(set_elem);
+        const bonus = set.bonuses[i];
+        let mock_item = new Map();
+        mock_item.set("fixID", true);
+        mock_item.set("displayName", setName+" Set: " + (i+1) + "/"+sets[setName].items.length);
+        set_elem.textContent = mock_item.get("displayName");
+        let mock_minRolls = new Map();
+        let mock_maxRolls = new Map();
+        mock_item.set("minRolls", mock_minRolls);
+        mock_item.set("maxRolls", mock_maxRolls);
+        for (const id in bonus) {
+            if (rolledIDs.includes(id)) {
+                mock_minRolls.set(id, bonus[id]);
+                mock_maxRolls.set(id, bonus[id]);
+            }
+            else {
+                mock_item.set(id, bonus[id]);
+            }
+        }
+        mock_item.set("powders", []);
+        displayExpandedItem(mock_item, set_elem.id);
+    }
+
+}
+
+/** Displays the individual probabilities of each possible value of each rollable ID for this item.
+ * 
+ * @param {String} parent_id the document id of the parent element
+ * @param {String} item expandedItem object
+ */
+function displayIDProbabilities(parent_id,item) {
+    let parent_elem = document.getElementById(parent_id);
+    parent_elem.style.display = "";
+    let title_elem = document.createElement("p");
+    title_elem.textContent = "Identification Probabilities";
+    title_elem.classList.add("Legendary");
+    title_elem.classList.add("title");
+    parent_elem.appendChild(title_elem);
+
+    let item_name = item.get("displayName");
+    console.log(itemMap.get(item_name))
 }

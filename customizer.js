@@ -548,13 +548,12 @@ function copyCustom() {
     }
 }
 
-function copyCustomLong() {
+function copyHash() {
     if (player_custom_item) {
-        let hash = encodeCustom(player_custom_item.statMap,true);
+        let hash = player_custom_item.statMap.get("hash");
         console.log(hash);
-        location.hash = hash;
-        copyTextToClipboard(custom_url_base+location.hash);
-        document.getElementById("copy-button-long").textContent = "Copied!";
+        copyTextToClipboard(hash);
+        document.getElementById("copy-button-hash").textContent = "Copied!";
     }
 }
 

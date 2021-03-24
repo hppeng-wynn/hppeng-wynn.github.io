@@ -9,7 +9,7 @@ const item_url_tag = location.hash.slice(1);
 console.log(item_url_base);
 console.log(item_url_tag);
 
-const ITEM_BUILD_VERSION = "6.9.42";
+const ITEM_BUILD_VERSION = "6.9.42.0";
 
 function setTitle() {
     let text = "WynnInfo version "+ITEM_BUILD_VERSION;
@@ -38,9 +38,13 @@ function init() {
         if(itemMap) {
             item = expandItem(itemMap.get(item_url_tag.replaceAll("%20"," ")), []);
             displayExpandedItem(item, "item-view");
-            displayIDCosts(item, "identification-costs");
-            displayAdditionalInfo(item, "additional-info");
+            displayAdditionalInfo("additional-info", item);
+            displayIDCosts("identification-costs", item);
+            if (item.get("set") && sets[item.get("set")]) {
+                displayAllSetBonuses("set-bonus-info",item.get("set"));
+            }
             console.log(item);
+            displayIDProbabilities("identification-probabilities", item);
         }
     } catch (error) {
         console.log(error);
