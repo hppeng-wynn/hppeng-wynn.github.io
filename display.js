@@ -402,7 +402,7 @@ function displayBuildStats(parent_id,build){
                     title.textContent = "Effective Life Steal:"
                     let value = document.createElement("td");
                     let defStats = build.getDefenseStats();
-                    value.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/4s";
+                    value.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s";
                     value.classList.add("right");
                     value.classList.add(style);
                     row.appendChild(title);
