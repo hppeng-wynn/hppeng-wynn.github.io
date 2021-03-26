@@ -411,8 +411,13 @@ class Build{
             adjAtkSpd = 0;
         }
 
-        // 0 for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct") + this.externalStats.get("mdPct"), 0, this.weapon, this.total_skillpoints, this.damageMultiplier, this.externalStats);
+        let damage_mult = 1;
+        if (this.weapon.get("type") === "relik") {
+            console.log("ASDFASDFASDFA");
+            damage_mult = 0.99; // CURSE YOU WYNNCRAFT
+        }
+        // 0spellmult for melee damage.
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct") + this.externalStats.get("mdPct"), 0, this.weapon, this.total_skillpoints, damage_mult * this.damageMultiplier, this.externalStats);
         
         let dex = this.total_skillpoints[1];
 
