@@ -40,7 +40,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     //1st round - apply each as ingred, 2nd round - apply as normal
     if (weapon.get("tier") === "Crafted") {
         let damageBases = buildStats.get("damageBases").slice();
-        for (const p of powders) {
+        for (const p of powders.concat(weapon.get("ingredPowders"))) {
             let powder = powderStats[p];  //use min, max, and convert
             let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
             let diff = Math.floor(damageBases[0] * powder.convert/100);
