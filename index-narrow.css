@@ -1,0 +1,101 @@
+.build-overall-container {
+    grid-column: 1;
+    grid-row: 2;
+}
+.spell-info-container {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.equipment{
+    padding: 0%;
+    display: grid;
+    grid-template-columns: min-content min-content auto;
+    gap: 5px;
+    grid-template-rows: min-content min-content auto;
+}
+.summary {
+    padding: 2% 4% 4%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    grid-auto-rows: minmax(60px, auto);
+}
+.container {
+
+}
+
+.ingredTable {
+    table-layout: "fixed";
+}
+.build, .spells .misc {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-auto-rows: minmax(60px, auto);
+    width: 94%;
+    background: #121516;
+}
+
+.iteminput {
+    width: 25vw;
+    height: 10vw;
+    max-height: 50px;
+}
+
+.powderinput {
+    width: 25vw;
+    height: 10vw;
+    max-height: 50px;
+}
+
+.skpInput, .idInput {
+    width: 90%;
+    height: 7vw;
+    max-height: 30px;
+}
+
+.wide-space {
+    height: 1em;
+}
+
+.idLabel, .skpLabel, .idDesc, .skpDesc {
+    font-size: 90%;
+}
+
+.title{
+    text-align: center;
+    font-size: 150%;
+}
+.smalltitle{
+    text-align: center;
+    font-size: 125%;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.button-narrow {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 100%;
+    display: inline-block;
+}
+button {
+    background-color: #666; 
+    border: 2px solid #444;
+    border-radius: 5px;
+    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 700;
+    font-size: 125%;
+    display: inline-block;
+}
