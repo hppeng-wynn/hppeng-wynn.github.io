@@ -464,22 +464,53 @@ button.toggleOn:hover {
     color: #ff0;
     background: #775;
 }
-
+.tooltip {
+    position: relative;
+}
 .tooltip .tooltiptext {
     visibility: hidden;
-    color: #aaa;
+    color: #ddd;
     background: #110110;
-    width: min(200%, 75vw);
+    /*width: min(200%, 75vw);*/
+    display: inline-block;
+    padding: 0 min(2%,10px) 0 min(2%,10px);
     text-align: center;
-    border: 3px solid #BCBCBC;
-    border-radius: 10px;
-    padding: 0 0;
+    border: 1px solid #BCBCBC;
+    border-radius: 2px;
     position: absolute;
     z-index: 1;
 }
-.center-parent {
-
+.header-tooltip {
+    top: 100%;
+    left: -20%;
 }
+.ing-tooltip {
+    min-width: 240px;
+    border: 3px solid #BCBCBC !important;
+    border-radius: 10px !important;
+    top: 100%;
+}
+.spellcostcalc {
+    width: max(70%, 130px) !important;
+    font-size: 12px;
+    /*overflow-wrap: break-word !important;*/
+    border: 1.5px dotted #BCBCBC !important;
+    border-radius: 1px !important;
+
+    /*JANK*/
+    left: -40%;
+    top: 24px;
+}
+.def-tooltip {
+    width: max(70%, 100px) !important;
+    font-size: 12px;
+    border: 1.5px dotted #BCBCBC !important;
+    border-radius: 1px !important; 
+    /*JANK*/
+    margin-top: 20px;
+    left: -30%;
+}
+
 .recipe {
     z-index: 1;
 }

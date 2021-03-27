@@ -57,6 +57,7 @@ function setHeaders() {
         img.classList.add("headericon");
         img.src = "/media/icons/new/" + data[0] + ".png";
         div.classList.add("tooltiptext");
+        div.classList.add("header-tooltip");
         div.classList.add("center");
         div.textContent = data[1];
         a_elem.appendChild(img);

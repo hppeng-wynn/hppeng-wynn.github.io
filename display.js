@@ -585,14 +585,31 @@ function displayExpandedItem(item, parent_id){
                 } else if (id === "majorIds") {
                     let p_elem = document.createElement("p");
                     p_elem.classList.add("itemp");
-                    let title_elem = document.createElement("b");
-                    title_elem.textContent = "Major IDs: ";
-                    let b_elem = document.createElement("b");
-                    b_elem.classList.add("Crafted");
-                    b_elem.textContent = item.get(id).toString();
+                    let majorID = item.get(id).toString();
 
-                    p_elem.appendChild(title_elem);
-                    p_elem.appendChild(b_elem);
+                    let title_elem = document.createElement("b");
+                    let b_elem = document.createElement("b");
+                    if (majorID.includes(":")) {   
+                        let name = majorID.substring(0, majorID.indexOf(":")+1);
+                        let mid = majorID.substring(majorID.indexOf(":")+1);
+                        if (name.charAt(0) !== "+") {name = "+" + name}
+                        title_elem.classList.add("Legendary");
+                        title_elem.textContent = name;
+                        b_elem.classList.add("Crafted");
+                        b_elem.textContent = mid;
+                        p_elem.appendChild(title_elem);
+                        p_elem.appendChild(b_elem);
+                    } else {
+                        let name = item.get(id).toString()
+                        if (name.charAt(0) !== "+") {name = "+" + name}
+                        b_elem.classList.add("Legendary");
+                        b_elem.textContent = name;
+                        p_elem.appendChild(b_elem);
+                    }
+
+                    
+
+                   
                     active_elem.appendChild(p_elem);
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
                     let p_elem = document.createElement("p");
@@ -918,7 +935,7 @@ function displayRecipeStats(craft, parent_id) {
         for (let j = 0; j < 2; j++) {
             let ingredName = ingreds[2 * i + j];
             let cell = document.createElement("td");
-            cell.style.width = "50%";
+            cell.style.minWidth = "50%";
             cell.classList.add("center");
             cell.classList.add("box");
             cell.classList.add("tooltip");
@@ -939,6 +956,7 @@ function displayRecipeStats(craft, parent_id) {
 
             let tooltip = document.createElement("div");
             tooltip.classList.add("tooltiptext");
+            tooltip.classList.add("ing-tooltip");
             tooltip.classList.add("center");
             tooltip.id = "tooltip-" + (2*i + j);
             cell.appendChild(tooltip);
@@ -1558,6 +1576,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     parent_elem.append(critStats);
 }
+
 function displayDefenseStats(parent_elem, build, insertSummary){
     let defenseStats = build.getDefenseStats();
     insertSummary = (typeof insertSummary !== 'undefined') ? insertSummary : false;
@@ -1626,6 +1645,11 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     hpRow.append(boost);
     statsTable.appendChild(hpRow);
 
+    let tooltip_elem;
+
+    let defMult = build.statMap.get("defMult");
+    if (!defMult) {defMult = 1}
+
     //EHP
     let ehpRow = document.createElement("tr");
     let ehp = document.createElement("td");
@@ -1635,6 +1659,12 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[1][0];
     boost.classList.add("right");
+    boost.classList.add("tooltip");
+    tooltip_elem = document.createElement("p");
+    tooltip_elem.classList.add("tooltiptext");
+    tooltip_elem.classList.add("def-tooltip");
+    tooltip_elem.textContent = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    boost.appendChild(tooltip_elem);
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
@@ -1648,6 +1678,12 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[1][1];
     boost.classList.add("right");
+    boost.classList.add("tooltip");
+    tooltip_elem = document.createElement("p");
+    tooltip_elem.classList.add("tooltiptext");
+    tooltip_elem.classList.add("def-tooltip");
+    tooltip_elem.textContent = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    boost.appendChild(tooltip_elem);
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
@@ -1675,6 +1711,12 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[3][0];
     boost.classList.add("right");
+    boost.classList.add("tooltip");
+    tooltip_elem = document.createElement("p");
+    tooltip_elem.classList.add("tooltiptext");
+    tooltip_elem.classList.add("def-tooltip");
+    tooltip_elem.textContent = `= ${stats[2]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    boost.appendChild(tooltip_elem);
 
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
@@ -1715,6 +1757,22 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         boost.textContent = eledefs[i];
         boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("right");
+        boost.classList.add("tooltip");
+        tooltip_elem = document.createElement("p");
+        tooltip_elem.classList.add("tooltiptext");
+        tooltip_elem.classList.add("def-tooltip");
+
+        let defRaw = build.statMap.get("defRaw")[i];
+        let defPct = build.statMap.get("defBonus")[i]/100;
+        if (defRaw < 0) {
+            defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
+            tooltip_elem.textContent = `= min(0, ${defRaw} * (1 ${defPct}))`
+        } else {
+            defPct >= 0 ? defPct = "+ " + defPct: defPct = "- " + defPct;
+            tooltip_elem.textContent = `= ${defRaw} * (1 ${defPct})`
+        }
+        boost.appendChild(tooltip_elem);
+
         eledefElemRow.appendChild(boost);
 
         statsTable.appendChild(eledefElemRow);
@@ -1747,6 +1805,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
 
     parent_elem.append(statsTable);
 }
+
 function displayPowderSpecials(parent_elem, powderSpecials, build) {
     parent_elem.textContent = "Powder Specials";
     let specials = powderSpecials.slice();
@@ -1870,6 +1929,7 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
         parent_elem.appendChild(powder_special);
     }
 }
+
 function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
@@ -1888,11 +1948,35 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         first.textContent = spell.title + " (";
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
+
         let second = document.createElement("b");
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
         second.classList.add("Mana");
+        second.classList.add("tooltip");
+        
+        let mana_cost_tooltip = document.createElement("p");
+        mana_cost_tooltip.classList.add("tooltiptext");
+        mana_cost_tooltip.classList.add("spellcostcalc")
+        mana_cost_tooltip.classList.add("itemp");
+
+        let tooltip_text = document.createElement("div");
+        tooltip_text.width = "100%";
+        tooltip_text.style.wordBreak = "break-all";
+        tooltip_text.style.overflowWrap = "break-word";  
+
+        let int_redux = skillPointsToPercentage(build.total_skillpoints[2]).toFixed(2);
+        let spPct_redux = (build.statMap.get("spPct" + spellIdx)/100).toFixed(2);
+        let spRaw_redux = (build.statMap.get("spRaw" + spellIdx)).toFixed(2);
+        spPct_redux >= 0 ? spPct_redux = "+ " + spPct_redux : spPct_redux = "- " + Math.abs(spPct_redux);
+        spRaw_redux >= 0 ? spRaw_redux = "+ " + spRaw_redux : spRaw_redux = "- " + Math.abs(spRaw_redux);
+
+        tooltip_text.textContent = `= max(1, floor((ceil(${spell.cost} * (1 - ${int_redux})) ${spRaw_redux}) * (1 ${spPct_redux})))`;
+        mana_cost_tooltip.appendChild(tooltip_text);
+        second.appendChild(mana_cost_tooltip);
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
+        
+
         let third = document.createElement("b");
         third.textContent = ")";
         title_elem.appendChild(third.cloneNode(true));
@@ -1928,6 +2012,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             }
         }
     }
+    //console.log(spell_parts);
 
     for (const part of spell_parts) {
         parent_elem.append(document.createElement("br"));
@@ -1960,6 +2045,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
+
 
             if (part.summary == true) {
                 let overallaverageLabel = document.createElement("p");
@@ -2004,8 +2090,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 }
             }
             save_damages.push(averageDamage);
-        }
-        else if (part.type === "heal") {
+        } else if (part.type === "heal") {
             let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
@@ -2023,8 +2108,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 overallhealLabel.classList.add("overallp");
                 part_divavg.append(overallhealLabel);
             }
-        }
-        else if (part.type === "total") {
+        } else if (part.type === "total") {
             let total_damage = 0;
             for (let i in part.factors) {
                 total_damage += save_damages[i] * part.factors[i];
@@ -2257,6 +2341,7 @@ function displayAdditionalInfo(elemID, item) {
  * @param {String} item expandedItem object
  */
 function displayIDProbabilities(parent_id,item) {
+    if (item.has("fixID") && item.get("fixID")) {return}
     let parent_elem = document.getElementById(parent_id);
     parent_elem.style.display = "";
     let title_elem = document.createElement("p");
@@ -2264,7 +2349,224 @@ function displayIDProbabilities(parent_id,item) {
     title_elem.classList.add("Legendary");
     title_elem.classList.add("title");
     parent_elem.appendChild(title_elem);
+    
+    let disclaimer_elem = document.createElement("p");
+    disclaimer_elem.textContent = "IDs are rolled on a uniform distribution. A chance of 0% means that either the minimum or maximum possible multiplier must be rolled to get this value."
+    parent_elem.appendChild(disclaimer_elem);
 
     let item_name = item.get("displayName");
     console.log(itemMap.get(item_name))
+    
+    let table_elem = document.createElement("table");
+    parent_elem.appendChild(table_elem);
+    for (const [id,val] of Object.entries(itemMap.get(item_name))) {
+        if (rolledIDs.includes(id)) {
+            let min = item.get("minRolls").get(id);
+            let max = item.get("maxRolls").get(id);
+
+            let row_title = document.createElement("tr");
+            //row_title.style.textAlign = "left";
+            let title_left = document.createElement("td");
+            let left_elem = document.createElement("p");
+            let left_val_title = document.createElement("b");
+            let left_val_elem = document.createElement("b");
+            title_left.style.textAlign = "left";
+            left_val_title.textContent = idPrefixes[id] + "Base ";
+            left_val_elem.textContent = val + idSuffixes[id];
+            if (val > 0 == !reversedIDs.includes(id)) {
+                left_val_elem.classList.add("positive");
+            } else if (val > 0 == reversedIDs.includes(id)) {
+                left_val_elem.classList.add("negative");
+            }
+            left_elem.appendChild(left_val_title);
+            left_elem.appendChild(left_val_elem);
+            title_left.appendChild(left_elem);
+            row_title.appendChild(title_left);
+
+            let title_right = document.createElement("td");
+            let title_right_text = document.createElement("b");
+            title_right.style.textAlign = "left";
+            title_right_text.textContent = "[ " + min + idSuffixes[id] + ", " + max + idSuffixes[id] + " ]";
+            if ( (min > 0 && max > 0 && !reversedIDs.includes(id)) || (min < 0 && max < 0 && reversedIDs.includes(id)) ) {
+                title_right_text.classList.add("positive");
+            } else if ( (min < 0 && max < 0 && !reversedIDs.includes(id)) || (min > 0 && max > 0 && reversedIDs.includes(id)) ) {
+                title_right_text.classList.add("negative");
+            }
+            title_right.appendChild(title_right_text);
+
+            let title_input = document.createElement("td");
+            let title_input_slider = document.createElement("input");
+            title_input_slider.type = "range";
+            title_input_slider.id = id+"-slider";
+            if (!reversedIDs.includes(id)) {
+                title_input_slider.step = 1;
+                title_input_slider.min = `${min}`;
+                title_input_slider.max = `${max}`;
+                title_input_slider.value = `${max}`;
+            } else {
+                title_input_slider.step = 1;
+                title_input_slider.min = `${-1*min}`;
+                title_input_slider.max = `${-1*max}`;
+                title_input_slider.value = `${-1*max}`;
+            }
+            let title_input_textbox = document.createElement("input");
+            title_input_textbox.type = "text";
+            title_input_textbox.value = `${max}`;
+            title_input_textbox.id = id+"-textbox";
+            title_input_textbox.classList.add("small-input");
+            title_input.appendChild(title_input_slider);
+            title_input.appendChild(title_input_textbox);
+            
+            row_title.appendChild(title_left);
+            row_title.appendChild(title_right);
+            row_title.appendChild(title_input);
+
+            let row_chances = document.createElement("tr");
+            let chance_cdf = document.createElement("td");
+            let chance_pdf = document.createElement("td");
+            let cdf_p = document.createElement("p");
+            cdf_p.id = id+"-cdf";
+            let pdf_p = document.createElement("p");
+            pdf_p.id = id+"-pdf";
+
+            chance_cdf.appendChild(cdf_p);
+            chance_pdf.appendChild(pdf_p);
+            row_chances.appendChild(chance_cdf);
+            row_chances.appendChild(chance_pdf);
+
+            table_elem.appendChild(row_title);
+            table_elem.appendChild(row_chances);
+
+            
+
+            stringPDF(id, max, val); //val is base roll
+            stringCDF(id, max, val); //val is base roll
+            title_input_slider.addEventListener("change", (event) => {
+                let id_name = event.target.id.split("-")[0];
+                let textbox_elem = document.getElementById(id_name+"-textbox");
+
+                if (reversedIDs.includes(id_name)) {
+                    if (event.target.value < -1*min) { event.target.value = -1*min}
+                    if (event.target.value > -1*max) { event.target.value = -1*max}
+                    stringPDF(id_name, -1*event.target.value, val); //val is base roll
+                    stringCDF(id_name, -1*event.target.value, val); //val is base roll
+                } else {    
+                    if (event.target.value < min) { event.target.value = min}
+                    if (event.target.value > max) { event.target.value = max}
+                    stringPDF(id_name, 1*event.target.value, val); //val is base roll
+                    stringCDF(id_name, 1*event.target.value, val); //val is base roll
+                }
+
+                if (textbox_elem && textbox_elem.value !== event.target.value) {
+                    if (reversedIDs.includes(id_name)) {
+                        textbox_elem.value = -event.target.value;
+                    } else {
+                        textbox_elem.value = event.target.value;
+                    }
+                }
+                
+                
+            });
+            title_input_textbox.addEventListener("change", (event) => {
+                let id_name = event.target.id.split("-")[0];
+                if (reversedIDs.includes(id_name)) {
+                    if (event.target.value > min) { event.target.value = min}
+                    if (event.target.value < max) { event.target.value = max}
+                } else {    
+                    if (event.target.value < min) { event.target.value = min}
+                    if (event.target.value > max) { event.target.value = max}
+                }
+                let slider_elem = document.getElementById(id_name+"-slider");
+                if (slider_elem.value !== event.target.value) {
+                    slider_elem.value = -event.target.value;    
+                }
+
+                stringPDF(id_name, 1*event.target.value, val); 
+                stringCDF(id_name, 1*event.target.value, val); 
+            });
+        }
+    }
+    
+
+
+    
+}
+
+//helper functions. id - the string of the id's name, val - the value of the id, base - the base value of the item for this id
+function stringPDF(id,val,base) {
+    /** [0.3b,1.3b] positive normal
+     *  [1.3b,0.3b] positive reversed
+     *  [1.3b,0.7b] negative normal
+     *  [0.7b,1.3b] negative reversed
+     * 
+     *  [0.3, 1.3] minr, maxr [0.3b, 1.3b] min, max
+     *  the minr/maxr decimal roll that corresponds to val -> minround, maxround
+     */
+    let p; let min; let max; let minr; let maxr; let minround; let maxround;
+    if (base > 0) {
+        minr = 0.3; maxr = 1.3;
+        min = Math.max(1, Math.round(minr*base)); max = Math.max(1, Math.round(maxr*base));
+        minround = (min == max) ? (minr) : ( Math.max(minr, (val-0.5) / base) );
+        maxround = (min == max) ? (maxr) : ( Math.min(maxr, (val+0.5) / base) );
+    } else {
+        minr = 1.3; maxr = 0.7;
+        min = Math.min(-1, Math.round(minr*base)); max = Math.min(-1, Math.round(maxr*base));
+        minround = (min == max) ? (minr) : ( Math.min(minr, (val-0.5) / base) );
+        maxround = (min == max) ? (maxr) : ( Math.max(maxr, (val+0.5) / base) );
+    }
+
+    console.log(( Math.min(maxr, (val+0.5) / base)));
+    
+    p = Math.abs(maxround-minround)/Math.abs(maxr-minr)*100;
+    p = p.toFixed(3);
+
+    let b1 = document.createElement("b");
+    b1.textContent = "Roll exactly ";
+    let b2 = document.createElement("b");
+    b2.textContent = val + idSuffixes[id];
+    if (val > 0 == !reversedIDs.includes(id)) {b2.classList.add("positive")}
+    if (val > 0 == reversedIDs.includes(id)) {b2.classList.add("negative")}
+    let b3 = document.createElement("b");
+    b3.textContent = ": " + p + "%";
+    document.getElementById(id + "-pdf").innerHTML = "";
+    document.getElementById(id + "-pdf").appendChild(b1);
+    document.getElementById(id + "-pdf").appendChild(b2);
+    document.getElementById(id + "-pdf").appendChild(b3);
+    document.getElementById(id + "-pdf").style.textAlign = "left";
+}
+function stringCDF(id,val,base) {
+    let p; let min; let max; let minr; let maxr; let minround; let maxround;
+    if (base > 0) {
+        minr = 0.3; maxr = 1.3;
+        min = Math.max(1, Math.round(minr*base)); max = Math.max(1, Math.round(maxr*base));
+        minround = (min == max) ? (minr) : ( Math.max(minr, (val-0.5) / base) );
+        maxround = (min == max) ? (maxr) : ( Math.min(maxr, (val+0.5) / base) );
+    } else {
+        minr = 1.3; maxr = 0.7;
+        min = Math.min(-1, Math.round(minr*base)); max = Math.min(-1, Math.round(maxr*base));
+        minround = (min == max) ? (minr) : ( Math.min(minr, (val-0.5) / base) );
+        maxround = (min == max) ? (maxr) : ( Math.max(maxr, (val+0.5) / base) );
+    }
+
+    console.log(( Math.min(maxr, (val+0.5) / base)));
+    if (reversedIDs.includes(id)) {
+        p = Math.abs(minr-maxround)/Math.abs(maxr-minr)*100;
+    } else {
+        p = Math.abs(maxr-minround)/Math.abs(maxr-minr)*100;
+    }
+    p = p.toFixed(3);
+    
+    let b1 = document.createElement("b");
+    b1.textContent = "Roll ";
+    let b2 = document.createElement("b");
+    b2.textContent = val + idSuffixes[id];
+    if (val > 0 == !reversedIDs.includes(id)) {b2.classList.add("positive")}
+    if (val > 0 == reversedIDs.includes(id)) {b2.classList.add("negative")}
+    let b3 = document.createElement("b");
+    b3.textContent= " or better: " + p + "%";
+    document.getElementById(id + "-cdf").innerHTML = "";
+    document.getElementById(id + "-cdf").appendChild(b1);
+    document.getElementById(id + "-cdf").appendChild(b2);
+    document.getElementById(id + "-cdf").appendChild(b3);
+    document.getElementById(id + "-cdf").style.textAlign = "left";
 }

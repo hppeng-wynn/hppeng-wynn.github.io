@@ -4,6 +4,8 @@ const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["va
 // externalStats should be a map
 function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
     let buildStats = new Map(stats);
+    let tooltipinfo = new Map();
+
     if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
         for (const entry of externalStats) {
             const key = entry[0];
@@ -80,12 +82,15 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
     }
+    tooltipinfo.set("damagebase",[neutralRemainingRaw,damages[1],damages[2],damages[3],damages[4],damages[5]]);
+    console.log(tooltipinfo);
 
     damages[0] = neutralRemainingRaw;
 
     let damageMult = damageMultiplier;
     let melee = false;
     // If we are doing melee calculations:
+    tooltipinfo.set("dmgMult", damageMult);
     if (spellMultiplier == 0) {
         spellMultiplier = 1;
         melee = true;
@@ -154,7 +159,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
     if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
     if (totalDamCrit[1] < 0) totalDamCrit[1] = 0;
-    return [totalDamNorm, totalDamCrit, damages_results];
+
+
+    return [totalDamNorm, totalDamCrit, damages_results, tooltipinfo];
 }
 
 
