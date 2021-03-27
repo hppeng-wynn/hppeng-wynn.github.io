@@ -585,14 +585,31 @@ function displayExpandedItem(item, parent_id){
                 } else if (id === "majorIds") {
                     let p_elem = document.createElement("p");
                     p_elem.classList.add("itemp");
-                    let title_elem = document.createElement("b");
-                    title_elem.textContent = "Major IDs: ";
-                    let b_elem = document.createElement("b");
-                    b_elem.classList.add("Crafted");
-                    b_elem.textContent = item.get(id).toString();
+                    let majorID = item.get(id).toString();
 
-                    p_elem.appendChild(title_elem);
-                    p_elem.appendChild(b_elem);
+                    let title_elem = document.createElement("b");
+                    let b_elem = document.createElement("b");
+                    if (majorID.includes(":")) {   
+                        let name = majorID.substring(0, majorID.indexOf(":")+1);
+                        let mid = majorID.substring(majorID.indexOf(":")+1);
+                        if (name.charAt(0) !== "+") {name = "+" + name}
+                        title_elem.classList.add("Legendary");
+                        title_elem.textContent = name;
+                        b_elem.classList.add("Crafted");
+                        b_elem.textContent = mid;
+                        p_elem.appendChild(title_elem);
+                        p_elem.appendChild(b_elem);
+                    } else {
+                        let name = item.get(id).toString()
+                        if (name.charAt(0) !== "+") {name = "+" + name}
+                        b_elem.classList.add("Legendary");
+                        b_elem.textContent = name;
+                        p_elem.appendChild(b_elem);
+                    }
+
+                    
+
+                   
                     active_elem.appendChild(p_elem);
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
                     let p_elem = document.createElement("p");
@@ -918,7 +935,7 @@ function displayRecipeStats(craft, parent_id) {
         for (let j = 0; j < 2; j++) {
             let ingredName = ingreds[2 * i + j];
             let cell = document.createElement("td");
-            cell.style.width = "50%";
+            cell.style.minWidth = "50%";
             cell.classList.add("center");
             cell.classList.add("box");
             cell.classList.add("tooltip");
@@ -939,6 +956,7 @@ function displayRecipeStats(craft, parent_id) {
 
             let tooltip = document.createElement("div");
             tooltip.classList.add("tooltiptext");
+            tooltip.classList.add("ing-tooltip");
             tooltip.classList.add("center");
             tooltip.id = "tooltip-" + (2*i + j);
             cell.appendChild(tooltip);
@@ -1558,6 +1576,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     parent_elem.append(critStats);
 }
+
 function displayDefenseStats(parent_elem, build, insertSummary){
     let defenseStats = build.getDefenseStats();
     insertSummary = (typeof insertSummary !== 'undefined') ? insertSummary : false;
@@ -1626,6 +1645,11 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     hpRow.append(boost);
     statsTable.appendChild(hpRow);
 
+    let tooltip_elem;
+
+    let defMult = build.statMap.get("defMult");
+    if (!defMult) {defMult = 1}
+
     //EHP
     let ehpRow = document.createElement("tr");
     let ehp = document.createElement("td");
@@ -1635,6 +1659,12 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[1][0];
     boost.classList.add("right");
+    boost.classList.add("tooltip");
+    tooltip_elem = document.createElement("p");
+    tooltip_elem.classList.add("tooltiptext");
+    tooltip_elem.classList.add("def-tooltip");
+    tooltip_elem.textContent = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    boost.appendChild(tooltip_elem);
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
@@ -1648,6 +1678,12 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[1][1];
     boost.classList.add("right");
+    boost.classList.add("tooltip");
+    tooltip_elem = document.createElement("p");
+    tooltip_elem.classList.add("tooltiptext");
+    tooltip_elem.classList.add("def-tooltip");
+    tooltip_elem.textContent = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    boost.appendChild(tooltip_elem);
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
@@ -1675,6 +1711,12 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[3][0];
     boost.classList.add("right");
+    boost.classList.add("tooltip");
+    tooltip_elem = document.createElement("p");
+    tooltip_elem.classList.add("tooltiptext");
+    tooltip_elem.classList.add("def-tooltip");
+    tooltip_elem.textContent = `= ${stats[2]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    boost.appendChild(tooltip_elem);
 
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
@@ -1715,6 +1757,22 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         boost.textContent = eledefs[i];
         boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("right");
+        boost.classList.add("tooltip");
+        tooltip_elem = document.createElement("p");
+        tooltip_elem.classList.add("tooltiptext");
+        tooltip_elem.classList.add("def-tooltip");
+
+        let defRaw = build.statMap.get("defRaw")[i];
+        let defPct = build.statMap.get("defBonus")[i]/100;
+        if (defRaw < 0) {
+            defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
+            tooltip_elem.textContent = `= min(0, ${defRaw} * (1 ${defPct}))`
+        } else {
+            defPct >= 0 ? defPct = "+ " + defPct: defPct = "- " + defPct;
+            tooltip_elem.textContent = `= ${defRaw} * (1 ${defPct})`
+        }
+        boost.appendChild(tooltip_elem);
+
         eledefElemRow.appendChild(boost);
 
         statsTable.appendChild(eledefElemRow);
@@ -1747,6 +1805,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
 
     parent_elem.append(statsTable);
 }
+
 function displayPowderSpecials(parent_elem, powderSpecials, build) {
     parent_elem.textContent = "Powder Specials";
     let specials = powderSpecials.slice();
@@ -1870,6 +1929,7 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
         parent_elem.appendChild(powder_special);
     }
 }
+
 function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
@@ -1888,11 +1948,35 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         first.textContent = spell.title + " (";
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
+
         let second = document.createElement("b");
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
         second.classList.add("Mana");
+        second.classList.add("tooltip");
+        
+        let mana_cost_tooltip = document.createElement("p");
+        mana_cost_tooltip.classList.add("tooltiptext");
+        mana_cost_tooltip.classList.add("spellcostcalc")
+        mana_cost_tooltip.classList.add("itemp");
+
+        let tooltip_text = document.createElement("div");
+        tooltip_text.width = "100%";
+        tooltip_text.style.wordBreak = "break-all";
+        tooltip_text.style.overflowWrap = "break-word";  
+
+        let int_redux = skillPointsToPercentage(build.total_skillpoints[2]).toFixed(2);
+        let spPct_redux = (build.statMap.get("spPct" + spellIdx)/100).toFixed(2);
+        let spRaw_redux = (build.statMap.get("spRaw" + spellIdx)).toFixed(2);
+        spPct_redux >= 0 ? spPct_redux = "+ " + spPct_redux : spPct_redux = "- " + Math.abs(spPct_redux);
+        spRaw_redux >= 0 ? spRaw_redux = "+ " + spRaw_redux : spRaw_redux = "- " + Math.abs(spRaw_redux);
+
+        tooltip_text.textContent = `= max(1, floor((ceil(${spell.cost} * (1 - ${int_redux})) ${spRaw_redux}) * (1 ${spPct_redux})))`;
+        mana_cost_tooltip.appendChild(tooltip_text);
+        second.appendChild(mana_cost_tooltip);
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
+        
+
         let third = document.createElement("b");
         third.textContent = ")";
         title_elem.appendChild(third.cloneNode(true));
@@ -1928,6 +2012,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             }
         }
     }
+    //console.log(spell_parts);
 
     for (const part of spell_parts) {
         parent_elem.append(document.createElement("br"));
@@ -1960,6 +2045,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
+
 
             if (part.summary == true) {
                 let overallaverageLabel = document.createElement("p");
@@ -2004,8 +2090,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 }
             }
             save_damages.push(averageDamage);
-        }
-        else if (part.type === "heal") {
+        } else if (part.type === "heal") {
             let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
@@ -2023,8 +2108,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 overallhealLabel.classList.add("overallp");
                 part_divavg.append(overallhealLabel);
             }
-        }
-        else if (part.type === "total") {
+        } else if (part.type === "total") {
             let total_damage = 0;
             for (let i in part.factors) {
                 total_damage += save_damages[i] * part.factors[i];
