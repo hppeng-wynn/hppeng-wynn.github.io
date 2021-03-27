@@ -44,7 +44,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         let damageBases = buildStats.get("damageBases").slice();
         for (const p of powders) {
             let powder = powderStats[p];  //use min, max, and convert
-            let element = round_near(p/6);
+            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
             let diff = Math.floor(damageBases[0] * powder.convert/100);
             damageBases[0] -= diff;
             damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
