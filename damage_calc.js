@@ -29,32 +29,18 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         const damage_vals = rawDamages[i].split("-").map(Number);
         damages.push(damage_vals);
     }
-    let damageBases = [];
-    if (weapon.get("tier") === "Crafted") {
-        damageBases = buildStats.get("damageBases").slice();
-    }
 
     // Applying spell conversions
     let neutralBase = damages[0].slice();
     let neutralRemainingRaw = damages[0].slice();
-    for (let i = 0; i < 5; ++i) {
-        let conversionRatio = spellConversions[i+1]/100;
-        let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
-        let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-        damages[i+1][0] = Math.floor(round_near(damages[i+1][0] + min_diff));
-        damages[i+1][1] = Math.floor(round_near(damages[i+1][1] + max_diff));
-        neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
-        neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
-    }
-    //console.log(damages);
-    let rawBoosts = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
 
     //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
     //1st round - apply each as ingred, 2nd round - apply as normal
     if (weapon.get("tier") === "Crafted") {
+        let damageBases = buildStats.get("damageBases").slice();
         for (const p of powders) {
             let powder = powderStats[p];  //use min, max, and convert
-            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
+            let element = round_near(p/6);
             let diff = Math.floor(damageBases[0] * powder.convert/100);
             damageBases[0] -= diff;
             damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
@@ -65,6 +51,16 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         }
         neutralRemainingRaw = damages[0].slice();
         neutralBase = damages[0].slice();
+    }
+
+    for (let i = 0; i < 5; ++i) {
+        let conversionRatio = spellConversions[i+1]/100;
+        let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
+        let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
+        damages[i+1][0] = Math.floor(round_near(damages[i+1][0] + min_diff));
+        damages[i+1][1] = Math.floor(round_near(damages[i+1][1] + max_diff));
+        neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+        neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
     }
 
     //apply powders to weapon
