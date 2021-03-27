@@ -36,6 +36,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let neutralBase = damages[0].slice();
     let neutralRemainingRaw = damages[0].slice();
 
+  
+
     //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
     //1st round - apply each as ingred, 2nd round - apply as normal
     if (weapon.get("tier") === "Crafted") {
@@ -54,7 +56,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         neutralRemainingRaw = damages[0].slice();
         neutralBase = damages[0].slice();
     }
-
+    
     for (let i = 0; i < 5; ++i) {
         let conversionRatio = spellConversions[i+1]/100;
         let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
@@ -82,6 +84,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
     }
+
+    
+
     tooltipinfo.set("damagebase",[neutralRemainingRaw,damages[1],damages[2],damages[3],damages[4],damages[5]]);
     console.log(tooltipinfo);
 
