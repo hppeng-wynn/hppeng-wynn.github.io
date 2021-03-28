@@ -211,18 +211,19 @@ class Craft{
                     powders.push(ingred.get("pid"));
                 }
             }
-            for (const p of powders) {
-                /* Powders as ingredients in crafted weapons are different than powders applied to non-crafted weapons. Thanks to nbcss for showing me the math.
-                */
-                let powder = powderStats[p];  //use min, max, and convert
-                let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
-                let diffLow = Math.floor(nDamBaseLow * powder.convert/100);
-                nDamBaseLow -= diffLow;
-                elemDamBaseLow[element] += diffLow + Math.floor( (powder.min + powder.max) / 2 );
-                let diffHigh = Math.floor(nDamBaseHigh * powder.convert/100);
-                nDamBaseHigh -= diffHigh;
-                elemDamBaseHigh[element] += diffHigh + Math.floor( (powder.min + powder.max) / 2 );
-            }
+            // for (const p of powders) {
+            //     /* Powders as ingredients in crafted weapons are different than powders applied to non-crafted weapons. Thanks to nbcss for showing me the math.
+            //     */
+            //     let powder = powderStats[p];  //use min, max, and convert
+            //     let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
+            //     let diffLow = Math.floor(nDamBaseLow * powder.convert/100);
+            //     nDamBaseLow -= diffLow;
+            //     elemDamBaseLow[element] += diffLow + Math.floor( (powder.min + powder.max) / 2 );
+            //     let diffHigh = Math.floor(nDamBaseHigh * powder.convert/100);
+            //     nDamBaseHigh -= diffHigh;
+            //     elemDamBaseHigh[element] += diffHigh + Math.floor( (powder.min + powder.max) / 2 );
+            // }
+            statMap.set("ingredPowders", powders);
             
             /* I create a separate variable for each low damage range because we need one damage range to calculate damage with, and it's custom to use the maximum range of the range range.
             */
