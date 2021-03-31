@@ -1412,6 +1412,9 @@ function displayPoisonDamage(overallparent_elem, build) {
 }
 
 function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
+    console.log("Melee Stats");
+    console.log(meleeStats);
+    let tooltipinfo = meleeStats[13];
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
     parent_elem.textContent = "";
@@ -1431,6 +1434,8 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     for (let i = 8; i < 11; ++i){
         stats[i] = stats[i].toFixed(2);
     }
+    //tooltipelem, tooltiptext
+    let tooltip; let tooltiptext;
     
     //title
     let title_elem = document.createElement("p");
@@ -1452,7 +1457,11 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let averageDamage = document.createElement("p");
     averageDamage.classList.add("left");
     averageDamage.classList.add("itemp");
+    averageDamage.classList.add("tooltip");
     averageDamage.textContent = "Average DPS: " + stats[10];
+    tooltiptext = `= ((${stats[8]} * ${(stats[6][2]).toFixed(2)}) + (${stats[9]} * ${(stats[7][2]).toFixed(2)}))`
+    tooltip = createTooltip(tooltip, "p", tooltiptext, averageDamage, ["melee-tooltip"]);
+    averageDamage.appendChild(tooltip);
     parent_elem.append(averageDamage);
 
     //overall average DPS
@@ -1464,6 +1473,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let overallaverageDamageSecond = document.createElement("b");
     overallaverageDamageSecond.classList.add("Damage");
     overallaverageDamageSecond.textContent = stats[10];
+    tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageDamage, ["melee-tooltip", "summary-tooltip"]);
     overallaverageDamage.appendChild(overallaverageDamageFirst);
     overallaverageDamage.appendChild(overallaverageDamageSecond);
 
@@ -1490,7 +1500,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     overallatkSpd.appendChild(overallatkSpdFirst);
     overallatkSpd.appendChild(overallatkSpdSecond);
     overallparent_elem.append(overallatkSpd);
-    //overallparent_elem.append(document.createElement("br"));
 
     //Non-Crit: n->elem, total dmg, DPS
     let nonCritStats = document.createElement("p");
@@ -1499,23 +1508,38 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     nonCritStats.textContent = "Non-Crit Stats: ";
     nonCritStats.append(document.createElement("br"));
     for (let i = 0; i < 6; i++){
-        if(stats[i][1] > 0){
+        if(stats[i][1] != 0){
             let dmg = document.createElement("p");
-            dmg.textContent = stats[i][0] + "-" + stats[i][1];
+            dmg.textContent = stats[i][0] + " \u2013 " + stats[i][1];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
+            tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
+            tooltip = createTooltip(tooltip, "p", tooltiptext, dmg, ["melee-tooltip"]);
             nonCritStats.append(dmg);
         }
     }
 
     let normalDamage = document.createElement("p");
-    normalDamage.textContent = "Total: " + stats[6][0] + "-" + stats[6][1];
+    normalDamage.textContent = "Total: " + stats[6][0] + " \u2013 " + stats[6][1];
     normalDamage.classList.add("itemp");
+    let tooltiparr = ["Min: = ", "Max: = "]
+    let arr = []; let arr2 = [];
+    for (let i = 0; i < 6; i++) {
+        if (stats[i][0] != 0) {
+            arr.push(stats[i][0]);
+            arr2.push(stats[i][1]);
+        }
+    }
+    tooltiptext = tooltiparr[0] + arr.join(" + ") + "\n" + tooltiparr[1] + arr2.join(" + ");
+    tooltip = createTooltip(tooltip, "p", tooltiptext, normalDamage, ["melee-tooltip"]);
     nonCritStats.append(normalDamage);
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
     normalDPS.classList.add("itemp");
+    normalDPS.classList.add("tooltip");
+    tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
+    tooltip = createTooltip(tooltip, "p", tooltiptext, normalDPS, ["melee-tooltip"]);
     nonCritStats.append(normalDPS);
 
     //overall average DPS
@@ -1526,6 +1550,8 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let singleHitDamageSecond = document.createElement("b");
     singleHitDamageSecond.classList.add("Damage");
     singleHitDamageSecond.textContent = stats[12].toFixed(2);
+    tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${stats[6][2].toFixed(2)} + ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${stats[7][2].toFixed(2)}`;
+    tooltip = createTooltip(tooltip, "p", tooltiptext, singleHitDamage, ["melee-tooltip", "summary-tooltip"]);
 
     singleHitDamage.appendChild(singleHitDamageFirst);
     singleHitDamage.appendChild(singleHitDamageSecond);
@@ -1549,22 +1575,37 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     critStats.textContent = "Crit Stats: ";
     critStats.append(document.createElement("br"));
     for (let i = 0; i < 6; i++){
-        if(stats[i][3] > 0){
+        if(stats[i][3] != 0) {
             dmg = document.createElement("p");
-            dmg.textContent = stats[i][2] + "-" + stats[i][3];
+            dmg.textContent = stats[i][2] + " \u2013 " + stats[i][3];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
+            tooltiptext = tooltipinfo.get("damageformulas")[i].slice(2,4).join("\n");
+            tooltip = createTooltip(tooltip, "p", tooltiptext, dmg, ["melee-tooltip"]);
             critStats.append(dmg);
         }
     }
     let critDamage = document.createElement("p");
-    critDamage.textContent = "Total: " + stats[7][0] + "-" + stats[7][1];
+    critDamage.textContent = "Total: " + stats[7][0] + " \u2013 " + stats[7][1];
     critDamage.classList.add("itemp");
+    tooltiparr = ["Min: = ", "Max: = "]
+    arr = []; arr2 = [];
+    for (let i = 0; i < 6; i++) {
+        if (stats[i][0] != 0) {
+            arr.push(stats[i][2]);
+            arr2.push(stats[i][3]);
+        }
+    }
+    tooltiptext = tooltiparr[0] + arr.join(" + ") + "\n" + tooltiparr[1] + arr2.join(" + ");
+    tooltip = createTooltip(tooltip, "p", tooltiptext, critDamage, ["melee-tooltip"]);
+    
     critStats.append(critDamage);
 
     let critDPS = document.createElement("p");
     critDPS.textContent = "Crit DPS: " + stats[9];
     critDPS.classList.add("itemp");
+    tooltiptext = ` = ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
+    tooltip = createTooltip(tooltip, "p", tooltiptext, critDPS, ["melee-tooltip"]);
     critStats.append(critDPS);
 
     let critChance = document.createElement("p");
@@ -1645,7 +1686,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     hpRow.append(boost);
     statsTable.appendChild(hpRow);
 
-    let tooltip_elem;
+    let tooltip; let tooltiptext;
 
     let defMult = build.statMap.get("defMult");
     if (!defMult) {defMult = 1}
@@ -1659,12 +1700,8 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[1][0];
     boost.classList.add("right");
-    boost.classList.add("tooltip");
-    tooltip_elem = document.createElement("p");
-    tooltip_elem.classList.add("tooltiptext");
-    tooltip_elem.classList.add("def-tooltip");
-    tooltip_elem.textContent = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
-    boost.appendChild(tooltip_elem);
+    tooltiptext = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
@@ -1678,12 +1715,8 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[1][1];
     boost.classList.add("right");
-    boost.classList.add("tooltip");
-    tooltip_elem = document.createElement("p");
-    tooltip_elem.classList.add("tooltiptext");
-    tooltip_elem.classList.add("def-tooltip");
-    tooltip_elem.textContent = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
-    boost.appendChild(tooltip_elem);
+    tooltiptext = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
@@ -1711,12 +1744,8 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost = document.createElement("td");
     boost.textContent = stats[3][0];
     boost.classList.add("right");
-    boost.classList.add("tooltip");
-    tooltip_elem = document.createElement("p");
-    tooltip_elem.classList.add("tooltiptext");
-    tooltip_elem.classList.add("def-tooltip");
-    tooltip_elem.textContent = `= ${stats[2]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
-    boost.appendChild(tooltip_elem);
+    tooltiptext = `= ${stats[2]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
+    tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
@@ -1757,21 +1786,17 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         boost.textContent = eledefs[i];
         boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("right");
-        boost.classList.add("tooltip");
-        tooltip_elem = document.createElement("p");
-        tooltip_elem.classList.add("tooltiptext");
-        tooltip_elem.classList.add("def-tooltip");
 
         let defRaw = build.statMap.get("defRaw")[i];
         let defPct = build.statMap.get("defBonus")[i]/100;
         if (defRaw < 0) {
             defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
-            tooltip_elem.textContent = `= min(0, ${defRaw} * (1 ${defPct}))`
+            tooltiptext = `= min(0, ${defRaw} * (1 ${defPct}))`
         } else {
             defPct >= 0 ? defPct = "+ " + defPct: defPct = "- " + defPct;
-            tooltip_elem.textContent = `= ${defRaw} * (1 ${defPct})`
+            tooltiptext = `= ${defRaw} * (1 ${defPct})`
         }
-        boost.appendChild(tooltip_elem);
+        tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
         eledefElemRow.appendChild(boost);
 
@@ -1933,6 +1958,8 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
 function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
     parent_elem.textContent = "";
 
+
+    let tooltip; let tooltiptext;
     const stats = build.statMap;
     let title_elem = document.createElement("p");
     title_elem.classList.add("smalltitle");
@@ -1953,16 +1980,6 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
         second.classList.add("Mana");
         second.classList.add("tooltip");
-        
-        let mana_cost_tooltip = document.createElement("p");
-        mana_cost_tooltip.classList.add("tooltiptext");
-        mana_cost_tooltip.classList.add("spellcostcalc")
-        mana_cost_tooltip.classList.add("itemp");
-
-        let tooltip_text = document.createElement("div");
-        tooltip_text.width = "100%";
-        tooltip_text.style.wordBreak = "break-all";
-        tooltip_text.style.overflowWrap = "break-word";  
 
         let int_redux = skillPointsToPercentage(build.total_skillpoints[2]).toFixed(2);
         let spPct_redux = (build.statMap.get("spPct" + spellIdx)/100).toFixed(2);
@@ -1970,9 +1987,9 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         spPct_redux >= 0 ? spPct_redux = "+ " + spPct_redux : spPct_redux = "- " + Math.abs(spPct_redux);
         spRaw_redux >= 0 ? spRaw_redux = "+ " + spRaw_redux : spRaw_redux = "- " + Math.abs(spRaw_redux);
 
-        tooltip_text.textContent = `= max(1, floor((ceil(${spell.cost} * (1 - ${int_redux})) ${spRaw_redux}) * (1 ${spPct_redux})))`;
-        mana_cost_tooltip.appendChild(tooltip_text);
-        second.appendChild(mana_cost_tooltip);
+        tooltiptext = `= max(1, floor((ceil(${spell.cost} * (1 - ${int_redux})) ${spRaw_redux}) * (1 ${spPct_redux})))`;
+        tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spellcostcalc"]);
+        second.appendChild(tooltip);
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
         
@@ -2032,6 +2049,8 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
             let results = _results[2];
+            let tooltipinfo = _results[3];
+            
             for (let i = 0; i < 6; ++i) {
                 for (let j in results[i]) {
                     results[i][j] = results[i][j].toFixed(2);
@@ -2043,7 +2062,9 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
             let averageLabel = document.createElement("p");
             averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
+            tooltiptext = ` = ((1 - ${critChance}) * ${nonCritAverage.toFixed(2)}) + (${critChance} * ${critAverage.toFixed(2)})`
             averageLabel.classList.add("damageSubtitle");
+            tooltip = createTooltip(tooltip, "p", tooltiptext, averageLabel, ["spell-tooltip"]);
             part_div.append(averageLabel);
 
 
@@ -2055,6 +2076,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 second.textContent = averageDamage.toFixed(2);
                 overallaverageLabel.appendChild(first);
                 overallaverageLabel.appendChild(second);
+                tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
                 second.classList.add("Damage");
                 overallaverageLabel.classList.add("overallp");
                 part_divavg.append(overallaverageLabel);
@@ -2065,36 +2087,56 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             nonCritLabel.classList.add("damageSubtitle");
             part_div.append(nonCritLabel);
             
+            let noncritarrmin = [];
+            let noncritarrmax = [];
             for (let i = 0; i < 6; i++){
-                if (results[i][1] > 0){
+                if (results[i][1] != 0){
                     let p = document.createElement("p");
                     p.classList.add("damagep");
                     p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][0]+"-"+results[i][1];
+                    p.textContent = results[i][0] + " \u2013 " + results[i][1];
+                    tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
+                    tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
+                    noncritarrmin.push(results[i][0]);
+                    noncritarrmax.push(results[i][1]);
                     part_div.append(p);
                 }
             }
+            tooltiptext = ` = ((${noncritarrmin.join(" + ")}) + (${noncritarrmax.join(" + ")})) / 2`;
+            tooltip = createTooltip(tooltip, "p", tooltiptext, nonCritLabel, ["spell-tooltip"]);
+
             //part_div.append(document.createElement("br"));
             let critLabel = document.createElement("p");
             critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
             critLabel.classList.add("damageSubtitle");
             part_div.append(critLabel);
 
+            let critarrmin = [];
+            let critarrmax = [];
             for (let i = 0; i < 6; i++){
-                if (results[i][1] > 0){
+                if (results[i][1] != 0){
                     let p = document.createElement("p");
                     p.classList.add("damagep");
                     p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][2]+"-"+results[i][3];
+                    p.textContent = results[i][2]+" \u2013 "+results[i][3];
+                    tooltiptext = tooltipinfo.get("damageformulas")[i].slice(2,4).join("\n");
+                    tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
+                    critarrmin.push(results[i][2]);
+                    critarrmax.push(results[i][3]);
                     part_div.append(p);
                 }
             }
+            tooltiptext = ` = ((${critarrmin.join(" + ")}) + (${critarrmax.join(" + ")})) / 2`;
+            tooltip = createTooltip(tooltip, "p", tooltiptext, critLabel, ["spell-tooltip"]);
+
             save_damages.push(averageDamage);
         } else if (part.type === "heal") {
             let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
+            tooltiptext = ` = ${part.strength} * ${build.getDefenseStats()[0]} * max(0.5, min(1.75, 1 + 0.5 * ${stats.get("wDamPct")/100}))`;
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             healLabel.classList.add("damagep");
+            tooltip = createTooltip(tooltip, "p", tooltiptext, healLabel, ["spell-tooltip"]);
             part_div.append(healLabel);
             if (part.summary == true) {
                 let overallhealLabel = document.createElement("p");
@@ -2106,16 +2148,25 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 second.classList.add("Set");
                 overallhealLabel.appendChild(second);
                 overallhealLabel.classList.add("overallp");
+                tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
                 part_divavg.append(overallhealLabel);
             }
         } else if (part.type === "total") {
             let total_damage = 0;
+            tooltiptext = "";
             for (let i in part.factors) {
                 total_damage += save_damages[i] * part.factors[i];
             }
+
+            let dmgarr = part.factors.slice();
+            dmgarr = dmgarr.map(x => "(" + x + " * " + save_damages[dmgarr.indexOf(x)].toFixed(2) + ")");
+            tooltiptext = " = " + dmgarr.join(" + ");
+
+
             let averageLabel = document.createElement("p");
             averageLabel.textContent = "Average: "+total_damage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
+            tooltip = createTooltip(tooltip, "p", tooltiptext, averageLabel, ["spell-tooltip"]);
             part_div.append(averageLabel);
 
             let overallaverageLabel = document.createElement("p");
@@ -2125,6 +2176,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             overallaverageLabelFirst.textContent = "Average: ";
             overallaverageLabelSecond.textContent = total_damage.toFixed(2);
             overallaverageLabelSecond.classList.add("Damage");
+            tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
 
 
             overallaverageLabel.appendChild(overallaverageLabelFirst);

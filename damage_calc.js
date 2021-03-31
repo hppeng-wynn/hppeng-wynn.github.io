@@ -5,6 +5,8 @@ const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["va
 function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
     let buildStats = new Map(stats);
     let tooltipinfo = new Map();
+    //6x for damages, normal min normal max crit min crit max
+    let damageformulas = [["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "]];
 
     if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
         for (const entry of externalStats) {
@@ -87,10 +89,11 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
 
     
 
-    tooltipinfo.set("damagebase",[neutralRemainingRaw,damages[1],damages[2],damages[3],damages[4],damages[5]]);
-    console.log(tooltipinfo);
+    
+    //console.log(tooltipinfo);
 
     damages[0] = neutralRemainingRaw;
+    tooltipinfo.set("damageBases", damages);
 
     let damageMult = damageMultiplier;
     let melee = false;
@@ -101,17 +104,21 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         melee = true;
     }
     else {
+        tooltipinfo.set("dmgMult", `(${tooltipinfo.get("dmgMult")} * ${spellMultiplier} * ${baseDamageMultiplier[attackSpeeds.indexOf(buildStats.get("atkSpd"))]})`)
         damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(buildStats.get("atkSpd"))];
     }
     //console.log(damages);
     //console.log(damageMult);
-
+    tooltipinfo.set("rawModifier", `(${rawModifier} * ${spellMultiplier} * ${damageMultiplier})`);
     rawModifier *= spellMultiplier * damageMultiplier;
     let totalDamNorm = [0, 0];
     let totalDamCrit = [0, 0];
     if(!melee){       
         totalDamNorm = [rawModifier, rawModifier];
         totalDamCrit = [rawModifier, rawModifier];
+        for (let arr of damageformulas) {
+            arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
+        }
     }
     let damages_results = [];
     // 0th skillpoint is strength, 1st is dex.
@@ -119,23 +126,35 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let strBoost = 1 + skillPointsToPercentage(str);
     //let staticBoost = (pctModifier / 100.);
     let staticBoost = (pctModifier / 100.) + skillPointsToPercentage(str);
+    tooltipinfo.set("staticBoost", `${(pctModifier/ 100.).toFixed(2)} + ${skillPointsToPercentage(str).toFixed(2)}`);
+    tooltipinfo.set("skillBoost",["","","","","",""]);
     let skillBoost = [0];
     for (let i in total_skillpoints) {
         skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get("damageBonus")[i] / 100.);
+        tooltipinfo.get("skillBoost")[i] = `(${skillPointsToPercentage(total_skillpoints[i]).toFixed(2)} + ${(buildStats.get("damageBonus")[i]/100.).toFixed(2)})`
     }
 
     for (let i in damages) {
         let damageBoost = 1 + skillBoost[i] + staticBoost;
+        tooltipinfo.set("damageBoost", `(1 + ${tooltipinfo.get("skillBoost")[i]} + ${tooltipinfo.get("staticBoost")})`)
         damages_results.push([
             //Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
             //Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
             //Math.max(damages[i][0] * strBoost * 2 * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
             //Math.max(damages[i][1] * strBoost * 2 * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
-            Math.max(damages[i][0] * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
-            Math.max(damages[i][1] * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
-            Math.max(damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit min
-            Math.max(damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit max
+            // Math.max(damages[i][0] * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
+            // Math.max(damages[i][1] * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
+            // Math.max(damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit min
+            // Math.max(damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit max
+            damages[i][0] * Math.max(damageBoost,0) * damageMult,       // Normal min
+            damages[i][1] * Math.max(damageBoost,0) * damageMult,       // Normal max
+            damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult,  // Crit min
+            damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, // Crit max
         ]);
+        damageformulas[i][0] += `(max((${tooltipinfo.get("damageBases")[i][0]} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][1] += `(max((${tooltipinfo.get("damageBases")[i][1]} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][2] += `(max((${tooltipinfo.get("damageBases")[i][0]} * max(1 + ${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][3] += `(max((${tooltipinfo.get("damageBases")[i][1]} * max(1 + ${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
         totalDamNorm[0] += damages_results[i][0];
         totalDamNorm[1] += damages_results[i][1];
         totalDamCrit[0] += damages_results[i][2];
@@ -159,13 +178,17 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     damages_results[0][1] += rawModifier;
     damages_results[0][2] += rawModifier;
     damages_results[0][3] += rawModifier;
+    for (let i in damageformulas[0]) {
+        damageformulas[0][i] += ` + ${tooltipinfo.get("rawModifier")}`
+    }
+    
 
     if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
     if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
     if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
     if (totalDamCrit[1] < 0) totalDamCrit[1] = 0;
 
-
+    tooltipinfo.set("damageformulas", damageformulas);
     return [totalDamNorm, totalDamCrit, damages_results, tooltipinfo];
 }
 

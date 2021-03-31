@@ -1,6 +1,5 @@
 
-const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
-//0.51, 0.82, 1.50, 2.05, 2.50, 3.11, 4.27
+
 const classDefenseMultipliers = new Map([ ["relik",0.50], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.20] ]);
 
 /**
@@ -414,8 +413,9 @@ class Build{
 
         let damage_mult = 1;
         if (this.weapon.get("type") === "relik") {
-            console.log("ASDFASDFASDFA");
             damage_mult = 0.99; // CURSE YOU WYNNCRAFT
+            //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
+            //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
         }
         // 0spellmult for melee damage.
         let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct") + this.externalStats.get("mdPct"), 0, this.weapon, this.total_skillpoints, damage_mult * this.damageMultiplier, this.externalStats);
@@ -436,7 +436,7 @@ class Build{
         let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
         let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex)));
         //[[n n n n] [e e e e] [t t t t] [w w w w] [f f f f] [a a a a] [lowtotal hightotal normalChance] [critlowtotal crithightotal critChance] normalDPS critCPS averageDPS adjAttackSpeed, singleHit] 
-        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd, singleHitTotal]);
+        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd, singleHitTotal]).concat(results[3]);
     }
 
     /*

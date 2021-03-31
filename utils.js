@@ -11,6 +11,8 @@ let accessoryTypes = [ "ring", "bracelet", "necklace" ];
 let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 let consumableTypes = [ "potion", "scroll", "food"];
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
+const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
+//0.51, 0.82, 1.50, 2.05, 2.50, 3.11, 4.27
 const classes = ["Warrior", "Assassin", "Mage", "Archer", "Shaman"];
 const tiers = ["Normal", "Unique", "Rare", "Legendary", "Fabled", "Mythic", "Set", "Crafted"] //I'm not sure why you would make a custom crafted but if you do you should be able to use it w/ the correct powder formula
 const types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(consumableTypes).map(x => x.substring(0,1).toUpperCase() + x.substring(1));
@@ -310,4 +312,35 @@ function randomColorHSL(h,s,l) {
     }
 
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+/** Creates a tooltip. 
+ * 
+ * @param {DOM Element} elem - the element to make a tooltip
+ * @param {String} element_type - the HTML element type that the tooltiptext should be.
+ * @param {String} tooltiptext - the text to display in the tooltip.
+ * @param {DOM Element} parent - the parent elem. optional.
+ * @param {String[]} classList - a list of classes to add to the element.
+ */
+function createTooltip(elem, element_type, tooltiptext, parent, classList) {
+    elem = document.createElement(element_type);
+    elem.classList.add("tooltiptext");
+    if (tooltiptext.includes("\n")) {
+        let texts = tooltiptext.split("\n");
+        for (const t of texts) {
+            let child = document.createElement(element_type);
+            child.textContent = t;
+            elem.appendChild(child);
+        }
+    } else {
+        elem.textContent = tooltiptext;
+    }
+    for (const c of classList) {
+        elem.classList.add(c);
+    }
+    if (parent) {
+        parent.classList.add("tooltip");
+        parent.appendChild(elem);
+    }
+    return elem;
 }

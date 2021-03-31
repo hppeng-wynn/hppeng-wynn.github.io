@@ -491,7 +491,7 @@ button.toggleOn:hover {
     top: 100%;
 }
 .spellcostcalc {
-    width: max(70%, 130px) !important;
+    width: max(70%, 120px) !important;
     font-size: 12px;
     /*overflow-wrap: break-word !important;*/
     border: 1.5px dotted #BCBCBC !important;
@@ -509,6 +509,27 @@ button.toggleOn:hover {
     /*JANK*/
     margin-top: 20px;
     left: -30%;
+}
+.melee-tooltip {
+    width: max(80%, 150px) !important;
+    font-size: 12px;
+    border: 1.5px dotted #BCBCBC !important;
+    border-radius: 1px !important; 
+    /*JANK*/
+    margin-top: 20px;
+    left: -10%;
+}
+.spell-tooltip {
+    width: max(80%, 150px) !important;
+    font-size: 12px;
+    border: 1.5px dotted #BCBCBC !important;
+    border-radius: 1px !important; 
+    /*JANK*/
+    margin-top: 20px;
+    left: -10%;
+}
+.summary-tooltip {
+    left: 10% !important;
 }
 
 .recipe {
