@@ -8,7 +8,7 @@ const custom_url_tag = location.hash.slice(1);
 console.log(custom_url_base);
 console.log(custom_url_tag);
 
-const CUSTOM_BUILD_VERSION = "6.9.42.0";
+const CUSTOM_BUILD_VERSION = "7";
 
 function setTitle() {
     let text = "WynnCustom version "+CUSTOM_BUILD_VERSION;
