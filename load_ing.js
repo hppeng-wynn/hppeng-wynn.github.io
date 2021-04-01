@@ -95,14 +95,17 @@ async function load_ings(init_func) {
     add_promises.push(add_tx2.complete);
     add_promises.push(add_tx3.complete);
     Promise.all(add_promises).then((values) => {
-        idb.close();
         init_ing_maps();
         init_func();
     });
+    // DB not closed? idfk man
 }
 
 function load_ing_init(init_func) {
-    
+    if (idb) {
+        console.log("Ingredient db already loaded, skipping load sequence");
+        return;
+    }
     let request = window.indexedDB.open("ing_db", ING_DB_VERSION)
     request.onerror = function() {
         console.log("DB failed to open...");

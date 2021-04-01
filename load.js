@@ -110,13 +110,17 @@ async function load(init_func) {
     }
     add_promises.push(add_tx.complete);
     Promise.all(add_promises).then((values) => {
-        db.close();
         init_maps();
         init_func();
     });
+    // DB not closed? idfk man
 }
 
 function load_init(init_func) {
+    if (db) {
+        console.log("Item db already loaded, skipping load sequence");
+        return;
+    }
     let request = window.indexedDB.open('item_db', DB_VERSION);
 
     request.onerror = function() {
