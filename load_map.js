@@ -108,6 +108,11 @@ function load_map_init(init_func) {
     
     // window.indexedDB.deleteDatabase("map_db", MAP_DB_VERSION);
     // window.indexedDB.deleteDatabase("maploc_db", MAP_DB_VERSION);
+    if (mdb) {
+        console.log("Map db already loaded, skipping load sequence");
+        init_func();
+        return;
+    }
 
     let request = window.indexedDB.open("map_db", MAP_DB_VERSION)
     request.onerror = function() {

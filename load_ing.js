@@ -105,6 +105,7 @@ async function load_ings(init_func) {
 function load_ing_init(init_func) {
     if (idb) {
         console.log("Ingredient db already loaded, skipping load sequence");
+        init_func();
         return;
     }
     let request = window.indexedDB.open("ing_db", ING_DB_VERSION)

@@ -119,6 +119,7 @@ async function load(init_func) {
 function load_init(init_func) {
     if (db) {
         console.log("Item db already loaded, skipping load sequence");
+        init_func();
         return;
     }
     let request = window.indexedDB.open('item_db', DB_VERSION);
