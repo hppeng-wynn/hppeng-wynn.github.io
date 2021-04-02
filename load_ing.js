@@ -4,6 +4,7 @@ const ING_DB_VERSION = 5;
 
 let idb;
 let ireload = false;
+let iload_complete = false;
 let ings;
 let recipes;
 
@@ -39,11 +40,12 @@ async function ing_load_local(init_func) {
             console.log("Successfully read local recipe db.");
             recipes = request4.result;
             init_ing_maps();
+            init_func();
+            iload_complete = true;
         }
     }
     await get_tx.complete;
     idb.close();
-    init_func();
 }
 
 function clean_ing(ing) {
@@ -98,12 +100,13 @@ async function load_ings(init_func) {
     Promise.all(add_promises).then((values) => {
         init_ing_maps();
         init_func();
+        iload_complete = true;
     });
     // DB not closed? idfk man
 }
 
 function load_ing_init(init_func) {
-    if (idb) {
+    if (iload_complete) {
         console.log("Ingredient db already loaded, skipping load sequence");
         init_func();
         return;
