@@ -136,7 +136,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
 
     for (let i in damages) {
         let damageBoost = 1 + skillBoost[i] + staticBoost;
-        tooltipinfo.set("damageBoost", `(1 + ${tooltipinfo.get("skillBoost")[i]} + ${tooltipinfo.get("staticBoost")})`)
+        tooltipinfo.set("damageBoost", `(1 + ${tooltipinfo.get("skillBoost")[i-1]} + ${tooltipinfo.get("staticBoost")})`)
         damages_results.push([
             //Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
             //Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max

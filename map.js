@@ -5,8 +5,8 @@
  
 const map_url_base = location.href.split("#")[0];
 const map_url_tag = location.hash.slice(1);
-console.log(map_url_base);
-console.log(map_url_tag);
+// console.log(map_url_base);
+// console.log(map_url_tag);
 
 const MAP_BUILD_VERSION = "6.9.42.0";
 

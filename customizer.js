@@ -5,8 +5,8 @@
  
 const custom_url_base = location.href.split("#")[0];
 const custom_url_tag = location.hash.slice(1);
-console.log(custom_url_base);
-console.log(custom_url_tag);
+// console.log(custom_url_base);
+// console.log(custom_url_tag);
 
 const CUSTOM_BUILD_VERSION = "6.9.42.0";
 

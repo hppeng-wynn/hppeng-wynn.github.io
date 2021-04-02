@@ -13,40 +13,47 @@ let itemLists = new Map();
  * Load item set from local DB. Calls init() on success.
  */
 async function load_local(init_func) {
-    let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
-    let sets_store = get_tx.objectStore('set_db');
-    let get_store = get_tx.objectStore('item_db');
-    let request = get_store.getAll();
-    request.onerror = function(event) {
-        console.log("Could not read local item db...");
-    }
-    request.onsuccess = function(event) {
-        console.log("Successfully read local item db.");
-        items = request.result;
-        //console.log(items);
-        let request2 = sets_store.openCursor();
-
-        sets = {};
-        request2.onerror = function(event) {
-            console.log("Could not read local set db...");
+    if (!itemMap) {
+        let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
+        let sets_store = get_tx.objectStore('set_db');
+        let get_store = get_tx.objectStore('item_db');
+        let request = get_store.getAll();
+        request.onerror = function(event) {
+            console.log("Could not read local item db...");
         }
-
-        request2.onsuccess = function(event) {
-            let cursor = event.target.result;
-            if (cursor) {
-                sets[cursor.primaryKey] = cursor.value;
-                cursor.continue();
+        request.onsuccess = function(event) {
+            console.log("Successfully read local item db.");
+            items = request.result;
+            //console.log(items);
+            let request2 = sets_store.openCursor();
+    
+            sets = {};
+            request2.onerror = function(event) {
+                console.log("Could not read local set db...");
             }
-            else {
-                console.log("Successfully read local set db.");
-                //console.log(sets);
-                init_maps();
-                init_func();
+    
+            request2.onsuccess = function(event) {
+                let cursor = event.target.result;
+                if (cursor) {
+                    sets[cursor.primaryKey] = cursor.value;
+                    cursor.continue();
+                }
+                else {
+                    console.log("Successfully read local set db.");
+                    //console.log(sets);
+                    init_maps();
+                }
             }
         }
+        await get_tx.complete;
+        db.close();
+    } else {
+        console.log("Item and Set dbs already loaded!");
     }
-    await get_tx.complete;
-    db.close();
+
+    if (itemMap) {
+        init_func();
+    }
 }
 
 /*

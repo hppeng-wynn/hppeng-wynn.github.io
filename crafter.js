@@ -4,8 +4,8 @@
 
 const ing_url_base = location.href.split("#")[0];
 const ing_url_tag = location.hash.slice(1);
-console.log(ing_url_base);
-console.log(ing_url_tag);
+// console.log(ing_url_base);
+// console.log(ing_url_tag);
 
 
 
@@ -37,10 +37,9 @@ function init() {
     //no ing
     
     console.log("all ingredients");
-    console.log(ings);
-    console.log("all recipes");
-    console.log(recipes);
     console.log(ingMap);
+    console.log("all recipes");
+    console.log(recipeMap);
     /*console.log(ingList);
     console.log(recipeList);   
     console.log(ingIDMap);

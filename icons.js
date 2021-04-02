@@ -5,6 +5,9 @@ icon_state_stored = window_storage.getItem("newicons");
 newIcons = true;
 if (icon_state_stored === "false") {toggleIcons()} 
 
+//REMOVE THIS IN THE REAL VERSION 7 OR SOMETHING
+window_storage.removeItem("rick");
+
 /** Toggle icons on the ENTIRE page.
  * 
  */
