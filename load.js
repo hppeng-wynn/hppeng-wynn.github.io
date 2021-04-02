@@ -3,6 +3,7 @@ const DB_VERSION = 38;
 
 let db;
 let reload = false;
+let load_complete = false;
 let items;
 let sets;
 let itemMap;
@@ -41,12 +42,13 @@ async function load_local(init_func) {
                 console.log("Successfully read local set db.");
                 //console.log(sets);
                 init_maps();
-                //console.log(init_func);
                 init_func();
+                load_complete = true;
             }
         }
     }
     await get_tx.complete;
+    db.close();
 }
 
 /*
@@ -112,12 +114,13 @@ async function load(init_func) {
     Promise.all(add_promises).then((values) => {
         init_maps();
         init_func();
+        load_complete = true;
     });
     // DB not closed? idfk man
 }
 
 function load_init(init_func) {
-    if (db) {
+    if (load_complete) {
         console.log("Item db already loaded, skipping load sequence");
         init_func();
         return;
