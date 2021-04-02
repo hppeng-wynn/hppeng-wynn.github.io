@@ -9,7 +9,7 @@ const ing_url_tag = location.hash.slice(1);
 
 
 
-const ING_BUILD_VERSION = "6.9.42.0";
+const ING_BUILD_VERSION = "7";
 /*
  * END testing section
  */

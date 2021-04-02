@@ -8,7 +8,7 @@ const map_url_tag = location.hash.slice(1);
 // console.log(map_url_base);
 // console.log(map_url_tag);
 
-const MAP_BUILD_VERSION = "6.9.42.0";
+const MAP_BUILD_VERSION = "7";
 
 function setTitle() {
     let text = "WynnGPS version "+MAP_BUILD_VERSION;

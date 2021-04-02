@@ -9,7 +9,7 @@ const item_url_tag = location.hash.slice(1);
 // console.log(item_url_base);
 // console.log(item_url_tag);
 
-const ITEM_BUILD_VERSION = "6.9.42.0";
+const ITEM_BUILD_VERSION = "7";
 
 function setTitle() {
     let text = "WynnInfo version "+ITEM_BUILD_VERSION;
