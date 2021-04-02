@@ -108,7 +108,7 @@ function populateItemList(type) {
  * Populate dropdowns, add listeners, etc.
  */
 function init() {
-    
+    console.log("builder.js init");
     
     for (const armorType of armorTypes) {
         populateItemList(armorType);

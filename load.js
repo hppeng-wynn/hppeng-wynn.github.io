@@ -41,12 +41,12 @@ async function load_local(init_func) {
                 console.log("Successfully read local set db.");
                 //console.log(sets);
                 init_maps();
+                console.log(init_func);
+                init_func();
             }
         }
     }
     await get_tx.complete;
-    db.close();
-    init_func();
 }
 
 /*

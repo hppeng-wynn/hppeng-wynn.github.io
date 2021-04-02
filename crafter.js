@@ -33,7 +33,7 @@ function setTitle() {
 
 
 
-function init() {
+function init_crafter() {
     //no ing
     
     console.log("all ingredients");
@@ -344,4 +344,4 @@ function resetFields() {
     calculateCraft();
 }
 
-load_ing_init(init);
+load_ing_init(init_crafter);

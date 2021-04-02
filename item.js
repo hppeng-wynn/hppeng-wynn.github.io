@@ -19,18 +19,9 @@ function setTitle() {
 
 setTitle();
 
-
-
-
-/*
- * END testing section
- */
-
-
 let item;
 
-
-function init() {
+function init_itempage() {
     //console.log(item_url_tag);
 
     //displayExpandedItem(expandItem(itemMap.get(item_url_tag).statMap, []), "item-view");
@@ -53,5 +44,5 @@ function init() {
 
 
 
-load_init(init);
+load_init(init_itempage);
 //load_ing_init(init);

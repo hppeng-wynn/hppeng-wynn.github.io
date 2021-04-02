@@ -60,7 +60,7 @@ const resourceColors = new Map([
 /** Thanks to kristofbolyai's github page for showing me how to do all of this.
  * 
  */
-function init(){ //async just in case we need async stuff
+function init_map(){ //async just in case we need async stuff
     map_elem = document.getElementById("mapdiv");
     let coordx_elem = document.getElementById("coord-x");
     let coordz_elem = document.getElementById("coord-z");
@@ -581,5 +581,5 @@ function eraseTerritoryStats() {
 }
 
 
-load_map_init(init);
+load_map_init(init_map);
 

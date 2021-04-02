@@ -54,7 +54,7 @@ function stringify(v) {
     return typeof v === 'number' ? (Math.round(v * 100) / 100).toString() : v;
 }
 
-function init() {
+function init_items2() {
     const itemList = document.getElementById('item-list');
     const itemListFooter = document.getElementById('item-list-footer');
 
@@ -198,4 +198,4 @@ function init() {
     searchFilterField.field.select();
 }
 
-load_init(init);
+load_init(init_items2);

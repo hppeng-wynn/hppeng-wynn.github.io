@@ -37,7 +37,7 @@ let neg_range = [1.3,0.7];
 let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","pos_roll_range-choice-min","pos_roll_range-choice-max"];
         
 
-function init() {
+function init_customizer() {
 
     try {
         populateFields();
@@ -694,5 +694,8 @@ function resetBaseValues() {
     }
 }
 
-load_init(init);
-load_ing_init(init);
+function _init_customizer() {
+    load_ing_init(init_customizer);
+}
+
+load_init(_init_customizer);

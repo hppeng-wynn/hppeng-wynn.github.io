@@ -189,8 +189,8 @@ function doItemSearch() {
     displayItems(items_copy);
 }
 
-function init() {
+function init_items() {
     items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i, []) );
 }
 
-load_init(init);
+load_init(init_items);
