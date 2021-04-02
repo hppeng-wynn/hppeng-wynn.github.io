@@ -21,35 +21,29 @@ let recipeIDMap;
  */
 async function ing_load_local(init_func) {
     console.log("IngMap is: \n " + ingMap);
-    if (!ingMap) {
-        let get_tx = idb.transaction(['ing_db', 'recipe_db'], 'readonly');
-        let ings_store = get_tx.objectStore('ing_db');
-        let recipes_store = get_tx.objectStore('recipe_db');
-        let request3 = ings_store.getAll();
-        request3.onerror = function(event) {
-            console.log("Could not read local ingredient db...");
-        }
-        request3.onsuccess = function(event) {
-            console.log("Successfully read local ingredient db.");
-            ings = request3.result;
-            let request4 = recipes_store.getAll();
-            request4.onerror = function(event) {
-                console.log("Could not read local recipe db...");
-            }
-            request4.onsuccess = function(event) {
-                console.log("Successfully read local recipe db.");
-                recipes = request4.result;
-                init_ing_maps();
-            }
-        }
-        await get_tx.complete;
-        idb.close();
-    } else {
-        console.log("Ingredient and Recipe dbs already loaded!");
+    let get_tx = idb.transaction(['ing_db', 'recipe_db'], 'readonly');
+    let ings_store = get_tx.objectStore('ing_db');
+    let recipes_store = get_tx.objectStore('recipe_db');
+    let request3 = ings_store.getAll();
+    request3.onerror = function(event) {
+        console.log("Could not read local ingredient db...");
     }
-    if (ingMap) {
-        init_func();
+    request3.onsuccess = function(event) {
+        console.log("Successfully read local ingredient db.");
+        ings = request3.result;
+        let request4 = recipes_store.getAll();
+        request4.onerror = function(event) {
+            console.log("Could not read local recipe db...");
+        }
+        request4.onsuccess = function(event) {
+            console.log("Successfully read local recipe db.");
+            recipes = request4.result;
+            init_ing_maps();
+        }
     }
+    await get_tx.complete;
+    idb.close();
+    init_func();
 }
 
 function clean_ing(ing) {
