@@ -5,6 +5,10 @@ function checkBool(v) {
 }
 
 function checkNum(v) {
+  if (typeof v === 'boolean') {
+    if (v) return 1;
+    return 0;
+  }
   if (typeof v !== 'number') throw new Error(`Expected number, but got ${typeof v}`);
   return v;
 }
@@ -259,6 +263,9 @@ const itemQueryFuncs = {
 // static type check
 function staticCheck(expType, term) {
   if (expType === 'any' || expType === term.type) {
+    return true;
+  }
+  if (expType === 'number' && term.type === 'boolean') {
     return true;
   }
   throw new Error(`Expected ${expType}, but got ${term.type}`);
