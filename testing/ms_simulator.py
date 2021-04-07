@@ -3,19 +3,23 @@ realSpeeds = [] # TODO
 
 atkSpd = 6
 
-#spellCycle = [1, 2, 1, 2, 0]
-#spellDelay = [0.5, 0.5, 0.5, 0.5, 0]
-spellCycle = [-1, 1, 0, 2, 1, 1]
-spellDelay = [0.4312345, 0, 0.4, 0.4, 0.4, 0.4]
+#spellCycle = [1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 2]
+#spellDelay = [0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 0, 0.5, 1, 0.5]
+spellCycle = [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2]
+spellDelay = [0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5]
+#spellCycle = [-1, 1, 0, 2, 1, 1]
+#spellDelay = [0.4312345, 0, 0.4, 0.4, 0.4, 0.4]
 #spellCycle = [9, 0, 9, 0, 10, 0, 0]
 #spellDelay = [0, 1.4, 0, 1.4, 0, 1.3, 1.3]
-delayCycle = [1.2, 0, 0.4, 0.4, 0.4, 0.4]
-spellCycle = spellCycle*8
-spellDelay = spellDelay*4 + delayCycle + spellDelay*2 + delayCycle
+#delayCycle = [1.2, 0, 0.4, 0.4, 0.4, 0.4]
+#spellCycle = spellCycle*8
+#spellDelay = spellDelay*4 + delayCycle + spellDelay*2 + delayCycle
 
 simulation_end = 100
-manaRegens = [5, 0, 15]
-manaSteals = [9, 13, 0]
+#manaRegens = [5, 0, 15]
+#manaSteals = [9, 13, 0]
+manaRegens = [0, 0]
+manaSteals = [8, 11]
 
 import random
 import math
