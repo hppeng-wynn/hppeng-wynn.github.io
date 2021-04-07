@@ -215,11 +215,11 @@ class Custom{
                 this.statMap.set("nDamBaseLow", Math.floor((parseFloat(this.statMap.get("nDamLow")) + parseFloat(this.statMap.get("nDam"))) / 2) );
                 this.statMap.set("nDamBaseHigh", Math.floor((parseFloat(this.statMap.get("nDamLow")) + parseFloat(this.statMap.get("nDam"))) / 2) );
                 for (const e in skp_elements) {
-                    statMap.set(skp_elements[e]+"DamBaseLow", Math.floor((parseFloat(this.statMap.get(skp_elements[e]+"DamLow")) + parseFloat(this.statMap.get(skp_elements[e]+"Dam"))) / 2));
-                    statMap.set(skp_elements[e]+"DamBaseHigh", Math.floor((parseFloat(this.statMap.get(skp_elements[e]+"DamLow")) + parseFloat(this.statMap.get(skp_elements[e]+"Dam"))) / 2));
+                    this.statMap.set(skp_elements[e]+"DamBaseLow", Math.floor((parseFloat(this.statMap.get(skp_elements[e]+"DamLow")) + parseFloat(this.statMap.get(skp_elements[e]+"Dam"))) / 2));
+                    this.statMap.set(skp_elements[e]+"DamBaseHigh", Math.floor((parseFloat(this.statMap.get(skp_elements[e]+"DamLow")) + parseFloat(this.statMap.get(skp_elements[e]+"Dam"))) / 2));
                 }
+                this.statMap.set("ingredPowders", []);
             }
-            
         }
 
         if (this.statMap.get("category") !== "weapon") {

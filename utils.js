@@ -344,3 +344,18 @@ function createTooltip(elem, element_type, tooltiptext, parent, classList) {
     }
     return elem;
 }
+
+/** A generic function that toggles the on and off state of a button.
+ * 
+ * @param {String} button_id - the id name of the button.
+ */
+function toggleButton(button_id) {
+    let elem = document.getElementById(button_id);
+    if (elem.tagName === "BUTTON") {
+        if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
+            elem.classList.remove("toggleOn");
+        } else {
+            elem.classList.add("toggleOn");
+        }
+    }
+}

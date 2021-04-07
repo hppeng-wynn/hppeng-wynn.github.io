@@ -249,16 +249,6 @@ function populateFields() {
     
 }
 
-/* Toggles ONE button
-*/
-function toggleButton(buttonId) {
-    let elem = document.getElementById(buttonId);
-    if (elem.classList.contains("toggleOn")) {
-        elem.classList.remove("toggleOn");
-    } else{
-        elem.classList.add("toggleOn");
-    }
-}
 
 /* Copy the link
 */

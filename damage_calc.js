@@ -131,12 +131,13 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let skillBoost = [0];
     for (let i in total_skillpoints) {
         skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get("damageBonus")[i] / 100.);
-        tooltipinfo.get("skillBoost")[i] = `(${skillPointsToPercentage(total_skillpoints[i]).toFixed(2)} + ${(buildStats.get("damageBonus")[i]/100.).toFixed(2)})`
+        tooltipinfo.get("skillBoost")[parseInt(i,10)+1] = `(${skillPointsToPercentage(total_skillpoints[i]).toFixed(2)} + ${(buildStats.get("damageBonus")[i]/100.).toFixed(2)})`
     }
+    tooltipinfo.get("skillBoost")[0] = undefined;
 
     for (let i in damages) {
         let damageBoost = 1 + skillBoost[i] + staticBoost;
-        tooltipinfo.set("damageBoost", `(1 + ${tooltipinfo.get("skillBoost")[i-1]} + ${tooltipinfo.get("staticBoost")})`)
+        tooltipinfo.set("damageBoost", `(1 + ${(tooltipinfo.get("skillBoost")[i] ? tooltipinfo.get("skillBoost")[i] + " + " : "")} ${tooltipinfo.get("staticBoost")})`)
         damages_results.push([
             //Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
             //Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max

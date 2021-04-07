@@ -8,7 +8,7 @@ const custom_url_tag = location.hash.slice(1);
 // console.log(custom_url_base);
 // console.log(custom_url_tag);
 
-const CUSTOM_BUILD_VERSION = "7";
+const CUSTOM_BUILD_VERSION = "7.0.1";
 
 function setTitle() {
     let text = "WynnCustom version "+CUSTOM_BUILD_VERSION;
@@ -193,7 +193,6 @@ function calculateCustom() {
                 }
             }
         }
-       
 
 
         player_custom_item = new Custom(statMap);
@@ -201,8 +200,6 @@ function calculateCustom() {
         document.getElementById("right-container").classList.remove("sticky-box");
         let custom_str = encodeCustom(player_custom_item.statMap, true);
         location.hash = custom_str;
-
-        custom_str = encodeCustom(player_custom_item.statMap, true);
         player_custom_item.setHash(custom_str);
         console.log(player_custom_item.statMap.get("hash"));
 
@@ -429,16 +426,7 @@ function populateFields() {
     }
 }
 
-/* Toggles ONE button
-*/
-function toggleButton(buttonId) {
-    let elem = document.getElementById(buttonId);
-    if (elem.classList.contains("toggleOn")) {
-        elem.classList.remove("toggleOn");
-    } else{
-        elem.classList.add("toggleOn");
-    }
-}
+
 
 /* Changes an element's text content from yes to no or vice versa
 */
