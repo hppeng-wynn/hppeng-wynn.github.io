@@ -61,7 +61,7 @@ function calculate_skillpoints(equipment, weapon) {
                 }
             }
             if (item.get("reqs")[i] == 0) continue;
-            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i]);// + item.get("skillpoints")[i]);
+            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i] + item.get("skillpoints")[i]);
             const req = item.get("reqs")[i];
             const cur = skillpoints[i];
             if (req > cur) {
