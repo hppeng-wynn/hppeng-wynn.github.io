@@ -1,8 +1,3 @@
-/**TODO: 
- *  Fix Claims (broken)
- *      Guild pull fails to update actual guilds on the map, which also do not save properly.
- *  Fix custom items saving reversed IDs in the wrong order.
- */
 
 /*
  * TESTING SECTION
@@ -116,7 +111,7 @@ function init_map(){ //async just in case we need async stuff
     map_elem.style.background = "#121516";
     
     try {
-        //refreshData();
+        refreshData();
         pullguilds();
         //save_map_data();
     } catch (error) {
@@ -204,8 +199,9 @@ function toggleButton(elemID) {
  * 
  */
 async function refreshData() { 
-    terrs = new Map();
+    //terrs = new Map();
     claims = new Map();
+    terrdata;
     guilds = [];
 
 
@@ -214,7 +210,6 @@ async function refreshData() {
     .then(data => {return data.json()})
     .then(res => { //success
         terrdata = Object.entries(res['territories']);
-        console.log(terrdata);
         guilds = [];
         for (const terr of terrdata) {
             //terrs.set(terr[0], terr[1].location) //bounds shouldnt change
