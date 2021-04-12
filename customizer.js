@@ -134,14 +134,14 @@ function calculateCustom() {
             }
             statMap.set("fixID", true);
 
-        } else { //rolled IDs!
+        } else { //not fixed
             for (const input of inputs) {
                 if (input.id.includes("-fixed")) {
                     continue;
                 }
-                //FIXs
                 let id = input.id.replace("-choice", "");
                 let rollMap = "";
+                let oppMap = "";
 
                 //If it's a minimum, it's -min
                 if(id.includes("-min")) {
@@ -570,16 +570,31 @@ function base_to_range(id) {
     let base = parseFloat(getValue(id+"-choice-base"));
     if(base) {
         //This version allows overriding of min and max.
-        if (base < 0) {
-            setValue(id+"-choice-min", Math.min(Math.round(neg_range[0]*base),-1));
+        if (reversedIDs.includes(id)) {
+            if (base < 0) {
+                setValue(id+"-choice-min", Math.min(Math.round(neg_range[1]*base),-1));
+            } else {
+                setValue(id+"-choice-min", Math.max(Math.round(pos_range[1]*base),1));
+            }
+            if (base < 0) {
+                setValue(id+"-choice-max", Math.min(Math.round(neg_range[0]*base),-1));
+            } else {
+                setValue(id+"-choice-max", Math.max(Math.round(pos_range[0]*base),1));
+            }
         } else {
-            setValue(id+"-choice-min", Math.max(Math.round(pos_range[0]*base),1));
+            if (base < 0) {
+                setValue(id+"-choice-min", Math.min(Math.round(neg_range[0]*base),-1));
+            } else {
+                setValue(id+"-choice-min", Math.max(Math.round(pos_range[0]*base),1));
+            }
+            if (base < 0) {
+                setValue(id+"-choice-max", Math.min(Math.round(neg_range[1]*base),-1));
+            } else {
+                setValue(id+"-choice-max", Math.max(Math.round(pos_range[1]*base),1));
+            }
         }
-        if (base < 0) {
-            setValue(id+"-choice-max", Math.min(Math.round(neg_range[1]*base),-1));
-        } else {
-            setValue(id+"-choice-max", Math.max(Math.round(pos_range[1]*base),1));
-        }
+
+
         /* No overiding min/max version
         if (!getValue(id+"-choice-min")) {
             if (base < 0) {

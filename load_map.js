@@ -66,6 +66,7 @@ async function load_map(init_func) {
     result = await (await fetch(url)).json();
     maplocs = result.locations;
 
+    refreshData();
     console.log(terrdata);
     console.log(maplocs);
 
@@ -154,8 +155,37 @@ function load_map_init(init_func) {
 
         console.log("DB setup complete...");
     }
-
 }
+
+/** Saves map data. Meant to be called after territories and guilds are refreshed.
+ * 
+ */
+function save_map_data() {
+    let add_promises = [];
+
+    let add_tx2 = mdb.transaction(['map_db'], 'readwrite');
+    let map_store = add_tx2.objectStore('map_db');
+    for (const terr of Object.entries(terrdata)) {
+        add_promises.push(map_store.add(terr[1],terr[0])); //WHY? WHY WOULD YOU STORE AS VALUE, KEY? WHY NOT KEEP THE NORMAL KEY, VALUE CONVENTION?
+    }
+
+    let add_tx3 = mdb.transaction(['maploc_db'], 'readwrite');
+    let maploc_store = add_tx3.objectStore('maploc_db');
+    for (const i in maplocs) {
+        add_promises.push(maploc_store.add(maplocs[i],i));
+    }
+
+    add_promises.push(add_tx2.complete);
+    add_promises.push(add_tx3.complete);
+    
+    Promise.all(add_promises).then((values) => {
+        mdb.close();
+        init_map_maps();
+        init_func();
+    });
+}
+
+
 
 function init_map_maps() {
     for (const [terr,data] of Object.entries(terrdata)) {

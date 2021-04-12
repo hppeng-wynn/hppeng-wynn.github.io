@@ -1,3 +1,9 @@
+/**TODO: 
+ *  Fix Claims (broken)
+ *      Guild pull fails to update actual guilds on the map, which also do not save properly.
+ *  Fix custom items saving reversed IDs in the wrong order.
+ */
+
 /*
  * TESTING SECTION
  */
@@ -110,10 +116,12 @@ function init_map(){ //async just in case we need async stuff
     map_elem.style.background = "#121516";
     
     try {
+        //refreshData();
         pullguilds();
+        //save_map_data();
     } catch (error) {
         console.log(error);
-        let header = document.getElementsById("header");
+        let header = document.getElementById("header");
         let warning = document.createElement("p");
         warning.classList.add("center");
         warning.style.color = "red";
@@ -195,7 +203,7 @@ function toggleButton(elemID) {
 /** Pulls data from the API and overrides all of the current stuff with it. Do NOT call this too often. Called once, upon initialization.
  * 
  */
-async function refreshData() { //async just in case we need async stuff
+async function refreshData() { 
     terrs = new Map();
     claims = new Map();
     guilds = [];
@@ -207,6 +215,7 @@ async function refreshData() { //async just in case we need async stuff
     .then(res => { //success
         terrdata = Object.entries(res['territories']);
         console.log(terrdata);
+        guilds = [];
         for (const terr of terrdata) {
             //terrs.set(terr[0], terr[1].location) //bounds shouldnt change
             claims.set(terr[0], terr[1].guild)
@@ -214,8 +223,13 @@ async function refreshData() { //async just in case we need async stuff
                 guilds.push(terr[1].guild);
             }
         }
+        console.log("terrdata \n", terrdata);
+        console.log("claims \n", claims);
+        console.log("guilds \n", guilds);
         pullguilds();
         console.log("Succesfully pulled and loaded territory data.")
+        //save_guild_data();
+        console.log("Succesfully saved territory data.")
     })
     .catch(error => { //failure
         console.log(error)
