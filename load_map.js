@@ -190,10 +190,10 @@ function save_map_data() {
 function init_map_maps() {
     for (const [terr,data] of Object.entries(terrdata)) {
         terrs.set(data.territory,data.location);
-        claims.set(data.territory,data.guild);
-        if (!guilds.includes(data.guild)) {
-            guilds.push(data.guild);
-        }
+        // claims.set(data.territory,data.guild);
+        // if (!guilds.includes(data.guild)) {
+        //     guilds.push(data.guild);
+        // }
         neighbors.set(data.territory,data.neighbors);
         resources.set(data.territory,{"resources":data.resources,"storage":data.storage,"emeralds":data.emeralds,"doubleemeralds":data.doubleemeralds,"doubleresource":data.doubleresource});
     }
