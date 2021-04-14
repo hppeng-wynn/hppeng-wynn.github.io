@@ -391,7 +391,7 @@ class Build{
 
     getSpellCost(spellIdx, cost) {
         cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
-        cost = Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100))
+        cost = Math.max(0, Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100)));
         return Math.max(1, cost + this.statMap.get("spRaw"+spellIdx));
     }
     
