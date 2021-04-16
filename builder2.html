@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
+        <!-- nunito font, copying wynndata -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" media="screen and (min-width: 1100px)" href="index-wide.css"/>
+        <link rel="stylesheet" media="screen and (max-width: 1099px)" href="index-narrow.css"/>
+        <link rel="icon" href="./media/icons/new/builder.png">
+        <link rel="manifest" href="manifest.json">
+        <title>WynnBuilder</title>
+    </head>
+    <body class="all">
+        <div class="center">
+            <header class = "header nomarginp">
+                <div class = "headerleft" id = "headerleft">   
+                </div>
+                <div class = "headercenter" id = "headercenter">
+                    <div >
+                        <p class = "itemp" id = "header">Wynn build calculator</p>
+                        <p class="itemp" id="help">
+                            <a class = "link" href="https://forums.wynncraft.com/threads/wynnbuilder-release-thread-and-some-damage-calculation-updates.281438">Forum thread (instructions/help)</a>
+                        </p>
+                    </div>
+                </div>    
+                <div class = "headerright" id = "headerright">
+                </div>
+            </header>
+        </div>
+        <div class="center"> Raw after % bby (also % caps at -100)</div>
+        
+        <div class="summary">
+            <div class="equipment" style="grid-column:1/span 2;grid-row:1">
+                <div style="grid-column:1/span 2;grid-row:1;width: 40vw">
+                    <table class="left">
+                        <tr>
+                            <th class="center smalltitle">
+                                <label>Equipment</label>
+                            </th>
+                            <th></th>
+                            <th class="center smalltitle">
+                                <label>Accessories</label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <label for="helmet-choice">Helmet:</label><br>
+                                <input class="iteminput" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" tabindex="1"/>
+                                <datalist id="helmet-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label id="helmet-slots" for="helmet-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="helmet-powder" name="helmet-powder" placeholder="Example: t6t6" tabindex="2"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label for="ring1-choice">Ring 1:</label><br>
+                                <input class="iteminput" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No Ring 1" tabindex="11"/>
+                                <datalist id="ring1-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <label for="chestplate-choice">Chestplate:</label><br>
+                                <input class="iteminput" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No Chestplate" tabindex="3"/>
+                                <datalist id="chestplate-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label id="chestplate-slots" for="chestplate-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="chestplate-powder" name="chestplate-powder" tabindex="4"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label for="ring2-choice">Ring 2:</label><br>
+                                <input class="iteminput" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No Ring 2" tabindex="12"/>
+                                <datalist id="ring2-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <label for="leggings-choice">Leggings:</label><br>
+                                <input class="iteminput" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No Leggings" tabindex="5"/>
+                                <datalist id="leggings-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label id="leggings-slots" for="leggings-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="leggings-powder" name="leggings-powder" tabindex="6"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label for="bracelet-choice">Bracelet:</label><br>
+                                <input class="iteminput" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No Bracelet" tabindex="13"/>
+                                <datalist id="bracelet-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <label for="boots-choice">Boots:</label><br>
+                                <input class="iteminput" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No Boots" tabindex="7"/>
+                                <datalist id="boots-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label id="boots-slots" for="boots-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="boots-powder" name="boots-powder" tabindex="8"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <label for="necklace-choice">Necklace:</label><br>
+                                <input class="iteminput" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No Necklace" tabindex="14"/>
+                                <datalist id="necklace-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <br>
+                                <label for="weapon-choice">Weapon:</label><br>
+                                <input class="iteminput" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value="" tabindex="9"/>
+                                <datalist id="weapon-items">
+                                </datalist>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <br>
+                                <label id="weapon-slots" for="weapon-powder">X slots</label><br>
+                                <input class="powderinput" type="text" id="weapon-powder" name="weapon-powder" tabindex="10"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <br/>
+                                <label for="level-choice">Level:</label><br>
+                                <input class="iteminput" id="level-choice" name="level-choice" value="106" tabindex="15"/>
+                                <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="center" style="grid-column:1/span 3;grid-row:2">
+                    <table class="left">
+                        <tr>
+                            <td>
+                                <br/>
+                                <button class = "button" id = "calc-button" onclick = "calculateBuild()" tabindex="16">
+                                Update Items
+                                </button>
+                            </td>
+                            <td>
+                                <br/>
+                                <button class = "button" id = "reset-button" onclick = "resetFields()">
+                                Reset
+                                </button>
+                            </td>
+                            <td>
+                                <br/>
+                                <button class = "button" id = "copy-button" onclick = "copyBuild()">
+                                Copy Short
+                                </button>
+                            </td>
+                            <td>
+                                <br/>
+                                <button class = "button" id = "share-button" onclick = "shareBuild()">
+                                Copy For Sharing
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="skillpoints" style="grid-column:1/span 3;grid-row:3;">
+                    <div class="center" style="grid-column:1;grid-row:1">
+                        <div>
+                            <label for="str-skp" class="skpLabel Earth" id="str-skp-label">Strength:</label><br>
+                            <input type="string" id="str-skp" name="str-skp" value="0" class="skpInput" tabindex="17"/>
+                        </div>
+                        <div id="str-skp-assign" class="skpDesc">
+                            Manually Assigned: 0
+                        </div>
+                        <div id="str-skp-base" class="skpDesc">
+                            Original Value: 0
+                        </div>
+                        <div id ="str-skp-pct" class="skpDesc">
+                        </div>
+                    </div>
+                    <div class="center" style="grid-column:2;grid-row:1">
+                        <div>
+                            <label for="dex-skp" class="skpLabel Thunder" id="dex-skp-label">Dexterity:</label><br>
+                            <input type="string" id="dex-skp" name="dex-skp" value="0" class="skpInput" tabindex="18"/>
+                        </div>
+                        <div id="dex-skp-assign" class="skpDesc">
+                            Manually Assigned: 0
+                        </div>
+                        <div id="dex-skp-base" class="skpDesc">
+                            Original Value: 0
+                        </div>
+                        <div id ="dex-skp-pct" class="skpDesc">
+                        </div>
+                    </div>
+                    <div class="center" style="grid-column:3;grid-row:1">
+                        <div>
+                            <label for="int-skp" class="skpLabel Water" id="int-skp-label">Intelligence:</label><br>
+                            <input type="string" id="int-skp" name="int-skp" value="0" class="skpInput" tabindex="19"/>
+                        </div>
+                        <div id="int-skp-assign" class="skpDesc">
+                            Manually Assigned: 0
+                        </div>
+                        <div id="int-skp-base" class="skpDesc">
+                            Original Value: 0
+                        </div>
+                        <div id ="int-skp-pct" class="skpDesc">
+                        </div>
+                    </div>
+                    <div class="center" style="grid-column:4;grid-row:1">
+                        <div>
+                            <label for="def-skp" class="skpLabel Fire" id="def-skp-label">Defense:</label><br>
+                            <input type="string" id="def-skp" name="def-skp" value="0" class="skpInput" tabindex="20"/>
+                        </div>
+                        <div id="def-skp-assign" class="skpDesc">
+                            Manually Assigned: 0
+                        </div>
+                        <div id="def-skp-base" class="skpDesc">
+                            Original Value: 0
+                        </div>
+                        <div id ="def-skp-pct" class="skpDesc">
+                        </div>
+                    </div>
+                    <div class="center" style="grid-column:5;grid-row:1">
+                        <div>
+                            <label for="agi-skp" class="skpLabel Air" id="agi-skp-label">Agility:</label><br>
+                            <input type="string" id="agi-skp" name="agi-skp" value="0" class="skpInput" tabindex="21"/>
+                        </div>
+                        <div id="agi-skp-assign" class="skpDesc">
+                            Manually Assigned: 0
+                        </div>
+                        <div id="agi-skp-base" class="skpDesc">
+                            Original Value: 0
+                        </div>
+                        <div id ="agi-skp-pct" class="skpDesc">
+                        </div>
+                    </div>
+                </div>
+                <div class="center" style="grid-column:1/span 3;grid-row:4">
+                    <div class="nomargin" id="summary-box"></div>
+                    <div class="center">
+                        <button class = "button" id = "update-button" onclick = "updateStats()" tabindex="22">
+                            Update Stats
+                        </button>
+                        <button class = "button" id = "show-id-button" onclick = "toggleID()" tabindex="23">
+                            Edit IDs
+                        </button>
+                    </div>
+                    <div class="id-box fade-in" id="id-edit" style="display: none">
+                        <div class="id-edit1">
+                            <table>
+                                <tr>
+                                    <th colspan="5">
+                                        <h1>Damage values:</h1>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="sdPct" class="idLabel" id="sdPct-label">Spell Dmg %:</label><br>
+                                                    <input type="number" id="sdPct" name="sdPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="sdPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="sdRaw" class="idLabel" id="sdRaw-label">Raw Spell:</label><br>
+                                                    <input type="number" id="sdRaw" name="sdRaw" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="sdRaw-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="mdPct" class="idLabel" id="mdPct-label">Melee Dmg %:</label><br>
+                                                    <input type="number" id="mdPct" name="mdPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="mdPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="mdRaw" class="idLabel" id="mdRaw-label">Raw Melee:</label><br>
+                                                    <input type="number" id="mdRaw" name="mdRaw" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="mdRaw-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="poison" class="idLabel" id="poison-label">Poison:</label><br>
+                                                    <input type="number" id="poison" name="poison" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="poison-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="eDamPct" class="idLabel Earth" id="eDamPct-label">Damage %:</label><br>
+                                                    <input type="number" id="eDamPct" name="eDamPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="eDamPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="tDamPct" class="idLabel Thunder" id="tDamPct-label">Damage %:</label><br>
+                                                    <input type="number" id="tDamPct" name="tDamPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="tDamPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="wDamPct" class="idLabel Water" id="wDamPct-label">Damage %:</label><br>
+                                                    <input type="number" id="wDamPct" name="wDamPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="wDamPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="fDamPct" class="idLabel Fire" id="fDamPct-label">Damage %:</label><br>
+                                                    <input type="number" id="fDamPct" name="fDamPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="fDamPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="aDamPct" class="idLabel Air" id="aDamPct-label">Damage %:</label><br>
+                                                    <input type="number" id="aDamPct" name="aDamPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="aDamPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="atkTier" class="idLabel" id="atkTier-label">+Tier:</label><br>
+                                                    <input type="number" id="atkTier" name="atkTier" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="atkTier-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="id-edit1">
+                            <table>
+                                <tr>
+                                    <th colspan="5">
+                                        <h1>Defense values:</h1>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="eDefPct" class="idLabel Earth" id="eDefPct-label">Defense %:</label><br>
+                                                    <input type="number" id="eDefPct" name="eDefPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="eDefPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="tDefPct" class="idLabel Thunder" id="tDefPct-label">Defense %:</label><br>
+                                                    <input type="number" id="tDefPct" name="tDefPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="tDefPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="wDefPct" class="idLabel Water" id="wDefPct-label">Defense %:</label><br>
+                                                    <input type="number" id="wDefPct" name="wDefPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="wDefPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="fDefPct" class="idLabel Fire" id="fDefPct-label">Defense %:</label><br>
+                                                    <input type="number" id="fDefPct" name="fDefPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="fDefPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="aDefPct" class="idLabel Air" id="aDefPct-label">Defense %:</label><br>
+                                                    <input type="number" id="aDefPct" name="aDefPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="aDefPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="hprRaw" class="idLabel" id="hprRaw-label">HPR Raw:</label><br>
+                                                    <input type="number" id="hprRaw" name="hprRaw" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="hprRaw-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="hprPct" class="idLabel" id="hprPct-label">HPR %:</label><br>
+                                                    <input type="number" id="hprPct" name="hprPct" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="hprPct-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="hpBonus" class="idLabel" id="hpBonus-label">Health Bonus:</label><br>
+                                                    <input type="number" id="hpBonus" name="hpBonus" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="hpBonus-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="id-edit1">
+                            <table>
+                                <tr>
+                                    <th colspan="5">
+                                        <h1>Utility values:</h1>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spPct1" class="idLabel" id="spPct1-label">1st Spell Cost %:</label><br>
+                                                    <input type="number" id="spPct1" name="spPct1" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spPct1-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spPct2" class="idLabel" id="spPct2-label">2nd Spell Cost %:</label><br>
+                                                    <input type="number" id="spPct2" name="spPct2" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spPct2-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spPct3" class="idLabel" id="spPct3-label">3rd Spell Cost %:</label><br>
+                                                    <input type="number" id="spPct3" name="spPct3" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spPct3-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spPct4" class="idLabel" id="spPct4-label">4th Spell Cost %:</label><br>
+                                                    <input type="number" id="spPct4" name="spPct4" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spPct4-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spRaw1" class="idLabel" id="spRaw1-label">1st Spell Cost Raw:</label><br>
+                                                    <input type="number" id="spRaw1" name="spRaw1" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spRaw1-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spRaw2" class="idLabel" id="spRaw2-label">2nd Spell Cost Raw:</label><br>
+                                                    <input type="number" id="spRaw2" name="spRaw2" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spRaw2-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spRaw3" class="idLabel" id="spRaw3-label">3rd Spell Cost Raw:</label><br>
+                                                    <input type="number" id="spRaw3" name="spRaw3" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spRaw3-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="idLeft">
+                                            <div class="idWrap">
+                                                <div>
+                                                    <label for="spRaw4" class="idLabel" id="spRaw4-label">4th Spell Cost Raw:</label><br>
+                                                    <input type="number" id="spRaw4" name="spRaw4" value="0" class="idInput"/>
+                                                </div>
+                                                <div id="spRaw4-base" class="idDesc">
+                                                    Original Value: 0
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="externalBuffs hide-container-block" id="buff-box" style="display: none;">
+                        <table class="externalBuffs" style="padding-bottom:20px">
+                            <tr>
+                                <p class = "buffs-title itemp smalltitle">
+                                    Spell Boosts & Powder Specials:
+                                </p>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class = "button-narrow" id = "vanish-boost" onclick = "updateBoosts('vanish-boost', true)">
+                                        Vanish (+80%)
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class = "button-narrow" id = "warscream-boost" onclick = "updateBoosts('warscream-boost', true)">
+                                        War Scream (+10%)
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class = "button-narrow" id = "yourtotem-boost" onclick = "updateBoosts('yourtotem-boost', true)">
+                                        Your Totem (+35%)
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class = "button-narrow" id = "allytotem-boost" onclick = "updateBoosts('allytotem-boost', true)">
+                                        Ally Totem (+15%)
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class = "button-narrow" id = "bash-boost" onclick = "updateBoosts('bash-boost', true)">
+                                        Bash (+50%)
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class = "powder-specials" style="display: none;">
+                            <div class = "powder-special-stats" style = "grid-column:1;grid-row:1">
+                                <div class = "center" id = "powder-special-stats">
+                                    <p class = "itemp">Powder Specials</p>
+                                </div>
+                            </div>
+                            <div style = "grid-column:2;grid-row:1">
+                                <div class = "powder-special" style = "grid-column:2;grid-row:1">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Earth">
+                                            Quake
+                                        </p>
+                                        <p class = "Quake itemp" id = "Quake">
+                                            <b>
+                                                <button class = "button" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1', true)">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2', true)">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3', true)">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4', true)">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5', true)">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:2">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Thunder">
+                                            Chain Lightning
+                                        </p>
+                                        <p class = "Chain_Lightning itemp" id = "Chain_Lightning">
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1', true)">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2', true)">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3', true)">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4', true)">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5', true)">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:3">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Water">
+                                            Curse
+                                        </p>
+                                        <p class = "Curse itemp" id = "Curse">
+                                            <b>
+                                                <button class = "button" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1', true)">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2', true)">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3', true)">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4', true)">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5', true)">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:4">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Fire">
+                                            Courage
+                                        </p>
+                                        <p class = "Courage itemp" id = "Courage">
+                                            <b>
+                                                <button class = "button" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1', true)">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2', true)">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3', true)">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4', true)">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5', true)">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "powder-special" style = "grid-column:2;grid-row:5">
+                                    <div class = "center" id = "powder-special">
+                                        <p class = "itemp Air">
+                                            Wind Prison
+                                        </p>
+                                        <p class = "Wind_Prison itemp" id = "Wind_Prison">
+                                            <b>
+                                                <button class = "button" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1', true)">
+                                                    4
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2', true)">
+                                                    4.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3', true)">
+                                                    5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4', true)">
+                                                    5.5
+                                                </button>
+                                            </b>
+                                            <b>
+                                                <button class = "button" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5', true)">
+                                                    6
+                                                </button>
+                                            </b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wide-space"></div>
+                </div>
+            </div>
+            <div class="build-overall-container hide-container-block" style="display: none;">
+                <div class = "center build-overall" id = "build-overall">
+                    <br/>
+                    <div class = "center" id = "build-overall-stats"></div>
+                </div>
+            </div>
+            <div class="spell-info-container hide-container-block" style="display: none;">
+                <div class="sticky-box">
+                    <div class="spell-info">
+                        <div class="center" id="build-melee-statsAvg">melee</div>
+                    </div>
+                    <div class="spell-info">
+                        <div class="center" id="spell0-infoAvg">spell1</div>
+                    </div>
+                    <div class="spell-info">
+                        <div class="center" id="spell1-infoAvg">spell2</div>
+                    </div>
+                    <div class="spell-info">
+                        <div class="center" id="spell2-infoAvg">spell3</div>
+                    </div>
+                    <div class="spell-info">
+                        <div class="center" id="spell3-infoAvg">spell4</div>
+                    </div>
+                    <div class="spell-info">
+                        <div class="center" id="build-poison-stats">poison</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "build hide-container-grid" style="display: none;">
+            <div class = "center build-helmet" id = "build-helmet" style = "grid-item-1">
+                <div class = "center" id = "build-helmet-stats"></div>
+            </div>
+            <div class = "center build-chestplate" id = "build-chestplate" style = "grid-item-2">
+                <div class = "center" id = "build-chestplate-stats"></div>
+            </div>
+            <div class = "center build-leggings" id = "build-leggings" style = "grid-item-3">
+                <div class = "center" id = "build-leggings-stats"></div>
+            </div>
+            <div class = "center build-boots" id = "build-boots" style = "grid-item-4">
+                <div class = "center" id = "build-boots-stats"></div>
+            </div>
+            <div class = "center build-ring1" id = "build-ring1" style = "grid-item-5">
+                <div class = "center" id = "build-ring1-stats"></div>
+            </div>
+            <div class = "center build-ring2" id = "build-ring2" style = "grid-item-6">
+                <div class = "center" id = "build-ring2-stats"></div>
+            </div>
+            <div class = "center build-leggings" id = "build-bracelet" style = "grid-item-7">
+                <div class = "center" id = "build-bracelet-stats"></div>
+            </div>
+            <div class = "center build-boots" id = "build-necklace" style = "grid-item-8">
+                <div class = "center" id = "build-necklace-stats"></div>
+            </div>
+            <div class = "center build-weapon" id = "build-weapon" style = "grid-item-9">
+                <div class = "center" id = "build-weapon-stats"></div>
+            </div>
+            <div class = "center build-order" id = "build-order" style = "grid-item-10">
+            </div>
+            <div class = "center build-melee-stats" id = "build-melee-stats" style = "grid-item-11">
+            </div>
+            <div class = "center build-defense-stats" id = "build-defense-stats" style = "grid-item-12">
+            </div>
+        </div>
+        <div class = "spells hide-container-grid" style="display: none;">
+            <div class = "center spell-info" id = "spell0" style = "grid-item-1">
+                <!--div class = "center" id = "spell0-name">Spell 1</div-->
+                <div class = "center" id = "spell0-info">Spell 1</div>
+            </div>
+            <div class = "center spell-info" id = "spell1" style = "grid-item-2">
+                <!--div class = "center" id = "spell1-name">Spell 2</div-->
+                <div class = "center" id = "spell1-info">Spell 2</div>
+            </div>
+            <div class = "center spell-info" id = "spell2" style = "grid-item-3">
+                <!--div class = "center" id = "spell2-name">Spell 3</div-->
+                <div class = "center" id = "spell2-info">Spell 3</div>
+            </div>
+            <div class = "center spell-info" id = "spell3" style = "grid-item-4">
+                <!--div class = "center" id = "spell3-name">Spell 4</div-->
+                <div class = "center" id = "spell3-info">Spell 4</div>
+            </div>
+        </div>
+        <div class="misc">
+            <div class = "center set-info" id = "set-info-div" style = "grid-column:1;grid-row:1; display: none;">
+                <div class = "center" id = "set-info">Set info</div>
+            </div>
+            <div class = "center int-info hide-container-block" id = "int-info-div" style = "grid-column:4;grid-row:1; display: none;">
+                <div class = "center" id = "int-info">Next Spell Costs</div> 
+            </div>
+        </div>
+        <div class = "center">
+            <footer>
+                <div class="center" id="header2">
+                    <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with <a href = "./atlas.html" target = "_blank" class = "link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>
+                    <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
+                </div>
+                <div class="center" id="credits">
+                    <a href="credits.txt" class="link">Additional credits</a>
+                </div>
+            </footer>
+        </div>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="loadheader.js"></script>
+        <script type="text/javascript" src="icons.js"></script>
+        <script type="text/javascript" src="powders.js"></script>
+        <script type="text/javascript" src="build_utils.js"></script>
+        <script type="text/javascript" src="skillpoints.js"></script>
+        <script type="text/javascript" src="damage_calc.js"></script>
+        <script type="text/javascript" src="display.js"></script>
+        <script type="text/javascript" src="load.js"></script>
+        <script type="text/javascript" src="load_ing.js"></script>  
+        <script type="text/javascript" src="custom.js"></script> 
+        <script type="text/javascript" src="customizer.js"></script>         
+        <script type="text/javascript" src="craft.js"></script>
+        <script type="text/javascript" src="crafter.js"></script>
+        <script type="text/javascript" src="build2.js"></script>
+        <script type="text/javascript" src="builder.js"></script>
+    </body>
+</html>
