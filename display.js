@@ -444,9 +444,14 @@ function displayExpandedItem(item, parent_id){
             stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
             let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
             let damages = results[2];
+            let total_damage = 0;
             for (const i in damage_keys) {
+                total_damage += damages[i][0] + damages[i][1];
                 item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
             }
+            total_damage = total_damage / 2;
+            item.set("basedps", total_damage);
+            
         } else {
             stats.set("damageRaw", [item.get("nDamLow"), item.get("eDamLow"), item.get("tDamLow"), item.get("wDamLow"), item.get("fDamLow"), item.get("aDamLow")]);
             stats.set("damageBases", [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")]);
@@ -457,9 +462,14 @@ function displayExpandedItem(item, parent_id){
             let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
             let damages = results[2];
             
+            let total_damage_min = 0;
+            let total_damage_max = 0;
             for (const i in damage_keys) {
+                total_damage_min += damagesLow[i][0] + damagesLow[i][1];
+                total_damage_max += damages[i][0] + damages[i][1];
                 item.set(damage_keys[i], damagesLow[i][0]+"-"+damagesLow[i][1]+"\u279c"+damages[i][0]+"-"+damages[i][1]);
             }
+            item.set("basedps", [total_damage_min, total_damage_max]);
         }
     } else if (item.get("category") === "armor") { 
     }
@@ -869,6 +879,25 @@ function displayExpandedItem(item, parent_id){
         item_desc_elem.style.wordBreak = "break-word";
         item_desc_elem.textContent = item.get("hash");
         active_elem.append(item_desc_elem);
+    }
+
+    if (item.get("category") === "weapon") { 
+        let damage_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
+        let total_damages = item.get("basedps");
+        let base_dps_elem = document.createElement("p");
+        base_dps_elem.classList.add("left");
+        base_dps_elem.classList.add("itemp");
+        if (item.get("tier") === "Crafted") {
+            let base_dps_min = total_damages[0] * damage_mult;
+            let base_dps_max = total_damages[1] * damage_mult;
+
+            base_dps_elem.textContent = "Base DPS: "+base_dps_min+"\u279c"+base_dps_max;
+        }
+        else {
+            base_dps_elem.textContent = "Base DPS: "+(total_damages * damage_mult);
+        }
+        parent_div.appendChild(document.createElement("p"));
+        parent_div.appendChild(base_dps_elem);
     }
 }
 
