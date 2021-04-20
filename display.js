@@ -469,6 +469,8 @@ function displayExpandedItem(item, parent_id){
                 total_damage_max += damages[i][0] + damages[i][1];
                 item.set(damage_keys[i], damagesLow[i][0]+"-"+damagesLow[i][1]+"\u279c"+damages[i][0]+"-"+damages[i][1]);
             }
+            total_damage_min = total_damage_min / 2;
+            total_damage_max = total_damage_max / 2;
             item.set("basedps", [total_damage_min, total_damage_max]);
         }
     } else if (item.get("category") === "armor") { 
