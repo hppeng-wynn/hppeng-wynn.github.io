@@ -708,4 +708,39 @@ function _init_customizer() {
     load_ing_init(init_customizer);
 }
 
+/** Saves the current user's item as a JSON file.
+ *  Starts a JSON download.
+ */
+function saveAsJSON() {
+    let CI = {};
+    for (const [id, val] of player_custom_item.statMap) {
+        if (id === "minRolls" || id === "maxRolls") {
+            continue;
+        } else {
+            val ? CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = val : "" ;
+        }
+    }
+    if (player_custom_item.statMap.get("minRolls")) {
+        for (const [id, min] of player_custom_item.statMap.get("minRolls")) {
+            const max = player_custom_item.statMap.get("maxRolls").get(id);
+            if (min && max) {
+                console.log(reversetranslations);
+                CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = [min,max];
+            }
+        }
+    }
+    
+    console.log(CI);
+    //yuck
+    let filename = player_custom_item.statMap.get("displayName");
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(CI, null, 2)));
+    element.setAttribute('download', filename + ".json");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
 load_init(_init_customizer);

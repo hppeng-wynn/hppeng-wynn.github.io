@@ -1810,42 +1810,44 @@
                     <div class = "container button-container">
                         <p></p>
                         <p class = "center smalltitle">Options</p>
-                        <p></p>
-                        <div class = "button create-button" style = "grid-item-1">
+                        <p class = "">Fixed IDs:</p>
+                        <div class = "button create-button">
                             <button class = "create-button" id = "create-button" onclick = "calculateCustom()">
                                 Create 
                             </button>
                         </div>
-                        <div class = "button copy-button" style = "grid-item-3">
+                        <div class = "button copy-button">
                             <button class = "copy-button" id = "copy-button" onclick = "copyCustom()">
                                 Copy Link
                             </button>
                         </div>
-                        <div class = "button set-button center" style = "grid-item-4">
-                            <div class = "">Fixed IDs:</div>
+                        <div class="button set-button center" id = "fixID">
+                            <button class = "fixID-choice" id = "fixID-choice" onclick = "toggleButton('fixID-choice'); toggleYN('fixID-choice'); toggleFixed({textContent})" tabindex="">no</button>
+                            <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                         </div>
-                        <div class = "button reset-button" style = "grid-item-2">
+                        <div class = "button reset-button">
                             <button class = "reset-button" id = "reset-button" onclick = "resetFields()">
                                 Reset
                             </button>
                         </div>
-                        <div class = "button copy-button-hash" style = "grid-item-6">
+                        <div class = "button copy-button-hash">
                             <button class = "copy-button-hash" id = "copy-button-hash" onclick = "copyHash()">
                                 Copy Hash
                             </button>
                         </div>
-                        <div class="button set-button center" id = "fixID" style = "grid-item-5">
-                            <button class = "fixID-choice" id = "fixID-choice" onclick = "toggleButton('fixID-choice'); toggleYN('fixID-choice'); toggleFixed({textContent})" tabindex="">no</button>
-                            <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
+                        <div class = "button save-button">
+                            <button class = "save-button" id = "save-button" onclick = "saveAsJSON()">
+                                JSON
+                            </button>
                         </div>
-                        <div class = "button set-button" style = "grid-item-7">
+                        <div class = "button set-button">
                             <div class = "">Base Item: </div>
                         </div>
-                        <div class = "button set-button" style = "grid-item-8">
+                        <div class = "button set-button">
                             <input class = "input" list = "base-list" id = "base-input" value = ""></input>
                             <datalist id = "base-list"></datalist>
                         </div>
-                        <div class = "button set-button" style = "grid-item-9">
+                        <div class = "button set-button">
                             <button class = "set-button" id = "set-button" onclick = "useBaseItem('base-input')">
                                 Use
                             </button>

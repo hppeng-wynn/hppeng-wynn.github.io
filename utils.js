@@ -22,7 +22,18 @@ let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
 
-
+//File reading for ID translations for JSON purposes
+let reversetranslations;
+let translations;
+function setRevTrans(revTransText) {
+    reversetranslations = new Map(revTransText.replaceAll(" ", "").replaceAll("\"", "").replaceAll("\n","").replaceAll("\r","").split(",").map(x => x.split(":").reverse()))
+}
+function setTrans(transText) {
+    translations = new Map(transText.replaceAll(" ", "").replaceAll("\"", "").replaceAll("\n","").replaceAll("\r","").split(",").map(x => x.split(":")))
+}
+fetch('translations.txt').then(response => response.text()).then(data => {setRevTrans(data)});
+fetch('translations.txt').then(response => response.text()).then(data => {setTrans(data);});
+console.log(translations);
 
 function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);
