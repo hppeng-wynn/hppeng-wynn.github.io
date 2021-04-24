@@ -37,7 +37,8 @@ let header_icon_map = new Map([
     ["crafter",["crafter","WynnCrafter"]],
     ["items",["searcher","WynnAtlas"]],
     ["customizer",["custom","WynnCustom"]],
-    ["map",["compass","WynnGPS"]]
+    ["map",["compass","WynnGPS"]],
+    ["wynnfo/index",["book","Wynnfo"]]
 ]);
 
 function setHeaders() {
@@ -51,7 +52,7 @@ function setHeaders() {
         a_elem.classList.add("nomarginp");
         a_elem.classList.add("iconlink");
         a_elem.classList.add("tooltip");
-        a_elem.href = "./" + name + ".html";
+        a_elem.href = "../" + name + ".html";
         img.classList.add("left");
         img.classList.add("linkoptions");
         img.classList.add("headericon");

@@ -34,17 +34,17 @@
 }
 .headerleft {
     display: inline-block;
-    width: 30%;
+    width: 35%;
     text-align: left;
 }
 .headercenter {
     display: inline-block;
-    width: 40%;
+    width: 30%;
     text-align: center;
 }
 .headerright{
     display: inline-block;
-    width: 30%;
+    width: 35%;
     text-align: right;
 }
 .iconlink {
@@ -103,7 +103,7 @@ div {
     grid-auto-rows: minmax(60px, auto);
 }
 
-.equipment, .skillpoints, .center, .header, .all, .nocolor, .crafted, .crafter{
+.equipment, .skillpoints, .header, .all, .nocolor, .crafted, .crafter{
     background: #121516;
     color: #aaa;
 }
