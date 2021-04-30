@@ -1,12 +1,5 @@
-/*
- * TESTING SECTION
- */
-
- 
 const custom_url_base = location.href.split("#")[0];
 const custom_url_tag = location.hash.slice(1);
-// console.log(custom_url_base);
-// console.log(custom_url_tag);
 
 const CUSTOM_BUILD_VERSION = "7.0.1";
 
@@ -18,20 +11,10 @@ function setTitle() {
 
 setTitle();
 
-
-
-
-/*
- * END testing section
- */
-
-
 let player_custom_item;
 let base_item; //the item that a user starts from, if any
 let pos_range = [0.3,1.3];
 let neg_range = [1.3,0.7];
-
-
 
 
 let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","pos_roll_range-choice-min","pos_roll_range-choice-max"];

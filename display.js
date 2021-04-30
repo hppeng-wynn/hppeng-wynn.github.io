@@ -370,7 +370,7 @@ function displayBuildStats(parent_id,build){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (id === "poison" && id_val > 0) {
-                    id_val = Math.round(id_val*(build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100);
+                    id_val = Math.ceil(id_val*(build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100);
                 }
                 displayFixedID(active_elem, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
@@ -1431,7 +1431,7 @@ function displayPoisonDamage(overallparent_elem, build) {
     overallpoisonDamage.classList.add("itemp");
     let overallpoisonDamageFirst = document.createElement("b");
     let overallpoisonDamageSecond = document.createElement("b");
-    let poison_tick = Math.round(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
+    let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
     overallpoisonDamageFirst.textContent = "Poison Tick: ";
     overallpoisonDamageSecond.textContent = Math.max(poison_tick,0);
     overallpoisonDamageSecond.classList.add("Damage");
