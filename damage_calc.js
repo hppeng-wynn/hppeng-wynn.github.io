@@ -39,6 +39,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let neutralRemainingRaw = damages[0].slice();
 
   
+    //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
 
     //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
     //1st round - apply each as ingred, 2nd round - apply as normal
