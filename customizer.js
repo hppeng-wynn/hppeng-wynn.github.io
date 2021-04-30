@@ -250,7 +250,7 @@ function encodeCustom(custom, verbose) {
                     }
                 }
             } else {
-                let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam","nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"];
+                let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]; //"nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"
                 let val = custom.get(id);
 
                 if (typeof(val) === "string" && val !== "") {
@@ -305,7 +305,6 @@ function decodeCustom(custom_url_tag) {
             while (tag !== "") {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
                 let len = Base64.toInt(tag.slice(2,4));
-                console.log(id);
                 if (rolledIDs.includes(id)) {
                     let sign = parseInt(tag.slice(4,5),10);
                     let minRoll = Base64.toInt(tag.slice(5,5+len));

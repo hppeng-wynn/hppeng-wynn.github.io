@@ -461,6 +461,7 @@ function displayExpandedItem(item, parent_id){
             stats.set("damageBases", [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")]);
             let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
             let damages = results[2];
+            console.log(damages);
             
             let total_damage_min = 0;
             let total_damage_max = 0;
@@ -893,7 +894,7 @@ function displayExpandedItem(item, parent_id){
             let base_dps_min = total_damages[0] * damage_mult;
             let base_dps_max = total_damages[1] * damage_mult;
 
-            base_dps_elem.textContent = "Base DPS: "+base_dps_min+"\u279c"+base_dps_max;
+            base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
         }
         else {
             base_dps_elem.textContent = "Base DPS: "+(total_damages * damage_mult);
