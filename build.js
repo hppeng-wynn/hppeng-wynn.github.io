@@ -158,6 +158,7 @@ class Build{
                     this.craftedItems.push(chestplate);
                 }
             } catch (Error) {
+                console.log(Error);
                 const chestplate = itemMap.get("No Chestplate");
                 this.powders[1] = this.powders[1].slice(0,chestplate.slots); 
                 this.chestplate = expandItem(chestplate, this.powders[1]);

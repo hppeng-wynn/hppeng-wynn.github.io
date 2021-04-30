@@ -1,12 +1,83 @@
 
 
-const ci_save_order = ["name", "lore",  "tier", "set", "slots", "type", "material", "drop", "quest",  "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd","durability","duration","charges"];
-const nonRolled_strings = ["name","lore", "tier","set","type","material","drop","quest","majorIds","classReq","atkSpd","displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "durability", "duration"];
+const ci_save_order = ["name", "lore",  "tier", "set", "slots", "type", "material", "drop", "quest",  "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd","durability","duration","charges"];
+const nonRolled_strings = ["name","lore", "tier","set","type","material","drop","quest","majorIds","classReq","atkSpd","displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];
 //omitted restrict - it's always "Custom Item"
 //omitted displayName - either it's the same as name (repetitive) or it's "Custom Item"
 //omitted category - can always get this from type
 //omitted fixId - we will denote this early in the string.
 //omitted "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_" - will be calculated on display
+
+/**
+ * @param {Map} custom - the statMap of the CI
+ * @param {boolean} verbose - if we want lore and majorIds to display
+ */
+function encodeCustom(custom, verbose) {
+    if (custom) {
+        if (custom.statMap) {
+            custom = custom.statMap; 
+        }
+        let hash = "1";
+        //version 1
+        if (custom.has("fixID") && custom.get("fixID")) {
+            hash += "1";
+        } else {
+            hash += "0";
+        }
+        for (const i in ci_save_order) {
+            let id = ci_save_order[i];
+            if (rolledIDs.includes(id)) {
+                let val_min = custom.get("minRolls").has(id) ? custom.get("minRolls").get(id) : 0;
+                let val_max = custom.get("maxRolls").has(id) ? custom.get("maxRolls").get(id) : 0;
+                let sign = (Boolean(val_min / Math.abs(val_min) < 0) | 0) + 2*(Boolean(val_max / Math.abs(val_max) < 0) | 0) // 0 - both pos 1 - min neg max pos 2 - min pos max neg (how?) 3 - min neg max neg 
+                //console.log(id + ": " + sign);
+                let min_len = Math.max(1,Math.ceil(log(64,Math.abs(val_min)+1)));
+                let max_len = Math.max(1,Math.ceil(log(64,Math.abs(val_max)+1)));
+                let len = Math.max(min_len,max_len);
+                val_min = Math.abs(val_min);
+                val_max = Math.abs(val_max);
+
+
+                if ( val_min != 0 || val_max != 0 ) {
+                    //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val_min,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + ":" + Base64.fromIntN(val_max,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + "_";
+                    if (custom.get("fixID")) {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len);
+                    } else {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len) + Base64.fromIntN(val_max,len);
+                    }
+                }
+            } else {
+                let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]; //"nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"
+                let val = custom.get(id);
+
+                if (typeof(val) === "string" && val !== "") {
+                    if ((damages.includes(id) && val === "0-0") || (!verbose && ["lore","majorIds","quest","materials","drop","set"].includes(id))) { continue; }
+                    if (id === "type") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(types.indexOf(val.substring(0,1).toUpperCase()+val.slice(1)),1);
+                    } else if (id === "tier") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(tiers.indexOf(val),1);
+                    } else if (id === "atkSpd") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(attackSpeeds.indexOf(val),1);
+                    } else if (id === "classReq") {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(classes.indexOf(val),1);
+                    } else {
+                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(val.replaceAll(" ", "%20").length,2) + val.replaceAll(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
+                    }
+                } else if (typeof(val) === "number" && val != 0) {
+                    let len = Math.max(1,Math.ceil(log(64,Math.abs(val))));
+                    let sign = Boolean(val / Math.abs(val) < 0) | 0;
+                    //console.log(sign);
+                    //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val,Math.max(1,Math.ceil(log(64,Math.abs(val))))) + "_";
+                    hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(Math.abs(val),len);
+                } 
+            }
+        }
+
+        return hash;
+    }
+    return "";
+}
+
 
 function getCustomFromHash(hash) {
     let name = hash.slice();
@@ -30,8 +101,10 @@ function getCustomFromHash(hash) {
             if (fixID) {
                 statMap.set("fixID", true);
             } 
+            console.log(",,");
             while (tag !== "") {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
+                console.log(tag.slice(0, 2) + ": " + id);
                 let len = Base64.toInt(tag.slice(2,4));
                 if (rolledIDs.includes(id)) {
                     let sign = parseInt(tag.slice(4,5),10);

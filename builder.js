@@ -925,4 +925,8 @@ function toggleID() {
     }
 }
 
-load_init(init);
+// TODO: Learn and use await
+function init2() {
+    load_ing_init(init);
+}
+load_init(init2);

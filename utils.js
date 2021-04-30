@@ -248,19 +248,15 @@ function copyTextToClipboard(text) {
   });
 }
 
-/** Generates a random color using the #(R)(G)(B) format. Not written by wynnbuilder devs.
- * 
+/**
+ * Generates a random color using the #(R)(G)(B) format.
  */
 function randomColor() {
-    var letters = '0123456789abcdef';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+    return '#' + Math.round(Math.random() * 0xFFFFFF).toString(16);
 }
 
-/** Generates a random color, but lightning must be relatively high (>0.5).
+/**
+ * Generates a random color, but lightning must be relatively high (>0.5).
  * 
  * @returns a random color in RGB 6-bit form.
  */
