@@ -714,7 +714,9 @@ function _init_customizer() {
 function saveAsJSON() {
     let CI = {};
     for (const [id, val] of player_custom_item.statMap) {
-        if (id === "minRolls" || id === "maxRolls") {
+        console.log(id);
+        let skipIds = ["minRolls", "maxRolls", "skillpoints", "reqs", "custom", "crafted", "restrict", "hash", "nDam_", "tDam_", "eDam_", "wDam_", "fDam_", "aDam_"]
+        if (skipIds.includes(id)) {
             continue;
         } else {
             val ? CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = val : "" ;
@@ -725,22 +727,74 @@ function saveAsJSON() {
             const max = player_custom_item.statMap.get("maxRolls").get(id);
             if (min && max) {
                 console.log(reversetranslations);
-                CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = [min,max];
+                let base = full_range_to_base(min, max);
+                if (base === null) {
+                    CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = [min,max];
+                } else if (base) {
+                    CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = base;
+                }
             }
         }
     }
     
     console.log(CI);
     //yuck
-    let filename = player_custom_item.statMap.get("displayName");
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(CI, null, 2)));
-    element.setAttribute('download', filename + ".json");
+    copyTextToClipboard(JSON.stringify(CI, null, 0));
+    document.getElementById("json-button").textContent = "Copied!";
+    // let filename = player_custom_item.statMap.get("displayName");
+    // var element = document.createElement('a');
+    // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(CI, null, 0)));
+    // element.setAttribute('download', filename + ".json");
 
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    // element.style.display = 'none';
+    // document.body.appendChild(element);
+    // element.click();
+    // document.body.removeChild(element);
 }
+
+/**Helper function
+ * Takes min, max, attempts to get the correct base. Returns null if no possible base or no base found.
+ */
+function full_range_to_base(min, max) {
+    //checks against the range
+    function checkBase(b, min, max) {
+        if ( b > 0 ) {
+            if (Math.round(pos_range[0] * b) == min && Math.round(pos_range[1] * b ) == max) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (Math.round(neg_range[0] * b) == min && Math.round(neg_range[1] * b ) == max) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    if (min && max && min/max < 0) {
+        return null;
+    } else if (min == max) {
+        //0 shouldn't save but this is for -1 and 1
+        return min; 
+    } else {
+        //both should be same sign - now do math
+        if (min < 0) {
+
+        } else {
+            let minPossible = (max - 0.5) / pos_range[1];
+            let maxPossible = (max + 0.5) / pos_range[1];
+            for (let i = Math.floor(minPossible); i < Math.ceil(maxPossible); i++) {
+                if (checkBase(i, min, max)) {
+                    return i;
+                }
+            }
+
+            return null;
+        }
+        
+    }
+}
+
 
 load_init(_init_customizer);
