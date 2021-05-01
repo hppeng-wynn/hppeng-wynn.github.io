@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 // console.log(url_tag);
 
 
-const BUILD_VERSION = "7.0.4";
+const BUILD_VERSION = "7.0.5";
 
 function setTitle() {
     let text;
@@ -422,9 +422,13 @@ function calculateBuild(save_skp, skp){
         let equipment = [ null, null, null, null, null, null, null, null, null ];
         for (let i in equipment) {
             let equip = getValue(equipmentInputs[i]).trim();
-            if (equip === "") { equip = "No " + equipment_names[i] }
+            if (equip === "") {
+                equip = "No " + equipment_names[i]
+            }
+            else {
+                setValue(equipmentInputs[i], equip);
+            }
             equipment[i] = equip;
-            setValue(equipmentInputs[i], equip);
         }
         let powderings = [];
         let errors = [];
