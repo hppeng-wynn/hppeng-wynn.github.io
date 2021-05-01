@@ -628,7 +628,9 @@ function saveAsJSON() {
     let CI = {};
     for (const [id, val] of player_custom_item.statMap) {
         console.log(id);
-        let skipIds = ["minRolls", "maxRolls", "skillpoints", "reqs", "custom", "crafted", "restrict", "hash", "nDam_", "tDam_", "eDam_", "wDam_", "fDam_", "aDam_"]
+        let skipIds = ["minRolls", "maxRolls", "skillpoints", "reqs", "custom", "crafted", "restrict", "hash",
+            "nDam_", "tDam_", "eDam_", "wDam_", "fDam_", "aDam_",
+            "powders", "durability", "duration" ]
         if (skipIds.includes(id)) {
             continue;
         } else {

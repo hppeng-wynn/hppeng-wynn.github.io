@@ -139,7 +139,7 @@ let items_expanded;
 function doItemSearch() {
     window.scrollTo(0, 0);
     let queries = [];
-    queries.push(new NameQuery(document.getElementById("name-choice").value));
+    queries.push(new NameQuery(document.getElementById("name-choice").value.trim()));
 
     let categoryOrType = document.getElementById("category-choice").value;
     if (itemTypes.includes(categoryOrType)) {

@@ -160,12 +160,24 @@ max_id = 0
 known_item_names = set()
 
 for item in items:
+    known_item_names.add(item["name"])
+
+old_items_map = dict()
+remap_items = []
+for item in old_items:
+    if "remapID" in item:
+        remap_items.append(item)
+    elif item["name"] not in known_item_names:
+        print(f'Unknown old item: {item["name"]}!!!')
+    old_items_map[item["name"]] = item
+
+for item in items:
     for key in delete_keys:
         if key in item:
             del item[key]
     
     for k in list(item.keys()):
-        if item[k] == 0 and not k in must_mappings:
+        if (item[k] == 0 or item[k] is None) and not k in must_mappings:
             del item[k]
 
     for k, v in translate_mappings.items():
@@ -181,17 +193,19 @@ for item in items:
         print(f'New item: {item["name"]} (id: {max_id})')
     item["id"] = id_map[item["name"]]
 
-    known_item_names.add(item["name"])
-
     item["type"] = item["type"].lower()
-    if item["name"] in item_set_map:
-        item["set"] = item_set_map[item["name"]]
+    if "displayName" in item:
+        item_name = item["displayName"]
+    else:
+        item_name = item["name"]
+    if item_name in item_set_map:
+        item["set"] = item_set_map[item_name]
+        if item["name"] in old_items_map:
+            old_item = old_items_map[item["name"]]
+            if "hideSet" in old_item:
+                item["hideSet"] = old_item["hideSet"]
 
-for item in old_items:
-    if "remapID" in item:
-        items.append(item)
-    elif item["name"] not in known_item_names:
-        print(f'Unknown old item: {item["name"]}!!!')
+items.extend(remap_items)
 
 with open("clean.json", "w") as outfile:
     json.dump(data, outfile, indent=2)
