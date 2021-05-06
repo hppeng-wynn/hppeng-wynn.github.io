@@ -3,9 +3,7 @@ const url_tag = location.hash.slice(1);
 // console.log(url_tag);
 
 
-const BUILD_VERSION = "7.0.3";
-
-
+const BUILD_VERSION = "7.0.5";
 
 function setTitle() {
     let text;
@@ -423,8 +421,13 @@ function calculateBuild(save_skp, skp){
         */
         let equipment = [ null, null, null, null, null, null, null, null, null ];
         for (let i in equipment) {
-            let equip = getValue(equipmentInputs[i]);
-            if (equip === "") { equip = "No " + equipment_names[i] }
+            let equip = getValue(equipmentInputs[i]).trim();
+            if (equip === "") {
+                equip = "No " + equipment_names[i]
+            }
+            else {
+                setValue(equipmentInputs[i], equip);
+            }
             equipment[i] = equip;
         }
         let powderings = [];
@@ -432,7 +435,7 @@ function calculateBuild(save_skp, skp){
         for (const i in powderInputs) {
             // read in two characters at a time.
             // TODO: make this more robust.
-            let input = getValue(powderInputs[i]);
+            let input = getValue(powderInputs[i]).trim();
             let powdering = [];
             let errorederrors = [];
             while (input) {
@@ -925,4 +928,8 @@ function toggleID() {
     }
 }
 
-load_init(init);
+// TODO: Learn and use await
+function init2() {
+    load_ing_init(init);
+}
+load_init(init2);

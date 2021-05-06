@@ -20,9 +20,6 @@ const ING_BUILD_VERSION = "7.0.1";
     Double powders
     Integrate to normal builder
  */
-let recipeTypes = ["HELMET","CHESTPLATE","LEGGINGS","BOOTS","RELIK","WAND","SPEAR","DAGGER","BOW","RING","NECKLACE","BRACELET","SCROLL","FOOD","POTION"];
-let levelTypes = ["1-3","3-5","5-7","7-9","10-13","13-15","15-17","17-19","20-23","23-25","25-27","27-29","30-33","33-35","35-37","37-39","40-43","43-45","45-47","47-49","50-53","53-55","55-57","57-59","60-63","63-65","65-67","67-69","70-73","73-75","75-77","77-79","80-83","83-85","85-87","87-89","90-93","93-95","95-97","97-99","100-103","103-105",]
-let ingFields = ["fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "lq", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "jh", "sprint", "sprintReg", "gXp", "gSpd"];
 let player_craft;
 
 function setTitle() {
@@ -169,24 +166,6 @@ function calculateCraft() {
     }
 
     
-}
-
-function encodeCraft(craft) {
-    if (craft) {
-        let atkSpds = ["SLOW","NORMAL","FAST"];
-        let craft_string =  "1" + 
-                            Base64.fromIntN(craft.ingreds[0].get("id"), 2) + 
-                            Base64.fromIntN(craft.ingreds[1].get("id"), 2) +
-                            Base64.fromIntN(craft.ingreds[2].get("id"), 2) +
-                            Base64.fromIntN(craft.ingreds[3].get("id"), 2) +
-                            Base64.fromIntN(craft.ingreds[4].get("id"), 2) +
-                            Base64.fromIntN(craft.ingreds[5].get("id"), 2) + 
-                            Base64.fromIntN(craft.recipe.get("id"),2) + 
-                            Base64.fromIntN(craft.mat_tiers[0] + (craft.mat_tiers[1]-1)*3, 1) +  //this maps tiers [a,b] to a+3b.
-                            Base64.fromIntN(atkSpds.indexOf(craft["atkSpd"]),1);
-        return craft_string;
-    }
-    return "";
 }
 
 function decodeCraft(ing_url_tag) {
