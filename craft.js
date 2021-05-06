@@ -201,10 +201,10 @@ class Craft{
             if(allNone) { 
                 statMap.set("hp", Math.floor( low * matmult )+ "-" + Math.floor( high * matmult ));
             }
-            statMap.set("duration", [Math.floor( statMap.get("duration")[0] * matmult ), Math.floor( statMap.get("duration")[1] * matmult )]);
+            statMap.set("duration", [Math.round( statMap.get("duration")[0] * matmult ), Math.round( statMap.get("duration")[1] * matmult )]);
         } else {
             //durability modifier
-            statMap.set("durability", [Math.floor( statMap.get("durability")[0] * matmult ), Math.floor( statMap.get("durability")[1] * matmult )]);
+            statMap.set("durability", [Math.round( statMap.get("durability")[0] * matmult ), Math.round( statMap.get("durability")[1] * matmult )]);
         }
         if (statMap.get("category") === "weapon") {
             //attack damages oh boy

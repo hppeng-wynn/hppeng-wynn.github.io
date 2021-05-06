@@ -2,7 +2,7 @@
 const pdfs = new Map([
     ["Wynncraft Damage Calculation",["mechanics", "Damage_calculation", "hppeng, ferricles, et al.", "A complete guide to Wynncraft's damage calculations. Includes formulas, tested game values, and worked examples."]],
     ["Crafted Weapon Powder Mechanics",["mechanics", "Crafted_Weapon_Powder_Mechanics", "ferricles", "A short guide to the mechanics of powder application on crafted weapons. Includes formulas and a worked example."]],
-    
+    ["Spell Costs",["mechanics", "Spell_Costs", "Bart MC, ferricles", "A documentation of spell costs and the mechanics of spell cost reduction."]],
     //[title ,[genre, filename, author(s), abstract/desc]]
 ]);
 
@@ -30,7 +30,7 @@ function init() {
             a.style.display = "flex-end";
 
             let secondline = document.createElement("div");
-            secondline.style.dipslay = "flex";
+            secondline.style.display = "flex";
             let ul = document.createElement("ul");
             ul.style.wordBreak = "break-word";
             let li = document.createElement("li");
