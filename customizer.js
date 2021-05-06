@@ -500,7 +500,7 @@ function useBaseItem(elem) {
             setValue("name-choice", baseItem.get("displayName"));
         }
 
-        //Take care of durability, duration, and charges.
+       //Take care of durability, duration, and charges.
         if (baseItem.get("tier") === "Crafted") {
             let specialIDs = ["duration", "durability"];
             setValue("charges-choice", baseItem.get("charges"));
