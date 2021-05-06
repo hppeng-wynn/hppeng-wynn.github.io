@@ -11,7 +11,7 @@
       "lvl": 60,
       "hprPct": 30,
       "mr": 3,
-      "strReq": 50,
+      "strReq": 0,
       "dexReq": 0,
       "intReq": 50,
       "agiReq": 50,
@@ -24,7 +24,9 @@
       "expd": 25,
       "fDamPct": 30,
       "wDamPct": 35,
+      "aDefPct": -90,
       "type": "helmet",
+      "restrict": "Untradable",
       "id": 3553
     },
     {
@@ -49,7 +51,10 @@
       "ms": 2,
       "mdRaw": 1675,
       "eDamPct": 20,
+      "spd": -10,
+      "atkTier": -13,
       "type": "chestplate",
+      "restrict": "Untradable",
       "id": 3554
     },
     {
@@ -80,6 +85,7 @@
       "eDamPct": 15,
       "spPct2": -67,
       "type": "boots",
+      "restrict": "Untradable",
       "id": 3555
     },
     {
@@ -104,6 +110,8 @@
       "def": 0,
       "sdPct": 6,
       "wDamPct": 8,
+      "spd": -10,
+      "fDefPct": -8,
       "type": "ring",
       "id": 3556
     },
@@ -137,6 +145,7 @@
       "mr": -1,
       "ls": 110,
       "sdRaw": 110,
+      "hpBonus": -850,
       "type": "wand",
       "id": 3557
     },
@@ -170,6 +179,8 @@
       "ms": 2,
       "wDamPct": 15,
       "eDamPct": 24,
+      "fDefPct": -20,
+      "hprRaw": -75,
       "type": "leggings",
       "id": 3558
     },
