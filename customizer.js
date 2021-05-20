@@ -12,6 +12,7 @@ function setTitle() {
 setTitle();
 
 let player_custom_item;
+let player_custom_ing;
 let base_item; //the item that a user starts from, if any
 let pos_range = [0.3,1.3];
 let neg_range = [1.3,0.7];

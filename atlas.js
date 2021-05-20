@@ -19,6 +19,7 @@ const flavortexts = ["JALA?? \n ATLAS?? \n ANYONE??",
                     "",
                     "Isn't this like that one game Amogus?",
                     "Mom, what does 'hppeng' mean?",
+                    "hpgbegg",
                     "|  |I  ||  |_",
                     "",
                 ];

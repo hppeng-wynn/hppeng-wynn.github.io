@@ -2,15 +2,18 @@
 
 import json
 
-
-with open("recipes_compress.json", "r") as infile:
-    recipe_data = json.loads(infile.read())
-recipes = recipe_data["recipes"]
-#this data does not have request :)
-with open("ingreds_compress.json", "r") as infile:
+with open("../ingreds.json", "r") as infile:
     ing_data = json.loads(infile.read())
-ings = ing_data["ingredients"]
+ings = ing_data
 #this data does not have request :)
+
+import os
+if os.path.exists("ing_map.json"):
+    with open("ing_map.json","r") as ing_mapfile:
+        ing_map = json.load(ing_mapfile)
+else:
+    ing_map = {ing["name"]: i for i, ing in enumerate(ings)}
+texture_names = []
 
 
 delete_keys = [
@@ -143,29 +146,7 @@ ing_delete_keys = [
 
 ]
 
-recipe_translate_mappings = { 
-    "level" : "lvl",
-    "id" : "name",
-}
-recipe_delete_keys = [ #lol
-
-]
-
-import os
-if os.path.exists("ing_map.json"):
-    with open("ing_map.json","r") as ing_mapfile:
-        ing_map = json.load(ing_mapfile)
-else:
-    ing_map = {ing["name"]: i for i, ing in enumerate(ings)}
-
-if os.path.exists("recipe_map.json"):
-    with open("recipe_map.json","r") as recipe_mapfile:
-        recipe_map = json.load(recipe_mapfile)
-else:
-    recipe_map = {recipe["name"]: i for i, recipe in enumerate(recipes)}
-
-texture_names = []
-
+print("loaded all files.")
 
 print(ings[0])
 for ing in ings:
@@ -180,7 +161,7 @@ for ing in ings:
     
     for k, v in ing_metaID_mappings.items():
         if k in ing['itemIDs']:
-            print(ing['itemIDs'])
+            print(ing['name'])
             ing['itemIDs'][v] = ing['itemIDs'][k]
             del ing['itemIDs'][k]
         elif k in ing['consumableIDs']:
@@ -200,31 +181,13 @@ for ing in ings:
         print(f'New Ingred: {ing["name"]}')
     ing["id"] = ing_map[ing["name"]]
 
-for recipe in recipes:
-    for key in recipe_delete_keys:
-        if key in recipe:
-            del recipe[key]
 
-    for k, v in recipe_translate_mappings.items():
-        if k in recipe:
-            recipe[v] = recipe[k]
-            del recipe[k]
-    if not (recipe["name"] in recipe_map):
-        recipe_map[recipe["name"]] = len(recipe_map)
-        print(f'New Recipe: {recipe["name"]}')
-    recipe["id"] = recipe_map[recipe["name"]]
-
-
-
-with open("ingreds_clean.json", "w") as outfile:
+with open("../ingreds_clean.json", "w") as outfile:
     json.dump(ing_data, outfile, indent = 2)
-with open("ingreds_compress2.json", "w") as outfile:
+with open("../ingreds_compress.json", "w") as outfile:
     json.dump(ing_data, outfile)
-with open("recipes_clean.json", "w") as outfile:
-    json.dump(recipe_data, outfile, indent = 2)
-with open("recipes_compress2.json", "w") as outfile:
-    json.dump(recipe_data, outfile)
-with open("ing_map.json", "w") as ing_mapfile:
+with open("../ing_map.json", "w") as ing_mapfile:
     json.dump(ing_map, ing_mapfile, indent = 2)
-with open("recipe_map.json", "w") as recipe_mapfile:
-    json.dump(recipe_map,recipe_mapfile,indent = 2)
+
+
+print('All ing jsons updated.')

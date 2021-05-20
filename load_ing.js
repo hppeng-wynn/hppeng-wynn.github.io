@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 5;
+const ING_DB_VERSION = 6;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -68,7 +68,7 @@ async function load_ings(init_func) {
     let result = await (await fetch(url)).json();
 
     result = await (await fetch(url)).json();
-    ings = result.ingredients;
+    ings = result;
 
     url = url.replace("/ingreds_compress.json", "/recipes_compress.json");
     result = await (await fetch(url)).json();
