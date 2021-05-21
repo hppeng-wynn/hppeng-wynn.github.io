@@ -8,8 +8,8 @@ ings = ing_data
 #this data does not have request :)
 
 import os
-if os.path.exists("ing_map.json"):
-    with open("ing_map.json","r") as ing_mapfile:
+if os.path.exists("../ing_map.json"):
+    with open("../ing_map.json","r") as ing_mapfile:
         ing_map = json.load(ing_mapfile)
 else:
     ing_map = {ing["name"]: i for i, ing in enumerate(ings)}

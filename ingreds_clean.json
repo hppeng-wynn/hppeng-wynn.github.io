@@ -268,7 +268,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 6
+    "id": 7
   },
   {
     "name": "Bamboo",
@@ -310,7 +310,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 7
+    "id": 6
   },
   {
     "name": "Bandit Rations",
@@ -564,7 +564,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 14
+    "id": 17
   },
   {
     "name": "Bloodweb",
@@ -603,7 +603,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 15
+    "id": 14
   },
   {
     "name": "Bone Ash",
@@ -675,7 +675,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 17
+    "id": 15
   },
   {
     "name": "Bright Petal",
@@ -1314,7 +1314,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 34
+    "id": 38
   },
   {
     "name": "Crawler Eye",
@@ -1353,7 +1353,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 35
+    "id": 34
   },
   {
     "name": "Crawler Sludge",
@@ -1393,7 +1393,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 36
+    "id": 35
   },
   {
     "name": "Crawler Web",
@@ -1428,7 +1428,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 37
+    "id": 36
   },
   {
     "name": "Crumbly Rock",
@@ -1464,7 +1464,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 38
+    "id": 37
   },
   {
     "name": "Cursed Venom Sac",
@@ -1573,7 +1573,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 41
+    "id": 42
   },
   {
     "name": "Decaying Skin",
@@ -1608,7 +1608,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 42
+    "id": 41
   },
   {
     "name": "Demonic Ashes",
@@ -2241,7 +2241,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 59
+    "id": 60
   },
   {
     "name": "Ghostly Essence",
@@ -2281,7 +2281,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 60
+    "id": 59
   },
   {
     "name": "Ghostly Membrane",
@@ -2317,7 +2317,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 61
+    "id": 62
   },
   {
     "name": "Ghostly Plume",
@@ -2353,7 +2353,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 62
+    "id": 61
   },
   {
     "name": "Goblin Tooth",
@@ -2661,7 +2661,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 70
+    "id": 104
   },
   {
     "name": "Grook Feather",
@@ -2696,7 +2696,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 71
+    "id": 114
   },
   {
     "name": "Hardened Magma",
@@ -2732,7 +2732,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 72
+    "id": 70
   },
   {
     "name": "Harpy Bone",
@@ -2768,7 +2768,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 73
+    "id": 71
   },
   {
     "name": "Holy Powder",
@@ -2807,7 +2807,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 74
+    "id": 72
   },
   {
     "name": "Hybrid Skin",
@@ -2846,7 +2846,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 75
+    "id": 73
   },
   {
     "name": "Ice Cream Sandwich",
@@ -2882,7 +2882,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 76
+    "id": 74
   },
   {
     "name": "Ice Sliver",
@@ -2918,7 +2918,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 77
+    "id": 75
   },
   {
     "name": "Icy Shard",
@@ -2957,7 +2957,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 78
+    "id": 76
   },
   {
     "name": "Illuminated Spirit",
@@ -2996,7 +2996,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 79
+    "id": 77
   },
   {
     "name": "Lava Blisters",
@@ -3031,7 +3031,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 80
+    "id": 78
   },
   {
     "name": "Leafy Stalk",
@@ -3068,7 +3068,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 81
+    "id": 80
   },
   {
     "name": "Leather",
@@ -3104,7 +3104,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 82
+    "id": 79
   },
   {
     "name": "Licorice Ropes",
@@ -3144,7 +3144,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 83
+    "id": 81
   },
   {
     "name": "Lizard Scale",
@@ -3183,7 +3183,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 84
+    "id": 82
   },
   {
     "name": "Lizard Tail",
@@ -3223,7 +3223,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 85
+    "id": 83
   },
   {
     "name": "Lunar Dust",
@@ -3259,7 +3259,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 86
+    "id": 84
   },
   {
     "name": "Luu Luu Vertebrae",
@@ -3294,7 +3294,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 87
+    "id": 85
   },
   {
     "name": "Magic Feather",
@@ -3329,7 +3329,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 88
+    "id": 86
   },
   {
     "name": "Magmatic Skin",
@@ -3370,7 +3370,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 89
+    "id": 87
   },
   {
     "name": "Manis Carapace",
@@ -3405,7 +3405,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 90
+    "id": 88
   },
   {
     "name": "Marsufosa Pelt",
@@ -3440,7 +3440,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 91
+    "id": 89
   },
   {
     "name": "Mashed Insect",
@@ -3479,7 +3479,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 92
+    "id": 90
   },
   {
     "name": "Melted Steel",
@@ -3519,7 +3519,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 93
+    "id": 92
   },
   {
     "name": "Metal Scraps",
@@ -3554,7 +3554,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 94
+    "id": 93
   },
   {
     "name": "Mineral Cinder",
@@ -3590,7 +3590,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 95
+    "id": 91
   },
   {
     "name": "Mixed Seeds",
@@ -3626,7 +3626,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 96
+    "id": 94
   },
   {
     "name": "Myconid Spores",
@@ -3677,7 +3677,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 97
+    "id": 95
   },
   {
     "name": "Naga Tail",
@@ -3712,7 +3712,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 98
+    "id": 96
   },
   {
     "name": "Oceanic Silt",
@@ -3747,7 +3747,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 99
+    "id": 97
   },
   {
     "name": "Ocelot Pelt",
@@ -3782,7 +3782,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 100
+    "id": 98
   },
   {
     "name": "Ocelot Tail",
@@ -3822,7 +3822,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 101
+    "id": 99
   },
   {
     "name": "Old Bone",
@@ -3858,7 +3858,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 102
+    "id": 100
   },
   {
     "name": "Ominous Pearl",
@@ -3895,7 +3895,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 103
+    "id": 101
   },
   {
     "name": "Optic Fiber",
@@ -3930,7 +3930,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 104
+    "id": 102
   },
   {
     "name": "Orc Eye",
@@ -3970,7 +3970,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 105
+    "id": 103
   },
   {
     "name": "Orc Skin",
@@ -4010,7 +4010,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 106
+    "id": 105
   },
   {
     "name": "Orc Teeth",
@@ -4049,7 +4049,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 107
+    "id": 106
   },
   {
     "name": "Overgrown Bones",
@@ -4085,7 +4085,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 108
+    "id": 107
   },
   {
     "name": "Perkish Potato",
@@ -4120,7 +4120,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 109
+    "id": 108
   },
   {
     "name": "Pigman Meat",
@@ -4156,7 +4156,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 110
+    "id": 109
   },
   {
     "name": "Pig's Remains",
@@ -4191,7 +4191,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 111
+    "id": 110
   },
   {
     "name": "Plucked Feather",
@@ -4231,7 +4231,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 112
+    "id": 111
   },
   {
     "name": "Poorly-Made Pouch",
@@ -4266,7 +4266,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 113
+    "id": 112
   },
   {
     "name": "Potato",
@@ -4301,7 +4301,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 114
+    "id": 113
   },
   {
     "name": "Prickly Grass",
@@ -4681,7 +4681,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 124
+    "id": 126
   },
   {
     "name": "River Clay",
@@ -4757,7 +4757,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 126
+    "id": 124
   },
   {
     "name": "Rose",
@@ -5265,7 +5265,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 139
+    "id": 143
   },
   {
     "name": "Shorting Wire",
@@ -5304,7 +5304,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 140
+    "id": 139
   },
   {
     "name": "Shredded Bone",
@@ -5340,7 +5340,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 141
+    "id": 140
   },
   {
     "name": "Silver Feather",
@@ -5379,7 +5379,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 142
+    "id": 141
   },
   {
     "name": "Skyraider Coin",
@@ -5418,7 +5418,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 143
+    "id": 142
   },
   {
     "name": "Sludge Parasite",
@@ -5643,7 +5643,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 149
+    "id": 151
   },
   {
     "name": "Soft Red Wool",
@@ -5679,7 +5679,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 150
+    "id": 149
   },
   {
     "name": "Soft Sand",
@@ -5718,7 +5718,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 151
+    "id": 153
   },
   {
     "name": "Soft White Wool",
@@ -5754,7 +5754,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 152
+    "id": 150
   },
   {
     "name": "Soft Yellow Wool",
@@ -5790,7 +5790,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 153
+    "id": 152
   },
   {
     "name": "Soggy Stone",
@@ -5904,7 +5904,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 156
+    "id": 157
   },
   {
     "name": "Spider Eggs",
@@ -5940,7 +5940,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 157
+    "id": 158
   },
   {
     "name": "Spider Fang",
@@ -5976,7 +5976,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 158
+    "id": 159
   },
   {
     "name": "Spider Leg",
@@ -6015,7 +6015,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 159
+    "id": 156
   },
   {
     "name": "Squid Ink",
@@ -6920,7 +6920,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 183
+    "id": 191
   },
   {
     "name": "Warped Skin",
@@ -6956,7 +6956,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 184
+    "id": 183
   },
   {
     "name": "Waterlogged Branch",
@@ -6996,7 +6996,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 185
+    "id": 184
   },
   {
     "name": "Werewolf Tail",
@@ -7036,7 +7036,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 186
+    "id": 185
   },
   {
     "name": "Wolf Fang",
@@ -7075,7 +7075,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 187
+    "id": 186
   },
   {
     "name": "Wood Scrap",
@@ -7147,7 +7147,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 189
+    "id": 187
   },
   {
     "name": "Wood Snippet",
@@ -7183,7 +7183,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 190
+    "id": 189
   },
   {
     "name": "Wool",
@@ -7223,7 +7223,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 191
+    "id": 190
   },
   {
     "name": "Worn Memorabilia",
@@ -7714,7 +7714,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 204
+    "id": 205
   },
   {
     "name": "Beef Tongue",
@@ -7753,7 +7753,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 205
+    "id": 204
   },
   {
     "name": "Bloodstained Remains",
@@ -7866,7 +7866,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 208
+    "id": 209
   },
   {
     "name": "Broken Steel Hook",
@@ -7905,7 +7905,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 209
+    "id": 208
   },
   {
     "name": "Burning Soul",
@@ -8213,7 +8213,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 217
+    "id": 218
   },
   {
     "name": "Chitin Plate",
@@ -8255,7 +8255,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 218
+    "id": 217
   },
   {
     "name": "Coagulated Clot",
@@ -8365,7 +8365,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 221
+    "id": 222
   },
   {
     "name": "Corn Husk",
@@ -8401,7 +8401,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 222
+    "id": 221
   },
   {
     "name": "Cortrich Eggs",
@@ -8787,7 +8787,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 232
+    "id": 233
   },
   {
     "name": "Earthly Aura",
@@ -8826,7 +8826,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 233
+    "id": 232
   },
   {
     "name": "Elemental Crystal",
@@ -9309,7 +9309,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 245
+    "id": 246
   },
   {
     "name": "Fuming Lava Rock",
@@ -9350,7 +9350,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 246
+    "id": 245
   },
   {
     "name": "Gloomy Orb",
@@ -9469,7 +9469,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 249
+    "id": 250
   },
   {
     "name": "Green Foot",
@@ -9512,7 +9512,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 250
+    "id": 249
   },
   {
     "name": "Green Scale",
@@ -9743,7 +9743,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 256
+    "id": 257
   },
   {
     "name": "Ibjub Fruit",
@@ -9782,7 +9782,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 257
+    "id": 256
   },
   {
     "name": "Ice Fragment",
@@ -9964,7 +9964,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 261
+    "id": 265
   },
   {
     "name": "Ivory Tusk",
@@ -10003,7 +10003,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 262
+    "id": 261
   },
   {
     "name": "Jolting Geode",
@@ -10077,7 +10077,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 264
+    "id": 262
   },
   {
     "name": "Karl Johan Cap",
@@ -10112,7 +10112,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 265
+    "id": 264
   },
   {
     "name": "Larbonic Sheddings",
@@ -10288,7 +10288,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 269
+    "id": 270
   },
   {
     "name": "Lively Apple",
@@ -10323,7 +10323,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 270
+    "id": 269
   },
   {
     "name": "Lion Fang",
@@ -10403,7 +10403,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 272
+    "id": 275
   },
   {
     "name": "Lost Talisman",
@@ -10444,7 +10444,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 273
+    "id": 272
   },
   {
     "name": "Lotus Seedpod",
@@ -10485,7 +10485,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 274
+    "id": 273
   },
   {
     "name": "Luminescent Ink",
@@ -10520,7 +10520,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 275
+    "id": 274
   },
   {
     "name": "Lunar Shard",
@@ -10750,7 +10750,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 281
+    "id": 282
   },
   {
     "name": "Muscle",
@@ -10790,7 +10790,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 282
+    "id": 281
   },
   {
     "name": "Nasty Residue",
@@ -11055,7 +11055,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 289
+    "id": 290
   },
   {
     "name": "Penguin Egg",
@@ -11095,7 +11095,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 290
+    "id": 289
   },
   {
     "name": "Phrumkin Seeds",
@@ -11332,7 +11332,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 296
+    "id": 297
   },
   {
     "name": "Pirate Beard",
@@ -11371,7 +11371,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 297
+    "id": 296
   },
   {
     "name": "Poison Sac",
@@ -12068,7 +12068,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 314
+    "id": 315
   },
   {
     "name": "Red Shale",
@@ -12109,7 +12109,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 315
+    "id": 316
   },
   {
     "name": "Roasted Tissue",
@@ -12155,7 +12155,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 316
+    "id": 314
   },
   {
     "name": "Savannah Stone",
@@ -12327,7 +12327,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 320
+    "id": 321
   },
   {
     "name": "Tropical Honeysuckle",
@@ -12372,7 +12372,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 321
+    "id": 320
   },
   {
     "name": "Ursine Claw",
@@ -12458,7 +12458,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 323
+    "id": 324
   },
   {
     "name": "Webbed Offshoot",
@@ -12500,7 +12500,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 324
+    "id": 323
   },
   {
     "name": "Zombie Brain",
@@ -12613,7 +12613,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 327
+    "id": 328
   },
   {
     "name": "Regenerative Pins",
@@ -12654,7 +12654,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 328
+    "id": 327
   },
   {
     "name": "Resistant Strain",
@@ -12701,7 +12701,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 329
+    "id": 681
   },
   {
     "name": "Rock-Hard Beak",
@@ -12741,7 +12741,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 330
+    "id": 329
   },
   {
     "name": "Rotten Teeth",
@@ -12780,7 +12780,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 331
+    "id": 330
   },
   {
     "name": "Rotten Log",
@@ -12815,7 +12815,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 332
+    "id": 331
   },
   {
     "name": "Rusty Axe Head",
@@ -12850,7 +12850,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 333
+    "id": 332
   },
   {
     "name": "Salt",
@@ -12880,7 +12880,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 334
+    "id": 333
   },
   {
     "name": "Scalding Sand",
@@ -12919,7 +12919,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 335
+    "id": 334
   },
   {
     "name": "Sea Salt",
@@ -12950,7 +12950,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 336
+    "id": 335
   },
   {
     "name": "Sentient Shadow",
@@ -12991,7 +12991,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 337
+    "id": 336
   },
   {
     "name": "Sharp Edge",
@@ -13030,7 +13030,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 338
+    "id": 337
   },
   {
     "name": "Shiny Mineral Deposit",
@@ -13120,7 +13120,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 340
+    "id": 338
   },
   {
     "name": "Sky Snail Shell",
@@ -13164,7 +13164,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 341
+    "id": 340
   },
   {
     "name": "Smooth Silt",
@@ -13204,7 +13204,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 342
+    "id": 341
   },
   {
     "name": "Snake Scale",
@@ -13244,7 +13244,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 343
+    "id": 344
   },
   {
     "name": "Snake Skin",
@@ -13287,7 +13287,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 344
+    "id": 342
   },
   {
     "name": "Snake Tooth",
@@ -13327,7 +13327,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 345
+    "id": 343
   },
   {
     "name": "Soapstone",
@@ -13367,7 +13367,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 346
+    "id": 345
   },
   {
     "name": "Spike Residue",
@@ -13407,7 +13407,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 347
+    "id": 346
   },
   {
     "name": "Squid Beak",
@@ -13489,7 +13489,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 349
+    "id": 347
   },
   {
     "name": "Sticky Fern",
@@ -13565,7 +13565,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 351
+    "id": 349
   },
   {
     "name": "Stone Plating",
@@ -13605,7 +13605,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 352
+    "id": 354
   },
   {
     "name": "Strange Geode",
@@ -13644,7 +13644,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 353
+    "id": 351
   },
   {
     "name": "Stretched Rawhide",
@@ -13683,7 +13683,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 354
+    "id": 352
   },
   {
     "name": "Strong Flesh",
@@ -13725,7 +13725,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 355
+    "id": 353
   },
   {
     "name": "Sylphid Tears",
@@ -13764,7 +13764,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 356
+    "id": 355
   },
   {
     "name": "Tender Pork Fillet",
@@ -13799,7 +13799,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 357
+    "id": 356
   },
   {
     "name": "Tentacle",
@@ -13878,7 +13878,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 359
+    "id": 357
   },
   {
     "name": "Throbbing Avos Heart",
@@ -13917,7 +13917,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 360
+    "id": 361
   },
   {
     "name": "Titanium Chunk",
@@ -13957,7 +13957,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 361
+    "id": 360
   },
   {
     "name": "Torn Rawhide",
@@ -14032,7 +14032,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 363
+    "id": 359
   },
   {
     "name": "Toxic Spores",
@@ -14110,7 +14110,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 365
+    "id": 363
   },
   {
     "name": "Undead Heart",
@@ -14150,7 +14150,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 366
+    "id": 365
   },
   {
     "name": "Viking Stone",
@@ -14231,7 +14231,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 368
+    "id": 366
   },
   {
     "name": "Voidstone Sample",
@@ -14271,7 +14271,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 369
+    "id": 368
   },
   {
     "name": "Watery Aura",
@@ -14310,7 +14310,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 370
+    "id": 369
   },
   {
     "name": "Windy Aura",
@@ -14349,7 +14349,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 371
+    "id": 370
   },
   {
     "name": "Wooly Armour",
@@ -14388,7 +14388,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 372
+    "id": 371
   },
   {
     "name": "Worn Coin",
@@ -14430,7 +14430,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 373
+    "id": 372
   },
   {
     "name": "Wriggling Darkness",
@@ -14470,7 +14470,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 374
+    "id": 373
   },
   {
     "name": "Zhight Coral Piece",
@@ -14510,7 +14510,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 375
+    "id": 374
   },
   {
     "name": "Zhight Shiny Stone",
@@ -14550,7 +14550,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 376
+    "id": 375
   },
   {
     "name": "7-Yottabyte Storage Component",
@@ -14582,7 +14582,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 377
+    "id": 376
   },
   {
     "name": "Accursed Effigy",
@@ -14626,7 +14626,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 378
+    "id": 377
   },
   {
     "name": "Acidic Blood",
@@ -14662,7 +14662,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 379
+    "id": 378
   },
   {
     "name": "Acidic Solution",
@@ -14698,7 +14698,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 380
+    "id": 379
   },
   {
     "name": "Adaptive Tissue",
@@ -14737,7 +14737,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 381
+    "id": 380
   },
   {
     "name": "Aged Tome",
@@ -14777,7 +14777,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 382
+    "id": 381
   },
   {
     "name": "Ancient Currency",
@@ -14818,7 +14818,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 383
+    "id": 382
   },
   {
     "name": "Ancient Moss",
@@ -14859,7 +14859,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 384
+    "id": 383
   },
   {
     "name": "Ancient Panel",
@@ -14898,7 +14898,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 385
+    "id": 384
   },
   {
     "name": "Angelic Gem",
@@ -14949,7 +14949,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 386
+    "id": 385
   },
   {
     "name": "Antique Metal",
@@ -14989,7 +14989,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 387
+    "id": 386
   },
   {
     "name": "Atmospheric Aspect",
@@ -15036,7 +15036,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 388
+    "id": 682
   },
   {
     "name": "Beastial Viscera",
@@ -15075,7 +15075,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 389
+    "id": 387
   },
   {
     "name": "Black Sulphur",
@@ -15115,7 +15115,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 390
+    "id": 388
   },
   {
     "name": "Blazing Fireball",
@@ -15151,7 +15151,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 391
+    "id": 389
   },
   {
     "name": "Bloated Artery",
@@ -15193,7 +15193,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 392
+    "id": 390
   },
   {
     "name": "Bob's Tear",
@@ -15227,7 +15227,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 393
+    "id": 391
   },
   {
     "name": "Bottled Decay",
@@ -15270,7 +15270,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 394
+    "id": 392
   },
   {
     "name": "Burial Talisman",
@@ -15313,7 +15313,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 395
+    "id": 393
   },
   {
     "name": "Burnt Skull",
@@ -15352,7 +15352,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 396
+    "id": 394
   },
   {
     "name": "Calmed Thunder",
@@ -15392,7 +15392,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 397
+    "id": 395
   },
   {
     "name": "Cat Food",
@@ -15432,7 +15432,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 398
+    "id": 396
   },
   {
     "name": "Chaotic Embers",
@@ -15471,7 +15471,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 399
+    "id": 397
   },
   {
     "name": "Cherry Sapling",
@@ -15510,7 +15510,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 400
+    "id": 398
   },
   {
     "name": "Compressed Aspect",
@@ -15557,7 +15557,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 401
+    "id": 683
   },
   {
     "name": "Condensed Darkness",
@@ -15603,7 +15603,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 402
+    "id": 399
   },
   {
     "name": "Corrupted Ichor",
@@ -15642,7 +15642,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 403
+    "id": 400
   },
   {
     "name": "Crumbling Skull",
@@ -15672,7 +15672,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 404
+    "id": 401
   },
   {
     "name": "Crystalline Growth",
@@ -15712,7 +15712,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 405
+    "id": 402
   },
   {
     "name": "Curse Gland",
@@ -15751,7 +15751,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 406
+    "id": 403
   },
   {
     "name": "Cursed Ashes",
@@ -15786,7 +15786,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 407
+    "id": 404
   },
   {
     "name": "Cyclone Blue Leaves",
@@ -15825,7 +15825,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 408
+    "id": 405
   },
   {
     "name": "Dark Iris",
@@ -15866,7 +15866,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 409
+    "id": 407
   },
   {
     "name": "Dark Matter",
@@ -15906,7 +15906,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 410
+    "id": 406
   },
   {
     "name": "Defiled Luxroot",
@@ -15946,7 +15946,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 411
+    "id": 408
   },
   {
     "name": "Desert Fossil",
@@ -15985,7 +15985,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 412
+    "id": 410
   },
   {
     "name": "Diseased Fluids",
@@ -16025,7 +16025,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 413
+    "id": 409
   },
   {
     "name": "Disturbed Aspect",
@@ -16073,7 +16073,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 414
+    "id": 684
   },
   {
     "name": "Dragon Aura",
@@ -16112,7 +16112,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 415
+    "id": 411
   },
   {
     "name": "Dried Gill",
@@ -16151,7 +16151,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 416
+    "id": 413
   },
   {
     "name": "Dried Kelp",
@@ -16188,7 +16188,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 417
+    "id": 412
   },
   {
     "name": "Earthly Pebble",
@@ -16223,7 +16223,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 418
+    "id": 414
   },
   {
     "name": "Elephant Toenail",
@@ -16258,7 +16258,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 419
+    "id": 415
   },
   {
     "name": "Enchanted Chain Link",
@@ -16302,7 +16302,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 420
+    "id": 416
   },
   {
     "name": "Engraved Tablet",
@@ -16342,7 +16342,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 421
+    "id": 417
   },
   {
     "name": "Enhanced Behaviour Microchip",
@@ -16383,7 +16383,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 422
+    "id": 418
   },
   {
     "name": "Enhanced Dynamics Microchip",
@@ -16424,7 +16424,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 423
+    "id": 419
   },
   {
     "name": "Enhanced Pathfinding Microchip",
@@ -16465,7 +16465,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 424
+    "id": 421
   },
   {
     "name": "Enhanced Physics Microchip",
@@ -16506,7 +16506,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 425
+    "id": 420
   },
   {
     "name": "Enhanced Post-Processing Microchip",
@@ -16547,7 +16547,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 426
+    "id": 423
   },
   {
     "name": "Enhanced Potential Microchip",
@@ -16588,7 +16588,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 427
+    "id": 422
   },
   {
     "name": "Enraged Soul",
@@ -16624,7 +16624,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 428
+    "id": 424
   },
   {
     "name": "Erratic Aspect",
@@ -16671,7 +16671,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 429
+    "id": 685
   },
   {
     "name": "Eternal Flame",
@@ -16718,7 +16718,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 430
+    "id": 425
   },
   {
     "name": "Fairy Powder",
@@ -16761,7 +16761,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 431
+    "id": 426
   },
   {
     "name": "Feather of Grace",
@@ -16797,7 +16797,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 432
+    "id": 427
   },
   {
     "name": "Fiberglass Frame",
@@ -16837,7 +16837,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 433
+    "id": 428
   },
   {
     "name": "Fighting Stick",
@@ -16881,7 +16881,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 434
+    "id": 429
   },
   {
     "name": "Fish Tail",
@@ -16920,7 +16920,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 435
+    "id": 432
   },
   {
     "name": "Flameheart",
@@ -16960,7 +16960,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 436
+    "id": 431
   },
   {
     "name": "Flesh-forged Circuit",
@@ -17000,7 +17000,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 437
+    "id": 430
   },
   {
     "name": "Flow of Fate",
@@ -17039,7 +17039,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 438
+    "id": 433
   },
   {
     "name": "Fresh Game",
@@ -17074,7 +17074,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 439
+    "id": 434
   },
   {
     "name": "Frozen Ghostly Essence",
@@ -17117,7 +17117,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 440
+    "id": 435
   },
   {
     "name": "Gelatinous Slime Chunk",
@@ -17154,7 +17154,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 441
+    "id": 436
   },
   {
     "name": "Generator Chip",
@@ -17196,7 +17196,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 442
+    "id": 437
   },
   {
     "name": "Glimmering Beak",
@@ -17235,7 +17235,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 443
+    "id": 438
   },
   {
     "name": "Glittering Silt",
@@ -17275,7 +17275,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 444
+    "id": 439
   },
   {
     "name": "Golden Avia Feather",
@@ -17306,7 +17306,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 445
+    "id": 440
   },
   {
     "name": "Gravitation Crystal",
@@ -17346,7 +17346,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 446
+    "id": 441
   },
   {
     "name": "Green Opal",
@@ -17385,7 +17385,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 447
+    "id": 442
   },
   {
     "name": "Gylia Essence",
@@ -17428,7 +17428,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 448
+    "id": 443
   },
   {
     "name": "Haleva Plant",
@@ -17468,7 +17468,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 449
+    "id": 444
   },
   {
     "name": "Harpy Wing",
@@ -17508,7 +17508,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 450
+    "id": 445
   },
   {
     "name": "Hellish Cinders",
@@ -17552,7 +17552,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 451
+    "id": 446
   },
   {
     "name": "Herbstzeitlose",
@@ -17591,7 +17591,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 452
+    "id": 447
   },
   {
     "name": "Hydrofluoric Acid",
@@ -17631,7 +17631,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 453
+    "id": 448
   },
   {
     "name": "Infected Mass",
@@ -17662,7 +17662,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 454
+    "id": 449
   },
   {
     "name": "Infernal Flesh",
@@ -17705,7 +17705,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 455
+    "id": 450
   },
   {
     "name": "Ironwood Chips",
@@ -17751,7 +17751,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 456
+    "id": 451
   },
   {
     "name": "Larvae Cluster",
@@ -17790,7 +17790,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 457
+    "id": 452
   },
   {
     "name": "Leopard Blood",
@@ -17829,7 +17829,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 458
+    "id": 453
   },
   {
     "name": "Lithoflesh",
@@ -17864,7 +17864,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 459
+    "id": 454
   },
   {
     "name": "Lost Spirit",
@@ -17904,7 +17904,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 460
+    "id": 456
   },
   {
     "name": "Lucky Rabbit's Foot",
@@ -17946,7 +17946,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 461
+    "id": 455
   },
   {
     "name": "Lucky Spider Egg",
@@ -17985,7 +17985,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 462
+    "id": 457
   },
   {
     "name": "Lunar Chunk",
@@ -18021,7 +18021,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 463
+    "id": 458
   },
   {
     "name": "Luxroot Cuttings",
@@ -18061,7 +18061,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 464
+    "id": 459
   },
   {
     "name": "Mangled Soul",
@@ -18098,7 +18098,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 465
+    "id": 460
   },
   {
     "name": "Maroferrous",
@@ -18138,7 +18138,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 466
+    "id": 461
   },
   {
     "name": "Maromagnetite",
@@ -18178,7 +18178,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 467
+    "id": 462
   },
   {
     "name": "Aged Medallion",
@@ -18218,7 +18218,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 468
+    "id": 463
   },
   {
     "name": "Mixed Mineral Deposit",
@@ -18264,7 +18264,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 469
+    "id": 464
   },
   {
     "name": "Mythical Hoof",
@@ -18315,7 +18315,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 470
+    "id": 465
   },
   {
     "name": "Naval Shard",
@@ -18354,7 +18354,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 471
+    "id": 466
   },
   {
     "name": "Nivlan Honeycomb",
@@ -18393,7 +18393,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 472
+    "id": 468
   },
   {
     "name": "Nose Ring",
@@ -18432,7 +18432,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 473
+    "id": 467
   },
   {
     "name": "Old Explosives",
@@ -18472,7 +18472,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 474
+    "id": 470
   },
   {
     "name": "Organic Explosive",
@@ -18512,7 +18512,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 475
+    "id": 469
   },
   {
     "name": "Overload Aspect",
@@ -18559,7 +18559,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 476
+    "id": 686
   },
   {
     "name": "Paralyzing Spores",
@@ -18605,7 +18605,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 477
+    "id": 471
   },
   {
     "name": "Piercing Talons",
@@ -18645,7 +18645,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 478
+    "id": 472
   },
   {
     "name": "Pig's Blood",
@@ -18680,7 +18680,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 479
+    "id": 473
   },
   {
     "name": "Pink Pelulite",
@@ -18720,7 +18720,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 480
+    "id": 474
   },
   {
     "name": "Plutonium Waste",
@@ -18759,7 +18759,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 481
+    "id": 475
   },
   {
     "name": "Popped Pustule",
@@ -18798,7 +18798,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 482
+    "id": 476
   },
   {
     "name": "Portal Emanation",
@@ -18840,7 +18840,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 483
+    "id": 477
   },
   {
     "name": "Portal Rift",
@@ -18879,7 +18879,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 484
+    "id": 478
   },
   {
     "name": "Primeval Skin",
@@ -18922,7 +18922,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 485
+    "id": 479
   },
   {
     "name": "Prized Pelt",
@@ -18961,7 +18961,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 486
+    "id": 480
   },
   {
     "name": "Pure Quartz",
@@ -19003,7 +19003,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 487
+    "id": 481
   },
   {
     "name": "Purest Tear",
@@ -19038,7 +19038,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 488
+    "id": 482
   },
   {
     "name": "Pykrete",
@@ -19074,7 +19074,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 489
+    "id": 483
   },
   {
     "name": "Cleaned Saccharum",
@@ -19114,7 +19114,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 490
+    "id": 484
   },
   {
     "name": "Shattered Memory Shard",
@@ -19154,7 +19154,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 491
+    "id": 485
   },
   {
     "name": "Therck's Chain",
@@ -19197,7 +19197,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 492
+    "id": 486
   },
   {
     "name": "Weakening Catalyst",
@@ -19240,7 +19240,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 493
+    "id": 487
   },
   {
     "name": "Ashstained Basalt",
@@ -19281,7 +19281,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 494
+    "id": 488
   },
   {
     "name": "Astral Alloy",
@@ -19338,7 +19338,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 495
+    "id": 489
   },
   {
     "name": "Creepvine Cluster",
@@ -19383,7 +19383,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 496
+    "id": 491
   },
   {
     "name": "Defective Circuits",
@@ -19428,7 +19428,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 497
+    "id": 493
   },
   {
     "name": "Dernic Parasite",
@@ -19473,7 +19473,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 498
+    "id": 490
   },
   {
     "name": "Digestible Fungi",
@@ -19518,7 +19518,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 499
+    "id": 492
   },
   {
     "name": "Flashfrost",
@@ -19559,7 +19559,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 500
+    "id": 494
   },
   {
     "name": "Herbal Extract",
@@ -19604,7 +19604,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 501
+    "id": 496
   },
   {
     "name": "Highland Basil",
@@ -19649,7 +19649,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 502
+    "id": 495
   },
   {
     "name": "Illusory Idol",
@@ -19694,7 +19694,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 503
+    "id": 497
   },
   {
     "name": "Mellow Mango",
@@ -19737,7 +19737,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 504
+    "id": 498
   },
   {
     "name": "Mysterious Mist",
@@ -19782,7 +19782,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 505
+    "id": 499
   },
   {
     "name": "Pokey Cactus",
@@ -19828,7 +19828,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 506
+    "id": 501
   },
   {
     "name": "Premium Hay Bale",
@@ -19873,7 +19873,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 507
+    "id": 500
   },
   {
     "name": "Quartz Cluster",
@@ -19915,7 +19915,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 508
+    "id": 503
   },
   {
     "name": "Radiant Seeds",
@@ -19960,7 +19960,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 509
+    "id": 502
   },
   {
     "name": "Ruins Shard",
@@ -20005,7 +20005,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 510
+    "id": 504
   },
   {
     "name": "Shadow of Ruin",
@@ -20046,7 +20046,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 511
+    "id": 505
   },
   {
     "name": "Sharpening Stone",
@@ -20087,7 +20087,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 512
+    "id": 507
   },
   {
     "name": "Soul Amalgamate",
@@ -20136,7 +20136,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 513
+    "id": 506
   },
   {
     "name": "Spreading Fireweed",
@@ -20179,7 +20179,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 514
+    "id": 508
   },
   {
     "name": "Void Particulates",
@@ -20241,7 +20241,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 515
+    "id": 509
   },
   {
     "name": "Rabbit Carcass",
@@ -20292,7 +20292,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 516
+    "id": 510
   },
   {
     "name": "Rare Potato",
@@ -20327,7 +20327,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 517
+    "id": 512
   },
   {
     "name": "Razor-Sharp Tooth",
@@ -20367,7 +20367,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 518
+    "id": 511
   },
   {
     "name": "Reinforced Leather",
@@ -20407,7 +20407,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 519
+    "id": 514
   },
   {
     "name": "Relic of the Past",
@@ -20446,7 +20446,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 520
+    "id": 513
   },
   {
     "name": "Repulsive Aspect",
@@ -20494,7 +20494,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 521
+    "id": 687
   },
   {
     "name": "Residual Spirit",
@@ -20533,7 +20533,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 522
+    "id": 515
   },
   {
     "name": "Retinal Barbs",
@@ -20575,7 +20575,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 523
+    "id": 517
   },
   {
     "name": "Rigid Fin",
@@ -20614,7 +20614,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 524
+    "id": 516
   },
   {
     "name": "Rotting Bone",
@@ -20653,7 +20653,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 525
+    "id": 518
   },
   {
     "name": "Router's Shield",
@@ -20692,7 +20692,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 526
+    "id": 519
   },
   {
     "name": "Scarab Husk",
@@ -20728,7 +20728,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 527
+    "id": 520
   },
   {
     "name": "Scarred Leather",
@@ -20769,7 +20769,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 528
+    "id": 521
   },
   {
     "name": "Scopaesthesia",
@@ -20824,7 +20824,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 529
+    "id": 522
   },
   {
     "name": "Scuttling Syenite",
@@ -20863,7 +20863,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 530
+    "id": 688
   },
   {
     "name": "Seabird Egg",
@@ -20902,7 +20902,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 531
+    "id": 523
   },
   {
     "name": "Sealed Blaze",
@@ -20953,7 +20953,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 532
+    "id": 525
   },
   {
     "name": "Sentient Water",
@@ -20992,7 +20992,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 533
+    "id": 526
   },
   {
     "name": "Serpent Tongue",
@@ -21031,7 +21031,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 534
+    "id": 524
   },
   {
     "name": "Shattered Aspect",
@@ -21079,7 +21079,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 535
+    "id": 689
   },
   {
     "name": "Shimmering Jewel",
@@ -21119,7 +21119,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 536
+    "id": 527
   },
   {
     "name": "Shinesting Scorpion Tail",
@@ -21159,7 +21159,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 537
+    "id": 530
   },
   {
     "name": "Shrieker's Head",
@@ -21202,7 +21202,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 538
+    "id": 528
   },
   {
     "name": "Silver Bullet",
@@ -21241,7 +21241,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 539
+    "id": 529
   },
   {
     "name": "Sky Flux",
@@ -21280,7 +21280,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 540
+    "id": 531
   },
   {
     "name": "Slimy Skin",
@@ -21323,7 +21323,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 541
+    "id": 532
   },
   {
     "name": "Smokebomb",
@@ -21366,7 +21366,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 542
+    "id": 534
   },
   {
     "name": "Soft Silk",
@@ -21406,7 +21406,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 543
+    "id": 533
   },
   {
     "name": "Sought-After Ore",
@@ -21443,7 +21443,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 544
+    "id": 536
   },
   {
     "name": "Soulbound Cinders",
@@ -21486,7 +21486,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 545
+    "id": 535
   },
   {
     "name": "Split Essence",
@@ -21527,7 +21527,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 546
+    "id": 537
   },
   {
     "name": "Squid Brain",
@@ -21567,7 +21567,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 547
+    "id": 538
   },
   {
     "name": "Sticky Mudball",
@@ -21607,7 +21607,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 548
+    "id": 539
   },
   {
     "name": "Stonewalker Core",
@@ -21647,7 +21647,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 549
+    "id": 540
   },
   {
     "name": "Succulent Crab Meat",
@@ -21686,7 +21686,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 550
+    "id": 541
   },
   {
     "name": "Swooper Wing",
@@ -21725,7 +21725,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 551
+    "id": 542
   },
   {
     "name": "Tenebrous Plasma",
@@ -21768,7 +21768,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 552
+    "id": 543
   },
   {
     "name": "Thorned Tusk",
@@ -21807,7 +21807,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 553
+    "id": 544
   },
   {
     "name": "Toxxulous Ripper\u2019s Legs",
@@ -21851,7 +21851,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 554
+    "id": 545
   },
   {
     "name": "Twisted Organ",
@@ -21890,7 +21890,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 555
+    "id": 546
   },
   {
     "name": "Vile Stone",
@@ -21930,7 +21930,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 556
+    "id": 547
   },
   {
     "name": "Volatile Light",
@@ -21986,7 +21986,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 557
+    "id": 551
   },
   {
     "name": "Vortex Expulsion",
@@ -22029,7 +22029,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 558
+    "id": 548
   },
   {
     "name": "Wendigo Bone",
@@ -22069,7 +22069,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 559
+    "id": 549
   },
   {
     "name": "Wind Ornament",
@@ -22108,7 +22108,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 560
+    "id": 550
   },
   {
     "name": "Wintery Aspect",
@@ -22156,7 +22156,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 561
+    "id": 690
   },
   {
     "name": "World Illuminator",
@@ -22196,7 +22196,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 562
+    "id": 552
   },
   {
     "name": "Wriggling Wooden Arm",
@@ -22235,7 +22235,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 563
+    "id": 553
   },
   {
     "name": "Yeti Fur",
@@ -22279,7 +22279,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 564
+    "id": 554
   },
   {
     "name": "Zhight Weird Magic Rock",
@@ -22321,7 +22321,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 565
+    "id": 555
   },
   {
     "name": "Adamastor's Faceplate",
@@ -22365,7 +22365,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 566
+    "id": 556
   },
   {
     "name": "Ancient Coins",
@@ -22410,7 +22410,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 567
+    "id": 557
   },
   {
     "name": "Ancient Heart",
@@ -22449,7 +22449,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 568
+    "id": 558
   },
   {
     "name": "Aqua Vitae",
@@ -22484,7 +22484,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 569
+    "id": 559
   },
   {
     "name": "Aquatic Beauty",
@@ -22535,7 +22535,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 570
+    "id": 560
   },
   {
     "name": "Archaic Medallion",
@@ -22574,7 +22574,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 571
+    "id": 561
   },
   {
     "name": "Aspect of the Void",
@@ -22607,7 +22607,7 @@
       "touching": -110,
       "notTouching": 15
     },
-    "id": 572
+    "id": 563
   },
   {
     "name": "Azure Blossom",
@@ -22650,7 +22650,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 573
+    "id": 562
   },
   {
     "name": "Bat Heart",
@@ -22693,7 +22693,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 574
+    "id": 564
   },
   {
     "name": "Black Hole",
@@ -22733,7 +22733,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 575
+    "id": 565
   },
   {
     "name": "Blessed Heart",
@@ -22763,7 +22763,7 @@
       "touching": -40,
       "notTouching": 0
     },
-    "id": 576
+    "id": 567
   },
   {
     "name": "Blighted Brain",
@@ -22802,7 +22802,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 577
+    "id": 566
   },
   {
     "name": "Blood of the Nivlan Beauty",
@@ -22843,7 +22843,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 578
+    "id": 568
   },
   {
     "name": "Borange Fluff",
@@ -22880,7 +22880,7 @@
       "touching": 12,
       "notTouching": 12
     },
-    "id": 579
+    "id": 569
   },
   {
     "name": "Bottled Fairy",
@@ -22916,7 +22916,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 580
+    "id": 570
   },
   {
     "name": "Braveheart",
@@ -22956,7 +22956,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 581
+    "id": 571
   },
   {
     "name": "Chromatic Bloom",
@@ -23015,7 +23015,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 582
+    "id": 572
   },
   {
     "name": "Coagulated Soulmass",
@@ -23050,7 +23050,7 @@
       "touching": 25,
       "notTouching": 0
     },
-    "id": 583
+    "id": 574
   },
   {
     "name": "Coalescence",
@@ -23080,7 +23080,7 @@
       "touching": -80,
       "notTouching": -80
     },
-    "id": 584
+    "id": 573
   },
   {
     "name": "Coastal Shell",
@@ -23115,7 +23115,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 585
+    "id": 575
   },
   {
     "name": "Colossus' Shard",
@@ -23154,7 +23154,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 586
+    "id": 576
   },
   {
     "name": "Contorted Stone",
@@ -23193,7 +23193,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 587
+    "id": 577
   },
   {
     "name": "Corrupted Beef",
@@ -23234,7 +23234,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 588
+    "id": 579
   },
   {
     "name": "Corrupted Fragment",
@@ -23280,7 +23280,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 589
+    "id": 578
   },
   {
     "name": "Cursed Wings",
@@ -23324,7 +23324,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 590
+    "id": 580
   },
   {
     "name": "Death Whistle Leaf",
@@ -23356,7 +23356,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 591
+    "id": 581
   },
   {
     "name": "Decaying Heart",
@@ -23387,7 +23387,7 @@
       "touching": -100,
       "notTouching": 75
     },
-    "id": 592
+    "id": 582
   },
   {
     "name": "Deep Ice Core",
@@ -23432,7 +23432,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 593
+    "id": 583
   },
   {
     "name": "Defender's Stone",
@@ -23476,7 +23476,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 594
+    "id": 585
   },
   {
     "name": "Defishious",
@@ -23511,7 +23511,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 595
+    "id": 584
   },
   {
     "name": "Depth's Gem",
@@ -23551,7 +23551,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 596
+    "id": 586
   },
   {
     "name": "Dominant Force",
@@ -23582,7 +23582,7 @@
       "touching": 120,
       "notTouching": 0
     },
-    "id": 597
+    "id": 587
   },
   {
     "name": "Doom Stone",
@@ -23613,7 +23613,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 598
+    "id": 588
   },
   {
     "name": "Draconic Bone Marrow",
@@ -23644,7 +23644,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 599
+    "id": 589
   },
   {
     "name": "Electroplasm",
@@ -23682,7 +23682,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 600
+    "id": 590
   },
   {
     "name": "Elephelk Trunk",
@@ -23725,7 +23725,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 601
+    "id": 591
   },
   {
     "name": "Engored Oculus",
@@ -23771,7 +23771,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 602
+    "id": 592
   },
   {
     "name": "Eye of The Beast",
@@ -23810,7 +23810,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 603
+    "id": 593
   },
   {
     "name": "Farcor's Trust",
@@ -23849,7 +23849,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 604
+    "id": 594
   },
   {
     "name": "Festering Face",
@@ -23891,7 +23891,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 605
+    "id": 596
   },
   {
     "name": "Fiery Essence",
@@ -23927,7 +23927,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 606
+    "id": 595
   },
   {
     "name": "Foul Fairy Dust",
@@ -23967,7 +23967,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 607
+    "id": 597
   },
   {
     "name": "Galvanic Stone",
@@ -24009,7 +24009,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 608
+    "id": 598
   },
   {
     "name": "Gilded Bark",
@@ -24052,7 +24052,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 609
+    "id": 600
   },
   {
     "name": "Glacial Anomaly",
@@ -24092,7 +24092,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 610
+    "id": 599
   },
   {
     "name": "Glimmering Coin",
@@ -24138,7 +24138,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 611
+    "id": 602
   },
   {
     "name": "Glow Bulb Seeds",
@@ -24182,7 +24182,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 612
+    "id": 601
   },
   {
     "name": "Gunkfueled Core",
@@ -24226,7 +24226,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 613
+    "id": 603
   },
   {
     "name": "Haros' Broken Badge",
@@ -24265,7 +24265,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 614
+    "id": 604
   },
   {
     "name": "Incremental Mapping Module",
@@ -24309,7 +24309,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 615
+    "id": 605
   },
   {
     "name": "Iridescent Elytra",
@@ -24354,7 +24354,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 616
+    "id": 606
   },
   {
     "name": "Kerasot Sporehead",
@@ -24397,7 +24397,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 617
+    "id": 607
   },
   {
     "name": "Large Lapis",
@@ -24436,7 +24436,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 618
+    "id": 609
   },
   {
     "name": "Large Titanium Chunk",
@@ -24476,7 +24476,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 619
+    "id": 608
   },
   {
     "name": "Lashing Hellfire",
@@ -24507,7 +24507,7 @@
       "touching": 0,
       "notTouching": 65
     },
-    "id": 620
+    "id": 610
   },
   {
     "name": "Limestone Core",
@@ -24546,7 +24546,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 621
+    "id": 611
   },
   {
     "name": "Linear Accelerator",
@@ -24590,7 +24590,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 622
+    "id": 612
   },
   {
     "name": "Lion Heart",
@@ -24633,7 +24633,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 623
+    "id": 613
   },
   {
     "name": "Lunar Charm",
@@ -24665,7 +24665,7 @@
       "touching": 33,
       "notTouching": 33
     },
-    "id": 624
+    "id": 614
   },
   {
     "name": "Luxurious Silk",
@@ -24700,7 +24700,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 625
+    "id": 615
   },
   {
     "name": "Mahogany Heartwood",
@@ -24744,7 +24744,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 626
+    "id": 616
   },
   {
     "name": "Major's Badge",
@@ -24779,7 +24779,7 @@
       "touching": 35,
       "notTouching": -30
     },
-    "id": 627
+    "id": 617
   },
   {
     "name": "Mega Fern",
@@ -24827,7 +24827,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 628
+    "id": 618
   },
   {
     "name": "More-Pearlescent Jewel",
@@ -24866,7 +24866,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 629
+    "id": 619
   },
   {
     "name": "Naval Stone",
@@ -24905,7 +24905,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 630
+    "id": 620
   },
   {
     "name": "Nivlan Honey",
@@ -24937,7 +24937,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 631
+    "id": 621
   },
   {
     "name": "Obelisk Core",
@@ -24969,7 +24969,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 632
+    "id": 622
   },
   {
     "name": "Ocea Steel",
@@ -25021,7 +25021,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 633
+    "id": 623
   },
   {
     "name": "Overheated Processor",
@@ -25064,7 +25064,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 634
+    "id": 624
   },
   {
     "name": "Panda King\u2019s Crown",
@@ -25121,7 +25121,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 635
+    "id": 625
   },
   {
     "name": "Panda King's Crown",
@@ -25177,7 +25177,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 636
+    "id": 626
   },
   {
     "name": "Parasitic Abscission",
@@ -25213,7 +25213,7 @@
       "touching": -29,
       "notTouching": -29
     },
-    "id": 637
+    "id": 627
   },
   {
     "name": "Pegasus Feather",
@@ -25256,7 +25256,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 638
+    "id": 628
   },
   {
     "name": "Piquant Pork Fillet",
@@ -25291,7 +25291,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 639
+    "id": 630
   },
   {
     "name": "Plane of Nonexistence",
@@ -25342,7 +25342,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 640
+    "id": 629
   },
   {
     "name": "Plasteel Plating",
@@ -25373,7 +25373,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 641
+    "id": 631
   },
   {
     "name": "Pride of the Heights",
@@ -25405,7 +25405,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 642
+    "id": 632
   },
   {
     "name": "Primordial Soul",
@@ -25436,7 +25436,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 643
+    "id": 633
   },
   {
     "name": "Familiar Essence",
@@ -25472,7 +25472,7 @@
       "touching": -40,
       "notTouching": -40
     },
-    "id": 644
+    "id": 634
   },
   {
     "name": "Old Treasure\u058e",
@@ -25511,7 +25511,7 @@
       "touching": 0,
       "notTouching": -40
     },
-    "id": 645
+    "id": 635
   },
   {
     "name": "Royal Cake Slice",
@@ -25551,7 +25551,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 646
+    "id": 639
   },
   {
     "name": "Vibrant Augment",
@@ -25603,7 +25603,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 647
+    "id": 636
   },
   {
     "name": "Autonomous Core",
@@ -25648,7 +25648,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 648
+    "id": 637
   },
   {
     "name": "Canyon Parsley",
@@ -25693,7 +25693,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 649
+    "id": 638
   },
   {
     "name": "Etheric Fern",
@@ -25725,7 +25725,7 @@
       "touching": 115,
       "notTouching": 115
     },
-    "id": 650
+    "id": 640
   },
   {
     "name": "Evolving Spores",
@@ -25786,7 +25786,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 651
+    "id": 641
   },
   {
     "name": "Gaze of Darkness",
@@ -25831,7 +25831,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 652
+    "id": 643
   },
   {
     "name": "Glowing Tree Sap",
@@ -25876,7 +25876,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 653
+    "id": 642
   },
   {
     "name": "Ironwood Scale",
@@ -25921,7 +25921,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 654
+    "id": 644
   },
   {
     "name": "Lost Heirloom",
@@ -25966,7 +25966,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 655
+    "id": 646
   },
   {
     "name": "Luminous Rune",
@@ -26007,7 +26007,7 @@
       "touching": 45,
       "notTouching": 45
     },
-    "id": 656
+    "id": 645
   },
   {
     "name": "Mana Extract",
@@ -26048,7 +26048,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 657
+    "id": 648
   },
   {
     "name": "Mangrove Root",
@@ -26093,7 +26093,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 658
+    "id": 647
   },
   {
     "name": "Mountain's Heart",
@@ -26134,7 +26134,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 659
+    "id": 649
   },
   {
     "name": "Platinum Grook Egg",
@@ -26179,7 +26179,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 660
+    "id": 650
   },
   {
     "name": "Salted Salmon",
@@ -26216,7 +26216,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 661
+    "id": 651
   },
   {
     "name": "Sentient Slimeball",
@@ -26259,7 +26259,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 662
+    "id": 652
   },
   {
     "name": "Shattered Dawnlight",
@@ -26304,7 +26304,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 663
+    "id": 655
   },
   {
     "name": "Skybound Remnant",
@@ -26345,7 +26345,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 664
+    "id": 653
   },
   {
     "name": "Soul Stone",
@@ -26387,7 +26387,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 665
+    "id": 654
   },
   {
     "name": "Soulfire Matterweave",
@@ -26428,7 +26428,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 666
+    "id": 657
   },
   {
     "name": "Spirograph Tablet",
@@ -26489,7 +26489,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 667
+    "id": 656
   },
   {
     "name": "Sun-Stained Skin",
@@ -26534,7 +26534,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 668
+    "id": 658
   },
   {
     "name": "Suspicious Shrubs",
@@ -26577,7 +26577,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 669
+    "id": 659
   },
   {
     "name": "Red Crystal Dust",
@@ -26616,7 +26616,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 670
+    "id": 660
   },
   {
     "name": "Relic of the Future",
@@ -26656,7 +26656,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 671
+    "id": 661
   },
   {
     "name": "Ritual Catalyst",
@@ -26705,7 +26705,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 672
+    "id": 662
   },
   {
     "name": "Rocky Mind",
@@ -26744,7 +26744,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 673
+    "id": 663
   },
   {
     "name": "Roots of Eternity",
@@ -26783,7 +26783,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 674
+    "id": 664
   },
   {
     "name": "Serpent's Fang",
@@ -26823,7 +26823,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 675
+    "id": 665
   },
   {
     "name": "Spark of the Oasis",
@@ -26863,7 +26863,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 676
+    "id": 666
   },
   {
     "name": "Squid",
@@ -26899,7 +26899,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 677
+    "id": 667
   },
   {
     "name": "Stolen Pearls",
@@ -26934,7 +26934,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 678
+    "id": 668
   },
   {
     "name": "Sturdy Flesh",
@@ -26972,7 +26972,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 679
+    "id": 669
   },
   {
     "name": "Subsuming Darkness",
@@ -27012,7 +27012,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 680
+    "id": 671
   },
   {
     "name": "Tempered Core",
@@ -27052,7 +27052,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 681
+    "id": 670
   },
   {
     "name": "The Grootslang's Heart",
@@ -27096,7 +27096,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 682
+    "id": 672
   },
   {
     "name": "Thermal Replication",
@@ -27136,7 +27136,7 @@
       "touching": 20,
       "notTouching": 20
     },
-    "id": 683
+    "id": 691
   },
   {
     "name": "Tungsten Chunk",
@@ -27175,7 +27175,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 684
+    "id": 673
   },
   {
     "name": "Unicorn Horn",
@@ -27207,7 +27207,7 @@
       "touching": 40,
       "notTouching": 80
     },
-    "id": 685
+    "id": 674
   },
   {
     "name": "Unsettling Soul",
@@ -27242,7 +27242,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 686
+    "id": 675
   },
   {
     "name": "Urdar's Stone",
@@ -27282,7 +27282,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 687
+    "id": 676
   },
   {
     "name": "Vim Veins",
@@ -27324,7 +27324,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 688
+    "id": 677
   },
   {
     "name": "Volatile Matter",
@@ -27369,7 +27369,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 689
+    "id": 680
   },
   {
     "name": "Vortexian Event Horizon",
@@ -27404,7 +27404,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 690
+    "id": 678
   },
   {
     "name": "Weathered Idol",
@@ -27447,6 +27447,6 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 691
+    "id": 679
   }
 ]
