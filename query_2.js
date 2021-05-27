@@ -351,16 +351,25 @@ class EqualityTerm extends BinaryOpTerm {
   constructor(left, right) {
     super('boolean', 'any', left, 'any', right);
   }
+
+  apply(a, b) {
+    return (typeof a === 'string' && typeof b === 'string')
+        ? this.compare(a.toLowerCase(), b.toLowerCase()) : this.compare(a, b);
+  }
+
+  compare(a, b) {
+    throw new Error('Abstract method!');
+  }
 }
 
 class EqTerm extends EqualityTerm {
-  apply(a, b) {
+  compare(a, b) {
     return a === b;
   }
 }
 
 class NeqTerm extends EqualityTerm {
-  apply(a, b) {
+  compare(a, b) {
     return a !== b;
   }
 }
@@ -383,7 +392,8 @@ class InequalityTerm extends BinaryOpTerm {
   apply(a, b) {
     checkComparable(a);
     checkComparable(b);
-    return this.compare(a, b);
+    return (typeof a === 'string' && typeof b === 'string')
+        ? this.compare(a.toLowerCase(), b.toLowerCase()) : this.compare(a, b);
   }
 
   compare(a, b) {
@@ -441,7 +451,7 @@ class MulTerm extends ArithmeticTerm {
 
 class DivTerm extends ArithmeticTerm {
   apply(a, b) {
-    return a  / b;
+    return a / b;
   }
 }
 
