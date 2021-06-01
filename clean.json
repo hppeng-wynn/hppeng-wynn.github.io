@@ -38438,7 +38438,9 @@
       "spRaw1": -1,
       "spRaw3": -1,
       "spRaw4": -1,
-      "id": 1249
+      "id": 1249,
+      "set": "Master Hive",
+      "hideSet": true
     },
     {
       "name": "Beetle Aegis",
