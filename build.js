@@ -505,9 +505,7 @@ class Build{
                 }
             }
             if (item.get("majorIds")) {
-                for (const majorID of item.get("majorIds")) {
-                    major_ids.add(majorID);
-                }
+                major_ids.add(item.get("majorIds"));
             }
         }
         statMap.set("activeMajorIDs", major_ids);
