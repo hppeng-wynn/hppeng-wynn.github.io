@@ -32,7 +32,7 @@
     </button>
 </div>
 */
-let header_icon_map = new Map([
+let header_icon_map_left = new Map([
     ["index",["builder","WynnBuilder"]],
     ["crafter",["crafter","WynnCrafter"]],
     ["items",["searcher","WynnAtlas"]],
@@ -45,7 +45,7 @@ function setHeaders() {
     let headerleft = document.getElementById("headerleft");
     let headerright = document.getElementById("headerright");
 
-    for (const [name,data] of header_icon_map) {
+    for (const [name,data] of header_icon_map_left) {
         let a_elem = document.createElement("a");
         let img = document.createElement("img");
         let div = document.createElement("div");
@@ -72,6 +72,30 @@ function setHeaders() {
     toggle_icon_button.onclick = function() {toggleIcons()};
     toggle_icon_button.textContent = "Use Old Icons";
     headerright.appendChild(toggle_icon_button);
+
+    let reload_div = document.createElement("div");
+    let reload_button = document.createElement("button");
+    reload_button.classList.add("button");
+    reload_button.style.left = '0px';
+    reload_button.style.top = '0px';
+    reload_button.style.width = '48px';
+    reload_button.style.height = '48px';
+    reload_button.style.padding = '0px';
+    reload_button.onclick = hardReload;
+    let reload_img = document.createElement("img");
+    reload_img.src = "/media/icons/new/reload.png"
+    reload_img.style.width = "100%";
+    let reload_tooltip;
+    reload_tooltip = createTooltip(reload_tooltip, "p", "Reload", reload_button, ["center","reloadtooltip"]);
+    //reload_tooltip.style.position = "relative";
+    reload_tooltip.style.left = "-50%";
+    reload_tooltip.style.top = "70%";
+
+    reload_div.appendChild(reload_button); 
+    reload_button.appendChild(reload_img);
+    headerright.appendChild(reload_div);
+ 
+
     console.log("Set Header");
 }
 

@@ -1,12 +1,28 @@
 // ['Title', ["type of paper","file name"]]
 const pdfs = new Map([
-    ["Wynncraft Damage Calculation",["mechanics", "Damage_calculation", "hppeng, ferricles, et al.", "A complete guide to Wynncraft's damage calculations. Includes formulas, tested game values, and worked examples."]],
-    ["Crafted Weapon Powder Mechanics",["mechanics", "Crafted_Weapon_Powder_Mechanics", "ferricles", "A short guide to the mechanics of powder application on crafted weapons. Includes formulas and a worked example."]],
-    ["Spell Costs",["mechanics", "Spell_Costs", "Bart MC, ferricles", "A documentation of spell costs and the mechanics of spell cost reduction."]],
+    ["Wynncraft Damage Calculation",
+        ["Mechanics", "Damage_calculation", "hppeng, ferricles, et al.", "A complete guide to Wynncraft's damage calculations. Includes formulas, tested game values, and worked examples."
+    ]],
+    ["Crafted Weapon Powder Mechanics",
+        ["Mechanics", "Crafted_Weapon_Powder_Mechanics", "ferricles", "A short guide to the mechanics of powder application on crafted weapons. Includes formulas and a worked example."
+    ]],
+    ["Spell Costs",
+        ["Mechanics", "Spell_Costs", "Bart MC, ferricles", "A documentation of spell costs and the mechanics of spell cost reduction."
+    ]],
     //[title ,[genre, filename, author(s), abstract/desc]]
 ]);
 
-const sections = ["mechanics", "documentation", "history"]
+
+const changelog = new Map([
+    ["7.0.8",
+        [" + Created Changelog section in Wynnfo",
+        " + Added an empty cache + reload button to the right header",
+        " - Deleted lack of on-page documentation",
+    ]],
+    //[title ,[genre, filename, author(s), abstract/desc]]
+]);
+
+const sections = ["Changelog", "Mechanics", "History" ]
 
 function init() {
     initSections();
@@ -61,6 +77,38 @@ function init() {
         } else {
             console.log("Invalid paper type for " + title + ": " + pdf[0]);
         }
+    }
+
+    let sec = document.getElementById("Changelog-section");
+    for ([version, changes] of changelog) {
+        let pre = document.createElement("pre");
+        let firstline = document.createElement("div");
+        firstline.style.display = "flex";
+        firstline.style.justifyContent = "space-between";
+
+        let titleElem = document.createElement("p");
+        titleElem.textContent = "Version " + version;
+
+        pre.appendChild(firstline);
+        firstline.appendChild(titleElem);
+        sec.appendChild(document.createElement("br"));
+        sec.appendChild(pre);
+
+        let ul = document.createElement("ul");
+        ul.style.listStyle = "none";
+        for (change of changes) {
+            let li = document.createElement("li");
+            li.textContent = change;
+            if (change.substring(0,3) === " + ") {
+                li.classList.add("positive");
+            } else if (change.substring(0,3) === " - ") {
+                li.classList.add("negative");
+            } else {
+            }
+            ul.appendChild(li);
+        }
+
+        pre.appendChild(ul);
     }
 }
 

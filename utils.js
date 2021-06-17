@@ -362,3 +362,14 @@ function toggleButton(button_id) {
         }
     }
 }
+
+/** A utility function that reloads the page forcefully. 
+ * 
+ */
+async function hardReload() {
+    //https://gist.github.com/rmehner/b9a41d9f659c9b1c3340
+    const dbs = await window.indexedDB.databases();
+    await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+
+    location.reload();
+}

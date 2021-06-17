@@ -342,3 +342,13 @@ ul{
     word-break: break-word;
     white-space: pre-wrap;
 }
+
+.positive {
+    color: #5f5;
+    /*text-shadow: 2px 2px 0 #153f15;*/
+}
+
+.negative {
+    color: #f55;
+    /*text-shadow: 2px 2px 0 #1f1515;*/
+}
