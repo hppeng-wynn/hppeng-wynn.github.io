@@ -137,26 +137,29 @@ function load_init(init_func) {
         console.log("DB failed to open...");
     };
 
-    request.onsuccess = async function() {
-        db = request.result;
-        if (!reload) {
-            console.log("Using stored data...")
-            load_local(init_func);
-        }
-        else {
-            if (load_in_progress) {
-                while (!load_complete) {
-                    await sleep(100);
-                }
-                init_func();
+    request.onsuccess = function() {
+        (async function() {
+            db = request.result;
+            if (!reload) {
+                console.log("Using stored data...")
+                load_local(init_func);
             }
             else {
-                // Not 100% safe... whatever!
-                load_in_progress = true
-                load(init_func);
-                console.log("Using new data...")
+                if (load_in_progress) {
+                    while (!load_complete) {
+                        await sleep(100);
+                    }
+                    console.log("Skipping load...")
+                    init_func();
+                }
+                else {
+                    // Not 100% safe... whatever!
+                    load_in_progress = true
+                    console.log("Using new data...")
+                    load(init_func);
+                }
             }
-        }
+        })()
     }
 
     request.onupgradeneeded = function(e) {
