@@ -137,7 +137,7 @@ function load_init(init_func) {
         console.log("DB failed to open...");
     };
 
-    request.onsuccess = function() {
+    request.onsuccess = async function() {
         db = request.result;
         if (!reload) {
             console.log("Using stored data...")
@@ -146,9 +146,7 @@ function load_init(init_func) {
         else {
             if (load_in_progress) {
                 while (!load_complete) {
-                    (async function () {
-                        await sleep(100);
-                    }) ()
+                    await sleep(100);
                 }
                 init_func();
             }
