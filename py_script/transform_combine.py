@@ -14,7 +14,8 @@ with open("dump.json", "r") as infile:
     data = json.loads(infile.read())
 
 items = data["items"]
-del data["request"]
+if "request" in data:
+    del data["request"]
 
 import os
 sets = dict()

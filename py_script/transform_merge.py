@@ -164,12 +164,13 @@ for item in items:
     known_item_names.add(item["name"])
 
 old_items_map = dict()
+unchanged_items = []
 remap_items = []
 for item in old_items:
     if "remapID" in item:
         remap_items.append(item)
     elif item["name"] not in known_item_names:
-        print(f'Unknown old item: {item["name"]}!!!')
+        unchanged_items.append(item)
     old_items_map[item["name"]] = item
 
 for item in items:
@@ -206,6 +207,7 @@ for item in items:
             if "hideSet" in old_item:
                 item["hideSet"] = old_item["hideSet"]
 
+items.extend(unchanged_items)
 items.extend(remap_items)
 
 with open("clean.json", "w") as outfile:
