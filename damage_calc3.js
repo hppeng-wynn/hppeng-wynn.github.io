@@ -166,10 +166,12 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     damages_results[0][1] += strBoost*rawModifier;
     damages_results[0][2] += strBoost*2*rawModifier;
     damages_results[0][3] += strBoost*2*rawModifier;
-    for (let i in damageformulas[0]) {
-        damageformulas[0][i] += ` + ${tooltipinfo.get("rawModifier")}`
+    for (let i = 0; i < 2; i++) {
+        damageformulas[0][i] += ` + (${strBoost} * ${tooltipinfo.get("rawModifier")})`
     }
-    
+    for (let i = 2; i < 4; i++) {
+        damageformulas[0][i] += ` + (2 * ${strBoost} * ${tooltipinfo.get("rawModifier")})`
+    }
 
     if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
     if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
