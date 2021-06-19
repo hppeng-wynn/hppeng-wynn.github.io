@@ -4,6 +4,7 @@ const DB_VERSION = 43;
 let db;
 let reload = false;
 let load_complete = false;
+let load_in_progress = false;
 let items;
 let sets;
 let itemMap;
@@ -62,6 +63,11 @@ function clean_item(item) {
         item.skillpoints = [item.str, item.dex, item.int, item.def, item.agi];
         item.has_negstat = item.str < 0 || item.dex < 0 || item.int < 0 || item.def < 0 || item.agi < 0;
         item.reqs = [item.strReq, item.dexReq, item.intReq, item.defReq, item.agiReq];
+        for (let i = 0; i < 5; ++i) {
+            if (item.reqs[i] === undefined) {
+                item.reqs[i] = 0;
+            }
+        }
         if (item.slots === undefined) {
             item.slots = 0
         }
@@ -138,8 +144,18 @@ function load_init(init_func) {
             load_local(init_func);
         }
         else {
-            console.log("Using new data...")
-            load(init_func);
+            if (load_in_progress) {
+                while (!load_complete) {
+                    sleep(100);
+                }
+                init_func();
+            }
+            else {
+                // Not 100% safe... whatever!
+                load_in_progress = true
+                load(init_func);
+                console.log("Using new data...")
+            }
         }
     }
 

@@ -4,6 +4,7 @@ const DB_VERSION = 44;
 let db;
 let reload = false;
 let load_complete = false;
+let load_in_progress = false;
 let items;
 let sets;
 let itemMap;
@@ -14,9 +15,9 @@ let itemLists = new Map();
  * Load item set from local DB. Calls init() on success.
  */
 async function load_local(init_func) {
-    let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
-    let sets_store = get_tx.objectStore('set_db');
-    let get_store = get_tx.objectStore('item_db');
+    let get_tx = db.transaction(['item3_db', 'set3_db'], 'readonly');
+    let sets_store = get_tx.objectStore('set3_db');
+    let get_store = get_tx.objectStore('item3_db');
     let request = get_store.getAll();
     request.onerror = function(event) {
         console.log("Could not read local item db...");
@@ -96,12 +97,12 @@ async function load(init_func) {
 //    await clear_sets.clear();
 //    await clear_tx.complete;
 
-    let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
+    let add_tx = db.transaction(['item3_db', 'set3_db'], 'readwrite');
     add_tx.onabort = function(e) {
         console.log(e);
         console.log("Not enough space...");
     };
-    let items_store = add_tx.objectStore('item_db');
+    let items_store = add_tx.objectStore('item3_db');
     let add_promises = [];
     for (const item of items) {
         clean_item(item);
@@ -111,7 +112,7 @@ async function load(init_func) {
         };
         add_promises.push(req);
     }
-    let sets_store = add_tx.objectStore('set_db');
+    let sets_store = add_tx.objectStore('set3_db');
     for (const set in sets) {
         add_promises.push(sets_store.add(sets[set], set));
     }
@@ -130,7 +131,7 @@ function load_init(init_func) {
         init_func();
         return;
     }
-    let request = window.indexedDB.open('item_db', DB_VERSION);
+    let request = window.indexedDB.open('item3_db', DB_VERSION);
 
     request.onerror = function() {
         console.log("DB failed to open...");
@@ -143,8 +144,18 @@ function load_init(init_func) {
             load_local(init_func);
         }
         else {
-            console.log("Using new data...")
-            load(init_func);
+            if (load_in_progress) {
+                while (!load_complete) {
+                    sleep(100);
+                }
+                init_func();
+            }
+            else {
+                // Not 100% safe... whatever!
+                load_in_progress = true
+                load(init_func);
+                console.log("Using new data...")
+            }
         }
     }
 
@@ -154,20 +165,20 @@ function load_init(init_func) {
         let db = e.target.result;
         
         try {
-            db.deleteObjectStore('item_db');
+            db.deleteObjectStore('item3_db');
         }
         catch (error) {
             console.log("Could not delete item DB. This is probably fine");
         }
         try {
-            db.deleteObjectStore('set_db');
+            db.deleteObjectStore('set3_db');
         }
         catch (error) {
             console.log("Could not delete set DB. This is probably fine");
         }
 
-        db.createObjectStore('item_db');
-        db.createObjectStore('set_db');
+        db.createObjectStore('item3_db');
+        db.createObjectStore('set3_db');
 
         console.log("DB setup complete...");
     }
