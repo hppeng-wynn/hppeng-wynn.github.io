@@ -62,7 +62,7 @@ function clean_item(item) {
         item.skillpoints = [item.str, item.dex, item.int, item.def, item.agi];
         item.has_negstat = item.str < 0 || item.dex < 0 || item.int < 0 || item.def < 0 || item.agi < 0;
         item.reqs = [item.strReq, item.dexReq, item.intReq, item.defReq, item.agiReq];
-        for (int i = 0; i < 5; ++i) {
+        for (let i = 0; i < 5; ++i) {
             if (item.reqs[i] === undefined) {
                 item.reqs[i] = 0;
             }
