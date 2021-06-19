@@ -1,5 +1,3 @@
-
-
 const ci_save_order = ["name", "lore",  "tier", "set", "slots", "type", "material", "drop", "quest",  "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd","durability","duration","charges"];
 const nonRolled_strings = ["name","lore", "tier","set","type","material","drop","quest","majorIds","classReq","atkSpd","displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];
 //omitted restrict - it's always "Custom Item"
@@ -222,21 +220,6 @@ class Custom{
         
         this.statMap.set("custom", true);
 
-        if (weaponTypes.includes(this.statMap.get("type"))) {
-            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
-                if (!(this.statMap.has(n) && this.statMap.get(n))) {
-                    this.statMap.set(n,"0-0");
-                }
-            }
-        }
-        else {
-            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
-                if (this.statMap.has(n)) {
-                    this.statMap.delete(n);
-                }
-            }
-        }
-
         for (const id of ci_save_order) {
             if (rolledIDs.includes(id)) {
                 if (!(this.statMap.get("minRolls").has(id) && this.statMap.get("minRolls").get(id))) {
@@ -252,6 +235,22 @@ class Custom{
                     if (!(this.statMap.has(id)&&this.statMap.get(id))) {
                         this.statMap.set(id,0);
                     }
+                }
+            }
+        }
+        let type = this.statMap.get("type").toLowerCase();
+        console.log(type);
+        if (weaponTypes.includes(type)) {
+            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+                if (!(this.statMap.has(n) && this.statMap.get(n))) {
+                    this.statMap.set(n,"0-0");
+                }
+            }
+        }
+        else {
+            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+                if (this.statMap.has(n)) {
+                    this.statMap.delete(n);
                 }
             }
         }
