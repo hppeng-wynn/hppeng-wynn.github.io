@@ -222,9 +222,18 @@ class Custom{
         
         this.statMap.set("custom", true);
 
-        for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
-            if (!(this.statMap.has(n) && this.statMap.get(n))) {
-                this.statMap.set(n,"0-0");
+        if (weaponTypes.includes(this.statMap.get("type"))) {
+            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+                if (!(this.statMap.has(n) && this.statMap.get(n))) {
+                    this.statMap.set(n,"0-0");
+                }
+            }
+        }
+        else {
+            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+                if (this.statMap.has(n)) {
+                    this.statMap.delete(n);
+                }
             }
         }
 

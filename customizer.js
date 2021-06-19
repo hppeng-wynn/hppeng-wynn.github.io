@@ -185,12 +185,12 @@ function calculateCustom() {
         let custom_str = encodeCustom(player_custom_item.statMap, true);
         location.hash = custom_str;
         player_custom_item.setHash(custom_str);
-        console.log(player_custom_item.statMap.get("hash"));
+        //console.log(player_custom_item.statMap.get("hash"));
 
         
         displayExpandedItem(player_custom_item.statMap, "custom-stats");
 
-        console.log(player_custom_item.statMap);
+        //console.log(player_custom_item.statMap);
 
     }catch (error) {
         //USE THE ERROR <p>S!
@@ -235,7 +235,7 @@ function decodeCustom(custom_url_tag) {
             }
             while (tag !== "") {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
-                console.log(tag.slice(0, 2) + ": " + id);
+                //console.log(tag.slice(0, 2) + ": " + id);
                 let len = Base64.toInt(tag.slice(2,4));
                 if (rolledIDs.includes(id)) {
                     let sign = parseInt(tag.slice(4,5),10);
@@ -628,7 +628,6 @@ function _init_customizer() {
 function saveAsJSON() {
     let CI = {};
     for (const [id, val] of player_custom_item.statMap) {
-        console.log(id);
         let skipIds = ["minRolls", "maxRolls", "skillpoints", "reqs", "custom", "crafted", "restrict", "hash",
             "nDam_", "tDam_", "eDam_", "wDam_", "fDam_", "aDam_",
             "powders", "durability", "duration" ]
@@ -638,22 +637,33 @@ function saveAsJSON() {
             val ? CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = val : "" ;
         }
     }
+    let is_fixid = true;
     if (player_custom_item.statMap.get("minRolls")) {
-        for (const [id, min] of player_custom_item.statMap.get("minRolls")) {
-            const max = player_custom_item.statMap.get("maxRolls").get(id);
+        for (let [id, min] of player_custom_item.statMap.get("minRolls")) {
+            let max = player_custom_item.statMap.get("maxRolls").get(id);
             if (min && max) {
-                console.log(reversetranslations);
+                let tmp = Math.min(min, max);
+                max = Math.max(min, max);
+                min = tmp;
+                if (min != max) {
+                    is_fixid = false;
+                }
+                // console.log(reversetranslations);
                 let base = full_range_to_base(min, max);
                 if (base === null) {
                     CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = [min,max];
                 } else if (base) {
                     CI[reversetranslations.get(id) ? reversetranslations.get(id) : id] = base;
                 }
+                else {
+                    console.log("CONVERSION ERROR: " + id);
+                }
             }
         }
     }
+    CI["identified"] = is_fixid
     
-    console.log(CI);
+    console.log(JSON.stringify(CI, null, 0));
     //yuck
     copyTextToClipboard(JSON.stringify(CI, null, 0));
     document.getElementById("json-button").textContent = "Copied!";
@@ -696,6 +706,13 @@ function full_range_to_base(min, max) {
     } else {
         //both should be same sign - now do math
         if (min < 0) {
+            let minPossible = (max - 0.5) / neg_range[1];
+            let maxPossible = (max + 0.5) / neg_range[1];
+            for (let i = Math.floor(minPossible); i < Math.ceil(maxPossible); i++) {
+                if (checkBase(i, min, max)) {
+                    return i;
+                }
+            }
 
         } else {
             let minPossible = (max - 0.5) / pos_range[1];
@@ -711,6 +728,5 @@ function full_range_to_base(min, max) {
         
     }
 }
-
 
 load_init(_init_customizer);
