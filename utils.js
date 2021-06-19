@@ -35,6 +35,10 @@ function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Permutations in js reference (also cool algorithm):
 // https://stackoverflow.com/a/41068709
 function perm(a){

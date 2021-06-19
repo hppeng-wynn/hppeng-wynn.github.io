@@ -146,7 +146,7 @@ function load_init(init_func) {
         else {
             if (load_in_progress) {
                 while (!load_complete) {
-                    sleep(100);
+                    await sleep(100);
                 }
                 init_func();
             }

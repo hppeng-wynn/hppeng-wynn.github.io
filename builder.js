@@ -3,7 +3,7 @@ const url_tag = location.hash.slice(1);
 // console.log(url_tag);
 
 
-const BUILD_VERSION = "7.0.8";
+const BUILD_VERSION = "7.0.9";
 
 function setTitle() {
     let text;
