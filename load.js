@@ -1,4 +1,4 @@
-const DB_VERSION = 43;
+const DB_VERSION = 45;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let db;
@@ -61,12 +61,12 @@ function clean_item(item) {
             item.displayName = item.name;
         }
         item.skillpoints = [item.str, item.dex, item.int, item.def, item.agi];
-        item.has_negstat = item.str < 0 || item.dex < 0 || item.int < 0 || item.def < 0 || item.agi < 0;
         item.reqs = [item.strReq, item.dexReq, item.intReq, item.defReq, item.agiReq];
+        item.has_negstat = false;
         for (let i = 0; i < 5; ++i) {
-            if (item.reqs[i] === undefined) {
-                item.reqs[i] = 0;
-            }
+            if (item.reqs[i] === undefined) { item.reqs[i] = 0; }
+            if (item.skillpoints[i] === undefined) { item.skillpoints[i] = 0; }
+            if (item.skillpoints[i] < 0) { item.has_negstat = true; }
         }
         if (item.slots === undefined) {
             item.slots = 0
