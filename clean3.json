@@ -17,6 +17,7 @@
       "agi": -2,
       "def": -2,
       "spRegen": -5,
+      "fixID": true,
       "id": 628
     },
     {
@@ -84,6 +85,7 @@
       "eDamPct": -65,
       "id": 1259,
       "set": "Fire Hive",
+      "fixID": true,
       "hideSet": true
     },
     {
@@ -197,6 +199,7 @@
       "eDamPct": 30,
       "id": 1253,
       "set": "Earth Hive",
+      "fixID": true,
       "hideSet": true
     },
     {
@@ -299,6 +302,7 @@
       "aDamPct": 85,
       "tDamPct": 85,
       "eDamPct": 85,
+      "fixID": true,
       "id": 606
     },
     {
@@ -320,6 +324,7 @@
       "spd": 24,
       "atkTier": 2,
       "eSteal": 8,
+      "fixID": true,
       "id": 604
     },
     {
@@ -443,6 +448,7 @@
       "spd": 10,
       "sdRaw": 40,
       "wDamPct": 10,
+      "fixID": true,
       "id": 790
     },
     {
@@ -501,6 +507,7 @@
       "lvl": 80,
       "agiReq": 70,
       "aDamPct": 85,
+      "fixID": true,
       "id": 602
     },
     {
@@ -515,6 +522,7 @@
       "lvl": 80,
       "strReq": 70,
       "eDamPct": 85,
+      "fixID": true,
       "id": 603
     },
     {
@@ -529,6 +537,7 @@
       "lvl": 80,
       "dexReq": 70,
       "tDamPct": 85,
+      "fixID": true,
       "id": 609
     },
     {
@@ -543,6 +552,7 @@
       "lvl": 80,
       "intReq": 70,
       "wDamPct": 85,
+      "fixID": true,
       "id": 615
     },
     {
@@ -557,6 +567,7 @@
       "lvl": 80,
       "defReq": 70,
       "fDamPct": 85,
+      "fixID": true,
       "id": 608
     },
     {
