@@ -125,7 +125,7 @@ async function load(init_func) {
     // DB not closed? idfk man
 }
 
-function load_init(init_func) {
+async function load_init(init_func) {
     if (load_complete) {
         console.log("Item db already loaded, skipping load sequence");
         init_func();
