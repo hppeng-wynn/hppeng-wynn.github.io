@@ -148,13 +148,14 @@ function load_init(init_func) {
                 while (!load_complete) {
                     await sleep(100);
                 }
+                console.log("Skipping load...")
                 init_func();
             }
             else {
                 // Not 100% safe... whatever!
                 load_in_progress = true
-                load(init_func);
                 console.log("Using new data...")
+                load(init_func);
             }
         }
     }
