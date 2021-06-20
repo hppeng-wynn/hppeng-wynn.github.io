@@ -23,6 +23,50 @@
             <div class="headerright" id = "headerright">
             </div>
         </header>
+        <table style="padding-bottom:20px">
+            <tr>
+                <td>
+                    <button class = "button-narrow" id = "wand" onclick = "setData('wand')">
+                        wands
+                    </button>
+                </td>
+                <td>
+                    <button class = "button-narrow" id = "spear" onclick = "setData('spear')">
+                        spears
+                    </button>
+                </td>
+                <td>
+                    <button class = "button-narrow" id = "dagger" onclick = "setData('dagger')">
+                        daggers
+                    </button>
+                </td>
+                <td>
+                    <button class = "button-narrow" id = "bow" onclick = "setData('bow')">
+                        bows
+                    </button>
+                </td>
+                <td>
+                    <button class = "button-narrow" id = "relik" onclick = "setData('relik')">
+                        reliks
+                    </button>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <button class = "button-narrow" id = "powderToggle" onclick = "togglePowder()">
+                        prepowder (true)
+                    </button>
+                </td>
+                <td>
+                    <button class = "button-narrow" id = "strDexToggle" onclick = "toggleStrDex()">
+                        1.20.3 (false)
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <p id="info">
+            SELECTED ITEM TYPE: wand
+        </p>
 
         <script src="https://d3js.org/d3.v7.js"></script>
         <script type="text/javascript" src="utils.js"></script>

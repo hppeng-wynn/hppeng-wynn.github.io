@@ -69,56 +69,107 @@ _yAxis.append("text");
 let _grid1 = graph.append("g");
 let _grid2 = graph.append("g");
 
+let dps_getter_func = d => 1;
+let prepowder = true;
+let strDex = false;
+
+let dps_data = {};
+let current_data = null;
+
 let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
 (async function() {
-    let dps_data = await (await fetch(baseUrl + "/dps_data_compress.json")).json()
+    dps_data = await (await fetch(baseUrl + "/dps_data_compress.json")).json()
     console.log(dps_data)
 
-    let colorMap = new Map(
-        [
-            ["Normal", "#fff"],
-            ["Unique", "#ff5"],
-            ["Rare","#f5f"],
-            ["Legendary","#5ff"],
-            ["Fabled","#f55"],
-            ["Mythic","#a0a"],
-            ["Crafted","#0aa"],
-            ["Custom","#0aa"],
-            ["Set","#5f5"]
-        ]
-    );
+    dps_getter_func = d => d[4];
+    current_data = dps_data.wand;
 
-    const item_points = graph.append("g")
-          .attr("stroke", "black")
-        .selectAll("circle")
-        .data(dps_data.wand, d => d[2])
-        .join("circle")
-          .attr("fill", d => colorMap.get(d[3]))
-          .attr("r", d => 5)
-          .call(circle => circle.append("title")
-            .text(d => [d[0], d[2]].join("\n")));
-
-    function redraw(data) {
-        let max_dps_base = 0;
-        for (let x of data) {
-            if (x[4] > max_dps_base) {
-                max_dps_base = x[4];
-            }
-        }
-        let x = d3.scaleLinear([70, 105], [margin.left, bbox().width - margin.right]);
-        let y = d3.scaleLinear([0, max_dps_base * 1.1], [bbox().height - margin.bottom, margin.top]);
-        let _bbox = bbox();
-        graph.attr("viewBox", [0, 0, _bbox.width, _bbox.height]);
-        xAxis(_xAxis, x);
-        yAxis(_yAxis, y);
-        grid(_grid1, _grid2, x, y);
-        item_points.data(data, d => d[2])
-          .attr("cx", d => x(d[1]))
-          .attr("cy", d => y(d[4]));
-    }
     d3.select(window)
         .on("resize", function() {
-            redraw(dps_data.wand);
+            redraw(current_data);
       });
-    redraw(dps_data.wand);
+    redraw(current_data);
 }) ();
+
+let colorMap = new Map(
+    [
+        ["Normal", "#fff"],
+        ["Unique", "#ff5"],
+        ["Rare","#f5f"],
+        ["Legendary","#5ff"],
+        ["Fabled","#f55"],
+        ["Mythic","#a0a"],
+        ["Crafted","#0aa"],
+        ["Custom","#0aa"],
+        ["Set","#5f5"]
+    ]
+);
+
+
+function redraw(data) {
+    let max_dps_base = 0;
+    let tmp = dps_getter_func;
+    let tmp2 = prepowder;
+    prepowder = false;
+    setGetterFunc();
+    for (let x of data) {
+        if (dps_getter_func(x) > max_dps_base) {
+            max_dps_base = dps_getter_func(x);
+        }
+    }
+    dps_getter_func = tmp;
+    prepowder = tmp2;
+    let x = d3.scaleLinear([70, 105], [margin.left, bbox().width - margin.right]);
+    let y = d3.scaleLinear([0, max_dps_base * 1.1], [bbox().height - margin.bottom, margin.top]);
+    let _bbox = bbox();
+    graph.attr("viewBox", [0, 0, _bbox.width, _bbox.height]);
+    xAxis(_xAxis, x);
+    yAxis(_yAxis, y);
+    grid(_grid1, _grid2, x, y);
+    graph.selectAll('circle')
+        .data(data, d => d[0])
+        .join(
+            function(enter) {
+                return enter.append("circle")
+                      .attr("fill", d => colorMap.get(d[3]))
+                      .attr("cx", d => x(d[1]))
+                      .attr("cy", d => y(dps_getter_func(d)))
+                      .attr("r", d => 5)
+                      .call(circle => circle.append("title")
+                        .text(d => [d[0], "DPS: "+dps_getter_func(d)].join("\n")));
+            },
+            update => update.attr("cx", d => x(d[1]))
+                          .attr("cy", d => y(dps_getter_func(d)))
+                          .select("title")
+                        .text(d => [d[0], "DPS: "+dps_getter_func(d)].join("\n")),
+            exit => exit.remove()
+        );
+}
+
+function setData(type) {
+    d3.select("#info").text("SELECTED ITEM TYPE: " + type);
+    current_data = dps_data[type];
+    redraw(current_data);
+}
+
+function setGetterFunc() {
+    if (prepowder && (!strDex)) dps_getter_func = d => d[4];
+    else if ((!prepowder) && (!strDex)) dps_getter_func = d => d[5];
+    else if (prepowder && strDex) dps_getter_func = d => d[6];
+    else dps_getter_func = d => d[7];
+
+}
+
+function togglePowder() {
+    prepowder = !prepowder;
+    d3.select("#powderToggle").text("prepowder ("+prepowder+")");
+    setGetterFunc();
+    redraw(current_data);
+}
+
+function toggleStrDex() {
+    strDex = !strDex;
+    d3.select("#strDexToggle").text("1.20.3 ("+strDex+")");
+    setGetterFunc();
+    redraw(current_data);
+}
