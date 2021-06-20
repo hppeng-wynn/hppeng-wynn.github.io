@@ -142,7 +142,8 @@ let details = graph.append("g")
 details.append("rect").attr("z", "100");
 
 function showDetails(data, i, xfunc, yfunc) {
-    let xpos = xfunc(i[1]);
+    let _bbox = bbox();
+    let xpos = xfunc(i[1])
     let ypos = yfunc(dps_getter_func(i));
     let texts = [[1, i[0]],
                 [3, "Prepowder: "+i[4].toFixed(2)],
@@ -158,11 +159,13 @@ function showDetails(data, i, xfunc, yfunc) {
         texts.push([idx, explanation[0] + ": " + explanation[1]]);
         idx += 1;
     }
+    let box_height = (14 * idx) - 4;
+    if (ypos + box_height > _bbox.height) ypos = _bbox.height - box_height;
     details.select("rect")
            .attr("x", xpos)
            .attr("y", ypos)
            .attr("width", 200)
-           .attr("height", (14 * idx) - 4)
+           .attr("height", box_height)
            .attr("opacity", 0.8);
     details.selectAll("text")
            .data(texts, d => d[0])
