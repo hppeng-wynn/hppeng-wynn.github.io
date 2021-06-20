@@ -75,14 +75,18 @@ let strDex = false;
 
 let dps_data = {};
 let current_data = null;
+let current_type = "wand";
+let baseline_x = [];
+let baseline_y = [];
 
 let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
 (async function() {
-    dps_data = await (await fetch(baseUrl + "/dps_data_compress.json")).json()
-    console.log(dps_data)
+    dps_data = await (await fetch(baseUrl + "/dps_data_compress.json")).json();
 
     dps_getter_func = d => d[4];
     current_data = dps_data.wand;
+    baseline_x = dps_data.baseline_xs;
+    baseline_y = dps_data.baseline_ys;
 
     d3.select(window)
         .on("resize", function() {
@@ -104,9 +108,87 @@ let colorMap = new Map(
         ["Set","#5f5"]
     ]
 );
+let tiers_mod = new Map(
+    [
+        ["Normal", 0.8],
+        ["Unique", 1.0],
+        ["Rare", 1.1],
+        ["Legendary", 1.3],
+        ["Fabled", 1.5],
+        ["Mythic", 1.7],
+        ["Set", 1.05]
+    ]
+);
+let weapon_type_mods = new Map(
+    [
+        ["wand", 0.6],
+        ["spear", 0.8],
+        ["dagger", 1.0],
+        ["bow", 1.2],
+        ["relik", 1.2]
+    ]
+);
+let tier_baselines = new Map()
+for (let tier of tiers_mod.keys()) {
+    let line_top = graph.append("path");
+    let line_bot = graph.append("path");
+    tier_baselines.set(tier, [line_top, line_bot]);
+}
 
+let circles = graph.append("g");
+
+let details = graph.append("g")
+        .attr("fill", "#444");
+details.append("rect").attr("z", "100");
+
+function showDetails(data, i, xfunc, yfunc) {
+    let xpos = xfunc(i[1]);
+    let ypos = yfunc(dps_getter_func(i));
+    let texts = [[1, i[0]],
+                [3, "Prepowder: "+i[4].toFixed(2)],
+                [4, "Postpowder: "+i[5].toFixed(2)],
+                [5, "Prepowder (1.20.3): "+i[6].toFixed(2)],
+                [6, "Postpowder (1.20.3): "+i[7].toFixed(2)],
+                [7, "Prepowder drop: "+((i[4]-i[6])/i[4]*100).toFixed(2) + "%"],
+                [8, "Postpowder drop: "+((i[5]-i[7])/i[5]*100).toFixed(2) + "%"],
+                [10, "Design Modifier: "+i[9].toFixed(2)],
+                [11, "Explained D. Mod: "+i[8].toFixed(2)]];
+    let idx = 12;
+    for (const explanation of i[10]) {
+        texts.push([idx, explanation[0] + ": " + explanation[1]]);
+        idx += 1;
+    }
+    details.select("rect")
+           .attr("x", xpos)
+           .attr("y", ypos)
+           .attr("width", 200)
+           .attr("height", (14 * idx) - 4)
+           .attr("opacity", 0.8);
+    details.selectAll("text")
+           .data(texts, d => d[0])
+           .join("text")
+           .style("font-size", "12px")
+           .attr("x", xpos+5)
+           .attr("y", d => d[0]*14 + ypos)
+           .attr("text-anchor", "start")
+           .attr("fill", "#fff")
+           .attr("opacity", 1)
+           .text(d => d[1]);
+}
+function hideDetails() {
+    details.select("rect")
+           .attr("x", 0)
+           .attr("y", 0)
+           .attr("width", 0)
+           .attr("height", 0)
+           .attr("opacity", 0);
+    details.selectAll("text")
+           .data([])
+           .join("text");
+}
 
 function redraw(data) {
+    hideDetails();
     let max_dps_base = 0;
     let tmp = dps_getter_func;
     let tmp2 = prepowder;
@@ -119,14 +201,38 @@ function redraw(data) {
     }
     dps_getter_func = tmp;
     prepowder = tmp2;
+    let _bbox = bbox();
     let x = d3.scaleLinear([70, 105], [margin.left, bbox().width - margin.right]);
     let y = d3.scaleLinear([0, max_dps_base * 1.1], [bbox().height - margin.bottom, margin.top]);
-    let _bbox = bbox();
+
+    let type_mod = weapon_type_mods.get(current_type);
+    for (let tier of tiers_mod.keys()) {
+        let res = tier_baselines.get(tier);
+        let line_top = res[0];
+        let line_bot = res[1];
+        let tier_mod = tiers_mod.get(tier);
+        let y_max = baseline_y.map(x => 2.1*x*tier_mod*type_mod);
+        let y_min = baseline_y.map(x => 2.0*x*tier_mod*type_mod);
+        line_top.datum(zip(baseline_x, y_max))
+            .attr("fill", "none")
+            .attr("stroke", d => colorMap.get(tier))
+            .attr("d", d3.line()
+                .x(function(d) { return x(d[0]) })
+                .y(function(d) { return y(d[1]) })
+              )
+        line_bot.datum(zip(baseline_x, y_min))
+            .attr("fill", "none")
+            .attr("stroke", d => colorMap.get(tier))
+            .attr("d", d3.line()
+                .x(function(d) { return x(d[0]) })
+                .y(function(d) { return y(d[1]) })
+              )
+    }
     graph.attr("viewBox", [0, 0, _bbox.width, _bbox.height]);
     xAxis(_xAxis, x);
     yAxis(_yAxis, y);
     grid(_grid1, _grid2, x, y);
-    graph.selectAll('circle')
+    circles.selectAll('circle')
         .data(data, d => d[0])
         .join(
             function(enter) {
@@ -135,18 +241,22 @@ function redraw(data) {
                       .attr("cx", d => x(d[1]))
                       .attr("cy", d => y(dps_getter_func(d)))
                       .attr("r", d => 5)
+                      .on("click", (d, i) => showDetails(d, i, x, y))
+                      .on("mouseover", function() { d3.select(this).raise(); })
                       .call(circle => circle.append("title")
                         .text(d => [d[0], "DPS: "+dps_getter_func(d)].join("\n")));
             },
             update => update.attr("cx", d => x(d[1]))
                           .attr("cy", d => y(dps_getter_func(d)))
+                          .on("click", (d, i) => showDetails(d, i, x, y))
                           .select("title")
-                        .text(d => [d[0], "DPS: "+dps_getter_func(d)].join("\n")),
+                          .text(d => [d[0], "DPS: "+dps_getter_func(d)].join("\n")),
             exit => exit.remove()
         );
 }
 
 function setData(type) {
+    current_type = type;
     d3.select("#info").text("SELECTED ITEM TYPE: " + type);
     current_data = dps_data[type];
     redraw(current_data);
@@ -169,6 +279,8 @@ function togglePowder() {
 
 function toggleStrDex() {
     strDex = !strDex;
+    if (strDex) baseline_y = dps_data.baseline_ys_new
+    else baseline_y = dps_data.baseline_ys
     d3.select("#strDexToggle").text("1.20.3 ("+strDex+")");
     setGetterFunc();
     redraw(current_data);

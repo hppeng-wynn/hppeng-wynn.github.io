@@ -71,8 +71,7 @@ for k in attack_speed_mods:
     dps_to_baseline[k] = 1/mult
 
 weapon_type_mods = {"wand": 0.6, "spear": 0.8, "dagger": 1.0, "bow": 1.2, "relik": 1.2}
-min_mult
-max_mult
+print((min_mult, max_mult))
 
 tiers_mod = {"Normal": 0.8, "Unique": 1.0, "Rare": 1.1, "Legendary": 1.3, "Fabled": 1.5, "Mythic": 1.7, "Set": 1.05}
 tiers_colors = {"Normal": (0.9, 0.9, 0.9), "Unique": (1, 1, 1/3), "Rare": (1, 1/3, 1), "Legendary": (1/3, 1, 1), "Fabled": (1, 1/3, 1/3), "Mythic": (2/3, 0, 2/3), "Set": (1/3, 1, 1/3)}
@@ -126,13 +125,13 @@ def guess_design_modifier(item, base_dps):
     actual_modifier = (item_baseline - nominal_baseline) / nominal_baseline
     explained_baseline = nominal_baseline * (1 + total_modifier)
     delta = (item_baseline - explained_baseline) / nominal_baseline
-    if delta >= 0.04 and delta <= 0.05:
+    if delta >= 0.04 and delta <= 0.06:
         total_modifier += 0.05
         explanation.append(("offensive", 0.05))
     elif delta >= 0.08:
         total_modifier += 0.1
         explanation.append(("hyper_offensive", 0.1))
-    elif delta <= -0.04 and delta >= -0.05:
+    elif delta <= -0.04 and delta >= -0.06:
         total_modifier -= 0.05
         explanation.append(("defensive", -0.05))
     elif delta <= -0.08:
