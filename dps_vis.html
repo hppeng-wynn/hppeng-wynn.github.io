@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth" style="height: 100%">
+    <head>
+        <!-- nunito font, copying wynndata -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="article.css">
+        <link rel="icon" href="./media/memes/agony.png">
+        <link rel="manifest" href="manifest.json">
+        <title>Base DPS Visualizer</title>
+    </head>
+    <body class="all" style="height: 95%; overflow: auto; display: flex; flex-direction: column">
+        <header class="header nomarginp">
+            <div class="headerleft" id = "headerleft">
+            </div>
+            <div class="headercenter" id = "headercenter">
+                <div>
+                    <p class="itemp" id="header">Base DPS Visualization</p>
+                </div>
+            </div>
+            <div class="headerright" id = "headerright">
+            </div>
+        </header>
+
+        <script src="https://d3js.org/d3.v7.js"></script>
+        <script type="text/javascript" src="utils.js"></script>
+        <script type="text/javascript" src="loadheader.js"></script>
+        <script type="text/javascript" src="icons.js"></script>
+        <script type="text/javascript" src="dps_vis.js"></script>
+    </body>
+</html>
