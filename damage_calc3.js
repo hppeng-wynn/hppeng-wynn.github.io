@@ -144,8 +144,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages_results.push([
             Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
             Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
-            Math.max(damages[i][0] * strBoost * 2 * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
-            Math.max(damages[i][1] * strBoost * 2 * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
+            Math.max(damages[i][0] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
+            Math.max(damages[i][1] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
         ]);
         damageformulas[i][0] += `(max((${tooltipinfo.get("damageBases")[i][0]} * ${strBoost} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
         damageformulas[i][1] += `(max((${tooltipinfo.get("damageBases")[i][1]} * ${strBoost} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
@@ -164,8 +164,8 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     }
     damages_results[0][0] += strBoost*rawModifier;
     damages_results[0][1] += strBoost*rawModifier;
-    damages_results[0][2] += strBoost*2*rawModifier;
-    damages_results[0][3] += strBoost*2*rawModifier;
+    damages_results[0][2] += (strBoost + 1)*rawModifier;
+    damages_results[0][3] += (strBoost + 1)*rawModifier;
     for (let i = 0; i < 2; i++) {
         damageformulas[0][i] += ` + (${strBoost} * ${tooltipinfo.get("rawModifier")})`
     }
