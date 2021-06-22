@@ -701,6 +701,7 @@
       "sdRaw": 280,
       "eDamPct": 10,
       "aDefPct": -15,
+      "fixID": true,
       "id": 2512
     },
     {
