@@ -125,16 +125,16 @@ def guess_design_modifier(item, base_dps):
     actual_modifier = (item_baseline - nominal_baseline) / nominal_baseline
     explained_baseline = nominal_baseline * (1 + total_modifier)
     delta = (item_baseline - explained_baseline) / nominal_baseline
-    if delta >= 0.04 and delta <= 0.06:
+    if delta >= 0.04 and delta < 0.075:
         total_modifier += 0.05
         explanation.append(("offensive", 0.05))
-    elif delta >= 0.08:
+    elif delta >= 0.075:
         total_modifier += 0.1
         explanation.append(("hyper_offensive", 0.1))
-    elif delta <= -0.04 and delta >= -0.06:
+    elif delta <= -0.04 and delta > -0.075:
         total_modifier -= 0.05
         explanation.append(("defensive", -0.05))
-    elif delta <= -0.08:
+    elif delta <= -0.075:
         total_modifier -= 0.1
         explanation.append(("hyper_defensive", -0.1))
     if abs(delta) > 0.2:
