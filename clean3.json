@@ -698,7 +698,7 @@
       "mdPct": 12,
       "ms": 2,
       "str": 8,
-      "sdRaw": 280,
+      "sdRaw": 205,
       "eDamPct": 10,
       "aDefPct": -15,
       "fixID": true,
@@ -960,7 +960,7 @@
       "mr": -3,
       "ms": 3,
       "ref": 25,
-      "sdRaw": 429,
+      "sdRaw": 313,
       "wDamPct": 35,
       "tDamPct": 35,
       "id": 1723
