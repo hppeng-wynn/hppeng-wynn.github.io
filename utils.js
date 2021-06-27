@@ -53,6 +53,10 @@ function setHTML(id, html) {
 
 function setValue(id, value) {
     let el = document.getElementById(id);
+    if (el == null) {
+        console.log("WARN tried to set text value of id {"+id+"} to ["+value+"] but did not exist!");
+        return;
+    }
     el.value = value;
     el.dispatchEvent(new Event("change"));
 }
