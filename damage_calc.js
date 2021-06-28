@@ -53,11 +53,11 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
             damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
         }
         //update all damages
-        if(!weapon.get("custom")) {
+        //if(!weapon.get("custom")) {
             for (let i = 0; i < damages.length; i++) {
                 damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
             }
-        }
+        //}
         
         neutralRemainingRaw = damages[0].slice();
         neutralBase = damages[0].slice();
