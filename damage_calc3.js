@@ -117,17 +117,18 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     rawModifier *= spellMultiplier * damageMultiplier;
     let totalDamNorm = [0, 0];
     let totalDamCrit = [0, 0];
-    if(!melee){       
-        totalDamNorm = [rawModifier, rawModifier];
-        totalDamCrit = [rawModifier, rawModifier];
-        for (let arr of damageformulas) {
-            arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
-        }
-    }
     let damages_results = [];
     // 0th skillpoint is strength, 1st is dex.
     let str = total_skillpoints[0];
     let strBoost = 1 + skillPointsToPercentage(str);
+    if(!melee){
+        let baseDam = rawModifier * strBoost;
+        totalDamNorm = [baseDam, baseDam];
+        totalDamCrit = [baseDam, baseDam];
+        for (let arr of damageformulas) {
+            arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
+        }
+    }
     let staticBoost = (pctModifier / 100.);
     tooltipinfo.set("staticBoost", `${(pctModifier/ 100.).toFixed(2)}`);
     tooltipinfo.set("skillBoost",["","","","","",""]);
