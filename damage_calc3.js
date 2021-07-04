@@ -123,8 +123,9 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let strBoost = 1 + skillPointsToPercentage(str);
     if(!melee){
         let baseDam = rawModifier * strBoost;
+        let baseDamCrit = rawModifier * (1 + strBoost);
         totalDamNorm = [baseDam, baseDam];
-        totalDamCrit = [baseDam, baseDam];
+        totalDamCrit = [baseDamCrit, baseDamCrit];
         for (let arr of damageformulas) {
             arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
         }
