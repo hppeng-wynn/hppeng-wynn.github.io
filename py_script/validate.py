@@ -1,6 +1,7 @@
 import json
+import sys
 
-with open("updated.json") as infile:
+with open(sys.argv[1]) as infile:
     data = json.load(infile)
 
 duplicate_map = dict()
