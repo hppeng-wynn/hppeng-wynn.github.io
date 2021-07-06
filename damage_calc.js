@@ -53,11 +53,11 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
             damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
         }
         //update all damages
-        //if(!weapon.get("custom")) {
+        if(!weapon.get("custom")) {
             for (let i = 0; i < damages.length; i++) {
                 damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
             }
-        //}
+        }
         
         neutralRemainingRaw = damages[0].slice();
         neutralBase = damages[0].slice();
@@ -117,20 +117,21 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     rawModifier *= spellMultiplier * damageMultiplier;
     let totalDamNorm = [0, 0];
     let totalDamCrit = [0, 0];
-    if(!melee){       
-        totalDamNorm = [rawModifier, rawModifier];
-        totalDamCrit = [rawModifier, rawModifier];
-        for (let arr of damageformulas) {
-            arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
-        }
-    }
     let damages_results = [];
     // 0th skillpoint is strength, 1st is dex.
     let str = total_skillpoints[0];
     let strBoost = 1 + skillPointsToPercentage(str);
-    //let staticBoost = (pctModifier / 100.);
-    let staticBoost = (pctModifier / 100.) + skillPointsToPercentage(str);
-    tooltipinfo.set("staticBoost", `${(pctModifier/ 100.).toFixed(2)} + ${skillPointsToPercentage(str).toFixed(2)}`);
+    if(!melee){
+        let baseDam = rawModifier * strBoost;
+        let baseDamCrit = rawModifier * (1 + strBoost);
+        totalDamNorm = [baseDam, baseDam];
+        totalDamCrit = [baseDamCrit, baseDamCrit];
+        for (let arr of damageformulas) {
+            arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
+        }
+    }
+    let staticBoost = (pctModifier / 100.);
+    tooltipinfo.set("staticBoost", `${(pctModifier/ 100.).toFixed(2)}`);
     tooltipinfo.set("skillBoost",["","","","","",""]);
     let skillBoost = [0];
     for (let i in total_skillpoints) {
@@ -143,50 +144,36 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         let damageBoost = 1 + skillBoost[i] + staticBoost;
         tooltipinfo.set("damageBoost", `(1 + ${(tooltipinfo.get("skillBoost")[i] ? tooltipinfo.get("skillBoost")[i] + " + " : "")} ${tooltipinfo.get("staticBoost")})`)
         damages_results.push([
-            //Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
-            //Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
-            //Math.max(damages[i][0] * strBoost * 2 * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
-            //Math.max(damages[i][1] * strBoost * 2 * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
-            // Math.max(damages[i][0] * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
-            // Math.max(damages[i][1] * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
-            // Math.max(damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit min
-            // Math.max(damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, 0), // Crit max
-            damages[i][0] * Math.max(damageBoost,0) * damageMult,       // Normal min
-            damages[i][1] * Math.max(damageBoost,0) * damageMult,       // Normal max
-            damages[i][0] * Math.max(1 + damageBoost, 0) * damageMult,  // Crit min
-            damages[i][1] * Math.max(1 + damageBoost, 0) * damageMult, // Crit max
+            Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
+            Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
+            Math.max(damages[i][0] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
+            Math.max(damages[i][1] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
         ]);
-        damageformulas[i][0] += `(max((${tooltipinfo.get("damageBases")[i][0]} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        damageformulas[i][1] += `(max((${tooltipinfo.get("damageBases")[i][1]} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        damageformulas[i][2] += `(max((${tooltipinfo.get("damageBases")[i][0]} * max(1 + ${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        damageformulas[i][3] += `(max((${tooltipinfo.get("damageBases")[i][1]} * max(1 + ${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][0] += `(max((${tooltipinfo.get("damageBases")[i][0]} * ${strBoost} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][1] += `(max((${tooltipinfo.get("damageBases")[i][1]} * ${strBoost} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][2] += `(max((${tooltipinfo.get("damageBases")[i][0]} * ${strBoost} * 2 * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
+        damageformulas[i][3] += `(max((${tooltipinfo.get("damageBases")[i][1]} * ${strBoost} * 2 * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
         totalDamNorm[0] += damages_results[i][0];
         totalDamNorm[1] += damages_results[i][1];
         totalDamCrit[0] += damages_results[i][2];
         totalDamCrit[1] += damages_results[i][3];
     }
     if (melee) {
-        //totalDamNorm[0] += Math.max(strBoost*rawModifier, -damages_results[0][0]);
-        //totalDamNorm[1] += Math.max(strBoost*rawModifier, -damages_results[0][1]);
-        //totalDamCrit[0] += Math.max(strBoost*2*rawModifier, -damages_results[0][2]);
-        //totalDamCrit[1] += Math.max(strBoost*2*rawModifier, -damages_results[0][3]);
-        totalDamNorm[0] += Math.max(rawModifier, -damages_results[0][0]);
-        totalDamNorm[1] += Math.max(rawModifier, -damages_results[0][1]);
-        totalDamCrit[0] += Math.max(rawModifier, -damages_results[0][2]);
-        totalDamCrit[1] += Math.max(rawModifier, -damages_results[0][3]);
+        totalDamNorm[0] += Math.max(strBoost*rawModifier, -damages_results[0][0]);
+        totalDamNorm[1] += Math.max(strBoost*rawModifier, -damages_results[0][1]);
+        totalDamCrit[0] += Math.max(strBoost*2*rawModifier, -damages_results[0][2]);
+        totalDamCrit[1] += Math.max(strBoost*2*rawModifier, -damages_results[0][3]);
     }
-    //damages_results[0][0] += strBoost*rawModifier;
-    //damages_results[0][1] += strBoost*rawModifier;
-    //damages_results[0][2] += strBoost*2*rawModifier;
-    //damages_results[0][3] += strBoost*2*rawModifier;
-    damages_results[0][0] += rawModifier;
-    damages_results[0][1] += rawModifier;
-    damages_results[0][2] += rawModifier;
-    damages_results[0][3] += rawModifier;
-    for (let i in damageformulas[0]) {
-        damageformulas[0][i] += ` + ${tooltipinfo.get("rawModifier")}`
+    damages_results[0][0] += strBoost*rawModifier;
+    damages_results[0][1] += strBoost*rawModifier;
+    damages_results[0][2] += (strBoost + 1)*rawModifier;
+    damages_results[0][3] += (strBoost + 1)*rawModifier;
+    for (let i = 0; i < 2; i++) {
+        damageformulas[0][i] += ` + (${strBoost} * ${tooltipinfo.get("rawModifier")})`
     }
-    
+    for (let i = 2; i < 4; i++) {
+        damageformulas[0][i] += ` + (2 * ${strBoost} * ${tooltipinfo.get("rawModifier")})`
+    }
 
     if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
     if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
