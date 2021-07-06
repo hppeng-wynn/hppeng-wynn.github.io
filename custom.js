@@ -7,6 +7,8 @@ const nonRolled_strings = ["name","lore", "tier","set","type","material","drop",
 //omitted "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_" - will be calculated on display
 // NOTE: DO NOT DELETE ENTRIES FROM ARRAYS FOR BACKWARDS COMPAT REASONS!!!
 
+// TODO: Add an exclude list
+
 /**
  * @param {Map} custom - the statMap of the CI
  * @param {boolean} verbose - if we want lore and majorIds to display
