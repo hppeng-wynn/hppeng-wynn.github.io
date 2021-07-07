@@ -484,7 +484,7 @@ class Build{
     */
     initBuildStats(){
 
-        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef"];
+        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi"];
 
         //Create a map of this build's stats
         let statMap = new Map();
@@ -497,6 +497,9 @@ class Build{
         let major_ids = new Set();
         for (const item of this.items){
             for (let [id, value] of item.get("maxRolls")) {
+                if (staticIDs.includes(id)) {
+                    continue;
+                }
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
             for (const staticID of staticIDs) {
