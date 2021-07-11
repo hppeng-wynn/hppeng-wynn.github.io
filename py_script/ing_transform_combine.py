@@ -143,7 +143,7 @@ ing_id_mappings = { #specifically for the id field of an ingredient.
 }
 ing_delete_keys = [
     "sprite",
-
+    "skin"
 ]
 
 print("loaded all files.")

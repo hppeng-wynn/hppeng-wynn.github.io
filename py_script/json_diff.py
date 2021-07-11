@@ -13,9 +13,18 @@ def shorten(v):
 def is_basic(t):
     return t is int or t is str or t is float or t is bool or t is list
 
+def custom_input():
+    if custom_input.alive:
+        try:
+            return input()
+        except:
+            custom_input.alive = False
+    return ""
+custom_input.alive = True
+
 def list_diff(list1, list2, path):
     print(f"Encountered object list {path}, enter match key: ", end="", file=sys.stderr)
-    key = input()
+    key = custom_input()
     if (key == ""):
         if list1 != list2:
             print(f"{path}.{k}: Value difference")
