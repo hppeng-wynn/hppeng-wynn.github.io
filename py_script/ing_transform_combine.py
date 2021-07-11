@@ -148,7 +148,6 @@ ing_delete_keys = [
 
 print("loaded all files.")
 
-print(ings[0])
 for ing in ings:
     for key in ing_delete_keys:
         if key in ing:
@@ -160,8 +159,30 @@ for ing in ings:
             del ing[k]
     
     for k, v in ing_metaID_mappings.items():
+        if 'consumableIDs' not in ing:
+            ing['consumableIDs'] = {
+                  "charges": 0,
+                  "dura": 0
+                }
+        if 'posMods' not in ing:
+            ing['posMods'] = {
+                  "left": 0,
+                  "right": 0,
+                  "above": 0,
+                  "under": 0,
+                  "touching": 0,
+                  "notTouching": 0
+                }
+        if 'itemIDs' not in ing:
+            ing['consumableIDs'] = {
+                  "dura": 0,
+                  "strReq": 0,
+                  "dexReq": 0,
+                  "intReq": 0,
+                  "defReq": 0,
+                  "agiReq": 0
+                }
         if k in ing['itemIDs']:
-            print(ing['name'])
             ing['itemIDs'][v] = ing['itemIDs'][k]
             del ing['itemIDs'][k]
         elif k in ing['consumableIDs']:

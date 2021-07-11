@@ -621,11 +621,17 @@ function updateBoosts(buttonId, recalcStats) {
             if (name === "warscream") {
                 player_build.defenseMultiplier -= .20;
             }
+            if (name === "vanish") {
+                player_build.defenseMultiplier -= .15;
+            }
             elem.classList.remove("toggleOn");
         }else{
             player_build.damageMultiplier += damageMultipliers.get(name);
             if (name === "warscream") {
                 player_build.defenseMultiplier += .20;
+            }
+            if (name === "vanish") {
+                player_build.defenseMultiplier += .15;
             }
             elem.classList.add("toggleOn");
         }
@@ -637,6 +643,7 @@ function updateBoosts(buttonId, recalcStats) {
                 elem.classList.remove("toggleOn");
                 player_build.damageMultiplier -= value;
                 if (key === "warscream") { player_build.defenseMultiplier -= .20 }
+                if (key === "vanish") { player_build.defenseMultiplier -= .15 }
             }
         }
     }

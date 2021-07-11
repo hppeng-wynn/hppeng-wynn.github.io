@@ -541,6 +541,9 @@
       "aDefPct": -65,
       "tDefPct": -65,
       "eDefPct": -65,
+      "majorIds": [
+        "FISSION"
+      ],
       "id": 1693
     },
     {
@@ -91192,6 +91195,9 @@
       "aDefPct": -100,
       "tDefPct": -100,
       "eDefPct": -100,
+      "majorIds": [
+        "EXPLOSIVE_IMPACT"
+      ],
       "id": 3587
     },
     {
