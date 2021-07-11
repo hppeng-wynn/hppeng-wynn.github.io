@@ -12194,8 +12194,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 224,
-        "maximum": 238
+        "minimum": 221,
+        "maximum": 227
       },
       "durability": {
         "minimum": 434,
@@ -12222,8 +12222,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 212,
-        "maximum": 224
+        "minimum": 215,
+        "maximum": 221
       },
       "durability": {
         "minimum": 427,
@@ -12278,8 +12278,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 238,
-        "maximum": 250
+        "minimum": 227,
+        "maximum": 228
       },
       "durability": {
         "minimum": 441,
@@ -12334,8 +12334,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 200,
-        "maximum": 212
+        "minimum": 207,
+        "maximum": 215
       },
       "durability": {
         "minimum": 417,
@@ -12530,8 +12530,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 167,
-        "maximum": 177
+        "minimum": 172,
+        "maximum": 180
       },
       "durability": {
         "minimum": 417,
@@ -12558,8 +12558,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 177,
-        "maximum": 187
+        "minimum": 180,
+        "maximum": 184
       },
       "durability": {
         "minimum": 427,
@@ -12586,8 +12586,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 187,
-        "maximum": 198
+        "minimum": 184,
+        "maximum": 189
       },
       "durability": {
         "minimum": 434,
@@ -12646,8 +12646,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 198,
-        "maximum": 208
+        "minimum": 189,
+        "maximum": 190
       },
       "durability": {
         "minimum": 441,
@@ -13234,8 +13234,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 200,
-        "maximum": 212
+        "minimum": 207,
+        "maximum": 215
       },
       "durability": {
         "minimum": 417,
@@ -13262,8 +13262,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 212,
-        "maximum": 224
+        "minimum": 215,
+        "maximum": 221
       },
       "durability": {
         "minimum": 427,
@@ -13290,8 +13290,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 224,
-        "maximum": 238
+        "minimum": 221,
+        "maximum": 227
       },
       "durability": {
         "minimum": 434,
@@ -13318,8 +13318,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 238,
-        "maximum": 250
+        "minimum": 227,
+        "maximum": 228
       },
       "durability": {
         "minimum": 441,
@@ -13586,8 +13586,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 134,
-        "maximum": 142
+        "minimum": 138,
+        "maximum": 144
       },
       "durability": {
         "minimum": 417,
@@ -13614,8 +13614,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 142,
-        "maximum": 150
+        "minimum": 144,
+        "maximum": 147
       },
       "durability": {
         "minimum": 427,
@@ -13642,8 +13642,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 150,
-        "maximum": 158
+        "minimum": 147,
+        "maximum": 151
       },
       "durability": {
         "minimum": 434,
@@ -13670,8 +13670,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 158,
-        "maximum": 166
+        "minimum": 151,
+        "maximum": 152
       },
       "durability": {
         "minimum": 441,
@@ -13698,8 +13698,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 100,
-        "maximum": 106
+        "minimum": 103,
+        "maximum": 108
       },
       "durability": {
         "minimum": 417,
@@ -13726,8 +13726,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 106,
-        "maximum": 112
+        "minimum": 108,
+        "maximum": 110
       },
       "durability": {
         "minimum": 427,
@@ -13754,8 +13754,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 112,
-        "maximum": 119
+        "minimum": 110,
+        "maximum": 113
       },
       "durability": {
         "minimum": 434,
@@ -13782,8 +13782,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 119,
-        "maximum": 125
+        "minimum": 113,
+        "maximum": 114
       },
       "durability": {
         "minimum": 441,
@@ -13922,8 +13922,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 268,
-        "maximum": 282
+        "minimum": 238,
+        "maximum": 242
       },
       "durability": {
         "minimum": 462,
@@ -13950,8 +13950,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 282,
-        "maximum": 296
+        "minimum": 242,
+        "maximum": 248
       },
       "durability": {
         "minimum": 469,
@@ -13978,8 +13978,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 253,
-        "maximum": 268
+        "minimum": 231,
+        "maximum": 238
       },
       "durability": {
         "minimum": 452,
@@ -14090,8 +14090,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 296,
-        "maximum": 311
+        "minimum": 248,
+        "maximum": 249
       },
       "durability": {
         "minimum": 476,
@@ -14258,8 +14258,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 223,
-        "maximum": 235
+        "minimum": 198,
+        "maximum": 202
       },
       "durability": {
         "minimum": 462,
@@ -14286,8 +14286,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 211,
-        "maximum": 223
+        "minimum": 192,
+        "maximum": 198
       },
       "durability": {
         "minimum": 452,
@@ -14314,8 +14314,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 235,
-        "maximum": 247
+        "minimum": 202,
+        "maximum": 206
       },
       "durability": {
         "minimum": 469,
@@ -14342,8 +14342,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 247,
-        "maximum": 259
+        "minimum": 206,
+        "maximum": 207
       },
       "durability": {
         "minimum": 476,
@@ -14962,8 +14962,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 253,
-        "maximum": 268
+        "minimum": 231,
+        "maximum": 238
       },
       "durability": {
         "minimum": 452,
@@ -14990,8 +14990,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 268,
-        "maximum": 282
+        "minimum": 238,
+        "maximum": 242
       },
       "durability": {
         "minimum": 462,
@@ -15018,8 +15018,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 282,
-        "maximum": 296
+        "minimum": 242,
+        "maximum": 248
       },
       "durability": {
         "minimum": 469,
@@ -15074,8 +15074,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 296,
-        "maximum": 311
+        "minimum": 248,
+        "maximum": 249
       },
       "durability": {
         "minimum": 476,
@@ -15282,8 +15282,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 169,
-        "maximum": 178
+        "minimum": 154,
+        "maximum": 159
       },
       "durability": {
         "minimum": 452,
@@ -15342,8 +15342,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 188,
-        "maximum": 198
+        "minimum": 162,
+        "maximum": 165
       },
       "durability": {
         "minimum": 469,
@@ -15370,8 +15370,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 127,
-        "maximum": 134
+        "minimum": 115,
+        "maximum": 119
       },
       "durability": {
         "minimum": 452,
@@ -15398,8 +15398,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 198,
-        "maximum": 207
+        "minimum": 165,
+        "maximum": 166
       },
       "durability": {
         "minimum": 476,
@@ -15426,8 +15426,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 134,
-        "maximum": 141
+        "minimum": 119,
+        "maximum": 121
       },
       "durability": {
         "minimum": 462,
@@ -15454,8 +15454,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 141,
-        "maximum": 148
+        "minimum": 121,
+        "maximum": 124
       },
       "durability": {
         "minimum": 469,
@@ -15482,8 +15482,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 148,
-        "maximum": 155
+        "minimum": 124,
+        "maximum": 125
       },
       "durability": {
         "minimum": 476,
@@ -15510,8 +15510,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 178,
-        "maximum": 188
+        "minimum": 159,
+        "maximum": 162
       },
       "durability": {
         "minimum": 462,
@@ -15650,8 +15650,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 314,
-        "maximum": 330
+        "minimum": 250,
+        "maximum": 254
       },
       "durability": {
         "minimum": 487,
@@ -15678,8 +15678,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 330,
-        "maximum": 346
+        "minimum": 254,
+        "maximum": 257
       },
       "durability": {
         "minimum": 497,
@@ -15706,8 +15706,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 346,
-        "maximum": 361
+        "minimum": 257,
+        "maximum": 260
       },
       "durability": {
         "minimum": 504,
@@ -15734,8 +15734,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 361,
-        "maximum": 377
+        "minimum": 260,
+        "maximum": 262
       },
       "durability": {
         "minimum": 511,
@@ -16014,8 +16014,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 275,
-        "maximum": 288
+        "minimum": 212,
+        "maximum": 215
       },
       "durability": {
         "minimum": 497,
@@ -16042,8 +16042,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 262,
-        "maximum": 275
+        "minimum": 208,
+        "maximum": 212
       },
       "durability": {
         "minimum": 487,
@@ -16070,8 +16070,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 288,
-        "maximum": 301
+        "minimum": 215,
+        "maximum": 217
       },
       "durability": {
         "minimum": 504,
@@ -16098,8 +16098,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 301,
-        "maximum": 314
+        "minimum": 217,
+        "maximum": 218
       },
       "durability": {
         "minimum": 511,
@@ -16658,8 +16658,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 314,
-        "maximum": 330
+        "minimum": 250,
+        "maximum": 254
       },
       "durability": {
         "minimum": 487,
@@ -16718,8 +16718,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 330,
-        "maximum": 346
+        "minimum": 254,
+        "maximum": 257
       },
       "durability": {
         "minimum": 497,
@@ -16746,8 +16746,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 346,
-        "maximum": 361
+        "minimum": 257,
+        "maximum": 260
       },
       "durability": {
         "minimum": 504,
@@ -16982,8 +16982,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 210,
-        "maximum": 220
+        "minimum": 167,
+        "maximum": 170
       },
       "durability": {
         "minimum": 487,
@@ -17010,8 +17010,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 220,
-        "maximum": 230
+        "minimum": 170,
+        "maximum": 172
       },
       "durability": {
         "minimum": 497,
@@ -17038,8 +17038,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 230,
-        "maximum": 241
+        "minimum": 172,
+        "maximum": 173
       },
       "durability": {
         "minimum": 504,
@@ -17066,8 +17066,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 241,
-        "maximum": 251
+        "minimum": 173,
+        "maximum": 175
       },
       "durability": {
         "minimum": 511,
@@ -17094,8 +17094,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 361,
-        "maximum": 377
+        "minimum": 260,
+        "maximum": 262
       },
       "durability": {
         "minimum": 511,
@@ -17150,8 +17150,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 157,
-        "maximum": 165
+        "minimum": 126,
+        "maximum": 127
       },
       "durability": {
         "minimum": 487,
@@ -17210,8 +17210,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 165,
-        "maximum": 173
+        "minimum": 127,
+        "maximum": 129
       },
       "durability": {
         "minimum": 497,
@@ -17238,8 +17238,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 173,
-        "maximum": 181
+        "minimum": 129,
+        "maximum": 130
       },
       "durability": {
         "minimum": 504,
@@ -17266,8 +17266,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 181,
-        "maximum": 188
+        "minimum": 130,
+        "maximum": 131
       },
       "durability": {
         "minimum": 511,
@@ -17322,8 +17322,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 379,
-        "maximum": 382
+        "minimum": 263,
+        "maximum": 264
       },
       "durability": {
         "minimum": 522,
@@ -17406,8 +17406,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 316,
-        "maximum": 318
+        "minimum": 219,
+        "maximum": 220
       },
       "durability": {
         "minimum": 522,
@@ -17494,8 +17494,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 379,
-        "maximum": 382
+        "minimum": 263,
+        "maximum": 264
       },
       "durability": {
         "minimum": 522,
@@ -17582,8 +17582,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 253,
-        "maximum": 255
+        "minimum": 175,
+        "maximum": 176
       },
       "durability": {
         "minimum": 522,
@@ -17666,8 +17666,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 382,
-        "maximum": 385
+        "minimum": 264,
+        "maximum": 265
       },
       "durability": {
         "minimum": 525,
@@ -17750,8 +17750,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 318,
-        "maximum": 320
+        "minimum": 220,
+        "maximum": 221
       },
       "durability": {
         "minimum": 525,
@@ -17930,8 +17930,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 382,
-        "maximum": 385
+        "minimum": 264,
+        "maximum": 265
       },
       "durability": {
         "minimum": 525,
@@ -17958,8 +17958,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 190,
-        "maximum": 192
+        "minimum": 131,
+        "maximum": 132
       },
       "durability": {
         "minimum": 522,
@@ -18074,8 +18074,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 256,
-        "maximum": 259
+        "minimum": 176,
+        "maximum": 177
       },
       "durability": {
         "minimum": 529,
@@ -18102,8 +18102,8 @@
         }
       ],
       "healthOrDamage": {
-        "minimum": 193,
-        "maximum": 196
+        "minimum": 132,
+        "maximum": 133
       },
       "durability": {
         "minimum": 525,
