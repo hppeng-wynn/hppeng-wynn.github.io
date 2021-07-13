@@ -148,14 +148,11 @@ function showDetails(data, i, xfunc, yfunc) {
     let texts = [[1, i[0]],
                 [3, "Prepowder: "+i[4].toFixed(2)],
                 [4, "Postpowder: "+i[5].toFixed(2)],
-                [5, "Prepowder (1.20.3): "+i[6].toFixed(2)],
-                [6, "Postpowder (1.20.3): "+i[7].toFixed(2)],
-                [7, "Prepowder drop: "+((i[4]-i[6])/i[4]*100).toFixed(2) + "%"],
-                [8, "Postpowder drop: "+((i[5]-i[7])/i[5]*100).toFixed(2) + "%"],
-                [10, "Design Modifier: "+i[9].toFixed(2)],
-                [11, "Explained D. Mod: "+i[8].toFixed(2)]];
-    let idx = 12;
-    for (const explanation of i[10]) {
+                [6, "Design Modifier: "+i[7].toFixed(2)],
+                [7, "Explained D. Mod: "+i[6].toFixed(2)]];
+    let idx = 8;
+    console.log(i);
+    for (const explanation of i[8]) {
         texts.push([idx, explanation[0] + ": " + explanation[1]]);
         idx += 1;
     }
@@ -276,15 +273,6 @@ function setGetterFunc() {
 function togglePowder() {
     prepowder = !prepowder;
     d3.select("#powderToggle").text("prepowder ("+prepowder+")");
-    setGetterFunc();
-    redraw(current_data);
-}
-
-function toggleStrDex() {
-    strDex = !strDex;
-    if (strDex) baseline_y = dps_data.baseline_ys_new
-    else baseline_y = dps_data.baseline_ys
-    d3.select("#strDexToggle").text("1.20.3 ("+strDex+")");
     setGetterFunc();
     redraw(current_data);
 }

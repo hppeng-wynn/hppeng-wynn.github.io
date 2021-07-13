@@ -15,6 +15,7 @@ baselines_known_y = np.array([ 341.53, 383.35, 432.14, 480.93, 536.69, 592.45, 6
 baselines_known_y_new = np.zeros(len(baselines_known_x))
 for i, (x, y) in enumerate(zip(baselines_known_x, baselines_known_y)):
     baselines_known_y_new[i] = y * (1 - 0.01 * (x - 70))
+baselines_known_y = baselines_known_y_new
 
 def interpolate_baseline(level):
     i = 0
@@ -54,8 +55,8 @@ def get_display_name(item):
     return item["name"]
 item_data = json.load(open(items_file))["items"]
 item_map = {get_display_name(item): item for item in item_data}
-item_new_data = json.load(open(items_new_file))["items"]
-item_new_map = {get_display_name(item): item for item in item_new_data}
+#item_new_data = json.load(open(items_new_file))["items"]
+#item_new_map = {get_display_name(item): item for item in item_new_data}
 
 attack_speed_mods = {"SUPER_SLOW": 0.51, "VERY_SLOW": 0.83, "SLOW": 1.5, "NORMAL": 2.05, "FAST": 2.5, "VERY_FAST": 3.1, "SUPER_FAST": 4.3}
 attack_speed_target_mult = {"SUPER_SLOW": 4, "VERY_SLOW": 2.5, "SLOW": 1.4, "NORMAL": 1, "FAST": 0.8, "VERY_FAST": 0.66, "SUPER_FAST": 0.48}
@@ -162,16 +163,15 @@ for name, item in item_map.items():
         continue
     if item["lvl"] >= min_level and item["category"] == "weapon":
         dps, postpowder_dps = get_data(item, powders_old)
-        new_item = item_new_map[name]
-        new_dps, new_postpowder_dps = get_data(new_item, powders_new)
+        # new_item = item_new_map[name]
+        # new_dps, new_postpowder_dps = get_data(new_item, powders_new)
         total, actual, explain = guess_design_modifier(item, dps)
         item_dat[item["type"]].append((get_display_name(item), item["lvl"], item["id"], item["tier"],
                                         dps, postpowder_dps,
-                                        new_dps, new_postpowder_dps, 
                                         total, actual, explain))
 item_dat["baseline_xs"] = baselines_known_x.tolist()
 item_dat["baseline_ys"] = baselines_known_y.tolist()
-item_dat["baseline_ys_new"] = baselines_known_y_new.tolist()
+#item_dat["baseline_ys_new"] = baselines_known_y_new.tolist()
 json.dump(item_dat, open("dps_data.json", "w"), indent=2)
 json.dump(item_dat, open("dps_data_compress.json", "w"))
 # item_lvl, item_dps, item_tiercolor = zip(*item_dat)

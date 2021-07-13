@@ -40,19 +40,6 @@ for set_name, set_data in data["sets"].items():
     for item_name in set_data["items"]:
         item_set_map[item_name] = set_name
 
-must_mappings = [
-    "strength",
-    "dexterity",
-    "intelligence",
-    "agility",
-    "defense",
-    "strengthPoints",
-    "dexterityPoints",
-    "intelligencePoints",
-    "agilityPoints",
-    "defensePoints",
-]
-
 translate_mappings = {
     #"name": "name",
     #"displayName": "displayName",
@@ -178,7 +165,7 @@ for item in items:
             del item[key]
     
     for k in list(item.keys()):
-        if (item[k] == 0 or item[k] is None) and not k in must_mappings:
+        if (item[k] == 0 or item[k] is None):
             del item[k]
 
     for k, v in translate_mappings.items():
