@@ -43,6 +43,7 @@ powders_old = [ [4.5, 6.5, 8.5,  9,    10.5, 22.5, "T"],    # LOL only updating 
                 [3.5, 6,   7,    7.5,  9,    17, "F"],
                 [4,   6.5, 7.5,  8,    9.5,  17, "A"],
                 [3.5, 5,   6.5,  7,    8.5,  15, "W"]]
+powders_old = powders_new
 def get_appropriate_powder_idx(item):
     for i, req in enumerate(reqs):
         if req in item and item[req] > 0:
