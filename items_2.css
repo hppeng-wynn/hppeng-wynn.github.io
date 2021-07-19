@@ -35,6 +35,7 @@
     background-color: #212121;
     border: solid 1px #666;
     overflow-y: scroll;
+    z-index: 20;
 }
 
 .search-field-compl.visible {
@@ -56,6 +57,29 @@
     position: absolute;
     display: block;
     color: #ff0000;
+    z-index: 10;
+}
+
+@media(max-width: 1099px) {
+    #search-container {
+        margin-bottom: 8px;
+        align-items: center;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .search-field-container {
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .search-field {
+        width: 75vw;
+    }
+
+    .search-field-error {
+        font-size: 10pt;
+    }
 }
 
 #item-list {
@@ -77,4 +101,16 @@
 
 .item-entry-sort-key {
     margin-left: 1.75em;
+}
+
+@media(max-width: 1099px) {
+    #item-list {
+        flex-flow: column;
+        align-items: center;
+    }
+
+    .item-entry {
+        width: 100%;
+        margin: 0 0 14px;
+    }
 }
