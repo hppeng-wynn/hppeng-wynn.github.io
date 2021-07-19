@@ -7,11 +7,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="items_2.css">
         <link rel="icon" href="./media/icons/new/searcher.png">
         <link rel="manifest" href="manifest.json">
         <title>WynnAtlas</title>
     </head>
-    <body class="all" style="overflow-y: scroll">
+    <body class="all">
         <header class="header nomarginp">
             <div class="headerleft" id = "headerleft">
             </div>
@@ -32,29 +33,25 @@
         <div class="center" id="help">
             <a href="items_2_help.html" class="link" target="_blank">Search Guide</a>
         </div>
-        <div class="center" id="main" style="padding: 2%">
-            <div id="search-container" style="margin-bottom: 1.5%">
-                <div class="left" id="search-filter" style="display: inline-block; vertical-align: top">
-                    <label for="search-filter-field">Filter By:</label>
-                    <br>
-                    <input id="search-filter-field" type="text"
-                           placeholder="name ?= &quot;blue&quot; & str >= 15 & dex >= 10"
-                           style="width: 25vw; padding: 8px">
-                    <br>
-                    <div id="search-filter-error" style="color: #ff0000"></div>
+        <div class="center" id="main">
+            <div id="search-container">
+                <div class="search-field-container left" id="search-filter">
+                    <label class="search-field-label" for="search-filter-field">Filter By:</label>
+                    <input class="search-field" id="search-filter-field" type="text" autofocus="true"
+                           placeholder="name ?= &quot;blue&quot; & str >= 15 & dex >= 10">
+                    <div class="search-field-compl" id="search-filter-compl"></div>
+                    <div class="search-field-error" id="search-filter-error"></div>
                 </div>
-                <div class="left" id="search-sort" style="display: inline-block; vertical-align: top">
-                    <label for="search-sort-field">Sort By:</label>
-                    <br>
-                    <input id="search-sort-field" type="text" placeholder="str + dex; meleerawdmg + spellrawdmg"
-                           style="width: 25vw; padding: 8px">
-                    <br>
-                    <div id="search-sort-error" style="color: #ff0000"></div>
+                <div class="search-field-container left" id="search-sort">
+                    <label class="search-field-label" for="search-sort-field">Sort By:</label>
+                    <input class="search-field" id="search-sort-field" type="text"
+                           placeholder="str + dex; meleerawdmg + spellrawdmg">
+                    <div class="search-field-compl" id="search-sort-compl"></div>
+                    <div class="search-field-error" id="search-sort-error"></div>
                 </div>
             </div>
             <div id="item-list-container">
-                <div class="left" id="item-list"
-                     style="display: flex; flex-flow: row wrap; justify-content: space-evenly"></div>
+                <div class="left" id="item-list"></div>
                 <div class="center" id="item-list-footer"></div>
             </div>
         </div>
