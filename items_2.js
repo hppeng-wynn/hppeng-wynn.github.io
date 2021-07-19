@@ -404,6 +404,10 @@ function init_items2() {
     // focus the query filter text box
     searchFilterField.field.focus();
     searchFilterField.field.select();
+
+    // scroll-to-top button
+    document.getElementById('scroll-up')
+        .addEventListener('mousedown', e => scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 load_init(init_items2);

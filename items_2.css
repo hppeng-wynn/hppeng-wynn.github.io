@@ -114,3 +114,26 @@
         margin: 0 0 14px;
     }
 }
+
+#scroll-up {
+    width: 10vw;
+    height: 10vw;
+    bottom: 4vw;
+    right: 4vw;
+    position: fixed;
+    display: none;
+    background-color: #212121;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    line-height: 10vw;
+    border: 1px solid #666;
+    cursor: pointer;
+    user-select: none;
+}
+
+@media(max-width: 1099px) {
+    #scroll-up {
+        display: block;
+    }
+}
