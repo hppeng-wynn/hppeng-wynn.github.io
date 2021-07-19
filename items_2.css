@@ -53,6 +53,7 @@
 }
 
 .search-field-error {
+    position: absolute;
     display: block;
     color: #ff0000;
 }
