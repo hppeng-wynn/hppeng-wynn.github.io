@@ -233,6 +233,33 @@ class ExprField {
 function compareLexico(ia, keysA, ib, keysB) {
     for (let i = 0; i < keysA.length; i++) { // assuming keysA and keysB are the same length
         let aKey = keysA[i], bKey = keysB[i];
+        if (typeof aKey === 'undefined') {
+            switch (typeof bKey) {
+                case 'string':
+                    aKey = "";
+                    break;
+                case 'number':
+                    aKey = 0;
+                    break;
+                case 'undefined':
+                    return 0;
+                default:
+                    throw new Error(`Incomparable type ${typeof bKey}`);
+            }
+        }
+        else if (typeof(bKey) === 'undefined') {
+            switch (typeof aKey) {
+                case 'string':
+                    bKey = "";
+                    break;
+                case 'number':
+                    bKey = 0;
+                    break;
+                default:
+                    throw new Error(`Incomparable type ${typeof aKey}`);
+            }
+
+        }
         if (typeof aKey !== typeof bKey) throw new Error(`Incomparable types ${typeof aKey} and ${typeof bKey}`); // can this even happen?
         switch (typeof aKey) {
             case 'string':
