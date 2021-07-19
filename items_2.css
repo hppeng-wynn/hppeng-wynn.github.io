@@ -1,0 +1,139 @@
+.all {
+    overflow-y: scroll;
+}
+
+#main {
+    padding: 2%;
+}
+
+#search-container {
+    margin-bottom: 1.5%;
+}
+
+.search-field-container {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.search-field-label {
+    display: block;
+    font-size: 12pt;
+    font-weight: 700;
+}
+
+.search-field {
+    width: 25vw;
+    padding: 8px;
+    position: relative;
+    display: block;
+}
+
+.search-field-compl {
+    max-height: 50vh;
+    position: fixed;
+    display: none;
+    background-color: #212121;
+    border: solid 1px #666;
+    overflow-y: scroll;
+    z-index: 20;
+}
+
+.search-field-compl.visible {
+    display: block;
+}
+
+.search-field-compl-entry {
+    padding: 2px 6px;
+    font-size: 12pt;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.search-field-compl-entry.focused {
+    background-color: #424242;
+}
+
+.search-field-error {
+    position: absolute;
+    display: block;
+    color: #ff0000;
+    z-index: 10;
+}
+
+@media(max-width: 1099px) {
+    #search-container {
+        margin-bottom: 8px;
+        align-items: center;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .search-field-container {
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .search-field {
+        width: 75vw;
+    }
+
+    .search-field-error {
+        font-size: 10pt;
+    }
+}
+
+#item-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.item-entry {
+    display: none;
+    width: 20vw;
+    margin: 1vw;
+    vertical-align: top;
+}
+
+.item-entry.visible {
+    display: inline-block;
+}
+
+.item-entry-sort-key {
+    margin-left: 1.75em;
+}
+
+@media(max-width: 1099px) {
+    #item-list {
+        flex-flow: column;
+        align-items: center;
+    }
+
+    .item-entry {
+        width: 100%;
+        margin: 0 0 14px;
+    }
+}
+
+#scroll-up {
+    width: 10vw;
+    height: 10vw;
+    bottom: 4vw;
+    right: 4vw;
+    position: fixed;
+    display: none;
+    background-color: #212121;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    line-height: 10vw;
+    border: 1px solid #666;
+    cursor: pointer;
+    user-select: none;
+}
+
+@media(max-width: 1099px) {
+    #scroll-up {
+        display: block;
+    }
+}

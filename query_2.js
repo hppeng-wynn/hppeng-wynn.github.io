@@ -76,7 +76,7 @@ const itemQueryProps = (function() {
   prop(['cat', 'category'], 'string', (i, ie) => i.category);
   const tierIndices = { Normal: 0, Unique: 1, Set: 2, Rare: 3, Legendary: 4, Fabled: 5, Mythic: 6 };
   prop(['rarityname', 'raritystr', 'tiername', 'tierstr'], 'string', (i, ie) => i.tier);
-  prop(['rarity', 'tier'], 'string', (i, ie) => tierIndices[i.tier]);
+  prop(['rarity', 'tier'], 'number', (i, ie) => tierIndices[i.tier]);
 
   prop(['level', 'lvl', 'combatlevel', 'combatlvl'], 'number', (i, ie) => i.lvl);
   prop(['strmin', 'strreq'], 'number', (i, ie) => i.strReq);
