@@ -1,4 +1,4 @@
-const DB_VERSION = 74;
+const DB_VERSION = 75;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let db;
@@ -70,6 +70,19 @@ function clean_item(item) {
         }
         if (item.slots === undefined) {
             item.slots = 0
+        }
+        for (let key of item_fields) {
+            if (item[key] === undefined) {
+                if (key in str_item_fields) {
+                    item[key] = "";
+                }
+                else if (key == "majorIds") {
+                    item[key] = [];
+                }
+                else {
+                    item[key] = 0;
+                }
+            }
         }
     }
 }

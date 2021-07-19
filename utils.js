@@ -343,6 +343,26 @@ function toggleButton(button_id) {
     }
 }
 
+/**
+ * If the input object is undefined, make it "match" the target type
+ * with default value (0 or empty str).
+ */
+function matchType(object, target) {
+    if (typeof object === 'undefined') {
+        switch (target) {
+            case 'string':
+                return "";
+            case 'number':
+                return 0;
+            case 'undefined':
+                return undefined;
+            default:
+                throw new Error(`Incomparable type ${target}`);
+        }
+    }
+    return object;
+}
+
 /** A utility function that reloads the page forcefully. 
  * 
  */
@@ -353,3 +373,4 @@ async function hardReload() {
 
     location.reload();
 }
+
