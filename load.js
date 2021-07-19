@@ -242,11 +242,7 @@ function init_maps() {
         item.wDam = "0-0";
         item.fDam = "0-0";
         item.aDam = "0-0";
-        item.str = 0,
-        item.dex = 0,
-        item.int = 0,
-        item.def = 0,
-        item.agi = 0,
+        clean_item(item);
 
         noneItems[i] = item;
     }

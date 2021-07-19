@@ -596,34 +596,31 @@ function displayExpandedItem(item, parent_id){
                     p_elem.textContent = "Set: " + item.get(id).toString();
                     active_elem.appendChild(p_elem);
                 } else if (id === "majorIds") {
-                    let p_elem = document.createElement("p");
-                    p_elem.classList.add("itemp");
-                    let majorID = item.get(id).toString();
+                    for (let majorID of item.get(id)) {
+                        let p_elem = document.createElement("p");
+                        p_elem.classList.add("itemp");
 
-                    let title_elem = document.createElement("b");
-                    let b_elem = document.createElement("b");
-                    if (majorID.includes(":")) {   
-                        let name = majorID.substring(0, majorID.indexOf(":")+1);
-                        let mid = majorID.substring(majorID.indexOf(":")+1);
-                        if (name.charAt(0) !== "+") {name = "+" + name}
-                        title_elem.classList.add("Legendary");
-                        title_elem.textContent = name;
-                        b_elem.classList.add("Crafted");
-                        b_elem.textContent = mid;
-                        p_elem.appendChild(title_elem);
-                        p_elem.appendChild(b_elem);
-                    } else {
-                        let name = item.get(id).toString()
-                        if (name.charAt(0) !== "+") {name = "+" + name}
-                        b_elem.classList.add("Legendary");
-                        b_elem.textContent = name;
-                        p_elem.appendChild(b_elem);
+                        let title_elem = document.createElement("b");
+                        let b_elem = document.createElement("b");
+                        if (majorID.includes(":")) {   
+                            let name = majorID.substring(0, majorID.indexOf(":")+1);
+                            let mid = majorID.substring(majorID.indexOf(":")+1);
+                            if (name.charAt(0) !== "+") {name = "+" + name}
+                            title_elem.classList.add("Legendary");
+                            title_elem.textContent = name;
+                            b_elem.classList.add("Crafted");
+                            b_elem.textContent = mid;
+                            p_elem.appendChild(title_elem);
+                            p_elem.appendChild(b_elem);
+                        } else {
+                            let name = item.get(id).toString()
+                            if (name.charAt(0) !== "+") {name = "+" + name}
+                            b_elem.classList.add("Legendary");
+                            b_elem.textContent = name;
+                            p_elem.appendChild(b_elem);
+                        }
+                        active_elem.appendChild(p_elem);
                     }
-
-                    
-
-                   
-                    active_elem.appendChild(p_elem);
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
                     let p_elem = document.createElement("p");
                     p_elem.classList.add("itemp");
