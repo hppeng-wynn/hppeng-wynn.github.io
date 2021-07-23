@@ -51,12 +51,14 @@ function encodeCustom(custom, verbose) {
                 let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]; //"nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"
                 let val = custom.get(id);
                 if (id == "majorIds") {
+                    console.log(val);
                     if (val.length > 0) {
                         val = val[0];
                     }
                     else {
                         val = "";
                     }
+                    console.log(val);
                 }
 
                 if (typeof(val) === "string" && val !== "") {
@@ -192,7 +194,7 @@ class Custom{
     constructor(statMap){
         this.statMap = statMap;
         // TODO patch
-        this.statMap.set("majorIds", [this.statMap.get("majorIds")]);
+        // this.statMap.set("majorIds", [this.statMap.get("majorIds")]);
         this.initCustomStats();
     }
 

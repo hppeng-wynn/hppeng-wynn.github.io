@@ -151,6 +151,12 @@ function calculateCustom() {
                 } else if (input.classList.contains("string-input")) {
                     if(rolledIDs.includes(id)) {
                         statMap.get(rollMap).set(id, input.value);
+                    } else if (id == "majorIds") {
+                        if (input.value === "") {
+                            statMap.set(id, []);
+                        } else {
+                            statMap.set(id, [input.value]);
+                        }
                     } else {
                         statMap.set(id, input.value);
                     }

@@ -596,6 +596,7 @@ function displayExpandedItem(item, parent_id){
                     p_elem.textContent = "Set: " + item.get(id).toString();
                     active_elem.appendChild(p_elem);
                 } else if (id === "majorIds") {
+                    console.log(item.get(id));
                     for (let majorID of item.get(id)) {
                         let p_elem = document.createElement("p");
                         p_elem.classList.add("itemp");
