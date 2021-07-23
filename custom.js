@@ -154,6 +154,10 @@ function getCustomFromHash(hash) {
                         }
                         tag = tag.slice(5+len);
                     } 
+                    if (id === "majorIds") {
+                        val = [val];
+                        console.log(val);
+                    }
                     statMap.set(id, val);
                 }
             }
@@ -179,6 +183,8 @@ class Custom{
      */
     constructor(statMap){
         this.statMap = statMap;
+        // TODO patch
+        this.statMap.set("majorIds", [this.statMap.get("majorIds")]);
         this.initCustomStats();
     }
 
