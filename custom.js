@@ -50,6 +50,14 @@ function encodeCustom(custom, verbose) {
             } else {
                 let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]; //"nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"
                 let val = custom.get(id);
+                if (id == "majorIds") {
+                    if (val.length > 0) {
+                        val = val[0];
+                    }
+                    else {
+                        val = "";
+                    }
+                }
 
                 if (typeof(val) === "string" && val !== "") {
                     if ((damages.includes(id) && val === "0-0") || (!verbose && ["lore","majorIds","quest","materials","drop","set"].includes(id))) { continue; }
