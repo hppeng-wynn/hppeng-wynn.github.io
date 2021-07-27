@@ -115,7 +115,6 @@ class Build{
             this.helmet = expandItem(helmet, this.powders[0]);
         } else {
             try {
-                //let boots = getCraftFromHash(equipment[0]) ? getCraftFromHash(equipment[0]) : (getCustomFromHash(equipment[0])? getCustomFromHash(equipment[0]) : undefined);
                 let helmet = getCustomFromHash(equipment[0]) ? getCustomFromHash(equipment[0]) : (getCraftFromHash(equipment[0]) ? getCraftFromHash(equipment[0]) : undefined);
                 if (helmet.statMap.get("type") !== "helmet") {
                     throw new Error("Not a helmet");
@@ -131,7 +130,6 @@ class Build{
                 }
                 
             } catch (Error) {
-                //console.log(Error); //fix
                 const helmet = itemMap.get("No Helmet");
                 this.powders[0] = this.powders[0].slice(0,helmet.slots);
                 this.helmet = expandItem(helmet, this.powders[0]);
@@ -357,8 +355,11 @@ class Build{
         let result = calculate_skillpoints(this.equipment, this.weapon);
         console.log(result);
         this.equip_order = result[0];
+        // How many skillpoints the player had to assign (5 number)
         this.base_skillpoints = result[1];
+        // How many skillpoints the build ended up with (5 number)
         this.total_skillpoints = result[2];
+        // How many skillpoints assigned (1 number, sum of base_skillpoints)
         this.assigned_skillpoints = result[3];
         this.activeSetCounts = result[4];
         

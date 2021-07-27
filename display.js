@@ -101,7 +101,6 @@ function expandIngredient(ing) {
         idMap.get("maxRolls").set(field, val['maximum']);
     }
     expandedIng.set("ids",idMap);
-    //console.log(expandedIng);
     return expandedIng;
 }
 
@@ -122,7 +121,6 @@ function expandRecipe(recipe) {
         }
     }
     expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][1]['amount'] ] ]) ]);
-    //console.log(expandedRecipe);
     return expandedRecipe;
 }
 
@@ -569,8 +567,7 @@ function displayExpandedItem(item, parent_id){
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
 
                     let powderPrefix = document.createElement("b");
-                    powderPrefix.classList.add("powderLeft");
-                    powderPrefix.classList.add("left");
+                    powderPrefix.classList.add("powderLeft"); powderPrefix.classList.add("left");
                     powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
                     p_elem.appendChild(powderPrefix);
                     
@@ -583,8 +580,7 @@ function displayExpandedItem(item, parent_id){
                     }
 
                     let powderSuffix = document.createElement("b");
-                    powderSuffix.classList.add("powderRight");
-                    powderSuffix.classList.add("left"); 
+                    powderSuffix.classList.add("powderRight"); powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
                     active_elem.appendChild(p_elem);
@@ -796,12 +792,8 @@ function displayExpandedItem(item, parent_id){
             let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
             let specialTitle = document.createElement("p");
             let specialEffects = document.createElement("p");
-            specialTitle.classList.add("left");
-            specialTitle.classList.add("itemp");
-            specialTitle.classList.add(damageClasses[skp_elements.indexOf(element) + 1]);
-            specialEffects.classList.add("left");
-            specialEffects.classList.add("itemp");
-            specialEffects.classList.add("nocolor");
+            addClasses(specialTitle, ["left", "itemp", damageClasses[skp_elements.indexOf(element) + 1]]);
+            addClasses(specialEffects, ["left", "itemp", "nocolor"]);
             let effects;
             if (item.get("category") === "weapon") {//weapon
                 effects = powderSpecial["weaponSpecialEffects"];
@@ -810,7 +802,6 @@ function displayExpandedItem(item, parent_id){
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
-            // console.log(effects);
             for (const [key,value] of effects.entries()) {
                 if (key !== "Description") {
                     let effect = document.createElement("p");
@@ -827,11 +818,8 @@ function displayExpandedItem(item, parent_id){
                     specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
                 }
             }
-            //specialTitle.append(specialEffects); 
             powder_special.appendChild(specialTitle);
             powder_special.appendChild(specialEffects);
-            
-    
             parent_div.appendChild(powder_special);
         }
     }
@@ -2028,7 +2016,6 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         third.textContent = ")";
         title_elem.appendChild(third.cloneNode(true));
         title_elemavg.appendChild(third);
-
     }
     else {
         title_elem.textContent = spell.title;
@@ -2111,53 +2098,33 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 overallaverageLabel.classList.add("overallp");
                 part_divavg.append(overallaverageLabel);
             }
-
-            let nonCritLabel = document.createElement("p");
-            nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
-            nonCritLabel.classList.add("damageSubtitle");
-            part_div.append(nonCritLabel);
             
-            let noncritarrmin = [];
-            let noncritarrmax = [];
-            for (let i = 0; i < 6; i++){
-                if (results[i][1] != 0){
-                    let p = document.createElement("p");
-                    p.classList.add("damagep");
-                    p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][0] + " \u2013 " + results[i][1];
-                    tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
-                    tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
-                    noncritarrmin.push(results[i][0]);
-                    noncritarrmax.push(results[i][1]);
-                    part_div.append(p);
+            function _damage_display(label_text, average, result_idx) {
+                let label = document.createElement("p");
+                label.textContent = label_text+average.toFixed(2);
+                label.classList.add("damageSubtitle");
+                part_div.append(label);
+                
+                let arrmin = [];
+                let arrmax = [];
+                for (let i = 0; i < 6; i++){
+                    if (results[i][1] != 0){
+                        let p = document.createElement("p");
+                        p.classList.add("damagep");
+                        p.classList.add(damageClasses[i]);
+                        p.textContent = results[i][result_idx] + " \u2013 " + results[i][result_idx + 1];
+                        tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
+                        tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
+                        arrmin.push(results[i][result_idx]);
+                        arrmax.push(results[i][result_idx + 1]);
+                        part_div.append(p);
+                    }
                 }
+                tooltiptext = ` = ((${arrmin.join(" + ")}) + (${arrmax.join(" + ")})) / 2`;
+                tooltip = createTooltip(tooltip, "p", tooltiptext, label, ["spell-tooltip"]);
             }
-            tooltiptext = ` = ((${noncritarrmin.join(" + ")}) + (${noncritarrmax.join(" + ")})) / 2`;
-            tooltip = createTooltip(tooltip, "p", tooltiptext, nonCritLabel, ["spell-tooltip"]);
-
-            //part_div.append(document.createElement("br"));
-            let critLabel = document.createElement("p");
-            critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
-            critLabel.classList.add("damageSubtitle");
-            part_div.append(critLabel);
-
-            let critarrmin = [];
-            let critarrmax = [];
-            for (let i = 0; i < 6; i++){
-                if (results[i][1] != 0){
-                    let p = document.createElement("p");
-                    p.classList.add("damagep");
-                    p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][2]+" \u2013 "+results[i][3];
-                    tooltiptext = tooltipinfo.get("damageformulas")[i].slice(2,4).join("\n");
-                    tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
-                    critarrmin.push(results[i][2]);
-                    critarrmax.push(results[i][3]);
-                    part_div.append(p);
-                }
-            }
-            tooltiptext = ` = ((${critarrmin.join(" + ")}) + (${critarrmax.join(" + ")})) / 2`;
-            tooltip = createTooltip(tooltip, "p", tooltiptext, critLabel, ["spell-tooltip"]);
+            _damage_display("Non-Crit Average: ", nonCritAverage, 0);
+            _damage_display("Crit Average: ", critAverage, 2);
 
             save_damages.push(averageDamage);
         } else if (part.type === "heal") {

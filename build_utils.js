@@ -42,15 +42,15 @@ function levelToHPBase(level){
     }
 }
 
-let skp_order = ["str","dex","int","def","agi"];
-let skill = ["Strength", "Dexterity", "Intelligence", "Defense", "Agility"];
-let skp_elements = ["e","t","w","f","a"];
-let damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
+const skp_order = ["str","dex","int","def","agi"];
+const skill = ["Strength", "Dexterity", "Intelligence", "Defense", "Agility"];
+const skp_elements = ["e","t","w","f","a"];
+const damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
 // Set up item lists for quick access later.
-let armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
-let accessoryTypes = [ "ring", "bracelet", "necklace" ];
-let weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
-let consumableTypes = [ "potion", "scroll", "food"];
+const armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
+const accessoryTypes = [ "ring", "bracelet", "necklace" ];
+const weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
+const consumableTypes = [ "potion", "scroll", "food"];
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
 const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 //0.51, 0.82, 1.50, 2.05, 2.50, 3.11, 4.27

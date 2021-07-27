@@ -203,5 +203,8 @@ function calculate_skillpoints(equipment, weapon) {
         best_total += total_diff;
     }
     let equip_order = fixed.concat(best).concat(crafted);
+    // best_skillpoints:  manually assigned (before any gear)
+    // final_skillpoints: final totals (5 individ)
+    // best_total:        total skillpoints assigned (number)
     return [equip_order, best_skillpoints, final_skillpoints, best_total, best_activeSetCounts];
 }

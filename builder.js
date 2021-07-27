@@ -506,45 +506,49 @@ function calculateBuild(save_skp, skp){
 
     }
     catch (error) {
-        if (error instanceof ListError) {
-            for (let i of error.errors) {
-                if (i instanceof ItemNotFound) {
-                    i.element.textContent = i.message;
-                } else if (i instanceof IncorrectInput) {
-                    if (document.getElementById(i.id) !== null) {
-                        document.getElementById(i.id).parentElement.querySelectorAll("p.error")[0].textContent = i.message;
-                    }
-                } else {
-                    let msg = i.stack;
-                    let lines = msg.split("\n");
-                    let header = document.getElementById("header");
-                    header.textContent = "";
-                    for (const line of lines) {
-                        let p = document.createElement("p");
-                        p.classList.add("itemp");
-                        p.textContent = line;
-                        header.appendChild(p);
-                    }
-                    let p2 = document.createElement("p");
-                    p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
-                    header.appendChild(p2);
+        handleBuilderError(error);
+    }
+}
+
+function handleBuilderError(error) {
+    if (error instanceof ListError) {
+        for (let i of error.errors) {
+            if (i instanceof ItemNotFound) {
+                i.element.textContent = i.message;
+            } else if (i instanceof IncorrectInput) {
+                if (document.getElementById(i.id) !== null) {
+                    document.getElementById(i.id).parentElement.querySelectorAll("p.error")[0].textContent = i.message;
                 }
+            } else {
+                let msg = i.stack;
+                let lines = msg.split("\n");
+                let header = document.getElementById("header");
+                header.textContent = "";
+                for (const line of lines) {
+                    let p = document.createElement("p");
+                    p.classList.add("itemp");
+                    p.textContent = line;
+                    header.appendChild(p);
+                }
+                let p2 = document.createElement("p");
+                p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+                header.appendChild(p2);
             }
-        } else {
-            let msg = error.stack;
-            let lines = msg.split("\n");
-            let header = document.getElementById("header");
-            header.textContent = "";
-            for (const line of lines) {
-                let p = document.createElement("p");
-                p.classList.add("itemp");
-                p.textContent = line;
-                header.appendChild(p);
-            }
-            let p2 = document.createElement("p");
-            p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
-            header.appendChild(p2);
         }
+    } else {
+        let msg = error.stack;
+        let lines = msg.split("\n");
+        let header = document.getElementById("header");
+        header.textContent = "";
+        for (const line of lines) {
+            let p = document.createElement("p");
+            p.classList.add("itemp");
+            p.textContent = line;
+            header.appendChild(p);
+        }
+        let p2 = document.createElement("p");
+        p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+        header.appendChild(p2);
     }
 }
 
@@ -762,30 +766,7 @@ function calculateBuildStats() {
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpRow = document.createElement("p");
-    //skpRow.classList.add("left");
     let td = document.createElement("p");
-    //td.classList.add("left");
-
-    /* let skpSummary = document.createElement("b");
-    skpSummary.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Total: (";
-    //skpSummary.classList.add("itemp");
-    td.appendChild(skpSummary);
-    for (let i = 0; i < skp_order.length; i++){
-        let skp = document.createElement("b");
-        let boost = document.createElement("b");
-        skp.classList.add(damageClasses[i+1]);
-        boost.textContent = player_build.total_skillpoints[i];
-        if (i < 4) {
-            boost.classList.add("space");
-        }
-        td.appendChild(skp);
-        td.appendChild(boost);
-    }
-   
-    let skpEnd = document.createElement("b");
-    skpEnd.textContent = ")";
-    td.appendChild(skpEnd);
-    skpRow.append(td); */
 
     let remainingSkp = document.createElement("p");
     remainingSkp.classList.add("center");
@@ -931,6 +912,103 @@ function toggleID() {
     else {
         targetDiv.style.display = "block";
         button.classList.add("toggleOn");
+    }
+}
+
+function optimizeStrDex() {
+    const remaining = levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints;
+    const base_skillpoints = player_build.base_skillpoints;
+    const max_str_boost = 100 - base_skillpoints[0];
+    const max_dex_boost = 100 - base_skillpoints[1];
+    const base_total_skillpoints = player_build.total_skillpoints;
+    let str_bonus = remaining;
+    let dex_bonus = 0;
+    let best_skillpoints = player_build.total_skillpoints;
+    let best_damage = 0;
+    for (let i = 0; i <= remaining; ++i) {
+        let total_skillpoints = base_total_skillpoints.slice();
+        total_skillpoints[0] += Math.min(max_str_boost, str_bonus);
+        total_skillpoints[1] += Math.min(max_dex_boost, dex_bonus);
+
+        // Calculate total 3rd spell damage
+        let spell = spell_table[player_build.weapon.get("type")][2];
+        const stats = player_build.statMap;
+        let critChance = skillPointsToPercentage(total_skillpoints[1]);
+        let save_damages = [];
+        let spell_parts;
+        if (spell.parts) {
+            spell_parts = spell.parts;
+        }
+        else {
+            spell_parts = spell.variants.DEFAULT;
+            for (const majorID of stats.get("activeMajorIDs")) {
+                if (majorID in spell.variants) {
+                    spell_parts = spell.variants[majorID];
+                    break;
+                }
+            }
+        }
+        let total_damage = 0;
+        for (const part of spell_parts) {
+            if (part.type === "damage") {
+                let _results = calculateSpellDamage(stats, part.conversion,
+                                        stats.get("sdRaw"), stats.get("sdPct") + player_build.externalStats.get("sdPct"), 
+                                        part.multiplier / 100, player_build.weapon, total_skillpoints,
+                                        player_build.damageMultiplier, player_build.externalStats);
+                let totalDamNormal = _results[0];
+                let totalDamCrit = _results[1];
+                let results = _results[2];
+                let tooltipinfo = _results[3];
+                
+                for (let i = 0; i < 6; ++i) {
+                    for (let j in results[i]) {
+                        results[i][j] = results[i][j].toFixed(2);
+                    }
+                }
+                let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
+                let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
+                let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
+
+                save_damages.push(averageDamage);
+                if (part.summary == true) {
+                    total_damage = averageDamage;
+                }
+            } else if (part.type === "total") {
+                total_damage = 0;
+                for (let i in part.factors) {
+                    total_damage += save_damages[i] * part.factors[i];
+                }
+            }
+        }        // END Calculate total 3rd spell damage (total_damage)
+        if (total_damage > best_damage) {
+            best_damage = total_damage;
+            best_skillpoints = total_skillpoints.slice();
+        }
+
+        str_bonus -= 1;
+        dex_bonus += 1;
+        
+    }
+    // TODO: reduce duplicated code, @calculateBuild
+    let skillpoints = player_build.total_skillpoints;
+    let delta_total = 0;
+    for (let i in skp_order) {
+        let manual_assigned = best_skillpoints[i];
+        let delta = manual_assigned - skillpoints[i];
+        skillpoints[i] = manual_assigned;
+        player_build.base_skillpoints[i] += delta;
+        delta_total += delta;
+    }
+    player_build.assigned_skillpoints += delta_total;
+        
+    try {
+        calculateBuildStats();
+        setTitle();
+        if (player_build.errored)
+            throw new ListError(player_build.errors);
+    }
+    catch (error) {
+        handleBuilderError(error);
     }
 }
 
