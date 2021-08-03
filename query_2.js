@@ -147,14 +147,14 @@ const itemQueryProps = (function() {
   maxId(['sprintregen', 'sprintreg'], 'sprintReg');
   maxId(['jumpheight', 'jh'], 'jh');
 
-  minId(['spellcost1', 'rawspellcost1', 'spcost1', 'spraw1'], 'spRaw1');
-  minId(['spellcost1%', 'spcost1%', 'sppct1'], 'spPct1');
-  minId(['spellcost2', 'rawspellcost2', 'spcost2', 'spraw2'], 'spRaw2');
-  minId(['spellcost2%', 'spcost2%', 'sppct2'], 'spPct2');
-  minId(['spellcost3', 'rawspellcost3', 'spcost3', 'spraw3'], 'spRaw3');
-  minId(['spellcost3%', 'spcost3%', 'sppct3'], 'spPct3');
-  minId(['spellcost4', 'rawspellcost4', 'spcost4', 'spraw4'], 'spRaw4');
-  minId(['spellcost4%', 'spcost4%', 'sppct4'], 'spPct4');
+  maxId(['spellcost1', 'rawspellcost1', 'spcost1', 'spraw1'], 'spRaw1');
+  maxId(['spellcost1%', 'spcost1%', 'sppct1'], 'spPct1');
+  maxId(['spellcost2', 'rawspellcost2', 'spcost2', 'spraw2'], 'spRaw2');
+  maxId(['spellcost2%', 'spcost2%', 'sppct2'], 'spPct2');
+  maxId(['spellcost3', 'rawspellcost3', 'spcost3', 'spraw3'], 'spRaw3');
+  maxId(['spellcost3%', 'spcost3%', 'sppct3'], 'spPct3');
+  maxId(['spellcost4', 'rawspellcost4', 'spcost4', 'spraw4'], 'spRaw4');
+  maxId(['spellcost4%', 'spcost4%', 'sppct4'], 'spPct4');
   sum(['sumspellcost', 'totalspellcost', 'sumrawspellcost', 'totalrawspellcost', 'sumspcost', 'totalspcost', 'sumspraw', 'totalspraw'], props.spraw1, props.spraw2, props.spraw3, props.spraw4);
   sum(['sumspellcost%', 'totalspellcost%', 'sumspcost%', 'totalspcost%', 'sumsppct', 'totalsppct'], props.sppct1, props.sppct2, props.sppct3, props.sppct4);
 
