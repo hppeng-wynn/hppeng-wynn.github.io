@@ -1415,7 +1415,7 @@ function displayPoisonDamage(overallparent_elem, build) {
     overallparent_elem.append(title_elemavg);
 
     let overallpoisonDamage = document.createElement("p");
-    overallpoisonDamage.classList.add("itemp");
+    overallpoisonDamage.classList.add("lessbottom");
     let overallpoisonDamageFirst = document.createElement("b");
     let overallpoisonDamageSecond = document.createElement("b");
     let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
@@ -1426,7 +1426,6 @@ function displayPoisonDamage(overallparent_elem, build) {
     overallpoisonDamage.appendChild(overallpoisonDamageFirst);
     overallpoisonDamage.appendChild(overallpoisonDamageSecond);
     overallparent_elem.append(overallpoisonDamage);
-    overallparent_elem.append(document.createElement("br"));
 }
 
 function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
@@ -1574,7 +1573,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     singleHitDamage.appendChild(singleHitDamageFirst);
     singleHitDamage.appendChild(singleHitDamageSecond);
     overallparent_elem.append(singleHitDamage);
-    overallparent_elem.append(document.createElement("br"));
     
     let normalChance = document.createElement("p");
     normalChance.textContent = "Non-Crit Chance: " + (stats[6][2]*100).toFixed(2) + "%"; 
@@ -2030,7 +2028,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
     let save_damages = [];
 
     let part_divavg = document.createElement("p");
-    part_divavg.classList.add("nomargin");
+    part_divavg.classList.add("lessbottom");
     overallparent_elem.append(part_divavg);
 
     let spell_parts;
@@ -2095,7 +2093,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 overallaverageLabel.appendChild(second);
                 tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
                 second.classList.add("Damage");
-                overallaverageLabel.classList.add("overallp");
+                overallaverageLabel.classList.add("itemp");
                 part_divavg.append(overallaverageLabel);
             }
             
@@ -2144,9 +2142,23 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 overallhealLabel.appendChild(first);
                 second.classList.add("Set");
                 overallhealLabel.appendChild(second);
-                overallhealLabel.classList.add("overallp");
+                overallhealLabel.classList.add("itemp");
                 tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
                 part_divavg.append(overallhealLabel);
+
+                let effectiveHealLabel = document.createElement("p");
+                first = document.createElement("b");
+                second = document.createElement("b");
+                let defStats = build.getDefenseStats();
+                tooltiptext = ` = ${heal_amount} * ${defStats[1][0].toFixed(2)} / ${defStats[0]}`;
+                first.textContent = "Effective Heal: ";
+                second.textContent = (defStats[1][0]*heal_amount/defStats[0]).toFixed(2);
+                effectiveHealLabel.appendChild(first);
+                second.classList.add("Set");
+                effectiveHealLabel.appendChild(second);
+                effectiveHealLabel.classList.add("itemp");
+                tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
+                part_divavg.append(effectiveHealLabel);
             }
         } else if (part.type === "total") {
             let total_damage = 0;

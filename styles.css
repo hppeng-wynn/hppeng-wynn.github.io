@@ -67,6 +67,11 @@ th, td {
 .nomargin {
     padding: 0px;
 }
+.lessbottom {
+    margin-bottom: 6px;
+    padding: 0px;
+    margin-top: 6px;
+}
 .nomarginp {
     margin-top: 0px;
     margin-left: 0px;
