@@ -56,9 +56,10 @@ const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 //0.51, 0.82, 1.50, 2.05, 2.50, 3.11, 4.27
 const classes = ["Warrior", "Assassin", "Mage", "Archer", "Shaman"];
 const tiers = ["Normal", "Unique", "Rare", "Legendary", "Fabled", "Mythic", "Set", "Crafted"] //I'm not sure why you would make a custom crafted but if you do you should be able to use it w/ the correct powder formula
-const types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(consumableTypes).map(x => x.substring(0,1).toUpperCase() + x.substring(1));
+const types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(consumableTypes).concat(["sword"]).map(x => x.substring(0,1).toUpperCase() + x.substring(1));
+weaponTypes.push("sword");
+console.log(types)
 let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes);
-
 
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");

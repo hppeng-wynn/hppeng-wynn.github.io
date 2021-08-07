@@ -294,6 +294,23 @@ const spell_table = {
                 { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [70, 30, 0, 0, 0, 0], summary: true },
             ] },
     ],
+    "sword": [
+        { title: "Successive Strikes", cost: 5, parts: [
+                { subtitle: "Damage", type: "damage", multiplier: 65, conversion: [70, 0, 15, 0, 0, 15]},
+                { subtitle: "Final Strike", type: "damage", multiplier: 120, conversion: [70, 0, 15, 0, 0, 15]},
+                { subtitle: "Total Damage (Normal)", type: "total", factors: [2, 0], summary: true },
+            ] },
+        { title: "Dash", cost: 3, parts: [
+                { subtitle: "Damage", type: "damage", multiplier: 120, conversion: [60, 0, 0, 0, 0, 40], summary: true },
+            ] },
+        { title: "Execute", cost: 8, parts: [
+                { subtitle: "Minimum Damage", type: "damage", multiplier: 100, conversion: [60, 0, 20, 0, 20, 0]},
+                { subtitle: "Maximum Damage", type: "damage", multiplier: 1200, conversion: [60, 0, 20, 0, 20, 0], summary: true },
+            ] },
+        { title: "Blade Echo", cost: 4, parts: [
+                { subtitle: "Damage", type: "damage", multiplier: 125, conversion: [60, 0, 0, 20, 0, 20], summary: true },
+            ] },
+    ],
     "powder": [ //This is how instant-damage powder specials are implemented. 
         { title: "Quake", cost: 0, parts:[
                 { subtitle: "Total Damage", type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},

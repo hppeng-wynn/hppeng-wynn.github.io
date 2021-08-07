@@ -238,6 +238,7 @@ class Custom{
         //this.setHashVerbose(); //do NOT move sethash from here please
         
         this.statMap.set("custom", true);
+        console.log(this.statMap);
 
         for (const id of ci_save_order) {
             if (rolledIDs.includes(id)) {
