@@ -2067,7 +2067,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         if (part.type === "damage") {
             //console.log(build.expandedStats);
             let _results = calculateSpellDamage(stats, part.conversion,
-                                    stats.get("sdRaw"), stats.get("sdPct") + build.externalStats.get("sdPct"), 
+                                    stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct") + build.externalStats.get("sdPct"), 
                                     part.multiplier / 100, build.weapon, build.total_skillpoints, build.damageMultiplier, build.externalStats);
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
