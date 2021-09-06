@@ -560,7 +560,13 @@ function displayExpandedItem(item, parent_id){
         }
         else {
             let id = command; 
-            if(( nonRolledIDs.includes(id) && item.get(id))){//nonRolledID & non-0/non-null/non-und ID
+            if(nonRolledIDs.includes(id)){//nonRolledID & non-0/non-null/non-und ID
+                if (!item.get(id)) {
+                    if (! (item.get("crafted") && skp_order.includes(id) && 
+                            (item.get("maxRolls").get(id) || item.get("minRolls").get(id)))) {
+                        continue;
+                    }
+                }
                 if (id === "slots") {
                     let p_elem = document.createElement("p");
                     // PROPER POWDER DISPLAYING
@@ -717,7 +723,9 @@ function displayExpandedItem(item, parent_id){
                     }
                 }
             }
-            else if ( rolledIDs.includes(id) && item.get("maxRolls") && item.get("maxRolls").get(id) ){ // && item.get("maxRolls").get(id) ){//rolled ID & non-0/non-null/non-und ID
+            else if ( rolledIDs.includes(id) &&
+                        ((item.get("maxRolls") && item.get("maxRolls").get(id))
+                        || (item.get("minRolls") && item.get("minRolls").get(id)))) {
                 let style = "positive";
                 if (item.get("minRolls").get(id) < 0) {
                     style = "negative";
