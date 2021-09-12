@@ -47,6 +47,9 @@
                             <th class="center smalltitle">
                                 <label>Accessories</label>
                             </th>
+                            <th class="center smalltitle">
+                                <label>Build</label>
+                            </th>
                         </tr>
                         <tr>
                             <td class="left">
@@ -152,6 +155,31 @@
                                 <label for="level-choice">Level:</label><br>
                                 <input class="iteminput" id="level-choice" name="level-choice" value="106" tabindex="15"/>
                                 <p class="error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="left">
+                                <label for="build-name">Build Name:</label><br>
+                                <input id="build-name" name="build-name"/>
+
+                                <!-- Dummy <p> tag for horizontal alignment -->
+                                <p style="top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <br/>
+                                <button style="font-size: 100%" class="button" id="save-button" onclick="saveBuild()">
+                                Save Build
+                                </button>
+                                <p id="saved-build" style="color: green; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                                <p id="saved-error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
+                            </td>
+                            <td class="left">
+                                <br/>
+                                <button style="font-size: 100%" class="button" id="load-button" onclick="loadBuild()">
+                                Load Build
+                                </button>
+                                <p id="loaded-build" style="color: green; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; white-space: nowrap; word-break:break-word;"></p>
+                                <p id="loaded-error" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;"></p>
                             </td>
                         </tr>
                     </table>

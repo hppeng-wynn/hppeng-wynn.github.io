@@ -885,6 +885,37 @@ function shareBuild() {
     }
 }
 
+function saveBuild() {
+    if (player_build) {
+        let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
+        let saveName = document.getElementById("build-name").value;
+        if ((!Object.keys(savedBuilds).includes(saveName) || document.getElementById("saved-error").textContent !== "") && location.hash !== "") {
+            savedBuilds[saveName] = location.hash.replace("#", "");
+            window.localStorage.setItem("builds", JSON.stringify(savedBuilds));
+
+            document.getElementById("saved-error").textContent = "";
+            document.getElementById("saved-build").textContent = "Build saved";
+        } else {
+            if (location.hash === "")
+                document.getElementById("saved-error").textContent = "Empty build";
+            else
+                document.getElementById("saved-error").textContent = "Exists. Overwrite?";
+        }
+    }
+}
+
+function loadBuild() {
+    let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
+    let saveName = document.getElementById("build-name").value;
+
+    document.getElementById("loaded-error").textContent = "";
+    if (Object.keys(savedBuilds).includes(saveName)) { 
+        decodeBuild(savedBuilds[saveName])
+        document.getElementById("loaded-build").textContent = "Build loaded";
+    } else
+        document.getElementById("loaded-error").textContent = "Build doesn't exist";
+}
+
 function resetFields(){
     for (let i in powderInputs) {
         setValue(powderInputs[i], "");
