@@ -389,7 +389,7 @@ class Build{
     /* Getters */
 
     getSpellCost(spellIdx, cost) {
-        return Math.max(1, this.getBaseSpellCost(spellIdx, cost);
+        return Math.max(1, this.getBaseSpellCost(spellIdx, cost));
     }
 
     getBaseSpellCost(spellIdx, cost) {
