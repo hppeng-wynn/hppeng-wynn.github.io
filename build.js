@@ -388,13 +388,14 @@ class Build{
 
     /* Getters */
 
-    /*  Get total health for build.
-    */
-
     getSpellCost(spellIdx, cost) {
+        return Math.max(1, this.getBaseSpellCost(spellIdx, cost);
+    }
+
+    getBaseSpellCost(spellIdx, cost) {
         cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
         cost += this.statMap.get("spRaw"+spellIdx);
-        return Math.max(1, Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100)));
+        return Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100));
     }
     
 

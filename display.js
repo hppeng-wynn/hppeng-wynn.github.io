@@ -2019,7 +2019,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         
 
         let third = document.createElement("b");
-        third.textContent = ")";
+        third.textContent = ") [Base: " + build.getSpellCost(spellIdx, spell.cost) + " ]";
         title_elem.appendChild(third.cloneNode(true));
         title_elemavg.appendChild(third);
     }
