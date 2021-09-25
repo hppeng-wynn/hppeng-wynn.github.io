@@ -182,7 +182,7 @@ function getCustomFromHash(hash) {
 }
 
 /** An object representing a Custom Item. Mostly for vanity purposes.
- * @dep Requires the use of nonRolledIDs and rolledIDs from display.js.
+ * @dep Requires the use of nonRolledIDs and rolledIDs from display_constants.js.
  * @dep Requires the use of attackSpeeds from build.js.   
 */
 class Custom{
@@ -198,22 +198,6 @@ class Custom{
         this.initCustomStats();
     }
 
-    //Applies powders to the CI
-    applyPowders() {
-        if (this.statMap.get("category") === "armor") {
-            //double apply armor powders
-            for(const id of this.statMap.get("powders")){
-                let powder = powderStats[id];
-                let name = powderNames.get(id);
-                this.statMap.set(name.charAt(0) + "Def", (this.statMap.get(name.charAt(0)+"Def") || 0) + 2 * powder["defPlus"]);
-                this.statMap.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (this.statMap.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - 2 * powder["defMinus"]);
-            }
-        }else if (this.statMap.get("category") === "weapon") {
-            //do nothing - weapon powders are handled in displayExpandedItem
-        }
-    }
-
-    
     setHash(hash) {
         let ihash = hash.slice();
         if (ihash.slice(0,3) !== "CI-") {

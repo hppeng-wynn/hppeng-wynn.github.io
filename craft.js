@@ -75,9 +75,8 @@ class Craft{
         this.statMap.set("hash", this.hash);
     }
     
-
     applyPowders() {
-        if (this.statMap.get("category") === "armor") {
+        if (this.statMap.get("category") === "armor" || this.statMap.get("category" === "accessory")) {
             //double apply armor powders
             for(const id of this.statMap.get("powders")){
                 let powder = powderStats[id];
@@ -88,8 +87,6 @@ class Craft{
         }else if (this.statMap.get("category") === "weapon") {
             //do nothing - weapon powders are handled in displayExpandedItem
         }
-
-        
     }
     setHash(hash) {
         this.hash = "CR-" + hash;
@@ -267,6 +264,12 @@ class Craft{
                 statMap.set(skp_elements[e]+"Dam",high1+"-"+high2);
             }
         } else if (statMap.get("category") === "armor") {
+            low = Math.floor(low * matmult);
+            high = Math.floor(high * matmult);
+            statMap.set("hp",high);
+            statMap.set("hpLow",low);
+        }
+        if (statMap.get("category") === "armor" || statMap.get("category") == "accessory") {
             for (let n in this.ingreds) {
                 let ingred = this.ingreds[n];
                 if (ingred.get("isPowder")) {
@@ -276,10 +279,6 @@ class Craft{
                     statMap.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (statMap.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
                 }
             }
-            low = Math.floor(low * matmult);
-            high = Math.floor(high * matmult);
-            statMap.set("hp",high);
-            statMap.set("hpLow",low);
         }
         /* END SECTION */
 

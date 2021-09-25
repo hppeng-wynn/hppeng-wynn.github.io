@@ -121,8 +121,8 @@ class Build{
                 }
                 this.powders[0] = this.powders[0].slice(0,helmet.statMap.get("slots")); 
                 helmet.statMap.set("powders",this.powders[0].slice());
-                helmet.applyPowders();
                 this.helmet = helmet.statMap;
+                applyArmorPowders(this.helmet, this.powders[0]);
                 if (this.helmet.get("custom")) {
                     this.customItems.push(helmet);
                 } else if (this.helmet.get("crafted")) { //customs can also be crafted, but custom takes priority.
@@ -148,8 +148,8 @@ class Build{
                 }
                 this.powders[1] = this.powders[1].slice(0,chestplate.statMap.get("slots"));
                 chestplate.statMap.set("powders",this.powders[1].slice());
-                chestplate.applyPowders();
                 this.chestplate = chestplate.statMap;
+                applyArmorPowders(this.chesplate, this.powders[1]);
                 if (this.chestplate.get("custom")) {
                     this.customItems.push(chestplate);
                 } else if (this.chestplate.get("crafted")) { //customs can also be crafted, but custom takes priority.
@@ -175,8 +175,8 @@ class Build{
                 }
                 this.powders[2] = this.powders[2].slice(0,leggings.statMap.get("slots")); 
                 leggings.statMap.set("powders",this.powders[2].slice());
-                leggings.applyPowders();
                 this.leggings = leggings.statMap;
+                applyArmorPowders(this.leggings, this.powders[2]);
                 if (this.leggings.get("custom")) {
                     this.customItems.push(leggings);
                 } else if (this.leggings.get("crafted")) { //customs can also be crafted, but custom takes priority.
@@ -201,9 +201,8 @@ class Build{
                 }
                 this.powders[3] = this.powders[3].slice(0,boots.statMap.get("slots")); 
                 boots.statMap.set("powders",this.powders[3].slice());
-                boots.applyPowders();
                 this.boots = boots.statMap;
-                console.log(boots);
+                applyArmorPowders(this.boots, this.powders[3]);
                 if (this.boots.get("custom")) {
                     this.customItems.push(boots);
                 } else if (this.boots.get("crafted")) { //customs can also be crafted, but custom takes priority.

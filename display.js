@@ -1,21 +1,23 @@
-let nonRolledIDs = ["name", "lore", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds"];
-let rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];
-let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
-let colorMap = new Map(
-    [
-        ["Normal", "#fff"],
-        ["Unique", "#ff5"],
-        ["Rare","#f5f"],
-        ["Legendary","#5ff"],
-        ["Fabled","#f55"],
-        ["Mythic","#a0a"],
-        ["Crafted","#0aa"],
-        ["Custom","#0aa"],
-        ["Set","#5f5"]
-    ]
-);
+/**
+ * Apply armor powdering.
+ * Also for jeweling for crafted items.
+ */
+function applyArmorPowders(expandedItem, powders) {
+    applyArmorPowdersOnce(expandedItem, powders);
+    if (expandedItem.get("crafted")) {
+        applyArmorPowdersOnce(expandedItem, powders);
+    }
+}
+function applyArmorPowdersOnce(expandedItem, powders) {
+    for(const id of powders){
+        let powder = powderStats[id];
+        let name = powderNames.get(id);
+        expandedItem.set(name.charAt(0) + "Def", (expandedItem.get(name.charAt(0)+"Def") || 0) + powder["defPlus"]);
+        expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
+    }
+}
 
-function expandItem(item, powders){
+function expandItem(item, powders) {
     let minRolls = new Map();
     let maxRolls = new Map();
     let expandedItem = new Map();
@@ -61,12 +63,7 @@ function expandItem(item, powders){
     expandedItem.set("maxRolls",maxRolls);
     expandedItem.set("powders", powders);
     if(item.category === "armor") {
-        for(const id of powders){
-            let powder = powderStats[id];
-            let name = powderNames.get(id);
-            expandedItem.set(name.charAt(0) + "Def", (expandedItem.get(name.charAt(0)+"Def") || 0) + powder["defPlus"]);
-            expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
-        }
+        applyArmorPowders(expandedItem, powders);
     }
     return expandedItem;
 }
@@ -134,56 +131,6 @@ function idRound(id){
     }else{
         return rounded;
     }
-}
-
-//Used for item IDs and ingredient id field IDs
-let idPrefixes = {"displayName": "", "lvl":"Combat Level Min: ", "classReq":"Class Req: ","strReq":"Strength Min: ","dexReq":"Dexterity Min: ","intReq":"Intelligence Min: ","defReq":"Defense Min: ","agiReq":"Agility Min: ", "nDam_":"Neutral Damage: ", "eDam_":"Earth Damage: ", "tDam_":"Thunder Damage: ", "wDam_":"Water Damage: ", "fDam_":"Fire Damage: ", "aDam_":"Air Damage: ", "atkSpd":"Attack Speed: ", "hp":"Health : ", "eDef":"Earth Defense: ", "tDef":"Thunder Defense: ", "wDef":"Water Defense: ", "fDef":"Fire Defense: ", "aDef":"Air Defense: ", "str":"Strength: ", "dex":"Dexterity: ", "int":"Intelligence: ", "def":"Defense: ","agi":"Agility: ", "hpBonus":"Health Bonus: ", "hprRaw":"Health Regen Raw: ", "hprPct":"Health Regen %: ", "sdRaw":"Raw Spell Damage: ", "sdPct":"Spell Damage %: ", "mdRaw":"Raw Melee Damage: ", "mdPct":"Melee Damage %: ", "mr":"Mana Regen: ", "ms":"Mana Steal: ", "ref":"Reflection: ", "ls":"Life Steal: ", "poison":"Poison: ", "thorns":"Thorns: ", "expd":"Exploding: ", "spd":"Walk Speed Bonus: ", "atkTier":"Attack Speed Bonus: ",  "eDamPct":"Earth Damage %: ", "tDamPct":"Thunder Damage %: ", "wDamPct":"Water Damage %: ", "fDamPct":"Fire Damage %: ", "aDamPct":"Air Damage %: ", "eDefPct":"Earth Defense %: ", "tDefPct":"Thunder Defense %: ", "wDefPct":"Water Defense %: ", "fDefPct":"Fire Defense %: ", "aDefPct":"Air Defense %: ", "spPct1":"1st Spell Cost %: ", "spRaw1":"1st Spell Cost Raw: ", "spPct2":"2nd Spell Cost %: ", "spRaw2":"2nd Spell Cost Raw: ", "spPct3":"3rd Spell Cost %: ", "spRaw3":"3rd Spell Cost Raw: ", "spPct4":"4th Spell Cost %: ", "spRaw4":"4th Spell Cost Raw: ", "rainbowRaw":"Rainbow Spell Damage Raw: ", "sprint":"Sprint Bonus: ", "sprintReg":"Sprint Regen Bonus: ", "jh":"Jump Height: ", "xpb":"Combat XP Bonus: ", "lb":"Loot Bonus: ", "lq":"Loot Quality: ", "spRegen":"Soul Point Regen: ", "eSteal":"Stealing: ", "gXp":"Gathering XP Bonus: ", "gSpd":"Gathering Speed Bonus: ", "slots":"Powder Slots: ", "set":"Set: ", "quest":"Quest Req: ", "restrict":"", "lore": ""};
-let idSuffixes = {"displayName": "", "lvl":"", "classReq":"","strReq":"","dexReq":"","intReq":"","defReq":"","agiReq":"", "nDam_":"", "eDam_":"", "tDam_":"", "wDam_":"", "fDam_":"", "aDam_":"", "atkSpd":"", "hp":"", "eDef":"", "tDef":"", "wDef":"", "fDef":"", "aDef":"", "str":"", "dex":"", "int":"", "def":"","agi":"", "hpBonus":"", "hprRaw":"", "hprPct":"%", "sdRaw":"", "sdPct":"%", "mdRaw":"", "mdPct":"%", "mr":"/5s", "ms":"/3s", "ref":"%", "ls":"/3s", "poison":"/3s", "thorns":"%", "expd":"%", "spd":"%", "atkTier":" tier",  "eDamPct":"%", "tDamPct":"%", "wDamPct":"%", "fDamPct":"%", "aDamPct":"%", "eDefPct":"%", "tDefPct":"%", "wDefPct":"%", "fDefPct":"%", "aDefPct":"%", "spPct1":"%", "spRaw1":"", "spPct2":"%", "spRaw2":"", "spPct3":"%", "spRaw3":"", "spPct4":"%", "spRaw4":"", "rainbowRaw":"", "sprint":"%", "sprintReg":"%", "jh":"", "xpb":"%", "lb":"%", "lq":"%", "spRegen":"%", "eSteal":"%", "gXp":"%", "gSpd":"%", "slots":"", "set":" set.", "quest":"", "restrict":"", "lore": ""};
-//Used for ingredient IDs - name, lvl, tier. As of now, not used.
-/*let ingPrefixes = {"name": "", "lvl": "", "tier": ""};
-let ingSuffixes = {"name": "", "lvl": "", "tier": ""}*/
-//Used for ingredient consumableIDs
-let consumableIDPrefixes = {
-    "charges": "Charges: ",
-    "dura": "Duration: "
-}
-let consumableIDSuffixes = {
-    "charges": "",
-    "dura": " sec."
-}
-//Used for ingredient itemIDs
-let itemIDPrefixes = {
-    "dura": "Durability: ",
-    "strReq": "Strength Min: ",
-    "dexReq": "Dexterity Min: ",
-    "intReq": "Intelligence Min: ",
-    "defReq": "Defense Min: ",
-    "agiReq": "Agility Min: "
-}
-/*let itemIDSuffixes = {
-    "dura": "",
-    "strReq": "",
-    "dexReq": "",
-    "intReq": "",
-    "defReq": "",
-    "agiReq": ""
-}*/
-//Used for ingredient posMods IDs
-let posModPrefixes = {
-    "left":"Effectiveness Left: ",
-    "right":"EFfectiveness Right: ",
-    "above":"Effectiveness Above: ",
-    "under":"Effectiveness Under: ",
-    "touching":"EFfectiveness Touching: ",
-    "notTouching":"Effectiveness Not Touching: "
-}
-let posModSuffixes = {
-    "left":"%",
-    "right":"%",
-    "above":"%",
-    "under":"%",
-    "touching":"%",
-    "notTouching":"%"
 }
 
 function apply_elemental_format(p_elem, id, suffix) {
@@ -255,40 +202,7 @@ function displayBuildStats(parent_id,build){
     // !elemental is some janky hack for elemental damage.
     // normals just display a thing.
 
-    let display_commands = [
-//        "#ldiv",
-//        "!elemental",
-//        "hp",
-//        "fDef", "wDef", "aDef", "tDef", "eDef",
-//        "!elemental",
-//        "#table",
-        
-//        "hprRaw", "hprPct",
-        "#table",
-        "str", "dex", "int", "def", "agi",
-        "mr", "ms",
-        "hprRaw", "hprPct",
-        "sdRaw", "sdPct",
-        "mdRaw", "mdPct",
-        "ref", "thorns",
-        "ls",
-        "poison",
-        "expd",
-        "spd",
-        "atkTier",
-        "!elemental",
-        "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
-//        "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
-        "!elemental",
-        "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
-        "rainbowRaw",
-        "sprint", "sprintReg",
-        "jh",
-        "xpb", "lb", "lq",
-        "spRegen",
-        "eSteal",
-        "gXp", "gSpd",
-        ];
+    let display_commands = build_overall_display_commands;
 
     // Clear the parent div.
     setHTML(parent_id, "");
@@ -368,11 +282,10 @@ function displayBuildStats(parent_id,build){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (id === "poison" && id_val > 0) {
-                    id_val = Math.ceil(id_val*(build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100);
+                    id_val = Math.ceil(id_val*build.statMap.get("poisonPct")/100);
                 }
                 displayFixedID(active_elem, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
-                    let style = "positive";
                     let row = document.createElement('tr');
                     let value_elem = document.createElement('td');
                     value_elem.classList.add('right');
@@ -388,12 +301,6 @@ function displayBuildStats(parent_id,build){
 
                     active_elem.appendChild(row);
                 } else if (id === "ls" && id_val != 0) {
-                    let style;
-                    if (id_val > 0) {
-                        style = "positive";
-                    } else{
-                        style = "negative";
-                    }
                     let row = document.createElement("tr");
                     let title = document.createElement("td");
                     title.classList.add("left");
@@ -475,57 +382,7 @@ function displayExpandedItem(item, parent_id){
     } else if (item.get("category") === "armor") { 
     }
 
-    let display_commands = [
-        "#cdiv",
-        "displayName",
-        //"type", //REPLACE THIS WITH SKIN
-        "#ldiv",
-        "atkSpd",
-        "#ldiv",
-        "!elemental",
-        "hp",
-        "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_",
-        "fDef", "wDef", "aDef", "tDef", "eDef",
-        "!elemental",
-        "#ldiv",
-        "classReq",
-        "lvl",
-        "strReq", "dexReq", "intReq", "defReq","agiReq",
-        "#ldiv",
-        "str", "dex", "int", "def", "agi",
-        "#table",
-        "str", "dex", "int", "def", "agi", //jank lmao
-        "hpBonus",
-        "hprRaw", "hprPct",
-        "sdRaw", "sdPct",
-        "mdRaw", "mdPct",
-        "mr", "ms",
-        "ref", "thorns",
-        "ls",
-        "poison",
-        "expd",
-        "spd",
-        "atkTier",
-        "!elemental",
-        "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
-        "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
-        "!elemental",
-        "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
-        "rainbowRaw",
-        "sprint", "sprintReg",
-        "jh",
-        "xpb", "lb", "lq",
-        "spRegen",
-        "eSteal",
-        "gXp", "gSpd",
-        "#ldiv",
-        "majorIds",
-        "slots",
-        "set",
-        "lore",
-        "quest",
-        "restrict"
-        ];
+    let display_commands = item_display_commands;
 
     // Clear the parent div.
     setHTML(parent_id, "");
@@ -629,52 +486,45 @@ function displayExpandedItem(item, parent_id){
                     p_elem.classList.add("itemp");
                     p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
                     active_elem.appendChild(p_elem);
+                } else if (id === "displayName") {
+                    let p_elem = document.createElement("a");
+                    p_elem.classList.add('itemp');
+                    p_elem.classList.add("smalltitle");
+                    p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "none");
+                    
+                    if (item.get("custom")) {
+                        p_elem.href = url_base.replace(/\w+.html/, "") + "customizer.html#" + item.get("hash");
+                        p_elem.textContent = item.get("displayName");
+                    } else if (item.get("crafted")) {
+                        p_elem.href = url_base.replace(/\w+.html/, "") + "crafter.html#" + item.get("hash");
+                        p_elem.textContent = item.get(id);
+                    } else {
+                        p_elem.href = url_base.replace(/\w+.html/, "") + "item.html#" + item.get("displayName");
+                        p_elem.textContent = item.get("displayName");
+                    }
+
+                    p_elem.target = "_blank";
+                    active_elem.appendChild(p_elem);
+                    let img = document.createElement("img");
+                    if (item && item.has("type")) {
+                        img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
+                        img.alt = item.get("type");
+                        img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
+                        let bckgrd = document.createElement("p");
+                        bckgrd.style = "width: 96px; height: 96px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
+                        bckgrd.classList.add("center");
+                        bckgrd.classList.add("itemp");
+                        active_elem.appendChild(bckgrd);
+                        bckgrd.appendChild(img);
+                    }
                 } else {
                     let p_elem;
                     if ( !(item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") && (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") ) { //skp warp
                         p_elem = displayFixedID(active_elem, id, item.get(id), elemental_format);
                     } else if (item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") {
                         p_elem = displayFixedID(active_elem, id, item.get(id+"Low")+"-"+item.get(id), elemental_format);
-                    }            
-                    if (id === "displayName") {
-                        p_elem.classList.add("title");
-                        if (item.get("tier") !== " ") {
-                            p_elem.classList.add(item.get("tier"));
-                        }
-                        
-                        p_elem.remove();
-                        p_elem = document.createElement("a");
-                        p_elem.classList.add('itemp');
-                        p_elem.classList.add("smalltitle");
-                        p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "none");
-                        
-                        if (item.get("custom")) {
-                            p_elem.href = url_base.replace(/\w+.html/, "") + "customizer.html#" + item.get("hash");
-                            p_elem.textContent = item.get("displayName");
-                        } else if (item.get("crafted")) {
-                            p_elem.href = url_base.replace(/\w+.html/, "") + "crafter.html#" + item.get("hash");
-                            p_elem.textContent = item.get(id);
-                        } else {
-                            p_elem.href = url_base.replace(/\w+.html/, "") + "item.html#" + item.get("displayName");
-                            p_elem.textContent = item.get("displayName");
-                        }
-                        
-
-                        p_elem.target = "_blank";
-                        active_elem.appendChild(p_elem);
-                        let img = document.createElement("img");
-                        if (item && item.has("type")) {
-                            img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
-                            img.alt = item.get("type");
-                            img.style = " z=index: 1;max-width: 64px; max-height: 64px; position: relative; top: 50%; transform: translateY(-50%);";
-                            let bckgrd = document.createElement("p");
-                            bckgrd.style = "width: 96px; height: 96px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
-                            bckgrd.classList.add("center");
-                            bckgrd.classList.add("itemp");
-                            active_elem.appendChild(bckgrd);
-                            bckgrd.appendChild(img);
-                        }
-                    } else if (id === "lore") {
+                    }
+                    if (id === "lore") {
                         p_elem.style = "font-style: italic";
                         p_elem.classList.add("lore");
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
@@ -697,25 +547,7 @@ function displayExpandedItem(item, parent_id){
                             row.appendChild(boost);
                             p_elem.appendChild(row);
                         } else if ( item.get("tier") === "Crafted" && active_elem.nodeName === "TABLE") {
-                            let row = document.createElement('tr');
-                            let min_elem = document.createElement('td');
-                            
-                            min_elem.classList.add('left');
-                            min_elem.classList.add( item.get("minRolls").get(id) < 0 ? "negative" : "positive");
-                            min_elem.textContent = item.get("minRolls").get(id) + idSuffixes[id];
-                            row.appendChild(min_elem);
-    
-                            let desc_elem = document.createElement('td');
-                            desc_elem.classList.add('center');
-                            //TODO elemental format jank
-                            desc_elem.textContent = idPrefixes[id];
-                            row.appendChild(desc_elem);
-    
-                            let max_elem = document.createElement('td');
-                            max_elem.classList.add('right');
-                            max_elem.classList.add( item.get("maxRolls").get(id) < 0 ? "negative" : "positive");
-                            max_elem.textContent = item.get("maxRolls").get(id) + idSuffixes[id];
-                            row.appendChild(max_elem);
+                            let row = displayRolledID(item, id, elemental_format);
                             active_elem.appendChild(row);
                         }
                     } else if (id === "restrict") {
@@ -737,35 +569,7 @@ function displayExpandedItem(item, parent_id){
                     displayFixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
                 }
                 else {
-                    let row = document.createElement('tr');
-                    let min_elem = document.createElement('td');
-                    
-                    min_elem.classList.add('left');
-                    min_elem.classList.add(style);
-                    min_elem.textContent = item.get("minRolls").get(id) + idSuffixes[id];
-                    row.appendChild(min_elem);
-
-                    let desc_elem = document.createElement('td');
-                    desc_elem.classList.add('center');
-                    //TODO elemental format jank
-                    if (elemental_format) {
-                        apply_elemental_format(desc_elem, id);
-                    }
-                    else {
-                        desc_elem.textContent = idPrefixes[id];
-                    }
-                    row.appendChild(desc_elem);
-
-                    if (item.get("maxRolls").get(id) > 0) {
-                        style = reversedIDs.includes(id) ? "negative" : "positive";
-                    } else if (item.get("maxRolls").get(id) < 0 ) {
-                        style = reversedIDs.includes(id) ? "positive" : "negative";
-                    }
-                    let max_elem = document.createElement('td');
-                    max_elem.classList.add('right');
-                    max_elem.classList.add(style);
-                    max_elem.textContent = item.get("maxRolls").get(id) + idSuffixes[id];
-                    row.appendChild(max_elem);
+                    let row = displayRolledID(item, id, elemental_format);
                     active_elem.appendChild(row);
                 }
             }else{
@@ -1223,49 +1027,7 @@ function displayExpandedIngredient(ingred, parent_id) {
             } else if (command === "ids") { //warp
                 for (let [key,value] of ingred.get("ids").get("maxRolls")) {
                     if (value !== undefined && value != 0) {
-                        value = ingred.get("ids").get("minRolls").get(key);
-                        if(value > 0) {
-                            style = "positive";
-                        } else if (value <= 0) {
-                            style = "negative";
-                        }
-                        if(reversedIDs.includes(key)){
-                            style === "positive" ? style = "negative" : style = "positive"; 
-                        }
-    
-                        let row = document.createElement('tr');
-                        row.classList.add("center");
-                        let min_elem = document.createElement('td');
-                        min_elem.classList.add('left');
-                        min_elem.classList.add(style);
-                        min_elem.textContent = value + idSuffixes[key];
-                        row.appendChild(min_elem);
-        
-                        let desc_elem = document.createElement('td');
-                        desc_elem.classList.add('center');
-                        //TODO elemental format jank
-                        if (elemental_format) {
-                            apply_elemental_format(desc_elem, key);
-                        }
-                        else {
-                            desc_elem.textContent = idPrefixes[key];
-                        }
-                        row.appendChild(desc_elem);
-        
-                        let max_elem = document.createElement('td');
-                        value = ingred.get("ids").get("maxRolls").get(key);
-                        if(value > 0) {
-                            style = "positive";
-                        } else if (value <= 0) {
-                            style = "negative";
-                        }
-                        if(reversedIDs.includes(key)){
-                            style === "positive" ? style = "negative" : style = "positive"; 
-                        }
-                        max_elem.classList.add('right');
-                        max_elem.classList.add(style);
-                        max_elem.textContent = value + idSuffixes[key];
-                        row.appendChild(max_elem);
+                        let row = displayRolledID(ingred.get("ids"), key, false, "auto");
                         active_elem.appendChild(row);
                     }
                 }
@@ -1351,12 +1113,45 @@ function displayNextCosts(parent_id, build) {
     }
 }
 
+function displayRolledID(item, id, elemental_format) {
+    let row = document.createElement('tr');
+    let min_elem = document.createElement('td');
+    min_elem.classList.add('left');
+    let id_min = item.get("minRolls").get(id)
+    let style = id_min < 0 ? "negative" : "positive";
+    if(reversedIDs.includes(id)){
+        style === "positive" ? style = "negative" : style = "positive"; 
+    }
+    min_elem.classList.add(style);
+    min_elem.textContent = id_min + idSuffixes[id];
+    row.appendChild(min_elem);
+
+    let desc_elem = document.createElement('td');
+    desc_elem.classList.add('center');
+    //TODO elemental format jank
+    if (elemental_format) {
+        apply_elemental_format(desc_elem, id);
+    }
+    else {
+        desc_elem.textContent = idPrefixes[id];
+    }
+    row.appendChild(desc_elem);
+
+    let max_elem = document.createElement('td');
+    let id_max = item.get("maxRolls").get(id)
+    max_elem.classList.add('right');
+    style = id_max < 0 ? "negative" : "positive";
+    if(reversedIDs.includes(id)){
+        style === "positive" ? style = "negative" : style = "positive"; 
+    }
+    max_elem.classList.add(style);
+    max_elem.textContent = id_max + idSuffixes[id];
+    row.appendChild(max_elem);
+    return row;
+}
 
 function displayFixedID(active, id, value, elemental_format, style) {
     if (style) {
-        /*if(reversedIDs.filter(e => e !== "atkTier").includes(id)){
-            style === "positive" ? style = "negative" : style = "positive"; 
-        }*/
         let row = document.createElement('tr');
         let desc_elem = document.createElement('td');
         desc_elem.classList.add('left');

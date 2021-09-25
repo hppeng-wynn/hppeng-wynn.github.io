@@ -180,7 +180,7 @@ function init_ing_maps() {
             ing.displayName = ing.name
             ing.tier = 0;
             ing.lvl = 0;
-            ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING"];
+            ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING"];
             ing.ids = {};
             ing.isPowder = true;
             ing.pid = 6*i + powderIngreds.indexOf(powderIng);
