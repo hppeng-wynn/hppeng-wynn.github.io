@@ -2020,8 +2020,10 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
         let third = document.createElement("b");
         third.textContent = ") [Base: " + build.getBaseSpellCost(spellIdx, spell.cost) + " ]";
-        title_elem.appendChild(third.cloneNode(true));
-        title_elemavg.appendChild(third);
+        title_elem.appendChild(third);
+        let third_summary = document.createElement("b");
+        third_summary.textContent = ")";
+        title_elemavg.appendChild(third_summary);
     }
     else {
         title_elem.textContent = spell.title;

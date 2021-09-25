@@ -890,17 +890,21 @@ function saveBuild() {
         let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
         let saveName = document.getElementById("build-name").value;
         let encodedBuild = encodeBuild();
-        if ((!Object.keys(savedBuilds).includes(saveName) || document.getElementById("saved-error").textContent !== "") && encodedBuild !== "") {
+        if ((!Object.keys(savedBuilds).includes(saveName)
+                || document.getElementById("saved-error").textContent !== "") && encodedBuild !== "") {
             savedBuilds[saveName] = encodedBuild.replace("#", "");
             window.localStorage.setItem("builds", JSON.stringify(savedBuilds));
 
             document.getElementById("saved-error").textContent = "";
-            document.getElementById("saved-build").textContent = "Build saved";
+            document.getElementById("saved-build").textContent = "Build saved Locally";
         } else {
-            if (encodedBuild === "")
+            document.getElementById("saved-build").textContent = "";
+            if (encodedBuild === "") {
                 document.getElementById("saved-error").textContent = "Empty build";
-            else
+            }
+            else {
                 document.getElementById("saved-error").textContent = "Exists. Overwrite?";
+            }
         }
     }
 }
@@ -909,12 +913,14 @@ function loadBuild() {
     let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
     let saveName = document.getElementById("build-name").value;
 
-    document.getElementById("loaded-error").textContent = "";
     if (Object.keys(savedBuilds).includes(saveName)) { 
         decodeBuild(savedBuilds[saveName])
+        document.getElementById("loaded-error").textContent = "";
         document.getElementById("loaded-build").textContent = "Build loaded";
-    } else
+    } else {
+        document.getElementById("loaded-build").textContent = "";
         document.getElementById("loaded-error").textContent = "Build doesn't exist";
+    }
 }
 
 function resetFields(){
