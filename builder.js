@@ -176,6 +176,8 @@ function init() {
     });
 
     decodeBuild(url_tag);
+
+    populateBuildList();
 }
 
 function getItemNameFromID(id) {
@@ -885,18 +887,34 @@ function shareBuild() {
     }
 }
 
+function populateBuildList() {
+    const buildList = document.getElementById("build-choice");
+    const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
+
+    for (const buildName of Object.keys(savedBuilds).sort()) {
+        const buildOption = document.createElement("option");
+        buildOption.setAttribute("value", buildName);
+        buildList.appendChild(buildOption);
+    }
+}
+
 function saveBuild() {
     if (player_build) {
-        let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
-        let saveName = document.getElementById("build-name").value;
-        let encodedBuild = encodeBuild();
+        const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
+        const saveName = document.getElementById("build-name").value;
+        const encodedBuild = encodeBuild();
         if ((!Object.keys(savedBuilds).includes(saveName)
                 || document.getElementById("saved-error").textContent !== "") && encodedBuild !== "") {
             savedBuilds[saveName] = encodedBuild.replace("#", "");
             window.localStorage.setItem("builds", JSON.stringify(savedBuilds));
 
             document.getElementById("saved-error").textContent = "";
-            document.getElementById("saved-build").textContent = "Build saved Locally";
+            document.getElementById("saved-build").textContent = "Build saved locally";
+            
+            const buildList = document.getElementById("build-choice");
+            const buildOption = document.createElement("option");
+            buildOption.setAttribute("value", saveName);
+            buildList.appendChild(buildOption);
         } else {
             document.getElementById("saved-build").textContent = "";
             if (encodedBuild === "") {
