@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WynnBuilder^2</title>
+    <link rel="icon" href="media/icons/new/builder.png" type="image/icon type">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="sq2.css">
+
+    <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+    <div id="overall-window" class="draggable window-container">
+        <div id="overall-window-header" class="window-header">
+            <div style="flex: 1"></div>
+            <div style="flex: 2; text-align: center;">Overall Build Stats</div>
+            <div style="flex: 1; text-align: right;"><button onclick="$('#overall-window').toggle()">[x]</button></div>
+        </div>
+        <div style="overflow: auto;" id="all-stats" class="minimal-stats-container"></div>
+    </div>
+    <div id="search-container" class="draggable full-border window-container" style="border-top: none;">
+        <div id="search-container-header" class="window-header">
+            <div style="flex: 1"></div>
+            <div style="flex: 2; text-align: center;">sq2-Search</div>
+            <div style="flex: 1; text-align: right;"><button onclick="$('#search-container').toggle()">[x]</button></div>
+        </div>
+        <div style="display: inline-flex;">
+            <div style="display: inline-flex; flex-direction: column; flex: 1">
+                <input class="search-field" type="text" id="name-choice" name="name-choice" placeholder="Name"/>
+                <input class="search-field" list="category-items" id="category-choice" name="category-choice" placeholder="Category"/>
+                <datalist id="category-items">
+                    <option value="ALL">
+                    <option value="armor">
+                    <option value="helmet">
+                    <option value="chestplate">
+                    <option value="leggings">
+                    <option value="boots">
+                    <option value="accessory">
+                    <option value="ring">
+                    <option value="bracelet">
+                    <option value="necklace">
+                    <option value="weapon">
+                    <option value="wand">
+                    <option value="spear">
+                    <option value="bow">
+                    <option value="dagger">
+                    <option value="relik">
+                </datalist>
+
+                <input class="search-field" list="rarity-items" id="rarity-choice" name="rarity-choice" placeholder="Rarity"/>
+                <datalist id="rarity-items">
+                    <option value="ANY">
+                    <option value="Normal">
+                    <option value="Unique">
+                    <option value="Set">
+                    <option value="Rare">
+                    <option value="Legendary">
+                    <option value="Fabled">
+                    <option value="Mythic">
+                    <option value="Sane">
+                </datalist>
+
+                <input class="search-field" type="text" id="search-level-choice" name="search-level-choice" value="1-106"/>
+            </div>
+            <div style="display: inline-flex; flex: 2;"></div>
+            <div style="display: inline-flex; flex-direction: column; flex: 1; justify-content: right;">
+                <datalist id="filter-items">
+                </datalist>
+                <input class="search-field" list="filter-items" id="filter1-choice" name="filter1-choice" placeholder="Filter"/>
+                <input class="search-field" list="filter-items" id="filter2-choice" name="filter2-choice" placeholder="Filter"/>
+                <input class="search-field" list="filter-items" id="filter3-choice" name="filter3-choice" placeholder="Filter"/>
+                <input class="search-field" list="filter-items" id="filter4-choice" name="filter4-choice" placeholder="Filter"/>
+            </div>
+        </div>
+        <div class="search-result-container" id='main'>
+        </div>
+    </div>
+
+    <div id="boost-container" class="draggable full-border window-container">
+        <div id="boost-container-header" class="window-header">
+            <div style="flex: 1"></div>
+            <div style="flex: 2; text-align: center;">Active boosts</div>
+            <div style="flex: 1; text-align: right;"><button onclick="$('#boost-container').toggle()">[x]</button></div>
+        </div>
+        <div style="display: inline-flex;">
+            <div style="display: inline-flex; flex-direction: column;">
+                <table id="boost-table" style="text-align: center;">
+                    <tr style="height: 2rem;">
+                        <th colspan="5" class="nDam">Class boosts</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button-boost" id="vanish-boost" onclick = "updateBoosts('vanish-boost', true)">
+                                Vanish (+80%)
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "warscream-boost" onclick = "updateBoosts('warscream-boost', true)">
+                                War Scream (+10%)
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "yourtotem-boost" onclick = "updateBoosts('yourtotem-boost', true)">
+                                Your Totem (+35%)
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "allytotem-boost" onclick = "updateBoosts('allytotem-boost', true)">
+                                Ally Totem (+15%)
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "bash-boost" onclick = "updateBoosts('bash-boost', true)">
+                                Bash (+50%)
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 2rem;">
+                        <th colspan="5" class="Earth">Quake</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class = "button-boost" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1', true)">
+                                Lv.4 [e4e4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2', true)">
+                                Lv.4.5 [e5e4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3', true)">
+                                Lv.5 [e5e5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4', true)">
+                                Lv.5.5 [e6e5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5', true)">
+                                Lv.6 [e6e6]
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 2rem;">
+                        <th colspan="5" class="Thunder">Chain Lightning</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class = "button-boost" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1', true)">
+                                Lv.4 [t4t4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2', true)">
+                                Lv.4.5 [t5t4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3', true)">
+                                Lv.5 [t5t5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4', true)">
+                                Lv.5.5 [t6t5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5', true)">
+                                Lv.6 [t6t6]
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 2rem;">
+                        <th colspan="5" class="Water">Curse</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class = "button-boost" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1', true)">
+                                Lv.4 [w4w4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2', true)">
+                                Lv.4.5 [w5w4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3', true)">
+                                Lv.5 [w5w5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4', true)">
+                                Lv.5.5 [w6w5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5', true)">
+                                Lv.6 [w6w6]
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr style="height: 2rem;">
+                        <th colspan="5" class="Fire">Courage</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class = "button-boost" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1', true)">
+                                Lv.4 [f4f4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2', true)">
+                                Lv.4.5 [f5f4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3', true)">
+                                Lv.5 [f5f5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4', true)">
+                                Lv.5.5 [f6f5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5', true)">
+                                Lv.6 [f6f6]
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <tr style="height: 2rem;">
+                        <th colspan="5" class="Air">Wind Prison</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class = "button-boost" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1', true)">
+                                Lv.4 [f4f4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2', true)">
+                                Lv.4.5 [f5f4]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3', true)">
+                                Lv.5 [f5f5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4', true)">
+                                Lv.5.5 [f6f5]
+                            </button>
+                        </td>
+                        <td>
+                            <button class = "button-boost" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5', true)">
+                                Lv.6 [f6f6]
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="display: inline-flex; flex-direction: column; max-height: 25rem; overflow-y: scroll;">
+                <div class = "center" id = "powder-special-stats">
+                    <p class = "nDam" style="text-align: center; font-weight: bold;">Powder Specials</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="weapon-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="helmet-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="chestplate-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="leggings-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="boots-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="ring1-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="ring2-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="bracelet-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="necklace-tooltip" style="display: none;" class="draggable full-border item-tooltip">
+    </div>
+    <div id="left" class="column">
+        <div class="bottom">
+            <ul>
+                <li><button onclick="$('#overall-window').toggle()"><img src="media/items/new/generic-scroll.png" alt="" title="Overall Build Stats"></button></li>
+                <li><button onclick="$('#search-container').toggle()"><img src="media/icons/new/searcher.png" alt="" title="Item Search" style="width: 64px"></button></li>
+                <li><button onclick="$('#boost-container').toggle()"><img src="media/icons/new/custom.png" alt="" title="Active boosts" style="width: 64px"></button></li>
+                <li><a href="https://wynnbuilder.github.io/"><img src="media/icons/new/atlas64.png" alt="place" title="WynnBuilder" style="width: 64px;"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="right" class="column">
+        <div class="bottom">
+            <div class="all-equipment" id="column1">
+                <div class="weapon-container" style="width: 46em;">
+                    <table style="width: 46em; border-collapse: collapse;" class="full-border">
+                        <tr>
+                            <td id="weapon-img-loc" style="border: none;">
+                                <img id="weapon-img" src="media/items/new/generic-dagger.png" style="display: flex; width: 2.8em;" class="item-icon">
+                            </td>
+                            <td style="border: none;">
+                                <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                    <tr>
+                                        <td class="se-border">
+                                            <input class="item-name" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value=""/>
+                                            <datalist id="weapon-items">
+                                            </datalist>
+                                        </td>
+                                        <td class="damage-size nDam">✣</td>
+                                        <td class="damage-size eDam">✤</td>
+                                        <td class="damage-size tDam">✦</td>
+                                        <td class="damage-size wDam">❉</td>
+                                        <td class="damage-size fDam">✹</td>
+                                        <td class="damage-size aDam">❋</td>
+                                        <td class="potency" style="display: none;">Melee potency: 0000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="se-border">
+                                            <input class="powders powder-input" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders"/>
+                                        </td>
+                                        <td class="damage-size nDam" id='nDam-base'>000-000</td>
+                                        <td class="damage-size eDam" id='eDam-base'>000-000</td>
+                                        <td class="damage-size tDam" id='tDam-base'>000-000</td>
+                                        <td class="damage-size wDam" id='wDam-base'>000-000</td>
+                                        <td class="damage-size fDam" id='fDam-base'>000-000</td>
+                                        <td class="damage-size" id='aDam-base'>000-000</td>
+                                        <td class="potency" style="display: none;">Spell potency: 0000</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="display: inline-flex; flex-direction: row;" >
+                    <div class="equipment-container" style="width: 23em;">
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="helmet-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-helmet.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none; justify-content: left; width: 100%;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='helmet-health' class="se-border Health"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet"/>
+                                                <datalist id="helmet-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='helmet-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input class="powders powder-input" type="text" id="helmet-powder" name="helmet-powder" placeholder="Example: t6t6"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="chestplate-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-chestplate.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='chestplate-health' style="width: 100%;" class="Health se-border"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No Chestplate"/>
+                                                <datalist id="chestplate-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='chestplate-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input class="powders powder-input" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="leggings-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-leggings.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='leggings-health' style="width: 100%;" class="Health se-border"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No Leggings"/>
+                                                <datalist id="leggings-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='leggings-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input class="powders powder-input" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="boots-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-boots.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='boots-health' style="width: 100%;" class="Health se-border"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No Boots"/>
+                                                <datalist id="boots-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='boots-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input class="powders powder-input" type="text" id="boots-powder" name="boots-powder" placeholder="powders"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="equipment-container" style="width: 23em;">
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="ring1-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-ring.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='ring1-health' style="width: 100%;" class="Health se-border"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No Ring 1" />
+                                                <datalist id="ring1-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='ring1-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input disabled class="powders powder-input" type="text" id="h-powder-input" name="h-powder-input" placeholder="no" style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold; width: 13em;">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="ring2-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-ring.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='ring2-health' style="width: 100%;" class="Health se-border"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No Ring 2"/>
+                                                <datalist id="ring2-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='ring2-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input disabled class="powders powder-input" type="text" id="h-powder-input" name="h-powder-input" placeholder="powders" style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold; width: 13em;">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="bracelet-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-bracelet.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='bracelet-health' style="width: 100%;" class="Health se-border"> </td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No Bracelet"/>
+                                                <datalist id="bracelet-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='bracelet-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input disabled class="powders powder-input" type="text" id="h-powder-input" name="h-powder-input" placeholder="on" style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold; width: 13em;">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="full-border" style="border-collapse: collapse;">
+                            <tr>
+                                <td id="necklace-img-loc" style="border: none; width: 0.1%;">
+                                    <img src="media/items/new/generic-necklace.png" style="display: flex; width: 2.8em;" class="item-icon">
+                                </td>
+                                <td style="border: none;">
+                                    <table style="font-size: 15px; text-align: center; border-collapse: collapse;">
+                                        <tr>
+                                            <td id='necklace-health' style="width: 100%;" class="Health se-border"></td>
+                                            <td class="se-border">
+                                                <input class="item-name" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No Necklace"/>
+                                                <datalist id="necklace-items">
+                                                </datalist>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id='necklace-lv' style="width: 100%;" class="se-border lvl"></td>
+                                            <td class="se-border">
+                                                <input disabled class="powders powder-input" type="text" id="h-powder-input" name="h-powder-input" placeholder="accs" style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold; width: 13em;">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>    
+                    </div>
+                </div>
+                <div class="skp-container">
+                    <table style="width: 46em; height: 11.15em;" class="full-border">
+                        <tr>
+                            <td class="skp-text" style="text-align: center;">
+                                <p class="eDam" style="font-weight: bold;">✤Strength</p>
+                                <input type="string" id="str-skp" name="str-skp" value="0" class="skp-input"/>
+                                <div id="str-skp-assign" class="skp-tooltip">
+                                    Manually Assigned: 0
+                                </div>
+                                <div id="str-skp-base" class="skp-tooltip">
+                                    Original Value: 0
+                                </div>
+                                <div id="str-skp-pct" class="skp-tooltip">
+                                </div>
+                            </td>
+                            <td class="skp-text" style="text-align: center;">
+                                <p class="tDam" style="font-weight: bold;">✦Dexterity</p>
+                                <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-input"/>
+                                <div id="dex-skp-assign" class="skp-tooltip">
+                                    Manually Assigned: 0
+                                </div>
+                                <div id="dex-skp-base" class="skp-tooltip">
+                                    Original Value: 0
+                                </div>
+                                <div id ="dex-skp-pct" class="skp-tooltip">
+                                </div>
+                            </td>
+                            <td class="skp-text" style="text-align: center;">                               
+                                <p class="wDam" style="font-weight: bold;">❉Intelligence</p>
+                                <input type="string" id="int-skp" name="int-skp" value="0" class="skp-input"/>
+                                <div id="int-skp-assign" class="skp-tooltip">
+                                    Manually Assigned: 0
+                                </div>
+                                <div id="int-skp-base" class="skp-tooltip">
+                                    Original Value: 0
+                                </div>
+                                <div id ="int-skp-pct" class="skp-tooltip">
+                                </div>
+                            </td>
+                            <td class="skp-text" style="text-align: center;">                               
+                                <p class="fDam" style="font-weight: bold;">✹Defense</p>
+                                <input type="string" id="def-skp" name="def-skp" value="0" class="skp-input"/>
+                                <div id="def-skp-assign" class="skp-tooltip">
+                                    Manually Assigned: 0
+                                </div>
+                                <div id="def-skp-base" class="skp-tooltip">
+                                    Original Value: 0
+                                </div>
+                                <div id ="def-skp-pct" class="skp-tooltip">
+                                </div>
+                            </td>
+                            <td class="skp-text" style="text-align: center;">
+                                <p class="aDam" style="font-weight: bold;">❋Agility</p>
+                                <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-input"/>
+                                <div id="agi-skp-assign" class="skp-tooltip">
+                                    Manually Assigned: 0
+                                </div>
+                                <div id="agi-skp-base" class="skp-tooltip">
+                                    Original Value: 0
+                                </div>
+                                <div id ="agi-skp-pct" class="skp-tooltip">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align: center; height: 100%;">
+                                <div class="nomargin" id="summary-box"></div>
+                                <div id="str-warnings" class="center"></div>
+                                <div id="dex-warnings" class="center"></div>
+                                <div id="int-warnings" class="center"></div>
+                                <div id="def-warnings" class="center"></div>
+                                <div id="agi-warnings" class="center"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="column2" class="minimal-stats-container">
+                <table style="text-align: center; border: 5px solid rgb(45, 45, 45); border-bottom: none;">
+                    <tr>
+                        <td id="basic-stats-btn" class="clickable" style="width: 7em; background-color: rgb(30, 30, 30);">Basic</td>
+                        <td id="off-stats-btn" class="clickable" style="width: 7em; background-color: rgb(45, 45, 45);">Offensive</td>
+                        <td id="def-stats-btn" class="clickable" style="width: 7em; background-color: rgb(45, 45, 45);">Defensive</td>
+                    </tr>
+                </table>
+                <div style="display: none; overflow: auto;" id="minimal-offensive-stats" class="minimal-stats-container"></div>
+                <div style="display: none; overflow: auto;" id="minimal-defensive-stats" class="minimal-stats-container"></div>
+                <div style="overflow: auto;" id="minimal-stats" class="minimal-stats-container"></div>
+            </div>
+            <div id="column3" style="display: inline-flex; vertical-align: top; background-color: rgb(30, 30, 30); width: 20.5em;">
+                <table style="width: 100%;">
+                    <tr style="height: 6em;">
+                        <td class="full-border" style="text-align: center; vertical-align: middle;">
+                            <div id="build-melee-statsAvg">melee</div>
+                        </td>
+                    </tr>
+                    <tr style="height: 3em;">
+                        <td class="full-border" style="text-align: center; vertical-align: middle;">
+                            <div class="center" id="build-poison-stats">poison</div>
+                        </td>
+                    </tr>
+                    <tr style="height: 3.65em;">
+                        <td class="full-border" style="text-align: center; vertical-align: middle;">
+                            <div id="spell0-infoAvg">spell1</div>
+                        </td>
+                    </tr>
+                    <tr style="height: 3.65em;">
+                        <td class="full-border" style="text-align: center; vertical-align: middle;">
+                            <div id="spell1-infoAvg">spell2</div>
+                        </td>
+                    </tr>
+                    <tr style="height: 3.65em;">
+                        <td class="full-border" style="text-align: center; vertical-align: middle;">
+                            <div id="spell2-infoAvg">spell3</div>
+                        </td>
+                    </tr>
+                    <tr style="height: 3.65em;">
+                        <td class="full-border" style="text-align: center; vertical-align: middle;">
+                            <div id="spell3-infoAvg">spell4</div>
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>
+                            <input class="item-input" id="level-choice" name="level-choice" value="106"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="drag-spell-boost" style="display: none;">
+        <div class="externalBuffs hide-container-block" id="buff-box" style="display: none;">
+            <div class = "powder-specials" style="display: none;">
+                <div class = "powder-special-stats" style = "grid-column:1;grid-row:1">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="drag-full-eqs" style="display: none;">
+        <div class = "build hide-container-grid" style="display: none;">
+            <div class = "center build-order" id = "build-order" style = "grid-item-10">
+            </div>
+            <div class = "center build-melee-stats" id = "build-melee-stats" style = "grid-item-11">
+            </div>
+            <div class = "center build-defense-stats" id = "build-defense-stats" style = "grid-item-12">
+            </div>
+        </div>
+    </div>
+    <div id="drag-full-spells" style="display: none;">
+        <div class = "spells hide-container-grid" style="display: none;">
+            <div class = "center spell-info" id = "spell0" style = "grid-item-1">
+                <!--div class = "center" id = "spell0-name">Spell 1</div-->
+                <div class = "center" id = "spell0-info">Spell 1</div>
+            </div>
+            <div class = "center spell-info" id = "spell1" style = "grid-item-2">
+                <!--div class = "center" id = "spell1-name">Spell 2</div-->
+                <div class = "center" id = "spell1-info">Spell 2</div>
+            </div>
+            <div class = "center spell-info" id = "spell2" style = "grid-item-3">
+                <!--div class = "center" id = "spell2-name">Spell 3</div-->
+                <div class = "center" id = "spell2-info">Spell 3</div>
+            </div>
+            <div class = "center spell-info" id = "spell3" style = "grid-item-4">
+                <!--div class = "center" id = "spell3-name">Spell 4</div-->
+                <div class = "center" id = "spell3-info">Spell 4</div>
+            </div>
+        </div>
+    </div>
+    <div id="drag-additional-info" style="display: none;">
+        <div class="misc">
+            <div class = "center set-info" id = "set-info-div" style = "grid-column:1;grid-row:1; display: none;">
+                <div class = "center" id = "set-info">Set info</div>
+            </div>
+            <div class = "center int-info hide-container-block" id = "int-info-div" style = "grid-column:4;grid-row:1; display: none;">
+                <div class = "center" id = "int-info">Next Spell Costs</div> 
+            </div>
+        </div>
+    </div>
+    <div id="drag-edit-ids" style="display: none;">
+        <div class="id-box fade-in" id="id-edit" style="display: none">
+            <div class="id-edit1">
+                <table>
+                    <tr>
+                        <th colspan="5">
+                            <h1>Damage values:</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="sdPct" class="idLabel" id="sdPct-label">Spell Dmg %:</label><br>
+                                        <input type="number" id="sdPct" name="sdPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="sdPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="sdRaw" class="idLabel" id="sdRaw-label">Raw Spell:</label><br>
+                                        <input type="number" id="sdRaw" name="sdRaw" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="sdRaw-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="mdPct" class="idLabel" id="mdPct-label">Melee Dmg %:</label><br>
+                                        <input type="number" id="mdPct" name="mdPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="mdPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="mdRaw" class="idLabel" id="mdRaw-label">Raw Melee:</label><br>
+                                        <input type="number" id="mdRaw" name="mdRaw" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="mdRaw-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="poison" class="idLabel" id="poison-label">Poison:</label><br>
+                                        <input type="number" id="poison" name="poison" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="poison-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="eDamPct" class="idLabel Earth" id="eDamPct-label">Damage %:</label><br>
+                                        <input type="number" id="eDamPct" name="eDamPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="eDamPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="tDamPct" class="idLabel Thunder" id="tDamPct-label">Damage %:</label><br>
+                                        <input type="number" id="tDamPct" name="tDamPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="tDamPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="wDamPct" class="idLabel Water" id="wDamPct-label">Damage %:</label><br>
+                                        <input type="number" id="wDamPct" name="wDamPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="wDamPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="fDamPct" class="idLabel Fire" id="fDamPct-label">Damage %:</label><br>
+                                        <input type="number" id="fDamPct" name="fDamPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="fDamPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="aDamPct" class="idLabel Air" id="aDamPct-label">Damage %:</label><br>
+                                        <input type="number" id="aDamPct" name="aDamPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="aDamPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="atkTier" class="idLabel" id="atkTier-label">+Tier:</label><br>
+                                        <input type="number" id="atkTier" name="atkTier" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="atkTier-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="id-edit1">
+                <table>
+                    <tr>
+                        <th colspan="5">
+                            <h1>Defense values:</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="eDefPct" class="idLabel Earth" id="eDefPct-label">Defense %:</label><br>
+                                        <input type="number" id="eDefPct" name="eDefPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="eDefPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="tDefPct" class="idLabel Thunder" id="tDefPct-label">Defense %:</label><br>
+                                        <input type="number" id="tDefPct" name="tDefPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="tDefPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="wDefPct" class="idLabel Water" id="wDefPct-label">Defense %:</label><br>
+                                        <input type="number" id="wDefPct" name="wDefPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="wDefPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="fDefPct" class="idLabel Fire" id="fDefPct-label">Defense %:</label><br>
+                                        <input type="number" id="fDefPct" name="fDefPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="fDefPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="aDefPct" class="idLabel Air" id="aDefPct-label">Defense %:</label><br>
+                                        <input type="number" id="aDefPct" name="aDefPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="aDefPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="hprRaw" class="idLabel" id="hprRaw-label">HPR Raw:</label><br>
+                                        <input type="number" id="hprRaw" name="hprRaw" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="hprRaw-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="hprPct" class="idLabel" id="hprPct-label">HPR %:</label><br>
+                                        <input type="number" id="hprPct" name="hprPct" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="hprPct-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="hpBonus" class="idLabel" id="hpBonus-label">Health Bonus:</label><br>
+                                        <input type="number" id="hpBonus" name="hpBonus" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="hpBonus-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="id-edit1">
+                <table>
+                    <tr>
+                        <th colspan="5">
+                            <h1>Utility values:</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spPct1" class="idLabel" id="spPct1-label">1st Spell Cost %:</label><br>
+                                        <input type="number" id="spPct1" name="spPct1" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spPct1-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spPct2" class="idLabel" id="spPct2-label">2nd Spell Cost %:</label><br>
+                                        <input type="number" id="spPct2" name="spPct2" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spPct2-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spPct3" class="idLabel" id="spPct3-label">3rd Spell Cost %:</label><br>
+                                        <input type="number" id="spPct3" name="spPct3" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spPct3-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spPct4" class="idLabel" id="spPct4-label">4th Spell Cost %:</label><br>
+                                        <input type="number" id="spPct4" name="spPct4" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spPct4-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spRaw1" class="idLabel" id="spRaw1-label">1st Spell Cost Raw:</label><br>
+                                        <input type="number" id="spRaw1" name="spRaw1" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spRaw1-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spRaw2" class="idLabel" id="spRaw2-label">2nd Spell Cost Raw:</label><br>
+                                        <input type="number" id="spRaw2" name="spRaw2" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spRaw2-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spRaw3" class="idLabel" id="spRaw3-label">3rd Spell Cost Raw:</label><br>
+                                        <input type="number" id="spRaw3" name="spRaw3" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spRaw3-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="idLeft">
+                                <div class="idWrap">
+                                    <div>
+                                        <label for="spRaw4" class="idLabel" id="spRaw4-label">4th Spell Cost Raw:</label><br>
+                                        <input type="number" id="spRaw4" name="spRaw4" value="0" class="idInput"/>
+                                    </div>
+                                    <div id="spRaw4-base" class="idDesc">
+                                        Original Value: 0
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="weird-dependencies-debug" style="display: none;">
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="build_utils.js"></script>
+    <script type="text/javascript" src="sq2icons.js"></script>
+    <script type="text/javascript" src="powders.js"></script>
+    <script type="text/javascript" src="skillpoints.js"></script>
+    <script type="text/javascript" src="damage_calc.js"></script>
+    <script type="text/javascript" src="sq2display_constants.js"></script>
+    <script type="text/javascript" src="sq2display.js"></script>
+    <script type="text/javascript" src="/query.js"></script>
+    <script type="text/javascript" src="load.js"></script>
+    <script type="text/javascript" src="load_ing.js"></script>
+    <script type="text/javascript" src="custom.js"></script> 
+    <script type="text/javascript" src="craft.js"></script>  
+    <script type="text/javascript" src="sq2build.js"></script>
+    <script type="text/javascript" src="sq2builder.js"></script>
+    <script type="text/javascript" src="sq2items.js"></script>
+    <script src="sq2.js"></script> 
+</body>
+</html> 
