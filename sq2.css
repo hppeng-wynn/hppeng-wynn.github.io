@@ -4,7 +4,6 @@ html {
 
 * {
     font-family: 'Nunito', sans-serif;
-    font-size: .8vw;
 }
 
 input::-webkit-calendar-picker-indicator {
@@ -121,7 +120,8 @@ p {
 
 input {
     background-color: rgb(40, 40, 40);
-    border-color:rgb(45, 45, 45);
+    border: 2px solid  rgb(25, 25, 25) !important;
+    box-sizing: border-box !important;
     color: rgb(240, 240, 240);
     min-width: 0;
     box-sizing: none;
@@ -181,7 +181,7 @@ td.damage-size {
 
 .skp-input {
     width: 7em;
-    height: 1.2em;
+    height: 1.5em;
     text-align: center;
 }
 
@@ -384,10 +384,10 @@ button {
 }
 
 .item-tooltip {
-    max-width: 20em; 
+    width: 15rem; 
     background-color: rgb(30, 30, 30); 
     color: white; 
-    font-size: 12px;
+    font-size: 0.8rem;
 }
 
 .window-container {
