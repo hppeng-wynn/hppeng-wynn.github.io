@@ -210,6 +210,7 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                 }
                 if (id === "slots") {
                     let p_elem = document.createElement("p");
+                    p_elem.classList.add('itemp')
                     // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
 

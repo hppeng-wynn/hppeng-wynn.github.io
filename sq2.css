@@ -85,30 +85,19 @@ table {
 }
 
 .full-border, .box {
-    border: 5px solid rgb(45, 45, 45);
-}
-
-.top-half-border {
-    border-top: 5px solid rgb(45, 45, 45);
-    border-left: 5px solid rgb(45, 45, 45);
-    border-right: 5px solid rgb(45, 45, 45);
-}
-
-.bot-half-border {
-    border-bottom: 5px solid rgb(45, 45, 45);
-    border-left: 5px solid rgb(45, 45, 45);
-    border-right: 5px solid rgb(45, 45, 45);
+    border: .3vw solid rgb(45, 45, 45);
 }
 
 .se-border {
-    border-left: 5px solid rgb(45, 45, 45);
-    border-right: 5px solid rgb(45, 45, 45);
+    border-left: .3vw solid rgb(45, 45, 45);
+    border-right: .3vw solid rgb(45, 45, 45);
 }
 
 td {
     padding: 0;
     margin: 0;
     white-space: nowrap;
+    font-size: .8vw;
 }
 
 p {
@@ -120,20 +109,23 @@ p {
 
 input {
     background-color: rgb(40, 40, 40);
-    border-top: 2px solid  rgb(25, 25, 25) !important;
-    border-left: 2px solid rgb(25, 25, 25) !important;
-    border-bottom: 2px solid rgb(45, 45, 45) !important;
-    border-right: 2px solid rgb(45, 45, 45) !important;
+    border-top: .15vw solid  rgb(25, 25, 25) !important;
+    border-left: .15vw solid rgb(25, 25, 25) !important;
+    border-bottom: .15vw solid rgb(45, 45, 45) !important;
+    border-right: .15vw solid rgb(45, 45, 45) !important;
     box-sizing: border-box !important;
     color: rgb(240, 240, 240);
     min-width: 0;
+    min-height: 0;
+    font-size: .8vw;
     box-sizing: none;
 }
 
 input.item-name {
     text-align: center;
     font-weight: bold;
-    width: 13em;
+    width: 10vw;
+    height: 1.2vw;
 }
 
 input.search-field {
@@ -159,6 +151,8 @@ input.search-field {
 }
 
 .skp-container {
+    width: 38vw;
+    height: 10vw;
     display: inline-flex;
     flex-direction: column;
     background-color: rgb(30, 30, 30);
@@ -169,7 +163,7 @@ td.mono-font {
 }
 
 td.damage-size {
-    width: 7em;
+    width: 5vw;
     user-select: none;
 }
 
@@ -183,8 +177,8 @@ td.damage-size {
 }
 
 .skp-input {
-    width: 7em;
-    height: 1.5em;
+    width: 6vw;
+    height: 1.2vw;
     text-align: center;
 }
 
@@ -198,11 +192,20 @@ td.damage-size {
     text-align: center; 
     font-family: 'Courier New', Courier, monospace; 
     font-weight: bold; 
-    width: 13em;
+    width: 10vw;
+    height: 1.2vw;
 }
 
 .skp-tooltip {
-    font-size: 0.7rem;
+    font-size: .6vw;
+}
+
+.spell-container {
+    display: inline-flex; 
+    vertical-align: top; 
+    background-color: rgb(30, 30, 30); 
+    width: 18vw; 
+    height: 24.5vw;
 }
 
 .draggable {
@@ -254,11 +257,7 @@ p.Damage {
     padding-top: 2px;
     padding-bottom: 2px;
 
-    border: 1px solid rgb(30, 30, 30);
     border-bottom: 1px solid rgb(45, 45, 45)
-    /*
-    border-top: 1px solid rgb(30, 30, 30);
-    border-bottom: 1px solid rgb(45, 45, 45);*/
 }
 
 .spacer-table {
@@ -270,8 +269,8 @@ p.Damage {
     flex-direction: column; 
     vertical-align: top; 
     background-color: rgb(30, 30, 30); 
-    width: 20.5rem; 
-    height: 29.65rem;
+    width: 18vw; 
+    height: 24.5vw;
 }
 
 .nDam {
@@ -382,8 +381,8 @@ button {
 }
 
 .item-margin {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: .8vw;
+    margin-bottom: .8vw;
 }
 
 .item-tooltip {
@@ -404,6 +403,7 @@ button {
     display: flex; 
     cursor: move; 
     background-color: rgb(45, 45, 45);
+    font-size: .8vw;
 }
 
 .search-result-container {
@@ -412,10 +412,8 @@ button {
     justify-content: center; 
     overflow-y: auto; 
     overflow-x: hidden; 
-    flex-basis: 40em; 
-    max-width: 20em; 
-    flex-grow: 0; 
-    flex-shrink: 0;
+    flex-basis: 30vw; 
+    max-width: 14.4vw; 
 }
 
 .button-boost  {
@@ -426,9 +424,17 @@ button {
 
 button.toggleOn{
     background-color:#0a0;
-    border: 3 px solid rgb(0, 70, 0);
+    border: 3px solid rgb(0, 70, 0);
 }
 
 .damageSubtitle  {
     text-align: center;
 }
+
+.itemp {
+    font-size: .8vw;
+}
+/*
+div:not(.item-tooltip) {
+    font-size: .8vw;
+}*/
