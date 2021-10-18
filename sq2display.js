@@ -187,7 +187,7 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
             }
             else if (command === "#table") {
                 active_elem = document.createElement('table');
-                active_elem.style.width = "19em";
+                active_elem.style.width = "100%";
             }
             
             active_elem.classList.add('item-margin');
