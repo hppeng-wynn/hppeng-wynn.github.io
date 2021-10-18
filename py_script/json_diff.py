@@ -44,14 +44,14 @@ def object_diff(obj1, obj2, path):
             if type1 != type2:
                 print(f"{path}.{k}: Type difference [{str(type1)} != {str(type2)}]")
             elif type1 is list and type2 is list and not is_basic(type(v[0])):
-                list_diff(v, obj, path+"."+k)
+                list_diff(v, obj, path+"."+str(k))
             elif (type1 is list and is_basic(type(v[0]))) or is_basic(type1) or v is None or obj2 is None:
                 if v != obj:
                     print(f"{path}.{k}: Value difference")
                     print(f"    Left: {shorten(str(v))}")
                     print(f"    Right: {shorten(str(obj))}")
             else:
-                object_diff(v, obj, path+"."+k)
+                object_diff(v, obj, path+"."+str(k))
         else:
             print(f"{path}.{k}: Contained in left but not right")
             print(f"    Value: {shorten(str(v))}")

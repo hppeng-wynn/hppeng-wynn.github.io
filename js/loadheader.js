@@ -19,8 +19,7 @@
         <img src = "/media/icons/new/custom.png" class = "left linkoptions headericon">
             <div class = "tooltiptext center">WynnCustom</div>
         </img>
-    </a>
-    <a href = "./map.html" class = "nomarginp iconlink tooltip">
+    </a> <a href = "./map.html" class = "nomarginp iconlink tooltip">
         <img src = "/media/icons/new/compass.png" class = "left linkoptions headericon">
         </img>
         <div class = "tooltiptext center">WynnGPS</div>
