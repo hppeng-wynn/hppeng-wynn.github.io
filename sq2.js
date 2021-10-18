@@ -2,8 +2,8 @@ let equipment_keys = ['weapon', 'helmet', 'chestplate', 'leggings', 'boots', 'ri
 
 $(document).ready(function(){
     // inits
-    $("#column2").height($("#column1").height());
-    $("#column3").height($("#column1").height());
+    // $("#column2").height($("#column1").height());
+    // $("#column3").height($("#column1").height());
 
     $("#overall-window").toggle();
     $("#search-container").toggle();

@@ -198,7 +198,7 @@ td.damage-size {
 }
 
 .skp-tooltip {
-    font-size: 11px;
+    font-size: 0.7rem;
 }
 
 .draggable {
@@ -266,7 +266,8 @@ p.Damage {
     flex-direction: column; 
     vertical-align: top; 
     background-color: rgb(30, 30, 30); 
-    width: 20.5em; 
+    width: 20.5rem; 
+    height: 29.65rem;
 }
 
 .nDam {
