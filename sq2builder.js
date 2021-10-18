@@ -830,29 +830,29 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-        displayExpandedItem(player_build.items[i], buildFields[i], true);
+        displaysq2ExpandedItem(player_build.items[i], buildFields[i], true);
     }
 
-    displayWeaponBase(player_build);
-    displayArmorStats(player_build);
-    displayMinimalBuildStats("all-stats", player_build, build_overall_display_commands);
+    displaysq2WeaponBase(player_build);
+    displaysq2ArmorStats(player_build);
+    displayMinimalBuildStats("all-stats", player_build, build_all_display_commands);
     displayMinimalBuildStats("minimal-stats", player_build, build_basic_display_commands);
     displayMinimalBuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
     displaySetBonuses("set-info",player_build);
     displayNextCosts("int-info",player_build);
 
     let meleeStats = player_build.getMeleeStats();
-    displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
+    displaysq2MeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
-    displayDefenseStats(document.getElementById("minimal-defensive-stats"),player_build);
+    displaysq2DefenseStats(document.getElementById("minimal-defensive-stats"),player_build);
 
-    displayPoisonDamage(document.getElementById("build-poison-stats"),player_build);
+    displaysq2PoisonDamage(document.getElementById("build-poison-stats"),player_build);
 
     let spells = spell_table[player_build.weapon.get("type")];
     for (let i = 0; i < 4; ++i) {
         let parent_elem = document.getElementById("spell"+i+"-info");
         let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
-        displaySpellDamage(parent_elem, overallparent_elem, player_build, spells[i], i+1);
+        displaysq2SpellDamage(parent_elem, overallparent_elem, player_build, spells[i], i+1);
     }
 
     location.hash = encodeBuild();

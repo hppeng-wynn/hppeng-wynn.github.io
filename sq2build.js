@@ -299,17 +299,10 @@ class Build{
                 errors.push(new ItemNotFound(equipment[7], "necklace", true));
             }
         }
-        
         if(itemMap.get(equipment[8]) && itemMap.get(equipment[8]).category === "weapon") {
             const weapon = itemMap.get(equipment[8]);
             this.powders[4] = this.powders[4].slice(0,weapon.slots); 
             this.weapon = expandItem(weapon, this.powders[4]);
-            /*
-            if (equipment[8] !== "No Weapon") {
-                document.getElementsByClassName("powder-specials")[0].style.display = "grid";
-            } else {
-                document.getElementsByClassName("powder-specials")[0].style.display = "none";
-            }*/
         }else{
             try {
                 let weapon = getCustomFromHash(equipment[8]) ? getCustomFromHash(equipment[8]) : (getCraftFromHash(equipment[8]) ? getCraftFromHash(equipment[8]) : undefined);

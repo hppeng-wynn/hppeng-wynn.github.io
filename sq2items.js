@@ -143,7 +143,6 @@ function doItemSearch() {
     queries.push(new NameQuery(document.getElementById("name-choice").value.trim()));
 
     let categoryOrType = document.getElementById("category-choice").value;
-    console.log("category: "+categoryOrType)
     if (itemTypes.includes(categoryOrType)) {
         queries.push(new IdMatchQuery("type", categoryOrType));
     }
@@ -188,8 +187,6 @@ function doItemSearch() {
         console.log(items_copy.length);
     }
     // document.getElementById("summary").textContent = items_copy.length + " results."
-    console.log('a')
-    console.log(items_copy);
     displayItems(items_copy);
 }
 

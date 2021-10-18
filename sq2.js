@@ -51,53 +51,72 @@ $(document).ready(function(){
 
     // set search style
     $("#weapon-choice").on('input', function(){
-        set_input_style('weapon');
-        check_item($("#weapon-choice").val());
-        update_powder_count('weapon');
+        setTimeout(function() {
+            set_input_style('weapon');
+            check_item($("#weapon-choice").val());
+            update_powder_count('weapon');
+        }, 500);
     });
 
     $("#helmet-choice").on('input', function(){
-        set_input_style('helmet');
-        check_item($("#helmet-choice").val());
-        update_powder_count('helmet', '|example: t6t6');
+        setTimeout(function() {
+            set_input_style('helmet');
+            check_item($("#helmet-choice").val());
+            update_powder_count('helmet', '|example: t6t6');
+        }, 500);
     });
 
     $("#chestplate-choice").on('input', function(){
-        set_input_style('chestplate');
-        check_item($("#chestplate-choice").val());
-        update_powder_count('chestplate');
+        setTimeout(function() {
+            set_input_style('chestplate');
+            check_item($("#chestplate-choice").val());
+            update_powder_count('chestplate');
+        }, 500);
     });
 
     $("#leggings-choice").on('input', function(){
-        set_input_style('leggings');
-        check_item($("#leggings-choice").val());
-        update_powder_count('leggings');
+        setTimeout(function() {
+            set_input_style('leggings');
+            check_item($("#leggings-choice").val());
+            update_powder_count('leggings');
+        }, 500);
+
     });
 
     $("#boots-choice").on('input', function(){
-        set_input_style('boots');
-        check_item($("#boots-choice").val());
-        update_powder_count('boots');
+        setTimeout(function() {
+            set_input_style('boots');
+            check_item($("#boots-choice").val());
+            update_powder_count('boots');
+        }, 500);
     });
 
     $("#ring1-choice").on('input', function(){
-        set_input_style('ring1');
-        check_item($("#ring1-choice").val());
+        setTimeout(function() {
+            set_input_style('ring1');
+            check_item($("#ring1-choice").val());
+        }, 500);
     });
 
     $("#ring2-choice").on('input', function(){
-        set_input_style('ring2');
-        check_item($("#ring2-choice").val());
+        setTimeout(function() {
+            set_input_style('ring2');
+            check_item($("#ring2-choice").val());
+        }, 500);
     });
 
     $("#bracelet-choice").on('input', function(){
-        set_input_style('bracelet');
-        check_item($("#bracelet-choice").val());
+        setTimeout(function() {
+            set_input_style('bracelet');
+            check_item($("#bracelet-choice").val());
+        }, 500);
     });
 
     $("#necklace-choice").on('input', function(){
-        set_input_style('necklace');
-        check_item($("#necklace-choice").val());
+        setTimeout(function() {
+            set_input_style('necklace');
+            check_item($("#necklace-choice").val());
+        }, 500);
     });
     
     // control vars
