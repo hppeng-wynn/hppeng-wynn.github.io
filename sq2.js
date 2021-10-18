@@ -36,6 +36,21 @@ $(document).ready(function(){
         handle: '#boost-container-header',
     });
 
+    $("#overall-window").mousedown(function() {
+        $(".window-container").css("z-index", 10);
+        $(this).css("z-index", 11);
+    });
+
+    $("#search-container").mousedown(function() {
+        $(".window-container").css("z-index", 10);
+        $(this).css("z-index", 11);
+    });
+
+    $("#boost-container").mousedown(function() {
+        $(".window-container").css("z-index", 10);
+        $(this).css("z-index", 11);
+    });
+
     // update builds
     jQuery(document).on("keypress", '.item-name', function(event){
         if (event.keyCode == 13) {
