@@ -136,6 +136,77 @@ function displayItems(items_copy) {
 
 let items_expanded;
 
+    // updates the current search state from the search query input boxes
+    function updateSearch() {
+        // compile query expressions, aborting if nothing has changed or either fails to compile
+        const changed = searchFilterField.compile() | searchSortField.compile();
+        if (!changed || searchFilterField.output === null || searchSortField.output === null) return;
+
+        // update url query string
+        const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
+            + `?f=${encodeURIComponent(searchFilterField.value)}&s=${encodeURIComponent(searchSortField.value)}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+
+        // hide old search results
+        itemListFooter.innerText = '';
+        for (const itemEntry of itemEntries) itemEntry.classList.remove('visible');
+
+        // index and sort search results
+        const searchResults = [];
+        try {
+            for (let i = 0; i < searchDb.length; i++) {
+                const item = searchDb[i][0], itemExp = searchDb[i][1];
+                if (checkBool(searchFilterField.output.resolve(item, itemExp))) {
+                    searchResults.push({ item, itemExp, sortKeys: searchSortField.output.resolve(item, itemExp) });
+                }
+            }
+        } catch (e) {
+            searchFilterField.errorText.innerText = e.message;
+            return;
+        }
+        if (searchResults.length === 0) {
+            itemListFooter.innerText = 'No results!';
+            return;
+        }
+        try {
+            searchResults.sort((a, b) => {
+                try {
+                    return compareLexico(a.item, a.sortKeys, b.item, b.sortKeys);
+                } catch (e) {
+                    console.log(a.item, b.item);
+                    throw e;
+                }
+            });
+        } catch (e) {
+            searchSortField.errorText.innerText = e.message;
+            return;
+        }
+
+        // display search results
+        const searchMax = Math.min(searchResults.length, ITEM_LIST_SIZE);
+        for (let i = 0; i < searchMax; i++) {
+            const result = searchResults[i];
+            itemEntries[i].classList.add('visible');
+            displayExpandedItem(result.itemExp, `item-entry-${i}`);
+            if (result.sortKeys.length > 0) {
+                const sortKeyListContainer = document.createElement('div');
+                sortKeyListContainer.classList.add('itemleft');
+                const sortKeyList = document.createElement('ul');
+                sortKeyList.classList.add('item-entry-sort-key', 'itemp', 'T0');
+                sortKeyListContainer.append(sortKeyList);
+                for (let j = 0; j < result.sortKeys.length; j++) {
+                    const sortKeyElem = document.createElement('li');
+                    sortKeyElem.innerText = stringify(result.sortKeys[j]);
+                    sortKeyList.append(sortKeyElem);
+                }
+                itemEntries[i].append(sortKeyListContainer);
+            }
+        }
+        if (searchMax < searchResults.length) {
+            itemListFooter.innerText = `${searchResults.length - searchMax} more...`;
+        }
+    }
+
 function doItemSearch() {
     window.scrollTo(0, 0);
     let queries = [];
