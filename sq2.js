@@ -37,6 +37,18 @@ $(document).ready(function(){
     });
 
     // update builds
+    jQuery(document).on("keypress", '.item-name', function(event){
+        if (event.keyCode == 13) {
+            calculateBuild();
+        }
+    });
+
+    jQuery(document).on("keypress", '.powder-input', function(event){
+        if (event.keyCode == 13) {
+            calculateBuild();
+        }
+    });
+
     jQuery(document).on("keypress", '.skp-input', function(event){
         if (event.keyCode == 13) {
             updateStats();
