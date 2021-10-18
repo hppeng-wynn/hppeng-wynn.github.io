@@ -131,7 +131,7 @@ function displayItems(items_copy) {
         box.classList.add("box");
         box.id = "item"+i;
         items_parent.appendChild(box);
-        displayExpandedItem(item, box.id);
+        displaysq2ExpandedItem(item, box.id);
     }
 }
 
