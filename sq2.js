@@ -2,8 +2,6 @@ let equipment_keys = ['weapon', 'helmet', 'chestplate', 'leggings', 'boots', 'ri
 
 $(document).ready(function(){
     // inits
-    // $("#column2").height($("#column1").height());
-    // $("#column3").height($("#column1").height());
 
     $("#overall-window").toggle();
     $("#search-container").toggle();
@@ -36,6 +34,7 @@ $(document).ready(function(){
         handle: '#boost-container-header',
     });
 
+    // window priority
     $("#overall-window").mousedown(function() {
         $(".window-container").css("z-index", 10);
         $(this).css("z-index", 11);
@@ -52,98 +51,83 @@ $(document).ready(function(){
     });
 
     // update builds
-    jQuery(document).on("keypress", '.item-name', function(event){
-        if (event.keyCode == 13) {
-            calculateBuild();
-        }
+    jQuery(document).on("input", '.skp-input', function(event){
+        updateStatSchedule();
     });
 
-    jQuery(document).on("keypress", '.powder-input', function(event){
-        if (event.keyCode == 13) {
-            calculateBuild();
-        }
-    });
-
-    jQuery(document).on("keypress", '.skp-input', function(event){
-        if (event.keyCode == 13) {
-            updateStats();
-        }
-    });
-
-    jQuery(document).on("keypress", '.search-field', function(event){
-        if (event.keyCode == 13) {
-            doItemSearch();
-        }
+    jQuery(document).on("input", '.search-field', function(event){
+        doSearchSchedule();
     });
 
     // set listeners/checks
     $("#weapon-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('weapon');
-            check_item($("#weapon-choice").val());
-            update_powder_count('weapon');
-        }, 500);
+        set_input_style('weapon');
+        calcBuildSchedule();
+        update_powder_count('weapon');
+    });
+
+    $("#weapon-powder").on('input', function(){
+        calcBuildSchedule();
     });
 
     $("#helmet-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('helmet');
-            check_item($("#helmet-choice").val());
-            update_powder_count('helmet', '|example: t6t6');
-        }, 500);
+        set_input_style('helmet');
+        calcBuildSchedule();
+        update_powder_count('helmet', '|example: t6t6');
+    });
+
+    $("#helmet-powder").on('input', function(){
+        calcBuildSchedule();
     });
 
     $("#chestplate-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('chestplate');
-            check_item($("#chestplate-choice").val());
-            update_powder_count('chestplate');
-        }, 500);
+        set_input_style('chestplate');
+        calcBuildSchedule();
+        update_powder_count('chestplate');
+    });
+
+    $("#chestplate-powder").on('input', function(){
+        calcBuildSchedule();
     });
 
     $("#leggings-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('leggings');
-            check_item($("#leggings-choice").val());
-            update_powder_count('leggings');
-        }, 500);
+        set_input_style('leggings');
+        calcBuildSchedule();
+        update_powder_count('leggings');
+    });
 
+    $("#leggings-powder").on('input', function(){
+        calcBuildSchedule();
     });
 
     $("#boots-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('boots');
-            check_item($("#boots-choice").val());
-            update_powder_count('boots');
-        }, 500);
+        set_input_style('boots');
+        calcBuildSchedule();
+        update_powder_count('boots');
+    });
+
+    $("#boots-powder").on('input', function(){
+        calcBuildSchedule();
     });
 
     $("#ring1-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('ring1');
-            check_item($("#ring1-choice").val());
-        }, 500);
+        set_input_style('ring1');
+        calcBuildSchedule();
     });
 
     $("#ring2-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('ring2');
-            check_item($("#ring2-choice").val());
-        }, 500);
+        set_input_style('ring2');
+        calcBuildSchedule();
     });
 
     $("#bracelet-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('bracelet');
-            check_item($("#bracelet-choice").val());
-        }, 500);
+        set_input_style('bracelet');
+        calcBuildSchedule();
     });
 
     $("#necklace-choice").on('input', function(){
-        setTimeout(function() {
-            set_input_style('necklace');
-            check_item($("#necklace-choice").val());
-        }, 500);
+        set_input_style('necklace');
+        calcBuildSchedule();
     });
     
     // control vars
@@ -300,18 +284,6 @@ function set_input_style(type) {
     }
 }
 
-function check_item(name) {
-    if (itemMap.has(name)) {
-        calculateBuild()
-    }
-}
-
-function check_powder(powders) {
-    if (powders.length % 2 == 0) {
-        
-    }
-}
-
 function init_tooltip_loc(equipment){
     let ImgLoc = document.getElementById(equipment+'-img-loc').getBoundingClientRect();
     let tooltipRect = document.getElementById(equipment+"-tooltip").getBoundingClientRect();
@@ -320,30 +292,6 @@ function init_tooltip_loc(equipment){
     $("#"+equipment+"-tooltip").css('top', Math.min(ImgLoc.top, windowHeight - (tooltipRect.bottom - tooltipRect.top)));
     $("#"+equipment+"-tooltip").css('left', ImgLoc.right);
 }
-
-
-/*
-        document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
-            let item_name = event.target.value;
-            let nSlots = undefined;
-            if (itemMap.has(item_name)) {
-                let item = itemMap.get(item_name);
-                nSlots = item["slots"];
-                //console.log(item);
-            }
-            else {
-                let crafted_custom_item = getCraftFromHash(item_name) !== undefined ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) !== undefined ? getCustomFromHash(item_name) : undefined);
-                if (crafted_custom_item !== undefined) {
-                    nSlots = crafted_custom_item.statMap.get("slots");
-                } 
-            }
-            if (nSlots !== undefined) {
-                document.getElementById(armorType+"-slots").textContent = nSlots + " slots";
-            }
-            else {
-                document.getElementById(armorType+"-slots").textContent = "X slots";
-            }
-        });*/
 
 function update_powder_count(type, alt="") {
     let item = itemMap.get($("#"+type+"-choice").val());
@@ -361,4 +309,39 @@ function init_equipUI() {
     update_powder_count('chestplate');
     update_powder_count('leggings');
     update_powder_count('boots');
+}
+
+// phanta method of handling input <3
+let calcBuildTask = null;
+let updateStatTask = null;
+let doSearchTask = null;
+
+function calcBuildSchedule(){
+    if (calcBuildTask !== null) {
+        clearTimeout(calcBuildTask);
+    }
+    calcBuildTask = setTimeout(function(){
+        calcBuildTask = null;
+        calculateBuild();
+    }, 500);
+}
+
+function updateStatSchedule(){
+    if (updateStatTask !== null) {
+        clearTimeout(updateStatTask);
+    }
+    updateStatTask = setTimeout(function(){
+        updateStatTask = null;
+        updateStats();
+    }, 500);
+}
+
+function doSearchSchedule(){
+    if (doSearchTask !== null) {
+        clearTimeout(doSearchTask);
+    }
+    doSearchTask = setTimeout(function(){
+        doSearchTask = null;
+        doItemSearch();
+    }, 500);
 }
