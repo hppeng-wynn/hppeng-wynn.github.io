@@ -76,7 +76,7 @@ $(document).ready(function(){
         }
     });
 
-    // set search style
+    // set listeners/checks
     $("#weapon-choice").on('input', function(){
         setTimeout(function() {
             set_input_style('weapon');
@@ -222,61 +222,70 @@ $(document).ready(function(){
 
 
     // item tooltip
-    init_tooltip_loc()
 
     $("#weapon-img-loc").hover(function(event){
         $("#weapon-tooltip").show();
+        init_tooltip_loc('weapon');
     }, function(){
         $("#weapon-tooltip").hide();
     });
 
     $("#helmet-img-loc").hover(function(event){
         $("#helmet-tooltip").show();
+        init_tooltip_loc('helmet');
     }, function(){
         $("#helmet-tooltip").hide();
     });
 
     $("#chestplate-img-loc").hover(function(event){
         $("#chestplate-tooltip").show();
+        init_tooltip_loc('chestplate');
     }, function(){
         $("#chestplate-tooltip").hide();
     });
 
     $("#leggings-img-loc").hover(function(event){
         $("#leggings-tooltip").show();
+        init_tooltip_loc('leggings');
     }, function(){
         $("#leggings-tooltip").hide();
     });
 
     $("#boots-img-loc").hover(function(event){
         $("#boots-tooltip").show();
+        init_tooltip_loc('boots');
     }, function(){
         $("#boots-tooltip").hide();
     });
 
     $("#ring1-img-loc").hover(function(event){
         $("#ring1-tooltip").show();
+        init_tooltip_loc('ring1');
     }, function(){
         $("#ring1-tooltip").hide();
     });
 
     $("#ring2-img-loc").hover(function(event){
         $("#ring2-tooltip").show();
+        init_tooltip_loc('ring2');
     }, function(){
         $("#ring2-tooltip").hide();
     });
 
     $("#bracelet-img-loc").hover(function(event){
         $("#bracelet-tooltip").show();
+        init_tooltip_loc('bracelet');
     }, function(){
         $("#bracelet-tooltip").hide();
     });
 
     $("#necklace-img-loc").hover(function(event){
         $("#necklace-tooltip").show();
+        init_tooltip_loc('necklace');
     }, function(){
         $("#necklace-tooltip").hide();
     });
+
 });
 
 function set_input_style(type) {
@@ -297,12 +306,19 @@ function check_item(name) {
     }
 }
 
-function init_tooltip_loc(){
-    for (const i in equipment_keys) {
-        let ImgLoc = document.getElementById(equipment_keys[i]+'-img-loc').getBoundingClientRect();
-        $("#"+equipment_keys[i]+"-tooltip").css('top', ImgLoc.bottom);
-        $("#"+equipment_keys[i]+"-tooltip").css('left', ImgLoc.left);
+function check_powder(powders) {
+    if (powders.length % 2 == 0) {
+        
     }
+}
+
+function init_tooltip_loc(equipment){
+    let ImgLoc = document.getElementById(equipment+'-img-loc').getBoundingClientRect();
+    let tooltipRect = document.getElementById(equipment+"-tooltip").getBoundingClientRect();
+    let windowHeight = $(window).height()
+
+    $("#"+equipment+"-tooltip").css('top', Math.min(ImgLoc.top, windowHeight - (tooltipRect.bottom - tooltipRect.top)));
+    $("#"+equipment+"-tooltip").css('left', ImgLoc.right);
 }
 
 
