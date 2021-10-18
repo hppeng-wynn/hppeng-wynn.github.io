@@ -149,7 +149,7 @@ class Build{
                 this.powders[1] = this.powders[1].slice(0,chestplate.statMap.get("slots"));
                 chestplate.statMap.set("powders",this.powders[1].slice());
                 this.chestplate = chestplate.statMap;
-                applyArmorPowders(this.chesplate, this.powders[1]);
+                applyArmorPowders(this.chestplate, this.powders[1]);
                 if (this.chestplate.get("custom")) {
                     this.customItems.push(chestplate);
                 } else if (this.chestplate.get("crafted")) { //customs can also be crafted, but custom takes priority.
