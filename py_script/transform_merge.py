@@ -209,7 +209,13 @@ for item in items:
 
 items.extend(unchanged_items)
 items.extend(remap_items)
-
+with open("id_map.json","w") as id_mapfile:
+    print("{", file=id_mapfile)
+    outputs = []
+    for v, k in sorted((v, k) for k, v in id_map.items()):
+        outputs.append(f' "{k}": {v}')
+    print(',\n'.join(outputs), file=id_mapfile)
+    print("}", file=id_mapfile)
 with open("clean.json", "w") as outfile:
     json.dump(data, outfile, indent=2)
 with open("compress.json", "w") as outfile:
