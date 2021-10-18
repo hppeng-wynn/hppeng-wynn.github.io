@@ -4,6 +4,7 @@ html {
 
 * {
     font-family: 'Nunito', sans-serif;
+    font-size: .8vw;
 }
 
 input::-webkit-calendar-picker-indicator {
@@ -274,35 +275,35 @@ p.Damage {
     color: #FFAA00;
 }
 
-.eDam, .Earth {
+.eDam, .Earth, .Earth_powder {
     color: #00AA00;
 }
 
-.Earth:before { content: "\2724" ' '; }
+.Earth:before, .Earth_powder:before { content: "\2724" ' '; }
 
-.tDam, .Thunder {
+.tDam, .Thunder, .Thunder_powder {
     color: #FFFF55;
 }
 
-.Thunder:before { content: "\2726" ' '; }
+.Thunder:before, .Thunder_powder:before { content: "\2726" ' '; }
 
-.wDam, .Water {
+.wDam, .Water, .Water_powder {
     color: #55FFFF
 }
 
-.Water:before { content: "\2749" ' '; }
+.Water:before, .Water_powder:before { content: "\2749" ' '; }
 
-.fDam, .Fire {
+.fDam, .Fire, .Fire_powder {
     color: #FF5555;
 }
 
-.Fire:before { content: "\2739" ' '; }
+.Fire:before, .Fire_powder:before { content: "\2739" ' '; }
 
-.aDam, .Air {
+.aDam, .Air, .Air_powder {
     color: #FFFFFF
 }
 
-.Air:before { content: "\274b" ' '; }
+.Air:before, .Air_powder:before { content: "\274b" ' '; }
 
 .Neutral { color: #fa0; }
 .Neutral:before { content: "\2724" ' '; }
