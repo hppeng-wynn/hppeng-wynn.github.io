@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WynnBuilder^2</title>
+    <link rel="icon" href="media/icons/new/builder.png" type="image/icon type">
+    <link rel="stylesheet" href="normalize.css">
+    <!--link rel="stylesheet" href="sq2.css"-->
+    <link rel="stylesheet" href="sq2bs.css">
+
+    <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+</head>
+<body class="text-light" style="background-color: #121212;">
+    <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
+        <a href=""><img src="media/icons/new/atlas64.png" alt="place" title="WynnBuilder"><b>WynnBuilder</b></a>
+        <a href=""><img src="media/items/new/generic-scroll.png" alt="" title="Overall Build Stats"><b>Build Stats</b></a>
+        <a href=""><img src="media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
+        <a href=""><img src="media/icons/new/custom.png" alt="" title="Active boosts"><b>Class Boosts</b></a>
+    </div>
+    <div class="container py-5 vh-100">
+        <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
+            <div class="col-lg-6">
+                <div class="row row-cols-1 gy-4">
+                    <div class="col">
+                        <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5">
+                            <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="helmet-img-loc" style="width: 64px;">
+                                        <img class="img-fluid" src="media/items/new-resized/generic-helmet.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap" id="helmet-health" class="Health">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value=""/>
+                                                <datalist id="helmet-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="ring1-img-loc" style="width: 64px;">
+                                        <img id="ring1-img" class="img-fluid" src="media/items/new-resized/generic-ring.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No ring" value=""/>
+                                                <datalist id="ring1-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="ring1-powder" name="ring1-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="chestplate-img-loc" style="width: 64px;">
+                                        <img id="chestplate-img" class="img-fluid" src="media/items/new-resized/generic-chestplate.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value=""/>
+                                                <datalist id="chestplate-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="ring2-img-loc" style="width: 64px;">
+                                        <img id="ring2-img" class="img-fluid" src="media/items/new-resized/generic-ring.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No ring" value=""/>
+                                                <datalist id="ring2-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="ring2-powder" name="ring2-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="leggings-img-loc" style="width: 64px;">
+                                        <img id="leggings-img" class="img-fluid" src="media/items/new-resized/generic-leggings.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value=""/>
+                                                <datalist id="leggings-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="bracelet-img-loc" style="width: 64px;">
+                                        <img id="bracelet-img" class="img-fluid" src="media/items/new-resized/generic-bracelet.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value=""/>
+                                                <datalist id="bracelet-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="bracelet-powder" name="bracelet-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="boots-img-loc" style="width: 64px;">
+                                        <img id="boots-img" class="img-fluid" src="media/items/new-resized/generic-boots.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No boots" value=""/>
+                                                <datalist id="boots-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="boots-powder" name="boots-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="necklace-img-loc" style="width: 64px;">
+                                        <img id="necklace-img" class="img-fluid" src="media/items/new-resized/generic-necklace.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value=""/>
+                                                <datalist id="necklace-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="necklace-powder" name="necklace-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="row h-100 dark-shadow dark-6 rounded">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="weapon-img-loc" style="width: 64px;">
+                                        <img id="weapon-img" class="img-fluid" src="media/items/new-resized/generic-wand.png" style="width: 52px">
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col text-nowrap">
+                                                09000
+                                            </div>
+                                            <div class="col text-nowrap">
+                                                Lv. 123
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col g-0 rounded">
+                                        <div class="row row-cols-1 h-100 align-items-center">
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value=""/>
+                                                <datalist id="weapon-items">
+                                                </datalist>
+                                            </div>
+                                            <div class="col">
+                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col order-xl-0 order-1">smol setting placehold er</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row row-cols-1 gy-2 rounded dark-5 dark-shadow">
+                            <div class="col">
+                                <div class="row row-cols-2 row-cols-lg-5 gy-2 justify-content-center">
+                                    <div class="col text-center gx-2">
+                                        <div class="rounded dark-6 dark-shadow-sm px-2">
+                                            <label for="str-skp" class="eDam skp-tooltip">Strength</label>
+                                            <input type="string" id="str-skp" name="str-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <div id="str-skp-assign" class="skp-tooltip" style="display: none;">
+                                                Manually Assigned: 0
+                                            </div>
+                                            <div id="str-skp-base" class="skp-tooltip">
+                                                Original: 0
+                                            </div>
+                                            <div id="str-skp-pct" class="skp-tooltip">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center gx-2">
+                                        <div class="rounded dark-6 dark-shadow-sm px-2">
+                                            <label for="dex-skp" class="tDam skp-tooltip">Dexterity</label>
+                                            <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <div id="dex-skp-assign" class="skp-tooltip" style="display: none;">
+                                                Manually Assigned: 0
+                                            </div>
+                                            <div id="dex-skp-base" class="skp-tooltip">
+                                                Original: 0
+                                            </div>
+                                            <div id ="dex-skp-pct" class="skp-tooltip">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center gx-2">
+                                        <div class="rounded dark-6 dark-shadow-sm px-2">
+                                            <label for="int-skp" class="wDam skp-tooltip">Intelligence</label>
+                                            <input type="string" id="int-skp" name="int-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <div id="int-skp-assign" class="skp-tooltip" style="display: none;">
+                                                Manually Assigned: 0
+                                            </div>
+                                            <div id="int-skp-base" class="skp-tooltip">
+                                                Original: 0
+                                            </div>
+                                            <div id ="int-skp-pct" class="skp-tooltip">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center gx-2">
+                                        <div class="rounded dark-6 dark-shadow-sm px-2">
+                                            <label for="def-skp" class="fDam skp-tooltip">Defense</label>
+                                            <input type="string" id="def-skp" name="def-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <div id="def-skp-assign" class="skp-tooltip" style="display: none;">
+                                                Manually Assigned: 0
+                                            </div>
+                                            <div id="def-skp-base" class="skp-tooltip">
+                                                Original: 0
+                                            </div>
+                                            <div id ="def-skp-pct" class="skp-tooltip">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center gx-2">
+                                        <div class="rounded dark-6 dark-shadow-sm px-2">
+                                            <label for="agi-skp" class="aDam skp-tooltip">Agility</label>
+                                            <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <div id="agi-skp-assign" class="skp-tooltip" style="display: none;">
+                                                Manually Assigned: 0
+                                            </div>
+                                            <div id="agi-skp-base" class="skp-tooltip">
+                                                Original: 0
+                                            </div>
+                                            <div id ="agi-skp-pct" class="skp-tooltip">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col text-center">
+                                Assigned 2048 Skill points, :whathow:
+                                <div id="summary-box"></div>
+                                <div id="str-warnings"></div>
+                                <div id="dex-warnings"></div>
+                                <div id="int-warnings"></div>
+                                <div id="def-warnings"></div>
+                                <div id="agi-warnings"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 h-100">
+                <div class="row row-cols-1 h-100 rounded dark-shadow dark-6">
+                    <div class="col dark-4 rounded-top">
+                        <div class="row">
+                            <div id="tab-basic-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top">
+                                Basic
+                            </div>
+                            <div id="tab-offense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top">
+                                Offense
+                            </div>
+                            <div id="tab-defense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top">
+                                Defense
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col h-100">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid, culpa eum dicta cumque doloremque aperiam eius rerum repellendus officia nisi, vero ullam nesciunt tempore amet et odio quia ab. Nobis!  
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="sq2bs.js"></script>
+    <!--script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/build_utils.js"></script>
+    <script type="text/javascript" src="sq2icons.js"></script>
+    <script type="text/javascript" src="js/powders.js"></script>
+    <script type="text/javascript" src="js/skillpoints.js"></script>
+    <script type="text/javascript" src="js/damage_calc.js"></script>
+
+    <script type="text/javascript" src="sq2display_constants.js"></script>
+    <script type="text/javascript" src="js/display_constants.js"></script>
+
+    <script type="text/javascript" src="sq2display.js"></script>
+    <script type="text/javascript" src="js/display.js"></script>
+
+    <script type="text/javascript" src="js/query.js"></script>
+    <script type="text/javascript" src="js/load.js"></script>
+    <script type="text/javascript" src="js/load_ing.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script> 
+    <script type="text/javascript" src="js/craft.js"></script>  
+    <script type="text/javascript" src="sq2build.js"></script>
+    <script type="text/javascript" src="sq2builder.js"></script>
+    <script type="text/javascript" src="sq2items.js"></script>
+    <script type="text/javascript" src="sq2.js"></script--> 
+</body>
+</html> 

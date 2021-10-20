@@ -1,0 +1,183 @@
+
+
+/* sidebar stuff */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 3.5vw; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+.sidebar:hover {
+    width: 11vw;
+}
+
+.sidebar a {
+    padding: .4vw .4vw .4vw .4vw;
+    display: block;
+    color: white;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sidebar a img {
+    margin-right: .6vw;
+    width: 2.5vw;
+}
+
+.sidebar a b {
+    font-size: .8vw;
+}
+
+.sidebar a:hover {
+    background-color: hsl(0, 0%, 8%);
+    color: rgb(210, 210, 210);
+}
+
+@media screen and (max-width: 992px) {
+    .sidebar {display: none;}
+}
+
+/* builder containers */
+
+/* wynn-related css(es) */
+.Health {
+    color: #AA0000
+}
+
+.Health:before {
+    content: "\2764" ' ';
+}
+
+.Normal {
+    color: #FFFFFF;
+}
+
+.Unique {
+    color: #FFFF55;
+}
+
+.Rare {
+    color: #FF55FF;
+}
+
+.Legendary {
+    color: #55FFFF;
+}
+
+.Fabled {
+    color: #FF5555;
+}
+
+.Mythic {
+    color: #AA00AA
+}
+
+.eDam, .Earth, .Earth_powder {
+    color: #00AA00;
+}
+
+.eDam:before, .Earth:before, .Earth_powder:before { content: "\2724" ' '; }
+
+.tDam, .Thunder, .Thunder_powder {
+    color: #FFFF55;
+}
+
+.tDam:before, .Thunder:before, .Thunder_powder:before { content: "\2726" ' '; }
+
+.wDam, .Water, .Water_powder {
+    color: #55FFFF
+}
+
+.wDam:before, .Water:before, .Water_powder:before { content: "\2749" ' '; }
+
+.fDam, .Fire, .Fire_powder {
+    color: #FF5555;
+}
+
+.fDam:before, .Fire:before, .Fire_powder:before { content: "\2739" ' '; }
+
+.aDam, .Air, .Air_powder {
+    color: #FFFFFF
+}
+
+.aDam:before, .Air:before, .Air_powder:before { content: "\274b" ' '; }
+
+.nDam, .Neutral {
+    color: #FFAA00;
+}
+
+.nDam:before, .Neutral:before { content: "\2724" ' '; }
+
+/* equipment field specifics */
+input {
+    min-width: 0;
+    width: 100%;
+}
+
+input.equipment-input {
+    font-weight: bold;
+}
+
+/* sp field */
+.skp-tooltip {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Fake button for build stats */
+.fake-button {
+    cursor: pointer;
+}
+
+.fake-button:hover {
+    background-color: hsl(0, 0%, 14%);
+}
+
+/* material design dark mode */
+.dark-1 {
+    background-color: hsl(0, 0%, 5%) !important;
+}
+
+.dark-2 {
+    background-color: hsl(0, 0%, 7%) !important;
+}
+
+.dark-3 {
+    background-color: hsl(0, 0%, 8%) !important;
+}
+
+.dark-4 {
+    background-color: hsl(0, 0%, 9%) !important;
+}
+
+.dark-5 {
+    background-color: hsl(0, 0%, 11%) !important;
+}
+
+.dark-6 {
+    background-color: hsl(0, 0%, 12%) !important;
+}
+
+.dark-7 {
+    background-color: hsl(0, 0%, 14%) !important;
+}
+
+.dark-8 {
+    background-color: hsl(0, 0%, 15%) !important;
+}
+
+.dark-9 {
+    background-color: hsl(0, 0%, 16%) !important;
+}
+
+.dark-shadow {
+    box-shadow: 0px 0px 20px 3px black;
+}
+
+.dark-shadow-sm {
+    box-shadow: 0px 0px 10px 2px black;
+}
