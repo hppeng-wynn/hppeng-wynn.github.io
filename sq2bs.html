@@ -8,21 +8,18 @@
     <link rel="stylesheet" href="sq2bs.css">
 
     <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
-<body class="text-light" style="background-color: #121212;">
+<body class="text-light d-flex justify-content-center" style="background-color: #121212;">
     <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
         <a href=""><img src="media/icons/new/atlas64.png" alt="place" title="WynnBuilder"><b>WynnBuilder</b></a>
         <a href=""><img src="media/items/new/generic-scroll.png" alt="" title="Overall Build Stats"><b>Build Stats</b></a>
         <a href=""><img src="media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
         <a href=""><img src="media/icons/new/custom.png" alt="" title="Active boosts"><b>Class Boosts</b></a>
     </div>
-    <div class="container py-5 vh-100">
+    <div class="container py-5 vh-100 mx-0 mx-lg-auto">
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
             <div class="col-lg-6">
                 <div class="row row-cols-1 gy-4">
@@ -30,15 +27,15 @@
                         <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5">
                             <div class="col-auto rounded order-xl-0 order-0">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="helmet-img-loc" style="width: 64px;">
-                                        <img class="img-fluid" src="media/items/new-resized/generic-helmet.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="helmet-img-loc">
+                                        <img class="img-fluid" src="media/items/new/generic-helmet.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap" id="helmet-health" class="Health">
+                                            <div class="col text-nowrap scaled-font" id="helmet-health" class="Health">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -46,12 +43,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="helmet-items" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value=""/>
                                                 <datalist id="helmet-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -59,15 +56,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-1">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="ring1-img-loc" style="width: 64px;">
-                                        <img id="ring1-img" class="img-fluid" src="media/items/new-resized/generic-ring.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="ring1-img-loc">
+                                        <img id="ring1-img" class="img-fluid" src="media/items/new/generic-ring.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -75,12 +72,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No ring" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="ring1-items" id="ring1-choice" name="ring1-choice" placeholder="No ring" value=""/>
                                                 <datalist id="ring1-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="ring1-powder" name="ring1-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="ring1-powder" name="ring1-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -88,15 +85,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-0">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="chestplate-img-loc" style="width: 64px;">
-                                        <img id="chestplate-img" class="img-fluid" src="media/items/new-resized/generic-chestplate.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="chestplate-img-loc">
+                                        <img id="chestplate-img" class="img-fluid" src="media/items/new/generic-chestplate.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -104,12 +101,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="chestplate-items" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value=""/>
                                                 <datalist id="chestplate-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -117,15 +114,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-1">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="ring2-img-loc" style="width: 64px;">
-                                        <img id="ring2-img" class="img-fluid" src="media/items/new-resized/generic-ring.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="ring2-img-loc">
+                                        <img id="ring2-img" class="img-fluid" src="media/items/new/generic-ring.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -133,12 +130,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No ring" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="ring2-items" id="ring2-choice" name="ring2-choice" placeholder="No ring" value=""/>
                                                 <datalist id="ring2-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="ring2-powder" name="ring2-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="ring2-powder" name="ring2-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -146,15 +143,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-0">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="leggings-img-loc" style="width: 64px;">
-                                        <img id="leggings-img" class="img-fluid" src="media/items/new-resized/generic-leggings.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="leggings-img-loc">
+                                        <img id="leggings-img" class="img-fluid" src="media/items/new/generic-leggings.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -162,12 +159,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="leggings-items" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value=""/>
                                                 <datalist id="leggings-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -175,15 +172,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-1">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="bracelet-img-loc" style="width: 64px;">
-                                        <img id="bracelet-img" class="img-fluid" src="media/items/new-resized/generic-bracelet.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="bracelet-img-loc">
+                                        <img id="bracelet-img" class="img-fluid" src="media/items/new/generic-bracelet.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -191,12 +188,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="bracelet-items" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value=""/>
                                                 <datalist id="bracelet-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="bracelet-powder" name="bracelet-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="bracelet-powder" name="bracelet-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -204,15 +201,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-0">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="boots-img-loc" style="width: 64px;">
-                                        <img id="boots-img" class="img-fluid" src="media/items/new-resized/generic-boots.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="boots-img-loc">
+                                        <img id="boots-img" class="img-fluid" src="media/items/new/generic-boots.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -220,12 +217,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No boots" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="boots-items" id="boots-choice" name="boots-choice" placeholder="No boots" value=""/>
                                                 <datalist id="boots-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="boots-powder" name="boots-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="boots-powder" name="boots-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -233,15 +230,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-1">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="necklace-img-loc" style="width: 64px;">
-                                        <img id="necklace-img" class="img-fluid" src="media/items/new-resized/generic-necklace.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="necklace-img-loc">
+                                        <img id="necklace-img" class="img-fluid" src="media/items/new/generic-necklace.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -249,12 +246,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="necklace-items" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value=""/>
                                                 <datalist id="necklace-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="necklace-powder" name="necklace-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="necklace-powder" name="necklace-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -262,15 +259,15 @@
                             </div>
                             <div class="col-auto rounded order-xl-0 order-1">
                                 <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm" id="weapon-img-loc" style="width: 64px;">
-                                        <img id="weapon-img" class="img-fluid" src="media/items/new-resized/generic-wand.png" style="width: 52px">
+                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="weapon-img-loc">
+                                        <img id="weapon-img" class="img-fluid" src="media/items/new/generic-wand.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 09000
                                             </div>
-                                            <div class="col text-nowrap">
+                                            <div class="col text-nowrap scaled-font">
                                                 Lv. 123
                                             </div>
                                         </div>
@@ -278,12 +275,12 @@
                                     <div class="col g-0 rounded">
                                         <div class="row row-cols-1 h-100 align-items-center">
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value=""/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" list="weapon-items" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value=""/>
                                                 <datalist id="weapon-items">
                                                 </datalist>
                                             </div>
                                             <div class="col">
-                                                <input class="equipment-input border-dark text-light dark-7 rounded" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders"/>
+                                                <input class="equipment-input border-dark text-light dark-7 rounded scaled-font" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders"/>
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +296,7 @@
                                     <div class="col text-center gx-2">
                                         <div class="rounded dark-6 dark-shadow-sm px-2">
                                             <label for="str-skp" class="eDam skp-tooltip">Strength</label>
-                                            <input type="string" id="str-skp" name="str-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <input type="string" id="str-skp" name="str-skp" value="0" class="skp-tooltip border-dark dark-7 text-light text-center"/>
                                             <div id="str-skp-assign" class="skp-tooltip" style="display: none;">
                                                 Manually Assigned: 0
                                             </div>
@@ -313,7 +310,7 @@
                                     <div class="col text-center gx-2">
                                         <div class="rounded dark-6 dark-shadow-sm px-2">
                                             <label for="dex-skp" class="tDam skp-tooltip">Dexterity</label>
-                                            <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-tooltip border-dark dark-7 text-light text-center"/>
                                             <div id="dex-skp-assign" class="skp-tooltip" style="display: none;">
                                                 Manually Assigned: 0
                                             </div>
@@ -327,7 +324,7 @@
                                     <div class="col text-center gx-2">
                                         <div class="rounded dark-6 dark-shadow-sm px-2">
                                             <label for="int-skp" class="wDam skp-tooltip">Intelligence</label>
-                                            <input type="string" id="int-skp" name="int-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <input type="string" id="int-skp" name="int-skp" value="0" class="skp-tooltip border-dark dark-7 text-light text-center"/>
                                             <div id="int-skp-assign" class="skp-tooltip" style="display: none;">
                                                 Manually Assigned: 0
                                             </div>
@@ -341,7 +338,7 @@
                                     <div class="col text-center gx-2">
                                         <div class="rounded dark-6 dark-shadow-sm px-2">
                                             <label for="def-skp" class="fDam skp-tooltip">Defense</label>
-                                            <input type="string" id="def-skp" name="def-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <input type="string" id="def-skp" name="def-skp" value="0" class="skp-tooltip border-dark dark-7 text-light text-center"/>
                                             <div id="def-skp-assign" class="skp-tooltip" style="display: none;">
                                                 Manually Assigned: 0
                                             </div>
@@ -355,7 +352,7 @@
                                     <div class="col text-center gx-2">
                                         <div class="rounded dark-6 dark-shadow-sm px-2">
                                             <label for="agi-skp" class="aDam skp-tooltip">Agility</label>
-                                            <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-input border-dark dark-7 text-light text-center"/>
+                                            <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-tooltip border-dark dark-7 text-light text-center"/>
                                             <div id="agi-skp-assign" class="skp-tooltip" style="display: none;">
                                                 Manually Assigned: 0
                                             </div>
@@ -432,7 +429,6 @@
     <script type="text/javascript" src="js/craft.js"></script>  
     <script type="text/javascript" src="sq2build.js"></script>
     <script type="text/javascript" src="sq2builder.js"></script>
-    <script type="text/javascript" src="sq2items.js"></script>
-    <script type="text/javascript" src="sq2.js"></script--> 
+    <script type="text/javascript" src="sq2items.js"></script-->
 </body>
 </html> 
