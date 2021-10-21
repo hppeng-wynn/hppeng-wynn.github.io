@@ -1,4 +1,6 @@
 $().ready(function(){
+    // test
+
     // sp fields
     jQuery(document).on("input", '.skp-update', function(){
         updateStatSchedule();
@@ -136,12 +138,15 @@ function update_fields(type, alt="") {
     let item = itemMap.get($("#"+type+"-choice").val());
     if (item) {
         $("#"+type+"-powder").attr("placeholder", item["slots"]+" slots"+alt);
-        $("#"+type+"-choice").removeClass("text-light").addClass(item.tier);
+        $("#"+type+"-choice").removeClass("text-light is-invalid").addClass(item.tier);
         if (type == 'weapon') {
             $("#"+type+"-img").attr('src', 'media/items/new/generic-'+item.type+'.png');
         }
-    } else {
-        $("#"+type+"-choice").removeClass('Normal Unique Rare Legendary Fabled Mythic Set').addClass("text-light");
+    } else if ($("#"+type+"-choice").val() == '') {
+        $("#"+type+"-choice").removeClass("is-invalid");
+    }
+    else {
+        $("#"+type+"-choice").removeClass('Normal Unique Rare Legendary Fabled Mythic Set').addClass("text-light is-invalid");
     }
 }
 

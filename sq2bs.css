@@ -71,32 +71,31 @@
 }
 
 .Normal {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .Unique {
-    color: #FFFF55;
+    color: #FFFF55 !important;
 }
 
 .Rare {
-    color: #FF55FF;
+    color: #FF55FF !important;
 }
 
 .Legendary {
-    color: #55FFFF;
+    color: #55FFFF !important;
 }
 
 .Fabled {
-    color: #FF5555;
+    color: #FF5555 !important;
 }
 
 .Mythic {
-    color: #AA00AA;
+    color: #AA00AA !important;
 }
 
 .Set {
-    display: inline;
-    color: #5f5;
+    color: #5f5 !important;
 }
 
 .eDam, .Earth, .Earth_powder {
@@ -146,6 +145,11 @@
 }
 
 /* equipment field specifics */
+.form-control {
+    transition: none !important;
+    box-shadow: none !important;
+    width: 95% !important;
+}
 
 .text-right {
     float: right;
