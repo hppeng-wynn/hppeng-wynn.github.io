@@ -1,4 +1,6 @@
-
+* {
+    font-family: 'Nunito', sans-serif;
+}
 
 /* sidebar stuff */
 .sidebar {
@@ -44,12 +46,28 @@
 /* builder containers */
 
 /* wynn-related css(es) */
+.positive {
+    color: #5f5;
+}
+
+.negative {
+    color: #f55;
+}
+
 .Health {
     color: #AA0000
 }
 
 .Health:before {
     content: "\2764" ' ';
+}
+
+.lvl:before {
+    content: 'Lv. '
+}
+
+.Damage { 
+    color: rgb(255, 198, 85)
 }
 
 .Normal {
@@ -73,7 +91,12 @@
 }
 
 .Mythic {
-    color: #AA00AA
+    color: #AA00AA;
+}
+
+.Set {
+    display: inline;
+    color: #5f5;
 }
 
 .eDam, .Earth, .Earth_powder {
@@ -110,9 +133,37 @@
     color: #FFAA00;
 }
 
-.nDam:before, .Neutral:before { content: "\2724" ' '; }
+.nDam:before, .Neutral:before { 
+    content: "\2724" ' '; 
+}
+
+.Mana { 
+    color: #5ff;
+}
+
+.Mana:after { 
+    content: "\273A"
+}
 
 /* equipment field specifics */
+
+.text-right {
+    float: right;
+}
+
+.text-left {
+    float: left;
+}
+
+.spell-display p {
+    margin-bottom: 0;
+}
+
+.spell-display b {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
 input {
     min-width: 0;
     width: 100%;
@@ -131,34 +182,72 @@ input.equipment-input {
     font-weight: bold;
 }
 
+.warning {
+    color: #ff8180;
+    font-size: 1.875rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
 .scaled-item-icon {
-    width: 128px;
+    width: 8rem;
 }
 
 .scaled-item-icon img {
-    width: 104px;
+    width: 6.5rem;
 }
 
-@media screen and (min-width: 992px) {
-    .scaled-font { 
-        font-size: 1rem; 
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .scaled-font {
+        font-size: .8rem;
     }
-
+    
     .skp-tooltip {
-        font-size: .875rem;
-        font-weight: bold;
+        font-size: .625rem;
     }
 
     .scaled-item-icon {
-        width: 64px;
+        width: 3.2rem;
     }
-    
+
     .scaled-item-icon img {
-        width: 56px;
+        width: 2.8rem;
+    }
+
+    .warning {
+        font-size: .7rem;
+    }
+
+    .spell-display b {
+        font-size: 1rem;
     }
 }
 
+@media screen and (min-width: 1400px) {
+    .scaled-font { 
+        font-size: 1rem;
+    }
 
+    .skp-tooltip {
+        font-size: .78rem;
+    }
+
+    .scaled-item-icon {
+        width: 4rem;
+    }
+    
+    .scaled-item-icon img {
+        width: 3.5rem;
+    }
+
+    .warning {
+        font-size: .8rem;
+    }
+
+    .spell-display b {
+        font-size: 1.2rem;
+    }
+}
 
 /* Fake button for build stats */
 .fake-button {
@@ -208,8 +297,8 @@ input.equipment-input {
 
 .dark-shadow {
     box-shadow: 0rem 0rem 1.25rem 0.1875rem black;
-  }
+}
   
   .dark-shadow-sm {
     box-shadow: 0rem 0rem 0.625rem 0.125rem black;
-  }
+}

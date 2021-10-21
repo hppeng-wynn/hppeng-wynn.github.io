@@ -165,7 +165,7 @@ function init() {
     });*/
 
     decodeBuild(url_tag);
-    init_equipUI();
+    init_field_styles();
 }
 
 function getItemNameFromID(id) {
@@ -469,7 +469,7 @@ function calculateBuild(save_skp, skp){
         const assigned = player_build.base_skillpoints;
         const skillpoints = player_build.total_skillpoints;
         for (let i in skp_order){ //big bren
-            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+            setText(skp_order[i] + "-skp-base", "Original: " + skillpoints[i]);
         }
 
         for (let id of editable_item_fields) {
@@ -761,10 +761,10 @@ function calculateBuildStats() {
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpRow = document.createElement("p");
-    let td = document.createElement("p");
+    // let td = document.createElement("p");
 
     let remainingSkp = document.createElement("p");
-    remainingSkp.classList.add("center");
+    remainingSkp.classList.add("scaled-font");
     let remainingSkpTitle = document.createElement("b");
     remainingSkpTitle.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Remaining skillpoints: ";
     let remainingSkpContent = document.createElement("b");
@@ -778,13 +778,14 @@ function calculateBuildStats() {
     summarybox.append(skpRow);
     summarybox.append(remainingSkp);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
-        let skpWarning = document.createElement("p");
+        let skpWarning = document.createElement("span");
         //skpWarning.classList.add("itemp");
         skpWarning.classList.add("warning");
-        skpWarning.classList.add("small-text");
+        // skpWarning.classList.add("skp-tooltip");
         skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
         let skpCount = document.createElement("p");
-        skpCount.classList.add("small-text");
+        skpCount.classList.add("warning");
+        // skpCount.classList.add("skp-tooltip");
         skpCount.textContent = "For level " + (player_build.level>101 ? "101+" : player_build.level)  + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
         summarybox.append(skpWarning);
         summarybox.append(skpCount);
@@ -830,14 +831,13 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-        displaysq2ExpandedItem(player_build.items[i], buildFields[i], true);
+        // displaysq2ExpandedItem(player_build.items[i], buildFields[i], true);
     }
 
-    displaysq2WeaponBase(player_build);
     displaysq2ArmorStats(player_build);
-    displayMinimalBuildStats("all-stats", player_build, build_all_display_commands);
-    displayMinimalBuildStats("minimal-stats", player_build, build_basic_display_commands);
-    displayMinimalBuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
+    displaysq2BuildStats("all-stats", player_build, build_all_display_commands);
+    displaysq2BuildStats("minimal-stats", player_build, build_basic_display_commands);
+    displaysq2BuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
     displaySetBonuses("set-info",player_build);
     displayNextCosts("int-info",player_build);
 

@@ -1,4 +1,4 @@
-function displayMinimalBuildStats(parent_id,build,command_group){
+function displaysq2BuildStats(parent_id,build,command_group){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
     // !elemental is some janky hack for elemental damage.
@@ -22,35 +22,13 @@ function displayMinimalBuildStats(parent_id,build,command_group){
 
     for (const command of display_commands) {
         // style instructions
+        
         if (command.charAt(0) === "#") {
-            if (command === "#cdiv") {
-                active_elem = document.createElement('div');
-                active_elem.classList.add('itemcenter');
+            if (command === "#defense-stats") {
+                displaysq2DefenseStats(parent_div, build, true);
             }
-            else if (command === "#ldiv") {
-                active_elem = document.createElement('div');
-                active_elem.classList.add('itemleft');
-            }
-            else if (command === "#table") {
-                active_elem = document.createElement('table');
-                active_elem.classList.add('full-border')
-            }
-            else if (command === "#defense-stats") {
-                displaysq2DefenseStats(active_elem, build, true);
-            }
-            else if(command === "#spacer") {
-                let row = document.createElement('tr');
-                let filler = document.createElement('td');
-                filler.colSpan = 2
-                filler.classList.add('center')
-                filler.classList.add('shaded-table')
-                filler.classList.add('spacer-table')
-                row.appendChild(filler);
-                active_elem.appendChild(row);
-            }
-            parent_div.appendChild(active_elem);
         }
-        else if (command.charAt(0) === "!") {
+        if (command.charAt(0) === "!") {
             // TODO: This is sooo incredibly janky.....
             if (command === "!elemental") {
                 elemental_format = !elemental_format;
@@ -79,12 +57,14 @@ function displayMinimalBuildStats(parent_id,build,command_group){
                 if (id === "poison" && id_val > 0) {
                     id_val = Math.ceil(id_val*build.statMap.get("poisonPct")/100);
                 }
-                displaysq2FixedID(active_elem, id, id_val, elemental_format, style);
+                displaysq2FixedID(parent_div, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
-                    let row = document.createElement('tr');
-                    let value_elem = document.createElement('td');
-                    value_elem.classList.add('right');
-                    value_elem.setAttribute("colspan", "2");
+                    let row = document.createElement('div');
+                    row.classList.add("row")
+                    let value_elem = document.createElement('div');
+                    value_elem.classList.add('col');
+                    value_elem.classList.add('text-end');
+
                     let prefix_elem = document.createElement('b');
                     prefix_elem.textContent = "\u279C With Strength: ";
                     let number_elem = document.createElement('b');
@@ -94,7 +74,7 @@ function displayMinimalBuildStats(parent_id,build,command_group){
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
 
-                    active_elem.appendChild(row);
+                    parent_div.appendChild(row);
                 }
                 
             // sp thingy
@@ -109,7 +89,7 @@ function displayMinimalBuildStats(parent_id,build,command_group){
                     style = "negative";
                 }
                 if (diff != 0) {
-                    displaysq2FixedID(active_elem, id, diff, false, style);
+                    displaysq2FixedID(parent_div, id, diff, false, style);
                 }
             }
         }
@@ -565,11 +545,12 @@ function displaysq2WeaponBase(build) {
 
 function displaysq2FixedID(active, id, value, elemental_format, style) {
     if (style) {
-        let row = document.createElement('tr');
-        let desc_elem = document.createElement('td');
-        desc_elem.classList.add('shaded-table');
-        desc_elem.classList.add('left');
-        desc_elem.classList.add('se-padded');
+        let row = document.createElement('div');
+        row.classList.add("row");
+        let desc_elem = document.createElement('div');
+        desc_elem.classList.add('col');
+        desc_elem.classList.add('text-start');
+
         if (elemental_format) {
             apply_elemental_format(desc_elem, id);
         }
@@ -578,10 +559,9 @@ function displaysq2FixedID(active, id, value, elemental_format, style) {
         }
         row.appendChild(desc_elem);
 
-        let value_elem = document.createElement('td');
-        value_elem.classList.add('right');
-        value_elem.classList.add('shaded-table');
-        value_elem.classList.add('se-padded');
+        let value_elem = document.createElement('div');
+        value_elem.classList.add('col');
+        value_elem.classList.add('text-end');
         value_elem.classList.add(style);
         value_elem.textContent = value + idSuffixes[id];
         row.appendChild(value_elem);
@@ -610,19 +590,13 @@ function displaysq2PoisonDamage(overallparent_elem, build) {
     overallparent_elem.textContent = "";
 
     //Title
-    let title_elemavg = document.createElement("p");
-    title_elemavg.classList.add('no-newline');
-    // title_elemavg.classList.add("smalltitle");
-    // title_elemavg.classList.add("Normal");
+    let title_elemavg = document.createElement("b");
     title_elemavg.textContent = "Poison Stats";
     overallparent_elem.append(title_elemavg);
 
     let overallpoisonDamage = document.createElement("p");
-    // overallpoisonDamage.classList.add("lessbottom");
-    let overallpoisonDamageFirst = document.createElement("p");
-    let overallpoisonDamageSecond = document.createElement("p");
-    overallpoisonDamageFirst.classList.add('no-newline');
-    overallpoisonDamageSecond.classList.add('no-newline');
+    let overallpoisonDamageFirst = document.createElement("span");
+    let overallpoisonDamageSecond = document.createElement("span");
     let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
     overallpoisonDamageFirst.textContent = "Poison Tick: ";
     overallpoisonDamageSecond.textContent = Math.max(poison_tick,0);
@@ -634,8 +608,8 @@ function displaysq2PoisonDamage(overallparent_elem, build) {
 }
 
 function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
-    console.log("Melee Stats");
-    console.log(meleeStats);
+    // console.log("Melee Stats");
+    // console.log(meleeStats);
     let tooltipinfo = meleeStats[13];
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
@@ -667,9 +641,7 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
     parent_elem.append(document.createElement("br"));
 
     //overall title
-    let title_elemavg = document.createElement("p");
-    title_elemavg.classList.add('no-newline');
-    title_elemavg.classList.add("box-title");
+    let title_elemavg = document.createElement("b");
     title_elemavg.textContent = "Melee Stats";
     overallparent_elem.append(title_elemavg);
     
@@ -684,12 +656,10 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     //overall average DPS
     let overallaverageDamage = document.createElement("p");
-    let overallaverageDamageFirst = document.createElement("p");
-    overallaverageDamageFirst.classList.add('no-newline');
+    let overallaverageDamageFirst = document.createElement("span");
     overallaverageDamageFirst.textContent = "Average DPS: "
 
-    let overallaverageDamageSecond = document.createElement("p");
-    overallaverageDamageSecond.classList.add('no-newline');
+    let overallaverageDamageSecond = document.createElement("span");
     overallaverageDamageSecond.classList.add("Damage");
     overallaverageDamageSecond.textContent = stats[10];
     overallaverageDamage.appendChild(overallaverageDamageFirst);
@@ -707,11 +677,9 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     //overall attack speed
     let overallatkSpd = document.createElement("p");
-    let overallatkSpdFirst = document.createElement("p");
-    overallatkSpdFirst.classList.add('no-newline');
+    let overallatkSpdFirst = document.createElement("span");
     overallatkSpdFirst.textContent = "Attack Speed: ";
-    let overallatkSpdSecond = document.createElement("p");
-    overallatkSpdSecond.classList.add('no-newline');
+    let overallatkSpdSecond = document.createElement("span");
     overallatkSpdSecond.classList.add("Damage");
     overallatkSpdSecond.textContent =  attackSpeeds[stats[11]];
     overallatkSpd.appendChild(overallatkSpdFirst);
@@ -758,11 +726,9 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     //overall average DPS
     let singleHitDamage = document.createElement("p");
-    let singleHitDamageFirst = document.createElement("p");
-    singleHitDamageFirst.classList.add('no-newline');
+    let singleHitDamageFirst = document.createElement("span");
     singleHitDamageFirst.textContent = "Single Hit Average: ";
-    let singleHitDamageSecond = document.createElement("p");
-    singleHitDamageSecond.classList.add('no-newline');
+    let singleHitDamageSecond = document.createElement("span");
     singleHitDamageSecond.classList.add("Damage");
     singleHitDamageSecond.textContent = stats[12].toFixed(2);
     tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${stats[6][2].toFixed(2)} + ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${stats[7][2].toFixed(2)}`;
@@ -834,7 +800,6 @@ function displaysq2ArmorStats(build) {
         document.getElementById(armor_keys[i]+'-health').textContent = build[armor_keys[i]].get('hp');
         document.getElementById(armor_keys[i]+'-lv').textContent = build[armor_keys[i]].get('lvl');
     }
-
 }
 
 function displaysq2DefenseStats(parent_elem, build, insertSummary){
@@ -846,8 +811,7 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     const stats = defenseStats.slice();    
 
     // parent_elem.append(document.createElement("br"));
-    let statsTable = document.createElement("table");
-    statsTable.classList.add("full-border");
+    let statsTable = document.createElement("div");
 
     //[total hp, ehp, total hpr, ehpr, [def%, agi%], [edef,tdef,wdef,fdef,adef]]
     for(const i in stats){
@@ -861,16 +825,17 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     }
     
     //total HP
-    let hpRow = document.createElement("tr");
-    let hp = document.createElement("td");
+    let hpRow = document.createElement("div");
+    hpRow.classList.add('row');
+    let hp = document.createElement("div");
+    hp.classList.add('col');
     hp.classList.add("Health");
-    hp.classList.add("shaded-table");
-    hp.classList.add("left");
+    hp.classList.add("text-start");
     hp.textContent = "Total HP:";  
-    let boost = document.createElement("td");
+    let boost = document.createElement("div");
+    boost.classList.add('col');
     boost.textContent = stats[0];
-    boost.classList.add("right");
-    boost.classList.add("shaded-table")
+    boost.classList.add("text-end");
     
     hpRow.appendChild(hp);
     hpRow.append(boost);
@@ -887,16 +852,17 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     if (!defMult) {defMult = 1}
 
     //EHP
-    let ehpRow = document.createElement("tr");
-    let ehp = document.createElement("td");
-    ehp.classList.add("left");
-    ehp.classList.add("shaded-table");
+    let ehpRow = document.createElement("div");
+    ehpRow.classList.add("row");
+    let ehp = document.createElement("div");
+    ehp.classList.add("col");
+    ehp.classList.add("text-start");
     ehp.textContent = "Effective HP:";
 
-    boost = document.createElement("td");
+    boost = document.createElement("div");
     boost.textContent = stats[1][0];
-    boost.classList.add("right");
-    boost.classList.add("shaded-table");
+    boost.classList.add("col");
+    boost.classList.add("text-end");
     tooltiptext = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
     // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
@@ -909,16 +875,17 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
         statsTable.append(ehpRow);
     }
 
-    ehpRow = document.createElement("tr");
-    ehp = document.createElement("td");
-    ehp.classList.add("left");
-    ehp.classList.add("shaded-table");
+    ehpRow = document.createElement("div");
+    ehpRow.classList.add("row");
+    ehp = document.createElement("div");
+    ehp.classList.add("col");
+    ehp.classList.add("text-start");
     ehp.textContent = "Effective HP (no agi):";
 
-    boost = document.createElement("td");
+    boost = document.createElement("div");
     boost.textContent = stats[1][1];
-    boost.classList.add("right");
-    boost.classList.add("shaded-table");
+    boost.classList.add("col");
+    boost.classList.add("text-end");
     tooltiptext = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
     // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
@@ -927,16 +894,17 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     statsTable.append(ehpRow);
 
     //total HPR
-    let hprRow = document.createElement("tr");
-    let hpr = document.createElement("td");
+    let hprRow = document.createElement("div");
+    hprRow.classList.add("row")
+    let hpr = document.createElement("div");
     hpr.classList.add("Health");
-    hpr.classList.add("shaded-table");
-    hpr.classList.add("left");
+    hpr.classList.add("col");
+    hpr.classList.add("text-start");
     hpr.textContent = "HP Regen (Total):";
-    boost = document.createElement("td");
+    boost = document.createElement("div");
     boost.textContent = stats[2];
-    boost.classList.add("right");
-    boost.classList.add("shaded-table")
+    boost.classList.add("col");
+    boost.classList.add("text-end");
 
     hprRow.appendChild(hpr);
     hprRow.appendChild(boost);
@@ -948,16 +916,17 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     }
 
     //EHPR
-    let ehprRow = document.createElement("tr");
-    let ehpr = document.createElement("td");
-    ehpr.classList.add("left");
-    ehpr.classList.add("shaded-table");
+    let ehprRow = document.createElement("div");
+    ehprRow.classList.add("row")
+    let ehpr = document.createElement("div");
+    ehpr.classList.add("col");
+    ehpr.classList.add("text-start");
     ehpr.textContent = "Effective HP Regen:";
 
-    boost = document.createElement("td");
+    boost = document.createElement("div");
     boost.textContent = stats[3][0];
-    boost.classList.add("right");
-    boost.classList.add("shaded-table");
+    boost.classList.add("col");
+    boost.classList.add("text-end");
     tooltiptext = `= ${stats[2]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
     // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
 
@@ -981,29 +950,28 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     //eledefs
     let eledefs = stats[5];
     for (let i = 0; i < eledefs.length; i++){
-        let eledefElemRow = document.createElement("tr");
+        let eledefElemRow = document.createElement("div");
+        eledefElemRow.classList.add("row")
 
-        let eledef = document.createElement("td");
-        eledef.classList.add("left");
-        eledef.classList.add("shaded-table");
-        let eledefTitle = document.createElement("p");
-        eledefTitle.classList.add('no-newline');
+        let eledef = document.createElement("div");
+        eledef.classList.add("col");
+        eledef.classList.add("text-start");
+        let eledefTitle = document.createElement("span");
         eledefTitle.textContent = damageClasses[i+1];
         eledefTitle.classList.add(damageClasses[i+1]);
 
-        let defense = document.createElement("p");
-        defense.classList.add('no-newline');
+        let defense = document.createElement("span");
         defense.textContent = " Def (Total): ";
 
         eledef.appendChild(eledefTitle);
         eledef.appendChild(defense);
         eledefElemRow.appendChild(eledef);
 
-        let boost = document.createElement("td");
+        let boost = document.createElement("div");
         boost.textContent = eledefs[i];
         boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
-        boost.classList.add("right");
-        boost.classList.add("shaded-table");
+        boost.classList.add("col");
+        boost.classList.add("text-end");
 
         let defRaw = build.statMap.get("defRaw")[i];
         let defPct = build.statMap.get("defBonus")[i]/100;
@@ -1027,27 +995,29 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
 
     if (!insertSummary) {
         //skp
-        let defRow = document.createElement("tr");
-        let defElem = document.createElement("td");
-        defElem.classList.add("left");
-        defElem.classList.add("shaded-table");
+        let defRow = document.createElement("div");
+        defRow.classList.add("row");
+        let defElem = document.createElement("div");
+        defElem.classList.add("col");
+        defElem.classList.add("text-start");
         defElem.textContent = "Damage Absorbed %:";
-        boost = document.createElement("td");
-        boost.classList.add("right");
-        boost.classList.add("shaded-table");
+        boost = document.createElement("div");
+        boost.classList.add("col");
+        boost.classList.add("text-end");
         boost.textContent = stats[4][0] + "%";
         defRow.appendChild(defElem);
         defRow.appendChild(boost);
         statsTable.append(defRow);
 
-        let agiRow = document.createElement("tr");
-        let agiElem = document.createElement("td");
-        agiElem.classList.add("left");
-        agiElem.classList.add("shaded-table");
+        let agiRow = document.createElement("div");
+        agiRow.classList.add("row");
+        let agiElem = document.createElement("div");
+        agiElem.classList.add("col");
+        agiElem.classList.add("text-start");
         agiElem.textContent = "Dodge Chance %:";
-        boost = document.createElement("td");
-        boost.classList.add("right");
-        boost.classList.add("shaded-table")
+        boost = document.createElement("div");
+        boost.classList.add("col");
+        boost.classList.add("text-end");
         boost.textContent = stats[4][1] + "%";
         agiRow.appendChild(agiElem);
         agiRow.appendChild(boost);
@@ -1191,26 +1161,19 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     let tooltip; let tooltiptext;
     const stats = build.statMap;
     let title_elem = document.createElement("p");
-    // title_elem.classList.add("smalltitle");
-    // title_elem.classList.add("Normal");
 
     overallparent_elem.textContent = "";
-    let title_elemavg = document.createElement("p");
-    // title_elemavg.classList.add('smalltitle');
-    // title_elemavg.classList.add('Normal');
+    let title_elemavg = document.createElement("b");
 
     if (spellIdx != 0) {
-        let first = document.createElement("p");
-        first.classList.add('no-newline');    
+        let first = document.createElement("span");
         first.textContent = spell.title + " (";
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
 
-        let second = document.createElement("p");
-        second.classList.add('no-newline');
+        let second = document.createElement("span");
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
         second.classList.add("Mana");
-        // second.classList.add("tooltip");
 
         let int_redux = skillPointsToPercentage(build.total_skillpoints[2]).toFixed(2);
         let spPct_redux = (build.statMap.get("spPct" + spellIdx)/100).toFixed(2);
@@ -1229,8 +1192,7 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
         third.classList.add('no-newline');
         third.textContent = ") [Base: " + build.getBaseSpellCost(spellIdx, spell.cost) + " ]";
         title_elem.appendChild(third);
-        let third_summary = document.createElement("p");
-        third_summary.classList.add('no-newline');
+        let third_summary = document.createElement("span");
         third_summary.textContent = ")";
         title_elemavg.appendChild(third_summary);
     }
@@ -1247,7 +1209,6 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     let save_damages = [];
 
     let part_divavg = document.createElement("p");
-    // part_divavg.classList.add("lessbottom");
     overallparent_elem.append(part_divavg);
 
     let spell_parts;
@@ -1266,13 +1227,12 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     //console.log(spell_parts);
 
     for (const part of spell_parts) {
-        parent_elem.append(document.createElement("br"));
+        // parent_elem.append(document.createElement("br"));
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
         let subtitle_elem = document.createElement("p");
         subtitle_elem.textContent = part.subtitle;
-        // subtitle_elem.classList.add("nomargin");
         part_div.append(subtitle_elem);
 
         if (part.type === "damage") {
@@ -1304,10 +1264,8 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
 
             if (part.summary == true) {
                 let overallaverageLabel = document.createElement("p");
-                let first = document.createElement("p");
-                let second = document.createElement("p");
-                first.classList.add('no-newline');
-                second.classList.add('no-newline');
+                let first = document.createElement("span");
+                let second = document.createElement("span");
                 first.textContent = part.subtitle + " Average: "; 
                 second.textContent = averageDamage.toFixed(2);
                 overallaverageLabel.appendChild(first);
@@ -1356,33 +1314,14 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
             part_div.append(healLabel);
             if (part.summary == true) {
                 let overallhealLabel = document.createElement("p");
-                let first = document.createElement("p");
-                let second = document.createElement("p");
-                first.classList.add('no-newline');
-                second.classList.add('no-newline');
+                let first = document.createElement("span");
+                let second = document.createElement("span");
                 first.textContent = part.subtitle + ": ";
                 second.textContent = heal_amount;
                 overallhealLabel.appendChild(first);
                 second.classList.add("Set");
                 overallhealLabel.appendChild(second);
-                // overallhealLabel.classList.add("itemp");
-                // tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
                 part_divavg.append(overallhealLabel);
-                
-                /*
-                let effectiveHealLabel = document.createElement("p");
-                first = document.createElement("b");
-                second = document.createElement("b");
-                let defStats = build.getDefenseStats();
-                tooltiptext = ` = ${heal_amount} * ${defStats[1][0].toFixed(2)} / ${defStats[0]}`;
-                first.textContent = "Effective Heal: ";
-                second.textContent = (defStats[1][0]*heal_amount/defStats[0]).toFixed(2);
-                effectiveHealLabel.appendChild(first);
-                second.classList.add("Set");
-                effectiveHealLabel.appendChild(second);
-                // effectiveHealLabel.classList.add("itemp");
-                // tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
-                part_divavg.append(effectiveHealLabel);*/
             }
         } else if (part.type === "total") {
             let total_damage = 0;
@@ -1403,15 +1342,11 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
             part_div.append(averageLabel);
 
             let overallaverageLabel = document.createElement("p");
-            overallaverageLabel.classList.add("damageSubtitle");
-            let overallaverageLabelFirst = document.createElement("p");
-            let overallaverageLabelSecond = document.createElement("p");
-            overallaverageLabelFirst.classList.add('no-newline');
-            overallaverageLabelSecond.classList.add('no-newline');
+            let overallaverageLabelFirst = document.createElement("span");
+            let overallaverageLabelSecond = document.createElement("span");
             overallaverageLabelFirst.textContent = "Average: ";
             overallaverageLabelSecond.textContent = total_damage.toFixed(2);
             overallaverageLabelSecond.classList.add("Damage");
-            //  tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
 
 
             overallaverageLabel.appendChild(overallaverageLabelFirst);

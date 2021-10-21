@@ -48,9 +48,7 @@ let build_offensive_display_commands = [
 ];
 
 let build_basic_display_commands = [
-    '#table',
     '#defense-stats',
-    '#spacer',
     // defense stats [hp, ehp, hpr, ]
     // "sPot", // base * atkspd + spell raws
     // melee potential
