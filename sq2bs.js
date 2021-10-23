@@ -5,7 +5,7 @@ let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 document.addEventListener('DOMContentLoaded', function() {
 
     for (const i in equipment_keys) {
-        document.querySelector("#"+equipment_keys[i]+"-choice").setAttribute("oninput", "update_fields('"+equipment_keys[i]+"'); calcBuildSchedule()");
+        document.querySelector("#"+equipment_keys[i]+"-choice").setAttribute("oninput", "calcBuildSchedule()");
         document.querySelector("#"+equipment_keys[i]+"-powder").setAttribute("oninput", "calcBuildSchedule()");
     }
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
@@ -59,8 +59,14 @@ function update_fields() {
 
         // resets
         document.querySelector("#"+equipment_keys[i]+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
-
+        console.log(document.querySelector("#"+equipment_keys[i]+"-choice").value)
         let item = player_build[equipment_keys[i]];
+
+        if ((item.get('name') == 'No '+ equipment_keys[i].charAt(0).toUpperCase() + equipment_keys[i].slice(1)) && (document.querySelector("#"+equipment_keys[i]+"-choice").value)) {
+            document.querySelector("#"+equipment_keys[i]+"-choice").classList.add("text-light", "is-invalid");
+            document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
+            continue;
+        }
 
         // set input text color
         document.querySelector("#"+equipment_keys[i]+"-choice").classList.add(item.get('tier'));
