@@ -53,40 +53,34 @@ function doSearchSchedule(){
 }
 
 // equipment field dynamic styling
-function update_fields(type, alt="") {
-    let item = itemMap.get(document.querySelector("#"+type+"-choice").value);
-    if (item && ((item.type == type.replace(/[0-9]/g, '')) || (item.category == type))) {
-        // powder styling
-        document.querySelector("#"+type+"-powder").setAttribute("placeholder", item["slots"]+" slots"+alt);
 
-        if (item['slots'] == 0) {
-            document.querySelector("#"+type+"-powder").disabled = true;
-        } else {
-            document.querySelector("#"+type+"-powder").disabled = false;
-        }
-
-        // input box styling
-        document.querySelector("#"+type+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
-        document.querySelector("#"+type+"-choice").classList.add(item.tier);
-
-        if (type == 'weapon') {
-            document.querySelector("#"+type+"-img").setAttribute('src', 'media/items/new/generic-'+item.type+'.png');
-        }
-    } else if (document.querySelector("#"+type+"-choice").value == '') {
-        document.querySelector("#"+type+"-choice").classList.remove("is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
-        document.querySelector("#"+type+"-powder").setAttribute("placeholder", '0 slots');
-    }
-    else {
-        document.querySelector("#"+type+"-choice").classList.remove('Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
-        document.querySelector("#"+type+"-choice").classList.add("text-light", "is-invalid");
-    }
-}
-
-function init_field_styles() {
+function update_fields() {
     for (const i in equipment_keys) {
-        update_fields(equipment_keys[i]);
+
+        // resets
+        document.querySelector("#"+equipment_keys[i]+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
+
+        let item = player_build[equipment_keys[i]];
+
+        // set input text color
+        document.querySelector("#"+equipment_keys[i]+"-choice").classList.add(item.get('tier'));
+        
+        // set powder slots
+        document.querySelector("#"+equipment_keys[i]+"-powder").setAttribute("placeholder", item.get('slots')+" slots");
+
+        if (item.get('slots') == 0) {
+            document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
+        } else {
+            document.querySelector("#"+equipment_keys[i]+"-powder").disabled = false;
+        }
+
+        // set weapon image
+        if (item.get('category') == 'weapon') {
+            document.querySelector("#weapon-img").setAttribute('src', 'media/items/new/generic-'+item.get('type')+'.png');
+        }
     }
 }
+
 
 function get_item_color(item) {
     item = itemMap.get(item);
@@ -108,12 +102,16 @@ function init_autocomplete() {
     let dropdowns = new Map()
     for (const i in equipment_keys) {
         // build dropdown
+        console.log('init dropdown for '+ equipment_keys[i])
         let item_arr = [];
         if (equipment_keys[i] == 'weapon') {
             for (const weaponType of weapon_keys) {
                 for (const weapon of itemLists.get(weaponType)) {
                     let item_obj = itemMap.get(weapon);
                     if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+                        continue;
+                    }
+                    if (item_obj["name"] == 'No '+ equipment_keys[i].charAt(0).toUpperCase() + equipment_keys[i].slice(1)) {
                         continue;
                     }
                     item_arr.push(weapon);
@@ -123,6 +121,9 @@ function init_autocomplete() {
             for (const item of itemLists.get(equipment_keys[i].replace(/[0-9]/g, ''))) {
                 let item_obj = itemMap.get(item);
                 if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+                    continue;
+                }
+                if (item_obj["name"] == 'No '+ equipment_keys[i].charAt(0).toUpperCase() + equipment_keys[i].slice(1)) {
                     continue;
                 }
                 item_arr.push(item)
@@ -138,6 +139,7 @@ function init_autocomplete() {
             wrapper: false,
             resultsList: {
                 tabSelect: true,
+                noResults: true,
                 class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
                 element: (list, data) => {
                     // dynamic result loc
@@ -145,6 +147,13 @@ function init_autocomplete() {
                     list.style.top = position.bottom + window.scrollY +"px";
                     list.style.left = position.x+"px";
                     list.style.width = position.width+"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.textContent = "Add: "+ data.query;
+                        message.value = data.query;
+                        list.prepend(message);
+                    }
                 },
             },
             resultItem: {
@@ -157,7 +166,9 @@ function init_autocomplete() {
             events: {
                 input: {
                     selection: (event) => {
-                        event.target.value = event.detail.selection.value;
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        }
                         update_fields(equipment_keys[i]);
                         calcBuildSchedule();
                     },

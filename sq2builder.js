@@ -71,7 +71,6 @@ let powderInputs = [
 
 function init() {
     console.log("builder.js init");
-    init_field_styles();
     init_autocomplete();
     decodeBuild(url_tag);
 }
@@ -741,11 +740,11 @@ function calculateBuildStats() {
     for (let i in player_build.items) {
         // displaysq2ExpandedItem(player_build.items[i], buildFields[i], true);
     }
-    console.log(player_build)
-    console.log("build")
+
+    update_fields()
+
     displaysq2ArmorStats(player_build);
     displaysq2BuildStats("all-stats", player_build, build_all_display_commands);
-    // displaysq2BuildStats("minimal-stats", player_build, build_basic_display_commands);
     displaysq2BuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
     displaySetBonuses("set-info",player_build);
     displayNextCosts("int-info",player_build);
