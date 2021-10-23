@@ -69,103 +69,11 @@ let powderInputs = [
     "weapon-powder",
 ];
 
-
-
-/*
- * Function that takes an item list and populates its corresponding dropdown.
- * Used for armors and bracelet/necklace.
- */
-function populateItemList(type) {
-    let item_list = document.getElementById(type+"-items");
-    for (const item of itemLists.get(type)) {
-        let item_obj = itemMap.get(item);
-        if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-            continue;
-        }
-        let el = document.createElement("option");
-        el.value = item;
-        item_list.appendChild(el);
-    }
-}
-
-/*
- * Populate dropdowns, add listeners, etc.
- */
 function init() {
     console.log("builder.js init");
-    
-    for (const armorType of armorTypes) {
-        populateItemList(armorType);
-        // Add change listener to update armor slots.
-        /*
-        document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
-            let item_name = event.target.value;
-            let nSlots = undefined;
-            if (itemMap.has(item_name)) {
-                let item = itemMap.get(item_name);
-                nSlots = item["slots"];
-                //console.log(item);
-            }
-            else {
-                let crafted_custom_item = getCraftFromHash(item_name) !== undefined ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) !== undefined ? getCustomFromHash(item_name) : undefined);
-                if (crafted_custom_item !== undefined) {
-                    nSlots = crafted_custom_item.statMap.get("slots");
-                } 
-            }
-            if (nSlots !== undefined) {
-                document.getElementById(armorType+"-slots").textContent = nSlots + " slots";
-            }
-            else {
-                document.getElementById(armorType+"-slots").textContent = "X slots";
-            }
-        });*/
-    }
-
-    let ring1_list = document.getElementById("ring1-items");
-    let ring2_list = document.getElementById("ring2-items");
-    for (const ring of itemLists.get("ring")) {
-        let item_obj = itemMap.get(ring);
-        if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-            continue;
-        }
-        let el1 = document.createElement("option");
-        let el2 = document.createElement("option");
-        el1.value = ring;
-        el2.value = ring;
-        ring1_list.appendChild(el1);
-        ring2_list.appendChild(el2);
-    }
-
-    populateItemList("bracelet");
-    populateItemList("necklace");
-
-    let weapon_list = document.getElementById("weapon-items");
-    for (const weaponType of weaponTypes) {
-        for (const weapon of itemLists.get(weaponType)) {
-            let item_obj = itemMap.get(weapon);
-            if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-                continue;
-            }
-            let el = document.createElement("option");
-            el.value = weapon;
-            weapon_list.appendChild(el);
-        }
-    }
-
-    // Add change listener to update weapon slots.
-    /*
-    document.getElementById("weapon-choice").addEventListener("change", (event) => {
-        let item_name = event.target.value;
-        let item = itemMap.has(item_name) ? itemMap.get(item_name) : (getCraftFromHash(item_name) ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) ? getCustomFromHash(item_name) : undefined));
-        if (item !== undefined && event.target.value !== "") {
-            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : (item.statMap !== undefined ? ( item.statMap.has("slots") ? item.statMap.get("slots") : 0): 0) )+ " slots";
-        } else {
-            document.getElementById("weapon-slots").textContent = "X slots";
-        }
-    });*/
-
-    decodeBuild(url_tag);
     init_field_styles();
+    init_autocomplete();
+    decodeBuild(url_tag);
 }
 
 function getItemNameFromID(id) {
@@ -833,10 +741,11 @@ function calculateBuildStats() {
     for (let i in player_build.items) {
         // displaysq2ExpandedItem(player_build.items[i], buildFields[i], true);
     }
-
+    console.log(player_build)
+    console.log("build")
     displaysq2ArmorStats(player_build);
     displaysq2BuildStats("all-stats", player_build, build_all_display_commands);
-    displaysq2BuildStats("minimal-stats", player_build, build_basic_display_commands);
+    // displaysq2BuildStats("minimal-stats", player_build, build_basic_display_commands);
     displaysq2BuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
     displaySetBonuses("set-info",player_build);
     displayNextCosts("int-info",player_build);

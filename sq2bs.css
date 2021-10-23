@@ -145,10 +145,37 @@
 }
 
 /* equipment field specifics */
+/* inputs and dropdowns */
 .form-control {
     transition: none !important;
     box-shadow: none !important;
     width: 95% !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul.search-box {
+    position: absolute;
+    padding: 0;
+}
+
+li.search-item {
+    cursor: pointer;
+}
+
+li.search-item:hover {
+    background-color: hsl(0, 0%, 11%) !important;
+}
+
+input {
+    min-width: 0;
+    width: 100%;
+}
+
+input.equipment-input {
+    font-weight: bold;
 }
 
 .text-right {
@@ -165,15 +192,6 @@
 
 .spell-display b {
     font-size: 3rem;
-    font-weight: bold;
-}
-
-input {
-    min-width: 0;
-    width: 100%;
-}
-
-input.equipment-input {
     font-weight: bold;
 }
 

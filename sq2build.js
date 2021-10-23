@@ -317,12 +317,12 @@ class Build{
                 }
                 this.powders[4] = this.powders[4].slice(0,this.weapon.get("slots")); 
                 this.weapon.set("powders",this.powders[4].slice());
-                document.getElementsByClassName("powder-specials")[0].style.display = "grid";
+                // document.getElementsByClassName("powder-specials")[0].style.display = "grid";
             } catch (Error) {
                 const weapon = itemMap.get("No Weapon");
                 this.powders[4] = this.powders[4].slice(0,weapon.slots); 
                 this.weapon = expandItem(weapon, this.powders[4]);
-                document.getElementsByClassName("powder-specials")[0].style.display = "none";
+                // document.getElementsByClassName("powder-specials")[0].style.display = "none";
                 errors.push(new ItemNotFound(equipment[8], "weapon", true));
             }
         }

@@ -2,7 +2,6 @@
  * Display commands
  */
 let build_all_display_commands = [
-    "#table",
     "#defense-stats",
     "str", "dex", "int", "def", "agi",
     "mr", "ms",
@@ -29,7 +28,6 @@ let build_all_display_commands = [
 ];
 
 let build_offensive_display_commands = [
-    '#table',
     "str", "dex", "int", "def", "agi",
     "mr", "ms",
     "sdRaw", "sdPct",
