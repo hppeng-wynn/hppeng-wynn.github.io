@@ -87,12 +87,6 @@ function update_fields() {
     }
 }
 
-
-function get_item_color(item) {
-    item = itemMap.get(item);
-    if (item) {return item.tier} else {return ''}
-}
-
 // tabular stats
 let tabs = ['all-stats', 'minimal-offensive-stats', 'minimal-defensive-stats'];
 
@@ -156,6 +150,7 @@ function init_autocomplete() {
 
                     if (!data.results.length) {
                         message = document.createElement('li');
+                        message.classList.add('scaled-font');
                         message.textContent = "Add: "+ data.query;
                         message.value = data.query;
                         list.prepend(message);
@@ -166,7 +161,7 @@ function init_autocomplete() {
                 class: "scaled-font search-item",
                 selected: "dark-5",
                 element: (item, data) => {
-                    item.classList.add(get_item_color(data.value));
+                    item.classList.add(itemMap.get(data.value).tier);
                 },
             },
             events: {
