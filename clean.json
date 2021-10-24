@@ -88,9 +88,9 @@
       "majorIds": [],
       "category": "weapon",
       "displayName": "Divzer",
-      "basedps": 297,
+      "basedps": 299,
       "slots": 3,
-      "nDam": "46-48",
+      "nDam": "48-50",
       "fDam": "0-0",
       "wDam": "0-0",
       "aDam": "0-0",
@@ -105,6 +105,10 @@
       "agi": -550,
       "def": -39,
       "atkTier": 1,
+      "sdRaw": 253,
+      "mdRaw": 536,
+      "fDamPct": -550,
+      "wDamPct": -550,
       "id": 1692
     },
     {
@@ -130,6 +134,8 @@
       "mdPct": 15,
       "str": 25,
       "sdRaw": -275,
+      "mdRaw": 575,
+      "spRaw4": -3,
       "id": 1700
     },
     {
