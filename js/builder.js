@@ -976,6 +976,8 @@ function optimizeStrDex() {
     const base_skillpoints = player_build.base_skillpoints;
     const max_str_boost = 100 - base_skillpoints[0];
     const max_dex_boost = 100 - base_skillpoints[1];
+    if (Math.min(remaining, max_str_boost, max_dex_boost) < 0) return; // Unwearable
+
     const base_total_skillpoints = player_build.total_skillpoints;
     let str_bonus = remaining;
     let dex_bonus = 0;

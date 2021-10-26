@@ -197,7 +197,7 @@ const spell_table = {
                 { subtitle: "Total Heal (Ally)", type: "heal", strength: 0.4 }
             ] },
         { title: "Teleport", cost: 4, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [60, 0, 40, 0, 0, 0], summary: true },
+                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 40, 0, 0, 0], summary: true },
             ] },
         { title: "Meteor", cost: 8, parts: [
                 { subtitle: "Blast Damage", type: "damage", multiplier: 500, conversion: [40, 30, 0, 0, 30, 0], summary: true },
