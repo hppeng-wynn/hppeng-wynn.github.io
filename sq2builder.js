@@ -306,6 +306,7 @@ function calculateBuild(save_skp, skp){
         if(player_build){
             updateBoosts("skip", false);
             updatePowderSpecials("skip", false);
+            reset_powder_specials();
         }
         let weaponName = getValue(equipmentInputs[8]);
         if (weaponName.startsWith("Morph-")) {

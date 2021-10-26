@@ -133,7 +133,7 @@ function update_field(field) {
 
     // call calc build
 }
-
+/* tabulars */
 
 let tabs = ['all-stats', 'minimal-offensive-stats', 'minimal-defensive-stats'];
 
@@ -166,6 +166,19 @@ function collapse_element(eq) {
     window.dispatchEvent(new Event('resize'));
     // weird bug where display: none overrides??
     document.querySelector("#"+eq+"-tooltip").style.display = "";
+}
+
+// disable boosts
+
+function reset_powder_specials() {
+    let specials = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"]
+    for (const special of specials) {
+        for (i = 1; i < 6; i++) {
+            if (document.querySelector("#"+special+"-"+i).classList.contains("toggleOn")) {
+                document.querySelector("#"+special+"-"+i).classList.remove("toggleOn");
+            }
+        }
+    }
 }
 
 // autocomplete initialize
