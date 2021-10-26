@@ -710,29 +710,35 @@
                         <div class="row row-cols-1 gy-3 mb-4 text-center scaled-font">
                             <div class="col">
                                 <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-melee-statsAvg">melee</div>
+                                <div class = "spell-display dark-5 rounded-bottom py-2 dark-shadow" id = "build-melee-stats" style="display: none;"></div>
                             </div>
                             <div class="col">
                                 <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-poison-stats">poison</div>
                             </div>
                             <div class="col">
-                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell0-infoAvg">spell1</div>
+                                <div class="spell-display spell-expand dark-5 rounded dark-shadow py-2 border border-dark" id="spell0-infoAvg">spell1</div>
+                                <div class = "spell-display dark-5 rounded dark-shadow py-2" id = "spell0-info" style="display: none;">Spell 1</div>
                             </div>
                             <div class="col">
-                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell1-infoAvg">spell2</div>
+                                <div class="spell-display spell-expand dark-5 rounded dark-shadow py-2 border border-dark" id="spell1-infoAvg">spell2</div>
+                                <div class = "spell-display dark-5 rounded dark-shadow py-2" id = "spell1-info" style="display: none;">Spell 2</div>
                             </div>
                             <div class="col">
-                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell2-infoAvg">spell3</div>
+                                <div class="spell-display spell-expand dark-5 rounded dark-shadow py-2 border border-dark" id="spell2-infoAvg">spell3</div>
+                                <div class = "spell-display dark-5 rounded dark-shadow py-2" id = "spell2-info" style="display: none;">Spell 3</div>
                             </div>
                             <div class="col">
-                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell3-infoAvg">spell4</div>
+                                <div class="spell-display spell-expand dark-5 rounded dark-shadow py-2 border border-dark" id="spell3-infoAvg">spell4</div>
+                                <div class = "spell-display dark-5 rounded dark-shadow py-2" id = "spell3-info" style="display: none;">Spell 4</div>
                             </div>
                             <div class="col">
                                 <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id = "powder-special-stats"></div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
             <div class="col" id="masonry-container">
 
                 <div id="helmet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
@@ -754,7 +760,7 @@
                 <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
                 </div>
             </div>
-            <div class="col dark-5">
+            <div class="col dark-5 scaled-font">
                 <footer class="text-center">
                     <div id="header2">
                         <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with <a href = "./atlas.html" target = "_blank" class = "link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>

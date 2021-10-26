@@ -1185,8 +1185,7 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
         title_elemavg.appendChild(second);
         
 
-        let third = document.createElement("p");
-        third.classList.add('no-newline');
+        let third = document.createElement("span");
         third.textContent = ") [Base: " + build.getBaseSpellCost(spellIdx, spell.cost) + " ]";
         title_elem.appendChild(third);
         let third_summary = document.createElement("span");
@@ -1224,7 +1223,6 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     //console.log(spell_parts);
 
     for (const part of spell_parts) {
-        // parent_elem.append(document.createElement("br"));
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
@@ -1269,14 +1267,12 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
                 overallaverageLabel.appendChild(second);
                 // tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
                 second.classList.add("Damage");
-                overallaverageLabel.classList.add("itemp");
                 part_divavg.append(overallaverageLabel);
             }
             
             function _damage_display(label_text, average, result_idx) {
                 let label = document.createElement("p");
                 label.textContent = label_text+average.toFixed(2);
-                label.classList.add("damageSubtitle");
                 part_div.append(label);
                 
                 let arrmin = [];
@@ -1284,11 +1280,8 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
                 for (let i = 0; i < 6; i++){
                     if (results[i][1] != 0){
                         let p = document.createElement("p");
-                        p.classList.add("damagep");
                         p.classList.add(damageClasses[i]);
                         p.textContent = results[i][result_idx] + " \u2013 " + results[i][result_idx + 1];
-                        tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
-                        // tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
                         arrmin.push(results[i][result_idx]);
                         arrmax.push(results[i][result_idx + 1]);
                         part_div.append(p);

@@ -2,6 +2,8 @@ let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'rin
 let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear']
 let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 
+let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info']
+
 document.addEventListener('DOMContentLoaded', function() {
 
     for (const eq of equipment_keys) {
@@ -9,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule();");
         document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('"+ eq +"')");
     }
+
+    for (const i of spell_disp) {
+        document.querySelector("#"+i+"Avg").setAttribute("onclick", "toggle_spell_tab('"+i+"')");
+    }
+
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
 
     let skp_fields = document.getElementsByClassName("skp-update");
@@ -138,11 +145,18 @@ function update_field(field) {
 let tabs = ['all-stats', 'minimal-offensive-stats', 'minimal-defensive-stats'];
 
 function show_tab(tab) {
-    collapse_element("helmet");
     for (const i in tabs) {
         document.querySelector("#"+tabs[i]).style.display = "none";
     }
     document.querySelector("#"+tab).style.display = "";
+}
+
+function toggle_spell_tab(tab) {
+    if (document.querySelector("#"+tab).style.display == "none") {
+        document.querySelector("#"+tab).style.display = "";
+    } else {
+        document.querySelector("#"+tab).style.display = "none";
+    }
 }
 
 function toggle_boost_tab(tab) {
