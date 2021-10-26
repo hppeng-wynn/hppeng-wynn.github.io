@@ -17,422 +17,757 @@
     <link rel="stylesheet" href="sq2bs.css">
 </head>
 <body class="text-light d-flex justify-content-center" style="background-color: #121212;">
+    <!-- hover tooltip stuff -->
+    
+    <!-- main -->
     <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
         <a href=""><img src="media/icons/new/atlas64.png" alt="place" title="WynnBuilder"><b>WynnBuilder</b></a>
-        <a href=""><img src="media/items/new/generic-scroll.png" alt="" title="Overall Build Stats"><b>Build Stats</b></a>
         <a href=""><img src="media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
-        <a href=""><img src="media/icons/new/custom.png" alt="" title="Active boosts"><b>Class Boosts</b></a>
+        <hr/>
+        <a onclick="shareBuild()" style="cursor: pointer;"><img src="media/items/new/generic-scroll.png" alt="" title="Item Search"><b>Copy For Sharing</b></a>
+        <a onclick="copyBuild()" style="cursor: pointer;"><img src="media/icons/new/save.png" alt="" title="Item Search"><b>Copy build</b></a>
+
     </div>
     <div class="container py-5 vh-100 mx-0 mx-lg-auto">
-        <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
-            <div class="col-xl-6">
-                <div class="row row-cols-1 gy-5">
-                    <div class="col">
-                        <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5 justify-content-center">
-                            <div class="col rounded order-xl-0 order-0">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="helmet-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="helmet-img-loc">
-                                        <img class="img-fluid" src="media/items/new/generic-helmet.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="helmet-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="helmet-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value="" tabindex="1"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders" tabindex="1"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-1">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="ring1-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="ring1-img-loc">
-                                        <img id="ring1-img" class="img-fluid" src="media/items/new/generic-ring.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="ring1-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="ring1-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="ring1-choice" name="ring1-choice" placeholder="No ring" value="" tabindex="2"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="ring1-powder" name="ring1-powder" placeholder="powders" tabindex="2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-0">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="chestplate-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="chestplate-img-loc">
-                                        <img id="chestplate-img" class="img-fluid" src="media/items/new/generic-chestplate.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="chestplate-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="chestplate-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value="" tabindex="1"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders" tabindex="1"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-1">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="ring2-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="ring2-img-loc">
-                                        <img id="ring2-img" class="img-fluid" src="media/items/new/generic-ring.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="ring2-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="ring2-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="ring2-choice" name="ring2-choice" placeholder="No ring" value="" tabindex="2"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="ring2-powder" name="ring2-powder" placeholder="powders" tabindex="2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-0">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="leggings-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="leggings-img-loc">
-                                        <img id="leggings-img" class="img-fluid" src="media/items/new/generic-leggings.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="leggings-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="leggings-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value="" tabindex="1"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders" tabindex="1"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-1">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="bracelet-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="bracelet-img-loc">
-                                        <img id="bracelet-img" class="img-fluid" src="media/items/new/generic-bracelet.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="bracelet-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="bracelet-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value="" tabindex="2"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="bracelet-powder" name="bracelet-powder" placeholder="powders" tabindex="2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-0">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="boots-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="boots-img-loc">
-                                        <img id="boots-img" class="img-fluid" src="media/items/new/generic-boots.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="boots-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="boots-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="boots-choice" name="boots-choice" placeholder="No boots" value="" tabindex="1"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="boots-powder" name="boots-powder" placeholder="powders" tabindex="1"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-1">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id="necklace-dropdown">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="necklace-img-loc">
-                                        <img id="necklace-img" class="img-fluid" src="media/items/new/generic-necklace.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="necklace-health">
-                                                09000
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="necklace-lv">
-                                                Lv. 123
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value="" tabindex="2"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="necklace-powder" name="necklace-powder" placeholder="powders" tabindex="2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-1">
-                                <div class="row h-100 dark-shadow dark-6 rounded" id='weapon-dropdown'>
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="weapon-img-loc">
-                                        <img id="weapon-img" class="img-fluid" src="media/items/new/generic-wand.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font fw-bold gx-3" id="weapon-dps">
-                                                base??
-                                            </div>
-                                            <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="weapon-lv">
-                                                ??
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value="" tabindex="2"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders" tabindex="2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto rounded order-xl-0 order-1">
-                                <div class="row h-100 dark-shadow dark-6 rounded">
-                                    <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="weapon-img-loc">
-                                        <img id="weapon-img" class="img-fluid" src="media/icons/new/Gears.png">
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col text-nowrap scaled-font">
-                                                Level:
-                                            </div>
-                                            <div class="col text-nowrap scaled-font">
-                                                Load:
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col g-0 rounded">
-                                        <div class="row row-cols-1 h-100 align-items-center">
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
-                                            </div>
-                                            <div class="col d-flex justify-content-end">
-                                                <input class="border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" placeholder="Load from local" tabindex="2"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row row-cols-1 gy-2 pb-3 rounded dark-5 dark-shadow">
+        <div class="row h-100 row-cols-1">
+            <div class="col">
+                <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
+                    <div class="col-xl-6">
+                        <div class="row row-cols-1 gy-5">
                             <div class="col">
-                                <div class="row row-cols-2 row-cols-xl-5 gy-2 justify-content-center">
-                                    <div class="col text-center gx-2">
-                                        <div class="rounded dark-6 dark-shadow-sm px-2">
-                                            <label for="str-skp" class="eDam skp-tooltip">Strength</label>
-                                            <input type="string" id="str-skp" name="str-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                            <div id="str-skp-assign" class="skp-tooltip" style="display: none;">
-                                                Manually Assigned: 0
+                                <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5 justify-content-center">
+                                    <div class="col rounded order-xl-0 order-0">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="helmet-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="helmet-img-loc">
+                                                <img id="helmet-img" class="img-fluid" src="media/items/new/generic-helmet.png">
                                             </div>
-                                            <div id="str-skp-base" class="skp-tooltip">
-                                                Original: 0
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="helmet-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="helmet-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div id="str-skp-pct" class="skp-tooltip">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col text-center gx-2">
-                                        <div class="rounded dark-6 dark-shadow-sm px-2">
-                                            <label for="dex-skp" class="tDam skp-tooltip">Dexterity</label>
-                                            <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                            <div id="dex-skp-assign" class="skp-tooltip" style="display: none;">
-                                                Manually Assigned: 0
-                                            </div>
-                                            <div id="dex-skp-base" class="skp-tooltip">
-                                                Original: 0
-                                            </div>
-                                            <div id ="dex-skp-pct" class="skp-tooltip">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col text-center gx-2">
-                                        <div class="rounded dark-6 dark-shadow-sm px-2">
-                                            <label for="int-skp" class="wDam skp-tooltip text-nowrap">Intelligence</label>
-                                            <input type="string" id="int-skp" name="int-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                            <div id="int-skp-assign" class="skp-tooltip" style="display: none;">
-                                                Manually Assigned: 0
-                                            </div>
-                                            <div id="int-skp-base" class="skp-tooltip">
-                                                Original: 0
-                                            </div>
-                                            <div id ="int-skp-pct" class="skp-tooltip">
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value="" tabindex="1"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders" tabindex="1"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col text-center gx-2">
-                                        <div class="rounded dark-6 dark-shadow-sm px-2">
-                                            <label for="def-skp" class="fDam skp-tooltip">Defense</label>
-                                            <input type="string" id="def-skp" name="def-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                            <div id="def-skp-assign" class="skp-tooltip" style="display: none;">
-                                                Manually Assigned: 0
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="ring1-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="ring1-img-loc">
+                                                <img id="ring1-img" class="img-fluid" src="media/items/new/generic-ring.png">
                                             </div>
-                                            <div id="def-skp-base" class="skp-tooltip">
-                                                Original: 0
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="ring1-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="ring1-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div id ="def-skp-pct" class="skp-tooltip">
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="ring1-choice" name="ring1-choice" placeholder="No ring" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="ring1-powder" name="ring1-powder" placeholder="powders" tabindex="2"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col text-center gx-2">
-                                        <div class="rounded dark-6 dark-shadow-sm px-2">
-                                            <label for="agi-skp" class="aDam skp-tooltip">Agility</label>
-                                            <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                            <div id="agi-skp-assign" class="skp-tooltip" style="display: none;">
-                                                Manually Assigned: 0
+                                    <div class="col-auto rounded order-xl-0 order-0">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="chestplate-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="chestplate-img-loc">
+                                                <img id="chestplate-img" class="img-fluid" src="media/items/new/generic-chestplate.png">
                                             </div>
-                                            <div id="agi-skp-base" class="skp-tooltip">
-                                                Original: 0
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="chestplate-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="chestplate-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div id ="agi-skp-pct" class="skp-tooltip">
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value="" tabindex="1"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders" tabindex="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="ring2-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="ring2-img-loc">
+                                                <img id="ring2-img" class="img-fluid" src="media/items/new/generic-ring.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="ring2-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="ring2-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="ring2-choice" name="ring2-choice" placeholder="No ring" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="ring2-powder" name="ring2-powder" placeholder="powders" tabindex="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-0">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="leggings-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="leggings-img-loc">
+                                                <img id="leggings-img" class="img-fluid" src="media/items/new/generic-leggings.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="leggings-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="leggings-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value="" tabindex="1"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders" tabindex="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="bracelet-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="bracelet-img-loc">
+                                                <img id="bracelet-img" class="img-fluid" src="media/items/new/generic-bracelet.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="bracelet-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="bracelet-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="bracelet-powder" name="bracelet-powder" placeholder="powders" tabindex="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-0">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="boots-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="boots-img-loc">
+                                                <img id="boots-img" class="img-fluid" src="media/items/new/generic-boots.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="boots-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="boots-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="boots-choice" name="boots-choice" placeholder="No boots" value="" tabindex="1"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="boots-powder" name="boots-powder" placeholder="powders" tabindex="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id="necklace-dropdown">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="necklace-img-loc">
+                                                <img id="necklace-img" class="img-fluid" src="media/items/new/generic-necklace.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font Health fw-bold gx-3" id="necklace-health">
+                                                        09000
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="necklace-lv">
+                                                        Lv. 123
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="necklace-powder" name="necklace-powder" placeholder="powders" tabindex="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow dark-6 rounded" id='weapon-dropdown'>
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="weapon-img-loc">
+                                                <img id="weapon-img" class="img-fluid" src="media/items/new/generic-wand.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font fw-bold gx-3" id="weapon-dps">
+                                                        base??
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="weapon-lv">
+                                                        ??
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders" tabindex="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow dark-6 rounded">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="weapon-img-loc">
+                                                <img class="img-fluid" src="media/icons/new/Gears.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col text-nowrap scaled-font">
+                                                        Level:
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font">
+                                                        Load:
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" placeholder="Load from local" tabindex="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto rounded order-xl-0 order-1 mobile-only">
+                                        <div class="row h-100 dark-shadow dark-6 rounded">
+                                            <div class="col-auto g-0 dark-7 rounded-end my-auto text-center dark-shadow-sm scaled-item-icon" id="weapon-img-loc">
+                                                <img class="img-fluid" src="media/items/new/generic-scroll.png">
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row gy-3 row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <button class="border-dark text-light dark-5 rounded scaled-font w-75 rounded" onclick="copyBuild()">Copy short</button>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <button class="border-dark text-light dark-5 rounded scaled-font w-75 rounded" onclick="shareBuild()">Copy For Sharing</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col text-center">
-                                <div id="summary-box"></div>
-                                <div id="str-warnings"></div>
-                                <div id="dex-warnings"></div>
-                                <div id="int-warnings"></div>
-                                <div id="def-warnings"></div>
-                                <div id="agi-warnings"></div>
+                            <div class="col">
+                                <div class="row row-cols-1 gy-2 pb-3 rounded dark-5 dark-shadow">
+                                    <div class="col">
+                                        <div class="row row-cols-2 row-cols-xl-5 gy-2 justify-content-center">
+                                            <div class="col text-center gx-2">
+                                                <div class="rounded dark-6 dark-shadow-sm px-2">
+                                                    <label for="str-skp" class="eDam skp-tooltip">Strength</label>
+                                                    <input type="string" id="str-skp" name="str-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
+                                                    <div id="str-skp-assign" class="skp-tooltip" style="display: none;">
+                                                        Manually Assigned: 0
+                                                    </div>
+                                                    <div id="str-skp-base" class="skp-tooltip">
+                                                        Original: 0
+                                                    </div>
+                                                    <div id="str-skp-pct" class="skp-tooltip">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center gx-2">
+                                                <div class="rounded dark-6 dark-shadow-sm px-2">
+                                                    <label for="dex-skp" class="tDam skp-tooltip">Dexterity</label>
+                                                    <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
+                                                    <div id="dex-skp-assign" class="skp-tooltip" style="display: none;">
+                                                        Manually Assigned: 0
+                                                    </div>
+                                                    <div id="dex-skp-base" class="skp-tooltip">
+                                                        Original: 0
+                                                    </div>
+                                                    <div id ="dex-skp-pct" class="skp-tooltip">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center gx-2">
+                                                <div class="rounded dark-6 dark-shadow-sm px-2">
+                                                    <label for="int-skp" class="wDam skp-tooltip text-nowrap">Intelligence</label>
+                                                    <input type="string" id="int-skp" name="int-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
+                                                    <div id="int-skp-assign" class="skp-tooltip" style="display: none;">
+                                                        Manually Assigned: 0
+                                                    </div>
+                                                    <div id="int-skp-base" class="skp-tooltip">
+                                                        Original: 0
+                                                    </div>
+                                                    <div id ="int-skp-pct" class="skp-tooltip">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center gx-2">
+                                                <div class="rounded dark-6 dark-shadow-sm px-2">
+                                                    <label for="def-skp" class="fDam skp-tooltip">Defense</label>
+                                                    <input type="string" id="def-skp" name="def-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
+                                                    <div id="def-skp-assign" class="skp-tooltip" style="display: none;">
+                                                        Manually Assigned: 0
+                                                    </div>
+                                                    <div id="def-skp-base" class="skp-tooltip">
+                                                        Original: 0
+                                                    </div>
+                                                    <div id ="def-skp-pct" class="skp-tooltip">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center gx-2">
+                                                <div class="rounded dark-6 dark-shadow-sm px-2">
+                                                    <label for="agi-skp" class="aDam skp-tooltip">Agility</label>
+                                                    <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
+                                                    <div id="agi-skp-assign" class="skp-tooltip" style="display: none;">
+                                                        Manually Assigned: 0
+                                                    </div>
+                                                    <div id="agi-skp-base" class="skp-tooltip">
+                                                        Original: 0
+                                                    </div>
+                                                    <div id ="agi-skp-pct" class="skp-tooltip">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center">
+                                        <div id="summary-box"></div>
+                                        <div id="str-warnings"></div>
+                                        <div id="dex-warnings"></div>
+                                        <div id="int-warnings"></div>
+                                        <div id="def-warnings"></div>
+                                        <div id="agi-warnings"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mb-5">
+                                <div class="row row-cols-1 gy-3">
+                                    <div class="col">
+                                        <div class="row row-cols-1 row-cols-1 text-center scaled-font dark-5 rounded dark-shadow">
+                                            <div class="col fw-bold dark-4 rounded-top">
+                                                Active boosts
+                                            </div>
+                                            <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
+                                                <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
+                                                    <div class="col-auto p-1">
+                                                        <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="updateBoosts('vanish-boost', true)">
+                                                            Vanish (+80%)
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto p-1">
+                                                        <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="updateBoosts('warscream-boost', true)">
+                                                            War Scream (+10%)
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto p-1">
+                                                        <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="updateBoosts('yourtotem-boost', true)">
+                                                            Your Totem (+35%)
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto p-1">
+                                                        <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="updateBoosts('allytotem-boost', true)">
+                                                            Ally Totem (+15%)
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-auto p-1">
+                                                        <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="updateBoosts('bash-boost', true)">
+                                                            Bash (+50%)
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row row-cols-1 rounded text-center dark-5 scaled-font">
+                                            <div class="col">
+                                                <div class="row text-nowrap">
+                                                    <div class="col eDam dark-4 fake-button elem-boost" onclick="toggle_boost_tab('str')">
+                                                        Earth
+                                                    </div>
+                                                    <div class="col tDam dark-4 fake-button elem-boost" onclick="toggle_boost_tab('dex')">
+                                                        Thunder
+                                                    </div>
+                                                    <div class="col wDam dark-4 fake-button elem-boost" onclick="toggle_boost_tab('int')">
+                                                        Water
+                                                    </div>
+                                                    <div class="col fDam dark-4 fake-button elem-boost" onclick="toggle_boost_tab('def')">
+                                                        Fire
+                                                    </div>
+                                                    <div class="col aDam dark-4 fake-button elem-boost" onclick="toggle_boost_tab('agi')">
+                                                        Air
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col" id="str-boost" style="display: none;">
+                                                <div class="row row-cols-1">
+                                                    <div class="col eDam dark-5">
+                                                        Quake (Active)
+                                                    </div>
+                                                    <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
+                                                        <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1', true)">
+                                                                    Lv.4 [e4e4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2', true)">
+                                                                    Lv.4.5 [e5e4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3', true)">
+                                                                    Lv.5 [e5e5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4', true)">
+                                                                    Lv.5.5 [e6e5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5', true)">
+                                                                    Lv.6 [e6e6]
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col eDam">
+                                                        Rage (Passive)
+                                                    </div>
+                                                    <div class="col">
+                                                        placeholder
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col" id="dex-boost" style="display: none;">
+                                                <div class="row row-cols-1">
+                                                    <div class="col tDam dark-5">
+                                                        Chain Lightning (Active)
+                                                    </div>
+                                                    <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
+                                                        <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1', true)">
+                                                                    Lv.4 [t4t4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2', true)">
+                                                                    Lv.4.5 [t5t4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3', true)">
+                                                                    Lv.5 [t5t5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4', true)">
+                                                                    Lv.5.5 [t6t5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5', true)">
+                                                                    Lv.6 [t6t6]
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col tDam">
+                                                        Kill Streak (Passive)
+                                                    </div>
+                                                    <div class="col">
+                                                        placeholder
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col" id="int-boost">
+                                                <div class="row row-cols-1">
+                                                    <div class="col wDam dark-5">
+                                                        Curse (Active)
+                                                    </div>
+                                                    <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
+                                                        <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1', true)">
+                                                                    Lv.4 [w4w4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2', true)">
+                                                                    Lv.4.5 [w5w4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3', true)">
+                                                                    Lv.5 [w5w5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4', true)">
+                                                                    Lv.5.5 [w6w5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5', true)">
+                                                                    Lv.6 [w6w6]
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col wDam">
+                                                        Concentration (Passive)
+                                                    </div>
+                                                    <div class="col">
+                                                        placeholder
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col" id="def-boost" style="display: none;">
+                                                <div class="row row-cols-1">
+                                                    <div class="col fDam dark-5">
+                                                        Courage (Active)
+                                                    </div>
+                                                    <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
+                                                        <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1', true)">
+                                                                    Lv.4 [f4f4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2', true)">
+                                                                    Lv.4.5 [f5f4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3', true)">
+                                                                    Lv.5 [f5f5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4', true)">
+                                                                    Lv.5.5 [f6f5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5', true)">
+                                                                    Lv.6 [f6f6]
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col fDam">
+                                                        Endurance (Passive)
+                                                    </div>
+                                                    <div class="col">
+                                                        how do calc
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col" id="agi-boost" style="display: none;">
+                                                <div class="row row-cols-1">
+                                                    <div class="col aDam dark-5">
+                                                        Wind Prison (Active)
+                                                    </div>
+                                                    <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
+                                                        <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1', true)">
+                                                                    Lv.4 [a4a4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2', true)">
+                                                                    Lv.4.5 [a5a4]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3', true)">
+                                                                    Lv.5 [a5a5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4', true)">
+                                                                    Lv.5.5 [a6a5]
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-auto p-1">
+                                                                <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5', true)">
+                                                                    Lv.6 [a6a6]
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col aDam">
+                                                        Dodge (Passive)
+                                                    </div>
+                                                    <div class="col">
+                                                        how do calc
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="row row-cols-1 rounded dark-shadow dark-6 scaled-font">
+                            <div class="col rounded-top">
+                                <div class="row">
+                                    <div id="tab-offense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('minimal-offensive-stats')">
+                                        Offense
+                                    </div>
+                                    <div id="tab-defense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('minimal-defensive-stats')">
+                                        Defense
+                                    </div>
+                                    <div id="tab-basic-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('all-stats')">
+                                        Overall
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: none;" id="minimal-offensive-stats" class="col text-nowrap"></div>
+                            <div style="display: none;" id="minimal-defensive-stats" class="col text-nowrap"></div>
+                            <div id="all-stats" class="col text-nowrap"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="row row-cols-1 gy-3 mb-4 text-center scaled-font">
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-melee-statsAvg">melee</div>
+                            </div>
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-poison-stats">poison</div>
+                            </div>
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell0-infoAvg">spell1</div>
+                            </div>
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell1-infoAvg">spell2</div>
+                            </div>
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell2-infoAvg">spell3</div>
+                            </div>
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell3-infoAvg">spell4</div>
+                            </div>
+                            <div class="col">
+                                <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id = "powder-special-stats"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3">
-                <div class="row row-cols-1 rounded dark-shadow dark-6 scaled-font">
-                    <div class="col rounded-top">
-                        <div class="row">
-                            <div id="tab-offense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('minimal-offensive-stats')">
-                                Offense
-                            </div>
-                            <div id="tab-defense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('minimal-defensive-stats')">
-                                Defense
-                            </div>
-                            <div id="tab-basic-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('all-stats')">
-                                Overall
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display: none;" id="minimal-offensive-stats" class="col text-nowrap"></div>
-                    <div style="display: none;" id="minimal-defensive-stats" class="col text-nowrap"></div>
-                    <div id="all-stats" class="col text-nowrap"></div>
+            </div>    
+            <div class="col" id="masonry-container">
+
+                <div id="helmet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="chestplate-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="leggings-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="boots-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="ring1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="ring2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="bracelet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="necklace-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                </div>
+                <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
                 </div>
             </div>
-            <div class="col-xl-3">
-                <div class="row row-cols-1 gy-3 mb-4 text-center scaled-font">
-                    <div class="col">
-                        <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-melee-statsAvg">melee</div>
+            <div class="col dark-5">
+                <footer class="text-center">
+                    <div id="header2">
+                        <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with <a href = "./atlas.html" target = "_blank" class = "link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>
+                        <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
                     </div>
-                    <div class="col">
-                        <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-poison-stats">poison</div>
+                    <div id="credits">
+                        <a href="credits.txt" class="link">Additional credits</a>
                     </div>
-                    <div class="col">
-                        <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell0-infoAvg">spell1</div>
-                    </div>
-                    <div class="col">
-                        <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell1-infoAvg">spell2</div>
-                    </div>
-                    <div class="col">
-                        <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell2-infoAvg">spell3</div>
-                    </div>
-                    <div class="col">
-                        <div class="spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="spell3-infoAvg">spell4</div>
-                    </div>
-                </div>
+                </footer>
             </div>
         </div>
     </div>
+    
     
     <div id="drag-full-eqs" style="display: none;">
         <div class = "build hide-container-grid" style="display: none;">
@@ -871,14 +1206,6 @@
         </div>
     </div>
     <div style="display: none;">
-        <div id="overall-window" class="draggable window-container">
-            <div id="overall-window-header" class="window-header">
-                <div style="flex: 1"></div>
-                <div style="flex: 2; text-align: center;">Overall Build Stats</div>
-                <div style="flex: 1; text-align: right;"><button onclick="$('#overall-window').toggle()">[x]</button></div>
-            </div>
-            <div style="overflow: auto;" id="all-stats" class="minimal-stats-container"></div>
-        </div>
         <div id="search-container" class="draggable full-border window-container" style="border-top: none;">
             <div id="search-container-header" class="window-header">
                 <div style="flex: 1"></div>
@@ -936,213 +1263,10 @@
             <div class="search-result-container" id='main'>
             </div>
         </div>
-    
-        <div id="boost-container" class="draggable full-border window-container">
-            <div id="boost-container-header" class="window-header">
-                <div style="flex: 1"></div>
-                <div style="flex: 2; text-align: center;">Active boosts</div>
-                <div style="flex: 1; text-align: right;"><button onclick="$('#boost-container').toggle()">[x]</button></div>
-            </div>
-            <div style="display: inline-flex;">
-                <div style="display: inline-flex; flex-direction: column;">
-                    <table id="boost-table" style="text-align: center;">
-                        <tr style="height: 2rem;">
-                            <th colspan="5" class="nDam">Class boosts</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class="button-boost" id="vanish-boost" onclick = "updateBoosts('vanish-boost', true)">
-                                    Vanish (+80%)
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "warscream-boost" onclick = "updateBoosts('warscream-boost', true)">
-                                    War Scream (+10%)
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "yourtotem-boost" onclick = "updateBoosts('yourtotem-boost', true)">
-                                    Your Totem (+35%)
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "allytotem-boost" onclick = "updateBoosts('allytotem-boost', true)">
-                                    Ally Totem (+15%)
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "bash-boost" onclick = "updateBoosts('bash-boost', true)">
-                                    Bash (+50%)
-                                </button>
-                            </td>
-                        </tr>
-    
-                        <tr style="height: 2rem;">
-                            <th colspan="5" class="Earth">Quake</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class = "button-boost" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1', true)">
-                                    Lv.4 [e4e4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2', true)">
-                                    Lv.4.5 [e5e4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3', true)">
-                                    Lv.5 [e5e5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4', true)">
-                                    Lv.5.5 [e6e5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5', true)">
-                                    Lv.6 [e6e6]
-                                </button>
-                            </td>
-                        </tr>
-    
-                        <tr style="height: 2rem;">
-                            <th colspan="5" class="Thunder">Chain Lightning</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class = "button-boost" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1', true)">
-                                    Lv.4 [t4t4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2', true)">
-                                    Lv.4.5 [t5t4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3', true)">
-                                    Lv.5 [t5t5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4', true)">
-                                    Lv.5.5 [t6t5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5', true)">
-                                    Lv.6 [t6t6]
-                                </button>
-                            </td>
-                        </tr>
-    
-                        <tr style="height: 2rem;">
-                            <th colspan="5" class="Water">Curse</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class = "button-boost" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1', true)">
-                                    Lv.4 [w4w4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2', true)">
-                                    Lv.4.5 [w5w4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3', true)">
-                                    Lv.5 [w5w5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4', true)">
-                                    Lv.5.5 [w6w5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5', true)">
-                                    Lv.6 [w6w6]
-                                </button>
-                            </td>
-                        </tr>
-    
-                        <tr style="height: 2rem;">
-                            <th colspan="5" class="Fire">Courage</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class = "button-boost" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1', true)">
-                                    Lv.4 [f4f4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2', true)">
-                                    Lv.4.5 [f5f4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3', true)">
-                                    Lv.5 [f5f5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4', true)">
-                                    Lv.5.5 [f6f5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5', true)">
-                                    Lv.6 [f6f6]
-                                </button>
-                            </td>
-                        </tr>
-                        
-                        <tr style="height: 2rem;">
-                            <th colspan="5" class="Air">Wind Prison</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button class = "button-boost" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1', true)">
-                                    Lv.4 [f4f4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2', true)">
-                                    Lv.4.5 [f5f4]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3', true)">
-                                    Lv.5 [f5f5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4', true)">
-                                    Lv.5.5 [f6f5]
-                                </button>
-                            </td>
-                            <td>
-                                <button class = "button-boost" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5', true)">
-                                    Lv.6 [f6f6]
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div style="display: inline-flex; flex-direction: column; max-height: 25rem; overflow-y: scroll;">
-                    <div class = "center" id = "powder-special-stats">
-                        <p class = "nDam" style="text-align: center; font-weight: bold;">Powder Specials</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/build_utils.js"></script>
     <script type="text/javascript" src="sq2icons.js"></script>

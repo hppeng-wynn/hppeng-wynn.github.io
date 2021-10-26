@@ -1,12 +1,13 @@
-let equipment_keys = ['weapon', 'helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace'];
+let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
 let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear']
 let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    for (const i in equipment_keys) {
-        document.querySelector("#"+equipment_keys[i]+"-choice").setAttribute("oninput", "calcBuildSchedule()");
-        document.querySelector("#"+equipment_keys[i]+"-powder").setAttribute("oninput", "calcBuildSchedule()");
+    for (const eq of equipment_keys) {
+        document.querySelector("#"+eq+"-choice").setAttribute("oninput", "update_field('"+ eq +"'); calcBuildSchedule();");
+        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule();");
+        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('"+ eq +"')");
     }
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
 
@@ -15,6 +16,23 @@ document.addEventListener('DOMContentLoaded', function() {
     for (i = 0; i < skp_fields.length; i++) {
         skp_fields[i].setAttribute("oninput", "updateStatSchedule()");
     }
+
+    let masonry = Macy({
+        container: "#masonry-container",
+        columns: 1,
+        mobileFirst: true,
+        breakAt: {
+            1200: 4,
+        },
+        margin: {
+            x: 20,
+            y: 20,
+        }
+        
+    });
+
+    
+
 });
 
 // phanta scheduler
@@ -29,7 +47,7 @@ function calcBuildSchedule(){
     calcBuildTask = setTimeout(function(){
         calcBuildTask = null;
         calculateBuild();
-    }, 1000);
+    }, 500);
 }
 
 function updateStatSchedule(){
@@ -53,77 +71,130 @@ function doSearchSchedule(){
 }
 
 // equipment field dynamic styling
+function update_field(field) {
+    // built on the assumption of no one will type in CI/CR letter by letter
+    // resets 
+    document.querySelector("#"+field+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
 
-function update_fields() {
-    for (const i in equipment_keys) {
+    item = document.querySelector("#"+field+"-choice").value
+    let powder_slots;
+    let tier;
+    let category;
+    let type;
 
-        // resets
-        document.querySelector("#"+equipment_keys[i]+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
-        console.log(document.querySelector("#"+equipment_keys[i]+"-choice").value)
-        let item = player_build[equipment_keys[i]];
-
-        if ((item.get('name') == 'No '+ equipment_keys[i].charAt(0).toUpperCase() + equipment_keys[i].slice(1)) && (document.querySelector("#"+equipment_keys[i]+"-choice").value)) {
-            document.querySelector("#"+equipment_keys[i]+"-choice").classList.add("text-light", "is-invalid");
-            document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
-            continue;
-        }
-
-        // set input text color
-        document.querySelector("#"+equipment_keys[i]+"-choice").classList.add(item.get('tier'));
-        
-        // set powder slots
-        document.querySelector("#"+equipment_keys[i]+"-powder").setAttribute("placeholder", item.get('slots')+" slots");
-
-        if (item.get('slots') == 0) {
-            document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
-        } else {
-            document.querySelector("#"+equipment_keys[i]+"-powder").disabled = false;
-        }
-
-        // set weapon image
-        if (item.get('category') == 'weapon') {
-            document.querySelector("#weapon-img").setAttribute('src', 'media/items/new/generic-'+item.get('type')+'.png');
-        }
+    // get item info
+    if (item.slice(0, 3) == "CI-") {
+        item = getCustomFromHash(item);
+        powder_slots = item.statMap.get("slots");
+        tier = item.statMap.get("tier");
+        category = item.statMap.get("category");
+        type = item.statMap.get("type");
     }
+    else if (item.slice(0, 3) == "CR-") {
+        item = getCraftFromHash(item);
+        powder_slots = item.statMap.get("slots");
+        tier = item.statMap.get("tier");
+        category = item.statMap.get("category");
+        type = item.statMap.get("type");
+    } 
+    else if (itemMap.get(item)) {
+        item = itemMap.get(item);
+        if (!item) {return false;}
+        powder_slots = item.slots;
+        tier = item.tier;
+        category = item.category;
+        type = item.type;
+    } 
+    else {
+        // item not found
+        document.querySelector("#"+field+"-choice").classList.add("text-light");
+        if (item) { document.querySelector("#"+field+"-choice").classList.add("is-invalid"); }
+
+        document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
+        return false;
+    }
+
+    // set item color
+    document.querySelector("#"+field+"-choice").classList.add(tier);
+
+    // set powder slots
+    document.querySelector("#"+field+"-powder").setAttribute("placeholder", powder_slots+" slots");
+
+    if (powder_slots == 0) {
+        document.querySelector("#"+field+"-powder").disabled = true;
+    } else {
+        document.querySelector("#"+field+"-powder").disabled = false;
+    }
+
+    // set weapon img
+    if (category == 'weapon') {
+        document.querySelector("#weapon-img").setAttribute('src', 'media/items/new/generic-'+type+'.png');
+    }
+
+    // call calc build
 }
 
-// tabular stats
+
 let tabs = ['all-stats', 'minimal-offensive-stats', 'minimal-defensive-stats'];
 
 function show_tab(tab) {
+    collapse_element("helmet");
     for (const i in tabs) {
         document.querySelector("#"+tabs[i]).style.display = "none";
     }
     document.querySelector("#"+tab).style.display = "";
 }
 
+function toggle_boost_tab(tab) {
+    for (const i of skp_keys) {
+        document.querySelector("#"+i+"-boost").style.display = "none";
+    }
+    document.querySelector("#"+tab+"-boost").style.display = "";
+}
+
+function collapse_element(eq) {
+    elem_list = document.querySelector("#"+eq+"-tooltip").children
+    for (elem of elem_list) {
+        if (elem.classList.contains("no-collapse")) { continue; }
+        if (elem.style.display == "none") {
+            elem.style.display = "";
+        } else {
+            elem.style.display = "none";
+        }   
+    }
+    // macy quirk
+    window.dispatchEvent(new Event('resize'));
+    // weird bug where display: none overrides??
+    document.querySelector("#"+eq+"-tooltip").style.display = "";
+}
+
 // autocomplete initialize
 function init_autocomplete() {
     let dropdowns = new Map()
-    for (const i in equipment_keys) {
+    for (const eq of equipment_keys) {
         // build dropdown
-        console.log('init dropdown for '+ equipment_keys[i])
+        console.log('init dropdown for '+ eq)
         let item_arr = [];
-        if (equipment_keys[i] == 'weapon') {
+        if (eq == 'weapon') {
             for (const weaponType of weapon_keys) {
                 for (const weapon of itemLists.get(weaponType)) {
                     let item_obj = itemMap.get(weapon);
                     if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                         continue;
                     }
-                    if (item_obj["name"] == 'No '+ equipment_keys[i].charAt(0).toUpperCase() + equipment_keys[i].slice(1)) {
+                    if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
                         continue;
                     }
                     item_arr.push(weapon);
                 }
             }
         } else {
-            for (const item of itemLists.get(equipment_keys[i].replace(/[0-9]/g, ''))) {
+            for (const item of itemLists.get(eq.replace(/[0-9]/g, ''))) {
                 let item_obj = itemMap.get(item);
                 if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                     continue;
                 }
-                if (item_obj["name"] == 'No '+ equipment_keys[i].charAt(0).toUpperCase() + equipment_keys[i].slice(1)) {
+                if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
                     continue;
                 }
                 item_arr.push(item)
@@ -131,11 +202,11 @@ function init_autocomplete() {
         }
 
         // create dropdown
-        dropdowns.set(equipment_keys[i], new autoComplete({
+        dropdowns.set(eq, new autoComplete({
             data: {
                 src: item_arr
             },
-            selector: "#"+ equipment_keys[i] +"-choice",
+            selector: "#"+ eq +"-choice",
             wrapper: false,
             resultsList: {
                 tabSelect: true,
@@ -143,7 +214,7 @@ function init_autocomplete() {
                 class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
                 element: (list, data) => {
                     // dynamic result loc
-                    let position = document.getElementById(equipment_keys[i]+'-dropdown').getBoundingClientRect();
+                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
                     list.style.top = position.bottom + window.scrollY +"px";
                     list.style.left = position.x+"px";
                     list.style.width = position.width+"px";
@@ -151,8 +222,7 @@ function init_autocomplete() {
                     if (!data.results.length) {
                         message = document.createElement('li');
                         message.classList.add('scaled-font');
-                        message.textContent = "Add: "+ data.query;
-                        message.value = data.query;
+                        message.textContent = "No results found!";
                         list.prepend(message);
                     }
                 },
@@ -170,7 +240,7 @@ function init_autocomplete() {
                         if (event.detail.selection.value) {
                             event.target.value = event.detail.selection.value;
                         }
-                        update_fields(equipment_keys[i]);
+                        update_field(eq);
                         calcBuildSchedule();
                     },
                 },

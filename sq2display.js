@@ -145,39 +145,27 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
     } else if (item.get("category") === "armor") { 
     }
 
-    let display_commands = item_display_commands;
+    let display_commands = sq2_item_display_commands;
 
     // Clear the parent div.
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
     
-    let active_elem;
     let fix_id = item.has("fixID") && item.get("fixID");
     let elemental_format = false;
     for (let i = 0; i < display_commands.length; i++) {
         const command = display_commands[i];
-        if (command.charAt(0) === "#") {
-            if (command === "#cdiv") {
-                active_elem = document.createElement('div');
-                active_elem.classList.add('center');
-            }
-            else if (command === "#ldiv") {
-                active_elem = document.createElement('div');
-                active_elem.classList.add('left');
-            }
-            else if (command === "#table") {
-                active_elem = document.createElement('table');
-                active_elem.style.width = "100%";
-            }
-            
-            active_elem.classList.add('item-margin');
-            parent_div.appendChild(active_elem);
-        }
-        else if (command.charAt(0) === "!") {
+        if (command.charAt(0) === "!") {
             // TODO: This is sooo incredibly janky.....
             if (command === "!elemental") {
                 elemental_format = !elemental_format;
-            } 
+            }
+            else if (command === "!spacer") {
+                let spacer = document.createElement('div');
+                spacer.classList.add("row", "my-2");
+                parent_div.appendChild(spacer);
+                continue;
+            }
         }
         else {
             let id = command; 
@@ -189,13 +177,13 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                     }
                 }
                 if (id === "slots") {
-                    let p_elem = document.createElement("p");
-                    p_elem.classList.add('itemp')
+                    let p_elem = document.createElement("div");
+                    p_elem.classList.add("col");
+                    
                     // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
 
                     let powderPrefix = document.createElement("b");
-                    powderPrefix.classList.add("powderLeft"); powderPrefix.classList.add("left");
                     powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
                     p_elem.appendChild(powderPrefix);
                     
@@ -208,22 +196,21 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                     }
 
                     let powderSuffix = document.createElement("b");
-                    powderSuffix.classList.add("powderRight"); powderSuffix.classList.add("left"); 
                     powderSuffix.textContent = "]";
                     p_elem.appendChild(powderSuffix);
-                    active_elem.appendChild(p_elem);
+                    parent_div.appendChild(p_elem);
                 } else if (id === "set") {
                     if (item.get("hideSet")) { continue; }
 
-                    let p_elem = document.createElement("p");
-                    p_elem.classList.add("itemp");
+                    let p_elem = document.createElement("div");
+                    p_elem.classList.add("col");
                     p_elem.textContent = "Set: " + item.get(id).toString();
-                    active_elem.appendChild(p_elem);
+                    parent_div.appendChild(p_elem);
                 } else if (id === "majorIds") {
                     console.log(item.get(id));
                     for (let majorID of item.get(id)) {
-                        let p_elem = document.createElement("p");
-                        p_elem.classList.add("itemp");
+                        let p_elem = document.createElement("div");
+                        p_elem.classList.add("col");
 
                         let title_elem = document.createElement("b");
                         let b_elem = document.createElement("b");
@@ -244,17 +231,16 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                             b_elem.textContent = name;
                             p_elem.appendChild(b_elem);
                         }
-                        active_elem.appendChild(p_elem);
+                        parent_div.appendChild(p_elem);
                     }
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
-                    let p_elem = document.createElement("p");
-                    p_elem.classList.add("itemp");
+                    let p_elem = document.createElement("div");
+                    p_elems.classList.add("col");
                     p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
-                    active_elem.appendChild(p_elem);
+                    parent_div.appendChild(p_elem);
                 } else if (id === "displayName") {
-                    let p_elem = document.createElement("a");
-                    p_elem.classList.add('itemp');
-                    p_elem.classList.add("smalltitle");
+                    let p_elem = document.createElement("div");
+                    p_elem.classList.add("col", "text-center", "no-collapse");
                     p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "none");
                     
                     if (item.get("custom")) {
@@ -268,44 +254,40 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                         p_elem.textContent = item.get("displayName");
                     }
 
-                    p_elem.target = "_blank";
-                    active_elem.appendChild(p_elem);
+                    parent_div.appendChild(p_elem);
                     let img = document.createElement("img");
                     if (item && item.has("type")) {
                         img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
                         img.alt = item.get("type");
                         if (mini) {
-                            img.style = " z=index: 1;max-width: 32px; max-height: 32px; position: relative; top: 50%; transform: translateY(-50%);";
+                            img.style = " z=index: 1; position: relative;";
                         } else {
-                            img.style = " z=index: 1;max-width: 48px; max-height: 48px; position: relative; top: 50%; transform: translateY(-50%);";
+                            img.style = " z=index: 1; position: relative;";
                         }
-                        let bckgrd = document.createElement("p");
+                        let bckgrd = document.createElement("div");
+                        bckgrd.classList.add("col", "px-0", "d-flex", "align-items-center", "justify-content-center", "no-collapse");
                         if  (mini) {
-                            bckgrd.style = "width: 48px; height: 48px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
+                            bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
                         } else {
-                            bckgrd.style = "width: 64px; height: 64px; border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "#121516 80%); margin-left: auto; margin-right: auto;"
+                            bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
+                            bckgrd.classList.add("scaled-bckgrd");
                         }
-                        bckgrd.classList.add("center");
-                        bckgrd.classList.add("itemp");
-                        active_elem.appendChild(bckgrd);
+                        parent_div.appendChild(bckgrd);
                         bckgrd.appendChild(img);
                     }
                 } else {
                     let p_elem;
-                    if ( !(item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") && (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") ) { //skp warp
-                        p_elem = displaysq2FixedID(active_elem, id, item.get(id), elemental_format);
+                    if ( !(item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") && (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && parent_div.nodeName === "table") ) { //skp warp
+                        p_elem = displaysq2FixedID(parent_div, id, item.get(id), elemental_format);
                     } else if (item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") {
-                        p_elem = displaysq2FixedID(active_elem, id, item.get(id+"Low")+"-"+item.get(id), elemental_format);
+                        p_elem = displaysq2FixedID(parent_div, id, item.get(id+"Low")+"-"+item.get(id), elemental_format);
                     }
                     if (id === "lore") {
                         p_elem.style = "font-style: italic";
-                        p_elem.classList.add("lore");
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
-                        if ( item.get("tier") !== "Crafted" && active_elem.nodeName === "DIV") {
-                            p_elem.textContent = "";
-                            p_elem.classList.add("itemp");
-                            row = document.createElement("p");
-                            row.classList.add("left");
+                        if ( item.get("tier") !== "Crafted" && parent_div.nodeName === "DIV") {
+                            row = document.createElement("div");
+                            row.classList.add("col");
                             
                             let title = document.createElement("b");
                             title.textContent = idPrefixes[id] + " ";
@@ -318,10 +300,10 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                             boost.textContent = item.get(id);
                             row.appendChild(title);
                             row.appendChild(boost);
-                            p_elem.appendChild(row);
-                        } else if ( item.get("tier") === "Crafted" && active_elem.nodeName === "TABLE") {
+                            parent_div.appendChild(row);
+                        } else if ( item.get("tier") === "Crafted" && parent_div.nodeName === "TABLE") {
                             let row = displaysq2RolledID(item, id, elemental_format);
-                            active_elem.appendChild(row);
+                            parent_div.appendChild(row);
                         }
                     } else if (id === "restrict") {
                         p_elem.classList.add("restrict");
@@ -339,11 +321,17 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (fix_id) {
-                    displaysq2FixedID(active_elem, id, item.get("minRolls").get(id), elemental_format, style);
+                    p_elem = document.createElement("div");
+                    p_elem.classList.add("col", "text-nowrap");
+                    if (id == "dex") {
+                        console.log("dex activated at fix_id")
+                    }
+                    displaysq2FixedID(p_elem, id, item.get("minRolls").get(id), elemental_format, style);
+                    parent_div.appendChild(p_elem);
                 }
                 else {
                     let row = displaysq2RolledID(item, id, elemental_format);
-                    active_elem.appendChild(row);
+                    parent_div.appendChild(row);
                 }
             }else{
               // :/  
@@ -353,8 +341,8 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
     //Show powder specials ;-;
     let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots", "ring", "bracelet", "necklace"];
     if(nonConsumables.includes(item.get("type"))) {
-        let powder_special = document.createElement("p");
-        powder_special.classList.add("left");
+        let powder_special = document.createElement("div");
+        powder_special.classList.add("col");
         let powders = item.get("powders");
         let element = "";
         let power = 0;
@@ -375,10 +363,9 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
         if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
             let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
             let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
-            let specialTitle = document.createElement("p");
-            let specialEffects = document.createElement("p");
-            addClasses(specialTitle, ["left", "itemp", damageClasses[skp_elements.indexOf(element) + 1]]);
-            addClasses(specialEffects, ["left", "itemp", "nocolor"]);
+            let specialTitle = document.createElement("span");
+            let specialEffects = document.createElement("span");
+            addClasses(specialTitle, [damageClasses[skp_elements.indexOf(element) + 1]]);
             let effects;
             if (item.get("category") === "weapon") {//weapon
                 effects = powderSpecial["weaponSpecialEffects"];
@@ -390,7 +377,7 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
             for (const [key,value] of effects.entries()) {
                 if (key !== "Description") {
                     let effect = document.createElement("p");
-                    effect.classList.add("itemp");
+                    effect.classList.add("m-0");
                     effect.textContent = key + ": " + value[power] + specialSuffixes.get(key);
                     if(key === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
@@ -410,8 +397,8 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
     }
     
     if(item.get("tier") && item.get("tier") === "Crafted") {
-        let dura_elem = document.createElement("p");
-        dura_elem.classList.add("itemp");
+        let dura_elem = document.createElement("div");
+        dura_elem.classList.add("col");
         let dura = [];
         let suffix = "";
         if(nonConsumables.includes(item.get("type"))) {
@@ -423,8 +410,7 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
             suffix = " sec."
             let charges = document.createElement("b");
             charges.textContent = "Charges: " + item.get("charges");
-            charges.classList.add("spaceleft");
-            active_elem.appendChild(charges);
+            parent_div.appendChild(charges);
         }
 
         if (typeof(dura) === "string") {
@@ -432,16 +418,16 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
         } else {
             dura_elem.textContent += dura[0]+"-"+dura[1] + suffix;
         }
-        active_elem.append(dura_elem);
+        parent_div.append(dura_elem);
 
     }
     //Show item tier
     if (item.get("tier") && item.get("tier") !== " ") {
-        let item_desc_elem = document.createElement("p");
-        item_desc_elem.classList.add('itemp');
+        let item_desc_elem = document.createElement("div");
+        item_desc_elem.classList.add("col");
         item_desc_elem.classList.add(item.get("tier"));
         item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
-        active_elem.append(item_desc_elem);
+        parent_div.append(item_desc_elem);
     }
 
     //Show item hash if applicable
@@ -452,7 +438,7 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
         item_desc_elem.style.wordWrap = "break-word";
         item_desc_elem.style.wordBreak = "break-word";
         item_desc_elem.textContent = item.get("hash");
-        active_elem.append(item_desc_elem);
+        parent_div.append(item_desc_elem);
     }
 
     if (item.get("category") === "weapon") { 
@@ -476,10 +462,14 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
 }
 
 function displaysq2RolledID(item, id, elemental_format) {
-    let row = document.createElement('tr');
-    let min_elem = document.createElement('td');
-    min_elem.classList.add('shaded-table');
-    min_elem.classList.add('left');
+    let row = document.createElement('div');
+    row.classList.add('col');
+
+    let item_div = document.createElement('div');
+    item_div.classList.add('row');
+
+    let min_elem = document.createElement('div');
+    min_elem.classList.add('col', 'text-start');
     let id_min = item.get("minRolls").get(id)
     let style = id_min < 0 ? "negative" : "positive";
     if(reversedIDs.includes(id)){
@@ -487,11 +477,10 @@ function displaysq2RolledID(item, id, elemental_format) {
     }
     min_elem.classList.add(style);
     min_elem.textContent = id_min + idSuffixes[id];
-    row.appendChild(min_elem);
+    item_div.appendChild(min_elem);
 
-    let desc_elem = document.createElement('td');
-    desc_elem.classList.add('center');
-    desc_elem.classList.add('shaded-table')
+    let desc_elem = document.createElement('div');
+    desc_elem.classList.add('col', 'text-center', 'text-nowrap');
     //TODO elemental format jank
     if (elemental_format) {
         apply_elemental_format(desc_elem, id);
@@ -499,19 +488,19 @@ function displaysq2RolledID(item, id, elemental_format) {
     else {
         desc_elem.textContent = idPrefixes[id];
     }
-    row.appendChild(desc_elem);
+    item_div.appendChild(desc_elem);
 
-    let max_elem = document.createElement('td');
+    let max_elem = document.createElement('div');
     let id_max = item.get("maxRolls").get(id)
-    max_elem.classList.add('right');
-    max_elem.classList.add('shaded-table')
+    max_elem.classList.add('col', 'text-end');
     style = id_max < 0 ? "negative" : "positive";
     if(reversedIDs.includes(id)){
         style === "positive" ? style = "negative" : style = "positive"; 
     }
     max_elem.classList.add(style);
     max_elem.textContent = id_max + idSuffixes[id];
-    row.appendChild(max_elem);
+    item_div.appendChild(max_elem);
+    row.appendChild(item_div);
     return row;
 }
 
@@ -573,8 +562,8 @@ function displaysq2FixedID(active, id, value, elemental_format, style) {
         if (value === "0-0" || value === "0-0\u279c0-0") {
             return;
         }
-        let p_elem = document.createElement('p');
-        p_elem.classList.add('itemp');
+        let p_elem = document.createElement('div');
+        p_elem.classList.add('col');
         if (elemental_format) {
             apply_elemental_format(p_elem, id, value);
         }
@@ -1029,8 +1018,11 @@ function displaysq2DefenseStats(parent_elem, build, insertSummary){
     }
 }
 
-function displaysq2PowderSpecials(parent_elem, powderSpecials, build) {
-    parent_elem.textContent = "Powder Specials";
+function displaysq2PowderSpecials(parent_elem, powderSpecials, build, overall=false) {
+    parent_elem.textContent = ""
+    let title = document.createElement("b");
+    title.textContent = "Powder Specials";
+    parent_elem.appendChild(title);
     let specials = powderSpecials.slice();
     let stats = build.statMap;
     let expandedStats = new Map();
@@ -1038,29 +1030,27 @@ function displaysq2PowderSpecials(parent_elem, powderSpecials, build) {
     for (special of specials) {
         //iterate through the special and display its effects.
         let powder_special = document.createElement("p");
-        powder_special.classList.add("left");
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
         let specialTitle = document.createElement("p");
         let specialEffects = document.createElement("p");
-        specialTitle.classList.add("left");
         specialTitle.classList.add(damageClasses[powderSpecialStats.indexOf(special[0]) + 1]);
-        specialEffects.classList.add("left");
         let effects = special[0]["weaponSpecialEffects"];
         let power = special[1];
         specialTitle.textContent = special[0]["weaponSpecialName"] + " " + Math.floor((power-1)*0.5 + 4) + (power % 2 == 0 ? ".5" : "");  
-        for (const [key,value] of effects) {
-            let effect = document.createElement("p");
-            effect.classList.add("item-margin");
-            effect.textContent += key + ": " + value[power-1] + specialSuffixes.get(key);
-            if(key === "Damage"){
-                effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
-            }
-            if(special[0]["weaponSpecialName"] === "Wind Prison" && key === "Damage Boost") {
-                effect.textContent += " (only 1st hit)";
-            }
-            specialEffects.appendChild(effect);
-        }
 
+        if (!overall || powderSpecialStats.indexOf(special[0]) == 2 || powderSpecialStats.indexOf(special[0]) == 3 || powderSpecialStats.indexOf(special[0]) == 4) {
+            for (const [key,value] of effects) {
+                let effect = document.createElement("p");
+                effect.textContent += key + ": " + value[power-1] + specialSuffixes.get(key);
+                if(key === "Damage"){
+                    effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
+                }
+                if(special[0]["weaponSpecialName"] === "Wind Prison" && key === "Damage Boost") {
+                    effect.textContent += " (only 1st hit)";
+                }
+                specialEffects.appendChild(effect);
+            }
+        }
         powder_special.appendChild(specialTitle);
         powder_special.appendChild(specialEffects);
 
@@ -1090,62 +1080,69 @@ function displaysq2PowderSpecials(parent_elem, powderSpecials, build) {
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
             let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
 
-            let averageLabel = document.createElement("p");
-            averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
-            averageLabel.classList.add("damageSubtitle");
-            averageLabel.classList.add("item-margin");
-            specialDamage.append(averageLabel);
-
-
-            let nonCritLabel = document.createElement("p");
-            nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
-            nonCritLabel.classList.add("damageSubtitle");
-            nonCritLabel.classList.add("item-margin");
-            specialDamage.append(nonCritLabel);
+            let averageWrap = document.createElement("p");
+            let averageLabel = document.createElement("span");
+            averageLabel.textContent = "Average: ";
             
-            for (let i = 0; i < 6; i++){
-                if (results[i][1] > 0){
-                    let p = document.createElement("p");
-                    p.classList.add("damagep");
-                    p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][0]+"-"+results[i][1];
-                    specialDamage.append(p);
-                }
-            }
-            let normalDamage = document.createElement("p");
-            normalDamage.textContent = "Total: " + totalDamNormal[0].toFixed(2) + "-" + totalDamNormal[1].toFixed(2);
-            normalDamage.classList.add("itemp");
-            specialDamage.append(normalDamage);
+            let averageLabelDmg = document.createElement("span");
+            averageLabelDmg.classList.add("Damage");
+            averageLabelDmg.textContent = averageDamage.toFixed(2);
 
-            let nonCritChanceLabel = document.createElement("p");
-            nonCritChanceLabel.textContent = "Non-Crit Chance: " + ((1-critChance)*100).toFixed(2)  + "%";
-            specialDamage.append(nonCritChanceLabel);
-
-            let critLabel = document.createElement("p");
-            critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
-            critLabel.classList.add("damageSubtitle");
-            critLabel.classList.add("item-margin");
+            averageWrap.appendChild(averageLabel);
+            averageWrap.appendChild(averageLabelDmg);
+            specialDamage.appendChild(averageWrap);
             
-            specialDamage.append(critLabel);
-            for (let i = 0; i < 6; i++){
-                if (results[i][1] > 0){
-                    let p = document.createElement("p");
-                    p.classList.add("damagep");
-                    p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][2]+"-"+results[i][3];
-                    specialDamage.append(p);
+            if (!overall) {
+                let nonCritLabel = document.createElement("p");
+                nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
+                nonCritLabel.classList.add("damageSubtitle");
+                nonCritLabel.classList.add("item-margin");
+                specialDamage.append(nonCritLabel);
+                
+                for (let i = 0; i < 6; i++){
+                    if (results[i][1] > 0){
+                        let p = document.createElement("p");
+                        p.classList.add("damagep");
+                        p.classList.add(damageClasses[i]);
+                        p.textContent = results[i][0]+"-"+results[i][1];
+                        specialDamage.append(p);
+                    }
                 }
+                let normalDamage = document.createElement("p");
+                normalDamage.textContent = "Total: " + totalDamNormal[0].toFixed(2) + "-" + totalDamNormal[1].toFixed(2);
+                normalDamage.classList.add("itemp");
+                specialDamage.append(normalDamage);
+
+                let nonCritChanceLabel = document.createElement("p");
+                nonCritChanceLabel.textContent = "Non-Crit Chance: " + ((1-critChance)*100).toFixed(2)  + "%";
+                specialDamage.append(nonCritChanceLabel);
+
+                let critLabel = document.createElement("p");
+                critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
+                critLabel.classList.add("damageSubtitle");
+                critLabel.classList.add("item-margin");
+                
+                specialDamage.append(critLabel);
+                for (let i = 0; i < 6; i++){
+                    if (results[i][1] > 0){
+                        let p = document.createElement("p");
+                        p.classList.add("damagep");
+                        p.classList.add(damageClasses[i]);
+                        p.textContent = results[i][2]+"-"+results[i][3];
+                        specialDamage.append(p);
+                    }
+                }
+                let critDamage = document.createElement("p");
+                critDamage.textContent = "Total: " + totalDamCrit[0].toFixed(2) + "-" + totalDamCrit[1].toFixed(2);
+                critDamage.classList.add("itemp");
+                specialDamage.append(critDamage);
+
+                let critChanceLabel = document.createElement("p");
+                critChanceLabel.textContent = "Crit Chance: " + (critChance*100).toFixed(2) + "%";
+                specialDamage.append(critChanceLabel);
+
+                save_damages.push(averageDamage);
             }
-            let critDamage = document.createElement("p");
-            critDamage.textContent = "Total: " + totalDamCrit[0].toFixed(2) + "-" + totalDamCrit[1].toFixed(2);
-            critDamage.classList.add("itemp");
-            specialDamage.append(critDamage);
-
-            let critChanceLabel = document.createElement("p");
-            critChanceLabel.textContent = "Crit Chance: " + (critChance*100).toFixed(2) + "%";
-            specialDamage.append(critChanceLabel);
-
-            save_damages.push(averageDamage);
 
             powder_special.append(specialDamage);
         } 

@@ -72,6 +72,9 @@ let powderInputs = [
 function init() {
     console.log("builder.js init");
     init_autocomplete();
+    for (const i of equipment_keys) {
+        update_field(i);
+    }
     decodeBuild(url_tag);
 }
 
@@ -639,8 +642,9 @@ function updatePowderSpecials(buttonId, recalcStats) {
     if (recalcStats) {
         calculateBuildStats();
     }
-    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
+    displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
 }
+
 /* Calculates all build statistics and updates the entire display.
 */
 function calculateBuildStats() {
@@ -738,10 +742,9 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-        // displaysq2ExpandedItem(player_build.items[i], buildFields[i], true);
+        displaysq2ExpandedItem(player_build.items[i], buildFields[i], false);
+        collapse_element(equipment_keys[i]);
     }
-
-    update_fields()
 
     displaysq2ArmorStats(player_build);
     displaysq2BuildStats("all-stats", player_build, build_all_display_commands);

@@ -169,6 +169,25 @@ li.search-item:hover {
     background-color: hsl(0, 0%, 11%) !important;
 }
 
+/* boosts styles */
+.button-boost:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.toggleOn {
+    background-color: #0a0 !important;
+}
+
+/* floating tooltip styles */
+.float-tooltip {
+    background-color: hsl(0, 0%, 16%);
+    position: absolute;
+    transition: .5s;
+    cursor: pointer;
+}
+
+/* generic */
+
 input {
     min-width: 0;
     width: 100%;
@@ -219,6 +238,15 @@ input.equipment-input {
     width: 6.5rem;
 }
 
+.scaled-bckgrd {
+    width: 10rem;
+    height: 10rem;
+}
+
+.scaled-bckgrd img {
+    width: 6.5rem;
+}
+
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
     .scaled-font {
         font-size: .8rem;
@@ -236,12 +264,25 @@ input.equipment-input {
         width: 2.8rem;
     }
 
+    .scaled-bckgrd {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .scaled-bckgrd img {
+        width: 2.8rem;
+    }
+
     .warning {
         font-size: .7rem;
     }
 
     .spell-display b {
         font-size: 1rem;
+    }
+
+    .mobile-only {
+        display: none;
     }
 }
 
@@ -262,12 +303,26 @@ input.equipment-input {
         width: 3.5rem;
     }
 
+    .scaled-bckgrd {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .scaled-bckgrd img {
+        width: 3.5rem;
+    }
+
+
     .warning {
         font-size: .8rem;
     }
 
     .spell-display b {
         font-size: 1.2rem;
+    }
+
+    .mobile-only {
+        display: none;
     }
 }
 
@@ -277,7 +332,7 @@ input.equipment-input {
 }
 
 .fake-button:hover {
-    background-color: hsl(0, 0%, 14%);
+    background-color: hsl(0, 0%, 14%) !important;
 }
 
 /* material design dark mode */
@@ -315,6 +370,42 @@ input.equipment-input {
 
 .dark-9 {
     background-color: hsl(0, 0%, 16%) !important;
+}
+
+.dark-1u {
+    background-color: hsl(0, 0%, 5%);
+}
+
+.dark-2u {
+    background-color: hsl(0, 0%, 7%);
+}
+
+.dark-3u {
+    background-color: hsl(0, 0%, 8%);
+}
+
+.dark-4u {
+    background-color: hsl(0, 0%, 9%);
+}
+
+.dark-5u {
+    background-color: hsl(0, 0%, 11%);
+}
+
+.dark-6u {
+    background-color: hsl(0, 0%, 12%);
+}
+
+.dark-7u {
+    background-color: hsl(0, 0%, 14%);
+}
+
+.dark-8u {
+    background-color: hsl(0, 0%, 15%);
+}
+
+.dark-9u {
+    background-color: hsl(0, 0%, 16%);
 }
 
 .dark-shadow {
