@@ -13,13 +13,14 @@ let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDam
 
 let editable_elems = [];
 
+/*
 for (let i of editable_item_fields) {
     let elem = document.getElementById(i);
     elem.addEventListener("change", (event) => {
         elem.classList.add("highlight");
     });
     editable_elems.push(elem);
-}
+}*/
 
 for (let i of skp_order) {
     let elem = document.getElementById(i+"-skp");
@@ -373,9 +374,7 @@ function calculateBuild(save_skp, skp){
         }
 
         console.log(player_build.toString());
-        displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
-
-        
+        displaysq2EquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
         const assigned = player_build.base_skillpoints;
         const skillpoints = player_build.total_skillpoints;
@@ -383,11 +382,6 @@ function calculateBuild(save_skp, skp){
             setText(skp_order[i] + "-skp-base", "Original: " + skillpoints[i]);
         }
 
-        for (let id of editable_item_fields) {
-            setValue(id, player_build.statMap.get(id));
-            setText(id+"-base", "Original Value: " + player_build.statMap.get(id));
-        }
-        
         if (save_skp) {
             // TODO: reduce duplicated code, @updateStats
             let skillpoints = player_build.total_skillpoints;
@@ -509,9 +503,12 @@ function updateStats() {
         updatePowderSpecials("skip", false);
         updateBoosts("skip", false);
     }
+    /*
     for (let id of editable_item_fields) {
-        player_build.statMap.set(id, parseInt(getValue(id)));
-    }
+            player_build.statMap.set(id, parseInt(getValue(id)));
+            console.log(player_build.statMap.get(id));
+        }
+    }*/
     player_build.aggregateStats();
     console.log(player_build.statMap);
     calculateBuildStats();
@@ -653,7 +650,7 @@ function calculateBuildStats() {
     const skillpoints = player_build.total_skillpoints;
     let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
     for (let i in skp_order){ //big bren
-        setText(skp_order[i] + "-skp-assign", "Manually Assigned: " + assigned[i]);
+        setText(skp_order[i] + "-skp-assign", "Assign: " + assigned[i]);
         setValue(skp_order[i] + "-skp", skillpoints[i]);
         let linebreak = document.createElement("br");
         linebreak.classList.add("itemp");
@@ -754,7 +751,6 @@ function calculateBuildStats() {
     displaysq2BuildStats("all-stats", player_build, build_all_display_commands);
     displaysq2BuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
     displaySetBonuses("set-info",player_build);
-    displayNextCosts("int-info",player_build);
 
     let meleeStats = player_build.getMeleeStats();
     displaysq2MeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);

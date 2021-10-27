@@ -182,7 +182,7 @@ li.search-item:hover {
 .float-tooltip {
     background-color: hsl(0, 0%, 16%);
     position: absolute;
-    transition: .5s;
+    transition: .3s;
     cursor: pointer;
 }
 
@@ -214,12 +214,21 @@ input.equipment-input {
     font-weight: bold;
 }
 
+.spell-expand {
+    cursor: pointer;
+}
+
 .scaled-font {
     font-size: 2.5rem;
 }
 
 .skp-tooltip {
     font-size: 2.1875rem;
+    font-weight: bold;
+}
+
+.spellcost-tooltip b {
+    font-size: 2.1875rem !important;
     font-weight: bold;
 }
 
@@ -254,6 +263,10 @@ input.equipment-input {
     
     .skp-tooltip {
         font-size: .625rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .625rem !important;
     }
 
     .scaled-item-icon {
@@ -293,6 +306,10 @@ input.equipment-input {
 
     .skp-tooltip {
         font-size: .78rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .78rem !important;
     }
 
     .scaled-item-icon {
@@ -412,6 +429,10 @@ input.equipment-input {
     box-shadow: 0rem 0rem 1.25rem 0.1875rem black;
 }
   
-  .dark-shadow-sm {
+.dark-shadow-sm {
     box-shadow: 0rem 0rem 0.625rem 0.125rem black;
+}
+
+.border-dark-7 {
+    border-color:hsl(0, 0%, 14%) !important;
 }

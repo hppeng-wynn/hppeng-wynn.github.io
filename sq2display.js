@@ -483,7 +483,7 @@ function displaysq2RolledID(item, id, elemental_format) {
     desc_elem.classList.add('col', 'text-center', 'text-nowrap');
     //TODO elemental format jank
     if (elemental_format) {
-        apply_elemental_format(desc_elem, id);
+        apply_sq2_elemental_format(desc_elem, id);
     }
     else {
         desc_elem.textContent = idPrefixes[id];
@@ -541,7 +541,7 @@ function displaysq2FixedID(active, id, value, elemental_format, style) {
         desc_elem.classList.add('text-start');
 
         if (elemental_format) {
-            apply_elemental_format(desc_elem, id);
+            apply_sq2_elemental_format(desc_elem, id);
         }
         else {
             desc_elem.textContent = idPrefixes[id];
@@ -565,7 +565,7 @@ function displaysq2FixedID(active, id, value, elemental_format, style) {
         let p_elem = document.createElement('div');
         p_elem.classList.add('col');
         if (elemental_format) {
-            apply_elemental_format(p_elem, id, value);
+            apply_sq2_elemental_format(p_elem, id, value);
         }
         else {
             p_elem.textContent = idPrefixes[id].concat(value, idSuffixes[id]);
@@ -1200,6 +1200,9 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     parent_elem.append(title_elem);
     overallparent_elem.append(title_elemavg);
 
+    overallparent_elem.append(displaysq2NextCosts(spell, build));
+
+
     let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
 
     let save_damages = [];
@@ -1344,4 +1347,84 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
             part_divavg.append(overallaverageLabel);
         }
     }
+}
+
+function displaysq2EquipOrder(parent_elem, buildOrder){
+    parent_elem.textContent = "";
+    const order = buildOrder.slice();
+    let title_elem = document.createElement("b");
+    title_elem.textContent = "Equip order ";
+    title_elem.classList.add("Normal", "text-center");
+    parent_elem.append(title_elem);
+    for (const item of order) {
+        let p_elem = document.createElement("b");
+        p_elem.textContent = item.get("displayName");
+        parent_elem.append(p_elem);
+    }
+}
+
+function displaysq2NextCosts(spell, build) { 
+    let int = build.total_skillpoints[2];
+    let spells = spell_table[build.weapon.get("type")];
+
+    let row = document.createElement("div");
+    row.classList.add("spellcost-tooltip");
+    let init_cost = document.createElement("b");
+    init_cost.textContent = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost);
+    init_cost.classList.add("Mana");
+    let arrow = document.createElement("b");
+    arrow.textContent = "\u279C";
+    let next_cost = document.createElement("b");
+    next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
+    next_cost.classList.add("Mana");
+    let int_needed = document.createElement("b");
+    if (init_cost.textContent === "1") {
+        int_needed.textContent = ": n/a (+0)";
+    }else { //do math
+        let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
+        let needed = int;
+        let noUpdate = false;
+        //forgive me... I couldn't inverse ceil, floor, and max.
+        while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) > target) {
+            if(needed > 150) {
+                noUpdate = true;
+                break;
+            }
+            needed++;
+            build.total_skillpoints[2] = needed;
+        }
+        let missing = needed - int;  
+        //in rare circumstances, the next spell cost can jump.
+        if (noUpdate) {
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)-1); 
+        }else {
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
+        }
+        
+        
+        build.total_skillpoints[2] = int;//forgive me pt 2
+        int_needed.textContent = ": " + (needed > 150 ? ">150" : needed) + " int (+" + (needed > 150 ? "n/a" : missing) + ")"; 
+    }
+    
+    // row.appendChild(init_cost);
+    row.appendChild(arrow);
+    row.appendChild(next_cost);
+    row.appendChild(int_needed);
+    return row;
+}
+
+function apply_sq2_elemental_format(p_elem, id, suffix) {
+    suffix = (typeof suffix !== 'undefined') ?  suffix : "";
+    // THIS IS SO JANK BUT IM TOO LAZY TO FIX IT TODO
+    let parts = idPrefixes[id].split(/ (.*)/);
+    let element_prefix = parts[0];
+    let desc = parts[1];
+    let i_elem = document.createElement('span');
+    i_elem.classList.add(element_prefix);
+    i_elem.textContent = element_prefix;
+    p_elem.appendChild(i_elem);
+
+    let i_elem2 = document.createElement('span');
+    i_elem2.textContent = " " + desc + suffix;
+    p_elem.appendChild(i_elem2);
 }

@@ -333,8 +333,8 @@
                                                 <div class="rounded dark-6 dark-shadow-sm px-2">
                                                     <label for="str-skp" class="eDam skp-tooltip">Strength</label>
                                                     <input type="string" id="str-skp" name="str-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                                    <div id="str-skp-assign" class="skp-tooltip" style="display: none;">
-                                                        Manually Assigned: 0
+                                                    <div id="str-skp-assign" class="skp-tooltip">
+                                                        Assign: 0
                                                     </div>
                                                     <div id="str-skp-base" class="skp-tooltip">
                                                         Original: 0
@@ -347,8 +347,8 @@
                                                 <div class="rounded dark-6 dark-shadow-sm px-2">
                                                     <label for="dex-skp" class="tDam skp-tooltip">Dexterity</label>
                                                     <input type="string" id="dex-skp" name="dex-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                                    <div id="dex-skp-assign" class="skp-tooltip" style="display: none;">
-                                                        Manually Assigned: 0
+                                                    <div id="dex-skp-assign" class="skp-tooltip">
+                                                        Assign: 0
                                                     </div>
                                                     <div id="dex-skp-base" class="skp-tooltip">
                                                         Original: 0
@@ -361,8 +361,8 @@
                                                 <div class="rounded dark-6 dark-shadow-sm px-2">
                                                     <label for="int-skp" class="wDam skp-tooltip text-nowrap">Intelligence</label>
                                                     <input type="string" id="int-skp" name="int-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                                    <div id="int-skp-assign" class="skp-tooltip" style="display: none;">
-                                                        Manually Assigned: 0
+                                                    <div id="int-skp-assign" class="skp-tooltip">
+                                                        Assign: 0
                                                     </div>
                                                     <div id="int-skp-base" class="skp-tooltip">
                                                         Original: 0
@@ -375,8 +375,8 @@
                                                 <div class="rounded dark-6 dark-shadow-sm px-2">
                                                     <label for="def-skp" class="fDam skp-tooltip">Defense</label>
                                                     <input type="string" id="def-skp" name="def-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                                    <div id="def-skp-assign" class="skp-tooltip" style="display: none;">
-                                                        Manually Assigned: 0
+                                                    <div id="def-skp-assign" class="skp-tooltip">
+                                                        Assign: 0
                                                     </div>
                                                     <div id="def-skp-base" class="skp-tooltip">
                                                         Original: 0
@@ -389,8 +389,8 @@
                                                 <div class="rounded dark-6 dark-shadow-sm px-2">
                                                     <label for="agi-skp" class="aDam skp-tooltip">Agility</label>
                                                     <input type="string" id="agi-skp" name="agi-skp" value="0" class="skp-update skp-tooltip border-dark dark-7 text-light text-center rounded" tabindex="2"/>
-                                                    <div id="agi-skp-assign" class="skp-tooltip" style="display: none;">
-                                                        Manually Assigned: 0
+                                                    <div id="agi-skp-assign" class="skp-tooltip">
+                                                        Assign: 0
                                                     </div>
                                                     <div id="agi-skp-base" class="skp-tooltip">
                                                         Original: 0
@@ -690,13 +690,13 @@
                         <div class="row row-cols-1 rounded dark-shadow dark-6 scaled-font">
                             <div class="col rounded-top">
                                 <div class="row">
-                                    <div id="tab-offense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('minimal-offensive-stats')">
+                                    <div id="tab-offense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4 border border-2 border-dark-7" onclick="show_tab('minimal-offensive-stats')">
                                         Offense
                                     </div>
-                                    <div id="tab-defense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('minimal-defensive-stats')">
+                                    <div id="tab-defense-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4 border border-2 border-dark-7" onclick="show_tab('minimal-defensive-stats')">
                                         Defense
                                     </div>
-                                    <div id="tab-basic-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4" onclick="show_tab('all-stats')">
+                                    <div id="tab-basic-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4 border border-2 border-dark-7" onclick="show_tab('all-stats')">
                                         Overall
                                     </div>
                                 </div>
@@ -740,25 +740,27 @@
                 </div>
             </div>
             <div class="col" id="masonry-container">
-
-                <div id="helmet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="helmet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="chestplate-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="chestplate-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="leggings-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="leggings-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="boots-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="boots-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="ring1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="ring1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="ring2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="ring2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="bracelet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="bracelet-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="necklace-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="necklace-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark">
+                <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
+                <div class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3" id = "build-order">
+                </div>
+                <div class = "rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark p-3" id = "set-info">Set info</div>
             </div>
             <div class="col dark-5 scaled-font">
                 <footer class="text-center">
@@ -773,49 +775,7 @@
             </div>
         </div>
     </div>
-    
-    
-    <div id="drag-full-eqs" style="display: none;">
-        <div class = "build hide-container-grid" style="display: none;">
-            <div class = "center build-order" id = "build-order">
-            </div>
-            <div class = "center build-melee-stats" id = "build-melee-stats">
-            </div>
-            <div class = "center build-defense-stats" id = "build-defense-stats">
-            </div>
-        </div>
-    </div>
-    <div id="drag-full-spells" style="display: none;">
-        <div class = "spells hide-container-grid" style="display: none;">
-            <div class = "center spell-info" id = "spell0">
-                <!--div class = "center" id = "spell0-name">Spell 1</div-->
-                <div class = "center" id = "spell0-info">Spell 1</div>
-            </div>
-            <div class = "center spell-info" id = "spell1">
-                <!--div class = "center" id = "spell1-name">Spell 2</div-->
-                <div class = "center" id = "spell1-info">Spell 2</div>
-            </div>
-            <div class = "center spell-info" id = "spell2">
-                <!--div class = "center" id = "spell2-name">Spell 3</div-->
-                <div class = "center" id = "spell2-info">Spell 3</div>
-            </div>
-            <div class = "center spell-info" id = "spell3">
-                <!--div class = "center" id = "spell3-name">Spell 4</div-->
-                <div class = "center" id = "spell3-info">Spell 4</div>
-            </div>
-        </div>
-    </div>
-    <div id="drag-additional-info" style="display: none;">
-        <div class="misc">
-            <div class = "center set-info" id = "set-info-div" style = "grid-column:1;grid-row:1; display: none;">
-                <div class = "center" id = "set-info">Set info</div>
-            </div>
-            <div class = "center int-info hide-container-block" id = "int-info-div" style = "grid-column:4;grid-row:1; display: none;">
-                <div class = "center" id = "int-info">Next Spell Costs</div> 
-            </div>
-        </div>
-    </div>
-    <div id="drag-edit-ids" style="display: none;">
+    <!--div id="drag-edit-ids" style="display: none;">
         <div class="id-box fade-in" id="id-edit" style="display: none">
             <div class="id-edit1">
                 <table>
@@ -1210,7 +1170,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div-->
     <div style="display: none;">
         <div id="search-container" class="draggable full-border window-container" style="border-top: none;">
             <div id="search-container-header" class="window-header">

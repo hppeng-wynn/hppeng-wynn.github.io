@@ -1,8 +1,9 @@
 let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
-let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear']
+let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear'];
 let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 
-let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info']
+let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
+let other_disp = ['build-order', 'set-info', 'int-info'];
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -164,6 +165,26 @@ function toggle_boost_tab(tab) {
         document.querySelector("#"+i+"-boost").style.display = "none";
     }
     document.querySelector("#"+tab+"-boost").style.display = "";
+}
+
+// toggle tab
+function toggle_tab(tab) {
+    if (document.querySelector("#"+tab).style.display == "none") {
+        document.querySelector("#"+tab).style.display = "";
+    } else {
+        document.querySelector("#"+tab).style.display = "none";
+    }
+}
+
+function toggle_edit(id) {
+    if (document.querySelector("#"+id).style.display == "none") {
+        document.querySelector("#"+id+"-val").style.display = "none";
+        document.querySelector("#"+id).style.display = "";
+    } else {
+        document.querySelector("#"+id+"-val").style.display = "";
+        document.querySelector("#"+id).style.display = "none";
+        updateStatSchedule();
+    }
 }
 
 function collapse_element(eq) {
