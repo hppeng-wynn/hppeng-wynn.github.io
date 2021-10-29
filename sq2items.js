@@ -104,16 +104,12 @@ const special_mappings = {
     "No Defense Req": new NegateQuery("defReq"),
 };
 
-let itemFilters = document.getElementById("filter-items");
+let itemFilters = []
 for (let x in translate_mappings) {
-    let el = document.createElement("option");
-    el.value = x;
-    itemFilters.appendChild(el);
+    itemFilters.push(x);
 }
 for (let x in special_mappings) {
-    let el = document.createElement("option");
-    el.value = x;
-    itemFilters.appendChild(el);
+    itemFilters.push(x);
 }
 
 let itemCategories = [ "armor", "accessory", "weapon" ];
@@ -123,13 +119,15 @@ function applyQuery(items, query) {
 }
 
 function displayItems(items_copy) {
-    let items_parent = document.getElementById("main");
+    let items_parent = document.getElementById("search-results");
     for (let i in items_copy) {
+        if (i > 200) {break;}
         let item = items_copy[i];
         let box = document.createElement("div");
-        box.style.flex = "1";
-        box.classList.add("box");
+        box.classList.add("col-auto", "dark-7", "dark-shadow");
+        box.style.position = "absolute";
         box.id = "item"+i;
+        box.addEventListener("dblclick", function() {set_item(item);});
         items_parent.appendChild(box);
         displaysq2ExpandedItem(item, box.id);
     }
@@ -178,7 +176,7 @@ function doItemSearch() {
     }
 
     let items_copy = items_expanded.slice();
-    document.getElementById("main").textContent = "";
+    document.getElementById("search-results").textContent = "";
     for (const query of queries) {
         console.log(items_copy.length);
         console.log(query);

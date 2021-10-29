@@ -743,14 +743,14 @@ function calculateBuildStats() {
         if (player_build.items[i].get("id") > 9999) {
             continue;
         }
-        displaysq2ExpandedItem(player_build.items[i], buildFields[i], false);
-        collapse_element(equipment_keys[i]);
+        displaysq2ExpandedItem(player_build.items[i], buildFields[i]);
+        collapse_element("#"+equipment_keys[i]+"-tooltip");
     }
 
     displaysq2ArmorStats(player_build);
     displaysq2BuildStats("all-stats", player_build, build_all_display_commands);
     displaysq2BuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
-    displaySetBonuses("set-info",player_build);
+    displaysq2SetBonuses("set-info",player_build);
 
     let meleeStats = player_build.getMeleeStats();
     displaysq2MeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
@@ -795,18 +795,34 @@ function shareBuild() {
     }
 }
 
+function populateBuildList() {
+    const buildList = document.getElementById("build-choice");
+    const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
+
+    for (const buildName of Object.keys(savedBuilds).sort()) {
+        const buildOption = document.createElement("option");
+        buildOption.setAttribute("value", buildName);
+        buildList.appendChild(buildOption);
+    }
+}
+
 function saveBuild() {
     if (player_build) {
-        let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
-        let saveName = document.getElementById("build-name").value;
-        let encodedBuild = encodeBuild();
+        const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
+        const saveName = document.getElementById("build-name").value;
+        const encodedBuild = encodeBuild();
         if ((!Object.keys(savedBuilds).includes(saveName)
                 || document.getElementById("saved-error").textContent !== "") && encodedBuild !== "") {
             savedBuilds[saveName] = encodedBuild.replace("#", "");
             window.localStorage.setItem("builds", JSON.stringify(savedBuilds));
 
             document.getElementById("saved-error").textContent = "";
-            document.getElementById("saved-build").textContent = "Build saved Locally";
+            document.getElementById("saved-build").textContent = "Build saved locally";
+            
+            const buildList = document.getElementById("build-choice");
+            const buildOption = document.createElement("option");
+            buildOption.setAttribute("value", saveName);
+            buildList.appendChild(buildOption);
         } else {
             document.getElementById("saved-build").textContent = "";
             if (encodedBuild === "") {
@@ -868,6 +884,8 @@ function optimizeStrDex() {
     const base_skillpoints = player_build.base_skillpoints;
     const max_str_boost = 100 - base_skillpoints[0];
     const max_dex_boost = 100 - base_skillpoints[1];
+    if (Math.min(remaining, max_str_boost, max_dex_boost) < 0) return; // Unwearable
+
     const base_total_skillpoints = player_build.total_skillpoints;
     let str_bonus = remaining;
     let dex_bonus = 0;
@@ -951,7 +969,7 @@ function optimizeStrDex() {
         
     try {
         calculateBuildStats();
-        // setTitle();
+        setTitle();
         if (player_build.errored)
             throw new ListError(player_build.errors);
     }

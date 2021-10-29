@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-choice").setAttribute("oninput", "update_field('"+ eq +"'); calcBuildSchedule();");
         document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule();");
-        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('"+ eq +"')");
+        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip')");
     }
 
     for (const i of spell_disp) {
@@ -39,7 +39,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
 
-    
+    let search_masonry = Macy({
+        container: "#search-results",
+        columns: 1,
+        mobileFirst: true,
+        breakAt: {
+            1200: 4,
+        },
+        margin: {
+            x: 20,
+            y: 20,
+        }
+        
+    });
+
+    document.querySelector("#search-container").addEventListener("keyup", function(event) {
+        if (event.key === "Escape") {
+            document.querySelector("#search-container").style.display = "none";
+        };
+    });
 
 });
 
@@ -75,6 +93,7 @@ function doSearchSchedule(){
     doSearchTask = setTimeout(function(){
         doSearchTask = null;
         doItemSearch();
+        window.dispatchEvent(new Event('resize'));
     }, 500);
 }
 
@@ -122,6 +141,14 @@ function update_field(field) {
         return false;
     }
 
+    if ((type != field.replace(/[0-9]/g, '')) && (category != field.replace(/[0-9]/g, ''))) {
+        document.querySelector("#"+field+"-choice").classList.add("text-light");
+        if (item) { document.querySelector("#"+field+"-choice").classList.add("is-invalid"); }
+
+        document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
+        return false;
+    }
+
     // set item color
     document.querySelector("#"+field+"-choice").classList.add(tier);
 
@@ -141,11 +168,12 @@ function update_field(field) {
 
     // call calc build
 }
-/* tabulars */
+/* tabulars | man i hate this code but too lazy to fix /shrug */
 
 let tabs = ['all-stats', 'minimal-offensive-stats', 'minimal-defensive-stats'];
 
 function show_tab(tab) {
+    console.log(itemFilters)
     for (const i in tabs) {
         document.querySelector("#"+tabs[i]).style.display = "none";
     }
@@ -176,19 +204,9 @@ function toggle_tab(tab) {
     }
 }
 
-function toggle_edit(id) {
-    if (document.querySelector("#"+id).style.display == "none") {
-        document.querySelector("#"+id+"-val").style.display = "none";
-        document.querySelector("#"+id).style.display = "";
-    } else {
-        document.querySelector("#"+id+"-val").style.display = "";
-        document.querySelector("#"+id).style.display = "none";
-        updateStatSchedule();
-    }
-}
+function collapse_element(elmnt) {
+    elem_list = document.querySelector(elmnt).children;
 
-function collapse_element(eq) {
-    elem_list = document.querySelector("#"+eq+"-tooltip").children
     for (elem of elem_list) {
         if (elem.classList.contains("no-collapse")) { continue; }
         if (elem.style.display == "none") {
@@ -200,7 +218,28 @@ function collapse_element(eq) {
     // macy quirk
     window.dispatchEvent(new Event('resize'));
     // weird bug where display: none overrides??
-    document.querySelector("#"+eq+"-tooltip").style.display = "";
+    document.querySelector(elmnt).style.display = "";
+}
+
+// search misc
+function set_item(item) {
+    document.querySelector("#search-container").style.display = "none";
+    let type;
+    // if (!player_build) {return false;}
+    if (item.get("category") === "weapon") {
+        type = "weapon";
+    } else if (item.get("type") === "ring") {
+        if (!document.querySelector("#ring1-choice").value) {
+            type = "ring1";
+        } else {
+            type = "ring2";
+        }
+    } else {
+        type = item.get("type");
+    }
+    document.querySelector("#"+type+"-choice").value = item.get("displayName");
+    calcBuildSchedule();
+    update_field(type);
 }
 
 // disable boosts
@@ -290,6 +329,54 @@ function init_autocomplete() {
                         }
                         update_field(eq);
                         calcBuildSchedule();
+                    },
+                },
+            }
+        }));
+    }
+    let filter_loc = ["filter1", "filter2", "filter3", "filter4"];
+    for (const i of filter_loc) {
+        console.log(i);
+        console.log('init dropdown for '+i+"-choice" )
+        dropdowns.set(i+"-choice", new autoComplete({
+            data: {
+                src: itemFilters,
+            },
+            selector: "#"+i+"-choice",
+            wrapper: false,
+            resultsList: {
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    // dynamic result loc
+                    console.log(i);
+                    list.style.zIndex = "100";
+                    let position = document.getElementById(i+"-dropdown").getBoundingClientRect();
+                    window_pos = document.getElementById("search-container").getBoundingClientRect();
+                    list.style.top = position.bottom - window_pos.top + 5 +"px";
+                    list.style.left = position.x - window_pos.x +"px";
+                    list.style.width = position.width+"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No filters found!";
+                        list.prepend(message);
+                    }
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        }
+                        doSearchSchedule();
                     },
                 },
             }

@@ -293,10 +293,6 @@ input.equipment-input {
     .spell-display b {
         font-size: 1rem;
     }
-
-    .mobile-only {
-        display: none;
-    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -337,10 +333,13 @@ input.equipment-input {
     .spell-display b {
         font-size: 1.2rem;
     }
-
-    .mobile-only {
-        display: none;
-    }
+}
+/* WynnAtlas Mini */
+.search-field {
+    background-color: hsl(0, 0%, 14%) !important;
+    color: white;
+    font-weight: bold;
+    border-color: hsl(0, 0%, 8%);
 }
 
 /* Fake button for build stats */

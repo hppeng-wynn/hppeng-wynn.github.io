@@ -96,7 +96,7 @@ function displaysq2BuildStats(parent_id,build,command_group){
     }
 }
 
-function displaysq2ExpandedItem(item, parent_id, mini=false){
+function displaysq2ExpandedItem(item, parent_id){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
     // !elemental is some janky hack for elemental damage.
@@ -259,19 +259,11 @@ function displaysq2ExpandedItem(item, parent_id, mini=false){
                     if (item && item.has("type")) {
                         img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
                         img.alt = item.get("type");
-                        if (mini) {
-                            img.style = " z=index: 1; position: relative;";
-                        } else {
-                            img.style = " z=index: 1; position: relative;";
-                        }
+                        img.style = " z=index: 1; position: relative;";
                         let bckgrd = document.createElement("div");
                         bckgrd.classList.add("col", "px-0", "d-flex", "align-items-center", "justify-content-center", "no-collapse");
-                        if  (mini) {
-                            bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
-                        } else {
-                            bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
-                            bckgrd.classList.add("scaled-bckgrd");
-                        }
+                        bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
+                        bckgrd.classList.add("scaled-bckgrd");
                         parent_div.appendChild(bckgrd);
                         bckgrd.appendChild(img);
                     }
@@ -1427,4 +1419,50 @@ function apply_sq2_elemental_format(p_elem, id, suffix) {
     let i_elem2 = document.createElement('span');
     i_elem2.textContent = " " + desc + suffix;
     p_elem.appendChild(i_elem2);
+}
+
+function displaysq2SetBonuses(parent_id,build) {
+    setHTML(parent_id, "");
+    let parent_div = document.getElementById(parent_id);
+
+    let set_summary_elem = document.createElement('p');
+    set_summary_elem.classList.add('text-center');
+    set_summary_elem.textContent = "Set Bonuses";
+    parent_div.append(set_summary_elem);
+    
+    if (build.activeSetCounts.size) {
+        parent_div.parentElement.style.display = "block";
+    } else {
+        parent_div.parentElement.style.display = "none";
+    }
+
+    for (const [setName, count] of build.activeSetCounts) {
+        const active_set = sets[setName];
+        if (active_set["hidden"]) { continue; }
+
+        let set_elem = document.createElement('p');
+        set_elem.id = "set-"+setName;
+        set_summary_elem.append(set_elem);
+        
+        const bonus = active_set.bonuses[count-1];
+        let mock_item = new Map();
+        mock_item.set("fixID", true);
+        mock_item.set("displayName", setName+" Set: "+count+"/"+sets[setName].items.length);
+        let mock_minRolls = new Map();
+        let mock_maxRolls = new Map();
+        mock_item.set("minRolls", mock_minRolls);
+        mock_item.set("maxRolls", mock_maxRolls);
+        for (const id in bonus) {
+            if (rolledIDs.includes(id)) {
+                mock_minRolls.set(id, bonus[id]);
+                mock_maxRolls.set(id, bonus[id]);
+            }
+            else {
+                mock_item.set(id, bonus[id]);
+            }
+        }
+        mock_item.set("powders", []);
+        displaysq2ExpandedItem(mock_item, set_elem.id);
+        console.log(mock_item);
+    }
 }
