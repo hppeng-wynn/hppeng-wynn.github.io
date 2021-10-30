@@ -75211,6 +75211,338 @@
     }
   ],
   "sets": {
+    "Ornate Shadow": {
+      "items": [
+        "Ornate Shadow Cowl",
+        "Ornate Shadow Garb",
+        "Ornate Shadow Cover",
+        "Ornate Shadow Cloud"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Grookwarts": {
+      "items": [
+        "Dragon's Eye Bracelet",
+        "Draoi Fair",
+        "Renda Langit"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Master Hive": {
+      "items": [
+        "Abyss-Imbued Leggings",
+        "Boreal-Patterned Crown",
+        "Anima-Infused Cuirass",
+        "Chaos-Woven Greaves",
+        "Elysium-Engraved Aegis",
+        "Eden-Blessed Guards",
+        "Gaea-Hewn Boots",
+        "Hephaestus-Forged Sabatons",
+        "Obsidian-Framed Helmet",
+        "Twilight-Gilded Cloak",
+        "Infused Hive Relik",
+        "Infused Hive Wand",
+        "Infused Hive Spear",
+        "Infused Hive Dagger",
+        "Infused Hive Bow",
+        "Contrast",
+        "Prowess",
+        "Intensity"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Thunder Hive": {
+      "items": [
+        "Sparkling Visor",
+        "Insulated Plate Mail",
+        "Static-Charged Leggings",
+        "Thunderous Step",
+        "Bottled Thunderstorm",
+        "Lightning Flash"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Air Hive": {
+      "items": [
+        "Pride of the Aerie",
+        "Gale's Freedom",
+        "Turbine Greaves",
+        "Flashstep",
+        "Breezehands",
+        "Vortex Bracer"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Earth Hive": {
+      "items": [
+        "Ambertoise Shell",
+        "Beetle Aegis",
+        "Elder Oak Roots",
+        "Humbark Moccasins",
+        "Subur Clip",
+        "Golemlus Core"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Water Hive": {
+      "items": [
+        "Whitecap Crown",
+        "Stillwater Blue",
+        "Trench Scourer",
+        "Silt of the Seafloor",
+        "Coral Ring",
+        "Moon Pool Circlet"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Fire Hive": {
+      "items": [
+        "Sparkweaver",
+        "Soulflare",
+        "Cinderchain",
+        "Mantlewalkers",
+        "Clockwork",
+        "Dupliblaze"
+      ],
+      "bonuses": [
+        {},
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        },
+        {
+          "illegal": true
+        }
+      ],
+      "hidden": true
+    },
+    "Synch Core": {
+      "items": [
+        "Overload Core",
+        "Synchro Core",
+        "Dodge Core",
+        "Harden Core",
+        "Hustle Core"
+      ],
+      "bonuses": [
+        {},
+        {
+          "hprRaw": -20,
+          "fDefPct": -8,
+          "wDefPct": -8,
+          "aDefPct": -8,
+          "tDefPct": -8,
+          "eDefPct": -8,
+          "sprint": -8
+        },
+        {
+          "hprRaw": 150,
+          "fDefPct": -40,
+          "wDefPct": -40,
+          "aDefPct": -40,
+          "tDefPct": -40,
+          "eDefPct": -40,
+          "sprint": -35,
+          "ws": 16,
+          "hpBonus": 1150,
+          "sdPct": 14,
+          "mdPct": 14,
+          "jh": 1,
+          "mr": -1,
+          "ms": -1
+        },
+        {
+          "hprRaw": 50,
+          "fDefPct": 8,
+          "wDefPct": 8,
+          "aDefPct": 8,
+          "tDefPct": 8,
+          "eDefPct": 8,
+          "sprint": 8,
+          "ws": 8,
+          "hpBonus": 666,
+          "sdPct": 7,
+          "mdPct": 7,
+          "jh": 1
+        }
+      ]
+    },
     "Black": {
       "items": [
         "Black Cap",
@@ -75379,24 +75711,24 @@
       "bonuses": [
         {},
         {
-          "str": 1,
-          "dex": -1,
-          "int": -1,
-          "agi": 1,
-          "def": 1,
-          "spd": 2,
-          "hprRaw": 60,
-          "mdRaw": 60
+          "str": 2,
+          "dex": -2,
+          "int": -2,
+          "agi": 2,
+          "def": 2,
+          "spd": 5,
+          "hprRaw": 55,
+          "mdRaw": 135
         },
         {
-          "str": 4,
-          "dex": -4,
-          "int": -4,
-          "agi": 4,
-          "def": 4,
-          "spd": 8,
-          "hprRaw": 180,
-          "mdRaw": 180
+          "str": 5,
+          "dex": -5,
+          "int": -5,
+          "agi": 5,
+          "def": 5,
+          "spd": 10,
+          "hprRaw": 210,
+          "mdRaw": 270
         },
         {
           "str": 15,
@@ -75404,10 +75736,10 @@
           "int": -15,
           "agi": 15,
           "def": 15,
-          "spd": 20,
+          "spd": 25,
           "atkTier": 1,
-          "hprRaw": 480,
-          "mdRaw": 480
+          "hprRaw": 525,
+          "mdRaw": 540
         }
       ]
     },
@@ -75423,7 +75755,7 @@
         {
           "mr": -1,
           "ms": 2,
-          "sdRaw": 35,
+          "sdRaw": 40,
           "wDamPct": 5,
           "tDamPct": 5,
           "eDamPct": -34
@@ -75431,7 +75763,7 @@
         {
           "mr": -2,
           "ms": 4,
-          "sdRaw": 100,
+          "sdRaw": 115,
           "wDamPct": 10,
           "tDamPct": 10,
           "eDamPct": -67
@@ -75439,10 +75771,11 @@
         {
           "mr": -3,
           "ms": 6,
-          "sdRaw": 195,
-          "wDamPct": 25,
-          "tDamPct": 25,
-          "eDamPct": -100
+          "sdRaw": 230,
+          "wDamPct": 32,
+          "tDamPct": 32,
+          "eDamPct": -100,
+          "atkTier": -2
         }
       ]
     },
@@ -75561,11 +75894,10 @@
         {},
         {
           "mr": 2,
-          "xpb": 12,
-          "str": 4,
-          "hpBonus": 400,
-          "sdRaw": 100,
-          "mdRaw": 50
+          "xpb": 40,
+          "def": 25,
+          "fDamPct": 20,
+          "hprRaw": 180
         }
       ]
     },
@@ -75603,32 +75935,33 @@
       ],
       "bonuses": [
         {
-          "xpb": -25,
-          "lb": -25
+          "xpb": 20,
+          "lb": 20
         },
         {
-          "xpb": -50,
-          "lb": -50,
-          "spd": -10,
-          "hpBonus": 300,
-          "sdRaw": -110,
-          "mdRaw": 60
-        },
-        {
-          "xpb": -75,
-          "lb": -75,
+          "xpb": 45,
+          "lb": 45,
           "spd": 5,
-          "hpBonus": -150,
-          "sdRaw": 100,
-          "mdRaw": -75
+          "hpBonus": 240,
+          "eSteal": 5
         },
         {
-          "xpb": -100,
-          "lb": -100,
-          "spd": 5,
-          "hpBonus": -150,
-          "sdRaw": 100,
-          "mdRaw": -75
+          "xpb": 75,
+          "lb": 75,
+          "spd": 10,
+          "hpBonus": 480,
+          "eSteal": 15,
+          "thorns": 12,
+          "ref": 12
+        },
+        {
+          "xpb": 120,
+          "lb": 120,
+          "spd": 25,
+          "hpBonus": 720,
+          "eSteal": 20,
+          "thorns": 30,
+          "ref": 30
         }
       ]
     },
@@ -75678,18 +76011,18 @@
       "bonuses": [
         {},
         {
-          "sdPct": -10,
+          "sdPct": -12,
           "mdPct": 12,
-          "sdRaw": -40,
-          "mdRaw": 30
+          "sdRaw": -50,
+          "mdRaw": 60
         },
         {
           "sdPct": -35,
-          "mdPct": 30,
-          "dex": 15,
-          "spd": 8,
-          "sdRaw": -90,
-          "mdRaw": 125
+          "mdPct": 35,
+          "dex": 30,
+          "spd": 11,
+          "sdRaw": -150,
+          "mdRaw": 180
         }
       ]
     },
@@ -75705,23 +76038,23 @@
         {
           "hprPct": -10,
           "mr": 1,
-          "sdPct": 4,
+          "sdPct": 6,
           "ref": 10,
           "thorns": 8
         },
         {
           "hprPct": -20,
           "mr": 2,
-          "sdPct": 12,
-          "ref": 30,
+          "sdPct": 14,
+          "ref": 35,
           "thorns": 24
         },
         {
-          "hprPct": -35,
+          "hprPct": -30,
           "mr": 4,
-          "sdPct": 28,
-          "ref": 70,
-          "thorns": 55
+          "sdPct": 30,
+          "ref": 75,
+          "thorns": 70
         }
       ]
     },
@@ -75805,7 +76138,7 @@
           "int": 15,
           "agi": 15,
           "def": 15,
-          "hpBonus": 6800,
+          "hpBonus": 8270,
           "spRaw1": -1,
           "spRaw2": -1,
           "spRaw3": -1,
@@ -75822,13 +76155,17 @@
           "xpb": -5
         },
         {
-          "mr": 1,
-          "sdPct": 10,
-          "xpb": 30,
-          "expd": 10,
           "hpBonus": 325,
+          "str": 0,
+          "dex": 0,
+          "int": 0,
+          "def": 0,
+          "agi": 0,
+          "xpb": 25,
           "spRegen": 10,
-          "sdRaw": 90
+          "sdPct": 8,
+          "spPct1": -12,
+          "spPct3": -12
         }
       ]
     },
@@ -75914,10 +76251,12 @@
         {},
         {
           "mdPct": 11,
-          "xpb": 10,
-          "spd": 20,
+          "xpb": 25,
+          "spd": 17,
           "aDamPct": 15,
-          "eDamPct": 15
+          "eDamPct": 15,
+          "sprint": 25,
+          "sprintReg": 50
         }
       ]
     },
@@ -76170,37 +76509,35 @@
       "bonuses": [
         {},
         {
-          "xpb": 15,
-          "lb": 15,
-          "ref": 5,
-          "spRegen": 15,
-          "fDefPct": 10,
-          "wDefPct": 10,
-          "aDefPct": 10,
-          "tDefPct": 10,
-          "eDefPct": 10
-        },
-        {
-          "xpb": 35,
-          "lb": 35,
-          "ref": 15,
-          "spRegen": 35,
+          "xpb": 25,
+          "lb": 25,
           "fDefPct": 20,
           "wDefPct": 20,
           "aDefPct": 20,
           "tDefPct": 20,
-          "eDefPct": 20
+          "eDefPct": 20,
+          "ms": 1
         },
         {
           "xpb": 50,
           "lb": 50,
-          "ref": 30,
-          "spRegen": 50,
-          "fDefPct": 30,
-          "wDefPct": 30,
-          "aDefPct": 30,
-          "tDefPct": 30,
-          "eDefPct": 30
+          "fDefPct": 50,
+          "wDefPct": 50,
+          "aDefPct": 50,
+          "tDefPct": 50,
+          "eDefPct": 50,
+          "ms": 2
+        },
+        {
+          "xpb": 75,
+          "lb": 75,
+          "fDefPct": 100,
+          "wDefPct": 100,
+          "aDefPct": 100,
+          "tDefPct": 100,
+          "eDefPct": 100,
+          "sdPct": 40,
+          "ms": 6
         }
       ]
     },
@@ -76215,30 +76552,30 @@
         {},
         {
           "mr": 1,
-          "sdPct": -5,
-          "mdPct": -10,
-          "def": 5,
-          "spRegen": 5,
-          "wDamPct": 10,
-          "aDamPct": 10
+          "sdPct": -10,
+          "mdPct": -15,
+          "def": 7,
+          "spRegen": 10,
+          "wDamPct": 15,
+          "aDamPct": 15
         },
         {
           "mr": 3,
-          "sdPct": -10,
-          "mdPct": -20,
-          "def": 10,
-          "spRegen": 10,
-          "wDamPct": 20,
-          "aDamPct": 20
+          "sdPct": -20,
+          "mdPct": -40,
+          "def": 15,
+          "spRegen": 25,
+          "wDamPct": 40,
+          "aDamPct": 40
         },
         {
-          "mr": 5,
-          "sdPct": -15,
-          "mdPct": -35,
-          "def": 30,
+          "mr": 6,
+          "sdPct": -40,
+          "mdPct": -85,
+          "def": 40,
           "spRegen": 100,
-          "wDamPct": 35,
-          "aDamPct": 35
+          "wDamPct": 85,
+          "aDamPct": 85
         }
       ]
     },
@@ -76278,25 +76615,26 @@
       ],
       "bonuses": [
         {
-          "sdPct": -6,
-          "mdPct": -6,
-          "sdRaw": 15,
-          "mdRaw": 10
+          "sdPct": -5,
+          "mdPct": -5,
+          "sdRaw": 27,
+          "mdRaw": 25
         },
         {
-          "sdPct": -12,
-          "mdPct": -12,
-          "ls": 22,
+          "sdPct": -13,
+          "mdPct": -13,
+          "ls": 30,
           "sdRaw": 55,
-          "mdRaw": 45
+          "mdRaw": 70
         },
         {
-          "sdPct": -23,
-          "mdPct": -23,
-          "ls": 51,
+          "sdPct": -33,
+          "mdPct": -33,
+          "ls": 90,
           "ms": 2,
-          "sdRaw": 130,
-          "mdRaw": 105
+          "sdRaw": 160,
+          "mdRaw": 105,
+          "atkTier": 1
         }
       ]
     },
@@ -76311,16 +76649,16 @@
         {
           "int": 3,
           "def": 3,
-          "hprRaw": 60
+          "hprRaw": 90
         },
         {
-          "mr": 4,
-          "int": 15,
-          "def": 15,
+          "mr": 5,
+          "int": 20,
+          "def": 20,
           "hpBonus": 1500,
-          "hprRaw": 270,
-          "fDefPct": 60,
-          "wDefPct": 60
+          "hprRaw": 330,
+          "fDefPct": 75,
+          "wDefPct": 75
         }
       ]
     },
@@ -76366,24 +76704,24 @@
         {
           "hprPct": 10,
           "lb": 8,
-          "agi": 5,
-          "def": 5,
-          "spd": 6
+          "agi": 3,
+          "def": 3,
+          "spd": 8
         },
         {
           "hprPct": 20,
-          "lb": 16,
+          "lb": 20,
           "agi": 7,
           "def": 7,
-          "spd": 14
+          "spd": 16
         },
         {
           "hprPct": 45,
-          "lb": 32,
-          "agi": 10,
-          "def": 10,
-          "spd": 20,
-          "hprRaw": 45
+          "lb": 35,
+          "agi": 15,
+          "def": 15,
+          "spd": 25,
+          "hprRaw": 50
         }
       ]
     },
@@ -76442,18 +76780,18 @@
       "bonuses": [
         {},
         {
-          "ls": 125,
+          "ls": 180,
           "agi": 3,
           "def": 3
         },
         {
-          "ls": 375,
-          "ref": 70,
-          "agi": 15,
-          "def": 15,
-          "thorns": 70,
-          "fDefPct": 75,
-          "aDefPct": 75
+          "ls": 700,
+          "ref": 80,
+          "agi": 25,
+          "def": 25,
+          "thorns": 80,
+          "fDefPct": 125,
+          "aDefPct": 125
         }
       ]
     },
@@ -76549,8 +76887,8 @@
         {},
         {
           "mdPct": 14,
-          "hpBonus": 30,
-          "mdRaw": 20
+          "hpBonus": 75,
+          "mdRaw": 25
         }
       ]
     },
