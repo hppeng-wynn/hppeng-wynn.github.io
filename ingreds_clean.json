@@ -13647,45 +13647,6 @@
     "id": 351
   },
   {
-    "name": "Stretched Rawhide",
-    "tier": 1,
-    "skills": [
-      "TAILORING"
-    ],
-    "lvl": 40,
-    "ids": {
-      "str": {
-        "minimum": -4,
-        "maximum": -2
-      },
-      "def": {
-        "minimum": 2,
-        "maximum": 4
-      }
-    },
-    "itemIDs": {
-      "dura": -44,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 5,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 352
-  },
-  {
     "name": "Strong Flesh",
     "tier": 1,
     "skills": [
@@ -13726,6 +13687,45 @@
       "notTouching": 0
     },
     "id": 353
+  },
+  {
+    "name": "Stretched Rawhide",
+    "tier": 1,
+    "skills": [
+      "TAILORING"
+    ],
+    "lvl": 40,
+    "ids": {
+      "str": {
+        "minimum": -4,
+        "maximum": -2
+      },
+      "def": {
+        "minimum": 2,
+        "maximum": 4
+      }
+    },
+    "itemIDs": {
+      "dura": -44,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 5,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 352
   },
   {
     "name": "Sylphid Tears",
@@ -17875,17 +17875,17 @@
     ],
     "lvl": 87,
     "ids": {
-      "sdRaw": {
+      "mr": {
         "minimum": 0,
-        "maximum": 100
+        "maximum": 1
       },
       "sdPct": {
         "minimum": 0,
-        "maximum": 15
+        "maximum": 10
       }
     },
     "itemIDs": {
-      "dura": -100,
+      "dura": -105,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -17893,8 +17893,8 @@
       "agiReq": 0
     },
     "consumableIDs": {
-      "charges": 0,
-      "dura": -200
+      "charges": -1,
+      "dura": -180
     },
     "posMods": {
       "left": 0,
@@ -23359,37 +23359,6 @@
     "id": 581
   },
   {
-    "name": "Decaying Heart",
-    "tier": 3,
-    "skills": [
-      "TAILORING",
-      "ARMOURING"
-    ],
-    "lvl": 66,
-    "ids": {},
-    "itemIDs": {
-      "dura": -175,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": -100,
-      "notTouching": 75
-    },
-    "id": 582
-  },
-  {
     "name": "Deep Ice Core",
     "tier": 3,
     "skills": [
@@ -23433,6 +23402,37 @@
       "notTouching": 0
     },
     "id": 583
+  },
+  {
+    "name": "Decaying Heart",
+    "tier": 3,
+    "skills": [
+      "TAILORING",
+      "ARMOURING"
+    ],
+    "lvl": 66,
+    "ids": {},
+    "itemIDs": {
+      "dura": -175,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": -100,
+      "notTouching": 75
+    },
+    "id": 582
   },
   {
     "name": "Defender's Stone",
@@ -25065,63 +25065,6 @@
       "notTouching": 0
     },
     "id": 624
-  },
-  {
-    "name": "Panda King\u2019s Crown",
-    "displayName": "Panda King's Crown",
-    "tier": 3,
-    "skills": [
-      "ARMOURING",
-      "TAILORING"
-    ],
-    "lvl": 89,
-    "ids": {
-      "fDefPct": {
-        "minimum": 15,
-        "maximum": 20
-      },
-      "wDefPct": {
-        "minimum": 15,
-        "maximum": 20
-      },
-      "aDefPct": {
-        "minimum": 15,
-        "maximum": 20
-      },
-      "tDefPct": {
-        "minimum": 15,
-        "maximum": 20
-      },
-      "eDefPct": {
-        "minimum": 15,
-        "maximum": 20
-      },
-      "mr": {
-        "minimum": -1,
-        "maximum": -1
-      }
-    },
-    "itemIDs": {
-      "dura": -105,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 625
   },
   {
     "name": "Panda King's Crown",
@@ -27382,19 +27325,15 @@
       "atkTier": {
         "minimum": 1,
         "maximum": 1
-      },
-      "mdPct": {
-        "minimum": -24,
-        "maximum": -24
       }
     },
     "itemIDs": {
       "dura": -180,
-      "strReq": 40,
-      "dexReq": 40,
-      "intReq": 40,
-      "defReq": 40,
-      "agiReq": 40
+      "strReq": 45,
+      "dexReq": 45,
+      "intReq": 45,
+      "defReq": 45,
+      "agiReq": 45
     },
     "consumableIDs": {
       "charges": 0,
