@@ -37247,7 +37247,7 @@
       "category": "armor",
       "drop": "never",
       "lvl": 1,
-      "id": 3645
+      "id": 3649
     },
     {
       "name": "Masochist",
@@ -40333,7 +40333,7 @@
       "spRegen": -150,
       "sdRaw": -800,
       "mdRaw": -1000,
-      "id": 3646
+      "id": 3650
     },
     {
       "name": "Lazarus' Brace",
@@ -41503,7 +41503,7 @@
       "eDam": "0-0",
       "atkSpd": "SLOW",
       "lvl": 1,
-      "id": 3647
+      "id": 3651
     },
     {
       "name": "The Juggernaut",
