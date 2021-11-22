@@ -36263,7 +36263,7 @@
       "eSteal": 10,
       "hprRaw": -270,
       "mdRaw": 285,
-      "spPct3": -44,
+      "spPct3": -43,
       "id": 1716
     },
     {
@@ -76906,6 +76906,34 @@
           "poison": 300,
           "hpBonus": 600,
           "jh": 1
+        }
+      ]
+    },
+    "Wynnterfest 2016": {
+      "items": [
+        "Green Ornament",
+        "Red Ornament",
+        "Blue Ornament",
+        "Yellow Ornament"
+      ],
+      "bonuses": [
+        {"sdPct": 3},
+        {
+            "sdPct": 3,
+            "mdPct": 3,
+            "xpb": 6
+        },
+        {
+            "sdPct": 3,
+            "mdPct": 3,
+            "xpb": 12,
+            "hpBonus": 120
+        },
+        {
+            "sdPct": 14,
+            "mdPct": 14,
+            "xpb": 24,
+            "hpBonus": 480
         }
       ]
     }

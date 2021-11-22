@@ -17875,17 +17875,17 @@
     ],
     "lvl": 87,
     "ids": {
-      "mr": {
+      "sdRaw": {
         "minimum": 0,
-        "maximum": 1
+        "maximum": 100
       },
       "sdPct": {
         "minimum": 0,
-        "maximum": 10
+        "maximum": 15
       }
     },
     "itemIDs": {
-      "dura": -105,
+      "dura": -100,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -17893,8 +17893,8 @@
       "agiReq": 0
     },
     "consumableIDs": {
-      "charges": -1,
-      "dura": -180
+      "charges": 0,
+      "dura": -200
     },
     "posMods": {
       "left": 0,
@@ -27325,15 +27325,19 @@
       "atkTier": {
         "minimum": 1,
         "maximum": 1
+      },
+      "mdPct": {
+        "minimum": -24,
+        "maximum": -24
       }
     },
     "itemIDs": {
       "dura": -180,
-      "strReq": 45,
-      "dexReq": 45,
-      "intReq": 45,
-      "defReq": 45,
-      "agiReq": 45
+      "strReq": 40,
+      "dexReq": 40,
+      "intReq": 40,
+      "defReq": 40,
+      "agiReq": 40
     },
     "consumableIDs": {
       "charges": 0,
