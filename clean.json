@@ -24618,6 +24618,7 @@
     },
     {
       "name": "Gale's Force",
+      "set": "Air Hive",
       "tier": "Legendary",
       "type": "bow",
       "category": "weapon",
@@ -26054,6 +26055,7 @@
       "tier": "Legendary",
       "type": "leggings",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26083,6 +26085,7 @@
     },
     {
       "name": "Ambertoise Shell",
+      "set": "Earth Hive",
       "tier": "Rare",
       "type": "helmet",
       "category": "armor",
@@ -26115,6 +26118,7 @@
       "tier": "Legendary",
       "type": "chestplate",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26144,6 +26148,7 @@
     },
     {
       "name": "Beetle Aegis",
+      "set": "Earth Hive",
       "tier": "Rare",
       "type": "chestplate",
       "category": "armor",
@@ -26172,6 +26177,7 @@
     },
     {
       "name": "Bottled Thunderstorm",
+      "set": "Thunder Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -26193,6 +26199,7 @@
       "tier": "Legendary",
       "type": "helmet",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26222,6 +26229,7 @@
     },
     {
       "name": "Breezehands",
+      "set": "Air Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -26240,6 +26248,7 @@
       "tier": "Legendary",
       "type": "leggings",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "poison": 2250,
       "category": "armor",
       "slots": 2,
@@ -26294,6 +26303,7 @@
     },
     {
       "name": "Cinderchain",
+      "set": "Fire Hive",
       "tier": "Rare",
       "type": "leggings",
       "category": "armor",
@@ -26323,6 +26333,7 @@
     },
     {
       "name": "Clockwork",
+      "set": "Fire Hive",
       "tier": "Rare",
       "thorns": 20,
       "category": "accessory",
@@ -26344,6 +26355,7 @@
     },
     {
       "name": "Coral Ring",
+      "set": "Water Hive",
       "tier": "Rare",
       "poison": -365,
       "category": "accessory",
@@ -26363,6 +26375,7 @@
       "name": "Contrast",
       "tier": "Legendary",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "poison": 750,
       "category": "accessory",
       "drop": "never",
@@ -26379,6 +26392,7 @@
     },
     {
       "name": "Dupliblaze",
+      "set": "Fire Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -26402,6 +26416,7 @@
       "tier": "Legendary",
       "type": "leggings",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26431,6 +26446,7 @@
     },
     {
       "name": "Elder Oak Roots",
+      "set": "Earth Hive",
       "tier": "Rare",
       "type": "leggings",
       "category": "armor",
@@ -26459,6 +26475,7 @@
       "tier": "Legendary",
       "type": "chestplate",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26488,6 +26505,7 @@
     },
     {
       "name": "Flashstep",
+      "set": "Air Hive",
       "tier": "Rare",
       "type": "boots",
       "category": "armor",
@@ -26510,6 +26528,7 @@
       "tier": "Legendary",
       "type": "boots",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26539,6 +26558,7 @@
     },
     {
       "name": "Golemlus Core",
+      "set": "Earth Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -26589,6 +26609,7 @@
       "tier": "Legendary",
       "type": "boots",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26618,6 +26639,7 @@
     },
     {
       "name": "Humbark Moccasins",
+      "set": "Earth Hive",
       "tier": "Rare",
       "type": "boots",
       "category": "armor",
@@ -26645,6 +26667,7 @@
       "tier": "Legendary",
       "type": "dagger",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "weapon",
       "slots": 5,
       "drop": "never",
@@ -26672,6 +26695,7 @@
       "tier": "Legendary",
       "type": "bow",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "weapon",
       "slots": 5,
       "drop": "never",
@@ -26699,6 +26723,7 @@
       "tier": "Legendary",
       "type": "relik",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "weapon",
       "slots": 5,
       "drop": "never",
@@ -26723,6 +26748,7 @@
     },
     {
       "name": "Insulated Plate Mail",
+      "set": "Thunder Hive",
       "tier": "Rare",
       "type": "chestplate",
       "category": "armor",
@@ -26756,6 +26782,7 @@
       "tier": "Legendary",
       "type": "spear",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "weapon",
       "slots": 5,
       "drop": "never",
@@ -26783,6 +26810,7 @@
       "tier": "Legendary",
       "type": "wand",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "weapon",
       "slots": 5,
       "drop": "never",
@@ -26807,6 +26835,7 @@
     },
     {
       "name": "Lightning Flash",
+      "set": "Thunder Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -26825,6 +26854,7 @@
       "name": "Intensity",
       "tier": "Legendary",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "accessory",
       "drop": "never",
       "restrict": "Untradable",
@@ -26842,6 +26872,7 @@
     },
     {
       "name": "Mantlewalkers",
+      "set": "Fire Hive",
       "tier": "Rare",
       "type": "boots",
       "thorns": 25,
@@ -26866,6 +26897,7 @@
     },
     {
       "name": "Moon Pool Circlet",
+      "set": "Water Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -26885,6 +26917,7 @@
       "tier": "Legendary",
       "type": "helmet",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -26914,6 +26947,7 @@
     },
     {
       "name": "Pride of the Aerie",
+      "set": "Air Hive",
       "tier": "Rare",
       "type": "helmet",
       "category": "armor",
@@ -26941,6 +26975,7 @@
       "name": "Prowess",
       "tier": "Legendary",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "accessory",
       "drop": "never",
       "restrict": "Untradable",
@@ -26957,6 +26992,7 @@
     },
     {
       "name": "Silt of the Seafloor",
+      "set": "Water Hive",
       "tier": "Rare",
       "type": "boots",
       "thorns": 35,
@@ -26986,6 +27022,7 @@
     },
     {
       "name": "Soulflare",
+      "set": "Fire Hive",
       "tier": "Rare",
       "type": "chestplate",
       "category": "armor",
@@ -27012,6 +27049,7 @@
     },
     {
       "name": "Sparkling Visor",
+      "set": "Thunder Hive",
       "tier": "Rare",
       "type": "helmet",
       "category": "armor",
@@ -27034,6 +27072,7 @@
     },
     {
       "name": "Sparkweaver",
+      "set": "Fire Hive",
       "tier": "Rare",
       "type": "helmet",
       "category": "armor",
@@ -27056,6 +27095,7 @@
     },
     {
       "name": "Stillwater Blue",
+      "set": "Water Hive",
       "tier": "Rare",
       "type": "chestplate",
       "category": "armor",
@@ -27080,6 +27120,7 @@
     {
       "name": "Static-charged Leggings",
       "displayName": "Static-Charged Leggings",
+      "set": "Thunder Hive",
       "tier": "Rare",
       "type": "leggings",
       "thorns": 40,
@@ -27103,6 +27144,7 @@
     },
     {
       "name": "Subur Clip",
+      "set": "Earth Hive",
       "tier": "Rare",
       "thorns": 20,
       "category": "accessory",
@@ -27121,6 +27163,7 @@
     },
     {
       "name": "Trench Scourer",
+      "set": "Water Hive",
       "tier": "Rare",
       "type": "leggings",
       "category": "armor",
@@ -27144,6 +27187,7 @@
     },
     {
       "name": "Thunderous Step",
+      "set": "Thunder Hive",
       "tier": "Rare",
       "type": "boots",
       "category": "armor",
@@ -27170,6 +27214,7 @@
       "tier": "Legendary",
       "type": "chestplate",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "drop": "never",
@@ -27199,6 +27244,7 @@
     },
     {
       "name": "Vortex Bracer",
+      "set": "Air Hive",
       "tier": "Rare",
       "category": "accessory",
       "drop": "never",
@@ -27218,6 +27264,7 @@
     },
     {
       "name": "Whitecap Crown",
+      "set": "Water Hive",
       "tier": "Rare",
       "type": "helmet",
       "category": "armor",
@@ -27239,6 +27286,7 @@
     },
     {
       "name": "Turbine Greaves",
+      "set": "Air Hive",
       "tier": "Rare",
       "type": "leggings",
       "category": "armor",
@@ -40573,6 +40621,7 @@
     },
     {
       "name": "Ornate Shadow Cloud",
+      "set": "Ornate Shadow",
       "tier": "Fabled",
       "type": "boots",
       "category": "armor",
@@ -40594,6 +40643,7 @@
     },
     {
       "name": "Ornate Shadow Cowl",
+      "set": "Ornate Shadow",
       "tier": "Fabled",
       "type": "helmet",
       "category": "armor",
@@ -40615,6 +40665,7 @@
     },
     {
       "name": "Ornate Shadow Cover",
+      "set": "Ornate Shadow",
       "tier": "Fabled",
       "type": "leggings",
       "category": "armor",
@@ -40636,6 +40687,7 @@
     },
     {
       "name": "Ornate Shadow Garb",
+      "set": "Ornate Shadow",
       "tier": "Fabled",
       "type": "chestplate",
       "category": "armor",

@@ -828,6 +828,7 @@ function calculateBuildStats() {
         const bonus = sets[setName].bonuses[count-1];
         // console.log(setName);
         if (bonus["illegal"]) {
+            console.log("mmmm");
             let setWarning = document.createElement("p");
             setWarning.classList.add("itemp");
             setWarning.classList.add("warning");
