@@ -39834,7 +39834,8 @@
       "wDefPct": -8,
       "type": "bracelet",
       "spRaw3": -1,
-      "id": 1879
+      "id": 1879,
+      "set": "Grookwarts"
     },
     {
       "name": "Draoi Fair",
@@ -39851,7 +39852,8 @@
       "hprRaw": 30,
       "type": "ring",
       "spRaw1": -1,
-      "id": 1882
+      "id": 1882,
+      "set": "Grookwarts"
     },
     {
       "name": "Earth Relic Dagger",
@@ -40920,7 +40922,8 @@
       "type": "necklace",
       "spRaw2": -1,
       "spRaw4": -1,
-      "id": 1931
+      "id": 1931,
+      "set": "Grookwarts"
     },
     {
       "name": "Royal Blazing Amulet",
@@ -50834,7 +50837,8 @@
       "hprPct": 12,
       "spd": 12,
       "type": "ring",
-      "id": 3606
+      "id": 3606,
+      "set": "Synch Core"
     },
     {
       "name": "Earth Relic Boots",
@@ -51088,7 +51092,8 @@
       "defReq": 30,
       "xpb": 5,
       "type": "ring",
-      "id": 3616
+      "id": 3616,
+      "set": "Synch Core"
     },
     {
       "name": "Hustle Core",
@@ -51101,7 +51106,8 @@
       "mdPct": 10,
       "ls": 70,
       "type": "ring",
-      "id": 3623
+      "id": 3623,
+      "set": "Synch Core"
     },
     {
       "name": "Horse Hoof",
@@ -51626,7 +51632,8 @@
       "lvl": 87,
       "xpb": 10,
       "type": "necklace",
-      "id": 3613
+      "id": 3613,
+      "set": "Synch Core"
     },
     {
       "name": "Relic Boots",
@@ -52127,7 +52134,8 @@
       "lvl": 87,
       "xpb": 10,
       "type": "bracelet",
-      "id": 3604
+      "id": 3604,
+      "set": "Synch Core"
     },
     {
       "name": "Thunder Relic Boots",
