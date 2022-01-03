@@ -218,7 +218,7 @@ const spell_table = {
                 { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true }
             ],
             RALLY: [
-                { subtitle: "Self Heal", type: "heal", strength: 0.1, summary: true },
+                { subtitle: "Self Heal", type: "heal", strength: 0.07, summary: true },
                 { subtitle: "Ally Heal", type: "heal", strength: 0.15 }
             ]
             } },
