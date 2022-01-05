@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Tome of Armour Mastery I",
+    "tier": "Legendary",
+    "type": "dungeon_tome",
+    "category": "tome",
+    "drop": "never",
+    "restrict": "Untradable",
+    "lvl": 60,
+
+  },
+]
