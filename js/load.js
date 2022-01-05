@@ -53,7 +53,11 @@ async function load_local(init_func) {
 }
 
 /*
- * Clean bad item data. For now just assigns display name if it isn't already assigned.
+ * Clean bad item data.
+ * Assigns `displayName` to equal `name` if it is undefined.
+ * String values default to empty string.
+ * Numeric values default to 0.
+ * Major ID defaults to empty list.
  */
 function clean_item(item) {
     if (item.remapID === undefined) {
@@ -67,9 +71,6 @@ function clean_item(item) {
             if (item.reqs[i] === undefined) { item.reqs[i] = 0; }
             if (item.skillpoints[i] === undefined) { item.skillpoints[i] = 0; }
             if (item.skillpoints[i] < 0) { item.has_negstat = true; }
-        }
-        if (item.slots === undefined) {
-            item.slots = 0
         }
         for (let key of item_fields) {
             if (item[key] === undefined) {
