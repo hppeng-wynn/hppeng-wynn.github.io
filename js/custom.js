@@ -30,7 +30,11 @@ function encodeCustom(custom, verbose) {
             if (rolledIDs.includes(id)) {
                 let val_min = custom.get("minRolls").has(id) ? custom.get("minRolls").get(id) : 0;
                 let val_max = custom.get("maxRolls").has(id) ? custom.get("maxRolls").get(id) : 0;
-                let sign = (Boolean(val_min / Math.abs(val_min) < 0) | 0) + 2*(Boolean(val_max / Math.abs(val_max) < 0) | 0) // 0 - both pos 1 - min neg max pos 2 - min pos max neg (how?) 3 - min neg max neg 
+                // 0 - both pos
+                // 1 - min neg max pos
+                // 2 - min pos max neg (how?)
+                // 3 - min neg max neg
+                let sign = (Boolean(val_min / Math.abs(val_min) < 0) | 0) + 2*(Boolean(val_max / Math.abs(val_max) < 0) | 0);
                 //console.log(id + ": " + sign);
                 let min_len = Math.max(1,Math.ceil(log(64,Math.abs(val_min)+1)));
                 let max_len = Math.max(1,Math.ceil(log(64,Math.abs(val_max)+1)));
@@ -38,9 +42,7 @@ function encodeCustom(custom, verbose) {
                 val_min = Math.abs(val_min);
                 val_max = Math.abs(val_max);
 
-
                 if ( val_min != 0 || val_max != 0 ) {
-                    //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val_min,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + ":" + Base64.fromIntN(val_max,Math.max(1,Math.ceil(log(64,Math.abs(val_min))))) + "_";
                     if (custom.get("fixID")) {
                         hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len);
                     } else {

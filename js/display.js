@@ -1,5 +1,6 @@
 /**
  * Apply armor powdering.
+ * Applies twice for crafted items because wynn.
  * Also for jeweling for crafted items.
  */
 function applyArmorPowders(expandedItem, powders) {
@@ -8,32 +9,42 @@ function applyArmorPowders(expandedItem, powders) {
         applyArmorPowdersOnce(expandedItem, powders);
     }
 }
+
+/**
+ * Apply armor powders once only.
+ * Encoding shortcut assumes that all powders give +def to one element
+ * and -def to the element "behind" it in cycle ETWFA, which is true
+ * as of now and unlikely to change in the near future.
+ */
 function applyArmorPowdersOnce(expandedItem, powders) {
     for(const id of powders){
         let powder = powderStats[id];
-        let name = powderNames.get(id);
-        expandedItem.set(name.charAt(0) + "Def", (expandedItem.get(name.charAt(0)+"Def") || 0) + powder["defPlus"]);
-        expandedItem.set(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5] + "Def", (expandedItem.get(skp_elements[(skp_elements.indexOf(name.charAt(0)) + 4 )% 5]+"Def") || 0) - powder["defMinus"]);
+        let name = powderNames.get(id).charAt(0);
+        let prevName = skp_elements[(skp_elements.indexOf(name) + 4 )% 5];
+        expandedItem.set(name+"Def", (expandedItem.get(name+"Def") || 0) + powder["defPlus"]);
+        expandedItem.set(prevName+"Def", (expandedItem.get(prevName+"Def") || 0) - powder["defMinus"]);
     }
 }
 
+/**
+ * Take an item with id list and turn it into a set of minrolls and maxrolls.
+ * Also applies powders to armor.
+ */
 function expandItem(item, powders) {
     let minRolls = new Map();
     let maxRolls = new Map();
     let expandedItem = new Map();
-    if(item.fixID){ //The item has fixed IDs.
+    if (item.fixID) { //The item has fixed IDs.
         expandedItem.set("fixID",true);
-        for (const id of rolledIDs){ //all rolled IDs are numerical
+        for (const id of rolledIDs) { //all rolled IDs are numerical
             let val = (item[id] || 0);
-            //if(item[id]) {
-                minRolls.set(id,val);
-                maxRolls.set(id,val);
-            //}
+            minRolls.set(id,val);
+            maxRolls.set(id,val);
         }
-    }else{ //The item does not have fixed IDs.
-        for (const id of rolledIDs){
+    } else { //The item does not have fixed IDs.
+        for (const id of rolledIDs) {
             let val = (item[id] || 0);
-            if(val > 0){ // positive rolled IDs                   
+            if (val > 0) { // positive rolled IDs
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*0.3));
                     minRolls.set(id,idRound(val*1.3));
@@ -41,28 +52,25 @@ function expandItem(item, powders) {
                     maxRolls.set(id,idRound(val*1.3));
                     minRolls.set(id,idRound(val*0.3));
                 }
-            }else if(val < 0){ //negative rolled IDs
+            } else if (val <= 0) { //negative rolled IDs
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*1.3));
                     minRolls.set(id,idRound(val*0.7));
                 }
                 else {
-                    minRolls.set(id,idRound(val*1.3));
                     maxRolls.set(id,idRound(val*0.7));
+                    minRolls.set(id,idRound(val*1.3));
                 }
-            }else{//Id = 0
-                minRolls.set(id,0);
-                maxRolls.set(id,0);
             }
         }
     }
-    for (const id of nonRolledIDs){
+    for (const id of nonRolledIDs) {
         expandedItem.set(id,item[id]);
     }
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
     expandedItem.set("powders", powders);
-    if(item.category === "armor") {
+    if (item.category === "armor") {
         applyArmorPowders(expandedItem, powders);
     }
     return expandedItem;
