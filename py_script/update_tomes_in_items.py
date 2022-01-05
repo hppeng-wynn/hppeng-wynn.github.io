@@ -1,27 +1,42 @@
 import os
+import json
 
-'''takes the data in updated.json and tomes.json to update the tomes in the db.'''
+'''takes updated data in tomes.json and updates the tome map'''
 
-with open("updated.json", "r") as oldfile:
-    data = json.load(oldfile)
-with open("tomes.json", "r") as tomesfile:
+#read in tomes json file
+with open("../tomes.json", "r") as tomesfile: 
     tome_data = json.load(tomesfile)
 
-#This probably does not work. I have not checked :)
 tomes = dict()
-for filename in os.listdir('sets'):
-    if "json" not in filename:
-        continue
-    set_name = filename[1:].split(".")[0].replace("+", " ").replace("%27", "'")
-    with open("sets/"+filename) as set_info:
-        set_obj = json.load(set_info)
-        for item in set_obj["items"]:
-            item_set_map[item] = set_name
-        sets[set_name] = set_obj
+tome_mapping = dict()
 
-data["sets"] = sets
 
+max_id = 0
+for tome in tome_data:
+    if "tomeID" in tome:
+        if tome["tomeID"] > max_id: 
+            max_id = tome["tomeID"]
+        tome_mapping[tome["name"]] = tome["tomeID"]
+i = max_id + 1
+
+for tome in tome_data:
+    if "tomeID" not in tome:
+        tome["tomeID"] = i
+        tome_mapping[tome["name"]] = i
+        i += 1
+    
+    tomes[tome["name"]] = tome
+
+
+'''
 with open("clean.json", "w") as outfile:
     json.dump(data, outfile, indent=2)
 with open("compress.json", "w") as outfile:
     json.dump(data, outfile)
+'''
+with open("tome_map.json", "w") as outfile:
+    json.dump(tome_mapping, outfile, indent = 2)
+with open("../tomes2.json", "w") as outfile:
+    json.dump(tome_data, outfile, indent = 2)
+
+
