@@ -269,6 +269,8 @@ class Custom{
                 this.statMap.set("category","weapon");
             } else if (consumableTypes.includes(this.statMap.get("type"))) {
                 this.statMap.set("category","consumable");
+            } else if (tomeTypes.includes(this.statMap.get("type"))) {
+                this.statMap.set("category", "tome");
             }
         }
 
