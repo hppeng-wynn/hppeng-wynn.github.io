@@ -52,7 +52,7 @@ function expandItem(item, powders) {
                     maxRolls.set(id,idRound(val*1.3));
                     minRolls.set(id,idRound(val*0.3));
                 }
-            } else if (val <= 0) { //negative rolled IDs
+            } else if (val < 0) { //negative rolled IDs
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*1.3));
                     minRolls.set(id,idRound(val*0.7));
@@ -61,6 +61,11 @@ function expandItem(item, powders) {
                     maxRolls.set(id,idRound(val*0.7));
                     minRolls.set(id,idRound(val*1.3));
                 }
+            }
+            else { // if val == 0
+                // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
+                maxRolls.set(id,0);
+                minRolls.set(id,0);
             }
         }
     }
