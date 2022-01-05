@@ -24618,7 +24618,6 @@
     },
     {
       "name": "Gale's Force",
-      "set": "Air Hive",
       "tier": "Legendary",
       "type": "bow",
       "category": "weapon",
@@ -26582,6 +26581,7 @@
     },
     {
       "name": "Gale's Freedom",
+      "set": "Air Hive",
       "tier": "Rare",
       "type": "chestplate",
       "category": "armor",
