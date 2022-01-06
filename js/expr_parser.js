@@ -75,7 +75,7 @@ const ExprParser = (function() {
         continue;
       }
       // parse a string literal
-      if ((m = /^"([^"]+)"/.exec(exprStr.substring(col))) !== null) { // with double-quotes
+      if ((m = /^"([^"]*)"/.exec(exprStr.substring(col))) !== null) { // with double-quotes
         tokens.push({ type: 'sLit', value: m[1] });
         col += m[0].length;
         continue;

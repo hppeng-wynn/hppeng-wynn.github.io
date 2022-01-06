@@ -1,5 +1,3 @@
-
-
 const translate_mappings = {
     //"Name": "name",
     //"Display Name": "displayName",
@@ -93,15 +91,15 @@ const translate_mappings = {
 };
 
 const special_mappings = {
-    "Sum (skill points)": new SumQuery(["str", "dex", "int", "def", "agi"]),
-    "Sum (Mana Sustain)": new SumQuery(["mr", "ms"]),
-    "Sum (Life Sustain)": new SumQuery(["hpr", "ls"]),
-    "Sum (Health + Health Bonus)": new SumQuery(["hp", "hpBonus"]),
-    "No Strength Req": new NegateQuery("strReq"),
-    "No Dexterity Req": new NegateQuery("dexReq"),
-    "No Intelligence Req": new NegateQuery("intReq"),
-    "No Agility Req": new NegateQuery("agiReq"),
-    "No Defense Req": new NegateQuery("defReq"),
+    "Sum (skill points)": "s:str+dex+int+def+agi",
+    "Sum (Mana Sustain)": "s:mr+ms",
+    "Sum (Life Sustain)": "s:hpr+ls",
+    "Sum (Health + Health Bonus)": "s:hp+hpBonus",
+    "No Strength Req": "f:strReq==0",
+    "No Dexterity Req": "f:dexReq==0",
+    "No Intelligence Req": "f:intReq==0",
+    "No Agility Req": "f:agiReq==0",
+    "No Defense Req": "f:defReq==0",
 };
 
 let itemFilters = document.getElementById("filter-items");
@@ -122,10 +120,10 @@ function applyQuery(items, query) {
     return items.filter(query.filter, query).sort(query.compare);
 }
 
-function displayItems(items_copy) {
+function displayItems(results) {
     let items_parent = document.getElementById("main");
-    for (let i in items_copy) {
-        let item = items_copy[i];
+    for (let i in results) {
+        let item = results[i].itemExp;
         let box = document.createElement("div");
         box.classList.add("box");
         box.id = "item"+i;
@@ -134,90 +132,19 @@ function displayItems(items_copy) {
     }
 }
 
-let items_expanded;
-
-    // updates the current search state from the search query input boxes
-    function updateSearch() {
-        // compile query expressions, aborting if nothing has changed or either fails to compile
-        const changed = searchFilterField.compile() | searchSortField.compile();
-        if (!changed || searchFilterField.output === null || searchSortField.output === null) return;
-
-        // update url query string
-        const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
-            + `?f=${encodeURIComponent(searchFilterField.value)}&s=${encodeURIComponent(searchSortField.value)}`;
-        window.history.pushState({ path: newUrl }, '', newUrl);
-
-        // hide old search results
-        itemListFooter.innerText = '';
-        for (const itemEntry of itemEntries) itemEntry.classList.remove('visible');
-
-        // index and sort search results
-        const searchResults = [];
-        try {
-            for (let i = 0; i < searchDb.length; i++) {
-                const item = searchDb[i][0], itemExp = searchDb[i][1];
-                if (checkBool(searchFilterField.output.resolve(item, itemExp))) {
-                    searchResults.push({ item, itemExp, sortKeys: searchSortField.output.resolve(item, itemExp) });
-                }
-            }
-        } catch (e) {
-            searchFilterField.errorText.innerText = e.message;
-            return;
-        }
-        if (searchResults.length === 0) {
-            itemListFooter.innerText = 'No results!';
-            return;
-        }
-        try {
-            searchResults.sort((a, b) => {
-                try {
-                    return compareLexico(a.item, a.sortKeys, b.item, b.sortKeys);
-                } catch (e) {
-                    console.log(a.item, b.item);
-                    throw e;
-                }
-            });
-        } catch (e) {
-            searchSortField.errorText.innerText = e.message;
-            return;
-        }
-
-        // display search results
-        const searchMax = Math.min(searchResults.length, ITEM_LIST_SIZE);
-        for (let i = 0; i < searchMax; i++) {
-            const result = searchResults[i];
-            itemEntries[i].classList.add('visible');
-            displayExpandedItem(result.itemExp, `item-entry-${i}`);
-            if (result.sortKeys.length > 0) {
-                const sortKeyListContainer = document.createElement('div');
-                sortKeyListContainer.classList.add('itemleft');
-                const sortKeyList = document.createElement('ul');
-                sortKeyList.classList.add('item-entry-sort-key', 'itemp', 'T0');
-                sortKeyListContainer.append(sortKeyList);
-                for (let j = 0; j < result.sortKeys.length; j++) {
-                    const sortKeyElem = document.createElement('li');
-                    sortKeyElem.innerText = stringify(result.sortKeys[j]);
-                    sortKeyList.append(sortKeyElem);
-                }
-                itemEntries[i].append(sortKeyListContainer);
-            }
-        }
-        if (searchMax < searchResults.length) {
-            itemListFooter.innerText = `${searchResults.length - searchMax} more...`;
-        }
-    }
+let searchDb;
 
 function doItemSearch() {
     window.scrollTo(0, 0);
     let queries = [];
-    queries.push(new NameQuery(document.getElementById("name-choice").value.trim()));
+    queries.push('f:name?="'+document.getElementById("name-choice").value.trim()+'"');
 
     let categoryOrType = document.getElementById("category-choice").value;
     if (itemTypes.includes(categoryOrType)) {
-        queries.push(new IdMatchQuery("type", categoryOrType));
+        queries.push('f:type="'+categoryOrType+'"');
     }
     else if (itemCategories.includes(categoryOrType)) {
-        queries.push(new IdMatchQuery("category", categoryOrType));
+        queries.push('f:cat="'+categoryOrType+'"');
     }
 
     let rarity = document.getElementById("rarity-choice").value;
@@ -225,19 +152,22 @@ function doItemSearch() {
         if (rarity === "ANY") {
 
         }
+        else if (rarity === "Sane") {
+            queries.push('f:tiername!="mythic"');
+        }
         else {
-            queries.push(new IdMatchQuery("tier", rarity));
+            queries.push('f:tiername="'+rarity+'"');
         }
     }
 
     let level_dat = document.getElementById("level-choice").value.split("-");
-    queries.push(new LevelRangeQuery(parseInt(level_dat[0]), parseInt(level_dat[1])));
+    queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
     
     for (let i = 1; i <= 4; ++i) {
         let raw_dat = document.getElementById("filter"+i+"-choice").value;
         let filter_dat = translate_mappings[raw_dat];
         if (filter_dat !== undefined) {
-            queries.push(new IdQuery(filter_dat));
+            queries.push("s:"+filter_dat);
             continue;
         }
         filter_dat = special_mappings[raw_dat];
@@ -247,21 +177,45 @@ function doItemSearch() {
         }
     }
 
-    let items_copy = items_expanded.slice();
     document.getElementById("main").textContent = "";
+    let filterQuery = "true";
+    let sortQueries = [];
+    console.log(queries);
     for (const query of queries) {
-        console.log(items_copy.length);
-        console.log(query);
-        console.log(query.filter);
-        items_copy = applyQuery(items_copy, query);
-        console.log(items_copy.length);
+        if (query.startsWith("s:")) {
+            sortQueries.push(query.slice(2));
+        }
+        else if (query.startsWith("f:")) {
+            filterQuery = filterQuery + "&" + query.slice(2);
+        }
     }
-    document.getElementById("summary").textContent = items_copy.length + " results."
-    displayItems(items_copy);
+    console.log(filterQuery);
+    console.log(sortQueries);
+    let results = [];
+    try {
+        const filterExpr = exprParser.parse(filterQuery);
+        const sortExprs = sortQueries.map(q => exprParser.parse(q));
+        for (let i = 0; i < searchDb.length; ++i) {
+            const item = searchDb[i][0];
+            const itemExp = searchDb[i][1];
+            if (checkBool(filterExpr.resolve(item, itemExp))) {
+                results.push({ item, itemExp, sortKeys: sortExprs.map(e => e.resolve(item, itemExp)) });
+            }
+        }
+        results.sort((a, b) => {
+            return compareLexico(a.item, a.sortKeys, b.item, b.sortKeys);
+        });
+    } catch (e) {
+        document.getElementById("summary").textContent = e.message;
+        return;
+    }
+    document.getElementById("summary").textContent = results.length + " results."
+    displayItems(results);
 }
 
 function init_items() {
-    items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i, []) );
+    searchDb = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
+    exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
 }
 
 load_init(init_items);

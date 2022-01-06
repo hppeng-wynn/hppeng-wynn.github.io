@@ -230,30 +230,6 @@ class ExprField {
     }
 }
 
-function compareLexico(ia, keysA, ib, keysB) {
-    for (let i = 0; i < keysA.length; i++) { // assuming keysA and keysB are the same length
-        let aKey = keysA[i], bKey = keysB[i];
-        if (typeof aKey !== typeof bKey) throw new Error(`Incomparable types ${typeof aKey} and ${typeof bKey}`); // can this even happen?
-        switch (typeof aKey) {
-            case 'string':
-                aKey = aKey.toLowerCase();
-                bKey = bKey.toLowerCase();
-                if (aKey < bKey) return -1;
-                if (aKey > bKey) return 1;
-                break;
-            case 'number': // sort numeric stuff in reverse order
-                aKey = isNaN(aKey) ? 0 : aKey;
-                bKey = isNaN(bKey) ? 0 : bKey;
-                if (aKey < bKey) return 1;
-                if (aKey > bKey) return -1;
-                break;
-            default:
-                throw new Error(`Incomparable type ${typeof aKey}`);
-        }
-    }
-    return ib.lvl - ia.lvl;
-}
-
 function stringify(v) {
     return typeof v === 'number' ? (Math.round(v * 100) / 100).toString() : v;
 }
