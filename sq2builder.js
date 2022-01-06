@@ -740,9 +740,9 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-        if (player_build.items[i].get("id") > 9999) {
-            continue;
-        }
+//        if (player_build.items[i].get("id") > 9999) {
+//            continue;
+//        }
         displaysq2ExpandedItem(player_build.items[i], buildFields[i]);
         collapse_element("#"+equipment_keys[i]+"-tooltip");
     }

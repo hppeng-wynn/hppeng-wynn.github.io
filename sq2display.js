@@ -462,6 +462,7 @@ function displaysq2RolledID(item, id, elemental_format) {
 
     let min_elem = document.createElement('div');
     min_elem.classList.add('col', 'text-start');
+    min_elem.style.cssText += "flex-grow: 0";
     let id_min = item.get("minRolls").get(id)
     let style = id_min < 0 ? "negative" : "positive";
     if(reversedIDs.includes(id)){
@@ -472,7 +473,8 @@ function displaysq2RolledID(item, id, elemental_format) {
     item_div.appendChild(min_elem);
 
     let desc_elem = document.createElement('div');
-    desc_elem.classList.add('col', 'text-center', 'text-nowrap');
+    desc_elem.classList.add('col', 'text-center');//, 'text-nowrap');
+    desc_elem.style.cssText += "flex-grow: 1";
     //TODO elemental format jank
     if (elemental_format) {
         apply_sq2_elemental_format(desc_elem, id);
@@ -485,8 +487,9 @@ function displaysq2RolledID(item, id, elemental_format) {
     let max_elem = document.createElement('div');
     let id_max = item.get("maxRolls").get(id)
     max_elem.classList.add('col', 'text-end');
+    max_elem.style.cssText += "flex-grow: 0";
     style = id_max < 0 ? "negative" : "positive";
-    if(reversedIDs.includes(id)){
+    if (reversedIDs.includes(id)) {
         style === "positive" ? style = "negative" : style = "positive"; 
     }
     max_elem.classList.add(style);

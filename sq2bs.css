@@ -425,11 +425,11 @@ input.equipment-input {
 }
 
 .dark-shadow {
-    box-shadow: 0rem 0rem 1.25rem 0.1875rem black;
+    box-shadow: 0rem 0rem 0.5rem 0.075rem black;
 }
   
 .dark-shadow-sm {
-    box-shadow: 0rem 0rem 0.625rem 0.125rem black;
+    box-shadow: 0rem 0rem 0.25rem 0.05rem black;
 }
 
 .border-dark-7 {
