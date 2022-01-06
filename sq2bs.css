@@ -1,0 +1,437 @@
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+/* sidebar stuff */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 3.5vw; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+.sidebar:hover {
+    width: 11vw;
+}
+
+.sidebar a {
+    padding: .4vw .4vw .4vw .4vw;
+    display: block;
+    color: white;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sidebar a img {
+    margin-right: .6vw;
+    width: 2.5vw;
+}
+
+.sidebar a b {
+    font-size: .8vw;
+}
+
+.sidebar a:hover {
+    background-color: hsl(0, 0%, 8%);
+    color: rgb(210, 210, 210);
+}
+
+@media screen and (max-width: 992px) {
+    .sidebar {display: none;}
+}
+
+/* builder containers */
+
+/* wynn-related css(es) */
+.positive {
+    color: #5f5;
+}
+
+.negative {
+    color: #f55;
+}
+
+.Health {
+    color: #AA0000
+}
+
+.Health:before {
+    content: "\2764" ' ';
+}
+
+.lvl:before {
+    content: 'Lv. '
+}
+
+.Damage { 
+    color: rgb(255, 198, 85)
+}
+
+.Normal {
+    color: #FFFFFF !important;
+}
+
+.Unique {
+    color: #FFFF55 !important;
+}
+
+.Rare {
+    color: #FF55FF !important;
+}
+
+.Legendary {
+    color: #55FFFF !important;
+}
+
+.Fabled {
+    color: #FF5555 !important;
+}
+
+.Mythic {
+    color: #AA00AA !important;
+}
+
+.Set {
+    color: #5f5 !important;
+}
+
+.eDam, .Earth, .Earth_powder {
+    color: #00AA00;
+}
+
+.eDam:before, .Earth:before, .Earth_powder:before { content: "\2724" ' '; }
+
+.tDam, .Thunder, .Thunder_powder {
+    color: #FFFF55;
+}
+
+.tDam:before, .Thunder:before, .Thunder_powder:before { content: "\2726" ' '; }
+
+.wDam, .Water, .Water_powder {
+    color: #55FFFF
+}
+
+.wDam:before, .Water:before, .Water_powder:before { content: "\2749" ' '; }
+
+.fDam, .Fire, .Fire_powder {
+    color: #FF5555;
+}
+
+.fDam:before, .Fire:before, .Fire_powder:before { content: "\2739" ' '; }
+
+.aDam, .Air, .Air_powder {
+    color: #FFFFFF
+}
+
+.aDam:before, .Air:before, .Air_powder:before { content: "\274b" ' '; }
+
+.nDam, .Neutral {
+    color: #FFAA00;
+}
+
+.nDam:before, .Neutral:before { 
+    content: "\2724" ' '; 
+}
+
+.Mana { 
+    color: #5ff;
+}
+
+.Mana:after { 
+    content: "\273A"
+}
+
+/* equipment field specifics */
+/* inputs and dropdowns */
+.form-control {
+    transition: none !important;
+    box-shadow: none !important;
+    width: 95% !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul.search-box {
+    position: absolute;
+    padding: 0;
+}
+
+li.search-item {
+    cursor: pointer;
+}
+
+li.search-item:hover {
+    background-color: hsl(0, 0%, 11%) !important;
+}
+
+/* boosts styles */
+.button-boost:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.toggleOn {
+    background-color: #0a0 !important;
+}
+
+/* floating tooltip styles */
+.float-tooltip {
+    background-color: hsl(0, 0%, 16%);
+    position: absolute;
+    transition: .3s;
+    cursor: pointer;
+}
+
+/* generic */
+
+input {
+    min-width: 0;
+    width: 100%;
+}
+
+input.equipment-input {
+    font-weight: bold;
+}
+
+.text-right {
+    float: right;
+}
+
+.text-left {
+    float: left;
+}
+
+.spell-display p {
+    margin-bottom: 0;
+}
+
+.spell-display b {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.spell-expand {
+    cursor: pointer;
+}
+
+.scaled-font {
+    font-size: 2.5rem;
+}
+
+.skp-tooltip {
+    font-size: 2.1875rem;
+    font-weight: bold;
+}
+
+.spellcost-tooltip b {
+    font-size: 2.1875rem !important;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ff8180;
+    font-size: 1.875rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.scaled-item-icon {
+    width: 8rem;
+}
+
+.scaled-item-icon img {
+    width: 6.5rem;
+}
+
+.scaled-bckgrd {
+    width: 10rem;
+    height: 10rem;
+}
+
+.scaled-bckgrd img {
+    width: 6.5rem;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .scaled-font {
+        font-size: .8rem;
+    }
+    
+    .skp-tooltip {
+        font-size: .625rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .625rem !important;
+    }
+
+    .scaled-item-icon {
+        width: 3.2rem;
+    }
+
+    .scaled-item-icon img {
+        width: 2.8rem;
+    }
+
+    .scaled-bckgrd {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .scaled-bckgrd img {
+        width: 2.8rem;
+    }
+
+    .warning {
+        font-size: .7rem;
+    }
+
+    .spell-display b {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .scaled-font { 
+        font-size: 1rem;
+    }
+
+    .skp-tooltip {
+        font-size: .78rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .78rem !important;
+    }
+
+    .scaled-item-icon {
+        width: 4rem;
+    }
+    
+    .scaled-item-icon img {
+        width: 3.5rem;
+    }
+
+    .scaled-bckgrd {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .scaled-bckgrd img {
+        width: 3.5rem;
+    }
+
+
+    .warning {
+        font-size: .8rem;
+    }
+
+    .spell-display b {
+        font-size: 1.2rem;
+    }
+}
+/* WynnAtlas Mini */
+.search-field {
+    background-color: hsl(0, 0%, 14%) !important;
+    color: white;
+    font-weight: bold;
+    border-color: hsl(0, 0%, 8%);
+}
+
+/* Fake button for build stats */
+.fake-button {
+    cursor: pointer;
+}
+
+.fake-button:hover {
+    background-color: hsl(0, 0%, 14%) !important;
+}
+
+/* material design dark mode */
+.dark-1 {
+    background-color: hsl(0, 0%, 5%) !important;
+}
+
+.dark-2 {
+    background-color: hsl(0, 0%, 7%) !important;
+}
+
+.dark-3 {
+    background-color: hsl(0, 0%, 8%) !important;
+}
+
+.dark-4 {
+    background-color: hsl(0, 0%, 9%) !important;
+}
+
+.dark-5 {
+    background-color: hsl(0, 0%, 11%) !important;
+}
+
+.dark-6 {
+    background-color: hsl(0, 0%, 12%) !important;
+}
+
+.dark-7 {
+    background-color: hsl(0, 0%, 14%) !important;
+}
+
+.dark-8 {
+    background-color: hsl(0, 0%, 15%) !important;
+}
+
+.dark-9 {
+    background-color: hsl(0, 0%, 16%) !important;
+}
+
+.dark-1u {
+    background-color: hsl(0, 0%, 5%);
+}
+
+.dark-2u {
+    background-color: hsl(0, 0%, 7%);
+}
+
+.dark-3u {
+    background-color: hsl(0, 0%, 8%);
+}
+
+.dark-4u {
+    background-color: hsl(0, 0%, 9%);
+}
+
+.dark-5u {
+    background-color: hsl(0, 0%, 11%);
+}
+
+.dark-6u {
+    background-color: hsl(0, 0%, 12%);
+}
+
+.dark-7u {
+    background-color: hsl(0, 0%, 14%);
+}
+
+.dark-8u {
+    background-color: hsl(0, 0%, 15%);
+}
+
+.dark-9u {
+    background-color: hsl(0, 0%, 16%);
+}
+
+.dark-shadow {
+    box-shadow: 0rem 0rem 1.25rem 0.1875rem black;
+}
+  
+.dark-shadow-sm {
+    box-shadow: 0rem 0rem 0.625rem 0.125rem black;
+}
+
+.border-dark-7 {
+    border-color:hsl(0, 0%, 14%) !important;
+}
