@@ -9,6 +9,7 @@ AMBIVALENCE IS REMOVED!
 """
 
 import json
+import os 
 
 with open("dump.json", "r") as infile:
     data = json.load(infile)
@@ -18,23 +19,14 @@ with open("updated.json", "r") as oldfile:
 
 items = data["items"]
 old_items = old_data["items"]
+old_tomes = old_data["tomes"]
 if "request" in data:
     del data["request"]
 
-# import os
-# sets = dict()
-# for filename in os.listdir('sets'):
-#     if "json" not in filename:
-#         continue
-#     set_name = filename[1:].split(".")[0].replace("+", " ").replace("%27", "'")
-#     with open("sets/"+filename) as set_info:
-#         set_obj = json.load(set_info)
-#         for item in set_obj["items"]:
-#             item_set_map[item] = set_name
-#         sets[set_name] = set_obj
-# 
-# data["sets"] = sets
+#this script does not change sets or tomes. use the dedicated set and tome update scripts to update.
 data["sets"] = old_data["sets"]
+data["tomes"] = old_data["tomes"]
+
 item_set_map = dict()
 for set_name, set_data in data["sets"].items():
     for item_name in set_data["items"]:

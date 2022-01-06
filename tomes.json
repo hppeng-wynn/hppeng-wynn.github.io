@@ -9,7 +9,9 @@
     "lvl": 60,
     "thorns": 6,
     "ref": 6,
-    "hpBonus": 120
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 0
   },
   {
     "name": "Retaliating Tome of Armour Mastery II",
@@ -20,7 +22,9 @@
     "restrict": "Soulbound",
     "lvl": 100,
     "thorns": 8,
-    "ref": 8
+    "ref": 8,
+    "fixID": false,
+    "tomeID": 1
   },
   {
     "name": "Destructive Tome of Armour Mastery I",
@@ -30,9 +34,11 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "exploding": 5, 
-    "mdPct": 5,  
-    "hpBonus": 120
+    "exploding": 5,
+    "mdPct": 5,
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 2
   },
   {
     "name": "Destructive Tome of Armour Mastery II",
@@ -43,7 +49,9 @@
     "restrict": "Soulbound",
     "lvl": 100,
     "thorns": 6,
-    "reflection": 6
+    "reflection": 6,
+    "fixID": false,
+    "tomeID": 3
   },
   {
     "name": "Sorcerer's Tome of Armour Mastery I",
@@ -53,8 +61,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "sdPct": 5,   
-    "hpBonus": 120
+    "sdPct": 5,
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 4
   },
   {
     "name": "Sorcerer's Tome of Armour Mastery II",
@@ -64,7 +74,9 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "sdPct": 6
+    "sdPct": 6,
+    "fixID": false,
+    "tomeID": 5
   },
   {
     "name": "Everlasting Tome of Armour Mastery I",
@@ -74,8 +86,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "hprRaw": 15,   
-    "hpBonus": 120
+    "hprRaw": 15,
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 6
   },
   {
     "name": "Everlasting Tome of Armour Mastery II",
@@ -85,7 +99,9 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "hprRaw": 60
+    "hprRaw": 60,
+    "fixID": false,
+    "tomeID": 7
   },
   {
     "name": "Vampiric Tome of Armour Mastery I",
@@ -95,8 +111,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "ls": 25,   
-    "hpBonus": 120
+    "ls": 25,
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 8
   },
   {
     "name": "Vampiric Tome of Armour Mastery II",
@@ -106,7 +124,9 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "ls": 85
+    "ls": 85,
+    "fixID": false,
+    "tomeID": 9
   },
   {
     "name": "Greedy Tome of Armour Mastery I",
@@ -116,8 +136,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "lb": 5,   
-    "hpBonus": 120
+    "lb": 5,
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 10
   },
   {
     "name": "Greedy Tome of Armour Mastery II",
@@ -127,7 +149,9 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "lb": 6
+    "lb": 6,
+    "fixID": false,
+    "tomeID": 11
   },
   {
     "name": "Weightless Tome of Armour Mastery I",
@@ -137,8 +161,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "spd": 5,   
-    "hpBonus": 120
+    "spd": 5,
+    "hpBonus": 120,
+    "fixID": false,
+    "tomeID": 12
   },
   {
     "name": "Weightless Tome of Armour Mastery II",
@@ -148,7 +174,9 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "spd": 6
+    "spd": 6,
+    "fixID": false,
+    "tomeID": 13
   },
   {
     "name": "Blooming Tome of Armour Mastery II",
@@ -158,8 +186,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "eDefPct": 10,   
-    "hpBonus": 150
+    "eDefPct": 10,
+    "hpBonus": 150,
+    "fixID": false,
+    "tomeID": 14
   },
   {
     "name": "Pulsing Tome of Armour Mastery II",
@@ -169,8 +199,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "tDefPct": 10,   
-    "hpBonus": 150
+    "tDefPct": 10,
+    "hpBonus": 150,
+    "fixID": false,
+    "tomeID": 15
   },
   {
     "name": "Oceanic Tome of Armour Mastery II",
@@ -180,8 +212,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "wDefPct": 10,   
-    "hpBonus": 150
+    "wDefPct": 10,
+    "hpBonus": 150,
+    "fixID": false,
+    "tomeID": 16
   },
   {
     "name": "Courageous Tome of Armour Mastery II",
@@ -191,8 +225,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "fDefPct": 10,   
-    "hpBonus": 150
+    "fDefPct": 10,
+    "hpBonus": 150,
+    "fixID": false,
+    "tomeID": 17
   },
   {
     "name": "Clouded Tome of Armour Mastery II",
@@ -202,8 +238,10 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 100,
-    "aDefPct": 10,   
-    "hpBonus": 150
+    "aDefPct": 10,
+    "hpBonus": 150,
+    "fixID": false,
+    "tomeID": 18
   },
   {
     "name": "Radiant Tome of Armour Mastery II",
@@ -217,8 +255,10 @@
     "tDefPct": 6,
     "wDefPct": 6,
     "fDefPct": 6,
-    "aDefPct": 6,   
-    "hpBonus": 150
+    "aDefPct": 6,
+    "hpBonus": 150,
+    "fixID": false,
+    "tomeID": 19
   },
   {
     "name": "Tome of Weapon Mastery I",
@@ -228,7 +268,9 @@
     "drop": "never",
     "restrict": "Soulbound",
     "lvl": 60,
-    "dmgMobs": 6 
+    "dmgMobs": 6,
+    "fixID": false,
+    "tomeID": 20
   },
   {
     "name": "Earthbound Tome of Weapon Mastery I",
@@ -239,7 +281,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 7,
-    "str": 3 
+    "str": 3,
+    "fixID": false,
+    "tomeID": 21
   },
   {
     "name": "Earthbound Tome of Weapon Mastery II",
@@ -250,7 +294,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 8,
-    "str": 3 
+    "str": 3,
+    "fixID": false,
+    "tomeID": 22
   },
   {
     "name": "Nimble Tome of Weapon Mastery I",
@@ -261,7 +307,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 7,
-    "dex": 3 
+    "dex": 3,
+    "fixID": false,
+    "tomeID": 23
   },
   {
     "name": "Nimble Tome of Weapon Mastery II",
@@ -272,7 +320,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 8,
-    "dex": 3 
+    "dex": 3,
+    "fixID": false,
+    "tomeID": 24
   },
   {
     "name": "Mystical Tome of Weapon Mastery I",
@@ -283,7 +333,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 7,
-    "int": 3 
+    "int": 3,
+    "fixID": false,
+    "tomeID": 25
   },
   {
     "name": "Mystical Tome of Weapon Mastery II",
@@ -294,7 +346,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 8,
-    "int": 3 
+    "int": 3,
+    "fixID": false,
+    "tomeID": 26
   },
   {
     "name": "Warding Tome of Weapon Mastery I",
@@ -305,7 +359,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 7,
-    "def": 3 
+    "def": 3,
+    "fixID": false,
+    "tomeID": 27
   },
   {
     "name": "Warding Tome of Weapon Mastery II",
@@ -316,7 +372,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 8,
-    "def": 3 
+    "def": 3,
+    "fixID": false,
+    "tomeID": 28
   },
   {
     "name": "Athletic Tome of Weapon Mastery I",
@@ -327,7 +385,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 7,
-    "agi": 3 
+    "agi": 3,
+    "fixID": false,
+    "tomeID": 29
   },
   {
     "name": "Athletic Tome of Weapon Mastery II",
@@ -338,7 +398,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 8,
-    "agi": 3 
+    "agi": 3,
+    "fixID": false,
+    "tomeID": 30
   },
   {
     "name": "Cosmic Tome of Weapon Mastery I",
@@ -352,8 +414,10 @@
     "str": 1,
     "dex": 1,
     "int": 1,
-    "def": 1, 
-    "agi": 1
+    "def": 1,
+    "agi": 1,
+    "fixID": false,
+    "tomeID": 31
   },
   {
     "name": "Cosmic Tome of Weapon Mastery II",
@@ -367,8 +431,10 @@
     "str": 1,
     "dex": 1,
     "int": 1,
-    "def": 1, 
-    "agi": 1
+    "def": 1,
+    "agi": 1,
+    "fixID": false,
+    "tomeID": 32
   },
   {
     "name": "Seismic Tome of Weapon Mastery II",
@@ -379,7 +445,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 12,
-    "eDamPct": 7
+    "eDamPct": 7,
+    "fixID": false,
+    "tomeID": 33
   },
   {
     "name": "Voltaic Tome of Weapon Mastery II",
@@ -390,7 +458,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 12,
-    "tDamPct": 7
+    "tDamPct": 7,
+    "fixID": false,
+    "tomeID": 34
   },
   {
     "name": "Abyssal Tome of Weapon Mastery II",
@@ -401,7 +471,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 12,
-    "wDamPct": 7
+    "wDamPct": 7,
+    "fixID": false,
+    "tomeID": 35
   },
   {
     "name": "Infernal Tome of Weapon Mastery II",
@@ -412,7 +484,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 12,
-    "fDamPct": 7
+    "fDamPct": 7,
+    "fixID": false,
+    "tomeID": 36
   },
   {
     "name": "Cyclonic Tome of Weapon Mastery II",
@@ -423,7 +497,9 @@
     "restrict": "Soulbound",
     "lvl": 80,
     "dmgMobs": 12,
-    "aDamPct": 7
+    "aDamPct": 7,
+    "fixID": false,
+    "tomeID": 37
   },
   {
     "name": "Astral Tome of Weapon Mastery II",
@@ -438,7 +514,9 @@
     "tDamPct": 6,
     "wDamPct": 6,
     "fDamPct": 6,
-    "aDamPct": 6
+    "aDamPct": 6,
+    "fixID": false,
+    "tomeID": 38
   },
   {
     "name": "Brute's Tome of Allegiance",
@@ -449,7 +527,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "str": 3,
-    "eDamPct": 2
+    "eDamPct": 2,
+    "fixID": false,
+    "tomeID": 39
   },
   {
     "name": "Sadist's Tome of Allegiance",
@@ -460,7 +540,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "dex": 3,
-    "tDamPct": 2
+    "tDamPct": 2,
+    "fixID": false,
+    "tomeID": 40
   },
   {
     "name": "Mastermind's Tome of Allegiance",
@@ -471,7 +553,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "int": 3,
-    "wDamPct": 2
+    "wDamPct": 2,
+    "fixID": false,
+    "tomeID": 41
   },
   {
     "name": "Arsonist's Tome of Allegiance",
@@ -482,7 +566,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "def": 3,
-    "fDamPct": 2
+    "fDamPct": 2,
+    "fixID": false,
+    "tomeID": 42
   },
   {
     "name": "Ghost's Tome of Allegiance",
@@ -493,7 +579,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "agi": 3,
-    "aDamPct": 2
+    "aDamPct": 2,
+    "fixID": false,
+    "tomeID": 43
   },
   {
     "name": "Psychopath's Tome of Allegiance",
@@ -504,7 +592,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "str": 2,
-    "dex": 2
+    "dex": 2,
+    "fixID": false,
+    "tomeID": 44
   },
   {
     "name": "Loner's Tome of Allegiance",
@@ -515,7 +605,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "str": 2,
-    "int": 2
+    "int": 2,
+    "fixID": false,
+    "tomeID": 45
   },
   {
     "name": "Warlock's Tome of Allegiance",
@@ -526,7 +618,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "dex": 2,
-    "int": 2
+    "int": 2,
+    "fixID": false,
+    "tomeID": 46
   },
   {
     "name": "Destroyer's Tome of Allegiance",
@@ -537,7 +631,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "str": 2,
-    "def": 2
+    "def": 2,
+    "fixID": false,
+    "tomeID": 47
   },
   {
     "name": "Devil's Tome of Allegiance",
@@ -548,7 +644,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "dex": 2,
-    "def": 2
+    "def": 2,
+    "fixID": false,
+    "tomeID": 48
   },
   {
     "name": "Alchemist's Tome of Allegiance",
@@ -559,7 +657,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "int": 2,
-    "def": 2
+    "def": 2,
+    "fixID": false,
+    "tomeID": 49
   },
   {
     "name": "Barbarian's Tome of Allegiance",
@@ -570,7 +670,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "str": 2,
-    "agi": 2
+    "agi": 2,
+    "fixID": false,
+    "tomeID": 50
   },
   {
     "name": "Freelancer's Tome of Allegiance",
@@ -581,7 +683,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "dex": 2,
-    "agi": 2
+    "agi": 2,
+    "fixID": false,
+    "tomeID": 51
   },
   {
     "name": "Sycophant's Tome of Allegiance",
@@ -592,7 +696,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "int": 2,
-    "agi": 2
+    "agi": 2,
+    "fixID": false,
+    "tomeID": 52
   },
   {
     "name": "Fanatic's Tome of Allegiance",
@@ -603,7 +709,9 @@
     "restrict": "Untradable",
     "lvl": 100,
     "def": 2,
-    "agi": 2
+    "agi": 2,
+    "fixID": false,
+    "tomeID": 53
   },
   {
     "name": "Assimilator's Tome of Allegiance",
@@ -617,6 +725,8 @@
     "dex": 1,
     "int": 1,
     "def": 1,
-    "agi": 1
+    "agi": 1,
+    "fixID": false,
+    "tomeID": 54
   }
 ]

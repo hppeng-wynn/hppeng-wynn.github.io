@@ -221,8 +221,11 @@ function init_maps() {
         ["accessory", "bracelet", "No Bracelet"],
         ["accessory", "necklace", "No Necklace"],
         ["weapon", "dagger", "No Weapon"],
+        ["tome", "weaponTome", "No Weapon Tome"],
+        ["tome", "armorTome", "No Armour Tome"],
+        ["tome", "guildTome", "No Guild Tome"]
     ];
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 12; i++) {
         let item = Object();
         item.slots = 0;
         item.category = noneItems[i][0];
