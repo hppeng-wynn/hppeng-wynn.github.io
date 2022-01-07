@@ -136,6 +136,7 @@
     content: "\2724" ' '; 
 }
 
+
 .Mana { 
     color: #5ff;
 }
@@ -347,9 +348,10 @@ input.equipment-input {
     cursor: pointer;
 }
 
-.fake-button:hover {
+.fake-button:hover, .selected-btn{
     background-color: hsl(0, 0%, 14%) !important;
 }
+
 
 /* material design dark mode */
 .dark-1 {

@@ -1,6 +1,9 @@
-let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
 let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear'];
+let armor_keys = ['helmet', 'chestplate', 'leggings', 'boots'];
 let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
+let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
+let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
+let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
 
 let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
 let other_disp = ['build-order', 'set-info', 'int-info'];
@@ -9,8 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-choice").setAttribute("oninput", "update_field('"+ eq +"'); calcBuildSchedule();");
-        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule();");
-        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip')");
+        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip'); toggle_plus_minus('" + eq + "-pm'); ");
+    }
+
+    for (const eq of powderable_keys) {
+        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule(); updatePowders(" + eq + "-powder)");
     }
 
     for (const i of spell_disp) {
@@ -137,28 +143,34 @@ function update_field(field) {
         document.querySelector("#"+field+"-choice").classList.add("text-light");
         if (item) { document.querySelector("#"+field+"-choice").classList.add("is-invalid"); }
 
-        document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
+        /*if (!accessory_keys.contains(type.toLowerCase())) {
+            document.querySelector("#"+type+"-powder").disabled = true;
+        }*/
         return false;
     }
+
 
     if ((type != field.replace(/[0-9]/g, '')) && (category != field.replace(/[0-9]/g, ''))) {
         document.querySelector("#"+field+"-choice").classList.add("text-light");
         if (item) { document.querySelector("#"+field+"-choice").classList.add("is-invalid"); }
 
-        document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
+        //document.querySelector("#"+equipment_keys[i]+"-powder").disabled = true;
         return false;
     }
 
     // set item color
     document.querySelector("#"+field+"-choice").classList.add(tier);
 
-    // set powder slots
-    document.querySelector("#"+field+"-powder").setAttribute("placeholder", powder_slots+" slots");
 
-    if (powder_slots == 0) {
-        document.querySelector("#"+field+"-powder").disabled = true;
-    } else {
-        document.querySelector("#"+field+"-powder").disabled = false;
+    if (powderable_keys.includes(field)) {
+        // set powder slots
+        document.querySelector("#"+field+"-powder").setAttribute("placeholder", powder_slots+" slots");
+
+        if (powder_slots == 0) {
+            document.querySelector("#"+field+"-powder").disabled = true;
+        } else {
+            document.querySelector("#"+field+"-powder").disabled = false;
+        }
     }
 
     // set weapon img
@@ -170,14 +182,18 @@ function update_field(field) {
 }
 /* tabulars | man i hate this code but too lazy to fix /shrug */
 
-let tabs = ['all-stats', 'minimal-offensive-stats', 'minimal-defensive-stats'];
+let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
 
 function show_tab(tab) {
-    console.log(itemFilters)
+    //console.log(itemFilters)
+
+    //hide all tabs, then show the tab of the div clicked and highlight the correct button
     for (const i in tabs) {
-        document.querySelector("#"+tabs[i]).style.display = "none";
+        document.querySelector("#" + tabs[i]).style.display = "none";
+        document.getElementById("tab-" + tabs[i].split("-")[0] + "-btn").classList.remove("selected-btn");
     }
-    document.querySelector("#"+tab).style.display = "";
+    document.querySelector("#" + tab).style.display = "";
+    document.getElementById("tab-" + tab.split("-")[0] +  "-btn").classList.add("selected-btn");
 }
 
 function toggle_spell_tab(tab) {
@@ -206,19 +222,20 @@ function toggle_tab(tab) {
 
 function collapse_element(elmnt) {
     elem_list = document.querySelector(elmnt).children;
-
-    for (elem of elem_list) {
-        if (elem.classList.contains("no-collapse")) { continue; }
-        if (elem.style.display == "none") {
-            elem.style.display = "";
-        } else {
-            elem.style.display = "none";
-        }   
+    if (elem_list) {
+        for (elem of elem_list) {
+            if (elem.classList.contains("no-collapse")) { continue; }   
+            if (elem.style.display == "none") {
+                elem.style.display = "";
+            } else {
+                elem.style.display = "none";
+            }   
+        }
     }
     // macy quirk
     window.dispatchEvent(new Event('resize'));
     // weird bug where display: none overrides??
-    document.querySelector(elmnt).style.display = "";
+    document.querySelector(elmnt).style.removeProperty('display');
 }
 
 // search misc

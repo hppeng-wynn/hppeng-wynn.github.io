@@ -5,14 +5,17 @@ function displaysq2BuildStats(parent_id,build,command_group){
     // normals just display a thing.
 
     let display_commands = command_group;
-    console.log(display_commands);
-
-    // Clear the parent div.
-    setHTML(parent_id, "");
+    //console.log(display_commands);
+    
+    
     let parent_div = document.getElementById(parent_id);
+    // Clear the parent div.
+    if (parent_div != null) {
+        setHTML(parent_id, "");
+    }
 
     let stats = build.statMap;
-    console.log(build.statMap);
+    //console.log(build.statMap);
     
     let active_elem;
     let elemental_format = false;
@@ -207,7 +210,7 @@ function displaysq2ExpandedItem(item, parent_id){
                     p_elem.textContent = "Set: " + item.get(id).toString();
                     parent_div.appendChild(p_elem);
                 } else if (id === "majorIds") {
-                    console.log(item.get(id));
+                    //console.log(item.get(id));
                     for (let majorID of item.get(id)) {
                         let p_elem = document.createElement("div");
                         p_elem.classList.add("col");
@@ -239,10 +242,20 @@ function displaysq2ExpandedItem(item, parent_id){
                     p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
                     parent_div.appendChild(p_elem);
                 } else if (id === "displayName") {
+                    let row = document.createElement("div");
+
                     let p_elem = document.createElement("div");
-                    p_elem.classList.add("col", "text-center", "no-collapse");
+                    let plusminus = document.createElement("div");
+                    row.classList.add("row", "no-collapse");
+                    p_elem.classList.add("col", "text-center");
                     p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "none");
-                    
+                    p_elem.style.textGrow = 1;
+                    //allow the plus minus element to toggle upon click: ➕➖
+                    plusminus.id = parent_div.id.split("-")[0] + "-pm";
+                    plusminus.classList.add("col", "plus_minus", "text_end");
+                    plusminus.style.flexGrow = 0;
+                    plusminus.textContent = "\u2795";
+
                     if (item.get("custom")) {
                         // p_elem.href = url_base.replace(/\w+.html/, "") + "customizer.html#" + item.get("hash");
                         p_elem.textContent = item.get("displayName");
@@ -254,17 +267,25 @@ function displaysq2ExpandedItem(item, parent_id){
                         p_elem.textContent = item.get("displayName");
                     }
 
-                    parent_div.appendChild(p_elem);
+                   
+
+                    parent_div.appendChild(row);
+                    row.appendChild(p_elem);
+                    row.appendChild(plusminus);
+
                     let img = document.createElement("img");
                     if (item && item.has("type")) {
                         img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
                         img.alt = item.get("type");
                         img.style = " z=index: 1; position: relative;";
+                        let container = document.createElement("div");
+                        
                         let bckgrd = document.createElement("div");
-                        bckgrd.classList.add("col", "px-0", "d-flex", "align-items-center", "justify-content-center", "no-collapse");
+                        bckgrd.classList.add("col", "px-0", "d-flex", "align-items-center", "justify-content-center");// , "no-collapse");
                         bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
                         bckgrd.classList.add("scaled-bckgrd");
-                        parent_div.appendChild(bckgrd);
+                        parent_div.appendChild(container);
+                        container.appendChild(bckgrd);
                         bckgrd.appendChild(img);
                     }
                 } else {
@@ -499,7 +520,7 @@ function displaysq2RolledID(item, id, elemental_format) {
     return row;
 }
 
-function displaysq2WeaponBase(build) {
+function displaysq2WeaponStats(build) {
     // let base_damage = build.get('damageRaw');
     let damage_keys = [ "nDam", "eDam", "tDam", "wDam", "fDam", "aDam" ];
 
@@ -522,8 +543,25 @@ function displaysq2WeaponBase(build) {
     powdered_map.set('aDam', powdered_base[5][0]+'-'+powdered_base[5][1]);
 
     // display
-    for (const i in damage_keys) {
+
+    //I think this is res's code? in any case it doesn't work - ferri
+    /* for (const i in damage_keys) {
         document.getElementById(damage_keys[i]+"-base").textContent = powdered_map.get(damage_keys[i]);
+    } */ 
+
+    let tot = 0;
+    //sum up elemental damages to get sum of base dps's
+    for (let i = 0; i < 6; i++) {
+        tot += powdered_base[i][0] + powdered_base[i][1];
+    }
+    tot /= 2;
+    let dps = Math.max(0, Math.round(tot * baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))] )); //atkspeeds
+
+    document.getElementById("weapon-dps").textContent = "base dps: " + dps; 
+    document.getElementById("weapon-lv").textContent = item.get("lvl"); 
+
+    if (item.get("type")) {
+        document.getElementById("weapon-img").src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
     }
 }
 
@@ -1433,11 +1471,13 @@ function displaysq2SetBonuses(parent_id,build) {
     set_summary_elem.textContent = "Set Bonuses";
     parent_div.append(set_summary_elem);
     
+    /*
     if (build.activeSetCounts.size) {
         parent_div.parentElement.style.display = "block";
     } else {
         parent_div.parentElement.style.display = "none";
     }
+    */
 
     for (const [setName, count] of build.activeSetCounts) {
         const active_set = sets[setName];
@@ -1468,4 +1508,23 @@ function displaysq2SetBonuses(parent_id,build) {
         displaysq2ExpandedItem(mock_item, set_elem.id);
         console.log(mock_item);
     }
+}
+
+function toggle_plus_minus(elem_id) {
+    let elem = document.getElementById(elem_id);
+    if (elem.classList.contains("plus_minus")) {
+        if (elem.textContent == "\u2795") {
+            elem.textContent = "\u2796";
+        } else if (elem.textContent == "\u2796"){
+            elem.textContent = "\u2795";
+        } else {
+            // ???? 
+        }
+    }
+}
+
+// updates the powders within this element. Attempts to do so using textContent and innerHTML.
+function updatePowders(elem_id) {
+    elem = document.getElementById(elem_id);
+    
 }

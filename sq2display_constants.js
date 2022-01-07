@@ -1,3 +1,11 @@
+let powder_chars = [
+    '\u2724',
+    '\u2726',
+    '\u2749',
+    '\u2739',
+    '\u274b'
+]
+
 /*
  * Display commands
  */

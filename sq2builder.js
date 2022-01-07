@@ -748,14 +748,15 @@ function calculateBuildStats() {
     }
 
     displaysq2ArmorStats(player_build);
-    displaysq2BuildStats("all-stats", player_build, build_all_display_commands);
-    displaysq2BuildStats("minimal-offensive-stats",player_build, build_offensive_display_commands);
+    displaysq2BuildStats('overall-stats', player_build, build_all_display_commands);
+    displaysq2BuildStats("offensive-stats",player_build, build_offensive_display_commands);
     displaysq2SetBonuses("set-info",player_build);
+    displaysq2WeaponStats(player_build);
 
     let meleeStats = player_build.getMeleeStats();
     displaysq2MeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
-    displaysq2DefenseStats(document.getElementById("minimal-defensive-stats"),player_build);
+    displaysq2DefenseStats(document.getElementById("defensive-stats"),player_build);
 
     displaysq2PoisonDamage(document.getElementById("build-poison-stats"),player_build);
 
