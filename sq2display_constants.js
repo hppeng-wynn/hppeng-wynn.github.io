@@ -5,6 +5,30 @@ let powder_chars = [
     '\u2739',
     '\u274b'
 ]
+let subscript_nums = [
+    '\u2081',
+    '\u2082',
+    '\u2083',
+    '\u2084',
+    '\u2085',
+    '\u2086',
+]
+
+let skp_names = [
+    'str',
+    'dex',
+    'int',
+    'def',
+    'agi'
+]
+
+let elem_chars = [
+    'e',
+    't',
+    'w',
+    'f',
+    'a'
+]
 
 /*
  * Display commands

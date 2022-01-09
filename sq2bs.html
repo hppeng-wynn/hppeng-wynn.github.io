@@ -21,8 +21,14 @@
     
     <!-- main -->
     <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
-        <a href=""><img src="media/icons/new/atlas64.png" alt="place" title="WynnBuilder"><b>WynnBuilder</b></a>
-        <a onclick="document.querySelector('#search-container').style.display = '';"><img src="media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
+        <a href=""><img src="media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
+        <a href = "/crafter.html"><img src = "media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
+        <a href = "/items.html"><img src = "media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+        <a href = "/customizer.html"><img src = "media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
+        <a href = "/map.html"><img src = "media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
+        <a href = "/wynnfo/index.html"><img src = "media/icons/new/book.png" alt = "Wynnfo" title = "WynnCrafter"><b>WynnCrafter</b></a>
+        <a onclick = "document.querySelector('#search-container').style.display = '';"><img src="media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
+        <a onclick = "toggleIcons()"><img src = "media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
     </div>
     <div class="container py-5 vh-100 mx-0 mx-lg-auto">
@@ -485,7 +491,8 @@
                                                     Rage (Passive)
                                                 </div>
                                                 <div class="col">
-                                                    placeholder
+                                                    <input type = "range" id = "str_boost_armor" name = "str-boost-armor" min = '0' max = '396' value = '0' step = '1' onchange = "updateArmorPowderSpecials('dex_boost_armor')">
+                                                    <label id = "str_boost_armor_label" for="str-boost-armor">% Earth Dmg Boost: 0</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -527,7 +534,8 @@
                                                     Kill Streak (Passive)
                                                 </div>
                                                 <div class="col">
-                                                    placeholder
+                                                    <input type = "range" id = "dex_boost_armor" name = "dex-boost-armor" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('dex_boost_armor')">
+                                                    <label id = "dex_boost_armor_label" for="dex-boost-armor">% Thunder Dmg Boost: 0</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -569,7 +577,8 @@
                                                     Concentration (Passive)
                                                 </div>
                                                 <div class="col">
-                                                    placeholder
+                                                    <input type = "range" id = "int_boost_armor" name = "dex-boost-armor" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('int_boost_armor')">
+                                                    <label id = "int_boost_armor_label" for="dex-boost-armor">% Water Dmg Boost: 0</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -611,7 +620,8 @@
                                                     Endurance (Passive)
                                                 </div>
                                                 <div class="col">
-                                                    how do calc
+                                                    <input type = "range" id = "def_boost_armor" name = "def-boost-armor" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('def_boost_armor')">
+                                                    <label id = "def_boost_armor_label" for="def-boost-armor">% Fire Dmg Boost: 0</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -653,7 +663,8 @@
                                                     Dodge (Passive)
                                                 </div>
                                                 <div class="col">
-                                                    how do calc
+                                                    <input type = "range" id = "agi_boost_armor" name = "agi-boost-armor" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('agi_boost_armor')">
+                                                    <label id = "agi_boost_armor_label" for="agi-boost-armor">% Air Dmg Boost: 0</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -673,7 +684,7 @@
                                 <div id="tab-defensive-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7" onclick="show_tab('defensive-stats')">
                                     Defense
                                 </div>
-                                <div id="tab-overall-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7" onclick="show_tab('overall-stats')">
+                                <div id="tab-overall-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7 selected-btn" onclick="show_tab('overall-stats')">
                                     Overall
                                 </div>
                             </div>
@@ -1202,6 +1213,7 @@
     <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/build_utils.js"></script>
+    <script type="text/javascript" src="js/icons.js"></script>
     <script type="text/javascript" src="sq2icons.js"></script>
     <script type="text/javascript" src="js/powders.js"></script>
     <script type="text/javascript" src="js/skillpoints.js"></script>

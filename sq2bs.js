@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     for (const eq of powderable_keys) {
-        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule(); updatePowders(" + eq + "-powder)");
+        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule(); updatePowders('" + eq + "-powder');");
     }
 
     for (const i of spell_disp) {

@@ -70,6 +70,9 @@ let powderInputs = [
     "weapon-powder",
 ];
 
+//keeps track of the armor powder special sliders. Needed for math. Assumes everything starts at 0.
+armor_powder_boosts = [0, 0, 0, 0, 0];
+
 function init() {
     console.log("builder.js init");
     init_autocomplete();
@@ -344,7 +347,6 @@ function calculateBuild(save_skp, skp){
             while (input) {
                 let first = input.slice(0, 2);
                 let powder = powderIDs.get(first);
-                console.log(powder);
                 if (powder === undefined) {
                     errorederrors.push(first);
                 } else {
@@ -555,7 +557,7 @@ function updateBoosts(buttonId, recalcStats) {
     }
 }
 
-/* Updates all powder special boosts 
+/* Updates ACTIVE powder special boosts (weapons)
 */
 function updatePowderSpecials(buttonId, recalcStats) {
     //console.log(player_build.statMap);
@@ -641,6 +643,31 @@ function updatePowderSpecials(buttonId, recalcStats) {
         calculateBuildStats();
     }
     displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
+}
+
+
+/* Updates PASSIVE powder special boosts (armors)
+*/
+function updateArmorPowderSpecials(elem_id) {
+    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
+
+    //update the label associated w/ the slider 
+    let elem = document.getElementById(elem_id);
+    let value = elem.value;
+
+    let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
+    let new_dmgboost = player_build.externalStats.get(dmg_id) + (value - armor_powder_boosts[skp_names.indexOf(wynn_elem)]);
+    armor_powder_boosts[skp_names.indexOf(wynn_elem)] = value;
+
+    let label = document.getElementById(elem_id + "_label");
+    label.textContent = label.textContent.split(":")[0] + ": " + elem.value;
+    
+    //update build stats
+    player_build.externalStats.set(dmg_id, new_dmgboost);
+
+    //calc build stats and display powder special
+    calculateBuildStats();
+    // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
 }
 
 /* Calculates all build statistics and updates the entire display.

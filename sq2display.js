@@ -1523,8 +1523,13 @@ function toggle_plus_minus(elem_id) {
     }
 }
 
-// updates the powders within this element. Attempts to do so using textContent and innerHTML.
+// updates the powders within this element.
 function updatePowders(elem_id) {
-    elem = document.getElementById(elem_id);
+    // let elem = document.getElementById(elem_id);
+    // for (let i = 0; i < elem.value.length - 1; i++) {
+    //     if ('etwfa'.includes(elem.value.charAt(i)) && elem.value.charAt(i + 1) >= '1' && elem.value.charAt(i + 1) <= '6') {
+    //         elem.value = elem.value.substring(0, i) + powder_chars['etwfa'.indexOf(elem.value.charAt(i))] + elem.value.substring(i + 2);
+    //     }
+    // }
     
 }
