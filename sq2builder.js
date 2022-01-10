@@ -655,19 +655,26 @@ function updateArmorPowderSpecials(elem_id) {
     let elem = document.getElementById(elem_id);
     let value = elem.value;
 
-    let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
-    let new_dmgboost = player_build.externalStats.get(dmg_id) + (value - armor_powder_boosts[skp_names.indexOf(wynn_elem)]);
-    armor_powder_boosts[skp_names.indexOf(wynn_elem)] = value;
 
     let label = document.getElementById(elem_id + "_label");
-    label.textContent = label.textContent.split(":")[0] + ": " + elem.value;
+    label.textContent = label.textContent.split(":")[0] + ": " + value;
     
-    //update build stats
-    player_build.externalStats.set(dmg_id, new_dmgboost);
+    if (player_build) {
+        let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
+        let new_dmgboost = player_build.externalStats.get(dmg_id) + (value - armor_powder_boosts[skp_names.indexOf(wynn_elem)]);
+        armor_powder_boosts[skp_names.indexOf(wynn_elem)] = value;
+        //update build stats
+        player_build.externalStats.set(dmg_id, new_dmgboost);
+    
+        //calc build stats and display powder special
+        calculateBuildStats();
+        // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
+    }
 
-    //calc build stats and display powder special
-    calculateBuildStats();
-    // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
+    //update the slider's graphics
+    let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
+    let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
+    elem.setAttribute("style.background",`linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA ${100 - pct}%)`);
 }
 
 /* Calculates all build statistics and updates the entire display.

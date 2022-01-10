@@ -30,6 +30,14 @@ let elem_chars = [
     'a'
 ]
 
+let elem_colors = [
+    "#00AA00",
+    "FFFF55",
+    "55FFFF",
+    "FF5555",
+    "FFFFFF"
+]
+
 /*
  * Display commands
  */
