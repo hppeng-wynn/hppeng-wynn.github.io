@@ -32,10 +32,10 @@ let elem_chars = [
 
 let elem_colors = [
     "#00AA00",
-    "FFFF55",
-    "55FFFF",
-    "FF5555",
-    "FFFFFF"
+    "#FFFF55",
+    "#55FFFF",
+    "#FF5555",
+    "#FFFFFF"
 ]
 
 /*

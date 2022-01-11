@@ -207,8 +207,11 @@ function toggle_spell_tab(tab) {
 function toggle_boost_tab(tab) {
     for (const i of skp_keys) {
         document.querySelector("#"+i+"-boost").style.display = "none";
+        document.getElementById(i + "-boost-tab").classList.remove("selected-btn");
     }
     document.querySelector("#"+tab+"-boost").style.display = "";
+    document.getElementById(tab + "-boost-tab").classList.add("selected-btn");
+
 }
 
 // toggle tab

@@ -674,7 +674,7 @@ function updateArmorPowderSpecials(elem_id) {
     //update the slider's graphics
     let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
     let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
-    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA ${100 - pct}%)`;
+    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
 }
 
 /* Calculates all build statistics and updates the entire display.
