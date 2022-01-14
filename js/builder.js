@@ -1076,3 +1076,4 @@ function init2() {
     load_ing_init(init);
 }
 load_init(init2);
+updateOGP();

@@ -3,6 +3,14 @@ const url_base = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.sp
 
 const zip = (a, b) => a.map((k, i) => [k, b[i]]);
 
+//updates all the OGP tags for a webpage. Should be called when build changes
+function updateOGP() {
+    let url_elem = document.getElementById("ogp-url");
+    if (url_elem) {
+        url_elem.content = url_base + getUrl;
+    }
+}
+
 function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);
 }
