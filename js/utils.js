@@ -14,7 +14,7 @@ function updateOGP() {
     //update the embed text content
     let build_elem = document.getElementById("ogp-build-list");
     if (build_elem && player_build) {
-            "WynnBuilder build:\n"+
+        let text = "WynnBuilder build:\n"+
             "> "+player_build.helmet.get("displayName")+"\n"+
             "> "+player_build.chestplate.get("displayName")+"\n"+
             "> "+player_build.leggings.get("displayName")+"\n"+
