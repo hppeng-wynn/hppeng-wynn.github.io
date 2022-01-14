@@ -861,6 +861,7 @@ function calculateBuildStats() {
 
     location.hash = encodeBuild();
     clear_highlights();
+    updateOGP();
 }
 
 function copyBuild() {
