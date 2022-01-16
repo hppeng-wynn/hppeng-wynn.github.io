@@ -5,9 +5,10 @@
  */
 function applyArmorPowders(expandedItem, powders) {
     applyArmorPowdersOnce(expandedItem, powders);
-    if (expandedItem.get("crafted")) {
-        applyArmorPowdersOnce(expandedItem, powders);
-    }
+    // NOTE: armor powder only applies once!
+    //if (expandedItem.get("crafted")) {
+    //    applyArmorPowdersOnce(expandedItem, powders);
+    //}
 }
 
 /**
