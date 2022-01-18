@@ -71,14 +71,14 @@ const translate_mappings = {
     "Custom Skin": "skin",
     //"Item Category": "category",
 
-    "1st Spell Cost %": "spPct1",
-    "1st Spell Cost Raw": "spRaw1",
-    "2nd Spell Cost %": "spPct2",
-    "2nd Spell Cost Raw": "spRaw2",
-    "3rd Spell Cost %": "spPct3",
-    "3rd Spell Cost Raw": "spRaw3",
-    "4th Spell Cost %": "spPct4",
-    "4th Spell Cost Raw": "spRaw4",
+    "1st Spell Cost %": "-spPct1",
+    "1st Spell Cost Raw": "-spRaw1",
+    "2nd Spell Cost %": "-spPct2",
+    "2nd Spell Cost Raw": "-spRaw2",
+    "3rd Spell Cost %": "-spPct3",
+    "3rd Spell Cost Raw": "-spRaw3",
+    "4th Spell Cost %": "-spPct4",
+    "4th Spell Cost Raw": "-spRaw4",
 
     "Rainbow Spell Damage": "rainbowRaw",
     "Sprint": "sprint",
@@ -168,6 +168,7 @@ function doItemSearch() {
         let filter_dat = translate_mappings[raw_dat];
         if (filter_dat !== undefined) {
             queries.push("s:"+filter_dat);
+            queries.push("f:"+filter_dat+"!=0");
             continue;
         }
         filter_dat = special_mappings[raw_dat];
