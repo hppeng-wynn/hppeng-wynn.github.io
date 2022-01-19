@@ -95,11 +95,11 @@ const special_mappings = {
     "Sum (Mana Sustain)": "s:mr+ms",
     "Sum (Life Sustain)": "s:hpr+ls",
     "Sum (Health + Health Bonus)": "s:hp+hpBonus",
-    "No Strength Req": "f:strReq==0",
-    "No Dexterity Req": "f:dexReq==0",
-    "No Intelligence Req": "f:intReq==0",
-    "No Agility Req": "f:agiReq==0",
-    "No Defense Req": "f:defReq==0",
+    "No Strength Req": "f:strReq=0",
+    "No Dexterity Req": "f:dexReq=0",
+    "No Intelligence Req": "f:intReq=0",
+    "No Agility Req": "f:agiReq=0",
+    "No Defense Req": "f:defReq=0",
 };
 
 let itemFilters = document.getElementById("filter-items");
