@@ -3,9 +3,9 @@ import numpy.linalg as la
 import matplotlib.pyplot as plt
 
 # Super slow attack speed. (Idealized to 1 hit/2s, 2/3 chance of proc
-mana_consumption = 3
-mana_steal = 5      # /3s
-mana_regen = 4      # /5s
+mana_consumption = 6
+mana_steal = 14     # /3s
+mana_regen = 6      # /5s
 #mana_steal = 5      # /3s
 #mana_regen = 5      # /5s
 natural_regen = 1
@@ -41,20 +41,25 @@ print("mana\tcumulative probability")
 for i in range(MAX_MANA):
     print(f"{i+1}\t{cumulative[i]}")
 
+mana_limit = 6+mana_consumption
+
 x_ticks = list(range(len(steady_state)))
 plt.figure()
 plt.scatter(x_ticks, steady_state, label="mana values")
 plt.xlim(0, 19)
 plt.ylim(0, 0.3)
-plt.axvline(x=6+mana_consumption)
+plt.axvline(x=mana_limit, color="red")
 plt.xlabel("Mana Value")
 plt.xticks(x_ticks)
 plt.ylabel("Probability at t=infty")
 plt.legend()
 ax2 = plt.gca().twinx()
-ax2.plot(x_ticks, cumulative, label="cumulative probability")
+ax2.plot(x_ticks, cumulative, label="cumulative probability", color="pink")
+
+plt.text(mana_limit - 0.2, cumulative[mana_limit] + 0.03, f"time with sprint loss: {cumulative[mana_limit]*100:.2f}%", horizontalalignment='right')
+plt.scatter((mana_limit,), (cumulative[mana_limit],), color="red")
 ax2.set_ylim(0, 1)
 ax2.set_ylabel("Cumulative probability at t=infty")
-plt.title(f"Build={mana_regen}mr,{mana_steal}ms,{mana_consumption}mana/sec")
+plt.title(f"Super Slow Speed: Build={mana_regen}mr,{mana_steal}ms,{mana_consumption}mana/sec")
 plt.legend()
 plt.show()

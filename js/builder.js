@@ -588,14 +588,14 @@ function updateStats() {
     let delta_total = 0;
     for (let i in skp_order) {
         let value = document.getElementById(skp_order[i] + "-skp").value;
-        if (value === ""){value = 0; setValue(skp_order[i] + "-skp", value)}
+        if (value === ""){value = "0"; setValue(skp_order[i] + "-skp", value)}
         let manual_assigned = 0;
         if (value.includes("+")) {
             let skp = value.split("+");
             for (const s of skp) {
                 manual_assigned += parseInt(s,10);
             }
-        }  else {
+        } else {
             manual_assigned = parseInt(value,10);
         }
         let delta = manual_assigned - skillpoints[i];
