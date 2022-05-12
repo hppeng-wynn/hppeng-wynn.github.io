@@ -321,6 +321,7 @@ function init_autocomplete() {
             selector: "#"+ eq +"-choice",
             wrapper: false,
             resultsList: {
+                maxResults: 1000,
                 tabSelect: true,
                 noResults: true,
                 class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
@@ -330,6 +331,7 @@ function init_autocomplete() {
                     list.style.top = position.bottom + window.scrollY +"px";
                     list.style.left = position.x+"px";
                     list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 2 +"px";
 
                     if (!data.results.length) {
                         message = document.createElement('li');

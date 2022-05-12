@@ -202,7 +202,7 @@ function redraw(data) {
     dps_getter_func = tmp;
     prepowder = tmp2;
     let _bbox = bbox();
-    let x = d3.scaleLinear([70, 105], [margin.left, bbox().width - margin.right]);
+    let x = d3.scaleLinear([70, 110], [margin.left, bbox().width - margin.right]);
     let y = d3.scaleLinear([0, max_dps_base * 1.1], [bbox().height - margin.bottom, margin.top]);
 
     let type_mod = weapon_type_mods.get(current_type);
