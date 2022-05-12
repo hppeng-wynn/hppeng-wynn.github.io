@@ -245,16 +245,25 @@ function displaysq2ExpandedItem(item, parent_id){
                     let row = document.createElement("div");
 
                     let p_elem = document.createElement("div");
-                    let plusminus = document.createElement("div");
                     row.classList.add("row", "no-collapse");
-                    p_elem.classList.add("col", "text-center");
+                    p_elem.classList.add("col", "text-center", "item-title");
                     p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "none");
                     p_elem.style.textGrow = 1;
+                    
+                    row.appendChild(p_elem);
+
+                    /* 
+                    FUNCTIONALITY FOR THIS FEATURE HAS SINCE BEEN REMOVED (WITH SQ2).
+                    IF WE WANT TO USE IT IN THE FUTURE, I'VE LEFT THE CODE TO ADD IT IN HERE
+                    */
+
                     //allow the plus minus element to toggle upon click: ➕➖
-                    plusminus.id = parent_div.id.split("-")[0] + "-pm";
-                    plusminus.classList.add("col", "plus_minus", "text_end");
-                    plusminus.style.flexGrow = 0;
-                    plusminus.textContent = "\u2795";
+                    // let plusminus = document.createElement("div");
+                    // plusminus.id = parent_div.id.split("-")[0] + "-pm";
+                    // plusminus.classList.add("col", "plus_minus", "text_end");
+                    // plusminus.style.flexGrow = 0;
+                    // plusminus.textContent = "\u2795";
+                    // row.appendChild(plusminus);
 
                     if (item.get("custom")) {
                         // p_elem.href = url_base.replace(/\w+.html/, "") + "customizer.html#" + item.get("hash");
@@ -270,8 +279,6 @@ function displaysq2ExpandedItem(item, parent_id){
                    
 
                     parent_div.appendChild(row);
-                    row.appendChild(p_elem);
-                    row.appendChild(plusminus);
 
                     let img = document.createElement("img");
                     if (item && item.has("type")) {

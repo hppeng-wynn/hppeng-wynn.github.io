@@ -1,6 +1,6 @@
 
 
-const translate_mappings = {
+const sq2_translate_mappings = {
     //"Name": "name",
     //"Display Name": "displayName",
     //"tier"Tier": ",
@@ -92,7 +92,7 @@ const translate_mappings = {
     "Gather Speed Bonus": "gSpd",
 };
 
-const special_mappings = {
+const sq2_special_mappings = {
     "Sum (skill points)": new SumQuery(["str", "dex", "int", "def", "agi"]),
     "Sum (Mana Sustain)": new SumQuery(["mr", "ms"]),
     "Sum (Life Sustain)": new SumQuery(["hpr", "ls"]),
@@ -104,15 +104,13 @@ const special_mappings = {
     "No Defense Req": new NegateQuery("defReq"),
 };
 
-let itemFilters = []
-for (let x in translate_mappings) {
-    itemFilters.push(x);
+let sq2ItemFilters = []
+for (let x in sq2_translate_mappings) {
+    sq2ItemFilters.push(x);
 }
-for (let x in special_mappings) {
-    itemFilters.push(x);
+for (let x in sq2_special_mappings) {
+    sq2ItemFilters.push(x);
 }
-
-let itemCategories = [ "armor", "accessory", "weapon" ];
 
 function applyQuery(items, query) {
     return items.filter(query.filter, query).sort(query.compare);
@@ -124,12 +122,16 @@ function displayItems(items_copy) {
         if (i > 200) {break;}
         let item = items_copy[i];
         let box = document.createElement("div");
-        box.classList.add("col-auto", "dark-7", "dark-shadow");
-        box.style.position = "absolute";
+        box.classList.add("col-lg-3", "col-sm-6", "p-2");
         box.id = "item"+i;
         box.addEventListener("dblclick", function() {set_item(item);});
+        
+        let bckgrdbox = document.createElement("div");
+        bckgrdbox.classList.add("dark-7", "rounded", "px-2", "col-auto");
+        box.appendChild(bckgrdbox);
+        bckgrdbox.id = "item"+i+"b";
         items_parent.appendChild(box);
-        displaysq2ExpandedItem(item, box.id);
+        displaysq2ExpandedItem(item, bckgrdbox.id);
     }
 }
 
@@ -158,7 +160,7 @@ function doItemSearch() {
         }
     }
 
-    let level_dat = document.getElementById("search-level-choice").value.split("-");
+    let level_dat = document.getElementById("level-choice").value ? document.getElementById("level-choice").value.split("-") : [1, 106];
     queries.push(new LevelRangeQuery(parseInt(level_dat[0]), parseInt(level_dat[1])));
     
     for (let i = 1; i <= 4; ++i) {
@@ -184,7 +186,7 @@ function doItemSearch() {
         items_copy = applyQuery(items_copy, query);
         console.log(items_copy.length);
     }
-    // document.getElementById("summary").textContent = items_copy.length + " results."
+    document.getElementById("summary").textContent = items_copy.length + " results:"
     displayItems(items_copy);
 }
 

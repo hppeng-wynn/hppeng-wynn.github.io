@@ -367,7 +367,7 @@ function init_autocomplete() {
         console.log('init dropdown for '+i+"-choice" )
         dropdowns.set(i+"-choice", new autoComplete({
             data: {
-                src: itemFilters,
+                src: sq2ItemFilters,
             },
             selector: "#"+i+"-choice",
             wrapper: false,

@@ -10,7 +10,6 @@
 /* builder containers */
 
 
-
 .e_slider, .t_slider, .w_slider, .f_slider, .a_slider {
     -webkit-appearance: none;
     background: #AAAAAA;
@@ -350,4 +349,10 @@ input.equipment-input {
 .box-title {
     text-align: center;
     font-size: 1.25rem;
+}
+
+.item-title {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 1rem;
 }
