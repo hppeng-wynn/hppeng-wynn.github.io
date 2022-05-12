@@ -54944,7 +54944,8 @@
       "wDamPct": 6,
       "type": "ring",
       "fixID": true,
-      "id": 2611
+      "id": 2611,
+      "set": "Wynnterfest 2016"
     },
     {
       "name": "North Pole",
@@ -55061,7 +55062,8 @@
       "eDamPct": 6,
       "type": "necklace",
       "fixID": true,
-      "id": 2615
+      "id": 2615,
+      "set": "Wynnterfest 2016"
     },
     {
       "name": "Saint's Leggings",
@@ -55095,7 +55097,8 @@
       "fDamPct": 6,
       "type": "bracelet",
       "fixID": true,
-      "id": 2616
+      "id": 2616,
+      "set": "Wynnterfest 2016"
     },
     {
       "name": "Saint's Shawl",
@@ -55190,7 +55193,8 @@
       "tDamPct": 6,
       "type": "ring",
       "fixID": true,
-      "id": 2621
+      "id": 2621,
+      "set": "Wynnterfest 2016"
     },
     {
       "name": "Sleigh Bell",

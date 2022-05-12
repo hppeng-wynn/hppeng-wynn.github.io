@@ -4,6 +4,4 @@ sets/
 
 .idea/
 *.iml
-node_modules/
-package.json
-package-lock.json
+.editor_log.txt
