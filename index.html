@@ -1,4 +1,10 @@
 <!DOCTYPE html>
 <html> 
-    <meta http-equiv="refresh" content="0; URL=./builder" />
+    <body>JS not enabled :(</body>
+    <script type="text/javascript">
+let getUrl = window.location;
+let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+let hash = window.location.hash;
+window.location.href = baseUrl + "builder/" + hash;
+    </script>
 </html>
