@@ -22,10 +22,10 @@ const ING_BUILD_VERSION = "7.0.1";
  */
 let player_craft;
 
-function setTitle() {
-    document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
-    document.getElementById("header").classList.add("funnynumber");
-}
+// function setTitle() {
+//     document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
+//     document.getElementById("header").classList.add("funnynumber");
+// }
 
 
 
@@ -51,7 +51,6 @@ function init_crafter() {
         
         populateFields();
         decodeCraft(ing_url_tag);
-        setTitle();
     } catch (error) {
         console.log("If you are seeing this while building, do not worry. Oherwise, panic! (jk contact ferricles)");
         console.log(error);
@@ -117,7 +116,8 @@ function calculateCraft() {
     }
     let ingreds = [];
     for (i = 1; i < 7; i++) {
-        console.log(getValue("ing-choice-"+i));
+        console.log("ing-choice-"+i);
+        // console.log(getValue("ing-choice-"+i));
         getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
     }
     let atkSpd = "NORMAL"; //default attack speed will be normal.
@@ -138,19 +138,21 @@ function calculateCraft() {
     console.log(levelrange)
     console.log(mat_tiers)
     console.log(ingreds)*/
+
     document.getElementById("mat-1").textContent = recipe.get("materials")[0].get("item").split(" ").slice(1).join(" ") + " Tier:";
     document.getElementById("mat-2").textContent = recipe.get("materials")[1].get("item").split(" ").slice(1).join(" ") + " Tier:"; 
     
     //Display Recipe Stats
-    displayRecipeStats(player_craft, "recipe-stats");
-    for(let i = 0; i < 6; i++) {
-        displayExpandedIngredient(player_craft["ingreds"][i],"tooltip-" + i);
-    }
+    displaysq2RecipeStats(player_craft, "recipe-stats");
+
     //Display Craft Stats
-    displayCraftStats(player_craft, "craft-stats");
+    // displayCraftStats(player_craft, "craft-stats");
+    let mock_item = player_craft.statMap;
+    displaysq2ExpandedItem(mock_item, "craft-stats");
+
     //Display Ingredients' Stats
     for (let i = 1; i < 7; i++) {
-        displayExpandedIngredient(player_craft.ingreds[i-1] , "ing-"+i+"-stats");
+        displaysq2ExpandedIngredient(player_craft.ingreds[i-1] , "ing-"+i+"-stats");
     }
     //Display Warnings - only ingred type warnings for now
     let warning_elem = document.getElementById("craft-warnings");

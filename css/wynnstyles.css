@@ -1,0 +1,175 @@
+/* 
+Wynn-Related CSS 
+*/
+
+
+
+/* Misc/Util Colors */
+.positive {
+    color: #5f5;
+}
+
+.negative {
+    color: #f55;
+}
+
+.Health {
+    color: #AA0000
+}
+
+.Health:before {
+    content: "\2764" ' ';
+}
+
+.Mana { 
+    color: #5ff;
+}
+
+.Mana:after { 
+    content: "\273A"
+}
+
+.lvl:before {
+    content: 'Lv. '
+}
+
+
+/* Tier Colors */
+
+.Normal {
+    color: #FFFFFF !important;
+}
+
+.Unique {
+    color: #FFFF55 !important;
+}
+
+.Rare {
+    color: #FF55FF !important;
+}
+
+.Legendary {
+    color: #55FFFF !important;
+}
+
+.Fabled {
+    color: #FF5555 !important;
+}
+
+.Mythic {
+    color: #AA00AA !important;
+}
+
+.Set {
+    color: #5f5 !important;
+}
+.Crafted, .Custom {
+    color: #0aa !important;
+}
+
+/* Tier Shadows */
+.Normal-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #fff;
+}
+
+.Unique-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #ff5;
+}
+.Rare-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #f5f;
+}
+.Legendary-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #5ff;
+}
+.Fabled-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #f55;
+}
+.Mythic-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #a0a;
+}
+.Crafted-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #0aa;
+}
+.Custom-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #0aa;
+}
+.Set-shadow {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem #5f5;
+}
+
+/* CR Styles */
+
+.Star {
+    color:rgb(255, 198, 85);
+}
+.Star:after {
+    content: "\272B";
+}
+.T0 {
+    color: #555;
+}
+.T1 {
+    color: #ff5;
+}
+.T2 {
+    color: #f5f;
+}
+.T3 {
+    color: #5ff;
+}
+.T0-bracket {
+    color: #555;
+}
+.T1-bracket {
+    color: #fa0;
+}
+.T2-bracket {
+    color: #a0a;
+}
+.T3-bracket {
+    color: #0aa;
+}
+
+/* Damages */
+
+.Damage { 
+    color: rgb(255, 198, 85)
+}
+
+.nDam, .Neutral {
+    color: #FFAA00;
+}
+
+.nDam:before, .Neutral:before { 
+    content: "\2724" ' '; 
+}
+
+.eDam, .Earth, .Earth_powder {
+    color: #00AA00;
+}
+
+.eDam:before, .Earth:before, .Earth_powder:before { content: "\2724" ' '; }
+
+.tDam, .Thunder, .Thunder_powder {
+    color: #FFFF55;
+}
+
+.tDam:before, .Thunder:before, .Thunder_powder:before { content: "\2726" ' '; }
+
+.wDam, .Water, .Water_powder {
+    color: #55FFFF
+}
+
+.wDam:before, .Water:before, .Water_powder:before { content: "\2749" ' '; }
+
+.fDam, .Fire, .Fire_powder {
+    color: #FF5555;
+}
+
+.fDam:before, .Fire:before, .Fire_powder:before { content: "\2739" ' '; }
+
+.aDam, .Air, .Air_powder {
+    color: #FFFFFF
+}
+
+.aDam:before, .Air:before, .Air_powder:before { content: "\274b" ' '; }

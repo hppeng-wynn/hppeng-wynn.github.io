@@ -381,6 +381,6 @@ async function hardReload() {
     const dbs = await window.indexedDB.databases();
     await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
 
-    location.reload();
+    location.reload(true);
 }
 

@@ -107,7 +107,8 @@ function doSearchSchedule(){
 function update_field(field) {
     // built on the assumption of no one will type in CI/CR letter by letter
     // resets 
-    document.querySelector("#"+field+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set');
+    document.querySelector("#"+field+"-choice").classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set', 'Crafted', 'Custom');
+    document.querySelector("#" + field + "-img").classList.remove('Normal-shadow', 'Unique-shadow', 'Rare-shadow', 'Legendary-shadow', 'Fabled-shadow', 'Mythic-shadow', 'Set-shadow', 'Crafted-shadow', 'Custom-shadow');
 
     item = document.querySelector("#"+field+"-choice").value
     let powder_slots;
@@ -160,6 +161,8 @@ function update_field(field) {
 
     // set item color
     document.querySelector("#"+field+"-choice").classList.add(tier);
+    document.querySelector("#"+field+"-img").classList.add(tier + "-shadow");
+
 
 
     if (powderable_keys.includes(field)) {
@@ -175,8 +178,10 @@ function update_field(field) {
 
     // set weapon img
     if (category == 'weapon') {
-        document.querySelector("#weapon-img").setAttribute('src', 'media/items/new/generic-'+type+'.png');
+        document.querySelector("#weapon-img").setAttribute('src', '../media/items/new/generic-'+type+'.png');
     }
+
+
 
     // call calc build
 }
@@ -403,3 +408,4 @@ function init_autocomplete() {
         }));
     }
 }
+

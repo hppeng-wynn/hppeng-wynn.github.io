@@ -145,4 +145,15 @@ let sq2_item_display_commands = [
     "restrict"
 ];
 
-
+let sq2_ing_display_order = [
+    "displayName", //tier will be displayed w/ name
+    "!spacer",
+    "ids",
+    "!spacer",
+    "posMods",
+    "itemIDs",
+    "consumableIDs",
+    "!spacer",
+    "lvl",
+    "skills",
+]

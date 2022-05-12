@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+<head>
+    <title>ATLAS???</title>
+
+    <link rel="icon" href="favicon.png">    
+    <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
+
+    <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
+
+    <link rel="stylesheet" href="../css/sq2bs.css">
+    <meta property="og:title" content="WynnBuilder" />
+    <meta property="og:type" content="video.movie" />
+    <meta property="og:url" content="https://hppeng-wynn.github.io/sq2bs.html" />
+    <meta property="og:image" content="https://i.kym-cdn.com/entries/icons/original/000/037/349/Screenshot_14.jpg" />
+</head>
+<body class="text-light d-flex justify-content-center" id = "body">
+    <div id="main-sidebar" class="sidebar dark-7 dark-shadow col">
+        <a href=""><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
+        <a href = "/crafter.html"><img src = "../media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
+        <a href = "/items.html"><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+        <a href = "/customizer.html"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
+        <a href = "/map.html"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
+        <a href = "/wynnfo/index.html"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "WynnCrafter"><b>WynnCrafter</b></a>
+        <a onclick = "document.querySelector('#search-container').style.display = '';"><img src="../media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
+        <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
+        <hr/>
+    </div>
+    <div class="container-fluid py-1 vh-100">
+        <div class = "row">
+            <div class = "col-4" id = "headerleft">  
+            </div>
+            <div class = "col-4 d-flex justify-content-center" id = "headercenter" style = "color:#fbcd49; font-size: 200%;">
+                <div>
+                    <p class = "itemp" id = "header">Atlas???</p>
+                </div>
+            </div>    
+            <div class = "col-4 d-flex justify-content-end" id = "headerright">
+                <div>
+                    <button class = "rounded atlas" onclick = "atlasClick()" style = "padding:0; text-align: right">
+                        <img src = "favicon.png" class = "rounded" style = "left:0;top:0;width:48px;height:48px"/>
+                    </button>
+                </div>  
+            </div>
+        </div>
+        <div class = "row d-flex text-center justify-content-center" id = "flavortext">
+            ...
+        </div>
+        <div class = "col navbar navbar-fixed-bottom vh-75 min-vh-50 text-break ml-5" id = "bodydiv" style = "min-height: 75vh; display: flex; flex-direction: column;" >
+        </div>
+        
+    </div>
+    <!-- sidebar -->
+    
+    <!-- main body -->
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+
+    
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/icons.js"></script>        
+    <script type="text/javascript" src="../js/atlas.js"></script>
+</body>
+</html>

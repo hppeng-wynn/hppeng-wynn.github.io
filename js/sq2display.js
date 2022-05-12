@@ -238,7 +238,7 @@ function displaysq2ExpandedItem(item, parent_id){
                     }
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
                     let p_elem = document.createElement("div");
-                    p_elems.classList.add("col");
+                    p_elem.classList.add("col");
                     p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
                     parent_div.appendChild(p_elem);
                 } else if (id === "displayName") {
@@ -275,7 +275,7 @@ function displaysq2ExpandedItem(item, parent_id){
 
                     let img = document.createElement("img");
                     if (item && item.has("type")) {
-                        img.src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
+                        img.src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
                         img.alt = item.get("type");
                         img.style = " z=index: 1; position: relative;";
                         let container = document.createElement("div");
@@ -561,7 +561,7 @@ function displaysq2WeaponStats(build) {
     document.getElementById("weapon-lv").textContent = item.get("lvl"); 
 
     if (item.get("type")) {
-        document.getElementById("weapon-img").src = "./media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
+        document.getElementById("weapon-img").src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
     }
 }
 
@@ -1531,5 +1531,353 @@ function updatePowders(elem_id) {
     //         elem.value = elem.value.substring(0, i) + powder_chars['etwfa'.indexOf(elem.value.charAt(i))] + elem.value.substring(i + 2);
     //     }
     // }
+}
+
+/*
+*  Displays stats about a recipe that are NOT displayed in the craft stats. 
+*  Includes: mat name and amounts, ingred names in an "array" with ingred effectiveness
+*/
+function displaysq2RecipeStats(craft, parent_id) {
+    let elem = document.getElementById(parent_id);
+    if (!elem.classList.contains("col")) {
+        elem.classList.add("col");
+    }
+
+    //local vars 
+    elem.textContent = "";
+    recipe = craft["recipe"];
+    mat_tiers = craft["mat_tiers"];
+    ingreds = [];
+    for (const n of craft["ingreds"]) {
+        ingreds.push(n.get("name"));
+    }
+    let effectiveness = craft["statMap"].get("ingredEffectiveness");
+
+    let title = document.createElement("div");
+    title.classList.add("row", "box-title", "fw-bold", "justify-content-center");
+    title.textContent = "Recipe Stats";
+    elem.appendChild(title);
+
+    let mats = document.createElement("div");
+    mats.classList.add("row");
+    mats.textContent = "Crafting Materials: ";
+    elem.appendChild(mats);
+
+    for (let i = 0; i < 2; i++) {
+        let tier = mat_tiers[i];
+        let row = document.createElement("div");
+        row.classList.add("row", "px-0", "mx-0");
+        let b = document.createElement("div");
+        let mat = recipe.get("materials")[i];
+        b.textContent = "- " + mat.get("amount") + "x " + mat.get("item").split(" ").slice(1).join(" ");
+        b.classList.add("col");
+        row.appendChild(b);
+
+        let starsB = document.createElement("div");
+        starsB.classList.add("T1-bracket", "col-auto", "px-0");
+        starsB.textContent = "[";
+        row.appendChild(starsB);
+        for(let j = 0; j < 3; j ++) {
+            let star = document.createElement("div");
+            star.classList.add("col-auto", "px-0");
+            star.textContent = "\u272B";
+            if(j < tier) {
+                star.classList.add("T1");
+            } else {
+                star.classList.add("T0");
+            }
+            row.append(star);
+        }
+        let starsE = document.createElement("div");
+        starsE.classList.add("T1-bracket", "col-auto", "px-0");
+        starsE.textContent = "]";
+        row.appendChild(starsE);
+
+        elem.appendChild(row);
+    }
+
+    let ingredTable = document.createElement("div");
+    ingredTable.classList.add("row");
+
+    for (let i = 0; i < 3; i++) {
+        let row = document.createElement("div");
+        row.classList.add("row", "g-1", "justify-content-center");
+
+        
+        for (let j = 0; j < 2; j++) {
+            if (j == 1) {
+                let spacer = document.createElement("div");
+                spacer.classList.add("col-1");
+                row.appendChild(spacer);
+            } 
+            let ingredName = ingreds[2 * i + j];
+            let col = document.createElement("div");
+            col.classList.add("col-5", "rounded", "dark-6", "border", "border-3", "dark-shadow");
+
+            let temp_row = document.createElement("div");
+            temp_row.classList.add("row");
+            col.appendChild(temp_row);
+
+            let ingred_div = document.createElement("div");
+            ingred_div.classList.add("col");
+            ingred_div.textContent = ingredName;
+            temp_row.appendChild(ingred_div);
+
+            let eff_div = document.createElement("div");
+            eff_div.classList.add("col-auto");
+            let e = effectiveness[2 * i + j];
+            if (e > 0) {
+                eff_div.classList.add("positive");
+            } else if (e < 0) {
+                eff_div.classList.add("negative");
+            }
+            eff_div.textContent = "[" + e + "%]";
+
+            temp_row.appendChild(eff_div);
+
+            row.appendChild(col);
+        }
+        ingredTable.appendChild(row);
+    }
+    elem.appendChild(ingredTable);
+}
+
+/*
+* Displays an ingredient in item format. 
+* However, an ingredient is too far from a normal item to display as one.
+*/
+function displaysq2ExpandedIngredient(ingred, parent_id) {
+    let parent_elem = document.getElementById(parent_id);
+    parent_elem.textContent = "";
     
+    let item_order = [
+        "dura",
+        "strReq",
+        "dexReq",
+        "intReq",
+        "defReq",
+        "agiReq"
+    ]
+    let consumable_order = [
+        "dura",
+        "charges"
+    ]
+    let posMods_order = [
+        "above",
+        "under",
+        "left",
+        "right",
+        "touching",
+        "notTouching"
+    ];
+    let id_display_order = [ 
+        "eDefPct", 
+        "tDefPct", 
+        "wDefPct", 
+        "fDefPct", 
+        "aDefPct", 
+        "eDamPct", 
+        "tDamPct", 
+        "wDamPct", 
+        "fDamPct", 
+        "aDamPct", 
+        "str", 
+        "dex", 
+        "int", 
+        "agi", 
+        "def",
+        "hpBonus",
+        "mr", 
+        "ms", 
+        "ls",
+        "hprRaw", 
+        "hprPct", 
+        "sdRaw", 
+        "sdPct", 
+        "mdRaw", 
+        "mdPct",  
+        "xpb",
+        "lb", 
+        "lq", 
+        "ref",  
+        "thorns", 
+        "expd", 
+        "spd", 
+        "atkTier", 
+        "poison",  
+        "spRegen", 
+        "eSteal", 
+        "spRaw1",
+        "spRaw2", 
+        "spRaw3", 
+        "spRaw4", 
+        "spPct1", 
+        "spPct2", 
+        "spPct3", 
+        "spPct4",
+        "jh", 
+        "sprint", 
+        "sprintReg", 
+        "gXp", 
+        "gSpd",
+    ];
+    let active_elem;
+    let elemental_format = false;
+    let style;
+    for (const command of sq2_ing_display_order) {
+        if (command.charAt(0) === "!") {
+            // TODO: This is sooo incredibly janky.....
+            if (command === "!elemental") {
+                elemental_format = !elemental_format;
+            }
+            else if (command === "!spacer") {
+                let spacer = document.createElement('div');
+                spacer.classList.add("row", "my-2");
+                parent_elem.appendChild(spacer);
+                continue;
+            }
+        } else {
+            let div = document.createElement("div");
+            div.classList.add("row");
+            if (command === "displayName") {
+                div.classList.add("box-title");
+                let title_elem = document.createElement("div");
+                title_elem.classList.add("col-auto", "justify-content-center", "pr-1");
+                title_elem.textContent = ingred.get("displayName");
+                div.appendChild(title_elem);
+
+                let tier = ingred.get("tier"); //tier in [0,3]
+                let begin = document.createElement("b");
+                begin.classList.add("T"+tier+"-bracket", "col-auto", "px-0");
+                begin.textContent = "[";
+                div.appendChild(begin);
+
+                for (let i = 0; i < 3; i++) {
+                    let tier_elem = document.createElement("b");
+                    if (i < tier) {
+                        tier_elem.classList.add("T"+tier);
+                    } else {
+                        tier_elem.classList.add("T0");
+                    }
+                    tier_elem.classList.add("px-0", "col-auto");
+                    tier_elem.textContent = "\u272B";
+                    div.appendChild(tier_elem);
+                }
+                let end = document.createElement("b");
+                end.classList.add("T"+tier+"-bracket", "px-0", "col-auto");
+                end.textContent = "]";
+                div.appendChild(end);   
+            }else if (command === "lvl") {
+                div.textContent = "Crafting Lvl Min: " + ingred.get("lvl");
+            }else if (command === "posMods") {
+                for (const [key,value] of ingred.get("posMods")) {
+                    let posModRow = document.createElement("div");
+                    posModRow.classList.add("row");
+                    if (value != 0) {
+                        let posMod = document.createElement("div");
+                        posMod.classList.add("col-auto");
+                        posMod.textContent = posModPrefixes[key];
+                        posModRow.appendChild(posMod);
+
+                        let val = document.createElement("div");
+                        val.classList.add("col-auto", "px-0");
+                        val.textContent = value + posModSuffixes[key];
+                        if(value > 0) {
+                            val.classList.add("positive");
+                        } else {
+                            val.classList.add("negative");
+                        }
+                        posModRow.appendChild(val);
+                        div.appendChild(posModRow);
+                    }
+                }
+            } else if (command === "itemIDs") { //dura, reqs
+                for (const [key,value] of ingred.get("itemIDs")) {
+                    let idRow = document.createElement("div");
+                    idRow.classList.add("row");                        
+                    if (value != 0) {
+                        let title = document.createElement("div");
+                        title.classList.add("col-auto");
+                        title.textContent = itemIDPrefixes[key];
+                        idRow.appendChild(title);
+                    }
+                    let desc = document.createElement("div");
+                    desc.classList.add("col-auto");
+                    if(value > 0) {
+                        if(key !== "dura") {
+                            desc.classList.add("negative");
+                        } else{
+                            desc.classList.add("positive");
+                        }
+                        desc.textContent = "+"+value;
+                    } else if (value < 0){
+                        if(key !== "dura") {
+                            desc.classList.add("positive");
+                        } else{
+                            desc.classList.add("negative");
+                        }
+                        desc.textContent = value; 
+                    }
+                    if(value != 0){
+                        idRow.appendChild(desc);
+                    }
+                    div.appendChild(idRow);
+                }
+            } else if (command === "consumableIDs") { //dura, charges
+                for (const [key,value] of ingred.get("consumableIDs")) {
+                    let idRow = document.createElement("div");
+                    idRow.classList.add("row");                        
+                    if (value != 0) {
+                        let title = document.createElement("div");
+                        title.classList.add("col-auto");
+                        title.textContent = consumableIDPrefixes[key];
+                        idRow.appendChild(title);
+                    }
+                    let desc = document.createElement("div");
+                    desc.classList.add("col-auto");
+                    if(value > 0) {
+                        desc.classList.add("positive");
+                        desc.textContent = "+"+value;
+                    } else if (value < 0){
+                        desc.classList.add("negative");
+                        desc.textContent = value; 
+                    }
+                    if(value != 0){
+                        idRow.appendChild(desc);
+                        let suffix = document.createElement("div");
+                        suffix.classList.add("col-auto");
+                        suffix.textContent = consumableIDSuffixes[key];
+                        idRow.appendChild(suffix);
+                    }
+                    div.appendChild(idRow);
+                }
+            }else if (command === "skills") {
+                let row = document.createElement("div");
+                row.classList.add("row");
+                let title = document.createElement("div");
+                title.classList.add("row");
+                title.textContent = "Used in:";
+                row.appendChild(title);
+                for(const skill of ingred.get("skills")) {
+                    let skill_div = document.createElement("div");
+                    skill_div.classList.add("row");
+                    skill_div.textContent = skill.charAt(0) + skill.substring(1).toLowerCase();
+                    row.appendChild(skill_div);
+                }
+                div.appendChild(row);
+            } else if (command === "ids") { //warp
+                for (let [key,value] of ingred.get("ids").get("maxRolls")) {
+                    if (value !== undefined && value != 0) {
+                        let row = displaysq2RolledID(ingred.get("ids"), key, elemental_format);
+                        row.classList.remove("col");
+                        row.classList.remove("col-12");
+                        div.appendChild(row);
+                    }
+                }
+            } else {//this shouldn't be happening        
+            }
+
+            parent_elem.appendChild(div);
+        }
+    }    
 }
