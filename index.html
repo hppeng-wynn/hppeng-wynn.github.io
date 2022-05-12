@@ -3,7 +3,7 @@
     <body>JS not enabled :(</body>
     <script type="text/javascript">
 let getUrl = window.location;
-let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+let baseUrl = getUrl .protocol + "//" + getUrl.host + "/";
 let hash = window.location.hash;
 window.location.href = baseUrl + "builder/" + hash;
     </script>
