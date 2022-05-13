@@ -76,10 +76,10 @@ armor_powder_boosts = [0, 0, 0, 0, 0];
 function init() {
     console.log("builder.js init");
     init_autocomplete();
+    decodeBuild(url_tag);
     for (const i of equipment_keys) {
         update_field(i);
     }
-    decodeBuild(url_tag);
 }
 
 function getItemNameFromID(id) {
