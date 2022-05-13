@@ -4,9 +4,7 @@
 
 #body {
     background-color: #121212;
-    cursor: pointer;
 }
-
 /* builder containers */
 
 
@@ -141,6 +139,12 @@ input.equipment-input {
     font-size: 3.5rem;
 }
 
+.big-title {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 4.5rem;
+}
+
 .skp-tooltip {
     font-size: 2.1875rem;
     font-weight: bold;
@@ -185,9 +189,13 @@ input.equipment-input {
     }
     
     .item-title {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
+    .big-title {
+        font-size: 1.5rem;
+    }
+
     .skp-tooltip {
         font-size: .625rem;
     }
@@ -233,6 +241,10 @@ input.equipment-input {
     
     .item-title {
         font-size: 1.5rem;
+    }
+
+    .big-title {
+        font-size: 1.8rem;
     }
 
     .skp-tooltip {
@@ -373,19 +385,18 @@ input.equipment-input {
     box-shadow: 0rem 0rem 0.25rem 0.05rem black;
 }
 
-.box-title {
-    text-align: center;
-}
-
-.item-title {
-    text-align: center;
-    overflow-wrap: break-word;
-}
-
 .atlas {
     color: #fbcd49;
 }
 
 a {
     color: #88FFFF;
+}
+
+a:hover {
+    color: #ff88ff;
+}
+
+.border-semi-light {
+    border-color: #aaa;
 }

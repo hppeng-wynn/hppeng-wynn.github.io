@@ -52,7 +52,6 @@ function init_crafter() {
         populateFields();
         decodeCraft(ing_url_tag);
     } catch (error) {
-        console.log("If you are seeing this while building, do not worry. Oherwise, panic! (jk contact ferricles)");
         console.log(error);
     }
     

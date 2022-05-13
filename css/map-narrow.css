@@ -6,12 +6,6 @@
 .overall-container{ 
     margin-bottom: 10px;
 }
-.container{
-    width: 95%;
-    border: 3px solid #BCBCBC;
-    border-radius: 3px;
-    padding: 2% 4% 4%;
-}
 .coord-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

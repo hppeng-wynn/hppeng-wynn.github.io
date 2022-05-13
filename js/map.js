@@ -9,16 +9,6 @@ const map_url_tag = location.hash.slice(1);
 // console.log(map_url_base);
 // console.log(map_url_tag);
 
-const MAP_BUILD_VERSION = "7";
-
-function setTitle() {
-    let text = "WynnGPS version "+MAP_BUILD_VERSION;
-    document.getElementById("header").classList.add("funnynumber");
-    document.getElementById("header").textContent = text;
-}
-
-setTitle();
-
 
 
 
@@ -73,7 +63,7 @@ function init_map(){ //async just in case we need async stuff
         zoomControl: false,
         zoom: 1
     }).setView([0,0], 1);
-    L.imageOverlay("/media/maps/world-map.png", bounds).addTo(map);
+    L.imageOverlay("../media/maps/world-map.png", bounds).addTo(map);
 
     map.fitBounds(bounds);
 
@@ -144,10 +134,10 @@ function placeMarker(lat, lng) {
     }
 
     marker = L.marker([lat, lng], {icon: L.icon({
-        iconUrl: '/media/icons/' + (newIcons ? "new/" : "old/" ) + 'marker.png',
+        iconUrl: '../media/icons/' + (newIcons ? "new/" : "old/" ) + 'marker.png',
         iconSize: [32, 32], 
         iconAnchor: [16, 32], 
-        shadowUrl: '/media/icons/' + (newIcons ? "new/" : "old/" ) + 'shadow.png',
+        shadowUrl: '../media/icons/' + (newIcons ? "new/" : "old/" ) + 'shadow.png',
         shadowSize: [1,1],
         shadowAnchor: [16, 32],
         className: "marker"
@@ -286,7 +276,7 @@ function pullguilds() {
             let li = document.createElement("li");
 
             let i = document.createElement("img");
-            i.src = "./media/icons/locations/"  + img;
+            i.src = "../media/icons/locations/"  + img;
             i.style.maxWidth = "32px";
             i.style.maxHeight = "32px";
             li.appendChild(i);
@@ -467,10 +457,10 @@ function toggleResources() {
                 let imgBounds = [ [ TRcorner[0]-(16*n)-20-gap*n,TRcorner[1]+4], [ TRcorner[0]-(16*n)-4-gap*n,TRcorner[1]+20] ];
                 imgBounds = [xytolatlng(imgBounds[0][0],imgBounds[0][1]), xytolatlng(imgBounds[1][0],imgBounds[1][1])];
 
-                let resourceObj = L.imageOverlay("/media/icons/" + (newIcons ? "new/" : "old/" ) +resource+".png", imgBounds, {className: `${resource} resourceimg`}).addTo(map);
+                let resourceObj = L.imageOverlay("../media/icons/" + (newIcons ? "new/" : "old/" ) +resource+".png", imgBounds, {className: `${resource} resourceimg`}).addTo(map);
                 resourceObjs.push(resourceObj);
             }
-            let gearObj = L.imageOverlay("/media/icons/" + (newIcons ? "new/" : "old/" ) + "Gears.png", [xytolatlng(TRcorner[0]-(16*terr_resources.length)-20-gap*terr_resources.length,TRcorner[1]+4), xytolatlng(TRcorner[0]-(16*terr_resources.length)-4-gap*terr_resources.length,TRcorner[1]+20)], {className: `Ore resourceimg`}).addTo(map);
+            let gearObj = L.imageOverlay("../media/icons/" + (newIcons ? "new/" : "old/" ) + "Gears.png", [xytolatlng(TRcorner[0]-(16*terr_resources.length)-20-gap*terr_resources.length,TRcorner[1]+4), xytolatlng(TRcorner[0]-(16*terr_resources.length)-4-gap*terr_resources.length,TRcorner[1]+20)], {className: `Ore resourceimg`}).addTo(map);
             resourceObjs.push(gearObj);
             //draw resource storage
             for (const n in terr_storage) {
@@ -479,10 +469,10 @@ function toggleResources() {
                 let imgBounds = [ [ DRcorner[0]-(16*n)-20-gap*n,DRcorner[1]-20], [ DRcorner[0]-(16*n)-4-gap*n,DRcorner[1]-4] ];
                 imgBounds = [xytolatlng(imgBounds[0][0],imgBounds[0][1]), xytolatlng(imgBounds[1][0],imgBounds[1][1])];
                 
-                let resourceObj = L.imageOverlay("/media/icons/" + (newIcons ? "new/" : "old/" ) +storage+".png", imgBounds, {alt: `${storage}`, className: `${storage} resourceimg`}).addTo(map);
+                let resourceObj = L.imageOverlay("../media/icons/" + (newIcons ? "new/" : "old/" ) +storage+".png", imgBounds, {alt: `${storage}`, className: `${storage} resourceimg`}).addTo(map);
                 resourceObjs.push(resourceObj);
             }
-            let chestObj = L.imageOverlay("/media/icons/" + (newIcons ? "new/" : "old/" ) + "Chest.png", [xytolatlng(DRcorner[0]-(16*terr_storage.length)-20-gap*terr_storage.length,DRcorner[1]-20), xytolatlng(DRcorner[0]-(16*terr_storage.length)-4-gap*terr_storage.length,DRcorner[1]-4)], {className: `Wood resourceimg`}).addTo(map);
+            let chestObj = L.imageOverlay("../media/icons/" + (newIcons ? "new/" : "old/" ) + "Chest.png", [xytolatlng(DRcorner[0]-(16*terr_storage.length)-20-gap*terr_storage.length,DRcorner[1]-20), xytolatlng(DRcorner[0]-(16*terr_storage.length)-4-gap*terr_storage.length,DRcorner[1]-4)], {className: `Wood resourceimg`}).addTo(map);
             resourceObjs.push(chestObj);
         }
 

@@ -14,11 +14,12 @@ const pdfs = new Map([
 
 
 const changelog = new Map([
-    ["7.0.8",
-        [" + Created Changelog section in Wynnfo",
-        " + Added an empty cache + reload button to the right header",
-        " - Deleted lack of on-page documentation",
-    ]],
+    ["WynnBuilder^2 (12 May 2022)",
+        [
+            " + Switched most of Wynnbuilder over to Bootstrap",
+            " - Old UI",
+        ]
+    ],
     //[title ,[genre, filename, author(s), abstract/desc]]
 ]);
 
@@ -116,25 +117,25 @@ function initSections() {
     let main = document.getElementById("main");
     for (const sec of sections) {
         let div = document.createElement("div");
-        div.classList.add(["section"]);
+        div.classList.add("row", "my-2");
         div.id = sec;
 
         let secspan = document.createElement("span");
-        secspan.classList.add("span-flex", "up");
+        secspan.classList.add("row", "up");
         div.appendChild(secspan);
-        let title = document.createElement("h2");
-        title.classList.add("indicator-title")
+        let title = document.createElement("div");
+        title.classList.add("col-10", "item-title", "text-start")
         title.style.margin = "0 0 0";
         title.textContent = "Section: " + sec;
-        let indicator = document.createElement("img");
-        indicator.classList.add("indicator-img");
-        indicator.src = "./media/indicator-down.png";
+        let indicator = document.createElement("div");
+        indicator.classList.add("col-auto", "fw-bold", "box-title");
+        indicator.textContent = "V";
         secspan.appendChild(title);
         secspan.appendChild(indicator);
 
 
         let section = document.createElement("section");
-        section.classList.add(["toggle-section"]);
+        section.classList.add("toggle-section");
         section.id = sec + "-section";
         section.style.display = "none";
         div.appendChild(section);
@@ -144,12 +145,13 @@ function initSections() {
             if (secspan.classList.contains("up")) {
                 secspan.classList.remove("up");
                 secspan.classList.add("down");
-                indicator.src = "./media/indicator-up.png";
+                indicator.style.transform = 'rotate(180deg)';
+
                 section.style.display = "";
             } else {
                 secspan.classList.remove("down");
                 secspan.classList.add("up");
-                indicator.src = "./media/indicator-down.png";
+                indicator.style.transform = 'rotate(0deg)';
                 section.style.display = "none";
             }
         });

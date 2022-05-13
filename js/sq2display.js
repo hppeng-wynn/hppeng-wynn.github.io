@@ -153,6 +153,7 @@ function displaysq2ExpandedItem(item, parent_id){
     // Clear the parent div.
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
+    parent_div.classList.add("border", "border-2", "border-dark");
     
     let fix_id = item.has("fixID") && item.get("fixID");
     let elemental_format = false;
