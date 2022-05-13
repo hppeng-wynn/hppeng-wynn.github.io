@@ -103,15 +103,17 @@ const special_mappings = {
 };
 
 let itemFilters = document.getElementById("filter-items");
-for (let x in translate_mappings) {
-    let el = document.createElement("option");
-    el.value = x;
-    itemFilters.appendChild(el);
-}
-for (let x in special_mappings) {
-    let el = document.createElement("option");
-    el.value = x;
-    itemFilters.appendChild(el);
+if (itemFilters) {
+    for (let x in translate_mappings) {
+        let el = document.createElement("option");
+        el.value = x;
+        itemFilters.appendChild(el);
+    }
+    for (let x in special_mappings) {
+        let el = document.createElement("option");
+        el.value = x;
+        itemFilters.appendChild(el);
+    }
 }
 
 let itemCategories = [ "armor", "accessory", "weapon" ];

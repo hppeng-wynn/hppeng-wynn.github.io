@@ -130,6 +130,17 @@ input.equipment-input {
     font-size: 2.5rem;
 }
 
+.box-title {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.item-title {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 3.5rem;
+}
+
 .skp-tooltip {
     font-size: 2.1875rem;
     font-weight: bold;
@@ -167,6 +178,14 @@ input.equipment-input {
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
     .scaled-font {
         font-size: .8rem;
+    }
+
+    .box-title {
+        font-size: 1rem;
+    }
+    
+    .item-title {
+        font-size: 1rem;
     }
     
     .skp-tooltip {
@@ -206,6 +225,14 @@ input.equipment-input {
 @media screen and (min-width: 1400px) {
     .scaled-font { 
         font-size: 1rem;
+    }
+
+    .box-title {
+        font-size: 1.25rem;
+    }
+    
+    .item-title {
+        font-size: 1.5rem;
     }
 
     .skp-tooltip {
@@ -353,4 +380,8 @@ input.equipment-input {
 .item-title {
     text-align: center;
     overflow-wrap: break-word;
+}
+
+.atlas {
+    color: #fbcd49;
 }
