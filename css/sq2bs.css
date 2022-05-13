@@ -372,3 +372,12 @@ input.equipment-input {
 .dark-shadow-sm {
     box-shadow: 0rem 0rem 0.25rem 0.05rem black;
 }
+
+.box-title {
+    text-align: center;
+}
+
+.item-title {
+    text-align: center;
+    overflow-wrap: break-word;
+}
