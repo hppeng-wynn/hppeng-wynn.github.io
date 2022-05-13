@@ -190,6 +190,13 @@ function doItemSearch() {
     displayItems(items_copy);
 }
 
+function resetItemSearch() {
+    resetFields = ["name-choice", "category-choice", "rarity-choice", "level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
+    for (const field of resetFields) {
+        document.getElementById(field).value = "";
+    }
+}
+
 function init_items() {
     items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i, []) );
 }
