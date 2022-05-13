@@ -126,9 +126,20 @@ input.equipment-input {
     cursor: pointer;
 }
 
-/* .scaled-font {
+.scaled-font {
     font-size: 2.5rem;
-} */
+}
+
+.box-title {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.item-title {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 3.5rem;
+}
 
 .skp-tooltip {
     font-size: 2.1875rem;
@@ -168,6 +179,14 @@ input.equipment-input {
     .scaled-font {
         font-size: .8rem;
     }
+
+    .box-title {
+        font-size: 1rem;
+    }
+    
+    .item-title {
+        font-size: 1rem;
+    }
     
     .skp-tooltip {
         font-size: .625rem;
@@ -206,6 +225,14 @@ input.equipment-input {
 @media screen and (min-width: 1400px) {
     .scaled-font { 
         font-size: 1rem;
+    }
+
+    .box-title {
+        font-size: 1.25rem;
+    }
+    
+    .item-title {
+        font-size: 1.5rem;
     }
 
     .skp-tooltip {
@@ -344,15 +371,4 @@ input.equipment-input {
   
 .dark-shadow-sm {
     box-shadow: 0rem 0rem 0.25rem 0.05rem black;
-}
-
-.box-title {
-    text-align: center;
-    font-size: 1.25rem;
-}
-
-.item-title {
-    text-align: center;
-    overflow-wrap: break-word;
-    font-size: 1rem;
 }
