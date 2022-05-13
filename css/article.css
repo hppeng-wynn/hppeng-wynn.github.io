@@ -102,7 +102,7 @@ main .heart {
 }
 
 .full-width > img {
-    width: 100%;
+    width: 80%;
     background-color: #000;
     filter: brightness(0.7) contrast(1.2) grayscale(0.5);
 }
