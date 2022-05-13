@@ -381,3 +381,7 @@ input.equipment-input {
     text-align: center;
     overflow-wrap: break-word;
 }
+
+.atlas {
+    color: #fbcd49;
+}
