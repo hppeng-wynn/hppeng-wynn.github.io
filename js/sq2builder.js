@@ -682,12 +682,13 @@ function updateArmorPowderSpecials(elem_id, recalc_stats) {
 
         }
     } else {
-        for (let i = 0; i < skp_names.length; ++i) {
-            skp_name = skp_names[i];
-            skp_char = elem_chars[i];
-            build.externalStats.set(skp_char + "DamPct", build.externalStats.get(skp_char + "DamPct") - document.getElementById(skp_name+"_boost_armor").value);
-            build.externalStats.get("damageBonus")[i] -= document.getElementById(skp_name+"_boost_armor").value;
-
+        if (player_build !== undefined) {
+            for (let i = 0; i < skp_names.length; ++i) {
+                skp_name = skp_names[i];
+                skp_char = elem_chars[i];
+                player_build.externalStats.set(skp_char + "DamPct", player_build.externalStats.get(skp_char + "DamPct") - document.getElementById(skp_name+"_boost_armor").value);
+                player_build.externalStats.get("damageBonus")[i] -= document.getElementById(skp_name+"_boost_armor").value;
+            }
         }
     }
     
@@ -704,7 +705,6 @@ function resetArmorPowderSpecials() {
     for (const skp of skp_names) {
         document.getElementById(skp + "_boost_armor").value = 0;
         document.getElementById(skp + "_boost_armor_prev").value = 0;
-
         document.getElementById(skp + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
 
     }
