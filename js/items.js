@@ -180,7 +180,6 @@ function doItemSearch() {
         }
     }
 
-    document.getElementById("main").textContent = "";
     let filterQuery = "true";
     let sortQueries = [];
     console.log(queries);
