@@ -693,7 +693,7 @@ function updateArmorPowderSpecials(elem_id, recalc_stats) {
     }
     
 
-    if (recalc_stats) {
+    if (recalc_stats && player_build) {
         //calc build stats and display powder special
         calculateBuildStats();
         // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
@@ -706,7 +706,7 @@ function resetArmorPowderSpecials() {
         document.getElementById(skp + "_boost_armor").value = 0;
         document.getElementById(skp + "_boost_armor_prev").value = 0;
         document.getElementById(skp + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
-
+        document.getElementById(skp + "_boost_armor_label").textContent = `% ${capitalizeFirst(elem_names[skpnames.indexOf(skp)])} Damage Boost: 0`
     }
 }
 
