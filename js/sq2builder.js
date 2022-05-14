@@ -26,7 +26,7 @@ for (let i of skp_order) {
     let elem = document.getElementById(i+"-skp");
     elem.addEventListener("change", (event) => {
         elem.classList.add("highlight");
-    });
+    }); 
     editable_elems.push(elem);
 }
 
@@ -69,9 +69,6 @@ let powderInputs = [
     "boots-powder",
     "weapon-powder",
 ];
-
-//keeps track of the armor powder special sliders. Needed for math. Assumes everything starts at 0.
-armor_powder_boosts = [0, 0, 0, 0, 0];
 
 function init() {
     console.log("builder.js init");
@@ -653,18 +650,27 @@ function updateArmorPowderSpecials(elem_id) {
 
     //update the label associated w/ the slider 
     let elem = document.getElementById(elem_id);
+    let label = document.getElementById(elem_id + "_label");
+    let prev_label = document.getElementById(elem_id + "_prev");
+
     let value = elem.value;
 
+    //for use in editing build stats
+    let prev_value = prev_label.value;
+    let value_diff = value - prev_value;
 
-    let label = document.getElementById(elem_id + "_label");
+    //update the "previous" label
+    prev_label.value = value;
+
     label.textContent = label.textContent.split(":")[0] + ": " + value;
     
     if (player_build) {
         let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
-        let new_dmgboost = player_build.externalStats.get(dmg_id) + (value - armor_powder_boosts[skp_names.indexOf(wynn_elem)]);
-        armor_powder_boosts[skp_names.indexOf(wynn_elem)] = value;
-        //update build stats
+        let new_dmgboost = player_build.externalStats.get(dmg_id) + value_diff;
+        
+        //update build external stats - the second one is the relevant one for damage calc purposes
         player_build.externalStats.set(dmg_id, new_dmgboost);
+        player_build.externalStats.get("damageBonus")[skp_names.indexOf(wynn_elem)] = new_dmgboost;
     
         //calc build stats and display powder special
         calculateBuildStats();
