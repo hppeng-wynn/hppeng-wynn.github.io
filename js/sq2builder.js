@@ -500,6 +500,7 @@ function updateStats() {
     player_build.assigned_skillpoints += delta_total;
     if(player_build){
         updatePowderSpecials("skip", false);
+        updateArmorPowderSpecials("skip", false);
         updateBoosts("skip", false);
     }
     /*
@@ -645,43 +646,67 @@ function updatePowderSpecials(buttonId, recalcStats) {
 
 /* Updates PASSIVE powder special boosts (armors)
 */
-function updateArmorPowderSpecials(elem_id) {
-    console.log(player_build);
+function updateArmorPowderSpecials(elem_id, recalc_stats) {
     //we only update the powder special + external stats if the player has a build
-    if (player_build !== undefined) {
-        let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
+    if (elem_id !== "skip") {
+        if (player_build !== undefined && player_build.weapon !== undefined && player_build.weapon.get("name") !== "No Weapon") {
+            let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
 
-        //update the label associated w/ the slider 
-        let elem = document.getElementById(elem_id);
-        let label = document.getElementById(elem_id + "_label");
-        let prev_label = document.getElementById(elem_id + "_prev");
-
-        let value = elem.value;
-
-        //for use in editing build stats
-        let prev_value = prev_label.value;
-        let value_diff = value - prev_value;
-
-        //update the "previous" label
-        prev_label.value = value;
-
-        label.textContent = label.textContent.split(":")[0] + ": " + value;
-        
-        let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
-        let new_dmgboost = player_build.externalStats.get(dmg_id) + value_diff;
-        
-        //update build external stats - the second one is the relevant one for damage calc purposes
-        player_build.externalStats.set(dmg_id, new_dmgboost);
-        player_build.externalStats.get("damageBonus")[skp_names.indexOf(wynn_elem)] = new_dmgboost;
+            //update the label associated w/ the slider 
+            let elem = document.getElementById(elem_id);
+            let label = document.getElementById(elem_id + "_label");
+            let prev_label = document.getElementById(elem_id + "_prev");
     
+            let value = elem.value;
+    
+            //for use in editing build stats
+            let prev_value = prev_label.value;
+            let value_diff = value - prev_value;
+    
+            //update the "previous" label
+            prev_label.value = value;
+    
+            label.textContent = label.textContent.split(":")[0] + ": " + value;
+            
+            let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
+            let new_dmgboost = player_build.externalStats.get(dmg_id) + value_diff;
+            
+            //update build external stats - the second one is the relevant one for damage calc purposes
+            player_build.externalStats.set(dmg_id, new_dmgboost);
+            player_build.externalStats.get("damageBonus")[skp_names.indexOf(wynn_elem)] = new_dmgboost;
+            
+            //update the slider's graphics
+            let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
+            let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
+            elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
+
+        }
+    } else {
+        for (let i = 0; i < skp_names.length; ++i) {
+            skp_name = skp_names[i];
+            skp_char = elem_chars[i];
+            build.externalStats.set(skp_char + "DamPct", build.externalStats.get(skp_char + "DamPct") - document.getElementById(skp_name+"_boost_armor").value);
+            build.externalStats.get("damageBonus")[i] -= document.getElementById(skp_name+"_boost_armor").value;
+
+        }
+    }
+    
+
+    if (recalc_stats) {
         //calc build stats and display powder special
         calculateBuildStats();
         // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
-    
-        //update the slider's graphics
-        let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
-        let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
-        elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
+    }
+
+}
+
+function resetArmorPowderSpecials() {
+    for (const skp of skp_names) {
+        document.getElementById(skp + "_boost_armor").value = 0;
+        document.getElementById(skp + "_boost_armor_prev").value = 0;
+
+        document.getElementById(skp + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
+
     }
 }
 

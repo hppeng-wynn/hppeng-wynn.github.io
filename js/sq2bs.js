@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
+    document.querySelector("#weapon-choice").setAttribute("oninput", document.querySelector("#weapon-choice").getAttribute("oninput") + "resetArmorPowderSpecials();");
+
 
     let skp_fields = document.getElementsByClassName("skp-update");
     
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         margin: {
             x: 20,
             y: 20,
-        }
+        } 
         
     });
 
