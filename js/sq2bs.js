@@ -180,10 +180,6 @@ function update_field(field) {
     if (category == 'weapon') {
         document.querySelector("#weapon-img").setAttribute('src', '../media/items/new/generic-'+type+'.png');
     }
-
-
-
-    // call calc build
 }
 /* tabulars | man i hate this code but too lazy to fix /shrug */
 

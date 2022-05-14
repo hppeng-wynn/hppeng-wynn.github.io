@@ -5,6 +5,20 @@ const url_tag = location.hash.slice(1);
 
 const BUILD_VERSION = "7.0.19";
 
+function setTitle() {
+    let text;
+    if (url_base.includes("hppeng-wynn")) {
+        text = "WynnBuilder UNSTABLE version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+    }
+    else {
+        text = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+        document.getElementById("header").classList.add("funnynumber");
+    }
+    document.getElementById("header").textContent = text;
+}
+
+setTitle();
+
 let player_build;
 
 
@@ -26,7 +40,7 @@ for (let i of skp_order) {
     let elem = document.getElementById(i+"-skp");
     elem.addEventListener("change", (event) => {
         elem.classList.add("highlight");
-    }); 
+    });
     editable_elems.push(elem);
 }
 
@@ -292,18 +306,6 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
-        /*
-        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
-        for (const sName of specialNames) {
-            for (let i = 1; i < 6; i++) {
-                let elem = document.getElementById(sName + "-" + i);
-                let name = sName.replace("_", " ");
-                if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
-                    elem.classList.remove("toggleOn");
-                }
-            }
-        }
-        */
         if(player_build){
             reset_powder_specials();
             updateBoosts("skip", false);
@@ -396,7 +398,6 @@ function calculateBuild(save_skp, skp){
         }
         
         calculateBuildStats();
-        // setTitle();
         if (player_build.errored)
             throw new ListError(player_build.errors);
 
@@ -489,7 +490,7 @@ function updateStats() {
             for (const s of skp) {
                 manual_assigned += parseInt(s,10);
             }
-        }  else {
+        } else {
             manual_assigned = parseInt(value,10);
         }
         let delta = manual_assigned - skillpoints[i];
@@ -502,12 +503,6 @@ function updateStats() {
         updatePowderSpecials("skip", false);
         updateBoosts("skip", false);
     }
-    /*
-    for (let id of editable_item_fields) {
-            player_build.statMap.set(id, parseInt(getValue(id)));
-            console.log(player_build.statMap.get(id));
-        }
-    }*/
     player_build.aggregateStats();
     console.log(player_build.statMap);
     calculateBuildStats();
@@ -712,7 +707,6 @@ function calculateBuildStats() {
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpRow = document.createElement("p");
-    // let td = document.createElement("p");
 
     let remainingSkp = document.createElement("p");
     remainingSkp.classList.add("scaled-font");
@@ -732,11 +726,9 @@ function calculateBuildStats() {
         let skpWarning = document.createElement("span");
         //skpWarning.classList.add("itemp");
         skpWarning.classList.add("warning");
-        // skpWarning.classList.add("skp-tooltip");
         skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
         let skpCount = document.createElement("p");
         skpCount.classList.add("warning");
-        // skpCount.classList.add("skp-tooltip");
         skpCount.textContent = "For level " + (player_build.level>101 ? "101+" : player_build.level)  + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
         summarybox.append(skpWarning);
         summarybox.append(skpCount);
@@ -782,9 +774,6 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-//        if (player_build.items[i].get("id") > 9999) {
-//            continue;
-//        }
         displaysq2ExpandedItem(player_build.items[i], buildFields[i]);
         collapse_element("#"+equipment_keys[i]+"-tooltip");
     }
