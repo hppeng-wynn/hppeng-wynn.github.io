@@ -41,7 +41,7 @@ function displaysq2BuildStats(parent_id,build,command_group){
         // id instruction
         else {
             let id = command;
-            if (stats.get(id)) {
+            if (stats.get(id) || build.externalStats.get(id)) {
                 let style = null;
 
                 // TODO: add pos and neg style
@@ -54,6 +54,10 @@ function displaysq2BuildStats(parent_id,build,command_group){
 
                 // ignore
                 let id_val = stats.get(id);
+                if (build.externalStats.has(id)) {
+                    id_val += build.externalStats.get(id);
+                }
+
                 if (reversedIDs.includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }

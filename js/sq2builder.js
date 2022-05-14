@@ -5,6 +5,20 @@ const url_tag = location.hash.slice(1);
 
 const BUILD_VERSION = "7.0.19";
 
+function setTitle() {
+    let text;
+    if (url_base.includes("hppeng-wynn")) {
+        text = "WynnBuilder UNSTABLE version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+    }
+    else {
+        text = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+        document.getElementById("header").classList.add("funnynumber");
+    }
+    document.getElementById("header").textContent = text;
+}
+
+setTitle();
+
 let player_build;
 
 
@@ -69,9 +83,6 @@ let powderInputs = [
     "boots-powder",
     "weapon-powder",
 ];
-
-//keeps track of the armor powder special sliders. Needed for math. Assumes everything starts at 0.
-armor_powder_boosts = [0, 0, 0, 0, 0];
 
 function init() {
     console.log("builder.js init");
@@ -295,18 +306,6 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
-        /*
-        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
-        for (const sName of specialNames) {
-            for (let i = 1; i < 6; i++) {
-                let elem = document.getElementById(sName + "-" + i);
-                let name = sName.replace("_", " ");
-                if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
-                    elem.classList.remove("toggleOn");
-                }
-            }
-        }
-        */
         if(player_build){
             reset_powder_specials();
             updateBoosts("skip", false);
@@ -399,7 +398,6 @@ function calculateBuild(save_skp, skp){
         }
         
         calculateBuildStats();
-        // setTitle();
         if (player_build.errored)
             throw new ListError(player_build.errors);
 
@@ -492,7 +490,7 @@ function updateStats() {
             for (const s of skp) {
                 manual_assigned += parseInt(s,10);
             }
-        }  else {
+        } else {
             manual_assigned = parseInt(value,10);
         }
         let delta = manual_assigned - skillpoints[i];
@@ -503,14 +501,9 @@ function updateStats() {
     player_build.assigned_skillpoints += delta_total;
     if(player_build){
         updatePowderSpecials("skip", false);
+        updateArmorPowderSpecials("skip", false);
         updateBoosts("skip", false);
     }
-    /*
-    for (let id of editable_item_fields) {
-            player_build.statMap.set(id, parseInt(getValue(id)));
-            console.log(player_build.statMap.get(id));
-        }
-    }*/
     player_build.aggregateStats();
     console.log(player_build.statMap);
     calculateBuildStats();
@@ -648,33 +641,68 @@ function updatePowderSpecials(buttonId, recalcStats) {
 
 /* Updates PASSIVE powder special boosts (armors)
 */
-function updateArmorPowderSpecials(elem_id) {
-    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
+function updateArmorPowderSpecials(elem_id, recalc_stats) {
+    //we only update the powder special + external stats if the player has a build
+    if (elem_id !== "skip") {
+        if (player_build !== undefined && player_build.weapon !== undefined && player_build.weapon.get("name") !== "No Weapon") {
+            let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
 
-    //update the label associated w/ the slider 
-    let elem = document.getElementById(elem_id);
-    let value = elem.value;
-
-
-    let label = document.getElementById(elem_id + "_label");
-    label.textContent = label.textContent.split(":")[0] + ": " + value;
+            //update the label associated w/ the slider 
+            let elem = document.getElementById(elem_id);
+            let label = document.getElementById(elem_id + "_label");
+            let prev_label = document.getElementById(elem_id + "_prev");
     
-    if (player_build) {
-        let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
-        let new_dmgboost = player_build.externalStats.get(dmg_id) + (value - armor_powder_boosts[skp_names.indexOf(wynn_elem)]);
-        armor_powder_boosts[skp_names.indexOf(wynn_elem)] = value;
-        //update build stats
-        player_build.externalStats.set(dmg_id, new_dmgboost);
+            let value = elem.value;
     
+            //for use in editing build stats
+            let prev_value = prev_label.value;
+            let value_diff = value - prev_value;
+    
+            //update the "previous" label
+            prev_label.value = value;
+    
+            label.textContent = label.textContent.split(":")[0] + ": " + value;
+            
+            let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
+            let new_dmgboost = player_build.externalStats.get(dmg_id) + value_diff;
+            
+            //update build external stats - the second one is the relevant one for damage calc purposes
+            player_build.externalStats.set(dmg_id, new_dmgboost);
+            player_build.externalStats.get("damageBonus")[skp_names.indexOf(wynn_elem)] = new_dmgboost;
+            
+            //update the slider's graphics
+            let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
+            let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
+            elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
+
+        }
+    } else {
+        if (player_build !== undefined) {
+            for (let i = 0; i < skp_names.length; ++i) {
+                skp_name = skp_names[i];
+                skp_char = elem_chars[i];
+                player_build.externalStats.set(skp_char + "DamPct", player_build.externalStats.get(skp_char + "DamPct") - document.getElementById(skp_name+"_boost_armor").value);
+                player_build.externalStats.get("damageBonus")[i] -= document.getElementById(skp_name+"_boost_armor").value;
+            }
+        }
+    }
+    
+
+    if (recalc_stats && player_build) {
         //calc build stats and display powder special
         calculateBuildStats();
         // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
     }
 
-    //update the slider's graphics
-    let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
-    let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
-    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
+}
+
+function resetArmorPowderSpecials() {
+    for (const skp of skp_names) {
+        document.getElementById(skp + "_boost_armor").value = 0;
+        document.getElementById(skp + "_boost_armor_prev").value = 0;
+        document.getElementById(skp + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
+        document.getElementById(skp + "_boost_armor_label").textContent = `% ${capitalizeFirst(elem_names[skpnames.indexOf(skp)])} Damage Boost: 0`
+    }
 }
 
 /* Calculates all build statistics and updates the entire display.
@@ -704,7 +732,6 @@ function calculateBuildStats() {
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpRow = document.createElement("p");
-    // let td = document.createElement("p");
 
     let remainingSkp = document.createElement("p");
     remainingSkp.classList.add("scaled-font");
@@ -724,11 +751,9 @@ function calculateBuildStats() {
         let skpWarning = document.createElement("span");
         //skpWarning.classList.add("itemp");
         skpWarning.classList.add("warning");
-        // skpWarning.classList.add("skp-tooltip");
         skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
         let skpCount = document.createElement("p");
         skpCount.classList.add("warning");
-        // skpCount.classList.add("skp-tooltip");
         skpCount.textContent = "For level " + (player_build.level>101 ? "101+" : player_build.level)  + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
         summarybox.append(skpWarning);
         summarybox.append(skpCount);
@@ -774,9 +799,6 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-//        if (player_build.items[i].get("id") > 9999) {
-//            continue;
-//        }
         displaysq2ExpandedItem(player_build.items[i], buildFields[i]);
         collapse_element("#"+equipment_keys[i]+"-tooltip");
     }

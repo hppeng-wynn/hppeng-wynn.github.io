@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
+    document.querySelector("#weapon-choice").setAttribute("oninput", document.querySelector("#weapon-choice").getAttribute("oninput") + "resetArmorPowderSpecials();");
+
 
     let skp_fields = document.getElementsByClassName("skp-update");
     
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         margin: {
             x: 20,
             y: 20,
-        }
+        } 
         
     });
 
@@ -180,10 +182,6 @@ function update_field(field) {
     if (category == 'weapon') {
         document.querySelector("#weapon-img").setAttribute('src', '../media/items/new/generic-'+type+'.png');
     }
-
-
-
-    // call calc build
 }
 /* tabulars | man i hate this code but too lazy to fix /shrug */
 

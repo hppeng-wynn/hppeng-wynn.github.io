@@ -4,7 +4,7 @@ const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["va
 // externalStats should be a map
 function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
     let buildStats = new Map(stats);
-    let tooltipinfo = new Map();
+    let tooltipinfo = new Map(); 
     //6x for damages, normal min normal max crit min crit max
     let damageformulas = [["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "]];
 
