@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ["filter3", sq2ItemFilters],
                                 ["filter4", sq2ItemFilters]]);
     for (const [field, data] of filterInputs) {
+        let field_choice = document.getElementById(field+"-choice");
+        // show dropdown on click
+        field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
         filterInputs.set(field, new autoComplete({
             data: {
                 src: data,
