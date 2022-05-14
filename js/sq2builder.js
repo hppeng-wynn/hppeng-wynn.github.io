@@ -5,19 +5,19 @@ const url_tag = location.hash.slice(1);
 
 const BUILD_VERSION = "7.0.19";
 
-function setTitle() {
-    let text;
-    if (url_base.includes("hppeng-wynn")) {
-        text = "WynnBuilder UNSTABLE version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
-    }
-    else {
-        text = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
-        document.getElementById("header").classList.add("funnynumber");
-    }
-    document.getElementById("header").textContent = text;
-}
-
-setTitle();
+// function setTitle() {
+//     let text;
+//     if (url_base.includes("hppeng-wynn")) {
+//         text = "WynnBuilder UNSTABLE version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+//     }
+//     else {
+//         text = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
+//         document.getElementById("header").classList.add("funnynumber");
+//     }
+//     document.getElementById("header").textContent = text;
+// }
+// 
+// setTitle();
 
 let player_build;
 
@@ -1026,7 +1026,6 @@ function optimizeStrDex() {
         
     try {
         calculateBuildStats();
-        setTitle();
         if (player_build.errored)
             throw new ListError(player_build.errors);
     }
