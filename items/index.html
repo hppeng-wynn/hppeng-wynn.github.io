@@ -47,7 +47,7 @@
                         </div>
                         <div class = "col-lg-3 col-sm-12">
                             <div class = "col fw-bold">Category:</div>
-                            <input class="col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" list="category-items" id="category-choice" name="category-choice" placeholder="ALL"/>
+                            <input class="col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="category-choice" name="category-choice" placeholder="ALL"/>
                             <datalist id="category-items">
                                 <option value="ALL">
                                 <option value="armor">
@@ -70,7 +70,7 @@
                         </div>
                         <div class = "col-lg-3 col-sm-12">
                             <div class = "col fw-bold">Rarity:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" list="rarity-items" id="rarity-choice" name="rarity-choice" placeholder="ANY"/>
+                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="rarity-choice" name="rarity-choice" placeholder="ANY"/>
                             <datalist id = "rarity-items">
                                 <option value="ANY">
                                 <option value="Normal">
@@ -93,22 +93,22 @@
                     <div class = "row">
                         <div class = "col-lg-3 col-sm-12">
                             <div class = "col fw-bold">Filter 1:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" list="filter-items" id="filter1-choice" name="filter1-choice" placeholder="ANY"/>
+                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter1-choice" name="filter1-choice" placeholder="ANY"/>
                             <p class="error col-auto"></p>
                         </div>
                         <div class = "col-lg-3 col-sm-12">
                             <div class = "col fw-bold">Filter 2:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" list="filter-items" id="filter2-choice" name="filter2-choice" placeholder="ANY"/>
+                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter2-choice" name="filter2-choice" placeholder="ANY"/>
                             <p class="error col-auto"></p>
                         </div>
                         <div class = "col-lg-3 col-sm-12">
                             <div class = "col fw-bold">Filter 3:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" list="filter-items" id="filter3-choice" name="filter3-choice" placeholder="ANY"/>
+                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter3-choice" name="filter3-choice" placeholder="ANY"/>
                             <p class="error col-auto"></p>
                         </div>
                         <div class = "col-lg-3 col-sm-12">
                             <div class = "col fw-bold">Filter 4:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" list="filter-items" id="filter4-choice" name="filter4-choice" placeholder="ANY"/>
+                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter4-choice" name="filter4-choice" placeholder="ANY"/>
                             <p class="error col-auto"></p>
                         </div>
                         <datalist id = "filter-items"></datalist>
@@ -133,6 +133,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
         <script type="text/javascript" src="../js/utils.js"></script>
         <script type="text/javascript" src="../js/build_utils.js"></script>
         <script type="text/javascript" src="../js/icons.js"></script>
