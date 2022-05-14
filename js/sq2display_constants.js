@@ -30,6 +30,14 @@ let elem_chars = [
     'a'
 ]
 
+let elem_names = [
+    'earth',
+    'thunder',
+    'water',
+    'fire',
+    'air'
+]
+
 let elem_colors = [
     "#00AA00",
     "#FFFF55",
