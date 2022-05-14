@@ -646,25 +646,27 @@ function updatePowderSpecials(buttonId, recalcStats) {
 /* Updates PASSIVE powder special boosts (armors)
 */
 function updateArmorPowderSpecials(elem_id) {
-    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
+    console.log(player_build);
+    //we only update the powder special + external stats if the player has a build
+    if (player_build !== undefined) {
+        let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
 
-    //update the label associated w/ the slider 
-    let elem = document.getElementById(elem_id);
-    let label = document.getElementById(elem_id + "_label");
-    let prev_label = document.getElementById(elem_id + "_prev");
+        //update the label associated w/ the slider 
+        let elem = document.getElementById(elem_id);
+        let label = document.getElementById(elem_id + "_label");
+        let prev_label = document.getElementById(elem_id + "_prev");
 
-    let value = elem.value;
+        let value = elem.value;
 
-    //for use in editing build stats
-    let prev_value = prev_label.value;
-    let value_diff = value - prev_value;
+        //for use in editing build stats
+        let prev_value = prev_label.value;
+        let value_diff = value - prev_value;
 
-    //update the "previous" label
-    prev_label.value = value;
+        //update the "previous" label
+        prev_label.value = value;
 
-    label.textContent = label.textContent.split(":")[0] + ": " + value;
-    
-    if (player_build) {
+        label.textContent = label.textContent.split(":")[0] + ": " + value;
+        
         let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
         let new_dmgboost = player_build.externalStats.get(dmg_id) + value_diff;
         
@@ -675,12 +677,12 @@ function updateArmorPowderSpecials(elem_id) {
         //calc build stats and display powder special
         calculateBuildStats();
         // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
+    
+        //update the slider's graphics
+        let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
+        let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
+        elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
     }
-
-    //update the slider's graphics
-    let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
-    let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
-    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
 }
 
 /* Calculates all build statistics and updates the entire display.
