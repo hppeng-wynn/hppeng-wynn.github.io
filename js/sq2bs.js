@@ -182,7 +182,7 @@ function update_field(field) {
         document.querySelector("#" + field + "-powder").classList.remove("is-invalid");
         let powder_string = document.querySelector("#"+field+"-powder").value;
 
-        if (powder_string.length % 2 != 0 || powder_string / 2 > powder_slots) {
+        if (powder_string.length % 2 != 0 || powder_string.length / 2 > powder_slots) {
             document.querySelector("#"+field+"-powder").classList.add("is-invalid");
         } else {
             for (i = 0; i < powder_string.length / 2; i++) {
