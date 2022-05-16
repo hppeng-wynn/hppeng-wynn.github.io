@@ -48,6 +48,7 @@ function init_crafter() {
         document.getElementById("level-choice").addEventListener("change", (event) => {
             updateMaterials();
         });
+        document.getElementById("recipe-choice").setAttribute("oninput", "updateCraftedImage()");
         
         populateFields();
         decodeCraft(ing_url_tag);
@@ -188,6 +189,7 @@ function decodeCraft(ing_url_tag) {
             //console.log(Base64.toInt(tag.substring(12,14)));
             recipesName = recipe.split("-");
             setValue("recipe-choice",recipesName[0]);
+            updateCraftedImage();
             setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
             tierNum = Base64.toInt(tag.substring(14,15));
             mat_tiers = [];
@@ -295,6 +297,16 @@ function toggleMaterial(buttonId) {
     } else { //we turned off a button: do nothing
         toggleButton(buttonId);
     }
+}
+
+/* Updates the crafted icon. 
+*/
+function updateCraftedImage() {
+    let input = document.getElementById("recipe-choice");
+    if (item_types.includes(input.value)) {
+        document.getElementById("recipe-img").src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + input.value.toLowerCase() + ".png";
+    }
+
 }
 
 /* Reset all fields

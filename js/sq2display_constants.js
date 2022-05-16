@@ -46,6 +46,24 @@ let elem_colors = [
     "#FFFFFF"
 ]
 
+let item_types = [
+    "Helmet",
+    "Chestplate",
+    "Leggings",
+    "Boots",
+    "Ring",
+    "Bracelet",
+    "Necklace",
+    "Dagger",
+    "Spear",
+    "Wand",
+    "Relik",
+    "Bow",
+    "Potion",
+    "Scroll",
+    "Food"
+]
+
 /*
  * Display commands
  */
