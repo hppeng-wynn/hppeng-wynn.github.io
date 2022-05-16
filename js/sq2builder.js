@@ -210,7 +210,6 @@ function decodeBuild(url_tag) {
             setValue(equipmentInputs[i], equipment[i]);
         }
         calculateBuild(save_skp, skillpoints);
-        updateEditableIDs();
     }
 }
 
@@ -306,6 +305,7 @@ function encodeBuild() {
 
 function calculateBuild(save_skp, skp){
     try {
+        resetEditableIDs();
         if(player_build){
             reset_powder_specials();
             updateBoosts("skip", false);
@@ -397,6 +397,7 @@ function calculateBuild(save_skp, skp){
             player_build.assigned_skillpoints += delta_total;
         }
         
+        updateEditableIDs();
         calculateBuildStats();
         if (player_build.errored)
             throw new ListError(player_build.errors);
@@ -533,22 +534,11 @@ function updateEditableIDs() {
 /* Resets all IDs in the edit IDs section to their "original" values. 
 */
 function resetEditableIDs() {
-    if (player_build) {
-        for (const id of editable_item_fields) {
-            let edit_input = document.getElementById(id);
-            let value_label = document.getElementById(id + "-base");
+    for (const id of editable_item_fields) {
+        let edit_input = document.getElementById(id);
 
-            edit_input.value = value_label.value;
-            edit_input.placeholder = value_label.value;
-        }
-    } else {
-        //no player build, reset to 0
-        for (const id of editable_item_fields) {
-            let edit_input = document.getElementById(id);
-
-            edit_input.value = 0;
-            edit_input.placeholder = 0;
-        }
+        edit_input.value = 0;
+        edit_input.placeholder = 0;
     }
 }
 
