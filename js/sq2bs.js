@@ -4,6 +4,7 @@ let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
 let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
 let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
+let powder_keys = ['e', 't', 'w', 'f', 'a'];
 
 let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
 let other_disp = ['build-order', 'set-info', 'int-info'];
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     for (const eq of powderable_keys) {
-        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule(); updatePowders('" + eq + "-powder');");
+        document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule(); update_field('"+ eq +"');");
     }
 
     for (const i of spell_disp) {
@@ -177,6 +178,20 @@ function update_field(field) {
         } else {
             document.querySelector("#"+field+"-powder").disabled = false;
         }
+
+        // powder error handling
+        document.querySelector("#" + field + "-powder").classList.remove("is-invalid");
+        let powder_string = document.querySelector("#"+field+"-powder").value;
+
+        if (powder_string.length % 2 != 0 || powder_string.length / 2 > powder_slots) {
+            document.querySelector("#"+field+"-powder").classList.add("is-invalid");
+        } else {
+            for (i = 0; i < powder_string.length / 2; i++) {
+                if (powder_keys.includes(powder_string.substring(i*2, i*2+2).split("")[0]) == false || isNaN(powder_string.substring(i*2, i*2+2).split("")[1]) || parseInt(powder_string.substring(i*2, i*2+2).split("")[1]) < 1 || parseInt(powder_string.substring(i*2, i*2+2).split("")[1]) > 6) {
+                    document.querySelector("#"+field+"-powder").classList.add("is-invalid");
+                }
+            }
+        };
     }
 
     // set weapon img
