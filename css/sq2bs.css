@@ -400,3 +400,11 @@ a:hover {
 .border-semi-light {
     border-color: #aaa;
 }
+
+/* supposed to work in firefox but doesn't */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+}

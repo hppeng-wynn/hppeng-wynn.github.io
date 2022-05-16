@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
     document.querySelector("#weapon-choice").setAttribute("oninput", document.querySelector("#weapon-choice").getAttribute("oninput") + "resetArmorPowderSpecials();");
-
+    // document.querySelector("#edit-IDs-button").setAttribute("onclick", "toggle_edit_id_tab()");
 
     let skp_fields = document.getElementsByClassName("skp-update");
     
@@ -80,6 +80,7 @@ function calcBuildSchedule(){
     }
     calcBuildTask = setTimeout(function(){
         calcBuildTask = null;
+        resetEditableIDs(); 
         calculateBuild();
     }, 500);
 }

@@ -27,14 +27,13 @@ let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDam
 
 let editable_elems = [];
 
-/*
 for (let i of editable_item_fields) {
     let elem = document.getElementById(i);
     elem.addEventListener("change", (event) => {
         elem.classList.add("highlight");
     });
     editable_elems.push(elem);
-}*/
+}
 
 for (let i of skp_order) {
     let elem = document.getElementById(i+"-skp");
@@ -211,6 +210,7 @@ function decodeBuild(url_tag) {
             setValue(equipmentInputs[i], equipment[i]);
         }
         calculateBuild(save_skp, skillpoints);
+        updateEditableIDs();
     }
 }
 
@@ -400,7 +400,6 @@ function calculateBuild(save_skp, skp){
         calculateBuildStats();
         if (player_build.errored)
             throw new ListError(player_build.errors);
-
     }
     catch (error) {
         console.log(error);
@@ -503,11 +502,56 @@ function updateStats() {
         updatePowderSpecials("skip", false);
         updateArmorPowderSpecials("skip", false);
         updateBoosts("skip", false);
+        for (let id of editable_item_fields) {
+            player_build.statMap.set(id, parseInt(getValue(id)));
+        }
     }
     player_build.aggregateStats();
     console.log(player_build.statMap);
     calculateBuildStats();
 }
+
+ 
+/* Updates all IDs in the edit IDs section. Resets each input and original value text to the correct text according to the current build.
+*/
+function updateEditableIDs() {
+    if (player_build) {
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+            let val = player_build.statMap.get(id);
+            edit_input.value = val;
+            edit_input.placeholder = val;
+
+            let value_label = document.getElementById(id + "-base");
+            value_label.textContent = "Original Value: " + val;
+            //a hack to make resetting easier
+            value_label.value = val;
+        }
+    }
+}
+
+/* Resets all IDs in the edit IDs section to their "original" values. 
+*/
+function resetEditableIDs() {
+    if (player_build) {
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+            let value_label = document.getElementById(id + "-base");
+
+            edit_input.value = value_label.value;
+            edit_input.placeholder = value_label.value;
+        }
+    } else {
+        //no player build, reset to 0
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+
+            edit_input.value = 0;
+            edit_input.placeholder = 0;
+        }
+    }
+}
+
 /* Updates all spell boosts
 */
 function updateBoosts(buttonId, recalcStats) {
@@ -933,6 +977,17 @@ function toggleID() {
     else {
         targetDiv.style.display = "block";
         button.classList.add("toggleOn");
+    }
+}
+
+function toggleButton(button_id) {
+    let button = document.getElementById(button_id);
+    if (button) {
+        if (button.classList.contains("toggleOn")) {
+            button.classList.remove("toggleOn");
+        } else {
+            button.classList.add("toggleOn");
+        }
     }
 }
 
