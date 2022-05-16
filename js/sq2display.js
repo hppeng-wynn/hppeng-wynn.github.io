@@ -310,7 +310,7 @@ function displaysq2ExpandedItem(item, parent_id){
                     if (id === "lore") {
                         p_elem.style = "font-style: italic";
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
-                        if ( item.get("tier") !== "Crafted" && parent_div.nodeName === "DIV") {
+                        if ( item.get("tier") !== "Crafted") {
                             row = document.createElement("div");
                             row.classList.add("col");
                             
@@ -326,7 +326,7 @@ function displaysq2ExpandedItem(item, parent_id){
                             row.appendChild(title);
                             row.appendChild(boost);
                             parent_div.appendChild(row);
-                        } else if ( item.get("tier") === "Crafted" && parent_div.nodeName === "TABLE") {
+                        } else if ( item.get("tier") === "Crafted") {
                             let row = displaysq2RolledID(item, id, elemental_format);
                             parent_div.appendChild(row);
                         }
