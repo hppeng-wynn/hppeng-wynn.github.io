@@ -76,4 +76,3 @@ for (const [k, v] of translations) {
     reversetranslations.set(v, k);
 }
 
-console.log(translations);

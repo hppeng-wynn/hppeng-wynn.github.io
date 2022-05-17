@@ -2438,7 +2438,6 @@ function stringPDF(id,val,base,amp) {
     document.getElementById(id + "-pdf").appendChild(b1);
     document.getElementById(id + "-pdf").appendChild(b2);
     document.getElementById(id + "-pdf").appendChild(b3);
-    document.getElementById(id + "-pdf").style.textAlign = "left";
 }
 function stringCDF(id,val,base,amp) {
     let p; let min; let max; let minr; let maxr; let minround; let maxround;
@@ -2473,5 +2472,4 @@ function stringCDF(id,val,base,amp) {
     document.getElementById(id + "-cdf").appendChild(b1);
     document.getElementById(id + "-cdf").appendChild(b2);
     document.getElementById(id + "-cdf").appendChild(b3);
-    document.getElementById(id + "-cdf").style.textAlign = "left";
 }

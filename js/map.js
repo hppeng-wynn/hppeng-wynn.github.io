@@ -233,7 +233,7 @@ function pullguilds() {
         .then(res => {
             guildTags.set(guild, res.prefix);
             guildColors.set(guild, randomColorHSL([0,1],[0,1],[0.4,1]));
-            console.log("Succesfully pulled guild data for " + guild + ".");
+            // console.log("Succesfully pulled guild data for " + guild + ".");
         })
         .catch(error => {
             console.log(error);

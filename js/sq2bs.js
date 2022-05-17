@@ -299,7 +299,6 @@ function init_autocomplete() {
     let dropdowns = new Map()
     for (const eq of equipment_keys) {
         // build dropdown
-        console.log('init dropdown for '+ eq)
         let item_arr = [];
         if (eq == 'weapon') {
             for (const weaponType of weapon_keys) {
@@ -377,8 +376,6 @@ function init_autocomplete() {
     }
     let filter_loc = ["filter1", "filter2", "filter3", "filter4"];
     for (const i of filter_loc) {
-        console.log(i);
-        console.log('init dropdown for '+i+"-choice" )
         dropdowns.set(i+"-choice", new autoComplete({
             data: {
                 src: sq2ItemFilters,
