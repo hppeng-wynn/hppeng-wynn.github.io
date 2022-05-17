@@ -97,6 +97,7 @@ function updateStatSchedule(){
 }
 
 function doSearchSchedule(){
+    console.log("Search Schedule called");
     if (doSearchTask !== null) {
         clearTimeout(doSearchTask);
     }

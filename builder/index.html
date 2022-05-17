@@ -45,7 +45,7 @@
         <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
         <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
         <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
-        <a><img src="../media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
+        <a onclick = "document.querySelector('#search-container').style.display = '';"><img src="../media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
         <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
     </div>
@@ -1138,50 +1138,50 @@
             </div>
         </div>
         <div class="row row-cols-1 justify-content-center">
-            <div class="col-8 dark-5 p-2 dark-shadow rounded-top">
-                <div class="row row-cols-1 row-cols-xl-4 justify-content-center">
+            <div class="col-10 dark-5 p-2 dark-shadow rounded-top">
+                <div class="row row-cols-1 row-cols-xl-4 justify-content-center mb-1">
                     <div class="col-auto">
-                        <label for="name-choice">Name:</label>
-                        <input class="search-field" type="text" id="name-choice" name="name-choice" placeholder="Name" oninput="doSearchSchedule();"/>
+                        <label for="item-name-choice">Name:</label>
+                        <input class="search-field" type="text" id="item-name-choice" name="item-name-choice" placeholder="Name" oninput="doSearchSchedule();"/>
                     </div>
                     <div class="col-auto">
-                        <label for="category-choice">Category:</label>
-                        <input class="search-field" id="category-choice" name="category-choice" placeholder="Category"/>
+                        <label for="item-category-choice">Category:</label>
+                        <input class="search-field" id="item-category-choice" name="item-category-choice" placeholder="Category"/>
                     </div>
                     <div class="col-auto">    
-                        <label for="rarity-choice">Rarity:</label>
-                        <input class="search-field" id="rarity-choice" name="rarity-choice" placeholder="Rarity"/>
+                        <label for="item-rarity-choice">Rarity:</label>
+                        <input class="search-field" id="item-rarity-choice" name="item-rarity-choice" placeholder="Rarity"/>
                     </div>
                     <div class="col-auto">
-                        <label for="level-choice">Level:</label>
-                        <input class="search-field" type="text" id="level-choice" name="level-choice" placeholder="1-106"/>
+                        <label for="item-level-choice">Level:</label>
+                        <input class="search-field" type="text" id="item-level-choice" name="item-level-choice" placeholder="1-106"/>
                     </div>
                 </div>
-                <div class="row row-cols-1 row-cols-xl-4 justify-content-center mt-1">
+                <div class="row row-cols-1 row-cols-xl-4 justify-content-center my-1">
                     <div class="col-auto" id="filter1-dropdown">
                         <label for="filter1-choice">Filter 1:</label>
-                        <input class="search-field" list="filter-items" id="filter1-choice" name="filter1-choice" placeholder="Filter"/>
+                        <input class="search-field" list="filter-items" id="filter1-choice" name="filter1-choice" placeholder=""/>
                     </div>
                     <div class="col-auto" id="filter2-dropdown">
                         <label for="filter2-choice">Filter 2:</label>
-                        <input class="search-field" list="filter-items" id="filter2-choice" name="filter2-choice" placeholder="Filter"/>
+                        <input class="search-field" list="filter-items" id="filter2-choice" name="filter2-choice" placeholder=""/>
                     </div>
                     <div class="col-auto" id="filter3-dropdown">    
                         <label for="filter3-choice">Filter 3:</label>
-                        <input class="search-field" list="filter-items" id="filter3-choice" name="filter3-choice" placeholder="Filter"/>
+                        <input class="search-field" list="filter-items" id="filter3-choice" name="filter3-choice" placeholder=""/>
                     </div>
                     <div class="col-auto" id="filter4-dropdown">
                         <label for="filter4-choice">Filter 4:</label>
-                        <input class="search-field" list="filter-items" id="filter4-choice" name="filter4-choice" placeholder="Filter"/>
+                        <input class="search-field" list="filter-items" id="filter4-choice" name="filter4-choice" placeholder=""/>
                     </div>
                 </div>
+                <div class = "row box-title justify-content-center my-1" id = "summary">
+                </div>
+                <div class = "row" id = "search-results">
+                    
+                </div>
             </div>
-            <div class="col p-4">
-                <div class="row justify-content-center" id="summary"></div>
-            </div>
-            <div class="col p-4">
-                <div class="row justify-content-center" id="search-results"></div>
-            </div>
+            
         </div>
     </div>
     

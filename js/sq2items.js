@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let filterInputs = new Map([["category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
-                                ["rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
+    let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
+                                ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
                                 ["filter1", sq2ItemFilters],
                                 ["filter2", sq2ItemFilters],
                                 ["filter3", sq2ItemFilters],
@@ -193,9 +193,9 @@ let items_expanded;
 function doItemSearch() {
     // window.scrollTo(0, 0);
     let queries = [];
-    queries.push(new NameQuery(document.getElementById("name-choice").value.trim()));
+    queries.push(new NameQuery(document.getElementById("item-name-choice").value.trim()));
 
-    let categoryOrType = document.getElementById("category-choice").value;
+    let categoryOrType = document.getElementById("item-category-choice").value;
     if (itemTypes.includes(categoryOrType)) {
         queries.push(new IdMatchQuery("type", categoryOrType));
     }
@@ -203,7 +203,7 @@ function doItemSearch() {
         queries.push(new IdMatchQuery("category", categoryOrType));
     }
 
-    let rarity = document.getElementById("rarity-choice").value;
+    let rarity = document.getElementById("item-rarity-choice").value;
     if (rarity) {
         if (rarity === "ANY") {
 
@@ -213,7 +213,7 @@ function doItemSearch() {
         }
     }
 
-    let level_dat = document.getElementById("level-choice").value ? document.getElementById("level-choice").value.split("-") : [1, 106];
+    let level_dat = document.getElementById("item-level-choice").value ? document.getElementById("item-level-choice").value.split("-") : [1, 106];
     queries.push(new LevelRangeQuery(parseInt(level_dat[0]), parseInt(level_dat[1])));
     
     for (let i = 1; i <= 4; ++i) {
@@ -234,8 +234,7 @@ function doItemSearch() {
     document.getElementById("search-results").textContent = "";
     for (const query of queries) {
         console.log(items_copy.length);
-        console.log(query);
-        console.log(query.filter);
+        console.log(query, query.filter);
         items_copy = applyQuery(items_copy, query);
         console.log(items_copy.length);
     }
@@ -244,7 +243,7 @@ function doItemSearch() {
 }
 
 function resetItemSearch() {
-    resetFields = ["name-choice", "category-choice", "rarity-choice", "level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
+    resetFields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
     for (const field of resetFields) {
         document.getElementById(field).value = "";
     }
