@@ -735,7 +735,7 @@ function resetArmorPowderSpecials() {
         document.getElementById(skp + "_boost_armor").value = 0;
         document.getElementById(skp + "_boost_armor_prev").value = 0;
         document.getElementById(skp + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
-        document.getElementById(skp + "_boost_armor_label").textContent = `% ${capitalizeFirst(elem_names[skpnames.indexOf(skp)])} Damage Boost: 0`
+        document.getElementById(skp + "_boost_armor_label").textContent = `% ${capitalizeFirst(elem_names[skp_names.indexOf(skp)])} Damage Boost: 0`
     }
 }
 
@@ -982,6 +982,9 @@ function toggleButton(button_id) {
 }
 
 function optimizeStrDex() {
+    if (!player_build) {
+        return;
+    }
     const remaining = levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints;
     const base_skillpoints = player_build.base_skillpoints;
     const max_str_boost = 100 - base_skillpoints[0];
