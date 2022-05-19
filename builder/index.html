@@ -53,8 +53,8 @@
         <div class="col">
             <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
                 <div class="col-xl-6">
-                    <div class="row row-cols-1 gy-5">
-                        <div class="col">
+                    <div class="row row-cols-1 mb-3">
+                        <div class="col py-3">
                             <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5 justify-content-center">
                                 <div class="col-auto rounded order-xl-0 order-0">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="helmet-dropdown">
@@ -324,8 +324,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="row row-cols-1 gy-2 pb-3 rounded dark-5 dark-shadow">
+                        <div class = "col py-3">
+                            <div class="row row-cols-1 gy-2 rounded dark-shadow justify-content-center">
+                                <div class="row h-100 my-2 dark-shadow dark-6 rounded" id="tomes-button">
+                                    <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-tomes" onclick = "toggle_tab('tomes-dropdown'); toggleButton('toggle-tomes')">Show Tomes</button>
+                                </div>
+                                <div class="row h-100 row-cols-1 row-cols-xl-2 dark-shadow rounded" id="tomes-dropdown" style = "display:none">
+                                    <div class="col-auto rounded order-xl-0 order-1">
+                                        <div class="row h-100 dark-shadow rounded" id='weapon-dropdown'>
+                                            <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="weapon-img-loc">
+                                                <img id="weapon-img" class="img-fluid rounded" src="../media/items/new/generic-wand.png">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col scaled-font fw-bold gx-3" id="weapon-dps">
+                                                        base dps: 0
+                                                    </div>
+                                                    <div class="col text-nowrap scaled-font lvl fw-bold gx-3" id="weapon-lv">
+                                                        0
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col g-0 rounded">
+                                                <div class="row row-cols-1 h-100 align-items-center">
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value="" tabindex="2"/>
+                                                    </div>
+                                                    <div class="col d-flex justify-content-end">
+                                                        <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders" tabindex="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col py-3">
+                            <div class="row row-cols-1 gy-2 rounded dark-5 dark-shadow">
                                 <div class="col">
                                     <div class="row row-cols-2 row-cols-xl-5 gy-2 justify-content-center">
                                         <div class="col text-center gx-2">
