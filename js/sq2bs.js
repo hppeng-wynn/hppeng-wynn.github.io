@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-choice").setAttribute("oninput", "update_field('"+ eq +"'); calcBuildSchedule();");
-        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip'); toggle_plus_minus('" + eq + "-pm'); ");
+        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip'); "); //toggle_plus_minus('" + eq + "-pm');
     }
 
     for (const eq of powderable_keys) {
@@ -252,7 +252,7 @@ function collapse_element(elmnt) {
                 elem.style.display = "";
             } else {
                 elem.style.display = "none";
-            }   
+            }  
         }
     }
     // macy quirk

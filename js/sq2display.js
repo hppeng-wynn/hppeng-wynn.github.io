@@ -249,13 +249,13 @@ function displaysq2ExpandedItem(item, parent_id){
                 } else if (id === "displayName") {
                     let row = document.createElement("div");
 
-                    let p_elem = document.createElement("a");
-                    row.classList.add("row", "no-collapse");
-                    p_elem.classList.add("col", "text-center", "item-title");
-                    p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
-                    p_elem.style.textGrow = 1;
+                    let a_elem = document.createElement("a");
+                    row.classList.add("row", "justify-content-center");
+                    a_elem.classList.add("col-auto", "text-center", "item-title", "p-0");
+                    a_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
+                    // a_elem.style.textGrow = 1;
                     
-                    row.appendChild(p_elem);
+                    row.appendChild(a_elem);
 
                     /* 
                     FUNCTIONALITY FOR THIS FEATURE HAS SINCE BEEN REMOVED (WITH SQ2).
@@ -271,19 +271,33 @@ function displaysq2ExpandedItem(item, parent_id){
                     // row.appendChild(plusminus);
 
                     if (item.get("custom")) {
-                        p_elem.href = "../custom/#" + item.get("hash");
+                        a_elem.href = "../custom/#" + item.get("hash");
+                        a_elem.textContent = item.get("displayName");
+                    } else if (item.get("crafted")) {
+                        a_elem.href = "../crafter/#" + item.get("hash");
+                        a_elem.textContent = item.get(id);
+                    } else {
+                        a_elem.href = "../item/#" + item.get("displayName");
+                        a_elem.textContent = item.get("displayName");
+                    }
+                    parent_div.appendChild(row);
+
+                    let nolink_row = document.createElement("div");
+                    let p_elem = document.createElement("p");
+                    nolink_row.classList.add("row", "justify-content-center");
+                    nolink_row.style.display = "none";
+                    p_elem.classList.add("col-auto", "text-center", "item-title", "p-0");
+                    p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
+                    if (item.get("custom")) {
                         p_elem.textContent = item.get("displayName");
                     } else if (item.get("crafted")) {
-                        p_elem.href = "../crafter/#" + item.get("hash");
                         p_elem.textContent = item.get(id);
                     } else {
-                        p_elem.href = "../item/#" + item.get("displayName");
                         p_elem.textContent = item.get("displayName");
                     }
-
-                   
-
-                    parent_div.appendChild(row);
+                    
+                    nolink_row.appendChild(p_elem);
+                    parent_div.appendChild(nolink_row);
 
                     let img = document.createElement("img");
                     if (item && item.has("type")) {
