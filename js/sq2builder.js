@@ -61,6 +61,15 @@ let equipment_fields = [
     "necklace",
     "weapon"
 ];
+let tome_fields = [
+    "weaponTome1",
+    "weaponTome2",
+    "armorTome1",
+    "armorTome2",
+    "armorTome3",
+    "armorTome4",
+    "guildTome1",
+]
 let equipment_names = [
     "Helmet",
     "Chestplate",
@@ -72,8 +81,19 @@ let equipment_names = [
     "Necklace",
     "Weapon"
 ];
+
+let tome_names = [
+    "Weapon Tome",
+    "Weapon Tome",
+    "Armor Tome",
+    "Armor Tome",
+    "Armor Tome",
+    "Armor Tome",
+    "Guild Tome",
+]
 let equipmentInputs = equipment_fields.map(x => x + "-choice");
-let buildFields = equipment_fields.map(x => x+"-tooltip");
+let buildFields = equipment_fields.map(x => x+"-tooltip").concat(tome_fields.map(x => x + "-tooltip"));
+let tomeInputs = tome_fields.map(x => x + "-choice");
 
 let powderInputs = [
     "helmet-powder",
@@ -82,15 +102,6 @@ let powderInputs = [
     "boots-powder",
     "weapon-powder",
 ];
-
-function init() {
-    console.log("builder.js init");
-    init_autocomplete();
-    decodeBuild(url_tag);
-    for (const i of equipment_keys) {
-        update_field(i);
-    }
-}
 
 function getItemNameFromID(id) {
     if (redirectMap.has(id)) {
@@ -224,6 +235,10 @@ function encodeBuild() {
             let crafted_idx = 0;
             let custom_idx = 0;
             for (const item of player_build.items) {
+                //skip tomes (do we skip them?)
+                if (item.category === "tome") {
+                    continue;
+                }
                 
                 if (item.get("custom")) {
                     let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
@@ -260,6 +275,11 @@ function encodeBuild() {
             build_string = "4_";
             let crafted_idx = 0;
             for (const item of player_build.items) {
+                //skip tomes for now
+                if (item.get("category") === "tome") {
+                    continue;
+                }
+
                 if (item.get("crafted")) {
                     build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx]);
                     crafted_idx += 1;
@@ -312,6 +332,7 @@ function calculateBuild(save_skp, skp){
             updatePowderSpecials("skip", false);
         }
         let weaponName = getValue(equipmentInputs[8]);
+        //bruh @hpp
         if (weaponName.startsWith("Morph-")) {
             let equipment = [ "Morph-Stardust", "Morph-Steel", "Morph-Iron", "Morph-Gold", "Morph-Topaz", "Morph-Emerald", "Morph-Amethyst", "Morph-Ruby", weaponName.substring(6) ];
             for (let i in equipment) {
@@ -362,11 +383,24 @@ function calculateBuild(save_skp, skp){
             //console.log("POWDERING: " + powdering);
             powderings.push(powdering);
         }
+        let tomes = [ null, null, null, null, null, null, null];
+        for (let i in tomes) {
+            let equip = getValue(tomeInputs[i]).trim();
+            if (equip === "") {
+                equip = "No " + tome_names[i]
+            }
+            else {
+                setValue(tomeInputs[i], equip);
+            }
+            tomes[i] = equip;
+        }
         
 
         let level = document.getElementById("level-choice").value;
-        player_build = new Build(level, equipment, powderings, new Map(), errors);
+        player_build = new Build(level, equipment, powderings, new Map(), errors, tomes);
         console.log(player_build);
+
+        //isn't this deprecated?
         for (let i of document.getElementsByClassName("hide-container-block")) {
 			i.style.display = "block";
         }
@@ -1080,7 +1114,20 @@ function optimizeStrDex() {
 }
 
 // TODO: Learn and use await
+function init() {
+    console.log("builder.js init");
+    init_autocomplete();
+    decodeBuild(url_tag);
+    for (const i of equipment_keys) {
+        update_field(i);
+    }
+}
 function init2() {
     load_ing_init(init);
 }
-load_init(init2);
+function init3() {
+    load_tome_init(init2)
+}
+
+
+load_init(init3);

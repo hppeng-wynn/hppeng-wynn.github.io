@@ -238,7 +238,7 @@ function init_maps() {
         item.has_negstat = false;
         item.reqs = [0, 0, 0, 0, 0];
         item.fixID = true;
-        item.tier = "Normal";//do not get rid of this @hpp
+        item.tier = "Normal";
         item.id = 10000 + i;
         item.nDam = "0-0";
         item.eDam = "0-0";

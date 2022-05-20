@@ -100,8 +100,12 @@ class Build{
      * @param {Number[]} powders : Powder application. List of lists of integers (powder IDs).
      *                  In order: boots, Chestplate, Leggings, Boots, Weapon.
      * @param {Object[]} inputerrors : List of instances of error-like classes.
+     * 
+     * @param {Object[]} tomes: List of tomes.
+     *                      In order: 2x Weapon Mastery Tome, 4x Armor Mastery Tome, 1x Guild Tome.
+     *                      2x Slaying Mastery Tome, 2x Dungeoneering Mastery Tome, 2x Gathering Mastery Tome are in game, but do not have "useful" stats (those that affect damage calculations or building)
      */
-    constructor(level,equipment, powders, externalStats, inputerrors=[]){
+    constructor(level,equipment, powders, externalStats, inputerrors=[], tomes){
 
         let errors = inputerrors;
         //this contains the Craft objects, if there are any crafted items. this.boots, etc. will contain the statMap of the Craft (which is built to be an expandedItem).
@@ -326,6 +330,142 @@ class Build{
                 errors.push(new ItemNotFound(equipment[8], "weapon", true));
             }
         }
+
+        //cannot craft tomes
+
+        if(tomeMap.get(tomes[0]) && tomeMap.get(tomes[0]).type === "weaponTome") {
+            const weaponTome1 = tomeMap.get(tomes[0]);
+            this.weaponTome1 = expandItem(weaponTome1, []);
+        } else {
+            try {
+                let weaponTome1 = getCustomFromHash(tomes[0]) ? getCustomFromHash(tomes[0]) : undefined;
+                if (weaponTome1.statMap.get("type") !== "weaponTome1") {
+                    throw new Error("Not a Weapon Tome");
+                }
+                if (this.weaponTome1.get("custom")) {
+                    this.customItems.push(weaponTome1);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const weaponTome1 = tomeMap.get("No Weapon Tome");
+                this.weaponTome1 = expandItem(weaponTome1, []);
+                errors.push(new ItemNotFound(tomes[0], "weaponTome1", true));
+            }
+        }
+        if(tomeMap.get(tomes[1]) && tomeMap.get(tomes[1]).type === "weaponTome") {
+            const weaponTome2 = tomeMap.get(tomes[1]);
+            this.weaponTome2 = expandItem(weaponTome2, []);
+        } else {
+            try {
+                let weaponTome2 = getCustomFromHash(tomes[1]) ? getCustomFromHash(tomes[1]) : undefined;
+                if (weaponTome2.statMap.get("type") !== "weaponTome2") {
+                    throw new Error("Not a Weapon Tome");
+                }
+                if (this.weaponTome2.get("custom")) {
+                    this.customItems.push(weaponTome2);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const weaponTome2 = tomeMap.get("No Weapon Tome");
+                this.weaponTome2 = expandItem(weaponTome2, []);
+                errors.push(new ItemNotFound(tomes[1], "weaponTome2", true));
+            }
+        }
+        if(tomeMap.get(tomes[2]) && tomeMap.get(tomes[2]).type === "armorTome") {
+            const armorTome1 = tomeMap.get(tomes[2]);
+            this.armorTome1 = expandItem(armorTome1, []);
+        } else {
+            try {
+                let armorTome1 = getCustomFromHash(tomes[2]) ? getCustomFromHash(tomes[2]) : undefined;
+                if (armorTome1.statMap.get("type") !== "armorTome1") {
+                    throw new Error("Not an Armor Tome");
+                }
+                if (this.armorTome1.get("custom")) {
+                    this.customItems.push(armorTome1);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const armorTome1 = tomeMap.get("No Armor Tome");
+                this.armorTome1 = expandItem(armorTome1, []);
+                errors.push(new ItemNotFound(tomes[2], "armorTome1", true));
+            }
+        }
+        if(tomeMap.get(tomes[3]) && tomeMap.get(tomes[3]).type === "armorTome") {
+            const armorTome2 = tomeMap.get(tomes[3]);
+            this.armorTome2 = expandItem(armorTome2, []);
+        } else {
+            try {
+                let armorTome2 = getCustomFromHash(tomes[3]) ? getCustomFromHash(tomes[3]) : undefined;
+                if (armorTome2.statMap.get("type") !== "armorTome2") {
+                    throw new Error("Not an Armor Tome");
+                }
+                if (this.armorTome2.get("custom")) {
+                    this.customItems.push(armorTome2);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const armorTome2 = tomeMap.get("No Armor Tome");
+                this.armorTome2 = expandItem(armorTome2, []);
+                errors.push(new ItemNotFound(tomes[3], "armorTome2", true));
+            }
+        }
+        if(tomeMap.get(tomes[4]) && tomeMap.get(tomes[4]).type === "armorTome") {
+            const armorTome3 = tomeMap.get(tomes[4]);
+            this.armorTome3 = expandItem(armorTome3, []);
+        } else {
+            try {
+                let armorTome3 = getCustomFromHash(tomes[4]) ? getCustomFromHash(tomes[4]) : undefined;
+                if (armorTome3.statMap.get("type") !== "armorTome3") {
+                    throw new Error("Not an Armor Tome");
+                }
+                if (this.armorTome3.get("custom")) {
+                    this.customItems.push(armorTome3);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const armorTome3 = tomeMap.get("No Armor Tome");
+                this.armorTome3 = expandItem(armorTome3, []);
+                errors.push(new ItemNotFound(tomes[4], "armorTome3", true));
+            }
+        }
+        if(tomeMap.get(tomes[5]) && tomeMap.get(tomes[5]).type === "armorTome") {
+            const armorTome4 = tomeMap.get(tomes[5]);
+            this.armorTome4 = expandItem(armorTome4, []);
+        } else {
+            try {
+                let armorTome4 = getCustomFromHash(tomes[5]) ? getCustomFromHash(tomes[5]) : undefined;
+                if (armorTome4.statMap.get("type") !== "armorTome4") {
+                    throw new Error("Not an Armor Tome");
+                }
+                if (this.armorTome4.get("custom")) {
+                    this.customItems.push(armorTome4);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const armorTome4 = tomeMap.get("No Armor Tome");
+                this.armorTome4 = expandItem(armorTome4, []);
+                errors.push(new ItemNotFound(tomes[5], "armorTome4", true));
+            }
+        }
+        if(tomeMap.get(tomes[6]) && tomeMap.get(tomes[6]).type === "guildTome") {
+            const guildTome1 = tomeMap.get(tomes[6]);
+            this.guildTome1 = expandItem(guildTome1, []);
+        } else {
+            try {
+                let guildTome1 = getCustomFromHash(tomes[6]) ? getCustomFromHash(tomes[6]) : undefined;
+                if (guildTome1.statMap.get("type") !== "guildTome1") {
+                    throw new Error("Not an Guild Tome");
+                }
+                if (this.guildTome1.get("custom")) {
+                    this.customItems.push(guildTome1);
+                } //can't craft tomes
+                
+            } catch (Error) {
+                const guildTome1 = tomeMap.get("No Guild Tome");
+                this.guildTome1 = expandItem(guildTome1, []);
+                errors.push(new ItemNotFound(tomes[6], "guildTome1", true));
+            }
+        }
         
         //console.log(this.craftedItems)
 
@@ -345,9 +485,10 @@ class Build{
 
         this.availableSkillpoints = levelToSkillPoints(this.level);
         this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
-        this.items = this.equipment.concat([this.weapon]);
+        this.tomes = [this.weaponTome1, this.weaponTome2, this.armorTome1, this.armorTome2, this.armorTome3, this.armorTome4, this.guildTome1];
+        this.items = this.equipment.concat([this.weapon]).concat(this.tomes);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
-        let result = calculate_skillpoints(this.equipment, this.weapon);
+        let result = calculate_skillpoints(this.equipment, this.weapon, this.tomes);
         console.log(result);
         this.equip_order = result[0];
         // How many skillpoints the player had to assign (5 number)
@@ -378,7 +519,7 @@ class Build{
     /*Returns build in string format
     */
     toString(){
-        return [this.equipment,this.weapon].flat();
+        return [this.equipment,this.weapon,this.tomes].flat();
     }
 
     /* Getters */

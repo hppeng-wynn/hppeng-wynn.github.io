@@ -451,7 +451,12 @@ function displaysq2ExpandedItem(item, parent_id){
         let item_desc_elem = document.createElement("div");
         item_desc_elem.classList.add("col");
         item_desc_elem.classList.add(item.get("tier"));
-        item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
+        if (tome_types.includes(item.get("type"))) {
+            tome_type_map = new Map([["weaponTome", "Weapon Tome"],["armorTome", "Armor Tome"],["guildTome", "Guild Tome"]]);
+            item_desc_elem.textContent = item.get("tier")+" "+tome_type_map.get(item.get("type"));
+        } else {
+            item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
+        }
         parent_div.append(item_desc_elem);
     }
 
