@@ -3,8 +3,6 @@ let armor_keys = ['helmet', 'chestplate', 'leggings', 'boots'];
 let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
 let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
-let tome_types = ['weaponTome', 'armorTome', 'guildTome'];
-let tome_keys = ['weaponTome1', 'weaponTome2', 'armorTome1', 'armorTome2', 'armorTome3', 'armorTome4', 'guildTome1'];
 let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'].concat(tome_keys);
 let powder_keys = ['e', 't', 'w', 'f', 'a'];
 
@@ -155,9 +153,9 @@ function update_field(field) {
         tome = tomeMap.get(item);
         if (!tome) {return false;}
         powder_slots = 0;
-        tier = item.tier;
-        category = item.category;
-        type = item.type;
+        tier = tome.tier;
+        category = tome.category;
+        type = tome.type;
     }
     else {
         // item not found
@@ -406,7 +404,8 @@ function init_autocomplete() {
             if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
                 continue;
             }
-            tome_arr.push(tome)
+            let tome_name = tome;
+            tome_arr.push(tome_name);
         }
 
         // create dropdown

@@ -488,7 +488,7 @@ class Build{
         this.tomes = [this.weaponTome1, this.weaponTome2, this.armorTome1, this.armorTome2, this.armorTome3, this.armorTome4, this.guildTome1];
         this.items = this.equipment.concat([this.weapon]).concat(this.tomes);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
-        let result = calculate_skillpoints(this.equipment, this.weapon, this.tomes);
+        let result = calculate_skillpoints(this.equipment.concat(this.tomes), this.weapon);
         console.log(result);
         this.equip_order = result[0];
         // How many skillpoints the player had to assign (5 number)

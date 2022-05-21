@@ -123,7 +123,7 @@ function parsePowdering(powder_info) {
     for (let i = 0; i < 5; ++i) {
         let powders = "";
         let n_blocks = Base64.toInt(powder_info.charAt(0));
-        console.log(n_blocks + " blocks");
+        // console.log(n_blocks + " blocks");
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
@@ -291,7 +291,6 @@ function encodeBuild() {
                     build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
                     crafted_idx += 1;
                 } else if (item.get("category") === "tome") {
-                    console.log(item);
                     build_string += Base64.fromIntN(item.get("id"), 1);
                 } else {
                     build_string += Base64.fromIntN(item.get("id"), 3);

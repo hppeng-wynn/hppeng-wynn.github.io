@@ -61,8 +61,14 @@ let item_types = [
     "Bow",
     "Potion",
     "Scroll",
-    "Food"
+    "Food",
+    "Weapon Tome",
+    "Armor Tome",
+    "Guild Tome"
 ]
+
+let tome_types = ['weaponTome', 'armorTome', 'guildTome'];
+let tome_keys = ['weaponTome1', 'weaponTome2', 'armorTome1', 'armorTome2', 'armorTome3', 'armorTome4', 'guildTome1'];
 
 /*
  * Display commands
