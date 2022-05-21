@@ -110,6 +110,13 @@ function getItemNameFromID(id) {
     return idMap.get(id);
 }
 
+function getTomeNameFromID(id) {
+    if (tomeRedirectMap.has(id)) {
+        return getTomeNameFromID(tomeRedirectMap.get(id));
+    }
+    return tomeIDMap.get(id);
+}
+
 function parsePowdering(powder_info) {
     // TODO: Make this run in linear instead of quadratic time... ew
     let powdering = [];
@@ -138,13 +145,17 @@ function parsePowdering(powder_info) {
  */
 function decodeBuild(url_tag) {
     if (url_tag) {
+        //default values
         let equipment = [null, null, null, null, null, null, null, null, null];
+        let tomes = [null, null, null, null, null, null, null];
         let powdering = ["", "", "", "", ""];
         let info = url_tag.split("_");
         let version = info[0];
         let save_skp = false;
         let skillpoints = [0, 0, 0, 0, 0];
         let level = 106;
+
+        //equipment (items)
         if (version === "0" || version === "1" || version === "2" || version === "3") {
             let equipments = info[1];
             for (let i = 0; i < 9; ++i ) {
@@ -188,6 +199,42 @@ function decodeBuild(url_tag) {
             }
             info[1] = info_str.slice(start_idx);
         }
+        if (version === "6") {
+            let info_str = info[1];
+            let start_idx = 0;
+            for (let i = 0; i < 9; ++i ) {
+                if (info_str.slice(start_idx,start_idx+3) === "CR-") {
+                    equipment[i] = info_str.slice(start_idx, start_idx+20);
+                    start_idx += 20;
+                } else if (info_str.slice(start_idx+3,start_idx+6) === "CI-") {
+                    let len = Base64.toInt(info_str.slice(start_idx,start_idx+3));
+                    equipment[i] = info_str.slice(start_idx+3,start_idx+3+len);
+                    start_idx += (3+len);
+                } else {
+                    let equipment_str = info_str.slice(start_idx, start_idx+3);
+                    equipment[i] = getItemNameFromID(Base64.toInt(equipment_str));
+                    start_idx += 3;
+                }
+            }
+            //tomes!
+            for (let i = 0; i < 7; ++i) {
+                let tome_str = info_str.charAt(start_idx);
+                tomes[i] = getTomeNameFromID(Base64.toInt(tome_str));
+                start_idx += 1;
+            }
+            info[1] = info_str.slice(start_idx);
+
+            //tome values do not appear in anything before v6.
+            for (let i in tomes) {
+                setValue(tomeInputs[i], tomes[i]);
+            }
+        }
+        //constant in all versions
+        for (let i in equipment) {
+            setValue(equipmentInputs[i], equipment[i]);
+        }
+
+        //level, skill point assignments, and powdering
         if (version === "1") {
             let powder_info = info[1];
             powdering = parsePowdering(powder_info);
@@ -200,7 +247,7 @@ function decodeBuild(url_tag) {
 
             let powder_info = info[1].slice(10);
             powdering = parsePowdering(powder_info);
-        } else if (version === "3" || version === "4" || version === "5"){
+        } else if (version === "3" || version === "4" || version === "5" || version === "6"){
             level = Base64.toInt(info[1].slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
@@ -213,13 +260,10 @@ function decodeBuild(url_tag) {
 
             powdering = parsePowdering(powder_info);
         }
-
         for (let i in powderInputs) {
             setValue(powderInputs[i], powdering[i]);
         }
-        for (let i in equipment) {
-            setValue(equipmentInputs[i], equipment[i]);
-        }
+
         calculateBuild(save_skp, skillpoints);
     }
 }
@@ -230,15 +274,14 @@ function encodeBuild() {
 
     if (player_build) {
         let build_string;
-        if (player_build.customItems.length > 0) { //v5 encoding
-            build_string = "5_";
+        
+        //V6 encoding - Tomes
+        if (player_build.items.length == 16 && player_build.tomes) {
+            build_string = "6_";
+
             let crafted_idx = 0;
             let custom_idx = 0;
             for (const item of player_build.items) {
-                //skip tomes (do we skip them?)
-                if (item.category === "tome") {
-                    continue;
-                }
                 
                 if (item.get("custom")) {
                     let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
@@ -247,42 +290,9 @@ function encodeBuild() {
                 } else if (item.get("crafted")) {
                     build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
                     crafted_idx += 1;
-                } else {
-                    build_string += Base64.fromIntN(item.get("id"), 3);
-                }
-            }
-    
-            for (const skp of skp_order) {
-                build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
-            }
-            build_string += Base64.fromIntN(player_build.level, 2);
-            for (const _powderset of player_build.powders) {
-                let n_bits = Math.ceil(_powderset.length / 6);
-                build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
-                // Slice copy.
-                let powderset = _powderset.slice();
-                while (powderset.length != 0) {
-                    let firstSix = powderset.slice(0,6).reverse();
-                    let powder_hash = 0;
-                    for (const powder of firstSix) {
-                        powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
-                    }
-                    build_string += Base64.fromIntN(powder_hash, 5);
-                    powderset = powderset.slice(6);
-                }
-            }
-        } else { //v4 encoding
-            build_string = "4_";
-            let crafted_idx = 0;
-            for (const item of player_build.items) {
-                //skip tomes for now
-                if (item.get("category") === "tome") {
-                    continue;
-                }
-
-                if (item.get("crafted")) {
-                    build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx]);
-                    crafted_idx += 1;
+                } else if (item.get("category") === "tome") {
+                    console.log(item);
+                    build_string += Base64.fromIntN(item.get("id"), 1);
                 } else {
                     build_string += Base64.fromIntN(item.get("id"), 3);
                 }
@@ -308,8 +318,89 @@ function encodeBuild() {
                 }
             }
         }
+
         return build_string;
     }
+    /* For reference in development - V5 and V4 encoding schemes */
+    // //V5 encoding - Custom Items
+    // if (player_build.customItems.length > 0) { 
+    //     build_string = "5_";
+    //     let crafted_idx = 0;
+    //     let custom_idx = 0;
+    //     for (const item of player_build.items) {
+    //         //skip tomes (do we skip them?)
+    //         if (item.category === "tome") {
+    //             continue;
+    //         }
+            
+    //         if (item.get("custom")) {
+    //             let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
+    //             build_string += Base64.fromIntN(custom.length, 3) + custom;
+    //             custom_idx += 1;
+    //         } else if (item.get("crafted")) {
+    //             build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
+    //             crafted_idx += 1;
+    //         } else {
+    //             build_string += Base64.fromIntN(item.get("id"), 3);
+    //         }
+    //     }
+
+    //     for (const skp of skp_order) {
+    //         build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
+    //     }
+    //     build_string += Base64.fromIntN(player_build.level, 2);
+    //     for (const _powderset of player_build.powders) {
+    //         let n_bits = Math.ceil(_powderset.length / 6);
+    //         build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
+    //         // Slice copy.
+    //         let powderset = _powderset.slice();
+    //         while (powderset.length != 0) {
+    //             let firstSix = powderset.slice(0,6).reverse();
+    //             let powder_hash = 0;
+    //             for (const powder of firstSix) {
+    //                 powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+    //             }
+    //             build_string += Base64.fromIntN(powder_hash, 5);
+    //             powderset = powderset.slice(6);
+    //         }
+    //     }
+    // } else { //v4 encoding
+    //     build_string = "4_";
+    //     let crafted_idx = 0;
+    //     for (const item of player_build.items) {
+    //         //skip tomes for now
+    //         if (item.get("category") === "tome") {
+    //             continue;
+    //         }
+
+    //         if (item.get("crafted")) {
+    //             build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx]);
+    //             crafted_idx += 1;
+    //         } else {
+    //             build_string += Base64.fromIntN(item.get("id"), 3);
+    //         }
+    //     }
+
+    //     for (const skp of skp_order) {
+    //         build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
+    //     }
+    //     build_string += Base64.fromIntN(player_build.level, 2);
+    //     for (const _powderset of player_build.powders) {
+    //         let n_bits = Math.ceil(_powderset.length / 6);
+    //         build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
+    //         // Slice copy.
+    //         let powderset = _powderset.slice();
+    //         while (powderset.length != 0) {
+    //             let firstSix = powderset.slice(0,6).reverse();
+    //             let powder_hash = 0;
+    //             for (const powder of firstSix) {
+    //                 powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+    //             }
+    //             build_string += Base64.fromIntN(powder_hash, 5);
+    //             powderset = powderset.slice(6);
+    //         }
+    //     }
+    // }
     //        this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
     //        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
     //                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
@@ -326,7 +417,7 @@ function encodeBuild() {
 function calculateBuild(save_skp, skp){
     try {
         resetEditableIDs();
-        if(player_build){
+        if (player_build) {
             reset_powder_specials();
             updateBoosts("skip", false);
             updatePowderSpecials("skip", false);

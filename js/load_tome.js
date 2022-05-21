@@ -7,7 +7,8 @@ let tload_complete = false;
 let tload_in_progress = false;
 let tomes;
 let tomeMap;
-let tomeIDMap;
+let tometomeIDMap;
+let tomeRedirectMap;
 let tomeLists = new Map();
 /*
  * Load tome set from local DB. Calls init() on success.
@@ -127,6 +128,8 @@ function init_tome_maps() {
     tomeMap = new Map();
     /* Mapping from item names to set names. */
     tomeIDMap = new Map();
+
+    tomeRedirectMap = new Map();
     for (const it of tomeTypes) {
         tomeLists.set(it, []);
     }
@@ -150,7 +153,7 @@ function init_tome_maps() {
         tome.reqs = [0, 0, 0, 0, 0];
         tome.fixID = true;
         tome.tier = "Normal";
-        tome.id = 10000 + i;
+        tome.id = 61 + i; //special case!
         tome.nDam = "0-0";
         tome.eDam = "0-0";
         tome.tDam = "0-0";
@@ -163,22 +166,19 @@ function init_tome_maps() {
         noneTomes[i] = tome;
     }
     tomes = tomes.concat(noneTomes);
-    //console.log(tomes);
     for (const tome of tomes) {
         if (tome.remapID === undefined) {
             tomeLists.get(tome.type).push(tome.displayName);
             tomeMap.set(tome.displayName, tome);
             if (noneTomes.includes(tome)) {
-                idMap.set(tome.id, "");
+                tomeIDMap.set(tome.id, "");
             }
             else {
-                idMap.set(tome.id, tome.displayName);
+                tomeIDMap.set(tome.id, tome.displayName);
             }
         }
         else {
-            redirectMap.set(tome.id, tome.remapID);
+            tomeRedirectMap.set(tome.id, tome.remapID);
         }
     }
-    console.log(tomeLists);
-    console.log(tomeMap);
 }
