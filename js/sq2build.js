@@ -339,7 +339,7 @@ class Build{
         } else {
             try {
                 let weaponTome1 = getCustomFromHash(tomes[0]) ? getCustomFromHash(tomes[0]) : undefined;
-                if (weaponTome1.statMap.get("type") !== "weaponTome1") {
+                if (weaponTome1.statMap.get("type") !== "weaponTome") {
                     throw new Error("Not a Weapon Tome");
                 }
                 if (this.weaponTome1.get("custom")) {
@@ -358,7 +358,7 @@ class Build{
         } else {
             try {
                 let weaponTome2 = getCustomFromHash(tomes[1]) ? getCustomFromHash(tomes[1]) : undefined;
-                if (weaponTome2.statMap.get("type") !== "weaponTome2") {
+                if (weaponTome2.statMap.get("type") !== "weaponTome") {
                     throw new Error("Not a Weapon Tome");
                 }
                 if (this.weaponTome2.get("custom")) {
@@ -377,7 +377,7 @@ class Build{
         } else {
             try {
                 let armorTome1 = getCustomFromHash(tomes[2]) ? getCustomFromHash(tomes[2]) : undefined;
-                if (armorTome1.statMap.get("type") !== "armorTome1") {
+                if (armorTome1.statMap.get("type") !== "armorTome") {
                     throw new Error("Not an Armor Tome");
                 }
                 if (this.armorTome1.get("custom")) {
@@ -396,7 +396,7 @@ class Build{
         } else {
             try {
                 let armorTome2 = getCustomFromHash(tomes[3]) ? getCustomFromHash(tomes[3]) : undefined;
-                if (armorTome2.statMap.get("type") !== "armorTome2") {
+                if (armorTome2.statMap.get("type") !== "armorTome") {
                     throw new Error("Not an Armor Tome");
                 }
                 if (this.armorTome2.get("custom")) {
@@ -415,7 +415,7 @@ class Build{
         } else {
             try {
                 let armorTome3 = getCustomFromHash(tomes[4]) ? getCustomFromHash(tomes[4]) : undefined;
-                if (armorTome3.statMap.get("type") !== "armorTome3") {
+                if (armorTome3.statMap.get("type") !== "armorTome") {
                     throw new Error("Not an Armor Tome");
                 }
                 if (this.armorTome3.get("custom")) {
@@ -434,7 +434,7 @@ class Build{
         } else {
             try {
                 let armorTome4 = getCustomFromHash(tomes[5]) ? getCustomFromHash(tomes[5]) : undefined;
-                if (armorTome4.statMap.get("type") !== "armorTome4") {
+                if (armorTome4.statMap.get("type") !== "armorTome") {
                     throw new Error("Not an Armor Tome");
                 }
                 if (this.armorTome4.get("custom")) {
