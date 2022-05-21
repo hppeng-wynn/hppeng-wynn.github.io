@@ -534,11 +534,22 @@ function updateEditableIDs() {
 /* Resets all IDs in the edit IDs section to their "original" values. 
 */
 function resetEditableIDs() {
-    for (const id of editable_item_fields) {
-        let edit_input = document.getElementById(id);
+    if (player_build) {
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+            let value_label = document.getElementById(id + "-base");
 
-        edit_input.value = 0;
-        edit_input.placeholder = 0;
+            edit_input.value = value_label.value;
+            edit_input.placeholder = value_label.value;
+        }
+    } else {
+        //no player build, reset to 0
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+
+            edit_input.value = 0;
+            edit_input.placeholder = 0;
+        }
     }
 }
 
