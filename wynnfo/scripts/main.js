@@ -14,6 +14,12 @@ const pdfs = new Map([
 
 
 const changelog = new Map([
+    ["Build Version 6 (20 May 2022)",
+        [
+            " + Added Tomes",
+            " + Changed Build encode and decode schemes to account for tomes",
+        ]
+    ],
     ["WynnBuilder^2 (12 May 2022)",
         [
             " + Switched most of Wynnbuilder over to Bootstrap",

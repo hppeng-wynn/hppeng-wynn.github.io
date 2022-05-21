@@ -13,15 +13,15 @@ tome_mapping = dict()
 
 max_id = 0
 for tome in tome_data:
-    if "tomeID" in tome:
-        if tome["tomeID"] > max_id: 
-            max_id = tome["tomeID"]
-        tome_mapping[tome["name"]] = tome["tomeID"]
+    if "id" in tome:
+        if tome["id"] > max_id: 
+            max_id = tome["id"]
+        tome_mapping[tome["name"]] = tome["id"]
 i = max_id + 1
 
 for tome in tome_data:
-    if "tomeID" not in tome:
-        tome["tomeID"] = i
+    if "id" not in tome:
+        tome["id"] = i
         tome_mapping[tome["name"]] = i
         i += 1
     

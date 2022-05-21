@@ -1,7 +1,6 @@
 function calculate_skillpoints(equipment, weapon) {
     // Calculate equipment equipping order and required skillpoints.
     // Return value: [equip_order, best_skillpoints, final_skillpoints, best_total];
-
     let fixed = [];
     let consider = [];
     let noboost = [];

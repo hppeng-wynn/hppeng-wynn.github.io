@@ -173,3 +173,7 @@ Wynn-Related CSS
 }
 
 .aDam:before, .Air:before, .Air_powder:before { content: "\274b" ' '; }
+
+.restrict {
+    color: #ff8180;
+}

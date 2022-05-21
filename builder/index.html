@@ -53,8 +53,8 @@
         <div class="col">
             <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
                 <div class="col-xl-6">
-                    <div class="row row-cols-1 gy-5">
-                        <div class="col">
+                    <div class="row row-cols-1 mb-3">
+                        <div class="col py-3">
                             <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5 justify-content-center">
                                 <div class="col-auto rounded order-xl-0 order-0">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="helmet-dropdown">
@@ -324,8 +324,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="row row-cols-1 gy-2 pb-3 rounded dark-5 dark-shadow">
+                        <div class="col py-3">
+                            <div class="row row-cols-1 gy-2 rounded dark-5 dark-shadow">
                                 <div class="col">
                                     <div class="row row-cols-2 row-cols-xl-5 gy-2 justify-content-center">
                                         <div class="col text-center gx-2">
@@ -420,19 +420,191 @@
                                         <div class="col fw-bold dark-4 rounded-top">
                                             <div class = "row">
                                                 <div class = "col-4 py-2">
-                                                    <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "toggle_tab('edit_id_tab'); toggleButton('edit-ID-button')">
-                                                        Edit IDs
+                                                    <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-tomes" onclick = "toggle_tab('tomes-dropdown'); toggleButton('toggle-tomes')">
+                                                        Show Tomes
                                                     </button>
                                                 </div>
                                                 <div class = "col-4 py-2">
-                                                    <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "updateStats();">
-                                                        Update Stats
+                                                    <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "toggle_tab('edit_id_tab'); toggleButton('edit-ID-button')">
+                                                        Edit IDs
                                                     </button>
                                                 </div>
                                                 <div class = "col-4 py-2">
                                                     <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "resetEditableIDs(); updateStats();">
                                                         Reset Edited IDs
                                                     </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "tomes-dropdown" style = "display: none;">
+                                            <div class="row h-100 row-cols-1 row-cols-xl-2 gy-2 rounded">
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='weaponTome1-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="weaponTome1-img-loc">
+                                                            <img id="weaponTome1-img" class="img-fluid rounded" src="../media/items/new/generic-weaponTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Weapon
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="weaponTome1-choice" name="weaponTome1-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='weaponTome2-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="weaponTome2-img-loc">
+                                                            <img id="weaponTome2-img" class="img-fluid rounded" src="../media/items/new/generic-weaponTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Weapon
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="weaponTome2-choice" name="weaponTome2-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='armorTome1-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="armorTome1-img-loc">
+                                                            <img id="armorTome1-img" class="img-fluid rounded" src="../media/items/new/generic-armorTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Armor
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="armorTome1-choice" name="armorTome1-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='armorTome2-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="armorTome2-img-loc">
+                                                            <img id="armorTome2-img" class="img-fluid rounded" src="../media/items/new/generic-armorTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Armor
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="armorTome2-choice" name="armorTome2-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='armorTome3-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="armorTome3-img-loc">
+                                                            <img id="armorTome3-img" class="img-fluid rounded" src="../media/items/new/generic-armorTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Armor
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="armorTome3-choice" name="armorTome3-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='armorTome4-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="armorTome4-img-loc">
+                                                            <img id="armorTome4-img" class="img-fluid rounded" src="../media/items/new/generic-armorTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Armor
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="armorTome4-choice" name="armorTome4-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto rounded">
+                                                    <div class="row h-100 dark-shadow rounded" id='guildTome1-dropdown'>
+                                                        <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="guildTome1-img-loc">
+                                                            <img id="guildTome1-img" class="img-fluid rounded" src="../media/items/new/generic-guildTome.png">
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Guild 
+                                                                </div>
+                                                                <div class="col scaled-font fw-bold gx-3">
+                                                                    Tome
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col g-0 rounded">
+                                                            <div class="row row-cols-1 h-100 align-items-center">
+                                                                <div class="col d-flex justify-content-end">
+                                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="guildTome1-choice" name="guildTome1-choice" placeholder="No Tome" value=""/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -446,7 +618,7 @@
                                                         Spell Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="sdPct" name="sdPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="sdPct" name="sdPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "sdPct-base">
                                                         Original Value: 0
@@ -457,7 +629,7 @@
                                                         Spell Damage Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="sdRaw" name="sdRaw" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="sdRaw" name="sdRaw" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "sdRaw-base">
                                                         Original Value: 0
@@ -468,7 +640,7 @@
                                                         Melee Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="mdPct" name="mdPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="mdPct" name="mdPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "mdPct-base">
                                                         Original Value: 0
@@ -479,7 +651,7 @@
                                                         Melee Damage Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="mdRaw" name="mdRaw" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="mdRaw" name="mdRaw" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "mdRaw-base">
                                                         Original Value: 0
@@ -492,7 +664,7 @@
                                                         Poison:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="poison" name="poison" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="poison" name="poison" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "poison-base">
                                                         Original Value: 0
@@ -503,7 +675,7 @@
                                                         Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="eDamPct" name="eDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="eDamPct" name="eDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "eDamPct-base">
                                                         Original Value: 0
@@ -514,7 +686,7 @@
                                                         Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="tDamPct" name="tDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="tDamPct" name="tDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "tDamPct-base">
                                                         Original Value: 0
@@ -525,7 +697,7 @@
                                                         Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="wDamPct" name="wDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="wDamPct" name="wDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "wDamPct-base">
                                                         Original Value: 0
@@ -538,7 +710,7 @@
                                                         Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="fDamPct" name="fDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="fDamPct" name="fDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "fDamPct-base">
                                                         Original Value: 0
@@ -549,7 +721,7 @@
                                                         Damage %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="aDamPct" name="aDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="aDamPct" name="aDamPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "aDamPct-base">
                                                         Original Value: 0
@@ -560,7 +732,7 @@
                                                         + Tier:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="atkTier" name="atkTier" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="atkTier" name="atkTier" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "atkTier-base">
                                                         Original Value: 0
@@ -579,7 +751,7 @@
                                                         Defense %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="eDefPct" name="eDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="eDefPct" name="eDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "eDefPct-base">
                                                         Original Value: 0
@@ -590,7 +762,7 @@
                                                         Defense %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="tDefPct" name="tDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="tDefPct" name="tDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "tDefPct-base">
                                                         Original Value: 0
@@ -601,7 +773,7 @@
                                                         Defense %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="wDefPct" name="wDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="wDefPct" name="wDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "wDefPct-base">
                                                         Original Value: 0
@@ -612,7 +784,7 @@
                                                         Defense %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="fDefPct" name="fDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="fDefPct" name="fDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "fDefPct-base">
                                                         Original Value: 0
@@ -625,7 +797,7 @@
                                                         Defense %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="aDefPct" name="aDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="aDefPct" name="aDefPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "aDefPct-base">
                                                         Original Value: 0
@@ -636,7 +808,7 @@
                                                         Health Regen Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="hprRaw" name="hprRaw" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="hprRaw" name="hprRaw" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "hprRaw-base">
                                                         Original Value: 0
@@ -647,7 +819,7 @@
                                                         Health Regen %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="hprPct" name="hprPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="hprPct" name="hprPct" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "hprPct-base">
                                                         Original Value: 0
@@ -658,7 +830,7 @@
                                                         Health Bonus:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="hpBonus" name="hpBonus" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="hpBonus" name="hpBonus" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "hpBonus-base">
                                                         Original Value: 0
@@ -674,7 +846,7 @@
                                                         1st Spell Cost %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spPct1" name="spPct1" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spPct1" name="spPct1" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spPct1-base">
                                                         Original Value: 0
@@ -685,7 +857,7 @@
                                                         2nd Spell Cost %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spPct2" name="spPct2" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spPct2" name="spPct2" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spPct2-base">
                                                         Original Value: 0
@@ -696,7 +868,7 @@
                                                         3rd Spell Cost %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spPct3" name="spPct3" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spPct3" name="spPct3" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spPct3-base">
                                                         Original Value: 0
@@ -707,7 +879,7 @@
                                                         4th Spell Cost %:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spPct4" name="spPct4" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spPct4" name="spPct4" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spPct4-base">
                                                         Original Value: 0
@@ -720,7 +892,7 @@
                                                         1st Spell Cost Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spRaw1" name="spRaw1" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spRaw1" name="spRaw1" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spRaw1-base">
                                                         Original Value: 0
@@ -731,7 +903,7 @@
                                                         2nd Spell Cost Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spRaw2" name="spRaw2" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spRaw2" name="spRaw2" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spRaw2-base">
                                                         Original Value: 0
@@ -742,7 +914,7 @@
                                                         3rd Spell Cost Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spRaw3" name="spRaw3" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spRaw3" name="spRaw3" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spRaw3-base">
                                                         Original Value: 0
@@ -753,7 +925,7 @@
                                                         4th Spell Cost Raw:
                                                     </div>
                                                     <div class = "row">
-                                                        <input type = "number" placeholder = "0" id="spRaw4" name="spRaw4" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm"/>
+                                                        <input type = "number" placeholder = "0" id="spRaw4" name="spRaw4" value="0" class="border-semi-dark border-2 text-light dark-5 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
                                                     </div>
                                                     <div class = "row" id = "spRaw4-base">
                                                         Original Value: 0
@@ -1118,6 +1290,20 @@
             </div>
             <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
             </div>
+            <div id="weaponTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
+            <div id="weaponTome2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
+            <div id="armorTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
+            <div id="armorTome2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
+            <div id="armorTome3-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
+            <div id="armorTome4-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
+            <div id="guildTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+            </div>
             <div class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3" id = "build-order">
             </div>
             <div class = "rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark p-3" id = "set-info"></div>
@@ -1209,6 +1395,7 @@
     <script type="text/javascript" src="../js/query_2.js"></script>
     <script type="text/javascript" src="../js/load.js"></script>
     <script type="text/javascript" src="../js/load_ing.js"></script>
+    <script type="text/javascript" src="../js/load_tome.js"></script>
     <script type="text/javascript" src="../js/custom.js"></script> 
     <script type="text/javascript" src="../js/craft.js"></script>  
     <script type="text/javascript" src="../js/sq2build.js"></script>

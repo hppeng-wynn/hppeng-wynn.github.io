@@ -3,7 +3,7 @@ let armor_keys = ['helmet', 'chestplate', 'leggings', 'boots'];
 let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
 let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
 let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
-let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
+let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'].concat(tome_keys);
 let powder_keys = ['e', 't', 'w', 'f', 'a'];
 
 let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
@@ -13,11 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-choice").setAttribute("oninput", "update_field('"+ eq +"'); calcBuildSchedule();");
-        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip'); "); //toggle_plus_minus('" + eq + "-pm');
+        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip');"); //toggle_plus_minus('" + eq + "-pm'); 
     }
 
     for (const eq of powderable_keys) {
         document.querySelector("#"+eq+"-powder").setAttribute("oninput", "calcBuildSchedule(); update_field('"+ eq +"');");
+    }
+
+    for (const eq of tome_keys) {
+        document.querySelector("#" + eq + "-choice").setAttribute("oninput", "update_field('" + eq + "'); calcBuildSchedule();");
+        document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip');");
     }
 
     for (const i of spell_disp) {
@@ -144,6 +149,14 @@ function update_field(field) {
         category = item.category;
         type = item.type;
     } 
+    else if (tomeMap.get(item)) {
+        tome = tomeMap.get(item);
+        if (!tome) {return false;}
+        powder_slots = 0;
+        tier = tome.tier;
+        category = tome.category;
+        type = tome.type;
+    }
     else {
         // item not found
         document.querySelector("#"+field+"-choice").classList.add("text-light");
@@ -299,6 +312,9 @@ function reset_powder_specials() {
 function init_autocomplete() {
     let dropdowns = new Map()
     for (const eq of equipment_keys) {
+        if (tome_keys.includes(eq)) {
+            continue;
+        }
         // build dropdown
         let item_arr = [];
         if (eq == 'weapon') {
@@ -375,6 +391,72 @@ function init_autocomplete() {
             }
         }));
     }
+
+    for (const eq of tome_keys) {
+        // build dropdown
+        let tome_arr = [];
+        for (const tome of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
+            let tome_obj = tomeMap.get(tome);
+            if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
+                continue;
+            }
+            //this should suffice for tomes - jank
+            if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
+                continue;
+            }
+            let tome_name = tome;
+            tome_arr.push(tome_name);
+        }
+
+        // create dropdown
+        dropdowns.set(eq, new autoComplete({
+            data: {
+                src: tome_arr
+            },
+            selector: "#"+ eq +"-choice",
+            wrapper: false,
+            resultsList: {
+                maxResults: 1000,
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    // dynamic result loc
+                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
+                    list.style.top = position.bottom + window.scrollY +"px";
+                    list.style.left = position.x+"px";
+                    list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 2 +"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No results found!";
+                        list.prepend(message);
+                    }
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+                element: (tome, data) => {
+                    tome.classList.add(tomeMap.get(data.value).tier);
+                },
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        }
+                        update_field(eq);
+                        calcBuildSchedule();
+                    },
+                },
+            }
+        }));
+    }
+
     let filter_loc = ["filter1", "filter2", "filter3", "filter4"];
     for (const i of filter_loc) {
         dropdowns.set(i+"-choice", new autoComplete({
