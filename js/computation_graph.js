@@ -1,7 +1,7 @@
 let _ALL_NODES = new Map();
 
 class ComputeNode {
-    /***
+    /**
      * Make a generic compute node.
      * Adds the node to the global map of nodenames to nodes (for calling from html listeners).
      *
@@ -21,7 +21,7 @@ class ComputeNode {
         this.fail_cb = false;   // Set to true to force updates even if parent failed.
     }
 
-    /***
+    /**
      * Request update of this compute node. Pushes updates to children.
      */
     update(timestamp) {
@@ -42,14 +42,14 @@ class ComputeNode {
         }
     }
 
-    /***
+    /**
      * Get value of this compute node. Can't trigger update cascades (push based update, not pull based.)
      */
     get_value() {
         return this.value
     }
 
-    /***
+    /**
      * Abstract method for computing something. Return value is set into this.value
      */
     compute_func(input_map) {
@@ -62,7 +62,7 @@ class ComputeNode {
     }
 }
 
-/***
+/**
  * Schedule a ComputeNode to be updated.
  *
  * @param node_name : ComputeNode name to schedule an update for.
@@ -79,11 +79,11 @@ function calcSchedule(node_name) {
     }, 500);
 }
 
-/***
+/**
  * Node for getting an item's stats from an item input field.
  */
-class ItemStats extends ComputeNode {
-    /***
+class ItemInputNode extends ComputeNode {
+    /**
      * Make an item stat pulling compute node.
      *
      * @param name: Name of this node.
@@ -94,7 +94,7 @@ class ItemStats extends ComputeNode {
         super(name);
         this.input_field.setAttribute("onInput", "calcSchedule('"+name+"');");
         this.input_field = item_input_field;
-        this.none_item = none_item;
+        this.none_item = expandItem(none_item);
     }
 
     compute_func(input_map) {
@@ -114,23 +114,23 @@ class ItemStats extends ComputeNode {
             item = getCraftFromHash(item_text);
         } 
         else if (itemMap.has(item_text)) {
-            item = itemMap.get(item_text);
+            item = Item(itemMap.get(item_text));
         } 
         else if (tomeMap.has(item_text)) {
-            item = tomeMap.get(item_text);
+            item = Item(tomeMap.get(item_text));
         }
 
-        if (!item || item.) {
+        if (!item || item.statMap.get('type') !== this.none_item.statMap.get('type')) {
             return null;
         }
         return item;
     }
 }
 
-/***
+/**
  * Node for updating item input fields from parsed items.
  */
-class ItemInputDisplay extends ComputeNode {
+class ItemInputDisplayNode extends ComputeNode {
 
     constructor(name, item_input_field, item_image) {
         super(name);
@@ -140,10 +140,7 @@ class ItemInputDisplay extends ComputeNode {
     }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) {
-            throw "ItemInputDisplay accepts exactly one input (item)";
-        }
-
+        if (input_map.size !== 1) { throw "ItemInputDisplayNode accepts exactly one input (item)"; }
         const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
         this.input_field.classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set', 'Crafted', 'Custom');
@@ -154,5 +151,28 @@ class ItemInputDisplay extends ComputeNode {
             this.input_field.classList.add("is-invalid");
             return null;
         }
+
+        const tier = item.statMap.get('tier');
+        this.input_field.classList.add(tier);
+        this.image.classList.add(tier + "-shadow");
+    }
+}
+
+/**
+ * Change the weapon to match correct type.
+ */
+class WeaponDisplayNode extends ComputeNode {
+
+    constructor(name, image_field) {
+        super(name);
+        this.image = image_field;
+    }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "WeaponDisplayNode accepts exactly one input (item)"; }
+        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        const type = item.statMap.get('type');
+        this.image_field.setAttribute('src', '../media/items/new/generic-'+type+'.png');
     }
 }

@@ -369,7 +369,7 @@ function useBaseItem(elem) {
     //Check items db.
     for (const [name,itemObj] of itemMap) {
         if (itemName === name) {
-            baseItem = expandItem(itemObj, []);
+            baseItem = expandItem(itemObj);
             break;
         }
     }
