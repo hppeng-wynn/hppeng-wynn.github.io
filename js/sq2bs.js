@@ -236,6 +236,13 @@ function toggle_spell_tab(tab) {
     } else {
         document.querySelector("#"+tab).style.display = "none";
     }
+
+    let arrow_img = document.querySelector("#" + "arrow_" + tab + "Avg");
+    if (arrow_img.src.includes("down")) {
+        arrow_img.src = arrow_img.src.replace("down", "up");
+    } else {
+        arrow_img.src = arrow_img.src.replace("up", "down");
+    }
 }
 
 function toggle_boost_tab(tab) {

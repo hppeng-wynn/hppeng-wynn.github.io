@@ -1413,41 +1413,11 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     }
 
     //up and down arrow - done ugly
-
-
-
-    let down_arrow = document.createElement("img");
-    down_arrow.id = "down_arrow_" + overallparent_elem.id;
-    down_arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    down_arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
-    overallparent_elem.appendChild(down_arrow);
-
-    let up_arrow = document.createElement("img");
-    up_arrow.id = "up_arrow_" + overallparent_elem.id;
-    up_arrow.style.maxWidth =  document.body.clientWidth > 900 ? "3rem" : "10rem";
-    up_arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_up.png";
-    up_arrow.style.display = "none";
-    overallparent_elem.appendChild(up_arrow);
-
-    overallparent_elem.setAttribute("onclick", overallparent_elem.getAttribute("onclick") + `;toggleUpDownArrow("${overallparent_elem.id}")`);
-}
-
-function toggleUpDownArrow(parent_id) {
-    parent_elem = document.getElementById(parent_id);
-    if (parent_elem) {
-        let down_arrow = document.getElementById("down_arrow_" + parent_id);
-        if (down_arrow.style.display === "none") {
-            down_arrow.style.display = "";
-        } else {
-            down_arrow.style.display = "none";
-        }
-        let up_arrow = document.getElementById("up_arrow_" + parent_id);
-        if (up_arrow.style.display === "none") {
-            up_arrow.style.display = "";
-        } else {
-            up_arrow.style.display = "none";
-        }
-    }
+    let arrow = document.createElement("img");
+    arrow.id = "arrow_" + overallparent_elem.id;
+    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
+    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
+    overallparent_elem.appendChild(arrow);
 }
 
 function displaysq2EquipOrder(parent_elem, buildOrder){
