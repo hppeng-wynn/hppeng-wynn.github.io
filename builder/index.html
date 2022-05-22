@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/wynnstyles.css">
 </head>
-<body class="text-light d-flex justify-content-center" id = "body">
+<body class="text-light" id = "body">
     <!-- hover tooltip stuff -->
     
     <!-- main -->
@@ -49,7 +49,7 @@
         <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
     </div>
-    <div class="container py-5 vh-100 mx-0 mx-lg-auto">
+    <div class="my-container">
         <div class="col">
             <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-0">
                 <div class="col-xl-6">
@@ -74,16 +74,16 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value="" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" id="helmet-choice" name="helmet-choice" placeholder="No Helmet" value="" tabindex="1"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" type="text" id="helmet-powder" name="helmet-powder" placeholder="powders" tabindex="1"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="ring1-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="ring1-img-loc">
                                             <img id="ring1-img" class="img-fluid rounded" src="../media/items/new/generic-ring.png">
@@ -101,16 +101,16 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="ring1-choice" name="ring1-choice" placeholder="No ring" value="" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control" id="ring1-choice" name="ring1-choice" placeholder="No ring" value="" tabindex="2"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end" style="height: 100%;">
-                                                    <!-- <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="ring1-powder" name="ring1-powder" placeholder="no powders" tabindex="2"/> -->
+                                                    <!-- <input class="equipment-input text-light form-control" type="text" id="ring1-powder" name="ring1-powder" placeholder="no powders" tabindex="2"/> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="col-auto order-xl-0 order-0">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="chestplate-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="chestplate-img-loc">
                                             <img id="chestplate-img" class="img-fluid rounded" src="../media/items/new/generic-chestplate.png">
@@ -128,16 +128,16 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value="" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" id="chestplate-choice" name="chestplate-choice" placeholder="No chestplate" value="" tabindex="1"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" type="text" id="chestplate-powder" name="chestplate-powder" placeholder="powders" tabindex="1"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="ring2-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="ring2-img-loc">
                                             <img id="ring2-img" class="img-fluid rounded" src="../media/items/new/generic-ring.png">
@@ -155,7 +155,7 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="ring2-choice" name="ring2-choice" placeholder="No ring" value="" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control" id="ring2-choice" name="ring2-choice" placeholder="No ring" value="" tabindex="2"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end" style="height: 100%;">
                                                 </div>
@@ -163,7 +163,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="col-auto order-xl-0 order-0">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="leggings-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="leggings-img-loc">
                                             <img id="leggings-img" class="img-fluid rounded" src="../media/items/new/generic-leggings.png">
@@ -181,16 +181,16 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value="" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value="" tabindex="1"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="leggings-powder" name="leggings-powder" placeholder="no powders" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" type="text" id="leggings-powder" name="leggings-powder" placeholder="no powders" tabindex="1"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="bracelet-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="bracelet-img-loc">
                                             <img id="bracelet-img" class="img-fluid rounded" src="../media/items/new/generic-bracelet.png">
@@ -208,7 +208,7 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value="" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control" id="bracelet-choice" name="bracelet-choice" placeholder="No bracelet" value="" tabindex="2"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end" style="height: 100%;">
                                                     
@@ -217,7 +217,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-0">
+                                <div class="col-auto order-xl-0 order-0">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="boots-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="boots-img-loc">
                                             <img id="boots-img" class="img-fluid rounded" src="../media/items/new/generic-boots.png">
@@ -235,16 +235,16 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="boots-choice" name="boots-choice" placeholder="No boots" value="" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" id="boots-choice" name="boots-choice" placeholder="No boots" value="" tabindex="1"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="boots-powder" name="boots-powder" placeholder="powders" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" type="text" id="boots-powder" name="boots-powder" placeholder="powders" tabindex="1"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id="necklace-dropdown">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="necklace-img-loc">
                                             <img id="necklace-img" class="img-fluid rounded" src="../media/items/new/generic-necklace.png">
@@ -262,7 +262,7 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value="" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control" id="necklace-choice" name="necklace-choice" placeholder="No necklace" value="" tabindex="2"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end" style="height: 100%;">
                                                 </div>
@@ -270,7 +270,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded" id='weapon-dropdown'>
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="weapon-img-loc">
                                             <img id="weapon-img" class="img-fluid rounded" src="../media/items/new/generic-wand.png">
@@ -288,16 +288,16 @@
                                         <div class="col g-0 rounded">
                                             <div class="row row-cols-1 h-100 align-items-center">
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value="" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control" id="weapon-choice" name="weapon-choice" placeholder="No Weapon" value="" tabindex="2"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control" type="text" id="weapon-powder" name="weapon-powder" placeholder="powders" tabindex="2"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto rounded order-xl-0 order-1">
+                                <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded">
                                         <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="weapon-img-loc">
                                             <img class="img-fluid rounded" src="../media/icons/new/Gears.png">
@@ -308,15 +308,15 @@
                                                     Level:
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
+                                                    <input class="equipment-input text-light form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
                                                 </div>
                                             </div>
                                             <div class="row align-items-center">
                                                 <div class="col-auto px-1 text-nowrap scaled-font">
-                                                    <button class="border-dark text-light dark-5 rounded scaled-font rounded" id=copy-button onclick="copyBuild()">Copy short</button>
+                                                    <button class="border-dark text-light dark-5 scaled-font rounded" id=copy-button onclick="copyBuild()">Copy short</button>
                                                 </div>
                                                 <div class="col-auto px-1 text-nowrap scaled-font">
-                                                    <button class="border-dark text-light dark-5 rounded scaled-font rounded" id=share-button onclick="shareBuild()">Copy for sharing</button>
+                                                    <button class="border-dark text-light dark-5 scaled-font rounded" id=share-button onclick="shareBuild()">Copy for sharing</button>
                                                 </div>
                                             </div>
                                         </div>

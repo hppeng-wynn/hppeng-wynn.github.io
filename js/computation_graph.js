@@ -15,13 +15,14 @@ class ComputeNode {
         this.inputs = [];
         this.children = [];
         this.value = 0;
-        this.compute_func = null;
-        this.callback_func = null;
         this.name = name;
         this.update_task = null;
         this.update_time = Date.now();
     }
 
+    /***
+     * Request update of this compute node. Pushes updates to children.
+     */
     update(timestamp) {
         if (timestamp < this.update_time) {
             return;
@@ -32,15 +33,24 @@ class ComputeNode {
         for (const input of this.inputs) {
             value_map.set(input.name, input.get_value());
         }
-        this.value = this.compute_func(this.value_map);
+        this.value = this.compute_func();
         for (const child of this.children) {
             child.update();
         }
-        this.callback_func(this.value);
     }
 
+    /***
+     * Get value of this compute node. Can't trigger update cascades (push based update, not pull based.)
+     */
     get_value() {
         return this.value
+    }
+
+    /***
+     * Abstract method for computing something. Return value is set into this.value
+     */
+    compute_func() {
+        throw "no compute func specified";
     }
 }
 
@@ -69,12 +79,39 @@ class ItemStats extends ComputeNode {
      * Make an item stat pulling compute node.
      *
      * @param name: Name of this node.
-     * @oaram item_input_field: Input field (html element) to listen for item names from.
+     * @param item_input_field: Input field (html element) to listen for item names from.
+     * @param none_item: Item object to use as the "none" for this field.
      */
-    constructor(name, item_input_field) {
+    constructor(name, item_input_field, none_item) {
         super(name);
         this.input_field.setAttribute("onInput", "calcSchedule('"+name+"');");
         this.input_field = item_input_field;
+        this.none_item = none_item;
+    }
+
+    compute_func() {
+        // built on the assumption of no one will type in CI/CR letter by letter
+
+        let item_text = this.input_field.value;
+        let item;
+
+        if (item_text.slice(0, 3) == "CI-") {
+            item = getCustomFromHash(item_text);
+        }
+        else if (item_text.slice(0, 3) == "CR-") {
+            item = getCraftFromHash(item_text);
+        } 
+        else if (itemMap.has(item_text)) {
+            item = itemMap.get(item_text);
+        } 
+        else if (tomeMap.has(item_text)) {
+            item = tomeMap.get(item_text);
+        }
+
+        if (!item) {
+            return this.none_item;
+        }
+        return item;
     }
 }
 

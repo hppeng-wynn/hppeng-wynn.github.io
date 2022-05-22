@@ -101,6 +101,19 @@ input {
 
 input.equipment-input {
     font-weight: bold;
+    background-color: hsl(0, 0%, 21%) !important;
+    border-radius: 0.375rem !important;
+    border-color: rgba(33, 37, 41, 1) !important;
+    min-height: calc(1.2 * var(--scaled-fontsize) + 2px);
+    padding: 0rem 0.5rem;
+    font-size: var(--scaled-fontsize);
+}
+
+.my-container {
+    position: fixed; /* Stay in place */
+    left: var(--sidebar-width);
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .text-right {
@@ -124,6 +137,9 @@ input.equipment-input {
     cursor: pointer;
 }
 
+:root {
+    --scaled-fontsize: 2.5rem;
+}
 .scaled-font {
     font-size: 2.5rem;
 }
@@ -180,8 +196,11 @@ input.equipment-input {
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
+    :root {
+        --scaled-fontsize: 1rem;
+    }
     .scaled-font {
-        font-size: .8rem;
+        font-size: 1rem;
     }
 
     .box-title {
@@ -231,6 +250,9 @@ input.equipment-input {
 }
 
 @media screen and (min-width: 1400px) {
+    :root {
+        --scaled-fontsize: 1rem;
+    }
     .scaled-font { 
         font-size: 1rem;
     }
