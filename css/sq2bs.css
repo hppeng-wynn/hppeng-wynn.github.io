@@ -358,6 +358,10 @@ input.equipment-input {
     background-color: hsl(0, 0%, 16%) !important;
 }
 
+.dark-10 {
+    background-color: hsl(0, 0%, 20%) !important;
+}
+
 .dark-1u {
     background-color: hsl(0, 0%, 5%);
 }
@@ -429,4 +433,14 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none; 
+}
+
+/* Make links bold when hovered over */
+
+a:hover {
+    font-weight: bold;
+}
+
+.button {
+    border-color: #fff;
 }
