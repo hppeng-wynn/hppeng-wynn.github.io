@@ -1,5 +1,3 @@
-let _ALL_NODES = new Map();
-
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -8,10 +6,6 @@ class ComputeNode {
      * @param name : Name of the node (string). Must be unique. Must "fit in" a JS string (terminated by single quotes).
      */
     constructor(name) {
-        if (_ALL_NODES.has(name)) {
-            throw 'Duplicate node name: ' + name;
-        }
-        _ALL_NODES.set(name, this)
         this.inputs = [];
         this.children = [];
         this.value = 0;
@@ -65,10 +59,9 @@ class ComputeNode {
 /**
  * Schedule a ComputeNode to be updated.
  *
- * @param node_name : ComputeNode name to schedule an update for.
+ * @param node : ComputeNode to schedule an update for.
  */
-function calcSchedule(node_name) {
-    node = _ALL_NODES.get(node_name);
+function calcSchedule(node) {
     if (node.update_task !== null) {
         clearTimeout(node.update_task);
     }
@@ -92,7 +85,7 @@ class ItemInputNode extends ComputeNode {
      */
     constructor(name, item_input_field, none_item) {
         super(name);
-        this.input_field.setAttribute("onInput", "calcSchedule('"+name+"');");
+        this.input_field.setAttribute("input", () => calcSchedule(this));
         this.input_field = item_input_field;
         this.none_item = expandItem(none_item);
     }

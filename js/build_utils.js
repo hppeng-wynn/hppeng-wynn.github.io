@@ -138,6 +138,7 @@ let rolledIDs = [
     "gXp",
     "gSpd"
 ];
+let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
 /**
  * Take an item with id list and turn it into a set of minrolls and maxrolls.
@@ -186,7 +187,7 @@ function expandItem(item) {
     }
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
-    expandedItem.set("powders", powders);
+    expandedItem.set("powders", []);
     return expandedItem;
 }
 

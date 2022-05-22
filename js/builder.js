@@ -1,182 +1,3 @@
-const url_tag = location.hash.slice(1);
-// console.log(url_base);
-// console.log(url_tag);
-
-
-const BUILD_VERSION = "7.0.19";
-
-function setTitle() {
-    let text;
-    if (url_base.includes("hppeng-wynn")) {
-        text = "WynnBuilder UNSTABLE version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
-    }
-    else {
-        text = "WynnBuilder version "+BUILD_VERSION+" (db version "+DB_VERSION+")";
-        document.getElementById("header").classList.add("funnynumber");
-    }
-    document.getElementById("header").textContent = text;
-}
-
-setTitle();
-
-let player_build;
-
-let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprRaw", "hprPct", "hpBonus", "atkTier", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
-let editable_elems = [];
-
-for (let i of editable_item_fields) {
-    let elem = document.getElementById(i);
-    elem.addEventListener("change", (event) => {
-        elem.classList.add("highlight");
-    });
-    editable_elems.push(elem);
-}
-
-for (let i of skp_order) {
-    let elem = document.getElementById(i+"-skp");
-    elem.addEventListener("change", (event) => {
-        elem.classList.add("highlight");
-    });
-    editable_elems.push(elem);
-}
-
-function clear_highlights() {
-    for (let i of editable_elems) {
-        i.classList.remove("highlight");
-    }
-}
-
-
-let equipment_fields = [
-    "helmet",
-    "chestplate",
-    "leggings",
-    "boots",
-    "ring1",
-    "ring2",
-    "bracelet",
-    "necklace",
-    "weapon"
-];
-let equipment_names = [
-    "Helmet",
-    "Chestplate",
-    "Leggings",
-    "Boots",
-    "Ring 1",
-    "Ring 2",
-    "Bracelet",
-    "Necklace",
-    "Weapon"
-];
-let equipmentInputs = equipment_fields.map(x => x + "-choice");
-let buildFields = equipment_fields.map(x => "build-"+x);
-
-let powderInputs = [
-    "helmet-powder",
-    "chestplate-powder",
-    "leggings-powder",
-    "boots-powder",
-    "weapon-powder",
-];
-
-
-
-/*
- * Function that takes an item list and populates its corresponding dropdown.
- * Used for armors and bracelet/necklace.
- */
-function populateItemList(type) {
-    let item_list = document.getElementById(type+"-items");
-    for (const item of itemLists.get(type)) {
-        let item_obj = itemMap.get(item);
-        if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-            continue;
-        }
-        let el = document.createElement("option");
-        el.value = item;
-        item_list.appendChild(el);
-    }
-}
-
-/*
- * Populate dropdowns, add listeners, etc.
- */
-function init() {
-    console.log("builder.js init");
-    
-    for (const armorType of armorTypes) {
-        populateItemList(armorType);
-        // Add change listener to update armor slots.
-        document.getElementById(armorType+"-choice").addEventListener("change", (event) => {
-            let item_name = event.target.value;
-            let nSlots = undefined;
-            if (itemMap.has(item_name)) {
-                let item = itemMap.get(item_name);
-                nSlots = item["slots"];
-                //console.log(item);
-            }
-            else {
-                let crafted_custom_item = getCraftFromHash(item_name) !== undefined ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) !== undefined ? getCustomFromHash(item_name) : undefined);
-                if (crafted_custom_item !== undefined) {
-                    nSlots = crafted_custom_item.statMap.get("slots");
-                } 
-            }
-            if (nSlots !== undefined) {
-                document.getElementById(armorType+"-slots").textContent = nSlots + " slots";
-            }
-            else {
-                document.getElementById(armorType+"-slots").textContent = "X slots";
-            }
-        });
-    }
-
-    let ring1_list = document.getElementById("ring1-items");
-    let ring2_list = document.getElementById("ring2-items");
-    for (const ring of itemLists.get("ring")) {
-        let item_obj = itemMap.get(ring);
-        if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-            continue;
-        }
-        let el1 = document.createElement("option");
-        let el2 = document.createElement("option");
-        el1.value = ring;
-        el2.value = ring;
-        ring1_list.appendChild(el1);
-        ring2_list.appendChild(el2);
-    }
-
-    populateItemList("bracelet");
-    populateItemList("necklace");
-
-    let weapon_list = document.getElementById("weapon-items");
-    for (const weaponType of weaponTypes) {
-        for (const weapon of itemLists.get(weaponType)) {
-            let item_obj = itemMap.get(weapon);
-            if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-                continue;
-            }
-            let el = document.createElement("option");
-            el.value = weapon;
-            weapon_list.appendChild(el);
-        }
-    }
-
-    // Add change listener to update weapon slots.
-    document.getElementById("weapon-choice").addEventListener("change", (event) => {
-        let item_name = event.target.value;
-        let item = itemMap.has(item_name) ? itemMap.get(item_name) : (getCraftFromHash(item_name) ? getCraftFromHash(item_name) : (getCustomFromHash(item_name) ? getCustomFromHash(item_name) : undefined));
-        if (item !== undefined && event.target.value !== "") {
-            document.getElementById("weapon-slots").textContent = (item["slots"] ? item["slots"] : (item.statMap !== undefined ? ( item.statMap.has("slots") ? item.statMap.get("slots") : 0): 0) )+ " slots";
-        } else {
-            document.getElementById("weapon-slots").textContent = "X slots";
-        }
-    });
-
-    decodeBuild(url_tag);
-
-    populateBuildList();
-}
 
 function getItemNameFromID(id) {
     if (redirectMap.has(id)) {
@@ -185,13 +6,20 @@ function getItemNameFromID(id) {
     return idMap.get(id);
 }
 
+function getTomeNameFromID(id) {
+    if (tomeRedirectMap.has(id)) {
+        return getTomeNameFromID(tomeRedirectMap.get(id));
+    }
+    return tomeIDMap.get(id);
+}
+
 function parsePowdering(powder_info) {
     // TODO: Make this run in linear instead of quadratic time... ew
     let powdering = [];
     for (let i = 0; i < 5; ++i) {
         let powders = "";
         let n_blocks = Base64.toInt(powder_info.charAt(0));
-        console.log(n_blocks + " blocks");
+        // console.log(n_blocks + " blocks");
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
@@ -205,7 +33,7 @@ function parsePowdering(powder_info) {
         }
         powdering[i] = powders;
     }
-    return powdering;
+    return [powdering, powder_info];
 }
 
 /*
@@ -213,14 +41,20 @@ function parsePowdering(powder_info) {
  */
 function decodeBuild(url_tag) {
     if (url_tag) {
+        //default values
         let equipment = [null, null, null, null, null, null, null, null, null];
+        let tomes = [null, null, null, null, null, null, null];
         let powdering = ["", "", "", "", ""];
         let info = url_tag.split("_");
         let version = info[0];
         let save_skp = false;
         let skillpoints = [0, 0, 0, 0, 0];
         let level = 106;
-        if (version === "0" || version === "1" || version === "2" || version === "3") {
+
+        version_number = parseInt(version)
+        //equipment (items)
+        // TODO: use filters
+        if (version_number < 4) {
             let equipments = info[1];
             for (let i = 0; i < 9; ++i ) {
                 let equipment_str = equipments.slice(i*3,i*3+3);
@@ -228,7 +62,7 @@ function decodeBuild(url_tag) {
             }
             info[1] = equipments.slice(27);
         }
-        if (version === "4") { 
+        else if (version_number == 4) { 
             let info_str = info[1];
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
@@ -244,7 +78,7 @@ function decodeBuild(url_tag) {
             }
             info[1] = info_str.slice(start_idx);
         }
-        if (version === "5") {
+        else if (version_number <= 6) {
             let info_str = info[1];
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
@@ -263,10 +97,17 @@ function decodeBuild(url_tag) {
             }
             info[1] = info_str.slice(start_idx);
         }
-        if (version === "1") {
+        //constant in all versions
+        for (let i in equipment) {
+            setValue(equipmentInputs[i], equipment[i]);
+        }
+
+        //level, skill point assignments, and powdering
+        if (version_number == 1) {
             let powder_info = info[1];
-            powdering = parsePowdering(powder_info);
-        } else if (version === "2") {
+            let res = parsePowdering(powder_info);
+            powdering = res[0];
+        } else if (version_number == 2) {
             save_skp = true;
             let skillpoint_info = info[1].slice(0, 10);
             for (let i = 0; i < 5; ++i ) {
@@ -274,8 +115,9 @@ function decodeBuild(url_tag) {
             }
 
             let powder_info = info[1].slice(10);
-            powdering = parsePowdering(powder_info);
-        } else if (version === "3" || version === "4" || version === "5"){
+            let res = parsePowdering(powder_info);
+            powdering = res[0];
+        } else if (version_number <= 6){
             level = Base64.toInt(info[1].slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
@@ -286,126 +128,101 @@ function decodeBuild(url_tag) {
 
             let powder_info = info[1].slice(12);
 
-            powdering = parsePowdering(powder_info);
+            let res = parsePowdering(powder_info);
+            powdering = res[0];
+            info[1] = res[1];
+        }
+        // Tomes.
+        if (version == 6) {
+            //tome values do not appear in anything before v6.
+            for (let i = 0; i < 7; ++i) {
+                let tome_str = info[1].charAt(i);
+                for (let i in tomes) {
+                    setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
+                }
+            }
+            info[1] = info[1].slice(7);
         }
 
         for (let i in powderInputs) {
             setValue(powderInputs[i], powdering[i]);
         }
-        for (let i in equipment) {
-            setValue(equipmentInputs[i], equipment[i]);
-        }
+
         calculateBuild(save_skp, skillpoints);
     }
 }
 
-/*  Stores the entire build in a string using B64 encryption and adds it to the URL.
+/*  Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
 function encodeBuild() {
 
     if (player_build) {
         let build_string;
-        if (player_build.customItems.length > 0) { //v5 encoding
-            build_string = "5_";
-            let crafted_idx = 0;
-            let custom_idx = 0;
-            for (const item of player_build.items) {
-                
-                if (item.get("custom")) {
-                    let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
-                    build_string += Base64.fromIntN(custom.length, 3) + custom;
-                    custom_idx += 1;
-                } else if (item.get("crafted")) {
-                    build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
-                    crafted_idx += 1;
-                } else {
-                    build_string += Base64.fromIntN(item.get("id"), 3);
+        
+        //V6 encoding - Tomes
+        build_version = 4;
+        build_string = "";
+        tome_string = "";
+
+        let crafted_idx = 0;
+        let custom_idx = 0;
+        for (const item of player_build.items) {
+            
+            if (item.get("custom")) {
+                let custom = "CI-"+encodeCustom(player_build.customItems[custom_idx],true);
+                build_string += Base64.fromIntN(custom.length, 3) + custom;
+                custom_idx += 1;
+                build_version = Math.max(build_version, 5);
+            } else if (item.get("crafted")) {
+                build_string += "CR-"+encodeCraft(player_build.craftedItems[crafted_idx]);
+                crafted_idx += 1;
+            } else if (item.get("category") === "tome") {
+                let tome_id = item.get("id");
+                if (tome_id <= 60) {
+                    // valid normal tome. ID 61-63 is for NONE tomes.
+                    build_version = Math.max(build_version, 6);
                 }
-            }
-    
-            for (const skp of skp_order) {
-                build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
-            }
-            build_string += Base64.fromIntN(player_build.level, 2);
-            for (const _powderset of player_build.powders) {
-                let n_bits = Math.ceil(_powderset.length / 6);
-                build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
-                // Slice copy.
-                let powderset = _powderset.slice();
-                while (powderset.length != 0) {
-                    let firstSix = powderset.slice(0,6).reverse();
-                    let powder_hash = 0;
-                    for (const powder of firstSix) {
-                        powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
-                    }
-                    build_string += Base64.fromIntN(powder_hash, 5);
-                    powderset = powderset.slice(6);
-                }
-            }
-        } else { //v4 encoding
-            build_string = "4_";
-            let crafted_idx = 0;
-            for (const item of player_build.items) {
-                if (item.get("crafted")) {
-                    build_string += "-"+encodeCraft(player_build.craftedItems[crafted_idx]);
-                    crafted_idx += 1;
-                } else {
-                    build_string += Base64.fromIntN(item.get("id"), 3);
-                }
-            }
-    
-            for (const skp of skp_order) {
-                build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
-            }
-            build_string += Base64.fromIntN(player_build.level, 2);
-            for (const _powderset of player_build.powders) {
-                let n_bits = Math.ceil(_powderset.length / 6);
-                build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
-                // Slice copy.
-                let powderset = _powderset.slice();
-                while (powderset.length != 0) {
-                    let firstSix = powderset.slice(0,6).reverse();
-                    let powder_hash = 0;
-                    for (const powder of firstSix) {
-                        powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
-                    }
-                    build_string += Base64.fromIntN(powder_hash, 5);
-                    powderset = powderset.slice(6);
-                }
+                tome_string += Base64.fromIntN(tome_id, 1);
+            } else {
+                build_string += Base64.fromIntN(item.get("id"), 3);
             }
         }
-        return build_string;
+
+        for (const skp of skp_order) {
+            build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
+        }
+        build_string += Base64.fromIntN(player_build.level, 2);
+        for (const _powderset of player_build.powders) {
+            let n_bits = Math.ceil(_powderset.length / 6);
+            build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
+            // Slice copy.
+            let powderset = _powderset.slice();
+            while (powderset.length != 0) {
+                let firstSix = powderset.slice(0,6).reverse();
+                let powder_hash = 0;
+                for (const powder of firstSix) {
+                    powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+                }
+                build_string += Base64.fromIntN(powder_hash, 5);
+                powderset = powderset.slice(6);
+            }
+        }
+        build_string += tome_string;
+
+        return build_version.toString() + "_" + build_string;
     }
-    //        this.equipment = [ this.helmet, this.chestplate, this.leggings, this.boots, this.ring1, this.ring2, this.bracelet, this.necklace ];
-    //        let build_string = "3_" + Base64.fromIntN(player_build.helmet.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.chestplate.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.leggings.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.boots.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.ring1.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.ring2.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.bracelet.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.necklace.get("id"), 3) +
-    //                            Base64.fromIntN(player_build.weapon.get("id"), 3);
-    return "";
 }
 
 function calculateBuild(save_skp, skp){
     try {
-        let specialNames = ["Quake", "Chain_Lightning", "Curse", "Courage", "Wind_Prison"];
-        for (const sName of specialNames) {
-            for (let i = 1; i < 6; i++) {
-                let elem = document.getElementById(sName + "-" + i);
-                let name = sName.replace("_", " ");
-                if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
-                    elem.classList.remove("toggleOn");
-                }
-            }
-        }
-        if(player_build){
+        resetEditableIDs();
+        if (player_build) {
+            reset_powder_specials();
             updateBoosts("skip", false);
             updatePowderSpecials("skip", false);
         }
         let weaponName = getValue(equipmentInputs[8]);
+        //bruh @hpp
         if (weaponName.startsWith("Morph-")) {
             let equipment = [ "Morph-Stardust", "Morph-Steel", "Morph-Iron", "Morph-Gold", "Morph-Topaz", "Morph-Emerald", "Morph-Amethyst", "Morph-Ruby", weaponName.substring(6) ];
             for (let i in equipment) {
@@ -440,7 +257,6 @@ function calculateBuild(save_skp, skp){
             while (input) {
                 let first = input.slice(0, 2);
                 let powder = powderIDs.get(first);
-                console.log(powder);
                 if (powder === undefined) {
                     errorederrors.push(first);
                 } else {
@@ -457,11 +273,24 @@ function calculateBuild(save_skp, skp){
             //console.log("POWDERING: " + powdering);
             powderings.push(powdering);
         }
+        let tomes = [ null, null, null, null, null, null, null];
+        for (let i in tomes) {
+            let equip = getValue(tomeInputs[i]).trim();
+            if (equip === "") {
+                equip = "No " + tome_names[i]
+            }
+            else {
+                setValue(tomeInputs[i], equip);
+            }
+            tomes[i] = equip;
+        }
         
 
         let level = document.getElementById("level-choice").value;
-        player_build = new Build(level, equipment, powderings, new Map(), errors);
+        player_build = new Build(level, equipment, powderings, new Map(), errors, tomes);
         console.log(player_build);
+
+        //isn't this deprecated?
         for (let i of document.getElementsByClassName("hide-container-block")) {
 			i.style.display = "block";
         }
@@ -470,21 +299,14 @@ function calculateBuild(save_skp, skp){
         }
 
         console.log(player_build.toString());
-        displayEquipOrder(document.getElementById("build-order"),player_build.equip_order);
-
-        
+        displaysq2EquipOrder(document.getElementById("build-order"),player_build.equip_order);
 
         const assigned = player_build.base_skillpoints;
         const skillpoints = player_build.total_skillpoints;
         for (let i in skp_order){ //big bren
-            setText(skp_order[i] + "-skp-base", "Original Value: " + skillpoints[i]);
+            setText(skp_order[i] + "-skp-base", "Original: " + skillpoints[i]);
         }
 
-        for (let id of editable_item_fields) {
-            setValue(id, player_build.statMap.get(id));
-            setText(id+"-base", "Original Value: " + player_build.statMap.get(id));
-        }
-        
         if (save_skp) {
             // TODO: reduce duplicated code, @updateStats
             let skillpoints = player_build.total_skillpoints;
@@ -499,14 +321,13 @@ function calculateBuild(save_skp, skp){
             player_build.assigned_skillpoints += delta_total;
         }
         
+        updateEditableIDs();
         calculateBuildStats();
-        setTitle();
         if (player_build.errored)
             throw new ListError(player_build.errors);
-
     }
     catch (error) {
-        handleBuilderError(error);
+        console.log(error);
     }
 }
 
@@ -586,7 +407,7 @@ function updateStats() {
     let delta_total = 0;
     for (let i in skp_order) {
         let value = document.getElementById(skp_order[i] + "-skp").value;
-        if (value === ""){value = "0"; setValue(skp_order[i] + "-skp", value)}
+        if (value === ""){value = 0; setValue(skp_order[i] + "-skp", value)}
         let manual_assigned = 0;
         if (value.includes("+")) {
             let skp = value.split("+");
@@ -604,15 +425,58 @@ function updateStats() {
     player_build.assigned_skillpoints += delta_total;
     if(player_build){
         updatePowderSpecials("skip", false);
+        updateArmorPowderSpecials("skip", false);
         updateBoosts("skip", false);
-    }
-    for (let id of editable_item_fields) {
-        player_build.statMap.set(id, parseInt(getValue(id)));
+        for (let id of editable_item_fields) {
+            player_build.statMap.set(id, parseInt(getValue(id)));
+        }
     }
     player_build.aggregateStats();
     console.log(player_build.statMap);
     calculateBuildStats();
 }
+
+ 
+/* Updates all IDs in the edit IDs section. Resets each input and original value text to the correct text according to the current build.
+*/
+function updateEditableIDs() {
+    if (player_build) {
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+            let val = player_build.statMap.get(id);
+            edit_input.value = val;
+            edit_input.placeholder = val;
+
+            let value_label = document.getElementById(id + "-base");
+            value_label.textContent = "Original Value: " + val;
+            //a hack to make resetting easier
+            value_label.value = val;
+        }
+    }
+}
+
+/* Resets all IDs in the edit IDs section to their "original" values. 
+*/
+function resetEditableIDs() {
+    if (player_build) {
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+            let value_label = document.getElementById(id + "-base");
+
+            edit_input.value = value_label.value;
+            edit_input.placeholder = value_label.value;
+        }
+    } else {
+        //no player build, reset to 0
+        for (const id of editable_item_fields) {
+            let edit_input = document.getElementById(id);
+
+            edit_input.value = 0;
+            edit_input.placeholder = 0;
+        }
+    }
+}
+
 /* Updates all spell boosts
 */
 function updateBoosts(buttonId, recalcStats) {
@@ -655,7 +519,7 @@ function updateBoosts(buttonId, recalcStats) {
     }
 }
 
-/* Updates all powder special boosts 
+/* Updates ACTIVE powder special boosts (weapons)
 */
 function updatePowderSpecials(buttonId, recalcStats) {
     //console.log(player_build.statMap);
@@ -740,8 +604,76 @@ function updatePowderSpecials(buttonId, recalcStats) {
     if (recalcStats) {
         calculateBuildStats();
     }
-    displayPowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build); 
+    displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
 }
+
+
+/* Updates PASSIVE powder special boosts (armors)
+*/
+function updateArmorPowderSpecials(elem_id, recalc_stats) {
+    //we only update the powder special + external stats if the player has a build
+    if (elem_id !== "skip") {
+        if (player_build !== undefined && player_build.weapon !== undefined && player_build.weapon.get("name") !== "No Weapon") {
+            let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
+
+            //update the label associated w/ the slider 
+            let elem = document.getElementById(elem_id);
+            let label = document.getElementById(elem_id + "_label");
+            let prev_label = document.getElementById(elem_id + "_prev");
+    
+            let value = elem.value;
+    
+            //for use in editing build stats
+            let prev_value = prev_label.value;
+            let value_diff = value - prev_value;
+    
+            //update the "previous" label
+            prev_label.value = value;
+    
+            label.textContent = label.textContent.split(":")[0] + ": " + value;
+            
+            let dmg_id = elem_chars[skp_names.indexOf(wynn_elem)] + "DamPct"; 
+            let new_dmgboost = player_build.externalStats.get(dmg_id) + value_diff;
+            
+            //update build external stats - the second one is the relevant one for damage calc purposes
+            player_build.externalStats.set(dmg_id, new_dmgboost);
+            player_build.externalStats.get("damageBonus")[skp_names.indexOf(wynn_elem)] = new_dmgboost;
+            
+            //update the slider's graphics
+            let bg_color = elem_colors[skp_names.indexOf(wynn_elem)];
+            let pct = Math.round(100 * value / powderSpecialStats[skp_names.indexOf(wynn_elem)].cap);
+            elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
+
+        }
+    } else {
+        if (player_build !== undefined) {
+            for (let i = 0; i < skp_names.length; ++i) {
+                skp_name = skp_names[i];
+                skp_char = elem_chars[i];
+                player_build.externalStats.set(skp_char + "DamPct", player_build.externalStats.get(skp_char + "DamPct") - document.getElementById(skp_name+"_boost_armor").value);
+                player_build.externalStats.get("damageBonus")[i] -= document.getElementById(skp_name+"_boost_armor").value;
+            }
+        }
+    }
+    
+
+    if (recalc_stats && player_build) {
+        //calc build stats and display powder special
+        calculateBuildStats();
+        // displaysq2PowderSpecials(document.getElementById("powder-special-stats"), powderSpecials, player_build, true); 
+    }
+
+}
+
+function resetArmorPowderSpecials() {
+    for (const skp of skp_names) {
+        document.getElementById(skp + "_boost_armor").value = 0;
+        document.getElementById(skp + "_boost_armor_prev").value = 0;
+        document.getElementById(skp + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
+        document.getElementById(skp + "_boost_armor_label").textContent = `% ${capitalizeFirst(elem_names[skp_names.indexOf(skp)])} Damage Boost: 0`
+    }
+}
+
 /* Calculates all build statistics and updates the entire display.
 */
 function calculateBuildStats() {
@@ -749,27 +681,29 @@ function calculateBuildStats() {
     const skillpoints = player_build.total_skillpoints;
     let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
     for (let i in skp_order){ //big bren
-        setText(skp_order[i] + "-skp-assign", "Manually Assigned: " + assigned[i]);
+        setText(skp_order[i] + "-skp-assign", "Assign: " + assigned[i]);
         setValue(skp_order[i] + "-skp", skillpoints[i]);
         let linebreak = document.createElement("br");
         linebreak.classList.add("itemp");
         document.getElementById(skp_order[i] + "-skp-label");
         setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+        document.getElementById(skp_order[i]+"-warnings").textContent = ''
         if (assigned[i] > 100) {
             let skp_warning = document.createElement("p");
             skp_warning.classList.add("warning");
-            skp_warning.textContent += "WARNING: Cannot assign " + assigned[i] + " skillpoints in " + ["Strength","Dexterity","Intelligence","Defense","Agility"][i] + " manually.";
-            document.getElementById(skp_order[i]+"-skp-pct").appendChild(skp_warning);
+            skp_warning.classList.add("small-text")
+            skp_warning.textContent += "Cannot assign " + assigned[i] + " skillpoints in " + ["Strength","Dexterity","Intelligence","Defense","Agility"][i] + " manually.";
+            document.getElementById(skp_order[i]+"-warnings").textContent = ''
+            document.getElementById(skp_order[i]+"-warnings").appendChild(skp_warning);
         }
     }
 
     let summarybox = document.getElementById("summary-box");
     summarybox.textContent = "";
     let skpRow = document.createElement("p");
-    let td = document.createElement("p");
 
     let remainingSkp = document.createElement("p");
-    remainingSkp.classList.add("center");
+    remainingSkp.classList.add("scaled-font");
     let remainingSkpTitle = document.createElement("b");
     remainingSkpTitle.textContent = "Assigned " + player_build.assigned_skillpoints + " skillpoints. Remaining skillpoints: ";
     let remainingSkpContent = document.createElement("b");
@@ -783,13 +717,12 @@ function calculateBuildStats() {
     summarybox.append(skpRow);
     summarybox.append(remainingSkp);
     if(player_build.assigned_skillpoints > levelToSkillPoints(player_build.level)){
-        let skpWarning = document.createElement("p");
+        let skpWarning = document.createElement("span");
         //skpWarning.classList.add("itemp");
         skpWarning.classList.add("warning");
-        skpWarning.classList.add("itemp");
         skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
         let skpCount = document.createElement("p");
-        skpCount.classList.add("itemp");
+        skpCount.classList.add("warning");
         skpCount.textContent = "For level " + (player_build.level>101 ? "101+" : player_build.level)  + ", there are only " + levelToSkillPoints(player_build.level) + " skill points available.";
         summarybox.append(skpWarning);
         summarybox.append(skpCount);
@@ -826,7 +759,6 @@ function calculateBuildStats() {
         const bonus = sets[setName].bonuses[count-1];
         // console.log(setName);
         if (bonus["illegal"]) {
-            console.log("mmmm");
             let setWarning = document.createElement("p");
             setWarning.classList.add("itemp");
             setWarning.classList.add("warning");
@@ -836,30 +768,32 @@ function calculateBuildStats() {
     }
 
     for (let i in player_build.items) {
-        displayExpandedItem(player_build.items[i], buildFields[i]);
+        displaysq2ExpandedItem(player_build.items[i], buildFields[i]);
+        collapse_element("#"+equipment_keys[i]+"-tooltip");
     }
 
-    displayBuildStats("build-overall-stats",player_build);
-    displaySetBonuses("set-info",player_build);
-    displayNextCosts("int-info",player_build);
+    displaysq2ArmorStats(player_build);
+    displaysq2BuildStats('overall-stats', player_build, build_all_display_commands);
+    displaysq2BuildStats("offensive-stats",player_build, build_offensive_display_commands);
+    displaysq2SetBonuses("set-info",player_build);
+    displaysq2WeaponStats(player_build);
 
     let meleeStats = player_build.getMeleeStats();
-    displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
+    displaysq2MeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
-    displayDefenseStats(document.getElementById("build-defense-stats"),player_build);
+    displaysq2DefenseStats(document.getElementById("defensive-stats"),player_build);
 
-    displayPoisonDamage(document.getElementById("build-poison-stats"),player_build);
+    displaysq2PoisonDamage(document.getElementById("build-poison-stats"),player_build);
 
     let spells = spell_table[player_build.weapon.get("type")];
     for (let i = 0; i < 4; ++i) {
         let parent_elem = document.getElementById("spell"+i+"-info");
         let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
-        displaySpellDamage(parent_elem, overallparent_elem, player_build, spells[i], i+1);
+        displaysq2SpellDamage(parent_elem, overallparent_elem, player_build, spells[i], i+1);
     }
 
     location.hash = encodeBuild();
     clear_highlights();
-    updateOGP();
 }
 
 function copyBuild() {
@@ -971,7 +905,21 @@ function toggleID() {
     }
 }
 
+function toggleButton(button_id) {
+    let button = document.getElementById(button_id);
+    if (button) {
+        if (button.classList.contains("toggleOn")) {
+            button.classList.remove("toggleOn");
+        } else {
+            button.classList.add("toggleOn");
+        }
+    }
+}
+
 function optimizeStrDex() {
+    if (!player_build) {
+        return;
+    }
     const remaining = levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints;
     const base_skillpoints = player_build.base_skillpoints;
     const max_str_boost = 100 - base_skillpoints[0];
@@ -1061,7 +1009,6 @@ function optimizeStrDex() {
         
     try {
         calculateBuildStats();
-        setTitle();
         if (player_build.errored)
             throw new ListError(player_build.errors);
     }
@@ -1071,8 +1018,20 @@ function optimizeStrDex() {
 }
 
 // TODO: Learn and use await
+function init() {
+    console.log("builder.js init");
+    init_autocomplete();
+    decodeBuild(url_tag);
+    for (const i of equipment_keys) {
+        update_field(i);
+    }
+}
 function init2() {
     load_ing_init(init);
 }
-load_init(init2);
-updateOGP();
+function init3() {
+    load_tome_init(init2)
+}
+
+
+load_init(init3);

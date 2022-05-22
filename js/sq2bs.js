@@ -1,13 +1,3 @@
-let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear'];
-let armor_keys = ['helmet', 'chestplate', 'leggings', 'boots'];
-let skp_keys = ['str', 'dex', 'int', 'def', 'agi'];
-let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
-let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
-let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'].concat(tome_keys);
-let powder_keys = ['e', 't', 'w', 'f', 'a'];
-
-let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
-let other_disp = ['build-order', 'set-info', 'int-info'];
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -202,7 +192,7 @@ function update_field(field) {
             document.querySelector("#"+field+"-powder").classList.add("is-invalid");
         } else {
             for (i = 0; i < powder_string.length / 2; i++) {
-                if (powder_keys.includes(powder_string.substring(i*2, i*2+2).split("")[0]) == false || isNaN(powder_string.substring(i*2, i*2+2).split("")[1]) || parseInt(powder_string.substring(i*2, i*2+2).split("")[1]) < 1 || parseInt(powder_string.substring(i*2, i*2+2).split("")[1]) > 6) {
+                if (skp_elements.includes(powder_string.substring(i*2, i*2+2).split("")[0]) == false || isNaN(powder_string.substring(i*2, i*2+2).split("")[1]) || parseInt(powder_string.substring(i*2, i*2+2).split("")[1]) < 1 || parseInt(powder_string.substring(i*2, i*2+2).split("")[1]) > 6) {
                     document.querySelector("#"+field+"-powder").classList.add("is-invalid");
                 }
             }
@@ -239,7 +229,7 @@ function toggle_spell_tab(tab) {
 }
 
 function toggle_boost_tab(tab) {
-    for (const i of skp_keys) {
+    for (const i of skp_order) {
         document.querySelector("#"+i+"-boost").style.display = "none";
         document.getElementById(i + "-boost-tab").classList.remove("selected-btn");
     }

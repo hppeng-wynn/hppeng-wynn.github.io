@@ -1,4 +1,3 @@
-let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 let colorMap = new Map(
     [
         ["Normal", "#fff"],
