@@ -256,7 +256,7 @@ function decodeBuild(url_tag) {
     }
 }
 
-/*  Stores the entire build in a string using B64 encryption and adds it to the URL.
+/*  Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
 function encodeBuild() {
 
