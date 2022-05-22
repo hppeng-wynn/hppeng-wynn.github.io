@@ -27,60 +27,6 @@ function applyArmorPowdersOnce(expandedItem, powders) {
     }
 }
 
-/**
- * Take an item with id list and turn it into a set of minrolls and maxrolls.
- * Also applies powders to armor.
- */
-function expandItem(item, powders) {
-    let minRolls = new Map();
-    let maxRolls = new Map();
-    let expandedItem = new Map();
-    if (item.fixID) { //The item has fixed IDs.
-        expandedItem.set("fixID",true);
-        for (const id of rolledIDs) { //all rolled IDs are numerical
-            let val = (item[id] || 0);
-            minRolls.set(id,val);
-            maxRolls.set(id,val);
-        }
-    } else { //The item does not have fixed IDs.
-        for (const id of rolledIDs) {
-            let val = (item[id] || 0);
-            if (val > 0) { // positive rolled IDs
-                if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(val*0.3));
-                    minRolls.set(id,idRound(val*1.3));
-                } else {
-                    maxRolls.set(id,idRound(val*1.3));
-                    minRolls.set(id,idRound(val*0.3));
-                }
-            } else if (val < 0) { //negative rolled IDs
-                if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(val*1.3));
-                    minRolls.set(id,idRound(val*0.7));
-                }
-                else {
-                    maxRolls.set(id,idRound(val*0.7));
-                    minRolls.set(id,idRound(val*1.3));
-                }
-            }
-            else { // if val == 0
-                // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
-                maxRolls.set(id,0);
-                minRolls.set(id,0);
-            }
-        }
-    }
-    for (const id of nonRolledIDs) {
-        expandedItem.set(id,item[id]);
-    }
-    expandedItem.set("minRolls",minRolls);
-    expandedItem.set("maxRolls",maxRolls);
-    expandedItem.set("powders", powders);
-    if (item.category === "armor") {
-        applyArmorPowders(expandedItem, powders);
-    }
-    return expandedItem;
-}
 
 /* Takes in an ingredient object and returns an equivalent Map().
 */

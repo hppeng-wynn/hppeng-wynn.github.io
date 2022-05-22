@@ -18,6 +18,7 @@ class ComputeNode {
         this.name = name;
         this.update_task = null;
         this.update_time = Date.now();
+        this.fail_cb = false;   // Set to true to force updates even if parent failed.
     }
 
     /***
@@ -33,9 +34,11 @@ class ComputeNode {
         for (const input of this.inputs) {
             value_map.set(input.name, input.get_value());
         }
-        this.value = this.compute_func();
+        this.value = this.compute_func(value_map);
         for (const child of this.children) {
-            child.update();
+            if (this.value || child.fail_cb) {
+                child.update();
+            }
         }
     }
 
@@ -49,7 +52,7 @@ class ComputeNode {
     /***
      * Abstract method for computing something. Return value is set into this.value
      */
-    compute_func() {
+    compute_func(input_map) {
         throw "no compute func specified";
     }
 
@@ -94,10 +97,14 @@ class ItemStats extends ComputeNode {
         this.none_item = none_item;
     }
 
-    compute_func() {
+    compute_func(input_map) {
         // built on the assumption of no one will type in CI/CR letter by letter
 
         let item_text = this.input_field.value;
+        if (!item_text) {
+            return this.none_item;
+        }
+
         let item;
 
         if (item_text.slice(0, 3) == "CI-") {
@@ -113,10 +120,39 @@ class ItemStats extends ComputeNode {
             item = tomeMap.get(item_text);
         }
 
-        if (!item) {
-            return this.none_item;
+        if (!item || item.) {
+            return null;
         }
         return item;
     }
 }
 
+/***
+ * Node for updating item input fields from parsed items.
+ */
+class ItemInputDisplay extends ComputeNode {
+
+    constructor(name, item_input_field, item_image) {
+        super(name);
+        this.input_field = item_input_field;
+        this.image = item_image;
+        this.fail_cb = true;
+    }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) {
+            throw "ItemInputDisplay accepts exactly one input (item)";
+        }
+
+        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        this.input_field.classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set', 'Crafted', 'Custom');
+        this.input_field.classList.add("text-light");
+        this.image.classList.remove('Normal-shadow', 'Unique-shadow', 'Rare-shadow', 'Legendary-shadow', 'Fabled-shadow', 'Mythic-shadow', 'Set-shadow', 'Crafted-shadow', 'Custom-shadow');
+
+        if (!item) {
+            this.input_field.classList.add("is-invalid");
+            return null;
+        }
+    }
+}
