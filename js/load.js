@@ -201,59 +201,61 @@ function load_init(init_func) {
     }
 }
 
+// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
+for (const it of itemTypes) {
+    itemLists.set(it, []);
+}
+
+let none_items = [
+    ["armor", "helmet", "No Helmet"],
+    ["armor", "chestplate", "No Chestplate"],
+    ["armor", "leggings", "No Leggings"],
+    ["armor", "boots", "No Boots"],
+    ["accessory", "ring", "No Ring 1"],
+    ["accessory", "ring", "No Ring 2"],
+    ["accessory", "bracelet", "No Bracelet"],
+    ["accessory", "necklace", "No Necklace"],
+    ["weapon", "dagger", "No Weapon"],
+];
+for (let i = 0; i < none_items.length; i++) {
+    let item = Object();
+    item.slots = 0;
+    item.category = none_items[i][0];
+    item.type = none_items[i][1];
+    item.name = none_items[i][2];
+    item.displayName = item.name;
+    item.set = null;
+    item.quest = null;
+    item.skillpoints = [0, 0, 0, 0, 0];
+    item.has_negstat = false;
+    item.reqs = [0, 0, 0, 0, 0];
+    item.fixID = true;
+    item.tier = "Normal";
+    item.id = 10000 + i;
+    item.nDam = "0-0";
+    item.eDam = "0-0";
+    item.tDam = "0-0";
+    item.wDam = "0-0";
+    item.fDam = "0-0";
+    item.aDam = "0-0";
+    clean_item(item);
+
+    none_items[i] = item;
+}
+
 function init_maps() {
     //warp
     itemMap = new Map();
     /* Mapping from item names to set names. */
     idMap = new Map();
     redirectMap = new Map();
-    for (const it of itemTypes) {
-        itemLists.set(it, []);
-    }
-
-    let noneItems = [
-        ["armor", "helmet", "No Helmet"],
-        ["armor", "chestplate", "No Chestplate"],
-        ["armor", "leggings", "No Leggings"],
-        ["armor", "boots", "No Boots"],
-        ["accessory", "ring", "No Ring 1"],
-        ["accessory", "ring", "No Ring 2"],
-        ["accessory", "bracelet", "No Bracelet"],
-        ["accessory", "necklace", "No Necklace"],
-        ["weapon", "dagger", "No Weapon"],
-    ];
-    for (let i = 0; i < noneItems.length; i++) {
-        let item = Object();
-        item.slots = 0;
-        item.category = noneItems[i][0];
-        item.type = noneItems[i][1];
-        item.name = noneItems[i][2];
-        item.displayName = item.name;
-        item.set = null;
-        item.quest = null;
-        item.skillpoints = [0, 0, 0, 0, 0];
-        item.has_negstat = false;
-        item.reqs = [0, 0, 0, 0, 0];
-        item.fixID = true;
-        item.tier = "Normal";
-        item.id = 10000 + i;
-        item.nDam = "0-0";
-        item.eDam = "0-0";
-        item.tDam = "0-0";
-        item.wDam = "0-0";
-        item.fDam = "0-0";
-        item.aDam = "0-0";
-        clean_item(item);
-
-        noneItems[i] = item;
-    }
-    items = items.concat(noneItems);
+    items = items.concat(none_items);
     //console.log(items);
     for (const item of items) {
         if (item.remapID === undefined) {
             itemLists.get(item.type).push(item.displayName);
             itemMap.set(item.displayName, item);
-            if (noneItems.includes(item)) {
+            if (none_items.includes(item)) {
                 idMap.set(item.id, "");
             }
             else {

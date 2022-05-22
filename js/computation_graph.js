@@ -13,6 +13,7 @@ class ComputeNode {
         this.update_task = null;
         this.update_time = Date.now();
         this.fail_cb = false;   // Set to true to force updates even if parent failed.
+        this.calc_inputs = new Map();
     }
 
     /**
@@ -23,17 +24,38 @@ class ComputeNode {
             return;
         }
         this.update_time = timestamp;
+        this.set_value(this.compute_func(this.calc_inputs));
+    }
 
-        let value_map = Map();
-        for (const input of this.inputs) {
-            value_map.set(input.name, input.get_value());
-        }
-        this.value = this.compute_func(value_map);
+    /**
+     * Set this node's value directly. Notifies children.
+     */
+    set_value(value) {
+        let timestamp = Date.now();
+        this.update_time = timestamp;
+        this.value = value;
         for (const child of this.children) {
-            if (this.value || child.fail_cb) {
-                child.update();
+            child.set_input(this.name, this.value, timestamp);
+        }
+    }
+
+    /**
+     * Set an input value. Propagates calculation if all inputs are present.
+     */
+    set_input(input_name, value, timestamp) {
+        if (value || this.fail_cb) {
+            this.calc_inputs.set(input_name, value)
+            if (this.calc_inputs.size === this.inputs.length) {
+                this.update(timestamp)
             }
         }
+    }
+
+    /**
+     * Remove cached input values to this calculation.
+     */
+    clear_cache() {
+        this.calc_inputs = new Map();
     }
 
     /**
@@ -72,6 +94,19 @@ function calcSchedule(node) {
     }, 500);
 }
 
+class PrintNode extends ComputeNode {
+
+    constructor(name) {
+        super(name);
+        this.fail_cb = true;
+    }
+
+    compute_func(input_map) {
+        console.log([this.name, input_map]);
+        return null;
+    }
+}
+
 /**
  * Node for getting an item's stats from an item input field.
  */
@@ -85,9 +120,9 @@ class ItemInputNode extends ComputeNode {
      */
     constructor(name, item_input_field, none_item) {
         super(name);
-        this.input_field.setAttribute("input", () => calcSchedule(this));
         this.input_field = item_input_field;
-        this.none_item = expandItem(none_item);
+        this.input_field.addEventListener("input", () => calcSchedule(this));
+        this.none_item = new Item(none_item);
     }
 
     compute_func(input_map) {
@@ -107,16 +142,22 @@ class ItemInputNode extends ComputeNode {
             item = getCraftFromHash(item_text);
         } 
         else if (itemMap.has(item_text)) {
-            item = Item(itemMap.get(item_text));
+            item = new Item(itemMap.get(item_text));
         } 
         else if (tomeMap.has(item_text)) {
-            item = Item(tomeMap.get(item_text));
+            item = new Item(tomeMap.get(item_text));
         }
 
-        if (!item || item.statMap.get('type') !== this.none_item.statMap.get('type')) {
-            return null;
+        if (item) {
+            let type_match;
+            if (this.none_item.statMap.get('category') === 'weapon') {
+                type_match = item.statMap.get('category') === 'weapon';
+            } else {
+                type_match = item.statMap.get('type') === this.none_item.statMap.get('type');
+            }
+            if (type_match) { return item; }
         }
-        return item;
+        return null;
     }
 }
 
@@ -166,6 +207,6 @@ class WeaponDisplayNode extends ComputeNode {
         const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
         const type = item.statMap.get('type');
-        this.image_field.setAttribute('src', '../media/items/new/generic-'+type+'.png');
+        this.image.setAttribute('src', '../media/items/new/generic-'+type+'.png');
     }
 }
