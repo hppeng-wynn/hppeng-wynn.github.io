@@ -44,23 +44,24 @@ function init_crafter() {
     try {
         document.getElementById("recipe-choice").addEventListener("change", (event) => {
             updateMaterials();
-            calculateCraft();
+            calculateCraftSchedule();
         });
         document.getElementById("level-choice").addEventListener("change", (event) => {
             updateMaterials();
-            calculateCraft();
+            calculateCraftSchedule();
         });
         document.getElementById("recipe-choice").setAttribute("oninput", "updateCraftedImage()");
+        document.getElementById("recipe-choice").setAttribute("change", "updateCraftedImage()");
         
         for (let i = 1; i < 4; ++i) {
-            document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraft();");
-            document.getElementById("mat-2-"+i).setAttribute("onclick", document.getElementById("mat-2-"+i).getAttribute("onclick") + "; calculateCraft();");
+            document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById("mat-2-"+i).setAttribute("onclick", document.getElementById("mat-2-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
         }
         for (let i = 1; i < 7; ++i) {
-            document.getElementById("ing-choice-" + i ).setAttribute("oninput", "calculateCraft();");
+            document.getElementById("ing-choice-" + i ).setAttribute("oninput", "calculateCraftSchedule();");
         }
         for (const str of ["slow", "normal", "fast"]) {
-            document.getElementById(str + "-atk-button").setAttribute("onclick", document.getElementById(str + "-atk-button").getAttribute("onclick") + "; calculateCraft();");
+            document.getElementById(str + "-atk-button").setAttribute("onclick", document.getElementById(str + "-atk-button").getAttribute("onclick") + "; calculateCraftSchedule();");
         }
 
 
@@ -100,6 +101,20 @@ function toggleAtkSpd(buttonId) {
         }
         elem.classList.add("toggleOn");
     }
+}
+
+let doCraftTask = null;
+
+function calculateCraftSchedule(){
+    console.log("Craft Schedule called");
+    if (doCraftTask !== null) {
+        clearTimeout(doCraftTask);
+    }
+    doCraftTask = setTimeout(function(){
+        doCraftTask = null;
+        calculateCraft();
+        window.dispatchEvent(new Event('resize'));
+    }, 250);
 }
 
 function calculateCraft() {
