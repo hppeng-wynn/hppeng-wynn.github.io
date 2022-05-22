@@ -24,7 +24,7 @@ class ComputeNode {
      * Request update of this compute node. Pushes updates to children.
      */
     update(timestamp) {
-        if (timestamp < this.update_time) {
+        if (timestamp <= this.update_time) {
             return;
         }
         this.update_time = timestamp;
@@ -51,6 +51,11 @@ class ComputeNode {
      */
     compute_func() {
         throw "no compute func specified";
+    }
+
+    link_to(parent_node) {
+        this.inputs.push(parent_node)
+        parent_node.children.push(this);
     }
 }
 
