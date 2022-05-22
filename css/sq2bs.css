@@ -336,6 +336,10 @@ input.equipment-input {
     background-color: hsl(0, 0%, 16%) !important;
 }
 
+.dark-10 {
+    background-color: hsl(0, 0%, 20%) !important;
+}
+
 .dark-1u {
     background-color: hsl(0, 0%, 5%);
 }
