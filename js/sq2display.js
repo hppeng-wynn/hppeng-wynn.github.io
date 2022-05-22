@@ -498,7 +498,8 @@ function displaysq2ExpandedItem(item, parent_id){
             base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
         }
         else {
-            base_dps_elem.textContent = "Base DPS: "+(total_damages * damage_mult);
+            let bdps = total_damages * damage_mult;
+            base_dps_elem.textContent = "Base DPS: " + (bdps ? bdps : 0);
         }
         parent_div.appendChild(document.createElement("p"));
         parent_div.appendChild(base_dps_elem);
@@ -588,7 +589,7 @@ function displaysq2WeaponStats(build) {
     tot /= 2;
     let dps = Math.max(0, Math.round(tot * baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))] )); //atkspeeds
 
-    document.getElementById("weapon-dps").textContent = "base dps: " + dps; 
+    document.getElementById("weapon-dps").textContent = "base dps: " + (isNaN(dps) ? 0 : dps); 
     document.getElementById("weapon-lv").textContent = item.get("lvl"); 
 
     if (item.get("type")) {

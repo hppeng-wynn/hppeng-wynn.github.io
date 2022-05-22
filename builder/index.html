@@ -184,7 +184,7 @@
                                                     <input class="equipment-input text-light form-control" id="leggings-choice" name="leggings-choice" placeholder="No leggings" value="" tabindex="1"/>
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
-                                                    <input class="equipment-input text-light form-control" type="text" id="leggings-powder" name="leggings-powder" placeholder="no powders" tabindex="1"/>
+                                                    <input class="equipment-input text-light form-control" type="text" id="leggings-powder" name="leggings-powder" placeholder="powders" tabindex="1"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -299,25 +299,24 @@
                                 </div>
                                 <div class="col-auto order-xl-0 order-1">
                                     <div class="row h-100 dark-shadow dark-6 rounded">
-                                        <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="weapon-img-loc">
-                                            <img class="img-fluid rounded" src="../media/icons/new/Gears.png">
-                                        </div>
-                                        
                                         <div class="col">
                                             <div class="row align-items-center">
-                                                <div class="col-3 text-nowrap scaled-font">
+                                                <div class="col-3 text-nowrap fw-bold scaled-font">
                                                     Level:
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
                                                     <input class="equipment-input text-light form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
                                                 </div>
-                                            </div>
-                                            <div class="row align-items-center">
                                                 <div class="col-auto px-1 text-nowrap scaled-font">
-                                                    <button class="button fw-bold text-light dark-5 scaled-font rounded" id=copy-button onclick="copyBuild()">Copy short</button>
+                                                    <button class="button fw-bold text-light dark-5 scaled-font rounded" id="reset-button" onclick="sq2ResetFields()">Reset</button>
+                                                </div>
+                                            </div>
+                                            <div class="row align-items-center justify-content-center my-1">
+                                                <div class="col-auto px-1 text-nowrap scaled-font">
+                                                    <button class="button fw-bold text-light dark-5 scaled-font rounded" id="copy-button" onclick="copyBuild()">Copy short</button>
                                                 </div>
                                                 <div class="col-auto px-1 text-nowrap scaled-font">
-                                                    <button class="button fw-bold text-light dark-5 scaled-font rounded" id=share-button onclick="shareBuild()">Copy for sharing</button>
+                                                    <button class="button fw-bold text-light dark-5 scaled-font rounded" id="share-button" onclick="shareBuild()">Copy for sharing</button>
                                                 </div>
                                             </div>
                                         </div>
