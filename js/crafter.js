@@ -44,12 +44,27 @@ function init_crafter() {
     try {
         document.getElementById("recipe-choice").addEventListener("change", (event) => {
             updateMaterials();
+            calculateCraftSchedule();
         });
         document.getElementById("level-choice").addEventListener("change", (event) => {
             updateMaterials();
+            calculateCraftSchedule();
         });
         document.getElementById("recipe-choice").setAttribute("oninput", "updateCraftedImage()");
+        document.getElementById("recipe-choice").setAttribute("change", "updateCraftedImage()");
         
+        for (let i = 1; i < 4; ++i) {
+            document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById("mat-2-"+i).setAttribute("onclick", document.getElementById("mat-2-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+        }
+        for (let i = 1; i < 7; ++i) {
+            document.getElementById("ing-choice-" + i ).setAttribute("oninput", "calculateCraftSchedule();");
+        }
+        for (const str of ["slow", "normal", "fast"]) {
+            document.getElementById(str + "-atk-button").setAttribute("onclick", document.getElementById(str + "-atk-button").getAttribute("onclick") + "; calculateCraftSchedule();");
+        }
+
+
         populateFields();
         decodeCraft(ing_url_tag);
     } catch (error) {
@@ -86,6 +101,20 @@ function toggleAtkSpd(buttonId) {
         }
         elem.classList.add("toggleOn");
     }
+}
+
+let doCraftTask = null;
+
+function calculateCraftSchedule(){
+    console.log("Craft Schedule called");
+    if (doCraftTask !== null) {
+        clearTimeout(doCraftTask);
+    }
+    doCraftTask = setTimeout(function(){
+        doCraftTask = null;
+        calculateCraft();
+        window.dispatchEvent(new Event('resize'));
+    }, 250);
 }
 
 function calculateCraft() {
@@ -230,11 +259,20 @@ function populateFields() {
     
     
 }
-
-
-/* Copy the link
+/*
+    Copies the CR Hash (CR-blahblahblah)
 */
-function copyRecipe(){
+function copyRecipeHash() {
+    if (player_craft) {
+        copyTextToClipboard("CR-"+location.hash);
+        document.getElementById("copy-hash-button").textContent = "Copied!";
+    }
+}
+
+/* 
+    Copies the link (hppeng-wynn.github.io/crafter/#blahblah)
+*/
+function copyRecipe() {
     if (player_craft) {
         copyTextToClipboard(ing_url_base+location.hash);
         document.getElementById("copy-button").textContent = "Copied!";
@@ -243,7 +281,7 @@ function copyRecipe(){
 
 /* Copy the link AND a display of all ingredients
 */
-function shareRecipe(){
+function shareRecipe() {
     if (player_craft) {
         let copyString = ing_url_base+location.hash + "\n";
         let name = player_craft.recipe.get("name").split("-");
