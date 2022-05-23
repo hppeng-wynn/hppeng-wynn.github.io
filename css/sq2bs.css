@@ -437,6 +437,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Make links bold when hovered over */
 
+.clickable:hover {
+    font-weight: bold;
+}
+
 a:hover {
     font-weight: bold;
 }
