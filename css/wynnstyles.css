@@ -133,7 +133,7 @@ Wynn-Related CSS
 
 /* Damages */
 
-.Damage:before {
+.base_dps:before { /* Little Dagger icon */
     content: "\1F5E1";
 }
 
