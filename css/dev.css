@@ -1,0 +1,85 @@
+/* General Styling - used for all elements on /dev/ */
+.row > * {
+    margin-bottom: 0.75rem;
+    margin-left: 0.5rem;
+    padding-left: 0 !important; /*Override grid.scss (bs) */
+}
+
+.row {
+    overflow-wrap: break-word;
+}
+
+.section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    border-left: 3px solid white;
+    border-radius: 0.1rem;
+    /* padding-right: 0rem !important; 
+    padding-left: 0rem !important; */
+}
+
+.section-title:hover{
+    font-weight: bold;
+}
+
+.section-title {
+    margin-bottom: 1.5rem;;
+}
+
+ul {
+    /*Needed to override <ul> style in sq2bs.css*/
+    list-style-type: circle;
+}
+
+.indent {
+    margin-left: 2rem;
+}
+
+/* Math */
+math, number {
+    font-family: 'CMU Serif', 'Cambria Math', 'Times New Roman', serif;
+}
+
+number {
+    color: rgb(17, 234, 9);
+}
+
+.full-width {
+    width: 100%;
+    text-align: center;
+}
+
+
+
+/* Variable Sizing (specific to dev page) */
+@media screen and (max-width: 600px) { 
+    .section-title > * {
+        font-size: 3.5rem;
+    }
+
+    .page-title {
+        font-size: 6rem;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1400px) {
+    .section-title > * {
+        font-size: 1.25rem;
+    }
+
+    .page-title {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .section-title > *{
+        font-size: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 4.5rem;
+    }
+}

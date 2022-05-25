@@ -1,43 +1,159 @@
 <!DOCTYPE html>
 <html scroll-behavior="smooth">
-    <head>
-        <title>WynnBuilder Dev</title>
-        <link rel="icon" href="../media/icons/new/atlas64.png">
-        <link rel="manifest" href="manifest.json">
 
-        <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
-    
-        <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+<head>
+    <title>WynnBuilder Dev</title>
+    <link rel="icon" href="../media/icons/new/atlas64.png">
+    <link rel="manifest" href="manifest.json">
 
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
-    
-        
-        <link rel="stylesheet" href="../css/sq2bs.css">
-        <link rel="stylesheet" href="../css/sidebar.css">
-        <link rel="stylesheet" href="../css/wynnstyles.css">
-    </head>
-    <body id = "body" class="all" style="overflow-y: scroll">
-        <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
-            <a href = "../builder/"><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
-            <a href = "../crafter/"><img src = "../media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
-            <a href = "../items/"><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
-            <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
-            <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
-            <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "WynnCrafter"><b>WynnCrafter</b></a>
-            <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
-            <hr/>
+    <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
+
+    <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
+
+
+    <link rel="stylesheet" href="../css/sq2bs.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/wynnstyles.css">
+    <link rel="stylesheet" href="../css/dev.css">
+</head>
+
+<body id="body" class="all" style="overflow-y: scroll">
+    <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
+        <a href="../builder/"><img src="../media/icons/new/builder.png" alt="WynnBuilder"
+                title="WynnBuilder"><b>WynnBuilder</b></a>
+        <a href="../crafter/"><img src="../media/icons/new/crafter.png" alt="WynnCrafter"
+                title="WynnCrafter"><b>WynnCrafter</b></a>
+        <a href="../items/"><img src="../media/icons/new/searcher.png" alt="WynnAtlas"
+                title="WynnAtlas"><b>WynnAtlas</b></a>
+        <a href="../custom/"><img src="../media/icons/new/custom.png" alt="WynnCustom"
+                title="WynnCustom"><b>WynnCustom</b></a>
+        <a href="../map/"><img src="../media/icons/new/compass.png" alt="WynnGPS" title="WynnGPS"><b>WynnGPS</b></a>
+        <a href="../wynnfo/"><img src="../media/icons/new/book.png" alt="Wynnfo"
+                title="WynnCrafter"><b>WynnCrafter</b></a>
+        <a href="" onclick="toggleIcons()"><img src="../media/icons/new/reload.png" alt=""
+                title="Swap items on page"><b>Swap Icon Style</b></a>
+        <hr />
+    </div>
+    <div class="container text-light px-5 scaled-font">
+        <div class="row justify-content-center page-title">
+            Wynnbuilder Developer Page
         </div>
-        <div class = "container">
-            <div class = "row">
-                bruh
+        <div class="row">
+            Welcome to the Wynnbuilder page for developers! Here we provide documentation and specifications for our
+            website. Read through these sections to learn more about how WynnBuilder works!
+        </div>
+        <div class="row section" title="Encoding and Decoding WynnBuilder links">
+            <p>
+                This section is about the encoding schemes Wynnbuilder uses for its various saveable items (builds,
+                crafted items, and custom items).
+            </p>
+            <p>
+                We use a Base 64 encode/decode system in most shareable links. It would be quite clunky to put a 
+                bunch of numbers (the data we save and read) into one link. To save some space, we compress the 
+                base 10 numerical alphabet into a custom base 64 alphabet.
+            </p>
+            <div class="row section" title="WB Base 64">
+                <p>
+                    The Wynnbuilder Base 64 character table:
+                </p>
+                <code class="full-width">
+                    0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-
+                </code>
+                <p>
+                    The Base 64 encoding of a number (in the 0 to 63 range) is equal to the character at the index
+                    within the above string.
+                </p>
+                <p>
+                    For example, if we have a set of items with id numbers in the range [<number>0</number>, 
+                    <number>10000</number>], we need at most 3 base 64 characters to encode any of these items 
+                    in the link! The item of id <number>1337</number> corresponds to the Base64 hash <code>0Kv</code>:
+                    <math>1337 = 0 * 4096 + 20 * 64 + 57</math>, <number>0</number> maps to <code>0</code>, 
+                    <number>20</number> maps to <code>K</code>, and <number>57</number> maps to <code>v</code>.
+                </p>
             </div>
+            <p>
+                Now that we understand the base 64 system, we can move on to the way builds, crafted items, and custom items are stored in links.
+            </p>
+            <div class="row section" title="Builds">
+                <p>
+                    First, what do we need in order to encode an entire build?
+                </p>
+                <p>
+                    Wynnbuilder mainly runs calculations for damages and defense. Therefore, we need:
+                </p>
+                <ul class="indent">
+                    <li>The build's items (equipment, tomes)</li>
+                    <li>The skill points distributed by the user (and user level)</li>
+                    <li>Item powderings</li>
+                </ul>
+                <p>
+                    Wynnbuilder assigns each item in the Wynncraft item pool to a unique ID number. For example, the bracelet <b class="atlas">Atlas</b>
+                    has an id number of <number>167</number>. We can then store all of a build's item pool items in a link with the items' id numbers. A 
+                    similar idea is used for skill points and powders. However, we know how many different skills there are already (5), so we can encode 
+                    the user's assignment of skill points in 5 numbers. With powders, it's a little different. There are 31 "states" of powder: 1 for no 
+                    powder and then 5 elements with 6 tiers of powder for each element. We will know how many available powder slots we have based on our 
+                    equipment. We can then put all of these numbers in a specific order (after running Base 64 encoding) to get our build link.
+                </p>
+                <p>
+                    All build links will end in "#[version number]_[build hash]".
+                </p>
+                <div class="row section" title="Version 6">
+                    <code class="full-width">
+
+                    </code>
+                </div>
+                <div class="row section" title="Version 5">
+                    <p>
+
+                    </p>
+                </div>
+                <div class="row section" title="Version 4">
+                    <p>
+
+                    </p>
+                </div>
+                <div class="row section" title="Version 3">
+                    <p>
+
+                    </p>
+                </div>
+                <div class="row section" title="Version 2">
+                    <p>
+
+                    </p>
+                </div>
+                <div class="row section" title="Version 1">
+                    <p>
+
+                    </p>
+                </div>
+
+            </div>
+            <div class="row section" title="Crafted Items">
+            </div>
+            <div class="row section" title="Custom Items">
+            </div>
+
+            <p>
+                Last updated: 25 May 2022
+            </p>
         </div>
-        <script type="text/javascript" src="../js/"></script>
-    </body>
+        <div class="row section" title="Test Section">
+        </div>
+
+    </div>
+    <script type="text/javascript" src="../js/dev.js"></script>
+    <script type="text/javascript" src="../js/sq2icons.js"></script>
+</body>
+
 </html>
