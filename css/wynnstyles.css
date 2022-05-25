@@ -34,6 +34,7 @@ Wynn-Related CSS
 }
 
 
+
 /* Tier Colors */
 
 .Normal {
@@ -131,6 +132,10 @@ Wynn-Related CSS
 }
 
 /* Damages */
+
+.base_dps:before { /* Little Dagger icon */
+    content: "\1F5E1";
+}
 
 .Damage { 
     color: rgb(255, 198, 85)
