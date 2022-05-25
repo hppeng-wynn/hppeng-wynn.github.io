@@ -127,7 +127,6 @@ function parsePowdering(powder_info) {
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
-            console.log(block);
             let six_powders = Base64.toInt(block);
             for (let k = 0; k < 6 && six_powders != 0; ++k) {
                 powders += powderNames.get((six_powders & 0x1f) - 1);
@@ -237,13 +236,11 @@ function decodeBuild(url_tag) {
             info[1] = res[1];
         }
         // Tomes.
-        if (version == 6) {
+        if (version_number == 6) {
             //tome values do not appear in anything before v6.
             for (let i = 0; i < 7; ++i) {
                 let tome_str = info[1].charAt(i);
-                for (let i in tomes) {
-                    setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
-                }
+                setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
             }
             info[1] = info[1].slice(7);
         }
