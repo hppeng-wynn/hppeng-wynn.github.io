@@ -563,6 +563,11 @@ function displaysq2WeaponStats(build) {
     stats.set("atkSpd", item.get("atkSpd"));
     stats.set("damageBonus", [0, 0, 0, 0, 0]);
     stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
+    
+    //needed for damage calc CR powders
+    if (build.weapon.get("tier") === "Crafted") {
+        stats.set("damageBases", [item.get("nDamBaseHigh"), item.get("eDamBaseHigh"), item.get("tDamBaseHigh"), item.get("wDamBaseHigh"), item.get("fDamBaseHigh"), item.get("aDamBaseHigh")]);
+    }
 
     let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, build.weapon, [0, 0, 0, 0, 0], 1, undefined);
     let powdered_base = results[2];
