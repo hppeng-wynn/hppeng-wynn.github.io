@@ -120,10 +120,11 @@ function getTomeNameFromID(id) {
 function parsePowdering(powder_info) {
     // TODO: Make this run in linear instead of quadratic time... ew
     let powdering = [];
+    console.log(powder_info);
     for (let i = 0; i < 5; ++i) {
         let powders = "";
         let n_blocks = Base64.toInt(powder_info.charAt(0));
-        // console.log(n_blocks + " blocks");
+        console.log(n_blocks + " blocks");
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
@@ -241,9 +242,7 @@ function decodeBuild(url_tag) {
             //tome values do not appear in anything before v6.
             for (let i = 0; i < 7; ++i) {
                 let tome_str = info[1].charAt(i);
-                for (let i in tomes) {
-                    setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
-                }
+                setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
             }
             info[1] = info[1].slice(7);
         }

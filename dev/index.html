@@ -52,7 +52,7 @@
             Welcome to the Wynnbuilder page for developers! Here we provide documentation and specifications for our
             website. Read through these sections to learn more about how WynnBuilder works!
         </div>
-        <div class="row section" title="Encoding and Decoding WynnBuilder links">
+        <div class="row section" title="Decoding WynnBuilder links">
             <p>
                 This section is about the encoding schemes Wynnbuilder uses for its various saveable items (builds,
                 crafted items, and custom items).
@@ -80,6 +80,27 @@
                     <math>1337 = 0 * 4096 + 20 * 64 + 57</math>, <number>0</number> maps to <code>0</code>, 
                     <number>20</number> maps to <code>K</code>, and <number>57</number> maps to <code>v</code>.
                 </p>
+                <p>
+                    Decoding is a little different. We can either interpret the base 64 string as a <b>signed</b> or <b>unsigned</b> number (signed: using 2s complement binary).
+                </p>
+                <p>
+                    Things that should be interpreted as <b>signed</b> are:
+                </p>
+                <ul class = "indent">
+                    <li>Skill Points</li>
+                    <li>Any numerical identification value for custom items</li>
+                </ul>
+                <p>
+                    Things that should be interpreted as <b>unsigned</b> are:
+                </p>
+                <ul class = "indent">
+                    <li>Item ID numbers</li>
+                    <li>Tome ID numbers</li>
+                    <li>Build Level</li>
+                    <li>Ingredient ID numbers</li>
+                    <li>Recipe ID numbers</li>
+                    <li>Powder numbers</li>
+                </ul>
             </div>
             <p>
                 Now that we understand the base 64 system, we can move on to the way builds, crafted items, and custom items are stored in links.
@@ -104,22 +125,267 @@
                     powder and then 5 elements with 6 tiers of powder for each element. We will know how many available powder slots we have based on our 
                     equipment. We can then put all of these numbers in a specific order (after running Base 64 encoding) to get our build link.
                 </p>
+                <div class = "row section" title = "ID number specifics">
+                    <p>
+                        For items, you can download the item DB here: <a href = "../clean.json" target = "_blank">clean.json</a>. Each item has an id value that can be put in a map. The NoneItem ID numbers start at 10000 in the canonical order: [helmet, chestplate, leggings, boots, ring 1, ring 2, bracelet, necklace, weapon].
+                    </p>
+                    <p>
+                        For tomes, you can download the tome DB here: <a href = "../tomes.json" target = "_blank">tomes.json</a>. Each tome has a tomeID value that can be put in a map. The NoneTome ID numbers start at 61 in the order [no weapon tome, no armor tome, no guild tome] so that we can store tome IDs in 1 Base 64 character.
+                    </p>
+                    <p>
+                        For powders: id numbers <number>1</number> through <number>30</number> map to Earth I, Earth II, ..., Earth VI, 
+                        etc. in the order Earth, Thunder, Water, Fire, Air. 0 is the id number for no powder.
+                    </p>
+                </div>
                 <p>
                     All build links will end in "#[version number]_[build hash]".
                 </p>
                 <div class="row section" title="Version 6">
-                    <code class="full-width">
-
-                    </code>
+                    <p>
+                        Version 6 was made to account for the desire to save tomes in a build. As of the last version of this documentation, version 6 is used for encoding whenever there are tomes in the build.
+                    </p>
+                    <div class = "row section" title = "Example 1: With Tomes">
+                        <code class="full-width">
+                            https://hppeng-wynn.github.io/builder/#6_06W2SH0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6ZU6FCDo
+                        </code>
+                        <p>
+                            Build hash format: 
+                        </p>
+                        <ul class = "indent">
+                            <li>
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <code>06W</code>, 
+                                <code>2SH</code>,
+                                <code>0D4</code>,
+                                <code>0Qq</code>,
+                                <code>2SK</code>,
+                                <code>2SL</code>,
+                                <code>02d</code>,
+                                <code>0og</code>,
+                                <code>0Qi</code>
+                            </li>
+                            <li>
+                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <code>19</code>,
+                                <code>1V</code>,
+                                <code>-E</code>,
+                                <code>0i</code>,
+                                <code>2C</code>
+                            </li>
+                            <li>
+                                <number>1</number> player level (<number>2</number> characters):
+                                <code>1g</code>
+                            </li>
+                            <li>
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                <ul class = "indent">
+                                    <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
+                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li>
+                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                    </li>
+                                    <li>
+                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                    </li>
+                                    <ul class = "indent">
+                                        <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                <number>7</number> tomes (<number>1</number> character each):
+                                <code>ZU6FCDo</code>    
+                                <ul class = "indent">
+                                    <li>The order of tomes listed is [2x weapon tome, 4x armor tome, 1x guild tome].</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="row section" title="Version 5">
                     <p>
-
+                        Version 5 was made to allow for the ability to save custom items. To learn the specifics about custom item encoding, refer to the Custom Items section. 
+                    </p>
+                    <p>
+                        As of the last version of this documentation, version 5 is only used for encoding when there are custom items (and no tomes) in the build.  
+                    </p>
+                    <div class = "row section" title = "Example 1: With Custom Item">
+                        <code class = "full-width">
+                            http://hppeng-wynn.github.io/builder/#5_06W00mCI-10000JCustom%20Chestplate0220510G020Fe0M0201a0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-                    
+                        </code>
+                        <p>
+                            Build Hash format:
+                        </p>
+                        <ul class = "indent">
+                            <li>
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <code>06W</code>, 
+                                <code>CI-10000JCustom%20Chestplate0220510G020Fe0M0201a</code>,
+                                <code>0D4</code>,
+                                <code>0Qq</code>,
+                                <code>2SK</code>,
+                                <code>2SL</code>,
+                                <code>02d</code>,
+                                <code>0og</code>,
+                                <code>0Qi</code>
+                                <ul class = "indent">
+                                    <li>Starting in this version, you can substitute in the full hash of a custom item ("CI-[gibberish]") for the 3-character hash of an item pool item, just like for crafted items.</li>
+                                    <li>Similar to crafted items, the way we can tell that an item is a custom item is when the 3-character hash of the 'item' is "CI-". No existing item has an item ID of "CI-" in base 64, so we can define a special case check for this "id number".</li>
+                                    <li>Further details on parsing and loading this custom item are in the Custom Item section.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <code>19</code>,
+                                <code>1V</code>,
+                                <code>-E</code>,
+                                <code>0i</code>,
+                                <code>2C</code>
+                            </li>
+                            <li>
+                                <number>1</number> player level (<number>2</number> characters):
+                                <code>1g</code>
+                            </li>
+                            <li>
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                <ul class = "indent">
+                                    <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
+                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li>
+                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                    </li>
+                                    <li>
+                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                    </li>
+                                    <ul class = "indent">
+                                        <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <p>
+                        It is possible that version 5 links will have an extra tome section at the end like above (see: Version 6 section). We ignore this in decoding.
                     </p>
                 </div>
                 <div class="row section" title="Version 4">
                     <p>
-
+                        Version 4 was made to allow for the ability to save crafted items. To learn the specifics about crafted item encoding, refer to the Crafted Items section. 
+                    </p>
+                    <p>
+                        As of the last version of this documentation, version 4 is the default version and is used when there are no custom items or tomes in the build.
+                    </p>
+                    <div class = "row section" title = "Example 1: No Crafted Items">
+                        <code class = "full-width">
+                            http://hppeng-wynn.github.io/builder/#4_06W2SH0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-               
+                        </code>
+                        <p>
+                            Build Hash format:
+                        </p>
+                        <ul class = "indent">
+                            <li>
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <code>06W</code>, 
+                                <code>2SH</code>,
+                                <code>0D4</code>,
+                                <code>0Qq</code>,
+                                <code>2SK</code>,
+                                <code>2SL</code>,
+                                <code>02d</code>,
+                                <code>0og</code>,
+                                <code>0Qi</code>
+                            </li>
+                            <li>
+                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <code>19</code>,
+                                <code>1V</code>,
+                                <code>-E</code>,
+                                <code>0i</code>,
+                                <code>2C</code>
+                            </li>
+                            <li>
+                                <number>1</number> player level (<number>2</number> characters):
+                                <code>1g</code>
+                            </li>
+                            <li>
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                <ul class = "indent">
+                                    <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
+                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li>
+                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                    </li>
+                                    <li>
+                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                    </li>
+                                    <ul class = "indent">
+                                        <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class = "row section" title = "Example 2: With Crafted Items">
+                        <code class = "full-width">
+                            https://hppeng-wynn.github.io/builder/#4_06WCR-1628i8v8v94948f210D40Qq2SK2SL02d0og0Qi1Q1V-E0l2C1g0000100nZ6zz++++-
+                        </code>
+                        <p>
+                            Build Hash format:
+                        </p>
+                        <ul class = "indent">
+                            <li>
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <code>06W</code>, 
+                                <code>CR-1628i8v8v94948f21</code>,
+                                <code>0D4</code>,
+                                <code>0Qq</code>,
+                                <code>2SK</code>,
+                                <code>2SL</code>,
+                                <code>02d</code>,
+                                <code>0og</code>,
+                                <code>0Qi</code>
+                                <ul class = "indent">
+                                    <li>Starting in this version, you can substitute in the full hash of a crafted item ("CR-[gibberish]") for the 3-character hash of an item pool item.</li>
+                                    <li>The way we can tell that an item is a crafted item is when the 3-character hash of the 'item' is "CR-". No existing item has an item ID of "CR-" in base 64, so we can define a special case check for this "id number".</li>
+                                    <li>Further details on parsing and loading this custom item are in the Crafted Item section.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <code>19</code>,
+                                <code>1V</code>,
+                                <code>-E</code>,
+                                <code>0i</code>,
+                                <code>2C</code>
+                            </li>
+                            <li>
+                                <number>1</number> player level (<number>2</number> characters):
+                                <code>1g</code>
+                            </li>
+                            <li>
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                <ul class = "indent">
+                                    <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
+                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li>
+                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                    </li>
+                                    <li>
+                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                    </li>
+                                    <ul class = "indent">
+                                        <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <p>
+                        It is possible that version 4 links will have an extra tome string like above (see: Version 6 section) after the powders. You can ignore this in decoding.
                     </p>
                 </div>
                 <div class="row section" title="Version 3">
@@ -142,6 +408,9 @@
             <div class="row section" title="Crafted Items">
             </div>
             <div class="row section" title="Custom Items">
+                <p>
+                    http://localhost:8000/builder/#5_06W02hCI-10000HMeta%20Chestplate010Gbest%20in%20slot0240401030510G0302SG0H020Fe0I020Fe0J020Fe0K020Fe0L020Fe0M0201Y0i0200U220z0204iKK150200U22160200U22170200U22180200U22190200U220D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-
+                </p>
             </div>
 
             <p>
