@@ -58,30 +58,32 @@
                 crafted items, and custom items).
             </p>
             <p>
-                We use a Base 64 encode/decode system in most shareable links. It would be quite clunky to put a 
+                We use a Base 64 (B64) encode/decode system in most shareable links. It would be quite clunky to put a 
                 bunch of numbers (the data we save and read) into one link. To save some space, we compress the 
-                base 10 numerical alphabet into a custom base 64 alphabet.
+                base 10 numerical alphabet into a custom B64 alphabet.
             </p>
-            <div class="row section" title="WB Base 64">
+            <div class="row section" title="WB Base 64 (B64)">
                 <p>
-                    The Wynnbuilder Base 64 character table:
+                    The Wynnbuilder B64 character table:
                 </p>
-                <code class="full-width">
-                    0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-
-                </code>
+                <pre class="full-width">
+0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-
+^    ^    ^    ^    ^    ^    ^    ^    ^    ^    ^    ^    ^   
+|    |    |    |    |    |    |    |    |    |    |    |    |   
+0    5    10   15   20   25   30   35   40   45   50   55   60  </pre>
                 <p>
-                    The Base 64 encoding of a number (in the 0 to 63 range) is equal to the character at the index
+                    The B64 encoding of a number (in the 0 to 63 range) is equal to the character at the index
                     within the above string.
                 </p>
                 <p>
                     For example, if we have a set of items with id numbers in the range [<number>0</number>, 
-                    <number>10000</number>], we need at most 3 base 64 characters to encode any of these items 
-                    in the link! The item of id <number>1337</number> corresponds to the Base64 hash <code>0Kv</code>:
+                    <number>10000</number>], we need at most 3 B64 characters to encode any of these items 
+                    in the link! The item of id <number>1337</number> corresponds to the B64 hash <code>0Kv</code>:
                     <math>1337 = 0 * 4096 + 20 * 64 + 57</math>, <number>0</number> maps to <code>0</code>, 
                     <number>20</number> maps to <code>K</code>, and <number>57</number> maps to <code>v</code>.
                 </p>
                 <p>
-                    Decoding is a little different. We can either interpret the base 64 string as a <b>signed</b> or <b>unsigned</b> number (signed: using 2s complement binary).
+                    Decoding is a little different. We can either interpret the B64 string as a <b>signed</b> or <b>unsigned</b> number (signed: using 2s complement binary).
                 </p>
                 <p>
                     Things that should be interpreted as <b>signed</b> are:
@@ -103,7 +105,7 @@
                 </ul>
             </div>
             <p>
-                Now that we understand the base 64 system, we can move on to the way builds, crafted items, and custom items are stored in links.
+                Now that we understand the B64 system, we can move on to the way builds, crafted items, and custom items are stored in links.
             </p>
             <div class="row section" title="Builds">
                 <p>
@@ -124,14 +126,14 @@
                     similar idea is used for skill points and powders. However, we know how many different skills there are already (5), so we can encode 
                     the user's assignment of skill points in 5 numbers. With powders, it's a little different. There are 31 "states" of powder: 1 for no 
                     powder and then 5 elements with 6 tiers of powder for each element. We will know how many available powder slots we have based on our 
-                    equipment. We can then put all of these numbers in a specific order (after running Base 64 encoding) to get our build link. -->
+                    equipment. We can then put all of these numbers in a specific order (after running B64 encoding) to get our build link. -->
                 </p>
                 <div class = "row section" title = "ID number specifics">
                     <p>
                         For items, you can download the item DB here: <a href = "../clean.json" target = "_blank">clean.json</a>. Each item has an id value that can be put in a map. The NoneItem ID numbers start at 10000 in the canonical order: [helmet, chestplate, leggings, boots, ring 1, ring 2, bracelet, necklace, weapon] (No Weapon has an id of 10008).
                     </p>
                     <p>
-                        For tomes, you can download the tome DB here: <a href = "../tome_map.json" target = "_blank">tome_map.json</a>. The NoneTome ID numbers start at 61 in the order [no weapon tome, no armor tome, no guild tome] so that we can store tome IDs in 1 Base 64 character.
+                        For tomes, you can download the tome DB here: <a href = "../tome_map.json" target = "_blank">tome_map.json</a>. The NoneTome ID numbers start at 61 in the order [no weapon tome, no armor tome, no guild tome] so that we can store tome IDs in 1 B64 character.
                     </p>
                     <p>
                         For powders: id numbers <number>1</number> through <number>30</number> map to Earth I, Earth II, ..., Earth VI, 
@@ -155,7 +157,7 @@
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> B64 characters each): 
                                 <code>06W</code>, 
                                 <code>2SH</code>,
                                 <code>0D4</code>,
@@ -167,7 +169,7 @@
                                 <code>0Qi</code>
                             </li>
                             <li>
-                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <number>5</number> skill point totals (<number>2</number> B64 characters each):
                                 <code>19</code>,
                                 <code>1V</code>,
                                 <code>-E</code>,
@@ -175,20 +177,20 @@
                                 <code>2C</code>
                             </li>
                             <li>
-                                <number>1</number> player level (<number>2</number> characters):
+                                <number>1</number> player level (<number>2</number> B64 characters):
                                 <code>1g</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -214,16 +216,16 @@
                     </p>
                     <div class = "row section" title = "Example 1: With Custom Item">
                         <code class = "full-width">
-                            http://hppeng-wynn.github.io/builder/#5_06W00mCI-10000JCustom%20Chestplate0220510G020Fe0M0201a0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-                    
+                            https://hppeng-wynn.github.io/builder/#5_06W00mCI-10000JCustom%20Chestplate0220510G020Fe0M0201a0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-                    
                         </code>
                         <p>
                             Build Hash format:
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> B64 characters each): 
                                 <code>06W</code>, 
-                                <code>CI-10000JCustom%20Chestplate0220510G020Fe0M0201a</code>,
+                                <code>00m</code> (with the custom item <code>CI-10000JCustom%20Chestplate0220510G020Fe0M0201a</code>),
                                 <code>0D4</code>,
                                 <code>0Qq</code>,
                                 <code>2SK</code>,
@@ -232,13 +234,14 @@
                                 <code>0og</code>,
                                 <code>0Qi</code>
                                 <ul class = "indent">
-                                    <li>Starting in this version, you can substitute in the full hash of a custom item ("CI-[gibberish]") for the 3-character hash of an item pool item, just like for crafted items.</li>
-                                    <li>Similar to crafted items, the way we can tell that an item is a custom item is when the 3-character hash of the 'item' is "CI-". No existing item has an item ID of "CI-" in base 64, so we can define a special case check for this "id number".</li>
+                                    <li>Starting in this version, to encode a custom item we substitute in the length of the full hash of a custom item ("CI-[gibberish]") in <number>3</number> B64 characters for the item ID, followed by the full hash.</li>
+                                    <li>When decoding build links of this version or higher, you must check whether or not the 3 characters after the current item are "CI-". If they are, the current 3 characters are the B64 representation of the unsigned length of the custom item hash (<math>n</math>), in characters. Then the next <math>n</math> characters make up the full custom item hash.</li> 
+                                    <li>No existing item has an item ID of "CI-" in B64, so we can define a special case check for this "id number".</li>
                                     <li>Further details on parsing and loading this custom item are in the Custom Item section.</li>
                                 </ul>
                             </li>
                             <li>
-                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <number>5</number> skill point totals (<number>2</number> B64 characters each):
                                 <code>19</code>,
                                 <code>1V</code>,
                                 <code>-E</code>,
@@ -246,20 +249,20 @@
                                 <code>2C</code>
                             </li>
                             <li>
-                                <number>1</number> player level (<number>2</number> characters):
+                                <number>1</number> player level (<number>2</number> B64 characters):
                                 <code>1g</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -281,14 +284,14 @@
                     </p>
                     <div class = "row section" title = "Example 1: No Crafted Items">
                         <code class = "full-width">
-                            http://hppeng-wynn.github.io/builder/#4_06W2SH0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-               
+                            https://hppeng-wynn.github.io/builder/#4_06W2SH0D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-               
                         </code>
                         <p>
                             Build Hash format:
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> N64 characters each): 
                                 <code>06W</code>, 
                                 <code>2SH</code>,
                                 <code>0D4</code>,
@@ -300,7 +303,7 @@
                                 <code>0Qi</code>
                             </li>
                             <li>
-                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <number>5</number> skill point totals (<number>2</number> B64 characters each):
                                 <code>19</code>,
                                 <code>1V</code>,
                                 <code>-E</code>,
@@ -308,20 +311,20 @@
                                 <code>2C</code>
                             </li>
                             <li>
-                                <number>1</number> player level (<number>2</number> characters):
+                                <number>1</number> player level (<number>2</number> B64 characters):
                                 <code>1g</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -339,7 +342,7 @@
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> B64 characters each): 
                                 <code>06W</code>, 
                                 <code>CR-1628i8v8v94948f21</code>,
                                 <code>0D4</code>,
@@ -351,12 +354,12 @@
                                 <code>0Qi</code>
                                 <ul class = "indent">
                                     <li>Starting in this version, you can substitute in the full hash of a crafted item ("CR-[gibberish]") for the 3-character hash of an item pool item.</li>
-                                    <li>The way we can tell that an item is a crafted item is when the 3-character hash of the 'item' is "CR-". No existing item has an item ID of "CR-" in base 64, so we can define a special case check for this "id number".</li>
+                                    <li>The way we can tell that an item is a crafted item is when the 3-character hash of the 'item' is "CR-". No existing item has an item ID of "CR-" in B64, so we can define a special case check for this "id number".</li>
                                     <li>Further details on parsing and loading this custom item are in the Crafted Item section.</li>
                                 </ul>
                             </li>
                             <li>
-                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <number>5</number> skill point totals (<number>2</number> B64 characters each):
                                 <code>19</code>,
                                 <code>1V</code>,
                                 <code>-E</code>,
@@ -364,20 +367,20 @@
                                 <code>2C</code>
                             </li>
                             <li>
-                                <number>1</number> player level (<number>2</number> characters):
+                                <number>1</number> player level (<number>2</number> B64 characters):
                                 <code>1g</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -403,7 +406,7 @@
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> B64 characters each): 
                                 <code>06W</code>, 
                                 <code>2SH</code>,
                                 <code>0D4</code>,
@@ -415,7 +418,7 @@
                                 <code>0Qi</code>
                             </li>
                             <li>
-                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <number>5</number> skill point totals (<number>2</number> B64 characters each):
                                 <code>19</code>,
                                 <code>1V</code>,
                                 <code>-E</code>,
@@ -423,20 +426,20 @@
                                 <code>2C</code>
                             </li>
                             <li>
-                                <number>1</number> player level (<number>2</number> characters):
+                                <number>1</number> player level (<number>2</number> B64 characters):
                                 <code>1g</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -459,7 +462,7 @@
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> B64 characters each): 
                                 <code>06W</code>, 
                                 <code>2SH</code>,
                                 <code>0D4</code>,
@@ -471,7 +474,7 @@
                                 <code>0Qi</code>
                             </li>
                             <li>
-                                <number>5</number> skill point totals (<number>2</number> characters each):
+                                <number>5</number> skill point totals (<number>2</number> B64 characters each):
                                 <code>19</code>,
                                 <code>1V</code>,
                                 <code>-E</code>,
@@ -479,16 +482,16 @@
                                 <code>2C</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -511,7 +514,7 @@
                         </p>
                         <ul class = "indent">
                             <li>
-                                <number>9</number> items from <code>idMap</code> (<number>3</number> characters each): 
+                                <number>9</number> items from <code>idMap</code> (<number>3</number> B64 characters each): 
                                 <code>06W</code>, 
                                 <code>2SH</code>,
                                 <code>0D4</code>,
@@ -523,16 +526,16 @@
                                 <code>0Qi</code>
                             </li>
                             <li>
-                                A <b>variable</b> number of powder "blocks" (<number>5</number> characters which give us <number>6</number> powders per block).
+                                A <b>variable</b> number of powder "blocks" (<number>5</number> B64 characters which give us <number>6</number> powders per block).
                                 <ul class = "indent">
                                     <li>For each of the 5 powderable equipment fields [helmet, chestplate, leggings, boots, weapon], we will have the following:</li>
-                                    <li><number>1</number> base 64 character that says that we need <number>n</number> blocks for this item.</li>
-                                    <li><number>n</number> blocks of <number>5</number> base 64 characters.</li>
+                                    <li><number>1</number> B64 character that says that we need <number>n</number> blocks for this item.</li>
+                                    <li><number>n</number> blocks of <number>5</number> B64 characters.</li>
                                     <li>
-                                        Since there are 4 <code>0</code>s (Base 64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
+                                        Since there are 4 <code>0</code>s (B64 0 = 0 unsigned) in this example, we have no powders on any of the armor piece (no blocks).
                                     </li>
                                     <li>
-                                        Then, we have <code>1</code> (Base 64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
+                                        Then, we have <code>1</code> (B64 1 = 1 unsigned). There is 1 block of powders to decode for the weapon item. That is <code>00nZ6</code>.
                                     </li>
                                     <ul class = "indent">
                                         <li>The unsigned equivalent of <code>00nZ6</code> in binary is 30 <b>binary</b> bits long (omitted). Each section of 5 bits directly corresponds to an powder ID.</li>
@@ -565,16 +568,16 @@
                 </p>
                 <div class = "row section" title = "ID number specifics">
                     <p>
-                        For ingredients, you can download the ingredient DB here: <a href = "../ing_map.json" target = "_blank">ing_map.json</a>. The ID number for No Ingredient is 4000.
+                        For ingredients, you can download the ingredient id map here: <a href = "../ing_map.json" target = "_blank">ing_map.json</a>. The ID number for No Ingredient is 4000.
                     </p>
                     <p>
-                        For recipes, you can download the recipe DB here: <a href = "../recipe_map.json" target = "_blank">recipe_map.json</a>. 
+                        For recipes, you can download the recipe id map here: <a href = "../recipe_map.json" target = "_blank">recipe_map.json</a> or the recipe DB here: <a href = "recipes_clean.json" target = "_blank">recipes_clean.json</a>. 
                     </p>
                 </div>
 
                 <div class = "row section" title = "Version 1">
                     <p>
-                        This is the first version of crafted item encoding. Crafted Items are always stored in a constant number of base 64 characters.
+                        This is the first version of crafted item encoding. Crafted Items are always stored in a constant number of B64 characters.
                     </p>
                     <div class = "row section" title = "Example - Crafted Item">
                         <p>
@@ -589,7 +592,7 @@
                         <ul class = "indent">
                             <li><number>3</number> characters to denote item type as crafted: <code>CR-</code> (always)</li>
                             <li><number>1</number> character for encoding version: <code>1</code> </li>
-                            <li><number>6</number> ingredient IDs (<number>2</number> Base 64 characters each): 
+                            <li><number>6</number> ingredient IDs (<number>2</number> B64 characters each): 
                                 <code>62</code>,
                                 <code>8i</code>,
                                 <code>8v</code>,
@@ -597,25 +600,28 @@
                                 <code>94</code>,
                                 <code>94</code>
                             </li>
-                            <li><number>2</number> characters for recipe ID: <code>8f</code></li>
+                            <li><number>2</number> B64 characters for recipe ID: <code>8f</code></li>
                             <li><number>1</number> character to encode material tiers: <code>2</code> 
                                 <ul class = "indent">
-
+                                    <li>There are 2 material tiers to decode. The ordering of materials is determined by their order within the corresponding recipe object held in the db.</li>
+                                    <li>The material tier character (from here on <math>t</math>) is in the range [<number>1</number>, <number>9</number>]. </li>
+                                    <li>Mat 1's tier is equal to <math>t % 3</math> except when this yields 0, in which case it becomes 3.</li>
+                                    <li>Mat 2's tier is equal to ceil(<math> (t - 0.5) / 3</math>).</li>
                                 </ul>
                             </li>
                             <li><number>1</number> character to encode attack speed: <code>1</code> 
                                 <ul class = "indent">
-                                    <li>The integer after doing unsigned decoding from the Base 64 character denotes the index within the following array: [SLOW, NORMAL, FAST]. Base 64 <code>1</code> maps to the unsigned integer <number>1</number>, meaning that the attack speed of this crafted item would be NORMAL if it were a weapon.</li>
+                                    <li>The integer after doing unsigned decoding from the B64 character denotes the index within the following array: [SLOW, NORMAL, FAST]. B64 <code>1</code> maps to the unsigned integer <number>1</number>, meaning that the attack speed of this crafted item would be NORMAL if it were a weapon.</li>
                                     <li>Note: although only weapons will have attack speed, we decided to include the character in all crafted item hashes to keep a constant hash length.</li>
                                 </ul>
                             </li>
                         </ul>
 
                         <p>
-                            You may need to parse a crafted item from a wynnbuilder link with a crafted item.
+                            You may need to parse a crafted item from a wynnbuilder crafter link.
                         </p>
                         <code class = "full-width">
-                            http://hppeng-wynn.github.io/crafter/#1628i8v8v94948f21
+                            https://hppeng-wynn.github.io/crafter/#1628i8v8v94948f21
                         </code>
                         <p>
                             We can simply take the string after the octothorpe/hash tag (#), tack on "CR-" in front of this string, and arrive at the full hash for the crafted item in question. Decode using the same logic as the previous example.
@@ -632,17 +638,262 @@
                 <p>
                     Custom items always start with "CI-" so that they are, as an entire category, distinguishable from item pool items. The stats and values that make up the custom item are stored in the rest of the "hash".
                 </p>
-                <p>
-                    http://localhost:8000/builder/#5_06W02hCI-10000HMeta%20Chestplate010Gbest%20in%20slot0240401030510G0302SG0H020Fe0I020Fe0J020Fe0K020Fe0L020Fe0M0201Y0i0200U220z0204iKK150200U22160200U22170200U22180200U22190200U220D40Qq2SK2SL02d0og0Qi191V-E0i2C1g0000100nZ6zz++++-
-                </p>
+                <div class = "row section" title = "Version 1">
+                    <p>This is the first version of custom item encoding and decoding.</p>
+                    <p>You will need the full array of item identification saving order and all non-rolled identifications (ex: name). View them below.</p>
+                    <div class = "row section" title = "Important Arrays">
+                        <p> ID saving order: <code>ci_save_order = ["name", "lore",  "tier", "set", "slots", "type", "material", "drop", "quest",  "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd","durability","duration","charges"];</code> </p>
+                        <p> Non-rolled string IDs: <code>nonRolled_strings = ["name", "lore", "tier", "set", "type", "material", "drop", "quest", "majorIds", "classReq", "atkSpd", "displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];</code></p>
+                        <p> Rolled IDs: <code>rolledIDs = ["hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd"];</code></p>
+                        <p> Non-rolled IDs: <code>nonRolledIDs = ["name", "lore", "displayName", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "str", "dex", "int", "agi", "def", "fixID", "category", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds"];</code></p>
+                        <p> Tiers: <code>tiers = ["Normal", "Unique", "Rare", "Legendary", "Fabled", "Mythic", "Set", "Crafted"]</code></p>
+                        <p> Types: <code>types = [ "helmet", "chestplate", "leggings", "boots", "ring", "bracelet", "necklace", "wand", "spear", "bow", "dagger", "relik", "potion", "scroll", "food"];</code></p>
+                        <p> Attack Speeds: <code>attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];</code></p>
+                        <p> Class Requirements: <code>classes = ["Warrior", "Assassin", "Mage", "Archer", "Shaman"]</code> </p>
+                    </div>
+
+                    <div class = "row section" title = "Example">
+                        <p>
+                            Here's an example of a custom item hash.
+                        </p>
+                        <code class = "full-width">
+                            CI-10000HMeta%20Chestplate010Gbest%20in%20slot0240401030510G0302SG0H020Fe0I020Fe0J020Fe0K020Fe0L020Fe0M0201Y0i0200U220z0204iKK150200U22160200U22170200U22180200U22190200U22                    
+                        </code>
+                        <p>
+                            Given a custom item hash, we will in general continue to parse through many identifications and their values until we reach the end of the custom item hash.
+                        </p>
+                        <p>
+                            Custom item hash format:
+                        </p>
+                        <ul class = "indent">
+                            <li><number>1</number> B64 character denoting encoding/decoding version number: <code>1</code></li>
+                            <li><number>1</number> character denoting whether or not this item has fixed IDs: <code>0</code>. (0 for no fixed IDs, 1 for fixed IDs)</li>
+                            <li>A series of encoded identifications, each taking a variable number of characters. For every ID, we have to save:
+                                <ul class = "indent">
+                                    <li><number>2</number> B64 characters that represent the identification ID (its index in the CI save order array). </li>
+                                    <li><number>2</number> B64 characters that represent the length <math>len</math> of the value of the identification.</li>
+                                    <li>A variable number characters to encode the value of the identification.
+                                        <li>For string-valued identifications (in the non-rolled strings array), we do not use any encoding for the value. The next <number>len</number> characters of the custom item hash is the raw value of the identification (before substituting space for "%20").
+                                            <ul class = "indent">
+                                                <li>Exception: for the identifications <code>tier</code>, <code>type</code>, <code>atkSpd</code>, and <code>classReq</code>, there is no string used. They are encoded as a numerical value representing an index in a pre-defined array (check the Important Arrays section above). They also do not use the earlier-specified 2 characters to store length; instead, they each use only 1 B64 character to store their index in their corresponding arrays.</li>
+                                            </ul>
+                                        </li>
+                                        <li>For numerical-valued identifications, encoding depends on the fixed ID value from before.
+                                            <ul class = "indent">
+                                                <li>Rolled IDs (with non-fixed IDs):
+                                                    <ul class = "indent">
+                                                        <li><number>1</number> character to denote the sign of the min and max values: 0 for both positive, 1 for negative min and positive max, 2 for positive min and negative max, and 3 for both negative.</li>
+                                                        <li><number>len</number> B64 characters that represent the unsigned <b>minimum</b> value of the identification.</li>
+                                                        <li><number>len</number> B64 characters that represent the unsigned <b>maximum</b> value of the identification.</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Rolled IDs (with fixed IDs) and Non-Rolled IDs:
+                                                    <ul class = "indent">
+                                                        <li><number>1</number> character (binary bit) to denote the sign of the value (0 positive, 1 negative).</li>
+                                                        <li><number>len</number> B64 characters that represent the unsigned value of the identification.</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </li>
+                                </ul>    
+                            </li>
+                            <li>To finish the example, we'll go through all the actual identifications of the provided custom item.
+                                <ul class = "indent">
+                                    <li>"CI-" constant portion</li>
+                                    <li>Encoding version number: <code>1</code></li>
+                                    <li>Fixed IDs: <code>0</code> (non-fixed IDs)</li>
+                                    <li><code>000HMeta%20Chestplate</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>00</code> ("name")</li>
+                                            <li>ID value length: <code>0H</code> (<number>17</number>)</li>
+                                            <li>ID value: <code>Meta%20Chestplate</code> ("Meta Chestplate")</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>010Gbest%20in%20slot</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>01</code> ("lore")</li>
+                                            <li>ID value length: <code>0G</code> (<number>16</number>)</li>
+                                            <li>ID value: <code>best%20in%20slot</code> ("best in slot")</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>024</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>02</code> ("tier")</li>
+                                            <li>ID value length: None (exception) </li>
+                                            <li>ID value: <code>4</code> (tiers[4] = "Fabled")</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>040103</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>04</code> ("slots")</li>
+                                            <li>ID value length: <code>01</code> (<number>1</number>)</li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>3</code> (<number>3</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>051</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>05</code> ("type")</li>
+                                            <li>ID value length: None (exception)</li>
+                                            <li>ID value: <code>1</code> (types[1] = "chestplate")</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0G0302SG</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0G</code> ("hp")</li>
+                                            <li>ID value length: <code>03</code> (<number>3</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>2SG</code> (<number>10000</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0H020Fe</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0H</code> ("fDef")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>Fe</code> (<number>1000</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0I020Fe</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0I</code> ("wDef")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>Fe</code> (<number>1000</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0J020Fe</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0J</code> ("aDef")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>Fe</code> (<number>1000</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0K020Fe</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0K</code> ("tDef")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>Fe</code> (<number>1000</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0L020Fe</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0L</code> ("eDef")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>Fe</code> (<number>1000</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0M0201Y</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0M</code> ("lvl")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (positive)</li>
+                                            <li>ID value: <code>1Y</code> (<number>98</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0i0200U22</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0i</code> ("hprPct")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>0U</code> (<number>30</number>)</li>
+                                            <li>ID value maximum: <code>22</code> (<number>130</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0z0204iKK</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0z</code> ("hprRaw")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>4i</code> (<number>300</number>)</li>
+                                            <li>ID value maximum: <code>KK</code> (<number>1300</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>0z0204iKK</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>0z</code> ("hprRaw")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>4i</code> (<number>300</number>)</li>
+                                            <li>ID value maximum: <code>KK</code> (<number>1300</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>150200U22</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>15</code> ("fDefPct")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>0U</code> (<number>30</number>)</li>
+                                            <li>ID value maximum: <code>22</code> (<number>130</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>160200U22</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>16</code> ("wDefPct")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>0U</code> (<number>30</number>)</li>
+                                            <li>ID value maximum: <code>22</code> (<number>130</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>170200U22</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>17</code> ("aDefPct")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>0U</code> (<number>30</number>)</li>
+                                            <li>ID value maximum: <code>22</code> (<number>130</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>180200U22</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>18</code> ("tDefPct")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>0U</code> (<number>30</number>)</li>
+                                            <li>ID value maximum: <code>22</code> (<number>130</number>)</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>190200U22</code>
+                                        <ul class = "indent">
+                                            <li>ID name: <code>19</code> ("eDefPct")</li>
+                                            <li>ID value length: <code>02</code> (<number>2</number>) </li>
+                                            <li>ID sign: <code>0</code> (both positive)</li>
+                                            <li>ID value minimum: <code>0U</code> (<number>30</number>)</li>
+                                            <li>ID value maximum: <code>22</code> (<number>130</number>)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- TODO -->
+
+                        <p>
+                            You may need to parse a custom item from a Wynnbuilder customizer link.
+                        </p>
+                        <code class = "full-width">
+                            hppeng-wynn.github.io/custom/#10000HMeta%20Chestplate010Gbest%20in%20slot0240401030510G0302SG0H020Fe0I020Fe0J020Fe0K020Fe0L020Fe0M0201Y0i0200U220z0204iKK150200U22160200U22170200U22180200U22190200U22
+                        </code>
+                        <p>
+                            Similar to crafted items, the part of the link after the "#" is the rest of the custom item after the "CI-" constant portion. You may need to convert all "%20" to spaces manually.
+                        </p>
+                        <p>
+                            Details on reading custom items in build links are provided in the Decoding WB links > Builds section.
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <p>
-                Last updated: 25 May 2022
+                Last updated: 30 May 2022
             </p>
         </div>
-        <div class="row section" title="Test Section">
-        </div>
+        <!-- <div class="row section" title="Test Section">
+        </div> -->
 
     </div>
     <script type="text/javascript" src="../js/dev.js"></script>
