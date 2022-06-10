@@ -29,6 +29,7 @@ const changelog = new Map([
     //[title ,[genre, filename, author(s), abstract/desc]]
 ]);
 
+
 const sections = ["Changelog", "Mechanics", "History" ]
 
 function init() {
@@ -127,7 +128,7 @@ function initSections() {
         div.id = sec;
 
         let secspan = document.createElement("span");
-        secspan.classList.add("row", "up");
+        secspan.classList.add("row", "up", "clickable");
         div.appendChild(secspan);
         let title = document.createElement("div");
         title.classList.add("col-10", "item-title", "text-start")

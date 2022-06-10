@@ -123,7 +123,6 @@ function parsePowdering(powder_info) {
     for (let i = 0; i < 5; ++i) {
         let powders = "";
         let n_blocks = Base64.toInt(powder_info.charAt(0));
-        // console.log(n_blocks + " blocks");
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
