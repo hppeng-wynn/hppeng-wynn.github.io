@@ -4,6 +4,7 @@ const ING_DB_VERSION = 13;
 
 let idb;
 let ireload = false;
+let iload_in_progress = false;
 let iload_complete = false;
 let ings;
 let recipes;
@@ -20,32 +21,34 @@ let recipeIDMap;
 /*
  * Load item set from local DB. Calls init() on success.
  */
-async function ing_load_local(init_func) {
-    console.log("IngMap is: \n " + ingMap);
-    let get_tx = idb.transaction(['ing_db', 'recipe_db'], 'readonly');
-    let ings_store = get_tx.objectStore('ing_db');
-    let recipes_store = get_tx.objectStore('recipe_db');
-    let request3 = ings_store.getAll();
-    request3.onerror = function(event) {
-        console.log("Could not read local ingredient db...");
-    }
-    request3.onsuccess = function(event) {
-        console.log("Successfully read local ingredient db.");
-        ings = request3.result;
+async function ing_load_local() {
+    return new Promise(function(resolve, reject) {
+        let get_tx = idb.transaction(['ing_db', 'recipe_db'], 'readonly');
+        let ings_store = get_tx.objectStore('ing_db');
+        let recipes_store = get_tx.objectStore('recipe_db');
+        let request3 = ings_store.getAll();
+        request3.onerror = function(event) {
+            reject("Could not read local ingredient db...");
+        }
+        request3.onsuccess = function(event) {
+            console.log("Successfully read local ingredient db.");
+        }
         let request4 = recipes_store.getAll();
         request4.onerror = function(event) {
-            console.log("Could not read local recipe db...");
+            reject("Could not read local recipe db...");
         }
         request4.onsuccess = function(event) {
             console.log("Successfully read local recipe db.");
+        }
+        get_tx.oncomplete = function(event) {
+            ings = request3.result;
             recipes = request4.result;
             init_ing_maps();
-            init_func();
             iload_complete = true;
+            idb.close();
+            resolve()
         }
-    }
-    await get_tx.complete;
-    idb.close();
+    });
 }
 
 function clean_ing(ing) {
@@ -59,11 +62,12 @@ function clean_ing(ing) {
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
-async function load_ings(init_func) {
+async function load_ings() {
 
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    let url = baseUrl + "/ingreds_compress.json";
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    // "Random" string to prevent caching!
+    let url = baseUrl + "/ingreds_compress.json?"+new Date();
     url = url.replace(/\w+.html/, "") ; 
     let result = await (await fetch(url)).json();
 
@@ -97,59 +101,65 @@ async function load_ings(init_func) {
     }
     add_promises.push(add_tx2.complete);
     add_promises.push(add_tx3.complete);
-    Promise.all(add_promises).then((values) => {
-        init_ing_maps();
-        init_func();
-        iload_complete = true;
-    });
-    // DB not closed? idfk man
+
+    await Promise.all(add_promises);
+    init_ing_maps();
+    iload_complete = true;
+    idb.close();
 }
 
-function load_ing_init(init_func) {
-    if (iload_complete) {
-        console.log("Ingredient db already loaded, skipping load sequence");
-        init_func();
-        return;
-    }
-    let request = window.indexedDB.open("ing_db", ING_DB_VERSION)
-    request.onerror = function() {
-        console.log("DB failed to open...");
-    }
+async function load_ing_init() {
+    return new Promise((resolve, reject) => {
+        let request = window.indexedDB.open("ing_db", ING_DB_VERSION)
+        request.onerror = function() {
+            reject("DB failed to open...");
+        }
 
-    request.onsuccess = function() {
-        idb = request.result;
-        if (!ireload) {
-            console.log("Using stored data...")
-            ing_load_local(init_func);
+        request.onsuccess = async function() {
+            idb = request.result;
+            if (iload_in_progress) {
+                while (!iload_complete) {
+                    await sleep(100);
+                }
+                console.log("Skipping load...")
+            }
+            else {
+                iload_in_progress = true
+                if (ireload) {
+                    console.log("Using new data...")
+                    await load_ings();
+                }
+                else {
+                    console.log("Using stored data...")
+                    await ing_load_local();
+                }
+            }
+            resolve();
         }
-        else {
-            console.log("Using new data...")
-            load_ings(init_func);
-        }
-    }
 
-    request.onupgradeneeded = function(e) {
-        ireload = true;
+        request.onupgradeneeded = function(e) {
+            ireload = true;
 
-        let idb = e.target.result;
-        
-        try {
-            idb.deleteObjectStore('ing_db');
-        }
-        catch (error) {
-            console.log("Could not delete ingredient DB. This is probably fine");
-        }
-        try {
-            idb.deleteObjectStore('recipe_db');
-        }
-        catch (error) {
-            console.log("Could not delete recipe DB. This is probably fine");
-        }
-        idb.createObjectStore('ing_db');
-        idb.createObjectStore('recipe_db');
+            let idb = e.target.result;
+            
+            try {
+                idb.deleteObjectStore('ing_db');
+            }
+            catch (error) {
+                console.log("Could not delete ingredient DB. This is probably fine");
+            }
+            try {
+                idb.deleteObjectStore('recipe_db');
+            }
+            catch (error) {
+                console.log("Could not delete recipe DB. This is probably fine");
+            }
+            idb.createObjectStore('ing_db');
+            idb.createObjectStore('recipe_db');
 
-        console.log("DB setup complete...");
-    }
+            console.log("DB setup complete...");
+        }
+    });
 }
 
 function init_ing_maps() {
@@ -222,4 +232,5 @@ function init_ing_maps() {
         recipeList.push(recipe["name"]);
         recipeIDMap.set(recipe["id"],recipe["name"]);
     }
+    console.log(ingMap);
 }

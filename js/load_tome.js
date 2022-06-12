@@ -13,29 +13,33 @@ let tomeLists = new Map();
 /*
  * Load tome set from local DB. Calls init() on success.
  */
-async function load_tome_local(init_func) {
-    let get_tx = tdb.transaction(['tome_db'], 'readonly');
-    let get_store = get_tx.objectStore('tome_db');
-    let request = get_store.getAll();
-    request.onerror = function(event) {
-        console.log("Could not read local tome db...");
-    }
-    request.onsuccess = function(event) {
-        console.log("Successfully read local tome db.");
-        tomes = request.result;
-        
-        init_tome_maps();
-        init_func();
-        tload_complete = true;
-    }
-    await get_tx.complete;
-    tdb.close();
+async function load_tome_local() {
+    return new Promise(function(resolve, reject) {
+        let get_tx = tdb.transaction(['tome_db'], 'readonly');
+        let get_store = get_tx.objectStore('tome_db');
+        let request = get_store.getAll();
+        request.onerror = function(event) {
+            reject("Could not read local tome db...");
+        }
+        request.onsuccess = function(event) {
+            console.log("Successfully read local tome db.");
+        }
+        get_tx.oncomplete = function(event) {
+            console.log('b');
+            console.log(request.readyState);
+            tomes = request.result;
+            init_tome_maps();
+            tload_complete = true;
+            tdb.close();
+            resolve();
+        }
+    });
 }
 
 /*
  * Load tome set from remote DB (json). Calls init() on success.
  */
-async function load_tome(init_func) {
+async function load_tome() {
 
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
@@ -60,67 +64,61 @@ async function load_tome(init_func) {
         };
         add_promises.push(req);
     }
-    Promise.all(add_promises).then((values) => {
-        init_tome_maps();
-        init_func();
-        tload_complete = true;
-    });
-    // DB not closed? idfk man
+    add_promises.push(add_tx.complete);
+
+    await Promise.all(add_promises);
+    init_tome_maps();
+    tload_complete = true;
+    tdb.close();
 }
 
-function load_tome_init(init_func) {
-    if (tload_complete) {
-        console.log("Tome db already loaded, skipping load sequence");
-        init_func();
-        return;
-    }
-    let request = window.indexedDB.open('tome_db', TOME_DB_VERSION);
+async function load_tome_init() {
+    return new Promise((resolve, reject) => {
+        let request = window.indexedDB.open('tome_db', TOME_DB_VERSION);
 
-    request.onerror = function() {
-        console.log("DB failed to open...");
-    };
+        request.onerror = function() {
+            reject("DB failed to open...");
+        };
 
-    request.onsuccess = function() {
-        (async function() {
+        request.onsuccess = async function() {
             tdb = request.result;
-            if (!treload) {
-                console.log("Using stored data...")
-                load_tome_local(init_func);
+            if (tload_in_progress) {
+                while (!tload_complete) {
+                    await sleep(100);
+                }
+                console.log("Skipping load...")
             }
             else {
-                if (tload_in_progress) {
-                    while (!tload_complete) {
-                        await sleep(100);
-                    }
-                    console.log("Skipping load...")
-                    init_func();
+                tload_in_progress = true
+                if (treload) {
+                    console.log("Using new data...")
+                    await load_tome();
                 }
                 else {
-                    // Not 100% safe... whatever!
-                    tload_in_progress = true
-                    console.log("Using new data...")
-                    load_tome(init_func);
+                    console.log("Using stored data...")
+                    await load_tome_local();
                 }
             }
-        })()
-    }
-
-    request.onupgradeneeded = function(e) {
-        treload = true;
-
-        let tdb = e.target.result;
-        
-        try {
-            tdb.deleteObjectStore('tome_db');
-        }
-        catch (error) {
-            console.log("Could not delete tome DB. This is probably fine");
+            resolve();
         }
 
-        tdb.createObjectStore('tome_db');
+        request.onupgradeneeded = function(e) {
+            treload = true;
 
-        console.log("DB setup complete...");
-    }
+            let tdb = e.target.result;
+            
+            try {
+                tdb.deleteObjectStore('tome_db');
+            }
+            catch (error) {
+                console.log("Could not delete tome DB. This is probably fine");
+            }
+
+            tdb.createObjectStore('tome_db');
+
+            console.log("DB setup complete...");
+        }
+    });
 }
 
 function init_tome_maps() {

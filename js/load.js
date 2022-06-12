@@ -14,42 +14,35 @@ let itemLists = new Map();
 /*
  * Load item set from local DB. Calls init() on success.
  */
-async function load_local(init_func) {
-    let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
-    let sets_store = get_tx.objectStore('set_db');
-    let get_store = get_tx.objectStore('item_db');
-    let request = get_store.getAll();
-    request.onerror = function(event) {
-        console.log("Could not read local item db...");
-    }
-    request.onsuccess = function(event) {
-        console.log("Successfully read local item db.");
-        items = request.result;
-        //console.log(items);
-        let request2 = sets_store.openCursor();
+async function load_local() {
+    return new Promise(function(resolve, reject) {
+        let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
+        let sets_store = get_tx.objectStore('set_db');
+        let get_store = get_tx.objectStore('item_db');
+        let request = get_store.getAll();
+        let request2 = sets_store.getAll();
+        request.onerror = function(event) {
+            reject("Could not read local item db...");
+        }
+        request.onsuccess = function(event) {
+            console.log("Successfully read local item db.");
+        }
 
-        sets = {};
         request2.onerror = function(event) {
-            console.log("Could not read local set db...");
+            reject("Could not read local set db...");
         }
-
         request2.onsuccess = function(event) {
-            let cursor = event.target.result;
-            if (cursor) {
-                sets[cursor.primaryKey] = cursor.value;
-                cursor.continue();
-            }
-            else {
-                console.log("Successfully read local set db.");
-                //console.log(sets);
-                init_maps();
-                init_func();
-                load_complete = true;
-            }
+            console.log("Successfully read local set db.");
         }
-    }
-    await get_tx.complete;
-    db.close();
+        get_tx.oncomplete = function(event) {
+            items = request.result;
+            sets = request2.result;
+            init_maps();
+            load_complete = true;
+            db.close();
+            resolve();
+        }
+    });
 }
 
 /*
@@ -91,7 +84,7 @@ function clean_item(item) {
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
-async function load(init_func) {
+async function load() {
 
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
@@ -101,16 +94,6 @@ async function load(init_func) {
     items = result.items;
     sets = result.sets;
     
-
-
-//    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
-//    let clear_items = clear_tx.objectStore('item_db');
-//    let clear_sets = clear_tx.objectStore('item_db');
-//
-//    await clear_items.clear();
-//    await clear_sets.clear();
-//    await clear_tx.complete;
-
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
     add_tx.onabort = function(e) {
         console.log(e);
@@ -131,74 +114,67 @@ async function load(init_func) {
         add_promises.push(sets_store.add(sets[set], set));
     }
     add_promises.push(add_tx.complete);
-    Promise.all(add_promises).then((values) => {
-        init_maps();
-        init_func();
-        load_complete = true;
-    });
-    // DB not closed? idfk man
+
+    await Promise.all(add_promises);
+    init_maps();
+    load_complete = true;
+    db.close();
 }
 
-function load_init(init_func) {
-    if (load_complete) {
-        console.log("Item db already loaded, skipping load sequence");
-        init_func();
-        return;
-    }
-    let request = window.indexedDB.open('item_db', DB_VERSION);
+async function load_init() {
+    return new Promise((resolve, reject) => {
+        let request = window.indexedDB.open('item_db', DB_VERSION);
 
-    request.onerror = function() {
-        console.log("DB failed to open...");
-    };
+        request.onerror = function() {
+            reject("DB failed to open...");
+        };
 
-    request.onsuccess = function() {
-        (async function() {
+        request.onsuccess = async function() {
             db = request.result;
-            if (!reload) {
-                console.log("Using stored data...")
-                load_local(init_func);
+            if (load_in_progress) {
+                while (!load_complete) {
+                    await sleep(100);
+                }
+                console.log("Skipping load...")
             }
             else {
-                if (load_in_progress) {
-                    while (!load_complete) {
-                        await sleep(100);
-                    }
-                    console.log("Skipping load...")
-                    init_func();
+                load_in_progress = true
+                if (reload) {
+                    console.log("Using new data...")
+                    await load();
                 }
                 else {
-                    // Not 100% safe... whatever!
-                    load_in_progress = true
-                    console.log("Using new data...")
-                    load(init_func);
+                    console.log("Using stored data...")
+                    await load_local();
                 }
             }
-        })()
-    }
+            resolve();
+        };
 
-    request.onupgradeneeded = function(e) {
-        reload = true;
+        request.onupgradeneeded = function(e) {
+            reload = true;
 
-        let db = e.target.result;
-        
-        try {
-            db.deleteObjectStore('item_db');
-        }
-        catch (error) {
-            console.log("Could not delete item DB. This is probably fine");
-        }
-        try {
-            db.deleteObjectStore('set_db');
-        }
-        catch (error) {
-            console.log("Could not delete set DB. This is probably fine");
-        }
+            let db = e.target.result;
+            
+            try {
+                db.deleteObjectStore('item_db');
+            }
+            catch (error) {
+                console.log("Could not delete item DB. This is probably fine");
+            }
+            try {
+                db.deleteObjectStore('set_db');
+            }
+            catch (error) {
+                console.log("Could not delete set DB. This is probably fine");
+            }
 
-        db.createObjectStore('item_db');
-        db.createObjectStore('set_db');
+            db.createObjectStore('item_db');
+            db.createObjectStore('set_db');
 
-        console.log("DB setup complete...");
-    }
+            console.log("DB setup complete...");
+        };
+    });
 }
 
 // List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.

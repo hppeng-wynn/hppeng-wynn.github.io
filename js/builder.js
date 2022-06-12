@@ -335,16 +335,11 @@ function init() {
     console.log("builder.js init");
     init_autocomplete();
     decodeBuild(url_tag);
-    for (const i of equipment_keys) {
-        update_field(i);
-    }
 }
 
-function init2() {
-    load_ing_init(init);
-}
-function init3() {
-    load_tome_init(init2)
-}
-
-load_init(init3);
+//load_init(init3);
+(async function() {
+    let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];
+    await Promise.all(load_promises);
+    init();
+})();
