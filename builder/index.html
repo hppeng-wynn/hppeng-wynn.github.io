@@ -418,17 +418,22 @@
                                 <div class="row row-cols-1 row-cols-1 text-center scaled-font dark-5 rounded dark-shadow">
                                     <div class="col fw-bold dark-4 rounded-top">
                                         <div class = "row">
-                                            <div class = "col-4 py-2">
+                                            <div class = "col-3 py-2">
                                                 <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-tomes" onclick = "toggle_tab('tomes-dropdown'); toggleButton('toggle-tomes')">
                                                     Show Tomes
                                                 </button>
                                             </div>
-                                            <div class = "col-4 py-2">
+                                            <div class = "col-3 py-2">
+                                                <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-atree" onclick = "toggle_tab('atree-dropdown'); toggleButton('toggle-atree')">
+                                                    Show Ability Tree
+                                                </button>
+                                            </div>
+                                            <div class = "col-3 py-2">
                                                 <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "toggle_tab('edit_id_tab'); toggleButton('edit-ID-button')">
                                                     Edit IDs
                                                 </button>
                                             </div>
-                                            <div class = "col-4 py-2">
+                                            <div class = "col-3 py-2">
                                                 <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "resetEditableIDs(); updateStats();">
                                                     Reset Edited IDs
                                                 </button>
@@ -604,6 +609,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "atree-dropdown">
+                                        <div class="row row-cols-1 row-cols-xl-2">
+                                            <div class="col dark-8 rounded" id="atree-ui">
+
+                                            </div>
+                                            <div class="col">
+                                                Active:
                                             </div>
                                         </div>
                                     </div>
@@ -1386,6 +1401,8 @@
     <script type="text/javascript" src="../js/powders.js"></script>
     <script type="text/javascript" src="../js/skillpoints.js"></script>
     <script type="text/javascript" src="../js/damage_calc.js"></script>
+
+    <script type="text/javascript" src="../js/atree_constants.js"></script>
 
     <script type="text/javascript" src="../js/display_constants.js"></script>
     <script type="text/javascript" src="../js/sq2display_constants.js"></script>

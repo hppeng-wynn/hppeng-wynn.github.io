@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     });
 
+    construct_AT(document.getElementById("atree-ui"), atree_example);
+    document.getElementById("atree-dropdown").style.display = "none";
 });
 
 // phanta scheduler
@@ -530,3 +532,67 @@ function init_autocomplete() {
     }
 }
 
+// atree parsing
+function construct_AT(elem, tree) {
+    for (let i = 0; i < tree.length; i++) {
+        let node = tree[i];
+        
+        // create rows if not exist
+        if (document.getElementById("atree-row-" + node.row) == null) {
+            for (let j = 0; j <= node.row; j++) {
+                if (document.getElementById("atree-row-" + j) == null) {
+                    let row = document.createElement('div');
+                    row.classList.add("row");
+                    row.id = "atree-row-" + j;
+                    row.style.height = elem.getBoundingClientRect().width / 5 + "px";
+
+
+                    for (let k = 0; k < 5; k++) {
+                        col = document.createElement('div');
+                        col.classList.add('col', 'px-0');
+                        row.appendChild(col);
+                    };
+                    elem.appendChild(row);
+                };
+            };
+        };
+
+        // create node
+        let node_elem = document.createElement('div')
+        node_elem.className = "atree-node";
+        node_elem.style = "background-image: url('" + node.image + "'); background-size: cover; width: 100%; height: 100%;";
+
+        if (node.connector && node.rotate != 0) {
+            node_elem.classList.add("rotate-" + node.rotate);
+        };
+
+        // add tooltip
+        if (!node.connector) {
+            node_elem.addEventListener('mouseover', function(e) {
+                if (e.target !== this) {return;}
+                let tooltip = this.children[0];
+                tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY + "px";
+                tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + "px";
+                tooltip.style.display = "block";
+            });
+
+            node_elem.addEventListener('mouseout', function(e) {
+                if (e.target !== this) {return;}
+                let tooltip = this.children[0];
+                tooltip.style.display = "none";
+            });
+
+            let node_tooltip = document.createElement('div');
+            node_tooltip.addEventListener('mouseover', function() {});
+            node_tooltip.style.backgroundColor = "#444444";
+            node_tooltip.style.color = "#ffffff";
+            node_tooltip.style.position = "absolute";
+            node_tooltip.style.width = elem.getBoundingClientRect().width + "px";
+            node_tooltip.style.display = "none";
+            node_tooltip.textContent = node.title;
+            node_elem.appendChild(node_tooltip);
+        };
+
+        document.getElementById("atree-row-" + node.row).children[node.col].appendChild(node_elem);
+    };
+};
