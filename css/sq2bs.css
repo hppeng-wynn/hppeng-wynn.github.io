@@ -473,3 +473,20 @@ a:hover {
     -o-transform: rotate(270deg);
     transform: rotate(270deg);
 }
+
+/* atree hover */
+.atree-node {
+    opacity: 75%;
+}
+
+.atree-node:hover {
+    opacity: 100%;
+}
+
+.hide-scroll {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.hide-scroll::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}

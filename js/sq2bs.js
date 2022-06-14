@@ -559,7 +559,6 @@ function construct_AT(elem, tree) {
 
         // create node
         let node_elem = document.createElement('div')
-        node_elem.className = "atree-node";
         node_elem.style = "background-image: url('" + node.image + "'); background-size: cover; width: 100%; height: 100%;";
 
         if (node.connector && node.rotate != 0) {
@@ -571,8 +570,8 @@ function construct_AT(elem, tree) {
             node_elem.addEventListener('mouseover', function(e) {
                 if (e.target !== this) {return;}
                 let tooltip = this.children[0];
-                tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY + "px";
-                tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + "px";
+                tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
+                tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .05 / 2) + "px";
                 tooltip.style.display = "block";
             });
 
@@ -582,15 +581,50 @@ function construct_AT(elem, tree) {
                 tooltip.style.display = "none";
             });
 
-            let node_tooltip = document.createElement('div');
-            node_tooltip.addEventListener('mouseover', function() {});
-            node_tooltip.style.backgroundColor = "#444444";
-            node_tooltip.style.color = "#ffffff";
+
+
+            node_elem.classList.add("atree-node");
+
+            let active_tooltip = document.createElement('div');
+            active_tooltip.classList.add("rounded-bottom", "dark-7", "border");
+            active_tooltip.style.width = elem.getBoundingClientRect().width * .95 + "px";
+            active_tooltip.style.display = "none";
+
+            // tooltip text formatting
+
+            let active_tooltip_title = document.createElement('b');
+            active_tooltip_title.classList.add("scaled-font");
+            active_tooltip_title.textContent = node.title;
+
+            let active_tooltip_text = document.createElement('p');
+            active_tooltip_text.classList.add("scaled-font-sm");
+            active_tooltip_text.textContent = node.desc;
+
+            active_tooltip.appendChild(active_tooltip_title);
+            active_tooltip.appendChild(active_tooltip_text);
+
+            node_tooltip = active_tooltip.cloneNode(true);
+
+            active_tooltip.id = "atree-ab-" + node.title.replaceAll(" ", "");
+
             node_tooltip.style.position = "absolute";
-            node_tooltip.style.width = elem.getBoundingClientRect().width + "px";
-            node_tooltip.style.display = "none";
-            node_tooltip.textContent = node.title;
+            node_tooltip.style.zIndex = "100";
+
             node_elem.appendChild(node_tooltip);
+            document.getElementById("atree-active").appendChild(active_tooltip);
+
+            node_elem.addEventListener('click', function(e) {
+                if (e.target !== this) {return;}
+                let tooltip = document.getElementById("atree-ab-" + node.title.replaceAll(" ", ""));
+                if (tooltip.style.display == "block") {
+                    tooltip.style.display = "none";
+                    this.classList.add("atree-node");
+                } 
+                else {
+                    tooltip.style.display = "block";
+                    this.classList.remove("atree-node");
+                }
+            });
         };
 
         document.getElementById("atree-row-" + node.row).children[node.col].appendChild(node_elem);
