@@ -190,7 +190,6 @@ class Craft{
         let amounts = this.recipe.get("materials").map(x=> x.get("amount"));
         //Mat Multipliers - should work!
         matmult = (tierToMult[tiers[0]]*amounts[0] + tierToMult[tiers[1]]*amounts[1]) / (amounts[0]+amounts[1]);
-        console.log(matmult);
 
         let low = this.recipe.get("healthOrDamage")[0];
         let high = this.recipe.get("healthOrDamage")[1];

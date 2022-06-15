@@ -142,7 +142,6 @@ function parsePowdering(powder_info) {
  * Populate fields based on url, and calculate build.
  */
 function decodeBuild(url_tag) {
-    console.log("decoding build");
     if (url_tag) {
         //default values
         let equipment = [null, null, null, null, null, null, null, null, null];
@@ -169,9 +168,7 @@ function decodeBuild(url_tag) {
             let info_str = info[1];
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
-                console.log(info_str.slice(start_idx,start_idx+3));
                 if (info_str.slice(start_idx,start_idx+3) === "CR-") {
-                    console.log(info_str.slice(start_idx, start_idx+20));
                     equipment[i] = info_str.slice(start_idx, start_idx+20);
                     start_idx += 20;
                 } else {
