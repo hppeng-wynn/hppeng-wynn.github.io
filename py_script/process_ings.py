@@ -1,15 +1,25 @@
+"""
+Used to process the raw data about ingredients pulled from the API.
 
+Usage: 
+- python process_ings.py [infile] [outfile] 
+OR
+- python process_ings.py [infile and outfile]
+"""
 
 import json
-
-with open("../ingreds.json", "r") as infile:
-    ing_data = json.loads(infile.read())
-ings = ing_data
-#this data does not have request :)
-
+import sys
 import os
-if os.path.exists("../ing_map.json"):
-    with open("../ing_map.json","r") as ing_mapfile:
+import base64
+
+infile, outfile = sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else sys.argv[1]
+
+with open(infile, "r") as in_file:
+    ing_data = json.loads(in_file.read())
+ings = ing_data['ings']
+
+if os.path.exists("ing_map.json"):
+    with open("ing_map.json","r") as ing_mapfile:
         ing_map = json.load(ing_mapfile)
 else:
     ing_map = {ing["name"]: i for i, ing in enumerate(ings)}
@@ -146,8 +156,6 @@ ing_delete_keys = [
     "skin"
 ]
 
-print("loaded all files.")
-
 for ing in ings:
     for key in ing_delete_keys:
         if key in ing:
@@ -202,13 +210,10 @@ for ing in ings:
         print(f'New Ingred: {ing["name"]}')
     ing["id"] = ing_map[ing["name"]]
 
-
-with open("../ingreds_clean.json", "w") as outfile:
-    json.dump(ing_data, outfile, indent = 2)
-with open("../ingreds_compress.json", "w") as outfile:
-    json.dump(ing_data, outfile)
-with open("../ing_map.json", "w") as ing_mapfile:
+#save ing ids
+with open("ing_map.json", "w+") as ing_mapfile:
     json.dump(ing_map, ing_mapfile, indent = 2)
 
-
-print('All ing jsons updated.')
+#save ings
+with open(outfile, "w+") as out_file:
+    json.dump(ing_data, out_file)

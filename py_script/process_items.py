@@ -1,36 +1,30 @@
 """
+Used to process the raw item data pulled from the API.
 
-NOTE!!!!!!!
+Usage: 
+- python process_items.py [infile] [outfile] 
+OR
+- python process_items.py [infile and outfile]
 
-DEMON TIDE 1.20 IS HARD CODED!
 
-AMBIVALENCE IS REMOVED!
-
+NOTE: id_map.json is due for change. Should be updated manually when Wynn2.0/corresponding WB version drops.
 """
 
 import json
+import sys
+import os
+import base64
 
-with open("dump.json", "r") as infile:
-    data = json.loads(infile.read())
+infile, outfile = sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else sys.argv[1]
+
+with open(infile, "r") as in_file:
+    data = json.loads(in_file.read())
+
 
 items = data["items"]
 if "request" in data:
     del data["request"]
 
-import os
-sets = dict()
-item_set_map = dict()
-for filename in os.listdir('sets'):
-    if "json" not in filename:
-        continue
-    set_name = filename[1:].split(".")[0].replace("+", " ").replace("%27", "'")
-    with open("sets/"+filename) as set_info:
-        set_obj = json.load(set_info)
-        for item in set_obj["items"]:
-            item_set_map[item] = set_name
-        sets[set_name] = set_obj
-
-data["sets"] = sets
 
 translate_mappings = {
     #"name": "name",
@@ -40,8 +34,8 @@ translate_mappings = {
     "sockets": "slots",
     #"type": "type",
     #"armorType": "armorType", (deleted)
-    #"armorColor": "color", (deleted)
-    #"addedLore": "lore", (deleted)
+    "armorColor": "color", #(deleted)
+    "addedLore": "lore", #(deleted)
     #"material": "material", (deleted)
     "dropType": "drop",
     #"quest": "quest",
@@ -126,29 +120,41 @@ translate_mappings = {
 }
 
 delete_keys = [
-    "addedLore",
+    #"addedLore",
     #"skin",
-    "armorType",
-    "armorColor",
-    "material"
+    #"armorType",
+    #"armorColor",
+    #"material"
 ]
 
-import os
-if os.path.exists("id_map.json"):
-    with open("id_map.json","r") as id_mapfile:
-        id_map = json.load(id_mapfile)
-else:
-    id_map = {item["name"]: i for i, item in enumerate(items)}
-        
+with open("../clean.json", "r") as oldfile:
+    old_data = json.load(oldfile)
+old_items = old_data['items']
+id_map = {item["name"]: item["id"] for item in old_items}
+with open("id_map.json", "r") as idmap_file:
+    id_map = json.load(idmap_file)
+used_ids = set([v for k, v in id_map.items()])
+max_id = 0
 
-texture_names = []
+known_item_names = set()
 
-import base64
+for item in items:
+    known_item_names.add(item["name"])
+
+remap_items = []
+old_items_map = dict()
+for item in old_items:
+    if "remapID" in item:
+        remap_items.append(item)
+    elif item["name"] not in known_item_names:
+        print(f'Unknown old item: {item["name"]}!!!')
+    old_items_map[item["name"]] = item
+
 for item in items:
     for key in delete_keys:
         if key in item:
             del item[key]
-
+    
     for k in list(item.keys()):
         if (item[k] == 0 or item[k] is None):
             del item[k]
@@ -159,21 +165,30 @@ for item in items:
             del item[k]
 
     if not (item["name"] in id_map):
-        id_map[item["name"]] = len(id_map)
-        print(f'New item: {item["name"]}')
+        while max_id in used_ids:
+            max_id += 1
+        used_ids.add(max_id)
+        id_map[item["name"]] = max_id
+        print(f'New item: {item["name"]} (id: {max_id})')
     item["id"] = id_map[item["name"]]
 
     item["type"] = item["type"].lower()
-    if item["name"] in item_set_map:
-        item["set"] = item_set_map[item["name"]]
+    if "displayName" in item:
+        item_name = item["displayName"]
+    else:
+        item_name = item["name"]
 
-#with open("1_20_ci.json", "r") as ci_file:
-#    ci_items = json.load(ci_file)
-#    items.extend(ci_items)
+items.extend(remap_items)
 
+#write items back into data
+data["items"] = items
+
+#save id map
 with open("id_map.json","w") as id_mapfile:
     json.dump(id_map, id_mapfile, indent=2)
-with open("clean.json", "w") as outfile:
-    json.dump(data, outfile, indent=2)
-with open("compress.json", "w") as outfile:
-    json.dump(data, outfile)
+
+
+#write the data back to the outfile
+with open(outfile, "w+") as out_file:
+    json.dump(data, out_file)
+

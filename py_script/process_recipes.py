@@ -1,8 +1,22 @@
+"""
+Used to process the raw data about crafting recipes pulled from the API.
 
+Usage: 
+- python process_recipes.py [infile] [outfile] 
+OR
+- python process_recipes.py [infile and outfile]
+"""
+
+import json
+import sys
 import os
+import base64
 
-with open("../recipes_compress.json", "r") as infile:
-    recipe_data = json.loads(infile.read())
+infile, outfile = sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else sys.argv[1]
+
+
+with open(infile, "r") as in_file:
+    recipe_data = json.loads(in_file.read())
 recipes = recipe_data["recipes"]
 
 if os.path.exists("recipe_map.json"):
@@ -19,8 +33,6 @@ recipe_delete_keys = [ #lol
 
 ]
 
-print("loaded all files.")
-
 for recipe in recipes:
     for key in recipe_delete_keys:
         if key in recipe:
@@ -34,13 +46,10 @@ for recipe in recipes:
         print(f'New Recipe: {recipe["name"]}')
     recipe["id"] = recipe_map[recipe["name"]]
 
+#save recipe id map
+with open("recipe_map.json", "w") as recipe_mapfile:
+    json.dump(recipe_map, recipe_mapfile, indent = 2)
 
-with open("../recipes_clean.json", "w") as outfile:
-    json.dump(recipe_data, outfile, indent = 2)
-with open("../recipes_compress.json", "w") as outfile:
-    json.dump(recipe_data, outfile)
-with open("../recipe_map.json", "w") as recipe_mapfile:
-    json.dump(recipe_map,recipe_mapfile,indent = 2)
-
-
-print('All ing jsons updated.')
+#save recipe data
+with open(outfile, "w+") as out_file:
+    json.dump(recipe_data, out_file)

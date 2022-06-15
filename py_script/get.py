@@ -7,27 +7,54 @@ Usage: python get.py [url or command] [outfile rel path]
 Relevant page: https://docs.wynncraft.com/
 """
 
-if __name__ == "__main__":
-    import requests
-    import json
-    import numpy as np
-    import sys
+import requests
+import json
+import numpy as np
+import sys
 
-    #req can either be a link to an API page OR a preset default
-    req = sys.argv[1]
-    outfile = sys.argv[2]
-    response = {} #default to empty file output
+#req can either be a link to an API page OR a preset default
+req, outfile = sys.argv[1], sys.argv[2]
 
-    if req.lower() is "items":
-        response = requests.get("https://api.wynncraft.com/public_api.php?action=itemDB&category=all")
-    elif req.lower() is "ings":
-        response = requests.get("https://api.wynncraft.com/v2/ingredient/list")
-    elif req.lower() is "recipes":
-        response = requests.get("https://api.wynncraft.com/v2/recipe/list")
-    else:
-        response = requests.get(req)
+CURR_WYNN_VERS = 2.0
 
-    with open("dump.json", "w") as outfile:
-        outfile.write(json.dumps(response.json()))
+#default to empty file output
+response = {} 
 
-    json.dump(response.json(), open(outfile, "w"))
+if req.lower() == "items":
+    response = requests.get("https://api.wynncraft.com/public_api.php?action=itemDB&category=all")
+elif req.lower() == "ings":
+    response = {"ings":[]}
+    for i in range(4):
+        response['ings'].extend(requests.get("https://api.wynncraft.com/v2/ingredient/search/tier/" + str(i)).json()['data'])
+elif req.lower() == "recipes":
+    temp = requests.get("https://api.wynncraft.com/v2/recipe/list")
+    response = {"recipes":[]}
+    for i in range(len(temp['data'])):
+        response["recipes"].extend(requests.get("https://api.wynncraft.com/v2/recipe/get/" + temp['data'][i]).json()['data'])
+        print("" + str(i) + " / " + str(len(temp['data'])))
+elif req.lower() == "terrs":
+    response = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList").json()['territories']
+    delkeys = ["territory","acquired","attacker"]
+    for t in response:
+        for key in delkeys:
+            del response[t][key]
+        response[t]["neighbors"] = []
+
+    #Dependency on a third-party manually-collected data source. May not update in sync with API.
+    terr_data = requests.get("https://gist.githubusercontent.com/kristofbolyai/87ae828ecc740424c0f4b3749b2287ed/raw/0735f2e8bb2d2177ba0e7e96ade421621070a236/territories.json").json()
+    for t in data:
+        response[t]["neighbors"] = data[t]["Routes"]
+        response[t]["resources"] = data[t]["Resources"]
+        response[t]["storage"] = data[t]["Storage"]
+        response[t]["emeralds"] = data[t]["Emeralds"]
+        response[t]["doubleemeralds"] = data[t]["DoubleEmerald"]
+        response[t]["doubleresource"] = data[t]["DoubleResource"]
+
+elif req.lower() == "maploc":
+    response = requests.get('https://api.wynncraft.com/public_api.php?action=mapLocations')
+else:
+    response = requests.get(req)
+
+response['version'] = CURR_WYNN_VERS
+
+json.dump(response, open(outfile, "w+"))

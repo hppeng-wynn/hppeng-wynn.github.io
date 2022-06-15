@@ -1,3 +1,7 @@
+"""
+Plots the dps of all weapons on a neat graph. Used to generate graphics for dps_vis.
+"""
+
 import matplotlib.pyplot as plt
 import json
 import numpy as np
