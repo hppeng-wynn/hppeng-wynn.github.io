@@ -474,11 +474,7 @@ a:hover {
     transform: rotate(270deg);
 }
 
-/* atree hover */
-.atree-selected {
-    border: 5px solid blue;
-    border-radius: 50%;
-}
+
 
 .hide-scroll {
     -ms-overflow-style: none;  /* Internet Explorer 10+ */

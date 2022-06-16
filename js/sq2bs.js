@@ -621,10 +621,12 @@ function construct_AT(elem, tree) {
                 if (tooltip.style.display == "block") {
                     tooltip.style.display = "none";
                     this.classList.remove("atree-selected");
+                    this.style.backgroundImage = 'url("../media/atree/node.png")';
                 } 
                 else {
                     tooltip.style.display = "block";
                     this.classList.add("atree-selected");
+                    this.style.backgroundImage = 'url("../media/atree/node-selected.png")';
                 }
             });
         };
