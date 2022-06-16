@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     });
 
-    construct_AT(document.getElementById("atree-ui"), atree_example);
+    construct_AT(document.getElementById("atree-ui"), atrees["Assassin"]); //dagger is default atree
     document.getElementById("atree-dropdown").style.display = "none";
 });
 
@@ -232,9 +232,13 @@ function update_field(field) {
         };
     }
 
-    // set weapon img
+    // set weapon img and set ability tree
     if (category == 'weapon') {
         document.querySelector("#weapon-img").setAttribute('src', '../media/items/new/generic-'+type+'.png');
+        construct_AT(document.getElementById("atree-ui"), atrees[wep_to_class[type.toLowerCase()]]); //dagger is default atree
+        document.getElementById("atree-dropdown").style.display = "none";
+
+        //TODO: reset chosen abilities (once ability implementation is here)
     }
 }
 /* tabulars | man i hate this code but too lazy to fix /shrug */
