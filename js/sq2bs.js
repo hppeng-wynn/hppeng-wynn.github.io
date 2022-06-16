@@ -596,7 +596,7 @@ function construct_AT(elem, tree) {
 
             let active_tooltip_title = document.createElement('b');
             active_tooltip_title.classList.add("scaled-font");
-            active_tooltip_title.textContent = node.title;
+            active_tooltip_title.innerHTML = node.title.replaceAll("\n", "<br>");
 
             let active_tooltip_text = document.createElement('p');
             active_tooltip_text.classList.add("scaled-font-sm");
