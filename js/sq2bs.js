@@ -544,10 +544,10 @@ function construct_AT(elem, tree) {
                     let row = document.createElement('div');
                     row.classList.add("row");
                     row.id = "atree-row-" + j;
-                    row.style.height = elem.getBoundingClientRect().width / 5 + "px";
+                    row.style.height = elem.getBoundingClientRect().width / 9 + "px";
 
 
-                    for (let k = 0; k < 5; k++) {
+                    for (let k = 0; k < 9; k++) {
                         col = document.createElement('div');
                         col.classList.add('col', 'px-0');
                         row.appendChild(col);
@@ -571,7 +571,7 @@ function construct_AT(elem, tree) {
                 if (e.target !== this) {return;}
                 let tooltip = this.children[0];
                 tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-                tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .05 / 2) + "px";
+                tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
                 tooltip.style.display = "block";
             });
 
@@ -581,13 +581,11 @@ function construct_AT(elem, tree) {
                 tooltip.style.display = "none";
             });
 
-
-
-            node_elem.classList.add("atree-node");
+            node_elem.classList.add("fake-button");
 
             let active_tooltip = document.createElement('div');
-            active_tooltip.classList.add("rounded-bottom", "dark-7", "border");
-            active_tooltip.style.width = elem.getBoundingClientRect().width * .95 + "px";
+            active_tooltip.classList.add("rounded-bottom", "dark-7", "border", "mb-2", "mx-auto");
+            active_tooltip.style.width = elem.getBoundingClientRect().width * .80 + "px";
             active_tooltip.style.display = "none";
 
             // tooltip text formatting
@@ -618,11 +616,11 @@ function construct_AT(elem, tree) {
                 let tooltip = document.getElementById("atree-ab-" + node.title.replaceAll(" ", ""));
                 if (tooltip.style.display == "block") {
                     tooltip.style.display = "none";
-                    this.classList.add("atree-node");
+                    this.classList.remove("atree-selected");
                 } 
                 else {
                     tooltip.style.display = "block";
-                    this.classList.remove("atree-node");
+                    this.classList.add("atree-selected");
                 }
             });
         };
