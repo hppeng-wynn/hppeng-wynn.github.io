@@ -73,11 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     });
 
-    construct_AT(document.getElementById("atree-ui"), atrees["Assassin"]); //dagger is default atree
     document.getElementById("atree-dropdown").style.display = "none";
 });
 
-// phanta scheduler
 let calcBuildTask = null;
 let updateStatTask = null;
 let doSearchTask = null;
@@ -235,8 +233,13 @@ function update_field(field) {
     // set weapon img and set ability tree
     if (category == 'weapon') {
         document.querySelector("#weapon-img").setAttribute('src', '../media/items/new/generic-'+type+'.png');
-        construct_AT(document.getElementById("atree-ui"), atrees[wep_to_class[type.toLowerCase()]]); //dagger is default atree
-        document.getElementById("atree-dropdown").style.display = "none";
+        //for some reason we have to cast to string 
+        construct_AT(document.getElementById("atree-ui"), atrees[wep_to_class.get(type)]); 
+
+        if (document.getElementById("toggle-atree").classList.contains("toggleOn")) {
+            toggle_tab('atree-dropdown'); 
+            toggleButton('toggle-atree');
+        }
 
         //TODO: reset chosen abilities (once ability implementation is here)
     }
@@ -538,6 +541,8 @@ function init_autocomplete() {
 
 // atree parsing
 function construct_AT(elem, tree) {
+    console.log("constructing ability tree UI");
+    elem.innerHTML = ""; //reset the atree in the DOM
     for (let i = 0; i < tree.length; i++) {
         let node = tree[i];
         
