@@ -98,6 +98,8 @@ function log(b, n) {
 // https://stackoverflow.com/a/27696695
 // Modified for fixed precision
 
+// Base64.fromInt(-2147483648); // gives "200000"
+// Base64.toInt("200000"); // gives -2147483648
 Base64 = (function () {
     var digitsStr = 
     //   0       8       16      24      32      40      48      56     63
@@ -149,8 +151,38 @@ Base64 = (function () {
     };
 })();
 
-// Base64.fromInt(-2147483648); // gives "200000"
-// Base64.toInt("200000"); // gives -2147483648
+
+/** A class used to represent an arbitrary length bit vector. Very useful for encoding and decoding.
+ * 
+ */
+ class BitVector {
+
+    /** Constructs an arbitrary-length bit vector.
+     * @class
+     * @param {String | Number}
+     */
+    constructor(data, length) {
+
+        /** @private
+         *  @type {UInt8Array}
+         */
+        if (length) {
+            if (typeof data === "string") {
+                this.bits = Uint8Array();
+            } else if (typeof data === "number") {
+                this.bits = Uint8Array();
+            }
+        } else {
+            if (typeof data === "string") {
+                this.bits = Uint8Array();
+            } else if (typeof data === "number") {
+                this.bits = Uint8Array();
+            }
+        }
+
+        
+    }
+}
 
 /*
     Turns a raw stat and a % stat into a final stat on the basis that - raw and >= 100% becomes 0 and + raw and <=-100% becomes negative.
