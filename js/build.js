@@ -221,19 +221,19 @@ class Build{
         //EHP
         let ehp = [totalHp, totalHp];
         let defMult = classDefenseMultipliers.get(this.weapon.statMap.get("type"));
-        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier));
-        ehp[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier));    
+        ehp[0] /= (1-def_pct)*(1-agi_pct)*(2-defMult);
+        ehp[1] /= (1-def_pct)*(2-defMult);
         defenseStats.push(ehp);
         //HPR
         let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
         defenseStats.push(totalHpr);
         //EHPR
         let ehpr = [totalHpr, totalHpr];
-        ehpr[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier)); 
-        ehpr[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier)); 
+        ehpr[0] /= (1-def_pct)*(1-agi_pct)*(2-defMult); 
+        ehpr[1] /= (1-def_pct)*(2-defMult); 
         defenseStats.push(ehpr);
         //skp stats
-        defenseStats.push([ (1 - ((1-def_pct) * (2 - this.defenseMultiplier)))*100, agi_pct*100]);
+        defenseStats.push([ def_pct*100, agi_pct*100]);
         //eledefs - TODO POWDERS
         let eledefs = [0, 0, 0, 0, 0];
         for(const i in skp_elements){ //kinda jank but ok

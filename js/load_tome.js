@@ -128,7 +128,7 @@ function init_tome_maps() {
     tomeIDMap = new Map();
 
     tomeRedirectMap = new Map();
-    for (const it of tomeTypes) {
+    for (const it of tome_types) {
         tomeLists.set(it, []);
     }
 

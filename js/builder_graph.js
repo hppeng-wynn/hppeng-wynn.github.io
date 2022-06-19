@@ -383,6 +383,12 @@ class BuildDisplayNode extends ComputeNode {
         displayBuildStats('overall-stats', build, build_all_display_commands);
         displayBuildStats("offensive-stats", build, build_offensive_display_commands);
         displaySetBonuses("set-info", build);
+        let meleeStats = build.getMeleeStats();
+        displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
+
+        displayDefenseStats(document.getElementById("defensive-stats"), build);
+
+        displayPoisonDamage(document.getElementById("build-poison-stats"), build);
     }
 }
 

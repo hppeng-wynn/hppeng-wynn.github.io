@@ -1116,7 +1116,6 @@ function displayEquipOrder(parent_elem, buildOrder){
 }
 
 function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
-    let tooltipinfo = meleeStats[13];
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
     parent_elem.textContent = "";
@@ -1136,8 +1135,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     for (let i = 8; i < 11; ++i) {
         stats[i] = stats[i].toFixed(2);
     }
-    //tooltipelem, tooltiptext
-    let tooltip; let tooltiptext;
     
     //title
     let title_elem = document.createElement("p");
@@ -1155,9 +1152,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     let averageDamage = document.createElement("p");
     averageDamage.classList.add("left");
     averageDamage.textContent = "Average DPS: " + stats[10];
-    tooltiptext = `= ((${stats[8]} * ${(stats[6][2]).toFixed(2)}) + (${stats[9]} * ${(stats[7][2]).toFixed(2)}))`
-    tooltip = createTooltip(tooltip, "p", tooltiptext, averageDamage, ["melee-tooltip"]);
-    averageDamage.appendChild(tooltip);
     parent_elem.append(averageDamage);
 
     //overall average DPS
@@ -1203,31 +1197,16 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
             dmg.textContent = stats[i][0] + " \u2013 " + stats[i][1];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
-            tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, dmg, ["melee-tooltip"]);
             nonCritStats.append(dmg);
         }
     }
 
     let normalDamage = document.createElement("p");
     normalDamage.textContent = "Total: " + stats[6][0] + " \u2013 " + stats[6][1];
-    let tooltiparr = ["Min: = ", "Max: = "]
-    let arr = []; let arr2 = [];
-    for (let i = 0; i < 6; i++) {
-        if (stats[i][0] != 0) {
-            arr.push(stats[i][0]);
-            arr2.push(stats[i][1]);
-        }
-    }
-    tooltiptext = tooltiparr[0] + arr.join(" + ") + "\n" + tooltiparr[1] + arr2.join(" + ");
-    tooltip = createTooltip(tooltip, "p", tooltiptext, normalDamage, ["melee-tooltip"]);
     nonCritStats.append(normalDamage);
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
-    normalDPS.classList.add("tooltip");
-    tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
-    tooltip = createTooltip(tooltip, "p", tooltiptext, normalDPS, ["melee-tooltip"]);
     nonCritStats.append(normalDPS);
 
     //overall average DPS
@@ -1237,9 +1216,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     let singleHitDamageSecond = document.createElement("span");
     singleHitDamageSecond.classList.add("Damage");
     singleHitDamageSecond.textContent = stats[12].toFixed(2);
-    tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${stats[6][2].toFixed(2)} + ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${stats[7][2].toFixed(2)}`;
-    // tooltip = createTooltip(tooltip, "p", tooltiptext, singleHitDamage, ["melee-tooltip", "summary-tooltip"]);
-
     singleHitDamage.appendChild(singleHitDamageFirst);
     singleHitDamage.appendChild(singleHitDamageSecond);
     overallparent_elem.append(singleHitDamage);
@@ -1264,30 +1240,15 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
             dmg.textContent = stats[i][2] + " \u2013 " + stats[i][3];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
-            tooltiptext = tooltipinfo.get("damageformulas")[i].slice(2,4).join("\n");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, dmg, ["melee-tooltip"]);
             critStats.append(dmg);
         }
     }
     let critDamage = document.createElement("p");
     critDamage.textContent = "Total: " + stats[7][0] + " \u2013 " + stats[7][1];
-    tooltiparr = ["Min: = ", "Max: = "]
-    arr = []; arr2 = [];
-    for (let i = 0; i < 6; i++) {
-        if (stats[i][0] != 0) {
-            arr.push(stats[i][2]);
-            arr2.push(stats[i][3]);
-        }
-    }
-    tooltiptext = tooltiparr[0] + arr.join(" + ") + "\n" + tooltiparr[1] + arr2.join(" + ");
-    tooltip = createTooltip(tooltip, "p", tooltiptext, critDamage, ["melee-tooltip"]);
-    
     critStats.append(critDamage);
 
     let critDPS = document.createElement("p");
     critDPS.textContent = "Crit DPS: " + stats[9];
-    tooltiptext = ` = ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
-    tooltip = createTooltip(tooltip, "p", tooltiptext, critDPS, ["melee-tooltip"]);
     critStats.append(critDPS);
 
     let critChance = document.createElement("p");
@@ -1343,8 +1304,6 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         statsTable.appendChild(hpRow);
     }
 
-    let tooltip; let tooltiptext;
-
     let defMult = build.statMap.get("defMult");
     if (!defMult) {defMult = 1}
 
@@ -1360,9 +1319,6 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost.textContent = stats[1][0];
     boost.classList.add("col");
     boost.classList.add("text-end");
-    tooltiptext = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
-    // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
-
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
 
@@ -1383,12 +1339,13 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost.textContent = stats[1][1];
     boost.classList.add("col");
     boost.classList.add("text-end");
-    tooltiptext = `= ${stats[0]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
-    // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
-
     ehpRow.appendChild(ehp);
     ehpRow.append(boost);
-    statsTable.append(ehpRow);
+    if (insertSummary) {
+        parent_elem.appendChild(ehpRow)
+    } else {
+        statsTable.append(ehpRow);
+    }
 
     //total HPR
     let hprRow = document.createElement("div");
@@ -1424,12 +1381,14 @@ function displayDefenseStats(parent_elem, build, insertSummary){
     boost.textContent = stats[3][0];
     boost.classList.add("col");
     boost.classList.add("text-end");
-    tooltiptext = `= ${stats[2]} / ((1 - ${skillPointsToPercentage(build.total_skillpoints[3]).toFixed(3)}) * (1 - ${skillPointsToPercentage(build.total_skillpoints[4]).toFixed(3)}) * (2 - ${defMult}) * (2 - ${build.defenseMultiplier}))`
-    // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
-
     ehprRow.appendChild(ehpr);
     ehprRow.append(boost);
-    statsTable.append(ehprRow);
+
+    if (insertSummary) {
+        parent_elem.appendChild(ehprRow);
+    } else {
+        statsTable.appendChild(ehprRow);
+    }
 
     //eledefs
     let eledefs = stats[5];
@@ -1461,13 +1420,9 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         let defPct = build.statMap.get("defBonus")[i]/100;
         if (defRaw < 0) {
             defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
-            tooltiptext = `= min(0, ${defRaw} * (1 ${defPct}))`
         } else {
             defPct >= 0 ? defPct = "+ " + defPct: defPct = "- " + defPct;
-            tooltiptext = `= ${defRaw} * (1 ${defPct})`
         }
-        // tooltip = createTooltip(tooltip, "p", tooltiptext, boost, ["def-tooltip"]);
-
         eledefElemRow.appendChild(boost);
         
         if (insertSummary) {
