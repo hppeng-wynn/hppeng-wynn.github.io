@@ -196,3 +196,68 @@ class Item {
         this.statMap = expandItem(item_obj);
     }
 }
+
+/* Takes in an ingredient object and returns an equivalent Map().
+*/
+function expandIngredient(ing) {
+    let expandedIng = new Map();
+    let mapIds = ['consumableIDs', 'itemIDs', 'posMods'];
+    for (const id of mapIds) {
+        let idMap = new Map();
+        for (const key of Object.keys(ing[id])) {
+            idMap.set(key, ing[id][key]);
+        }
+        expandedIng.set(id, idMap);
+    }
+    let normIds = ['lvl','name', 'displayName','tier','skills','id'];
+    for (const id of normIds) {
+        expandedIng.set(id, ing[id]);
+    }
+    if (ing['isPowder']) {
+        expandedIng.set("isPowder",ing['isPowder']);
+        expandedIng.set("pid",ing['pid']);
+    }
+    //now the actually hard one
+    let idMap = new Map();
+    idMap.set("minRolls", new Map());
+    idMap.set("maxRolls", new Map());
+    for (const field of ingFields) {
+        let val = (ing['ids'][field] || 0);
+        idMap.get("minRolls").set(field, val['minimum']);
+        idMap.get("maxRolls").set(field, val['maximum']);
+    }
+    expandedIng.set("ids",idMap);
+    return expandedIng;
+}
+
+/* Takes in a recipe object and returns an equivalent Map().
+*/
+function expandRecipe(recipe) {
+    let expandedRecipe = new Map();
+    let normIDs = ["name", "skill", "type","id"];
+    for (const id of normIDs) {
+        expandedRecipe.set(id,recipe[id]);
+    }
+    let rangeIDs = ["durability","lvl", "healthOrDamage", "duration", "basicDuration"];
+    for (const id of rangeIDs) {
+        if(recipe[id]){
+            expandedRecipe.set(id, [recipe[id]['minimum'], recipe[id]['maximum']]);
+        } else {
+            expandedRecipe.set(id, [0,0]);
+        }
+    }
+    expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][1]['amount'] ] ]) ]);
+    return expandedRecipe;
+}
+
+/*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
+* @param id
+*/
+function idRound(id){
+    rounded = Math.round(id);
+    if(rounded == 0){
+        return 1; //this is a hack, will need changing along w/ rest of ID system if anything changes
+    }else{
+        return rounded;
+    }
+}

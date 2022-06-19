@@ -81,6 +81,36 @@ class PowderInputNode extends InputNode {
     }
 }
 
+class SpellSelectNode extends ComputeNode {
+    constructor(spell_num) {
+        super("builder-spell"+spell_num+"-select");
+        this.spell_idx = spell_num;
+    }
+
+    compute_func(input_map) {
+        const build = input_map.get('build');
+
+        const i = this.spell_idx;
+        let spell = spell_table[build.weapon.statMap.get("type")][i];
+        let stats = build.statMap;
+
+        let spell_parts;
+        if (spell.parts) {
+            spell_parts = spell.parts;
+        }
+        else {
+            spell_parts = spell.variants.DEFAULT;
+            for (const majorID of stats.get("activeMajorIDs")) {
+                if (majorID in spell.variants) {
+                    spell_parts = spell.variants[majorID];
+                    break;
+                }
+            }
+        }
+        return [spell, spell_parts];
+    }
+}
+
 class SpellDamageCalcNode extends ComputeNode {
     constructor(spell_num) {
         super("builder-spell"+spell_num+"-calc");
@@ -88,22 +118,59 @@ class SpellDamageCalcNode extends ComputeNode {
     }
 
     compute_func(input_map) {
-        // inputs: 
-        let weapon = new Map(input_map.get('weapon-input').statMap);
-        let build = input_map.get('build');
-        let weapon_powder = input_map.get('weapon-powder');
+        const weapon = new Map(input_map.get('weapon-input').statMap);
+        const build = input_map.get('build');
+        const weapon_powder = input_map.get('weapon-powder');
+        const damage_mult = 1; // TODO: hook up
+        const spell_info = input_map.get('spell-info');
+        const spell_parts = spell_info[1];
+
         weapon.set("powders", weapon_powder);
+        let spell_results = []
+        let stats = build.statMap;
+
+        for (const part of spell_parts) {
+            if (part.type === "damage") {
+                let results = calculateSpellDamage(stats, part.conversion,
+                                        stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct"), 
+                                        part.multiplier / 100, weapon, build.total_skillpoints, damage_mult);
+                spell_results.push(results);
+            } else if (part.type === "heal") {
+                // TODO: wynn2 formula
+                let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
+                spell_results.push(heal_amount);
+            } else if (part.type === "total") {
+                // TODO: remove "total" type
+                spell_results.push(null);
+            }
+        }
+        return spell_results;
+    }
+}
+
+class SpellDisplayNode extends ComputeNode {
+    constructor(spell_num) {
+        super("builder-spell"+spell_num+"-display");
+        this.spell_idx = spell_num;
+    }
+
+    compute_func(input_map) {
+        const build = input_map.get('build');
+        const spell_info = input_map.get('spell-info');
+        const damages = input_map.get('spell-damage');
+        const spell = spell_info[0];
+        const spell_parts = spell_info[1];
+
         const i = this.spell_idx;
-        let spell = spell_table[weapon.get("type")][i];
         let parent_elem = document.getElementById("spell"+i+"-info");
         let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
-        displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, i+1, weapon);
+        displaySpellDamage(parent_elem, overallparent_elem, build, spell, i+1, spell_parts, damages);
     }
 }
 
 let item_nodes = [];
 let powder_nodes = [];
-let spell_nodes = [];
+let spelldmg_nodes = [];
 
 document.addEventListener('DOMContentLoaded', function() {
     // Bind item input fields to input nodes, and some display stuff (for auto colorizing stuff).
@@ -138,11 +205,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     for (let i = 0; i < 4; ++i) {
-        let spell_node = new SpellDamageCalcNode(i);
-        spell_node.link_to(item_nodes[8], 'weapon-input');
+        let spell_node = new SpellSelectNode(i);
         spell_node.link_to(build_node, 'build');
-        spell_node.link_to(powder_nodes[4], 'weapon-powder');
-        spell_nodes.push(spell_node);
+
+        let calc_node = new SpellDamageCalcNode(i);
+        calc_node.link_to(item_nodes[8], 'weapon-input');
+        calc_node.link_to(build_node, 'build');
+        calc_node.link_to(powder_nodes[4], 'weapon-powder');
+        calc_node.link_to(spell_node, 'spell-info');
+        spelldmg_nodes.push(calc_node);
+
+        let display_node = new SpellDisplayNode(i);
+        display_node.link_to(build_node, 'build');
+        display_node.link_to(spell_node, 'spell-info');
+        display_node.link_to(calc_node, 'spell-damage');
     }
 
     console.log("Set up graph");

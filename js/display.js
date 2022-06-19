@@ -27,72 +27,6 @@ function applyArmorPowdersOnce(expandedItem, powders) {
     }
 }
 
-
-/* Takes in an ingredient object and returns an equivalent Map().
-*/
-function expandIngredient(ing) {
-    let expandedIng = new Map();
-    let mapIds = ['consumableIDs', 'itemIDs', 'posMods'];
-    for (const id of mapIds) {
-        let idMap = new Map();
-        for (const key of Object.keys(ing[id])) {
-            idMap.set(key, ing[id][key]);
-        }
-        expandedIng.set(id, idMap);
-    }
-    let normIds = ['lvl','name', 'displayName','tier','skills','id'];
-    for (const id of normIds) {
-        expandedIng.set(id, ing[id]);
-    }
-    if (ing['isPowder']) {
-        expandedIng.set("isPowder",ing['isPowder']);
-        expandedIng.set("pid",ing['pid']);
-    }
-    //now the actually hard one
-    let idMap = new Map();
-    idMap.set("minRolls", new Map());
-    idMap.set("maxRolls", new Map());
-    for (const field of ingFields) {
-        let val = (ing['ids'][field] || 0);
-        idMap.get("minRolls").set(field, val['minimum']);
-        idMap.get("maxRolls").set(field, val['maximum']);
-    }
-    expandedIng.set("ids",idMap);
-    return expandedIng;
-}
-
-/* Takes in a recipe object and returns an equivalent Map().
-*/
-function expandRecipe(recipe) {
-    let expandedRecipe = new Map();
-    let normIDs = ["name", "skill", "type","id"];
-    for (const id of normIDs) {
-        expandedRecipe.set(id,recipe[id]);
-    }
-    let rangeIDs = ["durability","lvl", "healthOrDamage", "duration", "basicDuration"];
-    for (const id of rangeIDs) {
-        if(recipe[id]){
-            expandedRecipe.set(id, [recipe[id]['minimum'], recipe[id]['maximum']]);
-        } else {
-            expandedRecipe.set(id, [0,0]);
-        }
-    }
-    expandedRecipe.set("materials", [ new Map([ ["item", recipe['materials'][0]['item']], ["amount", recipe['materials'][0]['amount']] ]) , new Map([ ["item", recipe['materials'][1]['item']], ["amount",recipe['materials'][1]['amount'] ] ]) ]);
-    return expandedRecipe;
-}
-
-/*An independent helper function that rounds a rolled ID to the nearest integer OR brings the roll away from 0.
-* @param id
-*/
-function idRound(id){
-    rounded = Math.round(id);
-    if(rounded == 0){
-        return 1; //this is a hack, will need changing along w/ rest of ID system if anything changes
-    }else{
-        return rounded;
-    }
-}
-
 function apply_elemental_format(p_elem, id, suffix) {
     suffix = (typeof suffix !== 'undefined') ?  suffix : "";
     // THIS IS SO JANK BUT IM TOO LAZY TO FIX IT TODO
@@ -998,78 +932,54 @@ function displayExpandedIngredient(ingred, parent_id) {
     }    
 }
 
-function displayNextCosts(parent_id, build) { 
-    let p_elem = document.getElementById(parent_id);
+function displayNextCosts(spell, build, weapon) { 
     let int = build.total_skillpoints[2];
-    let spells = spell_table[build.weapon.get("type")];
+    let spells = spell_table[weapon.get("type")];
 
-    p_elem.textContent = "";
-    
-    let title = document.createElement("p");
-    title.classList.add("title");
-    title.classList.add("Normal");
-    title.textContent = "Next Spell Costs";
-    
-    let int_title = document.createElement("p");
-    int_title.classList.add("itemp");
-    int_title.textContent = int + " Intelligence points.";
-
-    p_elem.append(title);
-    p_elem.append(int_title);
-
-    for (const spell of spells) { 
-        let spellp = document.createElement("p");
-        let spelltitle = document.createElement("p");
-        spelltitle.classList.add("itemp");
-        spelltitle.textContent = spell.title;
-        spellp.appendChild(spelltitle);
-        let row = document.createElement("p");
-        row.classList.add("itemp");
-        let init_cost = document.createElement("b");
-        init_cost.textContent = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost);
-        init_cost.classList.add("Mana");
-        let arrow = document.createElement("b");
-        arrow.textContent = "\u279C";
-        let next_cost = document.createElement("b");
-        next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
-        next_cost.classList.add("Mana");
-        let int_needed = document.createElement("b");
-        if (init_cost.textContent === "1") {
-            int_needed.textContent = ": n/a (+0)";
-        }else { //do math
-            let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
-            let needed = int;
-            let noUpdate = false;
-            //forgive me... I couldn't inverse ceil, floor, and max.
-            while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) > target) {
-                if(needed > 150) {
-                    noUpdate = true;
-                    break;
-                }
-                needed++;
-                build.total_skillpoints[2] = needed;
+    let row = document.createElement("div");
+    row.classList.add("spellcost-tooltip");
+    let init_cost = document.createElement("b");
+    init_cost.textContent = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost);
+    init_cost.classList.add("Mana");
+    let arrow = document.createElement("b");
+    arrow.textContent = "\u279C";
+    let next_cost = document.createElement("b");
+    next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
+    next_cost.classList.add("Mana");
+    let int_needed = document.createElement("b");
+    if (init_cost.textContent === "1") {
+        int_needed.textContent = ": n/a (+0)";
+    }else { //do math
+        let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
+        let needed = int;
+        let noUpdate = false;
+        //forgive me... I couldn't inverse ceil, floor, and max.
+        while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) > target) {
+            if(needed > 150) {
+                noUpdate = true;
+                break;
             }
-            let missing = needed - int;  
-            //in rare circumstances, the next spell cost can jump.
-            if (noUpdate) {
-                next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)-1); 
-            }else {
-                next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
-            }
-            
-            
-            build.total_skillpoints[2] = int;//forgive me pt 2
-            int_needed.textContent = ": " + (needed > 150 ? ">150" : needed) + " int (+" + (needed > 150 ? "n/a" : missing) + ")"; 
+            needed++;
+            build.total_skillpoints[2] = needed;
+        }
+        let missing = needed - int;  
+        //in rare circumstances, the next spell cost can jump.
+        if (noUpdate) {
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)-1); 
+        }else {
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
         }
         
-        row.appendChild(init_cost);
-        row.appendChild(arrow);
-        row.appendChild(next_cost);
-        row.appendChild(int_needed);
-        spellp.appendChild(row);
-
-        p_elem.append(spellp);
+        
+        build.total_skillpoints[2] = int;//forgive me pt 2
+        int_needed.textContent = ": " + (needed > 150 ? ">150" : needed) + " int (+" + (needed > 150 ? "n/a" : missing) + ")"; 
     }
+    
+    // row.appendChild(init_cost);
+    row.appendChild(arrow);
+    row.appendChild(next_cost);
+    row.appendChild(int_needed);
+    return row;
 }
 
 function displayRolledID(item, id, elemental_format) {
@@ -1733,31 +1643,26 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
     }
 }
 
-function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
+function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx, spell_parts, damages) {
+    // TODO: remove spellIdx (just used to flag melee and cost)
+    // TODO: move cost calc out
     parent_elem.textContent = "";
 
-
-    let tooltip; let tooltiptext;
     const stats = build.statMap;
     let title_elem = document.createElement("p");
-    title_elem.classList.add("smalltitle");
-    title_elem.classList.add("Normal");
 
     overallparent_elem.textContent = "";
-    let title_elemavg = document.createElement("p");
-    title_elemavg.classList.add('smalltitle');
-    title_elemavg.classList.add('Normal');
+    let title_elemavg = document.createElement("b");
 
     if (spellIdx != 0) {
-        let first = document.createElement("b");    
+        let first = document.createElement("span");
         first.textContent = spell.title + " (";
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
 
-        let second = document.createElement("b");
+        let second = document.createElement("span");
         second.textContent = build.getSpellCost(spellIdx, spell.cost);
         second.classList.add("Mana");
-        second.classList.add("tooltip");
 
         let int_redux = skillPointsToPercentage(build.total_skillpoints[2]).toFixed(2);
         let spPct_redux = (build.statMap.get("spPct" + spellIdx)/100).toFixed(2);
@@ -1765,17 +1670,14 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         spPct_redux >= 0 ? spPct_redux = "+ " + spPct_redux : spPct_redux = "- " + Math.abs(spPct_redux);
         spRaw_redux >= 0 ? spRaw_redux = "+ " + spRaw_redux : spRaw_redux = "- " + Math.abs(spRaw_redux);
 
-        tooltiptext = `= max(1, floor((ceil(${spell.cost} * (1 - ${int_redux})) ${spRaw_redux}) * (1 ${spPct_redux})))`;
-        tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spellcostcalc"]);
-        second.appendChild(tooltip);
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
         
 
-        let third = document.createElement("b");
+        let third = document.createElement("span");
         third.textContent = ") [Base: " + build.getBaseSpellCost(spellIdx, spell.cost) + " ]";
         title_elem.appendChild(third);
-        let third_summary = document.createElement("b");
+        let third_summary = document.createElement("span");
         third_summary.textContent = ")";
         title_elemavg.appendChild(third_summary);
     }
@@ -1787,48 +1689,33 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
     parent_elem.append(title_elem);
     overallparent_elem.append(title_elemavg);
 
+    overallparent_elem.append(displayNextCosts(spell, build, build.weapon.statMap));
+
+
     let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
 
     let save_damages = [];
 
     let part_divavg = document.createElement("p");
-    part_divavg.classList.add("lessbottom");
     overallparent_elem.append(part_divavg);
 
-    let spell_parts;
-    if (spell.parts) {
-        spell_parts = spell.parts;
-    }
-    else {
-        spell_parts = spell.variants.DEFAULT;
-        for (const majorID of stats.get("activeMajorIDs")) {
-            if (majorID in spell.variants) {
-                spell_parts = spell.variants[majorID];
-                break;
-            }
-        }
-    }
-    //console.log(spell_parts);
+    for (let i = 0; i < spell_parts.length; ++i) {
+        const part = spell_parts[i];
+        const damage = damages[i];
 
-    for (const part of spell_parts) {
-        parent_elem.append(document.createElement("br"));
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
         let subtitle_elem = document.createElement("p");
         subtitle_elem.textContent = part.subtitle;
-        subtitle_elem.classList.add("nomargin");
         part_div.append(subtitle_elem);
 
         if (part.type === "damage") {
             //console.log(build.expandedStats);
-            let _results = calculateSpellDamage(stats, part.conversion,
-                                    stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct") + build.externalStats.get("sdPct"), 
-                                    part.multiplier / 100, build.weapon, build.total_skillpoints, build.damageMultiplier, build.externalStats);
+            let _results = damage;
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
             let results = _results[2];
-            let tooltipinfo = _results[3];
             
             for (let i = 0; i < 6; ++i) {
                 for (let j in results[i]) {
@@ -1841,30 +1728,25 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
 
             let averageLabel = document.createElement("p");
             averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
-            tooltiptext = ` = ((1 - ${critChance}) * ${nonCritAverage.toFixed(2)}) + (${critChance} * ${critAverage.toFixed(2)})`
-            averageLabel.classList.add("damageSubtitle");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, averageLabel, ["spell-tooltip"]);
+            // averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
 
 
             if (part.summary == true) {
                 let overallaverageLabel = document.createElement("p");
-                let first = document.createElement("b");
-                let second = document.createElement("b");
+                let first = document.createElement("span");
+                let second = document.createElement("span");
                 first.textContent = part.subtitle + " Average: "; 
                 second.textContent = averageDamage.toFixed(2);
                 overallaverageLabel.appendChild(first);
                 overallaverageLabel.appendChild(second);
-                tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
                 second.classList.add("Damage");
-                overallaverageLabel.classList.add("itemp");
                 part_divavg.append(overallaverageLabel);
             }
             
             function _damage_display(label_text, average, result_idx) {
                 let label = document.createElement("p");
                 label.textContent = label_text+average.toFixed(2);
-                label.classList.add("damageSubtitle");
                 part_div.append(label);
                 
                 let arrmin = [];
@@ -1872,84 +1754,56 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
                 for (let i = 0; i < 6; i++){
                     if (results[i][1] != 0){
                         let p = document.createElement("p");
-                        p.classList.add("damagep");
                         p.classList.add(damageClasses[i]);
                         p.textContent = results[i][result_idx] + " \u2013 " + results[i][result_idx + 1];
-                        tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
-                        tooltip = createTooltip(tooltip, "p", tooltiptext, p, ["spell-tooltip"]);
                         arrmin.push(results[i][result_idx]);
                         arrmax.push(results[i][result_idx + 1]);
                         part_div.append(p);
                     }
                 }
-                tooltiptext = ` = ((${arrmin.join(" + ")}) + (${arrmax.join(" + ")})) / 2`;
-                tooltip = createTooltip(tooltip, "p", tooltiptext, label, ["spell-tooltip"]);
             }
             _damage_display("Non-Crit Average: ", nonCritAverage, 0);
             _damage_display("Crit Average: ", critAverage, 2);
 
             save_damages.push(averageDamage);
         } else if (part.type === "heal") {
-            let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
-            tooltiptext = ` = ${part.strength} * ${build.getDefenseStats()[0]} * max(0.5, min(1.75, 1 + 0.5 * ${stats.get("wDamPct")/100}))`;
+            let heal_amount = damage;
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
-            healLabel.classList.add("damagep");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, healLabel, ["spell-tooltip"]);
+            // healLabel.classList.add("damagep");
             part_div.append(healLabel);
             if (part.summary == true) {
                 let overallhealLabel = document.createElement("p");
-                let first = document.createElement("b");
-                let second = document.createElement("b");
+                let first = document.createElement("span");
+                let second = document.createElement("span");
                 first.textContent = part.subtitle + ": ";
                 second.textContent = heal_amount;
                 overallhealLabel.appendChild(first);
                 second.classList.add("Set");
                 overallhealLabel.appendChild(second);
-                overallhealLabel.classList.add("itemp");
-                tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
                 part_divavg.append(overallhealLabel);
-
-                let effectiveHealLabel = document.createElement("p");
-                first = document.createElement("b");
-                second = document.createElement("b");
-                let defStats = build.getDefenseStats();
-                tooltiptext = ` = ${heal_amount} * ${defStats[1][0].toFixed(2)} / ${defStats[0]}`;
-                first.textContent = "Effective Heal: ";
-                second.textContent = (defStats[1][0]*heal_amount/defStats[0]).toFixed(2);
-                effectiveHealLabel.appendChild(first);
-                second.classList.add("Set");
-                effectiveHealLabel.appendChild(second);
-                effectiveHealLabel.classList.add("itemp");
-                tooltip = createTooltip(tooltip, "p", tooltiptext, second, ["spell-tooltip"]);
-                part_divavg.append(effectiveHealLabel);
             }
         } else if (part.type === "total") {
             let total_damage = 0;
-            tooltiptext = "";
             for (let i in part.factors) {
                 total_damage += save_damages[i] * part.factors[i];
             }
 
             let dmgarr = part.factors.slice();
             dmgarr = dmgarr.map(x => "(" + x + " * " + save_damages[dmgarr.indexOf(x)].toFixed(2) + ")");
-            tooltiptext = " = " + dmgarr.join(" + ");
 
 
             let averageLabel = document.createElement("p");
             averageLabel.textContent = "Average: "+total_damage.toFixed(2);
             averageLabel.classList.add("damageSubtitle");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, averageLabel, ["spell-tooltip"]);
             part_div.append(averageLabel);
 
             let overallaverageLabel = document.createElement("p");
-            overallaverageLabel.classList.add("damageSubtitle");
-            let overallaverageLabelFirst = document.createElement("b");
-            let overallaverageLabelSecond = document.createElement("b");
+            let overallaverageLabelFirst = document.createElement("span");
+            let overallaverageLabelSecond = document.createElement("span");
             overallaverageLabelFirst.textContent = "Average: ";
             overallaverageLabelSecond.textContent = total_damage.toFixed(2);
             overallaverageLabelSecond.classList.add("Damage");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageLabel, ["spell-tooltip", "summary-tooltip"]);
 
 
             overallaverageLabel.appendChild(overallaverageLabelFirst);
