@@ -1,21 +1,179 @@
-
-
-class BuildEncodeNode extends ComputeNode {
-    constructor() {
-        super("builder-encode");
+/**
+ * Node for getting an item's stats from an item input field.
+ *
+ * Signature: ItemInputNode() => Item | null
+ */
+class ItemInputNode extends InputNode {
+    /**
+     * Make an item stat pulling compute node.
+     *
+     * @param name: Name of this node.
+     * @param item_input_field: Input field (html element) to listen for item names from.
+     * @param none_item: Item object to use as the "none" for this field.
+     */
+    constructor(name, item_input_field, none_item) {
+        super(name, item_input_field);
+        this.none_item = new Item(none_item);
+        this.none_item.statMap.set('NONE', true);
     }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "BuildEncodeNode accepts exactly one input (build)"; }
-        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-        return encodeBuild(build);
+        // built on the assumption of no one will type in CI/CR letter by letter
+
+        let item_text = this.input_field.value;
+        if (!item_text) {
+            return this.none_item;
+        }
+
+        let item;
+
+        if (item_text.slice(0, 3) == "CI-") {
+            item = getCustomFromHash(item_text);
+        }
+        else if (item_text.slice(0, 3) == "CR-") {
+            item = getCraftFromHash(item_text);
+        } 
+        else if (itemMap.has(item_text)) {
+            item = new Item(itemMap.get(item_text));
+        } 
+        else if (tomeMap.has(item_text)) {
+            item = new Item(tomeMap.get(item_text));
+        }
+
+        if (item) {
+            let type_match;
+            if (this.none_item.statMap.get('category') === 'weapon') {
+                type_match = item.statMap.get('category') === 'weapon';
+            } else {
+                type_match = item.statMap.get('type') === this.none_item.statMap.get('type');
+            }
+            if (type_match) { return item; }
+        }
+        return null;
     }
 }
 
-class URLUpdateNode extends ComputeNode {
-    constructor() {
-        super("builder-url-update");
+/**
+ * Node for updating item input fields from parsed items.
+ *
+ * Signature: ItemInputDisplayNode(item: Item) => null
+ */
+class ItemInputDisplayNode extends ComputeNode {
+
+    constructor(name, eq, item_image) {
+        super(name);
+        this.input_field = document.getElementById(eq+"-choice");
+        this.health_field = document.getElementById(eq+"-health");
+        this.level_field = document.getElementById(eq+"-lv");
+        this.image = item_image;
+        this.fail_cb = true;
     }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "ItemInputDisplayNode accepts exactly one input (item)"; }
+        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        this.input_field.classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set', 'Crafted', 'Custom');
+        this.input_field.classList.add("text-light");
+        this.image.classList.remove('Normal-shadow', 'Unique-shadow', 'Rare-shadow', 'Legendary-shadow', 'Fabled-shadow', 'Mythic-shadow', 'Set-shadow', 'Crafted-shadow', 'Custom-shadow');
+
+        if (!item) {
+            this.input_field.classList.add("is-invalid");
+            return null;
+        }
+
+        if (item.statMap.has('NONE')) {
+            return null;
+        }
+        const tier = item.statMap.get('tier');
+        this.input_field.classList.add(tier);
+        if (this.health_field) {
+            // Doesn't exist for weapons.
+            this.health_field.textContent = item.statMap.get('hp');
+        }
+        this.level_field.textContent = item.statMap.get('lvl');
+        this.image.classList.add(tier + "-shadow");
+        return null;
+    }
+}
+
+/**
+ * Node for rendering an item.
+ *
+ * Signature: ItemDisplayNode(item: Item) => null
+ */
+class ItemDisplayNode extends ComputeNode {
+    constructor(name, target_elem) {
+        super(name);
+        this.target_elem = target_elem;
+    }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "ItemInputDisplayNode accepts exactly one input (item)"; }
+        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        displayExpandedItem(item.statMap, this.target_elem);
+        collapse_element("#"+this.target_elem);
+    }
+}
+
+/**
+ * Change the weapon to match correct type.
+ *
+ * Signature: WeaponInputDisplayNode(item: Item) => null
+ */
+class WeaponInputDisplayNode extends ComputeNode {
+
+    constructor(name, image_field) {
+        super(name);
+        this.image = image_field;
+    }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "WeaponDisplayNode accepts exactly one input (item)"; }
+        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        const type = item.statMap.get('type');
+        this.image.setAttribute('src', '../media/items/new/generic-'+type+'.png');
+    }
+}
+
+/**
+ * Encode the build into a url-able string.
+ *
+ * Signature: BuildEncodeNode(build: Build,
+                              helmet-powder: List[powder],
+                              chestplate-powder: List[powder],
+                              leggings-powder: List[powder],
+                              boots-powder: List[powder],
+                              weapon-powder: List[powder]) => str
+ */
+class BuildEncodeNode extends ComputeNode {
+    constructor() { super("builder-encode"); }
+
+    compute_func(input_map) {
+        const build = input_map.get('build');
+        let powders = [
+            input_map.get('helmet-powder'),
+            input_map.get('chestplate-powder'),
+            input_map.get('leggings-powder'),
+            input_map.get('boots-powder'),
+            input_map.get('weapon-powder')
+        ];
+        // TODO: grr global state for copy button..
+        player_build = build;
+        build_powders = powders;
+        return encodeBuild(build, powders);
+    }
+}
+
+/**
+ * Update the window's URL.
+ *
+ * Signature: URLUpdateNode(build_str: str) => null
+ */
+class URLUpdateNode extends ComputeNode {
+    constructor() { super("builder-url-update"); }
 
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "URLUpdateNode accepts exactly one input (build_str)"; }
@@ -24,10 +182,25 @@ class URLUpdateNode extends ComputeNode {
     }
 }
 
+/**
+ * Create a "build" object from a set of equipments.
+ * Returns a new Build object, or null if all items are NONE items.
+ *
+ * TODO: add tomes
+ *
+ * Signature: BuildAssembleNode(helmet-input: Item,
+ *                              chestplate-input: Item,
+ *                              leggings-input: Item,
+ *                              boots-input: Item,
+ *                              ring1-input: Item,
+ *                              ring2-input: Item,
+ *                              bracelet-input: Item,
+ *                              necklace-input: Item,
+ *                              weapon-input: Item,
+ *                              level-input: int) => Build | null
+ */
 class BuildAssembleNode extends ComputeNode {
-    constructor() {
-        super("builder-make-build");
-    }
+    constructor() { super("builder-make-build"); }
 
     compute_func(input_map) {
         let equipments = [
@@ -54,11 +227,15 @@ class BuildAssembleNode extends ComputeNode {
     }
 }
 
+/**
+ * Read an input field and parse into a list of powderings.
+ * Every two characters makes one powder. If parsing fails, NULL is returned.
+ *
+ * Signature: PowderInputNode() => List[powder] | null
+ */
 class PowderInputNode extends InputNode {
 
-    constructor(name, input_field) {
-        super(name, input_field);
-    }
+    constructor(name, input_field) { super(name, input_field); }
 
     compute_func(input_map) {
         // TODO: haha improve efficiency to O(n) dumb
@@ -81,6 +258,13 @@ class PowderInputNode extends InputNode {
     }
 }
 
+/**
+ * Select a spell+spell "variation" based on a build / spell idx.
+ * Right now this isn't much logic and is only used to abstract away major id interactions
+ * but will become significantly more complex in wynn2.
+ *
+ * Signature: SpellSelectNode<int>(build: Build) => [Spell, SpellParts]
+ */
 class SpellSelectNode extends ComputeNode {
     constructor(spell_num) {
         super("builder-spell"+spell_num+"-select");
@@ -111,10 +295,18 @@ class SpellSelectNode extends ComputeNode {
     }
 }
 
+/**
+ * Compute spell damage of spell parts.
+ * Currently kinda janky / TODO while we rework the internal rep. of spells.
+ *
+ * Signature: SpellDamageCalcNode(weapon-input: Item,
+ *                                build: Build,
+ *                                weapon-powder: List[powder],
+ *                                spell-info: [Spell, SpellParts]) => List[SpellDamage]
+ */
 class SpellDamageCalcNode extends ComputeNode {
     constructor(spell_num) {
         super("builder-spell"+spell_num+"-calc");
-        this.spell_idx = spell_num;
     }
 
     compute_func(input_map) {
@@ -148,6 +340,15 @@ class SpellDamageCalcNode extends ComputeNode {
     }
 }
 
+
+/**
+ * Display spell damage from spell parts.
+ * Currently kinda janky / TODO while we rework the internal rep. of spells.
+ *
+ * Signature: SpellDisplayNode(build: Build,
+ *                             spell-info: [Spell, SpellParts],
+ *                             spell-damage: List[SpellDamage]) => null
+ */
 class SpellDisplayNode extends ComputeNode {
     constructor(spell_num) {
         super("builder-spell"+spell_num+"-display");
@@ -168,26 +369,44 @@ class SpellDisplayNode extends ComputeNode {
     }
 }
 
+/**
+ * Display build stats.
+ *
+ * Signature: BuildDisplayNode(build: Build) => null
+ */
+class BuildDisplayNode extends ComputeNode {
+    constructor(spell_num) { super("builder-stats-display"); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "BuildDisplayNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        displayBuildStats('overall-stats', build, build_all_display_commands);
+        displayBuildStats("offensive-stats", build, build_offensive_display_commands);
+        displaySetBonuses("set-info", build);
+    }
+}
+
 let item_nodes = [];
 let powder_nodes = [];
 let spelldmg_nodes = [];
 
-document.addEventListener('DOMContentLoaded', function() {
+function builder_graph_init() {
     // Bind item input fields to input nodes, and some display stuff (for auto colorizing stuff).
-    for (const [eq, none_item] of zip(equipment_fields, none_items)) {
+    for (const [eq, display_elem, none_item] of zip3(equipment_fields, build_fields, none_items)) {
         let input_field = document.getElementById(eq+"-choice");
         let item_image = document.getElementById(eq+"-img");
 
         let item_input = new ItemInputNode(eq+'-input', input_field, none_item);
         item_nodes.push(item_input);
-        new ItemInputDisplayNode(eq+'-display', input_field, item_image).link_to(item_input);
+        new ItemInputDisplayNode(eq+'-input-display', eq, item_image).link_to(item_input);
+        new ItemDisplayNode(eq+'-item-display', display_elem).link_to(item_input);
         //new PrintNode(eq+'-debug').link_to(item_input);
         //document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip');"); //toggle_plus_minus('" + eq + "-pm'); 
     }
 
     // weapon image changer node.
     let weapon_image = document.getElementById("weapon-img");
-    new WeaponDisplayNode('weapon-type', weapon_image).link_to(item_nodes[8]);
+    new WeaponInputDisplayNode('weapon-type', weapon_image).link_to(item_nodes[8]);
 
     // Level input node.
     let level_input = new InputNode('level-input', document.getElementById('level-choice'));
@@ -198,10 +417,19 @@ document.addEventListener('DOMContentLoaded', function() {
         build_node.link_to(input);
     }
     build_node.link_to(level_input);
+    new BuildDisplayNode().link_to(build_node, 'build');
+
+    let build_encode_node = new BuildEncodeNode();
+    build_encode_node.link_to(build_node, 'build');
+
+    let url_update_node = new URLUpdateNode();
+    url_update_node.link_to(build_encode_node, 'build-str');
 
 
     for (const input of powder_inputs) {
-        powder_nodes.push(new PowderInputNode(input, document.getElementById(input)));
+        let powder_node = new PowderInputNode(input, document.getElementById(input));
+        powder_nodes.push(powder_node);
+        build_encode_node.link_to(powder_node, input);
     }
 
     for (let i = 0; i < 4; ++i) {
@@ -222,234 +450,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     console.log("Set up graph");
-
-    // Other "main" stuff
-    // TODO: consolidate and comment
-
-    // Spell dropdowns
-    for (const i of spell_disp) {
-        document.querySelector("#"+i+"Avg").addEventListener("click", () => toggle_spell_tab(i));
-    }
-
-    // Masonry setup
-    let masonry = Macy({
-        container: "#masonry-container",
-        columns: 1,
-        mobileFirst: true,
-        breakAt: {
-            1200: 4,
-        },
-        margin: {
-            x: 20,
-            y: 20,
-        } 
-        
-    });
-
-    let search_masonry = Macy({
-        container: "#search-results",
-        columns: 1,
-        mobileFirst: true,
-        breakAt: {
-            1200: 4,
-        },
-        margin: {
-            x: 20,
-            y: 20,
-        }
-        
-    });
-});
-
-// autocomplete initialize
-function init_autocomplete() {
-    let dropdowns = new Map();
-    for (const eq of equipment_keys) {
-        if (tome_keys.includes(eq)) {
-            continue;
-        }
-        // build dropdown
-        let item_arr = [];
-        if (eq == 'weapon') {
-            for (const weaponType of weapon_keys) {
-                for (const weapon of itemLists.get(weaponType)) {
-                    let item_obj = itemMap.get(weapon);
-                    if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-                        continue;
-                    }
-                    if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
-                        continue;
-                    }
-                    item_arr.push(weapon);
-                }
-            }
-        } else {
-            for (const item of itemLists.get(eq.replace(/[0-9]/g, ''))) {
-                let item_obj = itemMap.get(item);
-                if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-                    continue;
-                }
-                if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
-                    continue;
-                }
-                item_arr.push(item)
-            }
-        }
-
-        // create dropdown
-        dropdowns.set(eq, new autoComplete({
-            data: {
-                src: item_arr
-            },
-            selector: "#"+ eq +"-choice",
-            wrapper: false,
-            resultsList: {
-                maxResults: 1000,
-                tabSelect: true,
-                noResults: true,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    // dynamic result loc
-                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
-                    list.style.top = position.bottom + window.scrollY +"px";
-                    list.style.left = position.x+"px";
-                    list.style.width = position.width+"px";
-                    list.style.maxHeight = position.height * 2 +"px";
-
-                    if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No results found!";
-                        list.prepend(message);
-                    }
-                },
-            },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-                element: (item, data) => {
-                    item.classList.add(itemMap.get(data.value).tier);
-                },
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
-                        }
-                        event.target.dispatchEvent(new Event('input'));
-                    },
-                },
-            }
-        }));
-    }
-
-    for (const eq of tome_keys) {
-        // build dropdown
-        let tome_arr = [];
-        for (const tome of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
-            let tome_obj = tomeMap.get(tome);
-            if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
-                continue;
-            }
-            //this should suffice for tomes - jank
-            if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
-                continue;
-            }
-            let tome_name = tome;
-            tome_arr.push(tome_name);
-        }
-
-        // create dropdown
-        dropdowns.set(eq, new autoComplete({
-            data: {
-                src: tome_arr
-            },
-            selector: "#"+ eq +"-choice",
-            wrapper: false,
-            resultsList: {
-                maxResults: 1000,
-                tabSelect: true,
-                noResults: true,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    // dynamic result loc
-                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
-                    list.style.top = position.bottom + window.scrollY +"px";
-                    list.style.left = position.x+"px";
-                    list.style.width = position.width+"px";
-                    list.style.maxHeight = position.height * 2 +"px";
-
-                    if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No results found!";
-                        list.prepend(message);
-                    }
-                },
-            },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-                element: (tome, data) => {
-                    tome.classList.add(tomeMap.get(data.value).tier);
-                },
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
-                        }
-                    },
-                },
-            }
-        }));
-    }
-
-    let filter_loc = ["filter1", "filter2", "filter3", "filter4"];
-    for (const i of filter_loc) {
-        dropdowns.set(i+"-choice", new autoComplete({
-            data: {
-                src: sq2ItemFilters,
-            },
-            selector: "#"+i+"-choice",
-            wrapper: false,
-            resultsList: {
-                tabSelect: true,
-                noResults: true,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    // dynamic result loc
-                    console.log(i);
-                    list.style.zIndex = "100";
-                    let position = document.getElementById(i+"-dropdown").getBoundingClientRect();
-                    window_pos = document.getElementById("search-container").getBoundingClientRect();
-                    list.style.top = position.bottom - window_pos.top + 5 +"px";
-                    list.style.left = position.x - window_pos.x +"px";
-                    list.style.width = position.width+"px";
-
-                    if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No filters found!";
-                        list.prepend(message);
-                    }
-                },
-            },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
-                        }
-                    },
-                },
-            }
-        }));
-    }
 }
+

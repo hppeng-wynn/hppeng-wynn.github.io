@@ -46,7 +46,7 @@ function displaySetBonuses(parent_id,build) {
     }
 
     for (const [setName, count] of build.activeSetCounts) {
-        const active_set = sets[setName];
+        const active_set = sets.get(setName);
         if (active_set["hidden"]) { continue; }
 
         let set_elem = document.createElement('p');
@@ -353,12 +353,12 @@ function displayExpandedItem(item, parent_id){
                     */
 
                     //allow the plus minus element to toggle upon click: ➕➖
-                    let plusminus = document.createElement("div");
-                    plusminus.id = parent_div.id.split("-")[0] + "-pm";
-                    plusminus.classList.add("col", "plus_minus", "text_end");
-                    plusminus.style.flexGrow = 0;
-                    plusminus.textContent = "\u2795";
-                    row.appendChild(plusminus);
+                    //let plusminus = document.createElement("div");
+                    //plusminus.id = parent_div.id.split("-")[0] + "-pm";
+                    //plusminus.classList.add("col", "plus_minus", "text_end");
+                    //plusminus.style.flexGrow = 0;
+                    //plusminus.textContent = "\u2795";
+                    //row.appendChild(plusminus);
 
                     if (item.get("custom")) {
                         a_elem.href = "../custom/#" + item.get("hash");
@@ -595,12 +595,17 @@ function displayExpandedItem(item, parent_id){
     }
 }
 
-/*  Displays stats about a recipe that are NOT displayed in the craft stats. 
-*   Includes: mat name and amounts
-*             ingred names in an "array" with ingred effectiveness
+/*
+*  Displays stats about a recipe that are NOT displayed in the craft stats. 
+*  Includes: mat name and amounts, ingred names in an "array" with ingred effectiveness
 */
 function displayRecipeStats(craft, parent_id) {
     let elem = document.getElementById(parent_id);
+    if (!elem.classList.contains("col")) {
+        elem.classList.add("col");
+    }
+
+    //local vars 
     elem.textContent = "";
     recipe = craft["recipe"];
     mat_tiers = craft["mat_tiers"];
@@ -610,30 +615,33 @@ function displayRecipeStats(craft, parent_id) {
     }
     let effectiveness = craft["statMap"].get("ingredEffectiveness");
 
-    let ldiv = document.createElement("div");
-    ldiv.classList.add("itemleft");
-    let title = document.createElement("p");
-    title.classList.add("smalltitle");
+    let title = document.createElement("div");
+    title.classList.add("row", "box-title", "fw-bold", "justify-content-center");
     title.textContent = "Recipe Stats";
-    ldiv.appendChild(title);
-    let mats = document.createElement("p");
-    mats.classList.add("itemp");
+    elem.appendChild(title);
+
+    let mats = document.createElement("div");
+    mats.classList.add("row");
     mats.textContent = "Crafting Materials: ";
+    elem.appendChild(mats);
+
     for (let i = 0; i < 2; i++) {
         let tier = mat_tiers[i];
-        let row = document.createElement("p");
-        row.classList.add("left");
-        let b = document.createElement("b");
+        let row = document.createElement("div");
+        row.classList.add("row", "px-0", "mx-0");
+        let b = document.createElement("div");
         let mat = recipe.get("materials")[i];
         b.textContent = "- " + mat.get("amount") + "x " + mat.get("item").split(" ").slice(1).join(" ");
-        b.classList.add("space");
-        let starsB = document.createElement("b");
-        starsB.classList.add("T1-bracket");
-        starsB.textContent = "[";
+        b.classList.add("col");
         row.appendChild(b);
+
+        let starsB = document.createElement("div");
+        starsB.classList.add("T1-bracket", "col-auto", "px-0");
+        starsB.textContent = "[";
         row.appendChild(starsB);
         for(let j = 0; j < 3; j ++) {
-            let star = document.createElement("b");
+            let star = document.createElement("div");
+            star.classList.add("col-auto", "px-0");
             star.textContent = "\u272B";
             if(j < tier) {
                 star.classList.add("T1");
@@ -642,51 +650,57 @@ function displayRecipeStats(craft, parent_id) {
             }
             row.append(star);
         }
-        let starsE = document.createElement("b");
-        starsE.classList.add("T1-bracket");
+        let starsE = document.createElement("div");
+        starsE.classList.add("T1-bracket", "col-auto", "px-0");
         starsE.textContent = "]";
         row.appendChild(starsE);
-        mats.appendChild(row);
-    }
-    ldiv.appendChild(mats);
 
-    let ingredTable = document.createElement("table");
-    ingredTable.classList.add("itemtable");
-    ingredTable.classList.add("ingredTable");
+        elem.appendChild(row);
+    }
+
+    let ingredTable = document.createElement("div");
+    ingredTable.classList.add("row");
+
     for (let i = 0; i < 3; i++) {
-        let row = document.createElement("tr");
+        let row = document.createElement("div");
+        row.classList.add("row", "g-1", "justify-content-center");
+
+        
         for (let j = 0; j < 2; j++) {
+            if (j == 1) {
+                let spacer = document.createElement("div");
+                spacer.classList.add("col-1");
+                row.appendChild(spacer);
+            } 
             let ingredName = ingreds[2 * i + j];
-            let cell = document.createElement("td");
-            cell.style.minWidth = "50%";
-            cell.classList.add("center");
-            cell.classList.add("box");
-            cell.classList.add("tooltip");
-            let b = document.createElement("b");
-            b.textContent = ingredName;
-            b.classList.add("space");
-            let eff = document.createElement("b");
+            let col = document.createElement("div");
+            col.classList.add("col-5", "rounded", "dark-6", "border", "border-3", "dark-shadow");
+
+            let temp_row = document.createElement("div");
+            temp_row.classList.add("row");
+            col.appendChild(temp_row);
+
+            let ingred_div = document.createElement("div");
+            ingred_div.classList.add("col");
+            ingred_div.textContent = ingredName;
+            temp_row.appendChild(ingred_div);
+
+            let eff_div = document.createElement("div");
+            eff_div.classList.add("col-auto");
             let e = effectiveness[2 * i + j];
             if (e > 0) {
-                eff.classList.add("positive");
+                eff_div.classList.add("positive");
             } else if (e < 0) {
-                eff.classList.add("negative");
+                eff_div.classList.add("negative");
             }
-            eff.textContent = "[" + e + "%]";
-            cell.appendChild(b);
-            cell.appendChild(eff);
-            row.appendChild(cell);
+            eff_div.textContent = "[" + e + "%]";
 
-            let tooltip = document.createElement("div");
-            tooltip.classList.add("tooltiptext");
-            tooltip.classList.add("ing-tooltip");
-            tooltip.classList.add("center");
-            tooltip.id = "tooltip-" + (2*i + j);
-            cell.appendChild(tooltip);
+            temp_row.appendChild(eff_div);
+
+            row.appendChild(col);
         }
         ingredTable.appendChild(row);
     }
-    elem.appendChild(ldiv);
     elem.appendChild(ingredTable);
 }
 
@@ -696,23 +710,14 @@ function displayCraftStats(craft, parent_id) {
     displayExpandedItem(mock_item,parent_id);
 }
 
-//Displays an ingredient in item format. However, an ingredient is too far from a normal item to display as one.
+/*
+* Displays an ingredient in item format. 
+* However, an ingredient is too far from a normal item to display as one.
+*/
 function displayExpandedIngredient(ingred, parent_id) {
     let parent_elem = document.getElementById(parent_id);
     parent_elem.textContent = "";
-    let display_order = [
-        "#cdiv",
-        "displayName", //tier will be displayed w/ name
-        "#table",
-        "ids",
-        "#ldiv",
-        "posMods",
-        "itemIDs",
-        "consumableIDs",
-        "#ldiv",
-        "lvl",
-        "skills",
-    ]
+    
     let item_order = [
         "dura",
         "strReq",
@@ -787,83 +792,85 @@ function displayExpandedIngredient(ingred, parent_id) {
     let active_elem;
     let elemental_format = false;
     let style;
-    for (const command of display_order) {
-        if (command.charAt(0) === "#") {
-            if (command === "#cdiv") {
-                active_elem = document.createElement('div');
-                active_elem.classList.add('itemcenter');
+    for (const command of sq2_ing_display_order) {
+        if (command.charAt(0) === "!") {
+            // TODO: This is sooo incredibly janky.....
+            if (command === "!elemental") {
+                elemental_format = !elemental_format;
             }
-            else if (command === "#ldiv") {
-                active_elem = document.createElement('div');
-                active_elem.classList.add('itemleft');
+            else if (command === "!spacer") {
+                let spacer = document.createElement('div');
+                spacer.classList.add("row", "my-2");
+                parent_elem.appendChild(spacer);
+                continue;
             }
-            else if (command === "#table") {
-                active_elem = document.createElement('table');
-                active_elem.classList.add('itemtable');
-            }
-            parent_elem.appendChild(active_elem);
-        }else {
-            let p_elem =  document.createElement("p");
-            p_elem.classList.add("left");
+        } else {
+            let div = document.createElement("div");
+            div.classList.add("row");
             if (command === "displayName") {
-                p_elem.classList.add("title");
-                p_elem.classList.remove("left");
-                let title_elem = document.createElement("b");
+                div.classList.add("box-title");
+                let title_elem = document.createElement("div");
+                title_elem.classList.add("col-auto", "justify-content-center", "pr-1");
                 title_elem.textContent = ingred.get("displayName");
-                p_elem.appendChild(title_elem);
-
-                let space = document.createElement("b");
-                space.classList.add("space");
-                p_elem.appendChild(space);
+                div.appendChild(title_elem);
 
                 let tier = ingred.get("tier"); //tier in [0,3]
                 let begin = document.createElement("b");
-                begin.classList.add("T"+tier+"-bracket");
+                begin.classList.add("T"+tier+"-bracket", "col-auto", "px-0");
                 begin.textContent = "[";
-                p_elem.appendChild(begin);
+                div.appendChild(begin);
 
                 for (let i = 0; i < 3; i++) {
                     let tier_elem = document.createElement("b");
-                    if(i < tier) {tier_elem.classList.add("T"+tier)}
-                    else {tier_elem.classList.add("T0")}
+                    if (i < tier) {
+                        tier_elem.classList.add("T"+tier);
+                    } else {
+                        tier_elem.classList.add("T0");
+                    }
+                    tier_elem.classList.add("px-0", "col-auto");
                     tier_elem.textContent = "\u272B";
-                    p_elem.appendChild(tier_elem);
+                    div.appendChild(tier_elem);
                 }
                 let end = document.createElement("b");
-                end.classList.add("T"+tier+"-bracket");
+                end.classList.add("T"+tier+"-bracket", "px-0", "col-auto");
                 end.textContent = "]";
-                p_elem.appendChild(end);
+                div.appendChild(end);   
             }else if (command === "lvl") {
-                p_elem.textContent = "Crafting Lvl Min: " + ingred.get("lvl");
+                div.textContent = "Crafting Lvl Min: " + ingred.get("lvl");
             }else if (command === "posMods") {
                 for (const [key,value] of ingred.get("posMods")) {
-                    let p = document.createElement("p");
-                    p.classList.add("nomarginp");
+                    let posModRow = document.createElement("div");
+                    posModRow.classList.add("row");
                     if (value != 0) {
-                        let title = document.createElement("b");
-                        title.textContent = posModPrefixes[key];
-                        let val = document.createElement("b");
+                        let posMod = document.createElement("div");
+                        posMod.classList.add("col-auto");
+                        posMod.textContent = posModPrefixes[key];
+                        posModRow.appendChild(posMod);
+
+                        let val = document.createElement("div");
+                        val.classList.add("col-auto", "px-0");
                         val.textContent = value + posModSuffixes[key];
                         if(value > 0) {
                             val.classList.add("positive");
                         } else {
                             val.classList.add("negative");
                         }
-                        p.appendChild(title);
-                        p.appendChild(val);
-                        p_elem.appendChild(p);
+                        posModRow.appendChild(val);
+                        div.appendChild(posModRow);
                     }
                 }
             } else if (command === "itemIDs") { //dura, reqs
                 for (const [key,value] of ingred.get("itemIDs")) {
-                    let p = document.createElement("p");
-                    p.classList.add("nomarginp");                        
+                    let idRow = document.createElement("div");
+                    idRow.classList.add("row");                        
                     if (value != 0) {
-                        let title = document.createElement("b");
+                        let title = document.createElement("div");
+                        title.classList.add("col-auto");
                         title.textContent = itemIDPrefixes[key];
-                        p.appendChild(title);
+                        idRow.appendChild(title);
                     }
-                    let desc = document.createElement("b");
+                    let desc = document.createElement("div");
+                    desc.classList.add("col-auto");
                     if(value > 0) {
                         if(key !== "dura") {
                             desc.classList.add("negative");
@@ -880,20 +887,22 @@ function displayExpandedIngredient(ingred, parent_id) {
                         desc.textContent = value; 
                     }
                     if(value != 0){
-                        p.appendChild(desc);
+                        idRow.appendChild(desc);
                     }
-                    p_elem.append(p);
+                    div.appendChild(idRow);
                 }
             } else if (command === "consumableIDs") { //dura, charges
                 for (const [key,value] of ingred.get("consumableIDs")) {
-                    let p = document.createElement("p");
-                    p.classList.add("nomarginp");                        
+                    let idRow = document.createElement("div");
+                    idRow.classList.add("row");                        
                     if (value != 0) {
-                        let title = document.createElement("b");
+                        let title = document.createElement("div");
+                        title.classList.add("col-auto");
                         title.textContent = consumableIDPrefixes[key];
-                        p.appendChild(title);
+                        idRow.appendChild(title);
                     }
-                    let desc = document.createElement("b");
+                    let desc = document.createElement("div");
+                    desc.classList.add("col-auto");
                     if(value > 0) {
                         desc.classList.add("positive");
                         desc.textContent = "+"+value;
@@ -902,32 +911,41 @@ function displayExpandedIngredient(ingred, parent_id) {
                         desc.textContent = value; 
                     }
                     if(value != 0){
-                        p.appendChild(desc);
-                        let suffix = document.createElement("b");
+                        idRow.appendChild(desc);
+                        let suffix = document.createElement("div");
+                        suffix.classList.add("col-auto");
                         suffix.textContent = consumableIDSuffixes[key];
-                        p.appendChild(suffix);
+                        idRow.appendChild(suffix);
                     }
-                    p_elem.append(p);
+                    div.appendChild(idRow);
                 }
             }else if (command === "skills") {
-                p_elem.textContent = "Used in:";
+                let row = document.createElement("div");
+                row.classList.add("row");
+                let title = document.createElement("div");
+                title.classList.add("row");
+                title.textContent = "Used in:";
+                row.appendChild(title);
                 for(const skill of ingred.get("skills")) {
-                    let p = document.createElement("p");
-                    p.textContent = skill.charAt(0) + skill.substring(1).toLowerCase();
-                    p.classList.add("left");
-                    p_elem.append(p);
+                    let skill_div = document.createElement("div");
+                    skill_div.classList.add("row");
+                    skill_div.textContent = skill.charAt(0) + skill.substring(1).toLowerCase();
+                    row.appendChild(skill_div);
                 }
+                div.appendChild(row);
             } else if (command === "ids") { //warp
                 for (let [key,value] of ingred.get("ids").get("maxRolls")) {
                     if (value !== undefined && value != 0) {
-                        let row = displayRolledID(ingred.get("ids"), key, false, "auto");
-                        active_elem.appendChild(row);
+                        let row = displayRolledID(ingred.get("ids"), key, elemental_format);
+                        row.classList.remove("col");
+                        row.classList.remove("col-12");
+                        div.appendChild(row);
                     }
                 }
             } else {//this shouldn't be happening        
             }
 
-            active_elem.appendChild(p_elem);
+            parent_elem.appendChild(div);
         }
     }    
 }
@@ -1083,29 +1101,21 @@ function displayPoisonDamage(overallparent_elem, build) {
     overallparent_elem.append(overallpoisonDamage);
 }
 
-function displayEquipOrder(parent_elem,buildOrder){
+function displayEquipOrder(parent_elem, buildOrder){
     parent_elem.textContent = "";
     const order = buildOrder.slice();
-    let title_elem = document.createElement("p");
+    let title_elem = document.createElement("b");
     title_elem.textContent = "Equip order ";
-    title_elem.classList.add("title");
-    title_elem.classList.add("Normal");
-    title_elem.classList.add("itemp");
+    title_elem.classList.add("Normal", "text-center");
     parent_elem.append(title_elem);
-    parent_elem.append(document.createElement("br"));
     for (const item of order) {
-        let p_elem = document.createElement("p");
-        p_elem.classList.add("itemp");
-        p_elem.classList.add("left");
+        let p_elem = document.createElement("b");
         p_elem.textContent = item.get("displayName");
         parent_elem.append(p_elem);
     }
 }
 
-
-function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
-    console.log("Melee Stats");
-    console.log(meleeStats);
+function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     let tooltipinfo = meleeStats[13];
     let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
     //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
@@ -1123,7 +1133,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
             stats[i][j] = stats[i][j].toFixed(2);
         }
     }
-    for (let i = 8; i < 11; ++i){
+    for (let i = 8; i < 11; ++i) {
         stats[i] = stats[i].toFixed(2);
     }
     //tooltipelem, tooltiptext
@@ -1132,24 +1142,18 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //title
     let title_elem = document.createElement("p");
     title_elem.classList.add("title");
-    title_elem.classList.add("Normal");
-    title_elem.classList.add("itemp");
     title_elem.textContent = "Melee Stats";
     parent_elem.append(title_elem);
     parent_elem.append(document.createElement("br"));
 
     //overall title
-    let title_elemavg = document.createElement("p");
-    title_elemavg.classList.add("smalltitle");
-    title_elemavg.classList.add("Normal");
+    let title_elemavg = document.createElement("b");
     title_elemavg.textContent = "Melee Stats";
     overallparent_elem.append(title_elemavg);
     
     //average DPS
     let averageDamage = document.createElement("p");
     averageDamage.classList.add("left");
-    averageDamage.classList.add("itemp");
-    averageDamage.classList.add("tooltip");
     averageDamage.textContent = "Average DPS: " + stats[10];
     tooltiptext = `= ((${stats[8]} * ${(stats[6][2]).toFixed(2)}) + (${stats[9]} * ${(stats[7][2]).toFixed(2)}))`
     tooltip = createTooltip(tooltip, "p", tooltiptext, averageDamage, ["melee-tooltip"]);
@@ -1158,14 +1162,12 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     //overall average DPS
     let overallaverageDamage = document.createElement("p");
-    overallaverageDamage.classList.add("itemp");
-    let overallaverageDamageFirst = document.createElement("b");
+    let overallaverageDamageFirst = document.createElement("span");
     overallaverageDamageFirst.textContent = "Average DPS: "
 
-    let overallaverageDamageSecond = document.createElement("b");
+    let overallaverageDamageSecond = document.createElement("span");
     overallaverageDamageSecond.classList.add("Damage");
     overallaverageDamageSecond.textContent = stats[10];
-    tooltip = createTooltip(tooltip, "p", tooltiptext, overallaverageDamage, ["melee-tooltip", "summary-tooltip"]);
     overallaverageDamage.appendChild(overallaverageDamageFirst);
     overallaverageDamage.appendChild(overallaverageDamageSecond);
 
@@ -1175,18 +1177,15 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //attack speed
     let atkSpd = document.createElement("p");
     atkSpd.classList.add("left");
-    atkSpd.classList.add("itemp");
     atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
     parent_elem.append(atkSpd);
     parent_elem.append(document.createElement("br"));
 
     //overall attack speed
     let overallatkSpd = document.createElement("p");
-    overallatkSpd.classList.add("center");
-    overallatkSpd.classList.add("itemp");
-    let overallatkSpdFirst = document.createElement("b");
+    let overallatkSpdFirst = document.createElement("span");
     overallatkSpdFirst.textContent = "Attack Speed: ";
-    let overallatkSpdSecond = document.createElement("b");
+    let overallatkSpdSecond = document.createElement("span");
     overallatkSpdSecond.classList.add("Damage");
     overallatkSpdSecond.textContent =  attackSpeeds[stats[11]];
     overallatkSpd.appendChild(overallatkSpdFirst);
@@ -1196,11 +1195,10 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //Non-Crit: n->elem, total dmg, DPS
     let nonCritStats = document.createElement("p");
     nonCritStats.classList.add("left");
-    nonCritStats.classList.add("itemp");
     nonCritStats.textContent = "Non-Crit Stats: ";
     nonCritStats.append(document.createElement("br"));
-    for (let i = 0; i < 6; i++){
-        if(stats[i][1] != 0){
+    for (let i = 0; i < 6; i++) {
+        if (stats[i][1] != 0) {
             let dmg = document.createElement("p");
             dmg.textContent = stats[i][0] + " \u2013 " + stats[i][1];
             dmg.classList.add(damageClasses[i]);
@@ -1213,7 +1211,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     let normalDamage = document.createElement("p");
     normalDamage.textContent = "Total: " + stats[6][0] + " \u2013 " + stats[6][1];
-    normalDamage.classList.add("itemp");
     let tooltiparr = ["Min: = ", "Max: = "]
     let arr = []; let arr2 = [];
     for (let i = 0; i < 6; i++) {
@@ -1228,7 +1225,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
-    normalDPS.classList.add("itemp");
     normalDPS.classList.add("tooltip");
     tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
     tooltip = createTooltip(tooltip, "p", tooltiptext, normalDPS, ["melee-tooltip"]);
@@ -1236,14 +1232,13 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     //overall average DPS
     let singleHitDamage = document.createElement("p");
-    singleHitDamage.classList.add("itemp");
-    let singleHitDamageFirst = document.createElement("b");
+    let singleHitDamageFirst = document.createElement("span");
     singleHitDamageFirst.textContent = "Single Hit Average: ";
-    let singleHitDamageSecond = document.createElement("b");
+    let singleHitDamageSecond = document.createElement("span");
     singleHitDamageSecond.classList.add("Damage");
     singleHitDamageSecond.textContent = stats[12].toFixed(2);
     tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${stats[6][2].toFixed(2)} + ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${stats[7][2].toFixed(2)}`;
-    tooltip = createTooltip(tooltip, "p", tooltiptext, singleHitDamage, ["melee-tooltip", "summary-tooltip"]);
+    // tooltip = createTooltip(tooltip, "p", tooltiptext, singleHitDamage, ["melee-tooltip", "summary-tooltip"]);
 
     singleHitDamage.appendChild(singleHitDamageFirst);
     singleHitDamage.appendChild(singleHitDamageSecond);
@@ -1251,7 +1246,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     
     let normalChance = document.createElement("p");
     normalChance.textContent = "Non-Crit Chance: " + (stats[6][2]*100).toFixed(2) + "%"; 
-    normalChance.classList.add("itemp");
     normalChance.append(document.createElement("br"));
     normalChance.append(document.createElement("br"));
     nonCritStats.append(normalChance);
@@ -1262,7 +1256,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     //Crit: n->elem, total dmg, DPS
     let critStats = document.createElement("p");
     critStats.classList.add("left");
-    critStats.classList.add("itemp");
     critStats.textContent = "Crit Stats: ";
     critStats.append(document.createElement("br"));
     for (let i = 0; i < 6; i++){
@@ -1278,7 +1271,6 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
     }
     let critDamage = document.createElement("p");
     critDamage.textContent = "Total: " + stats[7][0] + " \u2013 " + stats[7][1];
-    critDamage.classList.add("itemp");
     tooltiparr = ["Min: = ", "Max: = "]
     arr = []; arr2 = [];
     for (let i = 0; i < 6; i++) {
@@ -1294,14 +1286,12 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     let critDPS = document.createElement("p");
     critDPS.textContent = "Crit DPS: " + stats[9];
-    critDPS.classList.add("itemp");
     tooltiptext = ` = ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
     tooltip = createTooltip(tooltip, "p", tooltiptext, critDPS, ["melee-tooltip"]);
     critStats.append(critDPS);
 
     let critChance = document.createElement("p");
     critChance.textContent = "Crit Chance: " + (stats[7][2]*100).toFixed(2) + "%";
-    critChance.classList.add("itemp");
     critChance.append(document.createElement("br"));
     critChance.append(document.createElement("br"));
     critStats.append(critChance);
@@ -2249,6 +2239,7 @@ function stringPDF(id,val,base,amp) {
     document.getElementById(id + "-pdf").appendChild(b2);
     document.getElementById(id + "-pdf").appendChild(b3);
 }
+
 function stringCDF(id,val,base,amp) {
     let p; let min; let max; let minr; let maxr; let minround; let maxround;
     if (base > 0) {

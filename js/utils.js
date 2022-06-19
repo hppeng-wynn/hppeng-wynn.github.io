@@ -1,7 +1,8 @@
 let getUrl = window.location;
 const url_base = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
-const zip = (a, b) => a.map((k, i) => [k, b[i]]);
+const zip2 = (a, b) => a.map((k, i) => [k, b[i]]);
+const zip3 = (a, b, c) => a.map((k, i) => [k, b[i], c[i]]);
 
 function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);

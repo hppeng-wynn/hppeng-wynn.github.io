@@ -85,7 +85,7 @@ let tome_names = [
     "Guild Tome",
 ]
 let equipmentInputs = equipment_fields.map(x => x + "-choice");
-let buildFields = equipment_fields.map(x => x+"-tooltip").concat(tome_fields.map(x => x + "-tooltip"));
+let build_fields = equipment_fields.map(x => x+"-tooltip");
 let tomeInputs = tome_fields.map(x => x + "-choice");
 
 let powder_inputs = [
@@ -100,7 +100,7 @@ let weapon_keys = ['dagger', 'wand', 'bow', 'relik', 'spear'];
 let armor_keys = ['helmet', 'chestplate', 'leggings', 'boots'];
 let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
 let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
-let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'].concat(tome_keys);
+let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
 
 let spell_disp = ['spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
 let other_disp = ['build-order', 'set-info', 'int-info'];

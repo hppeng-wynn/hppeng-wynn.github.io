@@ -22,10 +22,10 @@ class ComputeNode {
      * Request update of this compute node. Pushes updates to children.
      */
     update() {
-        if (!this.dirty) {
+        if (this.inputs_dirty_count != 0) {
             return;
         }
-        if (this.inputs_dirty_count != 0) {
+        if (!this.dirty) {
             return;
         }
         let calc_inputs = new Map();
@@ -128,6 +128,9 @@ class PrintNode extends ComputeNode {
 
 /**
  * Node for getting an input from an input field.
+ * Fires updates whenever the input field is updated.
+ *
+ * Signature: InputNode() => str
  */
 class InputNode extends ComputeNode {
     constructor(name, input_field) {
@@ -139,112 +142,5 @@ class InputNode extends ComputeNode {
 
     compute_func(input_map) {
         return this.input_field.value;
-    }
-}
-
-/**
- * Node for getting an item's stats from an item input field.
- */
-class ItemInputNode extends InputNode {
-    /**
-     * Make an item stat pulling compute node.
-     *
-     * @param name: Name of this node.
-     * @param item_input_field: Input field (html element) to listen for item names from.
-     * @param none_item: Item object to use as the "none" for this field.
-     */
-    constructor(name, item_input_field, none_item) {
-        super(name, item_input_field);
-        this.none_item = new Item(none_item);
-        this.none_item.statMap.set('NONE', true);
-    }
-
-    compute_func(input_map) {
-        // built on the assumption of no one will type in CI/CR letter by letter
-
-        let item_text = this.input_field.value;
-        if (!item_text) {
-            return this.none_item;
-        }
-
-        let item;
-
-        if (item_text.slice(0, 3) == "CI-") {
-            item = getCustomFromHash(item_text);
-        }
-        else if (item_text.slice(0, 3) == "CR-") {
-            item = getCraftFromHash(item_text);
-        } 
-        else if (itemMap.has(item_text)) {
-            item = new Item(itemMap.get(item_text));
-        } 
-        else if (tomeMap.has(item_text)) {
-            item = new Item(tomeMap.get(item_text));
-        }
-
-        if (item) {
-            let type_match;
-            if (this.none_item.statMap.get('category') === 'weapon') {
-                type_match = item.statMap.get('category') === 'weapon';
-            } else {
-                type_match = item.statMap.get('type') === this.none_item.statMap.get('type');
-            }
-            if (type_match) { return item; }
-        }
-        return null;
-    }
-}
-
-/**
- * Node for updating item input fields from parsed items.
- */
-class ItemInputDisplayNode extends ComputeNode {
-
-    constructor(name, item_input_field, item_image) {
-        super(name);
-        this.input_field = item_input_field;
-        this.image = item_image;
-        this.fail_cb = true;
-    }
-
-    compute_func(input_map) {
-        if (input_map.size !== 1) { throw "ItemInputDisplayNode accepts exactly one input (item)"; }
-        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-
-        this.input_field.classList.remove("text-light", "is-invalid", 'Normal', 'Unique', 'Rare', 'Legendary', 'Fabled', 'Mythic', 'Set', 'Crafted', 'Custom');
-        this.input_field.classList.add("text-light");
-        this.image.classList.remove('Normal-shadow', 'Unique-shadow', 'Rare-shadow', 'Legendary-shadow', 'Fabled-shadow', 'Mythic-shadow', 'Set-shadow', 'Crafted-shadow', 'Custom-shadow');
-
-        if (!item) {
-            this.input_field.classList.add("is-invalid");
-            return null;
-        }
-
-        if (item.statMap.has('NONE')) {
-            return null;
-        }
-        const tier = item.statMap.get('tier');
-        this.input_field.classList.add(tier);
-        this.image.classList.add(tier + "-shadow");
-        return null;
-    }
-}
-
-/**
- * Change the weapon to match correct type.
- */
-class WeaponDisplayNode extends ComputeNode {
-
-    constructor(name, image_field) {
-        super(name);
-        this.image = image_field;
-    }
-
-    compute_func(input_map) {
-        if (input_map.size !== 1) { throw "WeaponDisplayNode accepts exactly one input (item)"; }
-        const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-
-        const type = item.statMap.get('type');
-        this.image.setAttribute('src', '../media/items/new/generic-'+type+'.png');
     }
 }

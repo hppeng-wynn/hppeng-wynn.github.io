@@ -1,3 +1,5 @@
+let build_powders;
+
 function getItemNameFromID(id) {
     if (redirectMap.has(id)) {
         return getItemNameFromID(redirectMap.get(id));
@@ -142,15 +144,263 @@ function show_tab(tab) {
     document.getElementById("tab-" + tab.split("-")[0] +  "-btn").classList.add("selected-btn");
 }
 
+// autocomplete initialize
+function init_autocomplete() {
+    let dropdowns = new Map();
+    for (const eq of equipment_keys) {
+        if (tome_keys.includes(eq)) {
+            continue;
+        }
+        // build dropdown
+        let item_arr = [];
+        if (eq == 'weapon') {
+            for (const weaponType of weapon_keys) {
+                for (const weapon of itemLists.get(weaponType)) {
+                    let item_obj = itemMap.get(weapon);
+                    if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+                        continue;
+                    }
+                    if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
+                        continue;
+                    }
+                    item_arr.push(weapon);
+                }
+            }
+        } else {
+            for (const item of itemLists.get(eq.replace(/[0-9]/g, ''))) {
+                let item_obj = itemMap.get(item);
+                if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+                    continue;
+                }
+                if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
+                    continue;
+                }
+                item_arr.push(item)
+            }
+        }
+
+        // create dropdown
+        dropdowns.set(eq, new autoComplete({
+            data: {
+                src: item_arr
+            },
+            selector: "#"+ eq +"-choice",
+            wrapper: false,
+            resultsList: {
+                maxResults: 1000,
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    // dynamic result loc
+                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
+                    list.style.top = position.bottom + window.scrollY +"px";
+                    list.style.left = position.x+"px";
+                    list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 2 +"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No results found!";
+                        list.prepend(message);
+                    }
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+                element: (item, data) => {
+                    item.classList.add(itemMap.get(data.value).tier);
+                },
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        }
+                        event.target.dispatchEvent(new Event('input'));
+                    },
+                },
+            }
+        }));
+    }
+
+    for (const eq of tome_keys) {
+        // build dropdown
+        let tome_arr = [];
+        for (const tome of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
+            let tome_obj = tomeMap.get(tome);
+            if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
+                continue;
+            }
+            //this should suffice for tomes - jank
+            if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
+                continue;
+            }
+            let tome_name = tome;
+            tome_arr.push(tome_name);
+        }
+
+        // create dropdown
+        dropdowns.set(eq, new autoComplete({
+            data: {
+                src: tome_arr
+            },
+            selector: "#"+ eq +"-choice",
+            wrapper: false,
+            resultsList: {
+                maxResults: 1000,
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    // dynamic result loc
+                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
+                    list.style.top = position.bottom + window.scrollY +"px";
+                    list.style.left = position.x+"px";
+                    list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 2 +"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No results found!";
+                        list.prepend(message);
+                    }
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+                element: (tome, data) => {
+                    tome.classList.add(tomeMap.get(data.value).tier);
+                },
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        }
+                    },
+                },
+            }
+        }));
+    }
+
+    let filter_loc = ["filter1", "filter2", "filter3", "filter4"];
+    for (const i of filter_loc) {
+        dropdowns.set(i+"-choice", new autoComplete({
+            data: {
+                src: sq2ItemFilters,
+            },
+            selector: "#"+i+"-choice",
+            wrapper: false,
+            resultsList: {
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    // dynamic result loc
+                    console.log(i);
+                    list.style.zIndex = "100";
+                    let position = document.getElementById(i+"-dropdown").getBoundingClientRect();
+                    window_pos = document.getElementById("search-container").getBoundingClientRect();
+                    list.style.top = position.bottom - window_pos.top + 5 +"px";
+                    list.style.left = position.x - window_pos.x +"px";
+                    list.style.width = position.width+"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No filters found!";
+                        list.prepend(message);
+                    }
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        }
+                    },
+                },
+            }
+        }));
+    }
+}
+
+function collapse_element(elmnt) {
+    elem_list = document.querySelector(elmnt).children;
+    if (elem_list) {
+        for (elem of elem_list) {
+            if (elem.classList.contains("no-collapse")) { continue; }   
+            if (elem.style.display == "none") {
+                elem.style.display = "";
+            } else {
+                elem.style.display = "none";
+            }  
+        }
+    }
+    // macy quirk
+    window.dispatchEvent(new Event('resize'));
+    // weird bug where display: none overrides??
+    document.querySelector(elmnt).style.removeProperty('display');
+}
 
 // TODO: Learn and use await
 function init() {
     console.log("builder.js init");
     init_autocomplete();
+
+    // Other "main" stuff
+    // Spell dropdowns
+    for (const i of spell_disp) {
+        document.querySelector("#"+i+"Avg").addEventListener("click", () => toggle_spell_tab(i));
+    }
+    for (const eq of equipment_keys) {
+        document.querySelector("#"+eq+"-tooltip").addEventListener("click", () => collapse_element('#'+eq+'-tooltip'));
+    }
+
+    // Masonry setup
+    let masonry = Macy({
+        container: "#masonry-container",
+        columns: 1,
+        mobileFirst: true,
+        breakAt: {
+            1200: 4,
+        },
+        margin: {
+            x: 20,
+            y: 20,
+        } 
+        
+    });
+
+    let search_masonry = Macy({
+        container: "#search-results",
+        columns: 1,
+        mobileFirst: true,
+        breakAt: {
+            1200: 4,
+        },
+        margin: {
+            x: 20,
+            y: 20,
+        }
+        
+    });
     decodeBuild(url_tag);
+    builder_graph_init();
 }
 
-//load_init(init3);
 (async function() {
     let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];
     await Promise.all(load_promises);

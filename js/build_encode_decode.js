@@ -137,7 +137,7 @@ function decodeBuild(url_tag) {
 
 /*  Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
-function encodeBuild(build) {
+function encodeBuild(build, powders) {
 
     if (build) {
         let build_string;
@@ -147,19 +147,15 @@ function encodeBuild(build) {
         build_string = "";
         tome_string = "";
 
-        let crafted_idx = 0;
-        let custom_idx = 0;
         for (const item of build.items) {
             
-            if (item.get("custom")) {
-                let custom = "CI-"+encodeCustom(build.customItems[custom_idx],true);
+            if (item.statMap.get("custom")) {
+                let custom = "CI-"+encodeCustom(item, true);
                 build_string += Base64.fromIntN(custom.length, 3) + custom;
-                custom_idx += 1;
                 build_version = Math.max(build_version, 5);
-            } else if (item.get("crafted")) {
-                build_string += "CR-"+encodeCraft(build.craftedItems[crafted_idx]);
-                crafted_idx += 1;
-            } else if (item.get("category") === "tome") {
+            } else if (item.statMap.get("crafted")) {
+                build_string += "CR-"+encodeCraft(item);
+            } else if (item.statMap.get("category") === "tome") {
                 let tome_id = item.get("id");
                 if (tome_id <= 60) {
                     // valid normal tome. ID 61-63 is for NONE tomes.
@@ -167,7 +163,7 @@ function encodeBuild(build) {
                 }
                 tome_string += Base64.fromIntN(tome_id, 1);
             } else {
-                build_string += Base64.fromIntN(item.get("id"), 3);
+                build_string += Base64.fromIntN(item.statMap.get("id"), 3);
             }
         }
 
@@ -175,7 +171,7 @@ function encodeBuild(build) {
             build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
         }
         build_string += Base64.fromIntN(build.level, 2);
-        for (const _powderset of build.powders) {
+        for (const _powderset of powders) {
             let n_bits = Math.ceil(_powderset.length / 6);
             build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
             // Slice copy.
@@ -196,26 +192,24 @@ function encodeBuild(build) {
     }
 }
 
-function copyBuild(build) {
-    if (build) {
-        copyTextToClipboard(url_base+location.hash);
-        document.getElementById("copy-button").textContent = "Copied!";
-    }
+function copyBuild() {
+    copyTextToClipboard(url_base+location.hash);
+    document.getElementById("copy-button").textContent = "Copied!";
 }
 
 function shareBuild(build) {
     if (build) {
         let text = url_base+location.hash+"\n"+
             "WynnBuilder build:\n"+
-            "> "+build.helmet.get("displayName")+"\n"+
-            "> "+build.chestplate.get("displayName")+"\n"+
-            "> "+build.leggings.get("displayName")+"\n"+
-            "> "+build.boots.get("displayName")+"\n"+
-            "> "+build.ring1.get("displayName")+"\n"+
-            "> "+build.ring2.get("displayName")+"\n"+
-            "> "+build.bracelet.get("displayName")+"\n"+
-            "> "+build.necklace.get("displayName")+"\n"+
-            "> "+build.weapon.get("displayName")+" ["+build.weapon.get("powders").map(x => powderNames.get(x)).join("")+"]";
+            "> "+build.helmet.statMap.get("displayName")+"\n"+
+            "> "+build.chestplate.statMap.get("displayName")+"\n"+
+            "> "+build.leggings.statMap.get("displayName")+"\n"+
+            "> "+build.boots.statMap.get("displayName")+"\n"+
+            "> "+build.ring1.statMap.get("displayName")+"\n"+
+            "> "+build.ring2.statMap.get("displayName")+"\n"+
+            "> "+build.bracelet.statMap.get("displayName")+"\n"+
+            "> "+build.necklace.statMap.get("displayName")+"\n"+
+            "> "+build.weapon.statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }
