@@ -127,7 +127,9 @@ class Build{
         this.weapon = weapon;
         this.items = this.equipment.concat([this.weapon]).concat(this.tomes);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
-        let result = calculate_skillpoints(this.equipment.concat(this.tomes), this.weapon);
+
+        // calc skillpoints requires statmaps only
+        let result = calculate_skillpoints(this.equipment.concat(this.tomes).map((x) => x.statMap), this.weapon.statMap);
         console.log(result);
         this.equip_order = result[0];
         // How many skillpoints the player had to assign (5 number)
@@ -165,8 +167,9 @@ class Build{
     */
     getMeleeStats(){
         const stats = this.statMap;
-        if (this.weapon.get("tier") === "Crafted") {
-            stats.set("damageBases", [this.weapon.get("nDamBaseHigh"),this.weapon.get("eDamBaseHigh"),this.weapon.get("tDamBaseHigh"),this.weapon.get("wDamBaseHigh"),this.weapon.get("fDamBaseHigh"),this.weapon.get("aDamBaseHigh")]);
+        const weapon_stats = this.weapon.statMap;
+        if (weapon_stats.get("tier") === "Crafted") {
+            stats.set("damageBases", [weapon_stats.get("nDamBaseHigh"),weapon_stats.get("eDamBaseHigh"),weapon_stats.get("tDamBaseHigh"),weapon_stats.get("wDamBaseHigh"),weapon_stats.get("fDamBaseHigh"),weapon_stats.get("aDamBaseHigh")]);
         }
         let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
         if(adjAtkSpd > 6){
@@ -176,13 +179,13 @@ class Build{
         }
 
         let damage_mult = 1;
-        if (this.weapon.get("type") === "relik") {
+        if (weapon_stats.get("type") === "relik") {
             damage_mult = 0.99; // CURSE YOU WYNNCRAFT
             //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
             //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
         }
         // 0spellmult for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct") + this.externalStats.get("mdPct"), 0, this.weapon, this.total_skillpoints, damage_mult * this.damageMultiplier, this.externalStats);
+        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon.statMap, this.total_skillpoints, damage_mult * this.damageMultiplier);
         
         let dex = this.total_skillpoints[1];
 
@@ -217,8 +220,8 @@ class Build{
         defenseStats.push(totalHp);
         //EHP
         let ehp = [totalHp, totalHp];
-        let defMult = classDefenseMultipliers.get(this.weapon.get("type"));
-        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier));         
+        let defMult = classDefenseMultipliers.get(this.weapon.statMap.get("type"));
+        ehp[0] /= ((1-def_pct)*(1-agi_pct)*(2-defMult)*(2-this.defenseMultiplier));
         ehp[1] /= ((1-def_pct)*(2-defMult)*(2-this.defenseMultiplier));    
         defenseStats.push(ehp);
         //HPR
@@ -259,26 +262,27 @@ class Build{
 
         let major_ids = new Set();
         for (const item of this.items){
-            for (let [id, value] of item.get("maxRolls")) {
+            const item_stats = item.statMap;
+            for (let [id, value] of item_stats.get("maxRolls")) {
                 if (staticIDs.includes(id)) {
                     continue;
                 }
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
             for (const staticID of staticIDs) {
-                if (item.get(staticID)) {
-                    statMap.set(staticID, statMap.get(staticID) + item.get(staticID));
+                if (item_stats.get(staticID)) {
+                    statMap.set(staticID, statMap.get(staticID) + item_stats.get(staticID));
                 }
             }
-            if (item.get("majorIds")) {
-                for (const major_id of item.get("majorIds")) {
+            if (item_stats.get("majorIds")) {
+                for (const major_id of item_stats.get("majorIds")) {
                     major_ids.add(major_id);
                 }
             }
         }
         statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
-            const bonus = sets[setName].bonuses[count-1];
+            const bonus = sets.get(setName).bonuses[count-1];
             for (const id in bonus) {
                 if (skp_order.includes(id)) {
                     // pass. Don't include skillpoints in ids
@@ -291,16 +295,8 @@ class Build{
         statMap.set("poisonPct", 100);
 
         // The stuff relevant for damage calculation!!! @ferricles
-        statMap.set("atkSpd", this.weapon.get("atkSpd"));
+        statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));
 
-        for (const x of skp_elements) {
-            this.externalStats.set(x + "DamPct", 0);
-        }
-        this.externalStats.set("mdPct", 0);
-        this.externalStats.set("sdPct", 0);
-        this.externalStats.set("damageBonus", [0, 0, 0, 0, 0]);
-        this.externalStats.set("defBonus",[0, 0, 0, 0, 0]);
-        this.externalStats.set("poisonPct", 0);
         this.statMap = statMap;
 
         this.aggregateStats();
@@ -308,10 +304,11 @@ class Build{
 
     aggregateStats() {
         let statMap = this.statMap;
-        statMap.set("damageRaw", [this.weapon.get("nDam"), this.weapon.get("eDam"), this.weapon.get("tDam"), this.weapon.get("wDam"), this.weapon.get("fDam"), this.weapon.get("aDam")]);
+        let weapon_stats = this.weapon.statMap;
+        statMap.set("damageRaw", [weapon_stats.get("nDam"), weapon_stats.get("eDam"), weapon_stats.get("tDam"), weapon_stats.get("wDam"), weapon_stats.get("fDam"), weapon_stats.get("aDam")]);
         statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
         statMap.set("defRaw", [statMap.get("eDef"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
         statMap.set("defBonus", [statMap.get("eDefPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
-        statMap.set("defMult", classDefenseMultipliers.get(this.weapon.get("type")));
+        statMap.set("defMult", classDefenseMultipliers.get(weapon_stats.get("type")));
     }
 }

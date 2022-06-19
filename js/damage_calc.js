@@ -1,28 +1,11 @@
 const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
 // Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
 // If spell mult is 0, its melee damage and we don't multiply by attack speed.
-// externalStats should be a map
-function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
+function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier) {
     let buildStats = new Map(stats);
     let tooltipinfo = new Map(); 
     //6x for damages, normal min normal max crit min crit max
     let damageformulas = [["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "]];
-
-    if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
-        for (const entry of externalStats) {
-            const key = entry[0];
-            const value = entry[1];
-            if (typeof value === "number") {
-                buildStats.set(key, buildStats.get(key) + value);
-            } else if (Array.isArray(value)) {
-                arr = [];
-                for (let j = 0; j < value.length; j++) {
-                    arr[j] = buildStats.get(key)[j] + value[j];
-                }
-                buildStats.set(key, arr);
-            }
-        }
-    }
 
     let powders = weapon.get("powders").slice();
     

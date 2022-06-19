@@ -7,13 +7,14 @@ class ComputeNode {
      */
     constructor(name) {
         this.inputs = [];   // parent nodes
+        this.input_translation = new Map();
         this.children = [];
-        this.value = 0;
+        this.value = null;
         this.name = name;
         this.update_task = null;
         this.update_time = Date.now();
         this.fail_cb = false;   // Set to true to force updates even if parent failed.
-        this.dirty = false;
+        this.dirty = true;
         this.inputs_dirty = new Map();
         this.inputs_dirty_count = 0;
     }
@@ -32,24 +33,12 @@ class ComputeNode {
         }
         let calc_inputs = new Map();
         for (const input of this.inputs) {
-            calc_inputs.set(input.name, input.value);
+            calc_inputs.set(this.input_translation.get(input.name), input.value);
         }
         this.value = this.compute_func(calc_inputs);
         this.dirty = false;
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value, timestamp);
-        }
-    }
-
-    /**
-     * Set this node's value directly. Notifies children.
-     */
-    set_value(value) {
-        let timestamp = Date.now();
-        this.update_time = timestamp;
-        this.value = value;
-        for (const child of this.children) {
-            child.set_input(this.name, this.value, timestamp);
         }
     }
 
@@ -99,8 +88,10 @@ class ComputeNode {
         throw "no compute func specified";
     }
 
-    link_to(parent_node) {
+    link_to(parent_node, link_name) {
         this.inputs.push(parent_node)
+        link_name = (link_name !== undefined) ? link_name : parent_node.name;
+        this.input_translation.set(parent_node.name, link_name);
         this.inputs_dirty.set(parent_node.name, parent_node.dirty);
         if (parent_node.dirty) {
             this.inputs_dirty_count += 1;
@@ -147,6 +138,7 @@ class InputNode extends ComputeNode {
         super(name);
         this.input_field = input_field;
         this.input_field.addEventListener("input", () => calcSchedule(this));
+        calcSchedule(this);
     }
 
     compute_func(input_map) {
@@ -168,6 +160,7 @@ class ItemInputNode extends InputNode {
     constructor(name, item_input_field, none_item) {
         super(name, item_input_field);
         this.none_item = new Item(none_item);
+        this.none_item.statMap.set('NONE', true);
     }
 
     compute_func(input_map) {
@@ -231,9 +224,13 @@ class ItemInputDisplayNode extends ComputeNode {
             return null;
         }
 
+        if (item.statMap.has('NONE')) {
+            return null;
+        }
         const tier = item.statMap.get('tier');
         this.input_field.classList.add(tier);
         this.image.classList.add(tier + "-shadow");
+        return null;
     }
 }
 

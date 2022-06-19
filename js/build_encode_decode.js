@@ -1,3 +1,25 @@
+function parsePowdering(powder_info) {
+    // TODO: Make this run in linear instead of quadratic time... ew
+    let powdering = [];
+    for (let i = 0; i < 5; ++i) {
+        let powders = "";
+        let n_blocks = Base64.toInt(powder_info.charAt(0));
+        // console.log(n_blocks + " blocks");
+        powder_info = powder_info.slice(1);
+        for (let j = 0; j < n_blocks; ++j) {
+            let block = powder_info.slice(0,5);
+            console.log(block);
+            let six_powders = Base64.toInt(block);
+            for (let k = 0; k < 6 && six_powders != 0; ++k) {
+                powders += powderNames.get((six_powders & 0x1f) - 1);
+                six_powders >>>= 5;
+            }
+            powder_info = powder_info.slice(5);
+        }
+        powdering[i] = powders;
+    }
+    return [powdering, powder_info];
+}
 
 /*
  * Populate fields based on url, and calculate build.
@@ -107,8 +129,8 @@ function decodeBuild(url_tag) {
             info[1] = info[1].slice(7);
         }
 
-        for (let i in powderInputs) {
-            setValue(powderInputs[i], powdering[i]);
+        for (let i in powder_inputs) {
+            setValue(powder_inputs[i], powdering[i]);
         }
     }
 }

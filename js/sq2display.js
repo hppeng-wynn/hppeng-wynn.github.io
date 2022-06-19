@@ -41,7 +41,7 @@ function displaysq2BuildStats(parent_id,build,command_group){
         // id instruction
         else {
             let id = command;
-            if (stats.get(id) || build.externalStats.get(id)) {
+            if (stats.get(id)) {
                 let style = null;
 
                 // TODO: add pos and neg style
@@ -54,10 +54,6 @@ function displaysq2BuildStats(parent_id,build,command_group){
 
                 // ignore
                 let id_val = stats.get(id);
-                if (build.externalStats.has(id)) {
-                    id_val += build.externalStats.get(id);
-                }
-
                 if (reversedIDs.includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
@@ -650,7 +646,7 @@ function displaysq2PoisonDamage(overallparent_elem, build) {
     let overallpoisonDamage = document.createElement("p");
     let overallpoisonDamageFirst = document.createElement("span");
     let overallpoisonDamageSecond = document.createElement("span");
-    let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct") + build.externalStats.get("poisonPct"))/100 /3);
+    let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct"))/100 /3);
     overallpoisonDamageFirst.textContent = "Poison Tick: ";
     overallpoisonDamageSecond.textContent = Math.max(poison_tick,0);
     overallpoisonDamageSecond.classList.add("Damage");
@@ -1126,8 +1122,8 @@ function displaysq2PowderSpecials(parent_elem, powderSpecials, build, overall=fa
             let spell = (powderSpecialStats.indexOf(special[0]) == 3 ? spells[2] : spells[powderSpecialStats.indexOf(special[0])]);
             let part = spell["parts"][0];
             let _results = calculateSpellDamage(stats, part.conversion,
-                stats.get("mdRaw"), stats.get("mdPct") + build.externalStats.get("mdPct"), 
-                0, build.weapon, build.total_skillpoints, build.damageMultiplier * ((part.multiplier[power-1] / 100)), build.externalStats);//part.multiplier[power] / 100
+                stats.get("mdRaw"), stats.get("mdPct"), 
+                0, build.weapon, build.total_skillpoints, build.damageMultiplier * ((part.multiplier[power-1] / 100)));//part.multiplier[power] / 100
 
             let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
             let save_damages = [];
@@ -1215,7 +1211,7 @@ function displaysq2PowderSpecials(parent_elem, powderSpecials, build, overall=fa
     }
 }
 
-function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx) {
+function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx, weapon) {
     parent_elem.textContent = "";
 
 
@@ -1264,7 +1260,7 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
     parent_elem.append(title_elem);
     overallparent_elem.append(title_elemavg);
 
-    overallparent_elem.append(displaysq2NextCosts(spell, build));
+    overallparent_elem.append(displaysq2NextCosts(spell, build, weapon));
 
 
     let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
@@ -1300,8 +1296,8 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
         if (part.type === "damage") {
             //console.log(build.expandedStats);
             let _results = calculateSpellDamage(stats, part.conversion,
-                                    stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct") + build.externalStats.get("sdPct"), 
-                                    part.multiplier / 100, build.weapon, build.total_skillpoints, build.damageMultiplier, build.externalStats);
+                                    stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct"), 
+                                    part.multiplier / 100, weapon, build.total_skillpoints, build.damageMultiplier);
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];
             let results = _results[2];
@@ -1427,9 +1423,9 @@ function displaysq2EquipOrder(parent_elem, buildOrder){
     }
 }
 
-function displaysq2NextCosts(spell, build) { 
+function displaysq2NextCosts(spell, build, weapon) { 
     let int = build.total_skillpoints[2];
-    let spells = spell_table[build.weapon.get("type")];
+    let spells = spell_table[weapon.get("type")];
 
     let row = document.createElement("div");
     row.classList.add("spellcost-tooltip");

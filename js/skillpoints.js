@@ -31,14 +31,15 @@ function calculate_skillpoints(equipment, weapon) {
             let setCount = activeSetCounts.get(setName);
             let old_bonus = {};
             if (setCount) {
-                old_bonus = sets[setName].bonuses[setCount-1];
+                old_bonus = sets.get(setName).bonuses[setCount-1];
                 activeSetCounts.set(setName, setCount + 1);
             }
             else {
                 setCount = 0;
                 activeSetCounts.set(setName, 1);
             }
-            const new_bonus = sets[setName].bonuses[setCount];
+            console.log(sets);
+            const new_bonus = sets.get(setName).bonuses[setCount];
             //let skp_order = ["str","dex","int","def","agi"];
             for (const i in skp_order) {
                 const delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);
@@ -74,8 +75,8 @@ function calculate_skillpoints(equipment, weapon) {
         if (setName) { // undefined/null means no set.
             const setCount = activeSetCounts.get(setName);
             if (setCount) {
-                const old_bonus = sets[setName].bonuses[setCount-1];
-                const new_bonus = sets[setName].bonuses[setCount];
+                const old_bonus = sets.get(setName).bonuses[setCount-1];
+                const new_bonus = sets.get(setName).bonuses[setCount];
                 //let skp_order = ["str","dex","int","def","agi"];
                 for (const i in skp_order) {
                     const set_delta = (new_bonus[skp_order[i]] || 0) - (old_bonus[skp_order[i]] || 0);

@@ -6,7 +6,7 @@ let reload = false;
 let load_complete = false;
 let load_in_progress = false;
 let items;
-let sets;
+let sets = new Map();
 let itemMap;
 let idMap;
 let redirectMap;
@@ -20,7 +20,6 @@ async function load_local() {
         let sets_store = get_tx.objectStore('set_db');
         let get_store = get_tx.objectStore('item_db');
         let request = get_store.getAll();
-        let request2 = sets_store.getAll();
         request.onerror = function(event) {
             reject("Could not read local item db...");
         }
@@ -28,15 +27,27 @@ async function load_local() {
             console.log("Successfully read local item db.");
         }
 
+        // key-value iteration (hpp don't break this again)
+        // https://stackoverflow.com/questions/47931595/indexeddb-getting-all-data-with-keys
+        let request2 = sets_store.openCursor();
         request2.onerror = function(event) {
             reject("Could not read local set db...");
         }
         request2.onsuccess = function(event) {
-            console.log("Successfully read local set db.");
-        }
+            let cursor = event.target.result;
+            if (cursor) {
+                let key = cursor.primaryKey;
+                let value = cursor.value;
+                sets.set(key, value);
+                cursor.continue();
+            }
+            else {
+               // no more results
+                console.log("Successfully read local set db.");
+            }
+        };
         get_tx.oncomplete = function(event) {
             items = request.result;
-            sets = request2.result;
             init_maps();
             load_complete = true;
             db.close();

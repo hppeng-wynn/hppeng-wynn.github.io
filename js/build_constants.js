@@ -88,7 +88,7 @@ let equipmentInputs = equipment_fields.map(x => x + "-choice");
 let buildFields = equipment_fields.map(x => x+"-tooltip").concat(tome_fields.map(x => x + "-tooltip"));
 let tomeInputs = tome_fields.map(x => x + "-choice");
 
-let powderInputs = [
+let powder_inputs = [
     "helmet-powder",
     "chestplate-powder",
     "leggings-powder",

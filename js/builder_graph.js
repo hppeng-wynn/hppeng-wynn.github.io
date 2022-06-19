@@ -42,14 +42,71 @@ class BuildAssembleNode extends ComputeNode {
         ];
         let weapon = input_map.get('weapon-input');
         let level = input_map.get('level-input');
-        console.log('build node run');
+
+        let all_none = weapon.statMap.has('NONE');
+        for (const item of equipments) {
+            all_none = all_none && item.statMap.has('NONE');
+        }
+        if (all_none) {
+            return null;
+        }
         return new Build(level, equipments, [], weapon);
     }
 }
 
+class PowderInputNode extends InputNode {
+
+    constructor(name, input_field) {
+        super(name, input_field);
+    }
+
+    compute_func(input_map) {
+        // TODO: haha improve efficiency to O(n) dumb
+        // also, error handling is missing
+        let input = this.input_field.value.trim();
+        let powdering = [];
+        let errorederrors = [];
+        while (input) {
+            let first = input.slice(0, 2);
+            let powder = powderIDs.get(first);
+            if (powder === undefined) {
+                return null;
+            } else {
+                powdering.push(powder);
+            }
+            input = input.slice(2);
+        }
+        //console.log("POWDERING: " + powdering);
+        return powdering;
+    }
+}
+
+class SpellDamageCalcNode extends ComputeNode {
+    constructor(spell_num) {
+        super("builder-spell"+spell_num+"-calc");
+        this.spell_idx = spell_num;
+    }
+
+    compute_func(input_map) {
+        // inputs: 
+        let weapon = new Map(input_map.get('weapon-input').statMap);
+        let build = input_map.get('build');
+        let weapon_powder = input_map.get('weapon-powder');
+        weapon.set("powders", weapon_powder);
+        const i = this.spell_idx;
+        let spell = spell_table[weapon.get("type")][i];
+        let parent_elem = document.getElementById("spell"+i+"-info");
+        let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
+        displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, i+1, weapon);
+    }
+}
+
 let item_nodes = [];
+let powder_nodes = [];
+let spell_nodes = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Bind item input fields to input nodes, and some display stuff (for auto colorizing stuff).
     for (const [eq, none_item] of zip(equipment_fields, none_items)) {
         let input_field = document.getElementById(eq+"-choice");
         let item_image = document.getElementById(eq+"-img");
@@ -57,28 +114,70 @@ document.addEventListener('DOMContentLoaded', function() {
         let item_input = new ItemInputNode(eq+'-input', input_field, none_item);
         item_nodes.push(item_input);
         new ItemInputDisplayNode(eq+'-display', input_field, item_image).link_to(item_input);
-        new PrintNode(eq+'-debug').link_to(item_input);
+        //new PrintNode(eq+'-debug').link_to(item_input);
         //document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip');"); //toggle_plus_minus('" + eq + "-pm'); 
-
     }
+
+    // weapon image changer node.
     let weapon_image = document.getElementById("weapon-img");
     new WeaponDisplayNode('weapon-type', weapon_image).link_to(item_nodes[8]);
-    let level_input = new InputNode('level-input', document.getElementById('level-choice'));
-    new PrintNode('lvl-debug').link_to(level_input);
 
+    // Level input node.
+    let level_input = new InputNode('level-input', document.getElementById('level-choice'));
+
+    // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
     let build_node = new BuildAssembleNode();
     for (const input of item_nodes) {
         build_node.link_to(input);
     }
     build_node.link_to(level_input);
+
+
+    for (const input of powder_inputs) {
+        powder_nodes.push(new PowderInputNode(input, document.getElementById(input)));
+    }
+
+    for (let i = 0; i < 4; ++i) {
+        let spell_node = new SpellDamageCalcNode(i);
+        spell_node.link_to(item_nodes[8], 'weapon-input');
+        spell_node.link_to(build_node, 'build');
+        spell_node.link_to(powder_nodes[4], 'weapon-powder');
+        spell_nodes.push(spell_node);
+    }
+
     console.log("Set up graph");
 
+    let masonry = Macy({
+        container: "#masonry-container",
+        columns: 1,
+        mobileFirst: true,
+        breakAt: {
+            1200: 4,
+        },
+        margin: {
+            x: 20,
+            y: 20,
+        } 
+        
+    });
+
+    let search_masonry = Macy({
+        container: "#search-results",
+        columns: 1,
+        mobileFirst: true,
+        breakAt: {
+            1200: 4,
+        },
+        margin: {
+            x: 20,
+            y: 20,
+        }
+        
+    });
 });
 
 // autocomplete initialize
 function init_autocomplete() {
-    console.log("autocomplete init");
-    console.log(itemLists)
     let dropdowns = new Map();
     for (const eq of equipment_keys) {
         if (tome_keys.includes(eq)) {

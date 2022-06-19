@@ -12,29 +12,6 @@ function getTomeNameFromID(id) {
     return tomeIDMap.get(id);
 }
 
-function parsePowdering(powder_info) {
-    // TODO: Make this run in linear instead of quadratic time... ew
-    let powdering = [];
-    for (let i = 0; i < 5; ++i) {
-        let powders = "";
-        let n_blocks = Base64.toInt(powder_info.charAt(0));
-        // console.log(n_blocks + " blocks");
-        powder_info = powder_info.slice(1);
-        for (let j = 0; j < n_blocks; ++j) {
-            let block = powder_info.slice(0,5);
-            console.log(block);
-            let six_powders = Base64.toInt(block);
-            for (let k = 0; k < 6 && six_powders != 0; ++k) {
-                powders += powderNames.get((six_powders & 0x1f) - 1);
-                six_powders >>>= 5;
-            }
-            powder_info = powder_info.slice(5);
-        }
-        powdering[i] = powders;
-    }
-    return [powdering, powder_info];
-}
-
 function populateBuildList() {
     const buildList = document.getElementById("build-choice");
     const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
@@ -138,6 +115,21 @@ function toggle_tab(tab) {
         document.querySelector("#"+tab).style.display = "none";
     }
 }
+
+
+let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
+function show_tab(tab) {
+    //console.log(itemFilters)
+
+    //hide all tabs, then show the tab of the div clicked and highlight the correct button
+    for (const i in tabs) {
+        document.querySelector("#" + tabs[i]).style.display = "none";
+        document.getElementById("tab-" + tabs[i].split("-")[0] + "-btn").classList.remove("selected-btn");
+    }
+    document.querySelector("#" + tab).style.display = "";
+    document.getElementById("tab-" + tab.split("-")[0] +  "-btn").classList.add("selected-btn");
+}
+
 
 // TODO: Learn and use await
 function init() {
