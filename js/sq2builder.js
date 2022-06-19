@@ -114,11 +114,9 @@ function parsePowdering(powder_info) {
     for (let i = 0; i < 5; ++i) {
         let powders = "";
         let n_blocks = Base64.toInt(powder_info.charAt(0));
-        // console.log(n_blocks + " blocks");
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
-            console.log(block);
             let six_powders = Base64.toInt(block);
             for (let k = 0; k < 6 && six_powders != 0; ++k) {
                 powders += powderNames.get((six_powders & 0x1f) - 1);
@@ -161,11 +159,10 @@ function decodeBuild(url_tag) {
             let info_str = info[1];
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
-                if (info_str.charAt(start_idx) === "-") {
-                    equipment[i] = "CR-"+info_str.slice(start_idx+1, start_idx+18);
-                    start_idx += 18;
-                }
-                else {
+                if (info_str.slice(start_idx,start_idx+3) === "CR-") {
+                    equipment[i] = info_str.slice(start_idx, start_idx+20);
+                    start_idx += 20;
+                } else {
                     let equipment_str = info_str.slice(start_idx, start_idx+3);
                     equipment[i] = getItemNameFromID(Base64.toInt(equipment_str));
                     start_idx += 3;
@@ -228,13 +225,11 @@ function decodeBuild(url_tag) {
             info[1] = res[1];
         }
         // Tomes.
-        if (version == 6) {
+        if (version_number == 6) {
             //tome values do not appear in anything before v6.
             for (let i = 0; i < 7; ++i) {
                 let tome_str = info[1].charAt(i);
-                for (let i in tomes) {
-                    setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
-                }
+                setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
             }
             info[1] = info[1].slice(7);
         }

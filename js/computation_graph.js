@@ -12,7 +12,6 @@ class ComputeNode {
         this.value = null;
         this.name = name;
         this.update_task = null;
-        this.update_time = Date.now();
         this.fail_cb = false;   // Set to true to force updates even if parent failed.
         this.dirty = true;
         this.inputs_dirty = new Map();
@@ -22,12 +21,10 @@ class ComputeNode {
     /**
      * Request update of this compute node. Pushes updates to children.
      */
-    update(timestamp) {
-        if (timestamp <= this.update_time) {
+    update() {
+        if (!this.dirty) {
             return;
         }
-        this.update_time = timestamp;
-
         if (this.inputs_dirty_count != 0) {
             return;
         }
@@ -38,21 +35,21 @@ class ComputeNode {
         this.value = this.compute_func(calc_inputs);
         this.dirty = false;
         for (const child of this.children) {
-            child.mark_input_clean(this.name, this.value, timestamp);
+            child.mark_input_clean(this.name, this.value);
         }
     }
 
     /**
      * Mark parent as not dirty. Propagates calculation if all inputs are present.
      */
-    mark_input_clean(input_name, value, timestamp) {
+    mark_input_clean(input_name, value) {
         if (value !== null || this.fail_cb) {
             if (this.inputs_dirty.get(input_name)) {
                 this.inputs_dirty.set(input_name, false);
                 this.inputs_dirty_count -= 1;
             }
             if (this.inputs_dirty_count === 0) {
-                this.update(timestamp);
+                this.update();
             }
         }
     }
@@ -111,8 +108,7 @@ function calcSchedule(node) {
     }
     node.mark_dirty();
     node.update_task = setTimeout(function() {
-        const timestamp = Date.now();
-        node.update(timestamp);
+        node.update();
         node.update_task = null;
     }, 500);
 }

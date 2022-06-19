@@ -223,6 +223,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log("Set up graph");
 
+    // Other "main" stuff
+    // TODO: consolidate and comment
+
+    // Spell dropdowns
+    for (const i of spell_disp) {
+        document.querySelector("#"+i+"Avg").addEventListener("click", () => toggle_spell_tab(i));
+    }
+
+    // Masonry setup
     let masonry = Macy({
         container: "#masonry-container",
         columns: 1,

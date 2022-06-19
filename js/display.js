@@ -1814,6 +1814,13 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
             part_divavg.append(overallaverageLabel);
         }
     }
+
+    //up and down arrow - done ugly
+    let arrow = document.createElement("img");
+    arrow.id = "arrow_" + overallparent_elem.id;
+    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
+    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
+    overallparent_elem.appendChild(arrow);
 }
 
 /** Displays the ID costs of an item

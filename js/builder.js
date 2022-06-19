@@ -116,6 +116,18 @@ function toggle_tab(tab) {
     }
 }
 
+// toggle spell arrow
+function toggle_spell_tab(tab) {
+    let arrow_img = document.querySelector("#" + "arrow_" + tab + "Avg");
+    if (document.querySelector("#"+tab).style.display == "none") {
+        document.querySelector("#"+tab).style.display = "";
+        arrow_img.src = arrow_img.src.replace("down", "up");
+    } else {
+        document.querySelector("#"+tab).style.display = "none";
+        arrow_img.src = arrow_img.src.replace("up", "down");
+    }
+}
+
 
 let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
 function show_tab(tab) {

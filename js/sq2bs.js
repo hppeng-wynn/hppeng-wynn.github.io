@@ -103,6 +103,27 @@ function doSearchSchedule(){
     }, 500);
 }
 
+function sq2ResetFields(){
+    for (let i in powderInputs) {
+        setValue(powderInputs[i], "");
+    }
+    for (let i in equipmentInputs) {
+        setValue(equipmentInputs[i], "");
+    }
+
+    for (let i in tomeInputs) {
+        setValue(tomeInputs[i], "");
+    }
+    setValue("str-skp", "0");
+    setValue("dex-skp", "0");
+    setValue("int-skp", "0");
+    setValue("def-skp", "0");
+    setValue("agi-skp", "0");
+    setValue("level-choice", "106");
+    location.hash = "";
+    calculateBuild();
+}
+
 // equipment field dynamic styling
 function update_field(field) {
     // built on the assumption of no one will type in CI/CR letter by letter
@@ -221,10 +242,13 @@ function show_tab(tab) {
 }
 
 function toggle_spell_tab(tab) {
+    let arrow_img = document.querySelector("#" + "arrow_" + tab + "Avg");
     if (document.querySelector("#"+tab).style.display == "none") {
         document.querySelector("#"+tab).style.display = "";
+        arrow_img.src = arrow_img.src.replace("down", "up");
     } else {
         document.querySelector("#"+tab).style.display = "none";
+        arrow_img.src = arrow_img.src.replace("up", "down");
     }
 }
 

@@ -232,6 +232,7 @@ function decodeCustom(custom_url_tag) {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
                 //console.log(tag.slice(0, 2) + ": " + id);
                 let len = Base64.toInt(tag.slice(2,4));
+
                 if (rolledIDs.includes(id)) {
                     let sign = parseInt(tag.slice(4,5),10);
                     let minRoll = Base64.toInt(tag.slice(5,5+len));

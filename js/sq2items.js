@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
+    let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
                                 ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
                                 ["filter1", sq2ItemFilters],
                                 ["filter2", sq2ItemFilters],

@@ -491,10 +491,12 @@ function displaysq2ExpandedItem(item, parent_id){
             let base_dps_min = total_damages[0] * damage_mult;
             let base_dps_max = total_damages[1] * damage_mult;
 
-            base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
+        //    base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
+           base_dps_elem.textContent = base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
         }
         else {
-            base_dps_elem.textContent = "Base DPS: "+(total_damages * damage_mult);
+            let bdps = total_damages * damage_mult;
+            base_dps_elem.textContent = (bdps ? bdps : 0);
         }
         parent_div.appendChild(document.createElement("p"));
         parent_div.appendChild(base_dps_elem);
@@ -557,6 +559,11 @@ function displaysq2WeaponStats(build) {
     stats.set("atkSpd", item.get("atkSpd"));
     stats.set("damageBonus", [0, 0, 0, 0, 0]);
     stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
+    
+    //needed for damage calc CR powders
+    if (build.weapon.get("tier") === "Crafted") {
+        stats.set("damageBases", [item.get("nDamBaseHigh"), item.get("eDamBaseHigh"), item.get("tDamBaseHigh"), item.get("wDamBaseHigh"), item.get("fDamBaseHigh"), item.get("aDamBaseHigh")]);
+    }
 
     let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, build.weapon, [0, 0, 0, 0, 0], 1, undefined);
     let powdered_base = results[2];
@@ -584,7 +591,8 @@ function displaysq2WeaponStats(build) {
     tot /= 2;
     let dps = Math.max(0, Math.round(tot * baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))] )); //atkspeeds
 
-    document.getElementById("weapon-dps").textContent = "base dps: " + dps; 
+    // document.getElementById("weapon-dps").textContent = "base dps: " + (isNaN(dps) ? 0 : dps); 
+    document.getElementById("weapon-dps").textContent = (isNaN(dps) ? 0 : dps);
     document.getElementById("weapon-lv").textContent = item.get("lvl"); 
 
     if (item.get("type")) {
@@ -1407,6 +1415,13 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
             part_divavg.append(overallaverageLabel);
         }
     }
+
+    //up and down arrow - done ugly
+    let arrow = document.createElement("img");
+    arrow.id = "arrow_" + overallparent_elem.id;
+    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
+    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
+    overallparent_elem.appendChild(arrow);
 }
 
 function displaysq2EquipOrder(parent_elem, buildOrder){
