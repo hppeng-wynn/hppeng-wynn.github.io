@@ -233,6 +233,13 @@ function update_field(field) {
     // set weapon img and set ability tree
     if (category == 'weapon') {
         document.querySelector("#weapon-img").setAttribute('src', '../media/items/new/generic-'+type+'.png');
+        
+        //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
+        if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
+            toggle_tab('atree-dropdown'); 
+            toggleButton('toggle-atree');
+        }
+        
         //for some reason we have to cast to string 
         construct_AT(document.getElementById("atree-ui"), atrees[wep_to_class.get(type)]); 
 
@@ -542,7 +549,15 @@ function init_autocomplete() {
 // atree parsing
 function construct_AT(elem, tree) {
     console.log("constructing ability tree UI");
+    document.getElementById("atree-active").innerHTML = ""; //reset all atree actives - should be done in a more general way later
     elem.innerHTML = ""; //reset the atree in the DOM
+
+    // add in the "Active" title to atree
+    let active_row = document.createElement("div");
+    active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
+    active_row.textContent = "Active:";
+    document.getElementById("atree-active").appendChild(active_row);
+
     for (let i = 0; i < tree.length; i++) {
         let node = tree[i];
         
@@ -553,12 +568,16 @@ function construct_AT(elem, tree) {
                     let row = document.createElement('div');
                     row.classList.add("row");
                     row.id = "atree-row-" + j;
-                    row.style.height = elem.getBoundingClientRect().width / 9 + "px";
+                    //was causing atree rows to be 0 height
+                    console.log(elem.scrollWidth / 9);
+                    row.style.minHeight = elem.scrollWidth / 9 + "px";
+                    //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
 
 
                     for (let k = 0; k < 9; k++) {
                         col = document.createElement('div');
                         col.classList.add('col', 'px-0');
+                        col.style.minHeight = elem.scrollWidth / 9 + "px";
                         row.appendChild(col);
                     };
                     elem.appendChild(row);
@@ -594,7 +613,8 @@ function construct_AT(elem, tree) {
 
             let active_tooltip = document.createElement('div');
             active_tooltip.classList.add("rounded-bottom", "dark-7", "border", "mb-2", "mx-auto");
-            active_tooltip.style.width = elem.getBoundingClientRect().width * .80 + "px";
+            //was causing active element boxes to be 0 width 
+            // active_tooltip.style.width = elem.getBoundingClientRect().width * .80 + "px";
             active_tooltip.style.display = "none";
 
             // tooltip text formatting
