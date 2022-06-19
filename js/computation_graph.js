@@ -6,14 +6,16 @@ class ComputeNode {
      * @param name : Name of the node (string). Must be unique. Must "fit in" a JS string (terminated by single quotes).
      */
     constructor(name) {
-        this.inputs = [];
+        this.inputs = [];   // parent nodes
         this.children = [];
         this.value = 0;
         this.name = name;
         this.update_task = null;
         this.update_time = Date.now();
         this.fail_cb = false;   // Set to true to force updates even if parent failed.
-        this.calc_inputs = new Map();
+        this.dirty = false;
+        this.inputs_dirty = new Map();
+        this.inputs_dirty_count = 0;
     }
 
     /**
@@ -24,7 +26,19 @@ class ComputeNode {
             return;
         }
         this.update_time = timestamp;
-        this.set_value(this.compute_func(this.calc_inputs));
+
+        if (this.inputs_dirty_count != 0) {
+            return;
+        }
+        let calc_inputs = new Map();
+        for (const input of this.inputs) {
+            calc_inputs.set(input.name, input.value);
+        }
+        this.value = this.compute_func(calc_inputs);
+        this.dirty = false;
+        for (const child of this.children) {
+            child.mark_input_clean(this.name, this.value, timestamp);
+        }
     }
 
     /**
@@ -40,22 +54,35 @@ class ComputeNode {
     }
 
     /**
-     * Set an input value. Propagates calculation if all inputs are present.
+     * Mark parent as not dirty. Propagates calculation if all inputs are present.
      */
-    set_input(input_name, value, timestamp) {
-        if (value || this.fail_cb) {
-            this.calc_inputs.set(input_name, value)
-            if (this.calc_inputs.size === this.inputs.length) {
-                this.update(timestamp)
+    mark_input_clean(input_name, value, timestamp) {
+        if (value !== null || this.fail_cb) {
+            if (this.inputs_dirty.get(input_name)) {
+                this.inputs_dirty.set(input_name, false);
+                this.inputs_dirty_count -= 1;
+            }
+            if (this.inputs_dirty_count === 0) {
+                this.update(timestamp);
             }
         }
     }
 
-    /**
-     * Remove cached input values to this calculation.
-     */
-    clear_cache() {
-        this.calc_inputs = new Map();
+    mark_input_dirty(input_name) {
+        if (!this.inputs_dirty.get(input_name)) {
+            this.inputs_dirty.set(input_name, true);
+            this.inputs_dirty_count += 1;
+        }
+    }
+
+    mark_dirty() {
+        if (!this.dirty) {
+            this.dirty = true;
+            for (const child of this.children) {
+                child.mark_input_dirty(this.name);
+                child.mark_dirty();
+            }
+        }
     }
 
     /**
@@ -74,6 +101,10 @@ class ComputeNode {
 
     link_to(parent_node) {
         this.inputs.push(parent_node)
+        this.inputs_dirty.set(parent_node.name, parent_node.dirty);
+        if (parent_node.dirty) {
+            this.inputs_dirty_count += 1;
+        }
         parent_node.children.push(this);
     }
 }
@@ -87,6 +118,7 @@ function calcSchedule(node) {
     if (node.update_task !== null) {
         clearTimeout(node.update_task);
     }
+    node.mark_dirty();
     node.update_task = setTimeout(function() {
         const timestamp = Date.now();
         node.update(timestamp);
@@ -108,9 +140,24 @@ class PrintNode extends ComputeNode {
 }
 
 /**
+ * Node for getting an input from an input field.
+ */
+class InputNode extends ComputeNode {
+    constructor(name, input_field) {
+        super(name);
+        this.input_field = input_field;
+        this.input_field.addEventListener("input", () => calcSchedule(this));
+    }
+
+    compute_func(input_map) {
+        return this.input_field.value;
+    }
+}
+
+/**
  * Node for getting an item's stats from an item input field.
  */
-class ItemInputNode extends ComputeNode {
+class ItemInputNode extends InputNode {
     /**
      * Make an item stat pulling compute node.
      *
@@ -119,9 +166,7 @@ class ItemInputNode extends ComputeNode {
      * @param none_item: Item object to use as the "none" for this field.
      */
     constructor(name, item_input_field, none_item) {
-        super(name);
-        this.input_field = item_input_field;
-        this.input_field.addEventListener("input", () => calcSchedule(this));
+        super(name, item_input_field);
         this.none_item = new Item(none_item);
     }
 

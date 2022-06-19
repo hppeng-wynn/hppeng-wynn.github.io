@@ -1,5 +1,52 @@
 
 
+class BuildEncodeNode extends ComputeNode {
+    constructor() {
+        super("builder-encode");
+    }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "BuildEncodeNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        return encodeBuild(build);
+    }
+}
+
+class URLUpdateNode extends ComputeNode {
+    constructor() {
+        super("builder-url-update");
+    }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "URLUpdateNode accepts exactly one input (build_str)"; }
+        const [build_str] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        location.hash = build_str;
+    }
+}
+
+class BuildAssembleNode extends ComputeNode {
+    constructor() {
+        super("builder-make-build");
+    }
+
+    compute_func(input_map) {
+        let equipments = [
+            input_map.get('helmet-input'),
+            input_map.get('chestplate-input'),
+            input_map.get('leggings-input'),
+            input_map.get('boots-input'),
+            input_map.get('ring1-input'),
+            input_map.get('ring2-input'),
+            input_map.get('bracelet-input'),
+            input_map.get('necklace-input')
+        ];
+        let weapon = input_map.get('weapon-input');
+        let level = input_map.get('level-input');
+        console.log('build node run');
+        return new Build(level, equipments, [], weapon);
+    }
+}
+
 let item_nodes = [];
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -16,6 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     let weapon_image = document.getElementById("weapon-img");
     new WeaponDisplayNode('weapon-type', weapon_image).link_to(item_nodes[8]);
+    let level_input = new InputNode('level-input', document.getElementById('level-choice'));
+    new PrintNode('lvl-debug').link_to(level_input);
+
+    let build_node = new BuildAssembleNode();
+    for (const input of item_nodes) {
+        build_node.link_to(input);
+    }
+    build_node.link_to(level_input);
     console.log("Set up graph");
 
 });
@@ -98,6 +153,7 @@ function init_autocomplete() {
                         if (event.detail.selection.value) {
                             event.target.value = event.detail.selection.value;
                         }
+                        event.target.dispatchEvent(new Event('input'));
                     },
                 },
             }
