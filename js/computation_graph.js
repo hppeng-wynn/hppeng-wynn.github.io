@@ -137,7 +137,7 @@ class InputNode extends ComputeNode {
         super(name);
         this.input_field = input_field;
         this.input_field.addEventListener("input", () => calcSchedule(this));
-        calcSchedule(this);
+        //calcSchedule(this);  Manually fire first update for better control
     }
 
     compute_func(input_map) {

@@ -35,15 +35,9 @@ function displaySetBonuses(parent_id,build) {
     let parent_div = document.getElementById(parent_id);
 
     let set_summary_elem = document.createElement('p');
-    set_summary_elem.classList.add('itemcenter');
-    set_summary_elem.textContent = "Set Bonuses:";
+    set_summary_elem.classList.add('text-center');
+    set_summary_elem.textContent = "Set Bonuses";
     parent_div.append(set_summary_elem);
-    
-    if (build.activeSetCounts.size) {
-        parent_div.parentElement.style.display = "block";
-    } else {
-        parent_div.parentElement.style.display = "none";
-    }
 
     for (const [setName, count] of build.activeSetCounts) {
         const active_set = sets.get(setName);
@@ -75,7 +69,6 @@ function displaySetBonuses(parent_id,build) {
         console.log(mock_item);
     }
 }
-
 
 function displayBuildStats(parent_id,build,command_group){
     // Commands to "script" the creation of nice formatting.
@@ -1916,58 +1909,6 @@ function displayAdditionalInfo(elemID, item) {
     return;
 }
 
-/** Displays all set bonuses (0/n, 1/n, ... n/n) for a given set
- * 
- * @param {String} parent_id - id of the parent element
- * @param {String} setName - the name of the set
- */
- function displayAllSetBonuses(parent_id,setName) {
-    let parent_elem = document.getElementById(parent_id);
-    parent_elem.style.display = ""; 
-    let set = sets[setName];
-    let title_elem = document.createElement("p");
-    title_elem.textContent = setName + " Set Bonuses";
-    title_elem.classList.add("Set");
-    title_elem.classList.add("title");
-    parent_elem.appendChild(title_elem);
-    let grid_elem = document.createElement("div");
-    grid_elem.style.display = "flex";
-    grid_elem.style.flexDirection = "rows";
-    grid_elem.style.flexWrap = "wrap";
-    grid_elem.style.gap = "5px";
-    parent_elem.appendChild(grid_elem);
-
-    for (let i = 0; i < set.items.length; i++) {
-        
-        let set_elem = document.createElement('p');
-        set_elem.classList.add("container");
-        set_elem.style = "grid-item-"+(i+1);
-        set_elem.style.maxWidth = "max(180px, 15%)";
-        set_elem.id = "set-"+setName+"-"+i;
-        grid_elem.appendChild(set_elem);
-        const bonus = set.bonuses[i];
-        let mock_item = new Map();
-        mock_item.set("fixID", true);
-        mock_item.set("displayName", setName+" Set: " + (i+1) + "/"+sets[setName].items.length);
-        set_elem.textContent = mock_item.get("displayName");
-        let mock_minRolls = new Map();
-        let mock_maxRolls = new Map();
-        mock_item.set("minRolls", mock_minRolls);
-        mock_item.set("maxRolls", mock_maxRolls);
-        for (const id in bonus) {
-            if (rolledIDs.includes(id)) {
-                mock_minRolls.set(id, bonus[id]);
-                mock_maxRolls.set(id, bonus[id]);
-            }
-            else {
-                mock_item.set(id, bonus[id]);
-            }
-        }
-        mock_item.set("powders", []);
-        displayExpandedItem(mock_item, set_elem.id);
-    }
-
-}
 
 /** Displays the individual probabilities of each possible value of each rollable ID for this item.
  * 

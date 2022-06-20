@@ -389,7 +389,15 @@ class BuildDisplayNode extends ComputeNode {
         displayDefenseStats(document.getElementById("defensive-stats"), build);
 
         displayPoisonDamage(document.getElementById("build-poison-stats"), build);
+        displayEquipOrder(document.getElementById("build-order"), build.equip_order);
     }
+}
+
+/**
+ * Set the editble id fields.
+ */
+class EditableIDSetterNode extends ComputeNode {
+
 }
 
 let item_nodes = [];
@@ -454,6 +462,11 @@ function builder_graph_init() {
         display_node.link_to(spell_node, 'spell-info');
         display_node.link_to(calc_node, 'spell-damage');
     }
+
+    for (const input_node of item_nodes.concat(powder_nodes)) {
+        input_node.update();
+    }
+    level_input.update();
 
     console.log("Set up graph");
 }
