@@ -405,6 +405,8 @@ let powder_nodes = [];
 let spelldmg_nodes = [];
 
 function builder_graph_init() {
+    // Phase 1/2: Set up item input, propagate updates, etc.
+
     // Bind item input fields to input nodes, and some display stuff (for auto colorizing stuff).
     for (const [eq, display_elem, none_item] of zip3(equipment_fields, build_fields, none_items)) {
         let input_field = document.getElementById(eq+"-choice");
@@ -446,9 +448,28 @@ function builder_graph_init() {
         build_encode_node.link_to(powder_node, input);
     }
 
+    for (const input_node of item_nodes.concat(powder_nodes)) {
+        input_node.update();
+    }
+    level_input.update();
+
+    // Phase 2/2: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
+
+    // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
+    // let stat_agg_node = 
+    for (const field of editable_elems) {
+        // Create nodes that listens to each editable id input, the node name should match the "id"
+
+        // stat_agg_node.link_to( ... )
+    }
+
+    // Also do something similar for skill points
+
     for (let i = 0; i < 4; ++i) {
         let spell_node = new SpellSelectNode(i);
         spell_node.link_to(build_node, 'build');
+        // link and rewrite spell_node to the stat agg node
+        // spell_node.link_to(stat_agg_node, 'stats')
 
         let calc_node = new SpellDamageCalcNode(i);
         calc_node.link_to(item_nodes[8], 'weapon-input');
@@ -462,11 +483,17 @@ function builder_graph_init() {
         display_node.link_to(spell_node, 'spell-info');
         display_node.link_to(calc_node, 'spell-damage');
     }
+    
+    // Create a node that binds the build to the edit ids text boxes
+    // (make it export to the textboxes)
+    // This node is a bit tricky since it has to make a "weak link" (directly mark dirty and call update() for each of the stat nodes).
+    // IMPORTANT: mark all children dirty, then update each child, in that order (2 loops). else performance issues will be bad
+    // let id_exporter_node = ...
+    // id_exporter_node.link_to(build_node, 'build')
 
-    for (const input_node of item_nodes.concat(powder_nodes)) {
-        input_node.update();
-    }
-    level_input.update();
+    // call node.update() for each skillpoint node and stat edit listener node manually
+    // NOTE: the text boxes for skill points are already filled out by decodeBuild() so this will fix them
+    // this will propagate the update to the `stat_agg_node`, and then to damage calc
 
     console.log("Set up graph");
 }
