@@ -132,12 +132,16 @@ function decodeBuild(url_tag) {
         for (let i in powder_inputs) {
             setValue(powder_inputs[i], powdering[i]);
         }
+        for (let i in skillpoints) {
+            console.log(skillpoints[i]);
+            setValue(skp_order[i] + "-skp", skillpoints[i]);
+        }
     }
 }
 
 /*  Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
-function encodeBuild(build, powders) {
+function encodeBuild(build, powders, skillpoints) {
 
     if (build) {
         let build_string;
@@ -148,7 +152,6 @@ function encodeBuild(build, powders) {
         tome_string = "";
 
         for (const item of build.items) {
-            
             if (item.statMap.get("custom")) {
                 let custom = "CI-"+encodeCustom(item, true);
                 build_string += Base64.fromIntN(custom.length, 3) + custom;
@@ -167,8 +170,8 @@ function encodeBuild(build, powders) {
             }
         }
 
-        for (const skp of skp_order) {
-            build_string += Base64.fromIntN(getValue(skp + "-skp"), 2); // Maximum skillpoints: 2048
+        for (const skp of skillpoints) {
+            build_string += Base64.fromIntN(skp, 2); // Maximum skillpoints: 2048
         }
         build_string += Base64.fromIntN(build.level, 2);
         for (const _powderset of powders) {

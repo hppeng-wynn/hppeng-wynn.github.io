@@ -38,7 +38,6 @@ function calculate_skillpoints(equipment, weapon) {
                 setCount = 0;
                 activeSetCounts.set(setName, 1);
             }
-            console.log(sets);
             const new_bonus = sets.get(setName).bonuses[setCount];
             //let skp_order = ["str","dex","int","def","agi"];
             for (const i in skp_order) {

@@ -94,6 +94,7 @@ class ComputeNode {
             this.inputs_dirty_count += 1;
         }
         parent_node.children.push(this);
+        return this;
     }
 }
 

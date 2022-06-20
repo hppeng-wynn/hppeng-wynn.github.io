@@ -160,10 +160,17 @@ class BuildEncodeNode extends ComputeNode {
             input_map.get('boots-powder'),
             input_map.get('weapon-powder')
         ];
+        const skillpoints = [
+            input_map.get('str'),
+            input_map.get('dex'),
+            input_map.get('int'),
+            input_map.get('def'),
+            input_map.get('agi')
+        ];
         // TODO: grr global state for copy button..
         player_build = build;
         build_powders = powders;
-        return encodeBuild(build, powders);
+        return encodeBuild(build, powders, skillpoints);
     }
 }
 
@@ -295,12 +302,50 @@ class SpellSelectNode extends ComputeNode {
     }
 }
 
+/*
+ * Get all defensive stats for this build.
+ */
+function getDefenseStats(stats) {
+    let defenseStats = [];
+    let def_pct = skillPointsToPercentage(stats.get('def'));
+    let agi_pct = skillPointsToPercentage(stats.get('agi'));
+    //total hp
+    let totalHp = stats.get("hp") + stats.get("hpBonus");
+    if (totalHp < 5) totalHp = 5;
+    defenseStats.push(totalHp);
+    //EHP
+    let ehp = [totalHp, totalHp];
+    let defMult = stats.get("classDef");
+    ehp[0] /= (1-def_pct)*(1-agi_pct)*(2-defMult);
+    ehp[1] /= (1-def_pct)*(2-defMult);
+    defenseStats.push(ehp);
+    //HPR
+    let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
+    defenseStats.push(totalHpr);
+    //EHPR
+    let ehpr = [totalHpr, totalHpr];
+    ehpr[0] /= (1-def_pct)*(1-agi_pct)*(2-defMult); 
+    ehpr[1] /= (1-def_pct)*(2-defMult); 
+    defenseStats.push(ehpr);
+    //skp stats
+    defenseStats.push([ def_pct*100, agi_pct*100]);
+    //eledefs - TODO POWDERS
+    let eledefs = [0, 0, 0, 0, 0];
+    for(const i in skp_elements){ //kinda jank but ok
+        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), stats.get(skp_elements[i] + "DefPct")/100.);
+    }
+    defenseStats.push(eledefs);
+    
+    //[total hp, [ehp w/ agi, ehp w/o agi], total hpr, [ehpr w/ agi, ehpr w/o agi], [def%, agi%], [edef,tdef,wdef,fdef,adef]]
+    return defenseStats;
+}
+
 /**
  * Compute spell damage of spell parts.
  * Currently kinda janky / TODO while we rework the internal rep. of spells.
  *
  * Signature: SpellDamageCalcNode(weapon-input: Item,
- *                                build: Build,
+ *                                stats: StatMap,
  *                                weapon-powder: List[powder],
  *                                spell-info: [Spell, SpellParts]) => List[SpellDamage]
  */
@@ -311,25 +356,31 @@ class SpellDamageCalcNode extends ComputeNode {
 
     compute_func(input_map) {
         const weapon = new Map(input_map.get('weapon-input').statMap);
-        const build = input_map.get('build');
         const weapon_powder = input_map.get('weapon-powder');
         const damage_mult = 1; // TODO: hook up
         const spell_info = input_map.get('spell-info');
         const spell_parts = spell_info[1];
+        const stats = input_map.get('stats');
+        const skillpoints = [
+            stats.get('str'),
+            stats.get('dex'),
+            stats.get('int'),
+            stats.get('def'),
+            stats.get('agi')
+        ];
 
         weapon.set("powders", weapon_powder);
         let spell_results = []
-        let stats = build.statMap;
 
         for (const part of spell_parts) {
             if (part.type === "damage") {
                 let results = calculateSpellDamage(stats, part.conversion,
                                         stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct"), 
-                                        part.multiplier / 100, weapon, build.total_skillpoints, damage_mult);
+                                        part.multiplier / 100, weapon, skillpoints, damage_mult);
                 spell_results.push(results);
             } else if (part.type === "heal") {
                 // TODO: wynn2 formula
-                let heal_amount = (part.strength * build.getDefenseStats()[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
+                let heal_amount = (part.strength * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
                 spell_results.push(heal_amount);
             } else if (part.type === "total") {
                 // TODO: remove "total" type
@@ -345,7 +396,7 @@ class SpellDamageCalcNode extends ComputeNode {
  * Display spell damage from spell parts.
  * Currently kinda janky / TODO while we rework the internal rep. of spells.
  *
- * Signature: SpellDisplayNode(build: Build,
+ * Signature: SpellDisplayNode(stats: StatMap,
  *                             spell-info: [Spell, SpellParts],
  *                             spell-damage: List[SpellDamage]) => null
  */
@@ -375,18 +426,18 @@ class SpellDisplayNode extends ComputeNode {
  * Signature: BuildDisplayNode(build: Build) => null
  */
 class BuildDisplayNode extends ComputeNode {
-    constructor(spell_num) { super("builder-stats-display"); }
+    constructor() { super("builder-stats-display"); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "BuildDisplayNode accepts exactly one input (build)"; }
-        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-        displayBuildStats('overall-stats', build, build_all_display_commands);
-        displayBuildStats("offensive-stats", build, build_offensive_display_commands);
+        const build = input_map.get('build');
+        const stats = input_map.get('stats');
+        displayBuildStats('overall-stats', build, build_all_display_commands, stats);
+        displayBuildStats("offensive-stats", build, build_offensive_display_commands, stats);
         displaySetBonuses("set-info", build);
         let meleeStats = build.getMeleeStats();
         displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
-        displayDefenseStats(document.getElementById("defensive-stats"), build);
+        displayDefenseStats(document.getElementById("defensive-stats"), stats);
 
         displayPoisonDamage(document.getElementById("build-poison-stats"), build);
         displayEquipOrder(document.getElementById("build-order"), build.equip_order);
@@ -394,10 +445,212 @@ class BuildDisplayNode extends ComputeNode {
 }
 
 /**
+ * Show warnings for skillpoints, level, set bonus for a build
+ * Also shosw skill point remaining and other misc. info
+ *
+ * Signature: DisplayBuildWarningNode(build: Build, str: int, dex: int, int: int, def: int, agi: int) => null
+ */
+class DisplayBuildWarningsNode extends ComputeNode {
+    constructor() { super("builder-show-warnings"); }
+
+    compute_func(input_map) {
+        const build = input_map.get('build');
+        const min_assigned = build.base_skillpoints;
+        const base_totals = build.total_skillpoints;
+        const skillpoints = [
+                input_map.get('str'),
+                input_map.get('dex'),
+                input_map.get('int'),
+                input_map.get('def'),
+                input_map.get('agi')
+            ];
+        let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
+        let total_assigned = 0;
+        for (let i in skp_order){ //big bren
+            const assigned = skillpoints[i] - base_totals[i] + min_assigned[i]
+            setText(skp_order[i] + "-skp-assign", "Assign: " + assigned);
+            setValue(skp_order[i] + "-skp", skillpoints[i]);
+            let linebreak = document.createElement("br");
+            linebreak.classList.add("itemp");
+            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+            document.getElementById(skp_order[i]+"-warnings").textContent = ''
+            if (assigned > 100) {
+                let skp_warning = document.createElement("p");
+                skp_warning.classList.add("warning"); skp_warning.classList.add("small-text");
+                skp_warning.textContent += "Cannot assign " + assigned + " skillpoints in " + ["Strength","Dexterity","Intelligence","Defense","Agility"][i] + " manually.";
+                document.getElementById(skp_order[i]+"-warnings").appendChild(skp_warning);
+            }
+            total_assigned += assigned;
+        }
+
+        let summarybox = document.getElementById("summary-box");
+        summarybox.textContent = "";
+        let skpRow = document.createElement("p");
+
+        let remainingSkp = document.createElement("p");
+        remainingSkp.classList.add("scaled-font");
+        let remainingSkpTitle = document.createElement("b");
+        remainingSkpTitle.textContent = "Assigned " + total_assigned + " skillpoints. Remaining skillpoints: ";
+        let remainingSkpContent = document.createElement("b");
+        remainingSkpContent.textContent = "" + (levelToSkillPoints(build.level) - total_assigned);
+        remainingSkpContent.classList.add(levelToSkillPoints(build.level) - total_assigned < 0 ? "negative" : "positive");
+
+        remainingSkp.appendChild(remainingSkpTitle);
+        remainingSkp.appendChild(remainingSkpContent);
+
+        summarybox.append(skpRow);
+        summarybox.append(remainingSkp);
+        if(total_assigned > levelToSkillPoints(build.level)){
+            let skpWarning = document.createElement("span");
+            //skpWarning.classList.add("itemp");
+            skpWarning.classList.add("warning");
+            skpWarning.textContent = "WARNING: Too many skillpoints need to be assigned!";
+            let skpCount = document.createElement("p");
+            skpCount.classList.add("warning");
+            skpCount.textContent = "For level " + (build.level>101 ? "101+" : build.level)  + ", there are only " + levelToSkillPoints(build.level) + " skill points available.";
+            summarybox.append(skpWarning);
+            summarybox.append(skpCount);
+        }
+        let lvlWarning;
+        for (const item of build.items) {
+            let item_lvl;
+            if (item.statMap.get("crafted")) {
+                //item_lvl = item.get("lvlLow") + "-" + item.get("lvl");
+                item_lvl = item.statMap.get("lvlLow");
+            }
+            else {
+                item_lvl = item.statMap.get("lvl");
+            }
+
+            if (build.level < item_lvl) {
+                if (!lvlWarning) {
+                    lvlWarning = document.createElement("p");
+                    lvlWarning.classList.add("itemp");
+                    lvlWarning.classList.add("warning");
+                    lvlWarning.textContent = "WARNING: A level " + build.level + " player cannot use some piece(s) of this build."
+                }
+                let baditem = document.createElement("p"); 
+                    baditem.classList.add("nocolor");
+                    baditem.classList.add("itemp"); 
+                    baditem.textContent = item.get("displayName") + " requires level " + item_lvl + " to use.";
+                    lvlWarning.appendChild(baditem);
+            }
+        }
+        if(lvlWarning){
+            summarybox.append(lvlWarning);
+        }
+        for (const [setName, count] of build.activeSetCounts) {
+            const bonus = sets.get(setName).bonuses[count-1];
+            // console.log(setName);
+            if (bonus["illegal"]) {
+                let setWarning = document.createElement("p");
+                setWarning.classList.add("itemp");
+                setWarning.classList.add("warning");
+                setWarning.textContent = "WARNING: illegal item combination: " + setName
+                summarybox.append(setWarning);
+            }
+        }
+    }
+}
+
+/**
+ * Aggregate stats from the build and from inputs.
+ *
+ * Signature: AggregateStatsNode(build: Build, *args) => StatMap
+ */
+class AggregateStatsNode extends ComputeNode {
+    constructor() { super("builder-aggregate-stats"); }
+
+    compute_func(input_map) {
+        const build = input_map.get('build');
+        const weapon = input_map.get('weapon');
+        const output_stats = new Map(build.statMap);
+        for (const [k, v] of input_map.entries()) {
+            if (k === 'build') {
+                continue;
+            }
+            output_stats.set(k, v);
+        }
+        output_stats.set('classDef', classDefenseMultipliers.get(weapon.statMap.get("type")));
+        return output_stats;
+    }
+}
+
+/**
  * Set the editble id fields.
+ *
+ * Signature: EditableIDSetterNode(build: Build) => null
  */
 class EditableIDSetterNode extends ComputeNode {
+    constructor() { super("builder-id-setter"); }
 
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "EditableIDSetterNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        for (const id of editable_item_fields) {
+            document.getElementById(id).value = build.statMap.get(id);
+        }
+    }
+}
+
+/**
+ * Set skillpoint fields from build.
+ * This is separate because..... because of the way we work with edit ids vs skill points during the load sequence....
+ *
+ * Signature: SkillPointSetterNode(build: Build) => null
+ */
+class SkillPointSetterNode extends ComputeNode {
+    constructor(notify_nodes) {
+        super("builder-skillpoint-setter");
+        this.notify_nodes = notify_nodes;
+    }
+
+    compute_func(input_map) {
+        console.log("mmm");
+        if (input_map.size !== 1) { throw "SkillPointSetterNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        for (const [idx, elem] of skp_order.entries()) {
+            setText(elem + "-skp-base", "Original: " + build.base_skillpoints[idx]);
+            document.getElementById(elem+'-skp').value = build.total_skillpoints[idx];
+        }
+        // NOTE: DO NOT merge these loops for performance reasons!!!
+        for (const node of this.notify_nodes) {
+            node.mark_dirty();
+        }
+        for (const node of this.notify_nodes) {
+            node.update();
+        }
+    }
+}
+
+/**
+ * Get number (possibly summed) from a text input.
+ *
+ * Signature: SumNumberInputNode() => int
+ */
+class SumNumberInputNode extends InputNode {
+    compute_func(input_map) {
+        const value = this.input_field.value;
+        if (value === "") { value = 0; }
+
+        let input_num = 0;
+        if (value.includes("+")) {
+            let skp = value.split("+");
+            for (const s of skp) {
+                const val = parseInt(s,10);
+                if (isNaN(val)) {
+                    return null;
+                }
+                input_num += val;
+            }
+        } else {
+            input_num = parseInt(value,10);
+            if (isNaN(input_num)) {
+                return null;
+            }
+        }
+        return input_num;
+    }
 }
 
 let item_nodes = [];
@@ -433,7 +686,6 @@ function builder_graph_init() {
         build_node.link_to(input);
     }
     build_node.link_to(level_input);
-    new BuildDisplayNode().link_to(build_node, 'build');
 
     let build_encode_node = new BuildEncodeNode();
     build_encode_node.link_to(build_node, 'build');
@@ -448,48 +700,69 @@ function builder_graph_init() {
         build_encode_node.link_to(powder_node, input);
     }
 
+    // Edit IDs setter declared up here to set ids so they will be populated by default.
+    let edit_id_output = new EditableIDSetterNode();
+    edit_id_output.link_to(build_node);
+
+    // Phase 2/2: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
+
+    let build_disp_node = new BuildDisplayNode()
+    build_disp_node.link_to(build_node, 'build');
+    let build_warnings_node = new DisplayBuildWarningsNode();
+    build_warnings_node.link_to(build_node, 'build');
+
+    // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
+    let stat_agg_node = new AggregateStatsNode();
+    stat_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
+    let edit_input_nodes = [];
+    for (const field of editable_item_fields) {
+        // Create nodes that listens to each editable id input, the node name should match the "id"
+        const elem = document.getElementById(field);
+        const node = new SumNumberInputNode('builder-'+field+'-input', elem);
+
+        stat_agg_node.link_to(node, field);
+        edit_input_nodes.push(node);
+    }
+    for (const skp of skp_order) {
+        const elem = document.getElementById(skp+'-skp');
+        const node = new SumNumberInputNode('builder-'+skp+'-input', elem);
+
+        stat_agg_node.link_to(node, skp);
+        build_encode_node.link_to(node, skp);
+        build_warnings_node.link_to(node, skp);
+        edit_input_nodes.push(node);
+    }
+    build_disp_node.link_to(stat_agg_node, 'stats');
+
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
     }
     level_input.update();
-
-    // Phase 2/2: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
-
-    // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
-    // let stat_agg_node = 
-    for (const field of editable_elems) {
-        // Create nodes that listens to each editable id input, the node name should match the "id"
-
-        // stat_agg_node.link_to( ... )
-    }
 
     // Also do something similar for skill points
 
     for (let i = 0; i < 4; ++i) {
         let spell_node = new SpellSelectNode(i);
         spell_node.link_to(build_node, 'build');
-        // link and rewrite spell_node to the stat agg node
-        // spell_node.link_to(stat_agg_node, 'stats')
+        // TODO: link and rewrite spell_node to the stat agg node
+        spell_node.link_to(stat_agg_node, 'stats')
 
         let calc_node = new SpellDamageCalcNode(i);
-        calc_node.link_to(item_nodes[8], 'weapon-input');
-        calc_node.link_to(build_node, 'build');
-        calc_node.link_to(powder_nodes[4], 'weapon-powder');
-        calc_node.link_to(spell_node, 'spell-info');
+        calc_node.link_to(item_nodes[8], 'weapon-input').link_to(stat_agg_node, 'stats')
+            .link_to(powder_nodes[4], 'weapon-powder').link_to(spell_node, 'spell-info');
         spelldmg_nodes.push(calc_node);
 
         let display_node = new SpellDisplayNode(i);
-        display_node.link_to(build_node, 'build');
+        display_node.link_to(build_node, 'build'); // TODO: same here..
         display_node.link_to(spell_node, 'spell-info');
         display_node.link_to(calc_node, 'spell-damage');
     }
+    for (const node of edit_input_nodes) {
+        node.update();
+    }
     
-    // Create a node that binds the build to the edit ids text boxes
-    // (make it export to the textboxes)
-    // This node is a bit tricky since it has to make a "weak link" (directly mark dirty and call update() for each of the stat nodes).
-    // IMPORTANT: mark all children dirty, then update each child, in that order (2 loops). else performance issues will be bad
-    // let id_exporter_node = ...
-    // id_exporter_node.link_to(build_node, 'build')
+    let skp_output = new SkillPointSetterNode(edit_input_nodes);
+    skp_output.link_to(build_node);
 
     // call node.update() for each skillpoint node and stat edit listener node manually
     // NOTE: the text boxes for skill points are already filled out by decodeBuild() so this will fix them

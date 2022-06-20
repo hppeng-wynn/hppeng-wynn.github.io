@@ -156,7 +156,8 @@ class Build{
     }
 
     getBaseSpellCost(spellIdx, cost) {
-        // old intelligence: cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
+        // old intelligence:
+        cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
         cost += this.statMap.get("spRaw"+spellIdx);
         return Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100));
     }
@@ -206,44 +207,6 @@ class Build{
         return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd, singleHitTotal]).concat(results[3]);
     }
 
-    /*
-        Get all defensive stats for this build.
-    */
-    getDefenseStats(){
-        const stats = this.statMap;
-        let defenseStats = [];
-        let def_pct = skillPointsToPercentage(this.total_skillpoints[3]);
-        let agi_pct = skillPointsToPercentage(this.total_skillpoints[4]);
-        //total hp
-        let totalHp = stats.get("hp") + stats.get("hpBonus");
-        if (totalHp < 5) totalHp = 5;
-        defenseStats.push(totalHp);
-        //EHP
-        let ehp = [totalHp, totalHp];
-        let defMult = classDefenseMultipliers.get(this.weapon.statMap.get("type"));
-        ehp[0] /= (1-def_pct)*(1-agi_pct)*(2-defMult);
-        ehp[1] /= (1-def_pct)*(2-defMult);
-        defenseStats.push(ehp);
-        //HPR
-        let totalHpr = rawToPct(stats.get("hprRaw"), stats.get("hprPct")/100.);
-        defenseStats.push(totalHpr);
-        //EHPR
-        let ehpr = [totalHpr, totalHpr];
-        ehpr[0] /= (1-def_pct)*(1-agi_pct)*(2-defMult); 
-        ehpr[1] /= (1-def_pct)*(2-defMult); 
-        defenseStats.push(ehpr);
-        //skp stats
-        defenseStats.push([ def_pct*100, agi_pct*100]);
-        //eledefs - TODO POWDERS
-        let eledefs = [0, 0, 0, 0, 0];
-        for(const i in skp_elements){ //kinda jank but ok
-            eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), stats.get(skp_elements[i] + "DefPct")/100.);
-        }
-        defenseStats.push(eledefs);
-        
-        //[total hp, [ehp w/ agi, ehp w/o agi], total hpr, [ehpr w/ agi, ehpr w/o agi], [def%, agi%], [edef,tdef,wdef,fdef,adef]]
-        return defenseStats;
-    }
 
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The build itself should be valid. No checking of validity of pieces is done here.

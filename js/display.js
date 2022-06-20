@@ -50,7 +50,7 @@ function displaySetBonuses(parent_id,build) {
         const bonus = active_set.bonuses[count-1];
         let mock_item = new Map();
         mock_item.set("fixID", true);
-        mock_item.set("displayName", setName+" Set: "+count+"/"+sets[setName].items.length);
+        mock_item.set("displayName", setName+" Set: "+count+"/"+sets.get(setName).items.length);
         let mock_minRolls = new Map();
         let mock_maxRolls = new Map();
         mock_item.set("minRolls", mock_minRolls);
@@ -70,7 +70,7 @@ function displaySetBonuses(parent_id,build) {
     }
 }
 
-function displayBuildStats(parent_id,build,command_group){
+function displayBuildStats(parent_id,build,command_group,stats){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
     // !elemental is some janky hack for elemental damage.
@@ -82,8 +82,6 @@ function displayBuildStats(parent_id,build,command_group){
     if (parent_div != null) {
         setHTML(parent_id, "");
     }
-
-    let stats = build.statMap;
     
     let active_elem;
     let elemental_format = false;
@@ -96,7 +94,7 @@ function displayBuildStats(parent_id,build,command_group){
         
         if (command.charAt(0) === "#") {
             if (command === "#defense-stats") {
-                displayDefenseStats(parent_div, build, true);
+                displayDefenseStats(parent_div, stats, true);
             }
         }
         if (command.charAt(0) === "!") {
@@ -126,7 +124,7 @@ function displayBuildStats(parent_id,build,command_group){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (id === "poison" && id_val > 0) {
-                    id_val = Math.ceil(id_val*build.statMap.get("poisonPct")/100);
+                    id_val = Math.ceil(id_val*stats.get("poisonPct")/100);
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
@@ -140,7 +138,7 @@ function displayBuildStats(parent_id,build,command_group){
                     prefix_elem.textContent = "\u279C With Strength: ";
                     let number_elem = document.createElement('b');
                     number_elem.classList.add(style);
-                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(build.total_skillpoints[0])) ).toFixed(0) + idSuffixes[id];
+                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id];
                     value_elem.append(prefix_elem);
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
@@ -156,7 +154,7 @@ function displayBuildStats(parent_id,build,command_group){
                     let prefix_elem = document.createElement('b');
                     prefix_elem.textContent = "\u279C Effective LS: ";
 
-                    let defStats = build.getDefenseStats();
+                    let defStats = getDefenseStats(stats);
                     let number_elem = document.createElement('b');
                     number_elem.classList.add(style);
                     number_elem.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s";
@@ -1253,8 +1251,8 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     parent_elem.append(critStats);
 }
 
-function displayDefenseStats(parent_elem, build, insertSummary){
-    let defenseStats = build.getDefenseStats();
+function displayDefenseStats(parent_elem, statMap, insertSummary){
+    let defenseStats = getDefenseStats(statMap);
     insertSummary = (typeof insertSummary !== 'undefined') ? insertSummary : false;
     if (!insertSummary) {
         parent_elem.textContent = "";
@@ -1297,7 +1295,7 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         statsTable.appendChild(hpRow);
     }
 
-    let defMult = build.statMap.get("defMult");
+    let defMult = statMap.get("defMult");
     if (!defMult) {defMult = 1}
 
     //EHP
@@ -1409,8 +1407,8 @@ function displayDefenseStats(parent_elem, build, insertSummary){
         boost.classList.add("col");
         boost.classList.add("text-end");
 
-        let defRaw = build.statMap.get("defRaw")[i];
-        let defPct = build.statMap.get("defBonus")[i]/100;
+        let defRaw = statMap.get("defRaw")[i];
+        let defPct = statMap.get("defBonus")[i]/100;
         if (defRaw < 0) {
             defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
         } else {
