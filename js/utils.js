@@ -163,26 +163,13 @@ Base64 = (function () {
      */
     constructor(data, length) {
 
-        /** @private
-         *  @type {UInt8Array}
-         */
-        if (length) {
-            if (typeof data === "string") {
-                this.bits = Uint8Array();
-            } else if (typeof data === "number") {
-                this.bits = Uint8Array();
-            }
-        } else {
-            if (typeof data === "string") {
-                this.bits = Uint8Array();
-            } else if (typeof data === "number") {
-                this.bits = Uint8Array();
-            }
-        }
+        this.bitvector = NumberInt();
 
         
     }
 }
+
+let bitv = new BitVector(123123, 1);
 
 /*
     Turns a raw stat and a % stat into a final stat on the basis that - raw and >= 100% becomes 0 and + raw and <=-100% becomes negative.
