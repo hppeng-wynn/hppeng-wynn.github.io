@@ -941,46 +941,45 @@ function displayExpandedIngredient(ingred, parent_id) {
     }    
 }
 
-function displayNextCosts(spell, build, weapon) { 
-    let int = build.total_skillpoints[2];
-    let spells = spell_table[weapon.get("type")];
+function displayNextCosts(_stats, spell, spellIdx) { 
+    let stats = new Map(_stats);
+    let intel = stats.get('int');
 
     let row = document.createElement("div");
     row.classList.add("spellcost-tooltip");
     let init_cost = document.createElement("b");
-    init_cost.textContent = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost);
+    init_cost.textContent = getSpellCost(stats, spellIdx, spell.cost);
     init_cost.classList.add("Mana");
     let arrow = document.createElement("b");
     arrow.textContent = "\u279C";
     let next_cost = document.createElement("b");
-    next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1);
+    next_cost.textContent = (init_cost.textContent === "1" ? 1 : getSpellCost(stats, spellIdx, spell.cost) - 1);
     next_cost.classList.add("Mana");
     let int_needed = document.createElement("b");
     if (init_cost.textContent === "1") {
         int_needed.textContent = ": n/a (+0)";
     }else { //do math
-        let target = build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) - 1;
-        let needed = int;
+        let target = getSpellCost(stats, spellIdx, spell.cost) - 1;
+        let needed = intel;
         let noUpdate = false;
         //forgive me... I couldn't inverse ceil, floor, and max.
-        while (build.getSpellCost(spells.indexOf(spell) + 1, spell.cost) > target) {
+        while (getSpellCost(stats, spellIdx, spell.cost) > target) {
             if(needed > 150) {
                 noUpdate = true;
                 break;
             }
             needed++;
-            build.total_skillpoints[2] = needed;
+            stats.set('int', stats.get('int') + 1);
         }
-        let missing = needed - int;  
+        let missing = needed - intel;  
         //in rare circumstances, the next spell cost can jump.
         if (noUpdate) {
-            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)-1); 
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : getSpellCost(stats, spellIdx, spell.cost)-1); 
         }else {
-            next_cost.textContent = (init_cost.textContent === "1" ? 1 : build.getSpellCost(spells.indexOf(spell) + 1, spell.cost)); 
+            next_cost.textContent = (init_cost.textContent === "1" ? 1 : getSpellCost(stats, spellIdx, spell.cost)); 
         }
         
         
-        build.total_skillpoints[2] = int;//forgive me pt 2
         int_needed.textContent = ": " + (needed > 150 ? ">150" : needed) + " int (+" + (needed > 150 ? "n/a" : missing) + ")"; 
     }
     
@@ -1583,12 +1582,23 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
     }
 }
 
-function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spellIdx, spell_parts, damages) {
+function getSpellCost(stats, spellIdx, cost) {
+    return Math.max(1, getBaseSpellCost(stats, spellIdx, cost));
+}
+
+function getBaseSpellCost(stats, spellIdx, cost) {
+    // old intelligence:
+    cost = Math.ceil(cost * (1 - skillPointsToPercentage(stats.get('int'))));
+    cost += stats.get("spRaw"+spellIdx);
+    return Math.floor(cost * (1 + stats.get("spPct"+spellIdx) / 100));
+}
+    
+
+function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spellIdx, spell_parts, damages) {
     // TODO: remove spellIdx (just used to flag melee and cost)
     // TODO: move cost calc out
     parent_elem.textContent = "";
 
-    const stats = build.statMap;
     let title_elem = document.createElement("p");
 
     overallparent_elem.textContent = "";
@@ -1601,21 +1611,15 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         title_elemavg.appendChild(first);
 
         let second = document.createElement("span");
-        second.textContent = build.getSpellCost(spellIdx, spell.cost);
+        second.textContent = getSpellCost(stats, spellIdx, spell.cost);
         second.classList.add("Mana");
-
-        let int_redux = skillPointsToPercentage(build.total_skillpoints[2]).toFixed(2);
-        let spPct_redux = (build.statMap.get("spPct" + spellIdx)/100).toFixed(2);
-        let spRaw_redux = (build.statMap.get("spRaw" + spellIdx)).toFixed(2);
-        spPct_redux >= 0 ? spPct_redux = "+ " + spPct_redux : spPct_redux = "- " + Math.abs(spPct_redux);
-        spRaw_redux >= 0 ? spRaw_redux = "+ " + spRaw_redux : spRaw_redux = "- " + Math.abs(spRaw_redux);
 
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
         
 
         let third = document.createElement("span");
-        third.textContent = ") [Base: " + build.getBaseSpellCost(spellIdx, spell.cost) + " ]";
+        third.textContent = ") [Base: " + getBaseSpellCost(stats, spellIdx, spell.cost) + " ]";
         title_elem.appendChild(third);
         let third_summary = document.createElement("span");
         third_summary.textContent = ")";
@@ -1629,9 +1633,9 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
     parent_elem.append(title_elem);
     overallparent_elem.append(title_elemavg);
 
-    overallparent_elem.append(displayNextCosts(spell, build, build.weapon.statMap));
+    overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
 
-    let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
+    let critChance = skillPointsToPercentage(stats.get('dex'));
 
     let save_damages = [];
 
@@ -1650,7 +1654,6 @@ function displaySpellDamage(parent_elem, overallparent_elem, build, spell, spell
         part_div.append(subtitle_elem);
 
         if (part.type === "damage") {
-            //console.log(build.expandedStats);
             let _results = damage;
             let totalDamNormal = _results[0];
             let totalDamCrit = _results[1];

@@ -105,7 +105,7 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
     let staticBoost = (pctModifier / 100.);
     let skillBoost = [0];
     for (let i in total_skillpoints) {
-        skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get("damageBonus")[i] / 100.);
+        skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get(skp_elements[i]+"DamPct") / 100.);
     }
 
     for (let i in damages) {

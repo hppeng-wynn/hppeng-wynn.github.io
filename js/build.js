@@ -149,64 +149,6 @@ class Build{
         return [this.equipment,this.weapon,this.tomes].flat();
     }
 
-    /* Getters */
-
-    getSpellCost(spellIdx, cost) {
-        return Math.max(1, this.getBaseSpellCost(spellIdx, cost));
-    }
-
-    getBaseSpellCost(spellIdx, cost) {
-        // old intelligence:
-        cost = Math.ceil(cost * (1 - skillPointsToPercentage(this.total_skillpoints[2])));
-        cost += this.statMap.get("spRaw"+spellIdx);
-        return Math.floor(cost * (1 + this.statMap.get("spPct"+spellIdx) / 100));
-    }
-    
-
-    /*  Get melee stats for build.
-        Returns an array in the order:
-    */
-    getMeleeStats(){
-        const stats = this.statMap;
-        const weapon_stats = this.weapon.statMap;
-        if (weapon_stats.get("tier") === "Crafted") {
-            stats.set("damageBases", [weapon_stats.get("nDamBaseHigh"),weapon_stats.get("eDamBaseHigh"),weapon_stats.get("tDamBaseHigh"),weapon_stats.get("wDamBaseHigh"),weapon_stats.get("fDamBaseHigh"),weapon_stats.get("aDamBaseHigh")]);
-        }
-        let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
-        if(adjAtkSpd > 6){
-            adjAtkSpd = 6;
-        }else if(adjAtkSpd < 0){
-            adjAtkSpd = 0;
-        }
-
-        let damage_mult = 1;
-        if (weapon_stats.get("type") === "relik") {
-            damage_mult = 0.99; // CURSE YOU WYNNCRAFT
-            //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
-            //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
-        }
-        // 0spellmult for melee damage.
-        let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, this.weapon.statMap, this.total_skillpoints, damage_mult * this.damageMultiplier);
-        
-        let dex = this.total_skillpoints[1];
-
-        let totalDamNorm = results[0];
-        let totalDamCrit = results[1];
-        totalDamNorm.push(1-skillPointsToPercentage(dex));
-        totalDamCrit.push(skillPointsToPercentage(dex));
-        let damages_results = results[2];
-        
-        let singleHitTotal = ((totalDamNorm[0]+totalDamNorm[1])*(totalDamNorm[2])
-                            +(totalDamCrit[0]+totalDamCrit[1])*(totalDamCrit[2]))/2;
-
-        //Now do math
-        let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * baseDamageMultiplier[adjAtkSpd];
-        let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
-        let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex)));
-        //[[n n n n] [e e e e] [t t t t] [w w w w] [f f f f] [a a a a] [lowtotal hightotal normalChance] [critlowtotal crithightotal critChance] normalDPS critCPS averageDPS adjAttackSpeed, singleHit] 
-        return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd, singleHitTotal]).concat(results[3]);
-    }
-
 
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The build itself should be valid. No checking of validity of pieces is done here.

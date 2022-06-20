@@ -260,7 +260,6 @@ class PowderInputNode extends InputNode {
             }
             input = input.slice(2);
         }
-        //console.log("POWDERING: " + powdering);
         return powdering;
     }
 }
@@ -407,7 +406,7 @@ class SpellDisplayNode extends ComputeNode {
     }
 
     compute_func(input_map) {
-        const build = input_map.get('build');
+        const stats = input_map.get('stats');
         const spell_info = input_map.get('spell-info');
         const damages = input_map.get('spell-damage');
         const spell = spell_info[0];
@@ -416,8 +415,58 @@ class SpellDisplayNode extends ComputeNode {
         const i = this.spell_idx;
         let parent_elem = document.getElementById("spell"+i+"-info");
         let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
-        displaySpellDamage(parent_elem, overallparent_elem, build, spell, i+1, spell_parts, damages);
+        displaySpellDamage(parent_elem, overallparent_elem, stats, spell, i+1, spell_parts, damages);
     }
+}
+
+/*  Get melee stats for build.
+    Returns an array in the order:
+*/
+function getMeleeStats(stats, weapon) {
+    const weapon_stats = weapon.statMap;
+    const skillpoints = [
+            stats.get('str'),
+            stats.get('dex'),
+            stats.get('int'),
+            stats.get('def'),
+            stats.get('agi')
+        ];
+    if (weapon_stats.get("tier") === "Crafted") {
+        stats.set("damageBases", [weapon_stats.get("nDamBaseHigh"),weapon_stats.get("eDamBaseHigh"),weapon_stats.get("tDamBaseHigh"),weapon_stats.get("wDamBaseHigh"),weapon_stats.get("fDamBaseHigh"),weapon_stats.get("aDamBaseHigh")]);
+    }
+    let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+    if(adjAtkSpd > 6){
+        adjAtkSpd = 6;
+    }else if(adjAtkSpd < 0){
+        adjAtkSpd = 0;
+    }
+
+    let damage_mult = 1;
+    if (weapon_stats.get("type") === "relik") {
+        damage_mult = 0.99; // CURSE YOU WYNNCRAFT
+        //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
+        //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
+    }
+    // 0spellmult for melee damage.
+    let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, weapon_stats, skillpoints, damage_mult);
+    
+    let dex = skillpoints[1];
+
+    let totalDamNorm = results[0];
+    let totalDamCrit = results[1];
+    totalDamNorm.push(1-skillPointsToPercentage(dex));
+    totalDamCrit.push(skillPointsToPercentage(dex));
+    let damages_results = results[2];
+    
+    let singleHitTotal = ((totalDamNorm[0]+totalDamNorm[1])*(totalDamNorm[2])
+                        +(totalDamCrit[0]+totalDamCrit[1])*(totalDamCrit[2]))/2;
+
+    //Now do math
+    let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * baseDamageMultiplier[adjAtkSpd];
+    let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
+    let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex)));
+    //[[n n n n] [e e e e] [t t t t] [w w w w] [f f f f] [a a a a] [lowtotal hightotal normalChance] [critlowtotal crithightotal critChance] normalDPS critCPS averageDPS adjAttackSpeed, singleHit] 
+    return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd, singleHitTotal]).concat(results[3]);
 }
 
 /**
@@ -434,7 +483,9 @@ class BuildDisplayNode extends ComputeNode {
         displayBuildStats('overall-stats', build, build_all_display_commands, stats);
         displayBuildStats("offensive-stats", build, build_offensive_display_commands, stats);
         displaySetBonuses("set-info", build);
-        let meleeStats = build.getMeleeStats();
+        let meleeStats = getMeleeStats(stats, build.weapon);
+        // TODO: move weapon out?
+        console.log(meleeStats);
         displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
 
         displayDefenseStats(document.getElementById("defensive-stats"), stats);
@@ -541,7 +592,6 @@ class DisplayBuildWarningsNode extends ComputeNode {
         }
         for (const [setName, count] of build.activeSetCounts) {
             const bonus = sets.get(setName).bonuses[count-1];
-            // console.log(setName);
             if (bonus["illegal"]) {
                 let setWarning = document.createElement("p");
                 setWarning.classList.add("itemp");
@@ -606,7 +656,6 @@ class SkillPointSetterNode extends ComputeNode {
     }
 
     compute_func(input_map) {
-        console.log("mmm");
         if (input_map.size !== 1) { throw "SkillPointSetterNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const [idx, elem] of skp_order.entries()) {
@@ -656,6 +705,7 @@ class SumNumberInputNode extends InputNode {
 let item_nodes = [];
 let powder_nodes = [];
 let spelldmg_nodes = [];
+let edit_input_nodes = [];
 
 function builder_graph_init() {
     // Phase 1/2: Set up item input, propagate updates, etc.
@@ -714,7 +764,6 @@ function builder_graph_init() {
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
     let stat_agg_node = new AggregateStatsNode();
     stat_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
-    let edit_input_nodes = [];
     for (const field of editable_item_fields) {
         // Create nodes that listens to each editable id input, the node name should match the "id"
         const elem = document.getElementById(field);
@@ -753,7 +802,7 @@ function builder_graph_init() {
         spelldmg_nodes.push(calc_node);
 
         let display_node = new SpellDisplayNode(i);
-        display_node.link_to(build_node, 'build'); // TODO: same here..
+        display_node.link_to(stat_agg_node, 'stats'); // TODO: same here..
         display_node.link_to(spell_node, 'spell-info');
         display_node.link_to(calc_node, 'spell-damage');
     }
