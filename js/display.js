@@ -1,18 +1,3 @@
-/**
- * Apply armor powders.
- * Encoding shortcut assumes that all powders give +def to one element
- * and -def to the element "behind" it in cycle ETWFA, which is true
- * as of now and unlikely to change in the near future.
- */
-function applyArmorPowders(expandedItem, powders) {
-    for(const id of powders){
-        let powder = powderStats[id];
-        let name = powderNames.get(id).charAt(0);
-        let prevName = skp_elements[(skp_elements.indexOf(name) + 4 )% 5];
-        expandedItem.set(name+"Def", (expandedItem.get(name+"Def") || 0) + powder["defPlus"]);
-        expandedItem.set(prevName+"Def", (expandedItem.get(prevName+"Def") || 0) - powder["defMinus"]);
-    }
-}
 
 function apply_elemental_format(p_elem, id, suffix) {
     suffix = (typeof suffix !== 'undefined') ?  suffix : "";
@@ -192,6 +177,11 @@ function displayExpandedItem(item, parent_id){
     if (item.get("category") === "weapon") {
         let stats = new Map();
         stats.set("atkSpd", item.get("atkSpd"));
+        stats.set("eDamPct", 0);
+        stats.set("tDamPct", 0);
+        stats.set("wDamPct", 0);
+        stats.set("fDamPct", 0);
+        stats.set("aDamPct", 0);
         stats.set("damageBonus", [0, 0, 0, 0, 0]);
 
         //SUPER JANK @HPP PLS FIX
@@ -991,9 +981,15 @@ function displayNextCosts(_stats, spell, spellIdx) {
 }
 
 function displayRolledID(item, id, elemental_format) {
-    let row = document.createElement('tr');
-    let min_elem = document.createElement('td');
-    min_elem.classList.add('left');
+    let row = document.createElement('div');
+    row.classList.add('col');
+
+    let item_div = document.createElement('div');
+    item_div.classList.add('row');
+
+    let min_elem = document.createElement('div');
+    min_elem.classList.add('col', 'text-start');
+    min_elem.style.cssText += "flex-grow: 0";
     let id_min = item.get("minRolls").get(id)
     let style = id_min < 0 ? "negative" : "positive";
     if(reversedIDs.includes(id)){
@@ -1001,10 +997,11 @@ function displayRolledID(item, id, elemental_format) {
     }
     min_elem.classList.add(style);
     min_elem.textContent = id_min + idSuffixes[id];
-    row.appendChild(min_elem);
+    item_div.appendChild(min_elem);
 
-    let desc_elem = document.createElement('td');
-    desc_elem.classList.add('center');
+    let desc_elem = document.createElement('div');
+    desc_elem.classList.add('col', 'text-center');//, 'text-nowrap');
+    desc_elem.style.cssText += "flex-grow: 1";
     //TODO elemental format jank
     if (elemental_format) {
         apply_elemental_format(desc_elem, id);
@@ -1012,18 +1009,20 @@ function displayRolledID(item, id, elemental_format) {
     else {
         desc_elem.textContent = idPrefixes[id];
     }
-    row.appendChild(desc_elem);
+    item_div.appendChild(desc_elem);
 
-    let max_elem = document.createElement('td');
+    let max_elem = document.createElement('div');
     let id_max = item.get("maxRolls").get(id)
-    max_elem.classList.add('right');
+    max_elem.classList.add('col', 'text-end');
+    max_elem.style.cssText += "flex-grow: 0";
     style = id_max < 0 ? "negative" : "positive";
-    if(reversedIDs.includes(id)){
+    if (reversedIDs.includes(id)) {
         style === "positive" ? style = "negative" : style = "positive"; 
     }
     max_elem.classList.add(style);
     max_elem.textContent = id_max + idSuffixes[id];
-    row.appendChild(max_elem);
+    item_div.appendChild(max_elem);
+    row.appendChild(item_div);
     return row;
 }
 
@@ -1458,55 +1457,60 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
     }
 }
 
-function displayPowderSpecials(parent_elem, powderSpecials, build) {
-    parent_elem.textContent = "Powder Specials";
+function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overall=false) {
+    const skillpoints = [
+        stats.get('str'),
+        stats.get('dex'),
+        stats.get('int'),
+        stats.get('def'),
+        stats.get('agi')
+    ];
+    parent_elem.textContent = ""
+    let title = document.createElement("b");
+    title.textContent = "Powder Specials";
+    parent_elem.appendChild(title);
     let specials = powderSpecials.slice();
-    let stats = build.statMap;
     let expandedStats = new Map();
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
         //iterate through the special and display its effects.
         let powder_special = document.createElement("p");
-        powder_special.classList.add("left");
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
         let specialTitle = document.createElement("p");
         let specialEffects = document.createElement("p");
-        specialTitle.classList.add("left");
-        specialTitle.classList.add("itemp");
         specialTitle.classList.add(damageClasses[powderSpecialStats.indexOf(special[0]) + 1]);
-        specialEffects.classList.add("left");
-        specialEffects.classList.add("itemp");
-        specialEffects.classList.add("nocolor");
         let effects = special[0]["weaponSpecialEffects"];
         let power = special[1];
         specialTitle.textContent = special[0]["weaponSpecialName"] + " " + Math.floor((power-1)*0.5 + 4) + (power % 2 == 0 ? ".5" : "");  
-        for (const [key,value] of effects) {
-            let effect = document.createElement("p");
-            effect.classList.add("itemp");
-            effect.textContent += key + ": " + value[power-1] + specialSuffixes.get(key);
-            if(key === "Damage"){
-                effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
-            }
-            if(special[0]["weaponSpecialName"] === "Wind Prison" && key === "Damage Boost") {
-                effect.textContent += " (only 1st hit)";
-            }
-            specialEffects.appendChild(effect);
-        }
 
+        if (!overall || powderSpecialStats.indexOf(special[0]) == 2 || powderSpecialStats.indexOf(special[0]) == 3 || powderSpecialStats.indexOf(special[0]) == 4) {
+            for (const [key,value] of effects) {
+                let effect = document.createElement("p");
+                effect.textContent += key + ": " + value[power-1] + specialSuffixes.get(key);
+                if(key === "Damage"){
+                    effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
+                }
+                if(special[0]["weaponSpecialName"] === "Wind Prison" && key === "Damage Boost") {
+                    effect.textContent += " (only 1st hit)";
+                }
+                specialEffects.appendChild(effect);
+            }
+        }
         powder_special.appendChild(specialTitle);
         powder_special.appendChild(specialEffects);
 
         //if this special is an instant-damage special (Quake, Chain Lightning, Courage Burst), display the damage.
         let specialDamage = document.createElement("p");
+        // specialDamage.classList.add("item-margin");
         let spells = spell_table["powder"];
         if (powderSpecialStats.indexOf(special[0]) == 0 || powderSpecialStats.indexOf(special[0]) == 1 || powderSpecialStats.indexOf(special[0]) == 3) { //Quake, Chain Lightning, or Courage
             let spell = (powderSpecialStats.indexOf(special[0]) == 3 ? spells[2] : spells[powderSpecialStats.indexOf(special[0])]);
             let part = spell["parts"][0];
             let _results = calculateSpellDamage(stats, part.conversion,
-                stats.get("mdRaw"), stats.get("mdPct") + build.externalStats.get("mdPct"), 
-                0, build.weapon, build.total_skillpoints, build.damageMultiplier * ((part.multiplier[power-1] / 100)), build.externalStats);//part.multiplier[power] / 100
+                stats.get("mdRaw"), stats.get("mdPct"), 
+                0, weapon, skillpoints, stats.get('damageMultiplier') * ((part.multiplier[power-1] / 100)));//part.multiplier[power] / 100
 
-            let critChance = skillPointsToPercentage(build.total_skillpoints[1]);
+            let critChance = skillPointsToPercentage(skillpoints[1]);
             let save_damages = [];
             
             let totalDamNormal = _results[0];
@@ -1521,59 +1525,69 @@ function displayPowderSpecials(parent_elem, powderSpecials, build) {
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
             let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
 
-            let averageLabel = document.createElement("p");
-            averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
-            averageLabel.classList.add("damageSubtitle");
-            specialDamage.append(averageLabel);
-
-
-            let nonCritLabel = document.createElement("p");
-            nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
-            nonCritLabel.classList.add("damageSubtitle");
-            specialDamage.append(nonCritLabel);
+            let averageWrap = document.createElement("p");
+            let averageLabel = document.createElement("span");
+            averageLabel.textContent = "Average: ";
             
-            for (let i = 0; i < 6; i++){
-                if (results[i][1] > 0){
-                    let p = document.createElement("p");
-                    p.classList.add("damagep");
-                    p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][0]+"-"+results[i][1];
-                    specialDamage.append(p);
-                }
-            }
-            let normalDamage = document.createElement("p");
-            normalDamage.textContent = "Total: " + totalDamNormal[0].toFixed(2) + "-" + totalDamNormal[1].toFixed(2);
-            normalDamage.classList.add("itemp");
-            specialDamage.append(normalDamage);
+            let averageLabelDmg = document.createElement("span");
+            averageLabelDmg.classList.add("Damage");
+            averageLabelDmg.textContent = averageDamage.toFixed(2);
 
-            let nonCritChanceLabel = document.createElement("p");
-            nonCritChanceLabel.textContent = "Non-Crit Chance: " + ((1-critChance)*100).toFixed(2)  + "%";
-            specialDamage.append(nonCritChanceLabel);
-
-            let critLabel = document.createElement("p");
-            critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
-            critLabel.classList.add("damageSubtitle");
+            averageWrap.appendChild(averageLabel);
+            averageWrap.appendChild(averageLabelDmg);
+            specialDamage.appendChild(averageWrap);
             
-            specialDamage.append(critLabel);
-            for (let i = 0; i < 6; i++){
-                if (results[i][1] > 0){
-                    let p = document.createElement("p");
-                    p.classList.add("damagep");
-                    p.classList.add(damageClasses[i]);
-                    p.textContent = results[i][2]+"-"+results[i][3];
-                    specialDamage.append(p);
+            if (!overall) {
+                let nonCritLabel = document.createElement("p");
+                nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
+                nonCritLabel.classList.add("damageSubtitle");
+                nonCritLabel.classList.add("item-margin");
+                specialDamage.append(nonCritLabel);
+                
+                for (let i = 0; i < 6; i++){
+                    if (results[i][1] > 0){
+                        let p = document.createElement("p");
+                        p.classList.add("damagep");
+                        p.classList.add(damageClasses[i]);
+                        p.textContent = results[i][0]+"-"+results[i][1];
+                        specialDamage.append(p);
+                    }
                 }
+                let normalDamage = document.createElement("p");
+                normalDamage.textContent = "Total: " + totalDamNormal[0].toFixed(2) + "-" + totalDamNormal[1].toFixed(2);
+                normalDamage.classList.add("itemp");
+                specialDamage.append(normalDamage);
+
+                let nonCritChanceLabel = document.createElement("p");
+                nonCritChanceLabel.textContent = "Non-Crit Chance: " + ((1-critChance)*100).toFixed(2)  + "%";
+                specialDamage.append(nonCritChanceLabel);
+
+                let critLabel = document.createElement("p");
+                critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
+                critLabel.classList.add("damageSubtitle");
+                critLabel.classList.add("item-margin");
+                
+                specialDamage.append(critLabel);
+                for (let i = 0; i < 6; i++){
+                    if (results[i][1] > 0){
+                        let p = document.createElement("p");
+                        p.classList.add("damagep");
+                        p.classList.add(damageClasses[i]);
+                        p.textContent = results[i][2]+"-"+results[i][3];
+                        specialDamage.append(p);
+                    }
+                }
+                let critDamage = document.createElement("p");
+                critDamage.textContent = "Total: " + totalDamCrit[0].toFixed(2) + "-" + totalDamCrit[1].toFixed(2);
+                critDamage.classList.add("itemp");
+                specialDamage.append(critDamage);
+
+                let critChanceLabel = document.createElement("p");
+                critChanceLabel.textContent = "Crit Chance: " + (critChance*100).toFixed(2) + "%";
+                specialDamage.append(critChanceLabel);
+
+                save_damages.push(averageDamage);
             }
-            let critDamage = document.createElement("p");
-            critDamage.textContent = "Total: " + totalDamCrit[0].toFixed(2) + "-" + totalDamCrit[1].toFixed(2);
-            critDamage.classList.add("itemp");
-            specialDamage.append(critDamage);
-
-            let critChanceLabel = document.createElement("p");
-            critChanceLabel.textContent = "Crit Chance: " + (critChance*100).toFixed(2) + "%";
-            specialDamage.append(critChanceLabel);
-
-            save_damages.push(averageDamage);
 
             powder_special.append(specialDamage);
         } 

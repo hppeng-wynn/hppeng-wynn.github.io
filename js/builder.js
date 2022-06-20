@@ -69,20 +69,48 @@ function loadBuild() {
 }
 
 function resetFields(){
-    for (let i in powderInputs) {
-        setValue(powderInputs[i], "");
+    for (const i of powder_inputs) {
+        setValue(i, "");
     }
-    for (let i in equipmentInputs) {
-        setValue(equipmentInputs[i], "");
+    for (const i of equipment_inputs) {
+        setValue(i, "");
     }
     setValue("str-skp", "0");
     setValue("dex-skp", "0");
     setValue("int-skp", "0");
     setValue("def-skp", "0");
     setValue("agi-skp", "0");
+    for (const special_name of specialNames) {
+        for (let i = 1; i < 6; i++) { //toggle all pressed buttons of the same powder special off
+            //name is same, power is i
+            let elem = document.getElementById(special_name.replace(" ", "_")+'-'+i);
+            if (elem.classList.contains("toggleOn")) {
+                elem.classList.remove("toggleOn");
+            }
+        }
+    }
+    for (const [key, value] of damageMultipliers) {
+        let elem = document.getElementById(key + "-boost")
+        if (elem.classList.contains("toggleOn")) {
+            elem.classList.remove("toggleOn");
+        }
+    }
+
+    const nodes_to_reset = item_nodes.concat(powder_nodes.concat(edit_input_nodes));
+    for (const node of nodes_to_reset) {
+        node.mark_dirty();
+    }
+    powder_special_input.mark_dirty();
+    boosts_node.mark_dirty();
+
+    for (const node of nodes_to_reset) {
+        node.update();
+    }
+    powder_special_input.update();
+    boosts_node.update();
+
     setValue("level-choice", "106");
     location.hash = "";
-    calculateBuild();
 }
 
 function toggleID() {
@@ -130,6 +158,15 @@ function toggle_spell_tab(tab) {
     }
 }
 
+function toggle_boost_tab(tab) {
+    for (const i of skp_order) {
+        document.querySelector("#"+i+"-boost").style.display = "none";
+        document.getElementById(i + "-boost-tab").classList.remove("selected-btn");
+    }
+    document.querySelector("#"+tab+"-boost").style.display = "";
+    document.getElementById(tab + "-boost-tab").classList.add("selected-btn");
+
+}
 
 let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
 function show_tab(tab) {

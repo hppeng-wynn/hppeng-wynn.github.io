@@ -84,7 +84,7 @@ let tome_names = [
     "Armor Tome",
     "Guild Tome",
 ]
-let equipmentInputs = equipment_fields.map(x => x + "-choice");
+let equipment_inputs = equipment_fields.map(x => x + "-choice");
 let build_fields = equipment_fields.map(x => x+"-tooltip");
 let tomeInputs = tome_fields.map(x => x + "-choice");
 

@@ -307,7 +307,7 @@
                                                 <input class="equipment-input text-light form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
                                             </div>
                                             <div class="col-auto px-1 text-nowrap scaled-font">
-                                                <button class="button fw-bold text-light dark-5 scaled-font rounded" id="reset-button" onclick="sq2ResetFields()">Reset</button>
+                                                <button class="button fw-bold text-light dark-5 scaled-font rounded" id="reset-button" onclick="resetFields()">Reset</button>
                                             </div>
                                         </div>
                                         <div class="row align-items-center justify-content-center my-1">
@@ -944,27 +944,27 @@
                                     <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                         <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="updateBoosts('vanish-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="updateBoosts('vanish-boost')">
                                                     Vanish (+80%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="updateBoosts('warscream-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="updateBoosts('warscream-boost')">
                                                     War Scream (+10%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="updateBoosts('yourtotem-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="updateBoosts('yourtotem-boost')">
                                                     Your Totem (+35%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="updateBoosts('allytotem-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="updateBoosts('allytotem-boost')">
                                                     Ally Totem (+15%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="updateBoosts('bash-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="updateBoosts('bash-boost')">
                                                     Bash (+50%)
                                                 </button>
                                             </div>
@@ -1001,27 +1001,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1')">
                                                             Lv.4 [e4e4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2')">
                                                             Lv.4.5 [e5e4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3')">
                                                             Lv.5 [e5e5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4')">
                                                             Lv.5.5 [e6e5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5')">
                                                             Lv.6 [e6e6]
                                                         </button>
                                                     </div>
@@ -1031,7 +1031,7 @@
                                                 Rage (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "updateArmorPowderSpecials('str_boost_armor', true)">
+                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "updateArmorPowderSpecials('str_boost_armor')">
                                                 <input type="text" id="str_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "str_boost_armor_label" for="str-boost-armor">% Earth Dmg Boost: 0</label>
                                             </div>
@@ -1045,27 +1045,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1')">
                                                             Lv.4 [t4t4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2')">
                                                             Lv.4.5 [t5t4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3')">
                                                             Lv.5 [t5t5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4')">
                                                             Lv.5.5 [t6t5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5')">
                                                             Lv.6 [t6t6]
                                                         </button>
                                                     </div>
@@ -1075,7 +1075,7 @@
                                                 Kill Streak (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('dex_boost_armor', true)">
+                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('dex_boost_armor')">
                                                 <input type="text" id="dex_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "dex_boost_armor_label" for="dex-boost-armor">% Thunder Dmg Boost: 0</label>
                                             </div>
@@ -1089,27 +1089,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1')">
                                                             Lv.4 [w4w4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2')">
                                                             Lv.4.5 [w5w4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3')">
                                                             Lv.5 [w5w5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4')">
                                                             Lv.5.5 [w6w5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5')">
                                                             Lv.6 [w6w6]
                                                         </button>
                                                     </div>
@@ -1119,7 +1119,7 @@
                                                 Concentration (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('int_boost_armor', true)">
+                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('int_boost_armor')">
                                                 <input type="text" id="int_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "int_boost_armor_label" for="dex-boost-armor">% Water Dmg Boost: 0</label>
                                             </div>
@@ -1133,27 +1133,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1')">
                                                             Lv.4 [f4f4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2')">
                                                             Lv.4.5 [f5f4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3')">
                                                             Lv.5 [f5f5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4')">
                                                             Lv.5.5 [f6f5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5')">
                                                             Lv.6 [f6f6]
                                                         </button>
                                                     </div>
@@ -1163,7 +1163,7 @@
                                                 Endurance (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('def_boost_armor', true)">
+                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('def_boost_armor')">
                                                 <input type="text" id="def_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "def_boost_armor_label" for="def-boost-armor">% Fire Dmg Boost: 0</label>
                                             </div>
@@ -1177,27 +1177,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1')">
                                                             Lv.4 [a4a4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2')">
                                                             Lv.4.5 [a5a4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3')">
                                                             Lv.5 [a5a5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4')">
                                                             Lv.5.5 [a6a5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5')">
                                                             Lv.6 [a6a6]
                                                         </button>
                                                     </div>
@@ -1207,7 +1207,7 @@
                                                 Dodge (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('agi_boost_armor', true)">
+                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('agi_boost_armor')">
                                                 <input type="text" id="agi_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "agi_boost_armor_label" for="agi-boost-armor">% Air Dmg Boost: 0</label>
                                             </div>

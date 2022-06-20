@@ -8,7 +8,6 @@ function parsePowdering(powder_info) {
         powder_info = powder_info.slice(1);
         for (let j = 0; j < n_blocks; ++j) {
             let block = powder_info.slice(0,5);
-            console.log(block);
             let six_powders = Base64.toInt(block);
             for (let k = 0; k < 6 && six_powders != 0; ++k) {
                 powders += powderNames.get((six_powders & 0x1f) - 1);
@@ -84,7 +83,7 @@ function decodeBuild(url_tag) {
         }
         //constant in all versions
         for (let i in equipment) {
-            setValue(equipmentInputs[i], equipment[i]);
+            setValue(equipment_inputs[i], equipment[i]);
         }
 
         //level, skill point assignments, and powdering
@@ -133,7 +132,6 @@ function decodeBuild(url_tag) {
             setValue(powder_inputs[i], powdering[i]);
         }
         for (let i in skillpoints) {
-            console.log(skillpoints[i]);
             setValue(skp_order[i] + "-skp", skillpoints[i]);
         }
     }
@@ -147,7 +145,7 @@ function encodeBuild(build, powders, skillpoints) {
         let build_string;
         
         //V6 encoding - Tomes
-        build_version = 4;
+        build_version = 5;
         build_string = "";
         tome_string = "";
 

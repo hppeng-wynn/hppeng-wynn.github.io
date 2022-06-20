@@ -72,9 +72,6 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages[element+1][1] += powder.max;
     }
 
-    
-    //console.log(tooltipinfo);
-
     damages[0] = neutralRemainingRaw;
 
     let damageMult = damageMultiplier;
