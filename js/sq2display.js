@@ -827,12 +827,7 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
 
     parent_elem.append(critStats);
 
-    //up and down arrow - done ugly
-    let arrow = document.createElement("img");
-    arrow.id = "arrow_" + overallparent_elem.id;
-    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
-    overallparent_elem.appendChild(arrow);
+    addClickableArrow(overallparent_elem);
 }
 
 function displaysq2ArmorStats(build) {
@@ -1401,12 +1396,7 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
         }
     }
 
-    //up and down arrow - done ugly
-    let arrow = document.createElement("img");
-    arrow.id = "arrow_" + overallparent_elem.id;
-    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
-    overallparent_elem.appendChild(arrow);
+    addClickableArrow(overallparent_elem);
 }
 
 function displaysq2EquipOrder(parent_elem, buildOrder){
@@ -2389,4 +2379,13 @@ function sq2StringCDF(id,val,base,amp) {
     document.getElementById(id + "-cdf").appendChild(div1);
     document.getElementById(id + "-cdf").appendChild(div2);
     document.getElementById(id + "-cdf").appendChild(div3);
+}
+
+function addClickableArrow(elem) {
+    //up and down arrow - done ugly
+    let arrow = document.createElement("img");
+    arrow.id = "arrow_" + elem.id;
+    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
+    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
+    elem.appendChild(arrow);
 }
