@@ -96,18 +96,14 @@ function resetFields(){
         }
     }
 
-    const nodes_to_reset = item_nodes.concat(powder_nodes.concat(edit_input_nodes));
+    const nodes_to_reset = item_nodes.concat(powder_nodes).concat(edit_input_nodes).concat([powder_special_input, boosts_node]);
     for (const node of nodes_to_reset) {
         node.mark_dirty();
     }
-    powder_special_input.mark_dirty();
-    boosts_node.mark_dirty();
 
     for (const node of nodes_to_reset) {
         node.update();
     }
-    powder_special_input.update();
-    boosts_node.update();
 
     setValue("level-choice", "106");
     location.hash = "";

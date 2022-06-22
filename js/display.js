@@ -182,7 +182,6 @@ function displayExpandedItem(item, parent_id){
         stats.set("wDamPct", 0);
         stats.set("fDamPct", 0);
         stats.set("aDamPct", 0);
-        stats.set("damageBonus", [0, 0, 0, 0, 0]);
 
         //SUPER JANK @HPP PLS FIX
         let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
@@ -1293,9 +1292,6 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
         statsTable.appendChild(hpRow);
     }
 
-    let defMult = statMap.get("defMult");
-    if (!defMult) {defMult = 1}
-
     //EHP
     let ehpRow = document.createElement("div");
     ehpRow.classList.add("row");
@@ -1405,8 +1401,8 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
         boost.classList.add("col");
         boost.classList.add("text-end");
 
-        let defRaw = statMap.get("defRaw")[i];
-        let defPct = statMap.get("defBonus")[i]/100;
+        let defRaw = statMap.get(skp_elements[i]+"Def");
+        let defPct = statMap.get(skp_elements[i]+"DefPct")/100;
         if (defRaw < 0) {
             defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
         } else {

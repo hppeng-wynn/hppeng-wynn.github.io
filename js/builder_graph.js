@@ -206,6 +206,11 @@ class ItemInputDisplayNode extends ComputeNode {
         this.input_field.classList.add("text-light");
         this.image.classList.remove('Normal-shadow', 'Unique-shadow', 'Rare-shadow', 'Legendary-shadow', 'Fabled-shadow', 'Mythic-shadow', 'Set-shadow', 'Crafted-shadow', 'Custom-shadow');
 
+        if (this.health_field) {
+            // Doesn't exist for weapons.
+            this.health_field.textContent = "0";
+        }
+        this.level_field.textContent = "0";
         if (!item) {
             this.input_field.classList.add("is-invalid");
             return null;
@@ -443,7 +448,7 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHp);
     //EHP
     let ehp = [totalHp, totalHp];
-    let defMult = (2 - stats.get("classDef")) * (1 - stats.get("defBonus"));
+    let defMult = (2 - stats.get("classDef")) * (2 - stats.get("defMultiplier"));
     ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehp);
@@ -725,32 +730,46 @@ class DisplayBuildWarningsNode extends ComputeNode {
 }
 
 /**
- * Aggregate stats from the build and from inputs.
+ * Aggregate stats from all inputs (merges statmaps).
  *
- * Signature: AggregateStatsNode(build: Build, *args) => StatMap
+ * Signature: AggregateStatsNode(*args) => StatMap
  */
 class AggregateStatsNode extends ComputeNode {
     constructor() { super("builder-aggregate-stats"); }
 
     compute_func(input_map) {
+        const output_stats = new Map();
+        for (const [k, v] of input_map.entries()) {
+            for (const [k2, v2] of v.entries()) {
+                if (output_stats.has(k2)) {
+                    output_stats.set(k2, v2 + output_stats.get(k2));
+                }
+                else {
+                    output_stats.set(k2, v2);
+                }
+            }
+        }
+        return output_stats;
+    }
+}
+
+/**
+ * Aggregate editable ID stats with build and weapon type.
+ *
+ * Signature: AggregateEditableIDNode(build: Build, weapon: Item, *args) => StatMap
+ */
+class AggregateEditableIDNode extends ComputeNode {
+    constructor() { super("builder-aggregate-inputs"); }
+
+    compute_func(input_map) {
         const build = input_map.get('build'); input_map.delete('build');
-        const powder_boost = input_map.get('powder-boost'); input_map.delete('powder-boost');
-        const potion_boost = input_map.get('potion-boost'); input_map.delete('potion-boost');
         const weapon = input_map.get('weapon'); input_map.delete('weapon');
 
         const output_stats = new Map(build.statMap);
-        output_stats.set("damageMultiplier", 1 + potion_boost[0]);
-        output_stats.set("defBonus", potion_boost[1]);
+        output_stats.set("damageMultiplier", 1);
+        output_stats.set("defMultiplier", 1);
         for (const [k, v] of input_map.entries()) {
             output_stats.set(k, v);
-        }
-        for (const [k, v] of powder_boost.entries()) {
-            if (output_stats.has(k)) {
-                output_stats.set(k, v + output_stats.get(k));
-            }
-            else {
-                output_stats.set(k, v);
-            }
         }
 
         output_stats.set('classDef', classDefenseMultipliers.get(weapon.statMap.get("type")));
@@ -919,13 +938,14 @@ function builder_graph_init() {
 
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
     let stat_agg_node = new AggregateStatsNode();
-    stat_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
+    let edit_agg_node = new AggregateEditableIDNode();
+    edit_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
     for (const field of editable_item_fields) {
         // Create nodes that listens to each editable id input, the node name should match the "id"
         const elem = document.getElementById(field);
         const node = new SumNumberInputNode('builder-'+field+'-input', elem);
 
-        stat_agg_node.link_to(node, field);
+        edit_agg_node.link_to(node, field);
         edit_input_nodes.push(node);
     }
     // Edit IDs setter declared up here to set ids so they will be populated by default.
@@ -936,11 +956,12 @@ function builder_graph_init() {
         const elem = document.getElementById(skp+'-skp');
         const node = new SumNumberInputNode('builder-'+skp+'-input', elem);
 
-        stat_agg_node.link_to(node, skp);
+        edit_agg_node.link_to(node, skp);
         build_encode_node.link_to(node, skp);
         build_warnings_node.link_to(node, skp);
         edit_input_nodes.push(node);
     }
+    stat_agg_node.link_to(edit_agg_node);
     build_disp_node.link_to(stat_agg_node, 'stats');
 
     for (const input_node of item_nodes.concat(powder_nodes)) {

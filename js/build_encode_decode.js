@@ -202,15 +202,15 @@ function shareBuild(build) {
     if (build) {
         let text = url_base+location.hash+"\n"+
             "WynnBuilder build:\n"+
-            "> "+build.helmet.statMap.get("displayName")+"\n"+
-            "> "+build.chestplate.statMap.get("displayName")+"\n"+
-            "> "+build.leggings.statMap.get("displayName")+"\n"+
-            "> "+build.boots.statMap.get("displayName")+"\n"+
-            "> "+build.ring1.statMap.get("displayName")+"\n"+
-            "> "+build.ring2.statMap.get("displayName")+"\n"+
-            "> "+build.bracelet.statMap.get("displayName")+"\n"+
-            "> "+build.necklace.statMap.get("displayName")+"\n"+
-            "> "+build.weapon.statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
+            "> "+build.items[0].statMap.get("displayName")+"\n"+
+            "> "+build.items[1].statMap.get("displayName")+"\n"+
+            "> "+build.items[2].statMap.get("displayName")+"\n"+
+            "> "+build.items[3].statMap.get("displayName")+"\n"+
+            "> "+build.items[4].statMap.get("displayName")+"\n"+
+            "> "+build.items[5].statMap.get("displayName")+"\n"+
+            "> "+build.items[6].statMap.get("displayName")+"\n"+
+            "> "+build.items[7].statMap.get("displayName")+"\n"+
+            "> "+build.items[8].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }

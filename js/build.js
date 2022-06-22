@@ -211,9 +211,5 @@ class Build{
         let statMap = this.statMap;
         let weapon_stats = this.weapon.statMap;
         statMap.set("damageRaw", [weapon_stats.get("nDam"), weapon_stats.get("eDam"), weapon_stats.get("tDam"), weapon_stats.get("wDam"), weapon_stats.get("fDam"), weapon_stats.get("aDam")]);
-        statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
-        statMap.set("defRaw", [statMap.get("eDef"), statMap.get("tDef"), statMap.get("wDef"), statMap.get("fDef"), statMap.get("aDef")]);
-        statMap.set("defBonus", [statMap.get("eDefPct"), statMap.get("tDefPct"), statMap.get("wDefPct"), statMap.get("fDefPct"), statMap.get("aDefPct")]);
-        statMap.set("defMult", classDefenseMultipliers.get(weapon_stats.get("type")));
     }
 }
