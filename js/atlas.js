@@ -119,6 +119,10 @@ function runAtlas() {
                 let center = [(at1[0]+at2[0])/2, (at1[1]+at2[1])/2 ];
 
                 if (Math.sqrt(((at2[1]+atlas2.vy) - (at1[1]+atlas1.vy))**2 + ((at2[0]+atlas2.vx) - (at1[0]+atlas1.vx))**2) < 2*r) {
+                    //Play bruh sound effect
+                    document.getElementById('bruh_sound_effect').play();
+                    document.getElementById('bruh_sound_effect').currentTime = 0;
+                   
                     if(Math.sqrt( (at2[1]-at1[1])**2 + (at2[0]-at1[0])**2 ) < 2*r ) {//check for collision
                         //Move both away slightly - correct alg this time :)
                         atlas1.style.left = parseFloat(atlas1.style.left.replace("px","")) + (at1[0]-center[0]) * 2 * r / Math.sqrt(dx**2 + dy**2) + "px";
