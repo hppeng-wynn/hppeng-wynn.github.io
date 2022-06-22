@@ -159,17 +159,96 @@ Base64 = (function () {
 
     /** Constructs an arbitrary-length bit vector.
      * @class
-     * @param {String | Number}
+     * @param {String | Number} data 
+     * @param {Number} length - a set length for the data. Must be in the range [0, 32] if data is a Number.
+     * 
+     * The structure of the Uint32Array should be [[last, ..., first], ..., [last, ..., first], [empty space, last, ..., first]]
      */
     constructor(data, length) {
+        let bit_vec = [];
+        if (length < 0) {
+            throw new RangeError("BitVector must have nonnegative length.");
+        }
 
-        this.bitvector = NumberInt();
+        if (typeof data === "string") {
+            //string in B64
+            let str_len = data.length;
+            let curr = 0;
+            let curr_bits = 0;
+        } else if (typeof data === "number") {
+            //convert to int just in case
+            data = Math.round(data); 
 
-        
+            //range of numbers that won't fit in a uint32
+            if (data > 2**32 - 1 || data < -(2 ** 32 - 1)) {
+                throw new RangeError("Numerical data has to fit within a 32-bit integer range to instantiate a BitVector.");
+            }
+            bit_vec.push(data);
+        } else if (data instanceof Array) [
+
+        ]
+
+        this.length = length;
+        this.bits = new Uint32Array(bit_vec);
     }
-}
 
-let bitv = new BitVector(123123, 1);
+
+    readBitsSigned() {
+
+    }
+
+    readBitsUnsigned() {
+
+    }
+
+    setBits() {
+
+    }
+    
+    clearBits() {
+
+    }
+
+    append(data, length) {
+        if (length < 0) {
+            throw new RangeError("BitVector length must increase by a nonnegative number.");
+        }
+
+        this.length += length;
+    }
+
+    /** Creates a string version of the bit vector
+     * 
+     * @returns A bit vector in string format
+     */
+    toString() {
+        if (this.length == 0) {
+            return "";
+        }
+
+        let bitstr = "";
+        //extract bits from first uint32 - may not be all 32 bits
+        let length_first = this.length % 32;
+        let curr = this.bits[0];
+        for (let i = 0; i < length_first; ++i) {
+            bitstr = (curr % 2 == 0 ? '0' : '1') + bitstr;
+            curr >>= 1;
+        }
+
+        //extract bits from rest of uint32s - always all 32 bits
+        for (let i = 1; i < this.bits.length; ++i) {
+            curr = this.bits[i];
+            for (let j = 0; j < 32; ++j) {
+                bitstr = (curr % 2 == 0 ? '0' : '1') + bitstr;
+                curr >>= 1;
+            }
+        }
+
+        //return the formed bitstring
+        return bitstr;
+    }
+};
+
 
 /*
     Turns a raw stat and a % stat into a final stat on the basis that - raw and >= 100% becomes 0 and + raw and <=-100% becomes negative.
