@@ -758,19 +758,40 @@ class AggregateStatsNode extends ComputeNode {
     }
 }
 
+let edit_id_output;
+function resetEditableIDs() {
+    edit_id_output.notify();
+}
 /**
  * Set the editble id fields.
  *
  * Signature: EditableIDSetterNode(build: Build) => null
  */
 class EditableIDSetterNode extends ComputeNode {
-    constructor() { super("builder-id-setter"); }
+    constructor(notify_nodes) {
+        super("builder-id-setter");
+        this.notify_nodes = notify_nodes.slice();
+    }
 
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "EditableIDSetterNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const id of editable_item_fields) {
-            document.getElementById(id).value = build.statMap.get(id);
+            const val = build.statMap.get(id);
+            document.getElementById(id).value = val;
+            document.getElementById(id+'-base').textContent = 'Original Value: ' + val;
+        }
+    }
+
+    notify() {
+        this.mark_dirty();
+        this.update();
+        // NOTE: DO NOT merge these loops for performance reasons!!!
+        for (const node of this.notify_nodes) {
+            node.mark_dirty();
+        }
+        for (const node of this.notify_nodes) {
+            node.update();
         }
     }
 }
@@ -784,7 +805,7 @@ class EditableIDSetterNode extends ComputeNode {
 class SkillPointSetterNode extends ComputeNode {
     constructor(notify_nodes) {
         super("builder-skillpoint-setter");
-        this.notify_nodes = notify_nodes;
+        this.notify_nodes = notify_nodes.slice();
     }
 
     compute_func(input_map) {
@@ -889,10 +910,6 @@ function builder_graph_init() {
     item_nodes[3].link_to(powder_nodes[3], 'powdering');
     item_nodes[8].link_to(powder_nodes[4], 'powdering');
 
-    // Edit IDs setter declared up here to set ids so they will be populated by default.
-    let edit_id_output = new EditableIDSetterNode();
-    edit_id_output.link_to(build_node);
-
     // Phase 2/2: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
 
     let build_disp_node = new BuildDisplayNode()
@@ -911,6 +928,10 @@ function builder_graph_init() {
         stat_agg_node.link_to(node, field);
         edit_input_nodes.push(node);
     }
+    // Edit IDs setter declared up here to set ids so they will be populated by default.
+    edit_id_output = new EditableIDSetterNode(edit_input_nodes);    // Makes shallow copy of list.
+    edit_id_output.link_to(build_node);
+
     for (const skp of skp_order) {
         const elem = document.getElementById(skp+'-skp');
         const node = new SumNumberInputNode('builder-'+skp+'-input', elem);
