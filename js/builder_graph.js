@@ -178,6 +178,24 @@ class ItemInputNode extends InputNode {
                 return item;
             }
         }
+        else if (this.none_item.statMap.get('category') === 'weapon' && item_text.startsWith("Morph-")) {
+            let replace_items = [ "Morph-Stardust",
+                "Morph-Steel",
+                "Morph-Iron",
+                "Morph-Gold",
+                "Morph-Topaz",
+                "Morph-Emerald",
+                "Morph-Amethyst",
+                "Morph-Ruby",
+                item_text.substring(6)
+            ]
+
+            for (const [i, x] of zip2(equipment_inputs, replace_items)) { setValue(i, x); }
+
+            // NOTE: DO NOT REORDER FOR PERFORMANCE REASONS
+            for (const node of item_nodes) { node.mark_dirty(); }
+            for (const node of item_nodes) { node.update(); }
+        }
         return null;
     }
 }
