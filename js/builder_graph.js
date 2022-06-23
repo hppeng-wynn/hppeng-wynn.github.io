@@ -1,18 +1,42 @@
-let boosts_node;
-/* Updates all spell boosts
-*/
-function updateBoosts(buttonId) {
-    let elem = document.getElementById(buttonId);
-    if (elem.classList.contains("toggleOn")) {
-        elem.classList.remove("toggleOn");
-    } else {
-        elem.classList.add("toggleOn");
+let armor_powder_node = new (class extends ComputeNode {
+    constructor() { super('builder-armor-powder-input'); }
+
+    compute_func(input_map) {
+        let damage_boost = 0;
+        let def_boost = 0;
+        let statMap = new Map();
+        for (const [e, elem] of zip2(skp_elements, skp_order)) {
+            let val = parseInt(document.getElementById(elem+"_boost_armor").value);
+            statMap.set(e+'DamPct', val);
+        }
+        return statMap;
     }
-    boosts_node.mark_dirty();
-    boosts_node.update();
+})().update();
+
+/* Updates PASSIVE powder special boosts (armors)
+*/
+function update_armor_powder_specials(elem_id) {
+    //we only update the powder special + external stats if the player has a build
+    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
+
+    //update the label associated w/ the slider 
+    let elem = document.getElementById(elem_id);
+    let label = document.getElementById(elem_id + "_label");
+
+    let value = elem.value;
+
+    label.textContent = label.textContent.split(":")[0] + ": " + value
+    
+    //update the slider's graphics
+    let bg_color = elem_colors[skp_order.indexOf(wynn_elem)];
+    let pct = Math.round(100 * value / powderSpecialStats[skp_order.indexOf(wynn_elem)].cap);
+    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
+
+    armor_powder_node.mark_dirty().update();
 }
 
-class BoostsInputNode extends ComputeNode {
+
+let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
 
     compute_func(input_map) {
@@ -28,14 +52,40 @@ class BoostsInputNode extends ComputeNode {
         }
         return [damage_boost, def_boost];
     }
+})().update();
+
+/* Updates all spell boosts
+*/
+function update_boosts(buttonId) {
+    let elem = document.getElementById(buttonId);
+    if (elem.classList.contains("toggleOn")) {
+        elem.classList.remove("toggleOn");
+    } else {
+        elem.classList.add("toggleOn");
+    }
+    boosts_node.mark_dirty().update();
 }
 
-let powder_special_input;
 let specialNames = ["Quake", "Chain Lightning", "Curse", "Courage", "Wind Prison"];
+let powder_special_input = new (class extends ComputeNode {
+    constructor() { super('builder-powder-special-input'); }
+
+    compute_func(input_map) {
+        let powder_specials = []; // [ [special, power], [special, power]]
+        for (const sName of specialNames) {
+            for (let i = 1;i < 6; i++) {
+                if (document.getElementById(sName.replace(" ","_") + "-" + i).classList.contains("toggleOn")) {
+                    let powder_special = powderSpecialStats[specialNames.indexOf(sName.replace("_"," "))]; 
+                    powder_specials.push([powder_special, i]);
+                    break;
+                }   
+            }
+        }
+        return powder_specials;
+    }
+})();
 
 function updatePowderSpecials(buttonId) {
-    //console.log(player_build.statMap);
-   
     let name = (buttonId).split("-")[0];
     let power = (buttonId).split("-")[1]; // [1, 5]
     
@@ -53,26 +103,7 @@ function updatePowderSpecials(buttonId) {
         elem.classList.add("toggleOn"); 
     }
 
-    powder_special_input.mark_dirty();
-    powder_special_input.update();
-}
-
-class PowderSpecialInputNode extends ComputeNode {
-    constructor() { super('builder-powder-special-input'); }
-
-    compute_func(input_map) {
-        let powder_specials = []; // [ [special, power], [special, power]]
-        for (const sName of specialNames) {
-            for (let i = 1;i < 6; i++) {
-                if (document.getElementById(sName.replace(" ","_") + "-" + i).classList.contains("toggleOn")) {
-                    let powder_special = powderSpecialStats[specialNames.indexOf(sName.replace("_"," "))]; 
-                    powder_specials.push([powder_special, i]);
-                    break;
-                }   
-            }
-        }
-        return powder_specials;
-    }
+    powder_special_input.mark_dirty().update();
 }
 
 class PowderSpecialCalcNode extends ComputeNode {
@@ -988,17 +1019,15 @@ function builder_graph_init() {
     level_input.update();
 
     // Powder specials.
-    powder_special_input = new PowderSpecialInputNode();
     let powder_special_calc = new PowderSpecialCalcNode().link_to(powder_special_input, 'powder-specials');
     new PowderSpecialDisplayNode().link_to(powder_special_input, 'powder-specials')
         .link_to(stat_agg_node, 'stats').link_to(item_nodes[8], 'weapon');
     stat_agg_node.link_to(powder_special_calc, 'powder-boost');
+    stat_agg_node.link_to(armor_powder_node, 'armor-powder');
     powder_special_input.update();
 
     // Potion boost.
-    boosts_node = new BoostsInputNode();
     stat_agg_node.link_to(boosts_node, 'potion-boost');
-    boosts_node.update();
 
     // Also do something similar for skill points
 

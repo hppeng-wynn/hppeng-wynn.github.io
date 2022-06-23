@@ -944,27 +944,27 @@
                                     <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                         <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="updateBoosts('vanish-boost')">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="update_boosts('vanish-boost')">
                                                     Vanish (+80%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="updateBoosts('warscream-boost')">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="update_boosts('warscream-boost')">
                                                     War Scream (+10%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="updateBoosts('yourtotem-boost')">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="update_boosts('yourtotem-boost')">
                                                     Your Totem (+35%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="updateBoosts('allytotem-boost')">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="update_boosts('allytotem-boost')">
                                                     Ally Totem (+15%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="updateBoosts('bash-boost')">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="update_boosts('bash-boost')">
                                                     Bash (+50%)
                                                 </button>
                                             </div>
@@ -1031,7 +1031,7 @@
                                                 Rage (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "updateArmorPowderSpecials('str_boost_armor')">
+                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "update_armor_powder_specials('str_boost_armor')">
                                                 <input type="text" id="str_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "str_boost_armor_label" for="str-boost-armor">% Earth Dmg Boost: 0</label>
                                             </div>
@@ -1075,7 +1075,7 @@
                                                 Kill Streak (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('dex_boost_armor')">
+                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "update_armor_powder_specials('dex_boost_armor')">
                                                 <input type="text" id="dex_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "dex_boost_armor_label" for="dex-boost-armor">% Thunder Dmg Boost: 0</label>
                                             </div>
@@ -1119,7 +1119,7 @@
                                                 Concentration (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('int_boost_armor')">
+                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "update_armor_powder_specials('int_boost_armor')">
                                                 <input type="text" id="int_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "int_boost_armor_label" for="dex-boost-armor">% Water Dmg Boost: 0</label>
                                             </div>
@@ -1163,7 +1163,7 @@
                                                 Endurance (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('def_boost_armor')">
+                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "update_armor_powder_specials('def_boost_armor')">
                                                 <input type="text" id="def_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "def_boost_armor_label" for="def-boost-armor">% Fire Dmg Boost: 0</label>
                                             </div>
@@ -1207,7 +1207,7 @@
                                                 Dodge (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('agi_boost_armor')">
+                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "update_armor_powder_specials('agi_boost_armor')">
                                                 <input type="text" id="agi_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "agi_boost_armor_label" for="agi-boost-armor">% Air Dmg Boost: 0</label>
                                             </div>

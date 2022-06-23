@@ -37,6 +37,7 @@ class ComputeNode {
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
         }
+        return this;
     }
 
     /**
@@ -69,6 +70,7 @@ class ComputeNode {
                 child.mark_dirty();
             }
         }
+        return this;
     }
 
     /**

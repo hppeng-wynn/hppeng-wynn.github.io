@@ -212,20 +212,21 @@ let posModSuffixes = {
 let build_all_display_commands = [
     "#defense-stats",
     "str", "dex", "int", "def", "agi",
+    "!spacer",
     "mr", "ms",
     "hprRaw", "hprPct",
+    "ls",
     "sdRaw", "sdPct",
     "mdRaw", "mdPct",
-    "ref", "thorns",
-    "ls",
-    "poison",
-    "expd",
-    "spd",
-    "atkTier",
     "!elemental",
     "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
     "!elemental",
     "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
+    "atkTier",
+    "poison",
+    "ref", "thorns",
+    "expd",
+    "spd",
     "rainbowRaw",
     "sprint", "sprintReg",
     "jh",
@@ -324,4 +325,12 @@ let sq2_ing_display_order = [
     "!spacer",
     "lvl",
     "skills",
+]
+
+let elem_colors = [
+    "#00AA00",
+    "#FFFF55",
+    "#55FFFF",
+    "#FF5555",
+    "#FFFFFF"
 ]
