@@ -184,40 +184,88 @@ Base64 = (function () {
                 throw new RangeError("Numerical data has to fit within a 32-bit integer range to instantiate a BitVector.");
             }
             bit_vec.push(data);
-        } else if (data instanceof Array) [
-
-        ]
+        } else if (data instanceof Array) {
+            
+        }
 
         this.length = length;
         this.bits = new Uint32Array(bit_vec);
     }
 
-
-    readBitsSigned() {
-
+    /** Return value of bit at index idx.
+     * 
+     * @param {Number} idx - the index to read
+     */
+    read_bit(idx) {
+        if (idx < 0 || idx > this.length) {
+            throw new RangeError("Cannot read bit outside the range of the BitVector.");
+        }
+        return ((this.bits[Math.floor(idx / 32)] & (1 << (idx % 32))) == 0 ? 0 : 1);
     }
 
-    readBitsUnsigned() {
+    /** Returns an integer value (if possible) made from the range of bits [start, end). Undefined behavior if the range to read is too big.
+     * 
+     * @param {Number} start - the index to start slicing from. Inclusive
+     * @param {Number} end - the index to end slicing at. Exclusive
+     */
+    slice(start, end) {
+        if (end < start) {
+            throw new RangeError("Cannot slice a range where the end is before the start.");
+        } else if (end == start) {
+            return 0;
+        }
 
+        let res = 0;
+        if (Math.floor((end - 1) / 32) == Math.floor(start / 32)) {
+            //the range is within 1 uint32 section - do some relatively fast bit twiddling
+            res = (this.bits[Math.floor(start / 32)] & ~((((~0) << ((end - 1) % 32)) << 1) | ~((~0) << (start % 32)))) >>> (start % 32);
+        } else {
+            //range is not within 1 section of the array - do ugly
+            for (let i = start; i < end; i++) {
+                res |= (get_bit(i) << (i - start));
+            }
+        }
+        
+        return res;
     }
 
-    setBits() {
-
+    /** Assign bit at index idx to 1.
+     * 
+     * @param {Number} idx - the index to set
+     */
+    set_bit(idx) {
+        if (idx < 0 || idx > this.length) {
+            throw new RangeError("Cannot set bit outside the range of the BitVector.");
+        }
+        this.bits[Math.floor(idx / 32)] |= (1 << idx % 32);
     }
     
-    clearBits() {
-
+    /** Assign bit at index idx to 0.
+     * 
+     * @param {Number} idx - the index to clear
+     */
+    clear_bit(idx) {
+        if (idx < 0 || idx > this.length) {
+            throw new RangeError("Cannot clear bit outside the range of the BitVector.");
+        }
+        this.bits[Math.floor(idx / 32)] &= ~(1 << idx % 32);
     }
 
+    /** Appends data to the BitVector.
+     * 
+     * @param {Number | String | Array} data 
+     * @param {Number} length - the length, in bits, of the new data 
+     */
     append(data, length) {
         if (length < 0) {
             throw new RangeError("BitVector length must increase by a nonnegative number.");
         }
 
         this.length += length;
+        //add in new data
     }
 
-    /** Creates a string version of the bit vector
+    /** Creates a string version of the bit vector in B64. Does not keep the order of elements a sensible human readable format.  
      * 
      * @returns A bit vector in string format
      */
@@ -226,26 +274,7 @@ Base64 = (function () {
             return "";
         }
 
-        let bitstr = "";
-        //extract bits from first uint32 - may not be all 32 bits
-        let length_first = this.length % 32;
-        let curr = this.bits[0];
-        for (let i = 0; i < length_first; ++i) {
-            bitstr = (curr % 2 == 0 ? '0' : '1') + bitstr;
-            curr >>= 1;
-        }
-
-        //extract bits from rest of uint32s - always all 32 bits
-        for (let i = 1; i < this.bits.length; ++i) {
-            curr = this.bits[i];
-            for (let j = 0; j < 32; ++j) {
-                bitstr = (curr % 2 == 0 ? '0' : '1') + bitstr;
-                curr >>= 1;
-            }
-        }
-
-        //return the formed bitstring
-        return bitstr;
+        
     }
 };
 
