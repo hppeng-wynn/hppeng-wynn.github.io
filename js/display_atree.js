@@ -14,28 +14,36 @@ function construct_AT(elem, tree) {
         let node = tree[i];
         
         // create rows if not exist
-        if (document.getElementById("atree-row-" + node.display.row) == null) {
-            for (let j = 0; j <= node.display.row; j++) {
-                if (document.getElementById("atree-row-" + j) == null) {
-                    let row = document.createElement('div');
-                    row.classList.add("row");
-                    row.id = "atree-row-" + j;
-                    //was causing atree rows to be 0 height
-                    console.log(elem.scrollWidth / 9);
-                    row.style.minHeight = elem.scrollWidth / 9 + "px";
-                    //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
+        let missing_rows = [node.display.row];
+
+        for (let parent of node.parents) {
+            missing_rows.push(tree.find(object => {return object.display_name === parent;}).display.row);
+        }
+        for (let missing_row of missing_rows) {
+            if (document.getElementById("atree-row-" + missing_row) == null) {
+                for (let j = 0; j <= missing_row; j++) {
+                    if (document.getElementById("atree-row-" + j) == null) {
+                        let row = document.createElement('div');
+                        row.classList.add("row");
+                        row.id = "atree-row-" + j;
+                        //was causing atree rows to be 0 height
+                        console.log(elem.scrollWidth / 9);
+                        row.style.minHeight = elem.scrollWidth / 9 + "px";
+                        //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
 
 
-                    for (let k = 0; k < 9; k++) {
-                        col = document.createElement('div');
-                        col.classList.add('col', 'px-0');
-                        col.style.minHeight = elem.scrollWidth / 9 + "px";
-                        row.appendChild(col);
+                        for (let k = 0; k < 9; k++) {
+                            col = document.createElement('div');
+                            col.classList.add('col', 'px-0');
+                            col.style.minHeight = elem.scrollWidth / 9 + "px";
+                            row.appendChild(col);
+                        };
+                        elem.appendChild(row);
                     };
-                    elem.appendChild(row);
                 };
             };
-        };
+        }
+
 
         let connector_list = []
         // create connectors based on parent location
@@ -52,7 +60,7 @@ function construct_AT(elem, tree) {
                 connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
                 connector.id = "r" + i + "-c" + node.display.col + "-line"
                 document.getElementById("atree-row-" + i).children[node.display.col].appendChild(connector);
-                resolve_connector(document.getElementById("atree-row-" + i).children[node.display.col]);
+                resolve_connector(document.getElementById("atree-row-" + i).children[node.display.col], node);
             }
             // connect left
             for (let i = parent_node.display.col + 1; i < node.display.col; i++) {
@@ -61,7 +69,7 @@ function construct_AT(elem, tree) {
                 connector.classList.add("rotate-90");
                 connector.id = "r" + parent_node.display.row + "-c" + i + "-line"
                 document.getElementById("atree-row-" + parent_node.display.row).children[i].appendChild(connector); 
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[i]);
+                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[i], node);
             }
 
             // connect right
@@ -71,7 +79,7 @@ function construct_AT(elem, tree) {
                 connector.classList.add("rotate-90");
                 connector.id = "r" + parent_node.display.row + "-c" + i + "-line"
                 document.getElementById("atree-row-" + parent_node.display.row).children[i].appendChild(connector); 
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[i]);
+                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[i], node);
             }
 
             // connect corners
@@ -81,7 +89,7 @@ function construct_AT(elem, tree) {
                 connector.classList.add("rotate-180");
                 connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
                 document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
+                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col], node);
             }
 
             if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
@@ -90,7 +98,7 @@ function construct_AT(elem, tree) {
                 connector.classList.add("rotate-270");
                 connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
                 document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
+                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col], node);
             }
         }
 
@@ -165,11 +173,12 @@ function construct_AT(elem, tree) {
 };
 
 // resolve connector conflict
-function resolve_connector(elem) {
+function resolve_connector(elem, node) {
     if (elem.children.length < 2) {return false;}
     let line = 0;
     let angle = 0;
-    let t = 0
+    let t = 0;
+    let c = 0;
     for (let child of elem.children) {
         let type = child.id.split("-")[2]
         if (type == "line") {
@@ -178,22 +187,36 @@ function resolve_connector(elem) {
             angle += 1;
         } else if (type == "t") {
             t += 1;
+        } else if (type == "c") {
+            c += 1;
         }
     }
 
     let connect_elem = document.createElement("div");
 
-    if ((line == angle) || (angle == 1 && t == 1)) {
+    //if ((line == 1 && angle == 1) || (line == 2 && angle == 2) || (line == 1 && angle == 2) || (angle == 1 && t == 1)) {
+    //    connect_elem.style = "background-image: url('../media/atree/connect_t.png'); background-size: cover; width: 100%; height: 100%;"
+    //    connect_elem.classList.add("rotate-180")
+    //    connect_elem.id = elem.children[0].id.split("-")[0] + "-" + elem.children[0].id.split("-")[1] + "-t"
+    //    elem.replaceChildren(connect_elem);
+    //}
+    //if (line > 1 && angle == 0) {
+    //    elem.replaceChildren(elem.children[0])
+    //}
+    //if (t == 1 && line == 1) {
+    //    connect_elem.style = "background-image: url('../media/atree/connect_c.png'); background-size: cover; width: 100%; height: 100%;"
+    //    elem.replaceChildren(connect_elem);
+    //}
+    if ((line == 1 && angle == 1)) {
         connect_elem.style = "background-image: url('../media/atree/connect_t.png'); background-size: cover; width: 100%; height: 100%;"
         connect_elem.classList.add("rotate-180")
         connect_elem.id = elem.children[0].id.split("-")[0] + "-" + elem.children[0].id.split("-")[1] + "-t"
         elem.replaceChildren(connect_elem);
     }
-    if (line > 1 && angle == 0) {
-        elem.replaceChildren(elem.children[0])
-    }
-    if (t == 1 && line == 1) {
+    if (node.parents.length == 3 && t == 1) {
         connect_elem.style = "background-image: url('../media/atree/connect_c.png'); background-size: cover; width: 100%; height: 100%;"
+        connect_elem.id = elem.children[0].id.split("-")[0] + "-" + elem.children[0].id.split("-")[1] + "-c"
         elem.replaceChildren(connect_elem);
     }
+    elem.replaceChildren(elem.children[0])
 }
