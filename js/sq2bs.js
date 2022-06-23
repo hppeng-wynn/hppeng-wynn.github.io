@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector("#"+i+"Avg").setAttribute("onclick", "toggle_spell_tab('"+i+"')");
     }
 
+    document.querySelector("#build-melee-statsAvg").setAttribute("onclick", "toggle_spell_tab('build-melee-stats')");
+
     document.querySelector("#level-choice").setAttribute("oninput", "calcBuildSchedule()")
     document.querySelector("#weapon-choice").setAttribute("oninput", document.querySelector("#weapon-choice").getAttribute("oninput") + "resetArmorPowderSpecials();");
     // document.querySelector("#edit-IDs-button").setAttribute("onclick", "toggle_edit_id_tab()");

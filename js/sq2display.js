@@ -699,7 +699,6 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
     title_elem.classList.add("title");
     title_elem.textContent = "Melee Stats";
     parent_elem.append(title_elem);
-    parent_elem.append(document.createElement("br"));
 
     //overall title
     let title_elemavg = document.createElement("b");
@@ -710,9 +709,6 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let averageDamage = document.createElement("p");
     averageDamage.classList.add("left");
     averageDamage.textContent = "Average DPS: " + stats[10];
-    tooltiptext = `= ((${stats[8]} * ${(stats[6][2]).toFixed(2)}) + (${stats[9]} * ${(stats[7][2]).toFixed(2)}))`
-    tooltip = createTooltip(tooltip, "p", tooltiptext, averageDamage, ["melee-tooltip"]);
-    averageDamage.appendChild(tooltip);
     parent_elem.append(averageDamage);
 
     //overall average DPS
@@ -758,8 +754,6 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
             dmg.textContent = stats[i][0] + " \u2013 " + stats[i][1];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
-            tooltiptext = tooltipinfo.get("damageformulas")[i].slice(0,2).join("\n");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, dmg, ["melee-tooltip"]);
             nonCritStats.append(dmg);
         }
     }
@@ -774,15 +768,11 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
             arr2.push(stats[i][1]);
         }
     }
-    tooltiptext = tooltiparr[0] + arr.join(" + ") + "\n" + tooltiparr[1] + arr2.join(" + ");
-    tooltip = createTooltip(tooltip, "p", tooltiptext, normalDamage, ["melee-tooltip"]);
     nonCritStats.append(normalDamage);
 
     let normalDPS = document.createElement("p");
     normalDPS.textContent = "Normal DPS: " + stats[8];
     normalDPS.classList.add("tooltip");
-    tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
-    tooltip = createTooltip(tooltip, "p", tooltiptext, normalDPS, ["melee-tooltip"]);
     nonCritStats.append(normalDPS);
 
     //overall average DPS
@@ -792,9 +782,6 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
     let singleHitDamageSecond = document.createElement("span");
     singleHitDamageSecond.classList.add("Damage");
     singleHitDamageSecond.textContent = stats[12].toFixed(2);
-    tooltiptext = ` = ((${stats[6][0]} + ${stats[6][1]}) / 2) * ${stats[6][2].toFixed(2)} + ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${stats[7][2].toFixed(2)}`;
-    // tooltip = createTooltip(tooltip, "p", tooltiptext, singleHitDamage, ["melee-tooltip", "summary-tooltip"]);
-
     singleHitDamage.appendChild(singleHitDamageFirst);
     singleHitDamage.appendChild(singleHitDamageSecond);
     overallparent_elem.append(singleHitDamage);
@@ -819,8 +806,6 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
             dmg.textContent = stats[i][2] + " \u2013 " + stats[i][3];
             dmg.classList.add(damageClasses[i]);
             dmg.classList.add("itemp");
-            tooltiptext = tooltipinfo.get("damageformulas")[i].slice(2,4).join("\n");
-            tooltip = createTooltip(tooltip, "p", tooltiptext, dmg, ["melee-tooltip"]);
             critStats.append(dmg);
         }
     }
@@ -834,15 +819,11 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
             arr2.push(stats[i][3]);
         }
     }
-    tooltiptext = tooltiparr[0] + arr.join(" + ") + "\n" + tooltiparr[1] + arr2.join(" + ");
-    tooltip = createTooltip(tooltip, "p", tooltiptext, critDamage, ["melee-tooltip"]);
     
     critStats.append(critDamage);
 
     let critDPS = document.createElement("p");
     critDPS.textContent = "Crit DPS: " + stats[9];
-    tooltiptext = ` = ((${stats[7][0]} + ${stats[7][1]}) / 2) * ${baseDamageMultiplier[stats[11]]}`;
-    tooltip = createTooltip(tooltip, "p", tooltiptext, critDPS, ["melee-tooltip"]);
     critStats.append(critDPS);
 
     let critChance = document.createElement("p");
@@ -852,6 +833,8 @@ function displaysq2MeleeDamage(parent_elem, overallparent_elem, meleeStats){
     critStats.append(critChance);
 
     parent_elem.append(critStats);
+
+    addClickableArrow(overallparent_elem);
 }
 
 function displaysq2ArmorStats(build) {
@@ -1420,12 +1403,7 @@ function displaysq2SpellDamage(parent_elem, overallparent_elem, build, spell, sp
         }
     }
 
-    //up and down arrow - done ugly
-    let arrow = document.createElement("img");
-    arrow.id = "arrow_" + overallparent_elem.id;
-    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
-    overallparent_elem.appendChild(arrow);
+    addClickableArrow(overallparent_elem);
 }
 
 function displaysq2EquipOrder(parent_elem, buildOrder){
@@ -2408,4 +2386,13 @@ function sq2StringCDF(id,val,base,amp) {
     document.getElementById(id + "-cdf").appendChild(div1);
     document.getElementById(id + "-cdf").appendChild(div2);
     document.getElementById(id + "-cdf").appendChild(div3);
+}
+
+function addClickableArrow(elem) {
+    //up and down arrow - done ugly
+    let arrow = document.createElement("img");
+    arrow.id = "arrow_" + elem.id;
+    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
+    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
+    elem.appendChild(arrow);
 }
