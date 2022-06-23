@@ -1,15 +1,15 @@
 const atrees = 
 {
     "Archer": [
-        {   
+        {
             "display_name": "Arrow Shield",
             "desc": "Create a shield around you that deal damage and knockback mobs when triggered. (2 Charges)",
-            "archetype": "", 
-            "archetype_req": 0, 
-            "parents": ["Power Shots", "Cheaper Escape"], 
+            "archetype": "",
+            "archetype_req": 0,
+            "parents": ["Power Shots", "Cheaper Escape"],
             "dependencies": [],
             "blockers": [],
-            "cost": 1, 
+            "cost": 1,
             "display": {
                 "row": 9,
                 "col": 6
@@ -18,17 +18,17 @@ const atrees =
                 "duration": 60
             },
             "effects": [
-                { 
+                {
                     "type": "replace_spell",
                     "name": "Arrow Shield",
                     "cost": 30,
-                    "display_text": "Max Damage", 
-                    "base_spell": 4, 
-                    "spell_type": "damage", 
+                    "display_text": "Max Damage",
+                    "base_spell": 4,
+                    "spell_type": "damage",
                     "scaling": "spell",
-                    "display": "", 
+                    "display": "",
                     "parts": [
-                        {  
+                        {
                             "name": "Shield Damage",
                             "type": "damage",
                             "multipliers": [90, 0, 0, 0, 0, 10]
@@ -44,7 +44,7 @@ const atrees =
                 }
             ]
         },
-            
+
         {
             "display_name": "Escape",
             "desc": "Throw yourself backward to avoid danger. (Hold shift while escaping to cancel)",
@@ -422,7 +422,7 @@ const atrees =
             "desc": "Arrow Storm shoot +1 stream of arrows, effectively doubling its damage.",
             "archetype": "", 
             "archetype_req": 0, 
-            "parents": ["Guardian Angels"], 
+            "parents": ["Guardian Angels", "Cheaper Arrow Storm"], 
             "dependencies": [], 
             "blockers": ["Phantom Ray"],
             "cost": 2, 
@@ -480,7 +480,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 23,
+                "row": 22,
                 "col": 6
                 },
             "properties": {},
@@ -499,12 +499,12 @@ const atrees =
             "desc": "When you have 2+ Focus, holding shift will summon the Twain's Arc. Charge it up to shoot a destructive long-range beam. (Damage is dealt as Main Attack Damage)",
             "archetype": "Sharpshooter", 
             "archetype_req": 4, 
-            "parents": ["More Focus"], 
+            "parents": ["More Focus", "Traveler"], 
             "dependencies": ["Focus"], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 26,
+                "row": 25,
                 "col": 4
                 },
             "properties": {
@@ -542,7 +542,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 27,
+            "row": 26,
             "col": 1
             },
             "properties": {
@@ -577,7 +577,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-            "row": 27,
+            "row": 26   ,
             "col": 5
             },
             "properties": {
@@ -624,7 +624,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 29,
+            "row": 28,
             "col": 4
             },
             "properties": {
@@ -648,7 +648,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 29,
+            "row": 28,
             "col": 8
             },
             "properties": {
@@ -675,7 +675,7 @@ const atrees =
             "blockers": ["Grappling Hook"],
             "cost": 2, 
             "display": {
-            "row": 32,
+            "row": 31,
             "col": 0
             },
             "properties": {
@@ -695,12 +695,12 @@ const atrees =
             "desc": "If you do not damage an enemy for 5s or more, your next sucessful hit will deal +50% damage and add +1 Focus.",
             "archetype": "Sharpshooter",
             "archetype_req": 5, 
-            "parents": ["Shocking Bomb", "Better Arrow Shield"], 
+            "parents": ["Shocking Bomb", "Better Arrow Shield", "Cheaper Arrow Storm (2)"], 
             "dependencies": ["Focus"], 
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 32,
+            "row": 31,
             "col": 5
             },
             "properties": {
@@ -721,12 +721,12 @@ const atrees =
             "desc": "Arrow Shield summon a Hound that will attack and drag aggressive enemies towards your traps.",
             "archetype": "Trapper",
             "archetype_req": 0, 
-            "parents": ["Initiator", "Cheaper Arrow Storm"], 
+            "parents": ["Initiator", "Cheaper Arrow Storm (2)"], 
             "dependencies": ["Arrow Shield"], 
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 33,
+            "row": 32,
             "col": 7
             },
             "properties": {
@@ -751,7 +751,7 @@ const atrees =
             "blockers": ["Phantom Ray"],
             "cost": 2, 
             "display": {
-            "row": 34,
+            "row": 33,
             "col": 0
             },
             "properties": {},
@@ -777,7 +777,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 38,
+            "row": 37,
             "col": 1
             },
             "properties": {
@@ -803,7 +803,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 38,
+            "row": 37,
             "col": 4
             },
             "properties": {
@@ -849,12 +849,12 @@ const atrees =
             "desc": "Arrow bomb will throw 3 additional smaller bombs when exploding.",
             "archetype": "", 
             "archetype_req": 0, 
-            "parents": ["Grappling Hook", "More Shields"], 
+            "parents": ["Cheaper Escape (2)"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 38,
+            "row": 37,
             "col": 7
             },
             "properties": {
@@ -881,7 +881,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 39,
+            "row": 38,
             "col": 6
             },
             "properties": {
@@ -902,13 +902,13 @@ const atrees =
             "desc": "Enemies near you will be slowed down.",
             "archetype": "",
             "archetype_req": 0, 
-            "parents": ["Geyser Stomp", "More Focus"], 
+            "parents": ["Geyser Stomp", "More Focus (2)"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 40,
-            "col": 4
+            "row": 39,
+            "col": 2
             },
             "properties": {
             "range": 2.5,
@@ -925,7 +925,7 @@ const atrees =
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 41,
+            "row": 40,
             "col": 1
             },
             "properties": {
@@ -956,12 +956,12 @@ const atrees =
             "desc": "Allow you to place +6 Traps, but with reduced damage and range.",
             "archetype": "Trapper",
             "archetype_req": 10, 
-            "parents": ["Grape Bomb", "Cheaper Arrow Bomb"], 
+            "parents": ["Grape Bomb", "Cheaper Arrow Bomb (2)"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 41,
+                "row": 40,
                 "col": 7
                 },
             "properties": {
@@ -1299,7 +1299,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-            "row": 26,
+            "row": 25,
             "col": 0
             },
             "properties": {},
@@ -1323,7 +1323,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 27,
+                "row": 26,
                 "col": 8
                 },
             "properties": {
@@ -1340,7 +1340,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-            "row": 29,
+            "row": 28,
             "col": 6
             },
             "properties": {
@@ -1365,7 +1365,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 30,
+                "row": 29,
                 "col": 1
                 },
             "properties": {
@@ -1382,7 +1382,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-            "row": 32,
+            "row": 31,
             "col": 2
             },
             "properties": {
@@ -1409,7 +1409,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 32,
+                "row": 31,
                 "col": 8
                 },
             "properties": {
@@ -1427,12 +1427,12 @@ const atrees =
             "desc": "+30% Critical Hit Damage",
             "archetype": "", 
             "archetype_req": 0, 
-            "parents": ["Arrow Bomb"], 
+            "parents": ["Better Guardian Angels", "Cheaper Arrow Shield", "Arrow Hurricane"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 34,
+                "row": 33,
                 "col": 2
                 },
             "properties": {
@@ -1452,7 +1452,7 @@ const atrees =
             ]  
         },
         {
-            "display_name": "Cheaper Arrow Shield (2)",
+            "display_name": "Cheaper Arrow Shield",
             "desc": "Reduce the Mana cost of Arrow Shield.",
             "archetype": "", 
             "archetype_req": 0, 
@@ -1461,7 +1461,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 34,
+                "row": 33,
                 "col": 4
                 },
             "properties": {
@@ -1479,12 +1479,12 @@ const atrees =
             "desc": "Arrow Bomb's self-damage will knockback you farther away.",
             "archetype": "", 
             "archetype_req": 0, 
-            "parents": ["Cheaper Arrow Storm", "Initiator"], 
+            "parents": ["Cheaper Arrow Storm (2)", "Initiator"], 
             "dependencies": ["Arrow Bomb"], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 34,
+                "row": 33,
                 "col": 6
                 },
             "properties": {
@@ -1495,12 +1495,12 @@ const atrees =
             "desc": "Reduce the Mana cost of Escape.",
             "archetype": "", 
             "archetype_req": 0, 
-            "parents": ["Arrow Storm", "Arrow Shield"], 
+            "parents": ["Call of the Hound", "Decimator"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 35,
+                "row": 34,
                 "col": 7
                 },
             "properties": {
@@ -1519,12 +1519,12 @@ const atrees =
             "desc": "Increase your Grappling Hook's range, speed and strength.",
             "archetype": "Trapper", 
             "archetype_req": 5, 
-            "parents": ["Cheaper Escape"], 
+            "parents": ["Cheaper Escape (2)"], 
             "dependencies": ["Grappling Hook"], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 36,
+                "row": 35,
                 "col": 8
                 },
             "properties": {
@@ -1541,7 +1541,7 @@ const atrees =
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 41,
+                "row": 40,
                 "col": 5
                 },
             "properties": {
@@ -1565,7 +1565,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 20,
+                "row": 25,
                 "col": 7
             },
             "properties": {
@@ -1593,7 +1593,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 23,
+                "row": 28,
                 "col": 2
             },
             "properties": {
@@ -1613,7 +1613,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 27,
+                "row": 34,
                 "col": 1 
             },
             "properties": {
@@ -1639,7 +1639,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 30,
+                "row": 38,
                 "col": 0
             },
             "properties": {
@@ -1685,7 +1685,7 @@ const atrees =
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 14,
+                "row": 17,
                 "col": 0
             },
             "properties": {
@@ -1731,7 +1731,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 15,
+                "row": 19,
                 "col": 4
             },
             "properties": {
@@ -1762,7 +1762,7 @@ const atrees =
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 18,
+                "row": 22,
                 "col": 4
             },
             "properties": {
@@ -1788,12 +1788,12 @@ const atrees =
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
-            "parents": ["Crepuscular Ray"],
+            "parents": ["Crepuscular Ray", "Snow Storm"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 32,
+                "row": 39,
                 "col": 4
             },
             "properties": {
@@ -1824,7 +1824,7 @@ const atrees =
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 20,
+                "row": 25,
                 "col": 2
             },
             "properties": {
@@ -1859,7 +1859,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 17,
+                "row": 22,
                 "col": 8
             },
             "properties": {
@@ -1879,7 +1879,7 @@ const atrees =
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 31,
+                "row": 38,
                 "col": 8
             },
             "properties": {
@@ -1899,7 +1899,7 @@ const atrees =
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 14,
+                "row": 17,
                 "col": 2
             },
             "properties": {
@@ -1983,6 +1983,35 @@ const atrees =
                     "target_part": "Arrow Rain",
                     "cost": 0,
                     "multipliers": [120, 0, 0, 0, 0, 80]
+                }
+            ]
+        },
+        {
+            "display_name": "Decimator",
+            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 50%)",
+            "archetype": "Sharpshooter",
+            "archetype_req": 0,
+            "parents": ["Cheaper Arrow Shield"],
+            "dependencies": ["Phantom Ray"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 34,
+                "col": 5
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Phantom Ray hits",
+                    "output": {
+                        "type": "stat",
+                        "name": "PhRayDmg"
+                    },
+                    "scaling": 10,
+                    "max": 50
                 }
             ]
         }
@@ -2341,13 +2370,13 @@ const atrees =
             "desc": "After using Charge, violently crash down into the ground and deal damage",
             "archetype": "", 
             "archetype_req": 0, 
-            "parents": ["Charge"], 
+            "parents": ["Uppercut"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 6,
-                "col": 2
+                "row": 9,
+                "col": 1
             },
             "properties": {
                 "aoe": 4
@@ -2368,13 +2397,13 @@ const atrees =
             "desc": "For every 1% or 1 Raw Main Attack Damage you have from items, gain +2% Walk Speed (Max 20%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
-            "parents": ["Heavy Impact"], 
+            "parents": ["Charge"], 
             "dependencies": [], 
             "blockers": ["Tougher Skin"],
             "cost": 1, 
             "display": {
-                "row": 7,
-                "col": 0
+                "row": 6,
+                "col": 2
             },
             "properties": {
             },
