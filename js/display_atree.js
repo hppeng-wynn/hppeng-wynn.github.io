@@ -75,7 +75,7 @@ function construct_AT(elem, tree) {
             if (parent_node.display.col > node.display.col && (parent_node.display.row != node.display.row)) {
                 connector.classList.add("rotate-180");
             }
-            else {//if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
+            else if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
                 connector.classList.add("rotate-270");
             }
             resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
