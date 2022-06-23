@@ -54,18 +54,10 @@ function construct_AT(elem, tree) {
                 document.getElementById("atree-row-" + i).children[node.display.col].appendChild(connector);
                 resolve_connector(document.getElementById("atree-row-" + i).children[node.display.col]);
             }
-            // connect left
-            for (let i = parent_node.display.col + 1; i < node.display.col; i++) {
-                let connector = connect_elem.cloneNode()
-                connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
-                connector.classList.add("rotate-90");
-                connector.id = "r" + parent_node.display.row + "-c" + i + "-line"
-                document.getElementById("atree-row-" + parent_node.display.row).children[i].appendChild(connector); 
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[i]);
-            }
-
-            // connect right
-            for (let i = parent_node.display.col - 1; i > node.display.col; i--) {
+            // connect horizontally
+            let left = Math.min(parent_node.display.col, node.display.col);
+            let max = Math.max(parent_node.display.col, node.display.col);
+            for (let i = min + 1; i < max; i++) {
                 let connector = connect_elem.cloneNode()
                 connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
                 connector.classList.add("rotate-90");
@@ -75,23 +67,18 @@ function construct_AT(elem, tree) {
             }
 
             // connect corners
-            if (parent_node.display.col > node.display.col && (parent_node.display.row != node.display.row)) {
-                let connector = connect_elem.cloneNode()
-                connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
-                connector.classList.add("rotate-180");
-                connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
-                document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
-            }
 
-            if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
-                let connector = connect_elem.cloneNode()
-                connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
-                connector.classList.add("rotate-270");
-                connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
-                document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
-                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
+            let connector = connect_elem.cloneNode()
+            connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
+            connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
+            document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
+            if (parent_node.display.col > node.display.col && (parent_node.display.row != node.display.row)) {
+                connector.classList.add("rotate-180");
             }
+            else {//if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
+                connector.classList.add("rotate-270");
+            }
+            resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
         }
 
         // create node
