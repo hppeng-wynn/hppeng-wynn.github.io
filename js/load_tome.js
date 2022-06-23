@@ -25,7 +25,6 @@ async function load_tome_local() {
             console.log("Successfully read local tome db.");
         }
         get_tx.oncomplete = function(event) {
-            console.log(request.readyState);
             tomes = request.result;
             init_tome_maps();
             tload_complete = true;

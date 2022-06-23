@@ -139,7 +139,8 @@ class InputNode extends ComputeNode {
     constructor(name, input_field) {
         super(name);
         this.input_field = input_field;
-        this.input_field.addEventListener("input", () => calcSchedule(this));
+        //this.input_field.addEventListener("input", () => calcSchedule(this));
+        this.input_field.addEventListener("change", () => calcSchedule(this));
         //calcSchedule(this);  Manually fire first update for better control
     }
 

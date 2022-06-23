@@ -260,7 +260,7 @@ function init_autocomplete() {
                         if (event.detail.selection.value) {
                             event.target.value = event.detail.selection.value;
                         }
-                        event.target.dispatchEvent(new Event('input'));
+                        event.target.dispatchEvent(new Event('change'));
                     },
                 },
             }
@@ -324,7 +324,7 @@ function init_autocomplete() {
                         if (event.detail.selection.value) {
                             event.target.value = event.detail.selection.value;
                         }
-                        event.target.dispatchEvent(new Event('input'));
+                        event.target.dispatchEvent(new Event('change'));
                     },
                 },
             }

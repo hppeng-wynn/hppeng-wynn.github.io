@@ -130,7 +130,6 @@ class Build{
 
         // calc skillpoints requires statmaps only
         let result = calculate_skillpoints(this.equipment.concat(this.tomes).map((x) => x.statMap), this.weapon.statMap);
-        console.log(result);
         this.equip_order = result[0];
         // How many skillpoints the player had to assign (5 number)
         this.base_skillpoints = result[1];

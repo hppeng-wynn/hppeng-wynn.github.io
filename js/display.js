@@ -1246,6 +1246,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     critStats.append(critChance);
 
     parent_elem.append(critStats);
+    addClickableArrow(overallparent_elem);
 }
 
 function displayDefenseStats(parent_elem, statMap, insertSummary){
@@ -1764,12 +1765,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
         }
     }
 
-    //up and down arrow - done ugly
-    let arrow = document.createElement("img");
-    arrow.id = "arrow_" + overallparent_elem.id;
-    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
-    overallparent_elem.appendChild(arrow);
+    addClickableArrow(overallparent_elem);
 }
 
 /** Displays the ID costs of an item
@@ -2180,4 +2176,13 @@ function stringCDF(id,val,base,amp) {
     document.getElementById(id + "-cdf").appendChild(b1);
     document.getElementById(id + "-cdf").appendChild(b2);
     document.getElementById(id + "-cdf").appendChild(b3);
+}
+
+function addClickableArrow(elem) {
+    //up and down arrow - done ugly
+    let arrow = document.createElement("img");
+    arrow.id = "arrow_" + elem.id;
+    arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
+    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
+    elem.appendChild(arrow);
 }
