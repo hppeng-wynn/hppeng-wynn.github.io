@@ -188,7 +188,6 @@ Base64 = (function () {
                     //push and roll over uncaught bits
                     bit_vec.push(curr);
                     curr = (int >>> (32 - (total_bits % 32)));
-                    console.log(curr);
                 }
 
                 i++;
@@ -378,7 +377,6 @@ Base64 = (function () {
             //could be split between multiple new ints
             //reminder that shifts implicitly mod 32
             bit_vec[Math.floor(this.length / 32)] |= ((int & ~((~0) << length)) << (this.length));
-            console.log((int & ~(~(0) << length)));
             if (Math.floor((this.length + length) / 32) > Math.floor(this.length / 32)) {
                 bit_vec.push(int >>> (this.length));
             }
@@ -386,7 +384,6 @@ Base64 = (function () {
             throw new TypeError("BitVector must be appended with a Number or a B64 String");
         }
 
-        console.log(bit_vec);
         this.bits = new Uint32Array(bit_vec);
         this.length += length;
     }
