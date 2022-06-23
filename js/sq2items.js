@@ -250,7 +250,7 @@ function resetItemSearch() {
 }
 
 function init_items() {
-    items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i, []) );
+    items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i) );
 }
 
 load_init(init_items);

@@ -307,15 +307,17 @@
                                                 <input class="equipment-input text-light form-control form-control-sm" id="level-choice" name="level-choice" value="106" placeholder="Build level" value="" tabindex="2"/>
                                             </div>
                                             <div class="col-auto px-1 text-nowrap scaled-font">
-                                                <button class="button fw-bold text-light dark-5 scaled-font rounded" id="reset-button" onclick="sq2ResetFields()">Reset</button>
+                                                <button class="button fw-bold text-light dark-5 scaled-font rounded" id="reset-button" onclick="resetFields()">Reset</button>
                                             </div>
                                         </div>
                                         <div class="row align-items-center justify-content-center my-1">
-                                            <div class="col-auto px-1 text-nowrap scaled-font">
-                                                <button class="button fw-bold text-light dark-5 scaled-font rounded" id="copy-button" onclick="copyBuild()">Copy short</button>
-                                            </div>
-                                            <div class="col-auto px-1 text-nowrap scaled-font">
-                                                <button class="button fw-bold text-light dark-5 scaled-font rounded" id="share-button" onclick="shareBuild()">Copy for sharing</button>
+                                            <div class="row align-items-center">
+                                                <div class="col-auto px-1 text-nowrap scaled-font">
+                                                    <button class="border-dark text-light dark-5 scaled-font rounded" id=copy-button onclick="copyBuild()">Copy short</button>
+                                                </div>
+                                                <div class="col-auto px-1 text-nowrap scaled-font">
+                                                    <button class="border-dark text-light dark-5 scaled-font rounded" id=share-button onclick="shareBuild(player_build)">Copy for sharing</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -429,7 +431,7 @@
                                                 </button>
                                             </div>
                                             <div class = "col-4 py-2">
-                                                <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "resetEditableIDs(); updateStats();">
+                                                <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "resetEditableIDs();">
                                                     Reset Edited IDs
                                                 </button>
                                             </div>
@@ -617,7 +619,7 @@
                                                     Spell Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="sdPct" name="sdPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="sdPct" name="sdPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "sdPct-base">
                                                     Original Value: 0
@@ -628,7 +630,7 @@
                                                     Spell Damage Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="sdRaw" name="sdRaw" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="sdRaw" name="sdRaw" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "sdRaw-base">
                                                     Original Value: 0
@@ -639,7 +641,7 @@
                                                     Melee Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="mdPct" name="mdPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="mdPct" name="mdPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "mdPct-base">
                                                     Original Value: 0
@@ -650,7 +652,7 @@
                                                     Melee Damage Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="mdRaw" name="mdRaw" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="mdRaw" name="mdRaw" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "mdRaw-base">
                                                     Original Value: 0
@@ -663,7 +665,7 @@
                                                     Poison:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="poison" name="poison" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="poison" name="poison" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "poison-base">
                                                     Original Value: 0
@@ -674,7 +676,7 @@
                                                     Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="eDamPct" name="eDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="eDamPct" name="eDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "eDamPct-base">
                                                     Original Value: 0
@@ -685,7 +687,7 @@
                                                     Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="tDamPct" name="tDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="tDamPct" name="tDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "tDamPct-base">
                                                     Original Value: 0
@@ -696,7 +698,7 @@
                                                     Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="wDamPct" name="wDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="wDamPct" name="wDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "wDamPct-base">
                                                     Original Value: 0
@@ -709,7 +711,7 @@
                                                     Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="fDamPct" name="fDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="fDamPct" name="fDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "fDamPct-base">
                                                     Original Value: 0
@@ -720,7 +722,7 @@
                                                     Damage %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="aDamPct" name="aDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="aDamPct" name="aDamPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "aDamPct-base">
                                                     Original Value: 0
@@ -731,7 +733,7 @@
                                                     + Tier:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="atkTier" name="atkTier" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="atkTier" name="atkTier" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "atkTier-base">
                                                     Original Value: 0
@@ -750,7 +752,7 @@
                                                     Defense %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="eDefPct" name="eDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="eDefPct" name="eDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "eDefPct-base">
                                                     Original Value: 0
@@ -761,7 +763,7 @@
                                                     Defense %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="tDefPct" name="tDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="tDefPct" name="tDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "tDefPct-base">
                                                     Original Value: 0
@@ -772,7 +774,7 @@
                                                     Defense %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="wDefPct" name="wDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="wDefPct" name="wDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "wDefPct-base">
                                                     Original Value: 0
@@ -783,7 +785,7 @@
                                                     Defense %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="fDefPct" name="fDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="fDefPct" name="fDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "fDefPct-base">
                                                     Original Value: 0
@@ -796,7 +798,7 @@
                                                     Defense %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="aDefPct" name="aDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="aDefPct" name="aDefPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "aDefPct-base">
                                                     Original Value: 0
@@ -807,7 +809,7 @@
                                                     Health Regen Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="hprRaw" name="hprRaw" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="hprRaw" name="hprRaw" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "hprRaw-base">
                                                     Original Value: 0
@@ -818,7 +820,7 @@
                                                     Health Regen %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="hprPct" name="hprPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="hprPct" name="hprPct" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "hprPct-base">
                                                     Original Value: 0
@@ -829,7 +831,7 @@
                                                     Health Bonus:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="hpBonus" name="hpBonus" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="hpBonus" name="hpBonus" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "hpBonus-base">
                                                     Original Value: 0
@@ -845,7 +847,7 @@
                                                     1st Spell Cost %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spPct1" name="spPct1" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spPct1" name="spPct1" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spPct1-base">
                                                     Original Value: 0
@@ -856,7 +858,7 @@
                                                     2nd Spell Cost %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spPct2" name="spPct2" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spPct2" name="spPct2" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spPct2-base">
                                                     Original Value: 0
@@ -867,7 +869,7 @@
                                                     3rd Spell Cost %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spPct3" name="spPct3" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spPct3" name="spPct3" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spPct3-base">
                                                     Original Value: 0
@@ -878,7 +880,7 @@
                                                     4th Spell Cost %:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spPct4" name="spPct4" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spPct4" name="spPct4" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spPct4-base">
                                                     Original Value: 0
@@ -891,7 +893,7 @@
                                                     1st Spell Cost Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spRaw1" name="spRaw1" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spRaw1" name="spRaw1" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spRaw1-base">
                                                     Original Value: 0
@@ -902,7 +904,7 @@
                                                     2nd Spell Cost Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spRaw2" name="spRaw2" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spRaw2" name="spRaw2" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spRaw2-base">
                                                     Original Value: 0
@@ -913,7 +915,7 @@
                                                     3rd Spell Cost Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spRaw3" name="spRaw3" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spRaw3" name="spRaw3" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spRaw3-base">
                                                     Original Value: 0
@@ -924,7 +926,7 @@
                                                     4th Spell Cost Raw:
                                                 </div>
                                                 <div class = "row">
-                                                    <input type = "number" placeholder = "0" id="spRaw4" name="spRaw4" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" oninput = "updateStats()"/>
+                                                    <input type = "number" placeholder = "0" id="spRaw4" name="spRaw4" value="0" class="border-dark text-light dark-10 rounded scaled-font form-control form-control-sm"/>
                                                 </div>
                                                 <div class = "row" id = "spRaw4-base">
                                                     Original Value: 0
@@ -942,27 +944,27 @@
                                     <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                         <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="updateBoosts('vanish-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="update_boosts('vanish-boost')">
                                                     Vanish (+80%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="updateBoosts('warscream-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="update_boosts('warscream-boost')">
                                                     War Scream (+10%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="updateBoosts('yourtotem-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="yourtotem-boost" onclick="update_boosts('yourtotem-boost')">
                                                     Your Totem (+35%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="updateBoosts('allytotem-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="allytotem-boost" onclick="update_boosts('allytotem-boost')">
                                                     Ally Totem (+15%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="updateBoosts('bash-boost', true)">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="update_boosts('bash-boost')">
                                                     Bash (+50%)
                                                 </button>
                                             </div>
@@ -999,27 +1001,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-1" onclick = "updatePowderSpecials('Quake-1')">
                                                             Lv.4 [e4e4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-2" onclick = "updatePowderSpecials('Quake-2')">
                                                             Lv.4.5 [e5e4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-3" onclick = "updatePowderSpecials('Quake-3')">
                                                             Lv.5 [e5e5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-4" onclick = "updatePowderSpecials('Quake-4')">
                                                             Lv.5.5 [e6e5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Quake-5" onclick = "updatePowderSpecials('Quake-5')">
                                                             Lv.6 [e6e6]
                                                         </button>
                                                     </div>
@@ -1029,7 +1031,7 @@
                                                 Rage (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "updateArmorPowderSpecials('str_boost_armor', true)">
+                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "update_armor_powder_specials('str_boost_armor')">
                                                 <input type="text" id="str_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "str_boost_armor_label" for="str-boost-armor">% Earth Dmg Boost: 0</label>
                                             </div>
@@ -1043,27 +1045,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-1" onclick = "updatePowderSpecials('Chain_Lightning-1')">
                                                             Lv.4 [t4t4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-2" onclick = "updatePowderSpecials('Chain_Lightning-2')">
                                                             Lv.4.5 [t5t4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-3" onclick = "updatePowderSpecials('Chain_Lightning-3')">
                                                             Lv.5 [t5t5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-4" onclick = "updatePowderSpecials('Chain_Lightning-4')">
                                                             Lv.5.5 [t6t5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Chain_Lightning-5" onclick = "updatePowderSpecials('Chain_Lightning-5')">
                                                             Lv.6 [t6t6]
                                                         </button>
                                                     </div>
@@ -1073,7 +1075,7 @@
                                                 Kill Streak (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('dex_boost_armor', true)">
+                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "update_armor_powder_specials('dex_boost_armor')">
                                                 <input type="text" id="dex_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "dex_boost_armor_label" for="dex-boost-armor">% Thunder Dmg Boost: 0</label>
                                             </div>
@@ -1087,27 +1089,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-1" onclick = "updatePowderSpecials('Curse-1')">
                                                             Lv.4 [w4w4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-2" onclick = "updatePowderSpecials('Curse-2')">
                                                             Lv.4.5 [w5w4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-3" onclick = "updatePowderSpecials('Curse-3')">
                                                             Lv.5 [w5w5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-4" onclick = "updatePowderSpecials('Curse-4')">
                                                             Lv.5.5 [w6w5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Curse-5" onclick = "updatePowderSpecials('Curse-5')">
                                                             Lv.6 [w6w6]
                                                         </button>
                                                     </div>
@@ -1117,7 +1119,7 @@
                                                 Concentration (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('int_boost_armor', true)">
+                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "update_armor_powder_specials('int_boost_armor')">
                                                 <input type="text" id="int_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "int_boost_armor_label" for="dex-boost-armor">% Water Dmg Boost: 0</label>
                                             </div>
@@ -1131,27 +1133,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-1" onclick = "updatePowderSpecials('Courage-1')">
                                                             Lv.4 [f4f4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-2" onclick = "updatePowderSpecials('Courage-2')">
                                                             Lv.4.5 [f5f4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-3" onclick = "updatePowderSpecials('Courage-3')">
                                                             Lv.5 [f5f5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-4" onclick = "updatePowderSpecials('Courage-4')">
                                                             Lv.5.5 [f6f5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Courage-5" onclick = "updatePowderSpecials('Courage-5')">
                                                             Lv.6 [f6f6]
                                                         </button>
                                                     </div>
@@ -1161,7 +1163,7 @@
                                                 Endurance (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "updateArmorPowderSpecials('def_boost_armor', true)">
+                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "update_armor_powder_specials('def_boost_armor')">
                                                 <input type="text" id="def_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "def_boost_armor_label" for="def-boost-armor">% Fire Dmg Boost: 0</label>
                                             </div>
@@ -1175,27 +1177,27 @@
                                             <div class="col skp-tooltip dark-6 rounded-bottom my-3 my-xl-1">
                                                 <div class="row row-cols-2 row-cols-xl-0 text-nowrap justify-content-center">
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-1" onclick = "updatePowderSpecials('Wind_Prison-1')">
                                                             Lv.4 [a4a4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-2" onclick = "updatePowderSpecials('Wind_Prison-2')">
                                                             Lv.4.5 [a5a4]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-3" onclick = "updatePowderSpecials('Wind_Prison-3')">
                                                             Lv.5 [a5a5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-4" onclick = "updatePowderSpecials('Wind_Prison-4')">
                                                             Lv.5.5 [a6a5]
                                                         </button>
                                                     </div>
                                                     <div class="col-auto p-1">
-                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5', true)">
+                                                        <button class = "button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id = "Wind_Prison-5" onclick = "updatePowderSpecials('Wind_Prison-5')">
                                                             Lv.6 [a6a6]
                                                         </button>
                                                     </div>
@@ -1205,7 +1207,7 @@
                                                 Dodge (Passive)
                                             </div>
                                             <div class="col">
-                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "updateArmorPowderSpecials('agi_boost_armor', true)">
+                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "update_armor_powder_specials('agi_boost_armor')">
                                                 <input type="text" id="agi_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
                                                 <label id = "agi_boost_armor_label" for="agi-boost-armor">% Air Dmg Boost: 0</label>
                                             </div>
@@ -1289,7 +1291,7 @@
                 </div>
                 <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <div id="weaponTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
+                <!--div id="weaponTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
                 <div id="weaponTome2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
@@ -1302,7 +1304,7 @@
                 <div id="armorTome4-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
                 <div id="guildTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
+                </div-->
                 <div class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3" id = "build-order">
                 </div>
                 <div class = "rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark p-3" id = "set-info"></div>
@@ -1381,6 +1383,7 @@
     <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
     <script type="text/javascript" src="../js/utils.js"></script>
     <script type="text/javascript" src="../js/build_utils.js"></script>
+    <script type="text/javascript" src="../js/computation_graph.js"></script>
     <!-- <script type="text/javascript" src="../js/icons.js"></script> -->
     <script type="text/javascript" src="../js/sq2icons.js"></script>
     <script type="text/javascript" src="../js/powders.js"></script>
@@ -1388,10 +1391,8 @@
     <script type="text/javascript" src="../js/damage_calc.js"></script>
 
     <script type="text/javascript" src="../js/display_constants.js"></script>
-    <script type="text/javascript" src="../js/sq2display_constants.js"></script>
 
     <script type="text/javascript" src="../js/display.js"></script>
-    <script type="text/javascript" src="../js/sq2display.js"></script>
 
     <script type="text/javascript" src="../js/query.js"></script>
     <script type="text/javascript" src="../js/query_2.js"></script>
@@ -1400,12 +1401,15 @@
     <script type="text/javascript" src="../js/load_tome.js"></script>
     <script type="text/javascript" src="../js/custom.js"></script> 
     <script type="text/javascript" src="../js/craft.js"></script>  
-    <script type="text/javascript" src="../js/sq2build.js"></script>
-    <script type="text/javascript" src="../js/sq2builder.js"></script>
+    <script type="text/javascript" src="../js/build.js"></script>
+    <script type="text/javascript" src="../js/build_constants.js"></script>
+    <script type="text/javascript" src="../js/build_encode_decode.js"></script>
+    <script type="text/javascript" src="../js/builder.js"></script>
+    <script type="text/javascript" src="../js/builder_graph.js"></script>
     <script type="text/javascript" src="../js/expr_parser.js"></script>
     <script type="text/javascript" src="../js/items.js"></script>
     <script type="text/javascript" src="../js/sq2items.js"></script>
-    <script type="text/javascript" src="../js/sq2bs.js"></script>
+    <script type="text/javascript" src="../js/optimize.js"></script>
 
 </body>
 </html> 

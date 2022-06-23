@@ -1,32 +1,8 @@
 let getUrl = window.location;
 const url_base = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
-const zip = (a, b) => a.map((k, i) => [k, b[i]]);
-
-//updates all the OGP tags for a webpage. Should be called when build changes
-function updateOGP() {
-    //update the embed URL
-    let url_elem = document.getElementById("ogp-url");
-    if (url_elem) {
-        url_elem.content = url_base+location.hash;
-    }
-
-    //update the embed text content
-    let build_elem = document.getElementById("ogp-build-list");
-    if (build_elem && player_build) {
-        let text = "WynnBuilder build:\n"+
-            "> "+player_build.helmet.get("displayName")+"\n"+
-            "> "+player_build.chestplate.get("displayName")+"\n"+
-            "> "+player_build.leggings.get("displayName")+"\n"+
-            "> "+player_build.boots.get("displayName")+"\n"+
-            "> "+player_build.ring1.get("displayName")+"\n"+
-            "> "+player_build.ring2.get("displayName")+"\n"+
-            "> "+player_build.bracelet.get("displayName")+"\n"+
-            "> "+player_build.necklace.get("displayName")+"\n"+
-            "> "+player_build.weapon.get("displayName")+" ["+player_build.weapon.get("powders").map(x => powderNames.get(x)).join("")+"]";
-        build_elem.content = text;
-    }
-}
+const zip2 = (a, b) => a.map((k, i) => [k, b[i]]);
+const zip3 = (a, b, c) => a.map((k, i) => [k, b[i], c[i]]);
 
 function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);
