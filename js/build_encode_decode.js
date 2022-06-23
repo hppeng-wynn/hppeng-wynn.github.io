@@ -157,7 +157,7 @@ function encodeBuild(build, powders, skillpoints) {
             } else if (item.statMap.get("crafted")) {
                 build_string += "CR-"+encodeCraft(item);
             } else if (item.statMap.get("category") === "tome") {
-                let tome_id = item.get("id");
+                let tome_id = item.statMap.get("id");
                 if (tome_id <= 60) {
                     // valid normal tome. ID 61-63 is for NONE tomes.
                     build_version = Math.max(build_version, 6);

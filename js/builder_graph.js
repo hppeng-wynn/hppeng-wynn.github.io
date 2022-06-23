@@ -259,7 +259,10 @@ class ItemInputDisplayNode extends ComputeNode {
             // Doesn't exist for weapons.
             this.health_field.textContent = "0";
         }
-        this.level_field.textContent = "0";
+        if (this.level_field) {
+            // Doesn't exist for tomes.
+            this.level_field.textContent = "0";
+        }
         if (!item) {
             this.input_field.classList.add("is-invalid");
             return null;
@@ -274,7 +277,10 @@ class ItemInputDisplayNode extends ComputeNode {
             // Doesn't exist for weapons.
             this.health_field.textContent = item.statMap.get('hp');
         }
-        this.level_field.textContent = item.statMap.get('lvl');
+        if (this.level_field) {
+            // Doesn't exist for tomes.
+            this.level_field.textContent = item.statMap.get('lvl');
+        }
         this.image.classList.add(tier + "-shadow");
         return null;
     }
@@ -401,7 +407,14 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('ring1-input'),
             input_map.get('ring2-input'),
             input_map.get('bracelet-input'),
-            input_map.get('necklace-input')
+            input_map.get('necklace-input'),
+            input_map.get('weaponTome1-input'),
+            input_map.get('weaponTome2-input'),
+            input_map.get('armorTome1-input'),
+            input_map.get('armorTome2-input'),
+            input_map.get('armorTome3-input'),
+            input_map.get('armorTome4-input'),
+            input_map.get('guildTome1-input')
         ];
         let weapon = input_map.get('weapon-input');
         let level = input_map.get('level-input');
@@ -759,7 +772,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
                 }
                 let baditem = document.createElement("p"); 
                     baditem.classList.add("nocolor"); baditem.classList.add("itemp"); 
-                    baditem.textContent = item.get("displayName") + " requires level " + item_lvl + " to use.";
+                    baditem.textContent = item.statMap.get("displayName") + " requires level " + item_lvl + " to use.";
                     lvlWarning.appendChild(baditem);
             }
         }
@@ -791,7 +804,13 @@ class AggregateStatsNode extends ComputeNode {
         for (const [k, v] of input_map.entries()) {
             for (const [k2, v2] of v.entries()) {
                 if (output_stats.has(k2)) {
-                    output_stats.set(k2, v2 + output_stats.get(k2));
+                    // TODO: ugly AF
+                    if (k2 === 'damageMultiplier' || k2 === 'defMultiplier') {
+                        output_stats.set(k2, v2 * output_stats.get(k2));
+                    }
+                    else {
+                        output_stats.set(k2, v2 + output_stats.get(k2));
+                    }
                 }
                 else {
                     output_stats.set(k2, v2);
@@ -815,8 +834,6 @@ class AggregateEditableIDNode extends ComputeNode {
         const weapon = input_map.get('weapon'); input_map.delete('weapon');
 
         const output_stats = new Map(build.statMap);
-        output_stats.set("damageMultiplier", 1);
-        output_stats.set("defMultiplier", 1);
         for (const [k, v] of input_map.entries()) {
             output_stats.set(k, v);
         }
@@ -943,6 +960,15 @@ function builder_graph_init() {
         new ItemDisplayNode(eq+'-item-display', display_elem).link_to(item_input);
         //new PrintNode(eq+'-debug').link_to(item_input);
         //document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip');"); //toggle_plus_minus('" + eq + "-pm'); 
+    }
+    console.log(none_tomes);
+    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2]])) {
+        let input_field = document.getElementById(eq+"-choice");
+        let item_image = document.getElementById(eq+"-img");
+
+        let item_input = new ItemInputNode(eq+'-input', input_field, none_item);
+        item_nodes.push(item_input);
+        new ItemInputDisplayNode(eq+'-input-display', eq, item_image).link_to(item_input);
     }
 
     // weapon image changer node.

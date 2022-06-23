@@ -155,10 +155,12 @@ class Build{
     */
     initBuildStats(){
 
-        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi"];
+        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi", "dmgMobs", "defMobs"];
 
         //Create a map of this build's stats
         let statMap = new Map();
+        statMap.set("damageMultiplier", 1);
+        statMap.set("defMultiplier", 1);
 
         for (const staticID of staticIDs) {
             statMap.set(staticID, 0);
@@ -176,7 +178,15 @@ class Build{
             }
             for (const staticID of staticIDs) {
                 if (item_stats.get(staticID)) {
-                    statMap.set(staticID, statMap.get(staticID) + item_stats.get(staticID));
+                    if (staticID === "dmgMobs") {
+                        statMap.set('damageMultiplier', statMap.get('damageMultiplier') * item_stats.get(staticID));
+                    }
+                    else if (staticID === "defMobs") {
+                        statMap.set('defMultiplier', statMap.get('defMultiplier') * item_stats.get(staticID));
+                    }
+                    else {
+                        statMap.set(staticID, statMap.get(staticID) + item_stats.get(staticID));
+                    }
                 }
             }
             if (item_stats.get("majorIds")) {

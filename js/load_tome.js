@@ -1,4 +1,4 @@
-const TOME_DB_VERSION = 1;
+const TOME_DB_VERSION = 2;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let tdb;
@@ -120,6 +120,11 @@ async function load_tome_init() {
     });
 }
 
+let none_tomes = [
+    ["tome", "weaponTome", "No Weapon Tome"],
+    ["tome", "armorTome", "No Armor Tome"],
+    ["tome", "guildTome", "No Guild Tome"]
+];
 function init_tome_maps() {
     //warp
     tomeMap = new Map();
@@ -131,17 +136,12 @@ function init_tome_maps() {
         tomeLists.set(it, []);
     }
 
-    let noneTomes = [
-        ["tome", "weaponTome", "No Weapon Tome"],
-        ["tome", "armorTome", "No Armor Tome"],
-        ["tome", "guildTome", "No Guild Tome"]
-    ];
     for (let i = 0; i < 3; i++) {
         let tome = Object();
         tome.slots = 0;
-        tome.category = noneTomes[i][0];
-        tome.type = noneTomes[i][1];
-        tome.name = noneTomes[i][2];
+        tome.category = none_tomes[i][0];
+        tome.type = none_tomes[i][1];
+        tome.name = none_tomes[i][2];
         tome.displayName = tome.name;
         tome.set = null;
         tome.quest = null;
@@ -160,14 +160,14 @@ function init_tome_maps() {
         //dependency - load.js
         clean_item(tome);
 
-        noneTomes[i] = tome;
+        none_tomes[i] = tome;
     }
-    tomes = tomes.concat(noneTomes);
+    tomes = tomes.concat(none_tomes);
     for (const tome of tomes) {
         if (tome.remapID === undefined) {
             tomeLists.get(tome.type).push(tome.displayName);
             tomeMap.set(tome.displayName, tome);
-            if (noneTomes.includes(tome)) {
+            if (none_tomes.includes(tome)) {
                 tomeIDMap.set(tome.id, "");
             }
             else {
