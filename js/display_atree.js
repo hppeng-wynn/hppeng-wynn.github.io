@@ -68,17 +68,19 @@ function construct_AT(elem, tree) {
 
             // connect corners
 
-            let connector = connect_elem.cloneNode()
-            connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
-            connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
-            document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
-            if (parent_node.display.col > node.display.col && (parent_node.display.row != node.display.row)) {
-                connector.classList.add("rotate-180");
+            if (parent_node.display.row != node.display.row && parent_node.display.col != node.display.col) {
+                let connector = connect_elem.cloneNode()
+                connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
+                connector.id = "r" + parent_node.display.row + "-c" + node.display.col + "-angle"
+                document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col].appendChild(connector);
+                if (parent_node.display.col > node.display.col) {
+                    connector.classList.add("rotate-180");
+                }
+                else {// if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
+                    connector.classList.add("rotate-270");
+                }
+                resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
             }
-            else if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
-                connector.classList.add("rotate-270");
-            }
-            resolve_connector(document.getElementById("atree-row-" + parent_node.display.row).children[node.display.col]);
         }
 
         // create node
