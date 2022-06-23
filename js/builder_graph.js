@@ -894,7 +894,6 @@ class SkillPointSetterNode extends ComputeNode {
     }
 
     compute_func(input_map) {
-        console.log("a");
         if (input_map.size !== 1) { throw "SkillPointSetterNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const [idx, elem] of skp_order.entries()) {

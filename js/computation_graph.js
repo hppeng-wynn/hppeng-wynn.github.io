@@ -105,7 +105,7 @@ class ComputeNode {
  *
  * @param node : ComputeNode to schedule an update for.
  */
-function calcSchedule(node) {
+function calcSchedule(node, timeout) {
     if (node.update_task !== null) {
         clearTimeout(node.update_task);
     }
@@ -113,7 +113,7 @@ function calcSchedule(node) {
     node.update_task = setTimeout(function() {
         node.update();
         node.update_task = null;
-    }, 500);
+    }, timeout);
 }
 
 class PrintNode extends ComputeNode {
@@ -139,8 +139,8 @@ class InputNode extends ComputeNode {
     constructor(name, input_field) {
         super(name);
         this.input_field = input_field;
-        //this.input_field.addEventListener("input", () => calcSchedule(this));
-        this.input_field.addEventListener("change", () => calcSchedule(this));
+        this.input_field.addEventListener("input", () => calcSchedule(this, 5000));
+        this.input_field.addEventListener("change", () => calcSchedule(this, 500));
         //calcSchedule(this);  Manually fire first update for better control
     }
 

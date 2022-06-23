@@ -293,7 +293,7 @@ function init_autocomplete() {
             resultsList: {
                 maxResults: 1000,
                 tabSelect: true,
-                noResults: true,
+                noResults: false,
                 class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
                 element: (list, data) => {
                     // dynamic result loc
