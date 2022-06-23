@@ -55,7 +55,7 @@ function construct_AT(elem, tree) {
                 resolve_connector(document.getElementById("atree-row-" + i).children[node.display.col]);
             }
             // connect horizontally
-            let left = Math.min(parent_node.display.col, node.display.col);
+            let min = Math.min(parent_node.display.col, node.display.col);
             let max = Math.max(parent_node.display.col, node.display.col);
             for (let i = min + 1; i < max; i++) {
                 let connector = connect_elem.cloneNode()
