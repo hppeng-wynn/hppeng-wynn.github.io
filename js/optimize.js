@@ -19,7 +19,7 @@ function optimizeStrDex() {
         total_skillpoints[1] += Math.min(max_dex_boost, dex_bonus);
 
         // Calculate total 3rd spell damage
-        let spell = spell_table[player_build.weapon.get("type")][2];
+        let spell = spell_table[player_build.weapon.statMap.get("type")][2];
         const stats = player_build.statMap;
         let critChance = skillPointsToPercentage(total_skillpoints[1]);
         let save_damages = [];
@@ -41,8 +41,7 @@ function optimizeStrDex() {
             if (part.type === "damage") {
                 let _results = calculateSpellDamage(stats, part.conversion,
                                         stats.get("sdRaw"), stats.get("sdPct"), 
-                                        part.multiplier / 100, player_build.weapon, total_skillpoints,
-                                        player_build.damageMultiplier, player_build.externalStats);
+                                        part.multiplier / 100, player_build.weapon.statMap, total_skillpoints, 1);
                 let totalDamNormal = _results[0];
                 let totalDamCrit = _results[1];
                 let results = _results[2];
@@ -75,27 +74,16 @@ function optimizeStrDex() {
 
         str_bonus -= 1;
         dex_bonus += 1;
-        
     }
-    // TODO: reduce duplicated code, @calculateBuild
-    let skillpoints = player_build.total_skillpoints;
-    let delta_total = 0;
+    console.log(best_skillpoints);
+
+    // TODO do not merge for performance reasons
     for (let i in skp_order) {
-        let manual_assigned = best_skillpoints[i];
-        let delta = manual_assigned - skillpoints[i];
-        skillpoints[i] = manual_assigned;
-        player_build.base_skillpoints[i] += delta;
-        delta_total += delta;
+        skp_inputs[i].input_field.value = best_skillpoints[i];
+        skp_inputs[i].mark_dirty();
     }
-    player_build.assigned_skillpoints += delta_total;
-        
-    try {
-        calculateBuildStats();
-        if (player_build.errored)
-            throw new ListError(player_build.errors);
-    }
-    catch (error) {
-        handleBuilderError(error);
+    for (let i in skp_order) {
+        skp_inputs[i].update();
     }
 }
 

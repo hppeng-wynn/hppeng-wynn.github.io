@@ -223,9 +223,8 @@ class ItemInputNode extends InputNode {
 
             for (const [i, x] of zip2(equipment_inputs, replace_items)) { setValue(i, x); }
 
-            // NOTE: DO NOT REORDER FOR PERFORMANCE REASONS
-            for (const node of item_nodes) { node.mark_dirty(); }
-            for (const node of item_nodes) { node.update(); }
+            for (const node of item_nodes) { calcSchedule(node, 10); }
+            return this.compute_func(input_map);
         }
         return null;
     }
@@ -942,6 +941,7 @@ let item_nodes = [];
 let powder_nodes = [];
 let spelldmg_nodes = [];
 let edit_input_nodes = [];
+let skp_inputs = [];
 
 function builder_graph_init() {
     // Phase 1/2: Set up item input, propagate updates, etc.
@@ -1022,7 +1022,6 @@ function builder_graph_init() {
     edit_id_output = new EditableIDSetterNode(edit_input_nodes);    // Makes shallow copy of list.
     edit_id_output.link_to(build_node);
 
-    let skp_inputs = [];
     for (const skp of skp_order) {
         const elem = document.getElementById(skp+'-skp');
         const node = new SumNumberInputNode('builder-'+skp+'-input', elem);
