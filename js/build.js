@@ -105,7 +105,7 @@ class Build{
      *                      In order: 2x Weapon Mastery Tome, 4x Armor Mastery Tome, 1x Guild Tome.
      *                      2x Slaying Mastery Tome, 2x Dungeoneering Mastery Tome, 2x Gathering Mastery Tome are in game, but do not have "useful" stats (those that affect damage calculations or building)
      */
-    constructor(level, items, tomes, weapon){
+    constructor(level, items, weapon){
 
         if (level < 1) { //Should these be constants?
             this.level = 1;
@@ -123,13 +123,12 @@ class Build{
 
         this.availableSkillpoints = levelToSkillPoints(this.level);
         this.equipment = items;
-        this.tomes = tomes;
         this.weapon = weapon;
-        this.items = this.equipment.concat([this.weapon]).concat(this.tomes);
+        this.items = this.equipment.concat([this.weapon]);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
 
         // calc skillpoints requires statmaps only
-        let result = calculate_skillpoints(this.equipment.concat(this.tomes).map((x) => x.statMap), this.weapon.statMap);
+        let result = calculate_skillpoints(this.equipment.map((x) => x.statMap), this.weapon.statMap);
         this.equip_order = result[0];
         // How many skillpoints the player had to assign (5 number)
         this.base_skillpoints = result[1];
@@ -145,7 +144,7 @@ class Build{
     /*Returns build in string format
     */
     toString(){
-        return [this.equipment,this.weapon,this.tomes].flat();
+        return [this.equipment,this.weapon].flat();
     }
 
 

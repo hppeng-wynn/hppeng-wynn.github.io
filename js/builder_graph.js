@@ -382,8 +382,6 @@ class URLUpdateNode extends ComputeNode {
  * Create a "build" object from a set of equipments.
  * Returns a new Build object, or null if all items are NONE items.
  *
- * TODO: add tomes
- *
  * Signature: BuildAssembleNode(helmet-input: Item,
  *                              chestplate-input: Item,
  *                              leggings-input: Item,
@@ -426,7 +424,7 @@ class BuildAssembleNode extends ComputeNode {
         if (all_none && !location.hash) {
             return null;
         }
-        return new Build(level, equipments, [], weapon);
+        return new Build(level, equipments, weapon);
     }
 }
 
@@ -1007,8 +1005,6 @@ function builder_graph_init() {
 
     let build_disp_node = new BuildDisplayNode()
     build_disp_node.link_to(build_node, 'build');
-    let build_warnings_node = new DisplayBuildWarningsNode();
-    build_warnings_node.link_to(build_node, 'build');
 
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
     let stat_agg_node = new AggregateStatsNode();
@@ -1026,14 +1022,15 @@ function builder_graph_init() {
     edit_id_output = new EditableIDSetterNode(edit_input_nodes);    // Makes shallow copy of list.
     edit_id_output.link_to(build_node);
 
+    let skp_inputs = [];
     for (const skp of skp_order) {
         const elem = document.getElementById(skp+'-skp');
         const node = new SumNumberInputNode('builder-'+skp+'-input', elem);
 
         edit_agg_node.link_to(node, skp);
         build_encode_node.link_to(node, skp);
-        build_warnings_node.link_to(node, skp);
         edit_input_nodes.push(node);
+        skp_inputs.push(node);
     }
     stat_agg_node.link_to(edit_agg_node);
     build_disp_node.link_to(stat_agg_node, 'stats');
@@ -1078,6 +1075,13 @@ function builder_graph_init() {
     
     let skp_output = new SkillPointSetterNode(edit_input_nodes);
     skp_output.link_to(build_node);
+
+    let build_warnings_node = new DisplayBuildWarningsNode();
+    build_warnings_node.link_to(build_node, 'build');
+    for (const [skp_input, skp] of zip2(skp_inputs, skp_order)) {
+        build_warnings_node.link_to(skp_input, skp);
+    }
+    build_warnings_node.update();
 
     // call node.update() for each skillpoint node and stat edit listener node manually
     // NOTE: the text boxes for skill points are already filled out by decodeBuild() so this will fix them

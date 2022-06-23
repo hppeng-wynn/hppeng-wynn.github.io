@@ -119,11 +119,11 @@ function decodeBuild(url_tag) {
         // Tomes.
         if (version == 6) {
             //tome values do not appear in anything before v6.
-            for (let i = 0; i < 7; ++i) {
+            for (let i in tomes) {
                 let tome_str = info[1].charAt(i);
-                for (let i in tomes) {
-                    setValue(tomeInputs[i], getTomeNameFromID(Base64.toInt(tome_str)));
-                }
+                let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
+                console.log(tome_name);
+                setValue(tomeInputs[i], tome_name);
             }
             info[1] = info[1].slice(7);
         }
