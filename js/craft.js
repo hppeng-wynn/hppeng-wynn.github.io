@@ -170,7 +170,6 @@ class Craft{
                 statMap.set(e + "Dam", "0-0");
                 statMap.set(e + "DamLow", "0-0");
             }
-            //statMap.set("damageBonus", [statMap.get("eDamPct"), statMap.get("tDamPct"), statMap.get("wDamPct"), statMap.get("fDamPct"), statMap.get("aDamPct")]);
             statMap.set("category","weapon");
             statMap.set("atkSpd",this.atkSpd);
         } 
@@ -190,7 +189,6 @@ class Craft{
         let amounts = this.recipe.get("materials").map(x=> x.get("amount"));
         //Mat Multipliers - should work!
         matmult = (tierToMult[tiers[0]]*amounts[0] + tierToMult[tiers[1]]*amounts[1]) / (amounts[0]+amounts[1]);
-        console.log(matmult);
 
         let low = this.recipe.get("healthOrDamage")[0];
         let high = this.recipe.get("healthOrDamage")[1];
@@ -382,12 +380,10 @@ class Craft{
 
         statMap.set("reqs",[0,0,0,0,0]);
         statMap.set("skillpoints", [0,0,0,0,0]);
-        statMap.set("damageBonus",[0,0,0,0,0]);
         for (const e in skp_order) {
             statMap.set(skp_order[e], statMap.get("maxRolls").has(skp_order[e]) ? statMap.get("maxRolls").get(skp_order[e]) : 0);
             statMap.get("skillpoints")[e] = statMap.get("maxRolls").has(skp_order[e]) ? statMap.get("maxRolls").get(skp_order[e]) : 0;
             statMap.get("reqs")[e] = statMap.has(skp_order[e]+"Req") && !consumableTypes.includes(statMap.get("type"))? statMap.get(skp_order[e]+"Req") : 0;
-            statMap.get("damageBonus")[e] = statMap.has(skp_order[e]+"DamPct") ? statMap.get(skp_order[e]+"DamPct") : 0;
         }
         for (const id of rolledIDs) {
             if (statMap.get("minRolls").has(id)) {
