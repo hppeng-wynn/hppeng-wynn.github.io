@@ -162,8 +162,6 @@ function construct_AT(elem, tree) {
                 this.classList.add("atree-selected");
                 this.style.backgroundImage = 'url("../media/atree/node-selected.png")';
             }
-
-            toggle_connectors(connector_list);
         });
         document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
     };
