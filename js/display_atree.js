@@ -121,7 +121,7 @@ function construct_AT(elem, tree) {
         node_elem.classList.add("fake-button");
 
         let active_tooltip = document.createElement('div');
-        active_tooltip.classList.add("rounded-bottom", "dark-7", "border", "mb-2", "mx-auto");
+        active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
         //was causing active element boxes to be 0 width 
         // active_tooltip.style.width = elem.getBoundingClientRect().width * .80 + "px";
         active_tooltip.style.display = "none";
