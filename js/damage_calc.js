@@ -1,31 +1,67 @@
 const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
-// Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
-// If spell mult is 0, its melee damage and we don't multiply by attack speed.
-function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier) {
-    let buildStats = new Map(stats);
-    //6x for damages, normal min normal max crit min crit max
 
-    let powders = weapon.get("powders").slice();
-    
-    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
-    let damages = [];
-    const rawDamages = buildStats.get("damageRaw");
-    for (let i = 0; i < rawDamages.length; i++) {
-        const damage_vals = rawDamages[i].split("-").map(Number);
-        damages.push(damage_vals);
+// GRR THIS MUTATES THE ITEM
+function get_base_dps(item) {
+    const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
+    //SUPER JANK @HPP PLS FIX
+    let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
+    if (item.get("tier") !== "Crafted") {
+        let weapon_result = apply_weapon_powder(item);
+        let damages = weapon_result[0];
+        let total_damage = 0;
+        for (const i in damage_keys) {
+            total_damage += damages[i][0] + damages[i][1];
+            item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
+        }
+        total_damage = total_damage / 2;
+        return total_damage * attack_speed_mult;
+    } else {
+        let base_low = [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")];
+        let results_low = apply_weapon_powder(item, base_low);
+        let damage_low = results_low[2];
+        let base_high = [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")];
+        let results_high = apply_weapon_powder(item, base_high);
+        let damage_high = results_high[2];
+        
+        let total_damage_min = 0;
+        let total_damage_max = 0;
+        for (const i in damage_keys) {
+            total_damage_min += damage_low[i][0] + damage_low[i][1];
+            total_damage_max += damage_high[i][0] + damage_high[i][1];
+            item.set(damage_keys[i], damage_low[i][0]+"-"+damage_low[i][1]+"\u279c"+damage_high[i][0]+"-"+damage_high[i][1]);
+        }
+        total_damage_min = attack_speed_mult * total_damage_min / 2;
+        total_damage_max = attack_speed_mult * total_damage_max / 2;
+        return [total_damage_min, total_damage_max];
     }
+}
+
+/**
+ * weapon: Weapon to apply powder to
+ * damageBases: used by crafted
+ */
+function apply_weapon_powder(weapon, damageBases) {
+    let powders = weapon.get("powders").slice();
+
+    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
+    let damages = [
+        weapon.get('nDam').split('-').map(Number),
+        weapon.get('eDam').split('-').map(Number),
+        weapon.get('tDam').split('-').map(Number),
+        weapon.get('wDam').split('-').map(Number),
+        weapon.get('fDam').split('-').map(Number),
+        weapon.get('aDam').split('-').map(Number)
+    ];
 
     // Applying spell conversions
     let neutralBase = damages[0].slice();
     let neutralRemainingRaw = damages[0].slice();
-
   
     //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
 
     //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
     //1st round - apply each as ingred, 2nd round - apply as normal
-    if (weapon.get("tier") === "Crafted") {
-        let damageBases = buildStats.get("damageBases").slice();
+    if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
         for (const p of powders.concat(weapon.get("ingredPowders"))) {
             let powder = powderStats[p];  //use min, max, and convert
             let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
@@ -34,26 +70,13 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
             damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
         }
         //update all damages
-        if(!weapon.get("custom")) {
-            for (let i = 0; i < damages.length; i++) {
-                damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
-            }
+        for (let i = 0; i < damages.length; i++) {
+            damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
         }
-        
         neutralRemainingRaw = damages[0].slice();
         neutralBase = damages[0].slice();
     }
     
-    for (let i = 0; i < 5; ++i) {
-        let conversionRatio = spellConversions[i+1]/100;
-        let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
-        let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-        damages[i+1][0] = Math.floor(round_near(damages[i+1][0] + min_diff));
-        damages[i+1][1] = Math.floor(round_near(damages[i+1][1] + max_diff));
-        neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
-        neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
-    }
-
     //apply powders to weapon
     for (const powderID of powders) {
         const powder = powderStats[powderID];
@@ -72,69 +95,148 @@ function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier,
         damages[element+1][1] += powder.max;
     }
 
+    // The ordering of these two blocks decides whether neutral is present when converted away or not.
+    let present_elements = []
+    for (const damage of damages) {
+        present_elements.push(damage[1] > 0);
+    }
+
+    // The ordering of these two blocks decides whether neutral is present when converted away or not.
     damages[0] = neutralRemainingRaw;
+    return [damages, present_elements];
+}
 
-    let damageMult = damageMultiplier;
-    let melee = false;
-    // If we are doing melee calculations:
-    if (spellMultiplier == 0) {
-        spellMultiplier = 1;
-        melee = true;
-    }
-    else {
-        damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(buildStats.get("atkSpd"))];
-    }
-    //console.log(damages);
-    //console.log(damageMult);
-    rawModifier *= spellMultiplier * damageMultiplier;
-    let totalDamNorm = [0, 0];
-    let totalDamCrit = [0, 0];
-    let damages_results = [];
-    // 0th skillpoint is strength, 1st is dex.
-    let str = total_skillpoints[0];
-    let strBoost = 1 + skillPointsToPercentage(str);
-    if(!melee){
-        let baseDam = rawModifier * strBoost;
-        let baseDamCrit = rawModifier * (1 + strBoost);
-        totalDamNorm = [baseDam, baseDam];
-        totalDamCrit = [baseDamCrit, baseDamCrit];
-    }
-    let staticBoost = (pctModifier / 100.);
-    let skillBoost = [0];
-    for (let i in total_skillpoints) {
-        skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get(skp_elements[i]+"DamPct") / 100.);
+function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false) {
+    // TODO: Roll all the loops together maybe
+
+    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
+    // 1. Get weapon damage (with powders).
+    let weapon_result = apply_weapon_powder(weapon);
+    let weapon_damages = weapon_result[0];
+    let present = weapon_result[1];
+
+    // 2. Conversions.
+    // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.
+    let damages = [];
+    const neutral_convert = conversions[0] / 100;
+    let weapon_min = 0;
+    let weapon_max = 0;
+    for (const damage of weapon_damages) {
+        let min_dmg = damage[0] * neutral_convert;
+        let max_dmg = damage[1] * neutral_convert;
+        damages.push([min_dmg, max_dmg]);
+        weapon_min += damage[0];
+        weapon_max += damage[1];
     }
 
+    // 2.2. Next, apply elemental conversions using damage computed in step 1.1.
+    // Also, track which elements are present. (Add onto those present in the weapon itself.)
+    for (let i = 1; i <= 5; ++i) {
+        if (conversions[i] > 0) {
+            damages[i][0] += conversions[i]/100 * weapon_min;
+            damages[i][1] += conversions[i]/100 * weapon_max;
+            present[i] = true;
+        }
+    }
+
+    // Also theres prop and rainbow!!
+    const damage_elements = ['n'].concat(skp_elements); // netwfa
+
+    if (!ignore_speed) {
+        // 3. Apply attack speed multiplier. Ignored for melee single hit
+        const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(weapon.get("atkSpd"))];
+        for (let i = 0; i < 6; ++i) {
+            damages[i][0] *= attack_speed_mult;
+            damages[i][1] *= attack_speed_mult;
+        }
+    }
+
+    // 4. Add additive damage. TODO: Is there separate additive damage?
+    for (let i = 0; i < 6; ++i) {
+        if (present[i]) {
+            damages[i][0] += stats.get(damage_elements[i]+'DamAddMin');
+            damages[i][1] += stats.get(damage_elements[i]+'DamAddMax');
+        }
+    }
+
+    // 5. ID bonus.
+    let specific_boost_str = 'Md';
+    if (use_spell_damage) {
+        specific_boost_str = 'Sd';
+    }
+    // 5.1: %boost application
+    let skill_boost = [0];  // no neutral skillpoint booster
+    for (const skp of skp_order) {
+        skill_boost.push(skillPointsToPercentage(stats.get(skp)));
+    }
+    let static_boost = (stats.get(specific_boost_str.toLowerCase()+'Pct') + stats.get('damPct')) / 100;
+
+    // These do not count raw damage. I think. Easy enough to change
+    let total_min = 0;
+    let total_max = 0;
     for (let i in damages) {
-        let damageBoost = 1 + skillBoost[i] + staticBoost;
-        damages_results.push([
-            Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
-            Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
-            Math.max(damages[i][0] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
-            Math.max(damages[i][1] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
-        ]);
-        totalDamNorm[0] += damages_results[i][0];
-        totalDamNorm[1] += damages_results[i][1];
-        totalDamCrit[0] += damages_results[i][2];
-        totalDamCrit[1] += damages_results[i][3];
+        let damage_prefix = damage_elements[i] + specific_boost_str;
+        let damageBoost = 1 + skill_boost[i] + static_boost + (stats.get(damage_prefix+'Pct')/100);
+        damages[i][0] *= Math.max(damageBoost, 0);
+        damages[i][1] *= Math.max(damageBoost, 0);
+        // Collect total damage post %boost
+        total_min += damages[i][0];
+        total_max += damages[i][1];
     }
-    if (melee) {
-        totalDamNorm[0] += Math.max(strBoost*rawModifier, -damages_results[0][0]);
-        totalDamNorm[1] += Math.max(strBoost*rawModifier, -damages_results[0][1]);
-        totalDamCrit[0] += Math.max((strBoost+1)*rawModifier, -damages_results[0][2]);
-        totalDamCrit[1] += Math.max((strBoost+1)*rawModifier, -damages_results[0][3]);
+
+    let total_elem_min = total_min - damages[0][0];
+    let total_elem_max = total_max - damages[0][1];
+
+    // 5.2: Raw application.
+    let prop_raw = stats.get(specific_boost_str.toLowerCase()+'Raw') + stats.get('damRaw');
+    let rainbow_raw = stats.get('r'+specific_boost_str+'Raw') + stats.get('rDamRaw');
+    for (let i in damages) {
+        let damages_obj = damages[i];
+        let damage_prefix = damage_elements[i] + specific_boost_str;
+        // Normie raw
+        let raw_boost = 0;
+        if (present[i]) {
+            raw_boost += stats.get(damage_prefix+'Raw') + stats.get(damage_elements[i]+'DamRaw');
+        }
+        // Next, rainraw and propRaw
+        let new_min = damages_obj[0] + raw_boost + (damages_obj[0] / total_min) * prop_raw;
+        let new_max = damages_obj[1] + raw_boost + (damages_obj[1] / total_max) * prop_raw;
+        if (i != 0) {   // rainraw
+            new_min += (damages_obj[0] / total_elem_min) * rainbow_raw;
+            new_max += (damages_obj[1] / total_elem_max) * rainbow_raw;
+        }
+        damages_obj[0] = new_min;
+        damages_obj[1] = new_max;
     }
-    damages_results[0][0] += strBoost*rawModifier;
-    damages_results[0][1] += strBoost*rawModifier;
-    damages_results[0][2] += (strBoost + 1)*rawModifier;
-    damages_results[0][3] += (strBoost + 1)*rawModifier;
 
-    if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
-    if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
-    if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
-    if (totalDamCrit[1] < 0) totalDamCrit[1] = 0;
+    // 6. Strength boosters
+    // str/dex, as well as any other mutually multiplicative effects
+    let strBoost = 1 + skill_boost[1];
+    let total_dam_norm = [0, 0];
+    let total_dam_crit = [0, 0];
+    let damages_results = [];
+    const damage_mult = stats.get("damageMultiplier");
 
-    return [totalDamNorm, totalDamCrit, damages_results];
+    for (const damage of damages) {
+        const res = [
+            damage[0] * strBoost * damage_mult,       // Normal min
+            damage[1] * strBoost * damage_mult,       // Normal max
+            damage[0] * (strBoost + 1) * damage_mult,       // Crit min
+            damage[1] * (strBoost + 1) * damage_mult,       // Crit max
+        ];
+        damages_results.push(res);
+        total_dam_norm[0] += res[0];
+        total_dam_norm[1] += res[1];
+        total_dam_crit[0] += res[2];
+        total_dam_crit[1] += res[3];
+    }
+
+    if (total_dam_norm[0] < 0) total_dam_norm[0] = 0;
+    if (total_dam_norm[1] < 0) total_dam_norm[1] = 0;
+    if (total_dam_crit[0] < 0) total_dam_crit[0] = 0;
+    if (total_dam_crit[1] < 0) total_dam_crit[1] = 0;
+
+    return [total_dam_norm, total_dam_crit, damages_results];
 }
 
 

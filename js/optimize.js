@@ -39,9 +39,11 @@ function optimizeStrDex() {
         let total_damage = 0;
         for (const part of spell_parts) {
             if (part.type === "damage") {
-                let _results = calculateSpellDamage(stats, part.conversion,
-                                        stats.get("sdRaw"), stats.get("sdPct"), 
-                                        part.multiplier / 100, player_build.weapon.statMap, total_skillpoints, 1);
+                let tmp_conv = [];
+                for (let i in part.conversion) {
+                    tmp_conv.push(part.conversion[i] * part.multiplier);
+                }
+                let _results = calculateSpellDamage(stats, player_build.weapon.statMap, tmp_conv, true);
                 let totalDamNormal = _results[0];
                 let totalDamCrit = _results[1];
                 let results = _results[2];

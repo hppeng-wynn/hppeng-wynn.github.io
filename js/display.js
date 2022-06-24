@@ -174,50 +174,7 @@ function displayExpandedItem(item, parent_id){
     // !elemental is some janky hack for elemental damage.
     // normals just display a thing.
     if (item.get("category") === "weapon") {
-        let stats = new Map();
-        stats.set("atkSpd", item.get("atkSpd"));
-        stats.set("eDamPct", 0);
-        stats.set("tDamPct", 0);
-        stats.set("wDamPct", 0);
-        stats.set("fDamPct", 0);
-        stats.set("aDamPct", 0);
-
-        //SUPER JANK @HPP PLS FIX
-        let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
-        if (item.get("tier") !== "Crafted") {
-            stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
-            let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
-            let damages = results[2];
-            let total_damage = 0;
-            for (const i in damage_keys) {
-                total_damage += damages[i][0] + damages[i][1];
-                item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
-            }
-            total_damage = total_damage / 2;
-            item.set("basedps", total_damage);
-            
-        } else {
-            stats.set("damageRaw", [item.get("nDamLow"), item.get("eDamLow"), item.get("tDamLow"), item.get("wDamLow"), item.get("fDamLow"), item.get("aDamLow")]);
-            stats.set("damageBases", [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")]);
-            let resultsLow = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
-            let damagesLow = resultsLow[2];
-            stats.set("damageRaw", [item.get("nDam"), item.get("eDam"), item.get("tDam"), item.get("wDam"), item.get("fDam"), item.get("aDam")]);
-            stats.set("damageBases", [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")]);
-            let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], 0, 0, 0, item, [0, 0, 0, 0, 0], 1, undefined);
-            let damages = results[2];
-            console.log(damages);
-            
-            let total_damage_min = 0;
-            let total_damage_max = 0;
-            for (const i in damage_keys) {
-                total_damage_min += damagesLow[i][0] + damagesLow[i][1];
-                total_damage_max += damages[i][0] + damages[i][1];
-                item.set(damage_keys[i], damagesLow[i][0]+"-"+damagesLow[i][1]+"\u279c"+damages[i][0]+"-"+damages[i][1]);
-            }
-            total_damage_min = total_damage_min / 2;
-            total_damage_max = total_damage_max / 2;
-            item.set("basedps", [total_damage_min, total_damage_max]);
-        }
+        item.set('basedps', get_base_dps(item));
     } else if (item.get("category") === "armor") { 
     }
 
@@ -555,19 +512,18 @@ function displayExpandedItem(item, parent_id){
     }
 
     if (item.get("category") === "weapon") { 
-        let damage_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
         let total_damages = item.get("basedps");
         let base_dps_elem = document.createElement("p");
         base_dps_elem.classList.add("left");
         base_dps_elem.classList.add("itemp");
         if (item.get("tier") === "Crafted") {
-            let base_dps_min = total_damages[0] * damage_mult;
-            let base_dps_max = total_damages[1] * damage_mult;
+            let base_dps_min = total_damages[0];
+            let base_dps_max = total_damages[1];
 
             base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
         }
         else {
-            base_dps_elem.textContent = "Base DPS: "+(total_damages * damage_mult);
+            base_dps_elem.textContent = "Base DPS: "+(total_damages);
         }
         parent_div.appendChild(document.createElement("p"));
         parent_div.appendChild(base_dps_elem);
@@ -1502,9 +1458,12 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
         if (powderSpecialStats.indexOf(special[0]) == 0 || powderSpecialStats.indexOf(special[0]) == 1 || powderSpecialStats.indexOf(special[0]) == 3) { //Quake, Chain Lightning, or Courage
             let spell = (powderSpecialStats.indexOf(special[0]) == 3 ? spells[2] : spells[powderSpecialStats.indexOf(special[0])]);
             let part = spell["parts"][0];
-            let _results = calculateSpellDamage(stats, part.conversion,
-                stats.get("mdRaw"), stats.get("mdPct"), 
-                0, weapon, skillpoints, stats.get('damageMultiplier') * ((part.multiplier[power-1] / 100)));//part.multiplier[power] / 100
+
+            let tmp_conv = [];
+            for (let i in part.conversion) {
+                tmp_conv.push(part.conversion[i] * part.multiplier[power-1]);
+            }
+            let _results = calculateSpellDamage(stats, weapon, tmp_conv, false);
 
             let critChance = skillPointsToPercentage(skillpoints[1]);
             let save_damages = [];

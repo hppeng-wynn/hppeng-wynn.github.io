@@ -313,9 +313,10 @@ class ItemDisplayNode extends ComputeNode {
  */
 class WeaponInputDisplayNode extends ComputeNode {
 
-    constructor(name, image_field) {
+    constructor(name, image_field, dps_field) {
         super(name);
         this.image = image_field;
+        this.dps_field = dps_field;
     }
 
     compute_func(input_map) {
@@ -324,6 +325,12 @@ class WeaponInputDisplayNode extends ComputeNode {
 
         const type = item.statMap.get('type');
         this.image.setAttribute('src', '../media/items/new/generic-'+type+'.png');
+        let dps = get_base_dps(item.statMap);
+        if (isNaN(dps)) {
+            dps = dps[1];
+            if (isNaN(dps)) dps = 0;
+        }
+        this.dps_field.textContent = dps;
         
         //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
         if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
@@ -577,9 +584,11 @@ class SpellDamageCalcNode extends ComputeNode {
 
         for (const part of spell_parts) {
             if (part.type === "damage") {
-                let results = calculateSpellDamage(stats, part.conversion,
-                                        stats.get("sdRaw") + stats.get("rainbowRaw"), stats.get("sdPct"), 
-                                        part.multiplier / 100, weapon, skillpoints, damage_mult);
+                let tmp_conv = [];
+                for (let i in part.conversion) {
+                    tmp_conv.push(part.conversion[i] * part.multiplier/100);
+                }
+                let results = calculateSpellDamage(stats, weapon, tmp_conv, true);
                 spell_results.push(results);
             } else if (part.type === "heal") {
                 // TODO: wynn2 formula
@@ -651,8 +660,7 @@ function getMeleeStats(stats, weapon) {
         //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
         //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
     }
-    // 0spellmult for melee damage.
-    let results = calculateSpellDamage(stats, [100, 0, 0, 0, 0, 0], stats.get("mdRaw"), stats.get("mdPct"), 0, weapon_stats, skillpoints, damage_mult);
+    let results = calculateSpellDamage(stats, weapon_stats, [100, 0, 0, 0, 0, 0], false, true);
     
     let dex = skillpoints[1];
 
@@ -973,7 +981,6 @@ function builder_graph_init() {
         //new PrintNode(eq+'-debug').link_to(item_input);
         //document.querySelector("#"+eq+"-tooltip").setAttribute("onclick", "collapse_element('#"+ eq +"-tooltip');"); //toggle_plus_minus('" + eq + "-pm'); 
     }
-    console.log(none_tomes);
     for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2]])) {
         let input_field = document.getElementById(eq+"-choice");
         let item_image = document.getElementById(eq+"-img");
@@ -985,7 +992,8 @@ function builder_graph_init() {
 
     // weapon image changer node.
     let weapon_image = document.getElementById("weapon-img");
-    new WeaponInputDisplayNode('weapon-type', weapon_image).link_to(item_nodes[8]);
+    let weapon_dps = document.getElementById("weapon-dps");
+    new WeaponInputDisplayNode('weapon-type', weapon_image, weapon_dps).link_to(item_nodes[8]);
 
     // Level input node.
     let level_input = new InputNode('level-input', document.getElementById('level-choice'));
