@@ -4,6 +4,8 @@ function construct_AT(elem, tree) {
     console.log("constructing ability tree UI");
     document.getElementById("atree-active").innerHTML = ""; //reset all atree actives - should be done in a more general way later
     elem.innerHTML = ""; //reset the atree in the DOM
+    
+    if (tree === undefined) {return false;}
 
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
