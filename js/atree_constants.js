@@ -2028,7 +2028,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 0,
-                "col": 4
+                "col": 4,
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 4,
@@ -2072,7 +2073,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 2,
-                "col": 4
+                "col": 4,
+                "icon": "node_0"
             },
             "properties": {
                 "melee_range": 1
@@ -2102,7 +2104,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 2,
-                "col": 2
+                "col": 2,
+                "icon": "node_0"
             },
             "properties": {
                 
@@ -2126,7 +2129,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 4,
-                "col": 4
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {
                 "range": 3
@@ -2163,7 +2167,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 6,
-                "col": 4
+                "col": 4,
+                "icon": "node_4"
             },
             "properties": {
             },
@@ -2206,7 +2211,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 9,
-                "col": 1
+                "col": 1,
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 4
@@ -2233,7 +2239,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 6,
-                "col": 2
+                "col": 2,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2272,7 +2279,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 6,
-                "col": 6
+                "col": 6,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2321,7 +2329,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 8,
-                "col": 2
+                "col": 2,
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 3,
@@ -2366,7 +2375,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 8,
-                "col": 4
+                "col": 4,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2390,7 +2400,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 8,
-                "col": 6
+                "col": 6,
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 30,
@@ -2429,7 +2440,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 10,
-                "col": 0
+                "col": 0,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2463,7 +2475,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 10,
-                "col": 2
+                "col": 2,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2497,7 +2510,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 11,
-                "col": 4
+                "col": 4,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2531,7 +2545,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 10,
-                "col": 6
+                "col": 6,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2565,7 +2580,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 10,
-                "col": 8
+                "col": 8,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2599,7 +2615,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 12,
-                "col": 0
+                "col": 0,
+                "icon": "node_1"
             },
             "properties": {
                 "range": 6
@@ -2635,7 +2652,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 12,
-                "col": 2
+                "col": 2,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -2670,7 +2688,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 13,
-                "col": 4
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {
                 "range": 4
@@ -2702,7 +2721,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 12,
-                "col": 6
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 2
@@ -2729,7 +2749,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 12,
-                "col": 8
+                "col": 8,
+                "icon": "node_1"
             },
             "properties": {
                 "duration": 3,
@@ -2775,7 +2796,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 13,
-                "col": 7
+                "col": 7,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2801,7 +2823,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 15,
-                "col": 2
+                "col": 2,
+                "icon": "node_3"
             },
             "properties": {
             },
@@ -2821,7 +2844,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 15,
-                "col": 4
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {
                 "chance": 30
@@ -2848,7 +2872,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 15,
-                "col": 7
+                "col": 7,
+                "icon": "node_3"
             },
             "properties": {
                 "mantle_charge": 3
@@ -2869,7 +2894,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 16,
-                "col": 1
+                "col": 1,
+                "icon": "node_3"
             },
             "properties": {
                 "cooldown": 15
@@ -2901,7 +2927,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 17,
-                "col": 0
+                "col": 0,
+                "icon": "node_0"
             },
             "properties": {
                 "melee_range": 1
@@ -2931,7 +2958,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 17,
-                "col": 3
+                "col": 3,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -2955,7 +2983,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 17,
-                "col": 5
+                "col": 5,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -2975,7 +3004,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 17,
-                "col": 7
+                "col": 7,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -2999,7 +3029,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 18,
-                "col": 2
+                "col": 2,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3028,7 +3059,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 18,
-                "col": 6
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {
                 
@@ -3055,7 +3087,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 20,
-                "col": 0
+                "col": 0,
+                "icon": "node_2"
             },
             "properties": {
             },
@@ -3090,7 +3123,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 20,
-                "col": 3
+                "col": 3,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3111,12 +3145,13 @@ const atrees =
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["Manachism", "Flying Kick"], 
-            "dependencies": [], 
+            "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
             "cost": 1, 
             "display": {
                 "row": 20,
-                "col": 6
+                "col": 6,
+                "icon": "node_0"
             },
             "properties": {
                 "mantle_charge": 2
@@ -3137,7 +3172,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 20,
-                "col": 8
+                "col": 8,
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 1
@@ -3158,7 +3194,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 22,
-                "col": 0
+                "col": 0,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3184,7 +3221,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 22,
-                "col": 2
+                "col": 2,
+                "icon": "node_2"
             },
             "properties": {
                 "damage_bonus": 30,
@@ -3210,7 +3248,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 22,
-                "col": 4
+                "col": 4,
+                "icon": "node_0"
             },
             "properties": {
                 "chance": 30
@@ -3231,7 +3270,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 22,
-                "col": 6
+                "col": 6,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3267,7 +3307,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 22,
-                "col": 8
+                "col": 8,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3293,7 +3334,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 23,
-                "col": 1
+                "col": 1,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3313,7 +3355,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 24,
-                "col": 2
+                "col": 2,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3348,7 +3391,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 23,
-                "col": 5
+                "col": 5,
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 4
@@ -3375,7 +3419,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 23,
-                "col": 7
+                "col": 7,
+                "icon": "node_3"
             },
             "properties": {
             },
@@ -3395,7 +3440,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 26,
-                "col": 0
+                "col": 0,
+                "icon": "node_0"
             },
             "properties": {
                 "cooldown": -5
@@ -3427,7 +3473,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 26,
-                "col": 2
+                "col": 2,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3462,7 +3509,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 26,
-                "col": 4
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {
                 "range": 2 
@@ -3489,7 +3537,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 26,
-                "col": 7
+                "col": 7,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3518,7 +3567,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 27,
-                "col": 1
+                "col": 1,
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 5
@@ -3539,7 +3589,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 27,
-                "col": 6
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3565,7 +3616,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 27,
-                "col": 8
+                "col": 8,
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 6
@@ -3592,7 +3644,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 28,
-                "col": 0
+                "col": 0,
+                "icon": "node_2"
             },
             "properties": {
             },
@@ -3623,7 +3676,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 28,
-                "col": 2
+                "col": 2,
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 16
@@ -3668,7 +3722,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 28,
-                "col": 4
+                "col": 4,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3702,7 +3757,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 29,
-                "col": 1
+                "col": 1,
+                "icon": "node_1"
             },
             "properties": {
             },
@@ -3722,7 +3778,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 29,
-                "col": 3
+                "col": 3,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3748,7 +3805,8 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 29,
-                "col": 5
+                "col": 5,
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 15
@@ -3769,7 +3827,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 29,
-                "col": 7
+                "col": 7,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3793,7 +3852,8 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 31,
-                "col": 0
+                "col": 0,
+                "icon": "node_0"
             },
             "properties": {
             },
@@ -3811,13 +3871,14 @@ const atrees =
             "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
             "archetype": "Battle Monk", 
             "archetype_req": 12, 
-            "parents": ["Thunderclap"], 
+            "parents": ["Cyclone"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 31,
-                "col": 2
+                "col": 2,
+                "icon": "node_3"
             },
             "properties": {
             },
@@ -3841,22 +3902,30 @@ const atrees =
             "desc": "Bash will cast at the player's position and gain additional AoE.\n\n All elemental conversions become Thunder",
             "archetype": "Battle Monk", 
             "archetype_req": 8, 
-            "parents": ["Spirit of the Rabbit"], 
+            "parents": ["Cyclone"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 31,
-                "col": 4
+                "row": 32,
+                "col": 5,
+                "icon": "node_1"
             },
-            "properties": {
-                "aoe": 2
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
                     "conversion": "thunder"
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil_name": "Bash",
+                        "name": "aoe",
+                        "value": 3
+                    }]
                 }
             ]  
         },
@@ -3866,13 +3935,14 @@ const atrees =
             "desc": "After casting War Scream, envelop yourself with a vortex that damages nearby enemies every 0.5s",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
-            "parents": ["Thunderclap"], 
+            "parents": ["Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 32,
-                "col": 5
+                "row": 31,
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 4,
@@ -3910,13 +3980,11 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 32,
-                "col": 7
+                "col": 7,
+                "icon": "node_3"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
@@ -3930,13 +3998,11 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 34,
-                "col": 1
+                "col": 1,
+                "icon": "node_3"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
@@ -3950,13 +4016,11 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 35,
-                "col": 2
+                "col": 2,
+                "icon": "node_1"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
@@ -3970,13 +4034,11 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 35,
-                "col": 4
+                "col": 4,
+                "icon": "node_2"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
@@ -3990,10 +4052,10 @@ const atrees =
             "cost": 1, 
             "display": {
                 "row": 35,
-                "col": 6
+                "col": 6,
+                "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -4014,15 +4076,14 @@ const atrees =
             "cost": 2, 
             "display": {
                 "row": 35,
-                "col": 8
+                "col": 8,
+                "icon": "node_1"
             },
             "properties": {
                 "duration": 3,
                 "aoe": 12
             },
-            "effects": [
-                
-            ]  
+            "effects": []  
         }
     ],
 }

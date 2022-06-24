@@ -36,7 +36,6 @@ function construct_AT(elem, tree) {
                         row.classList.add("row");
                         row.id = "atree-row-" + j;
                         //was causing atree rows to be 0 height
-                        console.log(elem.scrollWidth / 9);
                         row.style.minHeight = elem.scrollWidth / 9 + "px";
                         //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
 
@@ -101,7 +100,11 @@ function construct_AT(elem, tree) {
 
         // create node
         let node_elem = document.createElement('div')
-        node_elem.style = "background-image: url('../media/atree/node.png'); background-size: cover; width: 100%; height: 100%;";
+        let icon = node.display.icon;
+        if (icon === undefined) {
+            icon = "node";
+        }
+        node_elem.style = "background-image: url('../media/atree/"+icon+".png'); background-size: cover; width: 100%; height: 100%;";
 
         // add tooltip
         node_elem.addEventListener('mouseover', function(e) {
