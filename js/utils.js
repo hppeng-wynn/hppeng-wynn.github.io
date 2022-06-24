@@ -379,7 +379,7 @@ Base64 = (function () {
             //could be split between multiple new ints
             //reminder that shifts implicitly mod 32
             bit_vec[bit_vec.length - 1] |= ((int & ~((~0) << length)) << (this.length));
-            if (((this.length + length) % 32 < ((this.length - 1) % 32) + 1) || ((this.length + length) % 32 != 0)) {
+            if (((this.length - 1) % 32 + 1) + length > 32) {
                 bit_vec.push(int >>> (32 - this.length));
             }
         } else {
