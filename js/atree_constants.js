@@ -3871,7 +3871,7 @@ const atrees =
             "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
             "archetype": "Battle Monk", 
             "archetype_req": 12, 
-            "parents": ["Thunderclap"], 
+            "parents": ["Cyclone"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -3935,13 +3935,13 @@ const atrees =
             "desc": "After casting War Scream, envelop yourself with a vortex that damages nearby enemies every 0.5s",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
-            "parents": ["Thunderclap"], 
+            "parents": ["Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
                 "row": 31,
-                "col": 4
+                "col": 4,
                 "icon": "node_1"
             },
             "properties": {
