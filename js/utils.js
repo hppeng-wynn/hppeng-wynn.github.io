@@ -266,7 +266,7 @@ Base64 = (function () {
      * @param {Number} idx - The index to set.
      */
     set_bit(idx) {
-        if (idx < 0 || idx > this.length) {
+        if (idx < 0 || idx >= this.length) {
             throw new RangeError("Cannot set bit outside the range of the BitVector.");
         }
         this.bits[Math.floor(idx / 32)] |= (1 << idx % 32);
@@ -277,7 +277,7 @@ Base64 = (function () {
      * @param {Number} idx - The index to clear.
      */
     clear_bit(idx) {
-        if (idx < 0 || idx > this.length) {
+        if (idx < 0 || idx >= this.length) {
             throw new RangeError("Cannot clear bit outside the range of the BitVector.");
         }
         this.bits[Math.floor(idx / 32)] &= ~(1 << idx % 32);
