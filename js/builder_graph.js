@@ -178,6 +178,7 @@ class ItemInputNode extends InputNode {
     }
 
     compute_func(input_map) {
+        console.log("Item update...." + Date.now());
         const powdering = input_map.get('powdering');
 
         // built on the assumption of no one will type in CI/CR letter by letter
@@ -337,7 +338,6 @@ class WeaponInputDisplayNode extends ComputeNode {
             toggle_tab('atree-dropdown'); 
             toggleButton('toggle-atree');
         }
-        console.log(document.getElementById("toggle-atree").classList.contains("toggleOn"));
     }
 }
 

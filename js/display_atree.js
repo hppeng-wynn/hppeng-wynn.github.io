@@ -36,7 +36,6 @@ function construct_AT(elem, tree) {
                         row.classList.add("row");
                         row.id = "atree-row-" + j;
                         //was causing atree rows to be 0 height
-                        console.log(elem.scrollWidth / 9);
                         row.style.minHeight = elem.scrollWidth / 9 + "px";
                         //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
 
