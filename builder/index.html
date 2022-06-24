@@ -272,7 +272,7 @@
                             <div class="col-auto order-xl-0 order-1">
                                 <div class="row h-100 dark-shadow dark-6 rounded" id='weapon-dropdown'>
                                     <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="weapon-img-loc">
-                                        <img id="weapon-img" class="img-fluid rounded" src="../media/items/new/generic-wand.png">
+                                        <img id="weapon-img" class="img-fluid rounded" src="../media/items/new/generic-dagger.png">
                                     </div>
                                     <div class="col-3">
                                         <div class="row row-cols-1 h-100 align-items-center">
@@ -420,17 +420,22 @@
                                 <div class="row row-cols-1 row-cols-1 text-center scaled-font dark-5 rounded dark-shadow">
                                     <div class="col fw-bold dark-4 rounded-top">
                                         <div class = "row">
-                                            <div class = "col-4 py-2">
+                                            <div class = "col-3 py-2">
                                                 <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-tomes" onclick = "toggle_tab('tomes-dropdown'); toggleButton('toggle-tomes')">
                                                     Show Tomes
                                                 </button>
                                             </div>
-                                            <div class = "col-4 py-2">
+                                            <div class = "col-3 py-2">
+                                                <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-atree" onclick = "toggle_tab('atree-dropdown'); toggleButton('toggle-atree')">
+                                                    Show Ability Tree
+                                                </button>
+                                            </div>
+                                            <div class = "col-3 py-2">
                                                 <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "toggle_tab('edit_id_tab'); toggleButton('edit-ID-button')">
                                                     Edit IDs
                                                 </button>
                                             </div>
-                                            <div class = "col-4 py-2">
+                                            <div class = "col-3 py-2">
                                                 <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "resetEditableIDs();">
                                                     Reset Edited IDs
                                                 </button>
@@ -606,6 +611,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "atree-dropdown" style = "display:none;">
+                                        <div class="row row-cols-1 row-cols-xl-2">
+                                            <div class="col border border-semi-light rounded dark-9 hide-scroll" id="atree-ui" style="height: 500px; overflow-y: auto;">
+
+                                            </div>
+                                            <div class="col mx-auto" id="atree-active">
                                             </div>
                                         </div>
                                     </div>
@@ -1390,6 +1404,8 @@
     <script type="text/javascript" src="../js/skillpoints.js"></script>
     <script type="text/javascript" src="../js/damage_calc.js"></script>
 
+    <script type="text/javascript" src="../js/atree_constants_min.js"></script>
+
     <script type="text/javascript" src="../js/display_constants.js"></script>
 
     <script type="text/javascript" src="../js/display.js"></script>
@@ -1404,6 +1420,7 @@
     <script type="text/javascript" src="../js/build.js"></script>
     <script type="text/javascript" src="../js/build_constants.js"></script>
     <script type="text/javascript" src="../js/build_encode_decode.js"></script>
+    <script type="text/javascript" src="../js/display_atree.js"></script>
     <script type="text/javascript" src="../js/builder.js"></script>
     <script type="text/javascript" src="../js/builder_graph.js"></script>
     <script type="text/javascript" src="../js/expr_parser.js"></script>

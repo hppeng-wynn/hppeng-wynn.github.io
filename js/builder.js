@@ -147,6 +147,7 @@ function toggle_tab(tab) {
     } else {
         document.querySelector("#"+tab).style.display = "none";
     }
+    console.log(document.querySelector("#"+tab).style.display);
 }
 
 // toggle spell arrow

@@ -178,6 +178,7 @@ class ItemInputNode extends InputNode {
     }
 
     compute_func(input_map) {
+        console.log("Item update...." + Date.now());
         const powdering = input_map.get('powdering');
 
         // built on the assumption of no one will type in CI/CR letter by letter
@@ -323,6 +324,20 @@ class WeaponInputDisplayNode extends ComputeNode {
 
         const type = item.statMap.get('type');
         this.image.setAttribute('src', '../media/items/new/generic-'+type+'.png');
+        
+        //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
+        if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
+            toggle_tab('atree-dropdown'); 
+            toggleButton('toggle-atree');
+        }
+        
+        //for some reason we have to cast to string 
+        construct_AT(document.getElementById("atree-ui"), atrees[wep_to_class.get(type)]); 
+
+        if (document.getElementById("toggle-atree").classList.contains("toggleOn")) {
+            toggle_tab('atree-dropdown'); 
+            toggleButton('toggle-atree');
+        }
     }
 }
 
