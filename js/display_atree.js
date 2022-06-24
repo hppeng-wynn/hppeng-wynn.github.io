@@ -4,6 +4,8 @@ function construct_AT(elem, tree) {
     console.log("constructing ability tree UI");
     document.getElementById("atree-active").innerHTML = ""; //reset all atree actives - should be done in a more general way later
     elem.innerHTML = ""; //reset the atree in the DOM
+    
+    if (tree === undefined) {return false;}
 
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
@@ -160,8 +162,6 @@ function construct_AT(elem, tree) {
                 this.classList.add("atree-selected");
                 this.style.backgroundImage = 'url("../media/atree/node-selected.png")';
             }
-
-            toggle_connectors(connector_list);
         });
         document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
     };
