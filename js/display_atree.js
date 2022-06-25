@@ -100,7 +100,11 @@ function construct_AT(elem, tree) {
 
         // create node
         let node_elem = document.createElement('div')
-        node_elem.style = "background-image: url('../media/atree/node.png'); background-size: cover; width: 100%; height: 100%;";
+        let icon = node.display.icon;
+        if (icon === undefined) {
+            icon = "node";
+        }
+        node_elem.style = "background-image: url('../media/atree/"+icon+".png'); background-size: cover; width: 100%; height: 100%;";
 
         // add tooltip
         node_elem.addEventListener('mouseover', function(e) {
@@ -120,7 +124,7 @@ function construct_AT(elem, tree) {
         node_elem.classList.add("fake-button");
 
         let active_tooltip = document.createElement('div');
-        active_tooltip.classList.add("rounded-bottom", "dark-7", "border", "mb-2", "mx-auto");
+        active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
         //was causing active element boxes to be 0 width 
         // active_tooltip.style.width = elem.getBoundingClientRect().width * .80 + "px";
         active_tooltip.style.display = "none";
