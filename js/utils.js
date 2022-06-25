@@ -389,3 +389,113 @@ async function hardReload() {
 function capitalizeFirst(str) {
     return str[0].toUpperCase() + str.substring(1);
 }
+
+/** https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+ *  If we ever want to write something that needs to import other js files
+ */
+const getScript = url => new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+
+    script.onerror = reject;
+
+    script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState;
+
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+
+        script.onload = script.onreadystatechange = null;
+
+        resolve();
+    }
+
+    document.head.appendChild(script);
+})
+
+/* 
+GENERIC TEST FUNCTIONS
+*/
+/** The generic assert function. Fails on all "false-y" values. Useful for non-object equality checks, boolean value checks, and existence checks.
+ * 
+ * @param {*} arg - argument to assert.
+ * @param {String} msg - the error message to throw. 
+ */
+ function assert(arg, msg) {
+    if (!arg) {
+        throw new Error(msg ? msg : "Assert failed.");
+    }
+}
+
+/** Asserts object equality of the 2 parameters. For loose and strict asserts, use assert().
+ * 
+ * @param {*} arg1 - first argument to compare.
+ * @param {*} arg2 - second argument to compare.
+ * @param {String} msg - the error message to throw. 
+ */
+function assert_equals(arg1, arg2, msg) {
+    if (!Object.is(arg1, arg2)) {
+        throw new Error(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
+    }
+}
+
+/** Asserts object inequality of the 2 parameters. For loose and strict asserts, use assert().
+ * 
+ * @param {*} arg1 - first argument to compare.
+ * @param {*} arg2 - second argument to compare.
+ * @param {String} msg - the error message to throw. 
+ */
+ function assert_not_equals(arg1, arg2, msg) {
+    if (Object.is(arg1, arg2)) {
+        throw new Error(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
+    }
+}
+
+/** Asserts proximity between 2 arguments. Should be used for any floating point datatype.
+ * 
+ * @param {*} arg1 - first argument to compare.
+ * @param {*} arg2 - second argument to compare.
+ * @param {Number} epsilon - the margin of error (<= del difference is ok). Defaults to -1E5.
+ * @param {String} msg - the error message to throw. 
+ */
+function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
+    if (Math.abs(arg1 - arg2) > epsilon) {
+        throw new Error(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
+    }
+}
+
+/** Asserts that the input argument is null.
+ * 
+ * @param {*} arg - the argument to test for null.
+ * @param {String} msg - the error message to throw.
+ */
+function assert_null(arg, msg) {
+    if (arg !== null) {
+        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not null.");
+    }
+}
+
+/** Asserts that the input argument is undefined.
+ * 
+ * @param {*} arg - the argument to test for undefined.
+ * @param {String} msg - the error message to throw.
+ */
+ function assert_undefined(arg, msg) {
+    if (arg !== undefined) {
+        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
+    }
+}
+
+/** Asserts that there is an error when a callback function is run.
+ * 
+ * @param {Function} func_binding - a function binding to run. Can be passed in with func.bind(null, arg1, ..., argn)
+ * @param {String} msg - the error message to throw.
+ */
+function assert_error(func_binding, msg) {
+    try {
+        func_binding();
+    } catch (err) {
+        return;
+    } 
+    throw new Error(msg ? msg : "Function didn't throw an error.");
+}
