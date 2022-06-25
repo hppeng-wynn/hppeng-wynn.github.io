@@ -510,3 +510,16 @@ function assert_null(arg, msg) {
     }
 }
 
+/** Asserts that there is an error when a callback function is run.
+ * 
+ * @param {Function} func_binding - a function binding to run. Can be passed in with func.bind(null, arg1, ..., argn)
+ * @param {String} msg - the error message to throw.
+ */
+function assert_error(func_binding, msg) {
+    try {
+        func_binding();
+        console.trace(msg ? msg : "Function didn't throw an error.");
+    } catch (err) {
+        return;
+    } 
+}
