@@ -175,6 +175,7 @@ function getCustomFromHash(hash) {
                 }
             }
             statMap.set("hash", "CI-" + name);
+            statMap.set("custom", true);
             return new Custom(statMap);
         }
     } catch (error) {

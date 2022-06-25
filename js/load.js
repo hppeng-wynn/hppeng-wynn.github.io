@@ -6,7 +6,7 @@ let reload = false;
 let load_complete = false;
 let load_in_progress = false;
 let items;
-let sets;
+let sets = new Map();
 let itemMap;
 let idMap;
 let redirectMap;
@@ -14,42 +14,46 @@ let itemLists = new Map();
 /*
  * Load item set from local DB. Calls init() on success.
  */
-async function load_local(init_func) {
-    let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
-    let sets_store = get_tx.objectStore('set_db');
-    let get_store = get_tx.objectStore('item_db');
-    let request = get_store.getAll();
-    request.onerror = function(event) {
-        console.log("Could not read local item db...");
-    }
-    request.onsuccess = function(event) {
-        console.log("Successfully read local item db.");
-        items = request.result;
-        //console.log(items);
-        let request2 = sets_store.openCursor();
-
-        sets = {};
-        request2.onerror = function(event) {
-            console.log("Could not read local set db...");
+async function load_local() {
+    return new Promise(function(resolve, reject) {
+        let get_tx = db.transaction(['item_db', 'set_db'], 'readonly');
+        let sets_store = get_tx.objectStore('set_db');
+        let get_store = get_tx.objectStore('item_db');
+        let request = get_store.getAll();
+        request.onerror = function(event) {
+            reject("Could not read local item db...");
+        }
+        request.onsuccess = function(event) {
+            console.log("Successfully read local item db.");
         }
 
+        // key-value iteration (hpp don't break this again)
+        // https://stackoverflow.com/questions/47931595/indexeddb-getting-all-data-with-keys
+        let request2 = sets_store.openCursor();
+        request2.onerror = function(event) {
+            reject("Could not read local set db...");
+        }
         request2.onsuccess = function(event) {
             let cursor = event.target.result;
             if (cursor) {
-                sets[cursor.primaryKey] = cursor.value;
+                let key = cursor.primaryKey;
+                let value = cursor.value;
+                sets.set(key, value);
                 cursor.continue();
             }
             else {
+               // no more results
                 console.log("Successfully read local set db.");
-                //console.log(sets);
-                init_maps();
-                init_func();
-                load_complete = true;
             }
+        };
+        get_tx.oncomplete = function(event) {
+            items = request.result;
+            init_maps();
+            load_complete = true;
+            db.close();
+            resolve();
         }
-    }
-    await get_tx.complete;
-    db.close();
+    });
 }
 
 /*
@@ -91,7 +95,7 @@ function clean_item(item) {
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
-async function load(init_func) {
+async function load() {
 
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
@@ -101,16 +105,6 @@ async function load(init_func) {
     items = result.items;
     sets = result.sets;
     
-
-
-//    let clear_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
-//    let clear_items = clear_tx.objectStore('item_db');
-//    let clear_sets = clear_tx.objectStore('item_db');
-//
-//    await clear_items.clear();
-//    await clear_sets.clear();
-//    await clear_tx.complete;
-
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
     add_tx.onabort = function(e) {
         console.log(e);
@@ -131,74 +125,109 @@ async function load(init_func) {
         add_promises.push(sets_store.add(sets[set], set));
     }
     add_promises.push(add_tx.complete);
-    Promise.all(add_promises).then((values) => {
-        init_maps();
-        init_func();
-        load_complete = true;
-    });
-    // DB not closed? idfk man
+
+    await Promise.all(add_promises);
+    init_maps();
+    load_complete = true;
+    db.close();
 }
 
-function load_init(init_func) {
-    if (load_complete) {
-        console.log("Item db already loaded, skipping load sequence");
-        init_func();
-        return;
-    }
-    let request = window.indexedDB.open('item_db', DB_VERSION);
+async function load_init() {
+    return new Promise((resolve, reject) => {
+        let request = window.indexedDB.open('item_db', DB_VERSION);
 
-    request.onerror = function() {
-        console.log("DB failed to open...");
-    };
+        request.onerror = function() {
+            reject("DB failed to open...");
+        };
 
-    request.onsuccess = function() {
-        (async function() {
+        request.onsuccess = async function() {
             db = request.result;
-            if (!reload) {
-                console.log("Using stored data...")
-                load_local(init_func);
+            if (load_in_progress) {
+                while (!load_complete) {
+                    await sleep(100);
+                }
+                console.log("Skipping load...")
             }
             else {
-                if (load_in_progress) {
-                    while (!load_complete) {
-                        await sleep(100);
-                    }
-                    console.log("Skipping load...")
-                    init_func();
+                load_in_progress = true
+                if (reload) {
+                    console.log("Using new data...")
+                    await load();
                 }
                 else {
-                    // Not 100% safe... whatever!
-                    load_in_progress = true
-                    console.log("Using new data...")
-                    load(init_func);
+                    console.log("Using stored data...")
+                    await load_local();
                 }
             }
-        })()
-    }
+            resolve();
+        };
 
-    request.onupgradeneeded = function(e) {
-        reload = true;
+        request.onupgradeneeded = function(e) {
+            reload = true;
 
-        let db = e.target.result;
-        
-        try {
-            db.deleteObjectStore('item_db');
-        }
-        catch (error) {
-            console.log("Could not delete item DB. This is probably fine");
-        }
-        try {
-            db.deleteObjectStore('set_db');
-        }
-        catch (error) {
-            console.log("Could not delete set DB. This is probably fine");
-        }
+            let db = e.target.result;
+            
+            try {
+                db.deleteObjectStore('item_db');
+            }
+            catch (error) {
+                console.log("Could not delete item DB. This is probably fine");
+            }
+            try {
+                db.deleteObjectStore('set_db');
+            }
+            catch (error) {
+                console.log("Could not delete set DB. This is probably fine");
+            }
 
-        db.createObjectStore('item_db');
-        db.createObjectStore('set_db');
+            db.createObjectStore('item_db');
+            db.createObjectStore('set_db');
 
-        console.log("DB setup complete...");
-    }
+            console.log("DB setup complete...");
+        };
+    });
+}
+
+// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
+for (const it of itemTypes) {
+    itemLists.set(it, []);
+}
+
+let none_items = [
+    ["armor", "helmet", "No Helmet"],
+    ["armor", "chestplate", "No Chestplate"],
+    ["armor", "leggings", "No Leggings"],
+    ["armor", "boots", "No Boots"],
+    ["accessory", "ring", "No Ring 1"],
+    ["accessory", "ring", "No Ring 2"],
+    ["accessory", "bracelet", "No Bracelet"],
+    ["accessory", "necklace", "No Necklace"],
+    ["weapon", "dagger", "No Weapon"],
+];
+for (let i = 0; i < none_items.length; i++) {
+    let item = Object();
+    item.slots = 0;
+    item.category = none_items[i][0];
+    item.type = none_items[i][1];
+    item.name = none_items[i][2];
+    item.displayName = item.name;
+    item.set = null;
+    item.quest = null;
+    item.skillpoints = [0, 0, 0, 0, 0];
+    item.has_negstat = false;
+    item.reqs = [0, 0, 0, 0, 0];
+    item.fixID = true;
+    item.tier = "Normal";
+    item.id = 10000 + i;
+    item.nDam = "0-0";
+    item.eDam = "0-0";
+    item.tDam = "0-0";
+    item.wDam = "0-0";
+    item.fDam = "0-0";
+    item.aDam = "0-0";
+    clean_item(item);
+
+    none_items[i] = item;
 }
 
 function init_maps() {
@@ -207,53 +236,13 @@ function init_maps() {
     /* Mapping from item names to set names. */
     idMap = new Map();
     redirectMap = new Map();
-    for (const it of itemTypes) {
-        itemLists.set(it, []);
-    }
-
-    let noneItems = [
-        ["armor", "helmet", "No Helmet"],
-        ["armor", "chestplate", "No Chestplate"],
-        ["armor", "leggings", "No Leggings"],
-        ["armor", "boots", "No Boots"],
-        ["accessory", "ring", "No Ring 1"],
-        ["accessory", "ring", "No Ring 2"],
-        ["accessory", "bracelet", "No Bracelet"],
-        ["accessory", "necklace", "No Necklace"],
-        ["weapon", "dagger", "No Weapon"],
-    ];
-    for (let i = 0; i < noneItems.length; i++) {
-        let item = Object();
-        item.slots = 0;
-        item.category = noneItems[i][0];
-        item.type = noneItems[i][1];
-        item.name = noneItems[i][2];
-        item.displayName = item.name;
-        item.set = null;
-        item.quest = null;
-        item.skillpoints = [0, 0, 0, 0, 0];
-        item.has_negstat = false;
-        item.reqs = [0, 0, 0, 0, 0];
-        item.fixID = true;
-        item.tier = "Normal";
-        item.id = 10000 + i;
-        item.nDam = "0-0";
-        item.eDam = "0-0";
-        item.tDam = "0-0";
-        item.wDam = "0-0";
-        item.fDam = "0-0";
-        item.aDam = "0-0";
-        clean_item(item);
-
-        noneItems[i] = item;
-    }
-    items = items.concat(noneItems);
+    items = items.concat(none_items);
     //console.log(items);
     for (const item of items) {
         if (item.remapID === undefined) {
             itemLists.get(item.type).push(item.displayName);
             itemMap.set(item.displayName, item);
-            if (noneItems.includes(item)) {
+            if (none_items.includes(item)) {
                 idMap.set(item.id, "");
             }
             else {

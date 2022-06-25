@@ -264,7 +264,7 @@ function populateFields() {
 */
 function copyRecipeHash() {
     if (player_craft) {
-        copyTextToClipboard("CR-"+location.hash);
+        copyTextToClipboard("CR-"+location.hash.slice(1));
         document.getElementById("copy-hash-button").textContent = "Copied!";
     }
 }

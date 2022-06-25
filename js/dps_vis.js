@@ -213,14 +213,14 @@ function redraw(data) {
         let tier_mod = tiers_mod.get(tier);
         let y_max = baseline_y.map(x => 2.1*x*tier_mod*type_mod);
         let y_min = baseline_y.map(x => 2.0*x*tier_mod*type_mod);
-        line_top.datum(zip(baseline_x, y_max))
+        line_top.datum(zip2(baseline_x, y_max))
             .attr("fill", "none")
             .attr("stroke", d => colorMap.get(tier))
             .attr("d", d3.line()
                 .x(function(d) { return x(d[0]) })
                 .y(function(d) { return y(d[1]) })
               )
-        line_bot.datum(zip(baseline_x, y_min))
+        line_bot.datum(zip2(baseline_x, y_min))
             .attr("fill", "none")
             .attr("stroke", d => colorMap.get(tier))
             .attr("d", d3.line()

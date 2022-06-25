@@ -239,7 +239,7 @@ function init_items2() {
     const itemListFooter = document.getElementById('item-list-footer');
 
     // compile the search db from the item db
-    const searchDb = items.filter(i => !i.remapID).map(i => [i, expandItem(i, [])]);
+    const searchDb = items.filter(i => !i.remapID).map(i => [i, expandItem(i)]);
 
     // init item list elements
     const ITEM_LIST_SIZE = 64;
