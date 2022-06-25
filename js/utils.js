@@ -417,25 +417,25 @@ function capitalizeFirst(str) {
 /** https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
  *  If we ever want to write something that needs to import other js files
  */
- const getScript = url => new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = url
-    script.async = true
-  
-    script.onerror = reject
-  
-    script.onload = script.onreadystatechange = function() {
-      const loadState = this.readyState
-  
-      if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-  
-      script.onload = script.onreadystatechange = null
-  
-      resolve()
+const getScript = url => new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+
+    script.onerror = reject;
+
+    script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState;
+
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+
+        script.onload = script.onreadystatechange = null;
+
+        resolve();
     }
-  
-    document.head.appendChild(script)
-  })
+
+    document.head.appendChild(script);
+})
 
 /* 
 GENERIC TEST FUNCTIONS
@@ -479,10 +479,10 @@ function assert_equals(arg1, arg2, msg) {
  * 
  * @param {*} arg1 - first argument to compare.
  * @param {*} arg2 - second argument to compare.
- * @param {Number} epsilon - the margin of error (<= del difference is ok).
+ * @param {Number} epsilon - the margin of error (<= del difference is ok). Defaults to -1E5.
  * @param {String} msg - the error message to throw. 
  */
-function assert_near(arg1, arg2, epsilon, msg) {
+function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
     if (Math.abs(arg1 - arg2) > epsilon) {
         throw new Error(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
     }
@@ -518,8 +518,8 @@ function assert_null(arg, msg) {
 function assert_error(func_binding, msg) {
     try {
         func_binding();
-        console.trace(msg ? msg : "Function didn't throw an error.");
     } catch (err) {
         return;
     } 
+    throw new Error(msg ? msg : "Function didn't throw an error.");
 }
