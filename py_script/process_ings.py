@@ -11,6 +11,7 @@ import json
 import sys
 import os
 import base64
+import argparse
 
 infile, outfile = sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else sys.argv[1]
 

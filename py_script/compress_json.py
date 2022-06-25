@@ -1,6 +1,6 @@
 '''
-A generic file used for turning a json into a "clean" version of itself (human-friendly whitespace).
-Clean files are useful for human reading and dev debugging.
+A generic file used for turning a json into a compressed version of itself (minimal whitespaces).
+Compressed files are useful for lowering the amount of data sent.
 
 Usage: python compress_json.py [infile rel path] [outfile rel path]
 '''
