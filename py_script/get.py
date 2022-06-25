@@ -7,13 +7,18 @@ Usage: python get.py [url or command] [outfile rel path]
 Relevant page: https://docs.wynncraft.com/
 """
 
-import requests
+import argparse
 import json
-import numpy as np
-import sys
 
-#req can either be a link to an API page OR a preset default
-req, outfile = sys.argv[1], sys.argv[2]
+import numpy as np
+import requests
+
+parser = argparse.ArgumentParser(description="Pull data from wynn API.")
+parser.add_argument('target', help='an API page, or preset [items, ings, recipes, terrs, maploc]')
+parser.add_argument('outfile', help='output file to dump results into')
+args = parser.parse_args()
+
+req, outfile = args.target, args.outfile
 
 CURR_WYNN_VERS = 2.0
 
