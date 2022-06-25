@@ -14,8 +14,13 @@ import json
 import sys
 import os
 import base64
+import argparse
 
-infile, outfile = sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else sys.argv[1]
+parser = argparse.ArgumentParser(description="Process raw pulled item data.")
+parser.add_argument('infile', help='input file to read data from')
+parser.add_argument('outfile', help='output file to dump clean data into')
+args = parser.parse_args()
+infile, outfile = args.infile, args.outfile
 
 with open(infile, "r") as in_file:
     data = json.loads(in_file.read())
