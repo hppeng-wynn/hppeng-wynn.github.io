@@ -1,3 +1,4 @@
+let all_nodes = [];
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -16,6 +17,7 @@ class ComputeNode {
         this.dirty = true;
         this.inputs_dirty = new Map();
         this.inputs_dirty_count = 0;
+        all_nodes.push(this);
     }
 
     /**
