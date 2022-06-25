@@ -1,3 +1,7 @@
+"""
+Used for grabbing image files at some point. Not used recently.
+"""
+
 import os
 import json
 
