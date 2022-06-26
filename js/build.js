@@ -187,7 +187,6 @@ class Build{
                 }
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
-            console.log(item_stats);
             for (const staticID of staticIDs) {
                 if (item_stats.get(staticID)) {
                         statMap.set(staticID, statMap.get(staticID) + item_stats.get(staticID));

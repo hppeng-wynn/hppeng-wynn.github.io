@@ -1,4 +1,5 @@
 let atree_map;
+let atree_head;
 let atree_connectors_map;
 let atree_active_connections = [];
 function construct_AT(elem, tree) {
@@ -25,6 +26,11 @@ function construct_AT(elem, tree) {
         
         // create rows if not exist
         let missing_rows = [node.display.row];
+
+        if (node.parents.length == 0) {
+            // Assuming there is only one head.
+            atree_head = node;
+        }
 
         for (let parent of node.parents) {
             missing_rows.push(tree.find(object => {return object.id === parent;}).display.row);
