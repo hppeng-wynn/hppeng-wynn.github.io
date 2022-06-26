@@ -928,7 +928,7 @@ class SkillPointSetterNode extends ComputeNode {
  */
 class SumNumberInputNode extends InputNode {
     compute_func(input_map) {
-        const value = this.input_field.value;
+        let value = this.input_field.value;
         if (value === "") { value = 0; }
 
         let input_num = 0;
