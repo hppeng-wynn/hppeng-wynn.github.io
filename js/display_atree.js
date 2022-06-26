@@ -12,14 +12,37 @@ function construct_AT(elem, tree) {
     active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
 
     let active_word = document.createElement("div");
-    active_word.classList.add("col");
-    active_word.textContent = "Active:";
+    active_word.classList.add("col-auto");
+    active_word.textContent = "Active Abilities:";
 
     let active_AP_container = document.createElement("div");
-    active_AP_container.classList.add("col");
-    active_AP_container.textContent = "(0/45 AP)";
-    
+    active_AP_container.classList.add("col-auto");
+
+    let active_AP_subcontainer = document.createElement("div");
+    active_AP_subcontainer.classList.add("row");
+
+    let active_AP_cost = document.createElement("div");
+    active_AP_cost.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_cost.id = "active_AP_cost";
+    active_AP_cost.textContent = "0";
+    let active_AP_slash = document.createElement("div");
+    active_AP_slash.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_slash.textContent = "/";
+    let active_AP_cap = document.createElement("div");
+    active_AP_cap.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_cap.id = "active_AP_cap";
+    active_AP_cap.textContent = "45";
+    let active_AP_end = document.createElement("div");
+    active_AP_end.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_end.textContent = " AP";
+
     //I can't believe we can't pass in multiple children at once
+    active_AP_subcontainer.appendChild(active_AP_cost);
+    active_AP_subcontainer.appendChild(active_AP_slash);
+    active_AP_subcontainer.appendChild(active_AP_cap);
+    active_AP_subcontainer.appendChild(active_AP_end);
+    active_AP_container.appendChild(active_AP_subcontainer);
+
     active_row.appendChild(active_word);
     active_row.appendChild(active_AP_container);
 
@@ -165,11 +188,13 @@ function construct_AT(elem, tree) {
                 tooltip.style.display = "none";
                 this.classList.remove("atree-selected");
                 this.style.backgroundImage = '';
+                document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) - node.cost; 
             } 
             else {
                 tooltip.style.display = "block";
                 this.classList.add("atree-selected");
                 this.style.backgroundImage = 'url("../media/atree/node_highlight.png")';
+                document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) + node.cost;
             }
         });
 
