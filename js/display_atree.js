@@ -309,15 +309,11 @@ function atree_get_state(connector) {
 
             if (state) {
                 connector_state.down = 1;
-                if (abil_name == "Scorched Earth") {
-                    alert('a')
-                }
             } else {
                 connector_state.down = 0;
             }
         }
     }
-    console.log(connector_state);
     return connector_state;
 }
 
