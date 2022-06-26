@@ -419,7 +419,7 @@ function displayExpandedItem(item, parent_id){
         }
     }
     //Show powder specials ;-;
-    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots", "ring", "bracelet", "necklace"];
+    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots"];//, "ring", "bracelet", "necklace"];
     if(nonConsumables.includes(item.get("type"))) {
         let powder_special = document.createElement("div");
         powder_special.classList.add("col");

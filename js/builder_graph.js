@@ -203,13 +203,11 @@ class ItemInputNode extends InputNode {
                 type_match = item.statMap.get('type') === this.none_item.statMap.get('type');
             }
             if (type_match) {
-                if (powdering !== undefined) {
-                    if (item.statMap.get('category') === 'armor') {
-                        applyArmorPowders(item.statMap, powdering);
-                    }
-                    else if (item.statMap.get('category') === 'weapon') {
-                        apply_weapon_powders(item.statMap, powdering);
-                    }
+                if (item.statMap.get('category') === 'armor') {
+                    applyArmorPowders(item.statMap, powdering);
+                }
+                else if (item.statMap.get('category') === 'weapon') {
+                    apply_weapon_powders(item.statMap, powdering);
                 }
                 return item;
             }
@@ -247,6 +245,7 @@ class ItemInputDisplayNode extends ComputeNode {
         this.input_field = document.getElementById(eq+"-choice");
         this.health_field = document.getElementById(eq+"-health");
         this.level_field = document.getElementById(eq+"-lv");
+        this.powder_field = document.getElementById(eq+"-powder");  // possibly None
         this.image = item_image;
         this.fail_cb = true;
     }
@@ -271,10 +270,18 @@ class ItemInputDisplayNode extends ComputeNode {
             this.input_field.classList.add("is-invalid");
             return null;
         }
+        if (item.statMap.has('powders')) {
+            this.powder_field.placeholder = "powders";
+        }
 
         if (item.statMap.has('NONE')) {
             return null;
         }
+
+        if (item.statMap.has('powders')) {
+            this.powder_field.placeholder = item.statMap.get('slots') + ' slots';
+        }
+
         const tier = item.statMap.get('tier');
         this.input_field.classList.add(tier);
         if (this.health_field) {

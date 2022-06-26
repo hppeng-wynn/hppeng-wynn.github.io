@@ -218,7 +218,6 @@ function expandItem(item) {
     }
     expandedItem.set("minRolls",minRolls);
     expandedItem.set("maxRolls",maxRolls);
-    expandedItem.set("powders", []);
     return expandedItem;
 }
 
