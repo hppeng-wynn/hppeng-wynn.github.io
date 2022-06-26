@@ -279,28 +279,28 @@ function atree_get_state(connector) {
         if (atree_map.get(abil_name).display.col > parseInt(connector.split(",")[1])) {
             if (state) {
                 connector_state[1] = 1;
-            } else if (!connector_state.right) {
+            } else if (!connector_state[1]) {
                 connector_state[1] = 0;
             }
         }
         if (atree_map.get(abil_name).display.col < parseInt(connector.split(",")[1])) {
             if (state) {
                 connector_state[0] = 1;
-            } else if (!connector_state.left) {
+            } else if (!connector_state[0]) {
                 connector_state[0] = 0;
             }
         }
         if (atree_map.get(abil_name).display.row < parseInt(connector.split(",")[0])) {
             if (state) {
                 connector_state[2] = 1;
-            } else if (!connector_state.up) {
+            } else if (!connector_state[2]) {
                 connector_state[2] = 0;
             }
         }
         if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
             if (state) {
                 connector_state[3] = 1;
-            } else if (!connector_state.down) {
+            } else if (!connector_state[3]) {
                 connector_state[3] = 0;
             };
         };
