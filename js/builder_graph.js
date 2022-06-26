@@ -524,7 +524,7 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHp);
     //EHP
     let ehp = [totalHp, totalHp];
-    let defMult = (2 - stats.get("classDef")) * (2 - stats.get("defMultiplier"));
+    let defMult = (2 - stats.get("classDef")) * stats.get("defMultiplier");
     ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehp);

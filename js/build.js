@@ -168,7 +168,6 @@ class Build{
 
         //Create a map of this build's stats
         let statMap = new Map();
-        statMap.set("damageMultiplier", 1);
         statMap.set("defMultiplier", 1);
 
         for (const staticID of staticIDs) {
@@ -191,15 +190,7 @@ class Build{
             console.log(item_stats);
             for (const staticID of staticIDs) {
                 if (item_stats.get(staticID)) {
-                    if (staticID == "damMobs") {
-                        statMap.set('damageMultiplier', statMap.get('damageMultiplier') * item_stats.get(staticID));
-                    }
-                    else if (staticID === "defMobs") {
-                        statMap.set('defMultiplier', statMap.get('defMultiplier') * item_stats.get(staticID));
-                    }
-                    else {
                         statMap.set(staticID, statMap.get(staticID) + item_stats.get(staticID));
-                    }
                 }
             }
             if (item_stats.get("majorIds")) {
@@ -208,6 +199,8 @@ class Build{
                 }
             }
         }
+        statMap.set('damageMultiplier', 1 + (statMap.get('damMobs') / 100));
+        statMap.set('defMultiplier', 1 - (statMap.get('defMobs') / 100));
         statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
             const bonus = sets.get(setName).bonuses[count-1];
