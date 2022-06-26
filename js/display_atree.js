@@ -167,7 +167,7 @@ function construct_AT(elem, tree) {
                 this.classList.add("atree-selected");
             }
             atree_toggle_state(node);
-            atree_update_connector(node);
+            atree_update_connector();
         });
         document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
     };
@@ -175,7 +175,7 @@ function construct_AT(elem, tree) {
     atree_render_connection();
 };
 
-// resolve connector conflict
+// resolve connector conflict, when they occupy the same cell.
 function resolve_connector(pos, node) {
     if (atree_connectors_map.get(pos).length < 2) {return false;}
 
@@ -228,6 +228,7 @@ function atree_render_connection() {
     }
 }
 
+// toggle the state of a node.
 function atree_toggle_state(node) {
     if (atree_map.get(node.display_name).active) {
         atree_map.get(node.display_name).active = false;
@@ -236,6 +237,7 @@ function atree_toggle_state(node) {
     }
 }
 
+// refresh all connector to default state, then try to calculate the connector for all node
 function atree_update_connector() {
     atree_connectors_map.forEach((v) => {
         if (v.length != 0) {
@@ -247,6 +249,7 @@ function atree_update_connector() {
     });
 }
 
+// set the correct connector highlight for an active node, given a node.
 function atree_compute_highlight(node) {
     node.connectors.forEach((v, k) => {
         if (node.active && atree_map.get(k).active) {
@@ -266,6 +269,7 @@ function atree_compute_highlight(node) {
     });
 }
 
+// get the current active state of different directions, given a connector coordinate.
 function atree_get_state(connector) {
     let connector_state = {left: 0, right: 0, up: 0, down: 0}
 
@@ -305,6 +309,7 @@ function atree_get_state(connector) {
     return connector_state;
 }
 
+// parse a sequence of left, right, up, down to appropriate connector image
 function atree_parse_connector(orient, type) {
     // left, right, up, down
     // todo 
