@@ -892,9 +892,70 @@
                 Last updated: 30 May 2022
             </p>
         </div>
+        <div class="row section" title="Wynnbuilder Internals (compute graph)">
+            <p>
+                This section is about how Wynnbuilder's main builder page processes user input and calculates results.
+                Might be useful if you want to script wynnbuilder or extend it! Or for wynnbuilder developers (internal docs).
+            </p>
+            <div class="row section" title="Why?">
+                <p>
+                    Modeling wynnbuilder's internal computations as a directed graph has a few advantages:
+                </p>
+                <ul class = "indent">
+                    <li>Each compute "node" is small(er); easier to debug.</li>
+                    <li>Information flow is specified explicitly (easier to debug).</li>
+                    <li>Easy to build caching for arbitrary computations (only calculate what u need)</li>
+                    <li>Stateless builder! Abstract the entire builder as a chain of function calls</li>
+                    <li>Makes for pretty pictures</li>
+                </ul>
+            </div>
+            <div class="row section" title="TODO ComputeNode details">
+                TODO
+            </div>
+            <p>
+                An overview of wynnbuilder's internal structure can be seen <a href = "./compute_graph.svg" target = "_blank">here</a>. Arrows indicate flow of information.
+                Colors correspond roughly as follows:
+            </p>
+            <img src="./builder_colorcode.png"/>
+            <p>
+                The overall logic flow is as follows:
+                <ul class = "indent">
+                    <li>Item and Powder inputs are parsed. Powders are applied to items.</li>
+                    <li>Items and level information are combined to make a build.</li>
+                    <li>Information from input fields for skill points and edit IDs is collected into an ID bonuses table.</li>
+                    <li>Information about active powder specials, strength boosts, etc. are collected into their own ID tables.</li>
+                    <li>All of the above tables are merged with the build's stats table to produce the "Final" ID bonus table.</li>
+                    <li>Which spell variant (think: major id) to use for each of the 4 spells is computed based on the build.</li>
+                    <li>Spell damage is calculated, using the merged stat table, spell info, and weapon info.</li>
+                </ul>
+            </p>
+            <p>
+                Outputs are computed as follows:
+                <ul class = "indent">
+                    <li>Input box highlights are computed from the items produced by item input box nodes.</li>
+                    <li>Item display is computed from item input boxes.</li>
+                    <li>Build hash/URL is computed from the build, and skillpoint assignment.</li>
+                    <li>Spell damage is displayed based on calculated spell damage results.</li>
+                    <li>Build stats are displayed by builder-stats-display (this same node also displays a bunch of stuff at the bottom of the screen...)</li>
+                </ul>
+            </p>
+            <div class="row section" title="Gotchas">
+                <p>
+                    The build sets default skillpoints and edited IDs automatically, whenever a build item/level is updated.
+                    This is done using "soft links" by two nodes shown in red (builder-skillpoint-setter and builder-id-setter).
+                </p>
+                <p>
+                    A soft link is where something goes and manually marks nodes dirty and calls their update methods.
+                    This is useful for these cases because the skillpoints and editable ID fields usually take their value from
+                    user input, but in some cases we want to programatically set them.
+                </p>
+                <p>
+                    For example another soft link (not shown) is used to implement the reset button.
+                </p>
+            </div>
+        </div>
         <!-- <div class="row section" title="Test Section">
         </div> -->
-
     </div>
     <script type="text/javascript" src="../js/dev.js"></script>
     <script type="text/javascript" src="../js/sq2icons.js"></script>

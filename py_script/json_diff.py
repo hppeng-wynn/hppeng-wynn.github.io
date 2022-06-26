@@ -1,4 +1,8 @@
-"""Json diff checker for manual testing."""
+"""
+Json diff checker for manual testing - mainly debug
+
+
+"""
 
 import argparse
 import json

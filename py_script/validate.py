@@ -1,3 +1,12 @@
+"""
+Used to validate item file - searches for duplicate items. Does not change the file.
+
+TODO: Eventually integrate this into the process scripts, including ings and recipes
+
+Usage:
+python validate.py [input file]
+"""
+
 import json
 import sys
 
