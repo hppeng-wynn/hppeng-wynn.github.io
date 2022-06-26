@@ -725,6 +725,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
         let total_assigned = 0;
         for (let i in skp_order){ //big bren
             const assigned = skillpoints[i] - base_totals[i] + min_assigned[i]
+            setText(skp_order[i] + "-skp-base", "Original: " + base_totals[i]);
             setText(skp_order[i] + "-skp-assign", "Assign: " + assigned);
             setValue(skp_order[i] + "-skp", skillpoints[i]);
             let linebreak = document.createElement("br");
@@ -912,7 +913,6 @@ class SkillPointSetterNode extends ComputeNode {
         if (input_map.size !== 1) { throw "SkillPointSetterNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const [idx, elem] of skp_order.entries()) {
-            setText(elem + "-skp-base", "Original: " + build.base_skillpoints[idx]);
             document.getElementById(elem+'-skp').value = build.total_skillpoints[idx];
         }
         // NOTE: DO NOT merge these loops for performance reasons!!!
@@ -932,7 +932,7 @@ class SkillPointSetterNode extends ComputeNode {
  */
 class SumNumberInputNode extends InputNode {
     compute_func(input_map) {
-        const value = this.input_field.value;
+        let value = this.input_field.value;
         if (value === "") { value = 0; }
 
         let input_num = 0;
