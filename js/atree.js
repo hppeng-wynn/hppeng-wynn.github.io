@@ -207,7 +207,6 @@ function construct_AT(elem, tree) {
             if (tooltip.style.display == "block") {
                 tooltip.style.display = "none";
                 this.classList.remove("atree-selected");
-                this.style.backgroundImage = '';
                 document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) - node.cost; 
             } 
             else {
