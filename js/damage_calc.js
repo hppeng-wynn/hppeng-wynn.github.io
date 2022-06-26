@@ -1,34 +1,25 @@
 const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
 
-// GRR THIS MUTATES THE ITEM
+const damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
+const damage_present_key = 'damagePresent';
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
     //SUPER JANK @HPP PLS FIX
-    let damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
     if (item.get("tier") !== "Crafted") {
-        let weapon_result = apply_weapon_powder(item);
-        let damages = weapon_result[0];
         let total_damage = 0;
-        for (const i in damage_keys) {
-            total_damage += damages[i][0] + damages[i][1];
-            item.set(damage_keys[i], damages[i][0]+"-"+damages[i][1]);
+        for (const damage_k of damage_keys) {
+            damages = item.get(damage_k);
+            total_damage += damages[0] + damages[1];
         }
-        total_damage = total_damage / 2;
-        return total_damage * attack_speed_mult;
-    } else {
-        let base_low = [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")];
-        let results_low = apply_weapon_powder(item, base_low);
-        let damage_low = results_low[2];
-        let base_high = [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")];
-        let results_high = apply_weapon_powder(item, base_high);
-        let damage_high = results_high[2];
-        
+        return total_damage * attack_speed_mult / 2;
+    }
+    else {
         let total_damage_min = 0;
         let total_damage_max = 0;
-        for (const i in damage_keys) {
-            total_damage_min += damage_low[i][0] + damage_low[i][1];
-            total_damage_max += damage_high[i][0] + damage_high[i][1];
-            item.set(damage_keys[i], damage_low[i][0]+"-"+damage_low[i][1]+"\u279c"+damage_high[i][0]+"-"+damage_high[i][1]);
+        for (const damage_k of damage_keys) {
+            damages = item.get(damage_k);
+            total_damage_min += damages[0][0] + damages[0][1];
+            total_damage_max += damages[1][0] + damages[1][1];
         }
         total_damage_min = attack_speed_mult * total_damage_min / 2;
         total_damage_max = attack_speed_mult * total_damage_max / 2;
@@ -36,11 +27,38 @@ function get_base_dps(item) {
     }
 }
 
+// THIS MUTATES THE ITEM
+function apply_weapon_powders(item) {
+    let present;
+    if (item.get("tier") !== "Crafted") {
+        let weapon_result = calc_weapon_powder(item);
+        let damages = weapon_result[0];
+        present = weapon_result[1];
+        for (const i in damage_keys) {
+            item.set(damage_keys[i], damages[i]);
+        }
+    } else {
+        let base_low = [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")];
+        let results_low = calc_weapon_powder(item, base_low);
+        let damage_low = results_low[0];
+        let base_high = [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")];
+        let results_high = calc_weapon_powder(item, base_high);
+        let damage_high = results_high[0];
+        present = results_high[1];
+        
+        for (const i in damage_keys) {
+            item.set(damage_keys[i], [damage_low[i], damage_high[i]]);
+        }
+    }
+    console.log(item);
+    item.set(damage_present_key, present);
+}
+
 /**
  * weapon: Weapon to apply powder to
  * damageBases: used by crafted
  */
-function apply_weapon_powder(weapon, damageBases) {
+function calc_weapon_powder(weapon, damageBases) {
     let powders = weapon.get("powders").slice();
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -86,10 +104,15 @@ function apply_weapon_powder(weapon, damageBases) {
         if (neutralRemainingRaw[1] > 0) {
             let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
             let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-            damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
-            damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
-            neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
-            neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
+
+            //damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
+            //damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
+            //neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+            //neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
+            damages[element+1][0] += min_diff;
+            damages[element+1][1] += max_diff;
+            neutralRemainingRaw[0] -= min_diff;
+            neutralRemainingRaw[1] -= max_diff;
         }
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
@@ -111,9 +134,14 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
     // 1. Get weapon damage (with powders).
-    let weapon_result = apply_weapon_powder(weapon);
-    let weapon_damages = weapon_result[0];
-    let present = weapon_result[1];
+    let weapon_damages;
+    if (weapon.get('tier') === 'Crafted') {
+        weapon_damages = damage_keys.map(x => weapon.get(x)[1]);
+    }
+    else {
+        weapon_damages = damage_keys.map(x => weapon.get(x));
+    }
+    let present = weapon.get(damage_present_key);
 
     // 2. Conversions.
     // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.

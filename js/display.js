@@ -173,6 +173,7 @@ function displayExpandedItem(item, parent_id){
     // #commands create a new element.
     // !elemental is some janky hack for elemental damage.
     // normals just display a thing.
+    item = new Map(item);   // shallow copy
     if (item.get("category") === "weapon") {
         item.set('basedps', get_base_dps(item));
     } else if (item.get("category") === "armor") { 
@@ -341,7 +342,21 @@ function displayExpandedItem(item, parent_id){
                         bckgrd.appendChild(img);
                     }
                 } else {
+                    if (id.endsWith('Dam_')) {
+                        // TODO: kinda jank but replacing lists with txt at this step
+                        let damages = item.get(id);
+                        if (item.get("tier") !== "Crafted") {
+                            damages = damages.map(x => Math.round(x));
+                            item.set(id, damages[0]+"-"+damages[1]);
+                        }
+                        else {
+                            damages = damages.map(x => x.map(y => Math.round(y)));
+                            item.set(id, damages[0][0]+"-"+damages[0][1]+"\u279c"+damages[1][0]+"-"+damages[1][1]);
+                        }
+                    }
+
                     let p_elem;
+                    // TODO: wtf is this if statement
                     if ( !(item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") && (!skp_order.includes(id)) || (skp_order.includes(id) && item.get("tier") !== "Crafted" && parent_div.nodeName === "table") ) { //skp warp
                         p_elem = displayFixedID(parent_div, id, item.get(id), elemental_format);
                     } else if (item.get("tier") === "Crafted" && item.get("category") === "armor" && id === "hp") {

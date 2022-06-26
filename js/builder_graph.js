@@ -204,8 +204,13 @@ class ItemInputNode extends InputNode {
                 type_match = item.statMap.get('type') === this.none_item.statMap.get('type');
             }
             if (type_match) {
-                if (item.statMap.get('category') === 'armor' && powdering !== undefined) {
-                    applyArmorPowders(item.statMap, powdering);
+                if (powdering !== undefined) {
+                    if (item.statMap.get('category') === 'armor') {
+                        applyArmorPowders(item.statMap, powdering);
+                    }
+                    else if (item.statMap.get('category') === 'weapon') {
+                        apply_weapon_powders(item.statMap, powdering);
+                    }
                 }
                 return item;
             }
@@ -330,7 +335,7 @@ class WeaponInputDisplayNode extends ComputeNode {
             dps = dps[1];
             if (isNaN(dps)) dps = 0;
         }
-        this.dps_field.textContent = dps;
+        this.dps_field.textContent = Math.round(dps);
         
         //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
         if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
