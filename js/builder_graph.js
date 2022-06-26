@@ -22,7 +22,6 @@ function update_armor_powder_specials(elem_id) {
     //update the label associated w/ the slider 
     let elem = document.getElementById(elem_id);
     let label = document.getElementById(elem_id + "_label");
-
     let value = elem.value;
 
     label.textContent = label.textContent.split(":")[0] + ": " + value
@@ -86,23 +85,18 @@ let powder_special_input = new (class extends ComputeNode {
 })();
 
 function updatePowderSpecials(buttonId) {
-    let name = (buttonId).split("-")[0];
-    let power = (buttonId).split("-")[1]; // [1, 5]
-    
+    let prefix = (buttonId).split("-")[0].replace(' ', '_') + '-';
     let elem = document.getElementById(buttonId);
-    if (elem.classList.contains("toggleOn")) { //toggle the pressed button off
-        elem.classList.remove("toggleOn");
-    } else {
+    if (elem.classList.contains("toggleOn")) { elem.classList.remove("toggleOn"); }
+    else {
         for (let i = 1;i < 6; i++) { //toggle all pressed buttons of the same powder special off
             //name is same, power is i
-            if(document.getElementById(name.replace(" ", "_") + "-" + i).classList.contains("toggleOn")) {
-                document.getElementById(name.replace(" ", "_") + "-" + i).classList.remove("toggleOn");
-            }
+            const elem2 = document.getElementById(prefix + i);
+            if(elem2.classList.contains("toggleOn")) { elem2.classList.remove("toggleOn"); }
         }
         //toggle the pressed button on
         elem.classList.add("toggleOn"); 
     }
-
     powder_special_input.mark_dirty().update();
 }
 
@@ -129,6 +123,7 @@ class PowderSpecialCalcNode extends ComputeNode {
 }
 
 class PowderSpecialDisplayNode extends ComputeNode {
+    // TODO: Refactor this entirely to be adding more spells to the spell list
     constructor() {
         super('builder-powder-special-display');
         this.fail_cb = true;
@@ -137,24 +132,8 @@ class PowderSpecialDisplayNode extends ComputeNode {
     compute_func(input_map) {
         const powder_specials = input_map.get('powder-specials');
         const stats = input_map.get('stats');
-        const weapon = input_map.get('weapon');
+        const weapon = input_map.get('build').weapon;
         displayPowderSpecials(document.getElementById("powder-special-stats"), powder_specials, stats, weapon.statMap, true); 
-    }
-}
-
-/**
- * Apply armor powders.
- * Encoding shortcut assumes that all powders give +def to one element
- * and -def to the element "behind" it in cycle ETWFA, which is true
- * as of now and unlikely to change in the near future.
- */
-function applyArmorPowders(expandedItem, powders) {
-    for(const id of powders){
-        let powder = powderStats[id];
-        let name = powderNames.get(id).charAt(0);
-        let prevName = skp_elements[(skp_elements.indexOf(name) + 4 )% 5];
-        expandedItem.set(name+"Def", (expandedItem.get(name+"Def") || 0) + powder["defPlus"]);
-        expandedItem.set(prevName+"Def", (expandedItem.get(prevName+"Def") || 0) - powder["defMinus"]);
     }
 }
 
@@ -174,6 +153,11 @@ class ItemInputNode extends InputNode {
     constructor(name, item_input_field, none_item) {
         super(name, item_input_field);
         this.none_item = new Item(none_item);
+        this.category = this.none_item.statMap.get('category');
+        if (this.category == 'armor' || this.category == 'weapon') {
+            this.none_item.statMap.set('powders', []);
+            apply_weapon_powders(this.none_item.statMap); // Needed to put in damagecalc zeros
+        }
         this.none_item.statMap.set('NONE', true);
     }
 
@@ -197,17 +181,17 @@ class ItemInputNode extends InputNode {
                 item.statMap.set('powders', powdering);
             }
             let type_match;
-            if (this.none_item.statMap.get('category') === 'weapon') {
-                type_match = item.statMap.get('category') === 'weapon';
+            if (this.category == 'weapon') {
+                type_match = item.statMap.get('category') == 'weapon';
             } else {
-                type_match = item.statMap.get('type') === this.none_item.statMap.get('type');
+                type_match = item.statMap.get('type') == this.none_item.statMap.get('type');
             }
             if (type_match) {
-                if (item.statMap.get('category') === 'armor') {
-                    applyArmorPowders(item.statMap, powdering);
+                if (item.statMap.get('category') == 'armor') {
+                    applyArmorPowders(item.statMap);
                 }
-                else if (item.statMap.get('category') === 'weapon') {
-                    apply_weapon_powders(item.statMap, powdering);
+                else if (item.statMap.get('category') == 'weapon') {
+                    apply_weapon_powders(item.statMap);
                 }
                 return item;
             }
@@ -579,7 +563,7 @@ class SpellDamageCalcNode extends ComputeNode {
     }
 
     compute_func(input_map) {
-        const weapon = new Map(input_map.get('weapon-input').statMap);
+        const weapon = input_map.get('build').weapon.statMap;
         const spell_info = input_map.get('spell-info');
         const spell_parts = spell_info[1];
         const stats = input_map.get('stats');
@@ -647,6 +631,7 @@ class SpellDisplayNode extends ComputeNode {
     Returns an array in the order:
 */
 function getMeleeStats(stats, weapon) {
+    stats = new Map(stats); // Shallow copy
     const weapon_stats = weapon.statMap;
     const skillpoints = [
             stats.get('str'),
@@ -665,9 +650,8 @@ function getMeleeStats(stats, weapon) {
         adjAtkSpd = 0;
     }
 
-    let damage_mult = stats.get("damageMultiplier");
     if (weapon_stats.get("type") === "relik") {
-        damage_mult = 0.99; // CURSE YOU WYNNCRAFT
+        stats.set('damageMultiplier', 0.99); // CURSE YOU WYNNCRAFT
         //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
         //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
     }
@@ -1076,7 +1060,7 @@ function builder_graph_init() {
     // Powder specials.
     let powder_special_calc = new PowderSpecialCalcNode().link_to(powder_special_input, 'powder-specials');
     new PowderSpecialDisplayNode().link_to(powder_special_input, 'powder-specials')
-        .link_to(stat_agg_node, 'stats').link_to(item_nodes[8], 'weapon');
+        .link_to(stat_agg_node, 'stats').link_to(build_node, 'build');
     stat_agg_node.link_to(powder_special_calc, 'powder-boost');
     stat_agg_node.link_to(armor_powder_node, 'armor-powder');
     powder_special_input.update();
@@ -1093,7 +1077,7 @@ function builder_graph_init() {
         spell_node.link_to(stat_agg_node, 'stats')
 
         let calc_node = new SpellDamageCalcNode(i);
-        calc_node.link_to(item_nodes[8], 'weapon-input').link_to(stat_agg_node, 'stats')
+        calc_node.link_to(build_node, 'build').link_to(stat_agg_node, 'stats')
             .link_to(spell_node, 'spell-info');
         spelldmg_nodes.push(calc_node);
 

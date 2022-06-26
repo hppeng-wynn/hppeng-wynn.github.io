@@ -1,7 +1,5 @@
 const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
 
-const damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
-const damage_present_key = 'damagePresent';
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
     //SUPER JANK @HPP PLS FIX
@@ -27,107 +25,6 @@ function get_base_dps(item) {
     }
 }
 
-// THIS MUTATES THE ITEM
-function apply_weapon_powders(item) {
-    let present;
-    if (item.get("tier") !== "Crafted") {
-        let weapon_result = calc_weapon_powder(item);
-        let damages = weapon_result[0];
-        present = weapon_result[1];
-        for (const i in damage_keys) {
-            item.set(damage_keys[i], damages[i]);
-        }
-    } else {
-        let base_low = [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")];
-        let results_low = calc_weapon_powder(item, base_low);
-        let damage_low = results_low[0];
-        let base_high = [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")];
-        let results_high = calc_weapon_powder(item, base_high);
-        let damage_high = results_high[0];
-        present = results_high[1];
-        
-        for (const i in damage_keys) {
-            item.set(damage_keys[i], [damage_low[i], damage_high[i]]);
-        }
-    }
-    console.log(item);
-    item.set(damage_present_key, present);
-}
-
-/**
- * weapon: Weapon to apply powder to
- * damageBases: used by crafted
- */
-function calc_weapon_powder(weapon, damageBases) {
-    let powders = weapon.get("powders").slice();
-
-    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
-    let damages = [
-        weapon.get('nDam').split('-').map(Number),
-        weapon.get('eDam').split('-').map(Number),
-        weapon.get('tDam').split('-').map(Number),
-        weapon.get('wDam').split('-').map(Number),
-        weapon.get('fDam').split('-').map(Number),
-        weapon.get('aDam').split('-').map(Number)
-    ];
-
-    // Applying spell conversions
-    let neutralBase = damages[0].slice();
-    let neutralRemainingRaw = damages[0].slice();
-  
-    //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
-
-    //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
-    //1st round - apply each as ingred, 2nd round - apply as normal
-    if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
-        for (const p of powders.concat(weapon.get("ingredPowders"))) {
-            let powder = powderStats[p];  //use min, max, and convert
-            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
-            let diff = Math.floor(damageBases[0] * powder.convert/100);
-            damageBases[0] -= diff;
-            damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
-        }
-        //update all damages
-        for (let i = 0; i < damages.length; i++) {
-            damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
-        }
-        neutralRemainingRaw = damages[0].slice();
-        neutralBase = damages[0].slice();
-    }
-    
-    //apply powders to weapon
-    for (const powderID of powders) {
-        const powder = powderStats[powderID];
-        // Bitwise to force conversion to integer (integer division).
-        const element = (powderID/6) | 0;
-        let conversionRatio = powder.convert/100;
-        if (neutralRemainingRaw[1] > 0) {
-            let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
-            let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-
-            //damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
-            //damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
-            //neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
-            //neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
-            damages[element+1][0] += min_diff;
-            damages[element+1][1] += max_diff;
-            neutralRemainingRaw[0] -= min_diff;
-            neutralRemainingRaw[1] -= max_diff;
-        }
-        damages[element+1][0] += powder.min;
-        damages[element+1][1] += powder.max;
-    }
-
-    // The ordering of these two blocks decides whether neutral is present when converted away or not.
-    let present_elements = []
-    for (const damage of damages) {
-        present_elements.push(damage[1] > 0);
-    }
-
-    // The ordering of these two blocks decides whether neutral is present when converted away or not.
-    damages[0] = neutralRemainingRaw;
-    return [damages, present_elements];
-}
 
 function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false) {
     // TODO: Roll all the loops together maybe
@@ -227,10 +124,18 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
             raw_boost += stats.get(damage_prefix+'Raw') + stats.get(damage_elements[i]+'DamRaw');
         }
         // Next, rainraw and propRaw
-        let new_min = damages_obj[0] + raw_boost + (damages_obj[0] / total_min) * prop_raw;
-        let new_max = damages_obj[1] + raw_boost + (damages_obj[1] / total_max) * prop_raw;
-        if (i != 0) {   // rainraw
-            new_min += (damages_obj[0] / total_elem_min) * rainbow_raw;
+        let new_min = damages_obj[0] + raw_boost;
+        let new_max = damages_obj[1] + raw_boost;
+        if (total_max > 0) {    // TODO: what about total negative all raw?
+            if (total_elem_min > 0) {
+                new_min += (damages_obj[0] / total_min) * prop_raw;
+            }
+            new_max += (damages_obj[1] / total_max) * prop_raw;
+        }
+        if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
+            if (total_elem_min > 0) {
+                new_min += (damages_obj[0] / total_elem_min) * rainbow_raw;
+            }
             new_max += (damages_obj[1] / total_elem_max) * rainbow_raw;
         }
         damages_obj[0] = new_min;
