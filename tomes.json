@@ -290,7 +290,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 60,
-      "dmgMobs": 6,
+      "damMobs": 6,
       "fixID": false,
       "id": 20
     },
@@ -302,7 +302,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 7,
+      "damMobs": 7,
       "str": 3,
       "fixID": false,
       "id": 21
@@ -315,7 +315,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 8,
+      "damMobs": 8,
       "str": 3,
       "fixID": false,
       "id": 22
@@ -328,7 +328,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 7,
+      "damMobs": 7,
       "dex": 3,
       "fixID": false,
       "id": 23
@@ -341,7 +341,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 8,
+      "damMobs": 8,
       "dex": 3,
       "fixID": false,
       "id": 24
@@ -354,7 +354,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 7,
+      "damMobs": 7,
       "int": 3,
       "fixID": false,
       "id": 25
@@ -367,7 +367,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 8,
+      "damMobs": 8,
       "int": 3,
       "fixID": false,
       "id": 26
@@ -380,7 +380,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 7,
+      "damMobs": 7,
       "def": 3,
       "fixID": false,
       "id": 27
@@ -393,7 +393,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 8,
+      "damMobs": 8,
       "def": 3,
       "fixID": false,
       "id": 28
@@ -406,7 +406,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 7,
+      "damMobs": 7,
       "agi": 3,
       "fixID": false,
       "id": 29
@@ -419,7 +419,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 8,
+      "damMobs": 8,
       "agi": 3,
       "fixID": false,
       "id": 30
@@ -432,7 +432,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 7,
+      "damMobs": 7,
       "str": 1,
       "dex": 1,
       "int": 1,
@@ -449,7 +449,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 8,
+      "damMobs": 8,
       "str": 1,
       "dex": 1,
       "int": 1,
@@ -466,7 +466,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 12,
+      "damMobs": 12,
       "eDamPct": 7,
       "fixID": false,
       "id": 33
@@ -479,7 +479,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 12,
+      "damMobs": 12,
       "tDamPct": 7,
       "fixID": false,
       "id": 34
@@ -492,7 +492,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 12,
+      "damMobs": 12,
       "wDamPct": 7,
       "fixID": false,
       "id": 35
@@ -505,7 +505,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 12,
+      "damMobs": 12,
       "fDamPct": 7,
       "fixID": false,
       "id": 36
@@ -518,7 +518,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 12,
+      "damMobs": 12,
       "aDamPct": 7,
       "fixID": false,
       "id": 37
@@ -531,7 +531,7 @@
       "drop": "never",
       "restrict": "Soulbound Item",
       "lvl": 80,
-      "dmgMobs": 12,
+      "damMobs": 12,
       "eDamPct": 6,
       "tDamPct": 6,
       "wDamPct": 6,

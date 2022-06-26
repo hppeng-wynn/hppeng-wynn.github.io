@@ -147,7 +147,6 @@ function toggle_tab(tab) {
     } else {
         document.querySelector("#"+tab).style.display = "none";
     }
-    console.log(document.querySelector("#"+tab).style.display);
 }
 
 // toggle spell arrow
@@ -442,6 +441,11 @@ function init() {
     decodeBuild(url_tag);
     builder_graph_init();
 }
+
+window.onerror = function(message, source, lineno, colno, error) {
+    document.getElementById('err-box').textContent = message;
+    document.getElementById('stack-box').textContent = error.stack;
+};
 
 (async function() {
     let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];

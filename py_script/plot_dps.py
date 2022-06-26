@@ -1,3 +1,7 @@
+"""
+Generates data for dps_vis
+"""
+
 import matplotlib.pyplot as plt
 import json
 import numpy as np

@@ -1,3 +1,4 @@
+let all_nodes = [];
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -16,6 +17,7 @@ class ComputeNode {
         this.dirty = true;
         this.inputs_dirty = new Map();
         this.inputs_dirty_count = 0;
+        all_nodes.push(this);
     }
 
     /**
@@ -91,9 +93,9 @@ class ComputeNode {
         this.inputs.push(parent_node)
         link_name = (link_name !== undefined) ? link_name : parent_node.name;
         this.input_translation.set(parent_node.name, link_name);
-        this.inputs_dirty.set(parent_node.name, parent_node.dirty);
-        if (parent_node.dirty) {
+        if (parent_node.dirty || (parent_node.value === null && !this.fail_cb)) {
             this.inputs_dirty_count += 1;
+            this.inputs_dirty.set(parent_node.name, true);
         }
         parent_node.children.push(this);
         return this;

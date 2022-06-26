@@ -210,7 +210,7 @@ function shareBuild(build) {
             "> "+build.items[5].statMap.get("displayName")+"\n"+
             "> "+build.items[6].statMap.get("displayName")+"\n"+
             "> "+build.items[7].statMap.get("displayName")+"\n"+
-            "> "+build.items[8].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
+            "> "+build.items[15].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }

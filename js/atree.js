@@ -1,0 +1,416 @@
+let atree_map;
+let atree_head;
+let atree_connectors_map;
+let atree_active_connections = [];
+function construct_AT(elem, tree) {
+    console.log("constructing ability tree UI");
+    document.getElementById("atree-active").innerHTML = ""; //reset all atree actives - should be done in a more general way later
+    elem.innerHTML = ""; //reset the atree in the DOM
+    
+    if (tree === undefined) {return false;}
+
+    // add in the "Active" title to atree
+    let active_row = document.createElement("div");
+    active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
+
+    let active_word = document.createElement("div");
+    active_word.classList.add("col-auto");
+    active_word.textContent = "Active Abilities:";
+
+    let active_AP_container = document.createElement("div");
+    active_AP_container.classList.add("col-auto");
+
+    let active_AP_subcontainer = document.createElement("div");
+    active_AP_subcontainer.classList.add("row");
+
+    let active_AP_cost = document.createElement("div");
+    active_AP_cost.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_cost.id = "active_AP_cost";
+    active_AP_cost.textContent = "0";
+    let active_AP_slash = document.createElement("div");
+    active_AP_slash.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_slash.textContent = "/";
+    let active_AP_cap = document.createElement("div");
+    active_AP_cap.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_cap.id = "active_AP_cap";
+    active_AP_cap.textContent = "45";
+    let active_AP_end = document.createElement("div");
+    active_AP_end.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_end.textContent = " AP";
+
+    //I can't believe we can't pass in multiple children at once
+    active_AP_subcontainer.appendChild(active_AP_cost);
+    active_AP_subcontainer.appendChild(active_AP_slash);
+    active_AP_subcontainer.appendChild(active_AP_cap);
+    active_AP_subcontainer.appendChild(active_AP_end);
+    active_AP_container.appendChild(active_AP_subcontainer);
+
+    active_row.appendChild(active_word);
+    active_row.appendChild(active_AP_container);
+
+    document.getElementById("atree-active").appendChild(active_row);
+
+    atree_map = new Map();
+    atree_connectors_map = new Map()
+    for (let i of tree) {
+        atree_map.set(i.id, {display: i.display, parents: i.parents, connectors: new Map(), active: false});
+    }
+
+    for (let i = 0; i < tree.length; i++) {
+        let node = tree[i];
+        
+        // create rows if not exist
+        let missing_rows = [node.display.row];
+
+        if (node.parents.length == 0) {
+            // Assuming there is only one head.
+            atree_head = node;
+        }
+
+        for (let parent of node.parents) {
+            missing_rows.push(tree.find(object => {return object.id === parent;}).display.row);
+        }
+        for (let missing_row of missing_rows) {
+            if (document.getElementById("atree-row-" + missing_row) == null) {
+                for (let j = 0; j <= missing_row; j++) {
+                    if (document.getElementById("atree-row-" + j) == null) {
+                        let row = document.createElement('div');
+                        row.classList.add("row");
+                        row.id = "atree-row-" + j;
+                        //was causing atree rows to be 0 height
+                        row.style.minHeight = elem.scrollWidth / 9 + "px";
+                        //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
+
+                        for (let k = 0; k < 9; k++) {
+                            col = document.createElement('div');
+                            col.classList.add('col', 'px-0');
+                            col.style.minHeight = elem.scrollWidth / 9 + "px";
+                            row.appendChild(col);
+
+                            atree_connectors_map.set(j + "," + k, [])
+                        };
+                        elem.appendChild(row);
+                    };
+                };
+            };
+        }
+
+
+        // create connectors based on parent location
+        for (let parent of node.parents) {
+            atree_map.get(node.id).connectors.set(parent, []);
+
+            let parent_node = atree_map.get(parent);
+
+            let connect_elem = document.createElement("div");
+            connect_elem.style = "background-size: cover; width: 100%; height: 100%;";
+            // connect up
+            for (let i = node.display.row - 1; i > parent_node.display.row; i--) {
+                let connector = connect_elem.cloneNode();
+                connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
+                atree_map.get(node.id).connectors.get(parent).push(i + "," + node.display.col);
+                atree_connectors_map.get(i + "," + node.display.col).push({connector: connector, type: "line", owner: [node.id, parent]});
+                resolve_connector(i + "," + node.display.col, node);
+            }
+            // connect horizontally
+            let min = Math.min(parent_node.display.col, node.display.col);
+            let max = Math.max(parent_node.display.col, node.display.col);
+            for (let i = min + 1; i < max; i++) {
+                let connector = connect_elem.cloneNode();
+                connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
+                connector.classList.add("rotate-90");
+                atree_map.get(node.id).connectors.get(parent).push(parent_node.display.row + "," + i);
+                atree_connectors_map.get(parent_node.display.row + "," + i).push({connector: connector, type: "line", owner: [node.id, parent]});
+                resolve_connector(parent_node.display.row + "," + i, node);
+            }
+
+            // connect corners
+
+            if (parent_node.display.row != node.display.row && parent_node.display.col != node.display.col) {
+                let connector = connect_elem.cloneNode();
+                connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
+                atree_map.get(node.id).connectors.get(parent).push(parent_node.display.row + "," + node.display.col);
+                atree_connectors_map.get(parent_node.display.row + "," + node.display.col).push({connector: connector, type: "angle", owner: [node.id, parent]});
+                if (parent_node.display.col > node.display.col) {
+                    connector.classList.add("rotate-180");
+                }
+                else {// if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
+                    connector.classList.add("rotate-270");
+                }
+                resolve_connector(parent_node.display.row + "," + node.display.col, node);
+            }
+        }
+
+        // create node
+        let node_elem = document.createElement('div');
+        let icon = node.display.icon;
+        if (icon === undefined) {
+            icon = "node";
+        }
+        node_elem.style = "background-image: url('../media/atree/"+icon+".png'); background-size: cover; width: 100%; height: 100%;";
+        node_elem.classList.add("atree-circle");
+
+        // add tooltip
+        node_elem.addEventListener('mouseover', function(e) {
+            if (e.target !== this) {return;}
+            let tooltip = this.children[0];
+            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
+            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
+            tooltip.style.display = "block";
+        });
+
+        node_elem.addEventListener('mouseout', function(e) {
+            if (e.target !== this) {return;}
+            let tooltip = this.children[0];
+            tooltip.style.display = "none";
+        });
+
+        node_elem.classList.add("fake-button");
+
+        let active_tooltip = document.createElement('div');
+        active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+        //was causing active element boxes to be 0 width 
+        active_tooltip.style.maxWidth = elem.getBoundingClientRect().width * .80 + "px";
+        active_tooltip.style.display = "none";
+
+        // tooltip text formatting
+
+        let active_tooltip_title = document.createElement('b');
+        active_tooltip_title.classList.add("scaled-font");
+        active_tooltip_title.innerHTML = node.display_name;
+
+        let active_tooltip_desc = document.createElement('p');
+        active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+        active_tooltip_desc.textContent = node.desc;
+
+        let active_tooltip_cost = document.createElement('p');
+        active_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
+        active_tooltip_cost.textContent = "Cost: " + node.cost + " AP";
+
+        active_tooltip.appendChild(active_tooltip_title);
+        active_tooltip.appendChild(active_tooltip_desc);
+        active_tooltip.appendChild(active_tooltip_cost);
+
+        node_tooltip = active_tooltip.cloneNode(true);
+
+        active_tooltip.id = "atree-ab-" + node.id;
+
+        node_tooltip.style.position = "absolute";
+        node_tooltip.style.zIndex = "100";
+
+        node_elem.appendChild(node_tooltip);
+        document.getElementById("atree-active").appendChild(active_tooltip);
+
+        node_elem.addEventListener('click', function(e) {
+            if (e.target !== this && e.target!== this.children[0]) {return;}
+            let tooltip = document.getElementById("atree-ab-" + node.id);
+            if (tooltip.style.display == "block") {
+                tooltip.style.display = "none";
+                this.classList.remove("atree-selected");
+                this.style.backgroundImage = '';
+                document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) - node.cost; 
+            } 
+            else {
+                tooltip.style.display = "block";
+                this.classList.add("atree-selected");
+                document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) + node.cost;
+            };
+            atree_toggle_state(node);
+            atree_update_connector();
+        });
+
+        // add tooltip
+
+        node_elem.addEventListener('mouseover', function(e) {
+            if (e.target !== this && e.target!== this.children[0]) {return;}
+            let tooltip = this.children[this.children.length - 1];
+            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
+            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
+            tooltip.style.display = "block";
+        });
+
+        node_elem.addEventListener('mouseout', function(e) {
+            if (e.target !== this && e.target!== this.children[0]) {return;}
+            let tooltip = this.children[this.children.length - 1];
+            tooltip.style.display = "none";
+        });
+
+        document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
+    };
+
+    atree_render_connection();
+};
+
+// resolve connector conflict, when they occupy the same cell.
+function resolve_connector(pos, node) {
+    if (atree_connectors_map.get(pos).length < 2) {return false;}
+
+    let line = false;
+    let angle = false;
+    let t = false;
+    let owners = [];
+    for (let i of atree_connectors_map.get(pos)) {
+        if (i.type == "line") {
+            line = true;
+        } else if (i.type == "angle") {
+            angle = true;
+        } else if (i.type == "t") {
+            t = true;
+        }
+        owners = owners.concat(i.owner);
+    }
+
+    owners = [...new Set(owners)];
+
+    let connect_elem = document.createElement("div");
+
+    if ((line && angle)) {
+        connect_elem.style = "background-image: url('../media/atree/connect_t.png'); background-size: cover; width: 100%; height: 100%;";
+        atree_connectors_map.set(pos, [{connector: connect_elem, type: "t", owner: owners, connector_state: {up: 0, left: 0, right: 0, down: 0}}]);
+    }
+    if (node.parents.length == 3 && t && atree_same_row(node)) {
+        connect_elem.style = "background-image: url('../media/atree/connect_c.png'); background-size: cover; width: 100%; height: 100%;";
+        atree_connectors_map.set(pos, [{connector: connect_elem, type: "c", owner: owners, connector_state: {up: 0, left: 0, right: 0, down: 0}}]);
+    }
+    // override the conflict with the first children
+    atree_connectors_map.set(pos, [atree_connectors_map.get(pos)[0]]);
+    atree_connectors_map.get(pos)[0].owner = owners;
+}
+
+// check if a node doesn't have same row w/ its parents (used to solve conflict)
+function atree_same_row(node) {
+    for (let i of node.parents) {
+        if (node.display.row == atree_map.get(i).display.row) { return false; }
+    };
+    return true;
+};
+
+// draw the connector onto the screen
+function atree_render_connection() {
+    for (let i of atree_connectors_map.keys()) {
+        if (document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]].children.length != 0) {continue;}
+        if (atree_connectors_map.get(i).length != 0) {
+            document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]].appendChild(atree_connectors_map.get(i)[0].connector);
+        };
+    };
+};
+
+// toggle the state of a node.
+function atree_toggle_state(node) {
+    if (atree_map.get(node.id).active) {
+        atree_map.get(node.id).active = false;
+    } else {
+        atree_map.get(node.id).active = true;
+    };
+};
+
+// refresh all connector to default state, then try to calculate the connector for all node
+function atree_update_connector() {
+    atree_connectors_map.forEach((v) => {
+        if (v.length != 0) {
+            v[0].connector.style.backgroundImage = "url('../media/atree/connect_" + v[0].type + ".png')";
+        }
+    });
+    atree_map.forEach((v) => {
+        atree_compute_highlight(v);
+    });
+}
+
+// set the correct connector highlight for an active node, given a node.
+function atree_compute_highlight(node) {
+    node.connectors.forEach((v, k) => {
+        if (node.active && atree_map.get(k).active) {
+            for (let i of v) {
+                connector_data = atree_connectors_map.get(i)[0];
+                if (connector_data.type == "c" || connector_data.type == "t") {
+                    connector_data.connector_state = atree_get_state(i);
+                    let connector_img = atree_parse_connector(connector_data.connector_state, connector_data.type);
+                    connector_data.connector.className = "";
+                    connector_data.connector.classList.add("rotate-" + connector_img.rotate);
+                    connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + connector_img.attrib + ".png')";
+                } else {
+                    connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + ".png')";
+                };
+            };
+        };
+    });
+};
+
+// get the current active state of different directions, given a connector coordinate.
+function atree_get_state(connector) {
+    let connector_state = [0, 0, 0, 0]; // left, right, up, down
+
+    for (let abil_name of atree_connectors_map.get(connector)[0].owner) {
+
+        state = atree_map.get(abil_name).active;
+        if (atree_map.get(abil_name).display.col > parseInt(connector.split(",")[1])) {
+            if (state) {
+                connector_state[1] = 1;
+            } else if (!connector_state[1]) {
+                connector_state[1] = 0;
+            }
+            continue;
+        }
+        if (atree_map.get(abil_name).display.col < parseInt(connector.split(",")[1])) {
+            if (state) {
+                connector_state[0] = 1;
+            } else if (!connector_state[0]) {
+                connector_state[0] = 0;
+            }
+            continue;
+        }
+        if (atree_map.get(abil_name).display.row < parseInt(connector.split(",")[0])) {
+            if (state) {
+                connector_state[2] = 1;
+            } else if (!connector_state[2]) {
+                connector_state[2] = 0;
+            }
+            continue;
+        }
+        if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
+            if (state) {
+                connector_state[3] = 1;
+            } else if (!connector_state[3]) {
+                connector_state[3] = 0;
+            };
+            continue;
+        };
+    };
+    return connector_state;
+}
+
+// parse a sequence of left, right, up, down to appropriate connector image
+function atree_parse_connector(orient, type) {
+    // left, right, up, down
+    let c_connector_dict = {
+        "1100": {attrib: "_2_l", rotate: 0},
+        "1010": {attrib: "_2_a", rotate: 0},
+        "1001": {attrib: "_2_a", rotate: 270},
+        "0110": {attrib: "_2_a", rotate: 90},
+        "0101": {attrib: "_2_a", rotate: 180},
+        "0011": {attrib: "_2_l", rotate: 90},
+        "1110": {attrib: "_3", rotate: 0},
+        "1101": {attrib: "_3", rotate: 180},
+        "1011": {attrib: "_3", rotate: 270},
+        "0111": {attrib: "_3", rotate: 90},
+        "1111": {attrib: "", rotate: 0}
+    };
+
+    let t_connector_dict = {
+        "1100": {attrib: "_2_l", rotate: 0},
+        "1001": {attrib: "_2_a", rotate: "flip"},
+        "0101": {attrib: "_2_a", rotate: 0},
+        "1101": {attrib: "_3", rotate: 0}
+    };
+
+    let res = "";  
+    for (let i of orient) {
+        res += i;
+    };
+
+    if (type == "c") {
+        return c_connector_dict[res];
+    } else {
+        return t_connector_dict[res];
+    };
+};

@@ -18,7 +18,7 @@
     -->
 
     <title>WynnBuilder</title>
-    <link rel="icon" href="../media/icons/new/builder.png" type="image/icon type">
+    <link rel="icon" href="./media/memes/agony.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
 
@@ -49,7 +49,7 @@
         <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
     </div>
-    <div class="container-fluid me-4" style="max-width: 95%;">
+    <div class="container-fluid me-4" style="max-width: 95%; display: none">
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-3 py-3">
             <div class="col-xl-6">
                 <div class="row row-cols-1 mb-3 gy-4">
@@ -406,8 +406,6 @@
                             </div>
                             <div class="col text-center">
                                 <div id="summary-box"></div>
-                                <div id="err-box"></div>
-                                <div id="stack-box"></div>
                                 <div id="str-warnings"></div>
                                 <div id="dex-warnings"></div>
                                 <div id="int-warnings"></div>
@@ -621,7 +619,7 @@
                                             <div class="col border border-semi-light rounded dark-9 hide-scroll" id="atree-ui" style="height: 500px; overflow-y: auto;">
 
                                             </div>
-                                            <div class="col mx-auto" style="height: 500px; overflow-y: auto;" id="atree-active">
+                                            <div class="col mx-auto" id="atree-active">
                                             </div>
                                         </div>
                                     </div>
@@ -1430,5 +1428,11 @@
     <script type="text/javascript" src="../js/sq2items.js"></script>
     <script type="text/javascript" src="../js/optimize.js"></script>
 
+    <div id="graph_body" style="max-width: 100%; height: 100vh">
+        <button id="saveButton">JANKY Export SVG</button>
+        <a id="saveLink">savelink</a>
+    </div>
+    <script src="https://d3js.org/d3.v7.js"></script>
+    <script type="text/javascript" src="../js/render_compute_graph.js"></script>
 </body>
 </html> 
