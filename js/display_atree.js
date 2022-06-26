@@ -289,6 +289,7 @@ function atree_get_state(connector) {
             } else if (!connector_state[1]) {
                 connector_state[1] = 0;
             }
+            continue;
         }
         if (atree_map.get(abil_name).display.col < parseInt(connector.split(",")[1])) {
             if (state) {
@@ -296,6 +297,7 @@ function atree_get_state(connector) {
             } else if (!connector_state[0]) {
                 connector_state[0] = 0;
             }
+            continue;
         }
         if (atree_map.get(abil_name).display.row < parseInt(connector.split(",")[0])) {
             if (state) {
@@ -303,6 +305,7 @@ function atree_get_state(connector) {
             } else if (!connector_state[2]) {
                 connector_state[2] = 0;
             }
+            continue;
         }
         if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
             if (state) {
@@ -310,6 +313,7 @@ function atree_get_state(connector) {
             } else if (!connector_state[3]) {
                 connector_state[3] = 0;
             };
+            continue;
         };
     };
     return connector_state;
