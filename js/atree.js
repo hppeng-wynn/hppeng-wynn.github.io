@@ -109,8 +109,41 @@ function render_AT(elem, tree) {
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
     active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
-    active_row.textContent = "Active: 0/45 AP";
     abil_points_current = 0;
+    let active_word = document.createElement("div");
+    active_word.classList.add("col-auto");
+    active_word.textContent = "Active Abilities:";
+
+    let active_AP_container = document.createElement("div");
+    active_AP_container.classList.add("col-auto");
+
+    let active_AP_subcontainer = document.createElement("div");
+    active_AP_subcontainer.classList.add("row");
+
+    let active_AP_cost = document.createElement("div");
+    active_AP_cost.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_cost.id = "active_AP_cost";
+    active_AP_cost.textContent = "0";
+    let active_AP_slash = document.createElement("div");
+    active_AP_slash.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_slash.textContent = "/";
+    let active_AP_cap = document.createElement("div");
+    active_AP_cap.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_cap.id = "active_AP_cap";
+    active_AP_cap.textContent = "45";
+    let active_AP_end = document.createElement("div");
+    active_AP_end.classList.add("col-auto", "mx-0", "px-0");
+    active_AP_end.textContent = " AP";
+
+    //I can't believe we can't pass in multiple children at once
+    active_AP_subcontainer.appendChild(active_AP_cost);
+    active_AP_subcontainer.appendChild(active_AP_slash);
+    active_AP_subcontainer.appendChild(active_AP_cap);
+    active_AP_subcontainer.appendChild(active_AP_end);
+    active_AP_container.appendChild(active_AP_subcontainer);
+
+    active_row.appendChild(active_word);
+    active_row.appendChild(active_AP_container);
     document.getElementById("atree-active").appendChild(active_row);
 
     let atree_map = new Map();
@@ -226,7 +259,7 @@ function render_AT(elem, tree) {
         let active_tooltip = document.createElement('div');
         active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
         //was causing active element boxes to be 0 width 
-        // active_tooltip.style.width = elem.getBoundingClientRect().width * .80 + "px";
+        active_tooltip.style.maxWidth = elem.getBoundingClientRect().width * .80 + "px";
         active_tooltip.style.display = "none";
 
         // tooltip text formatting
@@ -235,12 +268,17 @@ function render_AT(elem, tree) {
         active_tooltip_title.classList.add("scaled-font");
         active_tooltip_title.innerHTML = node.display_name;
 
-        let active_tooltip_text = document.createElement('p');
-        active_tooltip_text.classList.add("scaled-font-sm");
-        active_tooltip_text.textContent = node.desc;
+        let active_tooltip_desc = document.createElement('p');
+        active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+        active_tooltip_desc.textContent = node.desc;
+
+        let active_tooltip_cost = document.createElement('p');
+        active_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
+        active_tooltip_cost.textContent = "Cost: " + node.cost + " AP";
 
         active_tooltip.appendChild(active_tooltip_title);
-        active_tooltip.appendChild(active_tooltip_text);
+        active_tooltip.appendChild(active_tooltip_desc);
+        active_tooltip.appendChild(active_tooltip_cost);
 
         node_tooltip = active_tooltip.cloneNode(true);
 
@@ -253,7 +291,7 @@ function render_AT(elem, tree) {
         document.getElementById("atree-active").appendChild(active_tooltip);
 
         node_elem.addEventListener('click', function(e) {
-            if (e.target !== this) {return;};
+            if (e.target !== this && e.target!== this.children[0]) {return;}
             let tooltip = document.getElementById("atree-ab-" + node.id);
             if (tooltip.style.display == "block") {
                 tooltip.style.display = "none";
@@ -265,9 +303,26 @@ function render_AT(elem, tree) {
                 this.classList.add("atree-selected");
                 abil_points_current += node.cost;
             };
-            active_row.textContent = "Active: "+abil_points_current+"/45 AP";
+            document.getElementById("active_AP_cost").textContent = abil_points_current;
             atree_toggle_state(atree_connectors_map, node_wrap);
         });
+
+        // add tooltip
+
+        node_elem.addEventListener('mouseover', function(e) {
+            if (e.target !== this && e.target!== this.children[0]) {return;}
+            let tooltip = this.children[this.children.length - 1];
+            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
+            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
+            tooltip.style.display = "block";
+        });
+
+        node_elem.addEventListener('mouseout', function(e) {
+            if (e.target !== this && e.target!== this.children[0]) {return;}
+            let tooltip = this.children[this.children.length - 1];
+            tooltip.style.display = "none";
+        });
+
         document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
     };
     console.log(atree_connectors_map);
