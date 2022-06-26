@@ -153,7 +153,7 @@ class Build{
     */
     initBuildStats(){
 
-        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi", "dmgMobs", "defMobs"];
+        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi", "damMobs", "defMobs"];
 
         let must_ids = [
             "eMdPct","eMdRaw","eSdPct","eSdRaw","eDamPct","eDamRaw","eDamAddMin","eDamAddMax",
@@ -188,9 +188,10 @@ class Build{
                 }
                 statMap.set(id,(statMap.get(id) || 0)+value);
             }
+            console.log(item_stats);
             for (const staticID of staticIDs) {
                 if (item_stats.get(staticID)) {
-                    if (staticID === "dmgMobs") {
+                    if (staticID == "damMobs") {
                         statMap.set('damageMultiplier', statMap.get('damageMultiplier') * item_stats.get(staticID));
                     }
                     else if (staticID === "defMobs") {

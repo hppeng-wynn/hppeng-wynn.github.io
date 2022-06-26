@@ -832,6 +832,7 @@ class AggregateStatsNode extends ComputeNode {
                 }
             }
         }
+        console.log(output_stats);
         return output_stats;
     }
 }

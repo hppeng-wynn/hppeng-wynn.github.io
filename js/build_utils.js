@@ -78,12 +78,13 @@ let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slot
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
 ];
+// Extra fake IDs (reserved for use in spell damage calculation) : damageMultiplier, defMultiplier, poisonPct, activeMajorIDs
 let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ]
 
 //File reading for ID translations for JSON purposes
 let reversetranslations = new Map();
 let translations = new Map([["name", "name"], ["displayName", "displayName"], ["tier", "tier"], ["set", "set"], ["sockets", "slots"], ["type", "type"], ["dropType", "drop"], ["quest", "quest"], ["restrictions", "restrict"], ["damage", "nDam"], ["fireDamage", "fDam"], ["waterDamage", "wDam"], ["airDamage", "aDam"], ["thunderDamage", "tDam"], ["earthDamage", "eDam"], ["attackSpeed", "atkSpd"], ["health", "hp"], ["fireDefense", "fDef"], ["waterDefense", "wDef"], ["airDefense", "aDef"], ["thunderDefense", "tDef"], ["earthDefense", "eDef"], ["level", "lvl"], ["classRequirement", "classReq"], ["strength", "strReq"], ["dexterity", "dexReq"], ["intelligence", "intReq"], ["agility", "agiReq"], ["defense", "defReq"], ["healthRegen", "hprPct"], ["manaRegen", "mr"], ["spellDamage", "sdPct"], ["damageBonus", "mdPct"], ["lifeSteal", "ls"], ["manaSteal", "ms"], ["xpBonus", "xpb"], ["lootBonus", "lb"], ["reflection", "ref"], ["strengthPoints", "str"], ["dexterityPoints", "dex"], ["intelligencePoints", "int"], ["agilityPoints", "agi"], ["defensePoints", "def"], ["thorns", "thorns"], ["exploding", "expd"], ["speed", "spd"], ["attackSpeedBonus", "atkTier"], ["poison", "poison"], ["healthBonus", "hpBonus"], ["soulPoints", "spRegen"], ["emeraldStealing", "eSteal"], ["healthRegenRaw", "hprRaw"], ["spellDamageRaw", "sdRaw"], ["damageBonusRaw", "mdRaw"], ["bonusFireDamage", "fDamPct"], ["bonusWaterDamage", "wDamPct"], ["bonusAirDamage", "aDamPct"], ["bonusThunderDamage", "tDamPct"], ["bonusEarthDamage", "eDamPct"], ["bonusFireDefense", "fDefPct"], ["bonusWaterDefense", "wDefPct"], ["bonusAirDefense", "aDefPct"], ["bonusThunderDefense", "tDefPct"], ["bonusEarthDefense", "eDefPct"], ["type", "type"], ["identified", "fixID"], ["skin", "skin"], ["category", "category"], ["spellCostPct1", "spPct1"], ["spellCostRaw1", "spRaw1"], ["spellCostPct2", "spPct2"], ["spellCostRaw2", "spRaw2"], ["spellCostPct3", "spPct3"], ["spellCostRaw3", "spRaw3"], ["spellCostPct4", "spPct4"], ["spellCostRaw4", "spRaw4"], ["rainbowSpellDamageRaw", "rSdRaw"], ["sprint", "sprint"], ["sprintRegen", "sprintReg"], ["jumpHeight", "jh"], ["lootQuality", "lq"], ["gatherXpBonus", "gXp"], ["gatherSpeed", "gSpd"]]);
-//does not include dmgMobs (wep tomes) and defMobs (armor tomes)
+//does not include damMobs (wep tomes) and defMobs (armor tomes)
 for (const [k, v] of translations) {
     reversetranslations.set(v, k);
 }
@@ -115,6 +116,8 @@ let nonRolledIDs = [
     "reqs",
     "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_",
     "majorIds",
+    "damMobs",
+    "defMobs",
 // wynn2 damages.
 "eDamAddMin","eDamAddMax",
 "tDamAddMin","tDamAddMax",

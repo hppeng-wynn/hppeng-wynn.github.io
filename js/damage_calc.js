@@ -101,7 +101,8 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     let total_max = 0;
     for (let i in damages) {
         let damage_prefix = damage_elements[i] + specific_boost_str;
-        let damageBoost = 1 + skill_boost[i] + static_boost + (stats.get(damage_prefix+'Pct')/100);
+        let damageBoost = 1 + skill_boost[i] + static_boost
+                            + ((stats.get(damage_prefix+'Pct') + stats.get(damage_elements[i]+'DamPct')) /100);
         damages[i][0] *= Math.max(damageBoost, 0);
         damages[i][1] *= Math.max(damageBoost, 0);
         // Collect total damage post %boost
