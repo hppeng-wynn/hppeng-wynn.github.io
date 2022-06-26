@@ -244,7 +244,6 @@ function atree_update_connector() {
 
 function atree_compute_highlight(node) {
     node.connectors.forEach((v, k) => {
-        console.log(node.active);
         if (node.active && atree_map.get(k).active) {
             for (let i of v) {
                 connector_data = atree_connectors_map.get(i)[0];
@@ -307,20 +306,25 @@ function atree_get_state(connector) {
             }
         }
         if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
+
             if (state) {
                 connector_state.down = 1;
+                if (abil_name == "Scorched Earth") {
+                    alert('a')
+                }
             } else {
                 connector_state.down = 0;
             }
         }
     }
+    console.log(connector_state);
     return connector_state;
 }
 
 function atree_parse_connector(orient, type) {
     // left, right, up, down
     // todo 
-    let connector_dict = {
+    let c_connector_dict = {
         "1100": {attrib: "_2_l", rotate: 0},
         "1010": {attrib: "_2_a", rotate: 0},
         "1001": {attrib: "_2_a", rotate: 270},
@@ -334,10 +338,21 @@ function atree_parse_connector(orient, type) {
         "1111": {attrib: "", rotate: 0}
     }
 
+    let t_connector_dict = {
+        "1100": {attrib: "_2_l", rotate: 0},
+        "1001": {attrib: "_2_a", rotate: "flip"},
+        "0101": {attrib: "_2_a", rotate: 0},
+        "1101": {attrib: "_3", rotate: 0}
+    }
+
     let res = ""    
     for (let i in orient) {
         res += orient[i];
     }
 
-    return connector_dict[res];
+    if (type == "c") {
+        return c_connector_dict[res];
+    } else {
+        return t_connector_dict[res];
+    }
 }
