@@ -483,3 +483,13 @@ a:hover {
 .hide-scroll::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
+
+.atree-selected {
+    outline: 5px solid rgba(95, 214, 223, 0.8);
+}
+
+.atree-circle {
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}
