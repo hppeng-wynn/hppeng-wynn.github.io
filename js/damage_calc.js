@@ -173,8 +173,6 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     return [total_dam_norm, total_dam_crit, damages_results];
 }
 
-
-
 const spell_table = {
     "wand": [
         { title: "Heal", cost: 6, parts: [
