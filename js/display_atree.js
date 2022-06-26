@@ -156,7 +156,7 @@ function construct_AT(elem, tree) {
         document.getElementById("atree-active").appendChild(active_tooltip);
 
         node_elem.addEventListener('click', function(e) {
-            if (e.target !== this) {return;}
+            if (e.target !== this) {return;};
             let tooltip = document.getElementById("atree-ab-" + node.display_name.replaceAll(" ", ""));
             if (tooltip.style.display == "block") {
                 tooltip.style.display = "none";
@@ -165,7 +165,7 @@ function construct_AT(elem, tree) {
             else {
                 tooltip.style.display = "block";
                 this.classList.add("atree-selected");
-            }
+            };
             atree_toggle_state(node);
             atree_update_connector();
         });
@@ -194,7 +194,7 @@ function resolve_connector(pos, node) {
         owners = owners.concat(i.owner);
     }
 
-    owners = [...new Set(owners)]
+    owners = [...new Set(owners)];
 
     let connect_elem = document.createElement("div");
 
@@ -215,18 +215,18 @@ function resolve_connector(pos, node) {
 function atree_same_row(node) {
     for (let i of node.parents) {
         if (node.display.row == atree_map.get(i).display.row) { return false; }
-    }
+    };
     return true;
-}
+};
 
 // draw the connector onto the screen
 function atree_render_connection() {
     for (let i of atree_connectors_map.keys()) {
         if (atree_connectors_map.get(i).length != 0) {
             document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]].appendChild(atree_connectors_map.get(i)[0].connector);
-        }
-    }
-}
+        };
+    };
+};
 
 // toggle the state of a node.
 function atree_toggle_state(node) {
@@ -234,8 +234,8 @@ function atree_toggle_state(node) {
         atree_map.get(node.display_name).active = false;
     } else {
         atree_map.get(node.display_name).active = true;
-    }
-}
+    };
+};
 
 // refresh all connector to default state, then try to calculate the connector for all node
 function atree_update_connector() {
@@ -267,52 +267,50 @@ function atree_compute_highlight(node) {
             };
         };
     });
-}
+};
 
 // get the current active state of different directions, given a connector coordinate.
 function atree_get_state(connector) {
-    let connector_state = {left: 0, right: 0, up: 0, down: 0}
+    let connector_state = [0, 0, 0, 0]; // left, right, up, down
 
     for (let abil_name of atree_connectors_map.get(connector)[0].owner) {
 
         state = atree_map.get(abil_name).active;
         if (atree_map.get(abil_name).display.col > parseInt(connector.split(",")[1])) {
             if (state) {
-                connector_state.right = 1;
+                connector_state[1] = 1;
             } else if (!connector_state.right) {
-                connector_state.right = 0;
+                connector_state[1] = 0;
             }
         }
         if (atree_map.get(abil_name).display.col < parseInt(connector.split(",")[1])) {
             if (state) {
-                connector_state.left = 1;
+                connector_state[0] = 1;
             } else if (!connector_state.left) {
-                connector_state.left = 0;
+                connector_state[0] = 0;
             }
         }
         if (atree_map.get(abil_name).display.row < parseInt(connector.split(",")[0])) {
             if (state) {
-                connector_state.up = 1;
+                connector_state[2] = 1;
             } else if (!connector_state.up) {
-                connector_state.up = 0;
+                connector_state[2] = 0;
             }
         }
         if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
             if (state) {
-                connector_state.down = 1;
+                connector_state[3] = 1;
             } else if (!connector_state.down) {
-                connector_state.down = 0;
-            }
-        }
-    }
-    console.log(connector_state)
+                connector_state[3] = 0;
+            };
+        };
+    };
     return connector_state;
 }
 
 // parse a sequence of left, right, up, down to appropriate connector image
 function atree_parse_connector(orient, type) {
     // left, right, up, down
-    // todo 
     let c_connector_dict = {
         "1100": {attrib: "_2_l", rotate: 0},
         "1010": {attrib: "_2_a", rotate: 0},
@@ -325,23 +323,23 @@ function atree_parse_connector(orient, type) {
         "1011": {attrib: "_3", rotate: 270},
         "0111": {attrib: "_3", rotate: 90},
         "1111": {attrib: "", rotate: 0}
-    }
+    };
 
     let t_connector_dict = {
         "1100": {attrib: "_2_l", rotate: 0},
         "1001": {attrib: "_2_a", rotate: "flip"},
         "0101": {attrib: "_2_a", rotate: 0},
         "1101": {attrib: "_3", rotate: 0}
-    }
+    };
 
-    let res = ""    
-    for (let i in orient) {
-        res += orient[i];
-    }
+    let res = "";  
+    for (let i of orient) {
+        res += i;
+    };
 
     if (type == "c") {
         return c_connector_dict[res];
     } else {
         return t_connector_dict[res];
-    }
-}
+    };
+};
