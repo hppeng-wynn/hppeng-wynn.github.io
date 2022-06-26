@@ -1,4 +1,5 @@
 let atree_map;
+let atree_head;
 let atree_connectors_map;
 function construct_AT(elem, tree) {
     console.log("constructing ability tree UI");
@@ -24,6 +25,11 @@ function construct_AT(elem, tree) {
         
         // create rows if not exist
         let missing_rows = [node.display.row];
+
+        if (node.parents.length == 0) {
+            // Assuming there is only one head.
+            atree_head = node;
+        }
 
         for (let parent of node.parents) {
             missing_rows.push(tree.find(object => {return object.display_name === parent;}).display.row);
