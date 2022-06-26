@@ -2,19 +2,28 @@ function optimizeStrDex() {
     if (!player_build) {
         return;
     }
-    const remaining = levelToSkillPoints(player_build.level) - player_build.assigned_skillpoints;
-    const base_skillpoints = player_build.base_skillpoints;
+    const skillpoints = skp_inputs.map(x => x.value);   // JANK
+    let total_assigned = 0;
+    const min_assigned = player_build.base_skillpoints;
+    const base_totals = player_build.total_skillpoints;
+    let base_skillpoints = [];
+    for (let i in skp_order){ //big bren
+        const assigned = skillpoints[i] - base_totals[i] + min_assigned[i]
+        base_skillpoints.push(assigned);
+        total_assigned += assigned;
+    }
+
+    const remaining = levelToSkillPoints(player_build.level) - total_assigned;
     const max_str_boost = 100 - base_skillpoints[0];
     const max_dex_boost = 100 - base_skillpoints[1];
     if (Math.min(remaining, max_str_boost, max_dex_boost) < 0) return; // Unwearable
 
-    const base_total_skillpoints = player_build.total_skillpoints;
     let str_bonus = remaining;
     let dex_bonus = 0;
-    let best_skillpoints = player_build.total_skillpoints;
+    let best_skillpoints = skillpoints;
     let best_damage = 0;
     for (let i = 0; i <= remaining; ++i) {
-        let total_skillpoints = base_total_skillpoints.slice();
+        let total_skillpoints = skillpoints.slice();
         total_skillpoints[0] += Math.min(max_str_boost, str_bonus);
         total_skillpoints[1] += Math.min(max_dex_boost, dex_bonus);
 
