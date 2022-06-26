@@ -103,7 +103,7 @@ async function load() {
     let url = baseUrl + "/compress.json?"+new Date();
     let result = await (await fetch(url)).json();
     items = result.items;
-    sets = result.sets;
+    let sets_ = result.sets;
     
     let add_tx = db.transaction(['item_db', 'set_db'], 'readwrite');
     add_tx.onabort = function(e) {
@@ -121,8 +121,9 @@ async function load() {
         add_promises.push(req);
     }
     let sets_store = add_tx.objectStore('set_db');
-    for (const set in sets) {
-        add_promises.push(sets_store.add(sets[set], set));
+    for (const set in sets_) {
+        add_promises.push(sets_store.add(sets_[set], set));
+        sets.set(set, sets_[set]);
     }
     add_promises.push(add_tx.complete);
 
