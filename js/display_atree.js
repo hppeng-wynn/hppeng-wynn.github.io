@@ -238,9 +238,7 @@ function atree_toggle_state(node) {
 
 function atree_update_connector() {
     atree_map.forEach((v) => {
-        if (v.active) {
-            atree_compute_highlight(v);
-        }
+        atree_compute_highlight(v);
     });
 }
 
@@ -335,8 +333,6 @@ function atree_parse_connector(orient, type) {
         "0111": {attrib: "_3", rotate: 90},
         "1111": {attrib: "", rotate: 0}
     }
-
-    console.log(orient);
 
     let res = ""    
     for (let i in orient) {
