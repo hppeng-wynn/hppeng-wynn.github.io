@@ -237,6 +237,11 @@ function atree_toggle_state(node) {
 }
 
 function atree_update_connector() {
+    atree_connectors_map.forEach((v) => {
+        if (v.length != 0) {
+            v[0].connector.style.backgroundImage = "url('../media/atree/connect_" + v[0].type + ".png')";
+        }
+    });
     atree_map.forEach((v) => {
         atree_compute_highlight(v);
     });
@@ -249,33 +254,15 @@ function atree_compute_highlight(node) {
                 connector_data = atree_connectors_map.get(i)[0];
                 if (connector_data.type == "c" || connector_data.type == "t") {
                     connector_data.connector_state = atree_get_state(i);
-                    let connector_img = atree_parse_connector(connector_data.connector_state, connector_data.type)
+                    let connector_img = atree_parse_connector(connector_data.connector_state, connector_data.type);
                     connector_data.connector.className = "";
                     connector_data.connector.classList.add("rotate-" + connector_img.rotate);
                     connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + connector_img.attrib + ".png')";
                 } else {
                     connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + ".png')";
-                }
-            } 
-        } else {
-            for (let i of v) {
-                connector_data = atree_connectors_map.get(i)[0];
-                if (connector_data.type == "c" || connector_data.type == "t") {
-                    connector_data.connector_state = atree_get_state(i);
-                    let connector_img = atree_parse_connector(connector_data.connector_state, connector_data.type)
-                    if (!connector_img) {
-                        connector_data.connector.className = "";
-                        connector_data.connector.style.backgroundImage = "url('../media/atree/connect_" + connector_data.type + ".png')";
-                    } else {
-                        connector_data.connector.className = "";
-                        connector_data.connector.classList.add("rotate-" + connector_img.rotate);
-                        connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + connector_img.attrib + ".png')";
-                    };
-                } else {
-                    connector_data.connector.style.backgroundImage = "url('../media/atree/connect_" + connector_data.type + ".png')";
-                }
-            } 
-        }
+                };
+            };
+        };
     });
 }
 
@@ -283,37 +270,38 @@ function atree_get_state(connector) {
     let connector_state = {left: 0, right: 0, up: 0, down: 0}
 
     for (let abil_name of atree_connectors_map.get(connector)[0].owner) {
+
         state = atree_map.get(abil_name).active;
         if (atree_map.get(abil_name).display.col > parseInt(connector.split(",")[1])) {
             if (state) {
                 connector_state.right = 1;
-            } else {
+            } else if (!connector_state.right) {
                 connector_state.right = 0;
             }
         }
         if (atree_map.get(abil_name).display.col < parseInt(connector.split(",")[1])) {
             if (state) {
                 connector_state.left = 1;
-            } else {
+            } else if (!connector_state.left) {
                 connector_state.left = 0;
             }
         }
         if (atree_map.get(abil_name).display.row < parseInt(connector.split(",")[0])) {
             if (state) {
                 connector_state.up = 1;
-            } else {
+            } else if (!connector_state.up) {
                 connector_state.up = 0;
             }
         }
         if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
-
             if (state) {
                 connector_state.down = 1;
-            } else {
+            } else if (!connector_state.down) {
                 connector_state.down = 0;
             }
         }
     }
+    console.log(connector_state)
     return connector_state;
 }
 
