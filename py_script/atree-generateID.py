@@ -11,6 +11,8 @@ abilDict = {}
 with open("atree-parse.json") as f:
     data = json.loads(f.read())
     for classType, info in data.items():
+        #reset IDs for every class and start at 1
+        id = 1
         for abil in info:
             abilDict[abil["display_name"]] = id
             id += 1
