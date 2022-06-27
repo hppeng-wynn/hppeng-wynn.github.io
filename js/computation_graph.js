@@ -89,6 +89,9 @@ class ComputeNode {
         throw "no compute func specified";
     }
 
+    /**
+     * Add link to a parent compute node, optionally with an alias.
+     */
     link_to(parent_node, link_name) {
         this.inputs.push(parent_node)
         link_name = (link_name !== undefined) ? link_name : parent_node.name;
@@ -98,6 +101,26 @@ class ComputeNode {
             this.inputs_dirty.set(parent_node.name, true);
         }
         parent_node.children.push(this);
+        return this;
+    }
+
+    /**
+     * Delete a link to a parent node.
+     * TODO: time complexity of list deletion (not super relevant but it hurts my soul)
+     */
+    remove_link(parent_node) {
+        const idx = this.inputs.indexOf(parent_node);   // Get idx
+        this.inputs.splice(idx, 1);                     // remove element
+
+        this.input_translations.delete(parent_node.name);
+        const was_dirty = this.inputs_dirty.get(parent_node.name);
+        this.inputs_dirty.delete(parent_node.name);
+        if (was_dirty) {
+            this.inputs_dirty_count -= 1;
+        }
+
+        const idx2 = parent_node.children.indexOf(this);
+        parent_node.children.splice(idx2, 1);
         return this;
     }
 }

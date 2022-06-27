@@ -56,11 +56,14 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
 
     // 2.2. Next, apply elemental conversions using damage computed in step 1.1.
     // Also, track which elements are present. (Add onto those present in the weapon itself.)
+    let total_convert = 0;  //TODO get confirmation that this is how raw works.
     for (let i = 1; i <= 5; ++i) {
         if (conversions[i] > 0) {
-            damages[i][0] += conversions[i]/100 * weapon_min;
-            damages[i][1] += conversions[i]/100 * weapon_max;
+            const conv_frac = conversions[i]/100;
+            damages[i][0] += conv_frac * weapon_min;
+            damages[i][1] += conf_frac * weapon_max;
             present[i] = true;
+            total_convert += conv_frac
         }
     }
 
@@ -125,22 +128,22 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
             raw_boost += stats.get(damage_prefix+'Raw') + stats.get(damage_elements[i]+'DamRaw');
         }
         // Next, rainraw and propRaw
-        let new_min = damages_obj[0] + raw_boost;
-        let new_max = damages_obj[1] + raw_boost;
+        let min_boost = raw_boost;
+        let max_boost = raw_boost;
         if (total_max > 0) {    // TODO: what about total negative all raw?
             if (total_elem_min > 0) {
-                new_min += (damages_obj[0] / total_min) * prop_raw;
+                min_boost += (damages_obj[0] / total_min) * prop_raw;
             }
-            new_max += (damages_obj[1] / total_max) * prop_raw;
+            max_boost += (damages_obj[1] / total_max) * prop_raw;
         }
         if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
             if (total_elem_min > 0) {
-                new_min += (damages_obj[0] / total_elem_min) * rainbow_raw;
+                min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
             }
-            new_max += (damages_obj[1] / total_elem_max) * rainbow_raw;
+            max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
         }
-        damages_obj[0] = new_min;
-        damages_obj[1] = new_max;
+        damages_obj[0] += min_boost * total_convert;
+        damages_obj[1] += max_boost * total_convert;
     }
 
     // 6. Strength boosters
@@ -182,8 +185,9 @@ spell: {
     display_text:   str             short description of the spell, ex. Bash, Meteor, Arrow Shield
     base_spell:     int             spell index. 0-4 are reserved (0 is melee, 1-4 is common 4 spells)
     spell_type:     str             [TODO: DEPRECATED/REMOVE] "healing" or "damage"
-    scaling:        str             "melee" or "spell"
-    display:        str             "total" to sum all parts. Or, the name of a spell part
+    scaling:        Optional[str]   [DEFAULT: "spell"] "melee" or "spell"
+    use_atkspd:     Optional[bool]  [DEFAULT: true] true to factor attack speed, false otherwise.
+    display:        Optional[str]   [DEFAULT: "total"] "total" to sum all parts. Or, the name of a spell part
     parts:          List[part]      Parts of this spell (different stuff the spell does basically)
 }
 
@@ -212,37 +216,74 @@ spell_total: {
                                         are not the same type of spell. Can only pull from spells defined before it.
 }
 
+
+Before passing to display, use the following structs.
+NOTE: total is collapsed into damage or healing.
+
+spell_damage: {
+    type:           "damage"        Internal use
+    name:           str             Display name of part. Should be human readable
+    normal_min:     array[num, 6]   floating point damages (no crit, min), can be less than zero. Order: NETWFA
+    normal_max:     array[num, 6]   floating point damages (no crit, max)
+    normal_total:   array[num, 2]   (min, max) noncrit total damage (not negative)
+    crit_min:       array[num, 6]   floating point damages (crit, min), can be less than zero. Order: NETWFA
+    crit_max:       array[num, 6]   floating point damages (crit, max)
+    crit_total:     array[num, 2]   (min, max) crit total damage (not negative)
+}
+spell_heal: {
+    type:           "heal"          Internal use
+    name:           str             Display name of part. Should be human readable
+    heal_amount:    num             floating point HP healed (self)
+}
+
 */
 
 const default_spells = {
     wand: [{
-        name: "Melee",  // TODO: name for melee attacks?
+        name: "Magic Strike",  // TODO: name for melee attacks?
         display_text: "Mage basic attack",
-        base_spell: 0,  // Spell 0 is special cased to be handled with melee logic.
-        spell_type: "damage",
-        scaling: "melee",
-        display: "total",
-        parts: { name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
     spear: [{
         name: "Melee",  // TODO: name for melee attacks?
         display_text: "Warrior basic attack",
-        base_spell: 0,  // Spell 0 is special cased to be handled with melee logic.
-        spell_type: "damage",
-        scaling: "melee",
-        display: "total",
-        parts: { name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
-    bow: [
-
-    ],
-    dagger: [
-
-    ],
-    relik: [
-
-    ],
-}
+    bow: [{
+        name: "Bow Shot",  // TODO: name for melee attacks?
+        display_text: "Archer basic attack",
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }],
+    dagger: [{
+        name: "Melee",  // TODO: name for melee attacks?
+        display_text: "Assassin basic attack",
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }],
+    relik: [{
+        name: "Spread Beam",  // TODO: name for melee attacks?
+        display_text: "Shaman basic attack",
+        base_spell: 0,
+        spell_type: "damage",
+        scaling: "melee", use_atkspd: false,
+        display: "Total",
+        parts: [
+            { name: "Single Beam", multipliers: [33, 0, 0, 0, 0, 0] },
+            { name: "Total", hits: { "Single Beam": 3 } }
+        ]
+    }]
+};
 
 const spell_table = {
     "wand": [
