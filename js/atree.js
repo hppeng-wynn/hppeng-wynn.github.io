@@ -56,17 +56,14 @@ const atree_render = new (class extends ComputeNode {
         //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
         // TODO: FIXME! this is a side effect of `px` based rendering.
         if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
-            toggle_tab('atree-dropdown'); 
-            toggleButton('toggle-atree');
+            toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
         }
         
         //for some reason we have to cast to string 
         if (atree) { render_AT(document.getElementById("atree-ui"), atree); }
 
-        if (document.getElementById("toggle-atree").classList.contains("toggleOn")) {
-            toggle_tab('atree-dropdown'); 
-            toggleButton('toggle-atree');
-        }
+        //Toggle on, previously was toggled off
+        toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
     }
 })();
 
