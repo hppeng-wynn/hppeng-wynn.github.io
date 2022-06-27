@@ -173,6 +173,47 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     return [total_dam_norm, total_dam_crit, damages_results];
 }
 
+/*
+Spell schema:
+
+spell: {
+    name:           str             internal string name for the spell. Unique identifier
+    cost:           Optional[int]   ignored for spells that are not id 1-4
+    display_text:   str             short description of the spell, ex. Bash, Meteor, Arrow Shield
+    base_spell:     int             spell index. 0-4 are reserved (0 is melee, 1-4 is common 4 spells)
+    spell_type:     str             [TODO: DEPRECATED/REMOVE] "healing" or "damage"
+    scaling:        str             "melee" or "spell"
+    display:        str             "total" to sum all parts. Or, the name of a spell part
+    parts:          List[part]      Parts of this spell (different stuff the spell does basically)
+}
+
+NOTE: when using `replace_spell` on an existing spell, all fields become optional.
+Specified fields overwrite existing fields; unspecified fields are left unchanged.
+
+
+There are three possible spell "part" types: damage, heal, and total.
+
+part: spell_damage | spell_heal | spell_total
+
+spell_damage: {
+    name:           str != "total"  Name of the part.
+    type:           "damage"        [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
+    multipliers:    array[num, 6]   floating point spellmults (though supposedly wynn only supports integer mults)
+}
+spell_heal: {
+    name:           str != "total"  Name of the part.
+    type:           "heal"          [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
+    power:          num             floating point healing power (1 is 100% of max hp).
+}
+spell_total: {
+    name:           str != "total"  Name of the part.
+    type:           "total"         [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
+    hits:           Map[str, num]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
+                                        are not the same type of spell. Can only pull from spells defined before it.
+}
+
+*/
+
 const spell_table = {
     "wand": [
         { title: "Heal", cost: 6, parts: [
