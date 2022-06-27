@@ -50,7 +50,10 @@ let boosts_node = new (class extends ComputeNode {
                 if (key === "vanish") { def_boost += .15 }
             }
         }
-        return [damage_boost, def_boost];
+        let res = new Map();
+        res.set('damageMultiplier', 1+damage_boost);
+        res.set('defMultiplier', 1+def_boost);
+        return res;
     }
 })().update();
 
@@ -646,7 +649,7 @@ function getMeleeStats(stats, weapon) {
 
     let damage_mult = stats.get("damageMultiplier");
     if (weapon_stats.get("type") === "relik") {
-        damage_mult = 0.99; // CURSE YOU WYNNCRAFT
+        damage_mult *= 0.99; // CURSE YOU WYNNCRAFT
         //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
         //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
     }
