@@ -202,7 +202,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 68,
-                86,
+                39,
                 5
             ],
             "dependencies": [],
@@ -250,7 +250,7 @@ const atrees = {
             "archetype_req": 1,
             "parents": [
                 4,
-                82
+                35
             ],
             "dependencies": [
                 7
@@ -290,7 +290,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                83,
+                36,
                 69
             ],
             "dependencies": [
@@ -435,12 +435,12 @@ const atrees = {
                             "name": "Single Arrow",
                             "type": "damage",
                             "multipliers": [
-                                40,
+                                30,
                                 0,
                                 0,
                                 0,
                                 0,
-                                20
+                                10
                             ]
                         },
                         {
@@ -1434,7 +1434,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 82
+            "id": 35
         },
         {
             "display_name": "Thunder Mastery",
@@ -1443,7 +1443,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 7,
-                86,
+                39,
                 34
             ],
             "dependencies": [],
@@ -1474,7 +1474,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 83
+            "id": 36
         },
         {
             "display_name": "Water Mastery",
@@ -1483,8 +1483,8 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 34,
-                83,
-                86
+                36,
+                39
             ],
             "dependencies": [],
             "blockers": [],
@@ -1514,7 +1514,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 84
+            "id": 37
         },
         {
             "display_name": "Air Mastery",
@@ -1552,7 +1552,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 85
+            "id": 38
         },
         {
             "display_name": "Fire Mastery",
@@ -1560,7 +1560,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
-                83,
+                36,
                 0,
                 34
             ],
@@ -1592,7 +1592,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 86
+            "id": 39
         },
         {
             "display_name": "More Shields",
@@ -2196,7 +2196,7 @@ const atrees = {
                         "name": "damMult"
                     },
                     "scaling": [
-                        35
+                        3
                     ],
                     "max": 3
                 }
@@ -2398,7 +2398,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
-                84,
+                37,
                 4
             ],
             "dependencies": [
@@ -2457,7 +2457,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 6,
-                85
+                38
             ],
             "dependencies": [
                 0
@@ -2573,7 +2573,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 71
+            "id": 0
         },
         {
             "display_name": "Spear Proficiency 1",
@@ -2581,7 +2581,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                71
+                0
             ],
             "dependencies": [],
             "blockers": [],
@@ -2606,7 +2606,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 72
+            "id": 1
         },
         {
             "display_name": "Cheaper Bash",
@@ -2614,7 +2614,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                72
+                1
             ],
             "dependencies": [],
             "blockers": [],
@@ -2632,7 +2632,7 @@ const atrees = {
                     "cost": -10
                 }
             ],
-            "id": 73
+            "id": 2
         },
         {
             "display_name": "Double Bash",
@@ -2640,7 +2640,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                72
+                1
             ],
             "dependencies": [],
             "blockers": [],
@@ -2679,7 +2679,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 74
+            "id": 3
         },
         {
             "display_name": "Charge",
@@ -2687,7 +2687,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                74
+                3
             ],
             "dependencies": [],
             "blockers": [],
@@ -2731,7 +2731,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 75
+            "id": 4
         },
         {
             "display_name": "Heavy Impact",
@@ -2739,7 +2739,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                79
+                8
             ],
             "dependencies": [],
             "blockers": [],
@@ -2768,7 +2768,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 76
+            "id": 5
         },
         {
             "display_name": "Vehement",
@@ -2776,11 +2776,11 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                75
+                4
             ],
             "dependencies": [],
             "blockers": [
-                78
+                7
             ],
             "cost": 1,
             "display": {
@@ -2814,7 +2814,7 @@ const atrees = {
                     "max": 20
                 }
             ],
-            "id": 77
+            "id": 6
         },
         {
             "display_name": "Tougher Skin",
@@ -2822,11 +2822,11 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                75
+                4
             ],
             "dependencies": [],
             "blockers": [
-                77
+                6
             ],
             "cost": 1,
             "display": {
@@ -2870,7 +2870,7 @@ const atrees = {
                     "max": 100
                 }
             ],
-            "id": 78
+            "id": 7
         },
         {
             "display_name": "Uppercut",
@@ -2878,7 +2878,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                77
+                6
             ],
             "dependencies": [],
             "blockers": [],
@@ -2925,7 +2925,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 79
+            "id": 8
         },
         {
             "display_name": "Cheaper Charge",
@@ -2933,8 +2933,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                79,
-                81
+                8,
+                10
             ],
             "dependencies": [],
             "blockers": [],
@@ -2952,7 +2952,7 @@ const atrees = {
                     "cost": -5
                 }
             ],
-            "id": 80
+            "id": 9
         },
         {
             "display_name": "War Scream",
@@ -2960,7 +2960,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                78
+                7
             ],
             "dependencies": [],
             "blockers": [],
@@ -3001,7 +3001,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 81
+            "id": 10
         },
         {
             "display_name": "Earth Mastery",
@@ -3009,7 +3009,7 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                79
+                8
             ],
             "dependencies": [],
             "blockers": [],
@@ -3040,7 +3040,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 82
+            "id": 11
         },
         {
             "display_name": "Thunder Mastery",
@@ -3048,9 +3048,9 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                79,
-                85,
-                80
+                8,
+                14,
+                9
             ],
             "dependencies": [],
             "blockers": [],
@@ -3081,7 +3081,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 83
+            "id": 12
         },
         {
             "display_name": "Water Mastery",
@@ -3089,9 +3089,9 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 0,
             "parents": [
-                80,
-                83,
-                85
+                9,
+                12,
+                14
             ],
             "dependencies": [],
             "blockers": [],
@@ -3122,7 +3122,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 84
+            "id": 13
         },
         {
             "display_name": "Air Mastery",
@@ -3130,9 +3130,9 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 0,
             "parents": [
-                81,
-                83,
-                80
+                10,
+                12,
+                9
             ],
             "dependencies": [],
             "blockers": [],
@@ -3163,7 +3163,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 85
+            "id": 14
         },
         {
             "display_name": "Fire Mastery",
@@ -3171,7 +3171,7 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                81
+                10
             ],
             "dependencies": [],
             "blockers": [],
@@ -3202,7 +3202,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 86
+            "id": 15
         },
         {
             "display_name": "Quadruple Bash",
@@ -3210,8 +3210,8 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                82,
-                88
+                11,
+                17
             ],
             "dependencies": [],
             "blockers": [],
@@ -3249,7 +3249,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 87
+            "id": 16
         },
         {
             "display_name": "Fireworks",
@@ -3257,8 +3257,8 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                83,
-                87
+                12,
+                16
             ],
             "dependencies": [],
             "blockers": [],
@@ -3294,7 +3294,7 @@ const atrees = {
                     }
                 }
             ],
-            "id": 88
+            "id": 17
         },
         {
             "display_name": "Half-Moon Swipe",
@@ -3302,10 +3302,10 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 1,
             "parents": [
-                84
+                13
             ],
             "dependencies": [
-                79
+                8
             ],
             "blockers": [],
             "cost": 2,
@@ -3338,7 +3338,7 @@ const atrees = {
                     "conversion": "water"
                 }
             ],
-            "id": 89
+            "id": 18
         },
         {
             "display_name": "Flyby Jab",
@@ -3346,8 +3346,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                85,
-                91
+                14,
+                20
             ],
             "dependencies": [],
             "blockers": [],
@@ -3376,7 +3376,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 90
+            "id": 19
         },
         {
             "display_name": "Flaming Uppercut",
@@ -3384,11 +3384,11 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                86,
-                90
+                15,
+                19
             ],
             "dependencies": [
-                79
+                8
             ],
             "blockers": [],
             "cost": 2,
@@ -3435,7 +3435,7 @@ const atrees = {
                     }
                 }
             ],
-            "id": 91
+            "id": 20
         },
         {
             "display_name": "Iron Lungs",
@@ -3443,8 +3443,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                90,
-                91
+                19,
+                20
             ],
             "dependencies": [],
             "blockers": [],
@@ -3471,7 +3471,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 92
+            "id": 21
         },
         {
             "display_name": "Generalist",
@@ -3479,7 +3479,7 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 3,
             "parents": [
-                94
+                23
             ],
             "dependencies": [],
             "blockers": [],
@@ -3491,7 +3491,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 93
+            "id": 22
         },
         {
             "display_name": "Counter",
@@ -3499,7 +3499,7 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 0,
             "parents": [
-                89
+                18
             ],
             "dependencies": [],
             "blockers": [],
@@ -3528,7 +3528,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 94
+            "id": 23
         },
         {
             "display_name": "Mantle of the Bovemists",
@@ -3536,10 +3536,10 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 3,
             "parents": [
-                92
+                21
             ],
             "dependencies": [
-                81
+                10
             ],
             "blockers": [],
             "cost": 2,
@@ -3552,7 +3552,7 @@ const atrees = {
                 "mantle_charge": 3
             },
             "effects": [],
-            "id": 95
+            "id": 24
         },
         {
             "display_name": "Bak'al's Grasp",
@@ -3560,11 +3560,11 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 2,
             "parents": [
-                87,
-                88
+                16,
+                17
             ],
             "dependencies": [
-                81
+                10
             ],
             "blockers": [],
             "cost": 2,
@@ -3592,7 +3592,7 @@ const atrees = {
                     "max": 120
                 }
             ],
-            "id": 96
+            "id": 25
         },
         {
             "display_name": "Spear Proficiency 2",
@@ -3600,8 +3600,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                96,
-                98
+                25,
+                27
             ],
             "dependencies": [],
             "blockers": [],
@@ -3626,7 +3626,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 97
+            "id": 26
         },
         {
             "display_name": "Cheaper Uppercut",
@@ -3634,9 +3634,9 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                97,
-                99,
-                94
+                26,
+                28,
+                23
             ],
             "dependencies": [],
             "blockers": [],
@@ -3654,7 +3654,7 @@ const atrees = {
                     "cost": -5
                 }
             ],
-            "id": 98
+            "id": 27
         },
         {
             "display_name": "Aerodynamics",
@@ -3662,8 +3662,8 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 0,
             "parents": [
-                98,
-                100
+                27,
+                29
             ],
             "dependencies": [],
             "blockers": [],
@@ -3675,7 +3675,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 99
+            "id": 28
         },
         {
             "display_name": "Provoke",
@@ -3683,8 +3683,8 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                99,
-                95
+                28,
+                24
             ],
             "dependencies": [],
             "blockers": [],
@@ -3702,7 +3702,7 @@ const atrees = {
                     "cost": -5
                 }
             ],
-            "id": 100
+            "id": 29
         },
         {
             "display_name": "Precise Strikes",
@@ -3710,8 +3710,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                98,
-                97
+                27,
+                26
             ],
             "dependencies": [],
             "blockers": [],
@@ -3734,7 +3734,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 101
+            "id": 30
         },
         {
             "display_name": "Air Shout",
@@ -3742,11 +3742,11 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                99,
-                100
+                28,
+                29
             ],
             "dependencies": [
-                81
+                10
             ],
             "blockers": [],
             "cost": 2,
@@ -3772,7 +3772,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 102
+            "id": 31
         },
         {
             "display_name": "Enraged Blow",
@@ -3780,10 +3780,10 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                97
+                26
             ],
             "dependencies": [
-                96
+                25
             ],
             "blockers": [],
             "cost": 2,
@@ -3813,7 +3813,7 @@ const atrees = {
                     "max": 300
                 }
             ],
-            "id": 103
+            "id": 32
         },
         {
             "display_name": "Flying Kick",
@@ -3821,8 +3821,8 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 1,
             "parents": [
-                98,
-                105
+                27,
+                34
             ],
             "dependencies": [],
             "blockers": [],
@@ -3849,7 +3849,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 104
+            "id": 33
         },
         {
             "display_name": "Stronger Mantle",
@@ -3857,11 +3857,11 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                106,
-                104
+                35,
+                33
             ],
             "dependencies": [
-                95
+                24
             ],
             "blockers": [],
             "cost": 1,
@@ -3874,7 +3874,7 @@ const atrees = {
                 "mantle_charge": 2
             },
             "effects": [],
-            "id": 105
+            "id": 34
         },
         {
             "display_name": "Manachism",
@@ -3882,8 +3882,8 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 3,
             "parents": [
-                105,
-                100
+                34,
+                29
             ],
             "dependencies": [],
             "blockers": [],
@@ -3897,7 +3897,7 @@ const atrees = {
                 "cooldown": 1
             },
             "effects": [],
-            "id": 106
+            "id": 35
         },
         {
             "display_name": "Boiling Blood",
@@ -3905,8 +3905,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                103,
-                108
+                32,
+                37
             ],
             "dependencies": [],
             "blockers": [],
@@ -3933,7 +3933,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 107
+            "id": 36
         },
         {
             "display_name": "Ragnarokkr",
@@ -3941,11 +3941,11 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                107,
-                104
+                36,
+                33
             ],
             "dependencies": [
-                81
+                10
             ],
             "blockers": [],
             "cost": 2,
@@ -3965,7 +3965,7 @@ const atrees = {
                     "cost": 10
                 }
             ],
-            "id": 108
+            "id": 37
         },
         {
             "display_name": "Ambidextrous",
@@ -3973,12 +3973,12 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                104,
-                105,
-                110
+                33,
+                34,
+                39
             ],
             "dependencies": [
-                94
+                23
             ],
             "blockers": [],
             "cost": 1,
@@ -3991,7 +3991,7 @@ const atrees = {
                 "chance": 30
             },
             "effects": [],
-            "id": 109
+            "id": 38
         },
         {
             "display_name": "Burning Heart",
@@ -3999,8 +3999,8 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                109,
-                111
+                38,
+                40
             ],
             "dependencies": [],
             "blockers": [],
@@ -4032,7 +4032,7 @@ const atrees = {
                     "slider_step": 100
                 }
             ],
-            "id": 110
+            "id": 39
         },
         {
             "display_name": "Stronger Bash",
@@ -4040,8 +4040,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                110,
-                106
+                39,
+                35
             ],
             "dependencies": [],
             "blockers": [],
@@ -4068,7 +4068,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 111
+            "id": 40
         },
         {
             "display_name": "Intoxicating Blood",
@@ -4076,11 +4076,11 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 5,
             "parents": [
-                108,
-                107
+                37,
+                36
             ],
             "dependencies": [
-                96
+                25
             ],
             "blockers": [],
             "cost": 2,
@@ -4091,7 +4091,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 112
+            "id": 41
         },
         {
             "display_name": "Comet",
@@ -4099,10 +4099,10 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                108
+                37
             ],
             "dependencies": [
-                88
+                17
             ],
             "blockers": [],
             "cost": 2,
@@ -4137,7 +4137,7 @@ const atrees = {
                     }
                 }
             ],
-            "id": 113
+            "id": 42
         },
         {
             "display_name": "Collide",
@@ -4145,11 +4145,11 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 4,
             "parents": [
-                109,
-                110
+                38,
+                39
             ],
             "dependencies": [
-                104
+                33
             ],
             "blockers": [],
             "cost": 2,
@@ -4177,7 +4177,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 114
+            "id": 43
         },
         {
             "display_name": "Rejuvenating Skin",
@@ -4185,8 +4185,8 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                110,
-                111
+                39,
+                40
             ],
             "dependencies": [],
             "blockers": [],
@@ -4198,7 +4198,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 115
+            "id": 44
         },
         {
             "display_name": "Uncontainable Corruption",
@@ -4206,11 +4206,11 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                107,
-                117
+                36,
+                46
             ],
             "dependencies": [
-                96
+                25
             ],
             "blockers": [],
             "cost": 1,
@@ -4238,7 +4238,7 @@ const atrees = {
                     "max": 50
                 }
             ],
-            "id": 116
+            "id": 45
         },
         {
             "display_name": "Radiant Devotee",
@@ -4246,8 +4246,8 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 1,
             "parents": [
-                118,
-                116
+                47,
+                45
             ],
             "dependencies": [],
             "blockers": [],
@@ -4278,7 +4278,7 @@ const atrees = {
                     "slider_step": 4
                 }
             ],
-            "id": 117
+            "id": 46
         },
         {
             "display_name": "Whirlwind Strike",
@@ -4286,11 +4286,11 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 5,
             "parents": [
-                109,
-                117
+                38,
+                46
             ],
             "dependencies": [
-                79
+                8
             ],
             "blockers": [],
             "cost": 2,
@@ -4318,7 +4318,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 118
+            "id": 47
         },
         {
             "display_name": "Mythril Skin",
@@ -4326,7 +4326,7 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 6,
             "parents": [
-                115
+                44
             ],
             "dependencies": [],
             "blockers": [],
@@ -4349,7 +4349,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 119
+            "id": 48
         },
         {
             "display_name": "Armour Breaker",
@@ -4357,11 +4357,11 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                116,
-                117
+                45,
+                46
             ],
             "dependencies": [
-                96
+                25
             ],
             "blockers": [],
             "cost": 2,
@@ -4374,7 +4374,7 @@ const atrees = {
                 "duration": 5
             },
             "effects": [],
-            "id": 120
+            "id": 49
         },
         {
             "display_name": "Shield Strike",
@@ -4382,8 +4382,8 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                119,
-                122
+                48,
+                51
             ],
             "dependencies": [],
             "blockers": [],
@@ -4410,7 +4410,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 121
+            "id": 50
         },
         {
             "display_name": "Sparkling Hope",
@@ -4418,7 +4418,7 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                119
+                48
             ],
             "dependencies": [],
             "blockers": [],
@@ -4447,7 +4447,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 122
+            "id": 51
         },
         {
             "display_name": "Massive Bash",
@@ -4455,8 +4455,8 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 8,
             "parents": [
-                124,
-                116
+                53,
+                45
             ],
             "dependencies": [],
             "blockers": [],
@@ -4483,7 +4483,7 @@ const atrees = {
                     "slider_step": 3
                 }
             ],
-            "id": 123
+            "id": 52
         },
         {
             "display_name": "Tempest",
@@ -4491,8 +4491,8 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 0,
             "parents": [
-                123,
-                125
+                52,
+                54
             ],
             "dependencies": [],
             "blockers": [],
@@ -4539,7 +4539,7 @@ const atrees = {
                     }
                 }
             ],
-            "id": 124
+            "id": 53
         },
         {
             "display_name": "Spirit of the Rabbit",
@@ -4547,8 +4547,8 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 5,
             "parents": [
-                124,
-                118
+                53,
+                47
             ],
             "dependencies": [],
             "blockers": [],
@@ -4576,7 +4576,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 125
+            "id": 54
         },
         {
             "display_name": "Massacre",
@@ -4584,8 +4584,8 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 5,
             "parents": [
-                124,
-                123
+                53,
+                52
             ],
             "dependencies": [],
             "blockers": [],
@@ -4597,7 +4597,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 126
+            "id": 55
         },
         {
             "display_name": "Axe Kick",
@@ -4605,8 +4605,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                124,
-                125
+                53,
+                54
             ],
             "dependencies": [],
             "blockers": [],
@@ -4633,7 +4633,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 127
+            "id": 56
         },
         {
             "display_name": "Radiance",
@@ -4641,8 +4641,8 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 2,
             "parents": [
-                125,
-                129
+                54,
+                58
             ],
             "dependencies": [],
             "blockers": [],
@@ -4656,7 +4656,7 @@ const atrees = {
                 "cooldown": 15
             },
             "effects": [],
-            "id": 128
+            "id": 57
         },
         {
             "display_name": "Cheaper Bash 2",
@@ -4664,9 +4664,9 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                128,
-                121,
-                122
+                57,
+                50,
+                51
             ],
             "dependencies": [],
             "blockers": [],
@@ -4684,7 +4684,7 @@ const atrees = {
                     "cost": -5
                 }
             ],
-            "id": 129
+            "id": 58
         },
         {
             "display_name": "Cheaper War Scream",
@@ -4692,7 +4692,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                123
+                52
             ],
             "dependencies": [],
             "blockers": [],
@@ -4710,15 +4710,15 @@ const atrees = {
                     "cost": -5
                 }
             ],
-            "id": 130
+            "id": 59
         },
         {
             "display_name": "Discombobulate",
             "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
             "archetype": "Battle Monk",
-            "archetype_req": 12,
+            "archetype_req": 11,
             "parents": [
-                133
+                62
             ],
             "dependencies": [],
             "blockers": [],
@@ -4744,7 +4744,7 @@ const atrees = {
                     "max": 50
                 }
             ],
-            "id": 131
+            "id": 60
         },
         {
             "display_name": "Thunderclap",
@@ -4752,7 +4752,7 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 8,
             "parents": [
-                133
+                62
             ],
             "dependencies": [],
             "blockers": [],
@@ -4781,7 +4781,7 @@ const atrees = {
                     ]
                 }
             ],
-            "id": 132
+            "id": 61
         },
         {
             "display_name": "Cyclone",
@@ -4789,7 +4789,7 @@ const atrees = {
             "archetype": "Battle Monk",
             "archetype_req": 0,
             "parents": [
-                125
+                54
             ],
             "dependencies": [],
             "blockers": [],
@@ -4828,7 +4828,7 @@ const atrees = {
                     }
                 }
             ],
-            "id": 133
+            "id": 62
         },
         {
             "display_name": "Second Chance",
@@ -4836,7 +4836,7 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 12,
             "parents": [
-                129
+                58
             ],
             "dependencies": [],
             "blockers": [],
@@ -4848,7 +4848,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 134
+            "id": 63
         },
         {
             "display_name": "Blood Pact",
@@ -4856,7 +4856,7 @@ const atrees = {
             "archetype": "",
             "archetype_req": 10,
             "parents": [
-                130
+                59
             ],
             "dependencies": [],
             "blockers": [],
@@ -4868,7 +4868,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 135
+            "id": 64
         },
         {
             "display_name": "Haemorrhage",
@@ -4876,10 +4876,10 @@ const atrees = {
             "archetype": "Fallen",
             "archetype_req": 0,
             "parents": [
-                135
+                64
             ],
             "dependencies": [
-                135
+                64
             ],
             "blockers": [],
             "cost": 1,
@@ -4890,7 +4890,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 136
+            "id": 65
         },
         {
             "display_name": "Brink of Madness",
@@ -4898,8 +4898,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                135,
-                138
+                64,
+                67
             ],
             "dependencies": [],
             "blockers": [],
@@ -4911,7 +4911,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [],
-            "id": 137
+            "id": 66
         },
         {
             "display_name": "Cheaper Uppercut 2",
@@ -4919,8 +4919,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                134,
-                137
+                63,
+                66
             ],
             "dependencies": [],
             "blockers": [],
@@ -4938,7 +4938,7 @@ const atrees = {
                     "cost": -5
                 }
             ],
-            "id": 138
+            "id": 67
         },
         {
             "display_name": "Martyr",
@@ -4946,7 +4946,7 @@ const atrees = {
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
-                134
+                63
             ],
             "dependencies": [],
             "blockers": [],
@@ -4961,7 +4961,7 @@ const atrees = {
                 "aoe": 12
             },
             "effects": [],
-            "id": 139
+            "id": 68
         }
     ]
 }
