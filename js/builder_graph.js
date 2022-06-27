@@ -326,20 +326,6 @@ class WeaponInputDisplayNode extends ComputeNode {
             if (isNaN(dps)) dps = 0;
         }
         this.dps_field.textContent = Math.round(dps);
-        
-        //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
-        if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
-            toggle_tab('atree-dropdown'); 
-            toggleButton('toggle-atree');
-        }
-        
-        //for some reason we have to cast to string 
-        construct_AT(document.getElementById("atree-ui"), atrees[wep_to_class.get(type)]); 
-
-        if (document.getElementById("toggle-atree").classList.contains("toggleOn")) {
-            toggle_tab('atree-dropdown'); 
-            toggleButton('toggle-atree');
-        }
     }
 }
 
@@ -1051,6 +1037,7 @@ function builder_graph_init() {
     }
     stat_agg_node.link_to(edit_agg_node);
     build_disp_node.link_to(stat_agg_node, 'stats');
+    atree_node.link_to(build_node, 'build');
 
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
@@ -1092,6 +1079,8 @@ function builder_graph_init() {
     
     let skp_output = new SkillPointSetterNode(edit_input_nodes);
     skp_output.link_to(build_node);
+    
+    edit_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
 
     let build_warnings_node = new DisplayBuildWarningsNode();
     build_warnings_node.link_to(build_node, 'build');

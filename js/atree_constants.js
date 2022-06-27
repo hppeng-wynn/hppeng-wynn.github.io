@@ -466,7 +466,7 @@ const atrees = {
             "display_name": "Windy Feet",
             "base_abil": "Escape",
             "desc": "When casting Escape, give speed to yourself and nearby allies.",
-            "archetype": "Boltslinger",
+            "archetype": "",
             "archetype_req": 0,
             "parents": [
                 7
@@ -2193,7 +2193,7 @@ const atrees = {
                     "output": {
                         "type": "stat",
                         "abil_name": "Focus",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
                     "scaling": [
                         35
@@ -2228,7 +2228,7 @@ const atrees = {
                     "output": {
                         "type": "stat",
                         "abil_name": "Focus",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
                     "scaling": [
                         35
@@ -2263,7 +2263,7 @@ const atrees = {
                     "output": {
                         "type": "stat",
                         "abil_name": "Focus",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
                     "scaling": [
                         35
@@ -3805,12 +3805,12 @@ const atrees = {
                     ],
                     "output": {
                         "type": "stat",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
                     "scaling": [
-                        2
+                        3
                     ],
-                    "max": 200
+                    "max": 300
                 }
             ],
             "id": 103

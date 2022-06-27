@@ -367,7 +367,7 @@ const atrees =
             "display_name": "Windy Feet",
             "base_abil": "Escape",
             "desc": "When casting Escape, give speed to yourself and nearby allies.",
-            "archetype": "Boltslinger",
+            "archetype": "",
             "archetype_req": 0, 
             "parents": ["Arrow Storm"], 
             "dependencies": [], 
@@ -1745,9 +1745,9 @@ const atrees =
                     "output": {
                         "type": "stat",
                         "abil_name": "Focus",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
-                    "scaling": [35],
+                    "scaling": [3],
                     "max": 3
                 }
             ]
@@ -1776,7 +1776,7 @@ const atrees =
                     "output": {
                         "type": "stat",
                         "abil_name": "Focus",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
                     "scaling": [35],
                     "max": 5
@@ -1807,7 +1807,7 @@ const atrees =
                     "output": {
                         "type": "stat",
                         "abil_name": "Focus",
-                        "name": "dmgPct"
+                        "name": "damMult"
                     },
                     "scaling": [35],
                     "max": 7
@@ -3104,10 +3104,10 @@ const atrees =
                     ],
                     "output": {
                         "type": "stat",
-                        "name": "dmgPct" 
+                        "name": "damMult" 
                     },
-                    "scaling": [2],
-                    "max": 200
+                    "scaling": [3],
+                    "max": 300
                 }
             ]  
         },
@@ -3870,7 +3870,7 @@ const atrees =
             "display_name": "Discombobulate",
             "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
             "archetype": "Battle Monk", 
-            "archetype_req": 12, 
+            "archetype_req": 11, 
             "parents": ["Cyclone"], 
             "dependencies": [], 
             "blockers": [],

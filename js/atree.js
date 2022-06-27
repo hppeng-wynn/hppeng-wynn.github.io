@@ -1,18 +1,115 @@
-let atree_map;
-let atree_head;
-let atree_connectors_map;
-let atree_active_connections = [];
-function construct_AT(elem, tree) {
+let abil_points_current;
+
+/**
+ * Update ability tree internal representation. (topologically sorted node list)
+ *
+ * Signature: AbilityTreeUpdateNode(build: Build) => ATree
+ */
+const atree_node = new (class extends ComputeNode {
+    constructor() { super('builder-atree-update'); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        const atree_raw = atrees[wep_to_class.get(build.weapon.statMap.get('type'))];
+        if (!atree_raw) return null;
+
+        let atree_map = new Map();
+        let atree_head;
+        for (const i of atree_raw) {
+            atree_map.set(i.id, {children: [], node: i});
+            if (i.parents.length == 0) {
+                // Assuming there is only one head.
+                atree_head = atree_map.get(i.id);
+            }
+        }
+        for (const i of atree_raw) {
+            let node = atree_map.get(i.id);
+            let parents = [];
+            for (const parent_id of node.node.parents) {
+                let parent_node = atree_map.get(parent_id);
+                parent_node.children.push(node);
+                parents.push(parent_node);
+            }
+            node.parents = parents;
+        }
+
+        let atree_topo_sort = [];
+        topological_sort_tree(atree_head, atree_topo_sort, new Map());
+        atree_topo_sort.reverse();
+        return atree_topo_sort;
+    }
+})();
+
+/**
+ * Display ability tree from topologically sorted list.
+ *
+ * Signature: AbilityTreeRenderNode(atree: ATree) => null
+ */
+const atree_render = new (class extends ComputeNode {
+    constructor() { super('builder-atree-render'); this.fail_cb = true; }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeRenderNode accepts exactly one input (atree)"; }
+        const [atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
+        // TODO: FIXME! this is a side effect of `px` based rendering.
+        if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
+            toggle_tab('atree-dropdown'); 
+            toggleButton('toggle-atree');
+        }
+        
+        //for some reason we have to cast to string 
+        if (atree) { render_AT(document.getElementById("atree-ui"), atree); }
+
+        if (document.getElementById("toggle-atree").classList.contains("toggleOn")) {
+            toggle_tab('atree-dropdown'); 
+            toggleButton('toggle-atree');
+        }
+    }
+})();
+
+atree_render.link_to(atree_node);
+
+/**
+ * Create a reverse topological sort of the tree in the result list.
+ *
+ * https://en.wikipedia.org/wiki/Topological_sorting
+ * @param tree: Root of tree to sort
+ * @param res: Result list (reverse topological order)
+ * @param mark_state: Bookkeeping. Call with empty Map()
+ */
+function topological_sort_tree(tree, res, mark_state) {
+    const state = mark_state.get(tree);
+    if (state === undefined) {
+        // unmarked.
+        mark_state.set(tree, false);    // temporary mark
+        for (const child of tree.children) {
+            topological_sort_tree(child, res, mark_state);
+        }
+        mark_state.set(tree, true);     // permanent mark
+        res.push(tree);
+    }
+    // these cases are not needed. Case 1 does nothing, case 2 should never happen.
+    // else if (state === true) {
+    //     // permanent mark.
+    //     return;
+    // }
+    // else if (state === false) {
+    //     // temporary mark.
+    // }
+}
+
+function render_AT(elem, tree) {
     console.log("constructing ability tree UI");
     document.getElementById("atree-active").innerHTML = ""; //reset all atree actives - should be done in a more general way later
     elem.innerHTML = ""; //reset the atree in the DOM
-    
-    if (tree === undefined) {return false;}
 
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
     active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
-
+    abil_points_current = 0;
     let active_word = document.createElement("div");
     active_word.classList.add("col-auto");
     active_word.textContent = "Active Abilities:";
@@ -47,97 +144,89 @@ function construct_AT(elem, tree) {
 
     active_row.appendChild(active_word);
     active_row.appendChild(active_AP_container);
-
     document.getElementById("atree-active").appendChild(active_row);
 
-    atree_map = new Map();
-    atree_connectors_map = new Map()
-    for (let i of tree) {
-        atree_map.set(i.id, {display: i.display, parents: i.parents, connectors: new Map(), active: false});
+    let atree_map = new Map();
+    let atree_connectors_map = new Map()
+    let max_row = 0;
+    for (const i of tree) {
+        atree_map.set(i.node.id, {node: i.node, connectors: new Map(), active: false});
+        if (i.node.display.row > max_row) {
+            max_row = i.node.display.row;
+        }
+    }
+    // Copy graph structure.
+    for (const i of tree) {
+        let node_wrapper = atree_map.get(i.node.id);
+        node_wrapper.parents = [];
+        node_wrapper.children = [];
+        for (const parent of i.parents) {
+            node_wrapper.parents.push(atree_map.get(parent.node.id));
+        }
+        for (const child of i.children) {
+            node_wrapper.children.push(atree_map.get(child.node.id));
+        }
     }
 
-    for (let i = 0; i < tree.length; i++) {
-        let node = tree[i];
-        
-        // create rows if not exist
-        let missing_rows = [node.display.row];
+    // Setup grid.
+    for (let j = 0; j <= max_row; j++) {
+        let row = document.createElement('div');
+        row.classList.add("row");
+        row.id = "atree-row-" + j;
+        //was causing atree rows to be 0 height
+        // TODO: do this more dynamically
+        row.style.minHeight = elem.scrollWidth / 9 + "px";
+        //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
 
-        if (node.parents.length == 0) {
-            // Assuming there is only one head.
-            atree_head = node;
+        for (let k = 0; k < 9; k++) {
+            col = document.createElement('div');
+            col.classList.add('col', 'px-0');
+            col.style.minHeight = elem.scrollWidth / 9 + "px";
+            row.appendChild(col);
         }
+        elem.appendChild(row);
+    }
 
-        for (let parent of node.parents) {
-            missing_rows.push(tree.find(object => {return object.id === parent;}).display.row);
-        }
-        for (let missing_row of missing_rows) {
-            if (document.getElementById("atree-row-" + missing_row) == null) {
-                for (let j = 0; j <= missing_row; j++) {
-                    if (document.getElementById("atree-row-" + j) == null) {
-                        let row = document.createElement('div');
-                        row.classList.add("row");
-                        row.id = "atree-row-" + j;
-                        //was causing atree rows to be 0 height
-                        row.style.minHeight = elem.scrollWidth / 9 + "px";
-                        //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
-
-                        for (let k = 0; k < 9; k++) {
-                            col = document.createElement('div');
-                            col.classList.add('col', 'px-0');
-                            col.style.minHeight = elem.scrollWidth / 9 + "px";
-                            row.appendChild(col);
-
-                            atree_connectors_map.set(j + "," + k, [])
-                        };
-                        elem.appendChild(row);
-                    };
-                };
-            };
-        }
-
+    for (const _node of tree) {
+        let node_wrap = atree_map.get(_node.node.id);
+        let node = _node.node;
 
         // create connectors based on parent location
-        for (let parent of node.parents) {
-            atree_map.get(node.id).connectors.set(parent, []);
+        for (let parent of node_wrap.parents) {
+            node_wrap.connectors.set(parent, []);
 
-            let parent_node = atree_map.get(parent);
+            let parent_node = parent.node;
+            const parent_id = parent_node.id;
 
             let connect_elem = document.createElement("div");
             connect_elem.style = "background-size: cover; width: 100%; height: 100%;";
             // connect up
             for (let i = node.display.row - 1; i > parent_node.display.row; i--) {
                 let connector = connect_elem.cloneNode();
-                connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
-                atree_map.get(node.id).connectors.get(parent).push(i + "," + node.display.col);
-                atree_connectors_map.get(i + "," + node.display.col).push({connector: connector, type: "line", owner: [node.id, parent]});
-                resolve_connector(i + "," + node.display.col, node);
+                node_wrap.connectors.get(parent).push(i + "," + node.display.col);
+                resolve_connector(atree_connectors_map, i + "," + node.display.col, {connector: connector, connections: [0, 0, 1, 1]});
             }
             // connect horizontally
             let min = Math.min(parent_node.display.col, node.display.col);
             let max = Math.max(parent_node.display.col, node.display.col);
             for (let i = min + 1; i < max; i++) {
                 let connector = connect_elem.cloneNode();
-                connector.style.backgroundImage = "url('../media/atree/connect_line.png')";
-                connector.classList.add("rotate-90");
-                atree_map.get(node.id).connectors.get(parent).push(parent_node.display.row + "," + i);
-                atree_connectors_map.get(parent_node.display.row + "," + i).push({connector: connector, type: "line", owner: [node.id, parent]});
-                resolve_connector(parent_node.display.row + "," + i, node);
+                node_wrap.connectors.get(parent).push(parent_node.display.row + "," + i);
+                resolve_connector(atree_connectors_map, parent_node.display.row + "," + i, {connector: connector, connections: [1, 1, 0, 0]});
             }
 
             // connect corners
-
             if (parent_node.display.row != node.display.row && parent_node.display.col != node.display.col) {
                 let connector = connect_elem.cloneNode();
-                connector.style.backgroundImage = "url('../media/atree/connect_angle.png')";
-                atree_map.get(node.id).connectors.get(parent).push(parent_node.display.row + "," + node.display.col);
-                atree_connectors_map.get(parent_node.display.row + "," + node.display.col).push({connector: connector, type: "angle", owner: [node.id, parent]});
+                node_wrap.connectors.get(parent).push(parent_node.display.row + "," + node.display.col);
+                let connections = [0, 0, 0, 1];
                 if (parent_node.display.col > node.display.col) {
-                    connector.classList.add("rotate-180");
+                    connections[1] = 1;
                 }
                 else {// if (parent_node.display.col < node.display.col && (parent_node.display.row != node.display.row)) {
-                    connector.classList.add("rotate-270");
+                    connections[0] = 1;
                 }
-                resolve_connector(parent_node.display.row + "," + node.display.col, node);
+                resolve_connector(atree_connectors_map, parent_node.display.row + "," + node.display.col, {connector: connector, connections: connections});
             }
         }
 
@@ -207,15 +296,15 @@ function construct_AT(elem, tree) {
             if (tooltip.style.display == "block") {
                 tooltip.style.display = "none";
                 this.classList.remove("atree-selected");
-                document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) - node.cost; 
+                abil_points_current -= node.cost;
             } 
             else {
                 tooltip.style.display = "block";
                 this.classList.add("atree-selected");
-                document.getElementById("active_AP_cost").textContent = parseInt(document.getElementById("active_AP_cost").textContent) + node.cost;
+                abil_points_current += node.cost;
             };
-            atree_toggle_state(node);
-            atree_update_connector();
+            document.getElementById("active_AP_cost").textContent = abil_points_current;
+            atree_toggle_state(atree_connectors_map, node_wrap);
         });
 
         // add tooltip
@@ -236,71 +325,84 @@ function construct_AT(elem, tree) {
 
         document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
     };
-
-    atree_render_connection();
+    console.log(atree_connectors_map);
+    atree_render_connection(atree_connectors_map);
 };
 
 // resolve connector conflict, when they occupy the same cell.
-function resolve_connector(pos, node) {
-    if (atree_connectors_map.get(pos).length < 2) {return false;}
-
-    let line = false;
-    let angle = false;
-    let t = false;
-    let owners = [];
-    for (let i of atree_connectors_map.get(pos)) {
-        if (i.type == "line") {
-            line = true;
-        } else if (i.type == "angle") {
-            angle = true;
-        } else if (i.type == "t") {
-            t = true;
-        }
-        owners = owners.concat(i.owner);
+function resolve_connector(atree_connectors_map, pos, new_connector) {
+    if (!atree_connectors_map.has(pos)) {
+        atree_connectors_map.set(pos, new_connector);
+        return;
     }
-
-    owners = [...new Set(owners)];
-
-    let connect_elem = document.createElement("div");
-
-    if ((line && angle)) {
-        connect_elem.style = "background-image: url('../media/atree/connect_t.png'); background-size: cover; width: 100%; height: 100%;";
-        atree_connectors_map.set(pos, [{connector: connect_elem, type: "t", owner: owners, connector_state: {up: 0, left: 0, right: 0, down: 0}}]);
+    let existing = atree_connectors_map.get(pos).connections;
+    for (let i = 0; i < 4; ++i) {
+        existing[i] += new_connector.connections[i];
     }
-    if (node.parents.length == 3 && t && atree_same_row(node)) {
-        connect_elem.style = "background-image: url('../media/atree/connect_c.png'); background-size: cover; width: 100%; height: 100%;";
-        atree_connectors_map.set(pos, [{connector: connect_elem, type: "c", owner: owners, connector_state: {up: 0, left: 0, right: 0, down: 0}}]);
-    }
-    // override the conflict with the first children
-    atree_connectors_map.set(pos, [atree_connectors_map.get(pos)[0]]);
-    atree_connectors_map.get(pos)[0].owner = owners;
 }
 
-// check if a node doesn't have same row w/ its parents (used to solve conflict)
-function atree_same_row(node) {
-    for (let i of node.parents) {
-        if (node.display.row == atree_map.get(i).display.row) { return false; }
-    };
-    return true;
-};
+function set_connector_type(connector_info) {  // left right up down
+    const connections = connector_info.connections;
+    const connector_elem = connector_info.connector;
+    if (connections[2]) {
+        if (connections[0]) {
+            connector_info.type = 'c'; // cross
+            return;
+        }
+        connector_info.type = 'line';   // vert line
+        return;
+    }
+    if (connections[3]) {   // if down:
+        if (connections[0] && connections[1]) {
+            connector_info.type = 't';   // all 3 t
+            return;
+        }
+        connector_info.type = 'angle';   // elbow
+        if (connections[1]) {
+            connector_elem.classList.add("rotate-180");
+        }
+        else {
+            connector_elem.classList.add("rotate-270");
+        }
+        return;
+    }
+    connector_info.type = 'line';   // horiz line
+    connector_elem.classList.add("rotate-90");
+}
 
 // draw the connector onto the screen
-function atree_render_connection() {
+function atree_render_connection(atree_connectors_map) {
     for (let i of atree_connectors_map.keys()) {
-        if (document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]].children.length != 0) {continue;}
-        if (atree_connectors_map.get(i).length != 0) {
-            document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]].appendChild(atree_connectors_map.get(i)[0].connector);
-        };
+        let connector_info = atree_connectors_map.get(i);
+        let connector_elem = connector_info.connector;
+        set_connector_type(connector_info);
+        connector_elem.style.backgroundImage = "url('../media/atree/connect_"+connector_info.type+".png')";
+        connector_info.highlight = [0, 0, 0, 0];
+        console.log(i + ", " + connector_info.type);
+        let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
+        if (target_elem.children.length != 0) {
+            // janky special case...
+            connector_elem.style.display = 'none';
+        }
+        target_elem.appendChild(connector_elem);
     };
 };
 
 // toggle the state of a node.
-function atree_toggle_state(node) {
-    if (atree_map.get(node.id).active) {
-        atree_map.get(node.id).active = false;
-    } else {
-        atree_map.get(node.id).active = true;
-    };
+function atree_toggle_state(atree_connectors_map, node_wrapper) {
+    let node = node_wrapper.node;
+    const new_state = !node_wrapper.active;
+    node_wrapper.active = new_state
+    for (const parent of node_wrapper.parents) {
+        if (parent.active) {
+            atree_set_edge(atree_connectors_map, parent, node_wrapper, new_state);  // self->parent state only changes if parent is on
+        }
+    }
+    for (const child of node_wrapper.children) {
+        if (child.active) {
+            atree_set_edge(atree_connectors_map, node_wrapper, child, new_state);   // Same logic as above.
+        }
+    }
 };
 
 // refresh all connector to default state, then try to calculate the connector for all node
@@ -315,72 +417,61 @@ function atree_update_connector() {
     });
 }
 
-// set the correct connector highlight for an active node, given a node.
-function atree_compute_highlight(node) {
-    node.connectors.forEach((v, k) => {
-        if (node.active && atree_map.get(k).active) {
-            for (let i of v) {
-                connector_data = atree_connectors_map.get(i)[0];
-                if (connector_data.type == "c" || connector_data.type == "t") {
-                    connector_data.connector_state = atree_get_state(i);
-                    let connector_img = atree_parse_connector(connector_data.connector_state, connector_data.type);
-                    connector_data.connector.className = "";
-                    connector_data.connector.classList.add("rotate-" + connector_img.rotate);
-                    connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + connector_img.attrib + ".png')";
-                } else {
-                    connector_data.connector.style.backgroundImage = "url('../media/atree/highlight_" + connector_data.type + ".png')";
-                };
-            };
-        };
-    });
-};
+function atree_set_edge(atree_connectors_map, parent, child, state) {
+    const connectors = child.connectors.get(parent);
+    const parent_row = parent.node.display.row;
+    const parent_col = parent.node.display.col;
+    const child_row = child.node.display.row;
+    const child_col = child.node.display.col;
 
-// get the current active state of different directions, given a connector coordinate.
-function atree_get_state(connector) {
-    let connector_state = [0, 0, 0, 0]; // left, right, up, down
+    let state_delta = (state ? 1 : -1);
+    let child_side_idx = (parent_col > child_col ? 0 : 1);
+    let parent_side_idx = 1 - child_side_idx;
+    for (const connector_label of connectors) {
+        let connector_info = atree_connectors_map.get(connector_label);
+        let connector_elem = connector_info.connector;
+        let highlight_state = connector_info.highlight; // left right up down
+        const ctype = connector_info.type;
+        if (ctype === 't' || ctype === 'c') {
+            // c, t
+            const [connector_row, connector_col] = connector_label.split(',').map(x => parseInt(x));
 
-    for (let abil_name of atree_connectors_map.get(connector)[0].owner) {
-
-        state = atree_map.get(abil_name).active;
-        if (atree_map.get(abil_name).display.col > parseInt(connector.split(",")[1])) {
-            if (state) {
-                connector_state[1] = 1;
-            } else if (!connector_state[1]) {
-                connector_state[1] = 0;
+            if (connector_row === parent_row) {
+                highlight_state[parent_side_idx] += state_delta;
             }
+            else {
+                highlight_state[2] += state_delta;  // up connection guaranteed.
+            }
+            if (connector_col === child_col) {
+                highlight_state[3] += state_delta;
+            }
+            else {
+                highlight_state[child_side_idx] += state_delta;
+            }
+
+            let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
+
+            let connector_img = atree_parse_connector(render_state, ctype);
+            connector_elem.className = "";
+            connector_elem.classList.add("rotate-" + connector_img.rotate);
+            connector_elem.style.backgroundImage = connector_img.img;
             continue;
         }
-        if (atree_map.get(abil_name).display.col < parseInt(connector.split(",")[1])) {
-            if (state) {
-                connector_state[0] = 1;
-            } else if (!connector_state[0]) {
-                connector_state[0] = 0;
-            }
-            continue;
+        // lol bad overloading, [0] is just the whole state
+        highlight_state[0] += state_delta;
+        if (highlight_state[0] > 0) {
+            connector_elem.style.backgroundImage = "url('../media/atree/highlight_"+ctype+".png')";
         }
-        if (atree_map.get(abil_name).display.row < parseInt(connector.split(",")[0])) {
-            if (state) {
-                connector_state[2] = 1;
-            } else if (!connector_state[2]) {
-                connector_state[2] = 0;
-            }
-            continue;
+        else {
+            connector_elem.style.backgroundImage = "url('../media/atree/connect_"+ctype+".png')";
         }
-        if (atree_map.get(abil_name).display.row > parseInt(connector.split(",")[0])) {
-            if (state) {
-                connector_state[3] = 1;
-            } else if (!connector_state[3]) {
-                connector_state[3] = 0;
-            };
-            continue;
-        };
-    };
-    return connector_state;
+    }
 }
 
 // parse a sequence of left, right, up, down to appropriate connector image
 function atree_parse_connector(orient, type) {
     // left, right, up, down
+
     let c_connector_dict = {
         "1100": {attrib: "_2_l", rotate: 0},
         "1010": {attrib: "_2_a", rotate: 0},
@@ -405,11 +496,17 @@ function atree_parse_connector(orient, type) {
     let res = "";  
     for (let i of orient) {
         res += i;
-    };
+    }
+    if (res === "0000") {
+        return {img: "url('../media/atree/connect_" + type + ".png')", rotate: 0};
+    }
 
+    let ret;
     if (type == "c") {
-        return c_connector_dict[res];
+        ret = c_connector_dict[res];
     } else {
-        return t_connector_dict[res];
+        ret = t_connector_dict[res];
     };
+    ret.img = "url('../media/atree/highlight_" + type + ret.attrib + ".png')";
+    return ret;
 };
