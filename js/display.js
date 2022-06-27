@@ -1627,6 +1627,18 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     let part_divavg = document.createElement("p");
     overallparent_elem.append(part_divavg);
 
+    function _summary(text, val, fmt) {
+        let overallaverageLabel = document.createElement("p");
+        let first = document.createElement("span");
+        let second = document.createElement("span");
+        first.textContent = text;
+        second.textContent = val.toFixed(2);
+        overallaverageLabel.appendChild(first);
+        overallaverageLabel.appendChild(second);
+        second.classList.add(fmt);
+        part_divavg.append(overallaverageLabel);
+    }
+
     for (let i = 0; i < spell_results.length; ++i) {
         const damage_info = spell_results[i];
 
@@ -1652,15 +1664,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
 
 
             if (damage_info.name === spell.display) {
-                let overallaverageLabel = document.createElement("p");
-                let first = document.createElement("span");
-                let second = document.createElement("span");
-                first.textContent = damage_info.name+ " Average: "; 
-                second.textContent = averageDamage.toFixed(2);
-                overallaverageLabel.appendChild(first);
-                overallaverageLabel.appendChild(second);
-                second.classList.add("Damage");
-                part_divavg.append(overallaverageLabel);
+                _summary(damage_info.name+ " Average: ", averageDamage, "Damage");
             }
             
             function _damage_display(label_text, average, dmg_min, dmg_max) {
@@ -1686,42 +1690,8 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
             // healLabel.classList.add("damagep");
             part_div.append(healLabel);
             if (damage_info.name === spell.display) {
-                let overallhealLabel = document.createElement("p");
-                let first = document.createElement("span");
-                let second = document.createElement("span");
-                first.textContent = damage_info.name+ ": ";
-                second.textContent = heal_amount;
-                overallhealLabel.appendChild(first);
-                second.classList.add("Set");
-                overallhealLabel.appendChild(second);
-                part_divavg.append(overallhealLabel);
+                _summary(damage_info.name+ ": ", heal_amount, "Set");
             }
-//         } else if (part.type === "total") {
-//             let total_damage = 0;
-//             for (let i in part.factors) {
-//                 total_damage += save_damages[i] * part.factors[i];
-//             }
-// 
-//             let dmgarr = part.factors.slice();
-//             dmgarr = dmgarr.map(x => "(" + x + " * " + save_damages[dmgarr.indexOf(x)].toFixed(2) + ")");
-// 
-// 
-//             let averageLabel = document.createElement("p");
-//             averageLabel.textContent = "Average: "+total_damage.toFixed(2);
-//             averageLabel.classList.add("damageSubtitle");
-//             part_div.append(averageLabel);
-// 
-//             let overallaverageLabel = document.createElement("p");
-//             let overallaverageLabelFirst = document.createElement("span");
-//             let overallaverageLabelSecond = document.createElement("span");
-//             overallaverageLabelFirst.textContent = "Average: ";
-//             overallaverageLabelSecond.textContent = total_damage.toFixed(2);
-//             overallaverageLabelSecond.classList.add("Damage");
-// 
-// 
-//             overallaverageLabel.appendChild(overallaverageLabelFirst);
-//             overallaverageLabel.appendChild(overallaverageLabelSecond);
-//             part_divavg.append(overallaverageLabel);
         }
     }
 

@@ -246,6 +246,16 @@ const default_spells = {
         scaling: "melee", use_atkspd: false,
         display: "Melee",
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }, {
+        name: "Heal",  // TODO: name for melee attacks?
+        display_text: "Heal spell!",
+        base_spell: 1,
+        display: "Total Heal",
+        parts: [
+            { name: "First Pulse", power: 0.12 },
+            { name: "Second and Third Pulses", power: 0.06 },
+            { name: "Total Heal", hits: { "First Pulse": 1, "Second and Third Pulses": 2 } }
+        ]
     }],
     spear: [{
         name: "Melee",  // TODO: name for melee attacks?

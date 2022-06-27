@@ -592,7 +592,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.strength * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100))).toFixed(2);
+                let _heal_amount = (part.power * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)));
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
@@ -604,7 +604,8 @@ class SpellDamageCalcNode extends ComputeNode {
                     normal_total: [0, 0],
                     crit_min: [0, 0, 0, 0, 0, 0],
                     crit_max: [0, 0, 0, 0, 0, 0],
-                    crit_total: [0, 0]
+                    crit_total: [0, 0],
+                    heal_amount: 0
                 }
                 const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
                 for (const [subpart_name, hits] of Object.entries(part.hits)) {
@@ -1111,7 +1112,7 @@ function builder_graph_init() {
 
     // Also do something similar for skill points
 
-    //for (let i = 0; i < 4; ++i) {
+    //for (let i = 0; i < 4; ++i) { TODO: testing code
     for (let i = 0; i < 1; ++i) {
         let spell_node = new SpellSelectNode(i);
         spell_node.link_to(build_node, 'build');
