@@ -214,6 +214,36 @@ spell_total: {
 
 */
 
+const default_spells = {
+    wand: [{
+        name: "Melee",  // TODO: name for melee attacks?
+        display_text: "Mage basic attack",
+        base_spell: 0,  // Spell 0 is special cased to be handled with melee logic.
+        spell_type: "damage",
+        scaling: "melee",
+        display: "total",
+        parts: { name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }
+    }],
+    spear: [{
+        name: "Melee",  // TODO: name for melee attacks?
+        display_text: "Warrior basic attack",
+        base_spell: 0,  // Spell 0 is special cased to be handled with melee logic.
+        spell_type: "damage",
+        scaling: "melee",
+        display: "total",
+        parts: { name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }
+    }],
+    bow: [
+
+    ],
+    dagger: [
+
+    ],
+    relik: [
+
+    ],
+}
+
 const spell_table = {
     "wand": [
         { title: "Heal", cost: 6, parts: [

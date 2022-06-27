@@ -833,14 +833,13 @@ class AggregateEditableIDNode extends ComputeNode {
 
     compute_func(input_map) {
         const build = input_map.get('build'); input_map.delete('build');
-        const weapon = input_map.get('weapon'); input_map.delete('weapon');
 
         const output_stats = new Map(build.statMap);
         for (const [k, v] of input_map.entries()) {
             output_stats.set(k, v);
         }
 
-        output_stats.set('classDef', classDefenseMultipliers.get(weapon.statMap.get("type")));
+        output_stats.set('classDef', classDefenseMultipliers.get(build.weapon.statMap.get("type")));
         return output_stats;
     }
 }
@@ -946,6 +945,9 @@ let powder_nodes = [];
 let spelldmg_nodes = [];
 let edit_input_nodes = [];
 let skp_inputs = [];
+let build_node;
+let stat_agg_node;
+let edit_agg_node;
 
 function builder_graph_init() {
     // Phase 1/2: Set up item input, propagate updates, etc.
@@ -980,7 +982,7 @@ function builder_graph_init() {
     let level_input = new InputNode('level-input', document.getElementById('level-choice'));
 
     // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
-    let build_node = new BuildAssembleNode();
+    build_node = new BuildAssembleNode();
     for (const input of item_nodes) {
         build_node.link_to(input);
     }
@@ -1011,9 +1013,9 @@ function builder_graph_init() {
     build_disp_node.link_to(build_node, 'build');
 
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
-    let stat_agg_node = new AggregateStatsNode();
-    let edit_agg_node = new AggregateEditableIDNode();
-    edit_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
+    stat_agg_node = new AggregateStatsNode();
+    edit_agg_node = new AggregateEditableIDNode();
+    edit_agg_node.link_to(build_node, 'build');
     for (const field of editable_item_fields) {
         // Create nodes that listens to each editable id input, the node name should match the "id"
         const elem = document.getElementById(field);
@@ -1079,8 +1081,6 @@ function builder_graph_init() {
     
     let skp_output = new SkillPointSetterNode(edit_input_nodes);
     skp_output.link_to(build_node);
-    
-    edit_agg_node.link_to(build_node, 'build').link_to(item_nodes[8], 'weapon');
 
     let build_warnings_node = new DisplayBuildWarningsNode();
     build_warnings_node.link_to(build_node, 'build');

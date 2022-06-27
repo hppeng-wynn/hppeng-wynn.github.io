@@ -1476,9 +1476,10 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
 
             let tmp_conv = [];
             for (let i in part.conversion) {
-                tmp_conv.push(part.conversion[i] * part.multiplier[power-1]);
+                tmp_conv.push(part.conversion[i] * part.multiplier[power-1] / 100);
             }
-            let _results = calculateSpellDamage(stats, weapon, tmp_conv, false);
+            console.log(tmp_conv);
+            let _results = calculateSpellDamage(stats, weapon, tmp_conv, false, true);
 
             let critChance = skillPointsToPercentage(skillpoints[1]);
             let save_damages = [];
