@@ -435,12 +435,12 @@ const atrees = {
                             "name": "Single Arrow",
                             "type": "damage",
                             "multipliers": [
-                                40,
+                                30,
                                 0,
                                 0,
                                 0,
                                 0,
-                                20
+                                10
                             ]
                         },
                         {
