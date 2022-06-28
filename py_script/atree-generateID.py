@@ -1,14 +1,16 @@
 """
-Generate a JSON Ability Tree [atree_constants_id.json] with:
+Generate a minified JSON Ability Tree [atree_constants_min.json] AND a minified .js form [atree_constants_min.js] of the Ability Tree with:
  - All references replaced by numerical IDs
  - Extra JSON File with Class: [Original name as key and Assigned IDs as value].
-given a JSON Ability Tree with reference as string.
+given [atree_constants.js] .js form of the Ability Tree with reference as string.
 """
 import json
 
 abilDict = {}
-with open("atree_constants.json") as f:
-    data = json.loads(f.read())
+with open("atree_constants.js") as f:
+    data = f.read()
+    data = data.replace("const atrees = ", "")
+    data = json.loads(data)
     for classType, info in data.items():
         _id = 0
         abilDict[classType] = {}
@@ -31,5 +33,10 @@ with open("atree_constants.json") as f:
             for ref in range(len(info[abil]["blockers"])):
                 info[abil]["blockers"][ref] = abilDict[classType][info[abil]["blockers"][ref]]
 
-    with open('atree_constants_id.json', 'w', encoding='utf-8') as abil_dest:
-        json.dump(data, abil_dest, ensure_ascii=False, indent=4)
+    data_str = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
+    data_str = "const atrees=" + data_str
+    with open('atree_constants_min.js', 'w', encoding='utf-8') as abil_dest:
+        abil_dest.write(data_str)
+    
+    with open('atree_constants_min.json', 'w', encoding='utf-8') as json_dest:
+        json.dump(data, json_dest, ensure_ascii=False, separators=(',', ':'))
