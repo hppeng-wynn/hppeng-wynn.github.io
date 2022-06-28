@@ -60,7 +60,7 @@ const atree_render = new (class extends ComputeNode {
         }
         
         //for some reason we have to cast to string 
-        if (atree) { render_AT(document.getElementById("atree-ui"), atree); }
+        if (atree) { render_AT(document.getElementById("atree-ui"), document.getElementById("atree-active"), atree); }
 
         //Toggle on, previously was toggled off
         toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
@@ -98,10 +98,17 @@ function topological_sort_tree(tree, res, mark_state) {
     // }
 }
 
-function render_AT(elem, tree) {
+
+/** The main function for rendering an ability tree. 
+ * 
+ * @param {Element} UI_elem - the DOM element to draw the atree within.
+ * @param {Element} list_elem - the DOM element to list selected abilities within.
+ * @param {*} tree - the ability tree to work with.
+ */
+function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
-    document.getElementById("atree-active").innerHTML = ""; //reset all atree actives - should be done in a more general way later
-    elem.innerHTML = ""; //reset the atree in the DOM
+    list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
+    UI_elem.innerHTML = ""; //reset the atree in the DOM
 
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
@@ -141,7 +148,7 @@ function render_AT(elem, tree) {
 
     active_row.appendChild(active_word);
     active_row.appendChild(active_AP_container);
-    document.getElementById("atree-active").appendChild(active_row);
+    list_elem.appendChild(active_row);
 
     let atree_map = new Map();
     let atree_connectors_map = new Map()
@@ -170,18 +177,17 @@ function render_AT(elem, tree) {
         let row = document.createElement('div');
         row.classList.add("row");
         row.id = "atree-row-" + j;
-        //was causing atree rows to be 0 height
         // TODO: do this more dynamically
-        row.style.minHeight = elem.scrollWidth / 9 + "px";
-        //row.style.minHeight = elem.getBoundingClientRect().width / 9 + "px";
+        row.style.minHeight = UI_elem.scrollWidth / 9 + "px";
+        //row.style.minHeight = UI_elem.getBoundingClientRect().width / 9 + "px";
 
         for (let k = 0; k < 9; k++) {
             col = document.createElement('div');
             col.classList.add('col', 'px-0');
-            col.style.minHeight = elem.scrollWidth / 9 + "px";
+            col.style.minHeight = UI_elem.scrollWidth / 9 + "px";
             row.appendChild(col);
         }
-        elem.appendChild(row);
+        UI_elem.appendChild(row);
     }
 
     for (const _node of tree) {
@@ -255,8 +261,7 @@ function render_AT(elem, tree) {
 
         let active_tooltip = document.createElement('div');
         active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        //was causing active element boxes to be 0 width 
-        active_tooltip.style.maxWidth = elem.getBoundingClientRect().width * .80 + "px";
+        active_tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .80 + "px";
         active_tooltip.style.display = "none";
 
         // tooltip text formatting
@@ -285,7 +290,7 @@ function render_AT(elem, tree) {
         node_tooltip.style.zIndex = "100";
 
         node_elem.appendChild(node_tooltip);
-        document.getElementById("atree-active").appendChild(active_tooltip);
+        list_elem.appendChild(active_tooltip);
 
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}

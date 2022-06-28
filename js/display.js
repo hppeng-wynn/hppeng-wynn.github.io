@@ -1640,18 +1640,18 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     }
 
     for (let i = 0; i < spell_results.length; ++i) {
-        const damage_info = spell_results[i];
+        const spell_info = spell_results[i];
 
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
         let subtitle_elem = document.createElement("p");
-        subtitle_elem.textContent = damage_info.name
+        subtitle_elem.textContent = spell_info.name
         part_div.append(subtitle_elem);
 
-        if (damage_info.type === "damage") {
-            let totalDamNormal = damage_info.normal_total;
-            let totalDamCrit = damage_info.crit_total;
+        if (spell_info.type === "damage") {
+            let totalDamNormal = spell_info.normal_total;
+            let totalDamCrit = spell_info.crit_total;
 
             let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
@@ -1663,8 +1663,8 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
             part_div.append(averageLabel);
 
 
-            if (damage_info.name === spell.display) {
-                _summary(damage_info.name+ " Average: ", averageDamage, "Damage");
+            if (spell_info.name === spell.display) {
+                _summary(spell_info.name+ " Average: ", averageDamage, "Damage");
             }
             
             function _damage_display(label_text, average, dmg_min, dmg_max) {
@@ -1681,16 +1681,16 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
                     }
                 }
             }
-            _damage_display("Non-Crit Average: ", nonCritAverage, damage_info.normal_min, damage_info.normal_max);
-            _damage_display("Crit Average: ", critAverage, damage_info.crit_min, damage_info.crit_max);
-        } else if (damage_info.type === "heal") {
-            let heal_amount = damage_info.heal_amount;
+            _damage_display("Non-Crit Average: ", nonCritAverage, spell_info.normal_min, spell_info.normal_max);
+            _damage_display("Crit Average: ", critAverage, spell_info.crit_min, spell_info.crit_max);
+        } else if (spell_info.type === "heal") {
+            let heal_amount = spell_info.heal_amount;
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             // healLabel.classList.add("damagep");
             part_div.append(healLabel);
-            if (damage_info.name === spell.display) {
-                _summary(damage_info.name+ ": ", heal_amount, "Set");
+            if (spell_info.name === spell.display) {
+                _summary(spell_info.name+ ": ", heal_amount, "Set");
             }
         }
     }

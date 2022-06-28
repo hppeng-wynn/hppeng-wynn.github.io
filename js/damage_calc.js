@@ -240,7 +240,7 @@ spell_heal: {
 
 const default_spells = {
     wand: [{
-        name: "Magic Strike",  // TODO: name for melee attacks?
+        name: "Wand Melee",  // TODO: name for melee attacks?
         display_text: "Mage basic attack",
         base_spell: 0,
         scaling: "melee", use_atkspd: false,
@@ -282,7 +282,7 @@ const default_spells = {
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
     relik: [{
-        name: "Spread Beam",  // TODO: name for melee attacks?
+        name: "Relik Melee",  // TODO: name for melee attacks?
         display_text: "Shaman basic attack",
         base_spell: 0,
         spell_type: "damage",
