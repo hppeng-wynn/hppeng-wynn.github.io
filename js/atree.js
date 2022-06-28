@@ -457,17 +457,17 @@ function render_AT(UI_elem, list_elem, tree) {
                 tooltip.style.display = "none";
                 this.classList.remove("atree-selected");
                 abil_points_current -= ability.cost;
-                node_wrap.active = false;
             } 
             else {
                 tooltip.style.display = "block";
                 this.classList.add("atree-selected");
                 abil_points_current += ability.cost;
-                node_wrap.active = true;
             };
             console.log(node_wrap);
             document.getElementById("active_AP_cost").textContent = abil_points_current;
             atree_toggle_state(atree_connectors_map, node_wrap);
+            atree_merge.mark_dirty();
+            atree_merge.update();
         });
 
         // add tooltip
@@ -568,6 +568,7 @@ function atree_toggle_state(atree_connectors_map, node_wrapper) {
             atree_set_edge(atree_connectors_map, node_wrapper, child, new_state);   // Same logic as above.
         }
     }
+    console.log(node_wrapper);
 };
 
 // refresh all connector to default state, then try to calculate the connector for all node
