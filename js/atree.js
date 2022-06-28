@@ -142,15 +142,10 @@ function render_AT(UI_elem, list_elem, tree) {
     active_AP_end.classList.add("col-auto", "mx-0", "px-0");
     active_AP_end.textContent = " AP";
 
-    //I can't believe we can't pass in multiple children at once
-    active_AP_subcontainer.appendChild(active_AP_cost);
-    active_AP_subcontainer.appendChild(active_AP_slash);
-    active_AP_subcontainer.appendChild(active_AP_cap);
-    active_AP_subcontainer.appendChild(active_AP_end);
     active_AP_container.appendChild(active_AP_subcontainer);
+    active_AP_subcontainer.append(active_AP_cost, active_AP_slash, active_AP_cap, active_AP_end);
 
-    active_row.appendChild(active_word);
-    active_row.appendChild(active_AP_container);
+    active_row.append(active_word, active_AP_container);
     list_elem.appendChild(active_row);
 
     let atree_map = new Map();
@@ -281,9 +276,7 @@ function render_AT(UI_elem, list_elem, tree) {
         active_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
         active_tooltip_cost.textContent = "Cost: " + node.cost + " AP";
 
-        active_tooltip.appendChild(active_tooltip_title);
-        active_tooltip.appendChild(active_tooltip_desc);
-        active_tooltip.appendChild(active_tooltip_cost);
+        active_tooltip.append(active_tooltip_title, active_tooltip_desc, active_tooltip_cost);
 
         node_tooltip = active_tooltip.cloneNode(true);
 
