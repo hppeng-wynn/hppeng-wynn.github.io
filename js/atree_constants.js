@@ -329,37 +329,37 @@ const atrees = {
             "count": 2
         },
             "effects": [
-            {
-                "type": "replace_spell",
-                "name": "Guardian Angels",
-                "cost": 30,
-                "display_text": "Total Damage Average",
-                "base_spell": 4,
-                "spell_type": "damage",
-                "scaling": "spell",
-                "display": "Total Damage",
-                "parts": [
-                    {
-                        "name": "Single Arrow",
-                        "type": "damage",
-                        "multipliers": [30, 0, 0, 0, 0, 10]
-                    },
-                    {
-                        "name": "Single Bow",
-                        "type": "total",
-                        "hits": {
-                            "Single Arrow": 8
+                {
+                    "type": "replace_spell",
+                    "name": "Guardian Angels",
+                    "cost": 30,
+                    "display_text": "Total Damage Average",
+                    "base_spell": 4,
+                    "spell_type": "damage",
+                    "scaling": "spell",
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Single Arrow",
+                            "type": "damage",
+                            "multipliers": [30, 0, 0, 0, 0, 10]
+                        },
+                        {
+                            "name": "Single Bow",
+                            "type": "total",
+                            "hits": {
+                                "Single Arrow": 8
+                            }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": {
+                                "Single Bow": 2
+                            }
                         }
-                    },
-                    {
-                        "name": "Total Damage",
-                        "type": "total",
-                        "hits": {
-                            "Single Bow": 2
-                        }
-                    }
-                ]
-            }
+                    ]
+                }
             ]
         },
         {
