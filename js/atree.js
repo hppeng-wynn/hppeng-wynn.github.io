@@ -53,12 +53,6 @@ const atree_render = new (class extends ComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeRenderNode accepts exactly one input (atree)"; }
         const [atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-        //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
-        // TODO: FIXME! this is a side effect of `px` based rendering.
-        if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
-            toggle_tab('atree-dropdown'); 
-            toggleButton('toggle-atree');
-        }
         
         //for some reason we have to cast to string 
         if (atree) { render_AT(document.getElementById("atree-ui"), document.getElementById("atree-active"), atree); }
@@ -263,7 +257,6 @@ function render_AT(UI_elem, list_elem, tree) {
 
         let active_tooltip = document.createElement('div');
         active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        active_tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .80 + "px";
         active_tooltip.style.display = "none";
 
         // tooltip text formatting
@@ -318,6 +311,7 @@ function render_AT(UI_elem, list_elem, tree) {
             let tooltip = this.children[this.children.length - 1];
             tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
             tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
+            tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .95 + "px";
             tooltip.style.display = "block";
         });
 
