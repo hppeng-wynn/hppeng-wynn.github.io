@@ -240,6 +240,7 @@ spell_heal: {
 
 const default_spells = {
     wand: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Wand Melee",  // TODO: name for melee attacks?
         display_text: "Mage basic attack",
         base_spell: 0,
@@ -247,7 +248,7 @@ const default_spells = {
         display: "Melee",
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }, {
-        name: "Heal",  // TODO: name for melee attacks?
+        name: "Heal",  // TODO: name for melee attacks? // JUST FOR TESTING...
         display_text: "Heal spell!",
         base_spell: 1,
         display: "Total Heal",
@@ -258,6 +259,7 @@ const default_spells = {
         ]
     }],
     spear: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Melee",  // TODO: name for melee attacks?
         display_text: "Warrior basic attack",
         base_spell: 0,
@@ -266,6 +268,7 @@ const default_spells = {
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
     bow: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Bow Shot",  // TODO: name for melee attacks?
         display_text: "Archer basic attack",
         base_spell: 0,
@@ -274,6 +277,7 @@ const default_spells = {
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
     dagger: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Melee",  // TODO: name for melee attacks?
         display_text: "Assassin basic attack",
         base_spell: 0,
@@ -282,6 +286,7 @@ const default_spells = {
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
     relik: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Relik Melee",  // TODO: name for melee attacks?
         display_text: "Shaman basic attack",
         base_spell: 0,

@@ -1093,6 +1093,7 @@ function builder_graph_init() {
     stat_agg_node.link_to(edit_agg_node);
     build_disp_node.link_to(stat_agg_node, 'stats');
     atree_node.link_to(build_node, 'build');
+    atree_merge.link_to(build_node, 'build');
 
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
