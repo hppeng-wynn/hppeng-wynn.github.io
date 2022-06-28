@@ -227,7 +227,12 @@ const atree_merge = new (class extends ComputeNode {
 
         let abils_merged = new Map();
         for (const abil of default_abils[build.weapon.statMap.get('type')]) {
-            abils_merged.set(abil.id, deepcopy(abil));
+            let tmp_abil = deepcopy(abil);
+            if (!Array.isArray(tmp_abil.desc)) {
+                tmp_abil.desc = [tmp_abil.desc];
+            }
+            tmp_abil.subparts = [abil.id];
+            abils_merged.set(abil.id, tmp_abil);
         }
 
         for (const node of atree_order) {
@@ -240,9 +245,24 @@ const atree_merge = new (class extends ComputeNode {
             if (abils_merged.has(abil.base_abil)) {
                 // Merge abilities.
                 // TODO: What if there is more than one base abil?
+                let base_abil = abils_merged.get(abil.base_abil);
+                console.log(base_abil);
+                if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
+                else { base_abil.desc.push(abil.desc); }
+
+                base_abil.subparts.push(abil.id);
+                base_abil.effects = base_abil.effects.concat(abil.effects);
+                for (let propname in abil.properties) {
+                    base_abil[propname] = abil[propname];
+                }
             }
             else {
-                abils_merged.set(abil_id, deepcopy(abil));
+                let tmp_abil = deepcopy(abil);
+                if (!Array.isArray(tmp_abil.desc)) {
+                    tmp_abil.desc = [tmp_abil.desc];
+                }
+                tmp_abil.subparts = [abil.id];
+                abils_merged.set(abil_id, tmp_abil);
             }
         }
         return abils_merged;
@@ -450,9 +470,6 @@ function render_AT(UI_elem, list_elem, tree) {
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
             let tooltip = document.getElementById("atree-ab-" + ability.id);
-            console.log(node_wrap);
-            console.log(node_wrap.active);
-            console.log(tooltip.style.display);
             if (tooltip.style.display === "block") {
                 tooltip.style.display = "none";
                 this.classList.remove("atree-selected");
@@ -463,7 +480,6 @@ function render_AT(UI_elem, list_elem, tree) {
                 this.classList.add("atree-selected");
                 abil_points_current += ability.cost;
             };
-            console.log(node_wrap);
             document.getElementById("active_AP_cost").textContent = abil_points_current;
             atree_toggle_state(atree_connectors_map, node_wrap);
             atree_merge.mark_dirty();
@@ -554,12 +570,10 @@ function atree_render_connection(atree_connectors_map) {
 
 // toggle the state of a node.
 function atree_toggle_state(atree_connectors_map, node_wrapper) {
-    console.log(node_wrapper);
     const new_state = !node_wrapper.active;
     node_wrapper.active = new_state
     for (const parent of node_wrapper.parents) {
         if (parent.active) {
-            console.log(parent);
             atree_set_edge(atree_connectors_map, parent, node_wrapper, new_state);  // self->parent state only changes if parent is on
         }
     }
@@ -568,7 +582,6 @@ function atree_toggle_state(atree_connectors_map, node_wrapper) {
             atree_set_edge(atree_connectors_map, node_wrapper, child, new_state);   // Same logic as above.
         }
     }
-    console.log(node_wrapper);
 };
 
 // refresh all connector to default state, then try to calculate the connector for all node
