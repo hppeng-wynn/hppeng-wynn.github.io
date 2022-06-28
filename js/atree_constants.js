@@ -260,7 +260,7 @@ const atrees = {
         },
         {
             "display_name": "Arrow Storm",
-            "desc": "Shoot one stream of 8 arrows, dealing significant damage to close mobs and pushing them back.",
+            "desc": "Shoot two stream of 8 arrows, dealing significant damage to close mobs and pushing them back.",
             "archetype": "", 
             "archetype_req": 0, 
             "parents": ["Double Shots", "Cheaper Escape"], 
