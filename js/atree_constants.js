@@ -225,7 +225,7 @@ const atrees = {
         },
         {
             "display_name": "Nimble String",
-            "desc": "Arrow Storm throw out +8 arrows per stream and shoot twice as fast.",
+            "desc": "Arrow Storm throw out +6 arrows per stream and shoot twice as fast.",
             "archetype": "", 
             "archetype_req": 0, 
             "parents": ["Thunder Mastery", "Arrow Rain"], 
@@ -253,7 +253,7 @@ const atrees = {
                 "target_part": "Single Stream", 
                 "cost": 0,
                 "hits": {
-                    "Single Arrow": 8
+                    "Single Arrow": 6
                 }
             }
         ]
@@ -302,7 +302,7 @@ const atrees = {
                     "name": "Total Damage",
                     "type": "total",
                     "hits": {
-                    "Single Stream": 2
+                    "Single Stream": 1
                     }
                 }
                 ]
@@ -329,37 +329,37 @@ const atrees = {
             "count": 2
         },
             "effects": [
-            {
-                "type": "replace_spell",
-                "name": "Guardian Angels",
-                "cost": 30,
-                "display_text": "Total Damage Average",
-                "base_spell": 4,
-                "spell_type": "damage",
-                "scaling": "spell",
-                "display": "Total Damage",
-                "parts": [
-                    {
-                        "name": "Single Arrow",
-                        "type": "damage",
-                        "multipliers": [30, 0, 0, 0, 0, 10]
-                    },
-                    {
-                        "name": "Single Bow",
-                        "type": "total",
-                        "hits": {
-                            "Single Arrow": 8
+                {
+                    "type": "replace_spell",
+                    "name": "Guardian Angels",
+                    "cost": 30,
+                    "display_text": "Total Damage Average",
+                    "base_spell": 4,
+                    "spell_type": "damage",
+                    "scaling": "spell",
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Single Arrow",
+                            "type": "damage",
+                            "multipliers": [30, 0, 0, 0, 0, 10]
+                        },
+                        {
+                            "name": "Single Bow",
+                            "type": "total",
+                            "hits": {
+                                "Single Arrow": 8
+                            }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": {
+                                "Single Bow": 2
+                            }
                         }
-                    },
-                    {
-                        "name": "Total Damage",
-                        "type": "total",
-                        "hits": {
-                            "Single Bow": 2
-                        }
-                    }
-                ]
-            }
+                    ]
+                }
             ]
         },
         {
@@ -436,7 +436,7 @@ const atrees = {
                 "base_spell": 1, 
                 "target_part": "Single Arrow", 
                 "cost": 0,
-                "multipliers": [-11, 0, -7, 0, 0, 3]
+                "multipliers": [-10, 0, -2, 0, 0, 2]
             },
             {
                 "type": "add_spell_prop",
@@ -444,7 +444,16 @@ const atrees = {
                 "target_part": "Total Damage", 
                 "cost": 0,
                 "hits": {
-                    "Single Stream": 1 
+                    "Single Stream": 1
+                }
+            },
+            {
+                "type": "add_spell_prop",
+                "base_spell": 1, 
+                "target_part": "Single Stream", 
+                "cost": 0,
+                "hits": {
+                    "Single Arrow": 2
                 }
             }
             ]
@@ -928,7 +937,7 @@ const atrees = {
             "col": 1
             },
             "properties": {
-            "range": 10,
+            "range": 8,
             "shots": 5
         },
             "effects": [
@@ -937,7 +946,7 @@ const atrees = {
                 "base_spell": 4, 
                 "target_part": "Single Arrow", 
                 "cost": 0,
-                "multipliers": [0, 0, 0, 0, 20, 0]
+                "multipliers": [0, 0, 0, 0, 10, 0]
             },
             { 
                 "type": "add_spell_prop",

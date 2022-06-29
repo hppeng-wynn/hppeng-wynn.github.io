@@ -1476,9 +1476,10 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
 
             let tmp_conv = [];
             for (let i in part.conversion) {
-                tmp_conv.push(part.conversion[i] * part.multiplier[power-1]);
+                tmp_conv.push(part.conversion[i] * part.multiplier[power-1] / 100);
             }
-            let _results = calculateSpellDamage(stats, weapon, tmp_conv, false);
+            console.log(tmp_conv);
+            let _results = calculateSpellDamage(stats, weapon, tmp_conv, false, true);
 
             let critChance = skillPointsToPercentage(skillpoints[1]);
             let save_damages = [];
@@ -1578,7 +1579,7 @@ function getBaseSpellCost(stats, spellIdx, cost) {
 }
     
 
-function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spellIdx, spell_parts, damages) {
+function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spellIdx, spell_results) {
     // TODO: remove spellIdx (just used to flag melee and cost)
     // TODO: move cost calc out
     parent_elem.textContent = "";
@@ -1588,7 +1589,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     overallparent_elem.textContent = "";
     let title_elemavg = document.createElement("b");
 
-    if (spellIdx != 0) {
+    if ('cost' in spell) {
         let first = document.createElement("span");
         first.textContent = spell.title + " (";
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
@@ -1610,44 +1611,48 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
         title_elemavg.appendChild(third_summary);
     }
     else {
-        title_elem.textContent = spell.title;
-        title_elemavg.textContent = spell.title;
+        title_elem.textContent = spell.name;
+        title_elemavg.textContent = spell.name;
     }
 
     parent_elem.append(title_elem);
     overallparent_elem.append(title_elemavg);
 
-    overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
+    if ('cost' in spell) {
+        overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
+    }
 
     let critChance = skillPointsToPercentage(stats.get('dex'));
-
-    let save_damages = [];
 
     let part_divavg = document.createElement("p");
     overallparent_elem.append(part_divavg);
 
-    for (let i = 0; i < spell_parts.length; ++i) {
-        const part = spell_parts[i];
-        const damage = damages[i];
+    function _summary(text, val, fmt) {
+        let overallaverageLabel = document.createElement("p");
+        let first = document.createElement("span");
+        let second = document.createElement("span");
+        first.textContent = text;
+        second.textContent = val.toFixed(2);
+        overallaverageLabel.appendChild(first);
+        overallaverageLabel.appendChild(second);
+        second.classList.add(fmt);
+        part_divavg.append(overallaverageLabel);
+    }
+
+    for (let i = 0; i < spell_results.length; ++i) {
+        const spell_info = spell_results[i];
 
         let part_div = document.createElement("p");
         parent_elem.append(part_div);
 
         let subtitle_elem = document.createElement("p");
-        subtitle_elem.textContent = part.subtitle;
+        subtitle_elem.textContent = spell_info.name
         part_div.append(subtitle_elem);
 
-        if (part.type === "damage") {
-            let _results = damage;
-            let totalDamNormal = _results[0];
-            let totalDamCrit = _results[1];
-            let results = _results[2];
-            
-            for (let i = 0; i < 6; ++i) {
-                for (let j in results[i]) {
-                    results[i][j] = results[i][j].toFixed(2);
-                }
-            }
+        if (spell_info.type === "damage") {
+            let totalDamNormal = spell_info.normal_total;
+            let totalDamCrit = spell_info.crit_total;
+
             let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
             let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
@@ -1658,83 +1663,35 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
             part_div.append(averageLabel);
 
 
-            if (part.summary == true) {
-                let overallaverageLabel = document.createElement("p");
-                let first = document.createElement("span");
-                let second = document.createElement("span");
-                first.textContent = part.subtitle + " Average: "; 
-                second.textContent = averageDamage.toFixed(2);
-                overallaverageLabel.appendChild(first);
-                overallaverageLabel.appendChild(second);
-                second.classList.add("Damage");
-                part_divavg.append(overallaverageLabel);
+            if (spell_info.name === spell.display) {
+                _summary(spell_info.name+ " Average: ", averageDamage, "Damage");
             }
             
-            function _damage_display(label_text, average, result_idx) {
+            function _damage_display(label_text, average, dmg_min, dmg_max) {
                 let label = document.createElement("p");
                 label.textContent = label_text+average.toFixed(2);
                 part_div.append(label);
                 
-                let arrmin = [];
-                let arrmax = [];
                 for (let i = 0; i < 6; i++){
-                    if (results[i][1] != 0){
+                    if (dmg_max[i] != 0){
                         let p = document.createElement("p");
                         p.classList.add(damageClasses[i]);
-                        p.textContent = results[i][result_idx] + " \u2013 " + results[i][result_idx + 1];
-                        arrmin.push(results[i][result_idx]);
-                        arrmax.push(results[i][result_idx + 1]);
+                        p.textContent = dmg_min[i].toFixed(2)+" \u2013 "+dmg_max[i].toFixed(2);
                         part_div.append(p);
                     }
                 }
             }
-            _damage_display("Non-Crit Average: ", nonCritAverage, 0);
-            _damage_display("Crit Average: ", critAverage, 2);
-
-            save_damages.push(averageDamage);
-        } else if (part.type === "heal") {
-            let heal_amount = damage;
+            _damage_display("Non-Crit Average: ", nonCritAverage, spell_info.normal_min, spell_info.normal_max);
+            _damage_display("Crit Average: ", critAverage, spell_info.crit_min, spell_info.crit_max);
+        } else if (spell_info.type === "heal") {
+            let heal_amount = spell_info.heal_amount;
             let healLabel = document.createElement("p");
             healLabel.textContent = heal_amount;
             // healLabel.classList.add("damagep");
             part_div.append(healLabel);
-            if (part.summary == true) {
-                let overallhealLabel = document.createElement("p");
-                let first = document.createElement("span");
-                let second = document.createElement("span");
-                first.textContent = part.subtitle + ": ";
-                second.textContent = heal_amount;
-                overallhealLabel.appendChild(first);
-                second.classList.add("Set");
-                overallhealLabel.appendChild(second);
-                part_divavg.append(overallhealLabel);
+            if (spell_info.name === spell.display) {
+                _summary(spell_info.name+ ": ", heal_amount, "Set");
             }
-        } else if (part.type === "total") {
-            let total_damage = 0;
-            for (let i in part.factors) {
-                total_damage += save_damages[i] * part.factors[i];
-            }
-
-            let dmgarr = part.factors.slice();
-            dmgarr = dmgarr.map(x => "(" + x + " * " + save_damages[dmgarr.indexOf(x)].toFixed(2) + ")");
-
-
-            let averageLabel = document.createElement("p");
-            averageLabel.textContent = "Average: "+total_damage.toFixed(2);
-            averageLabel.classList.add("damageSubtitle");
-            part_div.append(averageLabel);
-
-            let overallaverageLabel = document.createElement("p");
-            let overallaverageLabelFirst = document.createElement("span");
-            let overallaverageLabelSecond = document.createElement("span");
-            overallaverageLabelFirst.textContent = "Average: ";
-            overallaverageLabelSecond.textContent = total_damage.toFixed(2);
-            overallaverageLabelSecond.classList.add("Damage");
-
-
-            overallaverageLabel.appendChild(overallaverageLabelFirst);
-            overallaverageLabel.appendChild(overallaverageLabelSecond);
-            part_divavg.append(overallaverageLabel);
         }
     }
 
