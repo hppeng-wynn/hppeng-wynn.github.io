@@ -235,12 +235,12 @@ function render_AT(UI_elem, list_elem, tree) {
         let node_elem = document.createElement('div');
         let icon = node.display.icon;
         if (icon === undefined) {
-            icon = "node";
+            icon = "node_0";
         }
         node_elem.style = "background-image: url('../media/atree/"+icon+".png'); background-size: cover; width: 100%; height: 100%;";
-        node_elem.classList.add("atree-circle");
+        node_elem.classList.add("atree-circle", "fake-button");
 
-        // add tooltip
+        // add node tooltip
         node_elem.addEventListener('mouseover', function(e) {
             if (e.target !== this) {return;}
             let tooltip = this.children[0];
@@ -255,36 +255,47 @@ function render_AT(UI_elem, list_elem, tree) {
             tooltip.style.display = "none";
         });
 
-        node_elem.classList.add("fake-button");
+        //node tooltip and active tooltip have common parts - let's make them first
 
-        let active_tooltip = document.createElement('div');
-        active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        active_tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .80 + "px";
-        active_tooltip.style.display = "none";
+        let tooltip_title = document.createElement('div');
+        tooltip_title.classList.add("row", "justify-content-center", "fw-bold");
+        tooltip_title.textContent = node.display_name;
 
-        // tooltip text formatting
+        let tooltip_desc = document.createElement('div');
+        tooltip_desc.classList.add("row", "mx-1", "text-wrap");
+        tooltip_desc.textContent = node.desc;
 
-        let active_tooltip_title = document.createElement('b');
-        active_tooltip_title.classList.add("scaled-font");
-        active_tooltip_title.innerHTML = node.display_name;
+        let tooltip_cost = document.createElement('div');
+        tooltip_cost.classList.add("row", "mx-1", "text-start");
+        tooltip_cost.textContent = "Cost: " + node.cost + " AP";
 
-        let active_tooltip_desc = document.createElement('p');
-        active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-        active_tooltip_desc.textContent = node.desc;
-
-        let active_tooltip_cost = document.createElement('p');
-        active_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
-        active_tooltip_cost.textContent = "Cost: " + node.cost + " AP";
-
-        active_tooltip.append(active_tooltip_title, active_tooltip_desc, active_tooltip_cost);
-
-        node_tooltip = active_tooltip.cloneNode(true);
-
-        active_tooltip.id = "atree-ab-" + node.id;
-
+        //create node tooltip
+        let node_tooltip = document.createElement('div');
+        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "my-1", "dark-shadow", "scaled-font", "container");
+        node_tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .80 + "px";
+        node_tooltip.style.display = "none";
+        node_tooltip.appendChild(tooltip_title);
+        node_tooltip.appendChild(tooltip_desc);
+        //active = copy of node
+        let active_tooltip = node_tooltip.cloneNode(true);
+        
+        //node tooltip specific stuff that we don't want to be copied
         node_tooltip.style.position = "absolute";
         node_tooltip.style.zIndex = "100";
+        node_tooltip.appendChild(tooltip_cost);
+        //add in anything new for active tooltips
+        active_tooltip.id = "atree-ab-" + node.id;
 
+        if (node.blockers.length > 0) {
+            let active_tooltip_blockers = document.createElement("div");
+            active_tooltip_blockers.classList.add("row", "mx-1", "text-start");
+            active_tooltip_blockers.textContent = "Blockers: " + node.blockers.join(", ");
+            active_tooltip.append(active_tooltip_blockers);
+        }
+
+        active_tooltip.appendChild(tooltip_cost.cloneNode(true));
+
+        //append node and active tooltips to corresponding parent elems
         node_elem.appendChild(node_tooltip);
         list_elem.appendChild(active_tooltip);
 
@@ -376,7 +387,6 @@ function atree_render_connection(atree_connectors_map) {
         set_connector_type(connector_info);
         connector_elem.style.backgroundImage = "url('../media/atree/connect_"+connector_info.type+".png')";
         connector_info.highlight = [0, 0, 0, 0];
-        console.log(i + ", " + connector_info.type);
         let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
         if (target_elem.children.length != 0) {
             // janky special case...
