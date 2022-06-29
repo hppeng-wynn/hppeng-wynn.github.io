@@ -61,7 +61,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
         if (conversions[i] > 0) {
             const conv_frac = conversions[i]/100;
             damages[i][0] += conv_frac * weapon_min;
-            damages[i][1] += conf_frac * weapon_max;
+            damages[i][1] += conv_frac * weapon_max;
             present[i] = true;
             total_convert += conv_frac
         }

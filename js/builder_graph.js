@@ -468,41 +468,17 @@ class PowderInputNode extends InputNode {
  * Signature: SpellSelectNode<int>(build: Build) => [Spell, SpellParts]
  */
 class SpellSelectNode extends ComputeNode {
-    // TODO: rewrite me entirely...
-    constructor(spell_num) {
-        super("builder-spell"+spell_num+"-select");
-        this.spell_idx = spell_num;
+    constructor(spell) {
+        super("builder-spell"+spell.base_spell+"-select");
+        this.spell = spell;
     }
 
     compute_func(input_map) {
         const build = input_map.get('build');
         let stats = build.statMap;
+        // TODO: apply major ids... DOOM.....
 
-        const i = this.spell_idx;
-        const spells = default_spells[build.weapon.statMap.get("type")];
-        let spell;
-        for (const _spell of spells) {
-            if (_spell.base_spell === i) {
-                spell = _spell;
-                break;
-            }
-        }
-        if (spell === undefined) { return null; }
-
-        let spell_parts;
-        if (spell.parts) {
-            spell_parts = spell.parts;
-        }
-        else {
-            spell_parts = spell.variants.DEFAULT;
-            for (const majorID of stats.get("activeMajorIDs")) {
-                if (majorID in spell.variants) {
-                    spell_parts = spell.variants[majorID];
-                    break;
-                }
-            }
-        }
-        return [spell, spell_parts];
+        return [this.spell, this.spell.parts];
     }
 }
 
@@ -995,15 +971,15 @@ class SumNumberInputNode extends InputNode {
 
 let item_nodes = [];
 let powder_nodes = [];
-let spelldmg_nodes = [];
 let edit_input_nodes = [];
 let skp_inputs = [];
 let build_node;
 let stat_agg_node;
 let edit_agg_node;
+let atree_graph_creator;
 
 function builder_graph_init() {
-    // Phase 1/2: Set up item input, propagate updates, etc.
+    // Phase 1/3: Set up item input, propagate updates, etc.
 
     // Bind item input fields to input nodes, and some display stuff (for auto colorizing stuff).
     for (const [eq, display_elem, none_item] of zip3(equipment_fields, build_fields, none_items)) {
@@ -1060,7 +1036,7 @@ function builder_graph_init() {
     item_nodes[3].link_to(powder_nodes[3], 'powdering');
     item_nodes[8].link_to(powder_nodes[4], 'powdering');
 
-    // Phase 2/2: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
+    // Phase 2/3: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
 
     let build_disp_node = new BuildDisplayNode()
     build_disp_node.link_to(build_node, 'build');
@@ -1092,9 +1068,18 @@ function builder_graph_init() {
     }
     stat_agg_node.link_to(edit_agg_node);
     build_disp_node.link_to(stat_agg_node, 'stats');
+
+    // Phase 3/3: Set up atree stuff.
+
+    // These two are defined in `atree.js`
     atree_node.link_to(build_node, 'build');
     atree_merge.link_to(build_node, 'build');
+    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
+                                    .link_to(atree_collect_spells, 'spells');
 
+    // ---------------------------------------------------------------
+    //  Trigger the update cascade for build!
+    // ---------------------------------------------------------------
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
     }
@@ -1113,23 +1098,6 @@ function builder_graph_init() {
 
     // Also do something similar for skill points
 
-    //for (let i = 0; i < 4; ++i) { TODO: testing code
-    for (let i = 0; i < 1; ++i) {
-        let spell_node = new SpellSelectNode(i);
-        spell_node.link_to(build_node, 'build');
-        // TODO: link and rewrite spell_node to the stat agg node
-        spell_node.link_to(stat_agg_node, 'stats')
-
-        let calc_node = new SpellDamageCalcNode(i);
-        calc_node.link_to(build_node, 'build').link_to(stat_agg_node, 'stats')
-            .link_to(spell_node, 'spell-info');
-        spelldmg_nodes.push(calc_node);
-
-        let display_node = new SpellDisplayNode(i);
-        display_node.link_to(stat_agg_node, 'stats'); // TODO: same here..
-        display_node.link_to(spell_node, 'spell-info');
-        display_node.link_to(calc_node, 'spell-damage');
-    }
     for (const node of edit_input_nodes) {
         node.update();
     }

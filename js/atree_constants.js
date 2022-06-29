@@ -623,7 +623,7 @@ const atrees = {
             {
                 "type": "convert_spell_conv",
                 "target_part": "all",
-                "conversion": "thunder"
+                "conversion": "Thunder"
             }
             ]
         },
@@ -808,7 +808,7 @@ const atrees = {
             "base_spell": 5,
             "spell_type": "damage",
             "scaling": "spell",
-            "display": "One Focus",
+            "display": "DPS",
             "cost": 0,
 
             "parts": [
@@ -818,7 +818,7 @@ const atrees = {
                     "multipliers": [10, 0, 0, 5, 0, 0]
                 },
                 {
-                    "name": "One Focus",
+                    "name": "DPS",
                     "type": "total",
                     "hits": {
                         "Single Arrow": 20
@@ -828,7 +828,7 @@ const atrees = {
                     "name": "Total Damage",
                     "type": "total",
                     "hits": {
-                    "One Focus": 7 
+                    "DPS": 7 
                     }
                 }
                 ]
@@ -2128,8 +2128,7 @@ const atrees = {
                     "target_part": "Total Damage",
                     "cost": 0,
                     "hits": {
-                        "name": "Single Hit",
-                        "value": 1
+                        "Single Hit": 1
                     }
                 },
                 {
@@ -2145,8 +2144,6 @@ const atrees = {
         {
             "display_name": "Charge",
             "desc": "Charge forward at high speed (hold shift to cancel)",
-            "archetype": "", 
-            "archetype_req": 0, 
             "parents": ["Double Bash"], 
             "dependencies": [], 
             "blockers": [],
@@ -2156,34 +2153,23 @@ const atrees = {
                 "col": 4,
                 "icon": "node_4"
             },
-            "properties": {
-            },
-            "effects": [
-                {
-                    "type": "replace_spell",
-                    "name": "Charge",
-                    "cost": 25,
-                    "display_text": "Total Damage Average",
-                    "base_spell": 2,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "display": "Total Damage",
-                    "parts": [
-                        {
-                            "name": "None",
-                            "type": "damage",
-                            "multipliers": [0, 0, 0, 0, 0, 0]
-                        },
-                        {
-                            "name": "Total Damage",
-                            "type": "total",
-                            "hits": {
-                                "None": 0
-                            }
-                        }
-                    ]
-                }
-            ]  
+            "properties": {},
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Charge",
+                "cost": 25,
+                "display_text": "Total Damage Average",
+                "base_spell": 2,
+                "spell_type": "damage",
+                "scaling": "spell",
+                "display": "Total Damage",
+                "parts": [
+                    {
+                        "name": "Total Damage",
+                        "hits": {}
+                    }
+                ]
+            }]  
         },
 
         {
@@ -2307,9 +2293,7 @@ const atrees = {
         {
             "display_name": "Uppercut",
             "desc": "Rocket enemies in the air and deal massive damage",
-            "archetype": "", 
-            "archetype_req": 0, 
-            "parents": ["Vehement"], 
+            "parents": ["Vehement", "Cheaper Charge"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -2331,19 +2315,15 @@ const atrees = {
                     "base_spell": 3,
                     "spell_type": "damage",
                     "scaling": "spell",
-                    "display": "total",
+                    "display": "Total Damage",
                     "parts": [
                         {
                             "name": "Uppercut",
-                            "type": "damage",
                             "multipliers": [150, 50, 50, 0, 0, 0]
                         },
                         {
                             "name": "Total Damage",
-                            "type": "total",
-                            "hits": {
-                                "Uppercut": 1
-                            }
+                            "hits": { "Uppercut": 1 }
                         }
                     ]
                 }
@@ -2353,8 +2333,7 @@ const atrees = {
         {
             "display_name": "Cheaper Charge",
             "desc": "Reduce the Mana cost of Charge",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Charge",
             "parents": ["Uppercut", "War Scream"], 
             "dependencies": [], 
             "blockers": [],
@@ -2378,9 +2357,7 @@ const atrees = {
         {
             "display_name": "War Scream",
             "desc": "Emit a terrorizing roar that deals damage, pull nearby enemies, and add damage resistance to yourself and allies",
-            "archetype": "", 
-            "archetype_req": 0, 
-            "parents": ["Tougher Skin"], 
+            "parents": ["Tougher Skin", "Cheaper Charge"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -2407,8 +2384,11 @@ const atrees = {
                     "parts": [
                         {
                             "name": "War Scream",
-                            "type": "damage",
                             "multipliers": [50, 0, 0, 0, 50, 0]
+                        },
+                        {
+                            "name": "Total Damage Average",
+                            "hits": { "War Scream": 1 }
                         }
                     ]
                 }
@@ -2687,7 +2667,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
-                    "conversion": "water"
+                    "conversion": "Water"
                 }
             ]  
         },
@@ -2826,11 +2806,17 @@ const atrees = {
             },
             "effects": [
                 {
-                    "type": "add_spell_prop",
+                    "type": "replace_spell",
+                    "name": "Counter",
+                    "display_text": "Counter",
                     "base_spell": 5,
-                    "target_part": "Counter",
-                    "cost": 0,
-                    "multipliers": [60, 0, 20, 0, 0, 20]
+                    "display": "Counter Damage",
+                    "parts": [
+                        {
+                            "name": "Counter Damage",
+                            "multipliers": [60, 0, 20, 0, 0, 20]
+                        }
+                    ]
                 }
             ]  
         },
@@ -3892,7 +3878,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
-                    "conversion": "thunder"
+                    "conversion": "Thunder"
                 },
                 {
                     "type": "raw_stat",

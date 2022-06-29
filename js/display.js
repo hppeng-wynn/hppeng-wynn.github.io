@@ -33,9 +33,8 @@ function displaySetBonuses(parent_id,build) {
         set_summary_elem.append(set_elem);
         
         const bonus = active_set.bonuses[count-1];
-        let mock_item = new Map();
-        mock_item.set("fixID", true);
-        mock_item.set("displayName", setName+" Set: "+count+"/"+sets.get(setName).items.length);
+        let mock_item = new Map([["fixID", true],
+                                 ["displayName", setName+" Set: "+count+"/"+sets.get(setName).items.length]]);
         let mock_minRolls = new Map();
         let mock_maxRolls = new Map();
         mock_item.set("minRolls", mock_minRolls);
@@ -1216,7 +1215,7 @@ function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
     critStats.append(critChance);
 
     parent_elem.append(critStats);
-    addClickableArrow(overallparent_elem);
+    addClickableArrow(overallparent_elem, parent_elem);
 }
 
 function displayDefenseStats(parent_elem, statMap, insertSummary){
@@ -1567,15 +1566,15 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
     }
 }
 
-function getSpellCost(stats, spellIdx, cost) {
-    return Math.max(1, getBaseSpellCost(stats, spellIdx, cost));
+function getSpellCost(stats, spell) {
+    return Math.max(1, getBaseSpellCost(stats, spell));
 }
 
-function getBaseSpellCost(stats, spellIdx, cost) {
-    // old intelligence:
-    cost = Math.ceil(cost * (1 - skillPointsToPercentage(stats.get('int'))));
-    cost += stats.get("spRaw"+spellIdx);
-    return Math.floor(cost * (1 + stats.get("spPct"+spellIdx) / 100));
+function getBaseSpellCost(stats, spell) {
+                            // old intelligence:
+    let cost = spell.cost;  //Math.ceil(spell.cost * (1 - skillPointsToPercentage(stats.get('int'))));
+    cost += stats.get("spRaw"+spell.base_spell);
+    return Math.floor(cost * (1 + stats.get("spPct"+spell.base_spell) / 100));
 }
     
 
@@ -1591,12 +1590,12 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
 
     if ('cost' in spell) {
         let first = document.createElement("span");
-        first.textContent = spell.title + " (";
+        first.textContent = spell.name + " (";
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
 
         let second = document.createElement("span");
-        second.textContent = getSpellCost(stats, spellIdx, spell.cost);
+        second.textContent = getSpellCost(stats, spell);
         second.classList.add("Mana");
 
         title_elem.appendChild(second.cloneNode(true));
@@ -1618,9 +1617,10 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     parent_elem.append(title_elem);
     overallparent_elem.append(title_elemavg);
 
-    if ('cost' in spell) {
-        overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
-    }
+    // if ('cost' in spell) {
+    // :( ...... ?
+    //     overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
+    // }
 
     let critChance = skillPointsToPercentage(stats.get('dex'));
 
@@ -1695,7 +1695,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
         }
     }
 
-    addClickableArrow(overallparent_elem);
+    addClickableArrow(overallparent_elem, parent_elem);
 }
 
 /** Displays the ID costs of an item
@@ -2108,11 +2108,23 @@ function stringCDF(id,val,base,amp) {
     document.getElementById(id + "-cdf").appendChild(b3);
 }
 
-function addClickableArrow(elem) {
+function addClickableArrow(elem, target) {
     //up and down arrow - done ugly
     let arrow = document.createElement("img");
     arrow.id = "arrow_" + elem.id;
     arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
     arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
     elem.appendChild(arrow);
+    arrow.addEventListener("click", () => toggle_spell_tab(arrow, target));
+}
+
+// toggle arrow thinger
+function toggle_spell_tab(arrow_img, target) {
+    if (target.style.display == "none") {
+        target.style.display = "";
+        arrow_img.src = arrow_img.src.replace("down", "up");
+    } else {
+        target.style.display = "none";
+        arrow_img.src = arrow_img.src.replace("up", "down");
+    }
 }

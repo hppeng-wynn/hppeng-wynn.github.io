@@ -50,6 +50,7 @@ add_spell_prop: {
 
 convert_spell_conv: {
   "type": "convert_spell_conv",
+  "base_spell": int
   "target_part": "all" | str,
   "conversion": element_str
 }
@@ -87,35 +88,35 @@ const default_abils = {
         id: 999,
         desc: "Mage basic attack.",
         properties: {range: 5000},
-        effects: [default_spells.wand]
+        effects: [default_spells.wand[0]]
     }],
     spear: [{
         display_name: "Warrior Melee",
         id: 999,
         desc: "Warrior basic attack.",
         properties: {range: 2},
-        effects: [default_spells.spear]
+        effects: [default_spells.spear[0]]
     }],
     bow: [{
         display_name: "Archer Melee",
         id: 999,
         desc: "Archer basic attack.",
         properties: {range: 20},
-        effects: [default_spells.bow]
+        effects: [default_spells.bow[0]]
     }],
     dagger: [{
         display_name: "Assassin Melee",
         id: 999,
         desc: "Assassin basic attack.",
         properties: {range: 2},
-        effects: [default_spells.dagger]
+        effects: [default_spells.dagger[0]]
     }],
     relik: [{
         display_name: "Shaman Melee",
         id: 999,
         desc: "Shaman basic attack.",
         properties: {range: 15, speed: 0},
-        effects: [default_spells.relik]
+        effects: [default_spells.relik[0]]
     }],
 };
 
@@ -216,6 +217,11 @@ function topological_sort_tree(tree, res, mark_state) {
 
 /**
  * Collect abilities and condense them into a list of "final abils".
+ * This is just for rendering purposes, and for collecting things that modify spells into one chunk.
+ * I stg if wynn makes abils that modify multiple spells
+ * ... well we can extend this by making `base_abil` a list instead but annoy
+ *
+ * Signature: AbilityTreeMergeNode(atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
  */
 const atree_merge = new (class extends ComputeNode {
     constructor() { super('builder-atree-merge'); }
@@ -246,7 +252,6 @@ const atree_merge = new (class extends ComputeNode {
                 // Merge abilities.
                 // TODO: What if there is more than one base abil?
                 let base_abil = abils_merged.get(abil.base_abil);
-                console.log(base_abil);
                 if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
                 else { base_abil.desc.push(abil.desc); }
 
@@ -269,7 +274,171 @@ const atree_merge = new (class extends ComputeNode {
     }
 })().link_to(atree_node, 'atree').link_to(atree_render, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
 
+/**
+ * Collect spells from abilities.
+ *
+ * Signature: AbilityCollectSpellsNode(atree-merged: Map[id, Ability]) => List[Spell]
+ */
+const atree_collect_spells = new (class extends ComputeNode {
+    constructor() { super('atree-spell-collector'); }
 
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeCollectSpellsNode accepts exactly one input (atree-merged)"; }
+        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        
+        let ret_spells = new Map();
+        for (const [abil_id, abil] of atree_merged.entries()) {
+            // TODO: Possibly, make a better way for detecting "spell abilities"?
+            if (abil.effects.length == 0 || abil.effects[0].type !== 'replace_spell') { continue; }
+
+            let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
+            const base_spell_id = ret_spell.base_spell;
+            for (const effect of abil.effects) {
+                switch (effect.type) {
+                case 'replace_spell':
+                    // replace_spell just replaces all (defined) aspects.
+                    for (const key in effect) {
+                        ret_spell[key] = effect[key];
+                    }
+                    continue;
+                case 'add_spell_prop': {
+                    const { base_spell, target_part = null, cost = 0} = effect;
+                    if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
+                    ret_spell.cost += cost;
+
+                    if (target_part  === null) {
+                        continue;
+                    }
+
+                    let found_part = false;
+                    for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
+                        if (part.name === target_part) {
+                            if ('display' in effect) {
+                                part.display = effect.display;
+                            }
+                            if ('multipliers' in effect) {
+                                for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
+                                    part.multipliers[idx] += v;
+                                }
+                            }
+                            else if ('power' in effect) {
+                                part.power += effect.power;
+                            }
+                            else if ('hits' in effect) {
+                                for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
+                                    part.hits[idx] += v;
+                                }
+                            }
+                            else {
+                                throw "uhh invalid spell add effect";
+                            }
+                            found_part = true;
+                            break;
+                        }
+                    }
+                    if (!found_part) { // add part.
+                        let spell_part = deepcopy(effect);
+                        spell_part.name = target_part;  // has some extra fields but whatever
+                        ret_spell.parts.push(spell_part);
+                    }
+                    continue;
+                }
+                case 'convert_spell_conv':
+                    const { base_spell, target_part, conversion } = effect;
+                    if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
+                    const elem_idx = damageClasses.indexOf(conversion);
+                    let filter = target_part === 'all';
+                    for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
+                        if (filter || part.name === target_part) {
+                            if ('multipliers' in part) {
+                                let total_conv = 0;
+                                for (let i = 1; i < 6; ++i) {   // skip neutral
+                                    total_conv += part.multipliers[i];
+                                }
+                                let new_conv = [part.multipliers[0], 0, 0, 0, 0, 0];
+                                new_conv[elem_idx] = total_conv;
+                                part.multipliers = new_conv;
+                            }
+                        }
+                    }
+                    continue;
+                }
+            }
+            ret_spells.set(base_spell_id, ret_spell);
+        }
+        return ret_spells;
+    }
+})().link_to(atree_merge, 'atree-merged');
+
+
+/**
+ * Construct compute nodes to link builder items and edit IDs to the appropriate display outputs.
+ * To make things a bit cleaner, the compute graph structure goes like
+ * [builder, build stats] -> [one agg node that is just a passthrough] -> all the spell calc nodes
+ * This way, when things have to be deleted i can just delete one node from the dependencies of builder/build stats...
+ * thats the idea anyway.
+ *
+ * Whenever this is updated, it forces an update of all the newly created spell nodes (if the build is clean).
+ *
+ * Signature: AbilityEnsureSpellsNodes(spells: Map[id, Spell]) => null
+ */
+class AbilityTreeEnsureNodesNode extends ComputeNode {
+    
+    /**
+     * Kinda "hyper-node": Constructor takes nodes that should be linked to (build node and stat agg node)
+     */
+    constructor(build_node, stat_agg_node) {
+        super('atree-make-nodes');
+        this.build_node = build_node;
+        this.stat_agg_node = stat_agg_node;
+        // Slight amount of wasted compute to keep internal state non-changing.
+        this.passthrough = new PassThroughNode('atree-make-nodes_internal').link_to(this.build_node, 'build').link_to(this.stat_agg_node, 'stats');
+        this.spelldmg_nodes = [];   // debugging use
+        this.spell_display_elem = document.getElementById("all-spells-display");
+    }
+
+    compute_func(input_map) {
+        console.log('atree make nodes');
+        this.passthrough.remove_link(this.build_node);
+        this.passthrough.remove_link(this.stat_agg_node);
+        this.passthrough = new PassThroughNode('atree-make-nodes_internal').link_to(this.build_node, 'build').link_to(this.stat_agg_node, 'stats');
+        this.spell_display_elem.textContent = "";
+        const build_node = this.passthrough.get_node('build');   // aaaaaaaaa performance... savings... help.... 
+        const stat_agg_node = this.passthrough.get_node('stats');
+
+        const spell_map = input_map.get('spells');  // TODO: is this gonna need more? idk...
+                                                    // TODO shortcut update path for sliders
+
+        for (const [spell_id, spell] of spell_map.entries()) {
+            let spell_node = new SpellSelectNode(spell);
+            spell_node.link_to(build_node, 'build');
+
+            let calc_node = new SpellDamageCalcNode(spell.base_spell);
+            calc_node.link_to(build_node, 'build').link_to(stat_agg_node, 'stats')
+                .link_to(spell_node, 'spell-info');
+            this.spelldmg_nodes.push(calc_node);
+
+            let display_elem = document.createElement('div');
+            display_elem.classList.add("col", "pe-0");
+            // TODO: just pass these elements into the display node instead of juggling the raw IDs...
+            let spell_summary = document.createElement('div'); spell_summary.setAttribute('id', "spell"+spell.base_spell+"-infoAvg");
+            spell_summary.classList.add("col", "spell-display", "spell-expand", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark");
+            let spell_detail = document.createElement('div'); spell_detail.setAttribute('id', "spell"+spell.base_spell+"-info");
+            spell_detail.classList.add("col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2");
+            spell_detail.style.display = "none";
+
+            display_elem.appendChild(spell_summary); display_elem.appendChild(spell_detail);
+
+            let display_node = new SpellDisplayNode(spell.base_spell);
+            display_node.link_to(stat_agg_node, 'stats');
+            display_node.link_to(spell_node, 'spell-info');
+            display_node.link_to(calc_node, 'spell-damage');
+
+            this.spell_display_elem.appendChild(display_elem);
+        }
+        this.passthrough.mark_dirty().update(); // Force update once.
+    }
+}
 
 /** The main function for rendering an ability tree. 
  * 
