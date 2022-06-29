@@ -174,11 +174,6 @@ const atree_render = new (class extends ComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeRenderNode accepts exactly one input (atree)"; }
         const [atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-        //as of now, we NEED to have the dropdown tab visible/not hidden in order to properly display atree stuff.
-        // TODO: FIXME! this is a side effect of `px` based rendering.
-        if (!document.getElementById("toggle-atree").classList.contains("toggleOn")) {
-            toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
-        }
         
         //for some reason we have to cast to string 
         let ret = null;
@@ -518,14 +513,10 @@ function render_AT(UI_elem, list_elem, tree) {
         let row = document.createElement('div');
         row.classList.add("row");
         row.id = "atree-row-" + j;
-        // TODO: do this more dynamically
-        row.style.minHeight = UI_elem.scrollWidth / 9 + "px";
-        //row.style.minHeight = UI_elem.getBoundingClientRect().width / 9 + "px";
 
         for (let k = 0; k < 9; k++) {
             col = document.createElement('div');
             col.classList.add('col', 'px-0');
-            col.style.minHeight = UI_elem.scrollWidth / 9 + "px";
             row.appendChild(col);
         }
         UI_elem.appendChild(row);
@@ -583,7 +574,10 @@ function render_AT(UI_elem, list_elem, tree) {
         if (icon === undefined) {
             icon = "node";
         }
-        node_elem.style = "background-image: url('../media/atree/"+icon+".png'); background-size: cover; width: 100%; height: 100%;";
+        let node_img = document.createElement('img');
+        node_img.src = '../media/atree/'+icon+'.png';
+        node_img.style = "width: 100%; height: 100%;";
+        node_elem.appendChild(node_img);
         node_elem.classList.add("atree-circle");
 
         // add tooltip
@@ -605,7 +599,6 @@ function render_AT(UI_elem, list_elem, tree) {
 
         let active_tooltip = document.createElement('div');
         active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        active_tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .80 + "px";
         active_tooltip.style.display = "none";
 
         // tooltip text formatting
@@ -662,6 +655,7 @@ function render_AT(UI_elem, list_elem, tree) {
             let tooltip = this.children[this.children.length - 1];
             tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
             tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
+            tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .95 + "px";
             tooltip.style.display = "block";
         });
 
@@ -725,8 +719,11 @@ function atree_render_connection(atree_connectors_map) {
     for (let i of atree_connectors_map.keys()) {
         let connector_info = atree_connectors_map.get(i);
         let connector_elem = connector_info.connector;
+        let connector_img = document.createElement('img');
         set_connector_type(connector_info);
-        connector_elem.style.backgroundImage = "url('../media/atree/connect_"+connector_info.type+".png')";
+        connector_img.src = '../media/atree/connect_'+connector_info.type+'.png';
+        connector_img.style = "width: 100%; height: 100%;"
+        connector_elem.replaceChildren(connector_img);
         connector_info.highlight = [0, 0, 0, 0];
         let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
         if (target_elem.children.length != 0) {
@@ -757,7 +754,10 @@ function atree_toggle_state(atree_connectors_map, node_wrapper) {
 function atree_update_connector() {
     atree_connectors_map.forEach((v) => {
         if (v.length != 0) {
-            v[0].connector.style.backgroundImage = "url('../media/atree/connect_" + v[0].type + ".png')";
+            let connector_elem = document.createElement("img");
+            connector_elem.style = "width: 100%; height: 100%;";
+            connector_elem.src = '../media/atree/connect_' + v[0].type + '.png'
+            v[0].replaceChildren(connector_elem);
         }
     });
     atree_map.forEach((v) => {
@@ -779,6 +779,8 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_info = atree_connectors_map.get(connector_label);
         let connector_elem = connector_info.connector;
         let highlight_state = connector_info.highlight; // left right up down
+        let connector_img_elem = document.createElement("img");
+        connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
         if (ctype === 't' || ctype === 'c') {
             // c, t
@@ -800,18 +802,21 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
             let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
 
             let connector_img = atree_parse_connector(render_state, ctype);
+            connector_img_elem.src = connector_img.img
             connector_elem.className = "";
             connector_elem.classList.add("rotate-" + connector_img.rotate);
-            connector_elem.style.backgroundImage = connector_img.img;
+            connector_elem.replaceChildren(connector_img_elem);
             continue;
         }
         // lol bad overloading, [0] is just the whole state
         highlight_state[0] += state_delta;
         if (highlight_state[0] > 0) {
-            connector_elem.style.backgroundImage = "url('../media/atree/highlight_"+ctype+".png')";
+            connector_img_elem.src = '../media/atree/highlight_'+ctype+'.png';
+            connector_elem.replaceChildren(connector_img_elem);
         }
         else {
-            connector_elem.style.backgroundImage = "url('../media/atree/connect_"+ctype+".png')";
+            connector_img_elem.src = '../media/atree/connect_'+ctype+'.png';
+            connector_elem.replaceChildren(connector_img_elem);
         }
     }
 }
@@ -846,7 +851,7 @@ function atree_parse_connector(orient, type) {
         res += i;
     }
     if (res === "0000") {
-        return {img: "url('../media/atree/connect_" + type + ".png')", rotate: 0};
+        return {img: "../media/atree/connect_" + type + ".png", rotate: 0};
     }
 
     let ret;
@@ -855,6 +860,6 @@ function atree_parse_connector(orient, type) {
     } else {
         ret = t_connector_dict[res];
     };
-    ret.img = "url('../media/atree/highlight_" + type + ret.attrib + ".png')";
+    ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
     return ret;
 };
