@@ -2171,8 +2171,6 @@ const atrees = {
         {
             "display_name": "Heavy Impact",
             "desc": "After using Charge, violently crash down into the ground and deal damage",
-            "archetype": "", 
-            "archetype_req": 0, 
             "parents": ["Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -2259,7 +2257,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "baseResist",
-                            "value": "5"
+                            "value": 5
                         }
                     ]
                 },
@@ -2411,16 +2409,9 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "eDamPct",
-                            "value": 20
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eDam",
-                            "value": [2, 4]
-                        }
+                        { "type": "stat", "name": "eDamPct", "value": 20 },
+                        { "type": "stat", "name": "eDamAddMin", "value": 2 },
+                        { "type": "stat", "name": "eDamAddMax", "value": 4 }
                     ]
                 }
             ]  
@@ -2446,16 +2437,9 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "tDamPct",
-                            "value": 10
-                        },
-                        {
-                            "type": "stat",
-                            "name": "tDam",
-                            "value": [1, 8]
-                        }
+                        { "type": "stat", "name": "tDamPct", "value": 10 },
+                        { "type": "stat", "name": "tDamAddMin", "value": 1 },
+                        { "type": "stat", "name": "tDamAddMax", "value": 8 }
                     ]
                 }
             ]  
@@ -2481,16 +2465,9 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "wDamPct",
-                            "value": 15
-                        },
-                        {
-                            "type": "stat",
-                            "name": "wDam",
-                            "value": [2, 4]
-                        }
+                        { "type": "stat", "name": "wDamPct", "value": 15 },
+                        { "type": "stat", "name": "wDamAddMin", "value": 2 },
+                        { "type": "stat", "name": "wDamAddMax", "value": 4 }
                     ]
                 }
             ]  
@@ -2516,16 +2493,9 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "aDamPct",
-                            "value": 15
-                        },
-                        {
-                            "type": "stat",
-                            "name": "aDam",
-                            "value": [3, 4]
-                        }
+                        { "type": "stat", "name": "aDamPct", "value": 15 },
+                        { "type": "stat", "name": "aDamAddMin", "value": 3 },
+                        { "type": "stat", "name": "aDamAddMax", "value": 4 }
                     ]
                 }
             ]  
@@ -2551,16 +2521,9 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "fDamPct",
-                            "value": 15
-                        },
-                        {
-                            "type": "stat",
-                            "name": "fDam",
-                            "value": [3, 5]
-                        }
+                        { "type": "stat", "name": "fDamPct", "value": 15 },
+                        { "type": "stat", "name": "fDamAddMin", "value": 3 },
+                        { "type": "stat", "name": "fDamAddMax", "value": 5 }
                     ]
                 }
             ]  
@@ -2571,6 +2534,7 @@ const atrees = {
             "desc": "Bash will hit 4 times at an even larger range",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Bash",
             "parents": ["Earth Mastery", "Fireworks"], 
             "dependencies": [], 
             "blockers": [],
@@ -2606,6 +2570,7 @@ const atrees = {
             "desc": "Mobs hit by Uppercut will explode mid-air and receive additional damage",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Uppercut",
             "parents": ["Thunder Mastery", "Quadruple Bash"], 
             "dependencies": [], 
             "blockers": [],
@@ -2640,6 +2605,7 @@ const atrees = {
             "desc": "Uppercut will deal a footsweep attack at a longer and wider angle. All elemental conversions become Water",
             "archetype": "Battle Monk", 
             "archetype_req": 1, 
+            "base_abil": "Uppercut",
             "parents": ["Water Mastery"], 
             "dependencies": ["Uppercut"], 
             "blockers": [],
@@ -2671,8 +2637,7 @@ const atrees = {
         {
             "display_name": "Flyby Jab",
             "desc": "Damage enemies in your way when using Charge",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Charge",
             "parents": ["Air Mastery", "Flaming Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -2700,6 +2665,7 @@ const atrees = {
             "desc": "Uppercut will light mobs on fire, dealing damage every 0.6 seconds",
             "archetype": "Paladin", 
             "archetype_req": 0, 
+            "base_abil": "Uppercut",
             "parents": ["Fire Mastery", "Flyby Jab"], 
             "dependencies": ["Uppercut"], 
             "blockers": [],
@@ -2742,8 +2708,7 @@ const atrees = {
         {
             "display_name": "Iron Lungs",
             "desc": "War Scream deals more damage",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "War Scream",
             "parents": ["Flyby Jab", "Flaming Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -2835,8 +2800,12 @@ const atrees = {
                 "mantle_charge": 3
             },
             "effects": [
-                
-            ]  
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [{ "type": "stat", "name": "defPct", "value": 70}]
+                }
+            ]
         },
 
         {
@@ -2866,7 +2835,7 @@ const atrees = {
                         "name": "raw" 
                     },
                     "scaling": [4],
-                    "slider_step": 2,
+                    "slider_step": 1,
                     "max": 120
                 }
             ]  
@@ -2875,8 +2844,7 @@ const atrees = {
         {
             "display_name": "Spear Proficiency 2",
             "desc": "Improve your Main Attack's damage and range w/ spear",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": 999,
             "parents": ["Bak'al's Grasp", "Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -2906,8 +2874,7 @@ const atrees = {
         {
             "display_name": "Cheaper Uppercut",
             "desc": "Reduce the Mana Cost of Uppercut",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Uppercut",
             "parents": ["Spear Proficiency 2", "Aerodynamics", "Counter"], 
             "dependencies": [], 
             "blockers": [],
@@ -2933,6 +2900,7 @@ const atrees = {
             "desc": "During Charge, you can steer and change direction",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
+            "base_abil": "Charge",
             "parents": ["Cheaper Uppercut", "Provoke"], 
             "dependencies": [], 
             "blockers": [],
@@ -2942,11 +2910,8 @@ const atrees = {
                 "col": 5,
                 "icon": "node_1"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
@@ -2954,6 +2919,7 @@ const atrees = {
             "desc": "Mobs damaged by War Scream will target only you for at least 5s \n\nReduce the Mana cost of War Scream",
             "archetype": "Paladin", 
             "archetype_req": 0, 
+            "base_abil": "War Scream",
             "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
             "dependencies": [], 
             "blockers": [],
@@ -2963,8 +2929,7 @@ const atrees = {
                 "col": 7,
                 "icon": "node_1"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -2977,8 +2942,6 @@ const atrees = {
         {
             "display_name": "Precise Strikes",
             "desc": "+30% Critical Hit Damage",
-            "archetype": "", 
-            "archetype_req": 0, 
             "parents": ["Cheaper Uppercut", "Spear Proficiency 2"], 
             "dependencies": [], 
             "blockers": [],
@@ -2996,7 +2959,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "critDmg",
+                            "name": "critDamPct",
                             "value": 30
                         }
                     ]
@@ -3007,8 +2970,7 @@ const atrees = {
         {
             "display_name": "Air Shout",
             "desc": "War Scream will fire a projectile that can go through walls and deal damage multiple times",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "War Scream",
             "parents": ["Aerodynamics", "Provoke"], 
             "dependencies": ["War Scream"], 
             "blockers": [],
@@ -3018,15 +2980,12 @@ const atrees = {
                 "col": 6,
                 "icon": "node_1"
             },
-            "properties": {
-                
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Air Shout",
-                    "cost": 0,
                     "multipliers": [20, 0, 0, 0, 0, 5]
                 }
             ]  
@@ -3034,7 +2993,7 @@ const atrees = {
 
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +2% (Max 200%)",
+            "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +3% (Max 300%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "parents": ["Spear Proficiency 2"], 
@@ -3073,6 +3032,7 @@ const atrees = {
             "desc": "When using Charge, mobs hit will halt your momentum and get knocked back",
             "archetype": "Battle Monk", 
             "archetype_req": 1, 
+            "base_abil": "Charge",
             "parents": ["Cheaper Uppercut", "Stronger Mantle"], 
             "dependencies": [], 
             "blockers": [],
@@ -3089,8 +3049,14 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Flying Kick",
-                    "cost": 0,
-                    "multipliers": [120, 0, 0, 10, 0, 20]
+                    "multipliers": [120, 0, 0, 10, 0, 20],
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Flying Kick Max Damage",
+                    "hits": { "Flying Kick": 1 },
+                    "display": "Flying Kick Max Damage"
                 }
             ]  
         },
@@ -3109,11 +3075,19 @@ const atrees = {
                 "col": 6,
                 "icon": "node_0"
             },
-            "properties": {
-                "mantle_charge": 2
-            },
+            "properties": {},
             "effects": [
-                
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Mantle of the Bovemists",
+                            "name": "mantle_charge",
+                            "value": 2
+                        }
+                    ]
+                }
             ]  
         },
 
@@ -3134,9 +3108,7 @@ const atrees = {
             "properties": {
                 "cooldown": 1
             },
-            "effects": [
-                
-            ]  
+            "effects": []  
         },
 
         {
@@ -3153,8 +3125,7 @@ const atrees = {
                 "col": 0,
                 "icon": "node_1"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -3171,6 +3142,7 @@ const atrees = {
             "desc": "War Scream become deafening, increasing its range and giving damage bonus to players",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "War Scream",
             "parents": ["Boiling Blood", "Flying Kick"], 
             "dependencies": ["War Scream"], 
             "blockers": [],
@@ -3181,7 +3153,6 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "damage_bonus": 30,
                 "aoe": 2
             },
             "effects": [
@@ -3189,15 +3160,18 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "cost": 10
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
                 }
             ]  
         },
-
         {
             "display_name": "Ambidextrous",
             "desc": "Increase your chance to attack with Counter by +30%",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Counter",
             "parents": ["Flying Kick", "Stronger Mantle", "Burning Heart"], 
             "dependencies": ["Counter"], 
             "blockers": [],
@@ -3207,11 +3181,12 @@ const atrees = {
                 "col": 4,
                 "icon": "node_0"
             },
-            "properties": {
-                "chance": 30
-            },
+            "properties": {},
             "effects": [
-                
+                {
+                    "type": "raw_stat",
+                    "bonuses": [ {"type": "prop", "abil": "Counter", "name": "chance", "value": 30} ]
+                }
             ]  
         },
 
@@ -3247,7 +3222,6 @@ const atrees = {
                     },
                     "scaling": [2],
                     "max": 100,
-                    "slider_step": 100
                 }
             ]  
         },
@@ -3255,8 +3229,7 @@ const atrees = {
         {
             "display_name": "Stronger Bash",
             "desc": "Increase the damage of Bash",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Bash",
             "parents": ["Burning Heart", "Manachism"], 
             "dependencies": [], 
             "blockers": [],
@@ -3266,14 +3239,12 @@ const atrees = {
                 "col": 8,
                 "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Single Hit",
-                    "cost": 0,
                     "multipliers": [30, 0, 0, 0, 0, 0]
                 }
             ]  
@@ -3284,6 +3255,7 @@ const atrees = {
             "desc": "After leaving Corrupted, gain 2% of the health lost back for each enemy killed while Corrupted",
             "archetype": "Fallen", 
             "archetype_req": 5, 
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Ragnarokkr", "Boiling Blood"], 
             "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
@@ -3293,11 +3265,8 @@ const atrees = {
                 "col": 1,
                 "icon": "node_1"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
@@ -3305,6 +3274,7 @@ const atrees = {
             "desc": "After being hit by Fireworks, enemies will crash into the ground and receive more damage",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Uppercut",
             "parents": ["Ragnarokkr"], 
             "dependencies": ["Fireworks"], 
             "blockers": [],
@@ -3314,8 +3284,7 @@ const atrees = {
                 "col": 2,
                 "icon": "node_1"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -3341,6 +3310,7 @@ const atrees = {
             "desc": "Mobs thrown into walls from Flying Kick will explode and receive additonal damage",
             "archetype": "Battle Monk", 
             "archetype_req": 4, 
+            "base_abil": "Charge",
             "parents": ["Ambidextrous", "Burning Heart"], 
             "dependencies": ["Flying Kick"], 
             "blockers": [],
@@ -3360,6 +3330,12 @@ const atrees = {
                     "target_part": "Collide",
                     "cost": 0,
                     "multipliers": [100, 0, 0, 0, 50, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Flying Kick Max Damage",
+                    "hits": { "Collide": 1 },
                 }
             ]  
         },
@@ -3378,18 +3354,13 @@ const atrees = {
                 "col": 7,
                 "icon": "node_3"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
-
         {
             "display_name": "Uncontainable Corruption",
             "desc": "Reduce the cooldown of Bak'al's Grasp by -5s, and increase the raw damage gained for every 2% of health lost by +1",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Boiling Blood", "Radiant Devotee"], 
             "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
@@ -3399,9 +3370,7 @@ const atrees = {
                 "col": 0,
                 "icon": "node_0"
             },
-            "properties": {
-                "cooldown": -5
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -3411,9 +3380,12 @@ const atrees = {
                         "type": "stat",
                         "name": "raw" 
                     },
-                    "scaling": [1],
-                    "slider_step": 2,
+                    "scaling": [0.5],
                     "max": 50
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [ {"type": "prop", "abil": "Bak'al's Grasp", "name": "cooldown", "value": -5} ]
                 }
             ]  
         },
@@ -3432,8 +3404,7 @@ const atrees = {
                 "col": 2,
                 "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -3447,9 +3418,8 @@ const atrees = {
                         "type": "stat",
                         "name": "mr"
                     },
-                    "scaling": [1],
+                    "scaling": [0.25],
                     "max": 10,
-                    "slider_step": 4
                 }
             ]  
         },
@@ -3459,6 +3429,7 @@ const atrees = {
             "desc": "Uppercut will create a strong gust of air, launching you upward with enemies (Hold shift to stay grounded)",
             "archetype": "Battle Monk", 
             "archetype_req": 5, 
+            "base_abil": "Uppercut",
             "parents": ["Ambidextrous", "Radiant Devotee"], 
             "dependencies": ["Uppercut"], 
             "blockers": [],
@@ -3476,7 +3447,6 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Uppercut",
-                    "cost": 0,
                     "multipliers": [0, 0, 0, 0, 0, 50]
                 }
             ]  
@@ -3496,8 +3466,7 @@ const atrees = {
                 "col": 7,
                 "icon": "node_1"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "raw_stat",
@@ -3517,6 +3486,7 @@ const atrees = {
             "desc": "While Corrupted, losing 30% Health will make your next Uppercut destroy enemies' defense, rendering them weaker to damage",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Uppercut",
             "parents": ["Uncontainable Corruption", "Radiant Devotee"], 
             "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
@@ -3530,7 +3500,11 @@ const atrees = {
                 "duration": 5
             },
             "effects": [
-                
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                }
             ]  
         },
 
@@ -3539,6 +3513,7 @@ const atrees = {
             "desc": "When your Mantle of the Bovemist loses all charges, deal damage around you for each Mantle individually lost",
             "archetype": "Paladin", 
             "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
             "parents": ["Mythril Skin", "Sparkling Hope"], 
             "dependencies": [], 
             "blockers": [],
@@ -3548,19 +3523,23 @@ const atrees = {
                 "col": 6,
                 "icon": "node_1"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Shield Strike",
-                    "cost": 0,
-                    "multipliers": [60, 0, 20, 0, 0, 0]
+                    "type": "replace_spell",
+                    "name": "Shield Strike",
+                    "display_text": "Shield Strike",
+                    "base_spell": 6,
+                    "display": "Damage per Shield",
+                    "parts": [
+                        {
+                            "name": "Damage per Shield",
+                            "multipliers": [60, 0, 20, 0, 0, 0]
+                        }
+                    ]
                 }
             ]  
         },
-
         {
             "display_name": "Sparkling Hope",
             "desc": "Everytime you heal 5% of your max health, deal damage to all nearby enemies",
@@ -3580,11 +3559,17 @@ const atrees = {
             },
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Sparkling Hope",
-                    "cost": 0,
-                    "multipliers": [10, 0, 5, 0, 0, 0]
+                    "type": "replace_spell",
+                    "name": "Sparkling Hope",
+                    "display_text": "Sparkling Hope",
+                    "base_spell": 6,
+                    "display": "Damage Tick",
+                    "parts": [
+                        {
+                            "name": "Damage Tick",
+                            "multipliers": [10, 0, 5, 0, 0, 0]
+                        }
+                    ]
                 }
             ]  
         },
@@ -3604,8 +3589,7 @@ const atrees = {
                 "col": 0,
                 "icon": "node_2"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -3616,9 +3600,8 @@ const atrees = {
                         "abil": "Bash",
                         "name": "aoe"
                     },
-                    "scaling": [1],
+                    "scaling": [0.333333333333333],
                     "max": 10,
-                    "slider_step": 3
                 }
             ]  
         },
@@ -3628,6 +3611,7 @@ const atrees = {
             "desc": "War Scream will ripple the ground and deal damage 3 times in a large area",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
+            "base_abil": "War Scream",
             "parents": ["Massive Bash", "Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
@@ -3645,14 +3629,12 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Tempest",
-                    "cost": "0",
                     "multipliers": [30, 10, 0, 0, 0, 10]
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Tempest Total Damage",
-                    "cost": "0",
                     "hits": {
                         "Tempest": 3
                     }
@@ -3668,12 +3650,12 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Spirit of the Rabbit",
             "desc": "Reduce the Mana cost of Charge and increase your Walk Speed by +20%",
             "archetype": "Battle Monk", 
             "archetype_req": 5, 
+            "base_spell": "Charge",
             "parents": ["Tempest", "Whirlwind Strike"], 
             "dependencies": [], 
             "blockers": [],
@@ -3683,8 +3665,7 @@ const atrees = {
                 "col": 4,
                 "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -3718,18 +3699,14 @@ const atrees = {
                 "col": 1,
                 "icon": "node_1"
             },
-            "properties": {
-            },
-            "effects": [
-                
-            ]  
+            "properties": {},
+            "effects": []  
         },
 
         {
             "display_name": "Axe Kick",
             "desc": "Increase the damage of Uppercut, but also increase its mana cost",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_spell": "Uppercut",
             "parents": ["Tempest", "Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
@@ -3739,8 +3716,7 @@ const atrees = {
                 "col": 3,
                 "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -3751,12 +3727,12 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Radiance",
             "desc": "Bash will buff your allies' positive IDs. (15s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 2, 
+            "base_spell": "Bash",
             "parents": ["Spirit of the Rabbit", "Cheaper Bash 2"], 
             "dependencies": [], 
             "blockers": [],
@@ -3769,16 +3745,13 @@ const atrees = {
             "properties": {
                 "cooldown": 15
             },
-            "effects": [
-                
-            ]  
+            "effects": []  
         },
 
         {
             "display_name": "Cheaper Bash 2",
             "desc": "Reduce the Mana cost of Bash",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_spell": "Bash",
             "parents": ["Radiance", "Shield Strike", "Sparkling Hope"], 
             "dependencies": [], 
             "blockers": [],
@@ -3788,8 +3761,7 @@ const atrees = {
                 "col": 7,
                 "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -3802,8 +3774,7 @@ const atrees = {
         {
             "display_name": "Cheaper War Scream",
             "desc": "Reduce the Mana cost of War Scream",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_spell": "War Scream",
             "parents": ["Massive Bash"], 
             "dependencies": [], 
             "blockers": [],
@@ -3813,8 +3784,7 @@ const atrees = {
                 "col": 0,
                 "icon": "node_0"
             },
-            "properties": {
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",

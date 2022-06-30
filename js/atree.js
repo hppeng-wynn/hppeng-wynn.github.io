@@ -51,11 +51,12 @@ convert_spell_conv: {
     base_spell:     int             // spell identifier
     target_part:    "all" | str     // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
                                     //      "all" means modify all parts.
-  "conversion": element_str
+    conversion:     element_str
 }
 raw_stat: {
-  "type": "raw_stat",
-  "bonuses": list[stat_bonus]
+    type:           "raw_stat"
+    toggle:         Optional[bool]  // default: false
+    bonuses:        List[stat_bonus]
 }
 stat_bonus: {
   "type": "stat" | "prop",
@@ -441,7 +442,15 @@ const atree_collect_spells = new (class extends ComputeNode {
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
             // TODO: Possibly, make a better way for detecting "spell abilities"?
-            if (abil.effects.length == 0 || abil.effects[0].type !== 'replace_spell') { continue; }
+            if (abil.effects.length == 0) { continue; }
+            let has_spell_def = false;
+            for (const effect of abil.effects) {
+                if (effect.type === 'replace_spell') {
+                    has_spell_def = true;
+                    break;
+                }
+            }
+            if (!has_spell_def) { continue; }
 
             let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
             const base_spell_id = ret_spell.base_spell;
