@@ -265,7 +265,6 @@ function render_AT(UI_elem, list_elem, tree) {
         //create node tooltip
         let node_tooltip = document.createElement('div');
         node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "my-1", "dark-shadow", "scaled-font", "container");
-        node_tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .80 + "px";
         node_tooltip.style.display = "none";
         node_tooltip.appendChild(tooltip_title);
         node_tooltip.appendChild(tooltip_desc);
@@ -276,6 +275,7 @@ function render_AT(UI_elem, list_elem, tree) {
         node_tooltip.style.position = "absolute";
         node_tooltip.style.zIndex = "100";
         node_tooltip.appendChild(tooltip_cost);
+
         //add in anything new for active tooltips
         active_tooltip.id = "atree-ab-" + node.id;
 
@@ -284,6 +284,17 @@ function render_AT(UI_elem, list_elem, tree) {
             active_tooltip_blockers.classList.add("row", "mx-1", "text-start");
             active_tooltip_blockers.textContent = "Blockers: " + node.blockers.join(", ");
             active_tooltip.append(active_tooltip_blockers);
+        }
+
+        //add in slider(s)
+        for (const effect of node.effects) {
+            if (effect.type === "stat_scaling") {
+                //TOOD: write boilerplate function for generating sliders + slider wrappers and call that function here
+                let slider_container = document.createElement("div");
+                slider_container.classList.add("row", "mx-1");
+                slider_container.textContent = "There will be a slider here eventually";
+                active_tooltip.appendChild(slider_container);
+            }
         }
 
         active_tooltip.appendChild(tooltip_cost.cloneNode(true));
@@ -328,7 +339,6 @@ function render_AT(UI_elem, list_elem, tree) {
 
         document.getElementById("atree-row-" + node.display.row).children[node.display.col].appendChild(node_elem);
     };
-    console.log(atree_connectors_map);
     atree_render_connection(atree_connectors_map);
 };
 
