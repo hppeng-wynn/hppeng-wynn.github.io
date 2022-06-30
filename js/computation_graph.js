@@ -112,7 +112,7 @@ class ComputeNode {
         const idx = this.inputs.indexOf(parent_node);   // Get idx
         this.inputs.splice(idx, 1);                     // remove element
 
-        this.input_translations.delete(parent_node.name);
+        this.input_translation.delete(parent_node.name);
         const was_dirty = this.inputs_dirty.get(parent_node.name);
         this.inputs_dirty.delete(parent_node.name);
         if (was_dirty) {
@@ -171,5 +171,44 @@ class InputNode extends ComputeNode {
 
     compute_func(input_map) {
         return this.input_field.value;
+    }
+}
+
+/**
+ * Passthrough node for simple aggregation.
+ * Unfortunately if you use this too much you get layers and layers of maps...
+ *
+ * Signature: PassThroughNode(**kwargs) => Map[...]
+ */
+class PassThroughNode extends ComputeNode {
+    constructor(name) {
+        super(name);
+        this.breakout_nodes = new Map();
+    }
+
+    compute_func(input_map) {
+        return input_map;
+    }
+
+    /**
+     * Get a ComputeNode that will "break out" one part of this aggregation input.
+     * There is some overhead to this operation because ComputeNode is not exactly a free abstraction... oof
+     * Also you will recv updates whenever any input that is part of the aggregation changes even
+     * if the specific sub-input didn't change.
+     *
+     * Parameters:
+     *      sub-input: The key to listen to
+     */
+    get_node(sub_input) {
+        if (this.breakout_nodes.has(sub_input)) {
+            return this.breakout_nodes.get(sub_input);
+        }
+        const _name = this.name;
+        const ret = new (class extends ComputeNode {
+                constructor() { super('passthrough-'+_name+'-'+sub_input); }
+                compute_func(input_map) { return input_map.get(_name).get(sub_input); }
+            })().link_to(this);
+        this.breakout_nodes.set(sub_input, ret);
+        return ret;
     }
 }

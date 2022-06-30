@@ -499,3 +499,17 @@ function assert_error(func_binding, msg) {
     } 
     throw new Error(msg ? msg : "Function didn't throw an error.");
 }
+
+/**
+ * Deep copy object/array of basic types.
+ */
+function deepcopy(obj) {
+    if (typeof(obj) !== 'object' || obj === null) { // null or value type
+        return obj;
+    }
+    let ret = Array.isArray(obj) ? [] : {};
+    for (let key in obj) {
+        ret[key] = deepcopy(obj[key]);
+    }
+    return ret;
+}
