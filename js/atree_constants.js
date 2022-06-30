@@ -3049,7 +3049,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Flying Kick",
-                    "multipliers": [120, 0, 0, 10, 0, 20],
+                    "multipliers": [120, 0, 0, 10, 0, 20]
                 },
                 {
                     "type": "add_spell_prop",
@@ -3221,7 +3221,7 @@ const atrees = {
                         "name": "fDamPct"
                     },
                     "scaling": [2],
-                    "max": 100,
+                    "max": 100
                 }
             ]  
         },
@@ -3335,7 +3335,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Flying Kick Max Damage",
-                    "hits": { "Collide": 1 },
+                    "hits": { "Collide": 1 }
                 }
             ]  
         },
@@ -3419,7 +3419,7 @@ const atrees = {
                         "name": "mr"
                     },
                     "scaling": [0.25],
-                    "max": 10,
+                    "max": 10
                 }
             ]  
         },
@@ -3599,7 +3599,7 @@ const atrees = {
                         "name": "aoe"
                     },
                     "scaling": [0.3333333333333333],
-                    "max": 10,
+                    "max": 10
                 }
             ]  
         },{

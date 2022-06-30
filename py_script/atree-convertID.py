@@ -52,7 +52,7 @@ for _class, info in atree_data.items():
                         if "abil" in _input and _input["abil"] in id_data[_class]:
                             _input["abil"] = id_data[_class][_input["abil"]]
                 if isinstance(effect["output"], list):
-                    for output in effect["outputs"]:
+                    for output in effect["output"]:
                         if "abil" in output and output["abil"] in id_data[_class]:
                             output["abil"] = id_data[_class][output["abil"]]
                 else:
