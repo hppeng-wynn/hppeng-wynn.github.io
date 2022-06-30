@@ -3507,7 +3507,6 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Shield Strike",
             "desc": "When your Mantle of the Bovemist loses all charges, deal damage around you for each Mantle individually lost",
@@ -3573,13 +3572,12 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Massive Bash",
             "desc": "While Corrupted, every 3% Health you lose will add +1 AoE to Bash (Max 10)",
             "archetype": "Fallen", 
             "archetype_req": 8, 
-            "base_abil": "Bak'al's Grasp",
+            "base_abil": "Bash",
             "parents": ["Tempest", "Uncontainable Corruption"], 
             "dependencies": [], 
             "blockers": [],
@@ -3600,13 +3598,11 @@ const atrees = {
                         "abil": "Bash",
                         "name": "aoe"
                     },
-                    "scaling": [0.333333333333333],
+                    "scaling": [0.3333333333333333],
                     "max": 10,
                 }
             ]  
-        },
-
-        {
+        },{
             "display_name": "Tempest",
             "desc": "War Scream will ripple the ground and deal damage 3 times in a large area",
             "archetype": "Battle Monk", 
@@ -3643,10 +3639,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Total Damage",
-                    "cost": "0",
-                    "hits": {
-                        "Tempest": 3
-                    }
+                    "hits": { "Tempest": 3 }
                 }
             ]  
         },
@@ -3655,7 +3648,7 @@ const atrees = {
             "desc": "Reduce the Mana cost of Charge and increase your Walk Speed by +20%",
             "archetype": "Battle Monk", 
             "archetype_req": 5, 
-            "base_spell": "Charge",
+            "base_abil": "Charge",
             "parents": ["Tempest", "Whirlwind Strike"], 
             "dependencies": [], 
             "blockers": [],
@@ -3674,22 +3667,15 @@ const atrees = {
                 },
                 {
                     "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "spd",
-                            "value": 20
-                        }
-                    ]
+                    "bonuses": [{ "type": "stat", "name": "spd", "value": 20 }]
                 }
             ]  
-        },
-
-        {
+        },{
             "display_name": "Massacre",
             "desc": "While Corrupted, if your effective attack speed is Slow or lower, hitting an enemy with your Main Attack will add +1% to your Corrupted bar",
             "archetype": "Fallen", 
             "archetype_req": 5, 
+            "base_abil": 999,
             "parents": ["Tempest", "Massive Bash"], 
             "dependencies": [], 
             "blockers": [],
@@ -3702,11 +3688,10 @@ const atrees = {
             "properties": {},
             "effects": []  
         },
-
         {
             "display_name": "Axe Kick",
             "desc": "Increase the damage of Uppercut, but also increase its mana cost",
-            "base_spell": "Uppercut",
+            "base_abil": "Uppercut",
             "parents": ["Tempest", "Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
@@ -3732,7 +3717,7 @@ const atrees = {
             "desc": "Bash will buff your allies' positive IDs. (15s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 2, 
-            "base_spell": "Bash",
+            "base_abil": "Bash",
             "parents": ["Spirit of the Rabbit", "Cheaper Bash 2"], 
             "dependencies": [], 
             "blockers": [],
@@ -3751,7 +3736,7 @@ const atrees = {
         {
             "display_name": "Cheaper Bash 2",
             "desc": "Reduce the Mana cost of Bash",
-            "base_spell": "Bash",
+            "base_abil": "Bash",
             "parents": ["Radiance", "Shield Strike", "Sparkling Hope"], 
             "dependencies": [], 
             "blockers": [],
@@ -3774,7 +3759,7 @@ const atrees = {
         {
             "display_name": "Cheaper War Scream",
             "desc": "Reduce the Mana cost of War Scream",
-            "base_spell": "War Scream",
+            "base_abil": "War Scream",
             "parents": ["Massive Bash"], 
             "dependencies": [], 
             "blockers": [],
@@ -3815,10 +3800,13 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
-                    "output": {
-                        "type": "stat",
-                        "name": "rainrawButDifferent" 
-                    },
+                    "output": [
+                        { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
+                        { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
+                        { "type": "stat", "name": "wDamAddMin" }, { "type": "stat", "name": "wDamAddMax" },
+                        { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
+                        { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
+                    ],
                     "scaling": [2],
                     "max": 50
                 }
@@ -3881,14 +3869,12 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Cyclone",
-                    "cost": 0,
                     "multipliers": [10, 0, 0, 0, 5, 10]
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Cyclone Total Damage",
-                    "cost": 0,
                     "hits": {
                         "Cyclone": 40
                     }
@@ -3917,7 +3903,7 @@ const atrees = {
 
         {
             "display_name": "Blood Pact",
-            "desc": "If you do not have enough mana to cast a spell, spend health instead (1% health per mana)",
+            "desc": "If you do not have enough mana to cast a spell, spend health instead (0.6% health per mana)",
             "archetype": "", 
             "archetype_req": 10, 
             "parents": ["Cheaper War Scream"], 
@@ -3929,15 +3915,18 @@ const atrees = {
                 "col": 1,
                 "icon": "node_3"
             },
-            "properties": {},
+            "properties": {
+                "health_cost": 0.6
+            },
             "effects": []  
         },
 
         {
             "display_name": "Haemorrhage",
-            "desc": "Reduce Blood Pact's health cost. (0.5% health per mana)",
+            "desc": "Reduce Blood Pact's health cost. (0.3% health per mana)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Blood Pact",
             "parents": ["Blood Pact"], 
             "dependencies": ["Blood Pact"], 
             "blockers": [],
@@ -3948,14 +3937,15 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": []  
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [{ "type": "prop", "abil": "Blood Pact", "name": "health_cost", "value": -0.3}]
+            }]
         },
 
         {
             "display_name": "Brink of Madness",
             "desc": "If your health is 25% full or less, gain +40% Resistance",
-            "archetype": "", 
-            "archetype_req": 0, 
             "parents": ["Blood Pact", "Cheaper Uppercut 2"], 
             "dependencies": [], 
             "blockers": [],
@@ -3972,8 +3962,7 @@ const atrees = {
         {
             "display_name": "Cheaper Uppercut 2",
             "desc": "Reduce the Mana cost of Uppercut",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Uppercut",
             "parents": ["Second Chance", "Brink of Madness"], 
             "dependencies": [], 
             "blockers": [],

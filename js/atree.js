@@ -70,7 +70,7 @@ stat_scaling: {
   "slider_name": Optional[str],
   "slider_step": Optional[float],
   "inputs": Optional[list[scaling_target]],
-  "output": scaling_target,
+  "output": scaling_target | List[scaling_target],
   "scaling": list[float],
   "max": float
 }

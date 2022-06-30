@@ -37,22 +37,27 @@ for _class, info in atree_data.items():
                 translate([abil], "base_abil")
 
         if "effects" not in info[abil]:
+            print("WARNING: abil missing 'effects' tag")
             print(info[abil])
             info[abil]["effects"] = []
         for effect in info[abil]["effects"]:
             if effect["type"] == "raw_stat":
                 for bonus in effect["bonuses"]:
-                    if "abil" in bonus:
+                    if "abil" in bonus and bonus["abil"] in id_data[_class]:
                         bonus["abil"] = id_data[_class][bonus["abil"]]
 
             elif effect["type"] == "stat_scaling":
                 if "inputs" in effect:  # Might not exist for sliders
                     for _input in effect["inputs"]:
-                        if "abil" in _input:
+                        if "abil" in _input and _input["abil"] in id_data[_class]:
                             _input["abil"] = id_data[_class][_input["abil"]]
-
-                if "abil" in effect["output"]:
-                    effect["output"]["abil"] = id_data[_class][effect["output"]["abil"]]
+                if isinstance(effect["output"], list):
+                    for output in effect["outputs"]:
+                        if "abil" in output and output["abil"] in id_data[_class]:
+                            output["abil"] = id_data[_class][output["abil"]]
+                else:
+                    if "abil" in effect["output"] and effect["output"]["abil"] in id_data[_class]:
+                        effect["output"]["abil"] = id_data[_class][effect["output"]["abil"]]
 
 
 with open('atree_constants_idfied.json', 'w', encoding='utf-8') as abil_dest:
