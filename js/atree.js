@@ -168,15 +168,23 @@ const atree_node = new (class extends ComputeNode {
  * Signature: AbilityTreeRenderNode(atree: ATree) => RenderedATree ( Map[id, RenderedATNode] )
  */
 const atree_render = new (class extends ComputeNode {
-    constructor() { super('builder-atree-render'); this.fail_cb = true; }
+    constructor() {
+        super('builder-atree-render');
+        this.fail_cb = true;
+        this.UI_elem = document.getElementById("atree-ui");
+        this.list_elem = document.getElementById("atree-header");
+    }
 
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeRenderNode accepts exactly one input (atree)"; }
         const [atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         
         //for some reason we have to cast to string 
+        this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
+        this.UI_elem.innerHTML = ""; //reset the atree in the DOM
+
         let ret = null;
-        if (atree) { ret = render_AT(document.getElementById("atree-ui"), document.getElementById("atree-header"), atree); }
+        if (atree) { ret = render_AT(this.UI_elem, this.list_elem, atree); }
 
         //Toggle on, previously was toggled off
         toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
@@ -184,6 +192,17 @@ const atree_render = new (class extends ComputeNode {
         return ret;
     }
 })().link_to(atree_node);
+
+// This exists so i don't have to re-render the UI to push atree updates.
+const atree_state_node = new (class extends ComputeNode {
+    constructor() { super('builder-atree-state'); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeStateNode accepts exactly one input (atree-rendered)"; }
+        const [rendered_atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        return rendered_atree;
+    }
+})().link_to(atree_render, 'atree-render');
 
 /**
  * Create a reverse topological sort of the tree in the result list.
@@ -266,7 +285,7 @@ const atree_merge = new (class extends ComputeNode {
         }
         return abils_merged;
     }
-})().link_to(atree_node, 'atree').link_to(atree_render, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
 
 /**
  * Validate ability tree.
@@ -284,9 +303,12 @@ const atree_validate = new (class extends ComputeNode {
         let errors = [];
         let reachable = new Map();
         atree_dfs_mark(atree_order[0], atree_state, reachable);
+        let abil_points_total = 0;
+        let archetype_count = new Map();
         for (const node of atree_order) {
             const abil = node.ability;
             if (!atree_state.get(abil.id).active) { continue; }
+            abil_points_total += abil.cost;
             if (!reachable.get(abil.id)) { errors.push(abil.display_name + ' is not reachable!'); }
 
             let failed_deps = [];
@@ -294,8 +316,8 @@ const atree_validate = new (class extends ComputeNode {
                 if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
             }
             if (failed_deps.length > 0) {
-                const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.name + '"');
-                errors.push(abil.name + ' dependencies not satisfied: ' + dep_string.join(", "));
+                const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+                errors.push(abil.display_name + ' dependencies not satisfied: ' + dep_string.join(", "));
             }
 
             let blocking_ids = [];
@@ -303,17 +325,41 @@ const atree_validate = new (class extends ComputeNode {
                 if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
             }
             if (blocking_ids.length > 0) {
-                const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.name + '"');
-                errors.push(abil.name + ' is blocked by: ' + blockers_string.join(", "));
+                const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+                errors.push(abil.display_name+' is blocked by: '+blockers_string.join(", "));
+            }
+
+            if ('archetype' in abil && abil.archetype !== "") {
+                let val = 1;
+                if (archetype_count.has(abil.archetype)) {
+                    val = archetype_count.get(abil.archetype) + 1;
+                }
+                archetype_count.set(abil.archetype, val);
+            }
+        }
+        // TODO: FIX THIS! ARCHETYPE REQ IS A PAIN IN THE ASS
+        // it doesn't follow topological order and theres some cases where "equip order" matters.
+        for (const node of atree_order) {
+            const abil = node.ability;
+            if (!atree_state.get(abil.id).active) { continue; }
+            if ('archetype_req' in abil && abil.archetype_req !== 0) {
+                const others = archetype_count.get(abil.archetype) - 1;
+                if (others < abil.archetype_req) {
+                    errors.push(abil.display_name+' fails archetype: '+abil.archetype+': '+others+' < '+abil.archetype_req)
+                }
             }
         }
 
-        return errors;
+        if (abil_points_total > 45) {
+            errors.push('too many ability points assigned! ('+abil_points_total+' > 45)');
+        }
+
+        return [abil_points_total, errors];
     }
-})().link_to(atree_node, 'atree').link_to(atree_render, 'atree-state');
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
 function atree_dfs_mark(start, atree_state, mark) {
-    if (mark.get(start)) { return; }
+    if (mark.get(start.ability.id)) { return; }
     mark.set(start.ability.id, true);
     for (const child of start.children) {
         if (atree_state.get(child.ability.id).active) {
@@ -331,9 +377,12 @@ const atree_render_active = new (class extends ComputeNode {
     compute_func(input_map) {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
-        const errors = input_map.get('atree-errors');
+        const [abil_points_total, errors] = input_map.get('atree-errors');
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
+        // TODO: move to display?
+        document.getElementById("active_AP_cost").textContent = abil_points_total;
+
         if (errors.length > 0) {
             let errorbox = document.createElement('div');
             errorbox.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
@@ -543,7 +592,6 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
     }
 }
 
-let abil_points_current;
 /** The main function for rendering an ability tree. 
  * 
  * @param {Element} UI_elem - the DOM element to draw the atree within.
@@ -552,13 +600,9 @@ let abil_points_current;
  */
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
-    list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
-    UI_elem.innerHTML = ""; //reset the atree in the DOM
-
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
     active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
-    abil_points_current = 0;
     let active_word = document.createElement("div");
     active_word.classList.add("col-auto");
     active_word.textContent = "Active Abilities:";
@@ -706,29 +750,33 @@ function render_AT(UI_elem, list_elem, tree) {
 
         node_elem.classList.add("fake-button");
 
-        let active_tooltip = document.createElement('div');
-        active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        active_tooltip.style.display = "none";
+        let node_tooltip = document.createElement('div');
+        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+        node_tooltip.style.display = "none";
 
         // tooltip text formatting
 
-        let active_tooltip_title = document.createElement('b');
-        active_tooltip_title.classList.add("scaled-font");
-        active_tooltip_title.innerHTML = ability.display_name;
+        let node_tooltip_title = document.createElement('b');
+        node_tooltip_title.classList.add("scaled-font");
+        node_tooltip_title.innerHTML = ability.display_name;
+        node_tooltip.appendChild(node_tooltip_title);
 
-        let active_tooltip_desc = document.createElement('p');
-        active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-        active_tooltip_desc.textContent = ability.desc;
+        if ('archetype' in ability && ability.archetype !== "") {
+            let node_tooltip_archetype = document.createElement('p');
+            node_tooltip_archetype.classList.add("scaled-font");
+            node_tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
+            node_tooltip.appendChild(node_tooltip_archetype);
+        }
 
-        let active_tooltip_cost = document.createElement('p');
-        active_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
-        active_tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
+        let node_tooltip_desc = document.createElement('p');
+        node_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+        node_tooltip_desc.textContent = ability.desc;
+        node_tooltip.appendChild(node_tooltip_desc);
 
-        active_tooltip.appendChild(active_tooltip_title);
-        active_tooltip.appendChild(active_tooltip_desc);
-        active_tooltip.appendChild(active_tooltip_cost);
-
-        node_tooltip = active_tooltip;//.cloneNode(true);
+        let node_tooltip_cost = document.createElement('p');
+        node_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
+        node_tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
+        node_tooltip.appendChild(node_tooltip_cost);
 
         node_tooltip.style.position = "absolute";
         node_tooltip.style.zIndex = "100";
@@ -736,22 +784,13 @@ function render_AT(UI_elem, list_elem, tree) {
         node_elem.appendChild(node_tooltip);
         //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
 
+        node_wrap.elem = node_elem;
+        node_wrap.all_connectors_ref = atree_connectors_map;
+
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
-            if (node_wrap.active) {
-                this.classList.remove("atree-selected");
-                abil_points_current -= ability.cost;
-            } 
-            else {
-                this.classList.add("atree-selected");
-                abil_points_current += ability.cost;
-            };
-            document.getElementById("active_AP_cost").textContent = abil_points_current;
-            atree_toggle_state(atree_connectors_map, node_wrap);
-            atree_merge.mark_dirty();
-            atree_validate.mark_dirty();
-            atree_merge.update();
-            atree_validate.update();
+            atree_set_state(node_wrap, !node_wrap.active);
+            atree_state_node.mark_dirty().update();
         });
 
         // add tooltip
@@ -841,9 +880,16 @@ function atree_render_connection(atree_connectors_map) {
 };
 
 // toggle the state of a node.
-function atree_toggle_state(atree_connectors_map, node_wrapper) {
-    const new_state = !node_wrapper.active;
-    node_wrapper.active = new_state
+function atree_set_state(node_wrapper, new_state) {
+    if (new_state) {
+        node_wrapper.active = true;
+        node_wrapper.elem.classList.add("atree-selected");
+    } 
+    else {
+        node_wrapper.active = false;
+        node_wrapper.elem.classList.remove("atree-selected");
+    }
+    let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
         if (parent.active) {
             atree_set_edge(atree_connectors_map, parent, node_wrapper, new_state);  // self->parent state only changes if parent is on

@@ -344,6 +344,8 @@ class BuildEncodeNode extends ComputeNode {
 
     compute_func(input_map) {
         const build = input_map.get('build');
+        const atree = input_map.get('atree');
+        const atree_state = input_map.get('atree-state');
         let powders = [
             input_map.get('helmet-powder'),
             input_map.get('chestplate-powder'),
@@ -361,7 +363,7 @@ class BuildEncodeNode extends ComputeNode {
         // TODO: grr global state for copy button..
         player_build = build;
         build_powders = powders;
-        return encodeBuild(build, powders, skillpoints);
+        return encodeBuild(build, powders, skillpoints, atree, atree_state);
     }
 }
 
@@ -1077,6 +1079,8 @@ function builder_graph_init() {
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
 
+    build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
+
     // ---------------------------------------------------------------
     //  Trigger the update cascade for build!
     // ---------------------------------------------------------------
@@ -1084,6 +1088,18 @@ function builder_graph_init() {
         input_node.update();
     }
     level_input.update();
+
+    // kinda janky, manually set atree and update. Some wasted compute here
+    if (atree_data !== null && atree_node.value !== null) { // janky check if atree is valid
+        const atree_state = atree_state_node.value;
+        if (atree_data.length > 0) {
+            const active_nodes = decode_atree(atree_node.value, atree_data);
+            for (const node of active_nodes) {
+                atree_set_state(atree_state.get(node.ability.id), true);
+            }
+            atree_state_node.mark_dirty().update();
+        }
+    }
 
     // Powder specials.
     let powder_special_calc = new PowderSpecialCalcNode().link_to(powder_special_input, 'powder-specials');

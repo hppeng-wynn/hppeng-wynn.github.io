@@ -193,9 +193,9 @@ Base64 = (function () {
      */
     read_bit(idx) {
         if (idx < 0 || idx >= this.length) {
-            throw new RangeError("Cannot read bit outside the range of the BitVector.");
+            throw new RangeError("Cannot read bit outside the range of the BitVector. ("+idx+" > "+this.length+")");
         }
-        return ((this.bits[Math.floor(idx / 32)] & (1 << (idx % 32))) == 0 ? 0 : 1);
+        return ((this.bits[Math.floor(idx / 32)] & (1 << idx)) == 0 ? 0 : 1);
     }
 
     /** Returns an integer value (if possible) made from the range of bits [start, end). Undefined behavior if the range to read is too big.

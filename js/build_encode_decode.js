@@ -20,6 +20,8 @@ function parsePowdering(powder_info) {
     return [powdering, powder_info];
 }
 
+let atree_data = null;
+
 /*
  * Populate fields based on url, and calculate build.
  */
@@ -62,7 +64,7 @@ function decodeBuild(url_tag) {
             }
             info[1] = info_str.slice(start_idx);
         }
-        else if (version_number <= 6) {
+        else if (version_number <= 7) {
             let info_str = info[1];
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
@@ -101,7 +103,7 @@ function decodeBuild(url_tag) {
             let powder_info = info[1].slice(10);
             let res = parsePowdering(powder_info);
             powdering = res[0];
-        } else if (version_number <= 6){
+        } else if (version_number <= 7){
             level = Base64.toInt(info[1].slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
@@ -117,7 +119,7 @@ function decodeBuild(url_tag) {
             info[1] = res[1];
         }
         // Tomes.
-        if (version == 6) {
+        if (version >= 6) {
             //tome values do not appear in anything before v6.
             for (let i in tomes) {
                 let tome_str = info[1].charAt(i);
@@ -126,6 +128,14 @@ function decodeBuild(url_tag) {
                 setValue(tomeInputs[i], tome_name);
             }
             info[1] = info[1].slice(7);
+        }
+
+        if (version >= 7) {
+            // ugly af. only works since its the last thing. will be fixed with binary decode
+            atree_data = new BitVector(info[1]);
+        }
+        else {
+            atree_data = null;
         }
 
         for (let i in powder_inputs) {
@@ -139,12 +149,13 @@ function decodeBuild(url_tag) {
 
 /*  Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
-function encodeBuild(build, powders, skillpoints) {
+function encodeBuild(build, powders, skillpoints, atree, atree_state) {
 
     if (build) {
         let build_string;
         
         //V6 encoding - Tomes
+        //V7 encoding - ATree
         build_version = 5;
         build_string = "";
         tome_string = "";
@@ -189,6 +200,12 @@ function encodeBuild(build, powders, skillpoints) {
         }
         build_string += tome_string;
 
+        if (atree_state.get(atree[0].ability.id).active) {
+            build_version = Math.max(build_version, 7);
+            const bitvec = encode_atree(atree, atree_state);
+            build_string += bitvec.toB64();
+        }
+
         return build_version.toString() + "_" + build_string;
     }
 }
@@ -216,3 +233,58 @@ function shareBuild(build) {
     }
 }
 
+/**
+ * Ability tree encode and decode functions
+ *
+ * Based on a traversal, basically only uses bits to represent the nodes that are on (and "dark" outgoing edges).
+ * credit: SockMower
+ */
+
+/**
+ * Return: BitVector
+ */
+function encode_atree(atree, atree_state) {
+    let ret_vec = new BitVector(0, 0);
+
+    function traverse(head, atree_state, visited, ret) {
+        for (const child of head.children) {
+            if (visited.has(child.ability.id)) { continue; }
+            visited.set(child.ability.id, true);
+            if (atree_state.get(child.ability.id).active) {
+                ret.append(1, 1);
+                traverse(child, atree_state, visited, ret);
+            }
+            else {
+                ret.append(0, 1);
+            }
+        }
+    }
+
+    traverse(atree[0], atree_state, new Map(), ret_vec);
+    return ret_vec;
+}
+
+/**
+ * Return: List of active nodes
+ */
+function decode_atree(atree, bits) {
+    let i = 0;
+    let ret = [];
+    ret.push(atree[0]);
+    function traverse(head, visited, ret) {
+        for (const child of head.children) {
+            if (visited.has(child.ability.id)) { continue; }
+            visited.set(child.ability.id, true);
+            if (bits.read_bit(i)) {
+                i += 1;
+                ret.push(child);
+                traverse(child, visited, ret);
+            }
+            else {
+                i += 1;
+            }
+        }
+    }
+    traverse(atree[0], new Map(), ret);
+    return ret;
+}

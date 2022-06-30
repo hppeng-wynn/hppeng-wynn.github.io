@@ -45,8 +45,6 @@ const atrees = {
         {
             "display_name": "Escape",
             "desc": "Throw yourself backward to avoid danger. (Hold shift while escaping to cancel)",
-            "archetype": "", 
-            "archetype_req": 0, 
             "parents": ["Heart Shatter"], 
             "dependencies": [],
             "blockers": [],
@@ -141,8 +139,6 @@ const atrees = {
         {
             "display_name": "Fire Creep",
             "desc": "Arrow Bomb will leak a trail of fire for 6s, Damaging enemies that walk into it every 0.4s.",
-            "archetype": "", 
-            "archetype_req": 0, 
             "parents": ["Phantom Ray", "Fire Mastery", "Bryophyte Roots"], 
             "dependencies": [], 
             "blockers": [],

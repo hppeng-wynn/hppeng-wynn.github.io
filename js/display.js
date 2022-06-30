@@ -1603,7 +1603,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
         
 
         let third = document.createElement("span");
-        third.textContent = ") [Base: " + getBaseSpellCost(stats, spellIdx, spell.cost) + " ]";
+        third.textContent = ")";// [Base: " + getBaseSpellCost(stats, spellIdx, spell.cost) + " ]";
         title_elem.appendChild(third);
         let third_summary = document.createElement("span");
         third_summary.textContent = ")";
