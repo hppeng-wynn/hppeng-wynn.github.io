@@ -149,17 +149,6 @@ function toggle_tab(tab) {
     }
 }
 
-// toggle spell arrow
-function toggle_spell_tab(tab) {
-    let arrow_img = document.querySelector("#" + "arrow_" + tab + "Avg");
-    if (document.querySelector("#"+tab).style.display == "none") {
-        document.querySelector("#"+tab).style.display = "";
-        arrow_img.src = arrow_img.src.replace("down", "up");
-    } else {
-        document.querySelector("#"+tab).style.display = "none";
-        arrow_img.src = arrow_img.src.replace("up", "down");
-    }
-}
 
 function toggle_boost_tab(tab) {
     for (const i of skp_order) {
@@ -396,16 +385,12 @@ function collapse_element(elmnt) {
     document.querySelector(elmnt).style.removeProperty('display');
 }
 
-// TODO: Learn and use await
 function init() {
     console.log("builder.js init");
     init_autocomplete();
 
     // Other "main" stuff
     // Spell dropdowns
-    for (const i of spell_disp) {
-        document.querySelector("#"+i+"Avg").addEventListener("click", () => toggle_spell_tab(i));
-    }
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-tooltip").addEventListener("click", () => collapse_element('#'+eq+'-tooltip'));
     }
