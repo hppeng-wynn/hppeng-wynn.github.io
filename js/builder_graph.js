@@ -749,7 +749,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
             document.getElementById(skp_order[i]+"-warnings").textContent = ''
             if (assigned > 100) {
                 let skp_warning = document.createElement("p");
-                skp_warning.classList.add("warning"); skp_warning.classList.add("small-text");
+                skp_warning.classList.add("warning", "small-text");
                 skp_warning.textContent += "Cannot assign " + assigned + " skillpoints in " + ["Strength","Dexterity","Intelligence","Defense","Agility"][i] + " manually.";
                 document.getElementById(skp_order[i]+"-warnings").appendChild(skp_warning);
             }

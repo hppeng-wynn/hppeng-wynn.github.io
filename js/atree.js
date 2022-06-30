@@ -1,5 +1,3 @@
-let abil_points_current;
-
 /**
 ATreeNode spec:
 
@@ -49,9 +47,10 @@ add_spell_prop: {
 }
 
 convert_spell_conv: {
-  "type": "convert_spell_conv",
-  "base_spell": int
-  "target_part": "all" | str,
+    type:           "convert_spell_conv"
+    base_spell:     int             // spell identifier
+    target_part:    "all" | str     // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
+                                    //      "all" means modify all parts.
   "conversion": element_str
 }
 raw_stat: {
@@ -177,7 +176,7 @@ const atree_render = new (class extends ComputeNode {
         
         //for some reason we have to cast to string 
         let ret = null;
-        if (atree) { ret = render_AT(document.getElementById("atree-ui"), document.getElementById("atree-active"), atree); }
+        if (atree) { ret = render_AT(document.getElementById("atree-ui"), document.getElementById("atree-header"), atree); }
 
         //Toggle on, previously was toggled off
         toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
@@ -216,7 +215,7 @@ function topological_sort_tree(tree, res, mark_state) {
  * I stg if wynn makes abils that modify multiple spells
  * ... well we can extend this by making `base_abil` a list instead but annoy
  *
- * Signature: AbilityTreeMergeNode(atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
+ * Signature: AbilityTreeMergeNode(build: Build, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
  */
 const atree_merge = new (class extends ComputeNode {
     constructor() { super('builder-atree-merge'); }
@@ -268,6 +267,115 @@ const atree_merge = new (class extends ComputeNode {
         return abils_merged;
     }
 })().link_to(atree_node, 'atree').link_to(atree_render, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+
+/**
+ * Validate ability tree.
+ * Return list of errors for rendering.
+ *
+ * Signature: AbilityTreeMergeNode(atree: ATree, atree-state: RenderedATree) => List[str]
+ */
+const atree_validate = new (class extends ComputeNode {
+    constructor() { super('atree-validator'); }
+
+    compute_func(input_map) {
+        const atree_state = input_map.get('atree-state');
+        const atree_order = input_map.get('atree');
+
+        let errors = [];
+        let reachable = new Map();
+        atree_dfs_mark(atree_order[0], atree_state, reachable);
+        for (const node of atree_order) {
+            const abil = node.ability;
+            if (!atree_state.get(abil.id).active) { continue; }
+            if (!reachable.get(abil.id)) { errors.push(abil.display_name + ' is not reachable!'); }
+
+            let failed_deps = [];
+            for (const dep_id of abil.dependencies) {
+                if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+            }
+            if (failed_deps.length > 0) {
+                const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.name + '"');
+                errors.push(abil.name + ' dependencies not satisfied: ' + dep_string.join(", "));
+            }
+
+            let blocking_ids = [];
+            for (const blocker_id of abil.blockers) {
+                if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+            }
+            if (blocking_ids.length > 0) {
+                const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.name + '"');
+                errors.push(abil.name + ' is blocked by: ' + blockers_string.join(", "));
+            }
+        }
+
+        return errors;
+    }
+})().link_to(atree_node, 'atree').link_to(atree_render, 'atree-state');
+
+function atree_dfs_mark(start, atree_state, mark) {
+    if (mark.get(start)) { return; }
+    mark.set(start.ability.id, true);
+    for (const child of start.children) {
+        if (atree_state.get(child.ability.id).active) {
+            atree_dfs_mark(child, atree_state, mark);
+        }
+    }
+}
+
+const atree_render_active = new (class extends ComputeNode {
+    constructor() {
+        super('atree-render-active');
+        this.list_elem = document.getElementById("atree-active");
+    }
+
+    compute_func(input_map) {
+        const merged_abils = input_map.get('atree-merged');
+        const atree_order = input_map.get('atree-order');
+        const errors = input_map.get('atree-errors');
+
+        this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
+        if (errors.length > 0) {
+            let errorbox = document.createElement('div');
+            errorbox.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+            this.list_elem.appendChild(errorbox);
+
+            let error_title = document.createElement('b');
+            error_title.classList.add("warning", "scaled-font");
+            error_title.innerHTML = "ATree Error!";
+            errorbox.appendChild(error_title);
+
+            for (const error of errors) {
+                let atree_warning = document.createElement("p");
+                atree_warning.classList.add("warning", "small-text");
+                atree_warning.textContent = error;
+                errorbox.appendChild(atree_warning);
+            }
+        }
+        for (const node of atree_order) {
+            if (!merged_abils.has(node.ability.id)) {
+                continue;
+            }
+            const abil = merged_abils.get(node.ability.id);
+
+            let active_tooltip = document.createElement('div');
+            active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+
+            let active_tooltip_title = document.createElement('b');
+            active_tooltip_title.classList.add("scaled-font");
+            active_tooltip_title.innerHTML = abil.display_name;
+            active_tooltip.appendChild(active_tooltip_title);
+
+            for (const desc of abil.desc) {
+                let active_tooltip_desc = document.createElement('p');
+                active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+                active_tooltip_desc.textContent = desc;
+                active_tooltip.appendChild(active_tooltip_desc);
+            }
+
+            this.list_elem.appendChild(active_tooltip);
+        }
+    }
+})().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
 
 /**
  * Collect spells from abilities.
@@ -404,7 +512,7 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
         const spell_map = input_map.get('spells');  // TODO: is this gonna need more? idk...
                                                     // TODO shortcut update path for sliders
 
-        for (const [spell_id, spell] of spell_map.entries()) {
+        for (const [spell_id, spell] of new Map([...spell_map].sort((a, b) => a[0] - b[0])).entries()) {
             let spell_node = new SpellSelectNode(spell);
             spell_node.link_to(build_node, 'build');
 
@@ -435,6 +543,7 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
     }
 }
 
+let abil_points_current;
 /** The main function for rendering an ability tree. 
  * 
  * @param {Element} UI_elem - the DOM element to draw the atree within.
@@ -619,33 +728,30 @@ function render_AT(UI_elem, list_elem, tree) {
         active_tooltip.appendChild(active_tooltip_desc);
         active_tooltip.appendChild(active_tooltip_cost);
 
-        node_tooltip = active_tooltip.cloneNode(true);
-
-        active_tooltip.id = "atree-ab-" + ability.id;
+        node_tooltip = active_tooltip;//.cloneNode(true);
 
         node_tooltip.style.position = "absolute";
         node_tooltip.style.zIndex = "100";
 
         node_elem.appendChild(node_tooltip);
-        list_elem.appendChild(active_tooltip);
+        //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
 
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = document.getElementById("atree-ab-" + ability.id);
-            if (tooltip.style.display === "block") {
-                tooltip.style.display = "none";
+            if (node_wrap.active) {
                 this.classList.remove("atree-selected");
                 abil_points_current -= ability.cost;
             } 
             else {
-                tooltip.style.display = "block";
                 this.classList.add("atree-selected");
                 abil_points_current += ability.cost;
             };
             document.getElementById("active_AP_cost").textContent = abil_points_current;
             atree_toggle_state(atree_connectors_map, node_wrap);
             atree_merge.mark_dirty();
+            atree_validate.mark_dirty();
             atree_merge.update();
+            atree_validate.update();
         });
 
         // add tooltip
