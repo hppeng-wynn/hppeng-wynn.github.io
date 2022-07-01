@@ -1664,7 +1664,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
 
 
             if (spell_info.name === spell.display) {
-                _summary(spell_info.name+ " Average: ", averageDamage, "Damage");
+                _summary(spell_info.name+ ": ", averageDamage, "Damage");
             }
             
             function _damage_display(label_text, average, dmg_min, dmg_max) {

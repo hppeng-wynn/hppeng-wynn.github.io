@@ -55,7 +55,8 @@ convert_spell_conv: {
 }
 raw_stat: {
     type:           "raw_stat"
-    toggle:         Optional[bool]  // default: false
+    toggle:         Optional[bool | str]    // default: false; true means create anon. toggle,
+                                            // string value means bind to (or create) named button
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
@@ -443,24 +444,25 @@ const atree_collect_spells = new (class extends ComputeNode {
         for (const [abil_id, abil] of atree_merged.entries()) {
             // TODO: Possibly, make a better way for detecting "spell abilities"?
             if (abil.effects.length == 0) { continue; }
+
+            let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
             let has_spell_def = false;
             for (const effect of abil.effects) {
                 if (effect.type === 'replace_spell') {
                     has_spell_def = true;
-                    break;
-                }
-            }
-            if (!has_spell_def) { continue; }
-
-            let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
-            const base_spell_id = ret_spell.base_spell;
-            for (const effect of abil.effects) {
-                switch (effect.type) {
-                case 'replace_spell':
                     // replace_spell just replaces all (defined) aspects.
                     for (const key in effect) {
                         ret_spell[key] = effect[key];
                     }
+                }
+            }
+            if (!has_spell_def) { continue; }
+
+            const base_spell_id = ret_spell.base_spell;
+            for (const effect of abil.effects) {
+                switch (effect.type) {
+                case 'replace_spell':
+                    // Already handled above.
                     continue;
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0} = effect;

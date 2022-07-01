@@ -180,9 +180,8 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
 Spell schema:
 
 spell: {
-    name:           str             internal string name for the spell. Unique identifier
+    name:           str             internal string name for the spell. Unique identifier, also display
     cost:           Optional[int]   ignored for spells that are not id 1-4
-    display_text:   str             short description of the spell, ex. Bash, Meteor, Arrow Shield
     base_spell:     int             spell index. 0-4 are reserved (0 is melee, 1-4 is common 4 spells)
     spell_type:     str             [TODO: DEPRECATED/REMOVE] "healing" or "damage"
     scaling:        Optional[str]   [DEFAULT: "spell"] "melee" or "spell"
@@ -242,14 +241,12 @@ const default_spells = {
     wand: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Wand Melee",  // TODO: name for melee attacks?
-        display_text: "Mage basic attack",
         base_spell: 0,
         scaling: "melee", use_atkspd: false,
         display: "Melee",
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
     }, {
         name: "Heal",  // TODO: name for melee attacks? // JUST FOR TESTING...
-        display_text: "Heal spell!",
         base_spell: 1,
         display: "Total Heal",
         parts: [
@@ -261,7 +258,6 @@ const default_spells = {
     spear: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Melee",  // TODO: name for melee attacks?
-        display_text: "Warrior basic attack",
         base_spell: 0,
         scaling: "melee", use_atkspd: false,
         display: "Melee",
@@ -270,16 +266,14 @@ const default_spells = {
     bow: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Bow Shot",  // TODO: name for melee attacks?
-        display_text: "Archer basic attack",
         base_spell: 0,
         scaling: "melee", use_atkspd: false,
-        display: "Melee",
-        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+        display: "Single Shot",
+        parts: [{ name: "Single Shot", multipliers: [100, 0, 0, 0, 0, 0] }]
     }],
     dagger: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Melee",  // TODO: name for melee attacks?
-        display_text: "Assassin basic attack",
         base_spell: 0,
         scaling: "melee", use_atkspd: false,
         display: "Melee",
@@ -288,7 +282,6 @@ const default_spells = {
     relik: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
         name: "Relik Melee",  // TODO: name for melee attacks?
-        display_text: "Shaman basic attack",
         base_spell: 0,
         spell_type: "damage",
         scaling: "melee", use_atkspd: false,
