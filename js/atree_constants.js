@@ -1680,7 +1680,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": ["Cheaper Arrow Storm", "Grappling Hook"],
-            "dependencies": [],
+            "dependencies": ["Focus"],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -1707,7 +1707,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": ["Crepuscular Ray", "Snow Storm"],
-            "dependencies": [],
+            "dependencies": ["Focus"],
             "blockers": [],
             "cost": 1,
             "display": {
