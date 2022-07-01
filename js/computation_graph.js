@@ -151,7 +151,7 @@ class ValueCheckComputeNode extends ComputeNode {
         }
         let val = this.compute_func(calc_inputs);
         if (val !== this.value) {
-            this.mark_dirty(2);
+            super.mark_dirty(2);
         }
         else {
             console.log("soft update");
