@@ -1121,7 +1121,7 @@ const atrees = {
         },
         {
             "display_name": "Fire Mastery",
-            "desc": "Increases base damage from all Earth attacks",
+            "desc": "Increases base damage from all Fire attacks",
             "archetype": "Sharpshooter", 
             "archetype_req": 0, 
             "parents": ["Thunder Mastery", "Arrow Shield", "Cheaper Escape"],
@@ -1245,7 +1245,7 @@ const atrees = {
             "display_name": "More Traps",
             "desc": "Increase the maximum amount of active Traps you can have by +2.",
             "archetype": "Trapper",
-            "archetype_req": 10, 
+            "archetype_req": 0, 
             "base_abil": "Arrow Bomb",
             "parents": ["Bouncing Bomb"], 
             "dependencies": ["Basaltic Trap"], 
