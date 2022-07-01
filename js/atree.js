@@ -487,7 +487,8 @@ const atree_collect_spells = new (class extends ComputeNode {
                             }
                             else if ('hits' in effect) {
                                 for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
-                                    part.hits[idx] += v;
+                                    if (idx in part.hits) { part.hits[idx] += v; }
+                                    else { part.hits[idx] = v; }
                                 }
                             }
                             else {
