@@ -153,14 +153,27 @@ class Build{
     */
     initBuildStats(){
 
-        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi", "dmgMobs", "defMobs"];
+        let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef", "str", "dex", "int", "def", "agi", "damMobs", "defMobs"];
+
+        let must_ids = [
+            "eMdPct","eMdRaw","eSdPct","eSdRaw","eDamPct","eDamRaw","eDamAddMin","eDamAddMax",
+            "tMdPct","tMdRaw","tSdPct","tSdRaw","tDamPct","tDamRaw","tDamAddMin","tDamAddMax",
+            "wMdPct","wMdRaw","wSdPct","wSdRaw","wDamPct","wDamRaw","wDamAddMin","wDamAddMax",
+            "fMdPct","fMdRaw","fSdPct","fSdRaw","fDamPct","fDamRaw","fDamAddMin","fDamAddMax",
+            "aMdPct","aMdRaw","aSdPct","aSdRaw","aDamPct","aDamRaw","aDamAddMin","aDamAddMax",
+            "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
+            "mdPct","mdRaw","sdPct","sdRaw","damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
+            "rMdPct","rMdRaw","rSdPct","rSdRaw","rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+        ]
 
         //Create a map of this build's stats
         let statMap = new Map();
-        statMap.set("damageMultiplier", 1);
         statMap.set("defMultiplier", 1);
 
         for (const staticID of staticIDs) {
+            statMap.set(staticID, 0);
+        }
+        for (const staticID of must_ids) {
             statMap.set(staticID, 0);
         }
         statMap.set("hp", levelToHPBase(this.level)); 
@@ -176,15 +189,7 @@ class Build{
             }
             for (const staticID of staticIDs) {
                 if (item_stats.get(staticID)) {
-                    if (staticID === "dmgMobs") {
-                        statMap.set('damageMultiplier', statMap.get('damageMultiplier') * item_stats.get(staticID));
-                    }
-                    else if (staticID === "defMobs") {
-                        statMap.set('defMultiplier', statMap.get('defMultiplier') * item_stats.get(staticID));
-                    }
-                    else {
                         statMap.set(staticID, statMap.get(staticID) + item_stats.get(staticID));
-                    }
                 }
             }
             if (item_stats.get("majorIds")) {
@@ -193,6 +198,8 @@ class Build{
                 }
             }
         }
+        statMap.set('damageMultiplier', 1 + (statMap.get('damMobs') / 100));
+        statMap.set('defMultiplier', 1 - (statMap.get('defMobs') / 100));
         statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
             const bonus = sets.get(setName).bonuses[count-1];
@@ -211,13 +218,5 @@ class Build{
         statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));
 
         this.statMap = statMap;
-
-        this.aggregateStats();
-    }
-
-    aggregateStats() {
-        let statMap = this.statMap;
-        let weapon_stats = this.weapon.statMap;
-        statMap.set("damageRaw", [weapon_stats.get("nDam"), weapon_stats.get("eDam"), weapon_stats.get("tDam"), weapon_stats.get("wDam"), weapon_stats.get("fDam"), weapon_stats.get("aDam")]);
     }
 }

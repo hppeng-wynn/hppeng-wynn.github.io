@@ -89,6 +89,9 @@ class ComputeNode {
         throw "no compute func specified";
     }
 
+    /**
+     * Add link to a parent compute node, optionally with an alias.
+     */
     link_to(parent_node, link_name) {
         this.inputs.push(parent_node)
         link_name = (link_name !== undefined) ? link_name : parent_node.name;
@@ -98,6 +101,26 @@ class ComputeNode {
             this.inputs_dirty.set(parent_node.name, true);
         }
         parent_node.children.push(this);
+        return this;
+    }
+
+    /**
+     * Delete a link to a parent node.
+     * TODO: time complexity of list deletion (not super relevant but it hurts my soul)
+     */
+    remove_link(parent_node) {
+        const idx = this.inputs.indexOf(parent_node);   // Get idx
+        this.inputs.splice(idx, 1);                     // remove element
+
+        this.input_translation.delete(parent_node.name);
+        const was_dirty = this.inputs_dirty.get(parent_node.name);
+        this.inputs_dirty.delete(parent_node.name);
+        if (was_dirty) {
+            this.inputs_dirty_count -= 1;
+        }
+
+        const idx2 = parent_node.children.indexOf(this);
+        parent_node.children.splice(idx2, 1);
         return this;
     }
 }
@@ -148,5 +171,44 @@ class InputNode extends ComputeNode {
 
     compute_func(input_map) {
         return this.input_field.value;
+    }
+}
+
+/**
+ * Passthrough node for simple aggregation.
+ * Unfortunately if you use this too much you get layers and layers of maps...
+ *
+ * Signature: PassThroughNode(**kwargs) => Map[...]
+ */
+class PassThroughNode extends ComputeNode {
+    constructor(name) {
+        super(name);
+        this.breakout_nodes = new Map();
+    }
+
+    compute_func(input_map) {
+        return input_map;
+    }
+
+    /**
+     * Get a ComputeNode that will "break out" one part of this aggregation input.
+     * There is some overhead to this operation because ComputeNode is not exactly a free abstraction... oof
+     * Also you will recv updates whenever any input that is part of the aggregation changes even
+     * if the specific sub-input didn't change.
+     *
+     * Parameters:
+     *      sub-input: The key to listen to
+     */
+    get_node(sub_input) {
+        if (this.breakout_nodes.has(sub_input)) {
+            return this.breakout_nodes.get(sub_input);
+        }
+        const _name = this.name;
+        const ret = new (class extends ComputeNode {
+                constructor() { super('passthrough-'+_name+'-'+sub_input); }
+                compute_func(input_map) { return input_map.get(_name).get(sub_input); }
+            })().link_to(this);
+        this.breakout_nodes.set(sub_input, ret);
+        return ret;
     }
 }
