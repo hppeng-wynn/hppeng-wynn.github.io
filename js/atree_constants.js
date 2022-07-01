@@ -1513,6 +1513,7 @@ const atrees = {
         {
             "display_name": "Homing Shots",
             "desc": "Your Main Attack arrows will follow nearby enemies and not be affected by gravity",
+            "archetype": "Sharpshooter", 
             "base_abil": 999,
             "parents": ["Leap", "Shocking Bomb"],
             "dependencies": [],
