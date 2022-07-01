@@ -1188,7 +1188,7 @@ const atrees = {
         {
             "display_name": "Air Mastery",
             "desc": "Increases base damage from all Air attacks",
-            "archetype": "Battle Monk", 
+            "archetype": "Boltslinger", 
             "archetype_req": 0, 
             "parents": ["Arrow Storm"], 
             "dependencies": [], 
@@ -1766,7 +1766,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": ["Cheaper Arrow Storm", "Grappling Hook"],
-            "dependencies": [],
+            "dependencies": ["Focus"],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -1797,7 +1797,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": ["Crepuscular Ray", "Snow Storm"],
-            "dependencies": [],
+            "dependencies": ["Focus"],
             "blockers": [],
             "cost": 1,
             "display": {
