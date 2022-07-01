@@ -1194,6 +1194,7 @@ const atrees = {
         {
             "display_name": "Stormy Feet",
             "desc": "Windy Feet will last longer and add more speed.",
+            "archetype": "Boltslinger", 
             "base_abil": "Escape",
             "parents": ["Windstorm"], 
             "dependencies": ["Windy Feet"], 
