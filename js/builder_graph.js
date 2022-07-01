@@ -578,8 +578,17 @@ class SpellDamageCalcNode extends ComputeNode {
                     type: "heal",
                     heal_amount: _heal_amount
                 }
-            } else if ('hits' in part) {
-                spell_result = {
+            }
+            else {
+                continue;
+            }
+            spell_result.name = part.name;
+            spell_results.push(spell_result);
+            spell_result_map.set(part.name, spell_result);
+        }
+        for (const part of spell_parts) {
+            if ('hits' in part) {
+                let spell_result = {
                     normal_min: [0, 0, 0, 0, 0, 0],
                     normal_max: [0, 0, 0, 0, 0, 0],
                     normal_total: [0, 0],
@@ -610,10 +619,10 @@ class SpellDamageCalcNode extends ComputeNode {
                         spell_result.heal_amount += subpart.heal_amount;
                     }
                 }
+                spell_result.name = part.name;
+                spell_results.push(spell_result);
+                spell_result_map.set(part.name, spell_result);
             }
-            spell_result.name = part.name;
-            spell_results.push(spell_result);
-            spell_result_map.set(part.name, spell_result);
         }
         return spell_results;
     }
