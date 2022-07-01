@@ -2832,7 +2832,7 @@ const atrees = {
                     "slider_name": "Corrupted",
                     "output": {
                         "type": "stat",
-                        "name": "raw" 
+                        "name": "damRaw" 
                     },
                     "scaling": [4],
                     "slider_step": 1,
@@ -3378,7 +3378,7 @@ const atrees = {
                     "slider_name": "Corrupted",
                     "output": {
                         "type": "stat",
-                        "name": "raw" 
+                        "name": "damRaw" 
                     },
                     "scaling": [0.5],
                     "max": 50
