@@ -124,16 +124,16 @@ const default_abils = {
 /**
  * Update ability tree internal representation. (topologically sorted node list)
  *
- * Signature: AbilityTreeUpdateNode(build: Build) => ATree (List of atree nodes in topological order)
+ * Signature: AbilityTreeUpdateNode(player-class: str) => ATree (List of atree nodes in topological order)
  */
 const atree_node = new (class extends ComputeNode {
     constructor() { super('builder-atree-update'); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (build)"; }
-        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (player-class)"; }
+        const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
-        const atree_raw = atrees[wep_to_class.get(build.weapon.statMap.get('type'))];
+        const atree_raw = atrees[player_class];
         if (!atree_raw) return null;
 
         let atree_map = new Map();
@@ -799,6 +799,7 @@ function render_AT(UI_elem, list_elem, tree) {
 
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
+            console.log("???");
             atree_set_state(node_wrap, !node_wrap.active);
             atree_state_node.mark_dirty().update();
         });

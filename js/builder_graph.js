@@ -435,6 +435,17 @@ class BuildAssembleNode extends ComputeNode {
     }
 }
 
+class PlayerClassNode extends ValueCheckComputeNode {
+    constructor(name) { super(name); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "PlayerClassNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        return wep_to_class.get(build.weapon.statMap.get('type'));
+    }
+}
+
 /**
  * Read an input field and parse into a list of powderings.
  * Every two characters makes one powder. If parsing fails, NULL is returned.
@@ -1085,8 +1096,9 @@ function builder_graph_init() {
 
     // Phase 3/3: Set up atree stuff.
 
+    let class_node = new PlayerClassNode('builder-class').link_to(build_node);
     // These two are defined in `atree.js`
-    atree_node.link_to(build_node, 'build');
+    atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(build_node, 'build');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
