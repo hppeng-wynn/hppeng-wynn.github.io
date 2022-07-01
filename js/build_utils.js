@@ -76,7 +76,8 @@ let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slot
 "aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct"*/,"aDamRaw","aDamAddMin","aDamAddMax",
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
-"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"critDamPct"
 ];
 // Extra fake IDs (reserved for use in spell damage calculation) : damageMultiplier, defMultiplier, poisonPct, activeMajorIDs
 let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ]
