@@ -594,15 +594,15 @@ function render_AT(UI_elem, list_elem, tree) {
 
         let tooltip_title = document.createElement('div');
         tooltip_title.classList.add("row", "justify-content-center", "fw-bold");
-        tooltip_title.textContent = node.display_name;
+        tooltip_title.textContent = ability.display_name;
 
         let tooltip_desc = document.createElement('div');
         tooltip_desc.classList.add("row", "mx-1", "text-wrap");
-        tooltip_desc.textContent = node.desc;
+        tooltip_desc.textContent = ability.desc;
 
         let tooltip_cost = document.createElement('div');
         tooltip_cost.classList.add("row", "mx-1", "text-start");
-        tooltip_cost.textContent = "Cost: " + node.cost + " AP";
+        tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
 
         //create node tooltip
         let node_tooltip = document.createElement('div');
@@ -619,22 +619,19 @@ function render_AT(UI_elem, list_elem, tree) {
         node_tooltip.appendChild(tooltip_cost);
 
         //add in anything new for active tooltips
-        active_tooltip.id = "atree-ab-" + node.id;
+        active_tooltip.id = "atree-ab-" + ability.id;
 
-        if (node.blockers.length > 0) {
+        if (ability.blockers.length > 0) {
             let active_tooltip_blockers = document.createElement("div");
             active_tooltip_blockers.classList.add("row", "mx-1", "text-start");
-            active_tooltip_blockers.textContent = "Blockers: " + node.blockers.join(", ");
+            active_tooltip_blockers.textContent = "Blockers: " + ability.blockers.join(", ");
             active_tooltip.append(active_tooltip_blockers);
         }
 
         //add in slider(s)
-        for (const effect of node.effects) {
-            if (effect.type === "stat_scaling") {
-                //TOOD: write boilerplate function for generating sliders + slider wrappers and call that function here
-                let slider_container = document.createElement("div");
-                slider_container.classList.add("row", "mx-1");
-                slider_container.textContent = "There will be a slider here eventually";
+        for (const effect of ability.effects) {
+            if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
+                let slider_container = gen_slider_labeled(effect['slider_name'], [], effect['min'], effect['max'], effect['slider_step'], effect['default_val'], "ability-slider" + ability.id, effect['slider_color'], []);
                 active_tooltip.appendChild(slider_container);
             }
         }

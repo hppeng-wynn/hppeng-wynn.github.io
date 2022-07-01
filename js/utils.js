@@ -513,3 +513,97 @@ function deepcopy(obj) {
     }
     return ret;
 }
+
+
+/**
+ * 
+ */
+function gen_slider_labeled(label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []) {
+    let slider_container = document.createElement("div");
+    slider_container.classList.add("row");
+
+    let buf_col = document.createElement("div");
+    buf_col.classList.add("col", "mx-1");
+
+    let slider = gen_slider(min, max, step, default_val, id, color, classlist);
+    
+    let label = document.createElement("div");
+    label.classList.add("col");
+    label.classList.add(...label_classlist);
+    label.textContent = label_name + ": " + default_val;
+
+    //we set IDs here because the slider's id is potentially only meaningful after gen_slider() is called
+    label.id = slider.id + "-label";
+    slider_container.id = slider.id + "-container";
+
+    buf_col.append(slider, label);
+    slider_container.appendChild(buf_col);
+
+    return slider_container;
+}
+
+/** Creates a slider input (input type = range) given styling parameters
+ * 
+ * @param {Number | String} min - The minimum value for the slider. defaults to 0
+ * @param {Number | String} max - The maximum value for the slider. defaults to 100
+ * @param {Number | String} step - The granularity between possible values. defaults to 1
+ * @param {Number | String} default_val - The default value to set the slider to.
+ * @param {String} id - The element ID to use for the slider. defaults to the current date time
+ * @param {String} color - The hex color to use for the slider. Needs the # character.
+ * @param {Array<String>} classlist - A list of classes to add to the slider.
+ * @returns 
+ */
+function gen_slider(min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []) {
+    //simple attribute vals
+    let slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = min;
+    slider.max = max;
+    slider.step = step;
+    slider.value = default_val;
+    slider.autocomplete = "off";
+    if (id) {
+        if (document.getElementById(id)) {
+            throw new Error("ID " + id + " already exists within the DOM.")
+        } else {
+            slider.id = id;
+        }
+    } else {
+        slider.id = new Date().toLocaleTimeString();
+    }
+    slider.color = color;
+    slider.classList.add(...classlist); //special spread operator - 
+     //necessary for display purposes
+     slider.style.webkitAppearance = "none";
+     slider.style.borderRadius = "30px";
+     slider.style.height = "0.5rem";
+     slider.classList.add("px-0");
+
+    //set up recoloring
+    slider.addEventListener("change", function(e) {
+        recolor_slider(slider.id);
+    });
+    //do recoloring for the default val
+    let pct = Math.round(100 * (parseInt(slider.value) - parseInt(slider.min)) / (parseInt(slider.max) - parseInt(slider.min)));
+    slider.style.background = `rgba(0, 0, 0, 0) linear-gradient(to right, ${color}, ${color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;  
+
+    //return slider
+    return slider;
+}
+
+/** Recolors a slider. If the corresponding label exists, also update that.
+ * 
+ * @param {String} id - the ID of the slider
+ */
+function recolor_slider(id) {
+    let slider = document.getElementById(id);
+    let color = slider.color;
+    let pct = Math.round(100 * (parseInt(slider.value) - parseInt(slider.min)) / (parseInt(slider.max) - parseInt(slider.min)));
+    slider.style.background = `rgba(0, 0, 0, 0) linear-gradient(to right, ${color}, ${color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;  
+
+    let label = document.getElementById(id + "-label");
+    if (label) {
+        //convention is that the number goes at the end... I parse by separating it at ':'
+        label.textContent = label.textContent.split(":")[0] + ": " + slider.value;
+    }
+} 
