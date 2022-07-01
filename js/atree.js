@@ -474,9 +474,6 @@ const atree_collect_spells = new (class extends ComputeNode {
                     let found_part = false;
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
                         if (part.name === target_part) {
-                            if ('display' in effect) {
-                                part.display = effect.display;
-                            }
                             if ('multipliers' in effect) {
                                 for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
                                     part.multipliers[idx] += v;
@@ -502,6 +499,9 @@ const atree_collect_spells = new (class extends ComputeNode {
                         let spell_part = deepcopy(effect);
                         spell_part.name = target_part;  // has some extra fields but whatever
                         ret_spell.parts.push(spell_part);
+                    }
+                    if ('display' in effect) {
+                        ret_spell.display = effect.display;
                     }
                     continue;
                 }

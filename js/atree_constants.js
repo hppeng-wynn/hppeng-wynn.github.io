@@ -2158,19 +2158,15 @@ const atrees = {
                 "base_spell": 2,
                 "spell_type": "damage",
                 "scaling": "spell",
-                "display": "Total Damage",
-                "parts": [
-                    {
-                        "name": "Total Damage",
-                        "hits": {}
-                    }
-                ]
+                "display": "",
+                "parts": []
             }]  
         },
 
         {
             "display_name": "Heavy Impact",
             "desc": "After using Charge, violently crash down into the ground and deal damage",
+            "base_abil": "Charge",
             "parents": ["Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -2190,6 +2186,13 @@ const atrees = {
                     "target_part": "Heavy Impact",
                     "cost": 0,
                     "multipliers": [100, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Contact Damage",
+                    "display": "Contact Damage",
+                    "hits": { "Heavy Impact": 1 }
                 }
             ]  
         },
@@ -2374,14 +2377,14 @@ const atrees = {
                     "base_spell": 4,
                     "spell_type": "damage",
                     "scaling": "spell",
-                    "display": "Total Damage Average",
+                    "display": "Total Damage",
                     "parts": [
                         {
                             "name": "War Scream",
                             "multipliers": [50, 0, 0, 0, 50, 0]
                         },
                         {
-                            "name": "Total Damage Average",
+                            "name": "Total Damage",
                             "hits": { "War Scream": 1 }
                         }
                     ]
@@ -2656,6 +2659,13 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Flyby Jab",
                     "multipliers": [20, 0, 0, 0, 0, 40]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Contact Damage",
+                    "display": "Contact Damage",
+                    "hits": { "Flyby Jab": 1 }
                 }
             ]  
         },
