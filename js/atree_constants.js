@@ -614,6 +614,7 @@ const atrees = {
                 },
                 { 
                     "type": "add_spell_prop",
+                    "base_spell": 2, 
                     "target_part": "Max Damage (Escape Artist)", 
                     "hits": { "Per Arrow": 120 },
                     "display": "Max Damage (Escape Artist)"
