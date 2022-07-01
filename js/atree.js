@@ -799,7 +799,6 @@ function render_AT(UI_elem, list_elem, tree) {
 
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
-            console.log("???");
             atree_set_state(node_wrap, !node_wrap.active);
             atree_state_node.mark_dirty().update();
         });
