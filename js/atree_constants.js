@@ -566,7 +566,7 @@ const atrees = {
         },
         {
             "display_name": "Mana Trap",
-            "desc": "Your Traps will give you 4 Mana per second when you stay close to them.",
+            "desc": "Your Traps will give you 2.85 Mana per second when you stay close to them.",
             "archetype": "Trapper", 
             "archetype_req": 5, 
             "base_abil": "Arrow Bomb",
@@ -580,7 +580,7 @@ const atrees = {
             },
             "properties": {
                 "range": 12,
-                "manaRegen": 4
+                "manaRegen": 2.85
             },
             "effects": [
                 { 
