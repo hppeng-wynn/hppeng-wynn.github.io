@@ -14,7 +14,10 @@ class ComputeNode {
         this.name = name;
         this.update_task = null;
         this.fail_cb = false;   // Set to true to force updates even if parent failed.
-        this.dirty = true;
+        this.dirty = 2;         // 3 states:
+                                // 2: dirty
+                                // 1: possibly dirty
+                                // 0: clean
         this.inputs_dirty = new Map();
         this.inputs_dirty_count = 0;
         all_nodes.push(this);
@@ -27,15 +30,17 @@ class ComputeNode {
         if (this.inputs_dirty_count != 0) {
             return;
         }
-        if (!this.dirty) {
+        if (this.dirty === 0) {
             return;
         }
-        let calc_inputs = new Map();
-        for (const input of this.inputs) {
-            calc_inputs.set(this.input_translation.get(input.name), input.value);
+        if (this.dirty == 2) {
+            let calc_inputs = new Map();
+            for (const input of this.inputs) {
+                calc_inputs.set(this.input_translation.get(input.name), input.value);
+            }
+            this.value = this.compute_func(calc_inputs);
         }
-        this.value = this.compute_func(calc_inputs);
-        this.dirty = false;
+        this.dirty = 0;
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
         }
@@ -64,12 +69,12 @@ class ComputeNode {
         }
     }
 
-    mark_dirty() {
-        if (!this.dirty) {
-            this.dirty = true;
+    mark_dirty(dirty_state=2) {
+        if (this.dirty < dirty_state) {
+            this.dirty = dirty_state;
             for (const child of this.children) {
                 child.mark_input_dirty(this.name);
-                child.mark_dirty();
+                child.mark_dirty(dirty_state);
             }
         }
         return this;
@@ -123,6 +128,50 @@ class ComputeNode {
         parent_node.children.splice(idx2, 1);
         return this;
     }
+}
+
+class ValueCheckComputeNode extends ComputeNode {
+    constructor(name) { super(name); }
+
+    /**
+     * Request update of this compute node. Pushes updates to children,
+     * but only if this node's value changed.
+     */
+    update() {
+        if (this.inputs_dirty_count != 0) {
+            return;
+        }
+        if (this.dirty === 0) {
+            return;
+        }
+
+        let calc_inputs = new Map();
+        for (const input of this.inputs) {
+            calc_inputs.set(this.input_translation.get(input.name), input.value);
+        }
+        let val = this.compute_func(calc_inputs);
+        if (val !== this.value) {
+            super.mark_dirty(2);
+        }
+        else {
+            console.log("soft update");
+        }
+        this.value = val;
+
+        this.dirty = 0;
+        for (const child of this.children) {
+            child.mark_input_clean(this.name, this.value);
+        }
+        return this;
+    }
+
+    /**
+     * Defaulting to "dusty" state.
+     */
+    mark_dirty(dirty_state="unused") {
+        return super.mark_dirty(1);
+    }
+
 }
 
 /**

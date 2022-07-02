@@ -49,7 +49,10 @@ let boosts_node = new (class extends ComputeNode {
                 if (key === "vanish") { def_boost += .15 }
             }
         }
-        return [damage_boost, def_boost];
+        let res = new Map();
+        res.set('damageMultiplier', 1+damage_boost);
+        res.set('defMultiplier', 1+def_boost);
+        return res;
     }
 })().update();
 
@@ -344,6 +347,8 @@ class BuildEncodeNode extends ComputeNode {
 
     compute_func(input_map) {
         const build = input_map.get('build');
+        const atree = input_map.get('atree');
+        const atree_state = input_map.get('atree-state');
         let powders = [
             input_map.get('helmet-powder'),
             input_map.get('chestplate-powder'),
@@ -361,7 +366,7 @@ class BuildEncodeNode extends ComputeNode {
         // TODO: grr global state for copy button..
         player_build = build;
         build_powders = powders;
-        return encodeBuild(build, powders, skillpoints);
+        return encodeBuild(build, powders, skillpoints, atree, atree_state);
     }
 }
 
@@ -427,6 +432,16 @@ class BuildAssembleNode extends ComputeNode {
             return null;
         }
         return new Build(level, equipments, weapon);
+    }
+}
+
+class PlayerClassNode extends ValueCheckComputeNode {
+    constructor(name) { super(name); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "PlayerClassNode accepts exactly one input (build)"; }
+        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        return wep_to_class.get(build.weapon.statMap.get('type'));
     }
 }
 
@@ -573,8 +588,17 @@ class SpellDamageCalcNode extends ComputeNode {
                     type: "heal",
                     heal_amount: _heal_amount
                 }
-            } else if ('hits' in part) {
-                spell_result = {
+            }
+            else {
+                continue;
+            }
+            spell_result.name = part.name;
+            spell_results.push(spell_result);
+            spell_result_map.set(part.name, spell_result);
+        }
+        for (const part of spell_parts) {
+            if ('hits' in part) {
+                let spell_result = {
                     normal_min: [0, 0, 0, 0, 0, 0],
                     normal_max: [0, 0, 0, 0, 0, 0],
                     normal_total: [0, 0],
@@ -605,10 +629,10 @@ class SpellDamageCalcNode extends ComputeNode {
                         spell_result.heal_amount += subpart.heal_amount;
                     }
                 }
+                spell_result.name = part.name;
+                spell_results.push(spell_result);
+                spell_result_map.set(part.name, spell_result);
             }
-            spell_result.name = part.name;
-            spell_results.push(spell_result);
-            spell_result_map.set(part.name, spell_result);
         }
         return spell_results;
     }
@@ -749,7 +773,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
             document.getElementById(skp_order[i]+"-warnings").textContent = ''
             if (assigned > 100) {
                 let skp_warning = document.createElement("p");
-                skp_warning.classList.add("warning"); skp_warning.classList.add("small-text");
+                skp_warning.classList.add("warning", "small-text");
                 skp_warning.textContent += "Cannot assign " + assigned + " skillpoints in " + ["Strength","Dexterity","Intelligence","Defense","Agility"][i] + " manually.";
                 document.getElementById(skp_order[i]+"-warnings").appendChild(skp_warning);
             }
@@ -1071,11 +1095,14 @@ function builder_graph_init() {
 
     // Phase 3/3: Set up atree stuff.
 
+    let class_node = new PlayerClassNode('builder-class').link_to(build_node);
     // These two are defined in `atree.js`
-    atree_node.link_to(build_node, 'build');
+    atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(build_node, 'build');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
+
+    build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
     // ---------------------------------------------------------------
     //  Trigger the update cascade for build!
@@ -1084,6 +1111,18 @@ function builder_graph_init() {
         input_node.update();
     }
     level_input.update();
+
+    // kinda janky, manually set atree and update. Some wasted compute here
+    if (atree_data !== null && atree_node.value !== null) { // janky check if atree is valid
+        const atree_state = atree_state_node.value;
+        if (atree_data.length > 0) {
+            const active_nodes = decode_atree(atree_node.value, atree_data);
+            for (const node of active_nodes) {
+                atree_set_state(atree_state.get(node.ability.id), true);
+            }
+            atree_state_node.mark_dirty().update();
+        }
+    }
 
     // Powder specials.
     let powder_special_calc = new PowderSpecialCalcNode().link_to(powder_special_input, 'powder-specials');

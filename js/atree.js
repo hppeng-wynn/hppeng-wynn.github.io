@@ -1,5 +1,3 @@
-let abil_points_current;
-
 /**
 ATreeNode spec:
 
@@ -49,14 +47,17 @@ add_spell_prop: {
 }
 
 convert_spell_conv: {
-  "type": "convert_spell_conv",
-  "base_spell": int
-  "target_part": "all" | str,
-  "conversion": element_str
+    type:           "convert_spell_conv"
+    base_spell:     int             // spell identifier
+    target_part:    "all" | str     // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
+                                    //      "all" means modify all parts.
+    conversion:     element_str
 }
 raw_stat: {
-  "type": "raw_stat",
-  "bonuses": list[stat_bonus]
+    type:           "raw_stat"
+    toggle:         Optional[bool | str]    // default: false; true means create anon. toggle,
+                                            // string value means bind to (or create) named button
+    bonuses:        List[stat_bonus]
 }
 stat_bonus: {
   "type": "stat" | "prop",
@@ -70,7 +71,7 @@ stat_scaling: {
   "slider_name": Optional[str],
   "slider_step": Optional[float],
   "inputs": Optional[list[scaling_target]],
-  "output": scaling_target,
+  "output": scaling_target | List[scaling_target],
   "scaling": list[float],
   "max": float
 }
@@ -124,16 +125,16 @@ const default_abils = {
 /**
  * Update ability tree internal representation. (topologically sorted node list)
  *
- * Signature: AbilityTreeUpdateNode(build: Build) => ATree (List of atree nodes in topological order)
+ * Signature: AbilityTreeUpdateNode(player-class: str) => ATree (List of atree nodes in topological order)
  */
 const atree_node = new (class extends ComputeNode {
     constructor() { super('builder-atree-update'); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (build)"; }
-        const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (player-class)"; }
+        const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
-        const atree_raw = atrees[wep_to_class.get(build.weapon.statMap.get('type'))];
+        const atree_raw = atrees[player_class];
         if (!atree_raw) return null;
 
         let atree_map = new Map();
@@ -169,15 +170,23 @@ const atree_node = new (class extends ComputeNode {
  * Signature: AbilityTreeRenderNode(atree: ATree) => RenderedATree ( Map[id, RenderedATNode] )
  */
 const atree_render = new (class extends ComputeNode {
-    constructor() { super('builder-atree-render'); this.fail_cb = true; }
+    constructor() {
+        super('builder-atree-render');
+        this.fail_cb = true;
+        this.UI_elem = document.getElementById("atree-ui");
+        this.list_elem = document.getElementById("atree-header");
+    }
 
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeRenderNode accepts exactly one input (atree)"; }
         const [atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         
         //for some reason we have to cast to string 
+        this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
+        this.UI_elem.innerHTML = ""; //reset the atree in the DOM
+
         let ret = null;
-        if (atree) { ret = render_AT(document.getElementById("atree-ui"), document.getElementById("atree-active"), atree); }
+        if (atree) { ret = render_AT(this.UI_elem, this.list_elem, atree); }
 
         //Toggle on, previously was toggled off
         toggle_tab('atree-dropdown'); toggleButton('toggle-atree');
@@ -185,6 +194,17 @@ const atree_render = new (class extends ComputeNode {
         return ret;
     }
 })().link_to(atree_node);
+
+// This exists so i don't have to re-render the UI to push atree updates.
+const atree_state_node = new (class extends ComputeNode {
+    constructor() { super('builder-atree-state'); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeStateNode accepts exactly one input (atree-rendered)"; }
+        const [rendered_atree] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        return rendered_atree;
+    }
+})().link_to(atree_render, 'atree-render');
 
 /**
  * Create a reverse topological sort of the tree in the result list.
@@ -216,7 +236,7 @@ function topological_sort_tree(tree, res, mark_state) {
  * I stg if wynn makes abils that modify multiple spells
  * ... well we can extend this by making `base_abil` a list instead but annoy
  *
- * Signature: AbilityTreeMergeNode(atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
+ * Signature: AbilityTreeMergeNode(build: Build, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
  */
 const atree_merge = new (class extends ComputeNode {
     constructor() { super('builder-atree-merge'); }
@@ -267,7 +287,146 @@ const atree_merge = new (class extends ComputeNode {
         }
         return abils_merged;
     }
-})().link_to(atree_node, 'atree').link_to(atree_render, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+
+/**
+ * Validate ability tree.
+ * Return list of errors for rendering.
+ *
+ * Signature: AbilityTreeMergeNode(atree: ATree, atree-state: RenderedATree) => List[str]
+ */
+const atree_validate = new (class extends ComputeNode {
+    constructor() { super('atree-validator'); }
+
+    compute_func(input_map) {
+        const atree_state = input_map.get('atree-state');
+        const atree_order = input_map.get('atree');
+
+        let errors = [];
+        let reachable = new Map();
+        atree_dfs_mark(atree_order[0], atree_state, reachable);
+        let abil_points_total = 0;
+        let archetype_count = new Map();
+        for (const node of atree_order) {
+            const abil = node.ability;
+            if (!atree_state.get(abil.id).active) { continue; }
+            abil_points_total += abil.cost;
+            if (!reachable.get(abil.id)) { errors.push(abil.display_name + ' is not reachable!'); }
+
+            let failed_deps = [];
+            for (const dep_id of abil.dependencies) {
+                if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+            }
+            if (failed_deps.length > 0) {
+                const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+                errors.push(abil.display_name + ' dependencies not satisfied: ' + dep_string.join(", "));
+            }
+
+            let blocking_ids = [];
+            for (const blocker_id of abil.blockers) {
+                if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+            }
+            if (blocking_ids.length > 0) {
+                const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+                errors.push(abil.display_name+' is blocked by: '+blockers_string.join(", "));
+            }
+
+            if ('archetype' in abil && abil.archetype !== "") {
+                let val = 1;
+                if (archetype_count.has(abil.archetype)) {
+                    val = archetype_count.get(abil.archetype) + 1;
+                }
+                archetype_count.set(abil.archetype, val);
+            }
+        }
+        // TODO: FIX THIS! ARCHETYPE REQ IS A PAIN IN THE ASS
+        // it doesn't follow topological order and theres some cases where "equip order" matters.
+        for (const node of atree_order) {
+            const abil = node.ability;
+            if (!atree_state.get(abil.id).active) { continue; }
+            if ('archetype_req' in abil && abil.archetype_req !== 0) {
+                const others = archetype_count.get(abil.archetype) - 1;
+                if (others < abil.archetype_req) {
+                    errors.push(abil.display_name+' fails archetype: '+abil.archetype+': '+others+' < '+abil.archetype_req)
+                }
+            }
+        }
+
+        if (abil_points_total > 45) {
+            errors.push('too many ability points assigned! ('+abil_points_total+' > 45)');
+        }
+
+        return [abil_points_total, errors];
+    }
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
+
+function atree_dfs_mark(start, atree_state, mark) {
+    if (mark.get(start.ability.id)) { return; }
+    mark.set(start.ability.id, true);
+    for (const child of start.children) {
+        if (atree_state.get(child.ability.id).active) {
+            atree_dfs_mark(child, atree_state, mark);
+        }
+    }
+}
+
+const atree_render_active = new (class extends ComputeNode {
+    constructor() {
+        super('atree-render-active');
+        this.list_elem = document.getElementById("atree-active");
+    }
+
+    compute_func(input_map) {
+        const merged_abils = input_map.get('atree-merged');
+        const atree_order = input_map.get('atree-order');
+        const [abil_points_total, errors] = input_map.get('atree-errors');
+
+        this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
+        // TODO: move to display?
+        document.getElementById("active_AP_cost").textContent = abil_points_total;
+
+        if (errors.length > 0) {
+            let errorbox = document.createElement('div');
+            errorbox.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+            this.list_elem.appendChild(errorbox);
+
+            let error_title = document.createElement('b');
+            error_title.classList.add("warning", "scaled-font");
+            error_title.innerHTML = "ATree Error!";
+            errorbox.appendChild(error_title);
+
+            for (const error of errors) {
+                let atree_warning = document.createElement("p");
+                atree_warning.classList.add("warning", "small-text");
+                atree_warning.textContent = error;
+                errorbox.appendChild(atree_warning);
+            }
+        }
+        for (const node of atree_order) {
+            if (!merged_abils.has(node.ability.id)) {
+                continue;
+            }
+            const abil = merged_abils.get(node.ability.id);
+
+            let active_tooltip = document.createElement('div');
+            active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+
+            let active_tooltip_title = document.createElement('b');
+            active_tooltip_title.classList.add("scaled-font");
+            active_tooltip_title.innerHTML = abil.display_name;
+            active_tooltip.appendChild(active_tooltip_title);
+
+            for (const desc of abil.desc) {
+                let active_tooltip_desc = document.createElement('p');
+                active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+                active_tooltip_desc.textContent = desc;
+                active_tooltip.appendChild(active_tooltip_desc);
+            }
+
+            this.list_elem.appendChild(active_tooltip);
+        }
+    }
+})().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
 
 /**
  * Collect spells from abilities.
@@ -284,17 +443,26 @@ const atree_collect_spells = new (class extends ComputeNode {
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
             // TODO: Possibly, make a better way for detecting "spell abilities"?
-            if (abil.effects.length == 0 || abil.effects[0].type !== 'replace_spell') { continue; }
+            if (abil.effects.length == 0) { continue; }
 
             let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
-            const base_spell_id = ret_spell.base_spell;
+            let has_spell_def = false;
             for (const effect of abil.effects) {
-                switch (effect.type) {
-                case 'replace_spell':
+                if (effect.type === 'replace_spell') {
+                    has_spell_def = true;
                     // replace_spell just replaces all (defined) aspects.
                     for (const key in effect) {
                         ret_spell[key] = effect[key];
                     }
+                }
+            }
+            if (!has_spell_def) { continue; }
+
+            const base_spell_id = ret_spell.base_spell;
+            for (const effect of abil.effects) {
+                switch (effect.type) {
+                case 'replace_spell':
+                    // Already handled above.
                     continue;
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0} = effect;
@@ -308,9 +476,6 @@ const atree_collect_spells = new (class extends ComputeNode {
                     let found_part = false;
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
                         if (part.name === target_part) {
-                            if ('display' in effect) {
-                                part.display = effect.display;
-                            }
                             if ('multipliers' in effect) {
                                 for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
                                     part.multipliers[idx] += v;
@@ -321,7 +486,8 @@ const atree_collect_spells = new (class extends ComputeNode {
                             }
                             else if ('hits' in effect) {
                                 for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
-                                    part.hits[idx] += v;
+                                    if (idx in part.hits) { part.hits[idx] += v; }
+                                    else { part.hits[idx] = v; }
                                 }
                             }
                             else {
@@ -335,6 +501,9 @@ const atree_collect_spells = new (class extends ComputeNode {
                         let spell_part = deepcopy(effect);
                         spell_part.name = target_part;  // has some extra fields but whatever
                         ret_spell.parts.push(spell_part);
+                    }
+                    if ('display' in effect) {
+                        ret_spell.display = effect.display;
                     }
                     continue;
                 }
@@ -404,7 +573,7 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
         const spell_map = input_map.get('spells');  // TODO: is this gonna need more? idk...
                                                     // TODO shortcut update path for sliders
 
-        for (const [spell_id, spell] of spell_map.entries()) {
+        for (const [spell_id, spell] of new Map([...spell_map].sort((a, b) => a[0] - b[0])).entries()) {
             let spell_node = new SpellSelectNode(spell);
             spell_node.link_to(build_node, 'build');
 
@@ -443,13 +612,9 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
  */
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
-    list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
-    UI_elem.innerHTML = ""; //reset the atree in the DOM
-
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
     active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
-    abil_points_current = 0;
     let active_word = document.createElement("div");
     active_word.classList.add("col-auto");
     active_word.textContent = "Active Abilities:";
@@ -596,6 +761,13 @@ function render_AT(UI_elem, list_elem, tree) {
         tooltip_title.classList.add("row", "justify-content-center", "fw-bold");
         tooltip_title.textContent = ability.display_name;
 
+        let tooltip_archetype;
+        if ('archetype' in ability && ability.archetype !== "") {
+            tooltip_archetype = document.createElement('div');
+            tooltip_archetype.classList.add("row", "mx-1", "text-start");
+            tooltip_archetype.textContent = "(Archetype: " + ability.archetype+")";
+        }
+
         let tooltip_desc = document.createElement('div');
         tooltip_desc.classList.add("row", "mx-1", "text-wrap");
         tooltip_desc.textContent = ability.desc;
@@ -608,8 +780,8 @@ function render_AT(UI_elem, list_elem, tree) {
         let node_tooltip = document.createElement('div');
         node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "my-1", "dark-shadow", "scaled-font", "container");
         node_tooltip.style.display = "none";
-        node_tooltip.appendChild(tooltip_title);
-        node_tooltip.appendChild(tooltip_desc);
+        node_tooltip.append(tooltip_title, tooltip_archetype ? tooltip_archetype : "", tooltip_desc);
+
         //active = copy of node
         let active_tooltip = node_tooltip.cloneNode(true);
         
@@ -641,25 +813,15 @@ function render_AT(UI_elem, list_elem, tree) {
 
         //append node and active tooltips to corresponding parent elems
         node_elem.appendChild(node_tooltip);
-        list_elem.appendChild(active_tooltip);
+        //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
+
+        node_wrap.elem = node_elem;
+        node_wrap.all_connectors_ref = atree_connectors_map;
 
         node_elem.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = document.getElementById("atree-ab-" + ability.id);
-            if (tooltip.style.display === "block") {
-                tooltip.style.display = "none";
-                this.classList.remove("atree-selected");
-                abil_points_current -= ability.cost;
-            } 
-            else {
-                tooltip.style.display = "block";
-                this.classList.add("atree-selected");
-                abil_points_current += ability.cost;
-            };
-            document.getElementById("active_AP_cost").textContent = abil_points_current;
-            atree_toggle_state(atree_connectors_map, node_wrap);
-            atree_merge.mark_dirty();
-            atree_merge.update();
+            atree_set_state(node_wrap, !node_wrap.active);
+            atree_state_node.mark_dirty().update();
         });
 
         // add tooltip
@@ -748,9 +910,16 @@ function atree_render_connection(atree_connectors_map) {
 };
 
 // toggle the state of a node.
-function atree_toggle_state(atree_connectors_map, node_wrapper) {
-    const new_state = !node_wrapper.active;
-    node_wrapper.active = new_state
+function atree_set_state(node_wrapper, new_state) {
+    if (new_state) {
+        node_wrapper.active = true;
+        node_wrapper.elem.classList.add("atree-selected");
+    } 
+    else {
+        node_wrapper.active = false;
+        node_wrapper.elem.classList.remove("atree-selected");
+    }
+    let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
         if (parent.active) {
             atree_set_edge(atree_connectors_map, parent, node_wrapper, new_state);  // self->parent state only changes if parent is on
