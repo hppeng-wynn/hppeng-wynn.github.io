@@ -579,7 +579,7 @@ const atrees = {
             "col": 8
             },
             "properties": {
-                "range": 12,
+                "range": 16,
                 "manaRegen": 2.85
             },
             "effects": [
