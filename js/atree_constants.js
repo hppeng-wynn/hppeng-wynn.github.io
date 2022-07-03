@@ -9,7 +9,8 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 9,
-                "col": 6
+                "col": 6,
+                "icon": "node_4"
             },
             "properties": {
                 "charges": 2,
@@ -49,7 +50,8 @@ const atrees = {
             "cost": 1, 
             "display": {
             "row": 7,
-            "col": 4
+            "col": 4,
+            "icon": "node_4"
             },
             "properties": {
                 "aoe": 0,
@@ -73,7 +75,8 @@ const atrees = {
             "cost": 1, 
             "display": {
                 "row": 0,
-                "col": 4
+                "col": 4,
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 4.5,
@@ -111,7 +114,8 @@ const atrees = {
             "cost": 1, 
             "display": {
                 "row": 4,
-                "col": 4
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -139,7 +143,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 16,
-            "col": 6
+            "col": 6,
+            "icon": "node_1"
             },
             "properties": { 
                 "aoe": 0.8,
@@ -170,7 +175,7 @@ const atrees = {
             "dependencies": ["Arrow Storm"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 16, "col": 8 },
+            "display": { "row": 16, "col": 8, "icon": "node_1"},
             "properties": {
                 "aoe": 2,
                 "duration": 5
@@ -199,7 +204,7 @@ const atrees = {
             "dependencies": ["Arrow Storm"], 
             "blockers": ["Phantom Ray"],
             "cost": 2, 
-            "display": { "row": 15, "col": 2 },
+            "display": { "row": 15, "col": 2, "icon": "node_1"},
             "properties": {},
             "effects": [
                 {
@@ -223,7 +228,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 9, "col": 2 },
+            "display": { "row": 9, "col": 2, "icon": "node_4"},
             "properties": { "range": 16 },
             "effects": [
                 { 
@@ -263,7 +268,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 19,
-            "col": 1
+            "col": 1,
+            "icon": "node_3"
             },
             "properties": {
             "range": 4,
@@ -311,7 +317,8 @@ const atrees = {
             "cost": 1, 
             "display": {
             "row": 10,
-            "col": 1
+            "col": 1,
+            "icon": "node_0"
             },
             "properties": {
                 "aoe": 8,
@@ -341,7 +348,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 19,
-            "col": 8
+            "col": 8,
+            "icon": "node_3"
             },
             "properties": {
                 "aoe": 7,
@@ -366,7 +374,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 21,
-                "col": 1
+                "col": 1,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -404,7 +413,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 21,
-                "col": 5
+                "col": 5,
+                "icon": "node_2"
                 },
             "properties": {
                 "range": 26
@@ -423,7 +433,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 22,
-                "col": 6
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -446,7 +457,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 25,
-                "col": 4
+                "col": 4,
+                "icon": "node_2"
             },
             "properties": {
                 "range": 64,
@@ -480,7 +492,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 26, "col": 1 },
+            "display": { "row": 26, "col": 1, "icon": "node_1"},
             "properties": {
                 "aoe": 4
             },
@@ -513,7 +525,7 @@ const atrees = {
             "dependencies": ["Fire Creep"], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 26, "col": 5 },
+            "display": { "row": 26, "col": 5, "icon": "node_1"},
             "properties": {
                 "duration": 2,
                 "aoe": 0.4
@@ -536,7 +548,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 28, "col": 0 },
+            "display": { "row": 28, "col": 0, "icon": "node_1"},
             "properties": {
                 "cooldown": 2
             },
@@ -552,7 +564,7 @@ const atrees = {
             "dependencies": ["Arrow Bomb"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 28, "col": 4 },
+            "display": { "row": 28, "col": 4, "icon": "node_1"},
             "properties": {
                 "gravity": 0
             },
@@ -576,7 +588,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 28,
-            "col": 8
+            "col": 8,
+            "icon": "node_3"
             },
             "properties": {
                 "range": 16,
@@ -602,7 +615,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 31,
-            "col": 0
+            "col": 0,
+            "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -630,7 +644,7 @@ const atrees = {
             "dependencies": ["Focus"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 31, "col": 5 },
+            "display": { "row": 31, "col": 5, "icon": "node_2"},
             "properties": {},
             "effects": []
         },
@@ -644,7 +658,7 @@ const atrees = {
             "dependencies": ["Arrow Shield"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 32, "col": 7 },
+            "display": { "row": 32, "col": 7, "icon": "node_2"},
             "properties": {},
             "effects": [
                 { 
@@ -665,7 +679,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": ["Phantom Ray"],
             "cost": 2, 
-            "display": { "row": 33, "col": 0 },
+            "display": { "row": 33, "col": 0, "icon": "node_3"},
             "properties": {},
             "effects": [
                 {
@@ -684,7 +698,7 @@ const atrees = {
             "dependencies": ["Fierce Stomp"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 37, "col": 1 },
+            "display": { "row": 37, "col": 1, "icon": "node_1"},
             "properties": {},
             "effects": [
                 { 
@@ -721,7 +735,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 37,
-            "col": 4
+            "col": 4,
+            "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -755,7 +770,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 37, "col": 7 },
+            "display": { "row": 37, "col": 7, "icon": "node_2"},
             "properties": {
                 "aoe": 2
             },
@@ -783,7 +798,7 @@ const atrees = {
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 38, "col": 6 },
+            "display": {"row": 38, "col": 6, "icon": "node_1"},
             "properties": {
                 "attackSpeed": 0.2
             },
@@ -815,7 +830,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 39,
-                "col": 2
+                "col": 2,
+                "icon": "node_2"
             },
             "properties": {
                 "range": 2.5,
@@ -833,7 +849,7 @@ const atrees = {
             "dependencies": ["Guardian Angels"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 40, "col": 1 },
+            "display": { "row": 40, "col": 1, "icon": "node_3"},
             "properties": {
                 "range": 8,
                 "shots": 5
@@ -863,7 +879,7 @@ const atrees = {
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 40, "col": 7 },
+            "display": {"row": 40, "col": 7, "icon": "node_3"},
             "properties": {},
             "effects": [
                 { 
@@ -900,7 +916,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 2, "col": 4 },
+            "display": { "row": 2, "col": 4, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -923,7 +939,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 2, "col": 6 },
+            "display": {"row": 2, "col": 6, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -941,7 +957,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 21, "col": 3 },
+            "display": {"row": 21, "col": 3, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -1840,7 +1856,7 @@ const atrees = {
             "display": {
                 "row": 17,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
