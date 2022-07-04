@@ -341,107 +341,53 @@ Base64 = (function () {
         }
 
         let new_length = this.length + length;
-        let mult = 1;
-        while (mult * this.bits.length * this.bits.BYTES_PER_ELEMENT * 8 < new_length) {
-            mult *= 2;
+        if (this.bits.length * this.bits.BYTES_PER_ELEMENT * 8 < new_length) {
+            //resize the internal repr by a factor of 2 before recursive calling
+            let bit_vec = [];
+            for (const int of this.bits) {
+                bit_vec.push(int);
+            }
+
+            bit_vec.concat(Array.apply(0, this.bits.length));
+            this.bits = new Uint32Array(bit_vec);
+            return this.append(data, length);
         }
 
-        if (mult > 1) {
-            //we have to expand the uint32array repr - double size
-            let bit_vec = [];
+        //just write to the original bitvec
+        let curr_idx = Math.floor(this.length / 32);
+        let pos = this.length;
+        
+        if (typeof data === "string") {
+            //daily reminder that shifts are modded by 32
+            for (const char of data) {
+                char = Base64.toInt(char);
+                this.bits[curr_idx] |= (char << pos);
 
-            for (const uint of this.bits) {
-                bit_vec.push(uint);
-            }
-            if (typeof data === "string") {
-                let int = bit_vec[bit_vec.length - 1];
-                let bv_idx = this.length;
-                let updated_curr = false;
-                for (let i = 0; i < data.length; i++) {
-                    let char = Base64.toInt(data[i]);
-                    let pre_pos = bv_idx % 32;
-                    int |= (char << bv_idx);
-                    bv_idx += 6;
-                    let post_pos = bv_idx % 32;
-                    if (post_pos < pre_pos) { //we have to have filled up the integer
-                        if (bit_vec.length == this.bits.length && !updated_curr) {
-                            bit_vec[bit_vec.length - 1] = int;
-                            updated_curr = true;
-                        } else {
-                            bit_vec.push(int);
-                        }
-                        int = (char >>> (6 - post_pos));
-                    }
-    
-                    if (i == data.length - 1) {
-                        if (bit_vec.length == this.bits.length && !updated_curr) {
-                            bit_vec[bit_vec.length - 1] = int;
-                        } else if (post_pos != 0) {
-                            bit_vec.push(int);
-                        }
-                    }
+                //if we go to the "next" char, update it
+                if (Math.floor((pos - 1) / 32) < Math.floor((pos + 5) / 32)) {
+                    this.bits[curr_idx + 1] |= (char >>> (6 - (pos + 6) % 32));
                 }
-            } else if (typeof data === "number") {
-                //convert to int just in case
-                let int = Math.round(data); 
-    
-                //range of numbers that "could" fit in a uint32 -> [0, 2^32) U [-2^31, 2^31)
-                if (data > 2**32 - 1 || data < -(2 ** 31)) {
-                    throw new RangeError("Numerical data has to fit within a 32-bit integer range to instantiate a BitVector.");
-                }
-                //could be split between multiple new ints
-                //reminder that shifts implicitly mod 32
-                bit_vec[bit_vec.length - 1] |= ((int & ~((~0) << length)) << (this.length));
-                if (((this.length - 1) % 32 + 1) + length > 32) {
-                    bit_vec.push(int >>> (32 - this.length));
-                }
-            } else {
-                throw new TypeError("BitVector must be appended with a Number or a B64 String");
-            }
 
-            //pad the end with 0s
-            for (let i = bit_vec.length; i < this.bits.length; i++) {
-                bit_vec.push(0);
+                //update counters
+                pos += 6;
+                curr_idx = Math.floor(pos / 32);
             }
-            
-            this.bits = new Uint32Array(bit_vec);
+        } else if (typeof data === "number") {
+            //convert to int just in case
+            let int = Math.round(data); 
+                
+            //range of numbers that "could" fit in a uint32 -> [0, 2^32) U [-2^31, 2^31)
+            if (data > 2**32 - 1 || data < -(2 ** 31)) {
+                throw new RangeError("Numerical data has to fit within a 32-bit integer range to instantiate a BitVector.");
+            }
+            //could be split between multiple new ints
+            //reminder that shifts implicitly mod 32
+            this.bits[curr_idx] |= ((int & ~((~0) << length)) << (this.length));
+            if (((this.length - 1) % 32 + 1) + length > 32) {
+                this.bits[curr_idx + 1] = (int >>> (32 - this.length));
+            }
         } else {
-            //just write to the original bitvec
-            let curr_idx = Math.floor(this.length / 32);
-            let pos = this.length;
-            
-            if (typeof data === "string") {
-                //daily reminder that shifts are modded by 32
-                for (const char of data) {
-                    char = Base64.toInt(char);
-                    this.bits[curr_idx] |= (char << pos);
-
-                    //if we go to the "next" char, update it
-                    if (Math.floor((pos - 1) / 32) < Math.floor((pos + 5) / 32)) {
-                        this.bits[curr_idx + 1] |= (char >>> (6 - (pos + 6) % 32));
-                    }
-
-                    //update counters
-                    pos += 6;
-                    curr_idx = Math.floor(pos / 32);
-                }
-            } else if (typeof data === "number") {
-                //convert to int just in case
-                let int = Math.round(data); 
-                    
-                //range of numbers that "could" fit in a uint32 -> [0, 2^32) U [-2^31, 2^31)
-                if (data > 2**32 - 1 || data < -(2 ** 31)) {
-                    throw new RangeError("Numerical data has to fit within a 32-bit integer range to instantiate a BitVector.");
-                }
-                //could be split between multiple new ints
-                //reminder that shifts implicitly mod 32
-                this.bits[curr_idx] |= ((int & ~((~0) << length)) << (this.length));
-                if (((this.length - 1) % 32 + 1) + length > 32) {
-                    this.bits[curr_idx + 1] = (int >>> (32 - this.length));
-                }
-            } else {
-                throw new TypeError("BitVector must be appended with a Number or a B64 String");
-            }
+            throw new TypeError("BitVector must be appended with a Number or a B64 String");
         }
 
         //update length
