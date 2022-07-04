@@ -1,3 +1,9 @@
+"""
+Used to parse a changelog at some point in the past. Could be used in the future.
+
+Not a typically used file
+"""
+
 import json
 import difflib
 

@@ -1,3 +1,8 @@
+"""
+An old script used for testing skillpoint assignment algorithms. Not used commonly.
+"""
+
+
 import json
 import math
 import copy
@@ -7,7 +12,7 @@ with open("clean.json") as infile:
 
 def clean_item(item):
     if not "displayName" in item:
-        item["displayName"] = item["name"];
+        item["displayName"] = item["name"]
     return item
 
 items = data["items"]

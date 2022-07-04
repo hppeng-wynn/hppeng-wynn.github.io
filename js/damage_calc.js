@@ -1,190 +1,297 @@
 const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
-// Calculate spell damage given a spell elemental conversion table, and a spell multiplier.
-// If spell mult is 0, its melee damage and we don't multiply by attack speed.
-// externalStats should be a map
-function calculateSpellDamage(stats, spellConversions, rawModifier, pctModifier, spellMultiplier, weapon, total_skillpoints, damageMultiplier, externalStats) {
-    let buildStats = new Map(stats);
-    let tooltipinfo = new Map(); 
-    //6x for damages, normal min normal max crit min crit max
-    let damageformulas = [["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "],["Min: = ","Max: = ","Min: = ","Max: = "]];
 
-    if(externalStats) { //if nothing is passed in, then this hopefully won't trigger
-        for (const entry of externalStats) {
-            const key = entry[0];
-            const value = entry[1];
-            if (typeof value === "number") {
-                buildStats.set(key, buildStats.get(key) + value);
-            } else if (Array.isArray(value)) {
-                arr = [];
-                for (let j = 0; j < value.length; j++) {
-                    arr[j] = buildStats.get(key)[j] + value[j];
-                }
-                buildStats.set(key, arr);
-            }
+function get_base_dps(item) {
+    const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
+    //SUPER JANK @HPP PLS FIX
+    if (item.get("tier") !== "Crafted") {
+        let total_damage = 0;
+        for (const damage_k of damage_keys) {
+            damages = item.get(damage_k);
+            total_damage += damages[0] + damages[1];
         }
-    }
-
-    let powders = weapon.get("powders").slice();
-    
-    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
-    let damages = [];
-    const rawDamages = buildStats.get("damageRaw");
-    for (let i = 0; i < rawDamages.length; i++) {
-        const damage_vals = rawDamages[i].split("-").map(Number);
-        damages.push(damage_vals);
-    }
-
-    // Applying spell conversions
-    let neutralBase = damages[0].slice();
-    let neutralRemainingRaw = damages[0].slice();
-
-  
-    //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
-
-    //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
-    //1st round - apply each as ingred, 2nd round - apply as normal
-    if (weapon.get("tier") === "Crafted") {
-        let damageBases = buildStats.get("damageBases").slice();
-        for (const p of powders.concat(weapon.get("ingredPowders"))) {
-            let powder = powderStats[p];  //use min, max, and convert
-            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
-            let diff = Math.floor(damageBases[0] * powder.convert/100);
-            damageBases[0] -= diff;
-            damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
-        }
-        //update all damages
-        if(!weapon.get("custom")) {
-            for (let i = 0; i < damages.length; i++) {
-                damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
-            }
-        }
-        
-        neutralRemainingRaw = damages[0].slice();
-        neutralBase = damages[0].slice();
-    }
-    
-    for (let i = 0; i < 5; ++i) {
-        let conversionRatio = spellConversions[i+1]/100;
-        let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
-        let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-        damages[i+1][0] = Math.floor(round_near(damages[i+1][0] + min_diff));
-        damages[i+1][1] = Math.floor(round_near(damages[i+1][1] + max_diff));
-        neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
-        neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
-    }
-
-    //apply powders to weapon
-    for (const powderID of powders) {
-        const powder = powderStats[powderID];
-        // Bitwise to force conversion to integer (integer division).
-        const element = (powderID/6) | 0;
-        let conversionRatio = powder.convert/100;
-        if (neutralRemainingRaw[1] > 0) {
-            let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
-            let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
-            damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
-            damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
-            neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
-            neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
-        }
-        damages[element+1][0] += powder.min;
-        damages[element+1][1] += powder.max;
-    }
-
-    
-
-    
-    //console.log(tooltipinfo);
-
-    damages[0] = neutralRemainingRaw;
-    tooltipinfo.set("damageBases", damages);
-
-    let damageMult = damageMultiplier;
-    let melee = false;
-    // If we are doing melee calculations:
-    tooltipinfo.set("dmgMult", damageMult);
-    if (spellMultiplier == 0) {
-        spellMultiplier = 1;
-        melee = true;
+        return total_damage * attack_speed_mult / 2;
     }
     else {
-        tooltipinfo.set("dmgMult", `(${tooltipinfo.get("dmgMult")} * ${spellMultiplier} * ${baseDamageMultiplier[attackSpeeds.indexOf(buildStats.get("atkSpd"))]})`)
-        damageMult *= spellMultiplier * baseDamageMultiplier[attackSpeeds.indexOf(buildStats.get("atkSpd"))];
-    }
-    //console.log(damages);
-    //console.log(damageMult);
-    tooltipinfo.set("rawModifier", `(${rawModifier} * ${spellMultiplier} * ${damageMultiplier})`);
-    rawModifier *= spellMultiplier * damageMultiplier;
-    let totalDamNorm = [0, 0];
-    let totalDamCrit = [0, 0];
-    let damages_results = [];
-    // 0th skillpoint is strength, 1st is dex.
-    let str = total_skillpoints[0];
-    let strBoost = 1 + skillPointsToPercentage(str);
-    if(!melee){
-        let baseDam = rawModifier * strBoost;
-        let baseDamCrit = rawModifier * (1 + strBoost);
-        totalDamNorm = [baseDam, baseDam];
-        totalDamCrit = [baseDamCrit, baseDamCrit];
-        for (let arr of damageformulas) {
-            arr = arr.map(x => x + " + " +tooltipinfo.get("rawModifier"));
+        let total_damage_min = 0;
+        let total_damage_max = 0;
+        for (const damage_k of damage_keys) {
+            damages = item.get(damage_k);
+            total_damage_min += damages[0][0] + damages[0][1];
+            total_damage_max += damages[1][0] + damages[1][1];
         }
+        total_damage_min = attack_speed_mult * total_damage_min / 2;
+        total_damage_max = attack_speed_mult * total_damage_max / 2;
+        return [total_damage_min, total_damage_max];
     }
-    let staticBoost = (pctModifier / 100.);
-    tooltipinfo.set("staticBoost", `${(pctModifier/ 100.).toFixed(2)}`);
-    tooltipinfo.set("skillBoost",["","","","","",""]);
-    let skillBoost = [0];
-    for (let i in total_skillpoints) {
-        skillBoost.push(skillPointsToPercentage(total_skillpoints[i]) + buildStats.get("damageBonus")[i] / 100.);
-        tooltipinfo.get("skillBoost")[parseInt(i,10)+1] = `(${skillPointsToPercentage(total_skillpoints[i]).toFixed(2)} + ${(buildStats.get("damageBonus")[i]/100.).toFixed(2)})`
-    }
-    tooltipinfo.get("skillBoost")[0] = undefined;
-
-    for (let i in damages) {
-        let damageBoost = 1 + skillBoost[i] + staticBoost;
-        tooltipinfo.set("damageBoost", `(1 + ${(tooltipinfo.get("skillBoost")[i] ? tooltipinfo.get("skillBoost")[i] + " + " : "")} ${tooltipinfo.get("staticBoost")})`)
-        damages_results.push([
-            Math.max(damages[i][0] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal min
-            Math.max(damages[i][1] * strBoost * Math.max(damageBoost,0) * damageMult, 0),       // Normal max
-            Math.max(damages[i][0] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit min
-            Math.max(damages[i][1] * (strBoost + 1) * Math.max(damageBoost,0) * damageMult, 0),       // Crit max
-        ]);
-        damageformulas[i][0] += `(max((${tooltipinfo.get("damageBases")[i][0]} * ${strBoost} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        damageformulas[i][1] += `(max((${tooltipinfo.get("damageBases")[i][1]} * ${strBoost} * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        damageformulas[i][2] += `(max((${tooltipinfo.get("damageBases")[i][0]} * ${strBoost} * 2 * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        damageformulas[i][3] += `(max((${tooltipinfo.get("damageBases")[i][1]} * ${strBoost} * 2 * max(${tooltipinfo.get("damageBoost")}, 0) * ${tooltipinfo.get("dmgMult")}), 0))`
-        totalDamNorm[0] += damages_results[i][0];
-        totalDamNorm[1] += damages_results[i][1];
-        totalDamCrit[0] += damages_results[i][2];
-        totalDamCrit[1] += damages_results[i][3];
-    }
-    if (melee) {
-        totalDamNorm[0] += Math.max(strBoost*rawModifier, -damages_results[0][0]);
-        totalDamNorm[1] += Math.max(strBoost*rawModifier, -damages_results[0][1]);
-        totalDamCrit[0] += Math.max((strBoost+1)*rawModifier, -damages_results[0][2]);
-        totalDamCrit[1] += Math.max((strBoost+1)*rawModifier, -damages_results[0][3]);
-    }
-    damages_results[0][0] += strBoost*rawModifier;
-    damages_results[0][1] += strBoost*rawModifier;
-    damages_results[0][2] += (strBoost + 1)*rawModifier;
-    damages_results[0][3] += (strBoost + 1)*rawModifier;
-    for (let i = 0; i < 2; i++) {
-        damageformulas[0][i] += ` + (${strBoost} * ${tooltipinfo.get("rawModifier")})`
-    }
-    for (let i = 2; i < 4; i++) {
-        damageformulas[0][i] += ` + (2 * ${strBoost} * ${tooltipinfo.get("rawModifier")})`
-    }
-
-    if (totalDamNorm[0] < 0) totalDamNorm[0] = 0;
-    if (totalDamNorm[1] < 0) totalDamNorm[1] = 0;
-    if (totalDamCrit[0] < 0) totalDamCrit[0] = 0;
-    if (totalDamCrit[1] < 0) totalDamCrit[1] = 0;
-
-    tooltipinfo.set("damageformulas", damageformulas);
-    return [totalDamNorm, totalDamCrit, damages_results, tooltipinfo];
 }
 
 
+function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false) {
+    // TODO: Roll all the loops together maybe
+
+    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
+    // 1. Get weapon damage (with powders).
+    let weapon_damages;
+    if (weapon.get('tier') === 'Crafted') {
+        weapon_damages = damage_keys.map(x => weapon.get(x)[1]);
+    }
+    else {
+        weapon_damages = damage_keys.map(x => weapon.get(x));
+    }
+    let present = weapon.get(damage_present_key);
+
+    // 2. Conversions.
+    // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.
+    let damages = [];
+    const neutral_convert = conversions[0] / 100;
+    let weapon_min = 0;
+    let weapon_max = 0;
+    for (const damage of weapon_damages) {
+        let min_dmg = damage[0] * neutral_convert;
+        let max_dmg = damage[1] * neutral_convert;
+        damages.push([min_dmg, max_dmg]);
+        weapon_min += damage[0];
+        weapon_max += damage[1];
+    }
+
+    // 2.2. Next, apply elemental conversions using damage computed in step 1.1.
+    // Also, track which elements are present. (Add onto those present in the weapon itself.)
+    let total_convert = 0;  //TODO get confirmation that this is how raw works.
+    for (let i = 1; i <= 5; ++i) {
+        if (conversions[i] > 0) {
+            const conv_frac = conversions[i]/100;
+            damages[i][0] += conv_frac * weapon_min;
+            damages[i][1] += conv_frac * weapon_max;
+            present[i] = true;
+            total_convert += conv_frac
+        }
+    }
+
+    // Also theres prop and rainbow!!
+    const damage_elements = ['n'].concat(skp_elements); // netwfa
+
+    if (!ignore_speed) {
+        // 3. Apply attack speed multiplier. Ignored for melee single hit
+        const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(weapon.get("atkSpd"))];
+        for (let i = 0; i < 6; ++i) {
+            damages[i][0] *= attack_speed_mult;
+            damages[i][1] *= attack_speed_mult;
+        }
+    }
+
+    // 4. Add additive damage. TODO: Is there separate additive damage?
+    for (let i = 0; i < 6; ++i) {
+        if (present[i]) {
+            damages[i][0] += stats.get(damage_elements[i]+'DamAddMin');
+            damages[i][1] += stats.get(damage_elements[i]+'DamAddMax');
+        }
+    }
+
+    // 5. ID bonus.
+    let specific_boost_str = 'Md';
+    if (use_spell_damage) {
+        specific_boost_str = 'Sd';
+    }
+    // 5.1: %boost application
+    let skill_boost = [0];  // no neutral skillpoint booster
+    for (const skp of skp_order) {
+        skill_boost.push(skillPointsToPercentage(stats.get(skp)));
+    }
+    let static_boost = (stats.get(specific_boost_str.toLowerCase()+'Pct') + stats.get('damPct')) / 100;
+
+    // These do not count raw damage. I think. Easy enough to change
+    let total_min = 0;
+    let total_max = 0;
+    for (let i in damages) {
+        let damage_prefix = damage_elements[i] + specific_boost_str;
+        let damageBoost = 1 + skill_boost[i] + static_boost
+                            + ((stats.get(damage_prefix+'Pct') + stats.get(damage_elements[i]+'DamPct')) /100);
+        damages[i][0] *= Math.max(damageBoost, 0);
+        damages[i][1] *= Math.max(damageBoost, 0);
+        // Collect total damage post %boost
+        total_min += damages[i][0];
+        total_max += damages[i][1];
+    }
+
+    let total_elem_min = total_min - damages[0][0];
+    let total_elem_max = total_max - damages[0][1];
+
+    // 5.2: Raw application.
+    let prop_raw = stats.get(specific_boost_str.toLowerCase()+'Raw') + stats.get('damRaw');
+    let rainbow_raw = stats.get('r'+specific_boost_str+'Raw') + stats.get('rDamRaw');
+    for (let i in damages) {
+        let damages_obj = damages[i];
+        let damage_prefix = damage_elements[i] + specific_boost_str;
+        // Normie raw
+        let raw_boost = 0;
+        if (present[i]) {
+            raw_boost += stats.get(damage_prefix+'Raw') + stats.get(damage_elements[i]+'DamRaw');
+        }
+        // Next, rainraw and propRaw
+        let min_boost = raw_boost;
+        let max_boost = raw_boost;
+        if (total_max > 0) {    // TODO: what about total negative all raw?
+            if (total_elem_min > 0) {
+                min_boost += (damages_obj[0] / total_min) * prop_raw;
+            }
+            max_boost += (damages_obj[1] / total_max) * prop_raw;
+        }
+        if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
+            if (total_elem_min > 0) {
+                min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
+            }
+            max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
+        }
+        damages_obj[0] += min_boost * total_convert;
+        damages_obj[1] += max_boost * total_convert;
+    }
+
+    // 6. Strength boosters
+    // str/dex, as well as any other mutually multiplicative effects
+    let strBoost = 1 + skill_boost[1];
+    let total_dam_norm = [0, 0];
+    let total_dam_crit = [0, 0];
+    let damages_results = [];
+    const damage_mult = stats.get("damageMultiplier");
+
+    for (const damage of damages) {
+        const res = [
+            damage[0] * strBoost * damage_mult,       // Normal min
+            damage[1] * strBoost * damage_mult,       // Normal max
+            damage[0] * (strBoost + 1) * damage_mult,       // Crit min
+            damage[1] * (strBoost + 1) * damage_mult,       // Crit max
+        ];
+        damages_results.push(res);
+        total_dam_norm[0] += res[0];
+        total_dam_norm[1] += res[1];
+        total_dam_crit[0] += res[2];
+        total_dam_crit[1] += res[3];
+    }
+
+    if (total_dam_norm[0] < 0) total_dam_norm[0] = 0;
+    if (total_dam_norm[1] < 0) total_dam_norm[1] = 0;
+    if (total_dam_crit[0] < 0) total_dam_crit[0] = 0;
+    if (total_dam_crit[1] < 0) total_dam_crit[1] = 0;
+
+    return [total_dam_norm, total_dam_crit, damages_results];
+}
+
+/*
+Spell schema:
+
+spell: {
+    name:           str             internal string name for the spell. Unique identifier, also display
+    cost:           Optional[int]   ignored for spells that are not id 1-4
+    base_spell:     int             spell index. 0-4 are reserved (0 is melee, 1-4 is common 4 spells)
+    spell_type:     str             [TODO: DEPRECATED/REMOVE] "healing" or "damage"
+    scaling:        Optional[str]   [DEFAULT: "spell"] "melee" or "spell"
+    use_atkspd:     Optional[bool]  [DEFAULT: true] true to factor attack speed, false otherwise.
+    display:        Optional[str]   [DEFAULT: "total"] "total" to sum all parts. Or, the name of a spell part
+    parts:          List[part]      Parts of this spell (different stuff the spell does basically)
+}
+
+NOTE: when using `replace_spell` on an existing spell, all fields become optional.
+Specified fields overwrite existing fields; unspecified fields are left unchanged.
+
+
+There are three possible spell "part" types: damage, heal, and total.
+
+part: spell_damage | spell_heal | spell_total
+
+spell_damage: {
+    name:           str != "total"  Name of the part.
+    type:           "damage"        [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
+    multipliers:    array[num, 6]   floating point spellmults (though supposedly wynn only supports integer mults)
+}
+spell_heal: {
+    name:           str != "total"  Name of the part.
+    type:           "heal"          [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
+    power:          num             floating point healing power (1 is 100% of max hp).
+}
+spell_total: {
+    name:           str != "total"  Name of the part.
+    type:           "total"         [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
+    hits:           Map[str, num]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
+                                        are not the same type of spell. Can only pull from spells defined before it.
+}
+
+
+Before passing to display, use the following structs.
+NOTE: total is collapsed into damage or healing.
+
+spell_damage: {
+    type:           "damage"        Internal use
+    name:           str             Display name of part. Should be human readable
+    normal_min:     array[num, 6]   floating point damages (no crit, min), can be less than zero. Order: NETWFA
+    normal_max:     array[num, 6]   floating point damages (no crit, max)
+    normal_total:   array[num, 2]   (min, max) noncrit total damage (not negative)
+    crit_min:       array[num, 6]   floating point damages (crit, min), can be less than zero. Order: NETWFA
+    crit_max:       array[num, 6]   floating point damages (crit, max)
+    crit_total:     array[num, 2]   (min, max) crit total damage (not negative)
+}
+spell_heal: {
+    type:           "heal"          Internal use
+    name:           str             Display name of part. Should be human readable
+    heal_amount:    num             floating point HP healed (self)
+}
+
+*/
+
+const default_spells = {
+    wand: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
+        name: "Wand Melee",  // TODO: name for melee attacks?
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }, {
+        name: "Heal",  // TODO: name for melee attacks? // JUST FOR TESTING...
+        base_spell: 1,
+        display: "Total Heal",
+        parts: [
+            { name: "First Pulse", power: 0.12 },
+            { name: "Second and Third Pulses", power: 0.06 },
+            { name: "Total Heal", hits: { "First Pulse": 1, "Second and Third Pulses": 2 } }
+        ]
+    }],
+    spear: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
+        name: "Melee",  // TODO: name for melee attacks?
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }],
+    bow: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
+        name: "Bow Shot",  // TODO: name for melee attacks?
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Single Shot",
+        parts: [{ name: "Single Shot", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }],
+    dagger: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
+        name: "Melee",  // TODO: name for melee attacks?
+        base_spell: 0,
+        scaling: "melee", use_atkspd: false,
+        display: "Melee",
+        parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
+    }],
+    relik: [{
+        type: "replace_spell",  // not needed but makes this usable as an "abil part"
+        name: "Relik Melee",  // TODO: name for melee attacks?
+        base_spell: 0,
+        spell_type: "damage",
+        scaling: "melee", use_atkspd: false,
+        display: "Total",
+        parts: [
+            { name: "Single Beam", multipliers: [33, 0, 0, 0, 0, 0] },
+            { name: "Total", hits: { "Single Beam": 3 } }
+        ]
+    }]
+};
 
 const spell_table = {
     "wand": [

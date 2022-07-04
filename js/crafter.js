@@ -172,16 +172,17 @@ function calculateCraft() {
     document.getElementById("mat-2").textContent = recipe.get("materials")[1].get("item").split(" ").slice(1).join(" ") + " Tier:"; 
     
     //Display Recipe Stats
-    displaysq2RecipeStats(player_craft, "recipe-stats");
+    displayRecipeStats(player_craft, "recipe-stats");
 
     //Display Craft Stats
     // displayCraftStats(player_craft, "craft-stats");
     let mock_item = player_craft.statMap;
-    displaysq2ExpandedItem(mock_item, "craft-stats");
+    apply_weapon_powders(mock_item);
+    displayExpandedItem(mock_item, "craft-stats");
 
     //Display Ingredients' Stats
     for (let i = 1; i < 7; i++) {
-        displaysq2ExpandedIngredient(player_craft.ingreds[i-1] , "ing-"+i+"-stats");
+        displayExpandedIngredient(player_craft.ingreds[i-1] , "ing-"+i+"-stats");
     }
     //Display Warnings - only ingred type warnings for now
     let warning_elem = document.getElementById("craft-warnings");
@@ -264,7 +265,7 @@ function populateFields() {
 */
 function copyRecipeHash() {
     if (player_craft) {
-        copyTextToClipboard("CR-"+location.hash);
+        copyTextToClipboard("CR-"+location.hash.slice(1));
         document.getElementById("copy-hash-button").textContent = "Copied!";
     }
 }
@@ -341,7 +342,7 @@ function toggleMaterial(buttonId) {
 */
 function updateCraftedImage() {
     let input = document.getElementById("recipe-choice");
-    if (item_types.includes(input.value)) {
+    if (all_types.includes(input.value)) {
         document.getElementById("recipe-img").src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + input.value.toLowerCase() + ".png";
     }
 
@@ -364,4 +365,8 @@ function resetFields() {
     calculateCraft();
 }
 
-load_ing_init(init_crafter);
+(async function() {
+    let load_promises = [ load_ing_init() ];
+    await Promise.all(load_promises);
+    init_crafter();
+})();

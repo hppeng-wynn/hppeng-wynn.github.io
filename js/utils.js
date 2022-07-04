@@ -1,32 +1,8 @@
 let getUrl = window.location;
 const url_base = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
-const zip = (a, b) => a.map((k, i) => [k, b[i]]);
-
-//updates all the OGP tags for a webpage. Should be called when build changes
-function updateOGP() {
-    //update the embed URL
-    let url_elem = document.getElementById("ogp-url");
-    if (url_elem) {
-        url_elem.content = url_base+location.hash;
-    }
-
-    //update the embed text content
-    let build_elem = document.getElementById("ogp-build-list");
-    if (build_elem && player_build) {
-        let text = "WynnBuilder build:\n"+
-            "> "+player_build.helmet.get("displayName")+"\n"+
-            "> "+player_build.chestplate.get("displayName")+"\n"+
-            "> "+player_build.leggings.get("displayName")+"\n"+
-            "> "+player_build.boots.get("displayName")+"\n"+
-            "> "+player_build.ring1.get("displayName")+"\n"+
-            "> "+player_build.ring2.get("displayName")+"\n"+
-            "> "+player_build.bracelet.get("displayName")+"\n"+
-            "> "+player_build.necklace.get("displayName")+"\n"+
-            "> "+player_build.weapon.get("displayName")+" ["+player_build.weapon.get("powders").map(x => powderNames.get(x)).join("")+"]";
-        build_elem.content = text;
-    }
-}
+const zip2 = (a, b) => a.map((k, i) => [k, b[i]]);
+const zip3 = (a, b, c) => a.map((k, i) => [k, b[i], c[i]]);
 
 function clamp(num, low, high){
     return Math.min(Math.max(num, low), high);
@@ -101,7 +77,7 @@ function log(b, n) {
 // Base64.fromInt(-2147483648); // gives "200000"
 // Base64.toInt("200000"); // gives -2147483648
 Base64 = (function () {
-    var digitsStr = 
+    var digitsStr =
     //   0       8       16      24      32      40      48      56     63
     //   v       v       v       v       v       v       v       v      v
         "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-";
@@ -153,7 +129,7 @@ Base64 = (function () {
 
 
 /** A class used to represent an arbitrary length bit vector. Very useful for encoding and decoding.
- * 
+ *
  */
  class BitVector {
 
@@ -161,7 +137,7 @@ Base64 = (function () {
      * @class
      * @param {String | Number} data - The data to append.
      * @param {Number} length - A set length for the data. Ignored if data is a string.
-     * 
+     *
      * The structure of the Uint32Array should be [[last, ..., first], ..., [last, ..., first], [empty space, last, ..., first]]
      */
     constructor(data, length) {
@@ -194,7 +170,7 @@ Base64 = (function () {
             }
 
             //convert to int just in case
-            data = Math.round(data); 
+            data = Math.round(data);
 
             //range of numbers that won't fit in a uint32
             if (data > 2**32 - 1 || data < -(2 ** 32 - 1)) {
@@ -210,23 +186,23 @@ Base64 = (function () {
     }
 
     /** Return value of bit at index idx.
-     * 
+     *
      * @param {Number} idx - The index to read
-     * 
+     *
      * @returns The bit value at position idx
      */
     read_bit(idx) {
         if (idx < 0 || idx >= this.length) {
-            throw new RangeError("Cannot read bit outside the range of the BitVector.");
+            throw new RangeError("Cannot read bit outside the range of the BitVector. ("+idx+" > "+this.length+")");
         }
-        return ((this.bits[Math.floor(idx / 32)] & (1 << (idx % 32))) == 0 ? 0 : 1);
+        return ((this.bits[Math.floor(idx / 32)] & (1 << idx)) == 0 ? 0 : 1);
     }
 
     /** Returns an integer value (if possible) made from the range of bits [start, end). Undefined behavior if the range to read is too big.
-     * 
+     *
      * @param {Number} start - The index to start slicing from. Inclusive.
      * @param {Number} end - The index to end slicing at. Exclusive.
-     * 
+     *
      * @returns An integer representation of the sliced bits.
      */
     slice(start, end) {
@@ -252,7 +228,7 @@ Base64 = (function () {
             res = (this.bits[int_idx] & ((~0) << (start))) >>> (start_pos);
             res |= (this.bits[int_idx + 1] & ~((~0) << (end))) << (32 - start_pos);
         }
-        
+
         return res;
 
         // General code - slow
@@ -262,7 +238,7 @@ Base64 = (function () {
     }
 
     /** Assign bit at index idx to 1.
-     * 
+     *
      * @param {Number} idx - The index to set.
      */
     set_bit(idx) {
@@ -271,9 +247,9 @@ Base64 = (function () {
         }
         this.bits[Math.floor(idx / 32)] |= (1 << idx % 32);
     }
-    
+
     /** Assign bit at index idx to 0.
-     * 
+     *
      * @param {Number} idx - The index to clear.
      */
     clear_bit(idx) {
@@ -283,8 +259,8 @@ Base64 = (function () {
         this.bits[Math.floor(idx / 32)] &= ~(1 << idx % 32);
     }
 
-    /** Creates a string version of the bit vector in B64. Does not keep the order of elements a sensible human readable format.  
-     * 
+    /** Creates a string version of the bit vector in B64. Does not keep the order of elements a sensible human readable format.
+     *
      * @returns A b64 string representation of the BitVector.
      */
     toB64() {
@@ -297,12 +273,12 @@ Base64 = (function () {
             b64_str += Base64.fromIntV(this.slice(i, i + 6), 1);
             i += 6;
         }
-        
+
         return b64_str;
     }
 
     /** Returns a BitVector in bitstring format. Probably only useful for dev debugging.
-     * 
+     *
      * @returns A bit string representation of the BitVector. Goes from higher-indexed bits to lower-indexed bits. (n ... 0)
      */
     toString() {
@@ -314,7 +290,7 @@ Base64 = (function () {
     }
 
      /** Returns a BitVector in bitstring format. Probably only useful for dev debugging.
-     * 
+     *
      * @returns A bit string representation of the BitVector. Goes from lower-indexed bits to higher-indexed bits. (0 ... n)
      */
     toStringR() {
@@ -326,7 +302,7 @@ Base64 = (function () {
     }
 
     /** Appends data to the BitVector.
-     * 
+     *
      * @param {Number | String} data - The data to append.
      * @param {Number} length - The length, in bits, of the new data. This is ignored if data is a string. Defaults to 32 for numbers.
      */
@@ -506,7 +482,7 @@ function randomColor() {
 
 /**
  * Generates a random color, but lightning must be relatively high (>0.5).
- * 
+ *
  * @returns a random color in RGB 6-bit form.
  */
 function randomColorLight() {
@@ -514,7 +490,7 @@ function randomColorLight() {
 }
 
 /** Generates a random color given HSL restrictions.
- * 
+ *
  * @returns a random color in RGB 6-bit form.
  */
 function randomColorHSL(h,s,l) {
@@ -566,8 +542,8 @@ function randomColorHSL(h,s,l) {
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
-/** Creates a tooltip. 
- * 
+/** Creates a tooltip.
+ *
  * @param {DOM Element} elem - the element to make a tooltip
  * @param {String} element_type - the HTML element type that the tooltiptext should be.
  * @param {String} tooltiptext - the text to display in the tooltip.
@@ -598,7 +574,7 @@ function createTooltip(elem, element_type, tooltiptext, parent, classList) {
 }
 
 /** A generic function that toggles the on and off state of a button.
- * 
+ *
  * @param {String} button_id - the id name of the button.
  */
 function toggleButton(button_id) {
@@ -642,8 +618,8 @@ function addClasses(elem, classes) {
     return elem;
 }
 
-/** A utility function that reloads the page forcefully. 
- * 
+/** A utility function that reloads the page forcefully.
+ *
  */
 async function hardReload() {
     //https://gist.github.com/rmehner/b9a41d9f659c9b1c3340
@@ -656,4 +632,128 @@ async function hardReload() {
 
 function capitalizeFirst(str) {
     return str[0].toUpperCase() + str.substring(1);
+}
+
+/** https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+ *  If we ever want to write something that needs to import other js files
+ */
+const getScript = url => new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+
+    script.onerror = reject;
+
+    script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState;
+
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+
+        script.onload = script.onreadystatechange = null;
+
+        resolve();
+    }
+
+    document.head.appendChild(script);
+})
+
+/*
+GENERIC TEST FUNCTIONS
+*/
+/** The generic assert function. Fails on all "false-y" values. Useful for non-object equality checks, boolean value checks, and existence checks.
+ *
+ * @param {*} arg - argument to assert.
+ * @param {String} msg - the error message to throw.
+ */
+ function assert(arg, msg) {
+    if (!arg) {
+        throw new Error(msg ? msg : "Assert failed.");
+    }
+}
+
+/** Asserts object equality of the 2 parameters. For loose and strict asserts, use assert().
+ *
+ * @param {*} arg1 - first argument to compare.
+ * @param {*} arg2 - second argument to compare.
+ * @param {String} msg - the error message to throw.
+ */
+function assert_equals(arg1, arg2, msg) {
+    if (!Object.is(arg1, arg2)) {
+        throw new Error(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
+    }
+}
+
+/** Asserts object inequality of the 2 parameters. For loose and strict asserts, use assert().
+ *
+ * @param {*} arg1 - first argument to compare.
+ * @param {*} arg2 - second argument to compare.
+ * @param {String} msg - the error message to throw.
+ */
+ function assert_not_equals(arg1, arg2, msg) {
+    if (Object.is(arg1, arg2)) {
+        throw new Error(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
+    }
+}
+
+/** Asserts proximity between 2 arguments. Should be used for any floating point datatype.
+ *
+ * @param {*} arg1 - first argument to compare.
+ * @param {*} arg2 - second argument to compare.
+ * @param {Number} epsilon - the margin of error (<= del difference is ok). Defaults to -1E5.
+ * @param {String} msg - the error message to throw.
+ */
+function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
+    if (Math.abs(arg1 - arg2) > epsilon) {
+        throw new Error(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
+    }
+}
+
+/** Asserts that the input argument is null.
+ *
+ * @param {*} arg - the argument to test for null.
+ * @param {String} msg - the error message to throw.
+ */
+function assert_null(arg, msg) {
+    if (arg !== null) {
+        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not null.");
+    }
+}
+
+/** Asserts that the input argument is undefined.
+ *
+ * @param {*} arg - the argument to test for undefined.
+ * @param {String} msg - the error message to throw.
+ */
+ function assert_undefined(arg, msg) {
+    if (arg !== undefined) {
+        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
+    }
+}
+
+/** Asserts that there is an error when a callback function is run.
+ *
+ * @param {Function} func_binding - a function binding to run. Can be passed in with func.bind(null, arg1, ..., argn)
+ * @param {String} msg - the error message to throw.
+ */
+function assert_error(func_binding, msg) {
+    try {
+        func_binding();
+    } catch (err) {
+        return;
+    }
+    throw new Error(msg ? msg : "Function didn't throw an error.");
+}
+
+/**
+ * Deep copy object/array of basic types.
+ */
+function deepcopy(obj) {
+    if (typeof(obj) !== 'object' || obj === null) { // null or value type
+        return obj;
+    }
+    let ret = Array.isArray(obj) ? [] : {};
+    for (let key in obj) {
+        ret[key] = deepcopy(obj[key]);
+    }
+    return ret;
 }
