@@ -324,7 +324,7 @@ Base64 = (function () {
                 bit_vec.push(int);
             }
 
-            bit_vec.concat(Array.apply(0, this.bits.length));
+            bit_vec.concat(Array(10).fill(0));
             this.bits = new Uint32Array(bit_vec);
             return this.append(data, length);
         }
