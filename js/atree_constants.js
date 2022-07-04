@@ -3319,7 +3319,7 @@ const atrees = {
             "display_name": "Rejuvenating Skin",
             "desc": "Regain back 30% of the damage you take as healing over 30s",
             "archetype": "Paladin", 
-            "archetype_req": 0, 
+            "archetype_req": 5, 
             "parents": ["Burning Heart", "Stronger Bash"], 
             "dependencies": [], 
             "blockers": [],

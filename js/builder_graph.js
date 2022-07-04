@@ -51,7 +51,7 @@ let boosts_node = new (class extends ComputeNode {
         }
         let res = new Map();
         res.set('damageMultiplier', 1+damage_boost);
-        res.set('defMultiplier', 1+def_boost);
+        res.set('defMultiplier', 1-def_boost);
         return res;
     }
 })().update();
