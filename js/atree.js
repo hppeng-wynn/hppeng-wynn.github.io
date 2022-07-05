@@ -39,6 +39,9 @@ add_spell_prop: {
     base_spell:     int             // spell identifier
     target_part:    Optional[str]   // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
                                     //     If target part does not exist, a new part is created.
+    behavior:       Optional[str]   // One of: "merge", "modify". default: merge
+                                    //     merge: add if exist, make new part if not exist
+                                    //     modify: change existing part. do nothing if not exist
     cost:           Optional[int]   // change to spellcost
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
@@ -57,6 +60,9 @@ raw_stat: {
     type:           "raw_stat"
     toggle:         Optional[bool | str]    // default: false; true means create anon. toggle,
                                             // string value means bind to (or create) named button
+    behavior:       Optional[str]           // One of: "merge", "modify". default: merge
+                                            //     merge: add if exist, make new part if not exist
+                                            //     modify: change existing part. do nothing if not exist
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
@@ -452,7 +458,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     has_spell_def = true;
                     // replace_spell just replaces all (defined) aspects.
                     for (const key in effect) {
-                        ret_spell[key] = effect[key];
+                        ret_spell[key] = deepcopy(effect[key]);
                     }
                 }
             }
@@ -465,7 +471,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     // Already handled above.
                     continue;
                 case 'add_spell_prop': {
-                    const { base_spell, target_part = null, cost = 0} = effect;
+                    const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
                     if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
                     ret_spell.cost += cost;
 
@@ -497,7 +503,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                             break;
                         }
                     }
-                    if (!found_part) { // add part.
+                    if (!found_part && behavior === 'merge') { // add part. if behavior is merge
                         let spell_part = deepcopy(effect);
                         spell_part.name = target_part;  // has some extra fields but whatever
                         ret_spell.parts.push(spell_part);
