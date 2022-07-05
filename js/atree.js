@@ -141,7 +141,7 @@ const atree_node = new (class extends ComputeNode {
         const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
         const atree_raw = atrees[player_class];
-        if (!atree_raw) return null;
+        if (!atree_raw) return [];
 
         let atree_map = new Map();
         let atree_head;
@@ -308,6 +308,8 @@ const atree_validate = new (class extends ComputeNode {
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
+        if (atree_order.length == 0) { return [0, ['no atree data']]; }
+
         let errors = [];
         let reachable = new Map();
         atree_dfs_mark(atree_order[0], atree_state, reachable);
@@ -473,7 +475,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
                     if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
-                    ret_spell.cost += cost;
+                    if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
                         continue;
