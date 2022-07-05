@@ -583,7 +583,7 @@ const atrees = {
             "archetype_req": 5, 
             "base_abil": "Arrow Bomb",
             "parents": ["More Traps", "Better Arrow Shield"], 
-            "dependencies": ["Fire Creep"], 
+            "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
