@@ -478,7 +478,6 @@ const atree_collect_spells = new (class extends ComputeNode {
                     if (target_part  === null) {
                         continue;
                     }
-                    console.log(effect);
 
                     let found_part = false;
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
