@@ -39,6 +39,9 @@ add_spell_prop: {
     base_spell:     int             // spell identifier
     target_part:    Optional[str]   // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
                                     //     If target part does not exist, a new part is created.
+    behavior:       Optional[str]   // One of: "merge", "modify". default: merge
+                                    //     merge: add if exist, make new part if not exist
+                                    //     modify: change existing part. do nothing if not exist
     cost:           Optional[int]   // change to spellcost
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)

@@ -6,8 +6,6 @@ Usage:
 OR
 - python process_items.py [infile and outfile]
 
-
-NOTE: id_map.json is due for change. Should be updated manually when Wynn2.0/corresponding WB version drops.
 """
 
 import json
@@ -31,11 +29,11 @@ items = data["items"]
 if "request" in data:
     del data["request"]
 
-with open("../clean.json", "r") as oldfile:
+with open("./clean.json", "r") as oldfile:
     old_data = json.load(oldfile)
 old_items = old_data['items']
 id_map = {item["name"]: item["id"] for item in old_items}
-with open("id_map.json", "r") as idmap_file:
+with open("id_map_tmp.json", "r") as idmap_file:
     id_map = json.load(idmap_file)
 used_ids = set([v for k, v in id_map.items()])
 max_id = 0
@@ -45,14 +43,33 @@ known_item_names = set()
 for item in items:
     known_item_names.add(item["name"])
 
+# TEMP wynn2 migration
+mul_keys = {
+    "spPct1": 0.7,
+    "spPct2": 0.7,
+    "spPct3": 0.7,
+    "spPct4": 0.7,
+    "spRaw1": 5,
+    "spRaw2": 5,
+    "spRaw3": 5,
+    "spRaw4": 5,
+    "mr": 5,
+    "ms": 5
+}
+
 remap_items = []
-old_items_map = dict()
+#old_items_map = dict()
+import math
 for item in old_items:
+    for k, v in mul_keys.items():
+        if k in item:
+            item[k] = math.floor(round(item[k] * v))
     if "remapID" in item:
         remap_items.append(item)
     elif item["name"] not in known_item_names:
-        print(f'Unknown old item: {item["name"]}!!!')
-    old_items_map[item["name"]] = item
+        items.append(item)
+        #print(f'Unknown old item: {item["name"]}!!!')
+    #old_items_map[item["name"]] = item
 
 for item in items:
     for key in delete_keys:
@@ -90,7 +107,7 @@ data["items"] = items
 data["sets"] = old_data["sets"]
 
 #save id map
-with open("id_map.json","w") as id_mapfile:
+with open("id_map_tmp.json","w") as id_mapfile:
     json.dump(id_map, id_mapfile, indent=2)
 
 
