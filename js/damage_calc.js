@@ -66,6 +66,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
             total_convert += conv_frac
         }
     }
+    total_convert += conversions[0]/100;
 
     // Also theres prop and rainbow!!
     const damage_elements = ['n'].concat(skp_elements); // netwfa
@@ -131,7 +132,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
         let min_boost = raw_boost;
         let max_boost = raw_boost;
         if (total_max > 0) {    // TODO: what about total negative all raw?
-            if (total_elem_min > 0) {
+            if (total_min > 0) {
                 min_boost += (damages_obj[0] / total_min) * prop_raw;
             }
             max_boost += (damages_obj[1] / total_max) * prop_raw;
