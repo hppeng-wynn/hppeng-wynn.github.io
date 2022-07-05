@@ -610,6 +610,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
                 for (const [subpart_name, hits] of Object.entries(part.hits)) {
                     const subpart = spell_result_map.get(subpart_name);
+                    if (!subpart) { continue; }
                     if (spell_result.type) {
                         if (subpart.type !== spell_result.type) {
                             throw "SpellCalc total subpart type mismatch";

@@ -267,16 +267,16 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 19,
-            "col": 1,
-            "icon": "node_3"
+                "row": 19,
+                "col": 1,
+                "icon": "node_3"
             },
             "properties": {
-            "range": 4,
-            "duration": 60,
-            "shots": 8,
-            "count": 2
-        },
+                "range": 4,
+                "duration": 60,
+                "shots": 8,
+                "charges": 2
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -1192,7 +1192,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Total Damage",
-                    "hits": { "Shield Damage": 2 }
+                    "hits": { "Shield Damage": 2, "Single Bow": 2 }
                 },
                 {
                     "type": "raw_stat",
@@ -1304,6 +1304,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3, 
                     "target_part": "Arrow Shield",
+                    "behavior": "modify",
                     "multipliers": [40, 0, 0, 0, 0, 0]
                 },
                 {
@@ -1311,6 +1312,7 @@ const atrees = {
                     "bonuses": [{
                         "type": "prop",
                         "abil": "Arrow Shield",
+                        "behavior": "modify",
                         "name": "aoe",
                         "value": 1
                     }]
