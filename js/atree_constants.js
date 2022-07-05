@@ -1679,7 +1679,7 @@ const atrees = {
             "display": {
                 "row": 19,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [{
