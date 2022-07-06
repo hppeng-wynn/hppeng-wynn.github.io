@@ -502,8 +502,8 @@ class SpellSelectNode extends ComputeNode {
  */
 function getDefenseStats(stats) {
     let defenseStats = [];
-    let def_pct = skillPointsToPercentage(stats.get('def')) * 0.867;    // lol
-    let agi_pct = skillPointsToPercentage(stats.get('agi')) * 0.951;    // lol2
+    let def_pct = skillPointsToPercentage(stats.get('def')) * skillpoint_final_mult[3];
+    let agi_pct = skillPointsToPercentage(stats.get('agi')) * skillpoint_final_mult[4];
     //total hp
     let totalHp = stats.get("hp") + stats.get("hpBonus");
     if (totalHp < 5) totalHp = 5;
@@ -766,7 +766,6 @@ class DisplayBuildWarningsNode extends ComputeNode {
             ];
         let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
         let total_assigned = 0;
-        const mults = [1, 1, 0.5, 0.867, 0.951];
         for (let i in skp_order){ //big bren
             const assigned = skillpoints[i] - base_totals[i] + min_assigned[i]
             setText(skp_order[i] + "-skp-base", "Original: " + base_totals[i]);
@@ -774,7 +773,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
             setValue(skp_order[i] + "-skp", skillpoints[i]);
             let linebreak = document.createElement("br");
             linebreak.classList.add("itemp");
-            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100*mults[i]).toFixed(1).concat(skp_effects[i]));
+            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100*skillpoint_final_mult[i]).toFixed(1).concat(skp_effects[i]));
             document.getElementById(skp_order[i]+"-warnings").textContent = ''
             if (assigned > 100) {
                 let skp_warning = document.createElement("p");

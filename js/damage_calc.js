@@ -95,8 +95,9 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
     // 5.1: %boost application
     let skill_boost = [0];  // no neutral skillpoint booster
-    for (const skp of skp_order) {
-        skill_boost.push(skillPointsToPercentage(stats.get(skp)));
+    for (let i in skp_order) {
+        const skp = skp_order[i];
+        skill_boost.push(skillPointsToPercentage(stats.get(skp)) * skillpoint_damage_mult[i]);
     }
     let static_boost = (stats.get(specific_boost_str.toLowerCase()+'Pct') + stats.get('damPct')) / 100;
 
