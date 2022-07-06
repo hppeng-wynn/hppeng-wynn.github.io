@@ -2474,7 +2474,7 @@ const atrees = {
 
         {
             "display_name": "Fire Mastery",
-            "desc": "Increases base damage from all Earth attacks",
+            "desc": "Increases base damage from all Fire attacks",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["War Scream"], 
@@ -2681,6 +2681,8 @@ const atrees = {
         {
             "display_name": "Iron Lungs",
             "desc": "War Scream deals more damage",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
             "base_abil": "War Scream",
             "parents": ["Flyby Jab", "Flaming Uppercut"], 
             "dependencies": [], 
