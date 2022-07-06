@@ -861,8 +861,6 @@ class AggregateStatsNode extends ComputeNode {
     compute_func(input_map) {
         const output_stats = new Map();
         for (const [k, v] of input_map.entries()) {
-            console.log(k);
-            console.log(v);
             for (const [k2, v2] of v.entries()) {
                 if (output_stats.has(k2)) {
                     // TODO: ugly AF

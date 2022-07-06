@@ -564,7 +564,7 @@ const atree_stats = new (class extends ComputeNode {
                         const { type, name, abil = "", value } = effect;
                         // TODO: prop
                         if (type === "stat") {
-                            if (ret_effects.has(name)) { ret_effects.set(name, ret_effect.get(name) + value); }
+                            if (ret_effects.has(name)) { ret_effects.set(name, ret_effects.get(name) + value); }
                             else { ret_effects.set(name, value); }
                         }
                     }
@@ -573,7 +573,7 @@ const atree_stats = new (class extends ComputeNode {
                     const { base_spell, cost = 0} = effect;
                     if (cost) {
                         const key = "spRaw"+base_spell;
-                        if (ret_effects.has(key)) { ret_effects.set(key, ret_effect.get(key) + cost); }
+                        if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
                         else { ret_effects.set(key, cost); }
                     }
                     continue;

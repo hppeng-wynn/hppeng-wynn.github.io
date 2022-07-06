@@ -1573,7 +1573,6 @@ function getSpellCost(stats, spell) {
 function getBaseSpellCost(stats, spell) {
                             // old intelligence:
     let cost = Math.ceil(spell.cost * (1 - skillPointsToPercentage(stats.get('int')) * skillpoint_final_mult[2]));
-    console.log(stats);
     cost += stats.get("spRaw"+spell.base_spell);
     return Math.floor(cost * (1 + stats.get("spPct"+spell.base_spell) / 100));
 }
