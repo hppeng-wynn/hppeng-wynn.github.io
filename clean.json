@@ -16582,10 +16582,10 @@
       "wDamPct": 50,
       "type": "necklace",
       "fixID": true,
-      "spPct1": 91,
-      "spPct2": 59,
-      "spPct3": 91,
-      "spPct4": 70,
+      "spPct1": 130,
+      "spPct2": 85,
+      "spPct3": 130,
+      "spPct4": 100,
       "id": 3618
     },
     {

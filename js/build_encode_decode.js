@@ -200,7 +200,7 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
         }
         build_string += tome_string;
 
-        if (atree_state.get(atree[0].ability.id).active) {
+        if (atree.length > 0 && atree_state.get(atree[0].ability.id).active) {
             build_version = Math.max(build_version, 7);
             const bitvec = encode_atree(atree, atree_state);
             build_string += bitvec.toB64();

@@ -502,8 +502,8 @@ class SpellSelectNode extends ComputeNode {
  */
 function getDefenseStats(stats) {
     let defenseStats = [];
-    let def_pct = skillPointsToPercentage(stats.get('def'));
-    let agi_pct = skillPointsToPercentage(stats.get('agi'));
+    let def_pct = skillPointsToPercentage(stats.get('def')) * skillpoint_final_mult[3];
+    let agi_pct = skillPointsToPercentage(stats.get('agi')) * skillpoint_final_mult[4];
     //total hp
     let totalHp = stats.get("hp") + stats.get("hpBonus");
     if (totalHp < 5) totalHp = 5;
@@ -511,7 +511,10 @@ function getDefenseStats(stats) {
     //EHP
     let ehp = [totalHp, totalHp];
     let defMult = (2 - stats.get("classDef")) * stats.get("defMultiplier");
-    ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
+    // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
+    ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    ehp[0] /= defMult;
+    // ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehp);
     //HPR
@@ -770,7 +773,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
             setValue(skp_order[i] + "-skp", skillpoints[i]);
             let linebreak = document.createElement("br");
             linebreak.classList.add("itemp");
-            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100*skillpoint_final_mult[i]).toFixed(1).concat(skp_effects[i]));
             document.getElementById(skp_order[i]+"-warnings").textContent = ''
             if (assigned > 100) {
                 let skp_warning = document.createElement("p");
