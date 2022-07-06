@@ -269,18 +269,21 @@ const atree_merge = new (class extends ComputeNode {
             }
             const abil = node.ability;
 
-            if (abils_merged.has(abil.base_abil)) {
-                // Merge abilities.
-                // TODO: What if there is more than one base abil?
-                let base_abil = abils_merged.get(abil.base_abil);
-                if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
-                else { base_abil.desc.push(abil.desc); }
+            if ('base_abil' in abil) {
+                if (abils_merged.has(abil.base_abil)) {
+                    // Merge abilities.
+                    // TODO: What if there is more than one base abil?
+                    let base_abil = abils_merged.get(abil.base_abil);
+                    if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
+                    else { base_abil.desc.push(abil.desc); }
 
-                base_abil.subparts.push(abil.id);
-                base_abil.effects = base_abil.effects.concat(abil.effects);
-                for (let propname in abil.properties) {
-                    base_abil[propname] = abil[propname];
+                    base_abil.subparts.push(abil.id);
+                    base_abil.effects = base_abil.effects.concat(abil.effects);
+                    for (let propname in abil.properties) {
+                        base_abil[propname] = abil[propname];
+                    }
                 }
+                // do nothing otherwise.
             }
             else {
                 let tmp_abil = deepcopy(abil);
@@ -378,6 +381,12 @@ function atree_dfs_mark(start, atree_state, mark) {
     }
 }
 
+/**
+ * Render ability tree.
+ * Return map of id -> corresponding html element.
+ *
+ * Signature: AbilityTreeRenderActiveNode(atree-merged: MergedATree, atree-order: ATree, atree-errors: List[str]) => Map[int, ATreeNode]
+ */
 const atree_render_active = new (class extends ComputeNode {
     constructor() {
         super('atree-render-active');
@@ -410,6 +419,7 @@ const atree_render_active = new (class extends ComputeNode {
                 errorbox.appendChild(atree_warning);
             }
         }
+        const ret_map = new Map();
         for (const node of atree_order) {
             if (!merged_abils.has(node.ability.id)) {
                 continue;
@@ -430,9 +440,11 @@ const atree_render_active = new (class extends ComputeNode {
                 active_tooltip_desc.textContent = desc;
                 active_tooltip.appendChild(active_tooltip_desc);
             }
+            ret_map.set(abil.id, active_tooltip);
 
             this.list_elem.appendChild(active_tooltip);
         }
+        return ret_map;
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
 
@@ -542,6 +554,29 @@ const atree_collect_spells = new (class extends ComputeNode {
     }
 })().link_to(atree_merge, 'atree-merged');
 
+
+/**
+ * Make interactive elements (sliders, buttons)
+ *
+ * Signature: AbilityActiveUINode(atree-merged: MergedATree) => List[
+ */
+const atree_make_actives = new (class extends ComputeNode {
+    constructor() { super('atree-make-sliders'); }
+
+    compute_func(input_map) {
+        const merged_abils = input_map.get('atree-merged');
+        const atree_order = input_map.get('atree-order');
+        const atree_html = input_map.get('atree-elements');
+    }
+})().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
+
+
+/**
+ * Collect stats from ability tree.
+ * Return StatMap of added stats (incl. cost modifications as raw cost)
+ *
+ * Signature: AbilityTreeStatsNode(atree-merged: MergedATree) => StatMap
+ */
 const atree_stats = new (class extends ComputeNode {
     constructor() { super('atree-stats-collector'); }
 
@@ -582,7 +617,6 @@ const atree_stats = new (class extends ComputeNode {
                 }
             }
         }
-        console.log(ret_effects);
         return ret_effects;
     }
 })().link_to(atree_merge, 'atree-merged');
