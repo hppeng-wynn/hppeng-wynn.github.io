@@ -561,7 +561,7 @@ const atree_stats = new (class extends ComputeNode {
                 case 'raw_stat':
                     // TODO: toggles...
                     for (const bonus of effect.bonuses) {
-                        const { type, name, abil = "", value } = effect;
+                        const { type, name, abil = "", value } = bonus;
                         // TODO: prop
                         if (type === "stat") {
                             if (ret_effects.has(name)) { ret_effects.set(name, ret_effects.get(name) + value); }
