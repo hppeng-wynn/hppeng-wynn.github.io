@@ -181,7 +181,8 @@ class ItemInputNode extends InputNode {
 
         if (item) {
             if (powdering !== undefined) {
-                item.statMap.set('powders', powdering);
+                const max_slots = item.statMap.get('slots');
+                item.statMap.set('powders', powdering.slice(0, max_slots));
             }
             let type_match;
             if (this.category == 'weapon') {

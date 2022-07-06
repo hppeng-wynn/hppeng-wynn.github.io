@@ -570,6 +570,8 @@ const atree_stats = new (class extends ComputeNode {
                     }
                     continue;
                 case 'add_spell_prop':
+                    // TODO unjankify....
+                    // costs are converted to raw cost ID
                     const { base_spell, cost = 0} = effect;
                     if (cost) {
                         const key = "spRaw"+base_spell;
