@@ -293,7 +293,7 @@ const atree_merge = new (class extends ComputeNode {
         }
         return abils_merged;
     }
-})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
 /**
  * Validate ability tree.
@@ -475,7 +475,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
                     if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
-                    if ('cost' in ret_spell) { ret_spell.cost += cost; }
+                    // TODO: unjankify this... if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
                         continue;
@@ -539,6 +539,49 @@ const atree_collect_spells = new (class extends ComputeNode {
             ret_spells.set(base_spell_id, ret_spell);
         }
         return ret_spells;
+    }
+})().link_to(atree_merge, 'atree-merged');
+
+const atree_stats = new (class extends ComputeNode {
+    constructor() { super('atree-stats-collector'); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeCollectStats accepts exactly one input (atree-merged)"; }
+        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        let ret_effects = new Map();
+        for (const [abil_id, abil] of atree_merged.entries()) {
+            if (abil.effects.length == 0) { continue; }
+
+            for (const effect of abil.effects) {
+                switch (effect.type) {
+                case 'stat_scaling':
+                    // TODO: handle
+                    continue;
+                case 'raw_stat':
+                    // TODO: toggles...
+                    for (const bonus of effect.bonuses) {
+                        const { type, name, abil = "", value } = effect;
+                        // TODO: prop
+                        if (type === "stat") {
+                            if (ret_effects.has(name)) { ret_effects.set(name, ret_effect.get(name) + value); }
+                            else { ret_effects.set(name, value); }
+                        }
+                    }
+                    continue;
+                case 'add_spell_prop':
+                    const { base_spell, cost = 0} = effect;
+                    if (cost) {
+                        const key = "spRaw"+base_spell;
+                        if (ret_effects.has(key)) { ret_effects.set(key, ret_effect.get(key) + cost); }
+                        else { ret_effects.set(key, cost); }
+                    }
+                    continue;
+                }
+            }
+        }
+        console.log(ret_effects);
+        return ret_effects;
     }
 })().link_to(atree_merge, 'atree-merged');
 

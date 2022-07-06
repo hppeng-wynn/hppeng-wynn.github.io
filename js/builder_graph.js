@@ -861,6 +861,8 @@ class AggregateStatsNode extends ComputeNode {
     compute_func(input_map) {
         const output_stats = new Map();
         for (const [k, v] of input_map.entries()) {
+            console.log(k);
+            console.log(v);
             for (const [k2, v2] of v.entries()) {
                 if (output_stats.has(k2)) {
                     // TODO: ugly AF
@@ -1105,6 +1107,7 @@ function builder_graph_init() {
     atree_merge.link_to(build_node, 'build');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
+    stat_agg_node.link_to(atree_stats, 'atree-stats');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 

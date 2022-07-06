@@ -3730,7 +3730,7 @@
       "sdRaw": 200,
       "wDamPct": -20,
       "eDamPct": 25,
-      "spPct4": -46,
+      "spPct4": -45,
       "id": 131
     },
     {
@@ -7287,8 +7287,8 @@
       "agi": 11,
       "def": 11,
       "hpBonus": -300,
-      "spPct2": 24,
-      "spPct4": -24,
+      "spPct2": 25,
+      "spPct4": -23,
       "id": 359
     },
     {
@@ -9950,9 +9950,9 @@
       "def": -20,
       "atkTier": -1,
       "hprRaw": -200,
-      "spPct2": -32,
+      "spPct2": -31,
       "spPct3": -21,
-      "spPct4": -24,
+      "spPct4": -23,
       "id": 482
     },
     {
@@ -10022,7 +10022,7 @@
       "spd": -8,
       "hpBonus": 1750,
       "hprRaw": 125,
-      "spPct1": -48,
+      "spPct1": -47,
       "id": 490
     },
     {
@@ -13227,7 +13227,7 @@
       "aDamPct": 12,
       "tDamPct": 15,
       "fixID": true,
-      "spPct3": -10,
+      "spPct3": -9,
       "id": 629
     },
     {
@@ -13963,7 +13963,7 @@
       "eSteal": 4,
       "aDamPct": 12,
       "tDamPct": 10,
-      "spPct1": -10,
+      "spPct1": -9,
       "spPct4": -14,
       "id": 658
     },
@@ -15415,7 +15415,7 @@
       "aDamPct": 21,
       "fixID": true,
       "spPct2": -54,
-      "spPct3": -34,
+      "spPct3": -33,
       "id": 726
     },
     {
@@ -15850,7 +15850,7 @@
       "wDefPct": -45,
       "eDefPct": -55,
       "spPct2": -14,
-      "spPct3": -10,
+      "spPct3": -9,
       "id": 2264
     },
     {
@@ -16582,10 +16582,10 @@
       "wDamPct": 50,
       "type": "necklace",
       "fixID": true,
-      "spPct1": 130,
-      "spPct2": 85,
-      "spPct3": 130,
-      "spPct4": 100,
+      "spPct1": 91,
+      "spPct2": 61,
+      "spPct3": 91,
+      "spPct4": 70,
       "id": 3618
     },
     {
@@ -16846,7 +16846,7 @@
       "mdRaw": 1997,
       "fixID": true,
       "spPct1": 23,
-      "spPct2": 15,
+      "spPct2": 16,
       "spPct3": 32,
       "spPct4": 23,
       "id": 782
@@ -18545,7 +18545,7 @@
       "tDamPct": 10,
       "spPct1": -21,
       "spPct2": -14,
-      "spPct3": -18,
+      "spPct3": -17,
       "spPct4": -21,
       "id": 860
     },
@@ -19351,8 +19351,8 @@
       "mdPct": 15,
       "spd": 10,
       "hpBonus": -300,
-      "spPct1": 24,
-      "spPct3": -24,
+      "spPct1": 25,
+      "spPct3": -23,
       "jh": 1,
       "id": 898
     },
@@ -23028,10 +23028,10 @@
       "ref": 20,
       "int": -40,
       "spd": 8,
-      "spPct1": -18,
-      "spPct2": -10,
-      "spPct3": -18,
-      "spPct4": -10,
+      "spPct1": -17,
+      "spPct2": -9,
+      "spPct3": -17,
+      "spPct4": -9,
       "id": 1070
     },
     {
@@ -24203,7 +24203,7 @@
       "aDamPct": -33,
       "tDamPct": -33,
       "eDamPct": -33,
-      "spPct3": -23,
+      "spPct3": -22,
       "id": 1143
     },
     {
@@ -26886,7 +26886,7 @@
       "str": 4,
       "dex": 4,
       "mdRaw": 52,
-      "spPct1": 18,
+      "spPct1": 19,
       "id": 1261
     },
     {
@@ -27362,8 +27362,8 @@
       "tDefPct": 40,
       "eDefPct": 40,
       "fixID": true,
-      "spPct3": -18,
-      "spPct4": -18,
+      "spPct3": -17,
+      "spPct4": -17,
       "id": 1279
     },
     {
@@ -35174,7 +35174,7 @@
       "dex": 4,
       "sdRaw": 13,
       "mdRaw": 13,
-      "spPct1": 18,
+      "spPct1": 19,
       "id": 1658
     },
     {
@@ -35953,7 +35953,7 @@
       "def": 15,
       "fDamPct": 40,
       "wDamPct": 40,
-      "spPct1": -23,
+      "spPct1": -22,
       "id": 1689
     },
     {
@@ -36059,7 +36059,7 @@
       "tDamPct": 55,
       "eDamPct": 55,
       "aDefPct": 35,
-      "spPct3": -52,
+      "spPct3": -51,
       "sprintReg": 43,
       "id": 3643
     },
@@ -36591,7 +36591,7 @@
       "fDamPct": 45,
       "wDamPct": -1000,
       "aDamPct": 45,
-      "spPct3": -16,
+      "spPct3": -15,
       "id": 3646
     },
     {
@@ -36900,7 +36900,7 @@
       "eSteal": 10,
       "hprRaw": -270,
       "mdRaw": 285,
-      "spPct3": -30,
+      "spPct3": -29,
       "id": 1716
     },
     {
@@ -44272,7 +44272,7 @@
       "fDamPct": 45,
       "wDamPct": -25,
       "eDamPct": -25,
-      "spPct3": -23,
+      "spPct3": -22,
       "id": 2063
     },
     {
@@ -47040,7 +47040,7 @@
       "ms": 5,
       "lb": 10,
       "str": -5,
-      "spPct1": -25,
+      "spPct1": -24,
       "id": 2182
     },
     {
@@ -49765,8 +49765,8 @@
       "agi": 7,
       "def": 7,
       "wDamPct": -15,
-      "spPct1": -10,
-      "spPct3": -10,
+      "spPct1": -9,
+      "spPct3": -9,
       "id": 2327
     },
     {
@@ -54851,7 +54851,7 @@
       "def": 4,
       "spd": 10,
       "fixID": true,
-      "spPct1": -18,
+      "spPct1": -17,
       "id": 2579
     },
     {
@@ -58543,7 +58543,7 @@
       "spRegen": 10,
       "aDefPct": 10,
       "fixID": true,
-      "spPct1": -18,
+      "spPct1": -17,
       "id": 2763
     },
     {
@@ -61862,10 +61862,10 @@
       "mr": 5,
       "sdPct": -25,
       "fixID": true,
-      "spPct1": -18,
-      "spPct2": -18,
-      "spPct3": -18,
-      "spPct4": -18,
+      "spPct1": -17,
+      "spPct2": -17,
+      "spPct3": -17,
+      "spPct4": -17,
       "id": 2900
     },
     {
@@ -62221,7 +62221,7 @@
       "hprRaw": -40,
       "sdRaw": 95,
       "fixID": true,
-      "spPct3": -10,
+      "spPct3": -9,
       "id": 2915
     },
     {
@@ -66367,7 +66367,7 @@
       "hprRaw": 150,
       "spPct1": -7,
       "spPct2": -14,
-      "spPct3": -10,
+      "spPct3": -9,
       "id": 3094
     },
     {
@@ -70048,7 +70048,7 @@
       "lb": 25,
       "hprRaw": -101,
       "spPct2": -31,
-      "spPct4": -10,
+      "spPct4": -9,
       "jh": 2,
       "id": 3621
     },
@@ -70785,7 +70785,7 @@
       "fDamPct": -30,
       "wDamPct": 20,
       "tDefPct": -25,
-      "spPct3": -24,
+      "spPct3": -23,
       "id": 3309
     },
     {
@@ -71213,9 +71213,9 @@
       "spd": 10,
       "fDamPct": 10,
       "wDamPct": -15,
-      "spPct1": -10,
+      "spPct1": -9,
       "spPct3": -7,
-      "spPct4": -10,
+      "spPct4": -9,
       "id": 3327
     },
     {
@@ -72481,9 +72481,9 @@
       "int": -24,
       "agi": 12,
       "spd": 15,
-      "spPct1": -10,
+      "spPct1": -9,
       "spPct3": -7,
-      "spPct4": -18,
+      "spPct4": -17,
       "id": 3385
     },
     {
@@ -73096,7 +73096,7 @@
       "ms": 5,
       "def": -12,
       "spd": 12,
-      "spPct1": -23,
+      "spPct1": -22,
       "id": 3413
     },
     {
