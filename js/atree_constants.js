@@ -2201,7 +2201,7 @@ const atrees = {
                         "type": "stat",
                         "name": "spd"
                     },
-                    "scaling": [1, 1],
+                    "scaling": [2, 2],
                     "max": 20
                 }
             ]  
@@ -2474,7 +2474,7 @@ const atrees = {
 
         {
             "display_name": "Fire Mastery",
-            "desc": "Increases base damage from all Earth attacks",
+            "desc": "Increases base damage from all Fire attacks",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["War Scream"], 
@@ -2595,12 +2595,7 @@ const atrees = {
                     "base_spell": 3,
                     "target_part": "Uppercut",
                     "cost": -10,
-                    "multipliers": [-70, 0, 0, 0, 0, 0]
-                },
-                {
-                    "type": "convert_spell_conv",
-                    "target_part": "all",
-                    "conversion": "Water"
+                    "multipliers": [-70, 0, 0, 30, 0, 0]
                 }
             ]  
         },
@@ -2686,6 +2681,8 @@ const atrees = {
         {
             "display_name": "Iron Lungs",
             "desc": "War Scream deals more damage",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
             "base_abil": "War Scream",
             "parents": ["Flyby Jab", "Flaming Uppercut"], 
             "dependencies": [], 
@@ -2957,13 +2954,13 @@ const atrees = {
                 "col": 6,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {"attackRate": 2},
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Air Shout",
-                    "multipliers": [20, 0, 0, 0, 0, 5]
+                    "multipliers": [40, 0, 0, 0, 0, 10]
                 }
             ]  
         },
@@ -3026,7 +3023,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Flying Kick",
-                    "multipliers": [120, 0, 0, 10, 0, 20]
+                    "multipliers": [150, 0, 0, 20, 0, 30]
                 },
                 {
                     "type": "add_spell_prop",
@@ -3306,7 +3303,7 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Collide",
                     "cost": 0,
-                    "multipliers": [100, 0, 0, 0, 50, 0]
+                    "multipliers": [150, 0, 0, 0, 50, 0]
                 },
                 {
                     "type": "add_spell_prop",
@@ -3782,8 +3779,8 @@ const atrees = {
                         { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
                         { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
                     ],
-                    "scaling": [2],
-                    "max": 50
+                    "scaling": [3],
+                    "max": 80
                 }
             ]  
         },
