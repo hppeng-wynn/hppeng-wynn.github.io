@@ -38,7 +38,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     else {
         weapon_damages = damage_keys.map(x => weapon.get(x));
     }
-    let present = weapon.get(damage_present_key);
+    let present = deepcopy(weapon.get(damage_present_key));
 
     // 2. Conversions.
     // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.

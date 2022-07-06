@@ -2285,7 +2285,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Uppercut",
-                            "multipliers": [150, 50, 50, 0, 0, 0]
+                            "multipliers": [200, 40, 40, 0, 0, 0]
                         },
                         {
                             "name": "Total Damage",
