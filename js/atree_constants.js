@@ -9,7 +9,8 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 9,
-                "col": 6
+                "col": 6,
+                "icon": "node_4"
             },
             "properties": {
                 "charges": 2,
@@ -49,7 +50,8 @@ const atrees = {
             "cost": 1, 
             "display": {
             "row": 7,
-            "col": 4
+            "col": 4,
+            "icon": "node_4"
             },
             "properties": {
                 "aoe": 0,
@@ -73,7 +75,8 @@ const atrees = {
             "cost": 1, 
             "display": {
                 "row": 0,
-                "col": 4
+                "col": 4,
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 4.5,
@@ -111,7 +114,8 @@ const atrees = {
             "cost": 1, 
             "display": {
                 "row": 4,
-                "col": 4
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -139,7 +143,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 16,
-            "col": 6
+            "col": 6,
+            "icon": "node_1"
             },
             "properties": { 
                 "aoe": 0.8,
@@ -170,7 +175,7 @@ const atrees = {
             "dependencies": ["Arrow Storm"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 16, "col": 8 },
+            "display": { "row": 16, "col": 8, "icon": "node_1"},
             "properties": {
                 "aoe": 2,
                 "duration": 5
@@ -199,7 +204,7 @@ const atrees = {
             "dependencies": ["Arrow Storm"], 
             "blockers": ["Phantom Ray"],
             "cost": 2, 
-            "display": { "row": 15, "col": 2 },
+            "display": { "row": 15, "col": 2, "icon": "node_1"},
             "properties": {},
             "effects": [
                 {
@@ -223,7 +228,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 9, "col": 2 },
+            "display": { "row": 9, "col": 2, "icon": "node_4"},
             "properties": { "range": 16 },
             "effects": [
                 { 
@@ -262,15 +267,16 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 19,
-            "col": 1
+                "row": 19,
+                "col": 1,
+                "icon": "node_3"
             },
             "properties": {
-            "range": 4,
-            "duration": 60,
-            "shots": 8,
-            "count": 2
-        },
+                "range": 4,
+                "duration": 60,
+                "shots": 8,
+                "charges": 2
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -311,7 +317,8 @@ const atrees = {
             "cost": 1, 
             "display": {
             "row": 10,
-            "col": 1
+            "col": 1,
+            "icon": "node_0"
             },
             "properties": {
                 "aoe": 8,
@@ -341,7 +348,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 19,
-            "col": 8
+            "col": 8,
+            "icon": "node_3"
             },
             "properties": {
                 "aoe": 7,
@@ -366,7 +374,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 21,
-                "col": 1
+                "col": 1,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -404,7 +413,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 21,
-                "col": 5
+                "col": 5,
+                "icon": "node_2"
                 },
             "properties": {
                 "range": 26
@@ -423,7 +433,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 22,
-                "col": 6
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -446,7 +457,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 25,
-                "col": 4
+                "col": 4,
+                "icon": "node_2"
             },
             "properties": {
                 "range": 64,
@@ -480,7 +492,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 26, "col": 1 },
+            "display": { "row": 26, "col": 1, "icon": "node_1"},
             "properties": {
                 "aoe": 4
             },
@@ -513,7 +525,7 @@ const atrees = {
             "dependencies": ["Fire Creep"], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 26, "col": 5 },
+            "display": { "row": 26, "col": 5, "icon": "node_1"},
             "properties": {
                 "duration": 2,
                 "aoe": 0.4
@@ -536,7 +548,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 28, "col": 0 },
+            "display": { "row": 28, "col": 0, "icon": "node_1"},
             "properties": {
                 "cooldown": 2
             },
@@ -552,7 +564,7 @@ const atrees = {
             "dependencies": ["Arrow Bomb"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 28, "col": 4 },
+            "display": { "row": 28, "col": 4, "icon": "node_1"},
             "properties": {
                 "gravity": 0
             },
@@ -566,21 +578,22 @@ const atrees = {
         },
         {
             "display_name": "Mana Trap",
-            "desc": "Your Traps will give you 4 Mana per second when you stay close to them.",
+            "desc": "Your Traps will give you 2.85 Mana per second when you stay close to them.",
             "archetype": "Trapper", 
             "archetype_req": 5, 
             "base_abil": "Arrow Bomb",
             "parents": ["More Traps", "Better Arrow Shield"], 
-            "dependencies": ["Fire Creep"], 
+            "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
             "row": 28,
-            "col": 8
+            "col": 8,
+            "icon": "node_3"
             },
             "properties": {
-                "range": 12,
-                "manaRegen": 4
+                "range": 16,
+                "manaRegen": 2.85
             },
             "effects": [
                 { 
@@ -602,7 +615,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 31,
-            "col": 0
+            "col": 0,
+            "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -630,7 +644,7 @@ const atrees = {
             "dependencies": ["Focus"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 31, "col": 5 },
+            "display": { "row": 31, "col": 5, "icon": "node_2"},
             "properties": {},
             "effects": []
         },
@@ -644,7 +658,7 @@ const atrees = {
             "dependencies": ["Arrow Shield"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 32, "col": 7 },
+            "display": { "row": 32, "col": 7, "icon": "node_2"},
             "properties": {},
             "effects": [
                 { 
@@ -665,7 +679,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": ["Phantom Ray"],
             "cost": 2, 
-            "display": { "row": 33, "col": 0 },
+            "display": { "row": 33, "col": 0, "icon": "node_3"},
             "properties": {},
             "effects": [
                 {
@@ -684,7 +698,7 @@ const atrees = {
             "dependencies": ["Fierce Stomp"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 37, "col": 1 },
+            "display": { "row": 37, "col": 1, "icon": "node_1"},
             "properties": {},
             "effects": [
                 { 
@@ -721,7 +735,8 @@ const atrees = {
             "cost": 2, 
             "display": {
             "row": 37,
-            "col": 4
+            "col": 4,
+            "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -755,7 +770,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 37, "col": 7 },
+            "display": { "row": 37, "col": 7, "icon": "node_2"},
             "properties": {
                 "aoe": 2
             },
@@ -783,7 +798,7 @@ const atrees = {
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 38, "col": 6 },
+            "display": {"row": 38, "col": 6, "icon": "node_1"},
             "properties": {
                 "attackSpeed": 0.2
             },
@@ -815,7 +830,8 @@ const atrees = {
             "cost": 2, 
             "display": {
                 "row": 39,
-                "col": 2
+                "col": 2,
+                "icon": "node_2"
             },
             "properties": {
                 "range": 2.5,
@@ -833,7 +849,7 @@ const atrees = {
             "dependencies": ["Guardian Angels"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 40, "col": 1 },
+            "display": { "row": 40, "col": 1, "icon": "node_3"},
             "properties": {
                 "range": 8,
                 "shots": 5
@@ -863,7 +879,7 @@ const atrees = {
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 40, "col": 7 },
+            "display": {"row": 40, "col": 7, "icon": "node_3"},
             "properties": {},
             "effects": [
                 { 
@@ -900,7 +916,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 2, "col": 4 },
+            "display": { "row": 2, "col": 4, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -923,7 +939,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 2, "col": 6 },
+            "display": {"row": 2, "col": 6, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -941,7 +957,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 21, "col": 3 },
+            "display": {"row": 21, "col": 3, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -1176,7 +1192,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Total Damage",
-                    "hits": { "Shield Damage": 2 }
+                    "hits": { "Shield Damage": 2, "Single Bow": 2 }
                 },
                 {
                     "type": "raw_stat",
@@ -1288,6 +1304,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3, 
                     "target_part": "Arrow Shield",
+                    "behavior": "modify",
                     "multipliers": [40, 0, 0, 0, 0, 0]
                 },
                 {
@@ -1295,6 +1312,7 @@ const atrees = {
                     "bonuses": [{
                         "type": "prop",
                         "abil": "Arrow Shield",
+                        "behavior": "modify",
                         "name": "aoe",
                         "value": 1
                     }]
@@ -1661,7 +1679,7 @@ const atrees = {
             "display": {
                 "row": 19,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [{
@@ -1840,7 +1858,7 @@ const atrees = {
             "display": {
                 "row": 17,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
@@ -2183,7 +2201,7 @@ const atrees = {
                         "type": "stat",
                         "name": "spd"
                     },
-                    "scaling": [1, 1],
+                    "scaling": [2, 2],
                     "max": 20
                 }
             ]  
@@ -2456,7 +2474,7 @@ const atrees = {
 
         {
             "display_name": "Fire Mastery",
-            "desc": "Increases base damage from all Earth attacks",
+            "desc": "Increases base damage from all Fire attacks",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["War Scream"], 
@@ -2577,12 +2595,7 @@ const atrees = {
                     "base_spell": 3,
                     "target_part": "Uppercut",
                     "cost": -10,
-                    "multipliers": [-70, 0, 0, 0, 0, 0]
-                },
-                {
-                    "type": "convert_spell_conv",
-                    "target_part": "all",
-                    "conversion": "Water"
+                    "multipliers": [-70, 0, 0, 30, 0, 0]
                 }
             ]  
         },
@@ -2668,6 +2681,8 @@ const atrees = {
         {
             "display_name": "Iron Lungs",
             "desc": "War Scream deals more damage",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
             "base_abil": "War Scream",
             "parents": ["Flyby Jab", "Flaming Uppercut"], 
             "dependencies": [], 
@@ -2939,13 +2954,13 @@ const atrees = {
                 "col": 6,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {"attackRate": 2},
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Air Shout",
-                    "multipliers": [20, 0, 0, 0, 0, 5]
+                    "multipliers": [40, 0, 0, 0, 0, 10]
                 }
             ]  
         },
@@ -3008,7 +3023,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Flying Kick",
-                    "multipliers": [120, 0, 0, 10, 0, 20]
+                    "multipliers": [150, 0, 0, 20, 0, 30]
                 },
                 {
                     "type": "add_spell_prop",
@@ -3288,7 +3303,7 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Collide",
                     "cost": 0,
-                    "multipliers": [100, 0, 0, 0, 50, 0]
+                    "multipliers": [150, 0, 0, 0, 50, 0]
                 },
                 {
                     "type": "add_spell_prop",
@@ -3303,7 +3318,7 @@ const atrees = {
             "display_name": "Rejuvenating Skin",
             "desc": "Regain back 30% of the damage you take as healing over 30s",
             "archetype": "Paladin", 
-            "archetype_req": 0, 
+            "archetype_req": 5, 
             "parents": ["Burning Heart", "Stronger Bash"], 
             "dependencies": [], 
             "blockers": [],
@@ -3764,8 +3779,8 @@ const atrees = {
                         { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
                         { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
                     ],
-                    "scaling": [2],
-                    "max": 50
+                    "scaling": [3],
+                    "max": 80
                 }
             ]  
         },

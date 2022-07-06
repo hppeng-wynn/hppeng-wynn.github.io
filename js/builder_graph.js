@@ -51,7 +51,7 @@ let boosts_node = new (class extends ComputeNode {
         }
         let res = new Map();
         res.set('damageMultiplier', 1+damage_boost);
-        res.set('defMultiplier', 1+def_boost);
+        res.set('defMultiplier', 1-def_boost);
         return res;
     }
 })().update();
@@ -181,7 +181,8 @@ class ItemInputNode extends InputNode {
 
         if (item) {
             if (powdering !== undefined) {
-                item.statMap.set('powders', powdering);
+                const max_slots = item.statMap.get('slots');
+                item.statMap.set('powders', powdering.slice(0, max_slots));
             }
             let type_match;
             if (this.category == 'weapon') {
@@ -502,8 +503,8 @@ class SpellSelectNode extends ComputeNode {
  */
 function getDefenseStats(stats) {
     let defenseStats = [];
-    let def_pct = skillPointsToPercentage(stats.get('def'));
-    let agi_pct = skillPointsToPercentage(stats.get('agi'));
+    let def_pct = skillPointsToPercentage(stats.get('def')) * skillpoint_final_mult[3];
+    let agi_pct = skillPointsToPercentage(stats.get('agi')) * skillpoint_final_mult[4];
     //total hp
     let totalHp = stats.get("hp") + stats.get("hpBonus");
     if (totalHp < 5) totalHp = 5;
@@ -511,7 +512,10 @@ function getDefenseStats(stats) {
     //EHP
     let ehp = [totalHp, totalHp];
     let defMult = (2 - stats.get("classDef")) * stats.get("defMultiplier");
-    ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
+    // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
+    ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    ehp[0] /= defMult;
+    // ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehp);
     //HPR
@@ -610,6 +614,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
                 for (const [subpart_name, hits] of Object.entries(part.hits)) {
                     const subpart = spell_result_map.get(subpart_name);
+                    if (!subpart) { continue; }
                     if (spell_result.type) {
                         if (subpart.type !== spell_result.type) {
                             throw "SpellCalc total subpart type mismatch";
@@ -769,7 +774,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
             setValue(skp_order[i] + "-skp", skillpoints[i]);
             let linebreak = document.createElement("br");
             linebreak.classList.add("itemp");
-            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100*skillpoint_final_mult[i]).toFixed(1).concat(skp_effects[i]));
             document.getElementById(skp_order[i]+"-warnings").textContent = ''
             if (assigned > 100) {
                 let skp_warning = document.createElement("p");
@@ -1101,6 +1106,7 @@ function builder_graph_init() {
     atree_merge.link_to(build_node, 'build');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
+    stat_agg_node.link_to(atree_stats, 'atree-stats');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 

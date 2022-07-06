@@ -44,14 +44,16 @@ function init_crafter() {
     try {
         document.getElementById("recipe-choice").addEventListener("change", (event) => {
             updateMaterials();
+            updateCraftedImage();
             calculateCraftSchedule();
+        });
+        document.getElementById("recipe-choice").addEventListener("oninput", (event) => {
+            updateCraftedImage();
         });
         document.getElementById("level-choice").addEventListener("change", (event) => {
             updateMaterials();
             calculateCraftSchedule();
         });
-        document.getElementById("recipe-choice").setAttribute("oninput", "updateCraftedImage()");
-        document.getElementById("recipe-choice").setAttribute("change", "updateCraftedImage()");
         
         for (let i = 1; i < 4; ++i) {
             document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
@@ -177,7 +179,7 @@ function calculateCraft() {
     //Display Craft Stats
     // displayCraftStats(player_craft, "craft-stats");
     let mock_item = player_craft.statMap;
-    apply_weapon_powders(mock_item);
+    if (mock_item.get('category') === 'weapon') { apply_weapon_powders(mock_item) };
     displayExpandedItem(mock_item, "craft-stats");
 
     //Display Ingredients' Stats

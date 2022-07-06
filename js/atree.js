@@ -39,6 +39,9 @@ add_spell_prop: {
     base_spell:     int             // spell identifier
     target_part:    Optional[str]   // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
                                     //     If target part does not exist, a new part is created.
+    behavior:       Optional[str]   // One of: "merge", "modify". default: merge
+                                    //     merge: add if exist, make new part if not exist
+                                    //     modify: change existing part. do nothing if not exist
     cost:           Optional[int]   // change to spellcost
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
@@ -57,6 +60,9 @@ raw_stat: {
     type:           "raw_stat"
     toggle:         Optional[bool | str]    // default: false; true means create anon. toggle,
                                             // string value means bind to (or create) named button
+    behavior:       Optional[str]           // One of: "merge", "modify". default: merge
+                                            //     merge: add if exist, make new part if not exist
+                                            //     modify: change existing part. do nothing if not exist
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
@@ -135,7 +141,7 @@ const atree_node = new (class extends ComputeNode {
         const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
         const atree_raw = atrees[player_class];
-        if (!atree_raw) return null;
+        if (!atree_raw) return [];
 
         let atree_map = new Map();
         let atree_head;
@@ -287,7 +293,7 @@ const atree_merge = new (class extends ComputeNode {
         }
         return abils_merged;
     }
-})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
 /**
  * Validate ability tree.
@@ -301,6 +307,8 @@ const atree_validate = new (class extends ComputeNode {
     compute_func(input_map) {
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
+
+        if (atree_order.length == 0) { return [0, ['no atree data']]; }
 
         let errors = [];
         let reachable = new Map();
@@ -452,7 +460,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     has_spell_def = true;
                     // replace_spell just replaces all (defined) aspects.
                     for (const key in effect) {
-                        ret_spell[key] = effect[key];
+                        ret_spell[key] = deepcopy(effect[key]);
                     }
                 }
             }
@@ -465,9 +473,9 @@ const atree_collect_spells = new (class extends ComputeNode {
                     // Already handled above.
                     continue;
                 case 'add_spell_prop': {
-                    const { base_spell, target_part = null, cost = 0} = effect;
+                    const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
                     if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
-                    ret_spell.cost += cost;
+                    // TODO: unjankify this... if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
                         continue;
@@ -497,7 +505,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                             break;
                         }
                     }
-                    if (!found_part) { // add part.
+                    if (!found_part && behavior === 'merge') { // add part. if behavior is merge
                         let spell_part = deepcopy(effect);
                         spell_part.name = target_part;  // has some extra fields but whatever
                         ret_spell.parts.push(spell_part);
@@ -531,6 +539,51 @@ const atree_collect_spells = new (class extends ComputeNode {
             ret_spells.set(base_spell_id, ret_spell);
         }
         return ret_spells;
+    }
+})().link_to(atree_merge, 'atree-merged');
+
+const atree_stats = new (class extends ComputeNode {
+    constructor() { super('atree-stats-collector'); }
+
+    compute_func(input_map) {
+        if (input_map.size !== 1) { throw "AbilityTreeCollectStats accepts exactly one input (atree-merged)"; }
+        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+
+        let ret_effects = new Map();
+        for (const [abil_id, abil] of atree_merged.entries()) {
+            if (abil.effects.length == 0) { continue; }
+
+            for (const effect of abil.effects) {
+                switch (effect.type) {
+                case 'stat_scaling':
+                    // TODO: handle
+                    continue;
+                case 'raw_stat':
+                    // TODO: toggles...
+                    for (const bonus of effect.bonuses) {
+                        const { type, name, abil = "", value } = bonus;
+                        // TODO: prop
+                        if (type === "stat") {
+                            if (ret_effects.has(name)) { ret_effects.set(name, ret_effects.get(name) + value); }
+                            else { ret_effects.set(name, value); }
+                        }
+                    }
+                    continue;
+                case 'add_spell_prop':
+                    // TODO unjankify....
+                    // costs are converted to raw cost ID
+                    const { base_spell, cost = 0} = effect;
+                    if (cost) {
+                        const key = "spRaw"+base_spell;
+                        if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
+                        else { ret_effects.set(key, cost); }
+                    }
+                    continue;
+                }
+            }
+        }
+        console.log(ret_effects);
+        return ret_effects;
     }
 })().link_to(atree_merge, 'atree-merged');
 
