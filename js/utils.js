@@ -758,19 +758,19 @@ function deepcopy(obj) {
 /**
  * 
  */
-function gen_slider_labeled(label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []) {
+function gen_slider_labeled({label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []}) {
     let slider_container = document.createElement("div");
     slider_container.classList.add("row");
 
     let buf_col = document.createElement("div");
     buf_col.classList.add("col", "mx-1");
-
-    let slider = gen_slider(min, max, step, default_val, id, color, classlist);
     
     let label = document.createElement("div");
     label.classList.add("col");
     label.classList.add(...label_classlist);
     label.textContent = label_name + ": " + default_val;
+
+    let slider = gen_slider(min, max, step, default_val, id, color, classlist, label);
 
     //we set IDs here because the slider's id is potentially only meaningful after gen_slider() is called
     label.id = slider.id + "-label";
@@ -793,7 +793,7 @@ function gen_slider_labeled(label_name, label_classlist = [], min = 0, max = 100
  * @param {Array<String>} classlist - A list of classes to add to the slider.
  * @returns 
  */
-function gen_slider(min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []) {
+function gen_slider(min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = [], label = undefined) {
     //simple attribute vals
     let slider = document.createElement("input");
     slider.type = "range";
@@ -817,11 +817,11 @@ function gen_slider(min = 0, max = 100, step = 1, default_val = min, id = undefi
      slider.style.webkitAppearance = "none";
      slider.style.borderRadius = "30px";
      slider.style.height = "0.5rem";
-     slider.classList.add("px-0");
+     slider.classList.add("px-0", "slider");
 
     //set up recoloring
     slider.addEventListener("change", function(e) {
-        recolor_slider(slider.id);
+        recolor_slider(slider, label);
     });
     //do recoloring for the default val
     let pct = Math.round(100 * (parseInt(slider.value) - parseInt(slider.min)) / (parseInt(slider.max) - parseInt(slider.min)));
@@ -833,15 +833,14 @@ function gen_slider(min = 0, max = 100, step = 1, default_val = min, id = undefi
 
 /** Recolors a slider. If the corresponding label exists, also update that.
  * 
- * @param {String} id - the ID of the slider
+ * @param {slider} slider - the slider element
+ * @param {label} label - the label element
  */
-function recolor_slider(id) {
-    let slider = document.getElementById(id);
+function recolor_slider(slider, label) {
     let color = slider.color;
     let pct = Math.round(100 * (parseInt(slider.value) - parseInt(slider.min)) / (parseInt(slider.max) - parseInt(slider.min)));
     slider.style.background = `rgba(0, 0, 0, 0) linear-gradient(to right, ${color}, ${color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;  
 
-    let label = document.getElementById(id + "-label");
     if (label) {
         //convention is that the number goes at the end... I parse by separating it at ':'
         label.textContent = label.textContent.split(":")[0] + ": " + slider.value;

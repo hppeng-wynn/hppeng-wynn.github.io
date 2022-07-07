@@ -11,29 +11,7 @@ let armor_powder_node = new (class extends ComputeNode {
         }
         return statMap;
     }
-})().update();
-
-/* Updates PASSIVE powder special boosts (armors)
-*/
-function update_armor_powder_specials(elem_id) {
-    //we only update the powder special + external stats if the player has a build
-    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
-
-    //update the label associated w/ the slider 
-    let elem = document.getElementById(elem_id);
-    let label = document.getElementById(elem_id + "_label");
-    let value = elem.value;
-
-    label.textContent = label.textContent.split(":")[0] + ": " + value
-    
-    //update the slider's graphics
-    let bg_color = elem_colors[skp_order.indexOf(wynn_elem)];
-    let pct = Math.round(100 * value / powderSpecialStats[skp_order.indexOf(wynn_elem)].cap);
-    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
-
-    armor_powder_node.mark_dirty().update();
-}
-
+})();
 
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
@@ -1116,6 +1094,7 @@ function builder_graph_init() {
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
     }
+    armor_powder_node.update();
     level_input.update();
 
     // kinda janky, manually set atree and update. Some wasted compute here
