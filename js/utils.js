@@ -347,7 +347,7 @@ Base64 = (function () {
                 this.bits[curr_idx] |= (char << pos);
 
                 //if we go to the "next" char, update it
-                if (Math.floor((pos - 1) / 32) < Math.floor((pos + 5) / 32)) {
+                if (Math.floor(pos / 32) < Math.floor((pos + 5) / 32)) {
                     this.bits[curr_idx + 1] |= (char >>> (6 - (pos + 6) % 32));
                 }
 
@@ -782,7 +782,6 @@ function deepcopy(obj) {
 }
 
 function bv_test() {
-
     console.log("=====STARTING BITVECTOR UNIT TESTS=====");
 
     // Empty Constructor + append str
