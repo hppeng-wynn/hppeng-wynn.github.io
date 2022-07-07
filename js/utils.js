@@ -327,8 +327,11 @@ Base64 = (function () {
             for (const int of this.bits) {
                 bit_vec.push(int);
             }
+            //effectively double size - TODO 1-line this
+            for (const int of this.bits) {
+                bit_vec.push(0);
+            }
 
-            bit_vec.concat(Array(10).fill(0));
             this.bits = new Uint32Array(bit_vec);
             return this.append(data, length);
         }
@@ -674,7 +677,8 @@ const TEST_FAIL = 0;
  */
  function assert(arg, msg) {
     if (!arg) {
-        throw new Error(msg ? msg : "Assert failed.");
+        console.trace(msg ? msg : "Assert failed.");
+        return TEST_FAIL;
     }
     return TEST_SUCCESS;
 }
@@ -687,7 +691,8 @@ const TEST_FAIL = 0;
  */
 function assert_equals(arg1, arg2, msg) {
     if (!Object.is(arg1, arg2)) {
-        throw new Error(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
+        console.trace(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
+        return TEST_FAIL;
     }
     return TEST_SUCCESS;
 }
@@ -700,7 +705,8 @@ function assert_equals(arg1, arg2, msg) {
  */
  function assert_not_equals(arg1, arg2, msg) {
     if (Object.is(arg1, arg2)) {
-        throw new Error(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
+        console.trace(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
+        return TEST_FAIL;
     }
     return TEST_SUCCESS;
 }
@@ -714,7 +720,8 @@ function assert_equals(arg1, arg2, msg) {
  */
 function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
     if (Math.abs(arg1 - arg2) > epsilon) {
-        throw new Error(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
+        console.trace(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
+        return TEST_FAIL;
     }
     return TEST_SUCCESS;
 }
@@ -726,7 +733,8 @@ function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
  */
 function assert_null(arg, msg) {
     if (arg !== null) {
-        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not null.");
+        console.trace(msg ? msg : "Assert Near failed. " + arg + " is not null.");
+        return TEST_FAIL;
     }
     return TEST_SUCCESS;
 }
@@ -738,7 +746,8 @@ function assert_null(arg, msg) {
  */
  function assert_undefined(arg, msg) {
     if (arg !== undefined) {
-        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
+        console.trace(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
+        return TEST_FAIL;
     }
     return TEST_SUCCESS;
 }
@@ -754,7 +763,8 @@ function assert_error(func_binding, msg) {
     } catch (err) {
         return TEST_SUCCESS;
     }
-    throw new Error(msg ? msg : "Function didn't throw an error.");
+    console.trace(msg ? msg : "Function didn't throw an error.");
+    return TEST_FAIL;
 }
 
 /**
@@ -773,7 +783,7 @@ function deepcopy(obj) {
 
 function bv_test() {
 
-    console.log("=====STARTING BITVECTOR UNIT TEST=====");
+    console.log("=====STARTING BITVECTOR UNIT TESTS=====");
 
     // Empty Constructor + append str
     let bv = new BitVector("");
@@ -813,8 +823,60 @@ function bv_test() {
     assert_equals(bv.bits.length, 1);
     assert_equals(bv.length, 30);
     assert_equals(bv.toB64(), "abcde");
+    bv = new BitVector("abcdefghij", 20);
+    assert_equals(bv.bits.length, 2);
+    assert_equals(bv.length, 60);
+    assert_equals(bv.toB64(), "abcdefghij");
 
-    console.log("=====FINISHED BITVECTOR UNIT TEST=====");
+    //test 32-bit length constructor
+    bv = new BitVector(2**31, 32);
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 32);
+
+    //test multiple length constructor (+ get to last bit)
+    bv = new BitVector("abcdefghijklmnop");
+    assert_equals(bv.bits.length, 3);
+    assert_equals(bv.length, 96);
+    assert_equals(bv.toB64(), "abcdefghijklmnop");
+
+    //test append resize w num 1
+    bv = new BitVector("abcd");
+    bv.append(10000, 14);
+    assert_equals(bv.bits.length, 2);
+    assert_equals(bv.length, 38);
+    assert_equals(bv.slice(24, 38), 10000);
+    assert_equals(bv.toB64().slice(0, 4), "abcd");
+
+    //test append resize w num 2
+    bv = new BitVector("abcdefghi");
+    bv.append(10000, 14);
+    assert_equals(bv.bits.length, 4);
+    assert_equals(bv.length, 68);
+    assert_equals(bv.slice(54, 68), 10000);
+    assert_equals(bv.toB64().slice(0, 9), "abcdefghi");
+
+    //test append resize w str 1
+    bv = new BitVector("abcd");
+    bv.append("efgh");
+    assert_equals(bv.bits.length, 2);
+    assert_equals(bv.length, 48);
+    assert_equals(bv.toB64(), "abcdefgh");
+
+    //test append resize w str 2
+    bv = new BitVector("abcd");
+    bv.append("efghijklmnopqrstuvwxyz");
+    assert_equals(bv.bits.length, 8);
+    assert_equals(bv.length, 156);
+    assert_equals(bv.toB64(), "abcdefghijklmnopqrstuvwxyz");
+
+    //test append resize w str 3
+    bv = new BitVector("abcdefgh");
+    bv.append("ijkl");
+    assert_equals(bv.bits.length, 4);
+    assert_equals(bv.length, 72);
+    assert_equals(bv.toB64(), "abcdefghijkl");
+
+    console.log("=====FINISHED BITVECTOR UNIT TESTS=====");
 }
 
 bv_test();
