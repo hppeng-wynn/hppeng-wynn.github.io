@@ -1240,7 +1240,7 @@ const atrees = {
             "display_name": "Refined Gunpowder",
             "desc": "Increase the damage of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
-            "parents": ["Windstorm"], 
+            "parents": ["Windstorm", "Traveler"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -1949,7 +1949,7 @@ const atrees = {
             "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 50%)",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
-            "parents": ["Cheaper Arrow Shield"],
+            "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
             "dependencies": ["Phantom Ray"],
             "blockers": [],
             "cost": 1,
@@ -2282,7 +2282,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Uppercut",
-                            "multipliers": [150, 50, 50, 0, 0, 0]
+                            "multipliers": [200, 40, 40, 0, 0, 0]
                         },
                         {
                             "name": "Total Damage",
@@ -2967,6 +2967,7 @@ const atrees = {
             "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +3% (Max 300%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Spear Proficiency 2"], 
             "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
@@ -3030,6 +3031,7 @@ const atrees = {
             "desc": "Add +2 additional charges to Mantle of the Bovemists",
             "archetype": "Paladin", 
             "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
             "parents": ["Manachism", "Flying Kick"], 
             "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
@@ -3078,8 +3080,7 @@ const atrees = {
         {
             "display_name": "Boiling Blood",
             "desc": "Bash leaves a trail of boiling blood behind its first explosion, slowing down and damaging enemies above it every 0.4 seconds",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Bash",
             "parents": ["Enraged Blow", "Ragnarokkr"], 
             "dependencies": [], 
             "blockers": [],
@@ -3816,7 +3817,7 @@ const atrees = {
             "parents": ["Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 1, 
+            "cost": 2, 
             "display": {
                 "row": 31,
                 "col": 4,
@@ -3866,7 +3867,7 @@ const atrees = {
         {
             "display_name": "Blood Pact",
             "desc": "If you do not have enough mana to cast a spell, spend health instead (0.6% health per mana)",
-            "archetype": "", 
+            "archetype": "Fallen", 
             "archetype_req": 10, 
             "parents": ["Cheaper War Scream"], 
             "dependencies": [], 
