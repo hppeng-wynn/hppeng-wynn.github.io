@@ -1,3 +1,9 @@
+"""
+Parses a set from a single file.
+
+Usage: python parse_set_individual.py [infile]
+"""
+
 import sys
 
 set_infile = sys.argv[1]

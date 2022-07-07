@@ -103,15 +103,17 @@ const special_mappings = {
 };
 
 let itemFilters = document.getElementById("filter-items");
-for (let x in translate_mappings) {
-    let el = document.createElement("option");
-    el.value = x;
-    itemFilters.appendChild(el);
-}
-for (let x in special_mappings) {
-    let el = document.createElement("option");
-    el.value = x;
-    itemFilters.appendChild(el);
+if (itemFilters) {
+    for (let x in translate_mappings) {
+        let el = document.createElement("option");
+        el.value = x;
+        itemFilters.appendChild(el);
+    }
+    for (let x in special_mappings) {
+        let el = document.createElement("option");
+        el.value = x;
+        itemFilters.appendChild(el);
+    }
 }
 
 let itemCategories = [ "armor", "accessory", "weapon" ];
@@ -137,9 +139,9 @@ let searchDb;
 function doItemSearch() {
     window.scrollTo(0, 0);
     let queries = [];
-    queries.push('f:name?="'+document.getElementById("name-choice").value.trim()+'"');
+    queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
 
-    let categoryOrType = document.getElementById("category-choice").value;
+    let categoryOrType = document.getElementById("item-category-choice").value;
     if (itemTypes.includes(categoryOrType)) {
         queries.push('f:type="'+categoryOrType+'"');
     }
@@ -147,7 +149,7 @@ function doItemSearch() {
         queries.push('f:cat="'+categoryOrType+'"');
     }
 
-    let rarity = document.getElementById("rarity-choice").value;
+    let rarity = document.getElementById("item-rarity-choice").value;
     if (rarity) {
         if (rarity === "ANY") {
 
@@ -160,7 +162,7 @@ function doItemSearch() {
         }
     }
 
-    let level_dat = document.getElementById("level-choice").value.split("-");
+    let level_dat = document.getElementById("item-level-choice").value.split("-");
     queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
     
     for (let i = 1; i <= 4; ++i) {
@@ -178,7 +180,6 @@ function doItemSearch() {
         }
     }
 
-    document.getElementById("main").textContent = "";
     let filterQuery = "true";
     let sortQueries = [];
     console.log(queries);

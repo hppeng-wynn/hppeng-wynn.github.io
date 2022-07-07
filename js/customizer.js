@@ -1,16 +1,6 @@
 const custom_url_base = location.href.split("#")[0];
 const custom_url_tag = location.hash.slice(1);
 
-const CUSTOM_BUILD_VERSION = "7.0.1";
-
-function setTitle() {
-    let text = "WynnCustom version "+CUSTOM_BUILD_VERSION;
-    document.getElementById("header").classList.add("funnynumber");
-    document.getElementById("header").textContent = text;
-}
-
-setTitle();
-
 let player_custom_item;
 let player_custom_ing;
 let base_item; //the item that a user starts from, if any
@@ -51,7 +41,6 @@ function init_customizer() {
 
         
     } catch (error) {
-        console.log("If you are seeing this while building, do not worry. Oherwise, panic! (jk contact ferricles)");
         console.log(error);
     }
 }
@@ -74,7 +63,7 @@ function calculateCustom() {
         statMap.set("maxRolls", new Map());
         let inputs = document.getElementsByTagName("input");
 
-        if (document.getElementById("fixID-choice").textContent === "yes") {//Fixed IDs
+        if (document.getElementById("fixID-choice").classList.contains("toggleOn")) {//Fixed IDs
             for (const input of inputs) {
                 if (input.id.includes("-min") || input.id.includes("-max")) {
                     continue;
@@ -187,33 +176,34 @@ function calculateCustom() {
 
         player_custom_item = new Custom(statMap);
 
-        document.getElementById("right-container").classList.remove("sticky-box");
         let custom_str = encodeCustom(player_custom_item.statMap, true);
         location.hash = custom_str;
         player_custom_item.setHash(custom_str);
-        //console.log(player_custom_item.statMap.get("hash"));
 
         
-        displayExpandedItem(player_custom_item.statMap, "custom-stats");
-
-        //console.log(player_custom_item.statMap);
+        displaysq2ExpandedItem(player_custom_item.statMap, "custom-stats");
 
     }catch (error) {
-        //USE THE ERROR <p>S!
+        //The error elements no longer exist in the page. Add them back if needed.
+
+        // console.log(error.stack);
 
         let msg = error.stack;
         let lines = msg.split("\n");
-        let header = document.getElementById("header");
-        header.textContent = "";
-        for (const line of lines) {
-            let p = document.createElement("p");
-            p.classList.add("itemp");
-            p.textContent = line;
-            header.appendChild(p);
+        for (line of lines) {
+            console.log(line);
         }
-        let p2 = document.createElement("p");
-        p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
-        header.appendChild(p2);
+        // let header = document.getElementById("header");
+        // header.textContent = "";
+        // for (const line of lines) {
+        //     let p = document.createElement("p");
+        //     p.classList.add("itemp");
+        //     p.textContent = line;
+        //     header.appendChild(p);
+        // }
+        // let p2 = document.createElement("p");
+        // p2.textContent = "If you believe this is an error, contact hppeng on forums or discord.";
+        // header.appendChild(p2);
     }
     
 }
@@ -236,13 +226,13 @@ function decodeCustom(custom_url_tag) {
             if (fixID) {
                 statMap.set("fixId", true);
                 toggleButton("fixID-choice");
-                toggleYN("fixID-choice");
-                toggleFixed(document.getElementById("fixID-choice"));
+                toggleFixed(document.getElementById("fixID-choice").classList.contains("toggleOn"));
             }
             while (tag !== "") {
                 let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
                 //console.log(tag.slice(0, 2) + ": " + id);
                 let len = Base64.toInt(tag.slice(2,4));
+
                 if (rolledIDs.includes(id)) {
                     let sign = parseInt(tag.slice(4,5),10);
                     let minRoll = Base64.toInt(tag.slice(5,5+len));
@@ -350,27 +340,15 @@ function populateFields() {
 
 
 
-/* Changes an element's text content from yes to no or vice versa
-*/
-function toggleYN(elemId) {
-    let elem = document.getElementById(elemId);
-    if (elem.textContent && elem.textContent === "no") {
-        elem.textContent = "yes";
-    } else if (elem.textContent === "yes") {
-        elem.textContent = "no";
-    } else {
-        elem.textContent = "no";
-    }
-}
-
 /**
  * @param fixed : a boolean for the state of the fixID button.
  */
-function toggleFixed(fixed) {
+function toggleFixed() {
+    let fixedID_bool = document.getElementById("fixID-choice").classList.contains("toggleOn");
     for (const id of rolledIDs) {
         let elem = document.getElementById(id);
         if (elem) {    
-            if (fixed.textContent === "yes") { //now fixed IDs -> go to 1 input
+            if (fixedID_bool) { //now fixed IDs -> go to 1 input
                 document.getElementById(id+"-choice-fixed-container").style = "";
                 document.getElementById(id+"-choice-container").style = "display:none";
             } else { //now rollable -> go to 2 inputs
@@ -392,7 +370,7 @@ function useBaseItem(elem) {
     //Check items db.
     for (const [name,itemObj] of itemMap) {
         if (itemName === name) {
-            baseItem = expandItem(itemObj, []);
+            baseItem = expandItem(itemObj);
             break;
         }
     }

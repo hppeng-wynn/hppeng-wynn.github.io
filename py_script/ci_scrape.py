@@ -1,3 +1,5 @@
+#looks like something that hpp does with curl
+
 import os
 
 with open("ci.txt.2") as infile:

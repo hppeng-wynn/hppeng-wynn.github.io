@@ -1,0 +1,14 @@
+Theme, formatting, and overall inspiration: Wynndata (Dukio)
+    - https://wynndata.tk
+
+The game, of course
+    - wynncraft.com
+
+Additional Contributors:
+ - Kiocifer (Icons!)
+ - Lennon (Skill point formula reversing)
+ - Phanta (WynnAtlas custom expression parser / item search)
+ - QuantumNep (Layout code/layout ideas)
+ - nbcss (Crafted Item mechanics reverse engineering)
+ - dr_carlos (Hiding UI elements properly, fade animations, proper error handling)
+ - Atlas Inc discord (feedback, ideas, damage calc, etc)

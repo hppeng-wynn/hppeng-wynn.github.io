@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+<head>
+    <title>WynnAtlas</title>
+    <link rel="icon" href="../media/icons/new/searcher.png" type="image/icon type">
+
+    <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
+
+    <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
+
+    
+    <link rel="stylesheet" href="../css/sq2bs.css">
+    <link rel="stylesheet" href="../css/items_2.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/wynnstyles.css">
+</head>
+    <body class = "text-light d-flex justify-content-center" id = "body">
+        <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
+            <a href = "../builder/"><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
+            <a href = "../crafter/"><img src = "../media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
+            <a href = "../items/"><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+            <a href = "/customizer.html"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
+            <a href = "/map.html"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
+            <a href = "/wynnfo/index.html"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "WynnCrafter"><b>WynnCrafter</b></a>
+            <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
+            <hr/>
+            <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
+        </div>
+        <div class = "container py-5 vh-100 mx-0 mx-lg-auto scaled-font">
+            <div class = "col">
+                <div class = "row">
+                    <div class = "col text-start" id = "credits">
+                        <a href="credits.txt" class="link">Additional credits</a>
+                    </div>
+                    <div class = "col text-center" id = "help">
+                        <a href="items_2_help.html" class="link" target="_blank">Search Guide</a>
+                    </div>
+                    <div class = "col text-end">
+                        <a href = "../items/">Basic Item Search</a>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class="col" id="main">
+                        <div class = "row" id="search-container">
+                            <div class="col search-field-container" id="search-filter">
+                                <div class="col fw-bold">Filter By:</div>
+                                <input class="col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="search-filter-field" type="text" autofocus="true"
+                                       placeholder="name ?= &quot;blue&quot; & str >= 15 & dex >= 10">
+                                <div class="search-field-error" id="search-filter-error"></div>
+                                <div class="search-field-compl" id="search-filter-compl"></div>
+                            </div>
+                            <div class="col search-field-container" id="search-sort">
+                                <div class="col fw-bold">Sort By:</div>
+                                <input class="col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="search-sort-field" type="text"
+                                       placeholder="str + dex; meleerawdmg + spellrawdmg">
+                                <div class="search-field-error" id="search-sort-error"></div>
+                                <div class="search-field-compl" id="search-sort-compl"></div>
+                            </div>
+                        </div>
+                        <div class = "row" id="item-list-container">
+                            <div class="row" id="item-list"></div>
+                            <div class="row" id="item-list-footer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "row" id="scroll-up">&uparrow;</div>
+            </div>
+        </div>
+
+        
+        <script type="text/javascript" src="/js/utils.js"></script>
+        <script type="text/javascript" src="/js/build_utils.js"></script>
+        <script type="text/javascript" src="/js/icons.js"></script>
+        <script type="text/javascript" src="/js/damage_calc.js"></script>
+        <script type="text/javascript" src="/js/display_constants.js"></script>
+        <script type="text/javascript" src="/js/display.js"></script>
+        <script type="text/javascript" src="/js/query_2.js"></script>
+        <script type="text/javascript" src="/js/expr_parser.js"></script>
+        <script type="text/javascript" src="/js/load.js"></script>
+        <script type="text/javascript" src="/js/items_2.js"></script>
+    </body>
+</html>

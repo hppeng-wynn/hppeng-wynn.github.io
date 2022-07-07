@@ -55,9 +55,140 @@ class PowderSpecial{
 function _ps(a,b,c,d,e) { return new PowderSpecial(a,b,c,d,e); } //bruh moment
 
 let powderSpecialStats = [
-    _ps("Quake",new Map([["Radius",[4.4,4.9,5.4,5.9,6.4]], ["Damage",[155,220,285,350,415]] ]),"Rage",new Map([ ["Damage", [0.3,0.4,0.5,0.7,1.0]],["Description", "% " + "\u2764" + " Missing"] ]),400), //e
+    _ps("Quake",new Map([["Radius",[4.4,4.9,5.4,5.9,6.4]], ["Damage",[155,220,285,350,415]] ]),"Rage",new Map([ ["Damage", [0.3,0.4,0.5,0.7,1.0]],["Description", "% " + "\u2764" + " Missing"] ]), 396), //e
     _ps("Chain Lightning",new Map([ ["Chains", [5,6,7,8,9]], ["Damage", [200,225,250,275,300]] ]),"Kill Streak",new Map([ ["Damage", [3,4.5,6,7.5,9]],["Duration", [5,5,5,5,5]],["Description", "Mob Killed"] ]),200), //t
     _ps("Curse",new Map([ ["Duration", [7,7.5,8,8.5,9]],["Damage Boost", [90,120,150,180,210]] ]),"Concentration",new Map([ ["Damage", [1,2,3,4,5]],["Duration",[1,1,1,1,1]],["Description", "Mana Used"] ]),150), //w
     _ps("Courage",new Map([ ["Duration", [6,6.5,7,7.5,8]],["Damage", [75,87.5,100,112.5,125]],["Damage Boost", [70,90,110,130,150]] ]),"Endurance",new Map([ ["Damage", [2,3,4,5,6]],["Duration", [8,8,8,8,8]],["Description", "Hit Taken"] ]),200), //f
     _ps("Wind Prison",new Map([ ["Duration", [3,3.5,4,4.5,5]],["Damage Boost", [400,450,500,550,600]],["Knockback", [8,12,16,20,24]] ]),"Dodge",new Map([ ["Damage",[2,3,4,5,6]],["Duration",[2,3,4,5,6]],["Description","Near Mobs"] ]),150) //a
 ];
+
+/**
+ * Apply armor powders.
+ * Encoding shortcut assumes that all powders give +def to one element
+ * and -def to the element "behind" it in cycle ETWFA, which is true
+ * as of now and unlikely to change in the near future.
+ */
+function applyArmorPowders(expandedItem) {
+    const powders = expandedItem.get('powders');
+    for(const id of powders){
+        let powder = powderStats[id];
+        let name = powderNames.get(id).charAt(0);
+        let prevName = skp_elements[(skp_elements.indexOf(name) + 4 )% 5];
+        expandedItem.set(name+"Def", (expandedItem.get(name+"Def") || 0) + powder["defPlus"]);
+        expandedItem.set(prevName+"Def", (expandedItem.get(prevName+"Def") || 0) - powder["defMinus"]);
+    }
+}
+
+const damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
+const damage_present_key = 'damagePresent';
+/**
+ * Apply weapon powders. MUTATES THE ITEM!
+ * Adds entries for `damage_keys` and `damage_present_key`
+ * For normal items, `damage_keys` is 6x2 list (elem: [min, max])
+ * For crafted items, `damage_keys` is 6x2x2 list (elem: [minroll: [min, max], maxroll: [min, max]])
+ */
+function apply_weapon_powders(item) {
+    let present;
+    if (item.get("tier") !== "Crafted") {
+        let weapon_result = calc_weapon_powder(item);
+        let damages = weapon_result[0];
+        present = weapon_result[1];
+        for (const i in damage_keys) {
+            item.set(damage_keys[i], damages[i]);
+        }
+    } else {
+        let base_low = [item.get("nDamBaseLow"),item.get("eDamBaseLow"),item.get("tDamBaseLow"),item.get("wDamBaseLow"),item.get("fDamBaseLow"),item.get("aDamBaseLow")];
+        let results_low = calc_weapon_powder(item, base_low);
+        let damage_low = results_low[0];
+        let base_high = [item.get("nDamBaseHigh"),item.get("eDamBaseHigh"),item.get("tDamBaseHigh"),item.get("wDamBaseHigh"),item.get("fDamBaseHigh"),item.get("aDamBaseHigh")];
+        let results_high = calc_weapon_powder(item, base_high);
+        let damage_high = results_high[0];
+        present = results_high[1];
+        
+        for (const i in damage_keys) {
+            item.set(damage_keys[i], [damage_low[i], damage_high[i]]);
+        }
+    }
+    item.set(damage_present_key, present);
+}
+
+/**
+ * Calculate weapon damage from powder.
+ *
+ * Params:
+ * weapon: Weapon to apply powder to
+ * damageBases: used by crafted
+ *
+ * Return:
+ * [damages, damage_present]
+ */
+function calc_weapon_powder(weapon, damageBases) {
+    let powders = weapon.get("powders").slice();
+
+    // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
+    let damages = [
+        weapon.get('nDam').split('-').map(Number),
+        weapon.get('eDam').split('-').map(Number),
+        weapon.get('tDam').split('-').map(Number),
+        weapon.get('wDam').split('-').map(Number),
+        weapon.get('fDam').split('-').map(Number),
+        weapon.get('aDam').split('-').map(Number)
+    ];
+
+    // Applying spell conversions
+    let neutralBase = damages[0].slice();
+    let neutralRemainingRaw = damages[0].slice();
+  
+    //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
+
+    //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
+    //1st round - apply each as ingred, 2nd round - apply as normal
+    if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
+        for (const p of powders.concat(weapon.get("ingredPowders"))) {
+            let powder = powderStats[p];  //use min, max, and convert
+            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
+            let diff = Math.floor(damageBases[0] * powder.convert/100);
+            damageBases[0] -= diff;
+            damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
+        }
+        //update all damages
+        for (let i = 0; i < damages.length; i++) {
+            damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
+        }
+        neutralRemainingRaw = damages[0].slice();
+        neutralBase = damages[0].slice();
+    }
+    
+    //apply powders to weapon
+    for (const powderID of powders) {
+        const powder = powderStats[powderID];
+        // Bitwise to force conversion to integer (integer division).
+        const element = (powderID/6) | 0;
+        let conversionRatio = powder.convert/100;
+        if (neutralRemainingRaw[1] > 0) {
+            let min_diff = Math.min(neutralRemainingRaw[0], conversionRatio * neutralBase[0]);
+            let max_diff = Math.min(neutralRemainingRaw[1], conversionRatio * neutralBase[1]);
+
+            damages[element+1][0] = Math.floor(round_near(damages[element+1][0] + min_diff));
+            damages[element+1][1] = Math.floor(round_near(damages[element+1][1] + max_diff));
+            neutralRemainingRaw[0] = Math.floor(round_near(neutralRemainingRaw[0] - min_diff));
+            neutralRemainingRaw[1] = Math.floor(round_near(neutralRemainingRaw[1] - max_diff));
+            //damages[element+1][0] += min_diff;
+            //damages[element+1][1] += max_diff;
+            //neutralRemainingRaw[0] -= min_diff;
+            //neutralRemainingRaw[1] -= max_diff;
+        }
+        damages[element+1][0] += powder.min;
+        damages[element+1][1] += powder.max;
+    }
+
+    // The ordering of these two blocks decides whether neutral is present when converted away or not.
+    let present_elements = []
+    for (const damage of damages) {
+        present_elements.push(damage[1] > 0);
+    }
+
+    // The ordering of these two blocks decides whether neutral is present when converted away or not.
+    damages[0] = neutralRemainingRaw;
+    return [damages, present_elements];
+}

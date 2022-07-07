@@ -10,13 +10,6 @@ const item_url_tag = location.hash.slice(1);
 
 const ITEM_BUILD_VERSION = "7.0.1";
 
-function setTitle() {
-    let text = "WynnInfo version "+ITEM_BUILD_VERSION;
-    document.getElementById("header").classList.add("funnynumber");
-    document.getElementById("header").textContent = text;
-}
-
-setTitle();
 
 let item;
 let amp_state = 0; //the level of corkian map used for ID purposes. Default 0.
@@ -27,16 +20,17 @@ function init_itempage() {
     //displayExpandedItem(expandItem(itemMap.get(item_url_tag).statMap, []), "item-view");
     try{ 
         item = expandItem(itemMap.get(item_url_tag.replaceAll("%20"," ")), []);
-        displayExpandedItem(item, "item-view");
-        displayAdditionalInfo("additional-info", item);
-        displayIDCosts("identification-costs", item);
+        displaysq2ExpandedItem(item, "item-view");
+        displaysq2AdditionalInfo("additional-info", item);
+        displaysq2IDCosts("identification-costs", item);
         if (item.get("set") && sets[item.get("set")]) {
-            displayAllSetBonuses("set-bonus-info",item.get("set"));
+            displaysq2AllSetBonuses("set-bonus-info",item.get("set"));
         }
         console.log(item);
-        displayIDProbabilities("identification-probabilities", item, amp_state);
+        displaysq2IDProbabilities("identification-probabilities", item, amp_state);
     } catch (error) {
         console.log(error);
+        console.log(error.stack);
     }
 }
 
@@ -45,7 +39,6 @@ function init_itempage() {
  * @param {Number} button_id the ID of the button just pressed.
  */
 function toggleAmps(button_id) {
-    console.log(button_id);
     amp_state = 0;
     if (button_id == 0) {return;}
     else {
@@ -59,7 +52,7 @@ function toggleAmps(button_id) {
             amp_state = button_id;
         } 
     }    
-    displayIDProbabilities("identification-probabilities", item, amp_state);
+    displaysq2IDProbabilities("identification-probabilities", item, amp_state);
 }
 
 

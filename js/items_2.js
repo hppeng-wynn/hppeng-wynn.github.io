@@ -239,17 +239,22 @@ function init_items2() {
     const itemListFooter = document.getElementById('item-list-footer');
 
     // compile the search db from the item db
-    const searchDb = items.filter(i => !i.remapID).map(i => [i, expandItem(i, [])]);
+    const searchDb = items.filter(i => !i.remapID).map(i => [i, expandItem(i)]);
 
     // init item list elements
     const ITEM_LIST_SIZE = 64;
     const itemEntries = [];
     for (let i = 0; i < ITEM_LIST_SIZE; i++) {
         const itemElem = document.createElement('div');
-        itemElem.classList.add('item-entry', 'box');
-        itemElem.setAttribute('id', `item-entry-${i}`);
+        itemElem.classList.add('col-lg-3', 'col-sm-auto', "p-2");
+        // itemElem.setAttribute('id', `item-entry-${i}`);
         itemList.append(itemElem);
         itemEntries.push(itemElem);
+
+        const itemElemContained = document.createElement("div");
+        itemElemContained.classList.add("dark-7", "rounded", "px-2", "col-auto");
+        itemElemContained.setAttribute('id', `item-entry-${i}`);
+        itemElem.appendChild(itemElemContained);
     }
 
     // create the expression parser
@@ -323,10 +328,10 @@ function init_items2() {
         for (let i = 0; i < searchMax; i++) {
             const result = searchResults[i];
             itemEntries[i].classList.add('visible');
-            displayExpandedItem(result.itemExp, `item-entry-${i}`);
+            displaysq2ExpandedItem(result.itemExp, `item-entry-${i}`);
             if (result.sortKeys.length > 0) {
                 const sortKeyListContainer = document.createElement('div');
-                sortKeyListContainer.classList.add('itemleft');
+                sortKeyListContainer.classList.add('row');
                 const sortKeyList = document.createElement('ul');
                 sortKeyList.classList.add('item-entry-sort-key', 'itemp', 'T0');
                 sortKeyListContainer.append(sortKeyList);

@@ -1,5 +1,6 @@
-const ci_save_order = ["name", "lore",  "tier", "set", "slots", "type", "material", "drop", "quest",  "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq","str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd","durability","duration","charges"];
-const nonRolled_strings = ["name","lore", "tier","set","type","material","drop","quest","majorIds","classReq","atkSpd","displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];
+const ci_save_order = ["name", "lore", "tier", "set", "slots", "type", "material", "drop", "quest", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "durability", "duration", "charges"];
+const nonRolled_strings = ["name", "lore", "tier", "set", "type", "material", "drop", "quest", "majorIds", "classReq", "atkSpd", "displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];
+
 //omitted restrict - it's always "Custom Item"
 //omitted displayName - either it's the same as name (repetitive) or it's "Custom Item"
 //omitted category - can always get this from type
@@ -16,7 +17,7 @@ const nonRolled_strings = ["name","lore", "tier","set","type","material","drop",
 function encodeCustom(custom, verbose) {
     if (custom) {
         if (custom.statMap) {
-            custom = custom.statMap; 
+            custom = custom.statMap;
         }
         let hash = "1";
         //version 1
@@ -34,55 +35,53 @@ function encodeCustom(custom, verbose) {
                 // 1 - min neg max pos
                 // 2 - min pos max neg (how?)
                 // 3 - min neg max neg
-                let sign = (Boolean(val_min / Math.abs(val_min) < 0) | 0) + 2*(Boolean(val_max / Math.abs(val_max) < 0) | 0);
+                let sign = (Boolean(val_min / Math.abs(val_min) < 0) | 0) + 2 * (Boolean(val_max / Math.abs(val_max) < 0) | 0);
                 //console.log(id + ": " + sign);
-                let min_len = Math.max(1,Math.ceil(log(64,Math.abs(val_min)+1)));
-                let max_len = Math.max(1,Math.ceil(log(64,Math.abs(val_max)+1)));
-                let len = Math.max(min_len,max_len);
+                let min_len = Math.max(1, Math.ceil(log(64, Math.abs(val_min) + 1)));
+                let max_len = Math.max(1, Math.ceil(log(64, Math.abs(val_max) + 1)));
+                let len = Math.max(min_len, max_len);
                 val_min = Math.abs(val_min);
                 val_max = Math.abs(val_max);
 
-                if ( val_min != 0 || val_max != 0 ) {
+                if (val_min != 0 || val_max != 0) {
                     if (custom.get("fixID")) {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(len, 2) + sign + Base64.fromIntN(val_min, len);
                     } else {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(val_min, len) + Base64.fromIntN(val_max,len);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(len, 2) + sign + Base64.fromIntN(val_min, len) + Base64.fromIntN(val_max, len);
                     }
                 }
             } else {
                 let damages = ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]; //"nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_"
                 let val = custom.get(id);
                 if (id == "majorIds") {
-                    console.log(val);
                     if (val.length > 0) {
                         val = val[0];
                     }
                     else {
                         val = "";
                     }
-                    console.log(val);
                 }
 
-                if (typeof(val) === "string" && val !== "") {
-                    if ((damages.includes(id) && val === "0-0") || (!verbose && ["lore","majorIds","quest","materials","drop","set"].includes(id))) { continue; }
+                if (typeof (val) === "string" && val !== "") {
+                    if ((damages.includes(id) && val === "0-0") || (!verbose && ["lore", "majorIds", "quest", "materials", "drop", "set"].includes(id))) { continue; }
                     if (id === "type") {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(types.indexOf(val.substring(0,1).toUpperCase()+val.slice(1)),1);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(types.indexOf(val.substring(0, 1).toUpperCase() + val.slice(1)), 1);
                     } else if (id === "tier") {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(tiers.indexOf(val),1);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(tiers.indexOf(val), 1);
                     } else if (id === "atkSpd") {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(attackSpeeds.indexOf(val),1);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(attackSpeeds.indexOf(val), 1);
                     } else if (id === "classReq") {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(classes.indexOf(val),1);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(classes.indexOf(val), 1);
                     } else {
-                        hash += Base64.fromIntN(i,2) + Base64.fromIntN(val.replaceAll(" ", "%20").length,2) + val.replaceAll(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(val.replaceAll(" ", "%20").length, 2) + val.replaceAll(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
                     }
-                } else if (typeof(val) === "number" && val != 0) {
-                    let len = Math.max(1,Math.ceil(log(64,Math.abs(val))));
+                } else if (typeof (val) === "number" && val != 0) {
+                    let len = Math.max(1, Math.ceil(log(64, Math.abs(val))));
                     let sign = Boolean(val / Math.abs(val) < 0) | 0;
                     //console.log(sign);
                     //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val,Math.max(1,Math.ceil(log(64,Math.abs(val))))) + "_";
-                    hash += Base64.fromIntN(i,2) + Base64.fromIntN(len,2) + sign + Base64.fromIntN(Math.abs(val),len);
-                } 
+                    hash += Base64.fromIntN(i, 2) + Base64.fromIntN(len, 2) + sign + Base64.fromIntN(Math.abs(val), len);
+                }
             }
         }
 
@@ -95,49 +94,51 @@ function encodeCustom(custom, verbose) {
 function getCustomFromHash(hash) {
     let name = hash.slice();
     let statMap;
+    console.log("decoding");
     try {
-        if (name.slice(0,3) === "CI-") {
+        if (name.slice(0, 3) === "CI-") {
             name = name.substring(3);
         } else {
             throw new Error("Not a custom item!");
         }
-    
+
+        //probably change vers and fixID to be encoded and decoded to/from B64 in the future
         let version = name.charAt(0);
-        let fixID = Boolean(parseInt(name.charAt(1),10));
+        let fixID = Boolean(parseInt(name.charAt(1), 10));
         let tag = name.substring(2);
         statMap = new Map();
         statMap.set("minRolls", new Map());
         statMap.set("maxRolls", new Map());
-    
+
         if (version === "1") {
             //do the things
             if (fixID) {
                 statMap.set("fixID", true);
-            } 
+            }
             while (tag !== "") {
-                let id = ci_save_order[Base64.toInt(tag.slice(0,2))];
-                let len = Base64.toInt(tag.slice(2,4));
+                let id = ci_save_order[Base64.toInt(tag.slice(0, 2))];
+                let len = Base64.toInt(tag.slice(2, 4));
                 if (rolledIDs.includes(id)) {
-                    let sign = parseInt(tag.slice(4,5),10);
-                    let minRoll = Base64.toInt(tag.slice(5,5+len));
+                    let sign = parseInt(tag.slice(4, 5), 10);
+                    let minRoll = Base64.toInt(tag.slice(5, 5 + len));
                     if (!fixID) {
-                        let maxRoll = Base64.toInt(tag.slice(5+len,5+2*len));
+                        let maxRoll = Base64.toInt(tag.slice(5 + len, 5 + 2 * len));
                         if (sign > 1) {
                             maxRoll *= -1;
                         }
                         if (sign % 2 == 1) {
                             minRoll *= -1;
                         }
-                        statMap.get("minRolls").set(id,minRoll);
-                        statMap.get("maxRolls").set(id,maxRoll);
-                        tag = tag.slice(5+2*len);
+                        statMap.get("minRolls").set(id, minRoll);
+                        statMap.get("maxRolls").set(id, maxRoll);
+                        tag = tag.slice(5 + 2 * len);
                     } else {
                         if (sign != 0) {
                             minRoll *= -1;
                         }
-                        statMap.get("minRolls").set(id,minRoll);
-                        statMap.get("maxRolls").set(id,minRoll);
-                        tag = tag.slice(5+len);
+                        statMap.get("minRolls").set(id, minRoll);
+                        statMap.get("maxRolls").set(id, minRoll);
+                        tag = tag.slice(5 + len);
                     }
                 } else {
                     let val;
@@ -155,17 +156,17 @@ function getCustomFromHash(hash) {
                             val = classes[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else { //general case
-                            val = tag.slice(4,4+len).replaceAll("%20"," ");
+                            val = tag.slice(4, 4 + len).replaceAll("%20", " ");
                         }
-                        tag = tag.slice(4+len);
+                        tag = tag.slice(4 + len);
                     } else {
-                        let sign = parseInt(tag.slice(4,5),10);
-                        val = Base64.toInt(tag.slice(5,5+len));
+                        let sign = parseInt(tag.slice(4, 5), 10);
+                        val = Base64.toInt(tag.slice(5, 5 + len));
                         if (sign == 1) {
                             val *= -1;
                         }
-                        tag = tag.slice(5+len);
-                    } 
+                        tag = tag.slice(5 + len);
+                    }
                     if (id === "majorIds") {
                         val = [val];
                         console.log(val);
@@ -173,27 +174,28 @@ function getCustomFromHash(hash) {
                     statMap.set(id, val);
                 }
             }
-            statMap.set("hash","CI-"+name);
+            statMap.set("hash", "CI-" + name);
+            statMap.set("custom", true);
             return new Custom(statMap);
         }
     } catch (error) {
         //console.log(statMap);
         return undefined;
     }
-    
+
 }
 
 /** An object representing a Custom Item. Mostly for vanity purposes.
  * @dep Requires the use of nonRolledIDs and rolledIDs from display_constants.js.
  * @dep Requires the use of attackSpeeds from build.js.   
 */
-class Custom{
+class Custom {
     /**
      * @description Construct a custom item (CI) from a statMap. 
      * @param {statMap}: A map with keys from rolledIDs or nonRolledIDs or minRolls/maxRolls and values befitting the keys. minRolls and maxRolls are their own maps and have the same keys, but with minimum and maximum values (for rolls). 
      * 
      */
-    constructor(statMap){
+    constructor(statMap) {
         this.statMap = statMap;
         // TODO patch
         // this.statMap.set("majorIds", [this.statMap.get("majorIds")]);
@@ -202,17 +204,17 @@ class Custom{
 
     setHash(hash) {
         let ihash = hash.slice();
-        if (ihash.slice(0,3) !== "CI-") {
+        if (ihash.slice(0, 3) !== "CI-") {
             ihash = "CI-" + hash;
         }
 
         this.hash = ihash;
-        this.statMap.set("hash",ihash);
+        this.statMap.set("hash", ihash);
     }
 
     updateName(name) {
         this.name = name;
-        this.displayName = name; 
+        this.displayName = name;
     }
 
     /* Get all stats for this CI. 
@@ -220,26 +222,24 @@ class Custom{
      * Follows the expandedItem item structure, similar to a crafted item.
      * TODO: Check if this is even useful
     */
-    initCustomStats(){
+    initCustomStats() {
         //this.setHashVerbose(); //do NOT move sethash from here please
-        
-        this.statMap.set("custom", true);
         console.log(this.statMap);
 
         for (const id of ci_save_order) {
             if (rolledIDs.includes(id)) {
                 if (!(this.statMap.get("minRolls").has(id) && this.statMap.get("minRolls").get(id))) {
-                    this.statMap.get("minRolls").set(id,0);
-                    this.statMap.get("maxRolls").set(id,0);
+                    this.statMap.get("minRolls").set(id, 0);
+                    this.statMap.get("maxRolls").set(id, 0);
                 }
             } else {
                 if (nonRolled_strings.includes(id)) {
-                    if (!(this.statMap.has(id)&&this.statMap.get(id))) {
-                        this.statMap.set(id,"");
+                    if (!(this.statMap.has(id) && this.statMap.get(id))) {
+                        this.statMap.set(id, "");
                     }
                 } else {
-                    if (!(this.statMap.has(id)&&this.statMap.get(id))) {
-                        this.statMap.set(id,0);
+                    if (!(this.statMap.has(id) && this.statMap.get(id))) {
+                        this.statMap.set(id, 0);
                     }
                 }
             }
@@ -247,30 +247,30 @@ class Custom{
         let type = this.statMap.get("type").toLowerCase();
         console.log(type);
         if (weaponTypes.includes(type)) {
-            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+            for (const n of ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]) {
                 if (!(this.statMap.has(n) && this.statMap.get(n))) {
-                    this.statMap.set(n,"0-0");
+                    this.statMap.set(n, "0-0");
                 }
             }
         }
         else {
-            for (const n of ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+            for (const n of ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]) {
                 if (this.statMap.has(n)) {
                     this.statMap.delete(n);
                 }
             }
         }
-        
+
         if (this.statMap.get("type")) {
-            this.statMap.set("type",this.statMap.get("type").toLowerCase());
+            this.statMap.set("type", this.statMap.get("type").toLowerCase());
             if (armorTypes.includes(this.statMap.get("type"))) {
-                this.statMap.set("category","armor");
+                this.statMap.set("category", "armor");
             } else if (accessoryTypes.includes(this.statMap.get("type"))) {
-                this.statMap.set("category","accessory");
+                this.statMap.set("category", "accessory");
             } else if (weaponTypes.includes(this.statMap.get("type"))) {
-                this.statMap.set("category","weapon");
+                this.statMap.set("category", "weapon");
             } else if (consumableTypes.includes(this.statMap.get("type"))) {
-                this.statMap.set("category","consumable");
+                this.statMap.set("category", "consumable");
             } else if (tomeTypes.includes(this.statMap.get("type"))) {
                 this.statMap.set("category", "tome");
             }
@@ -280,13 +280,13 @@ class Custom{
             this.statMap.set("crafted", true);
 
             for (const e of skp_elements) {
-                this.statMap.set(e+"DamLow", this.statMap.get(e+"Dam"));
+                this.statMap.set(e + "DamLow", this.statMap.get(e + "Dam"));
             }
             this.statMap.set("nDamLow", this.statMap.get("nDam"));
             this.statMap.set("hpLow", this.statMap.get("hp"));
             for (const e of skp_order) {
-                this.statMap.get("minRolls").set(e,this.statMap.get(e));
-                this.statMap.get("maxRolls").set(e,this.statMap.get(e));
+                this.statMap.get("minRolls").set(e, this.statMap.get(e));
+                this.statMap.get("maxRolls").set(e, this.statMap.get(e));
             }
             // for (const e of ["durability", "duration"]) {
             //     if (this.statMap.get(e) === "") {
@@ -296,15 +296,15 @@ class Custom{
             //     }
             // }
 
-            this.statMap.set("lvlLow",this.statMap.get("lvl"));
+            this.statMap.set("lvlLow", this.statMap.get("lvl"));
             if (this.statMap.get("category") === "weapon") {
                 //this is for powder purposes.
                 //users will likely not stick to the 0.9,1.1 rule because custom item. We will get around this by breaking everything and rewarding users for sticking to 0.9,1.1.
-                this.statMap.set("nDamBaseLow", Math.floor((parseFloat(this.statMap.get("nDamLow")) + parseFloat(this.statMap.get("nDam"))) / 2) );
-                this.statMap.set("nDamBaseHigh", Math.floor((parseFloat(this.statMap.get("nDamLow")) + parseFloat(this.statMap.get("nDam"))) / 2) );
+                this.statMap.set("nDamBaseLow", Math.floor((parseFloat(this.statMap.get("nDamLow")) + parseFloat(this.statMap.get("nDam"))) / 2));
+                this.statMap.set("nDamBaseHigh", Math.floor((parseFloat(this.statMap.get("nDamLow")) + parseFloat(this.statMap.get("nDam"))) / 2));
                 for (const e in skp_elements) {
-                    this.statMap.set(skp_elements[e]+"DamBaseLow", Math.floor((parseFloat(this.statMap.get(skp_elements[e]+"DamLow")) + parseFloat(this.statMap.get(skp_elements[e]+"Dam"))) / 2));
-                    this.statMap.set(skp_elements[e]+"DamBaseHigh", Math.floor((parseFloat(this.statMap.get(skp_elements[e]+"DamLow")) + parseFloat(this.statMap.get(skp_elements[e]+"Dam"))) / 2));
+                    this.statMap.set(skp_elements[e] + "DamBaseLow", Math.floor((parseFloat(this.statMap.get(skp_elements[e] + "DamLow")) + parseFloat(this.statMap.get(skp_elements[e] + "Dam"))) / 2));
+                    this.statMap.set(skp_elements[e] + "DamBaseHigh", Math.floor((parseFloat(this.statMap.get(skp_elements[e] + "DamLow")) + parseFloat(this.statMap.get(skp_elements[e] + "Dam"))) / 2));
                 }
                 this.statMap.set("ingredPowders", []);
             }
@@ -312,7 +312,7 @@ class Custom{
 
         if (this.statMap.get("category") !== "weapon") {
             this.statMap.set("atkSpd", "");
-            for (const n in ["nDam","eDam","tDam","wDam","fDam","aDam"]) {
+            for (const n in ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]) {
                 //this.statMap.set(n,"");
             }
         } else {
@@ -325,12 +325,12 @@ class Custom{
         } else {
             this.statMap.set("displayName", "Custom Item");
         }
-        this.statMap.set("powders",[]);
+        this.statMap.set("powders", []);
 
 
-        this.statMap.set("reqs",[this.statMap.get("strReq"),this.statMap.get("dexReq"),this.statMap.get("intReq"),this.statMap.get("defReq"),this.statMap.get("agiReq")]);
-        this.statMap.set("skillpoints", [this.statMap.get("str"),this.statMap.get("dex"),this.statMap.get("int"),this.statMap.get("def"),this.statMap.get("agi")]);
-              
+        this.statMap.set("reqs", [this.statMap.get("strReq"), this.statMap.get("dexReq"), this.statMap.get("intReq"), this.statMap.get("defReq"), this.statMap.get("agiReq")]);
+        this.statMap.set("skillpoints", [this.statMap.get("str"), this.statMap.get("dex"), this.statMap.get("int"), this.statMap.get("def"), this.statMap.get("agi")]);
+
 
         this.statMap.set("restrict", "Custom Item")
     }

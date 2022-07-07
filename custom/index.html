@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+    <head>
+        <title>WynnCustom</title>
+        <link rel="icon" href="../media/icons/new/custom.png" type="image/icon type">
+    
+        <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
+    
+        <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/css/autoComplete.min.css">
+    
+        
+        <link rel="stylesheet" href="../css/sq2bs.css">
+        <link rel="stylesheet" href="../css/sidebar.css">
+        <link rel="stylesheet" href="../css/wynnstyles.css">
+
+        <meta charset="UTF-8" />
+    </head>
+    <body id = "body" class = "text-light d-flex justify-content-center">
+        <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
+            <a href = "../builder/"><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
+            <a href = "../crafter/"><img src = "../media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
+            <a href = "../items/"><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+            <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
+            <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
+            <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
+            <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
+            <hr/>
+            <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
+        </div>
+        <div class = "container row py-5 vh-100 mx-0 mx-lg-auto scaled-font">
+            <div class = "col-lg-3 col-sm-12">
+                <div class = "col px-1">
+                    <div class = "row border border-dark border-3 mb-1 p-1 rounded dark-7">
+                        <div class = "col">
+                            <div class = "row big-title justify-content-center my-1">
+                                Info
+                            </div>
+
+                            <div class = "row" id = "name">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Name: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="name-choice" name="name-choice" value=""/>
+                                </div>                                
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "lore">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Lore: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="lore-choice" name="lore-choice" value=""/>
+                                </div>                                
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "type">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Type: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" list="type-list" id="type-choice" name="type-choice" placeholder="Helmet" value=""/>
+                                    <datalist id="type-list"></datalist>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "lvl">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Level: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lvl-choice" name="lvl-choice" placeholder="1" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "tier">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Tier: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" list = "tier-list" id="tier-choice" name="tier-choice" placeholder="Normal" value=""/>
+                                    <datalist id="tier-list"></datalist>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "slots">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Powder Slots:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="slots-choice" name="slots-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "majorIds">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Major ID: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="majorIds-choice" name="majorIds-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Requirements
+                            </div>
+                            <div class = "row" id = "classReq">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Class Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" list = "class-list" id="classReq-choice" name="classReq-choice" placeholder="" value=""/>
+                                    <datalist id="class-list"></datalist>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "quest">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Quest Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="quest-choice" name="quest-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "strReq">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Str Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="strReq-choice" name="strReq-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "dexReq">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Dex Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="dexReq-choice" name="dexReq-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "intReq">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Int Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="intReq-choice" name="intReq-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "defReq">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Def Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="defReq-choice" name="defReq-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "agiReq">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Agi Req: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="agiReq-choice" name="agiReq-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Extra
+                            </div>
+                            <div class = "row" id = "neg_roll_range">
+                                <div class = "col-12 box-title">
+                                    Negative Roll Range ([a,b]*base): 
+                                </div>
+                                <div class = "col-lg-6 col-sm-12">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="neg_roll_range-choice-min" name="neg_roll_range-choice-min" placeholder="min" value=""/>
+                                </div>     
+                                <div class = "col-lg-6 col-sm-12">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="neg_roll_range-choice-max" name="neg_roll_range-choice-max" placeholder="max" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "pos_roll_range">
+                                <div class = "col-12 box-title">
+                                    Positive Roll Range ([a,b]*base): 
+                                </div>
+                                <div class = "col-lg-6 col-sm-12">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="pos_roll_range-choice-min" name="pos_roll_range-choice-min" placeholder="min" value=""/>
+                                </div>     
+                                <div class = "col-lg-6 col-sm-12">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="pos_roll_range-choice-max" name="pos_roll_range-choice-max" placeholder="max" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            
+                            <div class = "row justify-content-center" id = "reset_roll_range">
+                                <button id="reset-roll-range-button" class = "button rounded scaled-font fw-bold text-light dark-5 col-lg-8 col-sm" onclick="resetBaseValues()">Reset Roll Bases</button>
+                            </div>                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-lg-3 col-sm-12">
+                <div class = "col px-1">
+                    <div class = "row border border-dark border-3 mb-1 p-1 rounded dark-7">
+                        <div class = "col">
+                            <div class = "row big-title justify-content-center my-1">
+                                Static Stats
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Skill Point Bonuses
+                            </div>
+                            <div class = "row" id = "str">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Str: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="str-choice" name="str-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "dex">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Dex: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="dex-choice" name="dex-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "int">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Int: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="int-choice" name="int-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "def">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Def: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="def-choice" name="def-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "agi">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Agi: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="agi-choice" name="agi-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Weapon Stats
+                            </div>
+                            <div class = "row" id = "nDam">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Neutral Dmg:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="nDam-choice" name="nDam-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "eDam">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Earth Dmg:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="eDam-choice" name="eDam-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "tDam">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Thunder Dmg:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="tDam-choice" name="tDam-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "wDam">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Water Dmg:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="wDam-choice" name="wDam-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "fDam">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Fire Dmg:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="fDam-choice" name="fDam-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "aDam">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Air Dmg:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" id="aDam-choice" name="aDam-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "atkTier">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Attack Speed:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm string-input" list="atkSpd-list" id="atkSpd-choice" name="atkSpd-choice" placeholder="NORMAL" value=""/>
+                                    <datalist id="atkSpd-list"></datalist>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Armor/Accessory Stats
+                            </div>
+                            <div class = "row" id = "hp">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Health: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hp-choice" name="hp-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "eDef">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Earth Def:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDef-choice" name="eDef-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "tDef">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Thunder Def:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDef-choice" name="tDef-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "wDef">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Water Def:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDef-choice" name="wDef-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "fDef">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Fire Def:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDef-choice" name="fDef-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "aDef">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Air Def:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDef-choice" name="aDef-choice" placeholder="" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Consumable Stats
+                            </div>
+                            <div class = "row" id = "durability">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Durability:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="durability-choice" name="durability-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "duration">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Duration:
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="duration-choice" name="duration-choice" placeholder="0-0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "charges">
+                                <div class = "col-lg-5 col-sm-12 box-title m-auto">
+                                    Charges: 
+                                </div>
+                                <div class = "col-lg-7 col-sm-12 h-100 m-auto">
+                                    <input class="border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="charges-choice" name="charges-choice" placeholder="0" value=""/>
+                                </div>     
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-lg-3 col-sm-12">
+                <div class = "col px-1">
+                    <div class = "row border border-dark border-3 mb-1 p-1 rounded dark-7">
+                        <div class = "col">
+                            <div class = "row big-title justify-content-center my-1">
+                                Variable Stats
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Damage Stats
+                            </div>
+                            <div class = "row" id = "eDamPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Earth Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="eDamPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDamPct-choice-fixed" name="eDamPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "eDamPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDamPct-choice-base" name="eDamPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDamPct-choice-min" name="eDamPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDamPct-choice-max" name="eDamPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "tDamPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Thunder Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="tDamPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDamPct-choice-fixed" name="tDamPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "tDamPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDamPct-choice-base" name="tDamPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDamPct-choice-min" name="tDamPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDamPct-choice-max" name="tDamPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "wDamPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Water Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="wDamPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDamPct-choice-fixed" name="wDamPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "wDamPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDamPct-choice-base" name="wDamPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDamPct-choice-min" name="wDamPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDamPct-choice-max" name="wDamPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "fDamPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Fire Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="fDamPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDamPct-choice-fixed" name="fDamPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "fDamPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDamPct-choice-base" name="fDamPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDamPct-choice-min" name="fDamPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDamPct-choice-max" name="fDamPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "aDamPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Air Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="aDamPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDamPct-choice-fixed" name="aDamPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "aDamPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDamPct-choice-base" name="aDamPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDamPct-choice-min" name="aDamPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDamPct-choice-max" name="aDamPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "mdPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Melee Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="mdPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdPct-choice-fixed" name="mdPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "mdPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdPct-choice-base" name="mdPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdPct-choice-min" name="mdPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdPct-choice-max" name="mdPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "mdRaw">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Raw Melee Damage: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="mdRaw-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdRaw-choice-fixed" name="mdRaw-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "mdRaw-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdRaw-choice-base" name="mdRaw-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdRaw-choice-min" name="mdRaw-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mdRaw-choice-max" name="mdRaw-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "sdPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Spell Damage %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="sdPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdPct-choice-fixed" name="sdPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "sdPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdPct-choice-base" name="sdPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdPct-choice-min" name="sdPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdPct-choice-max" name="sdPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "sdRaw">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Raw Spell Damage: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="sdRaw-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdRaw-choice-fixed" name="sdRaw-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "sdRaw-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdRaw-choice-base" name="sdRaw-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdRaw-choice-min" name="sdRaw-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sdRaw-choice-max" name="sdRaw-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "atkTier">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Attack Speed Bonus: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="atkTier-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="atkTier-choice-fixed" name="atkTier-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "atkTier-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="atkTier-choice-base" name="atkTier-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="atkTier-choice-min" name="atkTier-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="atkTier-choice-max" name="atkTier-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "poison">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Poison (/3s): 
+                                </div>
+                                <div class = "row h-100 m-auto" id="poison-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="poison-choice-fixed" name="poison-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "poison-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="poison-choice-base" name="poison-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="poison-choice-min" name="poison-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="poison-choice-max" name="poison-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Defensive Stats
+                            </div>
+                            <div class = "row" id = "hpBonus">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Health Bonus: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="hpBonus-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hpBonus-choice-fixed" name="hpBonus-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "hpBonus-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hpBonus-choice-base" name="hpBonus-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hpBonus-choice-min" name="hpBonus-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hpBonus-choice-max" name="hpBonus-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "eDefPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Earth Defense %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="eDefPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDefPct-choice-fixed" name="eDefPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "eDefPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDefPct-choice-base" name="eDefPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDefPct-choice-min" name="eDefPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eDefPct-choice-max" name="eDefPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "tDefPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Thunder Defense %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="tDefPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDefPct-choice-fixed" name="tDefPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "tDefPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDefPct-choice-base" name="tDefPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDefPct-choice-min" name="tDefPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="tDefPct-choice-max" name="tDefPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "wDefPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Water Defense %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="wDefPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDefPct-choice-fixed" name="wDefPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "wDefPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDefPct-choice-base" name="wDefPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDefPct-choice-min" name="wDefPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="wDefPct-choice-max" name="wDefPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "fDefPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Fire Defense %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="fDefPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDefPct-choice-fixed" name="fDefPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "fDefPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDefPct-choice-base" name="fDefPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDefPct-choice-min" name="fDefPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="fDefPct-choice-max" name="fDefPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "aDefPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Air Defense %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="aDefPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDefPct-choice-fixed" name="aDefPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "aDefPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDefPct-choice-base" name="aDefPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDefPct-choice-min" name="aDefPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="aDefPct-choice-max" name="aDefPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "hprPct">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Health Regen %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="hprPct-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprPct-choice-fixed" name="hprPct-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "hprPct-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprPct-choice-base" name="hprPct-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprPct-choice-min" name="hprPct-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprPct-choice-max" name="hprPct-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "hprRaw">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Raw Health Regen: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="hprRaw-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprRaw-choice-fixed" name="hprRaw-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "hprRaw-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprRaw-choice-base" name="hprRaw-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprRaw-choice-min" name="hprRaw-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="hprRaw-choice-max" name="hprRaw-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Utility
+                            </div>
+                            <div class = "row" id = "mr">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Mana Regen (/5s): 
+                                </div>
+                                <div class = "row h-100 m-auto" id="mr-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mr-choice-fixed" name="mr-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "mr-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mr-choice-base" name="mr-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mr-choice-min" name="mr-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="mr-choice-max" name="mr-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "ms">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Mana Steal (/3s): 
+                                </div>
+                                <div class = "row h-100 m-auto" id="ms-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ms-choice-fixed" name="ms-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "ms-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ms-choice-base" name="ms-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ms-choice-min" name="ms-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ms-choice-max" name="ms-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "ls">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Life Steal (/3s): 
+                                </div>
+                                <div class = "row h-100 m-auto" id="ls-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ls-choice-fixed" name="ls-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "ls-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ls-choice-base" name="ls-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ls-choice-min" name="ls-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ls-choice-max" name="ls-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "thorns">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Thorns Chance %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="thorns-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="thorns-choice-fixed" name="thorns-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "thorns-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="thorns-choice-base" name="thorns-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="thorns-choice-min" name="thorns-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="thorns-choice-max" name="thorns-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "ref">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Reflection Chance %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="ref-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ref-choice-fixed" name="ref-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "ref-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ref-choice-base" name="ref-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ref-choice-min" name="ref-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="ref-choice-max" name="ref-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "expd">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Exploding Chance %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="expd-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="expd-choice-fixed" name="expd-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "expd-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="expd-choice-base" name="expd-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="expd-choice-min" name="expd-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="expd-choice-max" name="expd-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "jh">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Jump Height: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="jh-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="jh-choice-fixed" name="jh-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "jh-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="jh-choice-base" name="jh-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="jh-choice-min" name="jh-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="jh-choice-max" name="jh-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spd">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Walk Speed %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spd-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spd-choice-fixed" name="spd-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spd-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spd-choice-base" name="spd-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spd-choice-min" name="spd-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spd-choice-max" name="spd-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "sprint">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Sprint Bonus %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="sprint-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprint-choice-fixed" name="sprint-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "sprint-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprint-choice-base" name="sprint-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprint-choice-min" name="sprint-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprint-choice-max" name="sprint-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "sprintReg">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Sprint Regen %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="sprintReg-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprintReg-choice-fixed" name="sprintReg-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "sprintReg-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprintReg-choice-base" name="sprintReg-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprintReg-choice-min" name="sprintReg-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="sprintReg-choice-max" name="sprintReg-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Spell Costs
+                            </div>
+                            <div class = "row" id = "spPct1">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    1st Spell Cost %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spPct1-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct1-choice-fixed" name="spPct1-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spPct1-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct1-choice-base" name="spPct1-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct1-choice-min" name="spPct1-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct1-choice-max" name="spPct1-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spPct2">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    2nd Spell Cost %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spPct2-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct2-choice-fixed" name="spPct2-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spPct2-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct2-choice-base" name="spPct2-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct2-choice-min" name="spPct2-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct2-choice-max" name="spPct2-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spPct3">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    3rd Spell Cost %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spPct3-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct3-choice-fixed" name="spPct3-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spPct3-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct3-choice-base" name="spPct3-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct3-choice-min" name="spPct3-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct3-choice-max" name="spPct3-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spPct4">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    4th Spell Cost %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spPct4-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct4-choice-fixed" name="spPct4-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spPct4-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct4-choice-base" name="spPct4-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct4-choice-min" name="spPct4-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spPct4-choice-max" name="spPct4-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spRaw1">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    1st Spell Cost Raw: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spRaw1-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw1-choice-fixed" name="spRaw1-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spRaw1-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw1-choice-base" name="spRaw1-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw1-choice-min" name="spRaw1-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw1-choice-max" name="spRaw1-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spRaw2">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    2nd Spell Cost Raw: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spRaw2-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw2-choice-fixed" name="spRaw2-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spRaw2-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw2-choice-base" name="spRaw2-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw2-choice-min" name="spRaw2-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw2-choice-max" name="spRaw2-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spRaw3">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    3rd Spell Cost Raw: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spRaw3-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw3-choice-fixed" name="spRaw3-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spRaw3-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw3-choice-base" name="spRaw3-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw3-choice-min" name="spRaw3-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw3-choice-max" name="spRaw3-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spRaw4">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    4th Spell Cost Raw: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spRaw4-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw4-choice-fixed" name="spRaw4-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spRaw4-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw4-choice-base" name="spRaw4-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw4-choice-min" name="spRaw4-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRaw4-choice-max" name="spRaw4-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+
+                            <div class = "row item-title justify-content-center my-1">
+                                Miscellaneous
+                            </div>
+                            <div class = "row" id = "xpb">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Combat XP Bonus %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="xpb-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="xpb-choice-fixed" name="xpb-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "xpb-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="xpb-choice-base" name="xpb-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="xpb-choice-min" name="xpb-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="xpb-choice-max" name="xpb-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "gXp">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Gathering XP Bonus %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="gXp-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gXp-choice-fixed" name="gXp-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "gXp-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gXp-choice-base" name="gXp-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gXp-choice-min" name="gXp-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gXp-choice-max" name="gXp-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "gSpd">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Gathering Speed Bonus %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="gSpd-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gSpd-choice-fixed" name="gSpd-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "gSpd-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gSpd-choice-base" name="gSpd-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gSpd-choice-min" name="gSpd-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="gSpd-choice-max" name="gSpd-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "eSteal">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Stealing %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="eSteal-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eSteal-choice-fixed" name="eSteal-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "eSteal-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eSteal-choice-base" name="eSteal-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eSteal-choice-min" name="eSteal-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="eSteal-choice-max" name="eSteal-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "lb">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Loot Bonus %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="lb-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lb-choice-fixed" name="lb-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "lb-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lb-choice-base" name="lb-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lb-choice-min" name="lb-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lb-choice-max" name="lb-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "lq">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Loot Quality %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="lq-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lq-choice-fixed" name="lq-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "lq-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lq-choice-base" name="lq-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lq-choice-min" name="lq-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="lq-choice-max" name="lq-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                            <div class = "row" id = "spRegen">
+                                <div class = "col-12 box-title m-auto text-start">
+                                    Soul Point Regen %: 
+                                </div>
+                                <div class = "row h-100 m-auto" id="spRegen-choice-fixed-container" style="display:none">
+                                    <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRegen-choice-fixed" name="spRegen-choice-fixed" placeholder="" value=""/>
+                                </div>
+                                <div class = "row h-100 m-auto" id = "spRegen-choice-container" > 
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            base:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRegen-choice-base" name="spRegen-choice-base" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            min:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRegen-choice-min" name="spRegen-choice-min" placeholder="" value=""/>
+                                    </div>
+                                    <div class = "col-lg-4 col-sm-12 h-100 m-auto">
+                                        <div class = "row box-title">
+                                            max:
+                                        </div>
+                                        <input class="row border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm number-input" id="spRegen-choice-max" name="spRegen-choice-max" placeholder="" value=""/>
+                                    </div> 
+                                </div>
+                                <div class="row" style="color: red; top: 30px; font-size: 10px; padding: 0; margin: 0; height: 5px; font-family: 'Nunito', sans-serif; word-break:break-word;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-lg-3 col-sm-12">
+                <div class = "col px-1">
+                    <div class = "row border border-dark border-3 mb-1 p-1 rounded dark-7">
+                        <div class = "col">
+                            <div class = "row item-title justify-content-center my-1">Options</div>
+                            <div class = "d-flex row justify-content-center align-items-center mb-1">
+                                <div class = "col-4">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "create-button" onclick = "calculateCustom()">
+                                        Create 
+                                    </button>
+                                </div>
+                                <div class = "col-4">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "copy-button" onclick = "copyCustom()">
+                                        Copy Link
+                                    </button>
+                                </div>
+                                <div class = "col-4">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "fixID-choice" onclick = "toggleButton('fixID-choice'); toggleFixed()" tabindex="">toggle fixed IDs</button>  
+                                </div>
+                            </div>
+
+                            <div class = "d-flex row justify-content-center align-items-center mb-1">
+                                <div class = "col-4">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "reset-button" onclick = "resetFields()">
+                                        Reset
+                                    </button>
+                                </div>
+                                <div class = "col-4">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "copy-button-hash" onclick = "copyHash()">
+                                        Copy Hash
+                                    </button>
+                                </div>
+                                <div class = "col-4">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "json-button" onclick = "saveAsJSON()">
+                                        JSON
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class = "d-flex row justify-content-center align-items-center mb-1">
+                                <div class = "col-lg-4 col-sm-12">
+                                    <div class = "row fw-bold justify-content-center">Base Item: </div>
+                                </div>
+                                <div class = "col-lg-8 col-sm-12">
+                                    <input class = "border-2 border-semi-light text-light dark-5 rounded scaled-font form-control form-control-sm" list = "base-list" id = "base-input" value = ""></input>
+                                    <datalist id = "base-list"></datalist>
+                                </div>
+                            </div>
+                            <div class = "d-flex row justify-content-start align-items-center">
+                                <div class = "col-3">
+                                    <button class = "button rounded scaled-font fw-bold text-light dark-5 w-100" id = "set-button" onclick = "useBaseItem('base-input')">
+                                        Use
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "row hide-container-block" style = "display:none">
+                        <div class = "custom-stats  rounded dark-6 text-light scaled-font border-dark dark-shadow g-0">
+                            <div class = "col p-3" id = "custom-stats"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 dark-5 scaled-font mt-3">
+                <footer class="text-center">
+                    <div id="header2">
+                        <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with <a href = "../atlas" target = "_blank" class = "atlas link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>
+                        <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
+                    </div>
+                    <div id="credits">
+                        <a href="credits.txt" class="link">Additional credits</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script type="text/javascript" src="/js/utils.js"></script>
+        <script type="text/javascript" src="/js/build_utils.js"></script>
+        <script type="text/javascript" src="/js/icons.js"></script>
+        <script type="text/javascript" src="/js/powders.js"></script>
+        <script type="text/javascript" src="/js/skillpoints.js"></script>
+        <script type="text/javascript" src="/js/damage_calc.js"></script>
+        <script type="text/javascript" src="/js/load.js"></script>
+        <script type="text/javascript" src="/js/load_ing.js"></script>
+        <script type="text/javascript" src="/js/crafter.js"></script>      
+        <script type="text/javascript" src="/js/craft.js"></script>    
+        <script type="text/javascript" src="/js/display_constants.js"></script>
+        <script type="text/javascript" src="/js/display.js"></script>
+        <script type="text/javascript" src="/js/sq2display_constants.js"></script>
+        <script type="text/javascript" src="/js/sq2display.js"></script>
+        <script type="text/javascript" src="/js/custom.js"></script>
+        <script type="text/javascript" src="/js/customizer.js"></script>
+    </body>
+</html>

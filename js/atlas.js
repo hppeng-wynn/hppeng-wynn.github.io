@@ -6,25 +6,33 @@ function setTitle() {
 }
 
 setTitle();
-const flavortexts = ["JALA?? \n ATLAS?? \n ANYONE??", 
-                    "this really do be a bruh moment.", 
-                    "OH, LOOK AT YOU. YOU FOUND THE FUNNY BUILDER GUILDER MEME PAGE. AREN'T YOU PROUD OF YOURSELF?", 
-                    "Downloading Atlas Inc Virus 2.0...",
-                    "Any WynnBuilders in the chat?",
-                    ":sunglaso:",    
-                    "This says a lot about our society.",
-                    "WynnCraft is overrated. Stay on this page forever!",
-                    "Now trading Smash invite letters for Atlas Inc invites!",
-                    "You have reached the customer support page of Wynnbuilder. Please call [REDACTED] to get your problems solved!",
-                    "",
-                    "Isn't this like that one game Amogus?",
-                    "Mom, what does 'hppeng' mean?",
-                    "hpgbegg",
-                    "|  |I  ||  |_",
-                    "",
-                ];
+const flavortexts = [
+    "JALA?? \n ATLAS?? \n ANYONE??", 
+    "this really do be a bruh moment.", 
+    "OH, LOOK AT YOU. YOU FOUND THE FUNNY BUILDER GUILDER MEME PAGE. AREN'T YOU PROUD OF YOURSELF?", 
+    "Downloading Atlas Inc Virus 2.0...",
+    "Any WynnBuilders in the chat?",
+    ":sunglaso:",    
+    "This says a lot about our society.",
+    "WynnCraft is overrated. Stay on this page forever!",
+    "Now trading Smash invite letters for Atlas Inc invites!",
+    "You have reached the customer support page of Wynnbuilder. Please call [REDACTED] to get your problems solved!",
+    "Mom, what does 'hppeng' mean?",
+    "hpgbegg",
+    "|  |I  ||  |_",
+    "Wynn was so good they made Wynn 2",
+    "Join Monumenta today!",
+    "do NOT look up the 25th largest island of Greece",
+    "whatever you do, don't search for lego piece 26047.",
+    "guys what does perbromic acid look like",
+    "Hello Chat",
+    "Goodbye Chat",
+    "Look up. Now look down. Now look up again. Spin your head 3 times clockwise. You look real silly.",
+    "There\'s \'guillble\' written on the ceiling",
+    "when the pretender is conspicuous...", 
+    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"];
 const dt = 10; //millis
-const PIX_PER_SEC = 1000;
+const PIX_PER_SEC = 1337;
 const EPSILON = 1E-7 * dt; 
 let atli = [];
 
@@ -32,11 +40,13 @@ let atli = [];
 function atlasClick() {
     let atlas = document.createElement("div");
     let atlas_img = document.createElement("img");
-    atlas_img.src = "favicon.png";
+    atlas.style.maxWidth = "64px";
+    atlas.style.maxHeight = "64px";
+    atlas_img.src = "../atlas/favicon.png";
     atlas_img.style.width = "100%";
     atlas_img.style.height = "100%";
-    atlas_img.style.maxWidth = "48px";
-    atlas_img.style.maxHeight = "48px";
+    atlas_img.style.maxWidth = "64px";
+    atlas_img.style.maxHeight = "64px";
     atlas_img.style.zIndex = 1;
     atlas.classList.add("atlas");
     let roll = Math.random();
@@ -44,7 +54,7 @@ function atlasClick() {
     let rollList = ["lmoa","doom","agony","enraged","sunglaso","thonk","unglaso"];
     for (let i = rollList.length-1; i > -1; i--) {
         if (roll < (i+1) * rollchance) {
-            atlas_img.src = "./media/memes/" + rollList[i] + ".png";
+            atlas_img.src = "../media/memes/" + rollList[i] + ".png";
         }
     }
     atlas.appendChild(atlas_img);
@@ -52,7 +62,8 @@ function atlasClick() {
     
     atlas.style.position = "absolute";
     rect = document.getElementById("bodydiv").getBoundingClientRect(); //use rect.top, rect.left, rect.bottom, and rect.top
-    
+    console.log(rect)
+
     atlasrect = atlas.getBoundingClientRect();
     atlas.style.left = Math.floor((rect.right - rect.left - 2*(atlasrect.right - atlasrect.left) ) * Math.random() + rect.left + (atlasrect.right - atlasrect.left) )+ "px";
     atlas.style.top = Math.floor((rect.bottom - rect.top - 2*(atlasrect.bottom - atlasrect.top) ) * Math.random() + rect.top + (atlasrect.bottom - atlasrect.top) ) + "px";
@@ -108,6 +119,10 @@ function runAtlas() {
                 let center = [(at1[0]+at2[0])/2, (at1[1]+at2[1])/2 ];
 
                 if (Math.sqrt(((at2[1]+atlas2.vy) - (at1[1]+atlas1.vy))**2 + ((at2[0]+atlas2.vx) - (at1[0]+atlas1.vx))**2) < 2*r) {
+                    //Play bruh sound effect
+                    document.getElementById('bruh_sound_effect').play();
+                    document.getElementById('bruh_sound_effect').currentTime = 0;
+                   
                     if(Math.sqrt( (at2[1]-at1[1])**2 + (at2[0]-at1[0])**2 ) < 2*r ) {//check for collision
                         //Move both away slightly - correct alg this time :)
                         atlas1.style.left = parseFloat(atlas1.style.left.replace("px","")) + (at1[0]-center[0]) * 2 * r / Math.sqrt(dx**2 + dy**2) + "px";

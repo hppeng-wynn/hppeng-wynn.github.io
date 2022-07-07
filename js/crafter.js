@@ -22,10 +22,10 @@ const ING_BUILD_VERSION = "7.0.1";
  */
 let player_craft;
 
-function setTitle() {
-    document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
-    document.getElementById("header").classList.add("funnynumber");
-}
+// function setTitle() {
+//     document.getElementById("header").textContent = "WynnCrafter version "+ING_BUILD_VERSION+" (ingredient db version "+ING_DB_VERSION+")";
+//     document.getElementById("header").classList.add("funnynumber");
+// }
 
 
 
@@ -44,16 +44,32 @@ function init_crafter() {
     try {
         document.getElementById("recipe-choice").addEventListener("change", (event) => {
             updateMaterials();
+            updateCraftedImage();
+            calculateCraftSchedule();
+        });
+        document.getElementById("recipe-choice").addEventListener("oninput", (event) => {
+            updateCraftedImage();
         });
         document.getElementById("level-choice").addEventListener("change", (event) => {
             updateMaterials();
+            calculateCraftSchedule();
         });
         
+        for (let i = 1; i < 4; ++i) {
+            document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById("mat-2-"+i).setAttribute("onclick", document.getElementById("mat-2-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+        }
+        for (let i = 1; i < 7; ++i) {
+            document.getElementById("ing-choice-" + i ).setAttribute("oninput", "calculateCraftSchedule();");
+        }
+        for (const str of ["slow", "normal", "fast"]) {
+            document.getElementById(str + "-atk-button").setAttribute("onclick", document.getElementById(str + "-atk-button").getAttribute("onclick") + "; calculateCraftSchedule();");
+        }
+
+
         populateFields();
         decodeCraft(ing_url_tag);
-        setTitle();
     } catch (error) {
-        console.log("If you are seeing this while building, do not worry. Oherwise, panic! (jk contact ferricles)");
         console.log(error);
     }
     
@@ -89,6 +105,20 @@ function toggleAtkSpd(buttonId) {
     }
 }
 
+let doCraftTask = null;
+
+function calculateCraftSchedule(){
+    console.log("Craft Schedule called");
+    if (doCraftTask !== null) {
+        clearTimeout(doCraftTask);
+    }
+    doCraftTask = setTimeout(function(){
+        doCraftTask = null;
+        calculateCraft();
+        window.dispatchEvent(new Event('resize'));
+    }, 250);
+}
+
 function calculateCraft() {
     //Make things display.
     for (let i of document.getElementsByClassName("hide-container-block")) {
@@ -117,7 +147,8 @@ function calculateCraft() {
     }
     let ingreds = [];
     for (i = 1; i < 7; i++) {
-        console.log(getValue("ing-choice-"+i));
+        console.log("ing-choice-"+i);
+        // console.log(getValue("ing-choice-"+i));
         getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
     }
     let atkSpd = "NORMAL"; //default attack speed will be normal.
@@ -138,16 +169,19 @@ function calculateCraft() {
     console.log(levelrange)
     console.log(mat_tiers)
     console.log(ingreds)*/
+
     document.getElementById("mat-1").textContent = recipe.get("materials")[0].get("item").split(" ").slice(1).join(" ") + " Tier:";
     document.getElementById("mat-2").textContent = recipe.get("materials")[1].get("item").split(" ").slice(1).join(" ") + " Tier:"; 
     
     //Display Recipe Stats
     displayRecipeStats(player_craft, "recipe-stats");
-    for(let i = 0; i < 6; i++) {
-        displayExpandedIngredient(player_craft["ingreds"][i],"tooltip-" + i);
-    }
+
     //Display Craft Stats
-    displayCraftStats(player_craft, "craft-stats");
+    // displayCraftStats(player_craft, "craft-stats");
+    let mock_item = player_craft.statMap;
+    if (mock_item.get('category') === 'weapon') { apply_weapon_powders(mock_item) };
+    displayExpandedItem(mock_item, "craft-stats");
+
     //Display Ingredients' Stats
     for (let i = 1; i < 7; i++) {
         displayExpandedIngredient(player_craft.ingreds[i-1] , "ing-"+i+"-stats");
@@ -187,6 +221,7 @@ function decodeCraft(ing_url_tag) {
             //console.log(Base64.toInt(tag.substring(12,14)));
             recipesName = recipe.split("-");
             setValue("recipe-choice",recipesName[0]);
+            updateCraftedImage();
             setValue("level-choice",recipesName[1]+"-"+recipesName[2]);
             tierNum = Base64.toInt(tag.substring(14,15));
             mat_tiers = [];
@@ -227,11 +262,20 @@ function populateFields() {
     
     
 }
-
-
-/* Copy the link
+/*
+    Copies the CR Hash (CR-blahblahblah)
 */
-function copyRecipe(){
+function copyRecipeHash() {
+    if (player_craft) {
+        copyTextToClipboard("CR-"+location.hash.slice(1));
+        document.getElementById("copy-hash-button").textContent = "Copied!";
+    }
+}
+
+/* 
+    Copies the link (hppeng-wynn.github.io/crafter/#blahblah)
+*/
+function copyRecipe() {
     if (player_craft) {
         copyTextToClipboard(ing_url_base+location.hash);
         document.getElementById("copy-button").textContent = "Copied!";
@@ -240,7 +284,7 @@ function copyRecipe(){
 
 /* Copy the link AND a display of all ingredients
 */
-function shareRecipe(){
+function shareRecipe() {
     if (player_craft) {
         let copyString = ing_url_base+location.hash + "\n";
         let name = player_craft.recipe.get("name").split("-");
@@ -296,6 +340,16 @@ function toggleMaterial(buttonId) {
     }
 }
 
+/* Updates the crafted icon. 
+*/
+function updateCraftedImage() {
+    let input = document.getElementById("recipe-choice");
+    if (all_types.includes(input.value)) {
+        document.getElementById("recipe-img").src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + input.value.toLowerCase() + ".png";
+    }
+
+}
+
 /* Reset all fields
 */
 function resetFields() {
@@ -313,4 +367,8 @@ function resetFields() {
     calculateCraft();
 }
 
-load_ing_init(init_crafter);
+(async function() {
+    let load_promises = [ load_ing_init() ];
+    await Promise.all(load_promises);
+    init_crafter();
+})();

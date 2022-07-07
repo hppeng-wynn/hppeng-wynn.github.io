@@ -15,11 +15,6 @@
     grid-column-gap: 5px;
     grid-auto-rows: minmax(32px, auto);
 }
-.container{
-    width: 95%;
-    border: 3px solid #BCBCBC;
-    border-radius: 3px;  
-}
 .leaflet-tooltip.labelp {
     font-family: 'Nunito', sans-serif;
     font-size: 1.1em;

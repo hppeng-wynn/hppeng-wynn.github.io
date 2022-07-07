@@ -1,14 +1,20 @@
+
 Theme, formatting, and overall inspiration: Wynndata (Dukio)
     - https://wynndata.tk
 
 The game, of course
     - wynncraft.com
 
-Additional Contributors:
+Additional Contributors, in no particular order:
  - Kiocifer (Icons!)
+ - IncinerateMe (helping transition to 1.20.3 / CI helper)
+ - puppy (wynn2 ability tree help)
+ - SockMower (ability tree encode/decode optimization)
+ - ITechnically (coding emotional support / misc)
+ - touhoku (best IM)
+ - HeyZeer0 (huge help in getting our damage formulas right)
  - Lennon (Skill point formula reversing)
  - Phanta (WynnAtlas custom expression parser / item search)
- - QuantumNep (Layout code/layout ideas)
  - nbcss (Crafted Item mechanics reverse engineering)
  - dr_carlos (Hiding UI elements properly, fade animations, proper error handling)
  - Atlas Inc discord (feedback, ideas, damage calc, etc)

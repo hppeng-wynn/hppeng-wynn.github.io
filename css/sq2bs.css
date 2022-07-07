@@ -1,0 +1,507 @@
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+#body {
+    background-color: #121212;
+}
+/* builder containers */
+
+
+.e_slider, .t_slider, .w_slider, .f_slider, .a_slider {
+    -webkit-appearance: none;
+    background: #AAAAAA;
+    border-radius: 30px;
+    height: 0.5rem;
+}
+
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+.e_slider::-webkit-slider-runnable-track, .t_slider::-webkit-slider-runnable-track, .w_slider::-webkit-slider-runnable-track, .f_slider::-webkit-slider-runnable-track, .a_slider::-webkit-slider-runnable-track {
+    -webkit-appeareance: none;
+    background:transparent;
+    height: 0.5rem;
+}
+
+ 
+/******** Firefox **** **/
+.e_slider::-moz-range-track, .t_slider::-moz-range-track, .w_slider::-moz-range-track, .f_slider::-moz-range-track, .a_slider::-moz-range-track {
+    -webkit-appearance: none;
+    background-color: transparent;
+    border-radius: 30px;
+    height: 0.5rem;
+}
+
+
+.e_slider::-webkit-slider-thumb, .t_slider::-webkit-slider-thumb, .w_slider::-webkit-slider-thumb, .f_slider::-webkit-slider-thumb, .a_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 0.375rem;
+    margin-top: -0.125rem;
+    background-color: #FFFFFF;
+    border: solid 2px #82CFD0;
+}
+
+input[type=range]:focus {
+    outline: none; /* Removes the border. */
+}
+
+
+/* equipment field specifics */
+/* inputs and dropdowns */
+.form-control {
+    transition: none !important;
+    box-shadow: none !important;
+    width: 95% !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul.search-box {
+    position: absolute;
+    padding: 0;
+    overflow: auto;
+}
+
+li.search-item {
+    cursor: pointer;
+}
+
+li.search-item:hover {
+    background-color: hsl(0, 0%, 11%) !important;
+}
+
+/* boosts styles */
+.button-boost:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+button.toggleOn {
+    background-color: #0a0 !important;
+}
+
+
+/* floating tooltip styles */
+.float-tooltip {
+    background-color: hsl(0, 0%, 16%);
+    position: absolute;
+    transition: .3s;
+    cursor: pointer;
+}
+
+/* generic */
+
+input {
+    min-width: 0;
+    width: 100%;
+}
+
+input.equipment-input {
+    font-weight: bold;
+    background-color: hsl(0, 0%, 21%) !important;
+    border-radius: 0.375rem !important;
+    border-color: rgba(33, 37, 41, 1) !important;
+    min-height: calc(1.2 * var(--scaled-fontsize) + 2px);
+    padding: 0rem 0.5rem;
+    font-size: var(--scaled-fontsize);
+}
+
+.my-container {
+    position: fixed; /* Stay in place */
+    left: var(--sidebar-width);
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.text-right {
+    float: right;
+}
+
+.text-left {
+    float: left;
+}
+
+.spell-display p {
+    margin-bottom: 0;
+}
+
+.spell-display b {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.spell-expand {
+    cursor: pointer;
+}
+
+:root {
+    --scaled-fontsize: 2.5rem;
+}
+.scaled-font {
+    font-size: 2.5rem;
+}
+
+.box-title {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.item-title {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 3.5rem;
+}
+
+.big-title {
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: 4.5rem;
+}
+
+.skp-tooltip {
+    font-size: 2.1875rem;
+    font-weight: bold;
+}
+
+.spellcost-tooltip b {
+    font-size: 2.1875rem !important;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ff8180;
+    font-size: 1.875rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.scaled-item-icon {
+    width: 8rem;
+}
+
+.scaled-item-icon img {
+    width: 6.5rem;
+}
+
+.scaled-bckgrd {
+    width: 10rem;
+    height: 10rem;
+}
+
+.scaled-bckgrd img {
+    width: 6.5rem;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    :root {
+        --scaled-fontsize: 1rem;
+    }
+    .scaled-font {
+        font-size: 1rem;
+    }
+
+    .box-title {
+        font-size: 1rem;
+    }
+    
+    .item-title {
+        font-size: 1.2rem;
+    }
+    
+    .big-title {
+        font-size: 1.5rem;
+    }
+
+    .skp-tooltip {
+        font-size: .625rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .625rem !important;
+    }
+
+    .scaled-item-icon {
+        width: 3.2rem;
+    }
+
+    .scaled-item-icon img {
+        width: 2.8rem;
+    }
+
+    .scaled-bckgrd {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .scaled-bckgrd img {
+        width: 2.8rem;
+    }
+
+    .warning {
+        font-size: .7rem;
+    }
+
+    .spell-display b {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    :root {
+        --scaled-fontsize: 1rem;
+    }
+    .scaled-font { 
+        font-size: 1rem;
+    }
+
+    .box-title {
+        font-size: 1.25rem;
+    }
+    
+    .item-title {
+        font-size: 1.5rem;
+    }
+
+    .big-title {
+        font-size: 1.8rem;
+    }
+
+    .skp-tooltip {
+        font-size: .78rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .78rem !important;
+    }
+
+    .scaled-item-icon {
+        width: 4rem;
+    }
+    
+    .scaled-item-icon img {
+        width: 3.5rem;
+    }
+
+    .scaled-bckgrd {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .scaled-bckgrd img {
+        width: 3.5rem;
+    }
+
+
+    .warning {
+        font-size: .8rem;
+    }
+
+    .spell-display b {
+        font-size: 1.2rem;
+    }
+}
+/* WynnAtlas Mini */
+.search-field {
+    background-color: hsl(0, 0%, 14%) !important;
+    color: white;
+    font-weight: bold;
+    border-color: hsl(0, 0%, 8%);
+}
+
+/* Fake button for build stats */
+.fake-button {
+    cursor: pointer;
+}
+
+.fake-button:hover, .selected-btn{
+    background-color: hsl(0, 0%, 14%) !important;
+}
+
+
+/* material design dark mode */
+.dark-1 {
+    background-color: hsl(0, 0%, 5%) !important;
+}
+
+.dark-2 {
+    background-color: hsl(0, 0%, 7%) !important;
+}
+
+.dark-3 {
+    background-color: hsl(0, 0%, 8%) !important;
+}
+
+.dark-4 {
+    background-color: hsl(0, 0%, 9%) !important;
+}
+
+.dark-5 {
+    background-color: hsl(0, 0%, 11%) !important;
+}
+
+.dark-6 {
+    background-color: hsl(0, 0%, 12%) !important;
+}
+
+.dark-7 {
+    background-color: hsl(0, 0%, 14%) !important;
+}
+
+.dark-8 {
+    background-color: hsl(0, 0%, 15%) !important;
+}
+
+.dark-9 {
+    background-color: hsl(0, 0%, 16%) !important;
+}
+
+.dark-10 {
+    background-color: hsl(0, 0%, 20%) !important;
+}
+
+.dark-1u {
+    background-color: hsl(0, 0%, 5%);
+}
+
+.dark-2u {
+    background-color: hsl(0, 0%, 7%);
+}
+
+.dark-3u {
+    background-color: hsl(0, 0%, 8%);
+}
+
+.dark-4u {
+    background-color: hsl(0, 0%, 9%);
+}
+
+.dark-5u {
+    background-color: hsl(0, 0%, 11%);
+}
+
+.dark-6u {
+    background-color: hsl(0, 0%, 12%);
+}
+
+.dark-7u {
+    background-color: hsl(0, 0%, 14%);
+}
+
+.dark-8u {
+    background-color: hsl(0, 0%, 15%);
+}
+
+.dark-9u {
+    background-color: hsl(0, 0%, 16%);
+}
+
+.border-dark-7 {
+    border-color:hsl(0, 0%, 14%) !important;
+}
+
+/* BOX SHADOW STYLES */
+.dark-shadow {
+    box-shadow: 0rem 0rem 0.5rem 0.075rem black;
+}
+  
+.dark-shadow-sm {
+    box-shadow: 0rem 0rem 0.25rem 0.05rem black;
+}
+
+.atlas {
+    color: #fbcd49;
+}
+
+a {
+    color: #88FFFF;
+}
+
+a:hover {
+    color: #ff88ff;
+}
+
+.border-semi-light {
+    border-color: #aaa;
+}
+
+/* supposed to work in firefox but doesn't */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+}
+
+/* Make links bold when hovered over */
+
+.clickable:hover {
+    font-weight: bold;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.button {
+    border-color: #fff;
+}
+
+/* atree connector rotations */
+.rotate-90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate-180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate-270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.rotate-flip {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+
+
+.hide-scroll {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.hide-scroll::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.atree-selected {
+    outline: 5px solid rgba(95, 214, 223, 0.8);
+}
+
+.atree-circle {
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}
+
+.hppeng{
+    color: #20c2b6;
+}
+.ferricles{
+    color: #5be553;
+}

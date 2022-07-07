@@ -1,3 +1,5 @@
+#parses all CI and creates a json file with all of them
+
 import os
 import re
 
