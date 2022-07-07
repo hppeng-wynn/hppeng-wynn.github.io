@@ -1875,6 +1875,7 @@ const atrees = {
             "desc": "Condense Arrow Storm into a single ray that damages enemies 10 times per second",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Arrow Storm",
             "parents": ["Water Mastery", "Fire Creep"],
             "dependencies": ["Arrow Storm"],
             "blockers": ["Windstorm", "Nimble String", "Arrow Hurricane"],
@@ -2774,7 +2775,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [{ "type": "stat", "name": "defPct", "value": 70}]
+                    "bonuses": [{ "type": "stat", "name": "defMultiplier", "value": 0.3}]
                 }
             ]
         },
@@ -3919,7 +3920,13 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []  
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [{ "type": "stat", "name": "defMultiplier", "value": 0.6}]
+                }
+            ]
         },
 
         {

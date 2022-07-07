@@ -176,6 +176,7 @@ const atree_node = new (class extends ComputeNode {
 
 /**
  * Create a reverse topological sort of the tree in the result list.
+ * NOTE: our structure isn't a tree... it isn't even acyclic... but do it anyway i guess...
  *
  * https://en.wikipedia.org/wiki/Topological_sorting
  * @param tree: Root of tree to sort
@@ -576,8 +577,6 @@ const atree_make_interactives = new (class extends ComputeNode {
         const atree_order = input_map.get('atree-order');
         const atree_html = input_map.get('atree-elements');
 
-        const ret_states = [];
-
         /**
          * slider_info {
          *   label_name: str,
@@ -617,7 +616,7 @@ const atree_make_interactives = new (class extends ComputeNode {
             let slider_container = gen_slider_labeled(slider_info);
             atree_html.get(slider_info.abil.id).appendChild(slider_container);
         }
-        return ret_states;
+        //return ret_states;
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
 
@@ -632,8 +631,8 @@ const atree_stats = new (class extends ComputeNode {
     constructor() { super('atree-stats-collector'); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "AbilityTreeCollectStats accepts exactly one input (atree-merged)"; }
-        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        const atree_merged = input_map.get('atree-merged');
+        const item_stats = input_map.get('build').statMap;
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -642,7 +641,19 @@ const atree_stats = new (class extends ComputeNode {
             for (const effect of abil.effects) {
                 switch (effect.type) {
                 case 'stat_scaling':
-                    // TODO: handle
+                    if (effect.slider) {
+                        // TODO: handle
+                    }
+                    else {
+                        const cap = effect.max;
+                        // TODO: type: prop?
+                        let total = 0;
+                        for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
+                            total += scaling * item_stats.get(input.name);
+                        }
+                        if (total > cap) { total = cap; }
+                        // TODO: output (list...)
+                    }
                     continue;
                 case 'raw_stat':
                     // TODO: toggles...
@@ -650,7 +661,11 @@ const atree_stats = new (class extends ComputeNode {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
                         if (type === "stat") {
-                            if (ret_effects.has(name)) { ret_effects.set(name, ret_effects.get(name) + value); }
+                            if (ret_effects.has(name)) { 
+                                if (name === 'damageMultiplier' || name === 'defMultiplier') {
+                                    ret_effects.set(name, ret_effects.get(name) * value); 
+                                }
+                                else { ret_effects.set(name, ret_effects.get(name) + value); }
                             else { ret_effects.set(name, value); }
                         }
                     }

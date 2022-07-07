@@ -1084,6 +1084,7 @@ function builder_graph_init() {
     atree_merge.link_to(build_node, 'build');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
+    atree_stats.link_to(build_node, 'build');
     stat_agg_node.link_to(atree_stats, 'atree-stats');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
