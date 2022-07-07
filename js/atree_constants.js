@@ -2970,6 +2970,7 @@ const atrees = {
             "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +3% (Max 300%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Spear Proficiency 2"], 
             "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
@@ -3040,6 +3041,7 @@ const atrees = {
             "desc": "Add +2 additional charges to Mantle of the Bovemists",
             "archetype": "Paladin", 
             "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
             "parents": ["Manachism", "Flying Kick"], 
             "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
@@ -3088,8 +3090,7 @@ const atrees = {
         {
             "display_name": "Boiling Blood",
             "desc": "Bash leaves a trail of boiling blood behind its first explosion, slowing down and damaging enemies above it every 0.4 seconds",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Bash",
             "parents": ["Enraged Blow", "Ragnarokkr"], 
             "dependencies": [], 
             "blockers": [],
@@ -3826,7 +3827,7 @@ const atrees = {
             "parents": ["Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 1, 
+            "cost": 2, 
             "display": {
                 "row": 31,
                 "col": 4,
@@ -3876,7 +3877,7 @@ const atrees = {
         {
             "display_name": "Blood Pact",
             "desc": "If you do not have enough mana to cast a spell, spend health instead (0.6% health per mana)",
-            "archetype": "", 
+            "archetype": "Fallen", 
             "archetype_req": 10, 
             "parents": ["Cheaper War Scream"], 
             "dependencies": [], 
