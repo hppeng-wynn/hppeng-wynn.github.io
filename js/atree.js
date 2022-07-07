@@ -76,6 +76,10 @@ stat_scaling: {
   "slider": bool,
   "slider_name": Optional[str],
   "slider_step": Optional[float],
+  slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
+                                            //     merge: add if exist, make new part if not exist
+                                            //     modify: change existing part. do nothing if not exist
+  slider_max: Optional[float]               // affected by slider_behavior
   "inputs": Optional[list[scaling_target]],
   "output": scaling_target | List[scaling_target],
   "scaling": list[float],
@@ -564,8 +568,8 @@ const atree_collect_spells = new (class extends ComputeNode {
  *   value: int     // value for sliders; 0-1 for toggles
  * }
  */
-const atree_make_actives = new (class extends ComputeNode {
-    constructor() { super('atree-make-sliders'); }
+const atree_make_interactives = new (class extends ComputeNode {
+    constructor() { super('atree-make-interactives'); }
 
     compute_func(input_map) {
         const merged_abils = input_map.get('atree-merged');
@@ -575,6 +579,8 @@ const atree_make_actives = new (class extends ComputeNode {
         const slider_map = new Map();
 
         // first, pull out all the sliders.
+        for (const [abil_id, abil] of merged_abils.entries()) {
+        }
         //add in slider(s)
 //        for (const effect of ability.effects) {
 //            if (effect['type'] === "stat_scaling" && effect['slider'] === true) {

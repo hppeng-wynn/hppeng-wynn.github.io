@@ -1405,7 +1405,7 @@ const atrees = {
                 "type": "raw_stat",
                 "bonuses": [{
                     "type": "stat",
-                    "name": "mdCritPct",
+                    "name": "critDamPct",
                     "value": 30
                 }]
             }]  
@@ -1691,7 +1691,7 @@ const atrees = {
                     "name": "damMult"
                 },
                 "scaling": [35],
-                "max": 3
+                "slider_max": 3
             }]
         },
         {
@@ -1713,12 +1713,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Focus",
+                "slider_max": 2,
                 "output": {
                     "type": "stat",
                     "name": "damMult"
                 },
-                "scaling": [30],
-                "max": 5
+                "scaling": [-5]
             }]
         },
         {
@@ -1740,12 +1740,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Focus",
+                "slider_max": 2,
                 "output": {
                     "type": "stat",
                     "name": "damMult"
                 },
-                "scaling": [25],
-                "max": 7
+                "scaling": [-5]
             }]
         },
         {
@@ -1798,13 +1798,13 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Trap Wait Time",
+                "slider_max": 4,
                 "output": {
                     "type": "stat",
                     "name": "damMult:Basaltic Trap"
                 },
                 "slider_step": 1,
-                "scaling": [20],
-                "max": 80
+                "scaling": [20]
             }]
         },
         {
@@ -1828,12 +1828,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Trap Wait Time",
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult:Basaltic Trap"
-                    },
-                    "scaling": [20],
-                    "max": 80
+                    "slider_max": 4
                 },
                 {
                     "type": "raw_stat",
@@ -1966,12 +1961,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Phantom Ray hits",
+                "slider_max": 5,
                 "output": {
                     "type": "stat",
                     "name": "damMult:Single Arrow"
                 },
-                "scaling": 10,
-                "max": 50
+                "scaling": 10
             }]
         }
     ],
@@ -2804,13 +2799,13 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Corrupted",
+                    "slider_max": 100,
+                    "slider_step": 1,
                     "output": {
                         "type": "stat",
                         "name": "damRaw" 
                     },
-                    "scaling": [4],
-                    "slider_step": 1,
-                    "max": 120
+                    "scaling": [2]
                 }
             ]  
         },
@@ -2984,19 +2979,12 @@ const atrees = {
             "effects": [
                 {
                     "type": "stat_scaling",
-                    "slider": false,
-                    "inputs": [
-                        {
-                            "type": "stat",
-                            "name": "hpBonus"
-                        }
-                    ],
+                    "slider_name": "Corrupted",
                     "output": {
                         "type": "stat",
                         "name": "damMult" 
                     },
-                    "scaling": [3],
-                    "max": 300
+                    "scaling": [3]
                 }
             ]  
         },
@@ -3354,8 +3342,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damRaw" 
                     },
-                    "scaling": [0.5],
-                    "max": 50
+                    "scaling": [0.5]
                 },
                 {
                     "type": "raw_stat",
@@ -3753,7 +3740,7 @@ const atrees = {
 
         {
             "display_name": "Discombobulate",
-            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
+            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +3 (Additive, Max +80). This bonus decays -5 every second",
             "archetype": "Battle Monk", 
             "archetype_req": 11, 
             "parents": ["Cyclone"], 
@@ -3772,6 +3759,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
+                    "slider_max": 27,
                     "output": [
                         { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
                         { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
