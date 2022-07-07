@@ -700,32 +700,16 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
     // add in the "Active" title to atree
-    let active_row = document.createElement("div");
-    active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
-    let active_word = document.createElement("div");
-    active_word.classList.add("col-auto");
-    active_word.textContent = "Active Abilities:";
+    let active_row = make_elem("div", ["row", "item-title", "mx-auto", "justify-content-center"]);
+    let active_word = make_elem("div", ["col-auto"], {textContent: "Active Abilities:"});
 
-    let active_AP_container = document.createElement("div");
-    active_AP_container.classList.add("col-auto");
+    let active_AP_container = make_elem("div", ["col-auto"]);
+    let active_AP_subcontainer = make_elem("div", ["row"]);
+    let active_AP_cost = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cost", textContent: "0"});
 
-    let active_AP_subcontainer = document.createElement("div");
-    active_AP_subcontainer.classList.add("row");
-
-    let active_AP_cost = document.createElement("div");
-    active_AP_cost.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_cost.id = "active_AP_cost";
-    active_AP_cost.textContent = "0";
-    let active_AP_slash = document.createElement("div");
-    active_AP_slash.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_slash.textContent = "/";
-    let active_AP_cap = document.createElement("div");
-    active_AP_cap.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_cap.id = "active_AP_cap";
-    active_AP_cap.textContent = "45";
-    let active_AP_end = document.createElement("div");
-    active_AP_end.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_end.textContent = " AP";
+    let active_AP_slash = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: "/"});
+    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap", textContent: "45"});
+    let active_AP_end = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: " AP"});
 
     active_AP_container.appendChild(active_AP_subcontainer);
     active_AP_subcontainer.append(active_AP_cost, active_AP_slash, active_AP_cap, active_AP_end);

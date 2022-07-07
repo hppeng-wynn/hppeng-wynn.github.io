@@ -846,3 +846,19 @@ function recolor_slider(slider, label) {
         label.textContent = label.textContent.split(":")[0] + ": " + slider.value;
     }
 } 
+
+/**
+ * Shorthand for making an element in html.
+ *
+ * @param {String} type : type of element
+ * @param {List[String]} classlist : css classes for element
+ * @param {Map[String, String]} args : Properties for the element
+ */
+function make_elem(type, classlist = [], args = {}) {
+    const ret_elem = document.createElement(type);
+    ret_elem.classList.add(...classlist);
+    for (const i in args) {
+        ret_elem[i] = args[i];
+    }
+    return ret_elem;
+}
