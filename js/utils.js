@@ -181,6 +181,10 @@ Base64 = (function () {
             throw new TypeError("BitVector must be instantiated with a Number or a B64 String");
         }
 
+        if (bit_vec.length == 0) {
+            bit_vec = [0];
+        }
+
         this.length = length;
         this.bits = new Uint32Array(bit_vec);
     }
@@ -335,8 +339,8 @@ Base64 = (function () {
         
         if (typeof data === "string") {
             //daily reminder that shifts are modded by 32
-            for (const char of data) {
-                char = Base64.toInt(char);
+            for (const character of data) {
+                let char = Base64.toInt(character);
                 this.bits[curr_idx] |= (char << pos);
 
                 //if we go to the "next" char, update it
@@ -660,6 +664,9 @@ const getScript = url => new Promise((resolve, reject) => {
 /*
 GENERIC TEST FUNCTIONS
 */
+const TEST_SUCCESS = 1;
+const TEST_FAIL = 0;
+
 /** The generic assert function. Fails on all "false-y" values. Useful for non-object equality checks, boolean value checks, and existence checks.
  *
  * @param {*} arg - argument to assert.
@@ -669,6 +676,7 @@ GENERIC TEST FUNCTIONS
     if (!arg) {
         throw new Error(msg ? msg : "Assert failed.");
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts object equality of the 2 parameters. For loose and strict asserts, use assert().
@@ -681,6 +689,7 @@ function assert_equals(arg1, arg2, msg) {
     if (!Object.is(arg1, arg2)) {
         throw new Error(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts object inequality of the 2 parameters. For loose and strict asserts, use assert().
@@ -693,6 +702,7 @@ function assert_equals(arg1, arg2, msg) {
     if (Object.is(arg1, arg2)) {
         throw new Error(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts proximity between 2 arguments. Should be used for any floating point datatype.
@@ -706,6 +716,7 @@ function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
     if (Math.abs(arg1 - arg2) > epsilon) {
         throw new Error(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts that the input argument is null.
@@ -717,6 +728,7 @@ function assert_null(arg, msg) {
     if (arg !== null) {
         throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not null.");
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts that the input argument is undefined.
@@ -728,6 +740,7 @@ function assert_null(arg, msg) {
     if (arg !== undefined) {
         throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts that there is an error when a callback function is run.
@@ -739,7 +752,7 @@ function assert_error(func_binding, msg) {
     try {
         func_binding();
     } catch (err) {
-        return;
+        return TEST_SUCCESS;
     }
     throw new Error(msg ? msg : "Function didn't throw an error.");
 }
@@ -757,3 +770,51 @@ function deepcopy(obj) {
     }
     return ret;
 }
+
+function bv_test() {
+
+    console.log("=====STARTING BITVECTOR UNIT TEST=====");
+
+    // Empty Constructor + append str
+    let bv = new BitVector("");
+    bv.append("Bc8");
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 18);
+    assert_equals(bv.toB64(), "Bc8");
+
+    // Empty Constructor + append num 1
+    bv = new BitVector("");
+    bv.append(10000, 18);
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 18);
+    assert_equals(bv.toB64(), "GS2"); //have to read backwards
+
+    // Empty Constructor + append num 1
+    bv = new BitVector("");
+    bv.append(10000, 14);
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 14);
+    assert_equals(bv.toB64(), "GS2"); //have to read backwards  
+
+    // 1-int constructor (num)
+    bv = new BitVector(10000, 14);
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 14);
+    assert_equals(bv.toB64(), "GS2");
+
+    // 1-int constructor (str)
+    bv = new BitVector("abcde");
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 30);
+    assert_equals(bv.toB64(), "abcde");
+
+    // test constructor ignore length when data is str
+    bv = new BitVector("abcde", 40);
+    assert_equals(bv.bits.length, 1);
+    assert_equals(bv.length, 30);
+    assert_equals(bv.toB64(), "abcde");
+
+    console.log("=====FINISHED BITVECTOR UNIT TEST=====");
+}
+
+bv_test();
