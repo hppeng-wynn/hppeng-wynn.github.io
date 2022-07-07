@@ -16,8 +16,8 @@ function skillPointsToPercentage(skp){
 }
 
 // WYNN2: Skillpoint max scaling. Intel is cost reduction
-const skillpoint_final_mult = [1, 1, 0.5, 0.867, 0.951];
-// intel damage and water%
+const skillpoint_final_mult = [1, 1, 0.5/skillPointsToPercentage(150), 0.867, 0.951];
+// intel water%
 const skillpoint_damage_mult = [1, 1, 1, 0.867, 0.951];
 
 /*Turns the input amount of levels into skillpoints available.

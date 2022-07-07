@@ -175,6 +175,30 @@ const atree_node = new (class extends ComputeNode {
 })();
 
 /**
+ * Create a reverse topological sort of the tree in the result list.
+ *
+ * https://en.wikipedia.org/wiki/Topological_sorting
+ * @param tree: Root of tree to sort
+ * @param res: Result list (reverse topological order)
+ * @param mark_state: Bookkeeping. Call with empty Map()
+ */
+function topological_sort_tree(tree, res, mark_state) {
+    const state = mark_state.get(tree);
+    if (state === undefined) {
+        // unmarked.
+        mark_state.set(tree, false);    // temporary mark
+        for (const child of tree.children) {
+            topological_sort_tree(child, res, mark_state);
+        }
+        mark_state.set(tree, true);     // permanent mark
+        res.push(tree);
+    }
+    // these cases are not needed. Case 1 does nothing, case 2 should never happen.
+    // else if (state === true) { return; } // permanent mark.
+    // else if (state === false) { throw "not a DAG"; } // temporary mark.
+}
+
+/**
  * Display ability tree from topologically sorted list.
  *
  * Signature: AbilityTreeRenderNode(atree: ATree) => RenderedATree ( Map[id, RenderedATNode] )
@@ -215,30 +239,6 @@ const atree_state_node = new (class extends ComputeNode {
         return rendered_atree;
     }
 })().link_to(atree_render, 'atree-render');
-
-/**
- * Create a reverse topological sort of the tree in the result list.
- *
- * https://en.wikipedia.org/wiki/Topological_sorting
- * @param tree: Root of tree to sort
- * @param res: Result list (reverse topological order)
- * @param mark_state: Bookkeeping. Call with empty Map()
- */
-function topological_sort_tree(tree, res, mark_state) {
-    const state = mark_state.get(tree);
-    if (state === undefined) {
-        // unmarked.
-        mark_state.set(tree, false);    // temporary mark
-        for (const child of tree.children) {
-            topological_sort_tree(child, res, mark_state);
-        }
-        mark_state.set(tree, true);     // permanent mark
-        res.push(tree);
-    }
-    // these cases are not needed. Case 1 does nothing, case 2 should never happen.
-    // else if (state === true) { return; } // permanent mark.
-    // else if (state === false) { throw "not a DAG"; } // temporary mark.
-}
 
 /**
  * Collect abilities and condense them into a list of "final abils".
@@ -575,22 +575,48 @@ const atree_make_interactives = new (class extends ComputeNode {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
         const atree_html = input_map.get('atree-elements');
+
         const ret_states = [];
+
+        /**
+         * slider_info {
+         *   label_name: str,
+         *   max: int,
+         *   step: int,
+         *   id: str,
+         *   abil: atree_node
+         * }
+         */
+        // Map<str, slider_info>
         const slider_map = new Map();
 
         // first, pull out all the sliders.
-        for (const [abil_id, abil] of merged_abils.entries()) {
+        for (const [abil_id, ability] of merged_abils.entries()) {
+            for (const effect of ability.effects) {
+                if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
+                    const { slider_name, slider_behavior = 'merge', slider_max, slider_step } = effect;
+                    if (slider_map.has(slider_name)) {
+                        const slider_info = slider_map.get(slider_name);
+                        slider_info.max += slider_max;
+                    }
+                    else if (slider_behavior === 'merge') {
+                        slider_map.set(slider_name, {
+                            label_name: slider_name,
+                            max: slider_max,
+                            step: slider_step,
+                            id: "ability-slider"+ability.id,
+                            //color: effect['slider_color'] TODO: add colors to json
+                            abil: ability
+                        });
+                    }
+                }
+            }
         }
-        //add in slider(s)
-//        for (const effect of ability.effects) {
-//            if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-//                let slider_container = gen_slider_labeled(effect['slider_name'], [], effect['min'], effect['max'], effect['slider_step'], effect['default_val'], "ability-slider" + ability.id, effect['slider_color'], []);
-//                active_tooltip.appendChild(slider_container);
-//            }
-//        }
-//        active_tooltip.id = "atree-ab-" + ability.id;
-//
-//        active_tooltip.appendChild(tooltip_cost.cloneNode(true));
+        // next, render the sliders onto the abilities.
+        for (const [slider_name, slider_info] of slider_map.entries()) {
+            let slider_container = gen_slider_labeled(slider_info);
+            atree_html.get(slider_info.abil.id).appendChild(slider_container);
+        }
         return ret_states;
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');

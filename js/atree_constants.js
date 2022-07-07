@@ -1699,6 +1699,7 @@ const atrees = {
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Focus",
             "parents": ["Cheaper Arrow Storm", "Grappling Hook"],
             "dependencies": ["Focus"],
             "blockers": [],
@@ -1726,6 +1727,7 @@ const atrees = {
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Focus",
             "parents": ["Crepuscular Ray", "Snow Storm"],
             "dependencies": ["Focus"],
             "blockers": [],
@@ -2204,7 +2206,7 @@ const atrees = {
 
         {
             "display_name": "Tougher Skin",
-            "desc": "Harden your skin and become permanently +5% more resistant\nFor every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
+            "desc": "Harden your skin and become permanently +5% more resistant. For every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["Charge"], 
