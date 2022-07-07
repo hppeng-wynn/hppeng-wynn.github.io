@@ -558,7 +558,11 @@ const atree_collect_spells = new (class extends ComputeNode {
 /**
  * Make interactive elements (sliders, buttons)
  *
- * Signature: AbilityActiveUINode(atree-merged: MergedATree) => List[
+ * Signature: AbilityActiveUINode(atree-merged: MergedATree) => List[ElemState]
+ *
+ * ElemState: {
+ *   value: int     // value for sliders; 0-1 for toggles
+ * }
  */
 const atree_make_actives = new (class extends ComputeNode {
     constructor() { super('atree-make-sliders'); }
@@ -567,6 +571,21 @@ const atree_make_actives = new (class extends ComputeNode {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
         const atree_html = input_map.get('atree-elements');
+        const ret_states = [];
+        const slider_map = new Map();
+
+        // first, pull out all the sliders.
+        //add in slider(s)
+//        for (const effect of ability.effects) {
+//            if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
+//                let slider_container = gen_slider_labeled(effect['slider_name'], [], effect['min'], effect['max'], effect['slider_step'], effect['default_val'], "ability-slider" + ability.id, effect['slider_color'], []);
+//                active_tooltip.appendChild(slider_container);
+//            }
+//        }
+//        active_tooltip.id = "atree-ab-" + ability.id;
+//
+//        active_tooltip.appendChild(tooltip_cost.cloneNode(true));
+        return ret_states;
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
 
@@ -870,17 +889,6 @@ function render_AT(UI_elem, list_elem, tree) {
             active_tooltip_blockers.textContent = "Blockers: " + ability.blockers.join(", ");
             active_tooltip.append(active_tooltip_blockers);
         }
-
-        //add in slider(s)
-        for (const effect of ability.effects) {
-            if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-                let slider_container = gen_slider_labeled(effect['slider_name'], [], effect['min'], effect['max'], effect['slider_step'], effect['default_val'], "ability-slider" + ability.id, effect['slider_color'], []);
-                active_tooltip.appendChild(slider_container);
-            }
-        }
-        active_tooltip.id = "atree-ab-" + ability.id;
-
-        active_tooltip.appendChild(tooltip_cost.cloneNode(true));
 
         //append node and active tooltips to corresponding parent elems
         node_elem.appendChild(node_tooltip);
