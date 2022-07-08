@@ -8,7 +8,7 @@
 /* builder containers */
 
 
-.e_slider, .t_slider, .w_slider, .f_slider, .a_slider {
+.slider {
     -webkit-appearance: none;
     background: #AAAAAA;
     border-radius: 30px;
@@ -16,15 +16,14 @@
 }
 
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
-.e_slider::-webkit-slider-runnable-track, .t_slider::-webkit-slider-runnable-track, .w_slider::-webkit-slider-runnable-track, .f_slider::-webkit-slider-runnable-track, .a_slider::-webkit-slider-runnable-track {
+.slider::-webkit-slider-runnable-track{
     -webkit-appeareance: none;
     background:transparent;
     height: 0.5rem;
 }
-
  
 /******** Firefox **** **/
-.e_slider::-moz-range-track, .t_slider::-moz-range-track, .w_slider::-moz-range-track, .f_slider::-moz-range-track, .a_slider::-moz-range-track {
+.slider::-moz-range-track {
     -webkit-appearance: none;
     background-color: transparent;
     border-radius: 30px;
@@ -32,7 +31,7 @@
 }
 
 
-.e_slider::-webkit-slider-thumb, .t_slider::-webkit-slider-thumb, .w_slider::-webkit-slider-thumb, .f_slider::-webkit-slider-thumb, .a_slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 0.75rem;
