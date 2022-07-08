@@ -155,13 +155,10 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     let total_dam_crit = [0, 0];
     let damages_results = [];
     const mult_map = stats.get("damMult");
-    console.log(mult_map);
     let damage_mult = 1;
     for (const [k, v] of mult_map.entries()) {
         damage_mult *= (1 + v/100);
     }
-    console.log(damage_mult);
-
 
     for (const damage of damages) {
         const res = [

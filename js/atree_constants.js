@@ -2814,6 +2814,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damRaw" 
                     },
+                    "max": 120,
                     "scaling": [2]
                 }
             ]  
@@ -2990,6 +2991,7 @@ const atrees = {
                 {
                     "type": "stat_scaling",
                     "slider_name": "Corrupted",
+                    "slider": true,
                     "output": {
                         "type": "stat",
                         "name": "damMult.Enraged" 
