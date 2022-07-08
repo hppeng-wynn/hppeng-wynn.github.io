@@ -51,6 +51,7 @@ const skp_order = ["str","dex","int","def","agi"];
 const skill = ["Strength", "Dexterity", "Intelligence", "Defense", "Agility"];
 const skp_elements = ["e","t","w","f","a"];
 const damageClasses = ["Neutral","Earth","Thunder","Water","Fire","Air"];
+const damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
 // Set up item lists for quick access later.
 const armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 const accessoryTypes = [ "ring", "bracelet", "necklace" ];

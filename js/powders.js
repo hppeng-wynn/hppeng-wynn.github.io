@@ -79,7 +79,6 @@ function applyArmorPowders(expandedItem) {
     }
 }
 
-const damage_keys = [ "nDam_", "eDam_", "tDam_", "wDam_", "fDam_", "aDam_" ];
 const damage_present_key = 'damagePresent';
 /**
  * Apply weapon powders. MUTATES THE ITEM!

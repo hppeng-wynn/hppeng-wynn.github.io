@@ -1,3 +1,58 @@
+document.addEventListener("DOMContentLoaded", function() {
+    let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
+                                ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
+                                ["filter1", itemFilters],
+                                ["filter2", itemFilters],
+                                ["filter3", itemFilters],
+                                ["filter4", itemFilters]]);
+    for (const [field, data] of filterInputs) {
+        let field_choice = document.getElementById(field+"-choice");
+        // show dropdown on click
+        field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
+        filterInputs.set(field, new autoComplete({
+            data: {
+                src: data,
+            },
+            threshold: 0,
+            selector: "#"+ field +"-choice",
+            wrapper: false,
+            resultsList: {
+                maxResults: 100,
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    let position = document.getElementById(field+'-choice').getBoundingClientRect();
+                    list.style.top = position.bottom + window.scrollY +"px";
+                    list.style.left = position.x+"px";
+                    list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 4 +"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No results found!";
+                        list.prepend(message);
+                    };
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        };
+                    },
+                },
+            }
+        }));
+    };
+});
+
 const translate_mappings = {
     //"Name": "name",
     //"Display Name": "displayName",
@@ -71,14 +126,14 @@ const translate_mappings = {
     "Custom Skin": "skin",
     //"Item Category": "category",
 
-    "1st Spell Cost %": "-spPct1",
-    "1st Spell Cost Raw": "-spRaw1",
-    "2nd Spell Cost %": "-spPct2",
-    "2nd Spell Cost Raw": "-spRaw2",
-    "3rd Spell Cost %": "-spPct3",
-    "3rd Spell Cost Raw": "-spRaw3",
-    "4th Spell Cost %": "-spPct4",
-    "4th Spell Cost Raw": "-spRaw4",
+    "1st Spell Cost %": "spPct1",
+    "1st Spell Cost Raw": "spRaw1",
+    "2nd Spell Cost %": "spPct2",
+    "2nd Spell Cost Raw": "spRaw2",
+    "3rd Spell Cost %": "spPct3",
+    "3rd Spell Cost Raw": "spRaw3",
+    "4th Spell Cost %": "spPct4",
+    "4th Spell Cost Raw": "spRaw4",
 
     "Rainbow Spell Damage": "rainbowRaw",
     "Sprint": "sprint",
@@ -91,29 +146,23 @@ const translate_mappings = {
 };
 
 const special_mappings = {
-    "Sum (skill points)": "s:str+dex+int+def+agi",
-    "Sum (Mana Sustain)": "s:mr+ms",
-    "Sum (Life Sustain)": "s:hpr+ls",
-    "Sum (Health + Health Bonus)": "s:hp+hpBonus",
-    "No Strength Req": "f:strReq=0",
-    "No Dexterity Req": "f:dexReq=0",
-    "No Intelligence Req": "f:intReq=0",
-    "No Agility Req": "f:agiReq=0",
-    "No Defense Req": "f:defReq=0",
+    "Sum (skill points)": new SumQuery(["str", "dex", "int", "def", "agi"]),
+    "Sum (Mana Sustain)": new SumQuery(["mr", "ms"]),
+    "Sum (Life Sustain)": new SumQuery(["hpr", "ls"]),
+    "Sum (Health + Health Bonus)": new SumQuery(["hp", "hpBonus"]),
+    "No Strength Req": new NegateQuery("strReq"),
+    "No Dexterity Req": new NegateQuery("dexReq"),
+    "No Intelligence Req": new NegateQuery("intReq"),
+    "No Agility Req": new NegateQuery("agiReq"),
+    "No Defense Req": new NegateQuery("defReq"),
 };
 
-let itemFilters = document.getElementById("filter-items");
-if (itemFilters) {
-    for (let x in translate_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
-    for (let x in special_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
+let itemFilters = []
+for (let x in translate_mappings) {
+    itemFilters.push(x);
+}
+for (let x in special_mappings) {
+    itemFilters.push(x);
 }
 
 let itemCategories = [ "armor", "accessory", "weapon" ];
@@ -122,31 +171,38 @@ function applyQuery(items, query) {
     return items.filter(query.filter, query).sort(query.compare);
 }
 
-function displayItems(results) {
-    let items_parent = document.getElementById("main");
-    for (let i in results) {
-        let item = results[i].itemExp;
+function displayItems(items_copy) {
+    let items_parent = document.getElementById("search-results");
+    for (let i in items_copy) {
+        if (i > 200) {break;}
+        let item = items_copy[i];
         let box = document.createElement("div");
-        box.classList.add("box");
+        box.classList.add("col-lg-3", "col-sm-6", "p-2");
         box.id = "item"+i;
+        box.addEventListener("dblclick", function() {set_item(item);});
+        
+        let bckgrdbox = document.createElement("div");
+        bckgrdbox.classList.add("dark-7", "rounded", "px-2", "col-auto");
+        box.appendChild(bckgrdbox);
+        bckgrdbox.id = "item"+i+"b";
         items_parent.appendChild(box);
-        displayExpandedItem(item, box.id);
+        displayExpandedItem(item, bckgrdbox.id);
     }
 }
 
-let searchDb;
+let items_expanded;
 
 function doItemSearch() {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     let queries = [];
-    queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
+    queries.push(new NameQuery(document.getElementById("item-name-choice").value.trim()));
 
     let categoryOrType = document.getElementById("item-category-choice").value;
     if (itemTypes.includes(categoryOrType)) {
-        queries.push('f:type="'+categoryOrType+'"');
+        queries.push(new IdMatchQuery("type", categoryOrType));
     }
     else if (itemCategories.includes(categoryOrType)) {
-        queries.push('f:cat="'+categoryOrType+'"');
+        queries.push(new IdMatchQuery("category", categoryOrType));
     }
 
     let rarity = document.getElementById("item-rarity-choice").value;
@@ -154,23 +210,19 @@ function doItemSearch() {
         if (rarity === "ANY") {
 
         }
-        else if (rarity === "Sane") {
-            queries.push('f:tiername!="mythic"');
-        }
         else {
-            queries.push('f:tiername="'+rarity+'"');
+            queries.push(new IdMatchQuery("tier", rarity));
         }
     }
 
-    let level_dat = document.getElementById("item-level-choice").value.split("-");
-    queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
+    let level_dat = document.getElementById("item-level-choice").value ? document.getElementById("item-level-choice").value.split("-") : [1, 106];
+    queries.push(new LevelRangeQuery(parseInt(level_dat[0]), parseInt(level_dat[1])));
     
     for (let i = 1; i <= 4; ++i) {
         let raw_dat = document.getElementById("filter"+i+"-choice").value;
         let filter_dat = translate_mappings[raw_dat];
         if (filter_dat !== undefined) {
-            queries.push("s:"+filter_dat);
-            queries.push("f:"+filter_dat+"!=0");
+            queries.push(new IdQuery(filter_dat));
             continue;
         }
         filter_dat = special_mappings[raw_dat];
@@ -180,44 +232,28 @@ function doItemSearch() {
         }
     }
 
-    let filterQuery = "true";
-    let sortQueries = [];
-    console.log(queries);
+    let items_copy = items_expanded.slice();
+    document.getElementById("search-results").textContent = "";
     for (const query of queries) {
-        if (query.startsWith("s:")) {
-            sortQueries.push(query.slice(2));
-        }
-        else if (query.startsWith("f:")) {
-            filterQuery = filterQuery + "&" + query.slice(2);
-        }
+        items_copy = applyQuery(items_copy, query);
     }
-    console.log(filterQuery);
-    console.log(sortQueries);
-    let results = [];
-    try {
-        const filterExpr = exprParser.parse(filterQuery);
-        const sortExprs = sortQueries.map(q => exprParser.parse(q));
-        for (let i = 0; i < searchDb.length; ++i) {
-            const item = searchDb[i][0];
-            const itemExp = searchDb[i][1];
-            if (checkBool(filterExpr.resolve(item, itemExp))) {
-                results.push({ item, itemExp, sortKeys: sortExprs.map(e => e.resolve(item, itemExp)) });
-            }
-        }
-        results.sort((a, b) => {
-            return compareLexico(a.item, a.sortKeys, b.item, b.sortKeys);
-        });
-    } catch (e) {
-        document.getElementById("summary").textContent = e.message;
-        return;
+    document.getElementById("summary").textContent = items_copy.length + " results:"
+    displayItems(items_copy);
+}
+
+function resetItemSearch() {
+    resetFields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
+    for (const field of resetFields) {
+        document.getElementById(field).value = "";
     }
-    document.getElementById("summary").textContent = results.length + " results."
-    displayItems(results);
 }
 
 function init_items() {
-    searchDb = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
-    exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
+    items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i) );
 }
 
-load_init(init_items);
+(async function() {
+    let load_promises = [ load_init() ];
+    await Promise.all(load_promises);
+    init_items();
+})();

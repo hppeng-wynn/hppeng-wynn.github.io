@@ -173,7 +173,11 @@ function displayExpandedItem(item, parent_id){
     // !elemental is some janky hack for elemental damage.
     // normals just display a thing.
     item = new Map(item);   // shallow copy
+    if (!item.has('powders')) { item.set('powders', []); }
     if (item.get("category") === "weapon") {
+        for (const key of damage_keys) {
+            if (item.get(key) === undefined) { item.set(key, item.get(key.slice(0, 4)).split('-').map(Number)) }
+        }
         item.set('basedps', get_base_dps(item));
     } else if (item.get("category") === "armor") { 
     }
