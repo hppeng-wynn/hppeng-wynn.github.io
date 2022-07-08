@@ -1688,7 +1688,7 @@ const atrees = {
                 "slider_name": "Focus",
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
                 "scaling": [40],
                 "slider_max": 3
@@ -1717,7 +1717,7 @@ const atrees = {
                 "slider_max": 2,
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
                 "scaling": [-5]
             }]
@@ -1745,7 +1745,7 @@ const atrees = {
                 "slider_max": 2,
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
                 "scaling": [-5]
             }]
@@ -1803,7 +1803,7 @@ const atrees = {
                 "slider_max": 4,
                 "output": {
                     "type": "stat",
-                    "name": "damMult:Basaltic Trap"
+                    "name": "damMult.Basaltic:Basaltic Trap"
                 },
                 "slider_step": 1,
                 "scaling": [20]
@@ -1967,7 +1967,7 @@ const atrees = {
                 "slider_max": 7,
                 "output": {
                     "type": "stat",
-                    "name": "damMult:Single Arrow"
+                    "name": "damMult.Decimator:Single Arrow"
                 },
                 "scaling": 10
             }]
@@ -2227,7 +2227,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "baseResist",
+                            "name": "defMult.Base",
                             "value": 5
                         }
                     ]
@@ -2775,7 +2775,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [{ "type": "stat", "name": "defMultiplier", "value": 0.3}]
+                    "bonuses": [{ "type": "stat", "name": "defMult.Mantle", "value": 70}]
                 }
             ]
         },
@@ -2986,7 +2986,7 @@ const atrees = {
                     "slider_name": "Corrupted",
                     "output": {
                         "type": "stat",
-                        "name": "damMult" 
+                        "name": "damMult.Enraged" 
                     },
                     "scaling": [3]
                 }
@@ -3130,7 +3130,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.Ragnarokkr", "value": 30} ]
                 }
             ]  
         },
@@ -3438,7 +3438,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "baseResist",
+                            "name": "defMult.Base",
                             "value": 5
                         }
                     ]
@@ -3468,7 +3468,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
                 }
             ]  
         },
@@ -3924,7 +3924,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [{ "type": "stat", "name": "defMultiplier", "value": 0.6}]
+                    "bonuses": [{ "type": "stat", "name": "defMult.Brink", "value": 40}]
                 }
             ]
         },

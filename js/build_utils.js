@@ -74,17 +74,17 @@ let skpReqs = skp_order.map(x => x + "Req");
 let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id", "majorIds", "damMobs", "defMobs",
 
 // wynn2 damages.
-"eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct"*/,"eDamRaw","eDamAddMin","eDamAddMax",
-"tMdPct","tMdRaw","tSdPct","tSdRaw",/*"tDamPct"*/,"tDamRaw","tDamAddMin","tDamAddMax",
-"wMdPct","wMdRaw","wSdPct","wSdRaw",/*"wDamPct"*/,"wDamRaw","wDamAddMin","wDamAddMax",
-"fMdPct","fMdRaw","fSdPct","fSdRaw",/*"fDamPct"*/,"fDamRaw","fDamAddMin","fDamAddMax",
-"aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct"*/,"aDamRaw","aDamAddMin","aDamAddMax",
+"eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct,"*/"eDamRaw","eDamAddMin","eDamAddMax",
+"tMdPct","tMdRaw","tSdPct","tSdRaw",/*"tDamPct,"*/"tDamRaw","tDamAddMin","tDamAddMax",
+"wMdPct","wMdRaw","wSdPct","wSdRaw",/*"wDamPct,"*/"wDamRaw","wDamAddMin","wDamAddMax",
+"fMdPct","fMdRaw","fSdPct","fSdRaw",/*"fDamPct,"*/"fDamRaw","fDamAddMin","fDamAddMax",
+"aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct,"*/"aDamRaw","aDamAddMin","aDamAddMax",
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
 "critDamPct"
 ];
-// Extra fake IDs (reserved for use in spell damage calculation) : damageMultiplier, defMultiplier, poisonPct, activeMajorIDs
+// Extra fake IDs (reserved for use in spell damage calculation) : damMult, defMult, poisonPct, activeMajorIDs
 let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ]
 
 //File reading for ID translations for JSON purposes
@@ -169,11 +169,11 @@ let rolledIDs = [
     "gXp",
     "gSpd",
 // wynn2 damages.
-"eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct"*/,"eDamRaw","eDamAddMin","eDamAddMax",
-"tMdPct","tMdRaw","tSdPct","tSdRaw",/*"tDamPct"*/,"tDamRaw","tDamAddMin","tDamAddMax",
-"wMdPct","wMdRaw","wSdPct","wSdRaw",/*"wDamPct"*/,"wDamRaw","wDamAddMin","wDamAddMax",
-"fMdPct","fMdRaw","fSdPct","fSdRaw",/*"fDamPct"*/,"fDamRaw","fDamAddMin","fDamAddMax",
-"aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct"*/,"aDamRaw","aDamAddMin","aDamAddMax",
+"eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct,"*/"eDamRaw","eDamAddMin","eDamAddMax",
+"tMdPct","tMdRaw","tSdPct","tSdRaw",/*"tDamPct,"*/"tDamRaw","tDamAddMin","tDamAddMax",
+"wMdPct","wMdRaw","wSdPct","wSdRaw",/*"wDamPct,"*/"wDamRaw","wDamAddMin","wDamAddMax",
+"fMdPct","fMdRaw","fSdPct","fSdRaw",/*"fDamPct,"*/"fDamRaw","fDamAddMin","fDamAddMax",
+"aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct,"*/"aDamRaw","aDamAddMin","aDamAddMax",
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
@@ -305,11 +305,23 @@ function idRound(id){
  * stupid stupid multiplicative stats
  */
 function merge_stat(stats, name, value) {
-    if (stats.has(name)) { 
-        if (name === 'damageMultiplier' || name === 'defMultiplier') {
-            stats.set(name, stats.get(name) * value); 
+    const start = name.slice(0, 7);
+    if (start === 'damMult' || start === 'defMult') {
+        if (!stats.has(start)) {
+            stats.set(start, new Map());
         }
-        else { stats.set(name, stats.get(name) + value); }
+        const map = stats.get(start);
+        if (value instanceof Map) {
+            for (const [k, v] of value.entries()) {
+                merge_stat(map, k, v);
+            }
+            return;
+        }
+        merge_stat(map, name.slice(8), value);
+        return;
+    }
+    if (stats.has(name)) { 
+        stats.set(name, stats.get(name) + value);
     }
     else { stats.set(name, value); }
 }

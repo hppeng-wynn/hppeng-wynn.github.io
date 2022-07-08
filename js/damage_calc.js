@@ -26,7 +26,7 @@ function get_base_dps(item) {
 }
 
 
-function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false) {
+function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false, part=undefined) {
     // TODO: Roll all the loops together maybe
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -154,7 +154,14 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     let total_dam_norm = [0, 0];
     let total_dam_crit = [0, 0];
     let damages_results = [];
-    const damage_mult = stats.get("damageMultiplier");
+    const mult_map = stats.get("damMult");
+    console.log(mult_map);
+    let damage_mult = 1;
+    for (const [k, v] of mult_map.entries()) {
+        damage_mult *= (1 + v/100);
+    }
+    console.log(damage_mult);
+
 
     for (const damage of damages) {
         const res = [

@@ -28,8 +28,8 @@ let boosts_node = new (class extends ComputeNode {
             }
         }
         let res = new Map();
-        res.set('damageMultiplier', 1+damage_boost);
-        res.set('defMultiplier', 1-def_boost);
+        res.set('damMult.Potion', 100*damage_boost);
+        res.set('defMult.Potion', 100*def_boost);
         return res;
     }
 })().update();
@@ -489,7 +489,10 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHp);
     //EHP
     let ehp = [totalHp, totalHp];
-    let defMult = (2 - stats.get("classDef")) * stats.get("defMultiplier");
+    let defMult = (2 - stats.get("classDef"));
+    for (const [k, v] of stats.get("defMult").entries()) {
+        defMult *= (1 - v/100);
+    }
     // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
     ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
     ehp[0] /= defMult;
@@ -536,7 +539,6 @@ class SpellDamageCalcNode extends ComputeNode {
         const spell = spell_info[0];
         const spell_parts = spell_info[1];
         const stats = input_map.get('stats');
-        const damage_mult = stats.get('damageMultiplier');
         const skillpoints = [
             stats.get('str'),
             stats.get('dex'),
@@ -673,7 +675,7 @@ function getMeleeStats(stats, weapon) {
     }
 
     if (weapon_stats.get("type") === "relik") {
-        stats.set('damageMultiplier', 0.99); // CURSE YOU WYNNCRAFT
+        merge_stat(stats, 'damMult.ShamanMelee', 0.99); // CURSE YOU WYNNCRAFT
         //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
         //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
     }
@@ -841,13 +843,7 @@ class AggregateStatsNode extends ComputeNode {
         const output_stats = new Map();
         for (const [k, v] of input_map.entries()) {
             for (const [k2, v2] of v.entries()) {
-                if (output_stats.has(k2)) {
-                    // TODO: ugly AF
-                    merge_stat(output_stats, k2, v2);
-                }
-                else {
-                    output_stats.set(k2, v2);
-                }
+                merge_stat(output_stats, k2, v2);
             }
         }
         return output_stats;

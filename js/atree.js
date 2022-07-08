@@ -563,7 +563,7 @@ const atree_collect_spells = new (class extends ComputeNode {
 /**
  * Make interactive elements (sliders, buttons)
  *
- * Signature: AbilityActiveUINode(atree-merged: MergedATree) => List[ElemState]
+ * Signature: AbilityActiveUINode(atree-merged: MergedATree) => Map<str, slider_info>
  *
  * ElemState: {
  *   value: int     // value for sliders; 0-1 for toggles
@@ -578,12 +578,13 @@ const atree_make_interactives = new (class extends ComputeNode {
         const atree_html = input_map.get('atree-elements');
 
         /**
-         * slider_info {
+         * slider_info 
          *   label_name: str,
          *   max: int,
          *   step: int,
          *   id: str,
          *   abil: atree_node
+         *   slider: html element
          * }
          */
         // Map<str, slider_info>
@@ -615,8 +616,10 @@ const atree_make_interactives = new (class extends ComputeNode {
         for (const [slider_name, slider_info] of slider_map.entries()) {
             let slider_container = gen_slider_labeled(slider_info);
             atree_html.get(slider_info.abil.id).appendChild(slider_container);
+            slider_info.slider = document.getElementById(slider_info.id);
+            slider_info.slider.addEventListener("change", (e) => atree_stats.mark_dirty().update());
         }
-        //return ret_states;
+        return slider_map;
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
 
@@ -625,7 +628,7 @@ const atree_make_interactives = new (class extends ComputeNode {
  * Collect stats from ability tree.
  * Return StatMap of added stats (incl. cost modifications as raw cost)
  *
- * Signature: AbilityTreeStatsNode(atree-merged: MergedATree) => StatMap
+ * Signature: AbilityTreeStatsNode(atree-merged: MergedATree, build: Build, atree-interactive: Map<str, slider_info>) => StatMap
  */
 const atree_stats = new (class extends ComputeNode {
     constructor() { super('atree-stats-collector'); }
@@ -633,6 +636,7 @@ const atree_stats = new (class extends ComputeNode {
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
         const item_stats = input_map.get('build').statMap;
+        const interactive_map = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -643,6 +647,20 @@ const atree_stats = new (class extends ComputeNode {
                 case 'stat_scaling':
                     if (effect.slider) {
                         // TODO: handle
+                        const slider_val = interactive_map.get(effect.slider_name).slider.value;
+                        const total = parseInt(slider_val) * effect.scaling[0];
+                        if (Array.isArray(effect.output)) {
+                            for (const output of effect.output) {
+                                if (output.type === 'stat') {
+                                    merge_stat(ret_effects, output.name, total);
+                                }
+                            }
+                        }
+                        else {
+                            if (effect.output.type === 'stat') {
+                                merge_stat(ret_effects, effect.output.name, total);
+                            }
+                        }
                     }
                     else {
                         const cap = effect.max;
@@ -691,11 +709,11 @@ const atree_stats = new (class extends ComputeNode {
             }
         }
         if (ret_effects.has('baseResist')) {
-            merge_stat(ret_effects, "defMultiplier", 1 - (ret_effects.get('baseResist') / 100));
+            merge_stat(ret_effects, "defMult", 1 - (ret_effects.get('baseResist') / 100));
         }
         return ret_effects;
     }
-})().link_to(atree_merge, 'atree-merged');
+})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
 
 
 /**
