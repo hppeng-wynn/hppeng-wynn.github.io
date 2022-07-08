@@ -315,6 +315,7 @@ const atree_validate = new (class extends ComputeNode {
         atree_dfs_mark(atree_order[0], atree_state, reachable);
         let abil_points_total = 0;
         let archetype_count = new Map();
+        let hard_error = false;
         for (const node of atree_order) {
             const abil = node.ability;
             if (!atree_state.get(abil.id).active) { continue; }
@@ -328,6 +329,7 @@ const atree_validate = new (class extends ComputeNode {
             if (failed_deps.length > 0) {
                 const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
                 errors.push(abil.display_name + ' dependencies not satisfied: ' + dep_string.join(", "));
+                hard_error = true;
             }
 
             let blocking_ids = [];
@@ -337,6 +339,7 @@ const atree_validate = new (class extends ComputeNode {
             if (blocking_ids.length > 0) {
                 const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
                 errors.push(abil.display_name+' is blocked by: '+blockers_string.join(", "));
+                hard_error = true;
             }
 
             if ('archetype' in abil && abil.archetype !== "") {
@@ -364,7 +367,7 @@ const atree_validate = new (class extends ComputeNode {
             errors.push('too many ability points assigned! ('+abil_points_total+' > 45)');
         }
 
-        return [abil_points_total, errors];
+        return [abil_points_total, hard_error, errors];
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
@@ -387,7 +390,7 @@ const atree_render_active = new (class extends ComputeNode {
     compute_func(input_map) {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
-        const [abil_points_total, errors] = input_map.get('atree-errors');
+        const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
@@ -445,8 +448,9 @@ const atree_collect_spells = new (class extends ComputeNode {
     constructor() { super('atree-spell-collector'); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "AbilityTreeCollectSpellsNode accepts exactly one input (atree-merged)"; }
-        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        const atree_merged = input_map.get('atree-merged');
+        const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
+        if (hard_error) { return []; }
         
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -540,7 +544,7 @@ const atree_collect_spells = new (class extends ComputeNode {
         }
         return ret_spells;
     }
-})().link_to(atree_merge, 'atree-merged');
+})().link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
 
 const atree_stats = new (class extends ComputeNode {
     constructor() { super('atree-stats-collector'); }
