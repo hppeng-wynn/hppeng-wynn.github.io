@@ -2782,7 +2782,7 @@ const atrees = {
 
         {
             "display_name": "Bak'al's Grasp",
-            "desc": "After casting War Scream, become Corrupted (15s Cooldown). You cannot heal while in that state\n\nWhile Corrupted, every 2% of Health you lose will add +4 Raw Damage to your attacks (Max 120)",
+            "desc": "After casting War Scream, become Corrupted (15s Cooldown). You cannot heal while in that state. While Corrupted, every 2% of Health you lose will add +4 Raw Damage to your attacks (Max 120)",
             "archetype": "Fallen", 
             "archetype_req": 2, 
             "parents": ["Quadruple Bash", "Fireworks"], 
@@ -2808,6 +2808,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damRaw" 
                     },
+                    "max": 120,
                     "scaling": [2]
                 }
             ]  
@@ -2982,6 +2983,7 @@ const atrees = {
                 {
                     "type": "stat_scaling",
                     "slider_name": "Corrupted",
+                    "slider": true,
                     "output": {
                         "type": "stat",
                         "name": "damMult.Enraged" 
