@@ -843,12 +843,7 @@ class AggregateStatsNode extends ComputeNode {
             for (const [k2, v2] of v.entries()) {
                 if (output_stats.has(k2)) {
                     // TODO: ugly AF
-                    if (k2 === 'damageMultiplier' || k2 === 'defMultiplier') {
-                        output_stats.set(k2, v2 * output_stats.get(k2));
-                    }
-                    else {
-                        output_stats.set(k2, v2 + output_stats.get(k2));
-                    }
+                    merge_stat(output_stats, k2, v2);
                 }
                 else {
                     output_stats.set(k2, v2);

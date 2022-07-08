@@ -3186,7 +3186,7 @@ const atrees = {
                         "type": "stat",
                         "name": "fDamPct"
                     },
-                    "scaling": [2],
+                    "scaling": [0.02],
                     "max": 100
                 }
             ]  

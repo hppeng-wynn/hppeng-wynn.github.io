@@ -300,3 +300,16 @@ function idRound(id){
         return rounded;
     }
 }
+
+/**
+ * stupid stupid multiplicative stats
+ */
+function merge_stat(stats, name, value) {
+    if (stats.has(name)) { 
+        if (name === 'damageMultiplier' || name === 'defMultiplier') {
+            stats.set(name, stats.get(name) * value); 
+        }
+        else { stats.set(name, stats.get(name) + value); }
+    }
+    else { stats.set(name, value); }
+}

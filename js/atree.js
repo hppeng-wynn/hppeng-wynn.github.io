@@ -653,6 +653,18 @@ const atree_stats = new (class extends ComputeNode {
                         }
                         if (total > cap) { total = cap; }
                         // TODO: output (list...)
+                        if (Array.isArray(effect.output)) {
+                            for (const output of effect.output) {
+                                if (output.type === 'stat') {
+                                    merge_stat(ret_effects, output.name, total);
+                                }
+                            }
+                        }
+                        else {
+                            if (effect.output.type === 'stat') {
+                                merge_stat(ret_effects, effect.output.name, total);
+                            }
+                        }
                     }
                     continue;
                 case 'raw_stat':
@@ -661,12 +673,7 @@ const atree_stats = new (class extends ComputeNode {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
                         if (type === "stat") {
-                            if (ret_effects.has(name)) { 
-                                if (name === 'damageMultiplier' || name === 'defMultiplier') {
-                                    ret_effects.set(name, ret_effects.get(name) * value); 
-                                }
-                                else { ret_effects.set(name, ret_effects.get(name) + value); }
-                            else { ret_effects.set(name, value); }
+                            merge_stat(ret_effects, name, value);
                         }
                     }
                     continue;
@@ -682,6 +689,9 @@ const atree_stats = new (class extends ComputeNode {
                     continue;
                 }
             }
+        }
+        if (ret_effects.has('baseResist')) {
+            merge_stat(ret_effects, "defMultiplier", 1 - (ret_effects.get('baseResist') / 100));
         }
         return ret_effects;
     }
