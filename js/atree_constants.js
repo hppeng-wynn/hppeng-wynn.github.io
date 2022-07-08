@@ -624,7 +624,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2, 
                     "target_part": "Per Arrow", 
-                    "multipliers": [30, 0, 10, 0, 0, 0]
+                    "multipliers": [20, 0, 10, 0, 0, 0]
                 },
                 { 
                     "type": "add_spell_prop",
@@ -748,7 +748,7 @@ const atrees = {
                     "parts": [
                         {  
                             "name": "Single Arrow",
-                            "multipliers": [10, 0, 0, 5, 0, 0]
+                            "multipliers": [20, 0, 0, 5, 0, 0]
                         },
                         {
                             "name": "DPS",
@@ -1690,7 +1690,7 @@ const atrees = {
                     "type": "stat",
                     "name": "damMult"
                 },
-                "scaling": [35],
+                "scaling": [40],
                 "slider_max": 3
             }]
         },
@@ -1867,7 +1867,7 @@ const atrees = {
                     "name": "spd"
                 },
                 "scaling": [6],
-                "max": 200
+                "max": 160
             }]
         },
         {
@@ -1918,7 +1918,7 @@ const atrees = {
         },
         {
             "display_name": "Arrow Rain",
-            "desc": "When Arrow Shield loses its last charge, unleash 200 arrows raining down on enemies",
+            "desc": "When Arrow Shield loses its last charge, unleash 150 arrows raining down on enemies",
             "base_abil": "Arrow Shield",
             "parents": ["Nimble String", "Air Mastery"],
             "dependencies": ["Arrow Shield"],
@@ -1935,19 +1935,19 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Arrow Rain (Per Arrow)",
-                    "multipliers": [120, 0, 0, 0, 0, 80]
+                    "multipliers": [80, 0, 0, 0, 0, 60]
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Arrow Rain (Total)",
-                    "hits": { "Arrow Rain (Per Arrow)": 200 }
+                    "hits": { "Arrow Rain (Per Arrow)": 150 }
                 }
             ]
         },
         {
             "display_name": "Decimator",
-            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 50%)",
+            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 70%)",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
@@ -1964,7 +1964,7 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Phantom Ray hits",
-                "slider_max": 5,
+                "slider_max": 7,
                 "output": {
                     "type": "stat",
                     "name": "damMult:Single Arrow"
