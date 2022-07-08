@@ -162,6 +162,7 @@ const atree_node = new (class extends ComputeNode {
             }
             node.parents = parents;
         }
+        console.log(atree_map);
 
         let atree_topo_sort = [];
         topological_sort_tree(atree_head, atree_topo_sort, new Map());
