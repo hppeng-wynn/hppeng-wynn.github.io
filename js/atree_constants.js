@@ -1949,7 +1949,7 @@ const atrees = {
         },
         {
             "display_name": "Decimator",
-            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 50%)",
+            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 70%)",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
