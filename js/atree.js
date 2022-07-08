@@ -316,7 +316,7 @@ const atree_validate = new (class extends ComputeNode {
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
-        if (atree_order.length == 0) { return [0, ['no atree data']]; }
+        if (atree_order.length == 0) { return [0, false, ['no atree data']]; }
 
         console.log(atree_state);
 
