@@ -371,7 +371,7 @@ const atree_validate = new (class extends ComputeNode {
                     if ('archetype_req' in ability && ability.archetype_req !== 0) {
                         const others = archetype_count.get(ability.archetype);
                         if (others < ability.archetype_req) {
-                            _add.push([node, abil.archetype+': '+others+' < '+abil.archetype_req, false])
+                            _add.push([node, ability.archetype+': '+others+' < '+ability.archetype_req, false])
                             continue;
                         }
                     }
