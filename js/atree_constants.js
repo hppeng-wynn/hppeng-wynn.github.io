@@ -2895,14 +2895,12 @@ const atrees = {
 
         {
             "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 5s \n\nReduce the Mana cost of War Scream",
-            "archetype": "Paladin", 
-            "archetype_req": 0, 
+            "desc": "Mobs damaged by War Scream will target only you for at least 5s. Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 1, 
+            "cost": 2, 
             "display": {
                 "row": 17,
                 "col": 7,

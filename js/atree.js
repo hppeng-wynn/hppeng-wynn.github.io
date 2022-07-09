@@ -317,75 +317,87 @@ const atree_validate = new (class extends ComputeNode {
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
-        if (atree_order.length == 0) { return [0, ['no atree data']]; }
+        if (atree_order.length == 0) { return [0, false, ['no atree data']]; }
 
-        let errors = [];
-        let reachable = new Map();
-        atree_dfs_mark(atree_order[0], atree_state, reachable);
+        let atree_to_add = [];
+        for (const node of atree_order) {
+            const abil = node.ability;
+            if (atree_state.get(abil.id).active) { atree_to_add.push([node, 'not reachable', false]); }
+        }
+
+        let reachable = new Set();
         let abil_points_total = 0;
         let archetype_count = new Map();
-        for (const node of atree_order) {
-            const abil = node.ability;
-            if (!atree_state.get(abil.id).active) { continue; }
-            abil_points_total += abil.cost;
-            if (!reachable.get(abil.id)) { errors.push(abil.display_name + ' is not reachable!'); }
-
-            let failed_deps = [];
-            for (const dep_id of abil.dependencies) {
-                if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
-            }
-            if (failed_deps.length > 0) {
-                const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
-                errors.push(abil.display_name + ' dependencies not satisfied: ' + dep_string.join(", "));
-            }
-
-            let blocking_ids = [];
-            for (const blocker_id of abil.blockers) {
-                if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
-            }
-            if (blocking_ids.length > 0) {
-                const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
-                errors.push(abil.display_name+' is blocked by: '+blockers_string.join(", "));
-            }
-
-            if ('archetype' in abil && abil.archetype !== "") {
-                let val = 1;
-                if (archetype_count.has(abil.archetype)) {
-                    val = archetype_count.get(abil.archetype) + 1;
+        while (true) {
+            let _add = [];
+            for (const [node, fail_reason, fail_hardness] of atree_to_add) {
+                const {parents, ability} = node;
+                if (parents.length === 0) {
+                    reachable.add(ability.id);
+                    // root abil has no archetype.
+                    abil_points_total += ability.cost;
+                    continue;
                 }
-                archetype_count.set(abil.archetype, val);
-            }
-        }
-        // TODO: FIX THIS! ARCHETYPE REQ IS A PAIN IN THE ASS
-        // it doesn't follow topological order and theres some cases where "equip order" matters.
-        for (const node of atree_order) {
-            const abil = node.ability;
-            if (!atree_state.get(abil.id).active) { continue; }
-            if ('archetype_req' in abil && abil.archetype_req !== 0) {
-                const others = archetype_count.get(abil.archetype) - 1;
-                if (others < abil.archetype_req) {
-                    errors.push(abil.display_name+' fails archetype: '+abil.archetype+': '+others+' < '+abil.archetype_req)
+                let failed_deps = [];
+                for (const dep_id of ability.dependencies) {
+                    if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
                 }
+                if (failed_deps.length > 0) {
+                    const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+                    _add.push([node, 'missing dep: ' + dep_strings.join(", "), true]);
+                    continue;
+                }
+                let blocking_ids = [];
+                for (const blocker_id of ability.blockers) {
+                    if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+                }
+                if (blocking_ids.length > 0) {
+                    const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+                    _add.push([node, 'blocked by: '+blockers_strings.join(", "), true]);
+                    continue;
+                }
+                let node_reachable = false;
+                for (const parent of parents) {
+                    if (reachable.has(parent.ability.id)) {
+                        node_reachable = true;
+                        break;
+                    }
+                }
+                if (!node_reachable) {
+                    _add.push([node, 'not reachable', false])
+                    continue;
+                }
+                if ('archetype' in ability && ability.archetype !== "") {
+                    if ('archetype_req' in ability && ability.archetype_req !== 0) {
+                        const others = archetype_count.get(ability.archetype);
+                        if (others < ability.archetype_req) {
+                            _add.push([node, abil.archetype+': '+others+' < '+abil.archetype_req, false])
+                            continue;
+                        }
+                    }
+                    let val = 1;
+                    if (archetype_count.has(ability.archetype)) {
+                        val = archetype_count.get(ability.archetype) + 1;
+                    }
+                    archetype_count.set(ability.archetype, val);
+                }
+                abil_points_total += ability.cost;
+                reachable.add(ability.id);
             }
+            if (atree_to_add.length == _add.length) {
+                break;
+            }
+            atree_to_add = _add;
         }
-
-        if (abil_points_total > 45) {
-            errors.push('too many ability points assigned! ('+abil_points_total+' > 45)');
+        let hard_error = false;
+        let errors = [];
+        for (const [node, fail_reason, fail_hardness] of atree_to_add) {
+            if (fail_hardness) { hard_error = true; }
+            errors.push(node.ability.display_name + ": " + fail_reason);
         }
-
-        return [abil_points_total, errors];
+        return [abil_points_total, hard_error, errors];
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
-
-function atree_dfs_mark(start, atree_state, mark) {
-    if (mark.get(start.ability.id)) { return; }
-    mark.set(start.ability.id, true);
-    for (const child of start.children) {
-        if (atree_state.get(child.ability.id).active) {
-            atree_dfs_mark(child, atree_state, mark);
-        }
-    }
-}
 
 /**
  * Render ability tree.
@@ -402,7 +414,7 @@ const atree_render_active = new (class extends ComputeNode {
     compute_func(input_map) {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
-        const [abil_points_total, errors] = input_map.get('atree-errors');
+        const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
@@ -418,10 +430,19 @@ const atree_render_active = new (class extends ComputeNode {
             error_title.innerHTML = "ATree Error!";
             errorbox.appendChild(error_title);
 
-            for (const error of errors) {
-                let atree_warning = document.createElement("p");
-                atree_warning.classList.add("warning", "small-text");
-                atree_warning.textContent = error;
+            for (let i = 0; i < 5 && i < errors.length; ++i) {
+                const error = errors[i];
+                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
+                errorbox.appendChild(atree_warning);
+            }
+            if (errors.length > 5) {
+                const error = '... ' + errors.length-5 + ' errors not shown';
+                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
+                errorbox.appendChild(atree_warning);
+            }
+            if (abil_points_total > 45) {
+                const error = 'too many ability points assigned! ('+abil_points_total+' > 45)';
+                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
                 errorbox.appendChild(atree_warning);
             }
         }
@@ -463,8 +484,9 @@ const atree_collect_spells = new (class extends ComputeNode {
     constructor() { super('atree-spell-collector'); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "AbilityTreeCollectSpellsNode accepts exactly one input (atree-merged)"; }
-        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        const atree_merged = input_map.get('atree-merged');
+        const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
+        if (hard_error) { return []; }
         
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -559,7 +581,7 @@ const atree_collect_spells = new (class extends ComputeNode {
         }
         return ret_spells;
     }
-})().link_to(atree_merge, 'atree-merged');
+})().link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
 
 
 /**
@@ -650,7 +672,8 @@ const atree_stats = new (class extends ComputeNode {
                     if (effect.slider) {
                         // TODO: handle
                         const slider_val = interactive_map.get(effect.slider_name).slider.value;
-                        const total = parseInt(slider_val) * effect.scaling[0];
+                        let total = parseInt(slider_val) * effect.scaling[0];
+                        if ('max' in effect && total > effect.max) { total = effect.max; }
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {
                                 if (output.type === 'stat') {
@@ -665,13 +688,12 @@ const atree_stats = new (class extends ComputeNode {
                         }
                     }
                     else {
-                        const cap = effect.max;
                         // TODO: type: prop?
                         let total = 0;
                         for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
                             total += scaling * item_stats.get(input.name);
                         }
-                        if (total > cap) { total = cap; }
+                        if ('max' in effect && total > effect.max) { total = effect.max; }
                         // TODO: output (list...)
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {
