@@ -1205,22 +1205,22 @@ function atree_parse_connector(orient, type, rotate) {
 
     let t_connector_dict = {
         0: {
-            "1100": {attrib: "_2_l", rotate: 0},
-            "1001": {attrib: "_2_a_f", rotate: 0},
-            "0101": {attrib: "_2_a", rotate: 0},
-            "1101": {attrib: "_3", rotate: 0},
+            "1100": {attrib: "_2_l"},
+            "1001": {attrib: "_2_a_f"},
+            "0101": {attrib: "_2_a"},
+            "1101": {attrib: "_3"},
         },
         90: {
-            "1010": {attrib: "_2_a_f", rotate: 90},
-            "1001": {attrib: "_2_a", rotate: 90},
-            "0011": {attrib: "_2_l", rotate: 90},
-            "1011": {attrib: "_3", rotate: 90}
+            "1010": {attrib: "_2_a_f"},
+            "1001": {attrib: "_2_a"},
+            "0011": {attrib: "_2_l"},
+            "1011": {attrib: "_3"}
         },
         270: {
-            "0110": {attrib: "_2_a", rotate: 270},
-            "0101": {attrib: "_2_a_f", rotate: 270},
-            "0011": {attrib: "_2_l", rotate: 270},
-            "0111": {attrib: "_3", rotate: 270}
+            "0110": {attrib: "_2_a"},
+            "0101": {attrib: "_2_a_f"},
+            "0011": {attrib: "_2_l"},
+            "0111": {attrib: "_3"}
         }
     };
 
@@ -1237,6 +1237,7 @@ function atree_parse_connector(orient, type, rotate) {
         ret = c_connector_dict[res];
     } else {
         ret = t_connector_dict[rotate][res];
+        ret.rotate = rotate;
     };
     ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
     return ret;
