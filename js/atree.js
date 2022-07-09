@@ -92,6 +92,9 @@ scaling_target: {
 }
 */
 
+
+const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properties: {}, effects: [] };
+
 // TODO: Range numbers
 const default_abils = {
     wand: [{
@@ -100,35 +103,35 @@ const default_abils = {
         desc: "Mage basic attack.",
         properties: {range: 5000},
         effects: [default_spells.wand[0]]
-    }],
+    }, elem_mastery_abil ],
     spear: [{
         display_name: "Warrior Melee",
         id: 999,
         desc: "Warrior basic attack.",
         properties: {range: 2},
         effects: [default_spells.spear[0]]
-    }],
+    }, elem_mastery_abil ],
     bow: [{
         display_name: "Archer Melee",
         id: 999,
         desc: "Archer basic attack.",
         properties: {range: 20},
         effects: [default_spells.bow[0]]
-    }],
+    }, elem_mastery_abil ],
     dagger: [{
         display_name: "Assassin Melee",
         id: 999,
         desc: "Assassin basic attack.",
         properties: {range: 2},
         effects: [default_spells.dagger[0]]
-    }],
+    }, elem_mastery_abil ],
     relik: [{
         display_name: "Shaman Melee",
         id: 999,
         desc: "Shaman basic attack.",
         properties: {range: 15, speed: 0},
         effects: [default_spells.relik[0]]
-    }],
+    }, elem_mastery_abil ],
 };
 
 
@@ -261,7 +264,10 @@ const atree_merge = new (class extends ComputeNode {
         let abils_merged = new Map();
         for (const abil of default_abils[build.weapon.statMap.get('type')]) {
             let tmp_abil = deepcopy(abil);
-            if (!Array.isArray(tmp_abil.desc)) {
+            if (!('desc' in tmp_abil)) {
+                tmp_abil.desc = [];
+            }
+            else if (!Array.isArray(tmp_abil.desc)) {
                 tmp_abil.desc = [tmp_abil.desc];
             }
             tmp_abil.subparts = [abil.id];
@@ -447,11 +453,15 @@ const atree_render_active = new (class extends ComputeNode {
             }
         }
         const ret_map = new Map();
+        const to_render_id = [999, 998];
         for (const node of atree_order) {
             if (!merged_abils.has(node.ability.id)) {
                 continue;
             }
-            const abil = merged_abils.get(node.ability.id);
+            to_render_id.push(node.ability.id);
+        }
+        for (const id of to_render_id) {
+            const abil = merged_abils.get(id);
 
             let active_tooltip = document.createElement('div');
             active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");

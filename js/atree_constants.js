@@ -989,6 +989,7 @@ const atrees = {
         },
         {
             "display_name": "Earth Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Earth attacks",
             "archetype": "Trapper", 
             "archetype_req": 0, 
@@ -1027,6 +1028,7 @@ const atrees = {
         },
         {
             "display_name": "Thunder Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Thunder attacks",
             "archetype": "Boltslinger", 
             "archetype_req": 0, 
@@ -1065,6 +1067,7 @@ const atrees = {
         },
         {
             "display_name": "Water Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Water attacks",
             "archetype": "Sharpshooter", 
             "archetype_req": 0, 
@@ -1103,6 +1106,7 @@ const atrees = {
         },
         {
             "display_name": "Air Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Air attacks",
             "archetype": "Boltslinger", 
             "archetype_req": 0, 
@@ -1141,6 +1145,7 @@ const atrees = {
         },
         {
             "display_name": "Fire Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Fire attacks",
             "archetype": "Sharpshooter", 
             "archetype_req": 0, 
@@ -2364,6 +2369,7 @@ const atrees = {
 
         {
             "display_name": "Earth Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Earth attacks",
             "archetype": "Fallen", 
             "archetype_req": 0, 
@@ -2392,6 +2398,7 @@ const atrees = {
 
         {
             "display_name": "Thunder Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Thunder attacks",
             "archetype": "Fallen", 
             "archetype_req": 0, 
@@ -2420,6 +2427,7 @@ const atrees = {
 
         {
             "display_name": "Water Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Water attacks",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
@@ -2448,6 +2456,7 @@ const atrees = {
 
         {
             "display_name": "Air Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Air attacks",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
@@ -2476,6 +2485,7 @@ const atrees = {
 
         {
             "display_name": "Fire Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Fire attacks",
             "archetype": "Paladin", 
             "archetype_req": 0, 
@@ -4154,6 +4164,7 @@ const atrees = {
         },
         {
             "display_name": "Earth Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Earth attacks",
             "archetype": "Arcanist", 
             "archetype_req": 0, 
@@ -4192,6 +4203,7 @@ const atrees = {
         },
         {
             "display_name": "Thunder Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Thunder attacks",
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
@@ -4230,6 +4242,7 @@ const atrees = {
         },
         {
             "display_name": "Water Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Water attacks",
             "archetype": "Light Bender", 
             "archetype_req": 0, 
@@ -4268,6 +4281,7 @@ const atrees = {
         },
         {
             "display_name": "Air Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Air attacks",
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
@@ -4306,6 +4320,7 @@ const atrees = {
         },
         {
             "display_name": "Fire Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Fire attacks",
             "archetype": "Arcanist", 
             "archetype_req": 0, 
@@ -4363,7 +4378,6 @@ const atrees = {
             "desc": "For every 2% or 2 Raw Spell Damage you have from items, gain +1/5s mana regen (Max 5/5s)",
             "archetype": "Arcanist",
             "archetype_req": 0,
-            "base_abil": 999,
             "parents": ["Teleport"],
             "dependencies": [],
             "blockers": ["Wand Proficiency II"],
@@ -4484,7 +4498,7 @@ const atrees = {
         },
         {
             "display_name": "Stronger Meteor",
-            "desc": "Incrase the damage of Meteor.",
+            "desc": "Increase the damage of Meteor.",
             "base_abil": "Meteor",
             "archetype": "Arcanist", 
             "archetype_req": 2, 
@@ -4547,10 +4561,10 @@ const atrees = {
             "desc": "Heal emit a strong light, damaging nearby enemies.",
             "archetype": "Light Bender",
             "archetype_req": 0,
+            "base_abil": "Heal",
             "parents": ["Water Mastery"],
             "dependencies": ["Heal"],
             "blockers": ["Arcane Transfer"],
-            "cost": 2,
             "display": {
                 "row": 13,
                 "col": 4,
@@ -4701,7 +4715,7 @@ const atrees = {
         {
             "display_name": "Eye Piercer",
             "desc": "Teleport will blind enemies, confusing them for a short amount of time.",
-            "base_abil": 2,
+            "base_abil": "Heal",
             "parents": ["Cheaper Heal"],
             "dependencies": ["Teleport"],
             "blockers": [],
@@ -4971,6 +4985,7 @@ const atrees = {
             "desc": "For every 1% Water Damage Bonus you have, buff Heal's healing power by +0.3%.",
             "archetype": "Light Bender",
             "archetype_req": 0,
+            "base_abil": "Heal",
             "parents": ["Healthier Ophanim I", "Transonic Warp"],
             "dependencies": [],
             "blockers": [],
@@ -5124,6 +5139,7 @@ const atrees = {
         {
             "display_name": "Arcane Speed",
             "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 3s. (8s Cooldown)",
+            "base_abil": "Heal",
             "parents": ["Lightweaver", "Larger Mana Bank II"],
             "dependencies": ["Heal"],
             "blockers": [],
