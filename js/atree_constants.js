@@ -578,6 +578,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
+                    "base_spell": 3,
                     "conversion": "Thunder"
                 }
             ]
@@ -3799,6 +3800,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
+                    "base_spell": 1,
                     "conversion": "Thunder"
                 },
                 {
