@@ -2668,14 +2668,6 @@ const atrees = {
                     "hits": {
                         "Flaming Uppercut": 5
                     }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Flaming Uppercut": 5
-                    }
                 }
             ]  
         },
@@ -4021,7 +4013,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-            "row": 7,
+            "row": 6,
             "col": 4,
             "icon": "node_4"
             },
@@ -4044,7 +4036,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 9, "col": 2, "icon": "node_4"},
+            "display": { "row": 8, "col": 2, "icon": "node_4"},
             "properties": { "aoe": 5 },
             "effects": [
                 { 
@@ -4070,7 +4062,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 9,
+                "row": 8,
                 "col": 6,
                 "icon": "node_4"
             },
@@ -4160,7 +4152,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 13,
+                "row": 10,
                 "col": 8,
                 "icon": "node_0"
             },
@@ -4198,7 +4190,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 13,
+                "row": 10,
                 "col": 2,
                 "icon": "node_0"
             },
@@ -4236,7 +4228,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 14,
+                "row": 11,
                 "col": 4,
                 "icon": "node_0"
             },
@@ -4274,7 +4266,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 13,
+                "row": 10,
                 "col": 0,
                 "icon": "node_0"
             },
@@ -4312,7 +4304,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 13,
+                "row": 10,
                 "col": 6,
                 "icon": "node_0"
             },
@@ -4348,7 +4340,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 9, "col": 4, "icon": "node_0"},
+            "display": { "row": 8, "col": 4, "icon": "node_0"},
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
@@ -4367,7 +4359,7 @@ const atrees = {
             "blockers": ["Wand Proficiency II"],
             "cost": 1,
             "display": {
-                "row": 7,
+                "row": 6,
                 "col": 6,
                 "icon": "node_0"
             },
@@ -4404,7 +4396,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 7,
+                "row": 6,
                 "col": 2,
                 "icon": "node_0"
             },
@@ -4431,7 +4423,7 @@ const atrees = {
             "dependencies": ["Teleport"], 
             "blockers": [],
             "cost": 2, 
-            "display": { "row": 15, "col": 2, "icon": "node_1"},
+            "display": { "row": 12, "col": 0, "icon": "node_1"},
             "properties": {},
             "effects": [
                 {
@@ -4458,8 +4450,8 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 15,
-                "col": 0,
+                "row": 12,
+                "col": 2,
                 "icon": "node_1"
             },
             "properties": {
@@ -4490,7 +4482,7 @@ const atrees = {
             "dependencies": ["Meteor"], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 16, "col": 8, "icon": "node_0"},
+            "display": { "row": 13, "col": 8, "icon": "node_0"},
             "properties": {},
             "effects": [
                 { 
@@ -4510,7 +4502,7 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 15,
+            "row": 12,
             "col": 7,
             "icon": "node_1"
             },
@@ -4543,9 +4535,9 @@ const atrees = {
             "blockers": ["Arcane Transfer"],
             "cost": 2,
             "display": {
-                "row": 16,
+                "row": 13,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -4567,7 +4559,7 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 19,
+                "row": 15,
                 "col": 1,
                 "icon": "node_3",
                 "__TODO": "hppeng please fix"
@@ -4585,9 +4577,9 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 19,
+                "row": 15,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": { "health": 200 },
             "effects": [{
@@ -4617,7 +4609,7 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 19,
+            "row": 15,
             "col": 7,
             "icon": "node_3"
             },
@@ -4640,7 +4632,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": {"row": 21, "col": 1, "icon": "node_0"},
+            "display": {"row": 17, "col": 1, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -4659,7 +4651,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 21,
+                "row": 17,
                 "col": 4,
                 "icon": "node_2"
             },
@@ -4675,7 +4667,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 21,
+                "row": 17,
                 "col": 6,
                 "icon": "node_1"
             },
@@ -4691,7 +4683,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 22,
+                "row": 18,
                 "col": 0,
                 "icon": "node_1"
             },
@@ -4709,7 +4701,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 22,
+                "row": 18,
                 "col": 3,
                 "icon": "node_1"
             },
@@ -4727,7 +4719,7 @@ const atrees = {
             "dependencies": ["Heal"], 
             "blockers": ["Arcane Transfer"],
             "cost": 2, 
-            "display": { "row": 22, "col": 5, "icon": "node_0"},
+            "display": { "row": 18, "col": 5, "icon": "node_0"},
             "properties": {},
             "effects": [{
                 "type": "raw_stat",
@@ -4750,7 +4742,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 22,
+                "row": 18,
                 "col": 8,
                 "icon": "node_0"
             },
@@ -4773,7 +4765,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": {"row": 25, "col": 0, "icon": "node_0"},
+            "display": {"row": 20, "col": 0, "icon": "node_0"},
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
@@ -4782,14 +4774,14 @@ const atrees = {
             }]
         },
         {
-            "display_name": "Cheaper Teleport",
+            "display_name": "Cheaper Teleport II",
             "desc": "Reduce the Mana cost of Teleport.",
-            "base_abil": 2,
+            "base_abil": "Teleport",
             "parents": ["Purification", "Fortitude"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": {"row": 25, "col": 0, "icon": "node_0"},
+            "display": {"row": 20, "col": 4, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -4805,12 +4797,12 @@ const atrees = {
             "base_abil": "Heal",
             "archetype": "Lightbender", 
             "archetype_req": 0, 
-            "parents": ["Cheaper Ice Snake", "Cheaper Teleport"],
+            "parents": ["Cheaper Ice Snake", "Cheaper Teleport II"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 25,
+                "row": 20,
                 "col": 2,
                 "icon": "node_2"
             },
@@ -4838,7 +4830,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 25,
+                "row": 20,
                 "col": 7,
                 "icon": "node_2"
             },
@@ -4856,7 +4848,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 27,
+                "row": 22,
                 "col": 7,
                 "icon": "node_0"
             },
@@ -4889,8 +4881,8 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 25,
-                "col": 2,
+                "row": 21,
+                "col": 1,
                 "icon": "node_1"
             },
             "properties": {},
@@ -4918,13 +4910,13 @@ const atrees = {
             "display_name": "Snake Nest",
             "desc": "Ice Snake will summon 3 snakes.",
             "base_abil": "Ice Snake",
-            "parents": ["Seance", "Cheaper Teleport", "Healthier Ophanim I"],
+            "parents": ["Seance", "Cheaper Teleport II", "Healthier Ophanim I"],
             "dependencies": ["Ice Snake"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 27,
-                "col": 6,
+                "row": 22,
+                "col": 5,
                 "icon": "node_1"
             },
             "properties": {},
@@ -4941,8 +4933,8 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 28,
-                "col": 5,
+                "row": 23,
+                "col": 6,
                 "icon": "node_1"
             },
             "properties": {
@@ -4955,12 +4947,12 @@ const atrees = {
             "desc": "For every 1% Water Damage Bonus you have, buff Heal's healing power by +0.3%.",
             "archetype": "Lightbender",
             "archetype_req": 0,
-            "parents": ["Transonic Warp"],
+            "parents": ["Healthier Ophanim I", "Transonic Warp"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 28,
+                "row": 23,
                 "col": 2,
                 "icon": "node_1"
             },
@@ -4992,7 +4984,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 28,
+                "row": 23,
                 "col": 0,
                 "icon": "node_2"
             },
@@ -5005,12 +4997,12 @@ const atrees = {
             "archetype": "Light Bender", 
             "archetype_req": 0, 
             "base_abil": "Ophanim",
-            "parents": ["Fortitude", "Cheaper Teleport"],
+            "parents": ["Fortitude", "Cheaper Teleport II"],
             "dependencies": ["Ophanim"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 27,
+                "row": 22,
                 "col": 3,
                 "icon": "node_0"
             },
@@ -5027,9 +5019,9 @@ const atrees = {
             "blockers": ["Arcane Transfer"],
             "cost": 2, 
             "display": {
-            "row": 28,
-            "col": 5,
-            "icon": "node_2"
+            "row": 23,
+            "col": 4,
+            "icon": "node_1"
             },
             "properties": { "aoe": 5 },
             "effects": [
@@ -5062,7 +5054,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 31,
+                "row": 25,
                 "col": 1,
                 "icon": "node_3"
             },
@@ -5079,7 +5071,7 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-            "row": 31,
+            "row": 25,
             "col": 4,
             "icon": "node_3"
             },
@@ -5113,7 +5105,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 31,
+                "row": 25,
                 "col": 6,
                 "icon": "node_1"
             },
@@ -5131,7 +5123,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 31,
+                "row": 25,
                 "col": 8,
                 "icon": "node_0"
             },
@@ -5149,7 +5141,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 32,
+                "row": 26,
                 "col": 7,
                 "icon": "node_1"
             },
@@ -5167,7 +5159,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 32,
+                "row": 26,
                 "col": 0,
                 "icon": "node_0"
             },
@@ -5190,7 +5182,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": {"row": 33, "col": 1, "icon": "node_0"},
+            "display": {"row": 27, "col": 1, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -5208,7 +5200,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": {"row": 33, "col": 1, "icon": "node_0"},
+            "display": {"row": 27, "col": 5, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
@@ -5229,7 +5221,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 32,
+                "row": 27,
                 "col": 8,
                 "icon": "node_3"
             },
@@ -5247,7 +5239,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 34,
+                "row": 29,
                 "col": 6,
                 "icon": "node_0"
             },
@@ -5263,9 +5255,9 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 32,
+                "row": 27,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 3
@@ -5297,9 +5289,9 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 33,
+                "row": 28,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5321,9 +5313,9 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 33,
+                "row": 28,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -5338,7 +5330,7 @@ const atrees = {
             "dependencies": ["Ophanim"], 
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 40, "col": 4, "icon": "node_0"},
+            "display": { "row": 28, "col": 4, "icon": "node_0"},
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
@@ -5355,7 +5347,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 33,
+                "row": 28,
                 "col": 7,
                 "icon": "node_1"
             },
@@ -5373,7 +5365,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 37,
+                "row": 32,
                 "col": 1,
                 "icon": "node_1"
             },
@@ -5391,7 +5383,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 36,
+                "row": 31,
                 "col": 0,
                 "icon": "node_0"
             },
@@ -5406,7 +5398,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 36,
+                "row": 31,
                 "col": 2,
                 "icon": "node_0"
             },
@@ -5439,7 +5431,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 37,
+                "row": 32,
                 "col": 3,
                 "icon": "node_2"
             },
@@ -5463,14 +5455,14 @@ const atrees = {
             "base_abil": "Ophanim",
             "archetype": "Light Bender", 
             "archetype_req": 0, 
-            "parents": ["Diffusion"],
+            "parents": ["Better Ophanim"],
             "dependencies": ["Healthier Ophanim I"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 36,
+                "row": 31,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": []
@@ -5486,7 +5478,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 37,
+                "row": 32,
                 "col": 5,
                 "icon": "node_3"
             },
@@ -5507,7 +5499,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 36,
+                "row": 31,
                 "col": 7,
                 "icon": "node_0"
             },
@@ -5520,12 +5512,12 @@ const atrees = {
             "archetype": "Arcanist", 
             "archetype_req": 12, 
             "base_abil": "Arcane Transfer",
-            "parents": ["Sunflare", "Larger Mana Bank III"],
+            "parents": ["Larger Mana Bank III"],
             "dependencies": ["Arcane Transfer"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 38,
+                "row": 33,
                 "col": 7,
                 "icon": "node_3"
             },
@@ -5543,7 +5535,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 39,
+                "row": 34,
                 "col": 8,
                 "icon": "node_0"
             },
@@ -5560,7 +5552,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 39,
+                "row": 34,
                 "col": 5,
                 "icon": "node_1"
             },
@@ -5578,9 +5570,9 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 40,
+                "row": 35,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -5601,7 +5593,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 39,
+                "row": 34,
                 "col": 0,
                 "icon": "node_3"
             },
@@ -5616,7 +5608,7 @@ const atrees = {
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
-            "display": {"row": 39, "col": 2, "icon": "node_0"},
+            "display": {"row": 34, "col": 2, "icon": "node_0"},
             "properties": {},
             "effects": [
                 {
