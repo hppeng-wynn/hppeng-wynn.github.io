@@ -1063,7 +1063,6 @@ function set_connector_type(connector_info) {  // left right up down
             lookup_str += 0;
         }
     }
-    console.log(lookup_str);
 
     connector_info.type = connector_dict[lookup_str].type;
     connector_info.rotate = connector_dict[lookup_str].rotate;
@@ -1168,9 +1167,7 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
 
             let connector_img = atree_parse_connector(render_state, ctype, rotate);
             connector_img_elem.src = connector_img.img
-            if (connector_img.rotate != "flip") {
-                connector_elem.className = "";
-            }
+            connector_elem.className = "";
             connector_elem.classList.add("rotate-" + connector_img.rotate);
             connector_elem.replaceChildren(connector_img_elem);
             continue;
