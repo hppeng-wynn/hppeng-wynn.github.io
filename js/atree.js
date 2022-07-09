@@ -264,7 +264,10 @@ const atree_merge = new (class extends ComputeNode {
         let abils_merged = new Map();
         for (const abil of default_abils[build.weapon.statMap.get('type')]) {
             let tmp_abil = deepcopy(abil);
-            if (!Array.isArray(tmp_abil.desc)) {
+            if (!('desc' in tmp_abil)) {
+                tmp_abil.desc = [];
+            }
+            else if (!Array.isArray(tmp_abil.desc)) {
                 tmp_abil.desc = [tmp_abil.desc];
             }
             tmp_abil.subparts = [abil.id];
@@ -429,11 +432,15 @@ const atree_render_active = new (class extends ComputeNode {
             }
         }
         const ret_map = new Map();
+        const to_render_id = [999, 998];
         for (const node of atree_order) {
             if (!merged_abils.has(node.ability.id)) {
                 continue;
             }
-            const abil = merged_abils.get(node.ability.id);
+            to_render_id.push(node.ability.id);
+        }
+        for (const id of to_render_id) {
+            const abil = merged_abils.get(id);
 
             let active_tooltip = document.createElement('div');
             active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
