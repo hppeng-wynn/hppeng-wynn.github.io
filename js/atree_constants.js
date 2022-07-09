@@ -2656,18 +2656,28 @@ const atrees = {
             },
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Flaming Uppercut",
-                    "multipliers": [0, 0, 0, 0, 50, 0]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Flaming Uppercut Total Damage",
-                    "hits": {
-                        "Flaming Uppercut": 5
-                    }
+                    "type": "replace_spell",
+                    "name": "Flaming Uppercut",
+                    "base_spell": 8,
+                    "display": "DPS",
+                    "parts": [
+                        {
+                            "name": "Damage Tick",
+                            "multipliers": [0, 0, 0, 0, 50, 0]
+                        },
+                        {
+                            "name": "DPS",
+                            "hits": {
+                                "Damage Tick": 1.66666666666666666666666666666
+                            }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "hits": {
+                                "Damage Tick": 5
+                            }
+                        }
+                    ]
                 }
             ]  
         },
@@ -3520,7 +3530,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Sparkling Hope",
-                    "base_spell": 6,
+                    "base_spell": 7,
                     "display": "Damage Tick",
                     "parts": [
                         {
