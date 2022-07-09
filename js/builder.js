@@ -98,7 +98,6 @@ function resetFields(){
     for (const elem of skp_order) {
         console.log(document.getElementById(elem + "_boost_armor").value);
         document.getElementById(elem + "_boost_armor").value = 0;
-        document.getElementById(elem + "_boost_armor_prev").value = 0;
         document.getElementById(elem + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
         document.getElementById(elem + "_boost_armor_label").textContent = `% ${damageClasses[skp_order.indexOf(elem)+1]} Damage Boost: 0`;
     }

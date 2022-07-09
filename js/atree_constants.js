@@ -4053,7 +4053,7 @@ const atrees = {
             "effects": [
                 { 
                     "type": "replace_spell",
-                    "name": "heal",
+                    "name": "Heal",
                     "cost": 35,
                     "base_spell": 1, 
                     "display": "Heal", 
@@ -4086,7 +4086,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "replace_spell",
-                    "name": "ice snake",
+                    "name": "Ice Snake",
                     "cost": 35,
                     "base_spell": 4,
                     "display": "Ice Snake Damage",
@@ -4501,6 +4501,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3, 
                     "target_part": "Meteor Damage", 
+                    "behavior": "modify",
                     "multipliers": [30, 90, 0, 0, 0, 0]
                 }
             ]
@@ -4522,20 +4523,26 @@ const atrees = {
                 "aoe": 7,
                 "duration": 8
             },
-            "effects": [
-                { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Burning Sigil", 
-                    "multipliers": [15, 0, 0, 0, 25, 0]
-                },
-                { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Total Burn Damage", 
-                    "hits": { "Burning Sigil": 20 }
-                }
-            ]
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Burning Sigil",
+                "base_spell": 6,
+                "display": "DPS",
+                "parts": [
+                    {
+                        "name": "Tick Damage",
+                        "multipliers": [15, 0, 0, 0, 25, 0]
+                    },
+                    {
+                        "name": "DPS",
+                        "hits": { "Tick Damage": 2.5 }
+                    },
+                    {
+                        "name": "Total Burn Damage",
+                        "hits": { "Tick Damage": 20 }
+                    }
+                ]
+            }]
         },
         {
             "display_name": "Sunshower",
@@ -4714,7 +4721,7 @@ const atrees = {
             "cost": 2,
             "display": {
                 "row": 18,
-                "col": 3,
+                "col": 2,
                 "icon": "node_1"
             },
             "properties": {},
@@ -4730,7 +4737,7 @@ const atrees = {
             "parents": ["Purification", "Sentient Snake"], 
             "dependencies": ["Heal"], 
             "blockers": ["Arcane Transfer"],
-            "cost": 2, 
+            "cost": 1, 
             "display": { "row": 18, "col": 5, "icon": "node_0"},
             "properties": {},
             "effects": [{
@@ -5577,10 +5584,10 @@ const atrees = {
             "archetype": "Light Bender", 
             "archetype_req": 0,
             "base_abil": "Lightweaver",
-            "parents": ["Sunflare", "Larger Mana Bank III"],
-            "dependencies": ["Chaos Explosion"],
+            "parents": ["Cheaper Heal II", "Manastorm"],
+            "dependencies": ["Lightweaver"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 35,
                 "col": 4,
