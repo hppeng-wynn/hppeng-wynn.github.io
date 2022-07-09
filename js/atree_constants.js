@@ -341,7 +341,6 @@ const atrees = {
             "desc": "When you hit the ground with Arrow Bomb, leave a Trap that damages enemies. (Max 2 Traps)",
             "archetype": "Trapper",
             "archetype_req": 2, 
-            "base_abil": "Arrow Bomb",
             "parents": ["Bryophyte Roots"], 
             "dependencies": [], 
             "blockers": [],
@@ -357,10 +356,17 @@ const atrees = {
             },
             "effects": [
                 { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Basaltic Trap", 
-                    "multipliers": [140, 30, 0, 0, 30, 0]
+                    "type": "replace_spell",
+                    "name": "Basaltic Trap",
+                    "base_spell": 7,
+                    "display": "Trap Damage",
+                    "parts": [
+                        {
+                            "name": "Trap Damage",
+                            "type": "damage",
+                            "multipliers": [140, 30, 0, 0, 30, 0]
+                        }
+                    ]
                 }
             ]
         },
@@ -572,6 +578,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
+                    "base_spell": 3,
                     "conversion": "Thunder"
                 }
             ]
@@ -581,7 +588,7 @@ const atrees = {
             "desc": "Your Traps will give you 2.85 Mana per second when you stay close to them.",
             "archetype": "Trapper", 
             "archetype_req": 5, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["More Traps", "Better Arrow Shield"], 
             "dependencies": [], 
             "blockers": [],
@@ -794,6 +801,7 @@ const atrees = {
             "desc": "Your Traps will be connected by a rope that deals damage to enemies every 0.2s.",
             "archetype": "Trapper", 
             "archetype_req": 0, 
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -804,20 +812,16 @@ const atrees = {
             },
             "effects": [
                 { 
-                    "type": "replace_spell",
-                    "name": "Tangled Traps",
-                    "base_spell": 7,
-                    "display": "DPS",
-                    "parts": [
-                        {  
-                            "name": "Damage Tick",
-                            "multipliers": [20, 0, 0, 0, 0, 20]
-                        },
-                        {
-                            "name": "DPS",
-                            "hits": { "Damage Tick": 5 }
-                        }
-                    ]
+                    "type": "add_spell_prop",
+                    "base_spell": 7, 
+                    "target_part": "Line Damage Tick", 
+                    "multipliers": [20, 0, 0, 0, 0, 20]
+                },
+                { 
+                    "type": "add_spell_prop",
+                    "base_spell": 7, 
+                    "target_part": "DPS", 
+                    "hits": { "Line Damage Tick": 5 }
                 }
             ]
         },
@@ -874,7 +878,7 @@ const atrees = {
             "desc": "Allow you to place +6 Traps, but with reduced damage and range.",
             "archetype": "Trapper",
             "archetype_req": 10, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb", "Cheaper Arrow Bomb (2)"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -884,8 +888,8 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Basaltic Trap", 
+                    "base_spell": 8, 
+                    "target_part": "Trap Damage", 
                     "cost": 0,
                     "multipliers": [-80, 0, 0, 0, 0, 0]
                 },
@@ -1262,7 +1266,7 @@ const atrees = {
             "desc": "Increase the maximum amount of active Traps you can have by +2.",
             "archetype": "Trapper",
             "archetype_req": 0, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Bouncing Bomb"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -1405,7 +1409,7 @@ const atrees = {
                 "type": "raw_stat",
                 "bonuses": [{
                     "type": "stat",
-                    "name": "mdCritPct",
+                    "name": "critDamPct",
                     "value": 30
                 }]
             }]  
@@ -1688,10 +1692,10 @@ const atrees = {
                 "slider_name": "Focus",
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
                 "scaling": [40],
-                "max": 3
+                "slider_max": 3
             }]
         },
         {
@@ -1699,6 +1703,7 @@ const atrees = {
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Focus",
             "parents": ["Cheaper Arrow Storm", "Grappling Hook"],
             "dependencies": ["Focus"],
             "blockers": [],
@@ -1713,12 +1718,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Focus",
+                "slider_max": 2,
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
-                "scaling": [30],
-                "max": 5
+                "scaling": [-5]
             }]
         },
         {
@@ -1726,6 +1731,7 @@ const atrees = {
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Focus",
             "parents": ["Crepuscular Ray", "Snow Storm"],
             "dependencies": ["Focus"],
             "blockers": [],
@@ -1740,12 +1746,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Focus",
+                "slider_max": 2,
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
-                "scaling": [25],
-                "max": 7
+                "scaling": [-5]
             }]
         },
         {
@@ -1781,7 +1787,7 @@ const atrees = {
             "desc": "Your Traps will deal +20% more damage for every second they are active (Max +80%)",
             "archetype": "Trapper",
             "archetype_req": 0,
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["More Shields"],
             "dependencies": ["Basaltic Trap"],
             "blockers": [],
@@ -1798,13 +1804,13 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Trap Wait Time",
+                "slider_max": 4,
                 "output": {
                     "type": "stat",
-                    "name": "damMult:Basaltic Trap"
+                    "name": "damMult.Basaltic:Basaltic Trap"
                 },
                 "slider_step": 1,
-                "scaling": [20],
-                "max": 80
+                "scaling": [20]
             }]
         },
         {
@@ -1812,7 +1818,7 @@ const atrees = {
             "desc": "Add +80% Max Damage to Patient Hunter",
             "archetype": "Trapper",
             "archetype_req": 0,
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb"],
             "dependencies": ["Patient Hunter"],
             "blockers": [],
@@ -1828,12 +1834,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Trap Wait Time",
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult:Basaltic Trap"
-                    },
-                    "scaling": [20],
-                    "max": 80
+                    "slider_max": 4
                 },
                 {
                     "type": "raw_stat",
@@ -1878,6 +1879,7 @@ const atrees = {
             "desc": "Condense Arrow Storm into a single ray that damages enemies 10 times per second",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Arrow Storm",
             "parents": ["Water Mastery", "Fire Creep"],
             "dependencies": ["Arrow Storm"],
             "blockers": ["Windstorm", "Nimble String", "Arrow Hurricane"],
@@ -1966,12 +1968,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Phantom Ray hits",
+                "slider_max": 7,
                 "output": {
                     "type": "stat",
-                    "name": "damMult:Single Arrow"
+                    "name": "damMult.Decimator:Single Arrow"
                 },
-                "scaling": 10,
-                "max": 70
+                "scaling": 10
             }]
         }
     ],
@@ -2209,7 +2211,7 @@ const atrees = {
 
         {
             "display_name": "Tougher Skin",
-            "desc": "Harden your skin and become permanently +5% more resistant\nFor every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
+            "desc": "Harden your skin and become permanently +5% more resistant. For every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["Charge"], 
@@ -2229,7 +2231,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "baseResist",
+                            "name": "defMult.Base",
                             "value": 5
                         }
                     ]
@@ -2777,7 +2779,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [{ "type": "stat", "name": "defPct", "value": 70}]
+                    "bonuses": [{ "type": "stat", "name": "defMult.Mantle", "value": 70}]
                 }
             ]
         },
@@ -2804,13 +2806,13 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Corrupted",
+                    "slider_max": 100,
+                    "slider_step": 1,
                     "output": {
                         "type": "stat",
                         "name": "damRaw" 
                     },
-                    "scaling": [4],
-                    "slider_step": 1,
-                    "max": 120
+                    "scaling": [2]
                 }
             ]  
         },
@@ -2985,19 +2987,12 @@ const atrees = {
             "effects": [
                 {
                     "type": "stat_scaling",
-                    "slider": false,
-                    "inputs": [
-                        {
-                            "type": "stat",
-                            "name": "hpBonus"
-                        }
-                    ],
+                    "slider_name": "Corrupted",
                     "output": {
                         "type": "stat",
-                        "name": "damMult" 
+                        "name": "damMult.Enraged" 
                     },
-                    "scaling": [3],
-                    "max": 300
+                    "scaling": [3]
                 }
             ]  
         },
@@ -3139,7 +3134,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.Ragnarokkr", "value": 30} ]
                 }
             ]  
         },
@@ -3195,7 +3190,7 @@ const atrees = {
                         "type": "stat",
                         "name": "fDamPct"
                     },
-                    "scaling": [2],
+                    "scaling": [0.02],
                     "max": 100
                 }
             ]  
@@ -3355,8 +3350,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damRaw" 
                     },
-                    "scaling": [0.5],
-                    "max": 50
+                    "scaling": [0.5]
                 },
                 {
                     "type": "raw_stat",
@@ -3448,7 +3442,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "baseResist",
+                            "name": "defMult.Base",
                             "value": 5
                         }
                     ]
@@ -3478,7 +3472,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
                 }
             ]  
         },
@@ -3754,7 +3748,7 @@ const atrees = {
 
         {
             "display_name": "Discombobulate",
-            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
+            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +3 (Additive, Max +80). This bonus decays -5 every second",
             "archetype": "Battle Monk", 
             "archetype_req": 11, 
             "parents": ["Cyclone"], 
@@ -3773,6 +3767,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
+                    "slider_max": 27,
                     "output": [
                         { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
                         { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
@@ -3805,6 +3800,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
+                    "base_spell": 1,
                     "conversion": "Thunder"
                 },
                 {
@@ -3929,7 +3925,13 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []  
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [{ "type": "stat", "name": "defMult.Brink", "value": 40}]
+                }
+            ]
         },
 
         {

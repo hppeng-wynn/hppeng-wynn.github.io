@@ -8,7 +8,7 @@ The game, of course
 Additional Contributors, in no particular order:
  - Kiocifer (Icons!)
  - IncinerateMe (helping transition to 1.20.3 / CI helper)
- - puppy (wynn2 ability tree help)
+ - puppy (dog)
  - SockMower (ability tree encode/decode optimization)
  - ITechnically (coding emotional support / misc)
  - touhoku (best IM)

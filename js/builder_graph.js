@@ -11,29 +11,7 @@ let armor_powder_node = new (class extends ComputeNode {
         }
         return statMap;
     }
-})().update();
-
-/* Updates PASSIVE powder special boosts (armors)
-*/
-function update_armor_powder_specials(elem_id) {
-    //we only update the powder special + external stats if the player has a build
-    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
-
-    //update the label associated w/ the slider 
-    let elem = document.getElementById(elem_id);
-    let label = document.getElementById(elem_id + "_label");
-    let value = elem.value;
-
-    label.textContent = label.textContent.split(":")[0] + ": " + value
-    
-    //update the slider's graphics
-    let bg_color = elem_colors[skp_order.indexOf(wynn_elem)];
-    let pct = Math.round(100 * value / powderSpecialStats[skp_order.indexOf(wynn_elem)].cap);
-    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
-
-    armor_powder_node.mark_dirty().update();
-}
-
+})();
 
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
@@ -50,8 +28,8 @@ let boosts_node = new (class extends ComputeNode {
             }
         }
         let res = new Map();
-        res.set('damageMultiplier', 1+damage_boost);
-        res.set('defMultiplier', 1-def_boost);
+        res.set('damMult.Potion', 100*damage_boost);
+        res.set('defMult.Potion', 100*def_boost);
         return res;
     }
 })().update();
@@ -258,7 +236,7 @@ class ItemInputDisplayNode extends ComputeNode {
             this.input_field.classList.add("is-invalid");
             return null;
         }
-        if (item.statMap.has('powders')) {
+        if (this.powder_field && item.statMap.has('powders')) {
             this.powder_field.placeholder = "powders";
         }
 
@@ -266,7 +244,7 @@ class ItemInputDisplayNode extends ComputeNode {
             return null;
         }
 
-        if (item.statMap.has('powders')) {
+        if (this.powder_field && item.statMap.has('powders')) {
             this.powder_field.placeholder = item.statMap.get('slots') + ' slots';
         }
 
@@ -511,7 +489,10 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHp);
     //EHP
     let ehp = [totalHp, totalHp];
-    let defMult = (2 - stats.get("classDef")) * stats.get("defMultiplier");
+    let defMult = (2 - stats.get("classDef"));
+    for (const [k, v] of stats.get("defMult").entries()) {
+        defMult *= (1 - v/100);
+    }
     // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
     ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
     ehp[0] /= defMult;
@@ -558,7 +539,6 @@ class SpellDamageCalcNode extends ComputeNode {
         const spell = spell_info[0];
         const spell_parts = spell_info[1];
         const stats = input_map.get('stats');
-        const damage_mult = stats.get('damageMultiplier');
         const skillpoints = [
             stats.get('str'),
             stats.get('dex'),
@@ -695,7 +675,7 @@ function getMeleeStats(stats, weapon) {
     }
 
     if (weapon_stats.get("type") === "relik") {
-        stats.set('damageMultiplier', 0.99); // CURSE YOU WYNNCRAFT
+        merge_stat(stats, 'damMult.ShamanMelee', 0.99); // CURSE YOU WYNNCRAFT
         //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
         //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
     }
@@ -863,18 +843,7 @@ class AggregateStatsNode extends ComputeNode {
         const output_stats = new Map();
         for (const [k, v] of input_map.entries()) {
             for (const [k2, v2] of v.entries()) {
-                if (output_stats.has(k2)) {
-                    // TODO: ugly AF
-                    if (k2 === 'damageMultiplier' || k2 === 'defMultiplier') {
-                        output_stats.set(k2, v2 * output_stats.get(k2));
-                    }
-                    else {
-                        output_stats.set(k2, v2 + output_stats.get(k2));
-                    }
-                }
-                else {
-                    output_stats.set(k2, v2);
-                }
+                merge_stat(output_stats, k2, v2);
             }
         }
         return output_stats;
@@ -976,7 +945,7 @@ class SkillPointSetterNode extends ComputeNode {
 class SumNumberInputNode extends InputNode {
     compute_func(input_map) {
         let value = this.input_field.value;
-        if (value === "") { value = 0; }
+        if (value === "") { value = "0"; }
 
         let input_num = 0;
         if (value.includes("+")) {
@@ -1106,6 +1075,7 @@ function builder_graph_init() {
     atree_merge.link_to(build_node, 'build');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
+    atree_stats.link_to(build_node, 'build');
     stat_agg_node.link_to(atree_stats, 'atree-stats');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
@@ -1116,6 +1086,7 @@ function builder_graph_init() {
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
     }
+    armor_powder_node.update();
     level_input.update();
 
     // kinda janky, manually set atree and update. Some wasted compute here
