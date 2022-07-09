@@ -1168,7 +1168,9 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
 
             let connector_img = atree_parse_connector(render_state, ctype, rotate);
             connector_img_elem.src = connector_img.img
-            connector_elem.className = "";
+            if (connector_img.rotate != "flip") {
+                connector_elem.className = "";
+            }
             connector_elem.classList.add("rotate-" + connector_img.rotate);
             connector_elem.replaceChildren(connector_img_elem);
             continue;
@@ -1207,19 +1209,19 @@ function atree_parse_connector(orient, type, rotate) {
     let t_connector_dict = {
         0: {
             "1100": {attrib: "_2_l", rotate: 0},
-            "1001": {attrib: "_2_a", rotate: "flip"},
+            "1001": {attrib: "_2_a_f", rotate: 0},
             "0101": {attrib: "_2_a", rotate: 0},
             "1101": {attrib: "_3", rotate: 0},
         },
         90: {
-            "1010": {attrib: "_2_a", rotate: "flip"},
+            "1010": {attrib: "_2_a_f", rotate: 90},
             "1001": {attrib: "_2_a", rotate: 90},
             "0011": {attrib: "_2_l", rotate: 90},
             "1011": {attrib: "_3", rotate: 90}
         },
         270: {
             "0110": {attrib: "_2_a", rotate: 270},
-            "0101": {attrib: "_2_a", rotate: "flip"},
+            "0101": {attrib: "_2_a_f", rotate: 270},
             "0011": {attrib: "_2_l", rotate: 270},
             "0111": {attrib: "_3", rotate: 270}
         }
