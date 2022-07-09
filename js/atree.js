@@ -1041,30 +1041,34 @@ function resolve_connector(atree_connectors_map, pos, new_connector) {
 function set_connector_type(connector_info) {  // left right up down
     const connections = connector_info.connections;
     const connector_elem = connector_info.connector;
-    if (connections[2]) {
-        if (connections[0]) {
-            connector_info.type = 'c'; // cross
-            return;
-        }
-        connector_info.type = 'line';   // vert line
-        return;
+    let connector_dict = {
+        "1100": {type: "line", rotate: 90},
+        "1010": {type: "angle", rotate: 0},
+        "1001": {type: "angle", rotate: 270},
+        "0110": {type: "angle", rotate: 90},
+        "0101": {type: "angle", rotate: 180},
+        "0011": {type: "line", rotate: 0},
+        "1110": {type: "t", rotate: 180},
+        "1101": {type: "t", rotate: 0},
+        "1011": {type: "t", rotate: 90},
+        "0111": {type: "t", rotate: 270},
+        "1111": {type: "c", rotate: 0}
     }
-    if (connections[3]) {   // if down:
-        if (connections[0] && connections[1]) {
-            connector_info.type = 't';   // all 3 t
-            return;
+
+    let lookup_str = "";
+    for (let i of connections) {
+        if (i != 0) {
+            lookup_str += 1;
+        } else {
+            lookup_str += 0;
         }
-        connector_info.type = 'angle';   // elbow
-        if (connections[1]) {
-            connector_elem.classList.add("rotate-180");
-        }
-        else {
-            connector_elem.classList.add("rotate-270");
-        }
-        return;
     }
-    connector_info.type = 'line';   // horiz line
-    connector_elem.classList.add("rotate-90");
+    console.log(lookup_str);
+
+    connector_info.type = connector_dict[lookup_str].type;
+    connector_info.rotate = connector_dict[lookup_str].rotate;
+    connector_elem.classList.add("rotate-" + connector_dict[lookup_str].rotate);
+
 }
 
 // draw the connector onto the screen
@@ -1142,6 +1146,7 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_img_elem = document.createElement("img");
         connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
+        const rotate = connector_info.rotate;
         if (ctype === 't' || ctype === 'c') {
             // c, t
             const [connector_row, connector_col] = connector_label.split(',').map(x => parseInt(x));
@@ -1161,7 +1166,7 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
 
             let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
 
-            let connector_img = atree_parse_connector(render_state, ctype);
+            let connector_img = atree_parse_connector(render_state, ctype, rotate);
             connector_img_elem.src = connector_img.img
             connector_elem.className = "";
             connector_elem.classList.add("rotate-" + connector_img.rotate);
@@ -1182,7 +1187,7 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
 }
 
 // parse a sequence of left, right, up, down to appropriate connector image
-function atree_parse_connector(orient, type) {
+function atree_parse_connector(orient, type, rotate) {
     // left, right, up, down
 
     let c_connector_dict = {
@@ -1200,10 +1205,24 @@ function atree_parse_connector(orient, type) {
     };
 
     let t_connector_dict = {
-        "1100": {attrib: "_2_l", rotate: 0},
-        "1001": {attrib: "_2_a", rotate: "flip"},
-        "0101": {attrib: "_2_a", rotate: 0},
-        "1101": {attrib: "_3", rotate: 0}
+        0: {
+            "1100": {attrib: "_2_l", rotate: 0},
+            "1001": {attrib: "_2_a", rotate: "flip"},
+            "0101": {attrib: "_2_a", rotate: 0},
+            "1101": {attrib: "_3", rotate: 0},
+        },
+        90: {
+            "1010": {attrib: "_2_a", rotate: "flip"},
+            "1001": {attrib: "_2_a", rotate: 90},
+            "0011": {attrib: "_2_l", rotate: 90},
+            "1011": {attrib: "_3", rotate: 90}
+        },
+        270: {
+            "0110": {attrib: "_2_a", rotate: 270},
+            "0101": {attrib: "_2_a", rotate: "flip"},
+            "0011": {attrib: "_2_l", rotate: 270},
+            "0111": {attrib: "_3", rotate: 270}
+        }
     };
 
     let res = "";  
@@ -1211,14 +1230,14 @@ function atree_parse_connector(orient, type) {
         res += i;
     }
     if (res === "0000") {
-        return {img: "../media/atree/connect_" + type + ".png", rotate: 0};
+        return {img: "../media/atree/connect_" + type + ".png", rotate: rotate};
     }
 
     let ret;
     if (type == "c") {
         ret = c_connector_dict[res];
     } else {
-        ret = t_connector_dict[res];
+        ret = t_connector_dict[rotate][res];
     };
     ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
     return ret;
