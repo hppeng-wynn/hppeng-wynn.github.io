@@ -4601,22 +4601,29 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": { "health": 200 },
-            "effects": [{
-                "type": "replace_spell",
-                "name": "Ophanim",
-                "base_spell": 3,
-                "display": "Per Melee (max)",
-                "parts": [
-                    {
-                        "name": "Per Orb",
-                        "multipliers": [50, 0, 30, 20, 0, 0]
-                    },
-                    {
-                        "name": "Per Melee (max)",
-                        "hits": { "Per Orb": 2 }
-                    }
-                ]
-            }]
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Ophanim",
+                    "base_spell": 3,
+                    "display": "Per Melee (max)",
+                    "parts": [
+                        {
+                            "name": "Per Orb",
+                            "multipliers": [50, 0, 30, 20, 0, 0]
+                        },
+                        {
+                            "name": "Per Melee (max)",
+                            "hits": { "Per Orb": 2 }
+                        }
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": 30
+                }
+            ]
         },
         {
             "display_name": "Arcane Transfer",
