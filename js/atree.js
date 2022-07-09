@@ -319,8 +319,6 @@ const atree_validate = new (class extends ComputeNode {
 
         if (atree_order.length == 0) { return [0, false, ['no atree data']]; }
 
-        console.log(atree_state);
-
         let atree_to_add = [];
         for (const node of atree_order) {
             const abil = node.ability;
