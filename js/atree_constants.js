@@ -341,7 +341,6 @@ const atrees = {
             "desc": "When you hit the ground with Arrow Bomb, leave a Trap that damages enemies. (Max 2 Traps)",
             "archetype": "Trapper",
             "archetype_req": 2, 
-            "base_abil": "Arrow Bomb",
             "parents": ["Bryophyte Roots"], 
             "dependencies": [], 
             "blockers": [],
@@ -357,10 +356,17 @@ const atrees = {
             },
             "effects": [
                 { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Basaltic Trap", 
-                    "multipliers": [140, 30, 0, 0, 30, 0]
+                    "type": "replace_spell",
+                    "name": "Basaltic Trap",
+                    "base_spell": 7,
+                    "display": "Trap Damage",
+                    "parts": [
+                        {
+                            "name": "Trap Damage",
+                            "type": "damage",
+                            "multipliers": [140, 30, 0, 0, 30, 0]
+                        }
+                    ]
                 }
             ]
         },
@@ -581,7 +587,7 @@ const atrees = {
             "desc": "Your Traps will give you 2.85 Mana per second when you stay close to them.",
             "archetype": "Trapper", 
             "archetype_req": 5, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["More Traps", "Better Arrow Shield"], 
             "dependencies": [], 
             "blockers": [],
@@ -794,6 +800,7 @@ const atrees = {
             "desc": "Your Traps will be connected by a rope that deals damage to enemies every 0.2s.",
             "archetype": "Trapper", 
             "archetype_req": 0, 
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -804,20 +811,16 @@ const atrees = {
             },
             "effects": [
                 { 
-                    "type": "replace_spell",
-                    "name": "Tangled Traps",
-                    "base_spell": 7,
-                    "display": "DPS",
-                    "parts": [
-                        {  
-                            "name": "Damage Tick",
-                            "multipliers": [20, 0, 0, 0, 0, 20]
-                        },
-                        {
-                            "name": "DPS",
-                            "hits": { "Damage Tick": 5 }
-                        }
-                    ]
+                    "type": "add_spell_prop",
+                    "base_spell": 7, 
+                    "target_part": "Line Damage Tick", 
+                    "multipliers": [20, 0, 0, 0, 0, 20]
+                },
+                { 
+                    "type": "add_spell_prop",
+                    "base_spell": 7, 
+                    "target_part": "DPS", 
+                    "hits": { "Line Damage Tick": 5 }
                 }
             ]
         },
@@ -874,7 +877,7 @@ const atrees = {
             "desc": "Allow you to place +6 Traps, but with reduced damage and range.",
             "archetype": "Trapper",
             "archetype_req": 10, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb", "Cheaper Arrow Bomb (2)"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -884,8 +887,8 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Basaltic Trap", 
+                    "base_spell": 8, 
+                    "target_part": "Trap Damage", 
                     "cost": 0,
                     "multipliers": [-80, 0, 0, 0, 0, 0]
                 },
@@ -1262,7 +1265,7 @@ const atrees = {
             "desc": "Increase the maximum amount of active Traps you can have by +2.",
             "archetype": "Trapper",
             "archetype_req": 0, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Bouncing Bomb"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -1783,7 +1786,7 @@ const atrees = {
             "desc": "Your Traps will deal +20% more damage for every second they are active (Max +80%)",
             "archetype": "Trapper",
             "archetype_req": 0,
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["More Shields"],
             "dependencies": ["Basaltic Trap"],
             "blockers": [],
@@ -1814,7 +1817,7 @@ const atrees = {
             "desc": "Add +80% Max Damage to Patient Hunter",
             "archetype": "Trapper",
             "archetype_req": 0,
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb"],
             "dependencies": ["Patient Hunter"],
             "blockers": [],

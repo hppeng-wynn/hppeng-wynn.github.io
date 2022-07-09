@@ -468,22 +468,24 @@ const atree_collect_spells = new (class extends ComputeNode {
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
             // TODO: Possibly, make a better way for detecting "spell abilities"?
-            if (abil.effects.length == 0) { continue; }
-
-            let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
-            let has_spell_def = false;
             for (const effect of abil.effects) {
                 if (effect.type === 'replace_spell') {
-                    has_spell_def = true;
                     // replace_spell just replaces all (defined) aspects.
-                    for (const key in effect) {
-                        ret_spell[key] = deepcopy(effect[key]);
+                    const ret_spell = ret_spells.get(effect.base_spell);
+                    if (ret_spell) {
+                        // NOTE: do not mutate results of previous steps!
+                        for (const key in effect) {
+                            ret_spell[key] = deepcopy(effect[key]);
+                        }
+                    }
+                    else {
+                        ret_spells.set(effect.base_spell, deepcopy(effect));
                     }
                 }
             }
-            if (!has_spell_def) { continue; }
+        }
 
-            const base_spell_id = ret_spell.base_spell;
+        for (const [abil_id, abil] of atree_merged.entries()) {
             for (const effect of abil.effects) {
                 switch (effect.type) {
                 case 'replace_spell':
@@ -491,7 +493,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     continue;
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
-                    if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
+                    const ret_spell = ret_spells.get(base_spell);
                     // TODO: unjankify this... if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
@@ -513,7 +515,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                                 for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
                                     if (idx in part.hits) { part.hits[idx] += v; }
                                     else { part.hits[idx] = v; }
-                                }
+                               }
                             }
                             else {
                                 throw "uhh invalid spell add effect";
@@ -534,7 +536,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                 }
                 case 'convert_spell_conv':
                     const { base_spell, target_part, conversion } = effect;
-                    if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
+                    const ret_spell = ret_spells.get(base_spell);
                     const elem_idx = damageClasses.indexOf(conversion);
                     let filter = target_part === 'all';
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
@@ -553,7 +555,6 @@ const atree_collect_spells = new (class extends ComputeNode {
                     continue;
                 }
             }
-            ret_spells.set(base_spell_id, ret_spell);
         }
         return ret_spells;
     }
