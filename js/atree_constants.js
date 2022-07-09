@@ -3546,7 +3546,7 @@ const atrees = {
             "desc": "While Corrupted, every 3% Health you lose will add +1 AoE to Bash (Max 10)",
             "archetype": "Fallen", 
             "archetype_req": 8, 
-            "base_abil": "Bash",
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Tempest", "Uncontainable Corruption"], 
             "dependencies": [], 
             "blockers": [],
@@ -4051,7 +4051,7 @@ const atrees = {
             "effects": [
                 { 
                     "type": "replace_spell",
-                    "name": "heal",
+                    "name": "Heal",
                     "cost": 35,
                     "base_spell": 1, 
                     "display": "Heal", 
@@ -4084,7 +4084,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "replace_spell",
-                    "name": "ice snake",
+                    "name": "Ice Snake",
                     "cost": 35,
                     "base_spell": 4,
                     "display": "Ice Snake Damage",
@@ -4499,6 +4499,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3, 
                     "target_part": "Meteor Damage", 
+                    "behavior": "modify",
                     "multipliers": [30, 90, 0, 0, 0, 0]
                 }
             ]
@@ -4520,25 +4521,31 @@ const atrees = {
                 "aoe": 7,
                 "duration": 8
             },
-            "effects": [
-                { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Burning Sigil", 
-                    "multipliers": [15, 0, 0, 0, 25, 0]
-                },
-                { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Total Burn Damage", 
-                    "hits": { "Burning Sigil": 20 }
-                }
-            ]
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Burning Sigil",
+                "base_spell": 6,
+                "display": "DPS",
+                "parts": [
+                    {
+                        "name": "Tick Damage",
+                        "multipliers": [15, 0, 0, 0, 25, 0]
+                    },
+                    {
+                        "name": "DPS",
+                        "hits": { "Tick Damage": 2.5 }
+                    },
+                    {
+                        "name": "Total Burn Damage",
+                        "hits": { "Tick Damage": 20 }
+                    }
+                ]
+            }]
         },
         {
             "display_name": "Sunshower",
             "desc": "Heal emit a strong light, damaging nearby enemies.",
-            "archetype": "Lightbender",
+            "archetype": "Light Bender",
             "archetype_req": 0,
             "parents": ["Water Mastery"],
             "dependencies": ["Heal"],
@@ -4592,22 +4599,29 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": { "health": 200 },
-            "effects": [{
-                "type": "replace_spell",
-                "name": "Ophanim",
-                "base_spell": 3,
-                "display": "Per Melee (max)",
-                "parts": [
-                    {
-                        "name": "Per Orb",
-                        "multipliers": [50, 0, 30, 20, 0, 0]
-                    },
-                    {
-                        "name": "Per Melee (max)",
-                        "hits": { "Per Orb": 2 }
-                    }
-                ]
-            }]
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Ophanim",
+                    "base_spell": 3,
+                    "display": "Per Melee (max)",
+                    "parts": [
+                        {
+                            "name": "Per Orb",
+                            "multipliers": [50, 0, 30, 20, 0, 0]
+                        },
+                        {
+                            "name": "Per Melee (max)",
+                            "hits": { "Per Orb": 2 }
+                        }
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": 30
+                }
+            ]
         },
         {
             "display_name": "Arcane Transfer",
@@ -4712,7 +4726,7 @@ const atrees = {
             "cost": 2,
             "display": {
                 "row": 18,
-                "col": 3,
+                "col": 2,
                 "icon": "node_1"
             },
             "properties": {},
@@ -4723,12 +4737,12 @@ const atrees = {
             "display_name": "Larger Heal",
             "desc": "Increase your Heal's range.",
             "base_abil": 1,
-            "archetype": "Lightbender", 
+            "archetype": "Light Bender", 
             "archetype_req": 0, 
             "parents": ["Purification", "Sentient Snake"], 
             "dependencies": ["Heal"], 
             "blockers": ["Arcane Transfer"],
-            "cost": 2, 
+            "cost": 1, 
             "display": { "row": 18, "col": 5, "icon": "node_0"},
             "properties": {},
             "effects": [{
@@ -4805,7 +4819,7 @@ const atrees = {
             "display_name": "Fortitude",
             "desc": "After healing 120% of your max health within 10s, apply a damage bonus to each player you've healed. (15s Cooldown)",
             "base_abil": "Heal",
-            "archetype": "Lightbender", 
+            "archetype": "Light Bender", 
             "archetype_req": 0, 
             "parents": ["Cheaper Ice Snake", "Cheaper Teleport II"],
             "dependencies": [],
@@ -4955,7 +4969,7 @@ const atrees = {
         {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage Bonus you have, buff Heal's healing power by +0.3%.",
-            "archetype": "Lightbender",
+            "archetype": "Light Bender",
             "archetype_req": 0,
             "parents": ["Healthier Ophanim I", "Transonic Warp"],
             "dependencies": [],
@@ -5333,7 +5347,7 @@ const atrees = {
         {
             "display_name": "Better Ophanim",
             "desc": "Increase your maximum orbs from Ophanim by +1.",
-            "archetype": "Lightbender",
+            "archetype": "Light Bender",
             "archetype_req": 0,
             "base_abil": "Ophanim",
             "parents": ["Explosive Entrance", "Cheaper Meteor II"], 
@@ -5575,10 +5589,10 @@ const atrees = {
             "archetype": "Light Bender", 
             "archetype_req": 0,
             "base_abil": "Lightweaver",
-            "parents": ["Sunflare", "Larger Mana Bank III"],
-            "dependencies": ["Chaos Explosion"],
+            "parents": ["Cheaper Heal II", "Manastorm"],
+            "dependencies": ["Lightweaver"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 35,
                 "col": 4,
