@@ -555,7 +555,7 @@ class SpellDamageCalcNode extends ComputeNode {
         for (const part of spell_parts) {
             let spell_result;
             if ('multipliers' in part) { // damage type spell
-                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed);
+                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed, spell.base_spell + '.' + part.name);
                 spell_result = {
                     type: "damage",
                     normal_min: results[2].map(x => x[0]),

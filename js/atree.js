@@ -442,7 +442,7 @@ const atree_render_active = new (class extends ComputeNode {
                 errorbox.appendChild(atree_warning);
             }
             if (errors.length > 5) {
-                const error = '... ' + errors.length-5 + ' errors not shown';
+                const error = '... ' + (errors.length-5) + ' errors not shown';
                 const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
                 errorbox.appendChild(atree_warning);
             }
@@ -680,20 +680,21 @@ const atree_stats = new (class extends ComputeNode {
                 switch (effect.type) {
                 case 'stat_scaling':
                     if (effect.slider) {
-                        // TODO: handle
-                        const slider_val = interactive_map.get(effect.slider_name).slider.value;
-                        let total = parseInt(slider_val) * effect.scaling[0];
-                        if ('max' in effect && total > effect.max) { total = effect.max; }
-                        if (Array.isArray(effect.output)) {
-                            for (const output of effect.output) {
-                                if (output.type === 'stat') {
-                                    merge_stat(ret_effects, output.name, total);
+                        if ('output' in effect) { // sometimes nodes will modify slider without having effect.
+                            const slider_val = interactive_map.get(effect.slider_name).slider.value;
+                            let total = parseInt(slider_val) * effect.scaling[0];
+                            if ('max' in effect && total > effect.max) { total = effect.max; }
+                            if (Array.isArray(effect.output)) {
+                                for (const output of effect.output) {
+                                    if (output.type === 'stat') {   // TODO: prop
+                                        merge_stat(ret_effects, output.name, total);
+                                    }
                                 }
                             }
-                        }
-                        else {
-                            if (effect.output.type === 'stat') {
-                                merge_stat(ret_effects, effect.output.name, total);
+                            else {
+                                if (effect.output.type === 'stat') {
+                                    merge_stat(ret_effects, effect.output.name, total);
+                                }
                             }
                         }
                     }

@@ -1812,7 +1812,7 @@ const atrees = {
                 "slider_max": 4,
                 "output": {
                     "type": "stat",
-                    "name": "damMult.Basaltic:Basaltic Trap"
+                    "name": "damMult.Basaltic:7.Trap Damage"
                 },
                 "slider_step": 1,
                 "scaling": [20]
@@ -1959,6 +1959,7 @@ const atrees = {
             "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 70%)",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Arrow Storm",
             "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
             "dependencies": ["Phantom Ray"],
             "blockers": [],
@@ -1976,9 +1977,9 @@ const atrees = {
                 "slider_max": 7,
                 "output": {
                     "type": "stat",
-                    "name": "damMult.Decimator:Single Arrow"
+                    "name": "damMult.Decimator:1.Single Arrow"
                 },
-                "scaling": 10
+                "scaling": [10]
             }]
         }
     ],
@@ -4684,7 +4685,7 @@ const atrees = {
             "display_name": "Purification",
             "desc": "Heal and Arcane Transfer will purify you of all negative effects and fire. (3s Cooldown)",
             "base_abil": 1,
-            "parents": ["Ophanim", "Cheaper Heal"],
+            "parents": ["Ophanim", "Cheaper Heal", "Sentient Snake"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
@@ -5218,7 +5219,7 @@ const atrees = {
             "display_name": "Cheaper Ice Snake II",
             "desc": "Reduce the Mana cost of Ice Snake.",
             "base_abil": "Ice Snake",
-            "parents": ["Diffusion"], 
+            "parents": ["Diffusion", "Explosive Entrance"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 

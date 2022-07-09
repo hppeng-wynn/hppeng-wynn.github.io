@@ -26,7 +26,7 @@ function get_base_dps(item) {
 }
 
 
-function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false, part=undefined) {
+function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false, part_filter=undefined) {
     // TODO: Roll all the loops together maybe
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -157,6 +157,13 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     const mult_map = stats.get("damMult");
     let damage_mult = 1;
     for (const [k, v] of mult_map.entries()) {
+        if (k.includes(':')) {
+            // TODO: fragile... checking for specific part multipliers.
+            const spell_match = k.split(':')[1];
+            if (spell_match !== part_filter) {
+                continue;
+            }
+        }
         damage_mult *= (1 + v/100);
     }
 
@@ -251,15 +258,6 @@ const default_spells = {
         scaling: "melee", use_atkspd: false,
         display: "Melee",
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
-    }, {
-        name: "Heal",  // TODO: name for melee attacks? // JUST FOR TESTING...
-        base_spell: 1,
-        display: "Total Heal",
-        parts: [
-            { name: "First Pulse", power: 0.12 },
-            { name: "Second and Third Pulses", power: 0.06 },
-            { name: "Total Heal", hits: { "First Pulse": 1, "Second and Third Pulses": 2 } }
-        ]
     }],
     spear: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
@@ -300,130 +298,6 @@ const default_spells = {
 };
 
 const spell_table = {
-    "wand": [
-        { title: "Heal", cost: 6, parts: [
-                { subtitle: "First Pulse", type: "heal", strength: 0.12 },
-                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.06 },
-                { subtitle: "Total Heal", type: "heal", strength: 0.24, summary: true },
-                { subtitle: "First Pulse (Ally)", type: "heal", strength: 0.20 },
-                { subtitle: "Second and Third Pulses (Ally)", type: "heal", strength: 0.1 },
-                { subtitle: "Total Heal (Ally)", type: "heal", strength: 0.4 }
-            ] },
-        { title: "Teleport", cost: 4, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 40, 0, 0, 0], summary: true },
-            ] },
-        { title: "Meteor", cost: 8, parts: [
-                { subtitle: "Blast Damage", type: "damage", multiplier: 500, conversion: [40, 30, 0, 0, 30, 0], summary: true },
-                { subtitle: "Burn Damage", type: "damage", multiplier: 125, conversion: [100, 0, 0, 0, 0, 0] },
-            ] },
-        { title: "Ice Snake", cost: 4, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 70, conversion: [50, 0, 0, 50, 0, 0], summary: true },
-            ] },
-    ],
-    "spear": [
-        { title: "Bash", cost: 6, parts: [
-                { subtitle: "First Damage", type: "damage", multiplier: 130, conversion: [60, 40, 0, 0, 0, 0]},
-                { subtitle: "Explosion Damage", type: "damage", multiplier: 130, conversion: [100, 0, 0, 0, 0, 0]},
-                { subtitle: "Total Damage", type: "total", factors: [1, 1], summary: true },
-            ] },
-        { title: "Charge", cost: 4, variants: {
-            DEFAULT: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true }
-            ],
-            RALLY: [
-                { subtitle: "Self Heal", type: "heal", strength: 0.07, summary: true },
-                { subtitle: "Ally Heal", type: "heal", strength: 0.15 }
-            ]
-            } },
-        { title: "Uppercut", cost: 9, parts: [
-                { subtitle: "First Damage", type: "damage", multiplier: 300, conversion: [70, 20, 10, 0, 0, 0] },
-                { subtitle: "Fireworks Damage", type: "damage", multiplier: 50, conversion: [60, 0, 40, 0, 0, 0] },
-                { subtitle: "Crash Damage", type: "damage", multiplier: 50, conversion: [80, 0, 20, 0, 0, 0] },
-                { subtitle: "Total Damage", type: "total", factors: [1, 1, 1], summary: true },
-            ] },
-        { title: "War Scream", cost: 6, parts: [
-                { subtitle: "Area Damage", type: "damage", multiplier: 50, conversion: [0, 0, 0, 0, 75, 25], summary: true },
-                { subtitle: "Air Shout (Per Hit)", type: "damage", multiplier: 30, conversion: [0, 0, 0, 0, 75, 25] },
-            ] },
-    ],
-    "bow": [
-        { title: "Arrow Storm", cost: 6, variants: {
-            DEFAULT: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [60, 0, 25, 0, 15, 0], summary: true },
-                { subtitle: "Per Arrow (60)", type: "damage", multiplier: 10, conversion: [60, 0, 25, 0, 15, 0]}
-            ],
-            HAWKEYE: [
-                { subtitle: "Total Damage (Hawkeye)", type: "damage", multiplier: 400, conversion: [60, 0, 25, 0, 15, 0], summary: true },
-                { subtitle: "Per Arrow (5)", type: "damage", multiplier: 80, conversion: [60, 0, 25, 0, 15, 0]}
-            ],
-            } },
-        { title: "Escape", cost: 3, parts: [
-                { subtitle: "Landing Damage", type: "damage", multiplier: 100, conversion: [50, 0, 0, 0, 0, 50], summary: true },
-            ] },
-        { title: "Bomb Arrow", cost: 8, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 250, conversion: [60, 25, 0, 0, 15, 0], summary: true },
-            ] },
-        { title: "Arrow Shield", cost: 10, parts: [
-                { subtitle: "Shield Damage", type: "damage", multiplier: 100, conversion: [70, 0, 0, 0, 0, 30], summary: true },
-                { subtitle: "Arrow Rain Damage", type: "damage", multiplier: 200, conversion: [70, 0, 0, 0, 0, 30] },
-            ] },
-    ],
-    "dagger": [
-        { title: "Spin Attack", cost: 6, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [70, 0, 30, 0, 0, 0], summary: true},
-            ] },
-        { title: "Vanish", cost: 2, parts: [
-                { subtitle: "No Damage", type: "none", summary: true }
-            ] },
-        { title: "Multihit", cost: 8, parts: [
-                { subtitle: "1st to 10th Hit", type: "damage", multiplier: 27, conversion: [100, 0, 0, 0, 0, 0] },
-                { subtitle: "Fatality", type: "damage", multiplier: 120, conversion: [20, 0, 30, 50, 0, 0] },
-                { subtitle: "Total Damage", type: "total", factors: [10, 1], summary: true },
-            ] },
-        { title: "Smoke Bomb", cost: 8, variants: {
-            DEFAULT: [
-                { subtitle: "Tick Damage (10 max)", type: "damage", multiplier: 60, conversion: [50, 25, 0, 0, 0, 25] },
-                { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [50, 25, 0, 0, 0, 25], summary: true },
-            ],
-            CHERRY_BOMBS: [
-                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [50, 25, 0, 0, 0, 25], summary: true },
-                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [50, 25, 0, 0, 0, 25] }
-            ]
-            } },
-    ],
-    "relik": [
-        { title: "Totem", cost: 4, parts: [
-                { subtitle: "Smash Damage", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 20, 0]},
-                { subtitle: "Damage Tick", type: "damage", multiplier: 20, conversion: [80, 0, 0, 0, 0, 20]},
-                { subtitle: "Heal Tick", type: "heal", strength: 0.03, summary: true },
-            ] },
-        { title: "Haul", cost: 1, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [80, 0, 20, 0, 0, 0], summary: true },
-            ] },
-        { title: "Aura", cost: 8, parts: [
-                { subtitle: "One Wave", type: "damage", multiplier: 200, conversion: [70, 0, 0, 30, 0, 0], summary: true },
-            ] },
-        { title: "Uproot", cost: 6, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [70, 30, 0, 0, 0, 0], summary: true },
-            ] },
-    ],
-    "sword": [
-        { title: "Successive Strikes", cost: 5, parts: [
-                { subtitle: "Damage", type: "damage", multiplier: 65, conversion: [70, 0, 15, 0, 0, 15]},
-                { subtitle: "Final Strike", type: "damage", multiplier: 120, conversion: [70, 0, 15, 0, 0, 15]},
-                { subtitle: "Total Damage (Normal)", type: "total", factors: [2, 0], summary: true },
-            ] },
-        { title: "Dash", cost: 3, parts: [
-                { subtitle: "Damage", type: "damage", multiplier: 120, conversion: [60, 0, 0, 0, 0, 40], summary: true },
-            ] },
-        { title: "Execute", cost: 8, parts: [
-                { subtitle: "Minimum Damage", type: "damage", multiplier: 100, conversion: [60, 0, 20, 0, 20, 0]},
-                { subtitle: "Maximum Damage", type: "damage", multiplier: 1200, conversion: [60, 0, 20, 0, 20, 0], summary: true },
-            ] },
-        { title: "Blade Echo", cost: 4, parts: [
-                { subtitle: "Damage", type: "damage", multiplier: 125, conversion: [60, 0, 0, 20, 0, 20], summary: true },
-            ] },
-    ],
     "powder": [ //This is how instant-damage powder specials are implemented. 
         { title: "Quake", cost: 0, parts:[
                 { subtitle: "Total Damage", type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
