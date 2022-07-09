@@ -5106,7 +5106,7 @@ const atrees = {
         {
             "display_name": "Arcane Speed",
             "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 3s. (8s Cooldown)",
-            "parents": ["Lightweaver", "Larger Mana Bank"],
+            "parents": ["Lightweaver", "Larger Mana Bank II"],
             "dependencies": ["Heal"],
             "blockers": [],
             "cost": 2,
@@ -5119,7 +5119,7 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Larger Mana Bank",
+            "display_name": "Larger Mana Bank II",
             "desc": "Increase your maximum Mana Bank by +30.",
             "base_abil": 1,
             "archetype": "Arcanist", 
@@ -5137,12 +5137,12 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Pyrokinesis",
+            "display_name": "Psychokinesis",
             "desc": "Meteor will launch directly from you as a slow projectile.",
             "base_abil": 3,
             "archetype": "Arcanist", 
             "archetype_req": 5, 
-            "parents": ["Larger Mana Bank", "Arcane Speed"],
+            "parents": ["Larger Mana Bank II", "Arcane Speed"],
             "dependencies": ["Meteor"],
             "blockers": [],
             "cost": 1,
@@ -5222,7 +5222,7 @@ const atrees = {
             "base_abil": "Arcane Transfer",
             "archetype": "Arcanist", 
             "archetype_req": 8, 
-            "parents": ["Larger Mana Bank"],
+            "parents": ["Larger Mana Bank II"],
             "dependencies": ["Arcane Transfer"],
             "blockers": [],
             "cost": 2,
@@ -5240,7 +5240,7 @@ const atrees = {
             "base_abil": "Arcane Transfer",
             "archetype": "Arcanist", 
             "archetype_req": 0, 
-            "parents": ["Larger Mana Bank"],
+            "parents": ["Arctic Snake"],
             "dependencies": ["Arcane Transfer"],
             "blockers": [],
             "cost": 1,
@@ -5345,7 +5345,7 @@ const atrees = {
             }]
         },
         {
-            "display_name": "Artic Snake",
+            "display_name": "Arctic Snake",
             "desc": "Ice Snake will freeze enemies completely for 2s.",
             "base_abil": "Ice Snake",
             "parents": ["Chaos Explosion"],
@@ -5359,6 +5359,270 @@ const atrees = {
             },
             "properties": {},
             "effects": []
+        },
+        {
+            "display_name": "Devitalize",
+            "desc": "Enemies will deal -2% damage for every Winded they have.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker", 
+            "archetype_req": 5, 
+            "parents": ["More Winded II", "Dynamic Faith"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 37,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "More Winded II",
+            "desc": "Incrase your maximum Winded by +5.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker",
+            "archetype_req": 0,
+            "parents": ["Time Dilation"],
+            "dependencies": ["Windsweeper"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 36,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Dynamic Faith",
+            "desc": "For every 2% Sprint you have from items, gain +1% Thunder Damage (Max 100%)",
+            "parents": ["More Winded II", "Healthier Ophanim II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 36,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": false,
+                "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "sprint"
+                        }
+                    ],
+                "output": {
+                    "type": "stat",
+                    "name": "tDamPct"
+                },
+                "scaling": [0.5],
+                "max": 100
+            }]
+        },
+        {
+            "display_name": "Divination",
+            "desc": "Increase your maximum orbs from Ophanim by +3 and reduce their damage.",
+            "base_abil": "Ophanim",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Dynamic Faith", "Healthier Ophanim II"],
+            "dependencies": ["Ophanim"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 37,
+                "col": 3,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                { 
+                    "type": "add_spell_prop", 
+                    "target_part": "Per Orb", 
+                    "multipliers": [-50, 0, -10, 0, 0, 0]
+                },
+                { 
+                    "type": "add_spell_prop",
+                    "target_part": "Per Melee (max)",
+                    "hits": { "Per Orb": 3 }
+                }
+            ]
+        },
+        {
+            "display_name": "Healthier Ophanim II",
+            "desc": "Increase the health of your orbs from Ophanim by +3000.",
+            "base_abil": "Ophanim",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Diffusion"],
+            "dependencies": ["Healthier Ophanim I"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 36,
+                "col": 4,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Sunflare",
+            "desc": "After healing 400% of your max health within 10s, your next Heal will make every nearby ally temporarily immune.",
+            "archetype": "Light Bender", 
+            "archetype_req": 12, 
+            "base_abil": "Heal",
+            "parents": ["Healthier Ophanim II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 37,
+                "col": 5,
+                "icon": "node_3"
+            },
+            "properties": {
+                "aoe": 12,
+                "duration": 5
+            },
+            "effects": []
+        },
+        {
+            "display_name": "Larger Mana Bank III",
+            "desc": "Increase your maximum Mana Bank by +30.",
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "base_abil": "Arcane Transfer",
+            "parents": ["Arctic Snake"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 36,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Arcane Overflow",
+            "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits.",
+            "archetype": "Arcanist", 
+            "archetype_req": 12, 
+            "base_abil": "Arcane Transfer",
+            "parents": ["Sunflare", "Larger Mana Bank III"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 38,
+                "col": 7,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Memory Recollection",
+            "desc": "Chaos Explosion will cast +2 spells.",
+            "archetype": "Arcanist",
+            "archetype_req": 0,
+            "base_abil": "Arcane Transfer",
+            "parents": ["Arcane Overflow"],
+            "dependencies": ["Chaos Explosion"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 39,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Manastorm",
+            "desc": "If you have more than 100 Mana, casting a spell will give you +10 mana over 5s.",
+            "archetype": "Arcanist", 
+            "archetype_req": 1, 
+            "parents": ["Cheaper Heal II", "Arcane Overflow", "Sunflare"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 39,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Better Lightweaver",
+            "desc": "Increase your Max Orbs by +2.",
+            "archetype": "Light Bender", 
+            "archetype_req": 0,
+            "base_abil": "Lightweaver",
+            "parents": ["Sunflare", "Larger Mana Bank III"],
+            "dependencies": ["Chaos Explosion"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 40,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                { 
+                    "type": "add_spell_prop",
+                    "target_part": "Orb Damage",
+                    "hits": { "Single Orb": 2 }
+                }
+            ]
+        },
+        {
+            "display_name": "Timelock",
+            "desc": "Holding shift and casting Heal will absorb all Winded on nearby enemies and make you Timelocked. While Timelocked, your mana will not be depleted and you become immovable from outside forces. Enemies will recieve Winded damage from all absorbed stacks. (Max 30)",
+            "archetype": "Riftwalker", 
+            "archetype_req": 12,
+            "parents": ["More Winded II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 39,
+                "col": 0,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Cheaper Heal II",
+            "desc": "Reduce the Mana cost of Heal.",
+            "base_abil": "Heal",
+            "parents": ["Timelock", "Manastorm"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 39, "col": 2, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "cost": -5
+                }
+            ]  
         }
     ]
 }
