@@ -236,7 +236,7 @@ class ItemInputDisplayNode extends ComputeNode {
             this.input_field.classList.add("is-invalid");
             return null;
         }
-        if (item.statMap.has('powders')) {
+        if (this.powder_field && item.statMap.has('powders')) {
             this.powder_field.placeholder = "powders";
         }
 
@@ -244,7 +244,7 @@ class ItemInputDisplayNode extends ComputeNode {
             return null;
         }
 
-        if (item.statMap.has('powders')) {
+        if (this.powder_field && item.statMap.has('powders')) {
             this.powder_field.placeholder = item.statMap.get('slots') + ' slots';
         }
 
@@ -945,7 +945,7 @@ class SkillPointSetterNode extends ComputeNode {
 class SumNumberInputNode extends InputNode {
     compute_func(input_map) {
         let value = this.input_field.value;
-        if (value === "") { value = 0; }
+        if (value === "") { value = "0"; }
 
         let input_num = 0;
         if (value.includes("+")) {
