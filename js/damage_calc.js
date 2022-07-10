@@ -5,6 +5,7 @@ function get_base_dps(item) {
     //SUPER JANK @HPP PLS FIX
     if (item.get("tier") !== "Crafted") {
         let total_damage = 0;
+        apply_weapon_powders(item);
         for (const damage_k of damage_keys) {
             damages = item.get(damage_k);
             total_damage += damages[0] + damages[1];

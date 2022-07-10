@@ -184,7 +184,8 @@ function displayItems(items_copy) {
         box.appendChild(bckgrdbox);
         bckgrdbox.id = "item"+i+"b";
         items_parent.appendChild(box);
-        displaysq2ExpandedItem(item, bckgrdbox.id);
+        item.set("powders", []);
+        displayExpandedItem(item, bckgrdbox.id, true);
     }
 }
 
@@ -251,6 +252,11 @@ function resetItemSearch() {
 
 function init_items() {
     items_expanded = items.filter( (i) => !("remapID" in i) ).map( (i) => expandItem(i) );
+    console.log(items_expanded);
+    console.log("a");
 }
 
-load_init(init_items);
+(async function() {
+    await Promise.resolve(load_init());
+    init_items();
+})();
