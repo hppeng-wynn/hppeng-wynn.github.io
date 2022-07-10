@@ -53,6 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 });
 
+let itemCategories = [ "armor", "accessory", "weapon" ];
+
 const sq2_translate_mappings = {
     //"Name": "name",
     //"Display Name": "displayName",
@@ -185,6 +187,9 @@ function displayItems(items_copy) {
         bckgrdbox.id = "item"+i+"b";
         items_parent.appendChild(box);
         item.set("powders", []);
+        if (item.get("category") == "weapon") {
+            apply_weapon_powders(item);
+        }
         displayExpandedItem(item, bckgrdbox.id, true);
     }
 }
@@ -219,12 +224,12 @@ function doItemSearch() {
     
     for (let i = 1; i <= 4; ++i) {
         let raw_dat = document.getElementById("filter"+i+"-choice").value;
-        let filter_dat = translate_mappings[raw_dat];
+        let filter_dat = sq2_translate_mappings[raw_dat];
         if (filter_dat !== undefined) {
             queries.push(new IdQuery(filter_dat));
             continue;
         }
-        filter_dat = special_mappings[raw_dat];
+        filter_dat = sq2_special_mappings[raw_dat];
         if (filter_dat !== undefined) {
             queries.push(filter_dat);
             continue;
