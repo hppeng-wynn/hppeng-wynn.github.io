@@ -5376,6 +5376,7 @@ const atrees = {
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
+                "base_spell": 3,
                 "target_part": "Per Melee (max)",
                 "hits": { "Per Orb": 1 }
             }]
@@ -5481,11 +5482,13 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop", 
+                    "base_spell": 3,
                     "target_part": "Per Orb", 
                     "multipliers": [-50, 0, -10, 0, 0, 0]
                 },
                 { 
                     "type": "add_spell_prop",
+                    "base_spell": 3,
                     "target_part": "Per Melee (max)",
                     "hits": { "Per Orb": 3 }
                 }

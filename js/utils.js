@@ -773,7 +773,7 @@ function gen_slider_labeled({label_name, label_classlist = [], min = 0, max = 10
     let slider = gen_slider(min, max, step, default_val, id, color, classlist, label);
 
     //we set IDs here because the slider's id is potentially only meaningful after gen_slider() is called
-    label.id = slider.id + "-label";
+    label.id = slider.id + "_label";
     slider_container.id = slider.id + "-container";
 
     buf_col.append(slider, label);
