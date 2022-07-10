@@ -328,7 +328,13 @@ const atree_validate = new (class extends ComputeNode {
         let atree_to_add = [];
         for (const node of atree_order) {
             const abil = node.ability;
-            if (atree_state.get(abil.id).active) { atree_to_add.push([node, 'not reachable', false]); }
+            if (atree_state.get(abil.id).active) {
+                atree_to_add.push([node, 'not reachable', false]);
+                atree_state.get(abil.id).img.src = '../media/atree/'+abil.display.icon+'.png';
+            }
+            else {
+                atree_state.get(abil.id).img.src = '../media/atree/'+abil.display.icon+'_blocked.png';
+            }
         }
 
         let reachable = new Set();
@@ -375,7 +381,7 @@ const atree_validate = new (class extends ComputeNode {
                 }
                 if ('archetype' in ability && ability.archetype !== "") {
                     if ('archetype_req' in ability && ability.archetype_req !== 0) {
-                        const others = archetype_count.get(ability.archetype);
+                        const others = (archetype_count.get(ability.archetype) || 0);
                         if (others < ability.archetype_req) {
                             _add.push([node, ability.archetype+': '+others+' < '+ability.archetype_req, false])
                             continue;
@@ -1005,6 +1011,7 @@ function render_AT(UI_elem, list_elem, tree) {
         //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
 
         node_wrap.elem = node_elem;
+        node_wrap.img = node_img;
         node_wrap.all_connectors_ref = atree_connectors_map;
 
         node_elem.addEventListener('click', function(e) {
@@ -1253,3 +1260,5 @@ function atree_parse_connector(orient, type, rotate) {
     ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
     return ret;
 };
+
+const atree_level_table = ['lvl0wtf',1,2,2,3,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,14,14,15,16,16,17,17,18,18,19,19,20,20,20,21,21,22,22,23,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,38,39,39,39,39,40,40,40,40,41,41,41,41,42,42,42,42,43,43,43,43,44,44,44,44,45,45,45]
