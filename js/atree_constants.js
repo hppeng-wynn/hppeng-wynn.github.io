@@ -4566,6 +4566,7 @@ const atrees = {
             "parents": ["Water Mastery"],
             "dependencies": ["Heal"],
             "blockers": ["Arcane Transfer"],
+            "cost": 2, 
             "display": {
                 "row": 13,
                 "col": 4,
@@ -4882,7 +4883,7 @@ const atrees = {
             "desc": "For every 5/3s Lifesteal you have from items, gain 1% Spell Damage (Max 50%)",
             "archetype": "",
             "archetype_req": 0,
-            "parents": ["Pyrokinesis"],
+            "parents": ["Pyrokinesis", "Snake Nest"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
