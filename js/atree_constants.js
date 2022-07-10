@@ -1882,8 +1882,6 @@ const atrees = {
         {
             "display_name": "Phantom Ray",
             "desc": "Condense Arrow Storm into a single ray that damages enemies 10 times per second",
-            "archetype": "Sharpshooter",
-            "archetype_req": 0,
             "base_abil": "Arrow Storm",
             "parents": ["Water Mastery", "Fire Creep"],
             "dependencies": ["Arrow Storm"],
@@ -4826,7 +4824,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "base_spell": 4,
+                    "base_spell": 2,
                     "cost": -5
                 }
             ]  
