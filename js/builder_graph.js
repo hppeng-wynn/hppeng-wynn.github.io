@@ -1007,6 +1007,9 @@ function builder_graph_init() {
 
     // Level input node.
     let level_input = new InputNode('level-input', document.getElementById('level-choice'));
+    
+    // linking to atree verification
+    atree_render_active.link_to(level_input, 'level');
 
     // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
     build_node = new BuildAssembleNode();
