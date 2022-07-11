@@ -427,6 +427,17 @@ const atree_render_active = new (class extends ComputeNode {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
         const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
+        const atree_level_table = ['lvl0wtf',1,2,2,3,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,14,14,15,16,16,17,17,18,18,19,19,20,20,20,21,21,22,22,23,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,38,39,39,39,39,40,40,40,40,41,41,41,41,42,42,42,42,43,43,43,43,44,44,44,44,45,45,45];
+        const level = parseInt(input_map.get('level'));
+        const active_AP_cap = document.getElementById('active_AP_cap');
+        let AP_cap;
+        if (isNaN(level)) {
+            AP_cap = 45;   
+        }
+        else {
+            AP_cap = atree_level_table[level];
+        }
+        active_AP_cap.textContent = AP_cap;
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
@@ -452,8 +463,8 @@ const atree_render_active = new (class extends ComputeNode {
                 const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
                 errorbox.appendChild(atree_warning);
             }
-            if (abil_points_total > 45) {
-                const error = 'too many ability points assigned! ('+abil_points_total+' > 45)';
+            if (abil_points_total > AP_cap) {
+                const error = 'too many ability points assigned! ('+abil_points_total+' > '+AP_cap+')';
                 const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
                 errorbox.appendChild(atree_warning);
             }
@@ -843,7 +854,7 @@ function render_AT(UI_elem, list_elem, tree) {
     let active_AP_cost = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cost", textContent: "0"});
 
     let active_AP_slash = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: "/"});
-    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap", textContent: "45"});
+    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap"});
     let active_AP_end = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: " AP"});
 
     active_AP_container.appendChild(active_AP_subcontainer);
