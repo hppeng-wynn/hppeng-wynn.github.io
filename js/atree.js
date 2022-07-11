@@ -673,8 +673,10 @@ const atree_make_interactives = new (class extends ComputeNode {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
                     const { slider_name, slider_behavior = 'merge', slider_max, slider_step } = effect;
                     if (slider_map.has(slider_name)) {
-                        const slider_info = slider_map.get(slider_name);
-                        slider_info.max += slider_max;
+                        if (slider_max !== undefined) {
+                            const slider_info = slider_map.get(slider_name);
+                            slider_info.max += slider_max;
+                        }
                     }
                     else if (slider_behavior === 'merge') {
                         slider_map.set(slider_name, {

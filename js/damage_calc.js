@@ -26,7 +26,7 @@ function get_base_dps(item) {
 }
 
 
-function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false, part_filter=undefined) {
+function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ignore_speed=false, part_filter=undefined) {
     // TODO: Roll all the loops together maybe
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -40,7 +40,28 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
     let present = deepcopy(weapon.get(damage_present_key));
 
+    // Also theres prop and rainbow!!
+    const damage_elements = ['n'].concat(skp_elements); // netwfa
+
     // 2. Conversions.
+    // 2.0: First, modify conversions.
+    let conversions = deepcopy(_conversions);
+    if (part_filter !== undefined) {
+        const conv_postfix = ':'+part_filter;
+        for (let i in damage_elements) {
+            const stat_name = damage_elements[i]+'ConvBase'+conv_postfix;
+            if (stats.has(stat_name)) {
+                conversions[i] += stats.get(stat_name);
+            }
+        }
+    }
+    for (let i in damage_elements) {
+        const stat_name = damage_elements[i]+'ConvBase';
+        if (stats.has(stat_name)) {
+            conversions[i] += stats.get(stat_name);
+        }
+    }
+
     // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.
     let damages = [];
     const neutral_convert = conversions[0] / 100;
@@ -68,9 +89,6 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
     total_convert += conversions[0]/100;
 
-    // Also theres prop and rainbow!!
-    const damage_elements = ['n'].concat(skp_elements); // netwfa
-
     if (!ignore_speed) {
         // 3. Apply attack speed multiplier. Ignored for melee single hit
         const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(weapon.get("atkSpd"))];
@@ -81,7 +99,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
 
     // 4. Add additive damage. TODO: Is there separate additive damage?
-    for (let i = 0; i < 6; ++i) {
+    for (let i in damage_elements) {
         if (present[i]) {
             damages[i][0] += stats.get(damage_elements[i]+'DamAddMin');
             damages[i][1] += stats.get(damage_elements[i]+'DamAddMax');
@@ -104,10 +122,10 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     // These do not count raw damage. I think. Easy enough to change
     let total_min = 0;
     let total_max = 0;
-    for (let i in damages) {
-        let damage_prefix = damage_elements[i] + specific_boost_str;
+    for (let i in damage_elements) {
+        let damage_specific = damage_elements[i] + specific_boost_str + 'Pct';
         let damageBoost = 1 + skill_boost[i] + static_boost
-                            + ((stats.get(damage_prefix+'Pct') + stats.get(damage_elements[i]+'DamPct')) /100);
+                            + ((stats.get(damage_specific) + stats.get(damage_elements[i]+'DamPct')) /100);
         damages[i][0] *= Math.max(damageBoost, 0);
         damages[i][1] *= Math.max(damageBoost, 0);
         // Collect total damage post %boost

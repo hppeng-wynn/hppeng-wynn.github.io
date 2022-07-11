@@ -88,7 +88,6 @@ const atrees = {
                 "cost": 50,
                 "base_spell": 3, 
                 "spell_type": "damage", 
-                "scaling": "spell",
                 "display": "Total Damage", 
                 "parts": [
                     {  
@@ -237,7 +236,6 @@ const atrees = {
                     "cost": 40,
                     "base_spell": 1, 
                     "spell_type": "damage", 
-                    "scaling": "spell",
                     "display": "Total Damage", 
                     "parts": [
                         {  
@@ -4586,17 +4584,39 @@ const atrees = {
             "archetype": "Riftwalker",
             "archetype_req": 3, 
             "parents": ["Wind Slash", "Thunderstorm"], 
-            "dependencies": [], 
+            "dependencies": ["Ice Snake"], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 15,
                 "col": 1,
-                "icon": "node_3",
-                "__TODO": "hppeng please fix"
+                "icon": "node_3"
             },
             "properties": { "max": 5 },
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:4.Ice Snake Damage"
+                    },
+                    "scaling": [20],
+                    "slider_step": 1,
+                    "slider_max": 5
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "wConvBase:4.Ice Snake Damage"
+                    },
+                    "scaling": [10]
+                }
+            ]
         },
         {
             "display_name": "Ophanim",
@@ -4735,7 +4755,7 @@ const atrees = {
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
             "parents": ["Cheaper Heal"],
-            "dependencies": ["Windsweeper"],
+            "dependencies": ["Windsweeper", "Purification"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -4744,8 +4764,32 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": [],
-            "__TODO": "I still don't really know how to do this, for the record though the ratio is 20% neutral 20% earth per stack"
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Meteor Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Meteor Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Per Orb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Per Orb"
+                        }
+                    ],
+                    "scaling": [15]
+                }
+            ]
         },
         {
             "display_name": "Larger Heal",
@@ -5028,7 +5072,38 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:2.Wind Slash"
+                    },
+                    "scaling": [30]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "tConvBase:2.Wind Slash"
+                    },
+                    "scaling": [10]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "aConvBase:2.Wind Slash"
+                    },
+                    "scaling": [5]
+                }
+            ]
         },
         {
             "display_name": "Healthier Ophanim I",
@@ -5204,15 +5279,25 @@ const atrees = {
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [{
-                    "type": "prop",
-                    "abil": "Windsweeper",
-                    "name": "max",
-                    "value": 5
-                }]
-            }]
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Windsweeper",
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "slider_max": 5
+                }
+            ]
         },
         {
             "display_name": "Cheaper Ice Snake II",
@@ -5348,8 +5433,8 @@ const atrees = {
             "desc": "When sprinting, create an area that increases the speed of all allies the longer they run in it. (Step out or stop running to cancel)",
             "archetype": "Riftwalker", 
             "archetype_req": 7, 
-            "parents": ["Cheaper Ice Snake II", "Explosive Entrance"],
-            "dependencies": ["Ice Snake"],
+            "parents": ["Cheaper Ice Snake II"],
+            "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -5429,7 +5514,25 @@ const atrees = {
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Windsweeper",
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "slider_max": 5
+                }
+            ]
         },
         {
             "display_name": "Dynamic Faith",
