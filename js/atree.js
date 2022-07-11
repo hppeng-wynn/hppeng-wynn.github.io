@@ -544,7 +544,8 @@ const atree_collect_spells = new (class extends ComputeNode {
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
                     const ret_spell = ret_spells.get(base_spell);
-                    // TODO: unjankify this... if ('cost' in ret_spell) { ret_spell.cost += cost; }
+                    // TODO: unjankify this...
+                    if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
                         continue;
@@ -748,15 +749,16 @@ const atree_stats = new (class extends ComputeNode {
                     }
                     continue;
                 case 'add_spell_prop':
+                    continue;
                     // TODO unjankify....
                     // costs are converted to raw cost ID
-                    const { base_spell, cost = 0} = effect;
-                    if (cost) {
-                        const key = "spRaw"+base_spell;
-                        if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
-                        else { ret_effects.set(key, cost); }
-                    }
-                    continue;
+                    // const { base_spell, cost = 0} = effect;
+                    // if (cost) {
+                    //     const key = "spRaw"+base_spell;
+                    //     if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
+                    //     else { ret_effects.set(key, cost); }
+                    // }
+                    // continue;
                 }
             }
         }
@@ -1271,5 +1273,3 @@ function atree_parse_connector(orient, type, rotate) {
     ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
     return ret;
 };
-
-const atree_level_table = ['lvl0wtf',1,2,2,3,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,14,14,15,16,16,17,17,18,18,19,19,20,20,20,21,21,22,22,23,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,38,39,39,39,39,40,40,40,40,41,41,41,41,42,42,42,42,43,43,43,43,44,44,44,44,45,45,45]
