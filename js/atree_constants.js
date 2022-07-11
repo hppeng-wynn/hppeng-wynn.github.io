@@ -4584,7 +4584,7 @@ const atrees = {
             "archetype": "Riftwalker",
             "archetype_req": 3, 
             "parents": ["Wind Slash", "Thunderstorm"], 
-            "dependencies": [], 
+            "dependencies": ["Ice Snake"], 
             "blockers": [],
             "cost": 2, 
             "display": {
@@ -4755,7 +4755,7 @@ const atrees = {
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
             "parents": ["Cheaper Heal"],
-            "dependencies": ["Windsweeper"],
+            "dependencies": ["Windsweeper", "Purification"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -5434,7 +5434,7 @@ const atrees = {
             "archetype": "Riftwalker", 
             "archetype_req": 7, 
             "parents": ["Cheaper Ice Snake II"],
-            "dependencies": ["Ice Snake"],
+            "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
