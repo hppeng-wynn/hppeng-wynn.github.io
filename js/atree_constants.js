@@ -4735,7 +4735,7 @@ const atrees = {
         {
             "display_name": "Eye Piercer",
             "desc": "Teleport will blind enemies, confusing them for a short amount of time.",
-            "base_abil": "Heal",
+            "base_abil": "Teleport",
             "parents": ["Cheaper Heal"],
             "dependencies": ["Teleport"],
             "blockers": [],
