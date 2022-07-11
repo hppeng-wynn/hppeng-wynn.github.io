@@ -4755,7 +4755,7 @@ const atrees = {
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
             "parents": ["Cheaper Heal", "Purification"],
-            "dependencies": ["Windsweeper", "Purification"],
+            "dependencies": ["Windsweeper"],
             "blockers": [],
             "cost": 2,
             "display": {
