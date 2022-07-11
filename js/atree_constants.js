@@ -1882,8 +1882,6 @@ const atrees = {
         {
             "display_name": "Phantom Ray",
             "desc": "Condense Arrow Storm into a single ray that damages enemies 10 times per second",
-            "archetype": "Sharpshooter",
-            "archetype_req": 0,
             "base_abil": "Arrow Storm",
             "parents": ["Water Mastery", "Fire Creep"],
             "dependencies": ["Arrow Storm"],
@@ -4566,6 +4564,7 @@ const atrees = {
             "parents": ["Water Mastery"],
             "dependencies": ["Heal"],
             "blockers": ["Arcane Transfer"],
+            "cost": 2, 
             "display": {
                 "row": 13,
                 "col": 4,
@@ -4825,7 +4824,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "base_spell": 4,
+                    "base_spell": 2,
                     "cost": -5
                 }
             ]  
@@ -4882,7 +4881,7 @@ const atrees = {
             "desc": "For every 5/3s Lifesteal you have from items, gain 1% Spell Damage (Max 50%)",
             "archetype": "",
             "archetype_req": 0,
-            "parents": ["Pyrokinesis"],
+            "parents": ["Pyrokinesis", "Snake Nest"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -5375,6 +5374,7 @@ const atrees = {
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
+                "base_spell": 3,
                 "target_part": "Per Melee (max)",
                 "hits": { "Per Orb": 1 }
             }]
@@ -5480,11 +5480,13 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop", 
+                    "base_spell": 3,
                     "target_part": "Per Orb", 
                     "multipliers": [-50, 0, -10, 0, 0, 0]
                 },
                 { 
                     "type": "add_spell_prop",
+                    "base_spell": 3,
                     "target_part": "Per Melee (max)",
                     "hits": { "Per Orb": 3 }
                 }
