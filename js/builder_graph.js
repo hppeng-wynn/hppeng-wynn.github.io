@@ -1075,7 +1075,7 @@ function builder_graph_init() {
     let class_node = new PlayerClassNode('builder-class').link_to(build_node);
     // These two are defined in `atree.js`
     atree_node.link_to(class_node, 'player-class');
-    atree_merge.link_to(build_node, 'build');
+    atree_merge.link_to(class_node, 'player-class');
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
     atree_stats.link_to(build_node, 'build');
