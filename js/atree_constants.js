@@ -4754,7 +4754,7 @@ const atrees = {
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
-            "parents": ["Cheaper Heal"],
+            "parents": ["Cheaper Heal", "Purification"],
             "dependencies": ["Windsweeper", "Purification"],
             "blockers": [],
             "cost": 2,
