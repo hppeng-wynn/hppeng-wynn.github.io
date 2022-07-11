@@ -425,7 +425,7 @@ const atree_render_active = new (class extends ComputeNode {
         const level = parseInt(input_map.get('level'));
         const active_AP_cap = document.getElementById('active_AP_cap');
         let AP_cap;
-        if (isNan(level)) {
+        if (isNaN(level)) {
             AP_cap = 45;   
         }
         else {
