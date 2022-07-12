@@ -32,10 +32,10 @@
             <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
         </div>
         <div class="container mt-5">
-            <div class="row">
-                <div class="col-5">
+            <div class="row row-cols-1 row-cols-lg-3 gy-5">
+                <div class="col col-lg-5">
                     <!--crafter ui-->
-                    <div class="row row-cols-2 gx-5 gy-2">
+                    <div class="row row-cols-1 row-cols-lg-2 gx-5 gy-4 gy-lg-2">
                         <div class="col" id="recipe-dropdown">
                             <div class="row dark-shadow dark-5 rounded">
                                 <div id = "recipe-img-loc" class = "col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon">
@@ -217,17 +217,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col col-lg-4">
                     <div class = "recipe hide-container-block px-3 col rounded dark-6 text-light scaled-font p-3 border-dark dark-shadow g-0" style = "display:none">
-                        <div class = "row recipe-stats">
-                            <div class = "col" id = "recipe-stats"></div>
+                        <div class = "row row-cols-1 recipe-stats " id = "recipe-stats">
                         </div>
                         <div class = "row craft-warnings">
                             <div class = "" id = "craft-warnings"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col col-lg-3">
                     <div class = "crafted row hide-container-block" style = "display:none">
                         <div class = "craft-stats">
                             <div class = "col rounded dark-6 text-light scaled-font p-3 border-dark dark-shadow g-0" id = "craft-stats"></div>
@@ -235,38 +234,34 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col ingredients-container hide-container-grid" id = "ingreds" style = "display:none">
-                    <div class = "col-lg-6 col-sm-12 hide-container-grid" id = "ingreds">
-                        <div class = "row mb-3">
+            <div class="row my-3">
+                <div class="col col-lg-6 ingredients-container hide-container-grid" id = "ingreds" style = "display:none">
+                    <div class = "row mb-3">
+                        <div class="col">
                             <p class="box-title hide-container-block">
                                 Ingredients
                             </p>
                         </div>
-                        <div class = "row mb-3">
-                            <div class="ing-stats col-lg-6 col-sm scaled-font" id = "ing-1">
-                                <div class = "rounded col g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-1-stats"></div>
-                            </div>
-                            <div class="ing-stats col-lg-6 col-sm scaled-font" id = "ing-2">
-                                <div class = "rounded col g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-2-stats"></div>
-                            </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-lg-2 g-3">
+                        <div class="ing-stats col-lg-6 col scaled-font" id = "ing-1">
+                            <div class = "rounded g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-1-stats"></div>
                         </div>
-                        <div class = "row mb-3">
-                            <div class="ing-stats col-lg-6 col-sm scaled-font" id = "ing-3">
-                                <div class = "rounded col g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-3-stats"></div>
-                            </div>
-                            <div class="ing-stats col-lg-6 col-sm scaled-font" id = "ing-4">
-                                <div class = "rounded col g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-4-stats"></div>
-                            </div>
+                        <div class="ing-stats col-lg-6 col scaled-font" id = "ing-2">
+                            <div class = "rounded g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-2-stats"></div>
                         </div>
-                        <div class = "row mb-3">
-                            <div class="ing-stats col-lg-6 col-sm scaled-font" id = "ing-5">
-                                <div class = "rounded col g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-5-stats"></div>
-                            </div>
-                            <div class="ing-stats col-lg-6 col-sm scaled-font" id = "ing-6">
-                                <div class = "rounded col g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-6-stats"></div>
-                            </div>
-                        </div>  
+                        <div class="ing-stats col-lg-6 col scaled-font" id = "ing-3">
+                            <div class = "rounded g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-3-stats"></div>
+                        </div>
+                        <div class="ing-stats col-lg-6 col scaled-font" id = "ing-4">
+                            <div class = "rounded g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-4-stats"></div>
+                        </div>
+                        <div class="ing-stats col-lg-6 col scaled-font" id = "ing-5">
+                            <div class = "rounded g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-5-stats"></div>
+                        </div>
+                        <div class="ing-stats col-lg-6 col scaled-font" id = "ing-6">
+                            <div class = "rounded g-0 dark-6 border border-3 border-dark dark-shadow p-3" id = "ing-6-stats"></div>
+                        </div>
                     </div>
                 </div>
             </div>
