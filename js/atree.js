@@ -735,6 +735,7 @@ function render_AT(UI_elem, list_elem, tree) {
         for (let k = 0; k < 9; k++) {
             col = document.createElement('div');
             col.classList.add('col', 'px-0');
+            col.style = "position: relative; aspect-ratio: 1/1;"
             row.appendChild(col);
         }
         UI_elem.appendChild(row);
@@ -752,7 +753,7 @@ function render_AT(UI_elem, list_elem, tree) {
             const parent_id = parent_abil.id;
 
             let connect_elem = document.createElement("div");
-            connect_elem.style = "background-size: cover; width: 100%; height: 100%;";
+            connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -791,29 +792,20 @@ function render_AT(UI_elem, list_elem, tree) {
         let icon = ability.display.icon;
         if (icon === undefined) {
             icon = "node";
+        } else if (icon == "node_4") {
+            icon = "node_warrior" // temp fix
         }
         let node_img = document.createElement('img');
         node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 100%; height: 100%;";
+        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
         node_elem.appendChild(node_img);
         node_elem.classList.add("atree-circle");
 
-        // add tooltip
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.display = "block";
-        });
-
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.display = "none";
-        });
-
-        node_elem.classList.add("fake-button");
+        // create hitbox
+        // this is necessary since images exceed the size of their square, but should only be interactible within that square
+        let hitbox = document.createElement("div");
+        hitbox.style = "position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;"
+        node_elem.appendChild(hitbox);
 
         let node_tooltip = document.createElement('div');
         node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
@@ -852,7 +844,7 @@ function render_AT(UI_elem, list_elem, tree) {
         node_wrap.elem = node_elem;
         node_wrap.all_connectors_ref = atree_connectors_map;
 
-        node_elem.addEventListener('click', function(e) {
+        hitbox.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
             atree_set_state(node_wrap, !node_wrap.active);
             atree_state_node.mark_dirty().update();
@@ -860,18 +852,18 @@ function render_AT(UI_elem, list_elem, tree) {
 
         // add tooltip
 
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .95 + "px";
+        hitbox.addEventListener('mouseover', function(e) {
+            if (e.target !== this && e.target!== this.parentElement.children[0]) {return;}
+            let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
+            tooltip.style.top = "50px";
+            tooltip.style.left = (this.parentElement.parentElement.parentElement.getBoundingClientRect().left - this.getBoundingClientRect().left) + "px";
+            tooltip.style.width = UI_elem.getBoundingClientRect().width * .95 + "px";
             tooltip.style.display = "block";
         });
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
+        hitbox.addEventListener('mouseout', function(e) {
+            if (e.target !== this && e.target!== this.parentElement.children[0]) {return;}
+            let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
             tooltip.style.display = "none";
         });
 
@@ -948,11 +940,11 @@ function atree_render_connection(atree_connectors_map) {
 function atree_set_state(node_wrapper, new_state) {
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.classList.add("atree-selected");
+        node_wrapper.elem.children[0].src = node_wrapper.elem.children[0].src.substring(0, node_wrapper.elem.children[0].src.length - 4) + "_selected.png";
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.classList.remove("atree-selected");
+        node_wrapper.elem.children[0].src = node_wrapper.elem.children[0].src.substring(0, node_wrapper.elem.children[0].src.length - 13) + ".png";
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
