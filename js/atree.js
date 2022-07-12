@@ -402,6 +402,7 @@ const atree_validate = new (class extends ComputeNode {
                 const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, 9999);
                 if (!success) {
                     _add.push([node, reason, hard_error]);
+                    continue;
                 }
                 if ('archetype' in ability && ability.archetype !== "") {
                     let val = 1;
@@ -1099,7 +1100,7 @@ function resolve_connector(atree_connectors_map, pos, new_connector) {
 function set_connector_type(connector_info) {  // left right up down
     const connections = connector_info.connections;
     const connector_elem = connector_info.connector;
-    let connector_dict = {
+    const connector_dict = {
         "1100": {type: "line", rotate: 90},
         "1010": {type: "angle", rotate: 0},
         "1001": {type: "angle", rotate: 270},
@@ -1115,7 +1116,7 @@ function set_connector_type(connector_info) {  // left right up down
 
     let lookup_str = "";
     for (let i of connections) {
-        if (i != 0) {
+        if (i) {
             lookup_str += 1;
         } else {
             lookup_str += 0;
@@ -1170,21 +1171,6 @@ function atree_set_state(node_wrapper, new_state) {
         }
     }
 };
-
-// refresh all connector to default state, then try to calculate the connector for all node
-function atree_update_connector() {
-    atree_connectors_map.forEach((v) => {
-        if (v.length != 0) {
-            let connector_elem = document.createElement("img");
-            connector_elem.style = "width: 100%; height: 100%;";
-            connector_elem.src = '../media/atree/connect_' + v[0].type + '.png'
-            v[0].replaceChildren(connector_elem);
-        }
-    });
-    atree_map.forEach((v) => {
-        atree_compute_highlight(v);
-    });
-}
 
 function atree_set_edge(atree_connectors_map, parent, child, state) {
     const connectors = child.connectors.get(parent);
