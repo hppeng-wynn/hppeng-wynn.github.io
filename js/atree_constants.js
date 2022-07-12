@@ -4439,7 +4439,7 @@ const atrees = {
             "display_name": "Wind Slash",
             "desc": "When using Teleport, slash through the air and deal damage to enemies you pierce.",
             "archetype": "Riftwalker",
-            "base_abil": "teleport",
+            "base_abil": "Teleport",
             "parents": ["Air Mastery", "Thunderstorm"], 
             "dependencies": ["Teleport"], 
             "blockers": [],

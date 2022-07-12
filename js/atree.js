@@ -97,35 +97,35 @@ const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properti
 
 // TODO: Range numbers
 const default_abils = {
-    wand: [{
+    Mage: [{
         display_name: "Mage Melee",
         id: 999,
         desc: "Mage basic attack.",
         properties: {range: 5000},
         effects: [default_spells.wand[0]]
     }, elem_mastery_abil ],
-    spear: [{
+    Warrior: [{
         display_name: "Warrior Melee",
         id: 999,
         desc: "Warrior basic attack.",
         properties: {range: 2},
         effects: [default_spells.spear[0]]
     }, elem_mastery_abil ],
-    bow: [{
+    Archer: [{
         display_name: "Archer Melee",
         id: 999,
         desc: "Archer basic attack.",
         properties: {range: 20},
         effects: [default_spells.bow[0]]
     }, elem_mastery_abil ],
-    dagger: [{
+    Assassin: [{
         display_name: "Assassin Melee",
         id: 999,
         desc: "Assassin basic attack.",
         properties: {range: 2},
         effects: [default_spells.dagger[0]]
     }, elem_mastery_abil ],
-    relik: [{
+    Shaman: [{
         display_name: "Shaman Melee",
         id: 999,
         desc: "Shaman basic attack.",
@@ -251,18 +251,18 @@ const atree_state_node = new (class extends ComputeNode {
  * I stg if wynn makes abils that modify multiple spells
  * ... well we can extend this by making `base_abil` a list instead but annoy
  *
- * Signature: AbilityTreeMergeNode(build: Build, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
+ * Signature: AbilityTreeMergeNode(player-class: WeaponType, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
  */
 const atree_merge = new (class extends ComputeNode {
     constructor() { super('builder-atree-merge'); }
 
     compute_func(input_map) {
-        const build = input_map.get('build');
+        const player_class = input_map.get('player-class');
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
         let abils_merged = new Map();
-        for (const abil of default_abils[build.weapon.statMap.get('type')]) {
+        for (const abil of default_abils[player_class]) {
             let tmp_abil = deepcopy(abil);
             if (!('desc' in tmp_abil)) {
                 tmp_abil.desc = [];
