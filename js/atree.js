@@ -987,8 +987,6 @@ function render_AT(UI_elem, list_elem, tree) {
         let icon = ability.display.icon;
         if (icon === undefined) {
             icon = "node";
-        } else if (icon == "node_4") {
-            icon = "node_warrior" // temp fix
         }
         let node_img = document.createElement('img');
         node_img.src = '../media/atree/'+icon+'.png';
@@ -1111,17 +1109,17 @@ function atree_render_connection(atree_connectors_map) {
 
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
-    console.log(node_wrapper.elem.children[0])
+    let icon = node_wrapper.ability.display.icon;
+    if (icon === undefined) {
+        icon = "node";
+    }
     if (new_state) {
-        console.log("on")
         node_wrapper.active = true;
-        node_wrapper.elem.children[0].src = node_wrapper.elem.children[0].src.substring(0, node_wrapper.elem.children[0].src.length - 4) + "_selected.png";
-        console.log(node_wrapper.elem.children[0].src)
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
     } 
     else {
-        console.log("off")
         node_wrapper.active = false;
-        node_wrapper.elem.children[0].src = node_wrapper.elem.children[0].src.substring(0, node_wrapper.elem.children[0].src.length - 13) + ".png";
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1135,21 +1133,6 @@ function atree_set_state(node_wrapper, new_state) {
         }
     }
 };
-
-// refresh all connector to default state, then try to calculate the connector for all node
-function atree_update_connector() {
-    atree_connectors_map.forEach((v) => {
-        if (v.length != 0) {
-            let connector_elem = document.createElement("img");
-            connector_elem.style = "width: 100%; height: 100%;";
-            connector_elem.src = '../media/atree/connect_' + v[0].type + '.png'
-            v[0].replaceChildren(connector_elem);
-        }
-    });
-    atree_map.forEach((v) => {
-        atree_compute_highlight(v);
-    });
-}
 
 function atree_set_edge(atree_connectors_map, parent, child, state) {
     const connectors = child.connectors.get(parent);
