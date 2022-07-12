@@ -88,7 +88,6 @@ const atrees = {
                 "cost": 50,
                 "base_spell": 3, 
                 "spell_type": "damage", 
-                "scaling": "spell",
                 "display": "Total Damage", 
                 "parts": [
                     {  
@@ -237,7 +236,6 @@ const atrees = {
                     "cost": 40,
                     "base_spell": 1, 
                     "spell_type": "damage", 
-                    "scaling": "spell",
                     "display": "Total Damage", 
                     "parts": [
                         {  
@@ -341,7 +339,6 @@ const atrees = {
             "desc": "When you hit the ground with Arrow Bomb, leave a Trap that damages enemies. (Max 2 Traps)",
             "archetype": "Trapper",
             "archetype_req": 2, 
-            "base_abil": "Arrow Bomb",
             "parents": ["Bryophyte Roots"], 
             "dependencies": [], 
             "blockers": [],
@@ -357,10 +354,17 @@ const atrees = {
             },
             "effects": [
                 { 
-                    "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Basaltic Trap", 
-                    "multipliers": [140, 30, 0, 0, 30, 0]
+                    "type": "replace_spell",
+                    "name": "Basaltic Trap",
+                    "base_spell": 7,
+                    "display": "Trap Damage",
+                    "parts": [
+                        {
+                            "name": "Trap Damage",
+                            "type": "damage",
+                            "multipliers": [140, 30, 0, 0, 30, 0]
+                        }
+                    ]
                 }
             ]
         },
@@ -572,6 +576,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
+                    "base_spell": 3,
                     "conversion": "Thunder"
                 }
             ]
@@ -581,7 +586,7 @@ const atrees = {
             "desc": "Your Traps will give you 2.85 Mana per second when you stay close to them.",
             "archetype": "Trapper", 
             "archetype_req": 5, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["More Traps", "Better Arrow Shield"], 
             "dependencies": [], 
             "blockers": [],
@@ -624,7 +629,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2, 
                     "target_part": "Per Arrow", 
-                    "multipliers": [30, 0, 10, 0, 0, 0]
+                    "multipliers": [20, 0, 10, 0, 0, 0]
                 },
                 { 
                     "type": "add_spell_prop",
@@ -748,7 +753,7 @@ const atrees = {
                     "parts": [
                         {  
                             "name": "Single Arrow",
-                            "multipliers": [10, 0, 0, 5, 0, 0]
+                            "multipliers": [20, 0, 0, 5, 0, 0]
                         },
                         {
                             "name": "DPS",
@@ -794,6 +799,7 @@ const atrees = {
             "desc": "Your Traps will be connected by a rope that deals damage to enemies every 0.2s.",
             "archetype": "Trapper", 
             "archetype_req": 0, 
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -804,20 +810,16 @@ const atrees = {
             },
             "effects": [
                 { 
-                    "type": "replace_spell",
-                    "name": "Tangled Traps",
-                    "base_spell": 7,
-                    "display": "DPS",
-                    "parts": [
-                        {  
-                            "name": "Damage Tick",
-                            "multipliers": [20, 0, 0, 0, 0, 20]
-                        },
-                        {
-                            "name": "DPS",
-                            "hits": { "Damage Tick": 5 }
-                        }
-                    ]
+                    "type": "add_spell_prop",
+                    "base_spell": 7, 
+                    "target_part": "Line Damage Tick", 
+                    "multipliers": [20, 0, 0, 0, 0, 20]
+                },
+                { 
+                    "type": "add_spell_prop",
+                    "base_spell": 7, 
+                    "target_part": "DPS", 
+                    "hits": { "Line Damage Tick": 5 }
                 }
             ]
         },
@@ -874,7 +876,7 @@ const atrees = {
             "desc": "Allow you to place +6 Traps, but with reduced damage and range.",
             "archetype": "Trapper",
             "archetype_req": 10, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb", "Cheaper Arrow Bomb (2)"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -884,8 +886,8 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop",
-                    "base_spell": 3, 
-                    "target_part": "Basaltic Trap", 
+                    "base_spell": 8, 
+                    "target_part": "Trap Damage", 
                     "cost": 0,
                     "multipliers": [-80, 0, 0, 0, 0, 0]
                 },
@@ -985,6 +987,7 @@ const atrees = {
         },
         {
             "display_name": "Earth Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Earth attacks",
             "archetype": "Trapper", 
             "archetype_req": 0, 
@@ -1023,6 +1026,7 @@ const atrees = {
         },
         {
             "display_name": "Thunder Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Thunder attacks",
             "archetype": "Boltslinger", 
             "archetype_req": 0, 
@@ -1061,6 +1065,7 @@ const atrees = {
         },
         {
             "display_name": "Water Mastery",
+            "base_abil": 998,
             "desc": "Increases your base damage from all Water attacks",
             "archetype": "Sharpshooter", 
             "archetype_req": 0, 
@@ -1099,6 +1104,7 @@ const atrees = {
         },
         {
             "display_name": "Air Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Air attacks",
             "archetype": "Boltslinger", 
             "archetype_req": 0, 
@@ -1137,6 +1143,7 @@ const atrees = {
         },
         {
             "display_name": "Fire Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Fire attacks",
             "archetype": "Sharpshooter", 
             "archetype_req": 0, 
@@ -1240,7 +1247,7 @@ const atrees = {
             "display_name": "Refined Gunpowder",
             "desc": "Increase the damage of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
-            "parents": ["Windstorm"], 
+            "parents": ["Windstorm", "Traveler"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -1262,7 +1269,7 @@ const atrees = {
             "desc": "Increase the maximum amount of active Traps you can have by +2.",
             "archetype": "Trapper",
             "archetype_req": 0, 
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Bouncing Bomb"], 
             "dependencies": ["Basaltic Trap"], 
             "blockers": [],
@@ -1405,7 +1412,7 @@ const atrees = {
                 "type": "raw_stat",
                 "bonuses": [{
                     "type": "stat",
-                    "name": "mdCritPct",
+                    "name": "critDamPct",
                     "value": 30
                 }]
             }]  
@@ -1688,10 +1695,10 @@ const atrees = {
                 "slider_name": "Focus",
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
-                "scaling": [35],
-                "max": 3
+                "scaling": [40],
+                "slider_max": 3
             }]
         },
         {
@@ -1699,6 +1706,7 @@ const atrees = {
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Focus",
             "parents": ["Cheaper Arrow Storm", "Grappling Hook"],
             "dependencies": ["Focus"],
             "blockers": [],
@@ -1713,12 +1721,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Focus",
+                "slider_max": 2,
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
-                "scaling": [30],
-                "max": 5
+                "scaling": [-5]
             }]
         },
         {
@@ -1726,6 +1734,7 @@ const atrees = {
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
+            "base_abil": "Focus",
             "parents": ["Crepuscular Ray", "Snow Storm"],
             "dependencies": ["Focus"],
             "blockers": [],
@@ -1740,12 +1749,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Focus",
+                "slider_max": 2,
                 "output": {
                     "type": "stat",
-                    "name": "damMult"
+                    "name": "damMult.Focus"
                 },
-                "scaling": [25],
-                "max": 7
+                "scaling": [-5]
             }]
         },
         {
@@ -1781,7 +1790,7 @@ const atrees = {
             "desc": "Your Traps will deal +20% more damage for every second they are active (Max +80%)",
             "archetype": "Trapper",
             "archetype_req": 0,
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["More Shields"],
             "dependencies": ["Basaltic Trap"],
             "blockers": [],
@@ -1798,13 +1807,13 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Trap Wait Time",
+                "slider_max": 4,
                 "output": {
                     "type": "stat",
-                    "name": "damMult:Basaltic Trap"
+                    "name": "damMult.Basaltic:7.Trap Damage"
                 },
                 "slider_step": 1,
-                "scaling": [20],
-                "max": 80
+                "scaling": [20]
             }]
         },
         {
@@ -1812,7 +1821,7 @@ const atrees = {
             "desc": "Add +80% Max Damage to Patient Hunter",
             "archetype": "Trapper",
             "archetype_req": 0,
-            "base_abil": "Arrow Bomb",
+            "base_abil": "Basaltic Trap",
             "parents": ["Grape Bomb"],
             "dependencies": ["Patient Hunter"],
             "blockers": [],
@@ -1828,12 +1837,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Trap Wait Time",
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult:Basaltic Trap"
-                    },
-                    "scaling": [20],
-                    "max": 80
+                    "slider_max": 4
                 },
                 {
                     "type": "raw_stat",
@@ -1870,14 +1874,13 @@ const atrees = {
                     "name": "spd"
                 },
                 "scaling": [6],
-                "max": 200
+                "max": 160
             }]
         },
         {
             "display_name": "Phantom Ray",
             "desc": "Condense Arrow Storm into a single ray that damages enemies 10 times per second",
-            "archetype": "Sharpshooter",
-            "archetype_req": 0,
+            "base_abil": "Arrow Storm",
             "parents": ["Water Mastery", "Fire Creep"],
             "dependencies": ["Arrow Storm"],
             "blockers": ["Windstorm", "Nimble String", "Arrow Hurricane"],
@@ -1920,7 +1923,7 @@ const atrees = {
         },
         {
             "display_name": "Arrow Rain",
-            "desc": "When Arrow Shield loses its last charge, unleash 200 arrows raining down on enemies",
+            "desc": "When Arrow Shield loses its last charge, unleash 150 arrows raining down on enemies",
             "base_abil": "Arrow Shield",
             "parents": ["Nimble String", "Air Mastery"],
             "dependencies": ["Arrow Shield"],
@@ -1937,22 +1940,23 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Arrow Rain (Per Arrow)",
-                    "multipliers": [120, 0, 0, 0, 0, 80]
+                    "multipliers": [80, 0, 0, 0, 0, 60]
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Arrow Rain (Total)",
-                    "hits": { "Arrow Rain (Per Arrow)": 200 }
+                    "hits": { "Arrow Rain (Per Arrow)": 150 }
                 }
             ]
         },
         {
             "display_name": "Decimator",
-            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 50%)",
+            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it (Max 70%)",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
-            "parents": ["Cheaper Arrow Shield"],
+            "base_abil": "Arrow Storm",
+            "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
             "dependencies": ["Phantom Ray"],
             "blockers": [],
             "cost": 1,
@@ -1966,12 +1970,12 @@ const atrees = {
                 "type": "stat_scaling",
                 "slider": true,
                 "slider_name": "Phantom Ray hits",
+                "slider_max": 7,
                 "output": {
                     "type": "stat",
-                    "name": "damMult:Single Arrow"
+                    "name": "damMult.Decimator:1.Single Arrow"
                 },
-                "scaling": 10,
-                "max": 50
+                "scaling": [10]
             }]
         }
     ],
@@ -2209,7 +2213,7 @@ const atrees = {
 
         {
             "display_name": "Tougher Skin",
-            "desc": "Harden your skin and become permanently +5% more resistant\nFor every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
+            "desc": "Harden your skin and become permanently +5% more resistant. For every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["Charge"], 
@@ -2229,7 +2233,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "baseResist",
+                            "name": "defMult.Base",
                             "value": 5
                         }
                     ]
@@ -2285,7 +2289,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Uppercut",
-                            "multipliers": [150, 50, 50, 0, 0, 0]
+                            "multipliers": [200, 40, 40, 0, 0, 0]
                         },
                         {
                             "name": "Total Damage",
@@ -2362,6 +2366,7 @@ const atrees = {
 
         {
             "display_name": "Earth Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Earth attacks",
             "archetype": "Fallen", 
             "archetype_req": 0, 
@@ -2390,6 +2395,7 @@ const atrees = {
 
         {
             "display_name": "Thunder Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Thunder attacks",
             "archetype": "Fallen", 
             "archetype_req": 0, 
@@ -2418,6 +2424,7 @@ const atrees = {
 
         {
             "display_name": "Water Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Water attacks",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
@@ -2446,6 +2453,7 @@ const atrees = {
 
         {
             "display_name": "Air Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Air attacks",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
@@ -2474,6 +2482,7 @@ const atrees = {
 
         {
             "display_name": "Fire Mastery",
+            "base_abil": 998,
             "desc": "Increases base damage from all Fire attacks",
             "archetype": "Paladin", 
             "archetype_req": 0, 
@@ -2654,26 +2663,28 @@ const atrees = {
             },
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Flaming Uppercut",
-                    "multipliers": [0, 0, 0, 0, 50, 0]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Flaming Uppercut Total Damage",
-                    "hits": {
-                        "Flaming Uppercut": 5
-                    }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Flaming Uppercut": 5
-                    }
+                    "type": "replace_spell",
+                    "name": "Flaming Uppercut",
+                    "base_spell": 8,
+                    "display": "DPS",
+                    "parts": [
+                        {
+                            "name": "Damage Tick",
+                            "multipliers": [0, 0, 0, 0, 50, 0]
+                        },
+                        {
+                            "name": "DPS",
+                            "hits": {
+                                "Damage Tick": 1.66666666666666666666666666666
+                            }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "hits": {
+                                "Damage Tick": 5
+                            }
+                        }
+                    ]
                 }
             ]  
         },
@@ -2777,14 +2788,14 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [{ "type": "stat", "name": "defPct", "value": 70}]
+                    "bonuses": [{ "type": "stat", "name": "defMult.Mantle", "value": 70}]
                 }
             ]
         },
 
         {
             "display_name": "Bak'al's Grasp",
-            "desc": "After casting War Scream, become Corrupted (15s Cooldown). You cannot heal while in that state\n\nWhile Corrupted, every 2% of Health you lose will add +4 Raw Damage to your attacks (Max 120)",
+            "desc": "After casting War Scream, become Corrupted (15s Cooldown). You cannot heal while in that state. While Corrupted, every 2% of Health you lose will add +4 Raw Damage to your attacks (Max 120)",
             "archetype": "Fallen", 
             "archetype_req": 2, 
             "parents": ["Quadruple Bash", "Fireworks"], 
@@ -2804,13 +2815,14 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Corrupted",
+                    "slider_max": 100,
+                    "slider_step": 1,
                     "output": {
                         "type": "stat",
                         "name": "damRaw" 
                     },
-                    "scaling": [4],
-                    "slider_step": 1,
-                    "max": 120
+                    "max": 120,
+                    "scaling": [2]
                 }
             ]  
         },
@@ -2890,14 +2902,12 @@ const atrees = {
 
         {
             "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 5s \n\nReduce the Mana cost of War Scream",
-            "archetype": "Paladin", 
-            "archetype_req": 0, 
+            "desc": "Mobs damaged by War Scream will target only you for at least 5s. Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 1, 
+            "cost": 2, 
             "display": {
                 "row": 17,
                 "col": 7,
@@ -2970,6 +2980,7 @@ const atrees = {
             "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +3% (Max 300%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Spear Proficiency 2"], 
             "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
@@ -2984,19 +2995,13 @@ const atrees = {
             "effects": [
                 {
                     "type": "stat_scaling",
-                    "slider": false,
-                    "inputs": [
-                        {
-                            "type": "stat",
-                            "name": "hpBonus"
-                        }
-                    ],
+                    "slider_name": "Corrupted",
+                    "slider": true,
                     "output": {
                         "type": "stat",
-                        "name": "damMult" 
+                        "name": "damMult.Enraged" 
                     },
-                    "scaling": [3],
-                    "max": 300
+                    "scaling": [3]
                 }
             ]  
         },
@@ -3040,6 +3045,7 @@ const atrees = {
             "desc": "Add +2 additional charges to Mantle of the Bovemists",
             "archetype": "Paladin", 
             "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
             "parents": ["Manachism", "Flying Kick"], 
             "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
@@ -3088,8 +3094,7 @@ const atrees = {
         {
             "display_name": "Boiling Blood",
             "desc": "Bash leaves a trail of boiling blood behind its first explosion, slowing down and damaging enemies above it every 0.4 seconds",
-            "archetype": "", 
-            "archetype_req": 0, 
+            "base_abil": "Bash",
             "parents": ["Enraged Blow", "Ragnarokkr"], 
             "dependencies": [], 
             "blockers": [],
@@ -3138,7 +3143,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.Ragnarokkr", "value": 30} ]
                 }
             ]  
         },
@@ -3194,7 +3199,7 @@ const atrees = {
                         "type": "stat",
                         "name": "fDamPct"
                     },
-                    "scaling": [2],
+                    "scaling": [0.02],
                     "max": 100
                 }
             ]  
@@ -3354,8 +3359,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damRaw" 
                     },
-                    "scaling": [0.5],
-                    "max": 50
+                    "scaling": [0.5]
                 },
                 {
                     "type": "raw_stat",
@@ -3447,7 +3451,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "baseResist",
+                            "name": "defMult.Base",
                             "value": 5
                         }
                     ]
@@ -3477,7 +3481,7 @@ const atrees = {
                 {
                     "type": "raw_stat",
                     "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult", "value": 30} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
                 }
             ]  
         },
@@ -3533,7 +3537,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Sparkling Hope",
-                    "base_spell": 6,
+                    "base_spell": 7,
                     "display": "Damage Tick",
                     "parts": [
                         {
@@ -3549,7 +3553,7 @@ const atrees = {
             "desc": "While Corrupted, every 3% Health you lose will add +1 AoE to Bash (Max 10)",
             "archetype": "Fallen", 
             "archetype_req": 8, 
-            "base_abil": "Bash",
+            "base_abil": "Bak'al's Grasp",
             "parents": ["Tempest", "Uncontainable Corruption"], 
             "dependencies": [], 
             "blockers": [],
@@ -3753,7 +3757,7 @@ const atrees = {
 
         {
             "display_name": "Discombobulate",
-            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +2 (Additive, Max +50). This bonus decays -5 every second",
+            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +3 (Additive, Max +80). This bonus decays -5 every second",
             "archetype": "Battle Monk", 
             "archetype_req": 11, 
             "parents": ["Cyclone"], 
@@ -3772,6 +3776,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
+                    "slider_max": 27,
                     "output": [
                         { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
                         { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
@@ -3804,6 +3809,7 @@ const atrees = {
                 {
                     "type": "convert_spell_conv",
                     "target_part": "all",
+                    "base_spell": 1,
                     "conversion": "Thunder"
                 },
                 {
@@ -3826,7 +3832,7 @@ const atrees = {
             "parents": ["Spirit of the Rabbit"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 1, 
+            "cost": 2, 
             "display": {
                 "row": 31,
                 "col": 4,
@@ -3876,7 +3882,7 @@ const atrees = {
         {
             "display_name": "Blood Pact",
             "desc": "If you do not have enough mana to cast a spell, spend health instead (0.6% health per mana)",
-            "archetype": "", 
+            "archetype": "Fallen", 
             "archetype_req": 10, 
             "parents": ["Cheaper War Scream"], 
             "dependencies": [], 
@@ -3928,7 +3934,13 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []  
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [{ "type": "stat", "name": "defMult.Brink", "value": 40}]
+                }
+            ]
         },
 
         {
@@ -3973,6 +3985,1786 @@ const atrees = {
                 "aoe": 12
             },
             "effects": []  
+        }
+    ],
+    "Mage": [
+        {
+            "display_name": "Meteor",
+            "desc": "Summon a slow but powerful meteor from the sky, dealing massive damage in a large area",
+            "parents": [], 
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 0,
+                "col": 4,
+                "icon": "node_4"
+            },
+            "properties": {
+                "aoe": 5,
+                "range": 18
+            },
+            "effects": [{ 
+                "type": "replace_spell",
+                "name": "Meteor",
+                "cost": 55,
+                "base_spell": 3, 
+                "display": "Total Damage", 
+                "parts": [
+                    {  
+                        "name": "Meteor Damage",
+                        "multipliers": [300, 100, 0, 0, 0, 0]
+                    },
+                    {
+                        "name": "Total Damage",
+                        "hits": { "Meteor Damage": 1 }
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Teleport",
+            "desc": "Instantly teleport in the direction you're facing",
+            "parents": ["Shooting Star"], 
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+            "row": 6,
+            "col": 4,
+            "icon": "node_4"
+            },
+            "properties": {
+                "range": 12
+            },
+            "effects": [{ 
+                "type": "replace_spell",
+                "name": "Teleport",
+                "cost": 25,
+                "base_spell": 2, 
+                "display": "", 
+                "parts": []
+            }]
+        },
+        {
+            "display_name": "Heal",
+            "desc": "Heal yourself and nearby allies in a large area around you. (When healing an ally, you cannot heal more than 30% of their max health)",
+            "parents": ["Wand Proficiency II", "Cheaper Teleport"], 
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1, 
+            "display": { "row": 8, "col": 2, "icon": "node_4"},
+            "properties": { "aoe": 5 },
+            "effects": [
+                { 
+                    "type": "replace_spell",
+                    "name": "Heal",
+                    "cost": 35,
+                    "base_spell": 1, 
+                    "display": "Heal", 
+                    "parts": [
+                        {  
+                            "name": "Heal",
+                            "power": 0.1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Ice Snake",
+            "desc": "Summon a fast-moving ice snake that reduces your enemies' speed and damage them.",
+            "parents": ["Wisdom", "Cheaper Teleport"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 8,
+                "col": 6,
+                "icon": "node_4"
+            },
+            "properties": {
+                "range": 18,
+                "effects": 40,
+                "duration": 3
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Ice Snake",
+                    "cost": 35,
+                    "base_spell": 4,
+                    "display": "Ice Snake Damage",
+                    "parts": [
+                        {
+                            "name": "Ice Snake Damage",
+                            "multipliers": [70, 0, 0, 30, 0, 0]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Shooting Star",
+            "desc": "Drastically increase the speed of your Meteor ability.",
+            "base_abil": 3,
+            "parents": ["Wand Proficiency I"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 4,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Wand Proficiency I",
+            "desc": "Improve your Main Attack's damage and range when using a wand.",
+            "base_abil": 999,
+            "parents": ["Meteor"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": { "row": 2, "col": 4, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "mdPct",
+                            "value": 5
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Cheaper Meteor",
+            "desc": "Reduce the Mana cost of Meteor.",
+            "base_abil": "Meteor",
+            "parents": ["Wand Proficiency I"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 2, "col": 6, "icon": "node_0"},
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 3,
+                "cost": -10
+            }]
+        },
+        {
+            "display_name": "Earth Mastery",
+            "base_abil": 998,
+            "desc": "Increases your base damage from all Earth attacks",
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "parents": ["Ice Snake"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "eDamPct",
+                            "value": 20
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eDamAddMin",
+                            "value": 2
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eDamAddMax",
+                            "value": 4
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Thunder Mastery",
+            "base_abil": 998,
+            "desc": "Increases your base damage from all Thunder attacks",
+            "archetype": "Riftwalker", 
+            "archetype_req": 0, 
+            "parents": ["Heal", "Cheaper Teleport"],
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "tDamPct",
+                            "value": 10
+                        },
+                        {
+                            "type": "stat",
+                            "name": "tDamAddMin",
+                            "value": 1
+                        },
+                        {
+                            "type": "stat",
+                            "name": "tDamAddMax",
+                            "value": 8
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Water Mastery",
+            "base_abil": 998,
+            "desc": "Increases your base damage from all Water attacks",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Cheaper Teleport", "Thunder Mastery"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 11,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "wDamPct",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "wDamAddMin",
+                            "value": 2
+                        },
+                        {
+                            "type": "stat",
+                            "name": "wDamAddMax",
+                            "value": 4
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Air Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Air attacks",
+            "archetype": "Riftwalker", 
+            "archetype_req": 0, 
+            "parents": ["Heal"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "aDamPct",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aDamAddMin",
+                            "value": 3
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aDamAddMax",
+                            "value": 4
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Fire Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Fire attacks",
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "parents": ["Ice Snake"],
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "fDamPct",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "fDamAddMin",
+                            "value": 3
+                        },
+                        {
+                            "type": "stat",
+                            "name": "fDamAddMax",
+                            "value": 5
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Cheaper Teleport",
+            "desc": "Reduce the Mana cost of Teleport.",
+            "base_abil": "Teleport",
+            "parents": ["Heal", "Ice Snake"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": { "row": 8, "col": 4, "icon": "node_0"},
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 2,
+                "cost": -5
+            }]  
+        },
+        {
+            "display_name": "Wisdom",
+            "desc": "For every 2% or 2 Raw Spell Damage you have from items, gain +1/5s mana regen (Max 5/5s)",
+            "archetype": "Arcanist",
+            "archetype_req": 0,
+            "parents": ["Teleport"],
+            "dependencies": [],
+            "blockers": ["Wand Proficiency II"],
+            "cost": 1,
+            "display": {
+                "row": 6,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": false,
+                "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "sdPct"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "sdRaw"
+                        }
+                    ],
+                "output": {
+                    "type": "stat",
+                    "name": "mr"
+                },
+                "scaling": [0.5, 0.5],
+                "max": 5
+            }]
+        },
+        {
+            "display_name": "Wand Proficiency II",
+            "desc": "Improve your Main Attack's damage and range when using a wand.",
+            "archetype": "Riftwalker",
+            "archetype_req": 0,
+            "base_abil": 999,
+            "parents": ["Teleport"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 6,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "mdPct",
+                            "value": 5
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Wind Slash",
+            "desc": "When using Teleport, slash through the air and deal damage to enemies you pierce.",
+            "archetype": "Riftwalker",
+            "base_abil": "Teleport",
+            "parents": ["Air Mastery", "Thunderstorm"], 
+            "dependencies": ["Teleport"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": { "row": 12, "col": 0, "icon": "node_1"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Wind Slash",
+                    "base_spell": 2,  
+                    "multipliers": [50, 0, 0, 0, 0, 50]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Total Damage",
+                    "base_spell": 2,  
+                    "display": "Total Damage",
+                    "hits": {"Wind Slash": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Thunderstorm",
+            "desc": "After casting Meteor, summon 3 lightning strikes and deal additional damage",
+            "base_abil": "Meteor",
+            "parents": ["Wind Slash", "Thunder Mastery"],
+            "dependencies": ["Meteor"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 12,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 2
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Lightning Damage",
+                    "base_spell": 3,  
+                    "multipliers": [30, 0, 15, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Total Damage",
+                    "base_spell": 3,
+                    "hits": { "Lightning Damage": 3 }
+                }
+            ]
+        },
+        {
+            "display_name": "Stronger Meteor",
+            "desc": "Increase the damage of Meteor.",
+            "base_abil": "Meteor",
+            "archetype": "Arcanist", 
+            "archetype_req": 2, 
+            "parents": ["Burning Sigil"], 
+            "dependencies": ["Meteor"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": { "row": 13, "col": 8, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                { 
+                    "type": "add_spell_prop",
+                    "base_spell": 3, 
+                    "target_part": "Meteor Damage", 
+                    "behavior": "modify",
+                    "multipliers": [30, 90, 0, 0, 0, 0]
+                }
+            ]
+        },
+        {
+            "display_name": "Burning Sigil",
+            "desc": "Meteor will leave a sigil that damages enemies every 0.4s.",
+            "base_abil": "Meteor",
+            "parents": ["Fire Mastery", "Earth Mastery"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+            "row": 12,
+            "col": 7,
+            "icon": "node_1"
+            },
+            "properties": { 
+                "aoe": 7,
+                "duration": 8
+            },
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Burning Sigil",
+                "base_spell": 6,
+                "display": "DPS",
+                "parts": [
+                    {
+                        "name": "Tick Damage",
+                        "multipliers": [15, 0, 0, 0, 25, 0]
+                    },
+                    {
+                        "name": "DPS",
+                        "hits": { "Tick Damage": 2.5 }
+                    },
+                    {
+                        "name": "Total Burn Damage",
+                        "hits": { "Tick Damage": 20 }
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Sunshower",
+            "desc": "Heal emit a strong light, damaging nearby enemies.",
+            "archetype": "Light Bender",
+            "archetype_req": 0,
+            "base_abil": "Heal",
+            "parents": ["Water Mastery"],
+            "dependencies": ["Heal"],
+            "blockers": ["Arcane Transfer"],
+            "cost": 2, 
+            "display": {
+                "row": 13,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                { 
+                    "type": "add_spell_prop",
+                    "base_spell": 1,  
+                    "target_part": "Sunshower Damage", 
+                    "multipliers": [70, 0, 0, 30, 0, 0]
+                }
+            ]
+        },
+        {
+            "display_name": "Windsweeper",
+            "desc": "Your Main Attack will add +1 Winded to enemies you hit. (Max 5, 0.5s cooldown) Ice Snake will deal additional damage to enemies for every Winded they have",
+            "archetype": "Riftwalker",
+            "archetype_req": 3, 
+            "parents": ["Wind Slash", "Thunderstorm"], 
+            "dependencies": ["Ice Snake"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 15,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": { "max": 5 },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:4.Ice Snake Damage"
+                    },
+                    "scaling": [20],
+                    "slider_step": 1,
+                    "slider_max": 5
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "wConvBase:4.Ice Snake Damage"
+                    },
+                    "scaling": [10]
+                }
+            ]
+        },
+        {
+            "display_name": "Ophanim",
+            "desc": "When casting Meteor, instead summon 2 orbs of light with 200 Health that will attack when you use your Main Attack. When they damage an enemy, they lose 20% of their Health. They can be healed back.",
+            "archetype": "Light Bender",
+            "archetype_req": 2,
+            "parents": ["Sunshower"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 15,
+                "col": 4,
+                "icon": "node_3"
+            },
+            "properties": { "health": 200 },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Ophanim",
+                    "base_spell": 3,
+                    "display": "Per Melee (max)",
+                    "parts": [
+                        {
+                            "name": "Per Orb",
+                            "multipliers": [50, 0, 30, 20, 0, 0]
+                        },
+                        {
+                            "name": "Per Melee (max)",
+                            "hits": { "Per Orb": 2 }
+                        }
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": 30
+                }
+            ]
+        },
+        {
+            "display_name": "Arcane Transfer",
+            "desc": "Meteor and Ice Snake will add +5 Mana to a Mana Bank for every aggressive enemy you hit. Heal will now transfer the content of your Mana Bank into usable Mana instead of healing.",
+            "archetype": "Arcanist",
+            "archetype_req": 2, 
+            "parents": ["Burning Sigil"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+            "row": 15,
+            "col": 7,
+            "icon": "node_3"
+            },
+            "properties": { "bank": 90 },
+            "effects": [
+                { 
+                    "type": "replace_spell",
+                    "name": "Arcane Transfer",
+                    "base_spell": 1, 
+                    "parts": [], 
+                    "display": ""
+                }
+            ]
+        },
+        {
+            "display_name": "Cheaper Heal",
+            "desc": "Reduce the Mana cost of Heal.",
+            "base_abil": "Heal",
+            "parents": ["Windsweeper", "Purification"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 17, "col": 1, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "cost": -5
+                }
+            ]  
+        },
+        {
+            "display_name": "Purification",
+            "desc": "Heal and Arcane Transfer will purify you of all negative effects and fire. (3s Cooldown)",
+            "base_abil": 1,
+            "parents": ["Ophanim", "Cheaper Heal", "Sentient Snake"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 17,
+                "col": 4,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Sentient Snake",
+            "desc": "Ice Snake will follow the direction you're facing, allowing you to control it.",
+            "base_abil": "Ice Snake",
+            "parents": ["Arcane Transfer", "Purification"],
+            "dependencies": ["Ice Snake"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 17,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Eye Piercer",
+            "desc": "Teleport will blind enemies, confusing them for a short amount of time.",
+            "base_abil": "Teleport",
+            "parents": ["Cheaper Heal"],
+            "dependencies": ["Teleport"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 18,
+                "col": 0,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Breathless",
+            "desc": "Meteor will deal additional damage to enemies for every Winded they have.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker", 
+            "archetype_req": 0, 
+            "parents": ["Cheaper Heal", "Purification"],
+            "dependencies": ["Windsweeper"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 18,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Meteor Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Meteor Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Per Orb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Per Orb"
+                        }
+                    ],
+                    "scaling": [15]
+                }
+            ]
+        },
+        {
+            "display_name": "Larger Heal",
+            "desc": "Increase your Heal's range.",
+            "base_abil": 1,
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Purification", "Sentient Snake"], 
+            "dependencies": ["Heal"], 
+            "blockers": ["Arcane Transfer"],
+            "cost": 1, 
+            "display": { "row": 18, "col": 5, "icon": "node_0"},
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [{
+                    "type": "prop",
+                    "abil": "Heal",
+                    "name": "aoe",
+                    "value": 2
+                }]
+            }]
+        },
+        {
+            "display_name": "Larger Mana Bank",
+            "desc": "Increase your maximum Mana Bank by +30.",
+            "base_abil": 1,
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "parents": ["Sentient Snake"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 18,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [{
+                    "type": "prop",
+                    "abil": "Arcane Transfer",
+                    "name": "bank",
+                    "value": 30
+                }]
+            }]
+        },
+        {
+            "display_name": "Cheaper Ice Snake",
+            "desc": "Reduce the Mana cost of Ice Snake.",
+            "base_abil": "Ice Snake",
+            "parents": ["Eye Piercer"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 20, "col": 0, "icon": "node_0"},
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 4,
+                "cost": -5
+            }]
+        },
+        {
+            "display_name": "Cheaper Teleport II",
+            "desc": "Reduce the Mana cost of Teleport.",
+            "base_abil": "Teleport",
+            "parents": ["Purification", "Fortitude"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 20, "col": 4, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "cost": -5
+                }
+            ]  
+        },
+        {
+            "display_name": "Fortitude",
+            "desc": "After healing 120% of your max health within 10s, apply a damage bonus to each player you've healed. (15s Cooldown)",
+            "base_abil": "Heal",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Cheaper Ice Snake", "Cheaper Teleport II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 20,
+                "col": 2,
+                "icon": "node_2"
+            },
+            "properties": {
+                "duration": 4
+            },
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": true,
+                "bonuses": [{
+                    "type": "stat",
+                    "name": "damMult.Fortitude",
+                    "value": 100
+                }]
+            }]
+        },
+        {
+            "display_name": "Pyrokinesis",
+            "desc": "When your Mana Bank reaches 30, your Main Attack will stop and explode when it hits an enemy. (Damage is dealt as Main Attack Damage)",
+            "base_abil": 4,
+            "archetype": "Arcanist", 
+            "archetype_req": 4, 
+            "parents": ["Sentient Snake"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 20,
+                "col": 7,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "__TODO": "replace_spell pyrokinesis damage",
+            "effects": []
+        },
+        {
+            "display_name": "Seance",
+            "desc": "For every 5/3s Lifesteal you have from items, gain 1% Spell Damage (Max 50%)",
+            "archetype": "",
+            "archetype_req": 0,
+            "parents": ["Pyrokinesis", "Snake Nest"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 22,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": false,
+                "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "ls"
+                        }
+                    ],
+                "output": {
+                    "type": "stat",
+                    "name": "sdPct"
+                },
+                "scaling": [0.2],
+                "max": 50
+            }]
+        },
+        {
+            "display_name": "Blink",
+            "desc": "Teleport will trigger 2 times in quick successions",
+            "base_abil": "Teleport",
+            "archetype": "Riftwalker", 
+            "archetype_req": 0, 
+            "parents": ["Fortitude", "Cheaper Ice Snake"],
+            "dependencies": ["Teleport"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 21,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": true,
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil": "Teleport",
+                        "name": "range",
+                        "value": -4
+                    }]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "behavior": "modify",
+                    "target_part": "Total Damage",
+                    "base_spell": 2,  
+                    "hits": {"Wind Slash": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Snake Nest",
+            "desc": "Ice Snake will summon 3 snakes.",
+            "base_abil": "Ice Snake",
+            "parents": ["Seance", "Cheaper Teleport II", "Healthier Ophanim I"],
+            "dependencies": ["Ice Snake"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 22,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Arcane Restoration",
+            "desc": "Pyrokinesis will add +1 Mana every 1s to your Mana Bank when hitting an aggressive enemy.",
+            "base_abil": 999,
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "parents": ["Seance", "Snake Nest"],
+            "dependencies": ["Pyrokinesis"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {
+                "duration": 4
+            },
+            "effects": []
+        },
+        {
+            "display_name": "Fluid Healing",
+            "desc": "For every 1% Water Damage Bonus you have, buff Heal's healing power by +0.3%.",
+            "archetype": "Light Bender",
+            "archetype_req": 0,
+            "base_abil": "Heal",
+            "parents": ["Healthier Ophanim I", "Transonic Warp"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": false,
+                "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "wDam"
+                        }
+                    ],
+                "output": {
+                    "type": "stat",
+                    "name": "healPct"
+                },
+                "scaling": [0.3]
+            }]
+        },
+        {
+            "display_name": "Transonic Warp",
+            "desc": "Teleport will deal additional damage to enemies for every Winded they have.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker", 
+            "archetype_req": 5, 
+            "parents": ["Cheaper Ice Snake"],
+            "dependencies": ["Ice Snake", "Windsweeper"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:2.Wind Slash"
+                    },
+                    "scaling": [30]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "tConvBase:2.Wind Slash"
+                    },
+                    "scaling": [10]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "aConvBase:2.Wind Slash"
+                    },
+                    "scaling": [5]
+                }
+            ]
+        },
+        {
+            "display_name": "Healthier Ophanim I",
+            "desc": "Increase the health of your orbs from Ophanim by +800 and reduce the damage they take when hitting an enemy by -5%.",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "base_abil": "Ophanim",
+            "parents": ["Fortitude", "Cheaper Teleport II"],
+            "dependencies": ["Ophanim"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 22,
+                "col": 3,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Orphion's Pulse",
+            "desc": "Heal will trigger 2 more times, increasing the overall healing.",
+            "archetype": "Light Bender",
+            "base_abil": "Heal",
+            "parents": ["Healthier Ophanim I", "Snake Nest"], 
+            "dependencies": ["Heal"], 
+            "blockers": ["Arcane Transfer"],
+            "cost": 2, 
+            "display": {
+            "row": 23,
+            "col": 4,
+            "icon": "node_1"
+            },
+            "properties": { "aoe": 5 },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Heal Pulse",
+                    "power": 0.15
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "display": "Total Heal",
+                    "target_part": "Total Heal",
+                    "hits": {
+                        "Heal": 1,
+                        "Heal Pulse": 2
+                    }
+                }
+            ]
+        },
+        {
+            "display_name": "Diffusion",
+            "desc": "If you kill an enemy with Winded on them, the leftover Winded will spread to nearby enemies.",
+            "archetype": "Riftwalker", 
+            "archetype_req": 6, 
+            "base_abil": "Windsweeper",
+            "parents": ["Transonic Warp", "Fluid Healing"],
+            "dependencies": ["Windsweeper"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 25,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {"aoe": 5 },
+            "effects": []
+        },
+        {
+            "display_name": "Lightweaver",
+            "desc": "After healing 60% of your max health within 10s, summon a rotating orb that damages all enemies it touches for 20s. (Max 3 Orbs)",
+            "archetype": "Light Bender",
+            "archetype_req": 7, 
+            "parents": ["Orphion's Pulse"],  
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+            "row": 25,
+            "col": 4,
+            "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Lightweaver",
+                    "base_spell": 5,
+                    "display": "Orb Damage",
+                    "parts": [
+                        {  
+                            "name": "Single Orb",
+                            "type": "damage",
+                            "multipliers": [30, 0, 0, 0, 20, 0]
+                        },
+                        {
+                            "name": "Orb Damage",
+                            "type": "total",
+                            "hits": { "Single Orb": 3 }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Arcane Speed",
+            "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 3s. (8s Cooldown)",
+            "base_abil": "Heal",
+            "parents": ["Lightweaver", "Larger Mana Bank II"],
+            "dependencies": ["Heal"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 25,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Larger Mana Bank II",
+            "desc": "Increase your maximum Mana Bank by +30.",
+            "base_abil": 1,
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "parents": ["Seance", "Arcane Speed"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 25,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Psychokinesis",
+            "desc": "Meteor will launch directly from you as a slow projectile.",
+            "base_abil": 3,
+            "archetype": "Arcanist", 
+            "archetype_req": 5, 
+            "parents": ["Larger Mana Bank II", "Arcane Speed"],
+            "dependencies": ["Meteor"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 26,
+                "col": 7,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "More Winded",
+            "desc": "Incrase your maximum Winded by +5.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker", 
+            "archetype_req": 0, 
+            "parents": ["Diffusion"],
+            "dependencies": ["Windsweeper"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 26,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Windsweeper",
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "slider_max": 5
+                }
+            ]
+        },
+        {
+            "display_name": "Cheaper Ice Snake II",
+            "desc": "Reduce the Mana cost of Ice Snake.",
+            "base_abil": "Ice Snake",
+            "parents": ["Diffusion", "Explosive Entrance"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 27, "col": 1, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": -5
+                }
+            ]  
+        },
+        {
+            "display_name": "Cheaper Meteor II",
+            "desc": "Reduce the Mana cost of Meteor.",
+            "base_abil": "Meteor",
+            "parents": ["Explosive Entrance", "Lightweaver", "Arcane Speed"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 27, "col": 5, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": -5
+                }
+            ]  
+        },
+        {
+            "display_name": "Chaos Explosion",
+            "desc": "When your Mana Bank reaches 120, casting Arcane Transfer will rapidly unleash the last 3 spells you've cast in order.",
+            "base_abil": "Arcane Transfer",
+            "archetype": "Arcanist", 
+            "archetype_req": 8, 
+            "parents": ["Larger Mana Bank II"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 27,
+                "col": 8,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Arcane Power",
+            "desc": "Meteor and Ice Snake will add +2 Mana to your Mana Bank for each aggressive mob you hit.",
+            "base_abil": "Arcane Transfer",
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "parents": ["Arctic Snake"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 29,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Explosive Entrance",
+            "desc": "Deal Damage in an area on the location you Teleport to.",
+            "base_abil": "Teleport",
+            "parents": ["Cheaper Ice Snake II", "Cheaper Meteor II"],
+            "dependencies": ["Teleport"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 27,
+                "col": 3,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 3
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Explosion Damage",
+                    "base_spell": 2,  
+                    "multipliers": [50, 0, 0, 0, 30, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "behavior": "modify",
+                    "target_part": "Total Damage",
+                    "base_spell": 2,  
+                    "hits": {"Explosion Damage": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Gust",
+            "desc": "Ice Snake will add +1 Winded to enemies and deal more damage.",
+            "base_abil": "Ice Snake",
+            "archetype": "Riftwalker", 
+            "archetype_req": 7, 
+            "parents": ["Cheaper Ice Snake II", "Explosive Entrance"],
+            "dependencies": ["Ice Snake"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 28,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Ice Snake",
+                    "base_spell": 4,  
+                    "multipliers": [0, 0, 0, 0, 0, 20]
+                }
+            ]
+        },
+        {
+            "display_name": "Time Dilation",
+            "desc": "When sprinting, create an area that increases the speed of all allies the longer they run in it. (Step out or stop running to cancel)",
+            "archetype": "Riftwalker", 
+            "archetype_req": 7, 
+            "parents": ["Cheaper Ice Snake II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 28,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Better Ophanim",
+            "desc": "Increase your maximum orbs from Ophanim by +1.",
+            "archetype": "Light Bender",
+            "archetype_req": 0,
+            "base_abil": "Ophanim",
+            "parents": ["Cheaper Meteor II"], 
+            "_parents": ["Explosive Entrance", "Cheaper Meteor II"], 
+            "dependencies": ["Ophanim"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": { "row": 28, "col": 4, "icon": "node_0"},
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 3,
+                "target_part": "Per Melee (max)",
+                "hits": { "Per Orb": 1 }
+            }]
+        },
+        {
+            "display_name": "Arctic Snake",
+            "desc": "Ice Snake will freeze enemies completely for 2s.",
+            "base_abil": "Ice Snake",
+            "parents": ["Chaos Explosion"],
+            "dependencies": ["Ice Snake"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 28,
+                "col": 7,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Devitalize",
+            "desc": "Enemies will deal -2% damage for every Winded they have.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker", 
+            "archetype_req": 5, 
+            "parents": ["More Winded II", "Dynamic Faith"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 32,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "More Winded II",
+            "desc": "Incrase your maximum Winded by +5.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker",
+            "archetype_req": 0,
+            "parents": ["Time Dilation"],
+            "_parents": ["Time Dilation", "Dynamic Faith"],
+            "dependencies": ["Windsweeper"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 31,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Windsweeper",
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "slider_max": 5
+                }
+            ]
+        },
+        {
+            "display_name": "Dynamic Faith",
+            "desc": "For every 2% Sprint you have from items, gain +1% Thunder Damage (Max 100%)",
+            "parents": ["More Winded II", "Healthier Ophanim II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 31,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": false,
+                "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "sprint"
+                        }
+                    ],
+                "output": {
+                    "type": "stat",
+                    "name": "tDamPct"
+                },
+                "scaling": [0.5],
+                "max": 100
+            }]
+        },
+        {
+            "display_name": "Divination",
+            "desc": "Increase your maximum orbs from Ophanim by +3 and reduce their damage.",
+            "base_abil": "Ophanim",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Dynamic Faith", "Healthier Ophanim II"],
+            "dependencies": ["Ophanim"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 32,
+                "col": 3,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                { 
+                    "type": "add_spell_prop", 
+                    "base_spell": 3,
+                    "target_part": "Per Orb", 
+                    "multipliers": [-50, 0, -10, 0, 0, 0]
+                },
+                { 
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Per Melee (max)",
+                    "hits": { "Per Orb": 3 }
+                }
+            ]
+        },
+        {
+            "display_name": "Healthier Ophanim II",
+            "desc": "Increase the health of your orbs from Ophanim by +3000.",
+            "base_abil": "Ophanim",
+            "archetype": "Light Bender", 
+            "archetype_req": 0, 
+            "parents": ["Better Ophanim"],
+            "dependencies": ["Healthier Ophanim I"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 31,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Sunflare",
+            "desc": "After healing 400% of your max health within 10s, your next Heal will make every nearby ally temporarily immune.",
+            "archetype": "Light Bender", 
+            "archetype_req": 12, 
+            "base_abil": "Heal",
+            "parents": ["Healthier Ophanim II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 32,
+                "col": 5,
+                "icon": "node_3"
+            },
+            "properties": {
+                "aoe": 12,
+                "duration": 5
+            },
+            "effects": []
+        },
+        {
+            "display_name": "Larger Mana Bank III",
+            "desc": "Increase your maximum Mana Bank by +30.",
+            "archetype": "Arcanist", 
+            "archetype_req": 0, 
+            "base_abil": "Arcane Transfer",
+            "parents": ["Arctic Snake"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 31,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Arcane Overflow",
+            "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits.",
+            "archetype": "Arcanist", 
+            "archetype_req": 12, 
+            "base_abil": "Arcane Transfer",
+            "parents": ["Larger Mana Bank III"],
+            "dependencies": ["Arcane Transfer"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 33,
+                "col": 7,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Memory Recollection",
+            "desc": "Chaos Explosion will cast +2 spells.",
+            "archetype": "Arcanist",
+            "archetype_req": 0,
+            "base_abil": "Arcane Transfer",
+            "parents": ["Arcane Overflow"],
+            "dependencies": ["Chaos Explosion"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 34,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Manastorm",
+            "desc": "If you have more than 100 Mana, casting a spell will give you +10 mana over 5s.",
+            "archetype": "Arcanist", 
+            "archetype_req": 1, 
+            "parents": ["Cheaper Heal II", "Arcane Overflow", "Sunflare"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Better Lightweaver",
+            "desc": "Increase your Max Orbs by +2.",
+            "archetype": "Light Bender", 
+            "archetype_req": 0,
+            "base_abil": "Lightweaver",
+            "parents": ["Cheaper Heal II", "Manastorm"],
+            "dependencies": ["Lightweaver"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 35,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                { 
+                    "type": "add_spell_prop",
+                    "target_part": "Orb Damage",
+                    "hits": { "Single Orb": 2 }
+                }
+            ]
+        },
+        {
+            "display_name": "Timelock",
+            "desc": "Holding shift and casting Heal will absorb all Winded on nearby enemies and make you Timelocked. While Timelocked, your mana will not be depleted and you become immovable from outside forces. Enemies will recieve Winded damage from all absorbed stacks. (Max 30)",
+            "archetype": "Riftwalker", 
+            "archetype_req": 12,
+            "parents": ["More Winded II"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 0,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Cheaper Heal II",
+            "desc": "Reduce the Mana cost of Heal.",
+            "base_abil": "Heal",
+            "parents": ["Timelock", "Manastorm"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {"row": 34, "col": 2, "icon": "node_0"},
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "cost": -5
+                }
+            ]  
         }
     ]
 }

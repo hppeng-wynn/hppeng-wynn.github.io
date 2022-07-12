@@ -550,9 +550,6 @@ function displayExpandedItem(item, parent_id){
 */
 function displayRecipeStats(craft, parent_id) {
     let elem = document.getElementById(parent_id);
-    if (!elem.classList.contains("col")) {
-        elem.classList.add("col");
-    }
 
     //local vars 
     elem.textContent = "";
@@ -565,91 +562,85 @@ function displayRecipeStats(craft, parent_id) {
     let effectiveness = craft["statMap"].get("ingredEffectiveness");
 
     let title = document.createElement("div");
-    title.classList.add("row", "box-title", "fw-bold", "justify-content-center");
+    title.classList.add("col", "box-title", "fw-bold", "justify-content-center", "scaled-font");
     title.textContent = "Recipe Stats";
     elem.appendChild(title);
 
     let mats = document.createElement("div");
-    mats.classList.add("row");
+    mats.classList.add("col");
     mats.textContent = "Crafting Materials: ";
     elem.appendChild(mats);
 
     for (let i = 0; i < 2; i++) {
         let tier = mat_tiers[i];
-        let row = document.createElement("div");
-        row.classList.add("row", "px-0", "mx-0");
-        let b = document.createElement("div");
+        let col = document.createElement("div");
+        col.classList.add("col", "ps-4");
+        let b = document.createElement("span");
         let mat = recipe.get("materials")[i];
         b.textContent = "- " + mat.get("amount") + "x " + mat.get("item").split(" ").slice(1).join(" ");
         b.classList.add("col");
-        row.appendChild(b);
+        col.appendChild(b);
 
-        let starsB = document.createElement("div");
-        starsB.classList.add("T1-bracket", "col-auto", "px-0");
+        let starsContainer = document.createElement("span");
+        let starsB = document.createElement("span");
+        starsB.classList.add("T1-bracket", "px-0");
         starsB.textContent = "[";
-        row.appendChild(starsB);
+        starsContainer.appendChild(starsB);
         for(let j = 0; j < 3; j ++) {
-            let star = document.createElement("div");
-            star.classList.add("col-auto", "px-0");
+            let star = document.createElement("span");
+            star.classList.add("px-0");
             star.textContent = "\u272B";
             if(j < tier) {
                 star.classList.add("T1");
             } else {
                 star.classList.add("T0");
             }
-            row.append(star);
+            starsContainer.append(star);
         }
-        let starsE = document.createElement("div");
-        starsE.classList.add("T1-bracket", "col-auto", "px-0");
+        let starsE = document.createElement("span");
+        starsE.classList.add("T1-bracket", "px-0");
         starsE.textContent = "]";
-        row.appendChild(starsE);
+        starsContainer.appendChild(starsE);
 
-        elem.appendChild(row);
+        col.appendChild(starsContainer);
+
+        elem.appendChild(col);
     }
 
     let ingredTable = document.createElement("div");
-    ingredTable.classList.add("row");
+    ingredTable.classList.add("col", "mt-2");
 
-    for (let i = 0; i < 3; i++) {
-        let row = document.createElement("div");
-        row.classList.add("row", "g-1", "justify-content-center");
+    let ingredContainer = document.createElement("div");
+    ingredContainer.classList.add("row", "row-cols-2", "g-3");
+    for (let i = 0; i < 6; i++) {
+        let ingredCell = document.createElement("div");
+        ingredCell.classList.add("col");
 
-        
-        for (let j = 0; j < 2; j++) {
-            if (j == 1) {
-                let spacer = document.createElement("div");
-                spacer.classList.add("col-1");
-                row.appendChild(spacer);
-            } 
-            let ingredName = ingreds[2 * i + j];
-            let col = document.createElement("div");
-            col.classList.add("col-5", "rounded", "dark-6", "border", "border-3", "dark-shadow");
+        let ingredTextContainer = document.createElement("div");
+        ingredTextContainer.classList.add("border", "border-3", "rounded")
 
-            let temp_row = document.createElement("div");
-            temp_row.classList.add("row");
-            col.appendChild(temp_row);
+        let ingredName = ingreds[i];
+        let ingred_text = document.createElement("p");
+        ingred_text.classList.add("mb-2", "ps-2");
+        ingred_text.textContent = ingredName;
+        ingredTextContainer.appendChild(ingred_text);
 
-            let ingred_div = document.createElement("div");
-            ingred_div.classList.add("col");
-            ingred_div.textContent = ingredName;
-            temp_row.appendChild(ingred_div);
-
-            let eff_div = document.createElement("div");
-            eff_div.classList.add("col-auto");
-            let e = effectiveness[2 * i + j];
-            if (e > 0) {
-                eff_div.classList.add("positive");
-            } else if (e < 0) {
-                eff_div.classList.add("negative");
-            }
-            eff_div.textContent = "[" + e + "%]";
-
-            temp_row.appendChild(eff_div);
-
-            row.appendChild(col);
+        let eff_div = document.createElement("p");
+        eff_div.classList.add("mb-2", "ps-2");
+        let e = effectiveness[i];
+        if (e > 0) {
+            eff_div.classList.add("positive");
+        } else if (e < 0) {
+            eff_div.classList.add("negative");
         }
-        ingredTable.appendChild(row);
+        eff_div.textContent = "[" + e + "%]";
+        ingredTextContainer.appendChild(eff_div);
+
+        ingredCell.appendChild(ingredTextContainer);
+
+        ingredContainer.appendChild(ingredCell);
     }
+    ingredTable.appendChild(ingredContainer);
     elem.appendChild(ingredTable);
 }
 
@@ -877,7 +868,7 @@ function displayExpandedIngredient(ingred, parent_id) {
                 row.appendChild(title);
                 for(const skill of ingred.get("skills")) {
                     let skill_div = document.createElement("div");
-                    skill_div.classList.add("row");
+                    skill_div.classList.add("row", "ps-4");
                     skill_div.textContent = skill.charAt(0) + skill.substring(1).toLowerCase();
                     row.appendChild(skill_div);
                 }

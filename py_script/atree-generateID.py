@@ -45,13 +45,14 @@ def translate_id(id_data, atree_data):
                         for _input in effect["inputs"]:
                             if "abil" in _input and _input["abil"] in id_data[_class]:
                                 _input["abil"] = id_data[_class][_input["abil"]]
-                    if isinstance(effect["output"], list):
-                        for output in effect["output"]:
-                            if "abil" in output and output["abil"] in id_data[_class]:
-                                output["abil"] = id_data[_class][output["abil"]]
-                    else:
-                        if "abil" in effect["output"] and effect["output"]["abil"] in id_data[_class]:
-                            effect["output"]["abil"] = id_data[_class][effect["output"]["abil"]]
+                    if "output" in effect:
+                        if isinstance(effect["output"], list):
+                            for output in effect["output"]:
+                                if "abil" in output and output["abil"] in id_data[_class]:
+                                    output["abil"] = id_data[_class][output["abil"]]
+                        else:
+                            if "abil" in effect["output"] and effect["output"]["abil"] in id_data[_class]:
+                                effect["output"]["abil"] = id_data[_class][effect["output"]["abil"]]
 
 abilDict = {}
 with open("atree_constants.js") as f:

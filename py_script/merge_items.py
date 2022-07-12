@@ -58,6 +58,11 @@ mul_keys = {
     "ms": 50
 }
 
+def round_near(x, eps=1e-5):
+    if abs(x - round(x)) < eps:
+        return round(x)
+    return x
+
 remap_items = []
 #old_items_map = dict()
 import math
@@ -67,7 +72,7 @@ for item in old_items:
             # SUPER JANKY ROUNDING
             tentimes = round(item[k] * v)
             rem = tentimes % 10
-            val = math.floor(round(tentimes / 10))
+            val = math.floor(round_near(tentimes / 10))
             if rem >= 5:
                 val += 1
             item[k] = val

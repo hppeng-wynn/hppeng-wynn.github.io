@@ -98,7 +98,6 @@ function resetFields(){
     for (const elem of skp_order) {
         console.log(document.getElementById(elem + "_boost_armor").value);
         document.getElementById(elem + "_boost_armor").value = 0;
-        document.getElementById(elem + "_boost_armor_prev").value = 0;
         document.getElementById(elem + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
         document.getElementById(elem + "_boost_armor_label").textContent = `% ${damageClasses[skp_order.indexOf(elem)+1]} Damage Boost: 0`;
     }
@@ -393,6 +392,18 @@ function init() {
     // Spell dropdowns
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-tooltip").addEventListener("click", () => collapse_element('#'+eq+'-tooltip'));
+    }
+    for (let i = 0; i < 5; ++i) {
+        const powder_special = powderSpecialStats[i];
+        const elem_name = damageClasses[i+1];   // skip neutral
+        const elem_char = skp_elements[i];      // TODO: merge?
+        const skp_name = skp_order[i];          // TODO: merge?
+        const boost_parent = document.getElementById(skp_name+'-boost');
+        const slider_id = skp_name+'_boost_armor';
+        const label_name = "% " + elem_name + " Dmg Boost";
+        const slider_container = gen_slider_labeled({label_name: label_name, max: powder_special.cap, id: slider_id, color: elem_colors[i]});
+        boost_parent.appendChild(slider_container);
+        document.getElementById(slider_id).addEventListener("change", (_) => armor_powder_node.mark_dirty().update() );
     }
 
     // Masonry setup
