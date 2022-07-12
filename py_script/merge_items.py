@@ -59,7 +59,7 @@ mul_keys = {
 }
 
 def round_near(x, eps=1e-5):
-    if x - round(x) < eps:
+    if abs(x - round(x)) < eps:
         return round(x)
     return x
 
