@@ -384,11 +384,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                atree_state.get(abil.id).img.src = '../media/atree/'+abil.display.icon+'.png';
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
             }
             else {
                 atree_not_present.push(abil.id);
-                atree_state.get(abil.id).img.src = '../media/atree/'+abil.display.icon+'_blocked.png';
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
             }
         }
 
@@ -995,6 +995,8 @@ function render_AT(UI_elem, list_elem, tree) {
         node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
         node_elem.appendChild(node_img);
 
+        node_wrap.img = node_img;
+
         // create hitbox
         // this is necessary since images exceed the size of their square, but should only be interactible within that square
         let hitbox = document.createElement("div");
@@ -1109,11 +1111,15 @@ function atree_render_connection(atree_connectors_map) {
 
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
+    console.log(node_wrapper.elem.children[0])
     if (new_state) {
+        console.log("on")
         node_wrapper.active = true;
         node_wrapper.elem.children[0].src = node_wrapper.elem.children[0].src.substring(0, node_wrapper.elem.children[0].src.length - 4) + "_selected.png";
+        console.log(node_wrapper.elem.children[0].src)
     } 
     else {
+        console.log("off")
         node_wrapper.active = false;
         node_wrapper.elem.children[0].src = node_wrapper.elem.children[0].src.substring(0, node_wrapper.elem.children[0].src.length - 13) + ".png";
     }
@@ -1184,19 +1190,16 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
                 highlight_state[child_side_idx] += state_delta;
             }
 
-            // let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
-
-            // let connector_img = atree_parse_connector(render_state, ctype);
-            // connector_img_elem.src = connector_img.img
-            // connector_elem.className = "";
-            // connector_elem.classList.add("rotate-" + connector_img.rotate);
             let render = "";
             for (let i = 0; i < 4; i++) {
                 render += highlight_state[i] === 0 ? "0" : "1";
             }
-            connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png"
+            if (render == "0000") {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + ".png";
+            } else {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png";
+            }
             connector_elem.replaceChildren(connector_img_elem);
-            console.log(connector_img_elem.src)
             continue;
         }
         // lol bad overloading, [0] is just the whole state
@@ -1209,6 +1212,5 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
             connector_img_elem.src = '../media/atree/connect_'+ctype+'.png';
             connector_elem.replaceChildren(connector_img_elem);
         }
-        console.log(connector_img_elem.src)
     }
 }
