@@ -151,15 +151,11 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         let min_boost = raw_boost;
         let max_boost = raw_boost;
         if (total_max > 0) {    // TODO: what about total negative all raw?
-            if (total_min > 0) {
-                min_boost += (damages_obj[0] / total_min) * prop_raw;
-            }
+            min_boost += (damages_obj[0] / total_min) * prop_raw;
             max_boost += (damages_obj[1] / total_max) * prop_raw;
         }
         if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
-            if (total_elem_min > 0) {
-                min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
-            }
+            min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
             max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
         }
         damages_obj[0] += min_boost * total_convert;
@@ -185,12 +181,14 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         damage_mult *= (1 + v/100);
     }
 
+    const crit_mult = stats.get("critDamPct")/100;
+
     for (const damage of damages) {
         const res = [
             damage[0] * strBoost * damage_mult,       // Normal min
             damage[1] * strBoost * damage_mult,       // Normal max
-            damage[0] * (strBoost + 1) * damage_mult,       // Crit min
-            damage[1] * (strBoost + 1) * damage_mult,       // Crit max
+            damage[0] * (strBoost + crit_mult) * damage_mult,       // Crit min
+            damage[1] * (strBoost + crit_mult) * damage_mult,       // Crit max
         ];
         damages_results.push(res);
         total_dam_norm[0] += res[0];

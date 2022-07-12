@@ -920,18 +920,12 @@ const atrees = {
             "cost": 1, 
             "display": { "row": 2, "col": 4, "icon": "node_0"},
             "properties": {},
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
-                }
-            ]  
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "Single Shot",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
         },
         {
             "display_name": "Cheaper Arrow Bomb",
@@ -2038,18 +2032,12 @@ const atrees = {
             "properties": {
                 "melee_range": 1
             },
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
-                }
-            ]  
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "melee",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
         },
 
         {
@@ -2843,18 +2831,12 @@ const atrees = {
             "properties": {
                 "melee_range": 1
             },
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
-                }
-            ]  
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "melee",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
         },
 
         {
