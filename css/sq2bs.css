@@ -449,36 +449,6 @@ a:hover {
     border-color: #fff;
 }
 
-/* atree connector rotations */
-.rotate-90 {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
-.rotate-180 {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
-}
-
-.rotate-270 {
-    -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    -o-transform: rotate(270deg);
-    transform: rotate(270deg);
-}
-
-.rotate-flip {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
-
 
 
 .hide-scroll {
@@ -487,12 +457,6 @@ a:hover {
 }
 .hide-scroll::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
-}
-
-.atree-circle {
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
 }
 
 .hppeng{

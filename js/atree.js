@@ -665,6 +665,12 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
  */
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
+
+    // increase padding, since images are larger than the space provided
+    UI_elem.style.paddingRight = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingLeft = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingTop = "calc(var(--bs-gutter-x) * .5)";
+
     // add in the "Active" title to atree
     let active_row = document.createElement("div");
     active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
@@ -799,7 +805,6 @@ function render_AT(UI_elem, list_elem, tree) {
         node_img.src = '../media/atree/'+icon+'.png';
         node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
         node_elem.appendChild(node_img);
-        node_elem.classList.add("atree-circle");
 
         // create hitbox
         // this is necessary since images exceed the size of their square, but should only be interactible within that square
@@ -857,7 +862,7 @@ function render_AT(UI_elem, list_elem, tree) {
             let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
             tooltip.style.top = "50px";
             tooltip.style.left = (this.parentElement.parentElement.parentElement.getBoundingClientRect().left - this.getBoundingClientRect().left) + "px";
-            tooltip.style.width = UI_elem.getBoundingClientRect().width * .95 + "px";
+            tooltip.style.width = UI_elem.getBoundingClientRect().width * .9 + "px";
             tooltip.style.display = "block";
         });
 
