@@ -1953,7 +1953,7 @@ const atrees = {
             "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
             "dependencies": ["Phantom Ray"],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 34,
                 "col": 5,
