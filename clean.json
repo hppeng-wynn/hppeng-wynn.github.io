@@ -76329,8 +76329,8 @@
           "sdPct": 14,
           "mdPct": 14,
           "jh": 1,
-          "mr": -1,
-          "ms": -1
+          "mr": -5,
+          "ms": -5
         },
         {
           "hprRaw": 50,
@@ -76358,19 +76358,19 @@
       "bonuses": [
         {},
         {
-          "ms": 1,
+          "ms": 5,
           "dex": 2,
           "sdRaw": 15,
           "mdRaw": 5
         },
         {
-          "ms": 1,
+          "ms": 5,
           "dex": 6,
           "sdRaw": 35,
           "mdRaw": 10
         },
         {
-          "ms": 3,
+          "ms": 15,
           "dex": 20,
           "sdRaw": 65,
           "mdRaw": 70
@@ -76430,10 +76430,10 @@
         {},
         {},
         {
-          "mr": 5,
+          "mr": 25,
           "sdPct": 75,
           "mdPct": 75,
-          "ms": 5,
+          "ms": 25,
           "ls": 400,
           "hprRaw": 600
         }
@@ -76558,24 +76558,24 @@
       "bonuses": [
         {},
         {
-          "mr": -1,
-          "ms": 2,
+          "mr": -5,
+          "ms": 10,
           "sdRaw": 40,
           "wDamPct": 5,
           "tDamPct": 5,
           "eDamPct": -34
         },
         {
-          "mr": -2,
-          "ms": 4,
+          "mr": -10,
+          "ms": 20,
           "sdRaw": 115,
           "wDamPct": 10,
           "tDamPct": 10,
           "eDamPct": -67
         },
         {
-          "mr": -3,
-          "ms": 6,
+          "mr": -15,
+          "ms": 30,
           "sdRaw": 230,
           "wDamPct": 32,
           "tDamPct": 32,
@@ -76612,7 +76612,7 @@
           "spRegen": 15
         },
         {
-          "mr": 2,
+          "mr": 10,
           "sdPct": 25,
           "mdPct": 25,
           "xpb": 50,
@@ -76698,7 +76698,7 @@
       "bonuses": [
         {},
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 40,
           "def": 25,
           "fDamPct": 20,
@@ -76842,21 +76842,21 @@
         {},
         {
           "hprPct": -10,
-          "mr": 1,
+          "mr": 5,
           "sdPct": 6,
           "ref": 10,
           "thorns": 8
         },
         {
           "hprPct": -20,
-          "mr": 2,
+          "mr": 10,
           "sdPct": 14,
           "ref": 35,
           "thorns": 24
         },
         {
           "hprPct": -30,
-          "mr": 4,
+          "mr": 20,
           "sdPct": 30,
           "ref": 75,
           "thorns": 70
@@ -76872,7 +76872,7 @@
         {},
         {
           "mdPct": 30,
-          "ms": 2,
+          "ms": 10,
           "spd": 25,
           "spPct2": -40
         }
@@ -76896,46 +76896,46 @@
           "lb": 5
         },
         {
-          "mr": 1,
+          "mr": 5,
           "xpb": 10,
           "lb": 10,
-          "spRaw2": -1,
+          "spRaw2": -5,
           "hpBonus": 125
         },
         {
-          "mr": 1,
+          "mr": 5,
           "xpb": 15,
           "lb": 15,
-          "spRaw2": -1,
+          "spRaw2": -5,
           "hpBonus": 425
         },
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 35,
           "lb": 35,
           "hpBonus": 1325,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 55,
           "lb": 55,
           "hpBonus": 2575,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
-          "mr": 3,
+          "mr": 15,
           "xpb": 80,
           "lb": 80,
           "hpBonus": 4450,
-          "spRaw1": -1,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw1": -5,
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
-          "mr": 4,
+          "mr": 20,
           "xpb": 100,
           "lb": 100,
           "str": 15,
@@ -76944,10 +76944,10 @@
           "agi": 15,
           "def": 15,
           "hpBonus": 8270,
-          "spRaw1": -1,
-          "spRaw2": -1,
-          "spRaw3": -1,
-          "spRaw4": -1
+          "spRaw1": -5,
+          "spRaw2": -5,
+          "spRaw3": -5,
+          "spRaw4": -5
         }
       ]
     },
@@ -77011,7 +77011,7 @@
       "bonuses": [
         {},
         {
-          "mr": 2,
+          "mr": 10,
           "sdPct": 15,
           "mdPct": -15,
           "sdRaw": 30,
@@ -77279,7 +77279,7 @@
       "bonuses": [
         {},
         {
-          "mr": 2,
+          "mr": 10,
           "mdPct": -24,
           "int": 5,
           "wDamPct": 10,
@@ -77287,7 +77287,7 @@
           "wDefPct": 16
         },
         {
-          "mr": 5,
+          "mr": 25,
           "mdPct": -54,
           "int": 15,
           "wDamPct": 20,
@@ -77295,7 +77295,7 @@
           "wDefPct": 36
         },
         {
-          "mr": 8,
+          "mr": 40,
           "mdPct": -90,
           "int": 25,
           "wDamPct": 40,
@@ -77321,7 +77321,7 @@
           "aDefPct": 20,
           "tDefPct": 20,
           "eDefPct": 20,
-          "ms": 1
+          "ms": 5
         },
         {
           "xpb": 50,
@@ -77331,7 +77331,7 @@
           "aDefPct": 50,
           "tDefPct": 50,
           "eDefPct": 50,
-          "ms": 2
+          "ms": 10
         },
         {
           "xpb": 75,
@@ -77342,7 +77342,7 @@
           "tDefPct": 100,
           "eDefPct": 100,
           "sdPct": 40,
-          "ms": 6
+          "ms": 30
         }
       ]
     },
@@ -77356,7 +77356,7 @@
       "bonuses": [
         {},
         {
-          "mr": 1,
+          "mr": 5,
           "sdPct": -10,
           "mdPct": -15,
           "def": 7,
@@ -77365,7 +77365,7 @@
           "aDamPct": 15
         },
         {
-          "mr": 3,
+          "mr": 15,
           "sdPct": -20,
           "mdPct": -40,
           "def": 15,
@@ -77374,7 +77374,7 @@
           "aDamPct": 40
         },
         {
-          "mr": 6,
+          "mr": 30,
           "sdPct": -40,
           "mdPct": -85,
           "def": 40,
@@ -77436,7 +77436,7 @@
           "sdPct": -33,
           "mdPct": -33,
           "ls": 90,
-          "ms": 2,
+          "ms": 10,
           "sdRaw": 160,
           "mdRaw": 105,
           "atkTier": 1
@@ -77457,7 +77457,7 @@
           "hprRaw": 90
         },
         {
-          "mr": 5,
+          "mr": 25,
           "int": 20,
           "def": 20,
           "hpBonus": 1500,
@@ -77477,19 +77477,19 @@
       "bonuses": [
         {},
         {
-          "mr": 1,
+          "mr": 5,
           "xpb": 5,
           "lb": 10,
           "hpBonus": 55
         },
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 10,
           "lb": 25,
           "hpBonus": 170
         },
         {
-          "mr": 4,
+          "mr": 20,
           "xpb": 25,
           "lb": 50,
           "int": 20,
