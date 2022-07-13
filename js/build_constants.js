@@ -7,8 +7,6 @@ const url_tag = location.hash.slice(1);
 
 const BUILD_VERSION = "7.0.19";
 
-let player_build;
-
 
 // THIS IS SUPER DANGEROUS, WE SHOULD NOT BE KEEPING THIS IN SO MANY PLACES
 let editable_item_fields = [ "sdPct", "sdRaw", "mdPct", "mdRaw", "poison",

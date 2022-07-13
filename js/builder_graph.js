@@ -192,7 +192,13 @@ class ItemInputNode extends InputNode {
 
             for (const [i, x] of zip2(equipment_inputs, replace_items)) { setValue(i, x); }
 
-            for (const node of item_nodes) { calcSchedule(node, 10); }
+            for (const node of item_nodes) { 
+                if (node !== this) {
+                    // save a tiny bit of compute
+                    calcSchedule(node, 10);
+                }
+            }
+            // Needed to push the weapon node's updates forward
             return this.compute_func(input_map);
         }
         return null;
