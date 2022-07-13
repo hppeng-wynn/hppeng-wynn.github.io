@@ -4512,6 +4512,13 @@ const atrees = {
                     "target_part": "Meteor Damage", 
                     "behavior": "modify",
                     "multipliers": [30, 90, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,  
+                    "target_part": "Lightning Damage",
+                    "behavior": "modify",
+                    "multipliers": [30, 90, 0, 0, 0, 0]
                 }
             ]
         },
@@ -4785,6 +4792,14 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "eConvBase:3.Per Orb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Lightning Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Lightning Damage"
                         }
                     ],
                     "scaling": [15]
