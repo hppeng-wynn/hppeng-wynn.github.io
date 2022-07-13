@@ -886,7 +886,7 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop",
-                    "base_spell": 8, 
+                    "base_spell": 7,
                     "target_part": "Trap Damage", 
                     "cost": 0,
                     "multipliers": [-80, 0, 0, 0, 0, 0]
