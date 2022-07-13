@@ -1082,8 +1082,6 @@ function builder_graph_init() {
     // These two are defined in `atree.js`
     atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(class_node, 'player-class');
-    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
-                                    .link_to(atree_collect_spells, 'spells');
     atree_stats.link_to(build_node, 'build');
     stat_agg_node.link_to(atree_stats, 'atree-stats');
 
@@ -1097,6 +1095,9 @@ function builder_graph_init() {
     }
     armor_powder_node.update();
     level_input.update();
+
+    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
+                                    .link_to(atree_collect_spells, 'spells');
 
     // kinda janky, manually set atree and update. Some wasted compute here
     if (atree_data !== null && atree_node.value !== null) { // janky check if atree is valid

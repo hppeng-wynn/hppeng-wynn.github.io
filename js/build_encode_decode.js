@@ -130,7 +130,6 @@ function decodeBuild(url_tag) {
             for (let i in tomes) {
                 let tome_str = info[1].charAt(i);
                 let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
-                console.log(tome_name);
                 setValue(tomeInputs[i], tome_name);
             }
             info[1] = info[1].slice(7);
