@@ -10,7 +10,7 @@ const atrees = {
             "display": {
                 "row": 9,
                 "col": 6,
-                "icon": "node_4"
+                "icon": "node_archer"
             },
             "properties": {
                 "charges": 2,
@@ -51,7 +51,7 @@ const atrees = {
             "display": {
             "row": 7,
             "col": 4,
-            "icon": "node_4"
+            "icon": "node_archer"
             },
             "properties": {
                 "aoe": 0,
@@ -76,7 +76,7 @@ const atrees = {
             "display": {
                 "row": 0,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_archer"
             },
             "properties": {
                 "aoe": 4.5,
@@ -227,7 +227,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 9, "col": 2, "icon": "node_4"},
+            "display": { "row": 9, "col": 2, "icon": "node_archer"},
             "properties": { "range": 16 },
             "effects": [
                 { 
@@ -1984,7 +1984,7 @@ const atrees = {
             "display": {
                 "row": 0,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {
                 "aoe": 4,
@@ -2110,7 +2110,7 @@ const atrees = {
             "display": {
                 "row": 6,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {},
             "effects": [{
@@ -2259,7 +2259,7 @@ const atrees = {
             "display": {
                 "row": 8,
                 "col": 2,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {
                 "aoe": 3,
@@ -2322,7 +2322,7 @@ const atrees = {
             "display": {
                 "row": 8,
                 "col": 6,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {
                 "duration": 30,
@@ -3980,7 +3980,7 @@ const atrees = {
             "display": {
                 "row": 0,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_mage"
             },
             "properties": {
                 "aoe": 5,
@@ -4014,7 +4014,7 @@ const atrees = {
             "display": {
             "row": 6,
             "col": 4,
-            "icon": "node_4"
+            "icon": "node_mage"
             },
             "properties": {
                 "range": 12
@@ -4035,7 +4035,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 8, "col": 2, "icon": "node_4"},
+            "display": { "row": 8, "col": 2, "icon": "node_mage"},
             "properties": { "aoe": 5 },
             "effects": [
                 { 
@@ -4063,7 +4063,7 @@ const atrees = {
             "display": {
                 "row": 8,
                 "col": 6,
-                "icon": "node_4"
+                "icon": "node_mage"
             },
             "properties": {
                 "range": 18,
@@ -4494,6 +4494,13 @@ const atrees = {
                     "target_part": "Meteor Damage", 
                     "behavior": "modify",
                     "multipliers": [30, 90, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,  
+                    "target_part": "Lightning Damage",
+                    "behavior": "modify",
+                    "multipliers": [30, 90, 0, 0, 0, 0]
                 }
             ]
         },
@@ -4767,6 +4774,14 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "eConvBase:3.Per Orb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Lightning Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Lightning Damage"
                         }
                     ],
                     "scaling": [15]

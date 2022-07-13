@@ -384,11 +384,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                atree_state.get(abil.id).img.src = '../media/atree/'+abil.display.icon+'.png';
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
             }
             else {
                 atree_not_present.push(abil.id);
-                atree_state.get(abil.id).img.src = '../media/atree/'+abil.display.icon+'_blocked.png';
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
             }
         }
 
@@ -875,6 +875,12 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
  */
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
+
+    // increase padding, since images are larger than the space provided
+    UI_elem.style.paddingRight = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingLeft = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingTop = "calc(var(--bs-gutter-x) * .5)";
+
     // add in the "Active" title to atree
     let active_row = make_elem("div", ["row", "item-title", "mx-auto", "justify-content-center"]);
     let active_word = make_elem("div", ["col-auto"], {textContent: "Active Abilities:"});
@@ -924,6 +930,7 @@ function render_AT(UI_elem, list_elem, tree) {
         for (let k = 0; k < 9; k++) {
             col = document.createElement('div');
             col.classList.add('col', 'px-0');
+            col.style = "position: relative; aspect-ratio: 1/1;"
             row.appendChild(col);
         }
         UI_elem.appendChild(row);
@@ -941,7 +948,7 @@ function render_AT(UI_elem, list_elem, tree) {
             const parent_id = parent_abil.id;
 
             let connect_elem = document.createElement("div");
-            connect_elem.style = "background-size: cover; width: 100%; height: 100%;";
+            connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -979,83 +986,59 @@ function render_AT(UI_elem, list_elem, tree) {
         let node_elem = document.createElement('div');
         let icon = ability.display.icon;
         if (icon === undefined) {
-            icon = "node_0";
+            icon = "node";
         }
         let node_img = document.createElement('img');
         node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 100%; height: 100%;";
+        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
         node_elem.appendChild(node_img);
-        node_elem.classList.add("atree-circle");
 
-        // add node tooltip
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.display = "block";
-        });
+        node_wrap.img = node_img;
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.display = "none";
-        });
+        // create hitbox
+        // this is necessary since images exceed the size of their square, but should only be interactible within that square
+        let hitbox = document.createElement("div");
+        hitbox.style = "position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;"
+        node_elem.appendChild(hitbox);
 
-        //node tooltip and active tooltip have common parts - let's make them first
+        let node_tooltip = document.createElement('div');
+        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+        node_tooltip.style.display = "none";
 
-        let tooltip_title = document.createElement('div');
-        tooltip_title.classList.add("row", "justify-content-center", "fw-bold");
-        tooltip_title.textContent = ability.display_name;
+        // tooltip text formatting
 
-        let tooltip_archetype;
+        let node_tooltip_title = document.createElement('b');
+        node_tooltip_title.classList.add("scaled-font");
+        node_tooltip_title.innerHTML = ability.display_name;
+        node_tooltip.appendChild(node_tooltip_title);
+
         if ('archetype' in ability && ability.archetype !== "") {
-            tooltip_archetype = document.createElement('div');
-            tooltip_archetype.classList.add("row", "mx-1", "text-start");
-            tooltip_archetype.textContent = "(Archetype: " + ability.archetype+")";
+            let node_tooltip_archetype = document.createElement('p');
+            node_tooltip_archetype.classList.add("scaled-font");
+            node_tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
+            node_tooltip.appendChild(node_tooltip_archetype);
         }
 
-        let tooltip_desc = document.createElement('div');
-        tooltip_desc.classList.add("row", "mx-1", "text-wrap");
-        tooltip_desc.textContent = ability.desc;
+        let node_tooltip_desc = document.createElement('p');
+        node_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+        node_tooltip_desc.textContent = ability.desc;
+        node_tooltip.appendChild(node_tooltip_desc);
 
-        let tooltip_cost = document.createElement('div');
-        tooltip_cost.classList.add("row", "mx-1", "text-start");
-        tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
+        let node_tooltip_cost = document.createElement('p');
+        node_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
+        node_tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
+        node_tooltip.appendChild(node_tooltip_cost);
 
-        //create node tooltip
-        let node_tooltip = document.createElement('div');
-        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "my-1", "dark-shadow", "scaled-font", "container");
-        node_tooltip.style.display = "none";
-        node_tooltip.append(tooltip_title, tooltip_archetype ? tooltip_archetype : "", tooltip_desc);
-
-        //active = copy of node
-        let active_tooltip = node_tooltip.cloneNode(true);
-        
-        //node tooltip specific stuff that we don't want to be copied
         node_tooltip.style.position = "absolute";
         node_tooltip.style.zIndex = "100";
-        node_tooltip.appendChild(tooltip_cost);
 
-        //add in anything new for active tooltips
-        active_tooltip.id = "atree-ab-" + ability.id;
-
-        if (ability.blockers.length > 0) {
-            let active_tooltip_blockers = document.createElement("div");
-            active_tooltip_blockers.classList.add("row", "mx-1", "text-start");
-            active_tooltip_blockers.textContent = "Blockers: " + ability.blockers.join(", ");
-            active_tooltip.append(active_tooltip_blockers);
-        }
-
-        //append node and active tooltips to corresponding parent elems
         node_elem.appendChild(node_tooltip);
         //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
 
         node_wrap.elem = node_elem;
-        node_wrap.img = node_img;
         node_wrap.all_connectors_ref = atree_connectors_map;
 
-        node_elem.addEventListener('click', function(e) {
+        hitbox.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
             atree_set_state(node_wrap, !node_wrap.active);
             atree_state_node.mark_dirty().update();
@@ -1063,18 +1046,18 @@ function render_AT(UI_elem, list_elem, tree) {
 
         // add tooltip
 
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .95 + "px";
+        hitbox.addEventListener('mouseover', function(e) {
+            if (e.target !== this && e.target!== this.parentElement.children[0]) {return;}
+            let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
+            tooltip.style.top = "50px";
+            tooltip.style.left = (this.parentElement.parentElement.parentElement.getBoundingClientRect().left - this.getBoundingClientRect().left) + "px";
+            tooltip.style.width = UI_elem.getBoundingClientRect().width * .9 + "px";
             tooltip.style.display = "block";
         });
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
+        hitbox.addEventListener('mouseout', function(e) {
+            if (e.target !== this && e.target!== this.parentElement.children[0]) {return;}
+            let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
             tooltip.style.display = "none";
         });
 
@@ -1098,35 +1081,10 @@ function resolve_connector(atree_connectors_map, pos, new_connector) {
 }
 
 function set_connector_type(connector_info) {  // left right up down
-    const connections = connector_info.connections;
-    const connector_elem = connector_info.connector;
-    const connector_dict = {
-        "1100": {type: "line", rotate: 90},
-        "1010": {type: "angle", rotate: 0},
-        "1001": {type: "angle", rotate: 270},
-        "0110": {type: "angle", rotate: 90},
-        "0101": {type: "angle", rotate: 180},
-        "0011": {type: "line", rotate: 0},
-        "1110": {type: "t", rotate: 180},
-        "1101": {type: "t", rotate: 0},
-        "1011": {type: "t", rotate: 90},
-        "0111": {type: "t", rotate: 270},
-        "1111": {type: "c", rotate: 0}
+    connector_info.type = "";
+    for (let i = 0; i < 4; i++) {
+        connector_info.type += connector_info.connections[i] == 0 ? "0" : "1";
     }
-
-    let lookup_str = "";
-    for (let i of connections) {
-        if (i) {
-            lookup_str += 1;
-        } else {
-            lookup_str += 0;
-        }
-    }
-
-    connector_info.type = connector_dict[lookup_str].type;
-    connector_info.rotate = connector_dict[lookup_str].rotate;
-    connector_elem.classList.add("rotate-" + connector_dict[lookup_str].rotate);
-
 }
 
 // draw the connector onto the screen
@@ -1151,13 +1109,17 @@ function atree_render_connection(atree_connectors_map) {
 
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
+    let icon = node_wrapper.ability.display.icon;
+    if (icon === undefined) {
+        icon = "node";
+    }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.classList.add("atree-selected");
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.classList.remove("atree-selected");
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1189,9 +1151,13 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_img_elem = document.createElement("img");
         connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
-        const rotate = connector_info.rotate;
-        if (ctype === 't' || ctype === 'c') {
-            // c, t
+        let num_1s = 0;
+        for (let i = 0; i < 4; i++) {
+            if (ctype.charAt(i) == "1") {
+                num_1s++;
+            }
+        }
+        if (num_1s > 2) { // t branch or 4-way
             const [connector_row, connector_col] = connector_label.split(',').map(x => parseInt(x));
 
             if (connector_row === parent_row) {
@@ -1207,19 +1173,22 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
                 highlight_state[child_side_idx] += state_delta;
             }
 
-            let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
-
-            let connector_img = atree_parse_connector(render_state, ctype, rotate);
-            connector_img_elem.src = connector_img.img
-            connector_elem.className = "";
-            connector_elem.classList.add("rotate-" + connector_img.rotate);
+            let render = "";
+            for (let i = 0; i < 4; i++) {
+                render += highlight_state[i] === 0 ? "0" : "1";
+            }
+            if (render == "0000") {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + ".png";
+            } else {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png";
+            }
             connector_elem.replaceChildren(connector_img_elem);
             continue;
         }
         // lol bad overloading, [0] is just the whole state
         highlight_state[0] += state_delta;
         if (highlight_state[0] > 0) {
-            connector_img_elem.src = '../media/atree/highlight_'+ctype+'.png';
+            connector_img_elem.src = '../media/atree/connect_' + ctype + '_1.png';
             connector_elem.replaceChildren(connector_img_elem);
         }
         else {
@@ -1228,61 +1197,3 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         }
     }
 }
-
-// parse a sequence of left, right, up, down to appropriate connector image
-function atree_parse_connector(orient, type, rotate) {
-    // left, right, up, down
-
-    let c_connector_dict = {
-        "1100": {attrib: "_2_l", rotate: 0},
-        "1010": {attrib: "_2_a", rotate: 0},
-        "1001": {attrib: "_2_a", rotate: 270},
-        "0110": {attrib: "_2_a", rotate: 90},
-        "0101": {attrib: "_2_a", rotate: 180},
-        "0011": {attrib: "_2_l", rotate: 90},
-        "1110": {attrib: "_3", rotate: 0},
-        "1101": {attrib: "_3", rotate: 180},
-        "1011": {attrib: "_3", rotate: 270},
-        "0111": {attrib: "_3", rotate: 90},
-        "1111": {attrib: "", rotate: 0}
-    };
-
-    let t_connector_dict = {
-        0: {
-            "1100": {attrib: "_2_l"},
-            "1001": {attrib: "_2_a_f"},
-            "0101": {attrib: "_2_a"},
-            "1101": {attrib: "_3"},
-        },
-        90: {
-            "1010": {attrib: "_2_a_f"},
-            "1001": {attrib: "_2_a"},
-            "0011": {attrib: "_2_l"},
-            "1011": {attrib: "_3"}
-        },
-        270: {
-            "0110": {attrib: "_2_a"},
-            "0101": {attrib: "_2_a_f"},
-            "0011": {attrib: "_2_l"},
-            "0111": {attrib: "_3"}
-        }
-    };
-
-    let res = "";  
-    for (let i of orient) {
-        res += i;
-    }
-    if (res === "0000") {
-        return {img: "../media/atree/connect_" + type + ".png", rotate: rotate};
-    }
-
-    let ret;
-    if (type == "c") {
-        ret = c_connector_dict[res];
-    } else {
-        ret = t_connector_dict[rotate][res];
-        ret.rotate = rotate;
-    };
-    ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
-    return ret;
-};
