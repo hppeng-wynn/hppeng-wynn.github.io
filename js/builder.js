@@ -373,6 +373,15 @@ function init() {
     });
     decodeBuild(url_tag);
     builder_graph_init();
+    for (const item_node of item_nodes) {
+        if (item_node.get_value() === null) {
+            // likely DB load failure...
+            if (confirm('One or more items failed to load correctly. This could be due to a corrupted build link, or (more likely) a database load failure. Would you like to reload?')) {
+                hardReload();
+            }
+            break;
+        }
+    }
 }
 
 window.onerror = function(message, source, lineno, colno, error) {
