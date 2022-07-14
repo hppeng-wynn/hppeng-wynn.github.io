@@ -1017,20 +1017,20 @@ function render_AT(UI_elem, list_elem, tree) {
             if (e.target !== this) {
                 return;
             }
-            if (ability.tooltip_elem) {
-                ability.tooltip_elem.remove();
-                delete ability.tooltip_elem;
+            if (node_wrap.tooltip_elem) {
+                node_wrap.tooltip_elem.remove();
+                delete node_wrap.tooltip_elem;
             }
-            ability.tooltip_elem = generateTooltip(UI_elem, node_elem, ability);
+            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability);
         });
 
         hitbox.addEventListener('mouseout', function(e) {
             if (e.target !== this) {
                 return;
             }
-            if (ability.tooltip_elem) {
-                ability.tooltip_elem.remove();
-                delete ability.tooltip_elem;
+            if (node_wrap.tooltip_elem) {
+                node_wrap.tooltip_elem.remove();
+                delete node_wrap.tooltip_elem;
             }
         });
 
