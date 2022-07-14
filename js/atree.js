@@ -1001,40 +1001,6 @@ function render_AT(UI_elem, list_elem, tree) {
         hitbox.style = "position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;"
         node_elem.appendChild(hitbox);
 
-        let node_tooltip = document.createElement('div');
-        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        node_tooltip.style.display = "none";
-
-        // tooltip text formatting
-
-        let node_tooltip_title = document.createElement('b');
-        node_tooltip_title.classList.add("scaled-font");
-        node_tooltip_title.innerHTML = ability.display_name;
-        node_tooltip.appendChild(node_tooltip_title);
-
-        if ('archetype' in ability && ability.archetype !== "") {
-            let node_tooltip_archetype = document.createElement('p');
-            node_tooltip_archetype.classList.add("scaled-font");
-            node_tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
-            node_tooltip.appendChild(node_tooltip_archetype);
-        }
-
-        let node_tooltip_desc = document.createElement('p');
-        node_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-        node_tooltip_desc.textContent = ability.desc;
-        node_tooltip.appendChild(node_tooltip_desc);
-
-        let node_tooltip_cost = document.createElement('p');
-        node_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
-        node_tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
-        node_tooltip.appendChild(node_tooltip_cost);
-
-        node_tooltip.style.position = "absolute";
-        node_tooltip.style.zIndex = "100";
-
-        node_elem.appendChild(node_tooltip);
-        //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
-
         node_wrap.elem = node_elem;
         node_wrap.all_connectors_ref = atree_connectors_map;
 
@@ -1045,20 +1011,27 @@ function render_AT(UI_elem, list_elem, tree) {
         });
 
         // add tooltip
-
+        // tooltips are being changed to generate on mouseover for fin444's future style updates
+        // this is being implemented before those updates since it helps with a hotfix
         hitbox.addEventListener('mouseover', function(e) {
-            if (e.target !== this && e.target!== this.parentElement.children[0]) {return;}
-            let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
-            tooltip.style.top = "50px";
-            tooltip.style.left = (this.parentElement.parentElement.parentElement.getBoundingClientRect().left - this.getBoundingClientRect().left) + "px";
-            tooltip.style.width = UI_elem.getBoundingClientRect().width * .9 + "px";
-            tooltip.style.display = "block";
+            if (e.target !== this) {
+                return;
+            }
+            if (ability.tooltip_elem) {
+                ability.tooltip_elem.remove();
+                delete ability.tooltip_elem;
+            }
+            ability.tooltip_elem = generateTooltip(UI_elem, node_elem, ability);
         });
 
         hitbox.addEventListener('mouseout', function(e) {
-            if (e.target !== this && e.target!== this.parentElement.children[0]) {return;}
-            let tooltip = this.parentElement.children[this.parentElement.children.length - 1];
-            tooltip.style.display = "none";
+            if (e.target !== this) {
+                return;
+            }
+            if (ability.tooltip_elem) {
+                ability.tooltip_elem.remove();
+                delete ability.tooltip_elem;
+            }
         });
 
         document.getElementById("atree-row-" + ability.display.row).children[ability.display.col].appendChild(node_elem);
@@ -1067,6 +1040,44 @@ function render_AT(UI_elem, list_elem, tree) {
 
     return atree_map;
 };
+
+function generateTooltip(UI_elem, node_elem, ability) {
+    let tooltip = document.createElement('div');
+    tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+
+    // tooltip text formatting
+
+    let tooltip_title = document.createElement('b');
+    tooltip_title.classList.add("scaled-font");
+    tooltip_title.innerHTML = ability.display_name;
+    tooltip.appendChild(tooltip_title);
+
+    if ('archetype' in ability && ability.archetype !== "") {
+        let tooltip_archetype = document.createElement('p');
+        tooltip_archetype.classList.add("scaled-font");
+        tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
+        tooltip.appendChild(tooltip_archetype);
+    }
+
+    let tooltip_desc = document.createElement('p');
+    tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+    tooltip_desc.textContent = ability.desc;
+    tooltip.appendChild(tooltip_desc);
+
+    let tooltip_cost = document.createElement('p');
+    tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
+    tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
+    tooltip.appendChild(tooltip_cost);
+
+    tooltip.style.position = "absolute";
+    tooltip.style.zIndex = "100";
+    tooltip.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
+    tooltip.style.left = UI_elem.getBoundingClientRect().left + "px";
+    tooltip.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
+
+    UI_elem.appendChild(tooltip);
+    return tooltip;
+}
 
 // resolve connector conflict, when they occupy the same cell.
 function resolve_connector(atree_connectors_map, pos, new_connector) {
