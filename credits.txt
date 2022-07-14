@@ -7,7 +7,7 @@ The game, of course
 
 Additional Contributors, in no particular order:
  - Kiocifer (Icons!)
- - IncinerateMe (helping transition to 1.20.3 / CI helper)
+ - IncinerateMe (helping transition to 1.20.3 / atree / CI helper)
  - puppy (dog)
  - SockMower (ability tree encode/decode optimization)
  - ITechnically (coding emotional support / misc)

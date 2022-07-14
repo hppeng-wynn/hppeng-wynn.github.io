@@ -619,8 +619,15 @@ function addClasses(elem, classes) {
  */
 async function hardReload() {
     //https://gist.github.com/rmehner/b9a41d9f659c9b1c3340
-    const dbs = await window.indexedDB.databases();
-    await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+    try {
+        const dbs = await window.indexedDB.databases();
+        await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+    } catch (error) {
+        // Hacky patch for firefox...
+        console.log(error);
+        const db_names = ['item_db', 'ing_db', 'map_db', 'tome_db'];
+        await db_names.forEach(db => { window.indexedDB.deleteDatabase(db) });
+    }
 
     location.reload(true);
 }

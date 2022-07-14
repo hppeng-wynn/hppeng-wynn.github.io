@@ -728,7 +728,7 @@ const atree_stats = new (class extends ComputeNode {
                     if (effect.slider) {
                         if ('output' in effect) { // sometimes nodes will modify slider without having effect.
                             const slider_val = interactive_map.get(effect.slider_name).slider.value;
-                            let total = parseInt(slider_val) * effect.scaling[0];
+                            let total = Math.floor(round_near(parseInt(slider_val) * effect.scaling[0]));
                             if ('max' in effect && total > effect.max) { total = effect.max; }
                             if (Array.isArray(effect.output)) {
                                 for (const output of effect.output) {
