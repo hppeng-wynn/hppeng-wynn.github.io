@@ -77,7 +77,7 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
 
     // 2.2. Next, apply elemental conversions using damage computed in step 1.1.
     // Also, track which elements are present. (Add onto those present in the weapon itself.)
-    let total_convert = 0;  //TODO get confirmation that this is how raw works.
+    let total_convert = 0;
     for (let i = 1; i <= 5; ++i) {
         if (conversions[i] > 0) {
             const conv_frac = conversions[i]/100;
@@ -151,11 +151,23 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         let min_boost = raw_boost;
         let max_boost = raw_boost;
         if (total_max > 0) {    // TODO: what about total negative all raw?
-            min_boost += (damages_obj[0] / total_min) * prop_raw;
+            // TODO: compute actual chance of 0 damage. For now we just copy max ratio
+            if (total_min === 0) {
+                min_boost += (damages_obj[1] / total_max) * prop_raw;
+            }
+            else {
+                min_boost += (damages_obj[0] / total_min) * prop_raw;
+            }
             max_boost += (damages_obj[1] / total_max) * prop_raw;
         }
         if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
-            min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
+            // TODO: compute actual chance of 0 damage. For now we just copy max ratio
+            if (total_elem_min === 0) {
+                min_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
+            }
+            else {
+                min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
+            }
             max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
         }
         damages_obj[0] += min_boost * total_convert;
