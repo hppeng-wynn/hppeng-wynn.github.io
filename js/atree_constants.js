@@ -4886,7 +4886,7 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "duration": 4
+                "duration": 5
             },
             "effects": [{
                 "type": "raw_stat",
@@ -4894,7 +4894,7 @@ const atrees = {
                 "bonuses": [{
                     "type": "stat",
                     "name": "damMult.Fortitude",
-                    "value": 100
+                    "value": 60
                 }]
             }]
         },
@@ -5655,7 +5655,7 @@ const atrees = {
             "display_name": "Arcane Overflow",
             "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits.",
             "archetype": "Arcanist", 
-            "archetype_req": 12, 
+            "archetype_req": 11, 
             "base_abil": "Arcane Transfer",
             "parents": ["Larger Mana Bank III"],
             "dependencies": ["Arcane Transfer"],
