@@ -316,7 +316,7 @@ const atrees = {
             "display": {
             "row": 10,
             "col": 1,
-            "icon": "node_0"
+            "icon": "node_1"
             },
             "properties": {
                 "aoe": 8,
