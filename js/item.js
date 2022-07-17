@@ -19,14 +19,17 @@ function init_itempage() {
 
     try{ 
         item = expandItem(itemMap[item_url_tag.replaceAll("%20"," ")], []);
+        if (item.get('category') === 'weapon') {
+            item.set('powders', []);
+            apply_weapon_powders(item);
+        }
         displaysq2ExpandedItem(item, "item-view");
         displaysq2AdditionalInfo("additional-info", item);
         displaysq2IDCosts("identification-costs", item);
         if (item.get("set") && sets[item.get("set")]) {
-            displaysq2AllSetBonuses("set-bonus-info",item.get("set"));
+            displayAllSetBonuses("set-bonus-info",item.get("set"));
         }
-        console.log(item);
-        displaysq2IDProbabilities("identification-probabilities", item, amp_state);
+        displayIDProbabilities("identification-probabilities", item, amp_state);
     } catch (error) {
         console.log(error);
         console.log(error.stack);
@@ -55,6 +58,8 @@ function toggleAmps(button_id) {
 }
 
 
-
-load_init(init_itempage);
-//load_ing_init(init);
+(async function() {
+    let load_promises = [ load_init() ];
+    await Promise.all(load_promises);
+    init_itempage();
+})();

@@ -5,13 +5,10 @@ function apply_elemental_format(p_elem, id, suffix) {
     let parts = idPrefixes[id].split(/ (.*)/);
     let element_prefix = parts[0];
     let desc = parts[1];
-    let i_elem = document.createElement('span');
-    i_elem.classList.add(element_prefix);
-    i_elem.textContent = element_prefix;
+    let i_elem = make_elem('span', [element_prefix], {textContent: element_prefix});
     p_elem.appendChild(i_elem);
 
-    let i_elem2 = document.createElement('span');
-    i_elem2.textContent = " " + desc + suffix;
+    let i_elem2 = make_elem('span', [], {textContent: " "+desc+suffix});
     p_elem.appendChild(i_elem2);
 }
 
@@ -19,17 +16,14 @@ function displaySetBonuses(parent_id,build) {
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
 
-    let set_summary_elem = document.createElement('p');
-    set_summary_elem.classList.add('text-center');
-    set_summary_elem.textContent = "Set Bonuses";
+    let set_summary_elem = make_elem('p', ['text-center'], {textContent: "Set Bonuses"});
     parent_div.append(set_summary_elem);
 
     for (const [setName, count] of build.activeSetCounts) {
         const active_set = sets.get(setName);
         if (active_set["hidden"]) { continue; }
 
-        let set_elem = document.createElement('p');
-        set_elem.id = "set-"+setName;
+        let set_elem = make_elem('p', [], {id: "set-"+setName});
         set_summary_elem.append(set_elem);
         
         const bonus = active_set.bonuses[count-1];
@@ -111,36 +105,28 @@ function displayBuildStats(parent_id,build,command_group,stats){
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
-                    let row = document.createElement('div');
-                    row.classList.add("row")
-                    let value_elem = document.createElement('div');
-                    value_elem.classList.add('col');
-                    value_elem.classList.add('text-end');
+                    let row = make_elem('div', ['row']);
+                    let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = document.createElement('b');
-                    prefix_elem.textContent = "\u279C With Strength: ";
-                    let number_elem = document.createElement('b');
-                    number_elem.classList.add(style);
-                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id];
+                    let prefix_elem = make_elem('b', [], {textContent: "\u279C With Strength: "});
+                    let number_elem = make_elem('b', [style], {
+                        textContent: (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id]
+                    });
                     value_elem.append(prefix_elem);
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
                     parent_div.appendChild(row);
                 }
                 else if (id === "ls" && id_val != 0) {
-                    let row = document.createElement('div');
-                    row.classList.add("row")
-                    let value_elem = document.createElement('div');
-                    value_elem.classList.add('col');
-                    value_elem.classList.add('text-end');
+                    let row = make_elem('div', ['row']);
+                    let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = document.createElement('b');
-                    prefix_elem.textContent = "\u279C Effective LS: ";
+                    let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
 
                     let defStats = getDefenseStats(stats);
-                    let number_elem = document.createElement('b');
-                    number_elem.classList.add(style);
-                    number_elem.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s";
+                    let number_elem = ('b', [style], {
+                        textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
+                    });
                     value_elem.append(prefix_elem);
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
@@ -1891,6 +1877,7 @@ function displayIDProbabilities(parent_id, item, amp) {
     parent_elem.appendChild(table_elem);
     for (const [id,val] of Object.entries(itemMap[item_name])) {
         if (rolledIDs.includes(id)) {
+            if (!item.get("maxRolls").get(id)) { continue; }
             let min = item.get("minRolls").get(id);
             let max = item.get("maxRolls").get(id);
             //Apply corkian amps

@@ -750,6 +750,7 @@ const atree_stats = new (class extends ComputeNode {
                         for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
                             total += scaling * item_stats.get(input.name);
                         }
+                        if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect && total > effect.max) { total = effect.max; }
                         // TODO: output (list...)
                         if (Array.isArray(effect.output)) {
