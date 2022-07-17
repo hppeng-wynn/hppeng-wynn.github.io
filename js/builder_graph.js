@@ -23,7 +23,7 @@ let boosts_node = new (class extends ComputeNode {
             let elem = document.getElementById(key + "-boost")
             if (elem.classList.contains("toggleOn")) {
                 damage_boost += value;
-                if (key === "warscream") { def_boost += .20 }
+                if (key === "warscream") { def_boost += .10 }
                 if (key === "vanish") { def_boost += .15 }
             }
         }
