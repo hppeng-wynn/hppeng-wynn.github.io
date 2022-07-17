@@ -5724,6 +5724,7 @@ const atrees = {
                 { 
                     "type": "add_spell_prop",
                     "target_part": "Orb Damage",
+                    "base_spell": 5,
                     "hits": { "Single Orb": 2 }
                 }
             ]
