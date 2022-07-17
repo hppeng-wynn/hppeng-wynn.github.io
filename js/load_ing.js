@@ -232,5 +232,4 @@ function init_ing_maps() {
         recipeList.push(recipe["name"]);
         recipeIDMap.set(recipe["id"],recipe["name"]);
     }
-    console.log(ingMap);
 }

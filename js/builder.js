@@ -390,7 +390,12 @@ window.onerror = function(message, source, lineno, colno, error) {
 };
 
 (async function() {
+    const start = Date.now();
     let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];
     await Promise.all(load_promises);
+    const codestart = Date.now();
     init();
+    const end = Date.now();
+    console.log(`builder calculation took ${(end-codestart)/ 1000} seconds.`);
+    console.log(`builder total took ${(end-start)/ 1000} seconds.`);
 })();

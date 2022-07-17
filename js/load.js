@@ -254,5 +254,4 @@ function init_maps() {
             redirectMap.set(item.id, item.remapID);
         }
     }
-    console.log(itemMap);
 }

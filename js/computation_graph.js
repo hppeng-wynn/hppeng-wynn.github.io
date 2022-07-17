@@ -174,20 +174,24 @@ class ValueCheckComputeNode extends ComputeNode {
 
 }
 
+let INPUT_UPDATE = false;
+
 /**
  * Schedule a ComputeNode to be updated.
  *
  * @param node : ComputeNode to schedule an update for.
  */
 function calcSchedule(node, timeout) {
-    if (node.update_task !== null) {
-        clearTimeout(node.update_task);
+    if (INPUT_UPDATE) {
+        if (node.update_task !== null) {
+            clearTimeout(node.update_task);
+        }
+        node.mark_dirty();
+        node.update_task = setTimeout(function() {
+            node.update();
+            node.update_task = null;
+        }, timeout);
     }
-    node.mark_dirty();
-    node.update_task = setTimeout(function() {
-        node.update();
-        node.update_task = null;
-    }, timeout);
 }
 
 class PrintNode extends ComputeNode {
