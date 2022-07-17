@@ -4968,7 +4968,7 @@ const atrees = {
                     "behavior": "modify",
                     "target_part": "Total Damage",
                     "base_spell": 2,  
-                    "hits": {"Wind Slash": 1}
+                    "hits": {"Wind Slash": 1, "Explosion Damage": 1}
                 }
             ]
         },
@@ -5061,30 +5061,48 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": {
-                        "type": "stat",
-                        "name": "nConvBase:2.Wind Slash"
-                    },
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:2.Wind Slash"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:2.Explosion Damage"
+                        }
+                    ],
                     "scaling": [30]
                 },
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": {
-                        "type": "stat",
-                        "name": "tConvBase:2.Wind Slash"
-                    },
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "tConvBase:2.Wind Slash"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "tConvBase:2.Explosion Damage"
+                        }
+                    ],
                     "scaling": [10]
                 },
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": {
-                        "type": "stat",
-                        "name": "aConvBase:2.Wind Slash"
-                    },
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "aConvBase:2.Wind Slash"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aConvBase:2.Explosion Damage"
+                        }
+                    ],
                     "scaling": [5]
                 }
             ]
@@ -5406,7 +5424,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Ice Snake",
+                    "target_part": "Ice Snake Damage",
                     "base_spell": 4,  
                     "multipliers": [0, 0, 0, 0, 0, 20]
                 }
@@ -5711,6 +5729,7 @@ const atrees = {
                 { 
                     "type": "add_spell_prop",
                     "target_part": "Orb Damage",
+                    "base_spell": 5,
                     "hits": { "Single Orb": 2 }
                 }
             ]
