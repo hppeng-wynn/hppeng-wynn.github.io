@@ -5424,7 +5424,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Ice Snake",
+                    "target_part": "Ice Snake Damage",
                     "base_spell": 4,  
                     "multipliers": [0, 0, 0, 0, 0, 20]
                 }
