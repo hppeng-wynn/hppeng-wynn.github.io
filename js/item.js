@@ -17,15 +17,16 @@ let amp_state = 0; //the level of corkian map used for ID purposes. Default 0.
 function init_itempage() {
     //console.log(item_url_tag);
 
+    //displayExpandedItem(expandItem(itemMap.get(item_url_tag).statMap, []), "item-view");
     try{ 
-        item = expandItem(itemMap[item_url_tag.replaceAll("%20"," ")], []);
+        item = expandItem(itemMap.get(item_url_tag.replaceAll("%20"," ")), []);
         if (item.get('category') === 'weapon') {
             item.set('powders', []);
             apply_weapon_powders(item);
         }
-        displaysq2ExpandedItem(item, "item-view");
-        displaysq2AdditionalInfo("additional-info", item);
-        displaysq2IDCosts("identification-costs", item);
+        displayExpandedItem(item, "item-view");
+        displayAdditionalInfo("additional-info", item);
+        displayIDCosts("identification-costs", item);
         if (item.get("set") && sets[item.get("set")]) {
             displayAllSetBonuses("set-bonus-info",item.get("set"));
         }

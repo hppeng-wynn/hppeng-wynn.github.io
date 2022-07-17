@@ -9,13 +9,13 @@ let iload_complete = false;
 let ings;
 let recipes;
 
-let ingMap = {};
+let ingMap = new Map();
 let ingList = [];
 
 let recipeMap;
 let recipeList = [];
 
-let ingIDMap = {};
+let ingIDMap = new Map();
 let recipeIDMap;
 
 /*
@@ -178,9 +178,9 @@ function init_ing_maps() {
         posMods: {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0},
         id: 4000
     };
-    ingMap[ing.displayName] = ing;
+    ingMap.set(ing.displayName, ing);
     ingList.push(ing.displayName);
-    ingIDMap[ing.id] = ing.displayName;
+    ingIDMap.set(ing.id, ing.displayName);
     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
     for (let i = 0; i < 5; i ++) {
         for (const powderIng of powderIngreds) {
@@ -215,17 +215,17 @@ function init_ing_maps() {
                     ing.itemIDs["agiReq"] = powderIng["skpReq"];
                     break;
             }
-            ingMap[ing.displayName] = ing;
+            ingMap.set(ing.displayName, ing);
             ingList.push(ing.displayName);
-            ingIDMap[ing.id] = ing.displayName;
+            ingIDMap.set(ing.id, ing.displayName);
         }
     }
     
 
     for (const ing of ings) {
-        ingMap[ing.displayName] = ing;
+        ingMap.set(ing.displayName, ing);
         ingList.push(ing.displayName);
-        ingIDMap[ing.id] = ing.displayName;
+        ingIDMap.set(ing.id, ing.displayName);
     }
     for (const recipe of recipes) {
         recipeMap.set(recipe.name, recipe);

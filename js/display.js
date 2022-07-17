@@ -1871,18 +1871,18 @@ function displayIDProbabilities(parent_id, item, amp) {
     if (amp != 0) {toggleButton("cork_amp_" + amp)}
 
     let item_name = item.get("displayName");
-    console.log(itemMap[item_name])
+    console.log(itemMap.get(item_name))
     
     let table_elem = document.createElement("table");
     parent_elem.appendChild(table_elem);
-    for (const [id,val] of Object.entries(itemMap[item_name])) {
+    for (const [id,val] of Object.entries(itemMap.get(item_name))) {
         if (rolledIDs.includes(id)) {
             if (!item.get("maxRolls").get(id)) { continue; }
             let min = item.get("minRolls").get(id);
             let max = item.get("maxRolls").get(id);
             //Apply corkian amps
             if (val > 0) {
-                let base = val;
+                let base = itemMap.get(item_name)[id];
                 if (reversedIDs.includes(id)) {max = Math.max( Math.round((0.3 + 0.05*amp) * base), 1)} 
                 else {min = Math.max( Math.round((0.3 + 0.05*amp) * base), 1)}
             }

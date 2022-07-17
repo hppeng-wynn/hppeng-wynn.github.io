@@ -7,15 +7,10 @@ let load_complete = false;
 let load_in_progress = false;
 let items;
 let sets = new Map();
-let itemMap = {};
-let idMap = {};
+let itemMap;
+let idMap;
 let redirectMap;
-let itemLists = {};
-// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
-for (const it of itemTypes) {
-    itemLists[it] = [];
-}
-
+let itemLists = new Map();
 /*
  * Load item set from local DB. Calls init() on success.
  */
@@ -194,6 +189,11 @@ async function load_init() {
     });
 }
 
+// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
+for (const it of itemTypes) {
+    itemLists.set(it, []);
+}
+
 let none_items = [
     ["armor", "helmet", "No Helmet"],
     ["armor", "chestplate", "No Chestplate"],
@@ -232,15 +232,27 @@ for (let i = 0; i < none_items.length; i++) {
 }
 
 function init_maps() {
-    for (const item of items) {
-        itemLists[item.type].push(item.displayName);
-        itemMap[item.displayName] = item;
-        idMap[item.id] = item.displayName;
-    }
-    for (const item of none_items) {
-        itemLists[item.type].push(item.displayName);
-        itemMap[item.displayName] = item;
-        idMap[item.id] = "";
-    }
+    //warp
+    itemMap = new Map();
+    /* Mapping from item names to set names. */
+    idMap = new Map();
+    redirectMap = new Map();
     items = items.concat(none_items);
+    //console.log(items);
+    for (const item of items) {
+        if (item.remapID === undefined) {
+            itemLists.get(item.type).push(item.displayName);
+            itemMap.set(item.displayName, item);
+            if (none_items.includes(item)) {
+                idMap.set(item.id, "");
+            }
+            else {
+                idMap.set(item.id, item.displayName);
+            }
+        }
+        else {
+            redirectMap.set(item.id, item.remapID);
+        }
+    }
+    console.log(itemMap);
 }

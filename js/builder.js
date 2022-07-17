@@ -164,8 +164,8 @@ function init_autocomplete() {
         let item_arr = [];
         if (eq == 'weapon') {
             for (const weaponType of weapon_keys) {
-                for (const weapon of itemLists[weaponType]) {
-                    let item_obj = itemMap[weapon];
+                for (const weapon of itemLists.get(weaponType)) {
+                    let item_obj = itemMap.get(weapon);
                     if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                         continue;
                     }
@@ -176,8 +176,8 @@ function init_autocomplete() {
                 }
             }
         } else {
-            for (const item of itemLists[eq.replace(/[0-9]/g, '')]) {
-                let item_obj = itemMap[item];
+            for (const item of itemLists.get(eq.replace(/[0-9]/g, ''))) {
+                let item_obj = itemMap.get(item);
                 if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                     continue;
                 }
@@ -220,7 +220,7 @@ function init_autocomplete() {
                 class: "scaled-font search-item",
                 selected: "dark-5",
                 element: (item, data) => {
-                    item.classList.add(itemMap[data.value].tier);
+                    item.classList.add(itemMap.get(data.value).tier);
                 },
             },
             events: {
@@ -390,15 +390,7 @@ window.onerror = function(message, source, lineno, colno, error) {
 };
 
 (async function() {
-    const start = Date.now();
     let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];
     await Promise.all(load_promises);
-    const codestart = Date.now();
     init();
-    const end = Date.now();
-    const calc_str = `builder calculation took ${(end-codestart)/ 1000} seconds.`;
-    const total_str = `builder total took ${(end-start)/ 1000} seconds.`;
-    console.log(calc_str);
-    console.log(total_str);
-    document.getElementById('stack-box').textContent += calc_str + total_str;
 })();

@@ -1,5 +1,5 @@
 function calculate_skillpoints(equipment, weapon) {
-    const start = Date.now();
+    const start = performance.now();
     // Calculate equipment equipping order and required skillpoints.
     // Return value: [equip_order, best_skillpoints, final_skillpoints, best_total];
     let fixed = [];
@@ -211,7 +211,7 @@ function calculate_skillpoints(equipment, weapon) {
     // best_skillpoints:  manually assigned (before any gear)
     // final_skillpoints: final totals (5 individ)
     // best_total:        total skillpoints assigned (number)
-    const end = Date.now();
+    const end = performance.now();
     const output_msg = `skillpoint calculation took ${(end-start)/ 1000} seconds.`;
     console.log(output_msg);
     document.getElementById('stack-box').textContent += output_msg;
