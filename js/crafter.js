@@ -32,15 +32,6 @@ let player_craft;
 
 function init_crafter() {
     //no ing
-    
-    console.log("all ingredients");
-    console.log(ingMap);
-    console.log("all recipes");
-    console.log(recipeMap);
-    /*console.log(ingList);
-    console.log(recipeList);   
-    console.log(ingIDMap);
-    console.log(recipeIDMap);*/
     try {
         document.getElementById("recipe-choice").addEventListener("change", (event) => {
             updateMaterials();
@@ -149,7 +140,7 @@ function calculateCraft() {
     for (i = 1; i < 7; i++) {
         console.log("ing-choice-"+i);
         // console.log(getValue("ing-choice-"+i));
-        getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
+        getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap["No Ingredient"])) : ingreds.push(expandIngredient(ingMap[getValue("ing-choice-" + i)]));
     }
     let atkSpd = "NORMAL"; //default attack speed will be normal.
     for (const b of ["slow-atk-button", "normal-atk-button", "fast-atk-button"]) {
@@ -214,7 +205,7 @@ function decodeCraft(ing_url_tag) {
         if (version === "1") {
             ingreds = [];
             for (let i = 0; i < 6; i ++ ) {
-                setValue("ing-choice-"+(i+1), ingIDMap.get(Base64.toInt(tag.substring(2*i,2*i+2))));
+                setValue("ing-choice-"+(i+1), ingIDMap[Base64.toInt(tag.substring(2*i,2*i+2))]);
                 //console.log(Base64.toInt(tag.substring(2*i,2*i+2)));
             }
             recipe = recipeIDMap.get(Base64.toInt(tag.substring(12,14)));

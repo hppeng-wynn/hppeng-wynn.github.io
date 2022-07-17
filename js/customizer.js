@@ -331,7 +331,7 @@ function populateFields() {
         class_list.appendChild(el);
     }
     let item_list = document.getElementById("base-list");
-    for (const name of itemMap.keys()) {
+    for (const name of Object.keys(itemMap)) {
         let el = document.createElement("option");
         el.value = name;
         item_list.appendChild(el);
@@ -368,7 +368,7 @@ function useBaseItem(elem) {
     let baseItem;
 
     //Check items db.
-    for (const [name,itemObj] of itemMap) {
+    for (const [name,itemObj] of Object.entries(itemMap)) {
         if (itemName === name) {
             baseItem = expandItem(itemObj);
             break;

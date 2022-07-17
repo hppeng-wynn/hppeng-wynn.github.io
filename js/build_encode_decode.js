@@ -1,7 +1,7 @@
 let player_build;
 let build_powders;
 
-function getItemNameFromID(id) { return idMap.get(id); }
+function getItemNameFromID(id) { return idMap[id]; }
 function getTomeNameFromID(id) { return tomeIDMap.get(id); }
 
 function parsePowdering(powder_info) {

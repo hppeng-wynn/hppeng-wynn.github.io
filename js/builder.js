@@ -165,7 +165,7 @@ function init_autocomplete() {
         if (eq == 'weapon') {
             for (const weaponType of weapon_keys) {
                 for (const weapon of itemLists[weaponType]) {
-                    let item_obj = itemMap.get(weapon);
+                    let item_obj = itemMap[weapon];
                     if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                         continue;
                     }
@@ -177,7 +177,7 @@ function init_autocomplete() {
             }
         } else {
             for (const item of itemLists[eq.replace(/[0-9]/g, '')]) {
-                let item_obj = itemMap.get(item);
+                let item_obj = itemMap[item];
                 if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                     continue;
                 }
@@ -220,7 +220,7 @@ function init_autocomplete() {
                 class: "scaled-font search-item",
                 selected: "dark-5",
                 element: (item, data) => {
-                    item.classList.add(itemMap.get(data.value).tier);
+                    item.classList.add(itemMap[data.value].tier);
                 },
             },
             events: {

@@ -214,7 +214,7 @@ function calculate_skillpoints(equipment, weapon) {
     const end = Date.now();
     const output_msg = `skillpoint calculation took ${(end-start)/ 1000} seconds.`;
     console.log(output_msg);
-    document.getElementById('stack-box').textContent = output_msg;
+    document.getElementById('stack-box').textContent += output_msg;
     return [equip_order, best_skillpoints, final_skillpoints, best_total, best_activeSetCounts];
 }
 

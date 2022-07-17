@@ -154,7 +154,7 @@ class ItemInputNode extends InputNode {
         let item;
         if (item_text.slice(0, 3) == "CI-") { item = getCustomFromHash(item_text); }
         else if (item_text.slice(0, 3) == "CR-") { item = getCraftFromHash(item_text); } 
-        else if (itemMap.has(item_text)) { item = new Item(itemMap.get(item_text)); } 
+        else if (itemMap[item_text]) { item = new Item(itemMap[item_text]); } 
         else if (tomeMap.has(item_text)) { item = new Item(tomeMap.get(item_text)); }
 
         if (item) {

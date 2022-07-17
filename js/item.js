@@ -17,9 +17,8 @@ let amp_state = 0; //the level of corkian map used for ID purposes. Default 0.
 function init_itempage() {
     //console.log(item_url_tag);
 
-    //displayExpandedItem(expandItem(itemMap.get(item_url_tag).statMap, []), "item-view");
     try{ 
-        item = expandItem(itemMap.get(item_url_tag.replaceAll("%20"," ")), []);
+        item = expandItem(itemMap[item_url_tag.replaceAll("%20"," ")], []);
         displaysq2ExpandedItem(item, "item-view");
         displaysq2AdditionalInfo("additional-info", item);
         displaysq2IDCosts("identification-costs", item);

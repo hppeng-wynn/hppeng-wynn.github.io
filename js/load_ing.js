@@ -9,13 +9,13 @@ let iload_complete = false;
 let ings;
 let recipes;
 
-let ingMap;
+let ingMap = {};
 let ingList = [];
 
 let recipeMap;
 let recipeList = [];
 
-let ingIDMap;
+let ingIDMap = {};
 let recipeIDMap;
 
 /*
@@ -163,39 +163,41 @@ async function load_ing_init() {
 }
 
 function init_ing_maps() {
-    ingMap = new Map();
     recipeMap = new Map();
-    ingIDMap = new Map();
     recipeIDMap = new Map();
 
-    let ing = Object();
-    ing.name = "No Ingredient";
-    ing.displayName = "No Ingredient";
-    ing.tier = 0;
-    ing.lvl = 0;
-    ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING", "COOKING", "ALCHEMISM", "SCRIBING"];
-    ing.ids= {};
-    ing.itemIDs = {"dura": 0, "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
-    ing.consumableIDs = {"dura": 0, "charges": 0};
-    ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
-    ing.id = 4000;
-    ingMap.set(ing["displayName"], ing);
-    ingList.push(ing["displayName"]);
-    ingIDMap.set(ing["id"], ing["displayName"]);
+    let ing = {
+        name: "No Ingredient",
+        displayName: "No Ingredient",
+        tier: 0,
+        lvl: 0,
+        skills: ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING", "COOKING", "ALCHEMISM", "SCRIBING"],
+        ids: {},
+        itemIDs: {"dura": 0, "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,},
+        consumableIDs: {"dura": 0, "charges": 0},
+        posMods: {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0},
+        id: 4000
+    };
+    ingMap[ing.displayName] = ing;
+    ingList.push(ing.displayName);
+    ingIDMap[ing.id] = ing.displayName;
     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
     for (let i = 0; i < 5; i ++) {
         for (const powderIng of powderIngreds) {
-            let ing = Object();
-            ing.name = "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1);
-            ing.displayName = ing.name
-            ing.tier = 0;
-            ing.lvl = 0;
-            ing.skills = ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING"];
-            ing.ids = {};
-            ing.isPowder = true;
-            ing.pid = 6*i + powderIngreds.indexOf(powderIng);
+            let ing = {
+                name: "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1),
+                tier: 0,
+                lvl: 0,
+                skills: ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING"],
+                ids: {},
+                isPowder: true,
+                pid: 6*i + powderIngreds.indexOf(powderIng),
+                itemIDs: {"dura": powderIng["durability"], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0},
+                consumableIDs: {"dura": 0, "charges": 0},
+                posMods: {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0}
+            };
             ing.id = 4001 + ing.pid;
-            ing.itemIDs = {"dura": powderIng["durability"], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0,};
+            ing.diplayName = ing.name;
             switch(i) {
                 case 0:
                     ing.itemIDs["strReq"] = powderIng["skpReq"];
@@ -213,23 +215,21 @@ function init_ing_maps() {
                     ing.itemIDs["agiReq"] = powderIng["skpReq"];
                     break;
             }
-            ing.consumableIDs = {"dura": 0, "charges": 0};
-            ing.posMods = {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0};
-            ingMap.set(ing["displayName"],ing);
-            ingList.push(ing["displayName"]);
-            ingIDMap.set(ing["id"], ing["displayName"]);
+            ingMap[ing.displayName] = ing;
+            ingList.push(ing.displayName);
+            ingIDMap[ing.id] = ing.displayName;
         }
     }
     
 
     for (const ing of ings) {
-        ingMap.set(ing["displayName"], ing);
-        ingList.push(ing["displayName"]);
-        ingIDMap.set(ing["id"], ing["displayName"]);
+        ingMap[ing.displayName] = ing;
+        ingList.push(ing.displayName);
+        ingIDMap[ing.id] = ing.displayName;
     }
     for (const recipe of recipes) {
-        recipeMap.set(recipe["name"], recipe);
-        recipeList.push(recipe["name"]);
-        recipeIDMap.set(recipe["id"],recipe["name"]);
+        recipeMap.set(recipe.name, recipe);
+        recipeList.push(recipe.name);
+        recipeIDMap.set(recipe.id, recipe.name);
     }
 }

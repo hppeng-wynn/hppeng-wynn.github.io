@@ -34,7 +34,7 @@ function getCraftFromHash(hash) {
         if (version === "1") {
             let ingreds = [];
             for (let i = 0; i < 6; i ++ ) {
-                ingreds.push( expandIngredient(ingMap.get(ingIDMap.get(Base64.toInt(name.substring(2*i,2*i+2))))) );
+                ingreds.push( expandIngredient(ingMap[ingIDMap[Base64.toInt(name.substring(2*i,2*i+2))]]) );
             }
             let recipe = expandRecipe(recipeMap.get(recipeIDMap.get(Base64.toInt(name.substring(12,14)))));
             
