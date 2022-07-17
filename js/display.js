@@ -1877,6 +1877,7 @@ function displayIDProbabilities(parent_id, item, amp) {
     parent_elem.appendChild(table_elem);
     for (const [id,val] of Object.entries(itemMap.get(item_name))) {
         if (rolledIDs.includes(id)) {
+            if (!item.get("maxRolls").get(id)) { continue; }
             let min = item.get("minRolls").get(id);
             let max = item.get("maxRolls").get(id);
             //Apply corkian amps
