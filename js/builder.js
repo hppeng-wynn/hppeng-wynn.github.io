@@ -396,6 +396,9 @@ window.onerror = function(message, source, lineno, colno, error) {
     const codestart = Date.now();
     init();
     const end = Date.now();
-    console.log(`builder calculation took ${(end-codestart)/ 1000} seconds.`);
-    console.log(`builder total took ${(end-start)/ 1000} seconds.`);
+    const calc_str = `builder calculation took ${(end-codestart)/ 1000} seconds.`;
+    const total_str = `builder total took ${(end-start)/ 1000} seconds.`;
+    console.log(calc_str);
+    console.log(total_str);
+    document.getElementById('stack-box').textContent += calc_str + total_str;
 })();

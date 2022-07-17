@@ -1143,6 +1143,6 @@ function builder_graph_init() {
     // this will propagate the update to the `stat_agg_node`, and then to damage calc
 
     console.log("Set up graph");
-    let INPUT_UPDATE = true;
+    INPUT_UPDATE = true;
 }
 

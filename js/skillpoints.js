@@ -6,16 +6,22 @@ function calculate_skillpoints(equipment, weapon) {
     let consider = [];
     let noboost = [];
     let crafted = [];
+    weapon.skillpoints = weapon.get('skillpoints');
+    weapon.reqs = weapon.get('reqs');
+    weapon.set = weapon.get('set');
     for (const item of equipment) {
+        item.skillpoints = item.get('skillpoints');
+        item.reqs = item.get('reqs');
+        item.set = item.get('set');
         if (item.get("crafted")) {
             crafted.push(item);
         }
-        else if (item.get("reqs").every(x => x === 0) && item.get("skillpoints").every(x => x >= 0)) {
+        else if (item.get("reqs").every(x => x === 0) && item.skillpoints.every(x => x >= 0)) {
             // All reqless item without -skillpoints.
             fixed.push(item);
         }
         // TODO hack: We will treat ALL set items as unsafe :(
-        else if (item.get("skillpoints").every(x => x === 0) && item.get("set") === null) {
+        else if (item.skillpoints.every(x => x === 0) && item.set === null) {
             noboost.push(item);
         }
         else {
@@ -24,10 +30,10 @@ function calculate_skillpoints(equipment, weapon) {
     }
     function apply_skillpoints(skillpoints, item, activeSetCounts) {
         for (let i = 0; i < 5; i++) {
-            skillpoints[i] += item.get("skillpoints")[i];
+            skillpoints[i] += item.skillpoints[i];
         }
 
-        const setName = item.get("set");
+        const setName = item.set;
         if (setName) { // undefined/null means no set.
             let setCount = activeSetCounts.get(setName);
             let old_bonus = {};
@@ -52,17 +58,17 @@ function calculate_skillpoints(equipment, weapon) {
         let applied = [0, 0, 0, 0, 0];
         let total = 0;
         for (let i = 0; i < 5; i++) {
-            if (item.get("skillpoints")[i] < 0 && skillpoint_min[i]) {
-                const unadjusted = skillpoints[i] + item.get("skillpoints")[i];
+            if (item.skillpoints[i] < 0 && skillpoint_min[i]) {
+                const unadjusted = skillpoints[i] + item.skillpoints[i];
                 const delta = skillpoint_min[i] - unadjusted;
                 if (delta > 0) {
                     applied[i] += delta;
                     total += delta;
                 }
             }
-            if (item.get("reqs")[i] == 0) continue;
-            skillpoint_min[i] = Math.max(skillpoint_min[i], item.get("reqs")[i] + item.get("skillpoints")[i]);
-            const req = item.get("reqs")[i];
+            if (item.reqs[i] == 0) continue;
+            skillpoint_min[i] = Math.max(skillpoint_min[i], item.reqs[i] + item.skillpoints[i]);
+            const req = item.reqs[i];
             const cur = skillpoints[i];
             if (req > cur) {
                 const diff = req - cur;
@@ -71,7 +77,7 @@ function calculate_skillpoints(equipment, weapon) {
             }
         }
 
-        const setName = item.get("set");
+        const setName = item.set;
         if (setName) { // undefined/null means no set.
             const setCount = activeSetCounts.get(setName);
             if (setCount) {
@@ -113,9 +119,7 @@ function calculate_skillpoints(equipment, weapon) {
         // Try every combination and pick the best one.
         for (let permutation of perm(consider)) {
             let activeSetCounts = new Map(static_activeSetCounts);
-
             let has_skillpoint = allFalse.slice();
-
             permutation = permutation.concat(noboost);
 
             let skillpoints_applied = [0, 0, 0, 0, 0];
