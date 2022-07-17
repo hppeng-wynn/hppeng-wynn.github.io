@@ -8,7 +8,7 @@ function apply_elemental_format(p_elem, id, suffix) {
     let i_elem = make_elem('span', [element_prefix], {textContent: element_prefix});
     p_elem.appendChild(i_elem);
 
-    let i_elem2 = make_elem('span', {textContent: " "+desc+suffix});
+    let i_elem2 = make_elem('span', [], {textContent: " "+desc+suffix});
     p_elem.appendChild(i_elem2);
 }
 
@@ -121,7 +121,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     let row = make_elem('div', ['row']);
                     let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = make_elem('b', {textContent: "\u279C Effective LS: "});
+                    let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
 
                     let defStats = getDefenseStats(stats);
                     let number_elem = ('b', [style], {
