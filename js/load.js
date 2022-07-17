@@ -10,7 +10,12 @@ let sets = new Map();
 let itemMap;
 let idMap;
 let redirectMap;
-let itemLists = new Map();
+let itemLists = {};
+// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
+for (const it of itemTypes) {
+    itemLists[it] = [];
+}
+
 /*
  * Load item set from local DB. Calls init() on success.
  */
@@ -189,11 +194,6 @@ async function load_init() {
     });
 }
 
-// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
-for (const it of itemTypes) {
-    itemLists.set(it, []);
-}
-
 let none_items = [
     ["armor", "helmet", "No Helmet"],
     ["armor", "chestplate", "No Chestplate"],
@@ -241,7 +241,7 @@ function init_maps() {
     //console.log(items);
     for (const item of items) {
         if (item.remapID === undefined) {
-            itemLists.get(item.type).push(item.displayName);
+            itemLists[item.type].push(item.displayName);
             itemMap.set(item.displayName, item);
             if (none_items.includes(item)) {
                 idMap.set(item.id, "");

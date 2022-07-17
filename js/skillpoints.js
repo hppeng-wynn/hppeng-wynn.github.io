@@ -117,6 +117,7 @@ function calculate_skillpoints(equipment, weapon) {
     let allFalse = [0, 0, 0, 0, 0];
     if (consider.length > 0 || noboost.length > 0 || crafted.length > 0) {
         // Try every combination and pick the best one.
+        construct_scc_graph(consider);
         for (let permutation of perm(consider)) {
             let activeSetCounts = new Map(static_activeSetCounts);
             let has_skillpoint = allFalse.slice();
@@ -215,4 +216,46 @@ function calculate_skillpoints(equipment, weapon) {
     console.log(output_msg);
     document.getElementById('stack-box').textContent = output_msg;
     return [equip_order, best_skillpoints, final_skillpoints, best_total, best_activeSetCounts];
+}
+
+function construct_scc_graph(items_to_consider) {
+    let nodes = [];
+    for (const item of items_to_consider) {
+        nodes.push({item: item, children: [], parents: [], visited: false});
+    }
+    let root_node = {
+        children: nodes,
+        parents: [],
+        visited: false
+    };
+    // Dependency graph construction.
+    for (const node_a of nodes) {
+        const {item: a, children: a_children} = node_a;
+        for (const node_b of nodes) {
+            const {item: b, parents: b_parents} = node_b;
+            for (let i = 0; i < 5; ++i) {
+                if (b.reqs[i] < a.reqs[i] && b.skillpoints[i]) {
+                    a_children.push(node_b);
+                    b_parents.push(node_a);
+                    break;
+                }
+            }
+        }
+    }
+    const res = []
+    /*
+     * SCC graph construction.
+     * https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm
+     */
+    function visit(u, res) {
+        if (u.visited) { return; }
+        u.visited = true;
+        for (const child of u.children) {
+            if (!child.visited) { visit(child, res); }
+        }
+        res.push(u);
+    }
+    visit(root_node, res);
+    res.reverse();
+    console.log(res);
 }

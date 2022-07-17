@@ -164,7 +164,7 @@ function init_autocomplete() {
         let item_arr = [];
         if (eq == 'weapon') {
             for (const weaponType of weapon_keys) {
-                for (const weapon of itemLists.get(weaponType)) {
+                for (const weapon of itemLists[weaponType]) {
                     let item_obj = itemMap.get(weapon);
                     if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                         continue;
@@ -176,7 +176,7 @@ function init_autocomplete() {
                 }
             }
         } else {
-            for (const item of itemLists.get(eq.replace(/[0-9]/g, ''))) {
+            for (const item of itemLists[eq.replace(/[0-9]/g, '')]) {
                 let item_obj = itemMap.get(item);
                 if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                     continue;
