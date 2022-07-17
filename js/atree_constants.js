@@ -3121,11 +3121,6 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "cost": 10
-                },
-                {
-                    "type": "raw_stat",
-                    "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult.Ragnarokkr", "value": 30} ]
                 }
             ]  
         },
@@ -4888,15 +4883,7 @@ const atrees = {
             "properties": {
                 "duration": 5
             },
-            "effects": [{
-                "type": "raw_stat",
-                "toggle": true,
-                "bonuses": [{
-                    "type": "stat",
-                    "name": "damMult.Fortitude",
-                    "value": 60
-                }]
-            }]
+            "effects": []
         },
         {
             "display_name": "Pyrokinesis",
