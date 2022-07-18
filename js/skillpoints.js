@@ -247,7 +247,7 @@ function construct_scc_graph(items_to_consider) {
         for (const node_b of nodes) {
             const {item: b, parents: b_parents} = node_b;
             for (let i = 0; i < 5; ++i) {
-                if (a.reqs[i] < b.reqs[i] && a.skillpoints[i]) {
+                if (a.skillpoints[i] > 0 && (a.reqs[i] < b.reqs[i] || b.skillpoints[i] < 0)) {
                     a_children.push(node_b);
                     b_parents.push(node_a);
                     break;
