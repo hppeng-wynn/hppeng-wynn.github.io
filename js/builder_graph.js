@@ -407,7 +407,10 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('guildTome1-input')
         ];
         let weapon = input_map.get('weapon-input');
-        let level = input_map.get('level-input');
+        let level = parseInt(input_map.get('level-input'));
+        if (isNaN(level)) {
+            level = 106;
+        }
 
         let all_none = weapon.statMap.has('NONE');
         for (const item of equipments) {
