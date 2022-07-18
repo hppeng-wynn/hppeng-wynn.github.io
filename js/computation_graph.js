@@ -1,4 +1,5 @@
 let all_nodes = [];
+let node_debug_stack = [];
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -33,6 +34,7 @@ class ComputeNode {
         if (this.dirty === 0) {
             return;
         }
+        node_debug_stack.push(this.name);
         if (this.dirty == 2) {
             let calc_inputs = new Map();
             for (const input of this.inputs) {
@@ -44,6 +46,7 @@ class ComputeNode {
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
         }
+        node_debug_stack.pop();
         return this;
     }
 
@@ -174,17 +177,20 @@ class ValueCheckComputeNode extends ComputeNode {
 
 }
 
+let graph_live_update = false;
 /**
  * Schedule a ComputeNode to be updated.
  *
  * @param node : ComputeNode to schedule an update for.
  */
 function calcSchedule(node, timeout) {
+    if (!graph_live_update) return;
     if (node.update_task !== null) {
         clearTimeout(node.update_task);
     }
     node.mark_dirty();
     node.update_task = setTimeout(function() {
+        node_debug_stack = [];
         node.update();
         node.update_task = null;
     }, timeout);

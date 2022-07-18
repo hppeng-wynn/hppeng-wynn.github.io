@@ -124,7 +124,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
 
                     let defStats = getDefenseStats(stats);
-                    let number_elem = ('b', [style], {
+                    let number_elem = make_elem('b', [style], {
                         textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
                     });
                     value_elem.append(prefix_elem);
@@ -201,33 +201,30 @@ function displayExpandedItem(item, parent_id){
                     // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
 
-                    let powderPrefix = make_elem("b", [], {
+                    p_elem.appendChild(make_elem("b", [], {
                         textContent: "Powder Slots: " + item.get(id) + " ["
-                    });
-                    p_elem.appendChild(powderPrefix);
+                    }));
                     
                     let powders = item.get("powders");
                     for (let i = 0; i < powders.length; i++) {
-                        let powder = make_elem("b", [damageClasses[Math.floor(powders[i]/6)+1]+"_powder"],
-                            { textContent: numerals.get((powders[i]%6)+1)+" " });
-                        p_elem.appendChild(powder);
+                        p_elem.appendChild(make_elem("b", [damageClasses[Math.floor(powders[i]/6)+1]+"_powder"], {
+                            textContent: numerals.get((powders[i]%6)+1)+" "
+                        }));
                     }
 
-                    let powderSuffix = make_elem("b", { textContent: "]" });
-                    p_elem.appendChild(powderSuffix);
+                    p_elem.appendChild(make_elem("b", [], { textContent: "]" }));
                     parent_div.appendChild(p_elem);
                 } else if (id === "set") {
                     if (item.get("hideSet")) { continue; }
 
-                    let p_elem = make_elem("div", ["col"], { textContent: "Set: " + item.get(id).toString() });
-                    parent_div.appendChild(p_elem);
+                    parent_div.appendChild(make_elem("div", ["col"], { textContent: "Set: " + item.get(id).toString() }));
                 } else if (id === "majorIds") {
                     //console.log(item.get(id));
                     for (let majorID of item.get(id)) {
                         let p_elem = make_elem("div", ['col']);
 
-                        let title_elem = make_elem("b", []);
-                        let b_elem = make_elem("b", []);
+                        let title_elem = make_elem("b");
+                        let b_elem = make_elem("b");
                         if (majorID.includes(":")) {   
                             let name = majorID.substring(0, majorID.indexOf(":")+1);
                             let mid = majorID.substring(majorID.indexOf(":")+1);
@@ -248,20 +245,30 @@ function displayExpandedItem(item, parent_id){
                         parent_div.appendChild(p_elem);
                     }
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
-                    let p_elem = document.createElement("div");
-                    p_elem.classList.add("col");
-                    p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
-                    parent_div.appendChild(p_elem);
+                    parent_div.appendChild(make_elem("div", ["col"], {
+                        textContent: "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id)
+                    }));
                 } else if (id === "displayName") {
-                    let row = document.createElement("div");
+                    let row = make_elem("div", ["row", "justify-content-center"]);
 
-                    let a_elem = document.createElement("a");
-                    row.classList.add("row", "justify-content-center");
-                    a_elem.classList.add("col-auto", "text-center", "item-title", "p-0");
-                    a_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
-                    // a_elem.style.textGrow = 1;
-                    
-                    row.appendChild(a_elem);
+                    let nolink_row = make_elem("div", ["row", "justify-content-center"]);
+                    nolink_row.style.display = "none";
+
+                    const tier_class = item.has("tier") ? item.get("tier").replace(" ","") : "Normal";
+                    let item_link;
+                    if (item.get("custom")) {
+                        item_link = "../custom/#" + item.get("hash");
+                    } else if (item.get("crafted")) {
+                        a_item_link = "../crafter/#" + item.get("hash");
+                    } else {
+                        item_link = "../item/#" + item.get("displayName");
+                    }
+                    const item_name_elem = make_elem("a", ["col-auto", "text-center", "item-title", "p-0", tier_class], {
+                        textContent: item.get('displayName')
+                    });
+                    nolink_row.appendChild(item_name_elem.cloneNode(true));
+                    item_name_elem.href = item_link;
+                    nolink_row.appendChild(item_name_elem);
 
                     /* 
                     FUNCTIONALITY FOR THIS FEATURE HAS SINCE BEEN REMOVED (WITH SQ2).
@@ -275,50 +282,23 @@ function displayExpandedItem(item, parent_id){
                     //plusminus.style.flexGrow = 0;
                     //plusminus.textContent = "\u2795";
                     //row.appendChild(plusminus);
-
-                    if (item.get("custom")) {
-                        a_elem.href = "../custom/#" + item.get("hash");
-                        a_elem.textContent = item.get("displayName");
-                    } else if (item.get("crafted")) {
-                        a_elem.href = "../crafter/#" + item.get("hash");
-                        a_elem.textContent = item.get(id);
-                    } else {
-                        a_elem.href = "../item/#" + item.get("displayName");
-                        a_elem.textContent = item.get("displayName");
-                    }
                     parent_div.appendChild(row);
-
-                    let nolink_row = document.createElement("div");
-                    let p_elem = document.createElement("p");
-                    nolink_row.classList.add("row", "justify-content-center");
-                    nolink_row.style.display = "none";
-                    p_elem.classList.add("col-auto", "text-center", "item-title", "p-0");
-                    p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
-                    if (item.get("custom")) {
-                        p_elem.textContent = item.get("displayName");
-                    } else if (item.get("crafted")) {
-                        p_elem.textContent = item.get(id);
-                    } else {
-                        p_elem.textContent = item.get("displayName");
-                    }
-                    
-                    nolink_row.appendChild(p_elem);
                     parent_div.appendChild(nolink_row);
 
-                    let img = document.createElement("img");
-                    if (item && item.has("type")) {
-                        img.src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
-                        img.alt = item.get("type");
-                        img.style = " z=index: 1; position: relative;";
-                        let container = document.createElement("div");
+                    if (item.has("type")) {
+                        let img = make_elem("img", [], {
+                            src: "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png",
+                            alt: item.get("type"),
+                            style: " z=index: 1; position: relative;"
+                        });
+                        let container = make_elem("div");
                         
-                        let bckgrd = document.createElement("div");
-                        bckgrd.classList.add("col", "px-0", "d-flex", "align-items-center", "justify-content-center");// , "no-collapse");
-                        bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
-                        bckgrd.classList.add("scaled-bckgrd");
-                        parent_div.appendChild(container);
-                        container.appendChild(bckgrd);
+                        let bckgrd = make_elem("div", ["col", "px-0", "d-flex", "align-items-center", "justify-content-center", 'scaled-bckgrd'], { // , "no-collapse"
+                            style: "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
+                        });
                         bckgrd.appendChild(img);
+                        container.appendChild(bckgrd);
+                        parent_div.appendChild(container);
                     }
                 } else {
                     if (id.endsWith('Dam_')) {
@@ -345,8 +325,7 @@ function displayExpandedItem(item, parent_id){
                         p_elem.style = "font-style: italic";
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
                         if ( item.get("tier") !== "Crafted") {
-                            row = document.createElement("div");
-                            row.classList.add("col");
+                            row = make_elem("div", ["col"]);
                             
                             let title = document.createElement("b");
                             title.textContent = idPrefixes[id] + " ";
