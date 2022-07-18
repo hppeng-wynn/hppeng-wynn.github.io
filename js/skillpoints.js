@@ -204,7 +204,7 @@ function calculate_skillpoints(equipment, weapon) {
             const skp = needed_skillpoints[i];
             best_skillpoints[i] += skp;
             final_skillpoints[i] += skp;
-            best_skillpoints += skp;
+            best_total += skp;
         }
         apply_skillpoints(final_skillpoints, weapon, best_activeSetCounts);
     }
