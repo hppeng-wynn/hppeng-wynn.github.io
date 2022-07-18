@@ -57,7 +57,15 @@
         </div>
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-3 py-3">
             <div class="col-xl-6">
-                <div class="row row-cols-1 mb-3 gy-4">
+                <div class="row my-2 g-5 dark-6 rounded-top d-flex d-lg-none">
+                    <div class="col text-center">
+                        <p class="dark-9 fake-button scaled-font" id="equipment-inputs-btn" onclick="show_tab_temp('equipment-inputs', ['equipment-inputs', 'adjust-id'])">Equipments</p>
+                    </div>
+                    <div class="col text-center">
+                        <p class="dark-9 fake-button scaled-font" id="adjust-id-btn" onclick="show_tab_temp('adjust-id', ['equipment-inputs', 'adjust-id'])">Boosts</p>
+                    </div>
+                </div>
+                <div class="row row-cols-1 mb-3 gy-4" id="equipment-inputs">
                     <div class="col">
                         <div class="row row-cols-1 row-cols-xl-2 rounded gy-4 gx-5 justify-content-center">
                             <div class="col-auto rounded order-xl-0 order-0">
@@ -421,6 +429,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row row-cols-1 d-lg-flex" id="adjust-id" style="display: none;">
                     <div class="col">
                         <div class="row row-cols-1 gy-4">
                             <div class="col mb-1">

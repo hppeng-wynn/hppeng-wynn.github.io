@@ -172,6 +172,18 @@ function show_tab(tab) {
     document.getElementById("tab-" + tab.split("-")[0] +  "-btn").classList.add("selected-btn");
 }
 
+function show_tab_temp(target, tabs) {
+    //console.log(itemFilters)
+
+    //hide all tabs, then show the tab of the div clicked and highlight the correct button
+    for (const i in tabs) {
+        document.querySelector("#" + tabs[i]).style.display = "none";
+        document.getElementById(tabs[i] + "-btn").classList.remove("selected-btn");
+    }
+    document.querySelector("#" + target).style.display = "";
+    document.getElementById(target + "-btn").classList.add("selected-btn");
+}
+
 // autocomplete initialize
 function init_autocomplete() {
     let dropdowns = new Map();
