@@ -131,6 +131,7 @@ function calculate_skillpoints(equipment, weapon) {
         const [root, terminal, sccs] = construct_scc_graph(consider);
         const end_checks = crafted.concat(noboost);
         end_checks.push(weapon);
+        console.log(sccs);
 
         function check_end(skillpoints_applied, skillpoints, activeSetCounts, total_applied) {
             // Crafted skillpoint does not count initially.
@@ -152,15 +153,16 @@ function calculate_skillpoints(equipment, weapon) {
         function permute_check(idx, _applied, _skillpoints, _sets, _has, _total_applied, order) {
             const {nodes, children} = sccs[idx];
             if (nodes[0] === terminal) {
+                console.log(order);
                 const total = check_end(_applied, _skillpoints, _sets, _total_applied);
-                if (total < best_total) {
+                if (total !== -1 && total < best_total) {
                     final_skillpoints = _skillpoints;
                     best_skillpoints = _applied;
                     best_total = total;
                     best_activeSetCounts = _sets;
                     best = order;
                     console.log('new best');
-                    console.log(order);
+                    console.log(total);
                 }
                 return;
             }
