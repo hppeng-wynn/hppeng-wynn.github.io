@@ -95,12 +95,15 @@ function calculate_skillpoints(equipment, weapon) {
         if (item.get("crafted")) {
             crafted.push(item);
         }
+        // TODO hack: We will treat ALL set items as unsafe :(
+        else if (item.set !== null) {
+            consider.push(item);
+        }
         else if (item.get("reqs").every(x => x === 0) && item.skillpoints.every(x => x >= 0)) {
             // All reqless item without -skillpoints.
             fixed.push(item);
         }
-        // TODO hack: We will treat ALL set items as unsafe :(
-        else if (item.skillpoints.every(x => x === 0) && item.set === null) {
+        else if (item.skillpoints.every(x => x <= 0)) {
             noboost.push(item);
         }
         else {
