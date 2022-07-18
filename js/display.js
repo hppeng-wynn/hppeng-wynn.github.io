@@ -181,8 +181,7 @@ function displayExpandedItem(item, parent_id){
                 elemental_format = !elemental_format;
             }
             else if (command === "!spacer") {
-                let spacer = document.createElement('div');
-                spacer.classList.add("row", "my-2");
+                let spacer = make_elem('div', ["row", "my-2"], {});
                 parent_div.appendChild(spacer);
                 continue;
             }
@@ -191,49 +190,44 @@ function displayExpandedItem(item, parent_id){
             let id = command; 
             if(nonRolledIDs.includes(id)){//nonRolledID & non-0/non-null/non-und ID
                 if (!item.get(id)) {
-                    if (! (item.get("crafted") && skp_order.includes(id) && 
+                    if (!(item.get("crafted") && skp_order.includes(id) && 
                             (item.get("maxRolls").get(id) || item.get("minRolls").get(id)))) {
                         continue;
                     }
                 }
                 if (id === "slots") {
-                    let p_elem = document.createElement("div");
-                    p_elem.classList.add("col");
-                    
+                    let p_elem = make_elem("div", ["col"]);
+
                     // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
 
-                    let powderPrefix = document.createElement("b");
-                    powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
+                    let powderPrefix = make_elem("b", [], {
+                        textContent: "Powder Slots: " + item.get(id) + " ["
+                    });
                     p_elem.appendChild(powderPrefix);
                     
                     let powders = item.get("powders");
                     for (let i = 0; i < powders.length; i++) {
-                        let powder = document.createElement("b");
-                        powder.textContent = numerals.get((powders[i]%6)+1)+" ";
-                        powder.classList.add(damageClasses[Math.floor(powders[i]/6)+1]+"_powder");
+                        let powder = make_elem("b", [damageClasses[Math.floor(powders[i]/6)+1]+"_powder"],
+                            { textContent: numerals.get((powders[i]%6)+1)+" " });
                         p_elem.appendChild(powder);
                     }
 
-                    let powderSuffix = document.createElement("b");
-                    powderSuffix.textContent = "]";
+                    let powderSuffix = make_elem("b", { textContent: "]" });
                     p_elem.appendChild(powderSuffix);
                     parent_div.appendChild(p_elem);
                 } else if (id === "set") {
                     if (item.get("hideSet")) { continue; }
 
-                    let p_elem = document.createElement("div");
-                    p_elem.classList.add("col");
-                    p_elem.textContent = "Set: " + item.get(id).toString();
+                    let p_elem = make_elem("div", ["col"], { textContent: "Set: " + item.get(id).toString() });
                     parent_div.appendChild(p_elem);
                 } else if (id === "majorIds") {
                     //console.log(item.get(id));
                     for (let majorID of item.get(id)) {
-                        let p_elem = document.createElement("div");
-                        p_elem.classList.add("col");
+                        let p_elem = make_elem("div", ['col']);
 
-                        let title_elem = document.createElement("b");
-                        let b_elem = document.createElement("b");
+                        let title_elem = make_elem("b", []);
+                        let b_elem = make_elem("b", []);
                         if (majorID.includes(":")) {   
                             let name = majorID.substring(0, majorID.indexOf(":")+1);
                             let mid = majorID.substring(majorID.indexOf(":")+1);
