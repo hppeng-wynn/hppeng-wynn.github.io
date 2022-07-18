@@ -45,7 +45,6 @@
         <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
         <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
         <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
-        <a onclick = "document.querySelector('#search-container').style.display = '';"><img src="../media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
         <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
         <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
@@ -623,7 +622,7 @@
                                     </div>
                                     <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "atree-dropdown" style = "display:none;">
                                         <div class="row row-cols-1 row-cols-xl-2">
-                                            <div class="col border border-semi-light rounded dark-9 hide-scroll" id="atree-ui" style="height: 90vh; overflow-y: auto;">
+                                            <div class="col border border-semi-light rounded dark-9 hide-scroll" id="atree-ui" style="height: 90vh; overflow-y: auto; overflow-x: hidden;">
 
                                             </div>
                                             <div class="col mx-auto" style="height: 90vh; overflow-y: auto;" id="atree-rhs">
@@ -975,7 +974,12 @@
                                             </div>
                                             <div class="col-auto p-1">
                                                 <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="update_boosts('warscream-boost')">
-                                                    War Scream (+10%)
+                                                    War Scream
+                                                </button>
+                                            </div>
+                                            <div class="col-auto p-1">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="ragnarokkr-boost" onclick="update_boosts('ragnarokkr-boost')">
+                                                    Ragnarokkr (+30%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
@@ -989,8 +993,8 @@
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="update_boosts('bash-boost')">
-                                                    Bash (+50%)
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="fortitude-boost" onclick="update_boosts('fortitude-boost')">
+                                                    Fortitude (+60%)
                                                 </button>
                                             </div>
                                         </div>
@@ -1367,7 +1371,6 @@
         </div>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
     <script type="text/javascript" src="../js/utils.js"></script>
@@ -1378,15 +1381,9 @@
     <script type="text/javascript" src="../js/powders.js"></script>
     <script type="text/javascript" src="../js/skillpoints.js"></script>
     <script type="text/javascript" src="../js/damage_calc.js"></script>
-
     <script type="text/javascript" src="../js/atree_constants_min.js"></script>
-
     <script type="text/javascript" src="../js/display_constants.js"></script>
-
     <script type="text/javascript" src="../js/display.js"></script>
-
-    <script type="text/javascript" src="../js/query.js"></script>
-    <script type="text/javascript" src="../js/query_2.js"></script>
     <script type="text/javascript" src="../js/load.js"></script>
     <script type="text/javascript" src="../js/load_ing.js"></script>
     <script type="text/javascript" src="../js/load_tome.js"></script>
@@ -1398,8 +1395,6 @@
     <script type="text/javascript" src="../js/atree.js"></script>
     <script type="text/javascript" src="../js/builder.js"></script>
     <script type="text/javascript" src="../js/builder_graph.js"></script>
-    <script type="text/javascript" src="../js/expr_parser.js"></script>
-    <script type="text/javascript" src="../js/sq2items.js"></script>
     <script type="text/javascript" src="../js/optimize.js"></script>
 
     <div id="graph_body" style="max-width: 100%; height: 100vh">
