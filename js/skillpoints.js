@@ -129,10 +129,8 @@ function calculate_skillpoints(equipment, weapon) {
     if (consider.length > 0 || noboost.length > 0 || crafted.length > 0) {
         // Try every combination and pick the best one.
         const [root, terminal, sccs] = construct_scc_graph(consider);
-        console.log(sccs);
         const end_checks = crafted.concat(noboost);
         end_checks.push(weapon);
-        // naive way first.
 
         function check_end(skillpoints_applied, skillpoints, activeSetCounts, total_applied) {
             // Crafted skillpoint does not count initially.
