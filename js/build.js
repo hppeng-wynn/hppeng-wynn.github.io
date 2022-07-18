@@ -30,7 +30,6 @@ class Build{
             this.level = level;
         } else if (typeof level === "string") {
             this.level = level;
-            errors.push(new IncorrectInput(level, "a number", "level-choice"));
         } else {
             errors.push("Level is not a string or number.");
         }
