@@ -189,7 +189,7 @@ function calculate_skillpoints(equipment, weapon) {
             }
         }
         // skip root.
-        permute_check(1, final_skillpoints, best_skillpoints, best_activeSetCounts, allFalse.slice(), 0, []);
+        permute_check(1, best_skillpoints, final_skillpoints, best_activeSetCounts, allFalse.slice(), 0, []);
 
         // add extra sp bonus
         apply_skillpoints(final_skillpoints, weapon, best_activeSetCounts);
