@@ -5007,6 +5007,7 @@ const atrees = {
             "effects": [{
                 "type": "stat_scaling",
                 "slider": false,
+                "round": false,
                 "inputs": [
                         {
                             "type": "stat",

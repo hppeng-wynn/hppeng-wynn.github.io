@@ -76,6 +76,7 @@ stat_scaling: {
   "slider": bool,
   "slider_name": Optional[str],
   "slider_step": Optional[float],
+  round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
   slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part. do nothing if not exist
@@ -751,7 +752,9 @@ const atree_stats = new (class extends ComputeNode {
                     if (effect.slider) {
                         if ('output' in effect) { // sometimes nodes will modify slider without having effect.
                             const slider_val = slider_map.get(effect.slider_name).slider.value;
-                            let total = Math.floor(round_near(parseInt(slider_val) * effect.scaling[0]));
+                            const {round = true} = effect;
+                            let total = parseInt(slider_val) * effect.scaling[0];
+                            if (round) { total = Math.floor(round_near(total)); }
                             if ('max' in effect && total > effect.max) { total = effect.max; }
                             if (Array.isArray(effect.output)) {
                                 for (const output of effect.output) {
@@ -770,9 +773,11 @@ const atree_stats = new (class extends ComputeNode {
                     else {
                         // TODO: type: prop?
                         let total = 0;
+                        const {round = true} = effect;
                         for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
                             total += scaling * item_stats.get(input.name);
                         }
+                        if (round) { total = Math.floor(round_near(total)); }
                         if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect && total > effect.max) { total = effect.max; }
                         // TODO: output (list...)

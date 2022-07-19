@@ -576,7 +576,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.power * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)));
+                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
