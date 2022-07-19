@@ -989,23 +989,30 @@ function displayFixedID(active, id, value, elemental_format, style) {
 
 function displayPoisonDamage(overallparent_elem, build) {
     overallparent_elem.textContent = "";
+    if (build.statMap.get('poison') <= 0) {
+        overallparent_elem.style = "display: none";
+        return;
+    }
+    overallparent_elem.style = "";
+
+    let container = make_elem('div', ['col', 'pe-0']);
+    let spell_summary = make_elem('div', ["col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2", "border", "border-dark"]); 
 
     //Title
-    let title_elemavg = document.createElement("b");
-    title_elemavg.textContent = "Poison Stats";
-    overallparent_elem.append(title_elemavg);
+    let title_elemavg = make_elem("b");
+    title_elemavg.append(make_elem('span', [], { textContent: "Poison Stats" }));
+    spell_summary.append(title_elemavg);
 
-    let overallpoisonDamage = document.createElement("p");
-    let overallpoisonDamageFirst = document.createElement("span");
-    let overallpoisonDamageSecond = document.createElement("span");
     let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct"))/100 /3);
-    overallpoisonDamageFirst.textContent = "Poison Tick: ";
-    overallpoisonDamageSecond.textContent = Math.max(poison_tick,0);
-    overallpoisonDamageSecond.classList.add("Damage");
 
-    overallpoisonDamage.appendChild(overallpoisonDamageFirst);
-    overallpoisonDamage.appendChild(overallpoisonDamageSecond);
-    overallparent_elem.append(overallpoisonDamage);
+    let overallpoisonDamage = make_elem("p");
+    overallpoisonDamage.append(
+        make_elem("span", [], { textContent: "Poison Tick: " }),
+        make_elem("span", ["Damage"], { textContent: Math.max(poison_tick,0) })
+    );
+    spell_summary.append(overallpoisonDamage);
+    container.append(spell_summary);
+    overallparent_elem.append(container);
 }
 
 function displayEquipOrder(parent_elem, buildOrder){
@@ -1228,6 +1235,13 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
 }
 
 function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overall=false) {
+    parent_elem.textContent = "";
+    if (powderSpecials.length === 0) {
+        parent_elem.style = "display: none";
+        return;
+    }
+    parent_elem.style = "";
+
     const skillpoints = [
         stats.get('str'),
         stats.get('dex'),
@@ -1235,16 +1249,13 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
         stats.get('def'),
         stats.get('agi')
     ];
-    parent_elem.textContent = ""
-    let title = document.createElement("b");
-    title.textContent = "Powder Specials";
-    parent_elem.appendChild(title);
+    parent_elem.append(make_elem("b", [], { textContent: "Powder Specials" }));
     let specials = powderSpecials.slice();
     let expandedStats = new Map();
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
         //iterate through the special and display its effects.
-        let powder_special = document.createElement("p");
+        let powder_special = make_elem("p", ["pt-3"]);
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
         let specialTitle = document.createElement("p");
         let specialEffects = document.createElement("p");

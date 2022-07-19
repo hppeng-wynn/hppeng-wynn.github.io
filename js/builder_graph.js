@@ -677,7 +677,7 @@ class BuildDisplayNode extends ComputeNode {
         // TODO: move weapon out?
         displayDefenseStats(document.getElementById("defensive-stats"), stats);
 
-        //displayPoisonDamage(document.getElementById("build-poison-stats"), build);
+        displayPoisonDamage(document.getElementById("build-poison-stats"), build);
         displayEquipOrder(document.getElementById("build-order"), build.equip_order);
     }
 }
