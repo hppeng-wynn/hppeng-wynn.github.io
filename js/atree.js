@@ -1075,8 +1075,9 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
     container.innerHTML += "<br/><br/>";
 
     // description
-    let description = make_elem("p", ["scaled-font-sm", "my-0", "mx-1", "text-wrap"], {});
-    description.innerHTML = ability.desc;
+    let description = make_elem("p", ["scaled-font-sm", "my-0", "mx-1", "text-wrap", "mc-gray"], {});
+    let numberRegex = /[+-]?\d+(\.\d+)?[%+s]?/g; // +/- (optional), 1 or more digits, period followed by 1 or more digits (optional), %/+/s (optional)
+    description.innerHTML = ability.desc.replaceAll(numberRegex, (m) => { return "<span class = 'mc-white'>" + m + "</span>" });
     container.appendChild(description);
 
     container.appendChild(document.createElement("br"));
