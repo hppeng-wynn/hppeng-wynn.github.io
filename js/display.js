@@ -268,7 +268,7 @@ function displayExpandedItem(item, parent_id){
                     });
                     nolink_row.appendChild(item_name_elem.cloneNode(true));
                     item_name_elem.href = item_link;
-                    nolink_row.appendChild(item_name_elem);
+                    row.appendChild(item_name_elem);
 
                     /* 
                     FUNCTIONALITY FOR THIS FEATURE HAS SINCE BEEN REMOVED (WITH SQ2).
