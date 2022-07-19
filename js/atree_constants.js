@@ -322,17 +322,7 @@ const atrees = {
                 "aoe": 8,
                 "duration": 120
             },
-            "effects": [{
-                "type": "stat_bonus",
-                "toggle": "Windy Feet",
-                "bonuses": [
-                    { 
-                        "type": "stat",
-                        "name": "spd",
-                        "value": 20
-                    }
-                ]
-            }]
+            "effects": []
         },
         {
             "display_name": "Basaltic Trap",
@@ -1225,17 +1215,7 @@ const atrees = {
             "properties": {
                 "duration": 60
             },
-            "effects": [{ 
-                "type": "stat_bonus",
-                "toggle": "Windy Feet",
-                "bonuses": [
-                    { 
-                        "type": "stat",
-                        "name": "spdPct",
-                        "value": 20
-                    }
-                ]
-            }]
+            "effects": []
         },
         {
             "display_name": "Refined Gunpowder",
@@ -2775,7 +2755,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
+                    "toggle": "Activate Mantle",
                     "bonuses": [{ "type": "stat", "name": "defMult.Mantle", "value": 70}]
                 }
             ]
@@ -3457,7 +3437,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
+                    "toggle": "Activate Armor Breaker",
                     "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
                 }
             ]  
@@ -3914,7 +3894,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
+                    "toggle": "Activate Brink",
                     "bonuses": [{ "type": "stat", "name": "defMult.Brink", "value": 40}]
                 }
             ]
@@ -4835,7 +4815,7 @@ const atrees = {
             "display_name": "Cheaper Ice Snake",
             "desc": "Reduce the Mana cost of Ice Snake.",
             "base_abil": "Ice Snake",
-            "parents": ["Eye Piercer"], 
+            "parents": ["Eye Piercer", "Fortitude"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4851,7 +4831,8 @@ const atrees = {
             "display_name": "Cheaper Teleport II",
             "desc": "Reduce the Mana cost of Teleport.",
             "base_abil": "Teleport",
-            "parents": ["Purification", "Fortitude"], 
+            "parents": ["Purification"],
+            "_parents": ["Purification", "Fortitude"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4955,7 +4936,6 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
                     "bonuses": [{
                         "type": "prop",
                         "abil": "Teleport",

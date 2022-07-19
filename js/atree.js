@@ -667,6 +667,7 @@ const atree_make_interactives = new (class extends ComputeNode {
          */
         // Map<str, slider_info>
         const slider_map = new Map();
+        const button_map = new Map();
 
         // first, pull out all the sliders.
         for (const [abil_id, ability] of merged_abils.entries()) {
@@ -690,6 +691,12 @@ const atree_make_interactives = new (class extends ComputeNode {
                         });
                     }
                 }
+                if (effect['type'] === "raw_stat" && effect['toggle']) {
+                    const { toggle: toggle_name } = effect;
+                    button_map.set(toggle_name, {
+                        abil: ability
+                    });
+                }
             }
         }
         // next, render the sliders onto the abilities.
@@ -699,7 +706,23 @@ const atree_make_interactives = new (class extends ComputeNode {
             slider_info.slider = document.getElementById(slider_info.id);
             slider_info.slider.addEventListener("change", (e) => atree_stats.mark_dirty().update());
         }
-        return slider_map;
+        for (const [button_name, button_info] of button_map.entries()) {
+            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm"], {
+                id: button_info.abil.id,
+                textContent: button_name
+            });
+            button.addEventListener("click", (e) => {
+                if (button.classList.contains("toggleOn")) {
+                    button.classList.remove("toggleOn");
+                } else {
+                    button.classList.add("toggleOn");
+                }
+                atree_stats.mark_dirty().update()
+            });
+            button_info.button = button;
+            atree_html.get(button_info.abil.id).appendChild(button);
+        }
+        return [slider_map, button_map];
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
 
@@ -716,7 +739,7 @@ const atree_stats = new (class extends ComputeNode {
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
         const item_stats = input_map.get('build').statMap;
-        const interactive_map = input_map.get('atree-interactive');
+        const [slider_map, button_map] = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -727,7 +750,7 @@ const atree_stats = new (class extends ComputeNode {
                 case 'stat_scaling':
                     if (effect.slider) {
                         if ('output' in effect) { // sometimes nodes will modify slider without having effect.
-                            const slider_val = interactive_map.get(effect.slider_name).slider.value;
+                            const slider_val = slider_map.get(effect.slider_name).slider.value;
                             let total = Math.floor(round_near(parseInt(slider_val) * effect.scaling[0]));
                             if ('max' in effect && total > effect.max) { total = effect.max; }
                             if (Array.isArray(effect.output)) {
@@ -769,6 +792,10 @@ const atree_stats = new (class extends ComputeNode {
                     continue;
                 case 'raw_stat':
                     // TODO: toggles...
+                    if (effect.toggle) {
+                        const button = button_map.get(effect.toggle).button;
+                        if (!button.classList.contains("toggleOn")) { continue; }
+                    }
                     for (const bonus of effect.bonuses) {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
