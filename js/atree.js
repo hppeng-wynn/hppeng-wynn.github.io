@@ -1133,14 +1133,19 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
             case "Trapper":
                 archetype.classList.add("mc-dark-green");
                 break;
+            case "Trickster":
             case "Sharpshooter":
                 archetype.classList.add("mc-light-purple");
                 break;
             case "Arcanist":
                 archetype.classList.add("mc-dark-purple");
                 break;
+            case "Acrobat":
             case "Light Bender":
                 // already white
+                break;
+            case "Shadestepper":
+                archetype.classList.add("mc-dark-red");
                 break;
         }
         container.appendChild(archetype);
