@@ -576,7 +576,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.power * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)));
+                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
@@ -1048,9 +1048,6 @@ function builder_graph_init() {
 
     // Phase 2/3: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
 
-    let build_disp_node = new BuildDisplayNode()
-    build_disp_node.link_to(build_node, 'build');
-
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
     stat_agg_node = new AggregateStatsNode();
     edit_agg_node = new AggregateEditableIDNode();
@@ -1077,7 +1074,6 @@ function builder_graph_init() {
         skp_inputs.push(node);
     }
     stat_agg_node.link_to(edit_agg_node);
-    build_disp_node.link_to(stat_agg_node, 'stats');
 
     // Phase 3/3: Set up atree stuff.
 
@@ -1127,10 +1123,14 @@ function builder_graph_init() {
 
     // Also do something similar for skill points
 
+    let build_disp_node = new BuildDisplayNode()
+    build_disp_node.link_to(build_node, 'build');
+    build_disp_node.link_to(stat_agg_node, 'stats');
+
     for (const node of edit_input_nodes) {
         node.update();
     }
-    
+
     let skp_output = new SkillPointSetterNode(edit_input_nodes);
     skp_output.link_to(build_node);
 
@@ -1146,5 +1146,6 @@ function builder_graph_init() {
     // this will propagate the update to the `stat_agg_node`, and then to damage calc
 
     console.log("Set up graph");
+    graph_live_update = true;
 }
 

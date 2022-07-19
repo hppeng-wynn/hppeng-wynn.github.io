@@ -129,6 +129,7 @@ class Build{
         }
         statMap.set("poisonPct", 100);
         statMap.set("critDamPct", 100);
+        statMap.set("healPct", 100);
 
         // The stuff relevant for damage calculation!!! @ferricles
         statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));
