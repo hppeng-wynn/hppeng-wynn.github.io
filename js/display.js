@@ -1915,12 +1915,12 @@ function stringCDF(id,val,base,amp) {
 
 function addClickableArrow(elem, target) {
     //up and down arrow - done ugly
-    let arrow = document.createElement("img");
-    arrow.id = "arrow_" + elem.id;
+    let arrow = make_elem("img", [], { id: "arrow_" + elem.id, src: "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png" });
     arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    arrow.src = "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png";
-    elem.appendChild(arrow);
-    arrow.addEventListener("click", () => toggle_spell_tab(arrow, target));
+    let container = make_elem('div', ['col']);
+    container.appendChild(arrow);
+    elem.appendChild(container);
+    container.addEventListener("click", () => toggle_spell_tab(arrow, target));
 }
 
 // toggle arrow thinger
