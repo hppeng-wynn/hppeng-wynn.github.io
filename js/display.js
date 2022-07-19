@@ -1022,152 +1022,6 @@ function displayEquipOrder(parent_elem, buildOrder){
     }
 }
 
-function displayMeleeDamage(parent_elem, overallparent_elem, meleeStats) {
-    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
-    //let damagePrefixes = ["Neutral Damage: ","Earth Damage: ","Thunder Damage: ","Water Damage: ","Fire Damage: ","Air Damage: "];
-    parent_elem.textContent = "";
-    overallparent_elem.textContent = "";
-    const stats = meleeStats.slice();
-    
-    for (let i = 0; i < 6; ++i) {
-        for (let j in stats[i]) {
-            stats[i][j] = stats[i][j].toFixed(2);
-        }
-    }
-    for (let i = 6; i < 8; ++i) {
-        for (let j = 0; j < 2; j++) {
-            stats[i][j] = stats[i][j].toFixed(2);
-        }
-    }
-    for (let i = 8; i < 11; ++i) {
-        stats[i] = stats[i].toFixed(2);
-    }
-    
-    //title
-    let title_elem = document.createElement("p");
-    title_elem.classList.add("title");
-    title_elem.textContent = "Melee Stats";
-    parent_elem.append(title_elem);
-    parent_elem.append(document.createElement("br"));
-
-    //overall title
-    let title_elemavg = document.createElement("b");
-    title_elemavg.textContent = "Melee Stats";
-    overallparent_elem.append(title_elemavg);
-    
-    //average DPS
-    let averageDamage = document.createElement("p");
-    averageDamage.classList.add("left");
-    averageDamage.textContent = "Average DPS: " + stats[10];
-    parent_elem.append(averageDamage);
-
-    //overall average DPS
-    let overallaverageDamage = document.createElement("p");
-    let overallaverageDamageFirst = document.createElement("span");
-    overallaverageDamageFirst.textContent = "Average DPS: "
-
-    let overallaverageDamageSecond = document.createElement("span");
-    overallaverageDamageSecond.classList.add("Damage");
-    overallaverageDamageSecond.textContent = stats[10];
-    overallaverageDamage.appendChild(overallaverageDamageFirst);
-    overallaverageDamage.appendChild(overallaverageDamageSecond);
-
-    overallparent_elem.append(overallaverageDamage);
-    //overallparent_elem.append(document.createElement("br"));
-
-    //attack speed
-    let atkSpd = document.createElement("p");
-    atkSpd.classList.add("left");
-    atkSpd.textContent = "Attack Speed: " + attackSpeeds[stats[11]];
-    parent_elem.append(atkSpd);
-    parent_elem.append(document.createElement("br"));
-
-    //overall attack speed
-    let overallatkSpd = document.createElement("p");
-    let overallatkSpdFirst = document.createElement("span");
-    overallatkSpdFirst.textContent = "Attack Speed: ";
-    let overallatkSpdSecond = document.createElement("span");
-    overallatkSpdSecond.classList.add("Damage");
-    overallatkSpdSecond.textContent =  attackSpeeds[stats[11]];
-    overallatkSpd.appendChild(overallatkSpdFirst);
-    overallatkSpd.appendChild(overallatkSpdSecond);
-    overallparent_elem.append(overallatkSpd);
-
-    //Non-Crit: n->elem, total dmg, DPS
-    let nonCritStats = document.createElement("p");
-    nonCritStats.classList.add("left");
-    nonCritStats.textContent = "Non-Crit Stats: ";
-    nonCritStats.append(document.createElement("br"));
-    for (let i = 0; i < 6; i++) {
-        if (stats[i][1] != 0) {
-            let dmg = document.createElement("p");
-            dmg.textContent = stats[i][0] + " \u2013 " + stats[i][1];
-            dmg.classList.add(damageClasses[i]);
-            dmg.classList.add("itemp");
-            nonCritStats.append(dmg);
-        }
-    }
-
-    let normalDamage = document.createElement("p");
-    normalDamage.textContent = "Total: " + stats[6][0] + " \u2013 " + stats[6][1];
-    nonCritStats.append(normalDamage);
-
-    let normalDPS = document.createElement("p");
-    normalDPS.textContent = "Normal DPS: " + stats[8];
-    nonCritStats.append(normalDPS);
-
-    //overall average DPS
-    let singleHitDamage = document.createElement("p");
-    let singleHitDamageFirst = document.createElement("span");
-    singleHitDamageFirst.textContent = "Single Hit Average: ";
-    let singleHitDamageSecond = document.createElement("span");
-    singleHitDamageSecond.classList.add("Damage");
-    singleHitDamageSecond.textContent = stats[12].toFixed(2);
-    singleHitDamage.appendChild(singleHitDamageFirst);
-    singleHitDamage.appendChild(singleHitDamageSecond);
-    overallparent_elem.append(singleHitDamage);
-    
-    let normalChance = document.createElement("p");
-    normalChance.textContent = "Non-Crit Chance: " + (stats[6][2]*100).toFixed(2) + "%"; 
-    normalChance.append(document.createElement("br"));
-    normalChance.append(document.createElement("br"));
-    nonCritStats.append(normalChance);
-
-    parent_elem.append(nonCritStats);
-    parent_elem.append(document.createElement("br"));
-
-    //Crit: n->elem, total dmg, DPS
-    let critStats = document.createElement("p");
-    critStats.classList.add("left");
-    critStats.textContent = "Crit Stats: ";
-    critStats.append(document.createElement("br"));
-    for (let i = 0; i < 6; i++){
-        if(stats[i][3] != 0) {
-            dmg = document.createElement("p");
-            dmg.textContent = stats[i][2] + " \u2013 " + stats[i][3];
-            dmg.classList.add(damageClasses[i]);
-            dmg.classList.add("itemp");
-            critStats.append(dmg);
-        }
-    }
-    let critDamage = document.createElement("p");
-    critDamage.textContent = "Total: " + stats[7][0] + " \u2013 " + stats[7][1];
-    critStats.append(critDamage);
-
-    let critDPS = document.createElement("p");
-    critDPS.textContent = "Crit DPS: " + stats[9];
-    critStats.append(critDPS);
-
-    let critChance = document.createElement("p");
-    critChance.textContent = "Crit Chance: " + (stats[7][2]*100).toFixed(2) + "%";
-    critChance.append(document.createElement("br"));
-    critChance.append(document.createElement("br"));
-    critStats.append(critChance);
-
-    parent_elem.append(critStats);
-    addClickableArrow(overallparent_elem, parent_elem);
-}
-
 function displayDefenseStats(parent_elem, statMap, insertSummary){
     let defenseStats = getDefenseStats(statMap);
     insertSummary = (typeof insertSummary !== 'undefined') ? insertSummary : false;
@@ -1533,31 +1387,23 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     // TODO: move cost calc out
     parent_elem.textContent = "";
 
-    let title_elem = document.createElement("p");
+    let title_elem = make_elem("p");
 
     overallparent_elem.textContent = "";
     let title_elemavg = document.createElement("b");
 
     if ('cost' in spell) {
-        let first = document.createElement("span");
-        first.textContent = spell.name + " (";
+        let first = make_elem("span", [], { textContent: spell.name + " (" });
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
 
-        let second = document.createElement("span");
-        second.textContent = getSpellCost(stats, spell);
-        second.classList.add("Mana");
-
+        let second = make_elem("span", ["Mana"], { textContent: getSpellCost(stats, spell) });
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
-        
 
-        let third = document.createElement("span");
-        third.textContent = ")";// [Base: " + getBaseSpellCost(stats, spellIdx, spell.cost) + " ]";
-        title_elem.appendChild(third);
-        let third_summary = document.createElement("span");
-        third_summary.textContent = ")";
-        title_elemavg.appendChild(third_summary);
+        let third = make_elem("span", [], { textContent: ")" });// " + getBaseSpellCost(stats, spellIdx, spell.cost) + " ]";
+        title_elem.appendChild(third.cloneNode(true));
+        title_elemavg.appendChild(third);
     }
     else {
         title_elem.textContent = spell.name;
@@ -1574,30 +1420,26 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
 
     let critChance = skillPointsToPercentage(stats.get('dex'));
 
-    let part_divavg = document.createElement("p");
+    let part_divavg = make_elem("p");
     overallparent_elem.append(part_divavg);
 
     function _summary(text, val, fmt) {
-        let overallaverageLabel = document.createElement("p");
-        let first = document.createElement("span");
-        let second = document.createElement("span");
-        first.textContent = text;
-        second.textContent = val.toFixed(2);
+        if (typeof(val) === 'number') { val = val.toFixed(2); }
+        let overallaverageLabel = make_elem("p");
+        let first = make_elem("span", [], { textContent: text });
+        let second = make_elem("span", [fmt], { textContent: val });
         overallaverageLabel.appendChild(first);
         overallaverageLabel.appendChild(second);
-        second.classList.add(fmt);
         part_divavg.append(overallaverageLabel);
     }
 
     for (let i = 0; i < spell_results.length; ++i) {
         const spell_info = spell_results[i];
 
-        let part_div = document.createElement("p");
+        let part_div = make_elem("p", ["pt-3"]);
         parent_elem.append(part_div);
 
-        let subtitle_elem = document.createElement("p");
-        subtitle_elem.textContent = spell_info.name
-        part_div.append(subtitle_elem);
+        part_div.append(make_elem("p", [], { textContent: spell_info.name }));
 
         if (spell_info.type === "damage") {
             let totalDamNormal = spell_info.normal_total;
@@ -1607,14 +1449,26 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
             let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
 
-            let averageLabel = document.createElement("p");
-            averageLabel.textContent = "Average: "+averageDamage.toFixed(2);
+            let averageLabel = make_elem("p", [], { textContent: "Average: "+averageDamage.toFixed(2) });
             // averageLabel.classList.add("damageSubtitle");
             part_div.append(averageLabel);
 
-
             if (spell_info.name === spell.display) {
-                _summary(spell_info.name+ ": ", averageDamage, "Damage");
+                if (spellIdx === 0) {
+                    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
+                    let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+                    if(adjAtkSpd > 6) {
+                        adjAtkSpd = 6;
+                    } else if(adjAtkSpd < 0) {
+                        adjAtkSpd = 0;
+                    }
+                    _summary("Average DPS: ", averageDamage * baseDamageMultiplier[adjAtkSpd], "Damage");
+                    _summary("Attack Speed: ", attackSpeeds[adjAtkSpd], "Damage");
+                    _summary("Per Attack: ", averageDamage, "Damage");
+                }
+                else {
+                    _summary(spell_info.name+ ": ", averageDamage, "Damage");
+                }
             }
             
             function _damage_display(label_text, average, dmg_min, dmg_max) {
