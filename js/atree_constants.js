@@ -5011,7 +5011,7 @@ const atrees = {
                 "inputs": [
                         {
                             "type": "stat",
-                            "name": "wDam"
+                            "name": "wDamPct"
                         }
                     ],
                 "output": {
