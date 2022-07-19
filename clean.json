@@ -76,6 +76,7 @@
       "spRaw1-base": -5,
       "category": "armor",
       "displayName": "Anaerobic",
+      "slots": 4,
       "hp": 3850,
       "wDef": -150,
       "aDef": 100,
@@ -118,10 +119,10 @@
       "classReq": "Shaman",
       "dexReq": 55,
       "defReq": 50,
-      "hprPct": -204,
       "ms": 13,
       "atkTier": 1,
       "hpBonus": -1150,
+      "hprRaw": -204,
       "sdRaw": 184,
       "spRaw1": -7,
       "id": 3614
@@ -336,7 +337,7 @@
       "poison": 600,
       "thorns": 25,
       "slots": 3,
-      "hp": 3450,
+      "hp": 4350,
       "fDef": 120,
       "wDef": 120,
       "aDef": 200,
@@ -393,8 +394,8 @@
       "fDef": 50,
       "wDef": 50,
       "lvl": 101,
-      "dexReq": 45,
       "intReq": 45,
+      "defReq": 45,
       "hprPct": 17,
       "sdPct": 5,
       "str": -3,
@@ -651,6 +652,7 @@
       "tier": "Legendary",
       "majorIds": [],
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "accessory",
       "displayName": "Prowess",
       "hp": 425,
@@ -873,6 +875,7 @@
       "type": "helmet",
       "tier": "Legendary",
       "quest": "The Qira Hive",
+      "set": "Master Hive",
       "category": "armor",
       "slots": 2,
       "hp": 3000,
@@ -1027,13 +1030,13 @@
       "mdPct": 40,
       "sdRaw": -40000,
       "spPct1": -40,
-      "spRaw1": -40,
+      "spRaw1": -400,
       "spPct2": -40,
-      "spRaw2": -40,
+      "spRaw2": -400,
       "spPct3": -40,
-      "spRaw3": -40,
+      "spRaw3": -400,
       "spPct4": -40,
-      "spRaw4": -40,
+      "spRaw4": -400,
       "id": 3021
     },
     {
@@ -1971,7 +1974,7 @@
       "type": "wand",
       "tier": "Mythic",
       "majorIds": [],
-      "mr-base": -49,
+      "mr-base": -45,
       "spRaw1-base": 4,
       "spRaw2-base": -299,
       "category": "weapon",
@@ -1988,7 +1991,7 @@
       "lvl": 99,
       "agiReq": 130,
       "hprPct": -200,
-      "mr": -49,
+      "mr": -45,
       "ref": 90,
       "agi": 20,
       "expd": 50,
@@ -2074,11 +2077,11 @@
       "basedps": 1350,
       "slots": 3,
       "nDam": "0-0",
-      "fDam": "215-325",
-      "wDam": "230-310",
-      "aDam": "245-295",
-      "tDam": "260-280",
-      "eDam": "200-340",
+      "fDam": "185-295",
+      "wDam": "200-280",
+      "aDam": "215-265",
+      "tDam": "230-250",
+      "eDam": "170-310",
       "atkSpd": "VERY_SLOW",
       "lvl": 96,
       "strReq": 45,
@@ -2086,9 +2089,9 @@
       "intReq": 45,
       "agiReq": 45,
       "defReq": 45,
-      "mr": -4,
+      "mr": -20,
       "sdPct": 30,
-      "ms": -4,
+      "ms": -20,
       "int": 50,
       "spPct1": -27,
       "spPct2": -27,
@@ -2176,6 +2179,62 @@
       "spPct3": -45,
       "sprintReg": 43,
       "id": 3643
+    },
+    {
+      "name": "Panic Zealot",
+      "tier": "Fabled",
+      "type": "relik",
+      "material": "273:7",
+      "majorIds": [
+        "FURIOUS_EFFIGY"
+      ],
+      "category": "weapon",
+      "slots": 3,
+      "lore": "They must know what you went through. They must suffer the same as you did.",
+      "drop": "never",
+      "restrict": "Untradable",
+      "nDam": "46-60",
+      "fDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "43-63",
+      "tDam": "0-0",
+      "eDam": "0-0",
+      "atkSpd": "SUPER_FAST",
+      "lvl": 101,
+      "agiReq": 85,
+      "spd": 30,
+      "atkTier": 3,
+      "hpBonus": -5000,
+      "tDamPct": -30,
+      "spPct1": -100,
+      "spPct2": -100,
+      "spPct3": -100,
+      "id": 3600
+    },
+    {
+      "name": "Ambivalence",
+      "tier": "Legendary",
+      "material": "259:29",
+      "category": "accessory",
+      "drop": "never",
+      "restrict": "Untradable",
+      "fDef": 70,
+      "aDef": 70,
+      "tDef": 70,
+      "lvl": 100,
+      "dexReq": 40,
+      "agiReq": 40,
+      "defReq": 40,
+      "sdPct": 250,
+      "int": -100,
+      "wDamPct": 50,
+      "type": "necklace",
+      "fixID": true,
+      "spPct1": 130,
+      "spPct2": 85,
+      "spPct3": 130,
+      "spPct4": 100,
+      "id": 3618
     },
     {
       "name": "Dondasch",
@@ -2713,35 +2772,6 @@
       "xpb": 10,
       "dex": 30,
       "id": 19
-    },
-    {
-      "name": "Panic Zealot",
-      "tier": "Fabled",
-      "type": "relik",
-      "majorIds": [
-        "FURIOUS_EFFIGY"
-      ],
-      "category": "weapon",
-      "slots": 3,
-      "drop": "never",
-      "restrict": "Untradable",
-      "nDam": "46-60",
-      "fDam": "0-0",
-      "wDam": "0-0",
-      "aDam": "43-63",
-      "tDam": "0-0",
-      "eDam": "0-0",
-      "atkSpd": "SUPER_FAST",
-      "lvl": 101,
-      "agiReq": 85,
-      "spd": 30,
-      "atkTier": 3,
-      "hpBonus": -5000,
-      "tDamPct": -30,
-      "spPct1": -70,
-      "spPct2": -70,
-      "spPct3": -70,
-      "id": 3600
     },
     {
       "name": "Redrock Bandanna",
@@ -8836,7 +8866,7 @@
       "def": 11,
       "hpBonus": -300,
       "spPct2": 25,
-      "spPct4": -23,
+      "spPct4": -24,
       "id": 359
     },
     {
@@ -11449,9 +11479,9 @@
       "def": -20,
       "atkTier": -1,
       "hprRaw": -200,
-      "spPct2": -31,
+      "spPct2": -32,
       "spPct3": -21,
-      "spPct4": -23,
+      "spPct4": -24,
       "id": 482
     },
     {
@@ -11521,7 +11551,7 @@
       "spd": -8,
       "hpBonus": 1750,
       "hprRaw": 125,
-      "spPct1": -47,
+      "spPct1": -48,
       "id": 490
     },
     {
@@ -14682,7 +14712,7 @@
       "aDamPct": 12,
       "tDamPct": 15,
       "fixID": true,
-      "spPct3": -9,
+      "spPct3": -10,
       "id": 629
     },
     {
@@ -16771,7 +16801,7 @@
       "aDamPct": 21,
       "fixID": true,
       "spPct2": -54,
-      "spPct3": -33,
+      "spPct3": -34,
       "id": 726
     },
     {
@@ -17184,7 +17214,7 @@
       "wDefPct": -45,
       "eDefPct": -55,
       "spPct2": -14,
-      "spPct3": -9,
+      "spPct3": -10,
       "id": 2264
     },
     {
@@ -17899,30 +17929,6 @@
       "id": 776
     },
     {
-      "name": "Ambivalence",
-      "tier": "Legendary",
-      "category": "accessory",
-      "drop": "never",
-      "restrict": "Untradable",
-      "fDef": 70,
-      "aDef": 70,
-      "tDef": 70,
-      "lvl": 100,
-      "dexReq": 40,
-      "agiReq": 40,
-      "defReq": 40,
-      "sdPct": 250,
-      "int": -100,
-      "wDamPct": 50,
-      "type": "necklace",
-      "fixID": true,
-      "spPct1": 91,
-      "spPct2": 61,
-      "spPct3": 91,
-      "spPct4": 70,
-      "id": 3618
-    },
-    {
       "name": "The Evolved",
       "tier": "Legendary",
       "type": "bow",
@@ -18098,12 +18104,13 @@
       "lvl": 100,
       "dexReq": 55,
       "defReq": 55,
-      "sdPct": 61600,
-      "mdPct": 14000,
       "ls": 700,
       "ms": 15,
       "int": -25,
       "spd": 10,
+      "tSdRaw": 500,
+      "fSdRaw": 500,
+      "aSdRaw": 500,
       "fixID": true,
       "spRaw3": -10,
       "id": 781
@@ -18180,7 +18187,7 @@
       "mdRaw": 1997,
       "fixID": true,
       "spPct1": 23,
-      "spPct2": 16,
+      "spPct2": 15,
       "spPct3": 32,
       "spPct4": 23,
       "id": 782
@@ -20686,7 +20693,7 @@
       "spd": 10,
       "hpBonus": -300,
       "spPct1": 25,
-      "spPct3": -23,
+      "spPct3": -24,
       "jh": 1,
       "id": 898
     },
@@ -24363,9 +24370,9 @@
       "int": -40,
       "spd": 8,
       "spPct1": -17,
-      "spPct2": -9,
+      "spPct2": -10,
       "spPct3": -17,
-      "spPct4": -9,
+      "spPct4": -10,
       "id": 1070
     },
     {
@@ -25537,7 +25544,7 @@
       "aDamPct": -33,
       "tDamPct": -33,
       "eDamPct": -33,
-      "spPct3": -22,
+      "spPct3": -23,
       "id": 1143
     },
     {
@@ -28186,7 +28193,7 @@
       "str": 4,
       "dex": 4,
       "mdRaw": 52,
-      "spPct1": 19,
+      "spPct1": 18,
       "id": 1261
     },
     {
@@ -36455,7 +36462,7 @@
       "dex": 4,
       "sdRaw": 13,
       "mdRaw": 13,
-      "spPct1": 19,
+      "spPct1": 18,
       "id": 1658
     },
     {
@@ -37209,7 +37216,7 @@
       "def": 15,
       "fDamPct": 40,
       "wDamPct": 40,
-      "spPct1": -22,
+      "spPct1": -23,
       "id": 1689
     },
     {
@@ -44564,7 +44571,7 @@
       "fDamPct": 45,
       "wDamPct": -25,
       "eDamPct": -25,
-      "spPct3": -22,
+      "spPct3": -23,
       "id": 2063
     },
     {
@@ -47311,7 +47318,7 @@
       "ms": 5,
       "lb": 10,
       "str": -5,
-      "spPct1": -24,
+      "spPct1": -25,
       "id": 2182
     },
     {
@@ -50036,8 +50043,8 @@
       "agi": 7,
       "def": 7,
       "wDamPct": -15,
-      "spPct1": -9,
-      "spPct3": -9,
+      "spPct1": -10,
+      "spPct3": -10,
       "id": 2327
     },
     {
@@ -62443,7 +62450,7 @@
       "hprRaw": -40,
       "sdRaw": 95,
       "fixID": true,
-      "spPct3": -9,
+      "spPct3": -10,
       "id": 2915
     },
     {
@@ -66515,7 +66522,7 @@
       "hprRaw": 150,
       "spPct1": -7,
       "spPct2": -14,
-      "spPct3": -9,
+      "spPct3": -10,
       "id": 3094
     },
     {
@@ -70196,7 +70203,7 @@
       "lb": 25,
       "hprRaw": -101,
       "spPct2": -31,
-      "spPct4": -9,
+      "spPct4": -10,
       "jh": 2,
       "id": 3621
     },
@@ -70933,7 +70940,7 @@
       "fDamPct": -30,
       "wDamPct": 20,
       "tDefPct": -25,
-      "spPct3": -23,
+      "spPct3": -24,
       "id": 3309
     },
     {
@@ -71361,9 +71368,9 @@
       "spd": 10,
       "fDamPct": 10,
       "wDamPct": -15,
-      "spPct1": -9,
+      "spPct1": -10,
       "spPct3": -7,
-      "spPct4": -9,
+      "spPct4": -10,
       "id": 3327
     },
     {
@@ -72629,7 +72636,7 @@
       "int": -24,
       "agi": 12,
       "spd": 15,
-      "spPct1": -9,
+      "spPct1": -10,
       "spPct3": -7,
       "spPct4": -17,
       "id": 3385
@@ -73244,7 +73251,7 @@
       "ms": 5,
       "def": -12,
       "spd": 12,
-      "spPct1": -22,
+      "spPct1": -23,
       "id": 3413
     },
     {
@@ -76325,8 +76332,8 @@
           "sdPct": 14,
           "mdPct": 14,
           "jh": 1,
-          "mr": -1,
-          "ms": -1
+          "mr": -5,
+          "ms": -5
         },
         {
           "hprRaw": 50,
@@ -76354,19 +76361,19 @@
       "bonuses": [
         {},
         {
-          "ms": 1,
+          "ms": 5,
           "dex": 2,
           "sdRaw": 15,
           "mdRaw": 5
         },
         {
-          "ms": 1,
+          "ms": 5,
           "dex": 6,
           "sdRaw": 35,
           "mdRaw": 10
         },
         {
-          "ms": 3,
+          "ms": 15,
           "dex": 20,
           "sdRaw": 65,
           "mdRaw": 70
@@ -76426,10 +76433,10 @@
         {},
         {},
         {
-          "mr": 5,
+          "mr": 25,
           "sdPct": 75,
           "mdPct": 75,
-          "ms": 5,
+          "ms": 25,
           "ls": 400,
           "hprRaw": 600
         }
@@ -76554,24 +76561,24 @@
       "bonuses": [
         {},
         {
-          "mr": -1,
-          "ms": 2,
+          "mr": -5,
+          "ms": 10,
           "sdRaw": 40,
           "wDamPct": 5,
           "tDamPct": 5,
           "eDamPct": -34
         },
         {
-          "mr": -2,
-          "ms": 4,
+          "mr": -10,
+          "ms": 20,
           "sdRaw": 115,
           "wDamPct": 10,
           "tDamPct": 10,
           "eDamPct": -67
         },
         {
-          "mr": -3,
-          "ms": 6,
+          "mr": -15,
+          "ms": 30,
           "sdRaw": 230,
           "wDamPct": 32,
           "tDamPct": 32,
@@ -76608,7 +76615,7 @@
           "spRegen": 15
         },
         {
-          "mr": 2,
+          "mr": 10,
           "sdPct": 25,
           "mdPct": 25,
           "xpb": 50,
@@ -76694,7 +76701,7 @@
       "bonuses": [
         {},
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 40,
           "def": 25,
           "fDamPct": 20,
@@ -76838,21 +76845,21 @@
         {},
         {
           "hprPct": -10,
-          "mr": 1,
+          "mr": 5,
           "sdPct": 6,
           "ref": 10,
           "thorns": 8
         },
         {
           "hprPct": -20,
-          "mr": 2,
+          "mr": 10,
           "sdPct": 14,
           "ref": 35,
           "thorns": 24
         },
         {
           "hprPct": -30,
-          "mr": 4,
+          "mr": 20,
           "sdPct": 30,
           "ref": 75,
           "thorns": 70
@@ -76868,7 +76875,7 @@
         {},
         {
           "mdPct": 30,
-          "ms": 2,
+          "ms": 10,
           "spd": 25,
           "spPct2": -40
         }
@@ -76892,46 +76899,46 @@
           "lb": 5
         },
         {
-          "mr": 1,
+          "mr": 5,
           "xpb": 10,
           "lb": 10,
-          "spRaw2": -1,
+          "spRaw2": -5,
           "hpBonus": 125
         },
         {
-          "mr": 1,
+          "mr": 5,
           "xpb": 15,
           "lb": 15,
-          "spRaw2": -1,
+          "spRaw2": -5,
           "hpBonus": 425
         },
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 35,
           "lb": 35,
           "hpBonus": 1325,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 55,
           "lb": 55,
           "hpBonus": 2575,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
-          "mr": 3,
+          "mr": 15,
           "xpb": 80,
           "lb": 80,
           "hpBonus": 4450,
-          "spRaw1": -1,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw1": -5,
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
-          "mr": 4,
+          "mr": 20,
           "xpb": 100,
           "lb": 100,
           "str": 15,
@@ -76940,10 +76947,10 @@
           "agi": 15,
           "def": 15,
           "hpBonus": 8270,
-          "spRaw1": -1,
-          "spRaw2": -1,
-          "spRaw3": -1,
-          "spRaw4": -1
+          "spRaw1": -5,
+          "spRaw2": -5,
+          "spRaw3": -5,
+          "spRaw4": -5
         }
       ]
     },
@@ -77007,7 +77014,7 @@
       "bonuses": [
         {},
         {
-          "mr": 2,
+          "mr": 10,
           "sdPct": 15,
           "mdPct": -15,
           "sdRaw": 30,
@@ -77275,7 +77282,7 @@
       "bonuses": [
         {},
         {
-          "mr": 2,
+          "mr": 10,
           "mdPct": -24,
           "int": 5,
           "wDamPct": 10,
@@ -77283,7 +77290,7 @@
           "wDefPct": 16
         },
         {
-          "mr": 5,
+          "mr": 25,
           "mdPct": -54,
           "int": 15,
           "wDamPct": 20,
@@ -77291,7 +77298,7 @@
           "wDefPct": 36
         },
         {
-          "mr": 8,
+          "mr": 40,
           "mdPct": -90,
           "int": 25,
           "wDamPct": 40,
@@ -77317,7 +77324,7 @@
           "aDefPct": 20,
           "tDefPct": 20,
           "eDefPct": 20,
-          "ms": 1
+          "ms": 5
         },
         {
           "xpb": 50,
@@ -77327,7 +77334,7 @@
           "aDefPct": 50,
           "tDefPct": 50,
           "eDefPct": 50,
-          "ms": 2
+          "ms": 10
         },
         {
           "xpb": 75,
@@ -77338,7 +77345,7 @@
           "tDefPct": 100,
           "eDefPct": 100,
           "sdPct": 40,
-          "ms": 6
+          "ms": 30
         }
       ]
     },
@@ -77352,7 +77359,7 @@
       "bonuses": [
         {},
         {
-          "mr": 1,
+          "mr": 5,
           "sdPct": -10,
           "mdPct": -15,
           "def": 7,
@@ -77361,7 +77368,7 @@
           "aDamPct": 15
         },
         {
-          "mr": 3,
+          "mr": 15,
           "sdPct": -20,
           "mdPct": -40,
           "def": 15,
@@ -77370,7 +77377,7 @@
           "aDamPct": 40
         },
         {
-          "mr": 6,
+          "mr": 30,
           "sdPct": -40,
           "mdPct": -85,
           "def": 40,
@@ -77432,7 +77439,7 @@
           "sdPct": -33,
           "mdPct": -33,
           "ls": 90,
-          "ms": 2,
+          "ms": 10,
           "sdRaw": 160,
           "mdRaw": 105,
           "atkTier": 1
@@ -77453,7 +77460,7 @@
           "hprRaw": 90
         },
         {
-          "mr": 5,
+          "mr": 25,
           "int": 20,
           "def": 20,
           "hpBonus": 1500,
@@ -77473,19 +77480,19 @@
       "bonuses": [
         {},
         {
-          "mr": 1,
+          "mr": 5,
           "xpb": 5,
           "lb": 10,
           "hpBonus": 55
         },
         {
-          "mr": 2,
+          "mr": 10,
           "xpb": 10,
           "lb": 25,
           "hpBonus": 170
         },
         {
-          "mr": 4,
+          "mr": 20,
           "xpb": 25,
           "lb": 50,
           "int": 20,

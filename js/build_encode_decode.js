@@ -1,3 +1,9 @@
+let player_build;
+let build_powders;
+
+function getItemNameFromID(id) { return idMap.get(id); }
+function getTomeNameFromID(id) { return tomeIDMap.get(id); }
+
 function parsePowdering(powder_info) {
     // TODO: Make this run in linear instead of quadratic time... ew
     let powdering = [];
@@ -124,7 +130,6 @@ function decodeBuild(url_tag) {
             for (let i in tomes) {
                 let tome_str = info[1].charAt(i);
                 let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
-                console.log(tome_name);
                 setValue(tomeInputs[i], tome_name);
             }
             info[1] = info[1].slice(7);

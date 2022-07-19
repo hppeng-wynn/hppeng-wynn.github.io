@@ -619,8 +619,15 @@ function addClasses(elem, classes) {
  */
 async function hardReload() {
     //https://gist.github.com/rmehner/b9a41d9f659c9b1c3340
-    const dbs = await window.indexedDB.databases();
-    await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+    try {
+        const dbs = await window.indexedDB.databases();
+        await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+    } catch (error) {
+        // Hacky patch for firefox...
+        console.log(error);
+        const db_names = ['item_db', 'ing_db', 'map_db', 'tome_db'];
+        await db_names.forEach(db => { window.indexedDB.deleteDatabase(db) });
+    }
 
     location.reload(true);
 }
@@ -743,13 +750,34 @@ function assert_error(func_binding, msg) {
 /**
  * Deep copy object/array of basic types.
  */
-function deepcopy(obj) {
+function deepcopy(obj, refs=undefined) {
+    if (refs === undefined) {
+        refs = new Map();
+    }
     if (typeof(obj) !== 'object' || obj === null) { // null or value type
         return obj;
     }
     let ret = Array.isArray(obj) ? [] : {};
     for (let key in obj) {
-        ret[key] = deepcopy(obj[key]);
+        let val;
+        try {
+            val = obj[key];
+        } catch (exc) {
+            console.trace();
+            val = undefined;
+        }
+        if (typeof(obj) === 'object') {
+            if (refs.has(val)) {
+                ret[key] = refs.get(val);
+            }
+            else {
+                refs.set(val, val);
+                ret[key] = deepcopy(val, refs);
+            }
+        }
+        else {
+            ret[key] = val;
+        }
     }
     return ret;
 }
@@ -760,10 +788,9 @@ function deepcopy(obj) {
  */
 function gen_slider_labeled({label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []}) {
     let slider_container = document.createElement("div");
-    slider_container.classList.add("row");
 
     let buf_col = document.createElement("div");
-    buf_col.classList.add("col", "mx-1");
+    buf_col.classList.add("col");
     
     let label = document.createElement("div");
     label.classList.add("col");

@@ -1,4 +1,4 @@
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
+const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.00], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
 
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
@@ -26,7 +26,7 @@ function get_base_dps(item) {
 }
 
 
-function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false, part_filter=undefined) {
+function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ignore_speed=false, part_filter=undefined) {
     // TODO: Roll all the loops together maybe
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -40,7 +40,28 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
     let present = deepcopy(weapon.get(damage_present_key));
 
+    // Also theres prop and rainbow!!
+    const damage_elements = ['n'].concat(skp_elements); // netwfa
+
     // 2. Conversions.
+    // 2.0: First, modify conversions.
+    let conversions = deepcopy(_conversions);
+    if (part_filter !== undefined) {
+        const conv_postfix = ':'+part_filter;
+        for (let i in damage_elements) {
+            const stat_name = damage_elements[i]+'ConvBase'+conv_postfix;
+            if (stats.has(stat_name)) {
+                conversions[i] += stats.get(stat_name);
+            }
+        }
+    }
+    for (let i in damage_elements) {
+        const stat_name = damage_elements[i]+'ConvBase';
+        if (stats.has(stat_name)) {
+            conversions[i] += stats.get(stat_name);
+        }
+    }
+
     // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.
     let damages = [];
     const neutral_convert = conversions[0] / 100;
@@ -56,7 +77,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
 
     // 2.2. Next, apply elemental conversions using damage computed in step 1.1.
     // Also, track which elements are present. (Add onto those present in the weapon itself.)
-    let total_convert = 0;  //TODO get confirmation that this is how raw works.
+    let total_convert = 0;
     for (let i = 1; i <= 5; ++i) {
         if (conversions[i] > 0) {
             const conv_frac = conversions[i]/100;
@@ -68,9 +89,6 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
     total_convert += conversions[0]/100;
 
-    // Also theres prop and rainbow!!
-    const damage_elements = ['n'].concat(skp_elements); // netwfa
-
     if (!ignore_speed) {
         // 3. Apply attack speed multiplier. Ignored for melee single hit
         const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(weapon.get("atkSpd"))];
@@ -81,7 +99,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
 
     // 4. Add additive damage. TODO: Is there separate additive damage?
-    for (let i = 0; i < 6; ++i) {
+    for (let i in damage_elements) {
         if (present[i]) {
             damages[i][0] += stats.get(damage_elements[i]+'DamAddMin');
             damages[i][1] += stats.get(damage_elements[i]+'DamAddMax');
@@ -104,10 +122,10 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     // These do not count raw damage. I think. Easy enough to change
     let total_min = 0;
     let total_max = 0;
-    for (let i in damages) {
-        let damage_prefix = damage_elements[i] + specific_boost_str;
+    for (let i in damage_elements) {
+        let damage_specific = damage_elements[i] + specific_boost_str + 'Pct';
         let damageBoost = 1 + skill_boost[i] + static_boost
-                            + ((stats.get(damage_prefix+'Pct') + stats.get(damage_elements[i]+'DamPct')) /100);
+                            + ((stats.get(damage_specific) + stats.get(damage_elements[i]+'DamPct')) /100);
         damages[i][0] *= Math.max(damageBoost, 0);
         damages[i][1] *= Math.max(damageBoost, 0);
         // Collect total damage post %boost
@@ -133,13 +151,21 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
         let min_boost = raw_boost;
         let max_boost = raw_boost;
         if (total_max > 0) {    // TODO: what about total negative all raw?
-            if (total_min > 0) {
+            // TODO: compute actual chance of 0 damage. For now we just copy max ratio
+            if (total_min === 0) {
+                min_boost += (damages_obj[1] / total_max) * prop_raw;
+            }
+            else {
                 min_boost += (damages_obj[0] / total_min) * prop_raw;
             }
             max_boost += (damages_obj[1] / total_max) * prop_raw;
         }
         if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
-            if (total_elem_min > 0) {
+            // TODO: compute actual chance of 0 damage. For now we just copy max ratio
+            if (total_elem_min === 0) {
+                min_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
+            }
+            else {
                 min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
             }
             max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
@@ -167,12 +193,14 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
         damage_mult *= (1 + v/100);
     }
 
+    const crit_mult = stats.get("critDamPct")/100;
+
     for (const damage of damages) {
         const res = [
             damage[0] * strBoost * damage_mult,       // Normal min
             damage[1] * strBoost * damage_mult,       // Normal max
-            damage[0] * (strBoost + 1) * damage_mult,       // Crit min
-            damage[1] * (strBoost + 1) * damage_mult,       // Crit max
+            damage[0] * (strBoost + crit_mult) * damage_mult,       // Crit min
+            damage[1] * (strBoost + crit_mult) * damage_mult,       // Crit max
         ];
         damages_results.push(res);
         total_dam_norm[0] += res[0];

@@ -10,7 +10,7 @@ const atrees = {
             "display": {
                 "row": 9,
                 "col": 6,
-                "icon": "node_4"
+                "icon": "node_archer"
             },
             "properties": {
                 "charges": 2,
@@ -51,7 +51,7 @@ const atrees = {
             "display": {
             "row": 7,
             "col": 4,
-            "icon": "node_4"
+            "icon": "node_archer"
             },
             "properties": {
                 "aoe": 0,
@@ -76,7 +76,7 @@ const atrees = {
             "display": {
                 "row": 0,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_archer"
             },
             "properties": {
                 "aoe": 4.5,
@@ -88,7 +88,6 @@ const atrees = {
                 "cost": 50,
                 "base_spell": 3, 
                 "spell_type": "damage", 
-                "scaling": "spell",
                 "display": "Total Damage", 
                 "parts": [
                     {  
@@ -228,7 +227,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 9, "col": 2, "icon": "node_4"},
+            "display": { "row": 9, "col": 2, "icon": "node_archer"},
             "properties": { "range": 16 },
             "effects": [
                 { 
@@ -237,7 +236,6 @@ const atrees = {
                     "cost": 40,
                     "base_spell": 1, 
                     "spell_type": "damage", 
-                    "scaling": "spell",
                     "display": "Total Damage", 
                     "parts": [
                         {  
@@ -318,23 +316,13 @@ const atrees = {
             "display": {
             "row": 10,
             "col": 1,
-            "icon": "node_0"
+            "icon": "node_1"
             },
             "properties": {
                 "aoe": 8,
                 "duration": 120
             },
-            "effects": [{
-                "type": "stat_bonus",
-                "toggle": "Windy Feet",
-                "bonuses": [
-                    { 
-                        "type": "stat",
-                        "name": "spd",
-                        "value": 20
-                    }
-                ]
-            }]
+            "effects": []
         },
         {
             "display_name": "Basaltic Trap",
@@ -888,7 +876,7 @@ const atrees = {
             "effects": [
                 { 
                     "type": "add_spell_prop",
-                    "base_spell": 8, 
+                    "base_spell": 7,
                     "target_part": "Trap Damage", 
                     "cost": 0,
                     "multipliers": [-80, 0, 0, 0, 0, 0]
@@ -922,18 +910,12 @@ const atrees = {
             "cost": 1, 
             "display": { "row": 2, "col": 4, "icon": "node_0"},
             "properties": {},
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
-                }
-            ]  
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "Single Shot",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
         },
         {
             "display_name": "Cheaper Arrow Bomb",
@@ -1233,17 +1215,7 @@ const atrees = {
             "properties": {
                 "duration": 60
             },
-            "effects": [{ 
-                "type": "stat_bonus",
-                "toggle": "Windy Feet",
-                "bonuses": [
-                    { 
-                        "type": "stat",
-                        "name": "spdPct",
-                        "value": 20
-                    }
-                ]
-            }]
+            "effects": []
         },
         {
             "display_name": "Refined Gunpowder",
@@ -1961,7 +1933,7 @@ const atrees = {
             "parents": ["Cheaper Arrow Shield", "Cheaper Escape (2)"],
             "dependencies": ["Phantom Ray"],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 34,
                 "col": 5,
@@ -1992,7 +1964,7 @@ const atrees = {
             "display": {
                 "row": 0,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {
                 "aoe": 4,
@@ -2040,18 +2012,12 @@ const atrees = {
             "properties": {
                 "melee_range": 1
             },
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
-                }
-            ]  
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "melee",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
         },
 
         {
@@ -2124,7 +2090,7 @@ const atrees = {
             "display": {
                 "row": 6,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {},
             "effects": [{
@@ -2273,7 +2239,7 @@ const atrees = {
             "display": {
                 "row": 8,
                 "col": 2,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {
                 "aoe": 3,
@@ -2336,7 +2302,7 @@ const atrees = {
             "display": {
                 "row": 8,
                 "col": 6,
-                "icon": "node_4"
+                "icon": "node_warrior"
             },
             "properties": {
                 "duration": 30,
@@ -2789,7 +2755,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
+                    "toggle": "Activate Mantle",
                     "bonuses": [{ "type": "stat", "name": "defMult.Mantle", "value": 70}]
                 }
             ]
@@ -2845,18 +2811,12 @@ const atrees = {
             "properties": {
                 "melee_range": 1
             },
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
-                }
-            ]  
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "melee",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
         },
 
         {
@@ -3141,11 +3101,6 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "cost": 10
-                },
-                {
-                    "type": "raw_stat",
-                    "toggle": true,
-                    "bonuses": [ {"type": "stat", "name": "damMult.Ragnarokkr", "value": 30} ]
                 }
             ]  
         },
@@ -3482,7 +3437,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
+                    "toggle": "Activate Armor Breaker",
                     "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
                 }
             ]  
@@ -3939,7 +3894,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
+                    "toggle": "Activate Brink",
                     "bonuses": [{ "type": "stat", "name": "defMult.Brink", "value": 40}]
                 }
             ]
@@ -4000,7 +3955,7 @@ const atrees = {
             "display": {
                 "row": 0,
                 "col": 4,
-                "icon": "node_4"
+                "icon": "node_mage"
             },
             "properties": {
                 "aoe": 5,
@@ -4034,7 +3989,7 @@ const atrees = {
             "display": {
             "row": 6,
             "col": 4,
-            "icon": "node_4"
+            "icon": "node_mage"
             },
             "properties": {
                 "range": 12
@@ -4055,7 +4010,7 @@ const atrees = {
             "dependencies": [],
             "blockers": [],
             "cost": 1, 
-            "display": { "row": 8, "col": 2, "icon": "node_4"},
+            "display": { "row": 8, "col": 2, "icon": "node_mage"},
             "properties": { "aoe": 5 },
             "effects": [
                 { 
@@ -4083,7 +4038,7 @@ const atrees = {
             "display": {
                 "row": 8,
                 "col": 6,
-                "icon": "node_4"
+                "icon": "node_mage"
             },
             "properties": {
                 "range": 18,
@@ -4441,7 +4396,7 @@ const atrees = {
             "display_name": "Wind Slash",
             "desc": "When using Teleport, slash through the air and deal damage to enemies you pierce.",
             "archetype": "Riftwalker",
-            "base_abil": "teleport",
+            "base_abil": "Teleport",
             "parents": ["Air Mastery", "Thunderstorm"], 
             "dependencies": ["Teleport"], 
             "blockers": [],
@@ -4512,6 +4467,13 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3, 
                     "target_part": "Meteor Damage", 
+                    "behavior": "modify",
+                    "multipliers": [30, 90, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,  
+                    "target_part": "Lightning Damage",
                     "behavior": "modify",
                     "multipliers": [30, 90, 0, 0, 0, 0]
                 }
@@ -4586,17 +4548,39 @@ const atrees = {
             "archetype": "Riftwalker",
             "archetype_req": 3, 
             "parents": ["Wind Slash", "Thunderstorm"], 
-            "dependencies": [], 
+            "dependencies": ["Ice Snake"], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 15,
                 "col": 1,
-                "icon": "node_3",
-                "__TODO": "hppeng please fix"
+                "icon": "node_3"
             },
             "properties": { "max": 5 },
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:4.Ice Snake Damage"
+                    },
+                    "scaling": [20],
+                    "slider_step": 1,
+                    "slider_max": 5
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "wConvBase:4.Ice Snake Damage"
+                    },
+                    "scaling": [10]
+                }
+            ]
         },
         {
             "display_name": "Ophanim",
@@ -4715,7 +4699,7 @@ const atrees = {
         {
             "display_name": "Eye Piercer",
             "desc": "Teleport will blind enemies, confusing them for a short amount of time.",
-            "base_abil": "Heal",
+            "base_abil": "Teleport",
             "parents": ["Cheaper Heal"],
             "dependencies": ["Teleport"],
             "blockers": [],
@@ -4734,7 +4718,7 @@ const atrees = {
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker", 
             "archetype_req": 0, 
-            "parents": ["Cheaper Heal"],
+            "parents": ["Cheaper Heal", "Purification"],
             "dependencies": ["Windsweeper"],
             "blockers": [],
             "cost": 2,
@@ -4744,8 +4728,40 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": [],
-            "__TODO": "I still don't really know how to do this, for the record though the ratio is 20% neutral 20% earth per stack"
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Meteor Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Meteor Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Per Orb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Per Orb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Lightning Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Lightning Damage"
+                        }
+                    ],
+                    "scaling": [15]
+                }
+            ]
         },
         {
             "display_name": "Larger Heal",
@@ -4799,7 +4815,7 @@ const atrees = {
             "display_name": "Cheaper Ice Snake",
             "desc": "Reduce the Mana cost of Ice Snake.",
             "base_abil": "Ice Snake",
-            "parents": ["Eye Piercer"], 
+            "parents": ["Eye Piercer", "Fortitude"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4815,7 +4831,8 @@ const atrees = {
             "display_name": "Cheaper Teleport II",
             "desc": "Reduce the Mana cost of Teleport.",
             "base_abil": "Teleport",
-            "parents": ["Purification", "Fortitude"], 
+            "parents": ["Purification"],
+            "_parents": ["Purification", "Fortitude"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4845,17 +4862,9 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "duration": 4
+                "duration": 5
             },
-            "effects": [{
-                "type": "raw_stat",
-                "toggle": true,
-                "bonuses": [{
-                    "type": "stat",
-                    "name": "damMult.Fortitude",
-                    "value": 100
-                }]
-            }]
+            "effects": []
         },
         {
             "display_name": "Pyrokinesis",
@@ -4927,7 +4936,6 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": true,
                     "bonuses": [{
                         "type": "prop",
                         "abil": "Teleport",
@@ -4940,7 +4948,7 @@ const atrees = {
                     "behavior": "modify",
                     "target_part": "Total Damage",
                     "base_spell": 2,  
-                    "hits": {"Wind Slash": 1}
+                    "hits": {"Wind Slash": 1, "Explosion Damage": 1}
                 }
             ]
         },
@@ -4999,10 +5007,11 @@ const atrees = {
             "effects": [{
                 "type": "stat_scaling",
                 "slider": false,
+                "round": false,
                 "inputs": [
                         {
                             "type": "stat",
-                            "name": "wDam"
+                            "name": "wDamPct"
                         }
                     ],
                 "output": {
@@ -5028,7 +5037,56 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:2.Wind Slash"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:2.Explosion Damage"
+                        }
+                    ],
+                    "scaling": [30]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "tConvBase:2.Wind Slash"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "tConvBase:2.Explosion Damage"
+                        }
+                    ],
+                    "scaling": [10]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "aConvBase:2.Wind Slash"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aConvBase:2.Explosion Damage"
+                        }
+                    ],
+                    "scaling": [5]
+                }
+            ]
         },
         {
             "display_name": "Healthier Ophanim I",
@@ -5204,15 +5262,25 @@ const atrees = {
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [{
-                    "type": "prop",
-                    "abil": "Windsweeper",
-                    "name": "max",
-                    "value": 5
-                }]
-            }]
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Windsweeper",
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "slider_max": 5
+                }
+            ]
         },
         {
             "display_name": "Cheaper Ice Snake II",
@@ -5337,7 +5405,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Ice Snake",
+                    "target_part": "Ice Snake Damage",
                     "base_spell": 4,  
                     "multipliers": [0, 0, 0, 0, 0, 20]
                 }
@@ -5348,8 +5416,8 @@ const atrees = {
             "desc": "When sprinting, create an area that increases the speed of all allies the longer they run in it. (Step out or stop running to cancel)",
             "archetype": "Riftwalker", 
             "archetype_req": 7, 
-            "parents": ["Cheaper Ice Snake II", "Explosive Entrance"],
-            "dependencies": ["Ice Snake"],
+            "parents": ["Cheaper Ice Snake II"],
+            "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -5366,7 +5434,8 @@ const atrees = {
             "archetype": "Light Bender",
             "archetype_req": 0,
             "base_abil": "Ophanim",
-            "parents": ["Explosive Entrance", "Cheaper Meteor II"], 
+            "parents": ["Cheaper Meteor II"], 
+            "_parents": ["Explosive Entrance", "Cheaper Meteor II"], 
             "dependencies": ["Ophanim"], 
             "blockers": [],
             "cost": 1, 
@@ -5420,6 +5489,7 @@ const atrees = {
             "archetype": "Riftwalker",
             "archetype_req": 0,
             "parents": ["Time Dilation"],
+            "_parents": ["Time Dilation", "Dynamic Faith"],
             "dependencies": ["Windsweeper"],
             "blockers": [],
             "cost": 1,
@@ -5429,7 +5499,25 @@ const atrees = {
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Windsweeper",
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "slider_max": 5
+                }
+            ]
         },
         {
             "display_name": "Dynamic Faith",
@@ -5553,7 +5641,7 @@ const atrees = {
             "display_name": "Arcane Overflow",
             "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits.",
             "archetype": "Arcanist", 
-            "archetype_req": 12, 
+            "archetype_req": 11, 
             "base_abil": "Arcane Transfer",
             "parents": ["Larger Mana Bank III"],
             "dependencies": ["Arcane Transfer"],
@@ -5622,6 +5710,7 @@ const atrees = {
                 { 
                     "type": "add_spell_prop",
                     "target_part": "Orb Damage",
+                    "base_spell": 5,
                     "hits": { "Single Orb": 2 }
                 }
             ]

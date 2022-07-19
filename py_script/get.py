@@ -60,6 +60,7 @@ elif req.lower() == "maploc":
 else:
     response = requests.get(req)
 
-response['version'] = CURR_WYNN_VERS
+data = response.json()
+data['version'] = CURR_WYNN_VERS
 
-json.dump(response, open(outfile, "w+"))
+json.dump(data, open(outfile, "w+"))

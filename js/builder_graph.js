@@ -23,7 +23,7 @@ let boosts_node = new (class extends ComputeNode {
             let elem = document.getElementById(key + "-boost")
             if (elem.classList.contains("toggleOn")) {
                 damage_boost += value;
-                if (key === "warscream") { def_boost += .20 }
+                if (key === "warscream") { def_boost += .10 }
                 if (key === "vanish") { def_boost += .15 }
             }
         }
@@ -192,7 +192,13 @@ class ItemInputNode extends InputNode {
 
             for (const [i, x] of zip2(equipment_inputs, replace_items)) { setValue(i, x); }
 
-            for (const node of item_nodes) { calcSchedule(node, 10); }
+            for (const node of item_nodes) { 
+                if (node !== this) {
+                    // save a tiny bit of compute
+                    calcSchedule(node, 10);
+                }
+            }
+            // Needed to push the weapon node's updates forward
             return this.compute_func(input_map);
         }
         return null;
@@ -401,7 +407,10 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('guildTome1-input')
         ];
         let weapon = input_map.get('weapon-input');
-        let level = input_map.get('level-input');
+        let level = parseInt(input_map.get('level-input'));
+        if (isNaN(level)) {
+            level = 106;
+        }
 
         let all_none = weapon.statMap.has('NONE');
         for (const item of equipments) {
@@ -567,7 +576,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.power * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)));
+                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
@@ -1007,6 +1016,9 @@ function builder_graph_init() {
 
     // Level input node.
     let level_input = new InputNode('level-input', document.getElementById('level-choice'));
+    
+    // linking to atree verification
+    atree_validate.link_to(level_input, 'level');
 
     // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
     build_node = new BuildAssembleNode();
@@ -1036,9 +1048,6 @@ function builder_graph_init() {
 
     // Phase 2/3: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
 
-    let build_disp_node = new BuildDisplayNode()
-    build_disp_node.link_to(build_node, 'build');
-
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
     stat_agg_node = new AggregateStatsNode();
     edit_agg_node = new AggregateEditableIDNode();
@@ -1065,16 +1074,13 @@ function builder_graph_init() {
         skp_inputs.push(node);
     }
     stat_agg_node.link_to(edit_agg_node);
-    build_disp_node.link_to(stat_agg_node, 'stats');
 
     // Phase 3/3: Set up atree stuff.
 
     let class_node = new PlayerClassNode('builder-class').link_to(build_node);
     // These two are defined in `atree.js`
     atree_node.link_to(class_node, 'player-class');
-    atree_merge.link_to(build_node, 'build');
-    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
-                                    .link_to(atree_collect_spells, 'spells');
+    atree_merge.link_to(class_node, 'player-class');
     atree_stats.link_to(build_node, 'build');
     stat_agg_node.link_to(atree_stats, 'atree-stats');
 
@@ -1088,6 +1094,9 @@ function builder_graph_init() {
     }
     armor_powder_node.update();
     level_input.update();
+
+    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
+                                    .link_to(atree_collect_spells, 'spells');
 
     // kinda janky, manually set atree and update. Some wasted compute here
     if (atree_data !== null && atree_node.value !== null) { // janky check if atree is valid
@@ -1114,10 +1123,14 @@ function builder_graph_init() {
 
     // Also do something similar for skill points
 
+    let build_disp_node = new BuildDisplayNode()
+    build_disp_node.link_to(build_node, 'build');
+    build_disp_node.link_to(stat_agg_node, 'stats');
+
     for (const node of edit_input_nodes) {
         node.update();
     }
-    
+
     let skp_output = new SkillPointSetterNode(edit_input_nodes);
     skp_output.link_to(build_node);
 
@@ -1133,5 +1146,6 @@ function builder_graph_init() {
     // this will propagate the update to the `stat_agg_node`, and then to damage calc
 
     console.log("Set up graph");
+    graph_live_update = true;
 }
 

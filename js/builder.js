@@ -1,18 +1,3 @@
-let build_powders;
-
-function getItemNameFromID(id) {
-    if (redirectMap.has(id)) {
-        return getItemNameFromID(redirectMap.get(id));
-    }
-    return idMap.get(id);
-}
-
-function getTomeNameFromID(id) {
-    if (tomeRedirectMap.has(id)) {
-        return getTomeNameFromID(tomeRedirectMap.get(id));
-    }
-    return tomeIDMap.get(id);
-}
 
 function populateBuildList() {
     const buildList = document.getElementById("build-choice");
@@ -148,7 +133,6 @@ function toggle_tab(tab) {
     }
 }
 
-
 function toggle_boost_tab(tab) {
     for (const i of skp_order) {
         document.querySelector("#"+i+"-boost").style.display = "none";
@@ -156,13 +140,10 @@ function toggle_boost_tab(tab) {
     }
     document.querySelector("#"+tab+"-boost").style.display = "";
     document.getElementById(tab + "-boost-tab").classList.add("selected-btn");
-
 }
 
 let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
 function show_tab(tab) {
-    //console.log(itemFilters)
-
     //hide all tabs, then show the tab of the div clicked and highlight the correct button
     for (const i in tabs) {
         document.querySelector("#" + tabs[i]).style.display = "none";
@@ -331,51 +312,6 @@ function init_autocomplete() {
         }));
     }
 
-    let filter_loc = ["filter1", "filter2", "filter3", "filter4"];
-    for (const i of filter_loc) {
-        dropdowns.set(i+"-choice", new autoComplete({
-            data: {
-                src: sq2ItemFilters,
-            },
-            selector: "#"+i+"-choice",
-            wrapper: false,
-            resultsList: {
-                tabSelect: true,
-                noResults: true,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    // dynamic result loc
-                    console.log(i);
-                    list.style.zIndex = "100";
-                    let position = document.getElementById(i+"-dropdown").getBoundingClientRect();
-                    window_pos = document.getElementById("search-container").getBoundingClientRect();
-                    list.style.top = position.bottom - window_pos.top + 5 +"px";
-                    list.style.left = position.x - window_pos.x +"px";
-                    list.style.width = position.width+"px";
-
-                    if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No filters found!";
-                        list.prepend(message);
-                    }
-                },
-            },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
-                        }
-                    },
-                },
-            }
-        }));
-    }
 }
 
 function collapse_element(elmnt) {
@@ -405,6 +341,7 @@ function init() {
     for (const eq of equipment_keys) {
         document.querySelector("#"+eq+"-tooltip").addEventListener("click", () => collapse_element('#'+eq+'-tooltip'));
     }
+    //  Armor Specials
     for (let i = 0; i < 5; ++i) {
         const powder_special = powderSpecialStats[i];
         const elem_name = damageClasses[i+1];   // skip neutral
@@ -448,6 +385,15 @@ function init() {
     });
     decodeBuild(url_tag);
     builder_graph_init();
+    for (const item_node of item_nodes) {
+        if (item_node.get_value() === null) {
+            // likely DB load failure...
+            if (confirm('One or more items failed to load correctly. This could be due to a corrupted build link, or (more likely) a database load failure. Would you like to reload?')) {
+                hardReload();
+            }
+            break;
+        }
+    }
 }
 
 window.onerror = function(message, source, lineno, colno, error) {

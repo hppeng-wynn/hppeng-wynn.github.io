@@ -76,6 +76,7 @@ stat_scaling: {
   "slider": bool,
   "slider_name": Optional[str],
   "slider_step": Optional[float],
+  round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
   slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part. do nothing if not exist
@@ -97,35 +98,35 @@ const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properti
 
 // TODO: Range numbers
 const default_abils = {
-    wand: [{
+    Mage: [{
         display_name: "Mage Melee",
         id: 999,
         desc: "Mage basic attack.",
         properties: {range: 5000},
         effects: [default_spells.wand[0]]
     }, elem_mastery_abil ],
-    spear: [{
+    Warrior: [{
         display_name: "Warrior Melee",
         id: 999,
         desc: "Warrior basic attack.",
         properties: {range: 2},
         effects: [default_spells.spear[0]]
     }, elem_mastery_abil ],
-    bow: [{
+    Archer: [{
         display_name: "Archer Melee",
         id: 999,
         desc: "Archer basic attack.",
         properties: {range: 20},
         effects: [default_spells.bow[0]]
     }, elem_mastery_abil ],
-    dagger: [{
+    Assassin: [{
         display_name: "Assassin Melee",
         id: 999,
         desc: "Assassin basic attack.",
         properties: {range: 2},
         effects: [default_spells.dagger[0]]
     }, elem_mastery_abil ],
-    relik: [{
+    Shaman: [{
         display_name: "Shaman Melee",
         id: 999,
         desc: "Shaman basic attack.",
@@ -251,18 +252,18 @@ const atree_state_node = new (class extends ComputeNode {
  * I stg if wynn makes abils that modify multiple spells
  * ... well we can extend this by making `base_abil` a list instead but annoy
  *
- * Signature: AbilityTreeMergeNode(build: Build, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
+ * Signature: AbilityTreeMergeNode(player-class: WeaponType, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
  */
 const atree_merge = new (class extends ComputeNode {
     constructor() { super('builder-atree-merge'); }
 
     compute_func(input_map) {
-        const build = input_map.get('build');
+        const player_class = input_map.get('player-class');
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
         let abils_merged = new Map();
-        for (const abil of default_abils[build.weapon.statMap.get('type')]) {
+        for (const abil of default_abils[player_class]) {
             let tmp_abil = deepcopy(abil);
             if (!('desc' in tmp_abil)) {
                 tmp_abil.desc = [];
@@ -311,6 +312,56 @@ const atree_merge = new (class extends ComputeNode {
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
 /**
+ * Check if an atree node can be activated.
+ *
+ * Return: [yes/no, hard error, reason]
+ */
+function abil_can_activate(atree_node, atree_state, reachable, archetype_count, points_remain) {
+    const {parents, ability} = atree_node;
+    if (parents.length === 0) {
+        return [true, false, ""];
+    }
+    let failed_deps = [];
+    for (const dep_id of ability.dependencies) {
+        if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+    }
+    if (failed_deps.length > 0) {
+        const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+        return [false, true, 'missing dep: ' + dep_strings.join(", ")];
+    }
+    let blocking_ids = [];
+    for (const blocker_id of ability.blockers) {
+        if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+    }
+    if (blocking_ids.length > 0) {
+        const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+        return [false, true, 'blocked by: '+blockers_strings.join(", ")];
+    }
+    let node_reachable = false;
+    for (const parent of parents) {
+        if (reachable.has(parent.ability.id)) {
+            node_reachable = true;
+            break;
+        }
+    }
+    if (!node_reachable) {
+        return [false, false, 'not reachable'];
+    }
+    if ('archetype' in ability && ability.archetype !== "") {
+        if ('archetype_req' in ability && ability.archetype_req !== 0) {
+            const others = (archetype_count.get(ability.archetype) || 0);
+            if (others < ability.archetype_req) {
+                return [false, false, ability.archetype+': '+others+' < '+ability.archetype_req];
+            }
+        }
+    }
+    if (ability.cost > points_remain) {
+        return [false, false, "not enough ability points left"];
+    }
+    return [true, false, ""];
+}
+
+/**
  * Validate ability tree.
  * Return list of errors for rendering.
  *
@@ -322,13 +373,24 @@ const atree_validate = new (class extends ComputeNode {
     compute_func(input_map) {
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
+        const level = parseInt(input_map.get('level'));
 
         if (atree_order.length == 0) { return [0, false, ['no atree data']]; }
 
         let atree_to_add = [];
+        let atree_not_present = [];
+        // mark all selected nodes as bright, and mark all other nodes as dark.
+        // also initialize the "to check" list, and the "not present" list.
         for (const node of atree_order) {
             const abil = node.ability;
-            if (atree_state.get(abil.id).active) { atree_to_add.push([node, 'not reachable', false]); }
+            if (atree_state.get(abil.id).active) {
+                atree_to_add.push([node, 'not reachable', false]);
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
+            }
+            else {
+                atree_not_present.push(abil.id);
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
+            }
         }
 
         let reachable = new Set();
@@ -337,50 +399,13 @@ const atree_validate = new (class extends ComputeNode {
         while (true) {
             let _add = [];
             for (const [node, fail_reason, fail_hardness] of atree_to_add) {
-                const {parents, ability} = node;
-                if (parents.length === 0) {
-                    reachable.add(ability.id);
-                    // root abil has no archetype.
-                    abil_points_total += ability.cost;
-                    continue;
-                }
-                let failed_deps = [];
-                for (const dep_id of ability.dependencies) {
-                    if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
-                }
-                if (failed_deps.length > 0) {
-                    const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
-                    _add.push([node, 'missing dep: ' + dep_strings.join(", "), true]);
-                    continue;
-                }
-                let blocking_ids = [];
-                for (const blocker_id of ability.blockers) {
-                    if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
-                }
-                if (blocking_ids.length > 0) {
-                    const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
-                    _add.push([node, 'blocked by: '+blockers_strings.join(", "), true]);
-                    continue;
-                }
-                let node_reachable = false;
-                for (const parent of parents) {
-                    if (reachable.has(parent.ability.id)) {
-                        node_reachable = true;
-                        break;
-                    }
-                }
-                if (!node_reachable) {
-                    _add.push([node, 'not reachable', false])
+                const {ability} = node;
+                const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, 9999);
+                if (!success) {
+                    _add.push([node, reason, hard_error]);
                     continue;
                 }
                 if ('archetype' in ability && ability.archetype !== "") {
-                    if ('archetype_req' in ability && ability.archetype_req !== 0) {
-                        const others = archetype_count.get(ability.archetype);
-                        if (others < ability.archetype_req) {
-                            _add.push([node, ability.archetype+': '+others+' < '+ability.archetype_req, false])
-                            continue;
-                        }
-                    }
                     let val = 1;
                     if (archetype_count.has(ability.archetype)) {
                         val = archetype_count.get(ability.archetype) + 1;
@@ -395,13 +420,38 @@ const atree_validate = new (class extends ComputeNode {
             }
             atree_to_add = _add;
         }
+        const atree_level_table = ['lvl0wtf',1,2,2,3,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,14,14,15,16,16,17,17,18,18,19,19,20,20,20,21,21,22,22,23,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,38,39,39,39,39,40,40,40,40,41,41,41,41,42,42,42,42,43,43,43,43,44,44,44,44,45,45,45];
+        let AP_cap;
+        if (isNaN(level)) {
+            AP_cap = 45;   
+        }
+        else {
+            AP_cap = atree_level_table[level];
+        }
+        document.getElementById('active_AP_cap').textContent = AP_cap;
+        document.getElementById("active_AP_cost").textContent = abil_points_total;
+        const ap_left = AP_cap - abil_points_total;
+
+        // using the "not present" list, highlight one-step reachable nodes.
+        for (const node_id of atree_not_present) {
+            const node = atree_state.get(node_id);
+            const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
+            if (success) {
+                node.img.src = '../media/atree/'+node.ability.display.icon+'.png';
+            }
+        }
+
         let hard_error = false;
         let errors = [];
+        if (abil_points_total > AP_cap) {
+            errors.push('too many ability points assigned! ('+abil_points_total+' > '+AP_cap+')');
+        }
         for (const [node, fail_reason, fail_hardness] of atree_to_add) {
             if (fail_hardness) { hard_error = true; }
             errors.push(node.ability.display_name + ": " + fail_reason);
         }
-        return [abil_points_total, hard_error, errors];
+
+        return [hard_error, errors];
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
@@ -420,12 +470,11 @@ const atree_render_active = new (class extends ComputeNode {
     compute_func(input_map) {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
-        const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
+        const [hard_error, _errors] = input_map.get('atree-errors');
+        const errors = deepcopy(_errors);
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
-        document.getElementById("active_AP_cost").textContent = abil_points_total;
-
         if (errors.length > 0) {
             let errorbox = document.createElement('div');
             errorbox.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
@@ -443,11 +492,6 @@ const atree_render_active = new (class extends ComputeNode {
             }
             if (errors.length > 5) {
                 const error = '... ' + (errors.length-5) + ' errors not shown';
-                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
-                errorbox.appendChild(atree_warning);
-            }
-            if (abil_points_total > 45) {
-                const error = 'too many ability points assigned! ('+abil_points_total+' > 45)';
                 const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
                 errorbox.appendChild(atree_warning);
             }
@@ -495,7 +539,7 @@ const atree_collect_spells = new (class extends ComputeNode {
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
-        const [abil_points_total, hard_error, errors] = input_map.get('atree-errors');
+        const [hard_error, errors] = input_map.get('atree-errors');
         if (hard_error) { return []; }
         
         let ret_spells = new Map();
@@ -527,7 +571,8 @@ const atree_collect_spells = new (class extends ComputeNode {
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
                     const ret_spell = ret_spells.get(base_spell);
-                    // TODO: unjankify this... if ('cost' in ret_spell) { ret_spell.cost += cost; }
+                    // TODO: unjankify this...
+                    if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
                         continue;
@@ -623,6 +668,7 @@ const atree_make_interactives = new (class extends ComputeNode {
          */
         // Map<str, slider_info>
         const slider_map = new Map();
+        const button_map = new Map();
 
         // first, pull out all the sliders.
         for (const [abil_id, ability] of merged_abils.entries()) {
@@ -630,8 +676,10 @@ const atree_make_interactives = new (class extends ComputeNode {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
                     const { slider_name, slider_behavior = 'merge', slider_max, slider_step } = effect;
                     if (slider_map.has(slider_name)) {
-                        const slider_info = slider_map.get(slider_name);
-                        slider_info.max += slider_max;
+                        if (slider_max !== undefined) {
+                            const slider_info = slider_map.get(slider_name);
+                            slider_info.max += slider_max;
+                        }
                     }
                     else if (slider_behavior === 'merge') {
                         slider_map.set(slider_name, {
@@ -644,6 +692,12 @@ const atree_make_interactives = new (class extends ComputeNode {
                         });
                     }
                 }
+                if (effect['type'] === "raw_stat" && effect['toggle']) {
+                    const { toggle: toggle_name } = effect;
+                    button_map.set(toggle_name, {
+                        abil: ability
+                    });
+                }
             }
         }
         // next, render the sliders onto the abilities.
@@ -653,7 +707,23 @@ const atree_make_interactives = new (class extends ComputeNode {
             slider_info.slider = document.getElementById(slider_info.id);
             slider_info.slider.addEventListener("change", (e) => atree_stats.mark_dirty().update());
         }
-        return slider_map;
+        for (const [button_name, button_info] of button_map.entries()) {
+            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm"], {
+                id: button_info.abil.id,
+                textContent: button_name
+            });
+            button.addEventListener("click", (e) => {
+                if (button.classList.contains("toggleOn")) {
+                    button.classList.remove("toggleOn");
+                } else {
+                    button.classList.add("toggleOn");
+                }
+                atree_stats.mark_dirty().update()
+            });
+            button_info.button = button;
+            atree_html.get(button_info.abil.id).appendChild(button);
+        }
+        return [slider_map, button_map];
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
 
@@ -670,7 +740,7 @@ const atree_stats = new (class extends ComputeNode {
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
         const item_stats = input_map.get('build').statMap;
-        const interactive_map = input_map.get('atree-interactive');
+        const [slider_map, button_map] = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -681,8 +751,10 @@ const atree_stats = new (class extends ComputeNode {
                 case 'stat_scaling':
                     if (effect.slider) {
                         if ('output' in effect) { // sometimes nodes will modify slider without having effect.
-                            const slider_val = interactive_map.get(effect.slider_name).slider.value;
+                            const slider_val = slider_map.get(effect.slider_name).slider.value;
+                            const {round = true} = effect;
                             let total = parseInt(slider_val) * effect.scaling[0];
+                            if (round) { total = Math.floor(round_near(total)); }
                             if ('max' in effect && total > effect.max) { total = effect.max; }
                             if (Array.isArray(effect.output)) {
                                 for (const output of effect.output) {
@@ -701,9 +773,12 @@ const atree_stats = new (class extends ComputeNode {
                     else {
                         // TODO: type: prop?
                         let total = 0;
+                        const {round = true} = effect;
                         for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
                             total += scaling * item_stats.get(input.name);
                         }
+                        if (round) { total = Math.floor(round_near(total)); }
+                        if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect && total > effect.max) { total = effect.max; }
                         // TODO: output (list...)
                         if (Array.isArray(effect.output)) {
@@ -722,6 +797,10 @@ const atree_stats = new (class extends ComputeNode {
                     continue;
                 case 'raw_stat':
                     // TODO: toggles...
+                    if (effect.toggle) {
+                        const button = button_map.get(effect.toggle).button;
+                        if (!button.classList.contains("toggleOn")) { continue; }
+                    }
                     for (const bonus of effect.bonuses) {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
@@ -731,15 +810,16 @@ const atree_stats = new (class extends ComputeNode {
                     }
                     continue;
                 case 'add_spell_prop':
+                    continue;
                     // TODO unjankify....
                     // costs are converted to raw cost ID
-                    const { base_spell, cost = 0} = effect;
-                    if (cost) {
-                        const key = "spRaw"+base_spell;
-                        if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
-                        else { ret_effects.set(key, cost); }
-                    }
-                    continue;
+                    // const { base_spell, cost = 0} = effect;
+                    // if (cost) {
+                    //     const key = "spRaw"+base_spell;
+                    //     if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
+                    //     else { ret_effects.set(key, cost); }
+                    // }
+                    // continue;
                 }
             }
         }
@@ -828,6 +908,12 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
  */
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
+
+    // increase padding, since images are larger than the space provided
+    UI_elem.style.paddingRight = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingLeft = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingTop = "calc(var(--bs-gutter-x) * .5)";
+
     // add in the "Active" title to atree
     let active_row = make_elem("div", ["row", "item-title", "mx-auto", "justify-content-center"]);
     let active_word = make_elem("div", ["col-auto"], {textContent: "Active Abilities:"});
@@ -837,7 +923,7 @@ function render_AT(UI_elem, list_elem, tree) {
     let active_AP_cost = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cost", textContent: "0"});
 
     let active_AP_slash = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: "/"});
-    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap", textContent: "45"});
+    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap"});
     let active_AP_end = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: " AP"});
 
     active_AP_container.appendChild(active_AP_subcontainer);
@@ -877,6 +963,7 @@ function render_AT(UI_elem, list_elem, tree) {
         for (let k = 0; k < 9; k++) {
             col = document.createElement('div');
             col.classList.add('col', 'px-0');
+            col.style = "position: relative; aspect-ratio: 1/1;"
             row.appendChild(col);
         }
         UI_elem.appendChild(row);
@@ -894,7 +981,7 @@ function render_AT(UI_elem, list_elem, tree) {
             const parent_id = parent_abil.id;
 
             let connect_elem = document.createElement("div");
-            connect_elem.style = "background-size: cover; width: 100%; height: 100%;";
+            connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -932,102 +1019,52 @@ function render_AT(UI_elem, list_elem, tree) {
         let node_elem = document.createElement('div');
         let icon = ability.display.icon;
         if (icon === undefined) {
-            icon = "node_0";
+            icon = "node";
         }
         let node_img = document.createElement('img');
         node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 100%; height: 100%;";
+        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
         node_elem.appendChild(node_img);
-        node_elem.classList.add("atree-circle");
 
-        // add node tooltip
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.display = "block";
-        });
+        node_wrap.img = node_img;
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.display = "none";
-        });
-
-        //node tooltip and active tooltip have common parts - let's make them first
-
-        let tooltip_title = document.createElement('div');
-        tooltip_title.classList.add("row", "justify-content-center", "fw-bold");
-        tooltip_title.textContent = ability.display_name;
-
-        let tooltip_archetype;
-        if ('archetype' in ability && ability.archetype !== "") {
-            tooltip_archetype = document.createElement('div');
-            tooltip_archetype.classList.add("row", "mx-1", "text-start");
-            tooltip_archetype.textContent = "(Archetype: " + ability.archetype+")";
-        }
-
-        let tooltip_desc = document.createElement('div');
-        tooltip_desc.classList.add("row", "mx-1", "text-wrap");
-        tooltip_desc.textContent = ability.desc;
-
-        let tooltip_cost = document.createElement('div');
-        tooltip_cost.classList.add("row", "mx-1", "text-start");
-        tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
-
-        //create node tooltip
-        let node_tooltip = document.createElement('div');
-        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "my-1", "dark-shadow", "scaled-font", "container");
-        node_tooltip.style.display = "none";
-        node_tooltip.append(tooltip_title, tooltip_archetype ? tooltip_archetype : "", tooltip_desc);
-
-        //active = copy of node
-        let active_tooltip = node_tooltip.cloneNode(true);
-        
-        //node tooltip specific stuff that we don't want to be copied
-        node_tooltip.style.position = "absolute";
-        node_tooltip.style.zIndex = "100";
-        node_tooltip.appendChild(tooltip_cost);
-
-        //add in anything new for active tooltips
-        active_tooltip.id = "atree-ab-" + ability.id;
-
-        if (ability.blockers.length > 0) {
-            let active_tooltip_blockers = document.createElement("div");
-            active_tooltip_blockers.classList.add("row", "mx-1", "text-start");
-            active_tooltip_blockers.textContent = "Blockers: " + ability.blockers.join(", ");
-            active_tooltip.append(active_tooltip_blockers);
-        }
-
-        //append node and active tooltips to corresponding parent elems
-        node_elem.appendChild(node_tooltip);
-        //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
+        // create hitbox
+        // this is necessary since images exceed the size of their square, but should only be interactible within that square
+        let hitbox = document.createElement("div");
+        hitbox.style = "position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;"
+        node_elem.appendChild(hitbox);
 
         node_wrap.elem = node_elem;
         node_wrap.all_connectors_ref = atree_connectors_map;
 
-        node_elem.addEventListener('click', function(e) {
+        hitbox.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
             atree_set_state(node_wrap, !node_wrap.active);
             atree_state_node.mark_dirty().update();
         });
 
         // add tooltip
-
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .95 + "px";
-            tooltip.style.display = "block";
+        // tooltips are being changed to generate on mouseover for fin444's future style updates
+        // this is being implemented before those updates since it helps with a hotfix
+        hitbox.addEventListener('mouseover', function(e) {
+            if (e.target !== this) {
+                return;
+            }
+            if (node_wrap.tooltip_elem) {
+                node_wrap.tooltip_elem.remove();
+                delete node_wrap.tooltip_elem;
+            }
+            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability);
         });
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
-            tooltip.style.display = "none";
+        hitbox.addEventListener('mouseout', function(e) {
+            if (e.target !== this) {
+                return;
+            }
+            if (node_wrap.tooltip_elem) {
+                node_wrap.tooltip_elem.remove();
+                delete node_wrap.tooltip_elem;
+            }
         });
 
         document.getElementById("atree-row-" + ability.display.row).children[ability.display.col].appendChild(node_elem);
@@ -1036,6 +1073,44 @@ function render_AT(UI_elem, list_elem, tree) {
 
     return atree_map;
 };
+
+function generateTooltip(UI_elem, node_elem, ability) {
+    let tooltip = document.createElement('div');
+    tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+
+    // tooltip text formatting
+
+    let tooltip_title = document.createElement('b');
+    tooltip_title.classList.add("scaled-font");
+    tooltip_title.innerHTML = ability.display_name;
+    tooltip.appendChild(tooltip_title);
+
+    if ('archetype' in ability && ability.archetype !== "") {
+        let tooltip_archetype = document.createElement('p');
+        tooltip_archetype.classList.add("scaled-font");
+        tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
+        tooltip.appendChild(tooltip_archetype);
+    }
+
+    let tooltip_desc = document.createElement('p');
+    tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
+    tooltip_desc.textContent = ability.desc;
+    tooltip.appendChild(tooltip_desc);
+
+    let tooltip_cost = document.createElement('p');
+    tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
+    tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
+    tooltip.appendChild(tooltip_cost);
+
+    tooltip.style.position = "absolute";
+    tooltip.style.zIndex = "100";
+    tooltip.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
+    tooltip.style.left = UI_elem.getBoundingClientRect().left + "px";
+    tooltip.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
+
+    UI_elem.appendChild(tooltip);
+    return tooltip;
+}
 
 // resolve connector conflict, when they occupy the same cell.
 function resolve_connector(atree_connectors_map, pos, new_connector) {
@@ -1050,35 +1125,10 @@ function resolve_connector(atree_connectors_map, pos, new_connector) {
 }
 
 function set_connector_type(connector_info) {  // left right up down
-    const connections = connector_info.connections;
-    const connector_elem = connector_info.connector;
-    let connector_dict = {
-        "1100": {type: "line", rotate: 90},
-        "1010": {type: "angle", rotate: 0},
-        "1001": {type: "angle", rotate: 270},
-        "0110": {type: "angle", rotate: 90},
-        "0101": {type: "angle", rotate: 180},
-        "0011": {type: "line", rotate: 0},
-        "1110": {type: "t", rotate: 180},
-        "1101": {type: "t", rotate: 0},
-        "1011": {type: "t", rotate: 90},
-        "0111": {type: "t", rotate: 270},
-        "1111": {type: "c", rotate: 0}
+    connector_info.type = "";
+    for (let i = 0; i < 4; i++) {
+        connector_info.type += connector_info.connections[i] == 0 ? "0" : "1";
     }
-
-    let lookup_str = "";
-    for (let i of connections) {
-        if (i != 0) {
-            lookup_str += 1;
-        } else {
-            lookup_str += 0;
-        }
-    }
-
-    connector_info.type = connector_dict[lookup_str].type;
-    connector_info.rotate = connector_dict[lookup_str].rotate;
-    connector_elem.classList.add("rotate-" + connector_dict[lookup_str].rotate);
-
 }
 
 // draw the connector onto the screen
@@ -1103,13 +1153,17 @@ function atree_render_connection(atree_connectors_map) {
 
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
+    let icon = node_wrapper.ability.display.icon;
+    if (icon === undefined) {
+        icon = "node";
+    }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.classList.add("atree-selected");
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.classList.remove("atree-selected");
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1123,21 +1177,6 @@ function atree_set_state(node_wrapper, new_state) {
         }
     }
 };
-
-// refresh all connector to default state, then try to calculate the connector for all node
-function atree_update_connector() {
-    atree_connectors_map.forEach((v) => {
-        if (v.length != 0) {
-            let connector_elem = document.createElement("img");
-            connector_elem.style = "width: 100%; height: 100%;";
-            connector_elem.src = '../media/atree/connect_' + v[0].type + '.png'
-            v[0].replaceChildren(connector_elem);
-        }
-    });
-    atree_map.forEach((v) => {
-        atree_compute_highlight(v);
-    });
-}
 
 function atree_set_edge(atree_connectors_map, parent, child, state) {
     const connectors = child.connectors.get(parent);
@@ -1156,9 +1195,13 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_img_elem = document.createElement("img");
         connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
-        const rotate = connector_info.rotate;
-        if (ctype === 't' || ctype === 'c') {
-            // c, t
+        let num_1s = 0;
+        for (let i = 0; i < 4; i++) {
+            if (ctype.charAt(i) == "1") {
+                num_1s++;
+            }
+        }
+        if (num_1s > 2) { // t branch or 4-way
             const [connector_row, connector_col] = connector_label.split(',').map(x => parseInt(x));
 
             if (connector_row === parent_row) {
@@ -1174,19 +1217,22 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
                 highlight_state[child_side_idx] += state_delta;
             }
 
-            let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
-
-            let connector_img = atree_parse_connector(render_state, ctype, rotate);
-            connector_img_elem.src = connector_img.img
-            connector_elem.className = "";
-            connector_elem.classList.add("rotate-" + connector_img.rotate);
+            let render = "";
+            for (let i = 0; i < 4; i++) {
+                render += highlight_state[i] === 0 ? "0" : "1";
+            }
+            if (render == "0000") {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + ".png";
+            } else {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png";
+            }
             connector_elem.replaceChildren(connector_img_elem);
             continue;
         }
         // lol bad overloading, [0] is just the whole state
         highlight_state[0] += state_delta;
         if (highlight_state[0] > 0) {
-            connector_img_elem.src = '../media/atree/highlight_'+ctype+'.png';
+            connector_img_elem.src = '../media/atree/connect_' + ctype + '_1.png';
             connector_elem.replaceChildren(connector_img_elem);
         }
         else {
@@ -1195,61 +1241,3 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         }
     }
 }
-
-// parse a sequence of left, right, up, down to appropriate connector image
-function atree_parse_connector(orient, type, rotate) {
-    // left, right, up, down
-
-    let c_connector_dict = {
-        "1100": {attrib: "_2_l", rotate: 0},
-        "1010": {attrib: "_2_a", rotate: 0},
-        "1001": {attrib: "_2_a", rotate: 270},
-        "0110": {attrib: "_2_a", rotate: 90},
-        "0101": {attrib: "_2_a", rotate: 180},
-        "0011": {attrib: "_2_l", rotate: 90},
-        "1110": {attrib: "_3", rotate: 0},
-        "1101": {attrib: "_3", rotate: 180},
-        "1011": {attrib: "_3", rotate: 270},
-        "0111": {attrib: "_3", rotate: 90},
-        "1111": {attrib: "", rotate: 0}
-    };
-
-    let t_connector_dict = {
-        0: {
-            "1100": {attrib: "_2_l"},
-            "1001": {attrib: "_2_a_f"},
-            "0101": {attrib: "_2_a"},
-            "1101": {attrib: "_3"},
-        },
-        90: {
-            "1010": {attrib: "_2_a_f"},
-            "1001": {attrib: "_2_a"},
-            "0011": {attrib: "_2_l"},
-            "1011": {attrib: "_3"}
-        },
-        270: {
-            "0110": {attrib: "_2_a"},
-            "0101": {attrib: "_2_a_f"},
-            "0011": {attrib: "_2_l"},
-            "0111": {attrib: "_3"}
-        }
-    };
-
-    let res = "";  
-    for (let i of orient) {
-        res += i;
-    }
-    if (res === "0000") {
-        return {img: "../media/atree/connect_" + type + ".png", rotate: rotate};
-    }
-
-    let ret;
-    if (type == "c") {
-        ret = c_connector_dict[res];
-    } else {
-        ret = t_connector_dict[rotate][res];
-        ret.rotate = rotate;
-    };
-    ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
-    return ret;
-};

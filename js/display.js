@@ -5,13 +5,10 @@ function apply_elemental_format(p_elem, id, suffix) {
     let parts = idPrefixes[id].split(/ (.*)/);
     let element_prefix = parts[0];
     let desc = parts[1];
-    let i_elem = document.createElement('span');
-    i_elem.classList.add(element_prefix);
-    i_elem.textContent = element_prefix;
+    let i_elem = make_elem('span', [element_prefix], {textContent: element_prefix});
     p_elem.appendChild(i_elem);
 
-    let i_elem2 = document.createElement('span');
-    i_elem2.textContent = " " + desc + suffix;
+    let i_elem2 = make_elem('span', [], {textContent: " "+desc+suffix});
     p_elem.appendChild(i_elem2);
 }
 
@@ -19,17 +16,14 @@ function displaySetBonuses(parent_id,build) {
     setHTML(parent_id, "");
     let parent_div = document.getElementById(parent_id);
 
-    let set_summary_elem = document.createElement('p');
-    set_summary_elem.classList.add('text-center');
-    set_summary_elem.textContent = "Set Bonuses";
+    let set_summary_elem = make_elem('p', ['text-center'], {textContent: "Set Bonuses"});
     parent_div.append(set_summary_elem);
 
     for (const [setName, count] of build.activeSetCounts) {
         const active_set = sets.get(setName);
         if (active_set["hidden"]) { continue; }
 
-        let set_elem = document.createElement('p');
-        set_elem.id = "set-"+setName;
+        let set_elem = make_elem('p', [], {id: "set-"+setName});
         set_summary_elem.append(set_elem);
         
         const bonus = active_set.bonuses[count-1];
@@ -111,36 +105,28 @@ function displayBuildStats(parent_id,build,command_group,stats){
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
-                    let row = document.createElement('div');
-                    row.classList.add("row")
-                    let value_elem = document.createElement('div');
-                    value_elem.classList.add('col');
-                    value_elem.classList.add('text-end');
+                    let row = make_elem('div', ['row']);
+                    let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = document.createElement('b');
-                    prefix_elem.textContent = "\u279C With Strength: ";
-                    let number_elem = document.createElement('b');
-                    number_elem.classList.add(style);
-                    number_elem.textContent = (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id];
+                    let prefix_elem = make_elem('b', [], {textContent: "\u279C With Strength: "});
+                    let number_elem = make_elem('b', [style], {
+                        textContent: (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id]
+                    });
                     value_elem.append(prefix_elem);
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
                     parent_div.appendChild(row);
                 }
                 else if (id === "ls" && id_val != 0) {
-                    let row = document.createElement('div');
-                    row.classList.add("row")
-                    let value_elem = document.createElement('div');
-                    value_elem.classList.add('col');
-                    value_elem.classList.add('text-end');
+                    let row = make_elem('div', ['row']);
+                    let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = document.createElement('b');
-                    prefix_elem.textContent = "\u279C Effective LS: ";
+                    let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
 
                     let defStats = getDefenseStats(stats);
-                    let number_elem = document.createElement('b');
-                    number_elem.classList.add(style);
-                    number_elem.textContent = Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s";
+                    let number_elem = make_elem('b', [style], {
+                        textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
+                    });
                     value_elem.append(prefix_elem);
                     value_elem.append(number_elem);
                     row.appendChild(value_elem);
@@ -195,8 +181,7 @@ function displayExpandedItem(item, parent_id){
                 elemental_format = !elemental_format;
             }
             else if (command === "!spacer") {
-                let spacer = document.createElement('div');
-                spacer.classList.add("row", "my-2");
+                let spacer = make_elem('div', ["row", "my-2"], {});
                 parent_div.appendChild(spacer);
                 continue;
             }
@@ -205,49 +190,41 @@ function displayExpandedItem(item, parent_id){
             let id = command; 
             if(nonRolledIDs.includes(id)){//nonRolledID & non-0/non-null/non-und ID
                 if (!item.get(id)) {
-                    if (! (item.get("crafted") && skp_order.includes(id) && 
+                    if (!(item.get("crafted") && skp_order.includes(id) && 
                             (item.get("maxRolls").get(id) || item.get("minRolls").get(id)))) {
                         continue;
                     }
                 }
                 if (id === "slots") {
-                    let p_elem = document.createElement("div");
-                    p_elem.classList.add("col");
-                    
+                    let p_elem = make_elem("div", ["col"]);
+
                     // PROPER POWDER DISPLAYING
                     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
 
-                    let powderPrefix = document.createElement("b");
-                    powderPrefix.textContent = "Powder Slots: " + item.get(id) + " [";
-                    p_elem.appendChild(powderPrefix);
+                    p_elem.appendChild(make_elem("b", [], {
+                        textContent: "Powder Slots: " + item.get(id) + " ["
+                    }));
                     
                     let powders = item.get("powders");
                     for (let i = 0; i < powders.length; i++) {
-                        let powder = document.createElement("b");
-                        powder.textContent = numerals.get((powders[i]%6)+1)+" ";
-                        powder.classList.add(damageClasses[Math.floor(powders[i]/6)+1]+"_powder");
-                        p_elem.appendChild(powder);
+                        p_elem.appendChild(make_elem("b", [damageClasses[Math.floor(powders[i]/6)+1]+"_powder"], {
+                            textContent: numerals.get((powders[i]%6)+1)+" "
+                        }));
                     }
 
-                    let powderSuffix = document.createElement("b");
-                    powderSuffix.textContent = "]";
-                    p_elem.appendChild(powderSuffix);
+                    p_elem.appendChild(make_elem("b", [], { textContent: "]" }));
                     parent_div.appendChild(p_elem);
                 } else if (id === "set") {
                     if (item.get("hideSet")) { continue; }
 
-                    let p_elem = document.createElement("div");
-                    p_elem.classList.add("col");
-                    p_elem.textContent = "Set: " + item.get(id).toString();
-                    parent_div.appendChild(p_elem);
+                    parent_div.appendChild(make_elem("div", ["col"], { textContent: "Set: " + item.get(id).toString() }));
                 } else if (id === "majorIds") {
                     //console.log(item.get(id));
                     for (let majorID of item.get(id)) {
-                        let p_elem = document.createElement("div");
-                        p_elem.classList.add("col");
+                        let p_elem = make_elem("div", ['col']);
 
-                        let title_elem = document.createElement("b");
-                        let b_elem = document.createElement("b");
+                        let title_elem = make_elem("b");
+                        let b_elem = make_elem("b");
                         if (majorID.includes(":")) {   
                             let name = majorID.substring(0, majorID.indexOf(":")+1);
                             let mid = majorID.substring(majorID.indexOf(":")+1);
@@ -268,20 +245,30 @@ function displayExpandedItem(item, parent_id){
                         parent_div.appendChild(p_elem);
                     }
                 } else if (id === "lvl" && item.get("tier") === "Crafted") {
-                    let p_elem = document.createElement("div");
-                    p_elem.classList.add("col");
-                    p_elem.textContent = "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id);
-                    parent_div.appendChild(p_elem);
+                    parent_div.appendChild(make_elem("div", ["col"], {
+                        textContent: "Combat Level Min: " + item.get("lvlLow") + "-" + item.get(id)
+                    }));
                 } else if (id === "displayName") {
-                    let row = document.createElement("div");
+                    let row = make_elem("div", ["row", "justify-content-center"]);
 
-                    let a_elem = document.createElement("a");
-                    row.classList.add("row", "justify-content-center");
-                    a_elem.classList.add("col-auto", "text-center", "item-title", "p-0");
-                    a_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
-                    // a_elem.style.textGrow = 1;
-                    
-                    row.appendChild(a_elem);
+                    let nolink_row = make_elem("div", ["row", "justify-content-center"]);
+                    nolink_row.style.display = "none";
+
+                    const tier_class = item.has("tier") ? item.get("tier").replace(" ","") : "Normal";
+                    let item_link;
+                    if (item.get("custom")) {
+                        item_link = "../custom/#" + item.get("hash");
+                    } else if (item.get("crafted")) {
+                        a_item_link = "../crafter/#" + item.get("hash");
+                    } else {
+                        item_link = "../item/#" + item.get("displayName");
+                    }
+                    const item_name_elem = make_elem("a", ["col-auto", "text-center", "item-title", "p-0", tier_class], {
+                        textContent: item.get('displayName')
+                    });
+                    nolink_row.appendChild(item_name_elem.cloneNode(true));
+                    item_name_elem.href = item_link;
+                    row.appendChild(item_name_elem);
 
                     /* 
                     FUNCTIONALITY FOR THIS FEATURE HAS SINCE BEEN REMOVED (WITH SQ2).
@@ -295,50 +282,23 @@ function displayExpandedItem(item, parent_id){
                     //plusminus.style.flexGrow = 0;
                     //plusminus.textContent = "\u2795";
                     //row.appendChild(plusminus);
-
-                    if (item.get("custom")) {
-                        a_elem.href = "../custom/#" + item.get("hash");
-                        a_elem.textContent = item.get("displayName");
-                    } else if (item.get("crafted")) {
-                        a_elem.href = "../crafter/#" + item.get("hash");
-                        a_elem.textContent = item.get(id);
-                    } else {
-                        a_elem.href = "../item/#" + item.get("displayName");
-                        a_elem.textContent = item.get("displayName");
-                    }
                     parent_div.appendChild(row);
-
-                    let nolink_row = document.createElement("div");
-                    let p_elem = document.createElement("p");
-                    nolink_row.classList.add("row", "justify-content-center");
-                    nolink_row.style.display = "none";
-                    p_elem.classList.add("col-auto", "text-center", "item-title", "p-0");
-                    p_elem.classList.add(item.has("tier") ? item.get("tier").replace(" ","") : "Normal");
-                    if (item.get("custom")) {
-                        p_elem.textContent = item.get("displayName");
-                    } else if (item.get("crafted")) {
-                        p_elem.textContent = item.get(id);
-                    } else {
-                        p_elem.textContent = item.get("displayName");
-                    }
-                    
-                    nolink_row.appendChild(p_elem);
                     parent_div.appendChild(nolink_row);
 
-                    let img = document.createElement("img");
-                    if (item && item.has("type")) {
-                        img.src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png";
-                        img.alt = item.get("type");
-                        img.style = " z=index: 1; position: relative;";
-                        let container = document.createElement("div");
+                    if (item.has("type")) {
+                        let img = make_elem("img", [], {
+                            src: "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png",
+                            alt: item.get("type"),
+                            style: " z=index: 1; position: relative;"
+                        });
+                        let container = make_elem("div");
                         
-                        let bckgrd = document.createElement("div");
-                        bckgrd.classList.add("col", "px-0", "d-flex", "align-items-center", "justify-content-center");// , "no-collapse");
-                        bckgrd.style = "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
-                        bckgrd.classList.add("scaled-bckgrd");
-                        parent_div.appendChild(container);
-                        container.appendChild(bckgrd);
+                        let bckgrd = make_elem("div", ["col", "px-0", "d-flex", "align-items-center", "justify-content-center", 'scaled-bckgrd'], { // , "no-collapse"
+                            style: "border-radius: 50%;background-image: radial-gradient(closest-side, " + colorMap.get(item.get("tier")) + " 20%," + "hsl(0, 0%, 16%) 80%); margin-left: auto; margin-right: auto;"
+                        });
                         bckgrd.appendChild(img);
+                        container.appendChild(bckgrd);
+                        parent_div.appendChild(container);
                     }
                 } else {
                     if (id.endsWith('Dam_')) {
@@ -365,8 +325,7 @@ function displayExpandedItem(item, parent_id){
                         p_elem.style = "font-style: italic";
                     } else if (skp_order.includes(id)) { //id = str, dex, int, def, or agi
                         if ( item.get("tier") !== "Crafted") {
-                            row = document.createElement("div");
-                            row.classList.add("col");
+                            row = make_elem("div", ["col"]);
                             
                             let title = document.createElement("b");
                             title.textContent = idPrefixes[id] + " ";
@@ -550,9 +509,6 @@ function displayExpandedItem(item, parent_id){
 */
 function displayRecipeStats(craft, parent_id) {
     let elem = document.getElementById(parent_id);
-    if (!elem.classList.contains("col")) {
-        elem.classList.add("col");
-    }
 
     //local vars 
     elem.textContent = "";
@@ -565,91 +521,85 @@ function displayRecipeStats(craft, parent_id) {
     let effectiveness = craft["statMap"].get("ingredEffectiveness");
 
     let title = document.createElement("div");
-    title.classList.add("row", "box-title", "fw-bold", "justify-content-center");
+    title.classList.add("col", "box-title", "fw-bold", "justify-content-center", "scaled-font");
     title.textContent = "Recipe Stats";
     elem.appendChild(title);
 
     let mats = document.createElement("div");
-    mats.classList.add("row");
+    mats.classList.add("col");
     mats.textContent = "Crafting Materials: ";
     elem.appendChild(mats);
 
     for (let i = 0; i < 2; i++) {
         let tier = mat_tiers[i];
-        let row = document.createElement("div");
-        row.classList.add("row", "px-0", "mx-0");
-        let b = document.createElement("div");
+        let col = document.createElement("div");
+        col.classList.add("col", "ps-4");
+        let b = document.createElement("span");
         let mat = recipe.get("materials")[i];
         b.textContent = "- " + mat.get("amount") + "x " + mat.get("item").split(" ").slice(1).join(" ");
         b.classList.add("col");
-        row.appendChild(b);
+        col.appendChild(b);
 
-        let starsB = document.createElement("div");
-        starsB.classList.add("T1-bracket", "col-auto", "px-0");
+        let starsContainer = document.createElement("span");
+        let starsB = document.createElement("span");
+        starsB.classList.add("T1-bracket", "px-0");
         starsB.textContent = "[";
-        row.appendChild(starsB);
+        starsContainer.appendChild(starsB);
         for(let j = 0; j < 3; j ++) {
-            let star = document.createElement("div");
-            star.classList.add("col-auto", "px-0");
+            let star = document.createElement("span");
+            star.classList.add("px-0");
             star.textContent = "\u272B";
             if(j < tier) {
                 star.classList.add("T1");
             } else {
                 star.classList.add("T0");
             }
-            row.append(star);
+            starsContainer.append(star);
         }
-        let starsE = document.createElement("div");
-        starsE.classList.add("T1-bracket", "col-auto", "px-0");
+        let starsE = document.createElement("span");
+        starsE.classList.add("T1-bracket", "px-0");
         starsE.textContent = "]";
-        row.appendChild(starsE);
+        starsContainer.appendChild(starsE);
 
-        elem.appendChild(row);
+        col.appendChild(starsContainer);
+
+        elem.appendChild(col);
     }
 
     let ingredTable = document.createElement("div");
-    ingredTable.classList.add("row");
+    ingredTable.classList.add("col", "mt-2");
 
-    for (let i = 0; i < 3; i++) {
-        let row = document.createElement("div");
-        row.classList.add("row", "g-1", "justify-content-center");
+    let ingredContainer = document.createElement("div");
+    ingredContainer.classList.add("row", "row-cols-2", "g-3");
+    for (let i = 0; i < 6; i++) {
+        let ingredCell = document.createElement("div");
+        ingredCell.classList.add("col");
 
-        
-        for (let j = 0; j < 2; j++) {
-            if (j == 1) {
-                let spacer = document.createElement("div");
-                spacer.classList.add("col-1");
-                row.appendChild(spacer);
-            } 
-            let ingredName = ingreds[2 * i + j];
-            let col = document.createElement("div");
-            col.classList.add("col-5", "rounded", "dark-6", "border", "border-3", "dark-shadow");
+        let ingredTextContainer = document.createElement("div");
+        ingredTextContainer.classList.add("border", "border-3", "rounded")
 
-            let temp_row = document.createElement("div");
-            temp_row.classList.add("row");
-            col.appendChild(temp_row);
+        let ingredName = ingreds[i];
+        let ingred_text = document.createElement("p");
+        ingred_text.classList.add("mb-2", "ps-2");
+        ingred_text.textContent = ingredName;
+        ingredTextContainer.appendChild(ingred_text);
 
-            let ingred_div = document.createElement("div");
-            ingred_div.classList.add("col");
-            ingred_div.textContent = ingredName;
-            temp_row.appendChild(ingred_div);
-
-            let eff_div = document.createElement("div");
-            eff_div.classList.add("col-auto");
-            let e = effectiveness[2 * i + j];
-            if (e > 0) {
-                eff_div.classList.add("positive");
-            } else if (e < 0) {
-                eff_div.classList.add("negative");
-            }
-            eff_div.textContent = "[" + e + "%]";
-
-            temp_row.appendChild(eff_div);
-
-            row.appendChild(col);
+        let eff_div = document.createElement("p");
+        eff_div.classList.add("mb-2", "ps-2");
+        let e = effectiveness[i];
+        if (e > 0) {
+            eff_div.classList.add("positive");
+        } else if (e < 0) {
+            eff_div.classList.add("negative");
         }
-        ingredTable.appendChild(row);
+        eff_div.textContent = "[" + e + "%]";
+        ingredTextContainer.appendChild(eff_div);
+
+        ingredCell.appendChild(ingredTextContainer);
+
+        ingredContainer.appendChild(ingredCell);
     }
+    ingredTable.appendChild(ingredContainer);
     elem.appendChild(ingredTable);
 }
 
@@ -877,7 +827,7 @@ function displayExpandedIngredient(ingred, parent_id) {
                 row.appendChild(title);
                 for(const skill of ingred.get("skills")) {
                     let skill_div = document.createElement("div");
-                    skill_div.classList.add("row");
+                    skill_div.classList.add("row", "ps-4");
                     skill_div.textContent = skill.charAt(0) + skill.substring(1).toLowerCase();
                     row.appendChild(skill_div);
                 }
@@ -1900,6 +1850,7 @@ function displayIDProbabilities(parent_id, item, amp) {
     parent_elem.appendChild(table_elem);
     for (const [id,val] of Object.entries(itemMap.get(item_name))) {
         if (rolledIDs.includes(id)) {
+            if (!item.get("maxRolls").get(id)) { continue; }
             let min = item.get("minRolls").get(id);
             let max = item.get("maxRolls").get(id);
             //Apply corkian amps

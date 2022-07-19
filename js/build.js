@@ -30,7 +30,6 @@ class Build{
             this.level = level;
         } else if (typeof level === "string") {
             this.level = level;
-            errors.push(new IncorrectInput(level, "a number", "level-choice"));
         } else {
             errors.push("Level is not a string or number.");
         }
@@ -129,6 +128,8 @@ class Build{
             }
         }
         statMap.set("poisonPct", 100);
+        statMap.set("critDamPct", 100);
+        statMap.set("healPct", 100);
 
         // The stuff relevant for damage calculation!!! @ferricles
         statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));
