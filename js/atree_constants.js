@@ -4604,29 +4604,6 @@ const atrees = {
             },
             "effects": []  
         },
-
-        {
-            "display_name": "Haemorrhage",
-            "desc": "Reduce Blood Pact's health cost. (0.3% health per mana)",
-            "archetype": "Fallen", 
-            "archetype_req": 0, 
-            "base_abil": "Blood Pact",
-            "parents": ["Blood Pact"], 
-            "dependencies": ["Blood Pact"], 
-            "blockers": [],
-            "cost": 1, 
-            "display": {
-                "row": 35,
-                "col": 2,
-                "icon": "node_1"
-            },
-            "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [{ "type": "prop", "abil": "Blood Pact", "name": "health_cost", "value": -0.3}]
-            }]
-        },
-
         {
             "display_name": "Brink of Madness",
             "desc": "If your health is 25% full or less, gain +40% Resistance",
@@ -6731,7 +6708,7 @@ const atrees = {
                 "Blood Pact"
             ],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 35,
                 "col": 2,
