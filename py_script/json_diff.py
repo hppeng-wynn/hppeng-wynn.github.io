@@ -49,9 +49,10 @@ def __print_type_diff(type1, type2, path):
 def __print_path_diff(_1, _2, key, path, side):
     if side:
         print(f"{path}.{key}: Contained in right but not left")
+        print(f"    Value: {shorten(str(_2[key]))}")
     else:
         print(f"{path}.{key}: Contained in left but not right")
-    print(f"    Value: {shorten(str(key))}")
+        print(f"    Value: {shorten(str(_1[key]))}")
 
 # Default diff reporter (just prints everything)
 JSON_DIFF_PRINTER = JSONDiffReporter(
@@ -81,9 +82,10 @@ def __type_diff(type1, type2, path):
 def __path_diff(_1, _2, key, path, side):
     if side:
         errmsg = f"{path}.{key}: Contained in right but not left\n"
+        errmsg += f"    Value: {shorten(str(_2[key]))}"
     else:
         errmsg = f"{path}.{key}: Contained in left but not right\n"
-    errmsg += f"    Value: {shorten(str(key))}"
+        errmsg += f"    Value: {shorten(str(_1[key]))}"
     raise AttributeError(errmsg)
 
 def get_test_diff_handler(get_key):
@@ -130,7 +132,7 @@ def object_diff(reporter, obj1, obj2, path) -> bool:
             else:
                 object_diff(reporter, val, obj, f"{path}.{k}")
             continue
-        reporter.path_diff(obj1, obj2, k, path, True)
+        reporter.path_diff(obj1, obj2, k, path, False)
     for k in obj2:
         if k not in obj1:
             reporter.path_diff(obj1, obj2, k, path, True)
