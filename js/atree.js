@@ -416,6 +416,7 @@ const atree_validate = new (class extends ComputeNode {
                 reachable.add(ability.id);
             }
             if (atree_to_add.length == _add.length) {
+                atree_to_add = _add;
                 break;
             }
             atree_to_add = _add;
