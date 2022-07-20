@@ -1466,15 +1466,16 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
 
             if (spell_info.name === spell.display) {
                 if (spellIdx === 0) {
-                    let attackSpeeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
+                    let display_attack_speeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
                     let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+                    console.log(stats);
                     if(adjAtkSpd > 6) {
                         adjAtkSpd = 6;
                     } else if(adjAtkSpd < 0) {
                         adjAtkSpd = 0;
                     }
                     add_summary("Average DPS: ", averageDamage * baseDamageMultiplier[adjAtkSpd], "Damage");
-                    add_summary("Attack Speed: ", attackSpeeds[adjAtkSpd], "Damage");
+                    add_summary("Attack Speed: ", display_attack_speeds[adjAtkSpd], "Damage");
                     add_summary("Per Attack: ", averageDamage, "Damage");
                 }
                 else {
