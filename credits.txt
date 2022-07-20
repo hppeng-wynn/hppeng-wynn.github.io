@@ -14,6 +14,7 @@ Additional Contributors, in no particular order:
  - touhoku (best IM)
  - HeyZeer0 (huge help in getting our damage formulas right)
  - blankman (fin444 github) (beautifying atree visuals)
+ - lemonalade (ability tree pdf for us to copy from :) )
  - Lennon (Skill point formula reversing)
  - Phanta (WynnAtlas custom expression parser / item search)
  - nbcss (and WIM team) (Crafted Item mechanics reverse engineering, testing)
