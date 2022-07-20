@@ -4729,36 +4729,44 @@ const atrees = {
             },
             "properties": {},
             "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Meteor Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Meteor Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Per Orb"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Per Orb"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Lightning Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Lightning Damage"
-                        }
-                    ],
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Winded",
+                        "output": [
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Lightning Damage"
+                            }
+                        ],
+                        "scaling": [5]
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Winded",
+                        "output": [
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Per Orb"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Lightning Damage"
+                            }
+                        ],
                     "scaling": [10]
                 }
             ]
