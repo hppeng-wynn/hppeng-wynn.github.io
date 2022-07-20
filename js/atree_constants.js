@@ -4747,7 +4747,7 @@ const atrees = {
                                 "name": "nConvBase:3.Lightning Damage"
                             }
                         ],
-                        "scaling": [5]
+                        "scaling": [15]
                     },
                     {
                         "type": "stat_scaling",
