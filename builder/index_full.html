@@ -5,17 +5,6 @@
     <meta name="HandheldFriendly" content="true" />
     <meta name="MobileOptimized" content="320" />
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=no" />
-    
-    <!--OGP suite
-    <meta property="og:title" content="Wynnbuilder" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://wynnbuilder.github.io/media/icons/new/builder.png" />
-    <meta property="og:image:width" content="420" />
-    <meta property="og:image:height" content="420" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:description" id = "ogp-build-list" content = "">
-    <meta property="og:url" id = "ogp-url" content="" />
-    -->
 
     <title>WynnBuilder</title>
     <link rel="icon" href="../media/icons/new/builder.png" type="image/icon type">
@@ -35,8 +24,6 @@
     <link rel="stylesheet" href="../css/wynnstyles.css">
 </head>
 <body class="text-light" id = "body">
-    <!-- hover tooltip stuff -->
-    
     <!-- main -->
     <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
         <a href = ""><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
@@ -1158,23 +1145,17 @@
                 </div>
             </div>
             <div class="col-xl-3 mb-3 px-0">
+                <div id="all-spells-display" class="row row-cols-1 gy-3 mb-4 text-center scaled-font">
+                    <div class = "col pe-0">
+                        <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell0-infoAvg">Input a weapon to see abilities!</div>
+                    </div>
+                </div>
+                <div class="row row-cols-1 gy-3 mb-4 text-center scaled-font" id="build-poison-stats" style="display: none">
+                </div>
                 <div class="row row-cols-1 gy-3 mb-4 text-center scaled-font">
-                    <div class = "col">
-                        <div class = "spell-display spell-expand dark-5 rounded dark-shadow py-2 border border-dark" id="build-melee-statsAvg">melee</div>
-                        <div class = "spell-display dark-5 rounded-bottom py-2 dark-shadow" id = "build-melee-stats" style="display: none;"></div>
+                    <div class = "col pe-0">
+                        <div class="col pe-0 spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="powder-special-stats"></div>
                     </div>
-                    <div class = "col">
-                        <div class = "col spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-poison-stats">poison</div>
-                    </div>
-                    <div id="all-spells-display" class="row row-cols-1 gy-3 text-center scaled-font pe-0">
-                        <div class = "col pe-0">
-                            <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell0-infoAvg">Input a weapon to see abilities!</div>
-                        </div>
-                    </div>
-                    <div class = "col">
-                        <div class = "spell-display dark-5 rounded dark-shadow py-2 border border-dark" id = "powder-special-stats"></div>
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -1198,20 +1179,6 @@
                 </div>
                 <div id="weapon-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
                 </div>
-                <!--div id="weaponTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
-                <div id="weaponTome2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
-                <div id="armorTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
-                <div id="armorTome2-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
-                <div id="armorTome3-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
-                <div id="armorTome4-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div>
-                <div id="guildTome1-tooltip" class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3">
-                </div-->
                 <div class="rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark dark-shadow p-3" id = "build-order">
                 </div>
                 <div class = "rounded row row-cols-1 g-0 scaled-font float-tooltip border border-3 border-dark p-3" id = "set-info"></div>
@@ -1278,10 +1245,8 @@
                 <div class = "row box-title justify-content-center my-1" id = "summary">
                 </div>
                 <div class = "row" id = "search-results">
-                    
                 </div>
             </div>
-            
         </div>
     </div>
     
@@ -1290,7 +1255,6 @@
     <script type="text/javascript" src="../js/utils.js"></script>
     <script type="text/javascript" src="../js/build_utils.js"></script>
     <script type="text/javascript" src="../js/computation_graph.js"></script>
-    <!-- <script type="text/javascript" src="../js/icons.js"></script> -->
     <script type="text/javascript" src="../js/sq2icons.js"></script>
     <script type="text/javascript" src="../js/powders.js"></script>
     <script type="text/javascript" src="../js/skillpoints.js"></script>

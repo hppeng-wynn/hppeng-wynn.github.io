@@ -864,10 +864,10 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
             let display_elem = document.createElement('div');
             display_elem.classList.add("col", "pe-0");
             // TODO: just pass these elements into the display node instead of juggling the raw IDs...
-            let spell_summary = document.createElement('div'); spell_summary.setAttribute('id', "spell"+spell.base_spell+"-infoAvg");
-            spell_summary.classList.add("col", "spell-display", "spell-expand", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark");
-            let spell_detail = document.createElement('div'); spell_detail.setAttribute('id', "spell"+spell.base_spell+"-info");
-            spell_detail.classList.add("col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2");
+            let spell_summary = make_elem('div', ["col", "spell-display", "fake-button", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark"],
+                    { id: "spell"+spell.base_spell+"-infoAvg" }); 
+            let spell_detail = make_elem('div', ["col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2"],
+                    { id: "spell"+spell.base_spell+"-info" });
             spell_detail.style.display = "none";
 
             display_elem.appendChild(spell_summary); display_elem.appendChild(spell_detail);
