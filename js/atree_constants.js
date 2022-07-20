@@ -9747,6 +9747,7 @@ const atrees = {
             "desc": "Multihit will deal a single devastating hit. If you strike the enemy from behind, deal double damage",
             "archetype": "Shadestepper",
             "archetype_req": 2,
+            "base_abil": "Multihit",
             "parents": [
                 "Earth Mastery",
                 "Thunder Mastery"
@@ -9766,33 +9767,26 @@ const atrees = {
             "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
+                    "type": "replace_spell",
+                    "name": "Backstab",
                     "base_spell": 3,
-                    "target_part": "Per Hit",
-                    "behavior": "modify",
-                    "cost": 0,
-                    "multipliers": [
-                        200,
-                        50,
-                        0,
-                        0,
-                        0,
-                        0
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Per Hit",
+                            "type": "damage",
+                            "multipliers": [
+                                200, 50, 0, 0, 0, 0
+                            ]
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": {
+                                "Per Hit": 1
+                            }
+                        }
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Damage",
-                    "behavior": "modify",
-                    "hits": {
-                        "Per Hit": 1
-                    }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "cost": -5
                 }
             ]
         },
