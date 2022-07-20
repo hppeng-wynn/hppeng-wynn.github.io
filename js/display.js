@@ -1434,14 +1434,14 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     let part_divavg = make_elem("p");
     overallparent_elem.append(part_divavg);
 
-    function _summary(text, val, fmt) {
+    function add_summary(text, val, fmt) {
         if (typeof(val) === 'number') { val = val.toFixed(2); }
-        let overallaverageLabel = make_elem("p");
-        let first = make_elem("span", [], { textContent: text });
-        let second = make_elem("span", [fmt], { textContent: val });
-        overallaverageLabel.appendChild(first);
-        overallaverageLabel.appendChild(second);
-        part_divavg.append(overallaverageLabel);
+        let summary_elem = make_elem("p");
+        summary_elem.append(
+            make_elem("span", [], { textContent: text }),
+            make_elem("span", [fmt], { textContent: val })
+        );
+        part_divavg.append(summary_elem);
     }
 
     for (let i = 0; i < spell_results.length; ++i) {
@@ -1473,12 +1473,12 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
                     } else if(adjAtkSpd < 0) {
                         adjAtkSpd = 0;
                     }
-                    _summary("Average DPS: ", averageDamage * baseDamageMultiplier[adjAtkSpd], "Damage");
-                    _summary("Attack Speed: ", attackSpeeds[adjAtkSpd], "Damage");
-                    _summary("Per Attack: ", averageDamage, "Damage");
+                    add_summary("Average DPS: ", averageDamage * baseDamageMultiplier[adjAtkSpd], "Damage");
+                    add_summary("Attack Speed: ", attackSpeeds[adjAtkSpd], "Damage");
+                    add_summary("Per Attack: ", averageDamage, "Damage");
                 }
                 else {
-                    _summary(spell_info.name+ ": ", averageDamage, "Damage");
+                    add_summary(spell_info.name+ ": ", averageDamage, "Damage");
                 }
             }
             
@@ -1505,7 +1505,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
             // healLabel.classList.add("damagep");
             part_div.append(healLabel);
             if (spell_info.name === spell.display) {
-                _summary(spell_info.name+ ": ", heal_amount, "Set");
+                add_summary(spell_info.name+ ": ", heal_amount, "Set");
             }
         }
     }
