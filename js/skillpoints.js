@@ -223,21 +223,15 @@ function construct_scc_graph(items_to_consider) {
     let terminal_node = {
         item: null,
         children: [],
-        parents: nodes,
-        visited: false,
-        assigned: false,
-        scc: null
+        parents: nodes
     };
     let root_node = {
         item: null,
         children: nodes,
         parents: [],
-        visited: false,
-        assigned: false,
-        scc: null
     };
     for (const item of items_to_consider) {
-        nodes.push({item: item, children: [terminal_node], parents: [root_node], visited: false, assigned: false, scc: null});
+        nodes.push({item: item, children: [terminal_node], parents: [root_node]});
     }
     // Dependency graph construction.
     for (const node_a of nodes) {
@@ -253,50 +247,6 @@ function construct_scc_graph(items_to_consider) {
             }
         }
     }
-    const res = []
-    /*
-     * SCC graph construction.
-     * https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm
-     */
-    function visit(u, res) {
-        if (u.visited) { return; }
-        u.visited = true;
-        for (const child of u.children) {
-            if (!child.visited) { visit(child, res); }
-        }
-        res.push(u);
-    }
-    visit(root_node, res);
-    res.reverse();
-    const sccs = [];
-    function assign(node, cur_scc) {
-        if (node.assigned) { return; }
-        cur_scc.nodes.push(node);
-        node.scc = cur_scc;
-        node.assigned = true;
-        for (const parent of node.parents) {
-            assign(parent, cur_scc);
-        }
-    }
-    for (const node of res) {
-        if (node.assigned) { continue; }
-        const cur_scc = {
-            nodes: [],
-            children: new Set(),
-            parents: new Set()
-        };
-        assign(node, cur_scc);
-        sccs.push(cur_scc);
-    }
-    for (const scc of sccs) {
-        for (const node of scc.nodes) {
-            for (const child of node.children) {
-                scc.children.add(child.scc);
-            }
-            for (const parent of node.parents) {
-                scc.parents.add(parent.scc);
-            }
-        }
-    }
+    const sccs = make_SCC_graph(root_node, nodes);
     return [root_node, terminal_node, sccs];
 }

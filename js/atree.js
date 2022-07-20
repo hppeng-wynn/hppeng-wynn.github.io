@@ -41,8 +41,8 @@ add_spell_prop: {
                                     //     If target part does not exist, a new part is created.
     behavior:       Optional[str]   // One of: "merge", "modify". default: merge
                                     //     merge: add if exist, make new part if not exist
-                                    //     modify: change existing part. do nothing if not exist
-    cost:           Optional[int]   // change to spellcost
+                                    //     modify: increment existing part. do nothing if not exist
+    cost:           Optional[int]   // change to spellcost. If the spell is not spell 1-4, this must be left empty.
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
     hits:           Optional[Map[str, float]]   // Additive changes to hits (for total entry)
@@ -62,7 +62,7 @@ raw_stat: {
                                             // string value means bind to (or create) named button
     behavior:       Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
-                                            //     modify: change existing part. do nothing if not exist
+                                            //     modify: increment existing part. do nothing if not exist
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
@@ -170,39 +170,22 @@ const atree_node = new (class extends ComputeNode {
             }
             node.parents = parents;
         }
-        console.log(atree_map);
 
+        let sccs = make_SCC_graph(atree_head, atree_map.values());
         let atree_topo_sort = [];
-        topological_sort_tree(atree_head, atree_topo_sort, new Map());
-        atree_topo_sort.reverse();
+        for (const scc of sccs) {
+            for (const node of scc.nodes) {
+                delete node.visited;
+                delete node.assigned;
+                delete node.scc;
+                atree_topo_sort.push(node);
+            }
+        }
+        console.log("Approximate topological order ability tree:");
+        console.log(atree_topo_sort);
         return atree_topo_sort;
     }
 })();
-
-/**
- * Create a reverse topological sort of the tree in the result list.
- * NOTE: our structure isn't a tree... it isn't even acyclic... but do it anyway i guess...
- *
- * https://en.wikipedia.org/wiki/Topological_sorting
- * @param tree: Root of tree to sort
- * @param res: Result list (reverse topological order)
- * @param mark_state: Bookkeeping. Call with empty Map()
- */
-function topological_sort_tree(tree, res, mark_state) {
-    const state = mark_state.get(tree);
-    if (state === undefined) {
-        // unmarked.
-        mark_state.set(tree, false);    // temporary mark
-        for (const child of tree.children) {
-            topological_sort_tree(child, res, mark_state);
-        }
-        mark_state.set(tree, true);     // permanent mark
-        res.push(tree);
-    }
-    // these cases are not needed. Case 1 does nothing, case 2 should never happen.
-    // else if (state === true) { return; } // permanent mark.
-    // else if (state === false) { throw "not a DAG"; } // temporary mark.
-}
 
 /**
  * Display ability tree from topologically sorted list.
