@@ -9989,27 +9989,31 @@ const atrees = {
             "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
+                    "type": "replace_spell",
+                    "name": "Lacerate",
                     "base_spell": 1,
-                    "target_part": "Spin Attack",
-                    "behavior": "modify",
-                    "multipliers": [
-                        40,
-                        0,
-                        0,
-                        10,
-                        0,
-                        20
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Per Hit",
+                            "type": "damage",
+                            "multipliers": [
+                                40,
+                                0,
+                                0,
+                                10,
+                                0,
+                                20
+                            ]
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": {
+                                "Per Hit": 3
+                            }
+                        }
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Total Damage",
-                    "behavior": "modify",
-                    "hits": {
-                        "Spin Attack": 3
-                    }
                 }
             ]
         },
@@ -10992,7 +10996,7 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Total Damage",
                     "hits": {
-                        "Spin Attack": 1
+                        "Per Hit": 1
                     }
                 }
             ]
