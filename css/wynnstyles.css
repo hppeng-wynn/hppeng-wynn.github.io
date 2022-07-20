@@ -182,3 +182,22 @@ Wynn-Related CSS
 .restrict {
     color: #ff8180;
 }
+
+/* Every text color in Minecraft */
+
+.mc-black { color: #000000 !important; }
+.mc-dark-blue { color: #0000AA !important; }
+.mc-dark-green { color: #00AA00 !important; }
+.mc-dark-aqua { color: #00AAAA !important; }
+.mc-dark-red { color: #AA0000 !important; }
+.mc-dark-purple { color: #AA00AA !important; }
+.mc-gold { color: #FFAA00 !important; }
+.mc-gray { color: #AAAAAA !important; }
+.mc-dark-gray { color: #555555 !important; }
+.mc-blue { color: #5555FF !important; }
+.mc-green { color: #55FF55 !important; }
+.mc-aqua { color: #55FFFF !important; }
+.mc-red { color: #FF5555 !important; }
+.mc-light-purple { color: #FF55FF !important; }
+.mc-yellow { color: #FFFF55 !important; }
+.mc-white { color: #FFFFFF !important; }
