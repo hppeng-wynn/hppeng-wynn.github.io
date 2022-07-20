@@ -9280,7 +9280,7 @@ const atrees = {
             "blockers": [
                 "Double Slice"
             ],
-            "cost": 0,
+            "cost": 1,
             "display": {
                 "row": 7,
                 "col": 2,
