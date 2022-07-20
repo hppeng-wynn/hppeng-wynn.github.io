@@ -9338,9 +9338,6 @@ const atrees = {
                     "name": "Dash",
                     "cost": 20,
                     "base_spell": 2,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -9418,9 +9415,6 @@ const atrees = {
                     "name": "Smoke Bomb",
                     "cost": 40,
                     "base_spell": 4,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -9504,9 +9498,6 @@ const atrees = {
                     "name": "Multihit",
                     "cost": 45,
                     "base_spell": 3,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -10464,11 +10455,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Violent Vortex",
-                    "cost": 0,
                     "base_spell": 5,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -10615,11 +10602,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Shurikens",
-                    "cost": 0,
                     "base_spell": 6,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -11037,11 +11020,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Violent Vortex",
-                    "cost": 0,
                     "base_spell": 5,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -11323,11 +11302,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Jasmine Bloom",
-                    "cost": 0,
                     "base_spell": 7,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Per Hit",
                     "parts": [
                         {

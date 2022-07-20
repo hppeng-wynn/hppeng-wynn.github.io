@@ -41,8 +41,8 @@ add_spell_prop: {
                                     //     If target part does not exist, a new part is created.
     behavior:       Optional[str]   // One of: "merge", "modify". default: merge
                                     //     merge: add if exist, make new part if not exist
-                                    //     modify: change existing part. do nothing if not exist
-    cost:           Optional[int]   // change to spellcost
+                                    //     modify: increment existing part. do nothing if not exist
+    cost:           Optional[int]   // change to spellcost. If the spell is not spell 1-4, this must be left empty.
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
     hits:           Optional[Map[str, float]]   // Additive changes to hits (for total entry)
@@ -62,7 +62,7 @@ raw_stat: {
                                             // string value means bind to (or create) named button
     behavior:       Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
-                                            //     modify: change existing part. do nothing if not exist
+                                            //     modify: increment existing part. do nothing if not exist
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
