@@ -1864,7 +1864,7 @@ const atrees = {
                 "col": 4,
                 "icon": "node_2"
             },
-            "properties": {},
+            "properties": {"range": 16},
             "effects": [
                 { 
                     "type": "replace_spell",
@@ -3432,7 +3432,7 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "duration": 5
+                "duration": 8
             },
             "effects": [
                 {
@@ -4729,37 +4729,45 @@ const atrees = {
             },
             "properties": {},
             "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Meteor Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Meteor Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Per Orb"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Per Orb"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Lightning Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Lightning Damage"
-                        }
-                    ],
-                    "scaling": [15]
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Winded",
+                        "output": [
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Lightning Damage"
+                            }
+                        ],
+                        "scaling": [5]
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Winded",
+                        "output": [
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Per Orb"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Lightning Damage"
+                            }
+                        ],
+                    "scaling": [10]
                 }
             ]
         },
@@ -5052,7 +5060,7 @@ const atrees = {
                             "name": "nConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [30]
+                    "scaling": [20]
                 },
                 {
                     "type": "stat_scaling",
@@ -5068,7 +5076,7 @@ const atrees = {
                             "name": "tConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [10]
+                    "scaling": [5]
                 },
                 {
                     "type": "stat_scaling",
@@ -5160,7 +5168,7 @@ const atrees = {
         },
         {
             "display_name": "Lightweaver",
-            "desc": "After healing 60% of your max health within 10s, summon a rotating orb that damages all enemies it touches for 20s. (Max 3 Orbs)",
+            "desc": "After healing 50% of your max health within 10s, summon a rotating orb that damages all enemies it touches for 20s. (Max 3 Orbs)",
             "archetype": "Light Bender",
             "archetype_req": 7, 
             "parents": ["Orphion's Pulse"],  
@@ -5243,7 +5251,7 @@ const atrees = {
                 "col": 7,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {"range": 20},
             "effects": []
         },
         {
@@ -5570,7 +5578,7 @@ const atrees = {
                     "type": "add_spell_prop", 
                     "base_spell": 3,
                     "target_part": "Per Orb", 
-                    "multipliers": [-50, 0, -10, 0, 0, 0]
+                    "multipliers": [-30, 0, -10, 0, 0, 0]
                 },
                 { 
                     "type": "add_spell_prop",
