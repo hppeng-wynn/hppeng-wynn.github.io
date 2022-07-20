@@ -1928,10 +1928,8 @@ function addClickableArrow(elem, target) {
     //up and down arrow - done ugly
     let arrow = make_elem("img", [], { id: "arrow_" + elem.id, src: "../media/icons/" + (newIcons ? "new" : "old") + "/toggle_down.png" });
     arrow.style.maxWidth = document.body.clientWidth > 900 ? "3rem" : "10rem";
-    let container = make_elem('div', ['col']);
-    container.appendChild(arrow);
-    elem.appendChild(container);
-    container.addEventListener("click", () => toggle_spell_tab(arrow, target));
+    elem.appendChild(arrow);
+    elem.addEventListener("click", () => toggle_spell_tab(arrow, target));
 }
 
 // toggle arrow thinger

@@ -132,6 +132,10 @@ input.equipment-input {
     font-weight: bold;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 :root {
     --scaled-fontsize: 2.5rem;
 }
