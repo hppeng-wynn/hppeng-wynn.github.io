@@ -1082,6 +1082,9 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
     let title = make_elem("b", ["scaled-font", "mx-1"], {});
     title.innerHTML = ability.display_name;
     switch(ability.display.icon) {
+        case "node_0":
+            // already white
+            break;
         case "node_1":
             title.classList.add("mc-gold");
             break;
@@ -1097,9 +1100,6 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
         case "node_assassin":
         case "node_shaman":
             title.classList.add("mc-green");
-            break;
-        case "0":
-            // already white
             break;
     }
     container.appendChild(title);
