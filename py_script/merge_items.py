@@ -44,18 +44,24 @@ for item in items:
     known_item_names.add(item["name"])
 
 # TEMP wynn2 migration
+# note: 10x'd
 mul_keys = {
-    "spPct1": 0.7,
-    "spPct2": 0.7,
-    "spPct3": 0.7,
-    "spPct4": 0.7,
-    "spRaw1": 5,
-    "spRaw2": 5,
-    "spRaw3": 5,
-    "spRaw4": 5,
-    "mr": 5,
-    "ms": 5
+    "spPct1": 7,
+    "spPct2": 7,
+    "spPct3": 7,
+    "spPct4": 7,
+    "spRaw1": 50,
+    "spRaw2": 50,
+    "spRaw3": 50,
+    "spRaw4": 50,
+    "mr": 50,
+    "ms": 50
 }
+
+def round_near(x, eps=1e-5):
+    if abs(x - round(x)) < eps:
+        return round(x)
+    return x
 
 remap_items = []
 #old_items_map = dict()
@@ -63,7 +69,13 @@ import math
 for item in old_items:
     for k, v in mul_keys.items():
         if k in item:
-            item[k] = math.floor(round(item[k] * v))
+            # SUPER JANKY ROUNDING
+            tentimes = round(item[k] * v)
+            rem = tentimes % 10
+            val = math.floor(round_near(tentimes / 10))
+            if rem >= 5:
+                val += 1
+            item[k] = val
     if "remapID" in item:
         remap_items.append(item)
     elif item["name"] not in known_item_names:

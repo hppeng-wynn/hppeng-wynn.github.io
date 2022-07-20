@@ -8,7 +8,7 @@
 /* builder containers */
 
 
-.e_slider, .t_slider, .w_slider, .f_slider, .a_slider {
+.slider {
     -webkit-appearance: none;
     background: #AAAAAA;
     border-radius: 30px;
@@ -16,15 +16,14 @@
 }
 
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
-.e_slider::-webkit-slider-runnable-track, .t_slider::-webkit-slider-runnable-track, .w_slider::-webkit-slider-runnable-track, .f_slider::-webkit-slider-runnable-track, .a_slider::-webkit-slider-runnable-track {
+.slider::-webkit-slider-runnable-track{
     -webkit-appeareance: none;
     background:transparent;
     height: 0.5rem;
 }
-
  
 /******** Firefox **** **/
-.e_slider::-moz-range-track, .t_slider::-moz-range-track, .w_slider::-moz-range-track, .f_slider::-moz-range-track, .a_slider::-moz-range-track {
+.slider::-moz-range-track {
     -webkit-appearance: none;
     background-color: transparent;
     border-radius: 30px;
@@ -32,7 +31,7 @@
 }
 
 
-.e_slider::-webkit-slider-thumb, .t_slider::-webkit-slider-thumb, .w_slider::-webkit-slider-thumb, .f_slider::-webkit-slider-thumb, .a_slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 0.75rem;
@@ -131,10 +130,6 @@ input.equipment-input {
 .spell-display b {
     font-size: 3rem;
     font-weight: bold;
-}
-
-.spell-expand {
-    cursor: pointer;
 }
 
 :root {
@@ -449,36 +444,6 @@ a:hover {
     border-color: #fff;
 }
 
-/* atree connector rotations */
-.rotate-90 {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
-.rotate-180 {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
-}
-
-.rotate-270 {
-    -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    -o-transform: rotate(270deg);
-    transform: rotate(270deg);
-}
-
-.rotate-flip {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
-
 
 
 .hide-scroll {
@@ -487,16 +452,6 @@ a:hover {
 }
 .hide-scroll::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
-}
-
-.atree-selected {
-    outline: 5px solid rgba(95, 214, 223, 0.8);
-}
-
-.atree-circle {
-    border-radius:50%;
-    -moz-border-radius:50%;
-    -webkit-border-radius:50%;
 }
 
 .hppeng{

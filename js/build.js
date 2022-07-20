@@ -1,95 +1,10 @@
 
 
-const classDefenseMultipliers = new Map([ ["relik",0.50], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.20], ["sword", 1.10]]);
+const classDefenseMultipliers = new Map([ ["relik",0.50], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.0], ["sword", 1.10]]);
 
-/**
- * @description Error to catch items that don't exist.
- * @module ItemNotFound
+/*
+ * Class that represents a wynn player's build.
  */
-class ItemNotFound {
-    /**
-     * @class
-     * @param {String} item the item name entered
-     * @param {String} type the type of item
-     * @param {Boolean} genElement whether to generate an element from inputs
-     * @param {String} override override for item type
-     */
-    constructor(item, type, genElement, override) {
-        /** 
-         * @public 
-         * @type {String}
-         */
-        this.message = `Cannot find ${override||type} named ${item}`;
-        if (genElement)
-            /** 
-             * @public 
-             * @type {Element}
-             */
-            this.element = document.getElementById(`${type}-choice`).parentElement.querySelectorAll("p.error")[0];
-        else
-            this.element = document.createElement("div");
-    }
-}
-
-/**
- * @description Error to catch incorrect input.
- * @module IncorrectInput 
- */
-class IncorrectInput {
-    /**
-     * @class
-     * @param {String} input the inputted text
-     * @param {String} format the correct format
-     * @param {String} sibling the id of the error node's sibling
-     */
-    constructor(input, format, sibling) {
-        /** 
-         * @public
-         * @type {String}
-         */
-        this.message = `${input} is incorrect. Example: ${format}`;
-        /**
-         * @public
-         * @type {String}
-         */
-        this.id = sibling;
-    }
-}
-
-/**
- * @description Error that inputs an array of items to generate errors of.
- * @module ListError
- * @extends Error
- */
-class ListError extends Error {
-    /**
-     * @class
-     * @param {Array} errors array of errors
-     */
-    constructor(errors) {
-        let ret = [];
-        if (typeof errors[0] == "string") {
-            super(errors[0]);
-        } else {
-            super(errors[0].message);
-        }
-        for (let i of errors) {
-            if (typeof i == "string") {
-                ret.push(new Error(i));
-            } else {
-                ret.push(i);
-            }
-        }
-        /**
-         * @public
-         * @type {Object[]}
-         */
-        this.errors = ret;
-    }
-}
-
-/*Class that represents a wynn player's build.
-*/
 class Build{
     
     /**
@@ -115,7 +30,6 @@ class Build{
             this.level = level;
         } else if (typeof level === "string") {
             this.level = level;
-            errors.push(new IncorrectInput(level, "a number", "level-choice"));
         } else {
             errors.push("Level is not a string or number.");
         }
@@ -168,7 +82,6 @@ class Build{
 
         //Create a map of this build's stats
         let statMap = new Map();
-        statMap.set("defMultiplier", 1);
 
         for (const staticID of staticIDs) {
             statMap.set(staticID, 0);
@@ -198,8 +111,10 @@ class Build{
                 }
             }
         }
-        statMap.set('damageMultiplier', 1 + (statMap.get('damMobs') / 100));
-        statMap.set('defMultiplier', 1 - (statMap.get('defMobs') / 100));
+        statMap.set('damMult', new Map());
+        statMap.set('defMult', new Map());
+        statMap.get('damMult').set('tome', statMap.get('damMobs'))
+        statMap.get('defMult').set('tome', statMap.get('defMobs'))
         statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
             const bonus = sets.get(setName).bonuses[count-1];
@@ -213,6 +128,8 @@ class Build{
             }
         }
         statMap.set("poisonPct", 100);
+        statMap.set("critDamPct", 100);
+        statMap.set("healPct", 100);
 
         // The stuff relevant for damage calculation!!! @ferricles
         statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));

@@ -18,7 +18,7 @@
     -->
 
     <title>WynnBuilder</title>
-    <link rel="icon" href="./media/memes/agony.png">
+    <link rel="icon" href="../media/icons/new/builder.png" type="image/icon type">
 
     <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
 
@@ -45,12 +45,15 @@
         <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
         <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
         <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
-        <a onclick = "document.querySelector('#search-container').style.display = '';"><img src="../media/icons/new/searcher.png" alt="" title="Item Search"><b>WynnAtlas Mini</b></a>
         <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
         <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
     </div>
     <div class="container-fluid me-4" style="max-width: 95%; display: none">
+        <!-- REMOVE THIS DIV AT SOME POINT. -->
+        <div class = "row scaled-font mx-auto" id = "discord-banner-dev">
+                <div class = "col text-center item-title">Join the <a class = "link" href = "https://discord.gg/CGavnAnerv" target = "_blank">discord</a> today to suggest new features, submit bug reports, and hangout/talk to devs!</div>
+        </div>
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-3 py-3">
             <div class="col-xl-6">
                 <div class="row row-cols-1 mb-3 gy-4">
@@ -407,6 +410,8 @@
                             </div>
                             <div class="col text-center">
                                 <div id="summary-box"></div>
+                                <div id="err-box"></div>
+                                <div id="stack-box"></div>
                                 <div id="str-warnings"></div>
                                 <div id="dex-warnings"></div>
                                 <div id="int-warnings"></div>
@@ -428,7 +433,7 @@
                                             </div>
                                             <div class = "col-3 py-2">
                                                 <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-atree" onclick = "toggle_tab('atree-dropdown'); toggleButton('toggle-atree')">
-                                                    Show Ability Tree
+                                                    Edit Abilities
                                                 </button>
                                             </div>
                                             <div class = "col-3 py-2">
@@ -617,10 +622,14 @@
                                     </div>
                                     <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "atree-dropdown" style = "display:none;">
                                         <div class="row row-cols-1 row-cols-xl-2">
-                                            <div class="col border border-semi-light rounded dark-9 hide-scroll" id="atree-ui" style="height: 500px; overflow-y: auto;">
+                                            <div class="col border border-semi-light rounded dark-9 hide-scroll" id="atree-ui" style="height: 90vh; overflow-y: auto; overflow-x: hidden;">
 
                                             </div>
-                                            <div class="col mx-auto" id="atree-active">
+                                            <div class="col mx-auto" style="height: 90vh; overflow-y: auto;" id="atree-rhs">
+                                            <div class="col mx-auto" style="height: 2em; overflow-y: auto;" id="atree-header">
+                                            </div>
+                                            <div class="col mx-auto" style="overflow-y: auto;" id="atree-active">
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -965,7 +974,12 @@
                                             </div>
                                             <div class="col-auto p-1">
                                                 <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="update_boosts('warscream-boost')">
-                                                    War Scream (+10%)
+                                                    War Scream
+                                                </button>
+                                            </div>
+                                            <div class="col-auto p-1">
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="ragnarokkr-boost" onclick="update_boosts('ragnarokkr-boost')">
+                                                    Ragnarokkr (+30%)
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
@@ -979,8 +993,8 @@
                                                 </button>
                                             </div>
                                             <div class="col-auto p-1">
-                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="bash-boost" onclick="update_boosts('bash-boost')">
-                                                    Bash (+50%)
+                                                <button class="button-boost w-100 border-0 text-white dark-8u dark-shadow-sm" id="fortitude-boost" onclick="update_boosts('fortitude-boost')">
+                                                    Fortitude (+60%)
                                                 </button>
                                             </div>
                                         </div>
@@ -1045,11 +1059,6 @@
                                             <div class="col eDam">
                                                 Rage (Passive)
                                             </div>
-                                            <div class="col">
-                                                <input type = "range" class = "e_slider" id = "str_boost_armor" name = "str-boost-armor" autocomplete = "off" min = '0' max = '400' value = '0' step = '1' onchange = "update_armor_powder_specials('str_boost_armor')">
-                                                <input type="text" id="str_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
-                                                <label id = "str_boost_armor_label" for="str-boost-armor">% Earth Dmg Boost: 0</label>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col" id="dex-boost" style="display: none;">
@@ -1088,11 +1097,6 @@
                                             </div>
                                             <div class="col tDam">
                                                 Kill Streak (Passive)
-                                            </div>
-                                            <div class="col">
-                                                <input type = "range" class = "t_slider" id = "dex_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "update_armor_powder_specials('dex_boost_armor')">
-                                                <input type="text" id="dex_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
-                                                <label id = "dex_boost_armor_label" for="dex-boost-armor">% Thunder Dmg Boost: 0</label>
                                             </div>
                                         </div>
                                     </div>
@@ -1133,11 +1137,6 @@
                                             <div class="col wDam">
                                                 Concentration (Passive)
                                             </div>
-                                            <div class="col">
-                                                <input type = "range" class = "w_slider" id = "int_boost_armor" name = "dex-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "update_armor_powder_specials('int_boost_armor')">
-                                                <input type="text" id="int_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
-                                                <label id = "int_boost_armor_label" for="dex-boost-armor">% Water Dmg Boost: 0</label>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="col" id="def-boost" style="display: none;">
@@ -1176,11 +1175,6 @@
                                             </div>
                                             <div class="col fDam">
                                                 Endurance (Passive)
-                                            </div>
-                                            <div class="col">
-                                                <input type = "range" class = "f_slider" id = "def_boost_armor" name = "def-boost-armor" autocomplete = "off" min = '0' max = '200' value = '0' step = '1' onchange = "update_armor_powder_specials('def_boost_armor')">
-                                                <input type="text" id="def_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
-                                                <label id = "def_boost_armor_label" for="def-boost-armor">% Fire Dmg Boost: 0</label>
                                             </div>
                                         </div>
                                     </div>
@@ -1221,11 +1215,6 @@
                                             <div class="col aDam">
                                                 Dodge (Passive)
                                             </div>
-                                            <div class="col">
-                                                <input type = "range" class = "a_slider" id = "agi_boost_armor" name = "agi-boost-armor" autocomplete = "off" min = '0' max = '150' value = '0' step = '1' onchange = "update_armor_powder_specials('agi_boost_armor')">
-                                                <input type="text" id="agi_boost_armor_prev" autocomplete = "off"  value="0" style = "display:none;">
-                                                <label id = "agi_boost_armor_label" for="agi-boost-armor">% Air Dmg Boost: 0</label>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1263,21 +1252,10 @@
                     <div class = "col">
                         <div class = "col spell-display dark-5 rounded dark-shadow py-2 border border-dark" id="build-poison-stats">poison</div>
                     </div>
-                    <div class = "col">
-                        <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell0-infoAvg">spell1</div>
-                        <div class = "col spell-display dark-5 rounded dark-shadow py-2" id = "spell0-info" style="display: none;">Spell 1</div>
-                    </div>
-                    <div class = "col">
-                        <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell1-infoAvg">spell2</div>
-                        <div class = "col spell-display dark-5 rounded dark-shadow py-2" id = "spell1-info" style="display: none;">Spell 2</div>
-                    </div>
-                    <div class = "col">
-                        <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell2-infoAvg">spell3</div>
-                        <div class = "col spell-display dark-5 rounded dark-shadow py-2" id = "spell2-info" style="display: none;">Spell 3</div>
-                    </div>
-                    <div class = "col">
-                        <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell3-infoAvg">spell4</div>
-                        <div class = "col spell-display dark-5 rounded dark-shadow py-2" id = "spell3-info" style="display: none;">Spell 4</div>
+                    <div id="all-spells-display" class="row row-cols-1 gy-3 text-center scaled-font pe-0">
+                        <div class = "col pe-0">
+                            <div class = "col spell-display spell-expand dark-5 rounded dark-shadow pt-2 border border-dark" id="spell0-infoAvg">Input a weapon to see abilities!</div>
+                        </div>
                     </div>
                     <div class = "col">
                         <div class = "spell-display dark-5 rounded dark-shadow py-2 border border-dark" id = "powder-special-stats"></div>
@@ -1329,11 +1307,11 @@
             <div class="col-12 dark-5 scaled-font">
                 <footer class="text-center">
                     <div id="header2">
-                        <p>Made by <b class = "hppeng">hppeng</b> and <b class = "ferricles">ferricles</b> with <a href = "../atlas" target = "_blank" class = "atlas link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>
+                        <p>Made by <b class = "hppeng">hppeng</b>, <b class = "ferricles">ferricles</b>, and <b>reschan</b> with <a href = "../atlas" target = "_blank" class = "atlas link">Atlas Inc</a> (JavaScript required to function, nothing works without js)</p>
                         <p>Hard refresh the page (Ctrl+Shift+R on windows/chrome) if it isn't updating correctly.</p>
                     </div>
                     <div id="credits">
-                        <a href="credits.txt" class="link">Additional credits</a>
+                        <a href="../credits.txt" class="link">Additional credits</a>
                     </div>
                 </footer>
             </div>  
@@ -1393,7 +1371,6 @@
         </div>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
     <script type="text/javascript" src="../js/utils.js"></script>
@@ -1404,15 +1381,9 @@
     <script type="text/javascript" src="../js/powders.js"></script>
     <script type="text/javascript" src="../js/skillpoints.js"></script>
     <script type="text/javascript" src="../js/damage_calc.js"></script>
-
     <script type="text/javascript" src="../js/atree_constants_min.js"></script>
-
     <script type="text/javascript" src="../js/display_constants.js"></script>
-
     <script type="text/javascript" src="../js/display.js"></script>
-
-    <script type="text/javascript" src="../js/query.js"></script>
-    <script type="text/javascript" src="../js/query_2.js"></script>
     <script type="text/javascript" src="../js/load.js"></script>
     <script type="text/javascript" src="../js/load_ing.js"></script>
     <script type="text/javascript" src="../js/load_tome.js"></script>
@@ -1424,9 +1395,6 @@
     <script type="text/javascript" src="../js/atree.js"></script>
     <script type="text/javascript" src="../js/builder.js"></script>
     <script type="text/javascript" src="../js/builder_graph.js"></script>
-    <script type="text/javascript" src="../js/expr_parser.js"></script>
-    <script type="text/javascript" src="../js/items.js"></script>
-    <script type="text/javascript" src="../js/sq2items.js"></script>
     <script type="text/javascript" src="../js/optimize.js"></script>
 
     <div id="graph_body" style="max-width: 100%; height: 100vh">
@@ -1434,6 +1402,7 @@
         <a id="saveLink">savelink</a>
     </div>
     <script src="https://d3js.org/d3.v7.js"></script>
-    <script type="text/javascript" src="../js/render_compute_graph.js"></script>
+    <script type="text/javascript" src="../js/debug/render_compute_graph.js"></script>
+
 </body>
 </html> 

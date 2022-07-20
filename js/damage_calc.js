@@ -1,4 +1,4 @@
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.10], ["bash", 0.50] ]);
+const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["vanish", 0.80], ["warscream", 0.00], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
 
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
@@ -26,7 +26,7 @@ function get_base_dps(item) {
 }
 
 
-function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, ignore_speed=false) {
+function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ignore_speed=false, part_filter=undefined) {
     // TODO: Roll all the loops together maybe
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -38,9 +38,30 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     else {
         weapon_damages = damage_keys.map(x => weapon.get(x));
     }
-    let present = weapon.get(damage_present_key);
+    let present = deepcopy(weapon.get(damage_present_key));
+
+    // Also theres prop and rainbow!!
+    const damage_elements = ['n'].concat(skp_elements); // netwfa
 
     // 2. Conversions.
+    // 2.0: First, modify conversions.
+    let conversions = deepcopy(_conversions);
+    if (part_filter !== undefined) {
+        const conv_postfix = ':'+part_filter;
+        for (let i in damage_elements) {
+            const stat_name = damage_elements[i]+'ConvBase'+conv_postfix;
+            if (stats.has(stat_name)) {
+                conversions[i] += stats.get(stat_name);
+            }
+        }
+    }
+    for (let i in damage_elements) {
+        const stat_name = damage_elements[i]+'ConvBase';
+        if (stats.has(stat_name)) {
+            conversions[i] += stats.get(stat_name);
+        }
+    }
+
     // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.
     let damages = [];
     const neutral_convert = conversions[0] / 100;
@@ -56,7 +77,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
 
     // 2.2. Next, apply elemental conversions using damage computed in step 1.1.
     // Also, track which elements are present. (Add onto those present in the weapon itself.)
-    let total_convert = 0;  //TODO get confirmation that this is how raw works.
+    let total_convert = 0;
     for (let i = 1; i <= 5; ++i) {
         if (conversions[i] > 0) {
             const conv_frac = conversions[i]/100;
@@ -66,9 +87,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
             total_convert += conv_frac
         }
     }
-
-    // Also theres prop and rainbow!!
-    const damage_elements = ['n'].concat(skp_elements); // netwfa
+    total_convert += conversions[0]/100;
 
     if (!ignore_speed) {
         // 3. Apply attack speed multiplier. Ignored for melee single hit
@@ -80,7 +99,7 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
 
     // 4. Add additive damage. TODO: Is there separate additive damage?
-    for (let i = 0; i < 6; ++i) {
+    for (let i in damage_elements) {
         if (present[i]) {
             damages[i][0] += stats.get(damage_elements[i]+'DamAddMin');
             damages[i][1] += stats.get(damage_elements[i]+'DamAddMax');
@@ -94,18 +113,19 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     }
     // 5.1: %boost application
     let skill_boost = [0];  // no neutral skillpoint booster
-    for (const skp of skp_order) {
-        skill_boost.push(skillPointsToPercentage(stats.get(skp)));
+    for (let i in skp_order) {
+        const skp = skp_order[i];
+        skill_boost.push(skillPointsToPercentage(stats.get(skp)) * skillpoint_damage_mult[i]);
     }
     let static_boost = (stats.get(specific_boost_str.toLowerCase()+'Pct') + stats.get('damPct')) / 100;
 
     // These do not count raw damage. I think. Easy enough to change
     let total_min = 0;
     let total_max = 0;
-    for (let i in damages) {
-        let damage_prefix = damage_elements[i] + specific_boost_str;
+    for (let i in damage_elements) {
+        let damage_specific = damage_elements[i] + specific_boost_str + 'Pct';
         let damageBoost = 1 + skill_boost[i] + static_boost
-                            + ((stats.get(damage_prefix+'Pct') + stats.get(damage_elements[i]+'DamPct')) /100);
+                            + ((stats.get(damage_specific) + stats.get(damage_elements[i]+'DamPct')) /100);
         damages[i][0] *= Math.max(damageBoost, 0);
         damages[i][1] *= Math.max(damageBoost, 0);
         // Collect total damage post %boost
@@ -131,13 +151,21 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
         let min_boost = raw_boost;
         let max_boost = raw_boost;
         if (total_max > 0) {    // TODO: what about total negative all raw?
-            if (total_elem_min > 0) {
+            // TODO: compute actual chance of 0 damage. For now we just copy max ratio
+            if (total_min === 0) {
+                min_boost += (damages_obj[1] / total_max) * prop_raw;
+            }
+            else {
                 min_boost += (damages_obj[0] / total_min) * prop_raw;
             }
             max_boost += (damages_obj[1] / total_max) * prop_raw;
         }
         if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
-            if (total_elem_min > 0) {
+            // TODO: compute actual chance of 0 damage. For now we just copy max ratio
+            if (total_elem_min === 0) {
+                min_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
+            }
+            else {
                 min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
             }
             max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
@@ -152,14 +180,27 @@ function calculateSpellDamage(stats, weapon, conversions, use_spell_damage, igno
     let total_dam_norm = [0, 0];
     let total_dam_crit = [0, 0];
     let damages_results = [];
-    const damage_mult = stats.get("damageMultiplier");
+    const mult_map = stats.get("damMult");
+    let damage_mult = 1;
+    for (const [k, v] of mult_map.entries()) {
+        if (k.includes(':')) {
+            // TODO: fragile... checking for specific part multipliers.
+            const spell_match = k.split(':')[1];
+            if (spell_match !== part_filter) {
+                continue;
+            }
+        }
+        damage_mult *= (1 + v/100);
+    }
+
+    const crit_mult = stats.get("critDamPct")/100;
 
     for (const damage of damages) {
         const res = [
             damage[0] * strBoost * damage_mult,       // Normal min
             damage[1] * strBoost * damage_mult,       // Normal max
-            damage[0] * (strBoost + 1) * damage_mult,       // Crit min
-            damage[1] * (strBoost + 1) * damage_mult,       // Crit max
+            damage[0] * (strBoost + crit_mult) * damage_mult,       // Crit min
+            damage[1] * (strBoost + crit_mult) * damage_mult,       // Crit max
         ];
         damages_results.push(res);
         total_dam_norm[0] += res[0];
@@ -245,15 +286,6 @@ const default_spells = {
         scaling: "melee", use_atkspd: false,
         display: "Melee",
         parts: [{ name: "Melee", multipliers: [100, 0, 0, 0, 0, 0] }]
-    }, {
-        name: "Heal",  // TODO: name for melee attacks? // JUST FOR TESTING...
-        base_spell: 1,
-        display: "Total Heal",
-        parts: [
-            { name: "First Pulse", power: 0.12 },
-            { name: "Second and Third Pulses", power: 0.06 },
-            { name: "Total Heal", hits: { "First Pulse": 1, "Second and Third Pulses": 2 } }
-        ]
     }],
     spear: [{
         type: "replace_spell",  // not needed but makes this usable as an "abil part"
@@ -294,130 +326,6 @@ const default_spells = {
 };
 
 const spell_table = {
-    "wand": [
-        { title: "Heal", cost: 6, parts: [
-                { subtitle: "First Pulse", type: "heal", strength: 0.12 },
-                { subtitle: "Second and Third Pulses", type: "heal", strength: 0.06 },
-                { subtitle: "Total Heal", type: "heal", strength: 0.24, summary: true },
-                { subtitle: "First Pulse (Ally)", type: "heal", strength: 0.20 },
-                { subtitle: "Second and Third Pulses (Ally)", type: "heal", strength: 0.1 },
-                { subtitle: "Total Heal (Ally)", type: "heal", strength: 0.4 }
-            ] },
-        { title: "Teleport", cost: 4, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 40, 0, 0, 0], summary: true },
-            ] },
-        { title: "Meteor", cost: 8, parts: [
-                { subtitle: "Blast Damage", type: "damage", multiplier: 500, conversion: [40, 30, 0, 0, 30, 0], summary: true },
-                { subtitle: "Burn Damage", type: "damage", multiplier: 125, conversion: [100, 0, 0, 0, 0, 0] },
-            ] },
-        { title: "Ice Snake", cost: 4, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 70, conversion: [50, 0, 0, 50, 0, 0], summary: true },
-            ] },
-    ],
-    "spear": [
-        { title: "Bash", cost: 6, parts: [
-                { subtitle: "First Damage", type: "damage", multiplier: 130, conversion: [60, 40, 0, 0, 0, 0]},
-                { subtitle: "Explosion Damage", type: "damage", multiplier: 130, conversion: [100, 0, 0, 0, 0, 0]},
-                { subtitle: "Total Damage", type: "total", factors: [1, 1], summary: true },
-            ] },
-        { title: "Charge", cost: 4, variants: {
-            DEFAULT: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [60, 0, 0, 0, 40, 0], summary: true }
-            ],
-            RALLY: [
-                { subtitle: "Self Heal", type: "heal", strength: 0.07, summary: true },
-                { subtitle: "Ally Heal", type: "heal", strength: 0.15 }
-            ]
-            } },
-        { title: "Uppercut", cost: 9, parts: [
-                { subtitle: "First Damage", type: "damage", multiplier: 300, conversion: [70, 20, 10, 0, 0, 0] },
-                { subtitle: "Fireworks Damage", type: "damage", multiplier: 50, conversion: [60, 0, 40, 0, 0, 0] },
-                { subtitle: "Crash Damage", type: "damage", multiplier: 50, conversion: [80, 0, 20, 0, 0, 0] },
-                { subtitle: "Total Damage", type: "total", factors: [1, 1, 1], summary: true },
-            ] },
-        { title: "War Scream", cost: 6, parts: [
-                { subtitle: "Area Damage", type: "damage", multiplier: 50, conversion: [0, 0, 0, 0, 75, 25], summary: true },
-                { subtitle: "Air Shout (Per Hit)", type: "damage", multiplier: 30, conversion: [0, 0, 0, 0, 75, 25] },
-            ] },
-    ],
-    "bow": [
-        { title: "Arrow Storm", cost: 6, variants: {
-            DEFAULT: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [60, 0, 25, 0, 15, 0], summary: true },
-                { subtitle: "Per Arrow (60)", type: "damage", multiplier: 10, conversion: [60, 0, 25, 0, 15, 0]}
-            ],
-            HAWKEYE: [
-                { subtitle: "Total Damage (Hawkeye)", type: "damage", multiplier: 400, conversion: [60, 0, 25, 0, 15, 0], summary: true },
-                { subtitle: "Per Arrow (5)", type: "damage", multiplier: 80, conversion: [60, 0, 25, 0, 15, 0]}
-            ],
-            } },
-        { title: "Escape", cost: 3, parts: [
-                { subtitle: "Landing Damage", type: "damage", multiplier: 100, conversion: [50, 0, 0, 0, 0, 50], summary: true },
-            ] },
-        { title: "Bomb Arrow", cost: 8, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 250, conversion: [60, 25, 0, 0, 15, 0], summary: true },
-            ] },
-        { title: "Arrow Shield", cost: 10, parts: [
-                { subtitle: "Shield Damage", type: "damage", multiplier: 100, conversion: [70, 0, 0, 0, 0, 30], summary: true },
-                { subtitle: "Arrow Rain Damage", type: "damage", multiplier: 200, conversion: [70, 0, 0, 0, 0, 30] },
-            ] },
-    ],
-    "dagger": [
-        { title: "Spin Attack", cost: 6, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 150, conversion: [70, 0, 30, 0, 0, 0], summary: true},
-            ] },
-        { title: "Vanish", cost: 2, parts: [
-                { subtitle: "No Damage", type: "none", summary: true }
-            ] },
-        { title: "Multihit", cost: 8, parts: [
-                { subtitle: "1st to 10th Hit", type: "damage", multiplier: 27, conversion: [100, 0, 0, 0, 0, 0] },
-                { subtitle: "Fatality", type: "damage", multiplier: 120, conversion: [20, 0, 30, 50, 0, 0] },
-                { subtitle: "Total Damage", type: "total", factors: [10, 1], summary: true },
-            ] },
-        { title: "Smoke Bomb", cost: 8, variants: {
-            DEFAULT: [
-                { subtitle: "Tick Damage (10 max)", type: "damage", multiplier: 60, conversion: [50, 25, 0, 0, 0, 25] },
-                { subtitle: "Total Damage", type: "damage", multiplier: 600, conversion: [50, 25, 0, 0, 0, 25], summary: true },
-            ],
-            CHERRY_BOMBS: [
-                { subtitle: "Total Damage (Cherry Bombs)", type: "damage", multiplier: 330, conversion: [50, 25, 0, 0, 0, 25], summary: true },
-                { subtitle: "Per Bomb", type: "damage", multiplier: 110, conversion: [50, 25, 0, 0, 0, 25] }
-            ]
-            } },
-    ],
-    "relik": [
-        { title: "Totem", cost: 4, parts: [
-                { subtitle: "Smash Damage", type: "damage", multiplier: 100, conversion: [80, 0, 0, 0, 20, 0]},
-                { subtitle: "Damage Tick", type: "damage", multiplier: 20, conversion: [80, 0, 0, 0, 0, 20]},
-                { subtitle: "Heal Tick", type: "heal", strength: 0.03, summary: true },
-            ] },
-        { title: "Haul", cost: 1, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [80, 0, 20, 0, 0, 0], summary: true },
-            ] },
-        { title: "Aura", cost: 8, parts: [
-                { subtitle: "One Wave", type: "damage", multiplier: 200, conversion: [70, 0, 0, 30, 0, 0], summary: true },
-            ] },
-        { title: "Uproot", cost: 6, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: 100, conversion: [70, 30, 0, 0, 0, 0], summary: true },
-            ] },
-    ],
-    "sword": [
-        { title: "Successive Strikes", cost: 5, parts: [
-                { subtitle: "Damage", type: "damage", multiplier: 65, conversion: [70, 0, 15, 0, 0, 15]},
-                { subtitle: "Final Strike", type: "damage", multiplier: 120, conversion: [70, 0, 15, 0, 0, 15]},
-                { subtitle: "Total Damage (Normal)", type: "total", factors: [2, 0], summary: true },
-            ] },
-        { title: "Dash", cost: 3, parts: [
-                { subtitle: "Damage", type: "damage", multiplier: 120, conversion: [60, 0, 0, 0, 0, 40], summary: true },
-            ] },
-        { title: "Execute", cost: 8, parts: [
-                { subtitle: "Minimum Damage", type: "damage", multiplier: 100, conversion: [60, 0, 20, 0, 20, 0]},
-                { subtitle: "Maximum Damage", type: "damage", multiplier: 1200, conversion: [60, 0, 20, 0, 20, 0], summary: true },
-            ] },
-        { title: "Blade Echo", cost: 4, parts: [
-                { subtitle: "Damage", type: "damage", multiplier: 125, conversion: [60, 0, 0, 20, 0, 20], summary: true },
-            ] },
-    ],
     "powder": [ //This is how instant-damage powder specials are implemented. 
         { title: "Quake", cost: 0, parts:[
                 { subtitle: "Total Damage", type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},

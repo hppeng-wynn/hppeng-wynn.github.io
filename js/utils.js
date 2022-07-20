@@ -630,8 +630,15 @@ function addClasses(elem, classes) {
  */
 async function hardReload() {
     //https://gist.github.com/rmehner/b9a41d9f659c9b1c3340
-    const dbs = await window.indexedDB.databases();
-    await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+    try {
+        const dbs = await window.indexedDB.databases();
+        await dbs.forEach(db => { window.indexedDB.deleteDatabase(db.name) });
+    } catch (error) {
+        // Hacky patch for firefox...
+        console.log(error);
+        const db_names = ['item_db', 'ing_db', 'map_db', 'tome_db'];
+        await db_names.forEach(db => { window.indexedDB.deleteDatabase(db) });
+    }
 
     location.reload(true);
 }
@@ -770,112 +777,204 @@ function assert_error(func_binding, msg) {
 /**
  * Deep copy object/array of basic types.
  */
-function deepcopy(obj) {
+function deepcopy(obj, refs=undefined) {
+    if (refs === undefined) {
+        refs = new Map();
+    }
     if (typeof(obj) !== 'object' || obj === null) { // null or value type
         return obj;
     }
     let ret = Array.isArray(obj) ? [] : {};
     for (let key in obj) {
-        ret[key] = deepcopy(obj[key]);
+        let val;
+        try {
+            val = obj[key];
+        } catch (exc) {
+            console.trace();
+            val = undefined;
+        }
+        if (typeof(obj) === 'object') {
+            if (refs.has(val)) {
+                ret[key] = refs.get(val);
+            }
+            else {
+                refs.set(val, val);
+                ret[key] = deepcopy(val, refs);
+            }
+        }
+        else {
+            ret[key] = val;
+        }
     }
     return ret;
 }
+/**
+ * 
+ */
+function gen_slider_labeled({label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []}) {
+    let slider_container = document.createElement("div");
 
-function bv_test() {
-    console.log("=====STARTING BITVECTOR UNIT TESTS=====");
+    let buf_col = document.createElement("div");
+    buf_col.classList.add("col");
+    
+    let label = document.createElement("div");
+    label.classList.add("col");
+    label.classList.add(...label_classlist);
+    label.textContent = label_name + ": " + default_val;
 
-    // Empty Constructor + append str
-    let bv = new BitVector("");
-    bv.append("Bc8");
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 18);
-    assert_equals(bv.toB64(), "Bc8");
+    let slider = gen_slider(min, max, step, default_val, id, color, classlist, label);
 
-    // Empty Constructor + append num 1
-    bv = new BitVector("");
-    bv.append(10000, 18);
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 18);
-    assert_equals(bv.toB64(), "GS2"); //have to read backwards
+    //we set IDs here because the slider's id is potentially only meaningful after gen_slider() is called
+    label.id = slider.id + "_label";
+    slider_container.id = slider.id + "-container";
 
-    // Empty Constructor + append num 1
-    bv = new BitVector("");
-    bv.append(10000, 14);
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 14);
-    assert_equals(bv.toB64(), "GS2"); //have to read backwards  
+    buf_col.append(slider, label);
+    slider_container.appendChild(buf_col);
 
-    // 1-int constructor (num)
-    bv = new BitVector(10000, 14);
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 14);
-    assert_equals(bv.toB64(), "GS2");
-
-    // 1-int constructor (str)
-    bv = new BitVector("abcde");
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 30);
-    assert_equals(bv.toB64(), "abcde");
-
-    // test constructor ignore length when data is str
-    bv = new BitVector("abcde", 40);
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 30);
-    assert_equals(bv.toB64(), "abcde");
-    bv = new BitVector("abcdefghij", 20);
-    assert_equals(bv.bits.length, 2);
-    assert_equals(bv.length, 60);
-    assert_equals(bv.toB64(), "abcdefghij");
-
-    //test 32-bit length constructor
-    bv = new BitVector(2**31, 32);
-    assert_equals(bv.bits.length, 1);
-    assert_equals(bv.length, 32);
-
-    //test multiple length constructor (+ get to last bit)
-    bv = new BitVector("abcdefghijklmnop");
-    assert_equals(bv.bits.length, 3);
-    assert_equals(bv.length, 96);
-    assert_equals(bv.toB64(), "abcdefghijklmnop");
-
-    //test append resize w num 1
-    bv = new BitVector("abcd");
-    bv.append(10000, 14);
-    assert_equals(bv.bits.length, 2);
-    assert_equals(bv.length, 38);
-    assert_equals(bv.slice(24, 38), 10000);
-    assert_equals(bv.toB64().slice(0, 4), "abcd");
-
-    //test append resize w num 2
-    bv = new BitVector("abcdefghi");
-    bv.append(10000, 14);
-    assert_equals(bv.bits.length, 4);
-    assert_equals(bv.length, 68);
-    assert_equals(bv.slice(54, 68), 10000);
-    assert_equals(bv.toB64().slice(0, 9), "abcdefghi");
-
-    //test append resize w str 1
-    bv = new BitVector("abcd");
-    bv.append("efgh");
-    assert_equals(bv.bits.length, 2);
-    assert_equals(bv.length, 48);
-    assert_equals(bv.toB64(), "abcdefgh");
-
-    //test append resize w str 2
-    bv = new BitVector("abcd");
-    bv.append("efghijklmnopqrstuvwxyz");
-    assert_equals(bv.bits.length, 8);
-    assert_equals(bv.length, 156);
-    assert_equals(bv.toB64(), "abcdefghijklmnopqrstuvwxyz");
-
-    //test append resize w str 3
-    bv = new BitVector("abcdefgh");
-    bv.append("ijkl");
-    assert_equals(bv.bits.length, 4);
-    assert_equals(bv.length, 72);
-    assert_equals(bv.toB64(), "abcdefghijkl");
-
-    console.log("=====FINISHED BITVECTOR UNIT TESTS=====");
+    return slider_container;
 }
 
-bv_test();
+/** Creates a slider input (input type = range) given styling parameters
+ * 
+ * @param {Number | String} min - The minimum value for the slider. defaults to 0
+ * @param {Number | String} max - The maximum value for the slider. defaults to 100
+ * @param {Number | String} step - The granularity between possible values. defaults to 1
+ * @param {Number | String} default_val - The default value to set the slider to.
+ * @param {String} id - The element ID to use for the slider. defaults to the current date time
+ * @param {String} color - The hex color to use for the slider. Needs the # character.
+ * @param {Array<String>} classlist - A list of classes to add to the slider.
+ * @returns 
+ */
+function gen_slider(min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = [], label = undefined) {
+    //simple attribute vals
+    let slider = document.createElement("input");
+    slider.type = "range";
+    slider.min = min;
+    slider.max = max;
+    slider.step = step;
+    slider.value = default_val;
+    slider.autocomplete = "off";
+    if (id) {
+        if (document.getElementById(id)) {
+            throw new Error("ID " + id + " already exists within the DOM.")
+        } else {
+            slider.id = id;
+        }
+    } else {
+        slider.id = new Date().toLocaleTimeString();
+    }
+    slider.color = color;
+    slider.classList.add(...classlist); //special spread operator - 
+     //necessary for display purposes
+     slider.style.webkitAppearance = "none";
+     slider.style.borderRadius = "30px";
+     slider.style.height = "0.5rem";
+     slider.classList.add("px-0", "slider");
+
+    //set up recoloring
+    slider.addEventListener("change", function(e) {
+        recolor_slider(slider, label);
+    });
+    //do recoloring for the default val
+    let pct = Math.round(100 * (parseInt(slider.value) - parseInt(slider.min)) / (parseInt(slider.max) - parseInt(slider.min)));
+    slider.style.background = `rgba(0, 0, 0, 0) linear-gradient(to right, ${color}, ${color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;  
+
+    //return slider
+    return slider;
+}
+
+/** Recolors a slider. If the corresponding label exists, also update that.
+ * 
+ * @param {slider} slider - the slider element
+ * @param {label} label - the label element
+ */
+function recolor_slider(slider, label) {
+    let color = slider.color;
+    let pct = Math.round(100 * (parseInt(slider.value) - parseInt(slider.min)) / (parseInt(slider.max) - parseInt(slider.min)));
+    slider.style.background = `rgba(0, 0, 0, 0) linear-gradient(to right, ${color}, ${color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;  
+
+    if (label) {
+        //convention is that the number goes at the end... I parse by separating it at ':'
+        label.textContent = label.textContent.split(":")[0] + ": " + slider.value;
+    }
+} 
+
+/**
+ * Shorthand for making an element in html.
+ *
+ * @param {String} type : type of element
+ * @param {List[String]} classlist : css classes for element
+ * @param {Map[String, String]} args : Properties for the element
+ */
+function make_elem(type, classlist = [], args = {}) {
+    const ret_elem = document.createElement(type);
+    ret_elem.classList.add(...classlist);
+    for (const i in args) {
+        ret_elem[i] = args[i];
+    }
+    return ret_elem;
+}
+
+/**
+ * Nodes must have:
+ * node: {
+ *   parents: List[node]
+ *   children: List[node]
+ * }
+ *
+ * This function will define: "visited, assigned, scc" properties
+ * Assuming a connected graph. (only one root)
+ */
+function make_SCC_graph(root_node, nodes) {
+    for (const node of nodes) {
+        node.visited = false;
+        node.assigned = false;
+        node.scc = null;
+    }
+    const res = []
+    /*
+     * SCC graph construction.
+     * https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm
+     */
+    function visit(u, res) {
+        if (u.visited) { return; }
+        u.visited = true;
+        for (const child of u.children) {
+            if (!child.visited) { visit(child, res); }
+        }
+        res.push(u);
+    }
+    visit(root_node, res);
+    res.reverse();
+    const sccs = [];
+    function assign(node, cur_scc) {
+        if (node.assigned) { return; }
+        cur_scc.nodes.push(node);
+        node.scc = cur_scc;
+        node.assigned = true;
+        for (const parent of node.parents) {
+            assign(parent, cur_scc);
+        }
+    }
+    for (const node of res) {
+        if (node.assigned) { continue; }
+        const cur_scc = {
+            nodes: [],
+            children: new Set(),
+            parents: new Set()
+        };
+        assign(node, cur_scc);
+        sccs.push(cur_scc);
+    }
+    for (const scc of sccs) {
+        for (const node of scc.nodes) {
+            for (const child of node.children) {
+                scc.children.add(child.scc);
+            }
+            for (const parent of node.parents) {
+                scc.parents.add(parent.scc);
+            }
+        }
+    }
+    return sccs;
+}

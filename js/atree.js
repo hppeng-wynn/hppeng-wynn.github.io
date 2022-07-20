@@ -41,8 +41,8 @@ add_spell_prop: {
                                     //     If target part does not exist, a new part is created.
     behavior:       Optional[str]   // One of: "merge", "modify". default: merge
                                     //     merge: add if exist, make new part if not exist
-                                    //     modify: change existing part. do nothing if not exist
-    cost:           Optional[int]   // change to spellcost
+                                    //     modify: increment existing part. do nothing if not exist
+    cost:           Optional[int]   // change to spellcost. If the spell is not spell 1-4, this must be left empty.
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
     hits:           Optional[Map[str, float]]   // Additive changes to hits (for total entry)
@@ -62,7 +62,7 @@ raw_stat: {
                                             // string value means bind to (or create) named button
     behavior:       Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
-                                            //     modify: change existing part. do nothing if not exist
+                                            //     modify: increment existing part. do nothing if not exist
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
@@ -76,6 +76,11 @@ stat_scaling: {
   "slider": bool,
   "slider_name": Optional[str],
   "slider_step": Optional[float],
+  round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
+  slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
+                                            //     merge: add if exist, make new part if not exist
+                                            //     modify: change existing part. do nothing if not exist
+  slider_max: Optional[float]               // affected by slider_behavior
   "inputs": Optional[list[scaling_target]],
   "output": scaling_target | List[scaling_target],
   "scaling": list[float],
@@ -88,43 +93,46 @@ scaling_target: {
 }
 */
 
+
+const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properties: {}, effects: [] };
+
 // TODO: Range numbers
 const default_abils = {
-    wand: [{
+    Mage: [{
         display_name: "Mage Melee",
         id: 999,
         desc: "Mage basic attack.",
         properties: {range: 5000},
         effects: [default_spells.wand[0]]
-    }],
-    spear: [{
+    }, elem_mastery_abil ],
+    Warrior: [{
         display_name: "Warrior Melee",
         id: 999,
         desc: "Warrior basic attack.",
         properties: {range: 2},
         effects: [default_spells.spear[0]]
-    }],
-    bow: [{
+    }, elem_mastery_abil ],
+    Archer: [{
         display_name: "Archer Melee",
         id: 999,
         desc: "Archer basic attack.",
         properties: {range: 20},
         effects: [default_spells.bow[0]]
-    }],
-    dagger: [{
+    }, elem_mastery_abil ],
+    Assassin: [{
         display_name: "Assassin Melee",
         id: 999,
         desc: "Assassin basic attack.",
         properties: {range: 2},
         effects: [default_spells.dagger[0]]
-    }],
-    relik: [{
+    }, elem_mastery_abil ],
+    Shaman: [{
         display_name: "Shaman Melee",
         id: 999,
         desc: "Shaman basic attack.",
         properties: {range: 15, speed: 0},
         effects: [default_spells.relik[0]]
-    }],
+    }, elem_mastery_abil ],
 };
 
 
@@ -141,7 +149,7 @@ const atree_node = new (class extends ComputeNode {
         const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
         const atree_raw = atrees[player_class];
-        if (!atree_raw) return null;
+        if (!atree_raw) return [];
 
         let atree_map = new Map();
         let atree_head;
@@ -163,9 +171,18 @@ const atree_node = new (class extends ComputeNode {
             node.parents = parents;
         }
 
+        let sccs = make_SCC_graph(atree_head, atree_map.values());
         let atree_topo_sort = [];
-        topological_sort_tree(atree_head, atree_topo_sort, new Map());
-        atree_topo_sort.reverse();
+        for (const scc of sccs) {
+            for (const node of scc.nodes) {
+                delete node.visited;
+                delete node.assigned;
+                delete node.scc;
+                atree_topo_sort.push(node);
+            }
+        }
+        console.log("Approximate topological order ability tree:");
+        console.log(atree_topo_sort);
         return atree_topo_sort;
     }
 })();
@@ -213,49 +230,28 @@ const atree_state_node = new (class extends ComputeNode {
 })().link_to(atree_render, 'atree-render');
 
 /**
- * Create a reverse topological sort of the tree in the result list.
- *
- * https://en.wikipedia.org/wiki/Topological_sorting
- * @param tree: Root of tree to sort
- * @param res: Result list (reverse topological order)
- * @param mark_state: Bookkeeping. Call with empty Map()
- */
-function topological_sort_tree(tree, res, mark_state) {
-    const state = mark_state.get(tree);
-    if (state === undefined) {
-        // unmarked.
-        mark_state.set(tree, false);    // temporary mark
-        for (const child of tree.children) {
-            topological_sort_tree(child, res, mark_state);
-        }
-        mark_state.set(tree, true);     // permanent mark
-        res.push(tree);
-    }
-    // these cases are not needed. Case 1 does nothing, case 2 should never happen.
-    // else if (state === true) { return; } // permanent mark.
-    // else if (state === false) { throw "not a DAG"; } // temporary mark.
-}
-
-/**
  * Collect abilities and condense them into a list of "final abils".
  * This is just for rendering purposes, and for collecting things that modify spells into one chunk.
  * I stg if wynn makes abils that modify multiple spells
  * ... well we can extend this by making `base_abil` a list instead but annoy
  *
- * Signature: AbilityTreeMergeNode(build: Build, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
+ * Signature: AbilityTreeMergeNode(player-class: WeaponType, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
  */
 const atree_merge = new (class extends ComputeNode {
     constructor() { super('builder-atree-merge'); }
 
     compute_func(input_map) {
-        const build = input_map.get('build');
+        const player_class = input_map.get('player-class');
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
         let abils_merged = new Map();
-        for (const abil of default_abils[build.weapon.statMap.get('type')]) {
+        for (const abil of default_abils[player_class]) {
             let tmp_abil = deepcopy(abil);
-            if (!Array.isArray(tmp_abil.desc)) {
+            if (!('desc' in tmp_abil)) {
+                tmp_abil.desc = [];
+            }
+            else if (!Array.isArray(tmp_abil.desc)) {
                 tmp_abil.desc = [tmp_abil.desc];
             }
             tmp_abil.subparts = [abil.id];
@@ -269,18 +265,21 @@ const atree_merge = new (class extends ComputeNode {
             }
             const abil = node.ability;
 
-            if (abils_merged.has(abil.base_abil)) {
-                // Merge abilities.
-                // TODO: What if there is more than one base abil?
-                let base_abil = abils_merged.get(abil.base_abil);
-                if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
-                else { base_abil.desc.push(abil.desc); }
+            if ('base_abil' in abil) {
+                if (abils_merged.has(abil.base_abil)) {
+                    // Merge abilities.
+                    // TODO: What if there is more than one base abil?
+                    let base_abil = abils_merged.get(abil.base_abil);
+                    if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
+                    else { base_abil.desc.push(abil.desc); }
 
-                base_abil.subparts.push(abil.id);
-                base_abil.effects = base_abil.effects.concat(abil.effects);
-                for (let propname in abil.properties) {
-                    base_abil[propname] = abil[propname];
+                    base_abil.subparts.push(abil.id);
+                    base_abil.effects = base_abil.effects.concat(abil.effects);
+                    for (let propname in abil.properties) {
+                        base_abil[propname] = abil[propname];
+                    }
                 }
+                // do nothing otherwise.
             }
             else {
                 let tmp_abil = deepcopy(abil);
@@ -293,7 +292,57 @@ const atree_merge = new (class extends ComputeNode {
         }
         return abils_merged;
     }
-})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state'); // TODO: THIS IS WRONG!!!!! Need one "collect" node...
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
+
+/**
+ * Check if an atree node can be activated.
+ *
+ * Return: [yes/no, hard error, reason]
+ */
+function abil_can_activate(atree_node, atree_state, reachable, archetype_count, points_remain) {
+    const {parents, ability} = atree_node;
+    if (parents.length === 0) {
+        return [true, false, ""];
+    }
+    let failed_deps = [];
+    for (const dep_id of ability.dependencies) {
+        if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+    }
+    if (failed_deps.length > 0) {
+        const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+        return [false, true, 'missing dep: ' + dep_strings.join(", ")];
+    }
+    let blocking_ids = [];
+    for (const blocker_id of ability.blockers) {
+        if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+    }
+    if (blocking_ids.length > 0) {
+        const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
+        return [false, true, 'blocked by: '+blockers_strings.join(", ")];
+    }
+    let node_reachable = false;
+    for (const parent of parents) {
+        if (reachable.has(parent.ability.id)) {
+            node_reachable = true;
+            break;
+        }
+    }
+    if (!node_reachable) {
+        return [false, false, 'not reachable'];
+    }
+    if ('archetype' in ability && ability.archetype !== "") {
+        if ('archetype_req' in ability && ability.archetype_req !== 0) {
+            const others = (archetype_count.get(ability.archetype) || 0);
+            if (others < ability.archetype_req) {
+                return [false, false, ability.archetype+': '+others+' < '+ability.archetype_req];
+            }
+        }
+    }
+    if (ability.cost > points_remain) {
+        return [false, false, "not enough ability points left"];
+    }
+    return [true, false, ""];
+}
 
 /**
  * Validate ability tree.
@@ -307,75 +356,94 @@ const atree_validate = new (class extends ComputeNode {
     compute_func(input_map) {
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
+        const level = parseInt(input_map.get('level'));
 
-        let errors = [];
-        let reachable = new Map();
-        atree_dfs_mark(atree_order[0], atree_state, reachable);
+        if (atree_order.length == 0) { return [0, false, ['no atree data']]; }
+
+        let atree_to_add = [];
+        let atree_not_present = [];
+        // mark all selected nodes as bright, and mark all other nodes as dark.
+        // also initialize the "to check" list, and the "not present" list.
+        for (const node of atree_order) {
+            const abil = node.ability;
+            if (atree_state.get(abil.id).active) {
+                atree_to_add.push([node, 'not reachable', false]);
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
+            }
+            else {
+                atree_not_present.push(abil.id);
+                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
+            }
+        }
+
+        let reachable = new Set();
         let abil_points_total = 0;
         let archetype_count = new Map();
-        for (const node of atree_order) {
-            const abil = node.ability;
-            if (!atree_state.get(abil.id).active) { continue; }
-            abil_points_total += abil.cost;
-            if (!reachable.get(abil.id)) { errors.push(abil.display_name + ' is not reachable!'); }
-
-            let failed_deps = [];
-            for (const dep_id of abil.dependencies) {
-                if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
-            }
-            if (failed_deps.length > 0) {
-                const dep_string = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
-                errors.push(abil.display_name + ' dependencies not satisfied: ' + dep_string.join(", "));
-            }
-
-            let blocking_ids = [];
-            for (const blocker_id of abil.blockers) {
-                if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
-            }
-            if (blocking_ids.length > 0) {
-                const blockers_string = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
-                errors.push(abil.display_name+' is blocked by: '+blockers_string.join(", "));
-            }
-
-            if ('archetype' in abil && abil.archetype !== "") {
-                let val = 1;
-                if (archetype_count.has(abil.archetype)) {
-                    val = archetype_count.get(abil.archetype) + 1;
+        while (true) {
+            let _add = [];
+            for (const [node, fail_reason, fail_hardness] of atree_to_add) {
+                const {ability} = node;
+                const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, 9999);
+                if (!success) {
+                    _add.push([node, reason, hard_error]);
+                    continue;
                 }
-                archetype_count.set(abil.archetype, val);
-            }
-        }
-        // TODO: FIX THIS! ARCHETYPE REQ IS A PAIN IN THE ASS
-        // it doesn't follow topological order and theres some cases where "equip order" matters.
-        for (const node of atree_order) {
-            const abil = node.ability;
-            if (!atree_state.get(abil.id).active) { continue; }
-            if ('archetype_req' in abil && abil.archetype_req !== 0) {
-                const others = archetype_count.get(abil.archetype) - 1;
-                if (others < abil.archetype_req) {
-                    errors.push(abil.display_name+' fails archetype: '+abil.archetype+': '+others+' < '+abil.archetype_req)
+                if ('archetype' in ability && ability.archetype !== "") {
+                    let val = 1;
+                    if (archetype_count.has(ability.archetype)) {
+                        val = archetype_count.get(ability.archetype) + 1;
+                    }
+                    archetype_count.set(ability.archetype, val);
                 }
+                abil_points_total += ability.cost;
+                reachable.add(ability.id);
+            }
+            if (atree_to_add.length == _add.length) {
+                break;
+            }
+            atree_to_add = _add;
+        }
+        const atree_level_table = ['lvl0wtf',1,2,2,3,3,4,4,5,5,6,6,7,8,8,9,9,10,11,11,12,12,13,14,14,15,16,16,17,17,18,18,19,19,20,20,20,21,21,22,22,23,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,34,35,35,35,36,36,36,37,37,37,38,38,38,38,39,39,39,39,40,40,40,40,41,41,41,41,42,42,42,42,43,43,43,43,44,44,44,44,45,45,45];
+        let AP_cap;
+        if (isNaN(level)) {
+            AP_cap = 45;   
+        }
+        else {
+            AP_cap = atree_level_table[level];
+        }
+        document.getElementById('active_AP_cap').textContent = AP_cap;
+        document.getElementById("active_AP_cost").textContent = abil_points_total;
+        const ap_left = AP_cap - abil_points_total;
+
+        // using the "not present" list, highlight one-step reachable nodes.
+        for (const node_id of atree_not_present) {
+            const node = atree_state.get(node_id);
+            const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
+            if (success) {
+                node.img.src = '../media/atree/'+node.ability.display.icon+'.png';
             }
         }
 
-        if (abil_points_total > 45) {
-            errors.push('too many ability points assigned! ('+abil_points_total+' > 45)');
+        let hard_error = false;
+        let errors = [];
+        if (abil_points_total > AP_cap) {
+            errors.push('too many ability points assigned! ('+abil_points_total+' > '+AP_cap+')');
+        }
+        for (const [node, fail_reason, fail_hardness] of atree_to_add) {
+            if (fail_hardness) { hard_error = true; }
+            errors.push(node.ability.display_name + ": " + fail_reason);
         }
 
-        return [abil_points_total, errors];
+        return [hard_error, errors];
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
-function atree_dfs_mark(start, atree_state, mark) {
-    if (mark.get(start.ability.id)) { return; }
-    mark.set(start.ability.id, true);
-    for (const child of start.children) {
-        if (atree_state.get(child.ability.id).active) {
-            atree_dfs_mark(child, atree_state, mark);
-        }
-    }
-}
-
+/**
+ * Render ability tree.
+ * Return map of id -> corresponding html element.
+ *
+ * Signature: AbilityTreeRenderActiveNode(atree-merged: MergedATree, atree-order: ATree, atree-errors: List[str]) => Map[int, ATreeNode]
+ */
 const atree_render_active = new (class extends ComputeNode {
     constructor() {
         super('atree-render-active');
@@ -385,12 +453,11 @@ const atree_render_active = new (class extends ComputeNode {
     compute_func(input_map) {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
-        const [abil_points_total, errors] = input_map.get('atree-errors');
+        const [hard_error, _errors] = input_map.get('atree-errors');
+        const errors = deepcopy(_errors);
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
-        document.getElementById("active_AP_cost").textContent = abil_points_total;
-
         if (errors.length > 0) {
             let errorbox = document.createElement('div');
             errorbox.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
@@ -401,18 +468,27 @@ const atree_render_active = new (class extends ComputeNode {
             error_title.innerHTML = "ATree Error!";
             errorbox.appendChild(error_title);
 
-            for (const error of errors) {
-                let atree_warning = document.createElement("p");
-                atree_warning.classList.add("warning", "small-text");
-                atree_warning.textContent = error;
+            for (let i = 0; i < 5 && i < errors.length; ++i) {
+                const error = errors[i];
+                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
+                errorbox.appendChild(atree_warning);
+            }
+            if (errors.length > 5) {
+                const error = '... ' + (errors.length-5) + ' errors not shown';
+                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
                 errorbox.appendChild(atree_warning);
             }
         }
+        const ret_map = new Map();
+        const to_render_id = [999, 998];
         for (const node of atree_order) {
             if (!merged_abils.has(node.ability.id)) {
                 continue;
             }
-            const abil = merged_abils.get(node.ability.id);
+            to_render_id.push(node.ability.id);
+        }
+        for (const id of to_render_id) {
+            const abil = merged_abils.get(id);
 
             let active_tooltip = document.createElement('div');
             active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
@@ -428,9 +504,11 @@ const atree_render_active = new (class extends ComputeNode {
                 active_tooltip_desc.textContent = desc;
                 active_tooltip.appendChild(active_tooltip_desc);
             }
+            ret_map.set(abil.id, active_tooltip);
 
             this.list_elem.appendChild(active_tooltip);
         }
+        return ret_map;
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
 
@@ -443,28 +521,31 @@ const atree_collect_spells = new (class extends ComputeNode {
     constructor() { super('atree-spell-collector'); }
 
     compute_func(input_map) {
-        if (input_map.size !== 1) { throw "AbilityTreeCollectSpellsNode accepts exactly one input (atree-merged)"; }
-        const [atree_merged] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        const atree_merged = input_map.get('atree-merged');
+        const [hard_error, errors] = input_map.get('atree-errors');
+        if (hard_error) { return []; }
         
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
             // TODO: Possibly, make a better way for detecting "spell abilities"?
-            if (abil.effects.length == 0) { continue; }
-
-            let ret_spell = deepcopy(abil.effects[0]);  // NOTE: do not mutate results of previous steps!
-            let has_spell_def = false;
             for (const effect of abil.effects) {
                 if (effect.type === 'replace_spell') {
-                    has_spell_def = true;
                     // replace_spell just replaces all (defined) aspects.
-                    for (const key in effect) {
-                        ret_spell[key] = deepcopy(effect[key]);
+                    const ret_spell = ret_spells.get(effect.base_spell);
+                    if (ret_spell) {
+                        // NOTE: do not mutate results of previous steps!
+                        for (const key in effect) {
+                            ret_spell[key] = deepcopy(effect[key]);
+                        }
+                    }
+                    else {
+                        ret_spells.set(effect.base_spell, deepcopy(effect));
                     }
                 }
             }
-            if (!has_spell_def) { continue; }
+        }
 
-            const base_spell_id = ret_spell.base_spell;
+        for (const [abil_id, abil] of atree_merged.entries()) {
             for (const effect of abil.effects) {
                 switch (effect.type) {
                 case 'replace_spell':
@@ -472,8 +553,9 @@ const atree_collect_spells = new (class extends ComputeNode {
                     continue;
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
-                    if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
-                    ret_spell.cost += cost;
+                    const ret_spell = ret_spells.get(base_spell);
+                    // TODO: unjankify this...
+                    if ('cost' in ret_spell) { ret_spell.cost += cost; }
 
                     if (target_part  === null) {
                         continue;
@@ -494,7 +576,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                                 for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
                                     if (idx in part.hits) { part.hits[idx] += v; }
                                     else { part.hits[idx] = v; }
-                                }
+                               }
                             }
                             else {
                                 throw "uhh invalid spell add effect";
@@ -515,7 +597,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                 }
                 case 'convert_spell_conv':
                     const { base_spell, target_part, conversion } = effect;
-                    if (base_spell !== base_spell_id) { continue; }   // TODO: redundant? if we assume abils only affect one spell
+                    const ret_spell = ret_spells.get(base_spell);
                     const elem_idx = damageClasses.indexOf(conversion);
                     let filter = target_part === 'all';
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
@@ -534,11 +616,202 @@ const atree_collect_spells = new (class extends ComputeNode {
                     continue;
                 }
             }
-            ret_spells.set(base_spell_id, ret_spell);
         }
         return ret_spells;
     }
-})().link_to(atree_merge, 'atree-merged');
+})().link_to(atree_merge, 'atree-merged').link_to(atree_validate, 'atree-errors');
+
+
+/**
+ * Make interactive elements (sliders, buttons)
+ *
+ * Signature: AbilityActiveUINode(atree-merged: MergedATree) => Map<str, slider_info>
+ *
+ * ElemState: {
+ *   value: int     // value for sliders; 0-1 for toggles
+ * }
+ */
+const atree_make_interactives = new (class extends ComputeNode {
+    constructor() { super('atree-make-interactives'); }
+
+    compute_func(input_map) {
+        const merged_abils = input_map.get('atree-merged');
+        const atree_order = input_map.get('atree-order');
+        const atree_html = input_map.get('atree-elements');
+
+        /**
+         * slider_info 
+         *   label_name: str,
+         *   max: int,
+         *   step: int,
+         *   id: str,
+         *   abil: atree_node
+         *   slider: html element
+         * }
+         */
+        // Map<str, slider_info>
+        const slider_map = new Map();
+        const button_map = new Map();
+
+        // first, pull out all the sliders.
+        for (const [abil_id, ability] of merged_abils.entries()) {
+            for (const effect of ability.effects) {
+                if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
+                    const { slider_name, slider_behavior = 'merge', slider_max, slider_step } = effect;
+                    if (slider_map.has(slider_name)) {
+                        if (slider_max !== undefined) {
+                            const slider_info = slider_map.get(slider_name);
+                            slider_info.max += slider_max;
+                        }
+                    }
+                    else if (slider_behavior === 'merge') {
+                        slider_map.set(slider_name, {
+                            label_name: slider_name,
+                            max: slider_max,
+                            step: slider_step,
+                            id: "ability-slider"+ability.id,
+                            //color: effect['slider_color'] TODO: add colors to json
+                            abil: ability
+                        });
+                    }
+                }
+                if (effect['type'] === "raw_stat" && effect['toggle']) {
+                    const { toggle: toggle_name } = effect;
+                    button_map.set(toggle_name, {
+                        abil: ability
+                    });
+                }
+            }
+        }
+        // next, render the sliders onto the abilities.
+        for (const [slider_name, slider_info] of slider_map.entries()) {
+            let slider_container = gen_slider_labeled(slider_info);
+            atree_html.get(slider_info.abil.id).appendChild(slider_container);
+            slider_info.slider = document.getElementById(slider_info.id);
+            slider_info.slider.addEventListener("change", (e) => atree_stats.mark_dirty().update());
+        }
+        for (const [button_name, button_info] of button_map.entries()) {
+            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm"], {
+                id: button_info.abil.id,
+                textContent: button_name
+            });
+            button.addEventListener("click", (e) => {
+                if (button.classList.contains("toggleOn")) {
+                    button.classList.remove("toggleOn");
+                } else {
+                    button.classList.add("toggleOn");
+                }
+                atree_stats.mark_dirty().update()
+            });
+            button_info.button = button;
+            atree_html.get(button_info.abil.id).appendChild(button);
+        }
+        return [slider_map, button_map];
+    }
+})().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
+
+
+/**
+ * Collect stats from ability tree.
+ * Return StatMap of added stats (incl. cost modifications as raw cost)
+ *
+ * Signature: AbilityTreeStatsNode(atree-merged: MergedATree, build: Build, atree-interactive: Map<str, slider_info>) => StatMap
+ */
+const atree_stats = new (class extends ComputeNode {
+    constructor() { super('atree-stats-collector'); }
+
+    compute_func(input_map) {
+        const atree_merged = input_map.get('atree-merged');
+        const item_stats = input_map.get('build').statMap;
+        const [slider_map, button_map] = input_map.get('atree-interactive');
+
+        let ret_effects = new Map();
+        for (const [abil_id, abil] of atree_merged.entries()) {
+            if (abil.effects.length == 0) { continue; }
+
+            for (const effect of abil.effects) {
+                switch (effect.type) {
+                case 'stat_scaling':
+                    if (effect.slider) {
+                        if ('output' in effect) { // sometimes nodes will modify slider without having effect.
+                            const slider_val = slider_map.get(effect.slider_name).slider.value;
+                            const {round = true} = effect;
+                            let total = parseInt(slider_val) * effect.scaling[0];
+                            if (round) { total = Math.floor(round_near(total)); }
+                            if ('max' in effect && total > effect.max) { total = effect.max; }
+                            if (Array.isArray(effect.output)) {
+                                for (const output of effect.output) {
+                                    if (output.type === 'stat') {   // TODO: prop
+                                        merge_stat(ret_effects, output.name, total);
+                                    }
+                                }
+                            }
+                            else {
+                                if (effect.output.type === 'stat') {
+                                    merge_stat(ret_effects, effect.output.name, total);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        // TODO: type: prop?
+                        let total = 0;
+                        const {round = true} = effect;
+                        for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
+                            total += scaling * item_stats.get(input.name);
+                        }
+                        if (round) { total = Math.floor(round_near(total)); }
+                        if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
+                        if ('max' in effect && total > effect.max) { total = effect.max; }
+                        // TODO: output (list...)
+                        if (Array.isArray(effect.output)) {
+                            for (const output of effect.output) {
+                                if (output.type === 'stat') {
+                                    merge_stat(ret_effects, output.name, total);
+                                }
+                            }
+                        }
+                        else {
+                            if (effect.output.type === 'stat') {
+                                merge_stat(ret_effects, effect.output.name, total);
+                            }
+                        }
+                    }
+                    continue;
+                case 'raw_stat':
+                    // TODO: toggles...
+                    if (effect.toggle) {
+                        const button = button_map.get(effect.toggle).button;
+                        if (!button.classList.contains("toggleOn")) { continue; }
+                    }
+                    for (const bonus of effect.bonuses) {
+                        const { type, name, abil = "", value } = bonus;
+                        // TODO: prop
+                        if (type === "stat") {
+                            merge_stat(ret_effects, name, value);
+                        }
+                    }
+                    continue;
+                case 'add_spell_prop':
+                    continue;
+                    // TODO unjankify....
+                    // costs are converted to raw cost ID
+                    // const { base_spell, cost = 0} = effect;
+                    // if (cost) {
+                    //     const key = "spRaw"+base_spell;
+                    //     if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
+                    //     else { ret_effects.set(key, cost); }
+                    // }
+                    // continue;
+                }
+            }
+        }
+        if (ret_effects.has('baseResist')) {
+            merge_stat(ret_effects, "defMult", 1 - (ret_effects.get('baseResist') / 100));
+        }
+        return ret_effects;
+    }
+})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
 
 
 /**
@@ -591,10 +864,10 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
             let display_elem = document.createElement('div');
             display_elem.classList.add("col", "pe-0");
             // TODO: just pass these elements into the display node instead of juggling the raw IDs...
-            let spell_summary = document.createElement('div'); spell_summary.setAttribute('id', "spell"+spell.base_spell+"-infoAvg");
-            spell_summary.classList.add("col", "spell-display", "spell-expand", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark");
-            let spell_detail = document.createElement('div'); spell_detail.setAttribute('id', "spell"+spell.base_spell+"-info");
-            spell_detail.classList.add("col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2");
+            let spell_summary = make_elem('div', ["col", "spell-display", "fake-button", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark"],
+                    { id: "spell"+spell.base_spell+"-infoAvg" }); 
+            let spell_detail = make_elem('div', ["col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2"],
+                    { id: "spell"+spell.base_spell+"-info" });
             spell_detail.style.display = "none";
 
             display_elem.appendChild(spell_summary); display_elem.appendChild(spell_detail);
@@ -618,43 +891,28 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
  */
 function render_AT(UI_elem, list_elem, tree) {
     console.log("constructing ability tree UI");
+
+    // increase padding, since images are larger than the space provided
+    UI_elem.style.paddingRight = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingLeft = "calc(var(--bs-gutter-x) * 1)";
+    UI_elem.style.paddingTop = "calc(var(--bs-gutter-x) * .5)";
+
     // add in the "Active" title to atree
-    let active_row = document.createElement("div");
-    active_row.classList.add("row", "item-title", "mx-auto", "justify-content-center");
-    let active_word = document.createElement("div");
-    active_word.classList.add("col-auto");
-    active_word.textContent = "Active Abilities:";
+    let active_row = make_elem("div", ["row", "item-title", "mx-auto", "justify-content-center"]);
+    let active_word = make_elem("div", ["col-auto"], {textContent: "Active Abilities:"});
 
-    let active_AP_container = document.createElement("div");
-    active_AP_container.classList.add("col-auto");
+    let active_AP_container = make_elem("div", ["col-auto"]);
+    let active_AP_subcontainer = make_elem("div", ["row"]);
+    let active_AP_cost = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cost", textContent: "0"});
 
-    let active_AP_subcontainer = document.createElement("div");
-    active_AP_subcontainer.classList.add("row");
+    let active_AP_slash = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: "/"});
+    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap"});
+    let active_AP_end = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: " AP"});
 
-    let active_AP_cost = document.createElement("div");
-    active_AP_cost.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_cost.id = "active_AP_cost";
-    active_AP_cost.textContent = "0";
-    let active_AP_slash = document.createElement("div");
-    active_AP_slash.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_slash.textContent = "/";
-    let active_AP_cap = document.createElement("div");
-    active_AP_cap.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_cap.id = "active_AP_cap";
-    active_AP_cap.textContent = "45";
-    let active_AP_end = document.createElement("div");
-    active_AP_end.classList.add("col-auto", "mx-0", "px-0");
-    active_AP_end.textContent = " AP";
-
-    //I can't believe we can't pass in multiple children at once
-    active_AP_subcontainer.appendChild(active_AP_cost);
-    active_AP_subcontainer.appendChild(active_AP_slash);
-    active_AP_subcontainer.appendChild(active_AP_cap);
-    active_AP_subcontainer.appendChild(active_AP_end);
     active_AP_container.appendChild(active_AP_subcontainer);
+    active_AP_subcontainer.append(active_AP_cost, active_AP_slash, active_AP_cap, active_AP_end);
 
-    active_row.appendChild(active_word);
-    active_row.appendChild(active_AP_container);
+    active_row.append(active_word, active_AP_container);
     list_elem.appendChild(active_row);
 
     let atree_map = new Map();
@@ -688,6 +946,7 @@ function render_AT(UI_elem, list_elem, tree) {
         for (let k = 0; k < 9; k++) {
             col = document.createElement('div');
             col.classList.add('col', 'px-0');
+            col.style = "position: relative; aspect-ratio: 1/1;"
             row.appendChild(col);
         }
         UI_elem.appendChild(row);
@@ -705,7 +964,7 @@ function render_AT(UI_elem, list_elem, tree) {
             const parent_id = parent_abil.id;
 
             let connect_elem = document.createElement("div");
-            connect_elem.style = "background-size: cover; width: 100%; height: 100%;";
+            connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -747,94 +1006,188 @@ function render_AT(UI_elem, list_elem, tree) {
         }
         let node_img = document.createElement('img');
         node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 100%; height: 100%;";
+        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
         node_elem.appendChild(node_img);
-        node_elem.classList.add("atree-circle");
 
-        // add tooltip
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.display = "block";
-        });
+        node_wrap.img = node_img;
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this) {return;}
-            let tooltip = this.children[0];
-            tooltip.style.display = "none";
-        });
-
-        node_elem.classList.add("fake-button");
-
-        let node_tooltip = document.createElement('div');
-        node_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-        node_tooltip.style.display = "none";
-
-        // tooltip text formatting
-
-        let node_tooltip_title = document.createElement('b');
-        node_tooltip_title.classList.add("scaled-font");
-        node_tooltip_title.innerHTML = ability.display_name;
-        node_tooltip.appendChild(node_tooltip_title);
-
-        if ('archetype' in ability && ability.archetype !== "") {
-            let node_tooltip_archetype = document.createElement('p');
-            node_tooltip_archetype.classList.add("scaled-font");
-            node_tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
-            node_tooltip.appendChild(node_tooltip_archetype);
-        }
-
-        let node_tooltip_desc = document.createElement('p');
-        node_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-        node_tooltip_desc.textContent = ability.desc;
-        node_tooltip.appendChild(node_tooltip_desc);
-
-        let node_tooltip_cost = document.createElement('p');
-        node_tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
-        node_tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
-        node_tooltip.appendChild(node_tooltip_cost);
-
-        node_tooltip.style.position = "absolute";
-        node_tooltip.style.zIndex = "100";
-
-        node_elem.appendChild(node_tooltip);
-        //list_elem.appendChild(active_tooltip);    NOTE: moved to `atree_render_active`
+        // create hitbox
+        // this is necessary since images exceed the size of their square, but should only be interactible within that square
+        let hitbox = document.createElement("div");
+        hitbox.style = "position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;"
+        node_elem.appendChild(hitbox);
 
         node_wrap.elem = node_elem;
         node_wrap.all_connectors_ref = atree_connectors_map;
 
-        node_elem.addEventListener('click', function(e) {
+        hitbox.addEventListener('click', function(e) {
             if (e.target !== this && e.target!== this.children[0]) {return;}
             atree_set_state(node_wrap, !node_wrap.active);
             atree_state_node.mark_dirty().update();
         });
 
         // add tooltip
-
-        node_elem.addEventListener('mouseover', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
-            tooltip.style.top = this.getBoundingClientRect().bottom + window.scrollY * 1.02 + "px";
-            tooltip.style.left = this.parentElement.parentElement.getBoundingClientRect().left + (elem.getBoundingClientRect().width * .2 / 2) + "px";
-            tooltip.style.maxWidth = UI_elem.getBoundingClientRect().width * .95 + "px";
-            tooltip.style.display = "block";
+        hitbox.addEventListener('mouseover', function(e) {
+            if (e.target !== this) {
+                return;
+            }
+            if (node_wrap.tooltip_elem) {
+                node_wrap.tooltip_elem.remove();
+                delete node_wrap.tooltip_elem;
+            }
+            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability, atree_map);
         });
 
-        node_elem.addEventListener('mouseout', function(e) {
-            if (e.target !== this && e.target!== this.children[0]) {return;}
-            let tooltip = this.children[this.children.length - 1];
-            tooltip.style.display = "none";
+        hitbox.addEventListener('mouseout', function(e) {
+            if (e.target !== this) {
+                return;
+            }
+            if (node_wrap.tooltip_elem) {
+                node_wrap.tooltip_elem.remove();
+                delete node_wrap.tooltip_elem;
+            }
         });
 
         document.getElementById("atree-row-" + ability.display.row).children[ability.display.col].appendChild(node_elem);
     };
-    console.log(atree_connectors_map);
     atree_render_connection(atree_connectors_map);
 
     return atree_map;
 };
+
+function generateTooltip(UI_elem, node_elem, ability, atree_map) {
+    let container = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"], {"style": "position: absolute; z-index: 100;"});
+    container.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
+    container.style.left = UI_elem.getBoundingClientRect().left + "px";
+    container.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
+
+    // title
+    let title = make_elem("b", ["scaled-font", "mx-1"], {});
+    title.innerHTML = ability.display_name;
+    switch(ability.display.icon) {
+        case "node_0":
+            // already white
+            break;
+        case "node_1":
+            title.classList.add("mc-gold");
+            break;
+        case "node_2":
+            title.classList.add("mc-light-purple");
+            break;
+        case "node_3":
+            title.classList.add("mc-red");
+            break;
+        case "node_warrior":
+        case "node_archer":
+        case "node_mage":
+        case "node_assassin":
+        case "node_shaman":
+            title.classList.add("mc-green");
+            break;
+    }
+    container.appendChild(title);
+
+    container.innerHTML += "<br/><br/>";
+
+    // description
+    let description = make_elem("p", ["scaled-font-sm", "my-0", "mx-1", "text-wrap", "mc-gray"], {});
+    let numberRegex = /[+-]?\d+(\.\d+)?[%+s]?/g; // +/- (optional), 1 or more digits, period followed by 1 or more digits (optional), %/+/s (optional)
+    description.innerHTML = ability.desc.replaceAll(numberRegex, (m) => { return "<span class = 'mc-white'>" + m + "</span>" });
+    container.appendChild(description);
+
+    container.appendChild(document.createElement("br"));
+
+    // archetype
+    if ("archetype" in ability && ability.archetype !== "") {
+        let archetype = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        archetype.innerHTML = ability.archetype + " Archetype";
+        switch(ability.archetype) {
+            case "Riftwalker":
+            case "Paladin":
+                archetype.classList.add("mc-aqua");
+                break;
+            case "Fallen":
+                archetype.classList.add("mc-red");
+                break;
+            case "Boltslinger":
+            case "Battle Monk":
+                archetype.classList.add("mc-yellow");
+                break;
+            case "Trapper":
+                archetype.classList.add("mc-dark-green");
+                break;
+            case "Trickster":
+            case "Sharpshooter":
+                archetype.classList.add("mc-light-purple");
+                break;
+            case "Arcanist":
+                archetype.classList.add("mc-dark-purple");
+                break;
+            case "Acrobat":
+            case "Light Bender":
+                // already white
+                break;
+            case "Shadestepper":
+                archetype.classList.add("mc-dark-red");
+                break;
+        }
+        container.appendChild(archetype);
+        container.appendChild(document.createElement("br"));
+    }
+
+    // calculate if requirements are satisfied
+    let apUsed = 0;
+    let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
+    let archChosen = 0;
+    let blockedBy = [];
+    for (let [id, node_wrap] of atree_map.entries()) {
+        if (!node_wrap.active || id == ability.id) {
+            continue; // we don't want to count abilities that are not selected, and an ability should not count towards itself
+        }
+        apUsed += node_wrap.ability.cost;
+        if (node_wrap.ability.archetype == ability.archetype) {
+            archChosen++;
+        }
+        if (ability.blockers.includes(id)) {
+            blockedBy.push(node_wrap.ability.display_name);
+        }
+    }
+
+    let reqYes = "<span class = 'mc-green'>&#10004;</span>" // green check mark
+    let reqNo = "<span class = 'mc-red'>&#10006;</span>" // red x
+
+    // cost
+    let cost = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+    if (apUsed + ability.cost > maxAP) {
+        cost.innerHTML = reqNo;
+    } else {
+        cost.innerHTML = reqYes;
+    }
+    cost.innerHTML += " <span class = 'mc-gray'>Ability Points:</span> " + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
+    container.appendChild(cost);
+
+    // archetype req
+    if (ability.archetype_req > 0 && ability.archetype != null) {
+        let archReq = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        if (archChosen >= ability.archetype_req) {
+            archReq.innerHTML = reqYes;
+        } else {
+            archReq.innerHTML = reqNo;
+        }
+        archReq.innerHTML += " <span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        container.appendChild(archReq);
+    }
+
+    // blockers
+    for (let i = 0; i < blockedBy.length; i++) {
+        let blocker = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        blocker.innerHTML = reqNo + " <span class = 'mc-gray'>Blocked By:</span> " + blockedBy[i];
+        container.appendChild(blocker);
+    }
+
+    UI_elem.appendChild(container);
+    return container;
+}
 
 // resolve connector conflict, when they occupy the same cell.
 function resolve_connector(atree_connectors_map, pos, new_connector) {
@@ -849,32 +1202,10 @@ function resolve_connector(atree_connectors_map, pos, new_connector) {
 }
 
 function set_connector_type(connector_info) {  // left right up down
-    const connections = connector_info.connections;
-    const connector_elem = connector_info.connector;
-    if (connections[2]) {
-        if (connections[0]) {
-            connector_info.type = 'c'; // cross
-            return;
-        }
-        connector_info.type = 'line';   // vert line
-        return;
+    connector_info.type = "";
+    for (let i = 0; i < 4; i++) {
+        connector_info.type += connector_info.connections[i] == 0 ? "0" : "1";
     }
-    if (connections[3]) {   // if down:
-        if (connections[0] && connections[1]) {
-            connector_info.type = 't';   // all 3 t
-            return;
-        }
-        connector_info.type = 'angle';   // elbow
-        if (connections[1]) {
-            connector_elem.classList.add("rotate-180");
-        }
-        else {
-            connector_elem.classList.add("rotate-270");
-        }
-        return;
-    }
-    connector_info.type = 'line';   // horiz line
-    connector_elem.classList.add("rotate-90");
 }
 
 // draw the connector onto the screen
@@ -899,13 +1230,17 @@ function atree_render_connection(atree_connectors_map) {
 
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
+    let icon = node_wrapper.ability.display.icon;
+    if (icon === undefined) {
+        icon = "node";
+    }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.classList.add("atree-selected");
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.classList.remove("atree-selected");
+        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -919,21 +1254,6 @@ function atree_set_state(node_wrapper, new_state) {
         }
     }
 };
-
-// refresh all connector to default state, then try to calculate the connector for all node
-function atree_update_connector() {
-    atree_connectors_map.forEach((v) => {
-        if (v.length != 0) {
-            let connector_elem = document.createElement("img");
-            connector_elem.style = "width: 100%; height: 100%;";
-            connector_elem.src = '../media/atree/connect_' + v[0].type + '.png'
-            v[0].replaceChildren(connector_elem);
-        }
-    });
-    atree_map.forEach((v) => {
-        atree_compute_highlight(v);
-    });
-}
 
 function atree_set_edge(atree_connectors_map, parent, child, state) {
     const connectors = child.connectors.get(parent);
@@ -952,8 +1272,13 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_img_elem = document.createElement("img");
         connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
-        if (ctype === 't' || ctype === 'c') {
-            // c, t
+        let num_1s = 0;
+        for (let i = 0; i < 4; i++) {
+            if (ctype.charAt(i) == "1") {
+                num_1s++;
+            }
+        }
+        if (num_1s > 2) { // t branch or 4-way
             const [connector_row, connector_col] = connector_label.split(',').map(x => parseInt(x));
 
             if (connector_row === parent_row) {
@@ -969,19 +1294,22 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
                 highlight_state[child_side_idx] += state_delta;
             }
 
-            let render_state = highlight_state.map(x => (x > 0 ? 1 : 0));
-
-            let connector_img = atree_parse_connector(render_state, ctype);
-            connector_img_elem.src = connector_img.img
-            connector_elem.className = "";
-            connector_elem.classList.add("rotate-" + connector_img.rotate);
+            let render = "";
+            for (let i = 0; i < 4; i++) {
+                render += highlight_state[i] === 0 ? "0" : "1";
+            }
+            if (render == "0000") {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + ".png";
+            } else {
+                connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png";
+            }
             connector_elem.replaceChildren(connector_img_elem);
             continue;
         }
         // lol bad overloading, [0] is just the whole state
         highlight_state[0] += state_delta;
         if (highlight_state[0] > 0) {
-            connector_img_elem.src = '../media/atree/highlight_'+ctype+'.png';
+            connector_img_elem.src = '../media/atree/connect_' + ctype + '_1.png';
             connector_elem.replaceChildren(connector_img_elem);
         }
         else {
@@ -990,46 +1318,3 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         }
     }
 }
-
-// parse a sequence of left, right, up, down to appropriate connector image
-function atree_parse_connector(orient, type) {
-    // left, right, up, down
-
-    let c_connector_dict = {
-        "1100": {attrib: "_2_l", rotate: 0},
-        "1010": {attrib: "_2_a", rotate: 0},
-        "1001": {attrib: "_2_a", rotate: 270},
-        "0110": {attrib: "_2_a", rotate: 90},
-        "0101": {attrib: "_2_a", rotate: 180},
-        "0011": {attrib: "_2_l", rotate: 90},
-        "1110": {attrib: "_3", rotate: 0},
-        "1101": {attrib: "_3", rotate: 180},
-        "1011": {attrib: "_3", rotate: 270},
-        "0111": {attrib: "_3", rotate: 90},
-        "1111": {attrib: "", rotate: 0}
-    };
-
-    let t_connector_dict = {
-        "1100": {attrib: "_2_l", rotate: 0},
-        "1001": {attrib: "_2_a", rotate: "flip"},
-        "0101": {attrib: "_2_a", rotate: 0},
-        "1101": {attrib: "_3", rotate: 0}
-    };
-
-    let res = "";  
-    for (let i of orient) {
-        res += i;
-    }
-    if (res === "0000") {
-        return {img: "../media/atree/connect_" + type + ".png", rotate: 0};
-    }
-
-    let ret;
-    if (type == "c") {
-        ret = c_connector_dict[res];
-    } else {
-        ret = t_connector_dict[res];
-    };
-    ret.img = "../media/atree/highlight_" + type + ret.attrib + ".png";
-    return ret;
-};

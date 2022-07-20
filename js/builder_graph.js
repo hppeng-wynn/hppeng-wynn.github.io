@@ -11,29 +11,7 @@ let armor_powder_node = new (class extends ComputeNode {
         }
         return statMap;
     }
-})().update();
-
-/* Updates PASSIVE powder special boosts (armors)
-*/
-function update_armor_powder_specials(elem_id) {
-    //we only update the powder special + external stats if the player has a build
-    let wynn_elem = elem_id.split("_")[0]; //str, dex, int, def, agi
-
-    //update the label associated w/ the slider 
-    let elem = document.getElementById(elem_id);
-    let label = document.getElementById(elem_id + "_label");
-    let value = elem.value;
-
-    label.textContent = label.textContent.split(":")[0] + ": " + value
-    
-    //update the slider's graphics
-    let bg_color = elem_colors[skp_order.indexOf(wynn_elem)];
-    let pct = Math.round(100 * value / powderSpecialStats[skp_order.indexOf(wynn_elem)].cap);
-    elem.style.background = `linear-gradient(to right, ${bg_color}, ${bg_color} ${pct}%, #AAAAAA ${pct}%, #AAAAAA 100%)`;
-
-    armor_powder_node.mark_dirty().update();
-}
-
+})();
 
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
@@ -45,13 +23,13 @@ let boosts_node = new (class extends ComputeNode {
             let elem = document.getElementById(key + "-boost")
             if (elem.classList.contains("toggleOn")) {
                 damage_boost += value;
-                if (key === "warscream") { def_boost += .20 }
+                if (key === "warscream") { def_boost += .10 }
                 if (key === "vanish") { def_boost += .15 }
             }
         }
         let res = new Map();
-        res.set('damageMultiplier', 1+damage_boost);
-        res.set('defMultiplier', 1-def_boost);
+        res.set('damMult.Potion', 100*damage_boost);
+        res.set('defMult.Potion', 100*def_boost);
         return res;
     }
 })().update();
@@ -181,7 +159,8 @@ class ItemInputNode extends InputNode {
 
         if (item) {
             if (powdering !== undefined) {
-                item.statMap.set('powders', powdering);
+                const max_slots = item.statMap.get('slots');
+                item.statMap.set('powders', powdering.slice(0, max_slots));
             }
             let type_match;
             if (this.category == 'weapon') {
@@ -213,7 +192,13 @@ class ItemInputNode extends InputNode {
 
             for (const [i, x] of zip2(equipment_inputs, replace_items)) { setValue(i, x); }
 
-            for (const node of item_nodes) { calcSchedule(node, 10); }
+            for (const node of item_nodes) { 
+                if (node !== this) {
+                    // save a tiny bit of compute
+                    calcSchedule(node, 10);
+                }
+            }
+            // Needed to push the weapon node's updates forward
             return this.compute_func(input_map);
         }
         return null;
@@ -257,7 +242,7 @@ class ItemInputDisplayNode extends ComputeNode {
             this.input_field.classList.add("is-invalid");
             return null;
         }
-        if (item.statMap.has('powders')) {
+        if (this.powder_field && item.statMap.has('powders')) {
             this.powder_field.placeholder = "powders";
         }
 
@@ -265,7 +250,7 @@ class ItemInputDisplayNode extends ComputeNode {
             return null;
         }
 
-        if (item.statMap.has('powders')) {
+        if (this.powder_field && item.statMap.has('powders')) {
             this.powder_field.placeholder = item.statMap.get('slots') + ' slots';
         }
 
@@ -422,7 +407,10 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('guildTome1-input')
         ];
         let weapon = input_map.get('weapon-input');
-        let level = input_map.get('level-input');
+        let level = parseInt(input_map.get('level-input'));
+        if (isNaN(level)) {
+            level = 106;
+        }
 
         let all_none = weapon.statMap.has('NONE');
         for (const item of equipments) {
@@ -502,16 +490,22 @@ class SpellSelectNode extends ComputeNode {
  */
 function getDefenseStats(stats) {
     let defenseStats = [];
-    let def_pct = skillPointsToPercentage(stats.get('def'));
-    let agi_pct = skillPointsToPercentage(stats.get('agi'));
+    let def_pct = skillPointsToPercentage(stats.get('def')) * skillpoint_final_mult[3];
+    let agi_pct = skillPointsToPercentage(stats.get('agi')) * skillpoint_final_mult[4];
     //total hp
     let totalHp = stats.get("hp") + stats.get("hpBonus");
     if (totalHp < 5) totalHp = 5;
     defenseStats.push(totalHp);
     //EHP
     let ehp = [totalHp, totalHp];
-    let defMult = (2 - stats.get("classDef")) * stats.get("defMultiplier");
-    ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
+    let defMult = (2 - stats.get("classDef"));
+    for (const [k, v] of stats.get("defMult").entries()) {
+        defMult *= (1 - v/100);
+    }
+    // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
+    ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    ehp[0] /= defMult;
+    // ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehp);
     //HPR
@@ -554,7 +548,6 @@ class SpellDamageCalcNode extends ComputeNode {
         const spell = spell_info[0];
         const spell_parts = spell_info[1];
         const stats = input_map.get('stats');
-        const damage_mult = stats.get('damageMultiplier');
         const skillpoints = [
             stats.get('str'),
             stats.get('dex'),
@@ -571,7 +564,7 @@ class SpellDamageCalcNode extends ComputeNode {
         for (const part of spell_parts) {
             let spell_result;
             if ('multipliers' in part) { // damage type spell
-                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed);
+                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed, spell.base_spell + '.' + part.name);
                 spell_result = {
                     type: "damage",
                     normal_min: results[2].map(x => x[0]),
@@ -583,7 +576,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.power * getDefenseStats(stats)[0] * Math.max(0.5,Math.min(1.75, 1 + 0.5 * stats.get("wDamPct")/100)));
+                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
@@ -663,57 +656,8 @@ class SpellDisplayNode extends ComputeNode {
         const i = this.spell_idx;
         let parent_elem = document.getElementById("spell"+i+"-info");
         let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
-        displaySpellDamage(parent_elem, overallparent_elem, stats, spell, i+1, damages);
+        displaySpellDamage(parent_elem, overallparent_elem, stats, spell, i, damages);
     }
-}
-
-/*  Get melee stats for build.
-    Returns an array in the order:
-*/
-function getMeleeStats(stats, weapon) {
-    stats = new Map(stats); // Shallow copy
-    const weapon_stats = weapon.statMap;
-    const skillpoints = [
-            stats.get('str'),
-            stats.get('dex'),
-            stats.get('int'),
-            stats.get('def'),
-            stats.get('agi')
-        ];
-    if (weapon_stats.get("tier") === "Crafted") {
-        stats.set("damageBases", [weapon_stats.get("nDamBaseHigh"),weapon_stats.get("eDamBaseHigh"),weapon_stats.get("tDamBaseHigh"),weapon_stats.get("wDamBaseHigh"),weapon_stats.get("fDamBaseHigh"),weapon_stats.get("aDamBaseHigh")]);
-    }
-    let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
-    if(adjAtkSpd > 6){
-        adjAtkSpd = 6;
-    }else if(adjAtkSpd < 0){
-        adjAtkSpd = 0;
-    }
-
-    if (weapon_stats.get("type") === "relik") {
-        stats.set('damageMultiplier', 0.99); // CURSE YOU WYNNCRAFT
-        //One day we will create WynnWynn and no longer have shaman 99% melee injustice.
-        //In all seriousness 99% is because wynn uses 0.33 to estimate dividing the damage by 3 to split damage between 3 beams.
-    }
-    let results = calculateSpellDamage(stats, weapon_stats, [100, 0, 0, 0, 0, 0], false, true);
-    
-    let dex = skillpoints[1];
-
-    let totalDamNorm = results[0];
-    let totalDamCrit = results[1];
-    totalDamNorm.push(1-skillPointsToPercentage(dex));
-    totalDamCrit.push(skillPointsToPercentage(dex));
-    let damages_results = results[2];
-    
-    let singleHitTotal = ((totalDamNorm[0]+totalDamNorm[1])*(totalDamNorm[2])
-                        +(totalDamCrit[0]+totalDamCrit[1])*(totalDamCrit[2]))/2;
-
-    //Now do math
-    let normDPS = (totalDamNorm[0]+totalDamNorm[1])/2 * baseDamageMultiplier[adjAtkSpd];
-    let critDPS = (totalDamCrit[0]+totalDamCrit[1])/2 * baseDamageMultiplier[adjAtkSpd];
-    let avgDPS = (normDPS * (1 - skillPointsToPercentage(dex))) + (critDPS * (skillPointsToPercentage(dex)));
-    //[[n n n n] [e e e e] [t t t t] [w w w w] [f f f f] [a a a a] [lowtotal hightotal normalChance] [critlowtotal crithightotal critChance] normalDPS critCPS averageDPS adjAttackSpeed, singleHit] 
-    return damages_results.concat([totalDamNorm,totalDamCrit,normDPS,critDPS,avgDPS,adjAtkSpd, singleHitTotal]).concat(results[3]);
 }
 
 /**
@@ -730,10 +674,7 @@ class BuildDisplayNode extends ComputeNode {
         displayBuildStats('overall-stats', build, build_all_display_commands, stats);
         displayBuildStats("offensive-stats", build, build_offensive_display_commands, stats);
         displaySetBonuses("set-info", build);
-        let meleeStats = getMeleeStats(stats, build.weapon);
         // TODO: move weapon out?
-        displayMeleeDamage(document.getElementById("build-melee-stats"), document.getElementById("build-melee-statsAvg"), meleeStats);
-
         displayDefenseStats(document.getElementById("defensive-stats"), stats);
 
         displayPoisonDamage(document.getElementById("build-poison-stats"), build);
@@ -770,7 +711,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
             setValue(skp_order[i] + "-skp", skillpoints[i]);
             let linebreak = document.createElement("br");
             linebreak.classList.add("itemp");
-            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100).toFixed(1).concat(skp_effects[i]));
+            setText(skp_order[i] + "-skp-pct", (skillPointsToPercentage(skillpoints[i])*100*skillpoint_final_mult[i]).toFixed(1).concat(skp_effects[i]));
             document.getElementById(skp_order[i]+"-warnings").textContent = ''
             if (assigned > 100) {
                 let skp_warning = document.createElement("p");
@@ -859,18 +800,7 @@ class AggregateStatsNode extends ComputeNode {
         const output_stats = new Map();
         for (const [k, v] of input_map.entries()) {
             for (const [k2, v2] of v.entries()) {
-                if (output_stats.has(k2)) {
-                    // TODO: ugly AF
-                    if (k2 === 'damageMultiplier' || k2 === 'defMultiplier') {
-                        output_stats.set(k2, v2 * output_stats.get(k2));
-                    }
-                    else {
-                        output_stats.set(k2, v2 + output_stats.get(k2));
-                    }
-                }
-                else {
-                    output_stats.set(k2, v2);
-                }
+                merge_stat(output_stats, k2, v2);
             }
         }
         return output_stats;
@@ -972,7 +902,7 @@ class SkillPointSetterNode extends ComputeNode {
 class SumNumberInputNode extends InputNode {
     compute_func(input_map) {
         let value = this.input_field.value;
-        if (value === "") { value = 0; }
+        if (value === "") { value = "0"; }
 
         let input_num = 0;
         if (value.includes("+")) {
@@ -1034,6 +964,9 @@ function builder_graph_init() {
 
     // Level input node.
     let level_input = new InputNode('level-input', document.getElementById('level-choice'));
+    
+    // linking to atree verification
+    atree_validate.link_to(level_input, 'level');
 
     // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
     build_node = new BuildAssembleNode();
@@ -1063,9 +996,6 @@ function builder_graph_init() {
 
     // Phase 2/3: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
 
-    let build_disp_node = new BuildDisplayNode()
-    build_disp_node.link_to(build_node, 'build');
-
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
     stat_agg_node = new AggregateStatsNode();
     edit_agg_node = new AggregateEditableIDNode();
@@ -1092,16 +1022,15 @@ function builder_graph_init() {
         skp_inputs.push(node);
     }
     stat_agg_node.link_to(edit_agg_node);
-    build_disp_node.link_to(stat_agg_node, 'stats');
 
     // Phase 3/3: Set up atree stuff.
 
     let class_node = new PlayerClassNode('builder-class').link_to(build_node);
     // These two are defined in `atree.js`
     atree_node.link_to(class_node, 'player-class');
-    atree_merge.link_to(build_node, 'build');
-    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
-                                    .link_to(atree_collect_spells, 'spells');
+    atree_merge.link_to(class_node, 'player-class');
+    atree_stats.link_to(build_node, 'build');
+    stat_agg_node.link_to(atree_stats, 'atree-stats');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
@@ -1111,7 +1040,11 @@ function builder_graph_init() {
     for (const input_node of item_nodes.concat(powder_nodes)) {
         input_node.update();
     }
+    armor_powder_node.update();
     level_input.update();
+
+    atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
+                                    .link_to(atree_collect_spells, 'spells');
 
     // kinda janky, manually set atree and update. Some wasted compute here
     if (atree_data !== null && atree_node.value !== null) { // janky check if atree is valid
@@ -1138,10 +1071,14 @@ function builder_graph_init() {
 
     // Also do something similar for skill points
 
+    let build_disp_node = new BuildDisplayNode()
+    build_disp_node.link_to(build_node, 'build');
+    build_disp_node.link_to(stat_agg_node, 'stats');
+
     for (const node of edit_input_nodes) {
         node.update();
     }
-    
+
     let skp_output = new SkillPointSetterNode(edit_input_nodes);
     skp_output.link_to(build_node);
 
@@ -1157,5 +1094,6 @@ function builder_graph_init() {
     // this will propagate the update to the `stat_agg_node`, and then to damage calc
 
     console.log("Set up graph");
+    graph_live_update = true;
 }
 
