@@ -2512,7 +2512,7 @@ const atrees = {
                 "col": 4,
                 "icon": "node_2"
             },
-            "properties": {},
+            "properties": {"range": 16},
             "effects": [
                 {
                     "type": "replace_spell",
@@ -3085,11 +3085,1702 @@ const atrees = {
             "display_name": "Earth Mastery",
             "base_abil": 998,
             "desc": "Increases base damage from all Earth attacks",
-            "archetype": "Fallen",
-            "archetype_req": 0,
-            "parents": [
-                "Uppercut"
-            ],
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "parents": ["Uppercut"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        { "type": "stat", "name": "eDamPct", "value": 20 },
+                        { "type": "stat", "name": "eDamAddMin", "value": 2 },
+                        { "type": "stat", "name": "eDamAddMax", "value": 4 }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Thunder Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Thunder attacks",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "parents": ["Uppercut", "Air Mastery", "Cheaper Charge"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        { "type": "stat", "name": "tDamPct", "value": 10 },
+                        { "type": "stat", "name": "tDamAddMin", "value": 1 },
+                        { "type": "stat", "name": "tDamAddMax", "value": 8 }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Water Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Water attacks",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
+            "parents": ["Cheaper Charge", "Thunder Mastery", "Air Mastery"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 11,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        { "type": "stat", "name": "wDamPct", "value": 15 },
+                        { "type": "stat", "name": "wDamAddMin", "value": 2 },
+                        { "type": "stat", "name": "wDamAddMax", "value": 4 }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Air Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Air attacks",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
+            "parents": ["War Scream", "Thunder Mastery", "Cheaper Charge"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        { "type": "stat", "name": "aDamPct", "value": 15 },
+                        { "type": "stat", "name": "aDamAddMin", "value": 3 },
+                        { "type": "stat", "name": "aDamAddMax", "value": 4 }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Fire Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Fire attacks",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "parents": ["War Scream"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 10,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        { "type": "stat", "name": "fDamPct", "value": 15 },
+                        { "type": "stat", "name": "fDamAddMin", "value": 3 },
+                        { "type": "stat", "name": "fDamAddMax", "value": 5 }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Quadruple Bash",
+            "desc": "Bash will hit 4 times at an even larger range",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "Bash",
+            "parents": ["Earth Mastery", "Fireworks"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 12,
+                "col": 0,
+                "icon": "node_1"
+            },
+            "properties": {
+                "range": 6
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Single Hit": 2
+                    }         
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Single Hit",
+                    "multipliers": [-20, 0, 0, 0, 0, 0] 
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Fireworks",
+            "desc": "Mobs hit by Uppercut will explode mid-air and receive additional damage",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "Uppercut",
+            "parents": ["Thunder Mastery", "Quadruple Bash"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 12,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Fireworks",
+                    "multipliers": [80, 0, 20, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Fireworks": 1
+                    }
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Half-Moon Swipe",
+            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle. All elemental conversions become Water",
+            "archetype": "Battle Monk", 
+            "archetype_req": 1, 
+            "base_abil": "Uppercut",
+            "parents": ["Water Mastery"], 
+            "dependencies": ["Uppercut"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 13,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {
+                "range": 4
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Uppercut",
+                    "cost": -10,
+                    "multipliers": [-70, 0, 0, 30, 0, 0]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Flyby Jab",
+            "desc": "Damage enemies in your way when using Charge",
+            "base_abil": "Charge",
+            "parents": ["Air Mastery", "Flaming Uppercut"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 12,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 2
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Flyby Jab",
+                    "multipliers": [20, 0, 0, 0, 0, 40]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Contact Damage",
+                    "display": "Contact Damage",
+                    "hits": { "Flyby Jab": 1 }
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Flaming Uppercut",
+            "desc": "Uppercut will light mobs on fire, dealing damage every 0.6 seconds",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "base_abil": "Uppercut",
+            "parents": ["Fire Mastery", "Flyby Jab"], 
+            "dependencies": ["Uppercut"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 12,
+                "col": 8,
+                "icon": "node_1"
+            },
+            "properties": {
+                "duration": 3,
+                "tick": 0.6
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Flaming Uppercut",
+                    "base_spell": 8,
+                    "display": "DPS",
+                    "parts": [
+                        {
+                            "name": "Damage Tick",
+                            "multipliers": [0, 0, 0, 0, 50, 0]
+                        },
+                        {
+                            "name": "DPS",
+                            "hits": {
+                                "Damage Tick": 1.66666666666666666666666666666
+                            }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "hits": {
+                                "Damage Tick": 5
+                            }
+                        }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Iron Lungs",
+            "desc": "War Scream deals more damage",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "base_abil": "War Scream",
+            "parents": ["Flyby Jab", "Flaming Uppercut"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 13,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "War Scream",
+                    "cost": 0,
+                    "multipliers": [30, 0, 0, 0, 0, 30]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Generalist",
+            "desc": "After casting 3 different spells in a row, your next spell will cost 5 mana",
+            "archetype": "Battle Monk", 
+            "archetype_req": 3, 
+            "parents": ["Counter"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 15,
+                "col": 2,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []  
+        },
+
+        {
+            "display_name": "Counter",
+            "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
+            "parents": ["Half-Moon Swipe"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 15,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {
+                "chance": 30
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Counter",
+                    "base_spell": 5,
+                    "display": "Counter Damage",
+                    "parts": [
+                        {
+                            "name": "Counter Damage",
+                            "multipliers": [60, 0, 20, 0, 0, 20]
+                        }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Mantle of the Bovemists",
+            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits (20s cooldown)",
+            "archetype": "Paladin", 
+            "archetype_req": 3, 
+            "parents": ["Iron Lungs"], 
+            "dependencies": ["War Scream"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 15,
+                "col": 7,
+                "icon": "node_3"
+            },
+            "properties": {
+                "mantle_charge": 3
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Mantle",
+                    "bonuses": [{ "type": "stat", "name": "defMult.Mantle", "value": 70}]
+                }
+            ]
+        },
+
+        {
+            "display_name": "Bak'al's Grasp",
+            "desc": "After casting War Scream, become Corrupted (15s Cooldown). You cannot heal while in that state. While Corrupted, every 2% of Health you lose will add +4 Raw Damage to your attacks (Max 120)",
+            "archetype": "Fallen", 
+            "archetype_req": 2, 
+            "parents": ["Quadruple Bash", "Fireworks"], 
+            "dependencies": ["War Scream"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 16,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {
+                "cooldown": 15
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Corrupted",
+                    "slider_max": 100,
+                    "slider_step": 1,
+                    "output": {
+                        "type": "stat",
+                        "name": "damRaw" 
+                    },
+                    "max": 120,
+                    "scaling": [2]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Spear Proficiency 2",
+            "desc": "Improve your Main Attack's damage and range w/ spear",
+            "base_abil": 999,
+            "parents": ["Bak'al's Grasp", "Cheaper Uppercut"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 17,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {
+                "melee_range": 1
+            },
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "melee",
+                "multipliers": [5, 0, 0, 0, 0, 0]
+            }]
+        },
+
+        {
+            "display_name": "Cheaper Uppercut",
+            "desc": "Reduce the Mana Cost of Uppercut",
+            "base_abil": "Uppercut",
+            "parents": ["Spear Proficiency 2", "Aerodynamics", "Counter"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 17,
+                "col": 3,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": -5
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Aerodynamics",
+            "desc": "During Charge, you can steer and change direction",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
+            "base_abil": "Charge",
+            "parents": ["Cheaper Uppercut", "Provoke"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 17,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []  
+        },
+
+        {
+            "display_name": "Provoke",
+            "desc": "Mobs damaged by War Scream will target only you for at least 5s. Reduce the Mana cost of War Scream",
+            "base_abil": "War Scream",
+            "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 17,
+                "col": 7,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": -5
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Precise Strikes",
+            "desc": "+30% Critical Hit Damage",
+            "parents": ["Cheaper Uppercut", "Spear Proficiency 2"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 18,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "critDamPct",
+                            "value": 30
+                        }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Air Shout",
+            "desc": "War Scream will fire a projectile that can go through walls and deal damage multiple times",
+            "base_abil": "War Scream",
+            "parents": ["Aerodynamics", "Provoke"], 
+            "dependencies": ["War Scream"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 18,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {"attackRate": 2},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Air Shout",
+                    "multipliers": [40, 0, 0, 0, 0, 10]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Enraged Blow",
+            "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +3% (Max 300%)",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "Bak'al's Grasp",
+            "parents": ["Spear Proficiency 2"], 
+            "dependencies": ["Bak'al's Grasp"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 20,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider_name": "Corrupted",
+                    "slider": true,
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Enraged" 
+                    },
+                    "scaling": [3]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Flying Kick",
+            "desc": "When using Charge, mobs hit will halt your momentum and get knocked back",
+            "archetype": "Battle Monk", 
+            "archetype_req": 1, 
+            "base_abil": "Charge",
+            "parents": ["Cheaper Uppercut", "Stronger Mantle"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 20,
+                "col": 3,
+                "icon": "node_1"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Flying Kick",
+                    "multipliers": [150, 0, 0, 20, 0, 30]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Flying Kick Max Damage",
+                    "hits": { "Flying Kick": 1 },
+                    "display": "Flying Kick Max Damage"
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Stronger Mantle",
+            "desc": "Add +2 additional charges to Mantle of the Bovemists",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
+            "parents": ["Manachism", "Flying Kick"], 
+            "dependencies": ["Mantle of the Bovemists"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 20,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Mantle of the Bovemists",
+                            "name": "mantle_charge",
+                            "value": 2
+                        }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Manachism",
+            "desc": "If you receive a hit that's less than 5% of your max HP, gain 10 Mana (1s Cooldown)",
+            "archetype": "Paladin", 
+            "archetype_req": 3, 
+            "parents": ["Stronger Mantle", "Provoke"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 20,
+                "col": 8,
+                "icon": "node_2"
+            },
+            "properties": {
+                "cooldown": 1
+            },
+            "effects": []  
+        },
+
+        {
+            "display_name": "Boiling Blood",
+            "desc": "Bash leaves a trail of boiling blood behind its first explosion, slowing down and damaging enemies above it every 0.4 seconds",
+            "base_abil": "Bash",
+            "parents": ["Enraged Blow", "Ragnarokkr"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 22,
+                "col": 0,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Boiling Blood",
+                    "cost": 0,
+                    "multipliers": [25, 0, 0, 0, 5, 0]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Ragnarokkr",
+            "desc": "War Scream become deafening, increasing its range and giving damage bonus to players",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "War Scream",
+            "parents": ["Boiling Blood", "Flying Kick"], 
+            "dependencies": ["War Scream"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 22,
+                "col": 2,
+                "icon": "node_2"
+            },
+            "properties": {
+                "aoe": 2
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": 10
+                }
+            ]  
+        },
+        {
+            "display_name": "Ambidextrous",
+            "desc": "Increase your chance to attack with Counter by +30%",
+            "base_abil": "Counter",
+            "parents": ["Flying Kick", "Stronger Mantle", "Burning Heart"], 
+            "dependencies": ["Counter"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 22,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [ {"type": "prop", "abil": "Counter", "name": "chance", "value": 30} ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Burning Heart",
+            "desc": "For every 100 Health Bonus you have from item IDs, gain +2% Fire Damage (Max 100%)",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "parents": ["Ambidextrous", "Stronger Bash"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 22,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": false,
+                    "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "hpBonus"
+                        }
+                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "fDamPct"
+                    },
+                    "scaling": [0.02],
+                    "max": 100
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Stronger Bash",
+            "desc": "Increase the damage of Bash",
+            "base_abil": "Bash",
+            "parents": ["Burning Heart", "Manachism"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 22,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Single Hit",
+                    "multipliers": [30, 0, 0, 0, 0, 0]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Intoxicating Blood",
+            "desc": "After leaving Corrupted, gain 2% of the health lost back for each enemy killed while Corrupted",
+            "archetype": "Fallen", 
+            "archetype_req": 5, 
+            "base_abil": "Bak'al's Grasp",
+            "parents": ["Ragnarokkr", "Boiling Blood"], 
+            "dependencies": ["Bak'al's Grasp"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 23,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []  
+        },
+
+        {
+            "display_name": "Comet",
+            "desc": "After being hit by Fireworks, enemies will crash into the ground and receive more damage",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "Uppercut",
+            "parents": ["Ragnarokkr"], 
+            "dependencies": ["Fireworks"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 24,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Comet",
+                    "cost": 0,
+                    "multipliers": [80, 20, 0, 0, 0, 0]
+                },
+                {
+                    "type":"add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Total Damage",
+                    "cost": 0, 
+                    "hits": {
+                        "Comet": 1
+                    }
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Collide",
+            "desc": "Mobs thrown into walls from Flying Kick will explode and receive additonal damage",
+            "archetype": "Battle Monk", 
+            "archetype_req": 4, 
+            "base_abil": "Charge",
+            "parents": ["Ambidextrous", "Burning Heart"], 
+            "dependencies": ["Flying Kick"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 23,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 4
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Collide",
+                    "cost": 0,
+                    "multipliers": [150, 0, 0, 0, 50, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Flying Kick Max Damage",
+                    "hits": { "Collide": 1 }
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Rejuvenating Skin",
+            "desc": "Regain back 30% of the damage you take as healing over 30s",
+            "archetype": "Paladin", 
+            "archetype_req": 5, 
+            "parents": ["Burning Heart", "Stronger Bash"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 23,
+                "col": 7,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []  
+        },
+        {
+            "display_name": "Uncontainable Corruption",
+            "desc": "Reduce the cooldown of Bak'al's Grasp by -5s, and increase the raw damage gained for every 2% of health lost by +1",
+            "base_abil": "Bak'al's Grasp",
+            "parents": ["Boiling Blood", "Radiant Devotee"], 
+            "dependencies": ["Bak'al's Grasp"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 26,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Corrupted",
+                    "output": {
+                        "type": "stat",
+                        "name": "damRaw" 
+                    },
+                    "scaling": [0.5]
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [ {"type": "prop", "abil": "Bak'al's Grasp", "name": "cooldown", "value": -5} ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Radiant Devotee",
+            "desc": "For every 4% Reflection you have from items, gain +1/5s Mana Regen (Max 10/5s)",
+            "archetype": "Battle Monk", 
+            "archetype_req": 1, 
+            "parents": ["Whirlwind Strike", "Uncontainable Corruption"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 26,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "ref"
+                        }
+                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "mr"
+                    },
+                    "scaling": [0.25],
+                    "max": 10
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Whirlwind Strike",
+            "desc": "Uppercut will create a strong gust of air, launching you upward with enemies (Hold shift to stay grounded)",
+            "archetype": "Battle Monk", 
+            "archetype_req": 5, 
+            "base_abil": "Uppercut",
+            "parents": ["Ambidextrous", "Radiant Devotee"], 
+            "dependencies": ["Uppercut"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 26,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {
+                "range": 2 
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Uppercut",
+                    "multipliers": [0, 0, 0, 0, 0, 50]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Mythril Skin",
+            "desc": "Gain +5% Base Resistance and become immune to knockback",
+            "archetype": "Paladin", 
+            "archetype_req": 6, 
+            "parents": ["Rejuvenating Skin"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 26,
+                "col": 7,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "defMult.Base",
+                            "value": 5
+                        }
+                    ]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Armour Breaker",
+            "desc": "While Corrupted, losing 30% Health will make your next Uppercut destroy enemies' defense, rendering them weaker to damage",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "Uppercut",
+            "parents": ["Uncontainable Corruption", "Radiant Devotee"], 
+            "dependencies": ["Bak'al's Grasp"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 27,
+                "col": 1,
+                "icon": "node_2"
+            },
+            "properties": {
+                "duration": 8
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Armor Breaker",
+                    "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Shield Strike",
+            "desc": "When your Mantle of the Bovemist loses all charges, deal damage around you for each Mantle individually lost",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
+            "parents": ["Mythril Skin", "Sparkling Hope"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 27,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Shield Strike",
+                    "base_spell": 6,
+                    "display": "Damage per Shield",
+                    "parts": [
+                        {
+                            "name": "Damage per Shield",
+                            "multipliers": [60, 0, 20, 0, 0, 0]
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Sparkling Hope",
+            "desc": "Everytime you heal 5% of your max health, deal damage to all nearby enemies",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "parents": ["Mythril Skin"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 27,
+                "col": 8,
+                "icon": "node_2"
+            },
+            "properties": {
+                "aoe": 6
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Sparkling Hope",
+                    "base_spell": 7,
+                    "display": "Damage Tick",
+                    "parts": [
+                        {
+                            "name": "Damage Tick",
+                            "multipliers": [10, 0, 5, 0, 0, 0]
+                        }
+                    ]
+                }
+            ]  
+        },
+        {
+            "display_name": "Massive Bash",
+            "desc": "While Corrupted, every 3% Health you lose will add +1 AoE to Bash (Max 10)",
+            "archetype": "Fallen", 
+            "archetype_req": 8, 
+            "base_abil": "Bak'al's Grasp",
+            "parents": ["Tempest", "Uncontainable Corruption"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 28,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Corrupted",
+                    "output": {
+                        "type": "prop",
+                        "abil": "Bash",
+                        "name": "aoe"
+                    },
+                    "scaling": [0.3333333333333333],
+                    "max": 10
+                }
+            ]  
+        },{
+            "display_name": "Tempest",
+            "desc": "War Scream will ripple the ground and deal damage 3 times in a large area",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
+            "base_abil": "War Scream",
+            "parents": ["Massive Bash", "Spirit of the Rabbit"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 28,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 16
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Tempest",
+                    "multipliers": [30, 10, 0, 0, 0, 10]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Tempest Total Damage",
+                    "hits": {
+                        "Tempest": 3
+                    }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Total Damage",
+                    "hits": { "Tempest": 3 }
+                }
+            ]  
+        },
+        {
+            "display_name": "Spirit of the Rabbit",
+            "desc": "Reduce the Mana cost of Charge and increase your Walk Speed by +20%",
+            "archetype": "Battle Monk", 
+            "archetype_req": 5, 
+            "base_abil": "Charge",
+            "parents": ["Tempest", "Whirlwind Strike"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 28,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "cost": -5
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [{ "type": "stat", "name": "spd", "value": 20 }]
+                }
+            ]  
+        },{
+            "display_name": "Massacre",
+            "desc": "While Corrupted, if your effective attack speed is Slow or lower, hitting an enemy with your Main Attack will add +1% to your Corrupted bar",
+            "archetype": "Fallen", 
+            "archetype_req": 5, 
+            "base_abil": 999,
+            "parents": ["Tempest", "Massive Bash"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 29,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []  
+        },
+        {
+            "display_name": "Axe Kick",
+            "desc": "Increase the damage of Uppercut, but also increase its mana cost",
+            "base_abil": "Uppercut",
+            "parents": ["Tempest", "Spirit of the Rabbit"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 29,
+                "col": 3,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Uppercut",
+                    "cost": 10,
+                    "multipliers": [100, 0, 0, 0, 0, 0]
+                }
+            ]  
+        },
+        {
+            "display_name": "Radiance",
+            "desc": "Bash will buff your allies' positive IDs. (15s Cooldown)",
+            "archetype": "Paladin", 
+            "archetype_req": 2, 
+            "base_abil": "Bash",
+            "parents": ["Spirit of the Rabbit", "Cheaper Bash 2"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 29,
+                "col": 5,
+                "icon": "node_2"
+            },
+            "properties": {
+                "cooldown": 15
+            },
+            "effects": []  
+        },
+
+        {
+            "display_name": "Cheaper Bash 2",
+            "desc": "Reduce the Mana cost of Bash",
+            "base_abil": "Bash",
+            "parents": ["Radiance", "Shield Strike", "Sparkling Hope"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 29,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "cost": -5
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Cheaper War Scream",
+            "desc": "Reduce the Mana cost of War Scream",
+            "base_abil": "War Scream",
+            "parents": ["Massive Bash"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 31,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": -5
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Discombobulate",
+            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +3 (Additive, Max +80). This bonus decays -5 every second",
+            "archetype": "Battle Monk", 
+            "archetype_req": 11, 
+            "parents": ["Cyclone"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 31,
+                "col": 2,
+                "icon": "node_3"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Hits dealt",
+                    "slider_max": 27,
+                    "output": [
+                        { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
+                        { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
+                        { "type": "stat", "name": "wDamAddMin" }, { "type": "stat", "name": "wDamAddMax" },
+                        { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
+                        { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
+                    ],
+                    "scaling": [3],
+                    "max": 80
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Thunderclap",
+            "desc": "Bash will cast at the player's position and gain additional AoE.\n\n All elemental conversions become Thunder",
+            "archetype": "Battle Monk", 
+            "archetype_req": 8, 
+            "parents": ["Cyclone"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 32,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "convert_spell_conv",
+                    "target_part": "all",
+                    "base_spell": 1,
+                    "conversion": "Thunder"
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil": "Bash",
+                        "name": "aoe",
+                        "value": 3
+                    }]
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Cyclone",
+            "desc": "After casting War Scream, envelop yourself with a vortex that damages nearby enemies every 0.5s",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
+            "parents": ["Spirit of the Rabbit"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 31,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 4,
+                "duration": 20
+            },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Cyclone",
+                    "multipliers": [10, 0, 0, 0, 5, 10]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Cyclone Total Damage",
+                    "hits": {
+                        "Cyclone": 40
+                    }
+                    
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Second Chance",
+            "desc": "When you receive a fatal blow, survive and regain 30% of your Health (10m Cooldown)",
+            "archetype": "Paladin", 
+            "archetype_req": 12, 
+            "parents": ["Cheaper Bash 2"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 32,
+                "col": 7,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []  
+        },
+
+        {
+            "display_name": "Blood Pact",
+            "desc": "If you do not have enough mana to cast a spell, spend health instead (0.6% health per mana)",
+            "archetype": "Fallen", 
+            "archetype_req": 10, 
+            "parents": ["Cheaper War Scream"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 34,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {
+                "health_cost": 0.6
+            },
+            "effects": []  
+        },
+
+        {
+            "display_name": "Haemorrhage",
+            "desc": "Reduce Blood Pact's health cost. (0.3% health per mana)",
+            "archetype": "Fallen", 
+            "archetype_req": 0, 
+            "base_abil": "Blood Pact",
+            "parents": ["Blood Pact"], 
+            "dependencies": ["Blood Pact"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 35,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [{ "type": "prop", "abil": "Blood Pact", "name": "health_cost", "value": -0.3}]
+            }]
+        },
+
+        {
+            "display_name": "Brink of Madness",
+            "desc": "If your health is 25% full or less, gain +40% Resistance",
+            "parents": ["Blood Pact", "Cheaper Uppercut 2"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 35,
+                "col": 4,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Brink",
+                    "bonuses": [{ "type": "stat", "name": "defMult.Brink", "value": 40}]
+                }
+            ]
+        },
+
+        {
+            "display_name": "Cheaper Uppercut 2",
+            "desc": "Reduce the Mana cost of Uppercut",
+            "base_abil": "Uppercut",
+            "parents": ["Second Chance", "Brink of Madness"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 35,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": -5
+                }
+            ]  
+        },
+
+        {
+            "display_name": "Martyr",
+            "desc": "When you receive a fatal blow, all nearby allies become invincible",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "parents": ["Second Chance"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 35,
+                "col": 8,
+                "icon": "node_1"
+            },
+            "properties": {
+                "duration": 3,
+                "aoe": 12
+            },
+            "effects": []  
+        }
+    ],
+    "Mage": [
+        {
+            "display_name": "Meteor",
+            "desc": "Summon a slow but powerful meteor from the sky, dealing massive damage in a large area",
+            "parents": [], 
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 0,
+                "col": 4,
+                "icon": "node_mage"
+            },
+            "properties": {
+                "aoe": 5,
+                "range": 18
+            },
+            "effects": [{ 
+                "type": "replace_spell",
+                "name": "Meteor",
+                "cost": 55,
+                "base_spell": 3, 
+                "display": "Total Damage", 
+                "parts": [
+                    {  
+                        "name": "Meteor Damage",
+                        "multipliers": [300, 100, 0, 0, 0, 0]
+                    },
+                    {
+                        "name": "Total Damage",
+                        "hits": { "Meteor Damage": 1 }
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Teleport",
+            "desc": "Instantly teleport in the direction you're facing",
+            "parents": ["Shooting Star"], 
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+            "row": 6,
+            "col": 4,
+            "icon": "node_mage"
+            },
+            "properties": {
+                "range": 12
+            },
+            "effects": [{ 
+                "type": "replace_spell",
+                "name": "Teleport",
+                "cost": 25,
+                "base_spell": 2, 
+                "display": "", 
+                "parts": []
+            }]
+        },
+        {
+            "display_name": "Heal",
+            "desc": "Heal yourself and nearby allies in a large area around you. (When healing an ally, you cannot heal more than 30% of their max health)",
+            "parents": ["Wand Proficiency II", "Cheaper Teleport"], 
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1, 
+            "display": { "row": 8, "col": 2, "icon": "node_mage"},
+            "properties": { "aoe": 5 },
+            "effects": [
+                { 
+                    "type": "replace_spell",
+                    "name": "Heal",
+                    "cost": 35,
+                    "base_spell": 1, 
+                    "display": "Heal", 
+                    "parts": [
+                        {  
+                            "name": "Heal",
+                            "power": 0.1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Ice Snake",
+            "desc": "Summon a fast-moving ice snake that reduces your enemies' speed and damage them.",
+            "parents": ["Wisdom", "Cheaper Teleport"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -6142,39 +7833,45 @@ const atrees = {
             },
             "properties": {},
             "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Meteor Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Meteor Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Per Orb"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Per Orb"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Lightning Damage"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Lightning Damage"
-                        }
-                    ],
-                    "scaling": [
-                        15
-                    ]
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Winded",
+                        "output": [
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "nConvBase:3.Lightning Damage"
+                            }
+                        ],
+                        "scaling": [15]
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Winded",
+                        "output": [
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Meteor Damage"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Per Orb"
+                            },
+                            {
+                                "type": "stat",
+                                "name": "eConvBase:3.Lightning Damage"
+                            }
+                        ],
+                    "scaling": [10]
                 }
             ]
         },
@@ -6553,9 +8250,7 @@ const atrees = {
                             "name": "nConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [
-                        30
-                    ]
+                    "scaling": [20]
                 },
                 {
                     "type": "stat_scaling",
@@ -6571,9 +8266,7 @@ const atrees = {
                             "name": "tConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [
-                        10
-                    ]
+                    "scaling": [5]
                 },
                 {
                     "type": "stat_scaling",
@@ -6688,7 +8381,7 @@ const atrees = {
         },
         {
             "display_name": "Lightweaver",
-            "desc": "After healing 60% of your max health within 10s, summon a rotating orb that damages all enemies it touches for 20s. (Max 3 Orbs)",
+            "desc": "After healing 50% of your max health within 10s, summon a rotating orb that damages all enemies it touches for 20s. (Max 3 Orbs)",
             "archetype": "Light Bender",
             "archetype_req": 7,
             "parents": [
@@ -6797,7 +8490,7 @@ const atrees = {
                 "col": 7,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {"range": 20},
             "effects": []
         },
         {
@@ -7219,15 +8912,8 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 3,
-                    "target_part": "Per Orb",
-                    "multipliers": [
-                        -50,
-                        0,
-                        -10,
-                        0,
-                        0,
-                        0
-                    ]
+                    "target_part": "Per Orb", 
+                    "multipliers": [-30, 0, -10, 0, 0, 0]
                 },
                 {
                     "type": "add_spell_prop",

@@ -1044,8 +1044,6 @@ function render_AT(UI_elem, list_elem, tree) {
         });
 
         // add tooltip
-        // tooltips are being changed to generate on mouseover for fin444's future style updates
-        // this is being implemented before those updates since it helps with a hotfix
         hitbox.addEventListener('mouseover', function(e) {
             if (e.target !== this) {
                 return;
@@ -1054,7 +1052,7 @@ function render_AT(UI_elem, list_elem, tree) {
                 node_wrap.tooltip_elem.remove();
                 delete node_wrap.tooltip_elem;
             }
-            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability);
+            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability, atree_map);
         });
 
         hitbox.addEventListener('mouseout', function(e) {
@@ -1074,42 +1072,138 @@ function render_AT(UI_elem, list_elem, tree) {
     return atree_map;
 };
 
-function generateTooltip(UI_elem, node_elem, ability) {
-    let tooltip = document.createElement('div');
-    tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+function generateTooltip(UI_elem, node_elem, ability, atree_map) {
+    let container = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"], {"style": "position: absolute; z-index: 100;"});
+    container.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
+    container.style.left = UI_elem.getBoundingClientRect().left + "px";
+    container.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
 
-    // tooltip text formatting
+    // title
+    let title = make_elem("b", ["scaled-font", "mx-1"], {});
+    title.innerHTML = ability.display_name;
+    switch(ability.display.icon) {
+        case "node_0":
+            // already white
+            break;
+        case "node_1":
+            title.classList.add("mc-gold");
+            break;
+        case "node_2":
+            title.classList.add("mc-light-purple");
+            break;
+        case "node_3":
+            title.classList.add("mc-red");
+            break;
+        case "node_warrior":
+        case "node_archer":
+        case "node_mage":
+        case "node_assassin":
+        case "node_shaman":
+            title.classList.add("mc-green");
+            break;
+    }
+    container.appendChild(title);
 
-    let tooltip_title = document.createElement('b');
-    tooltip_title.classList.add("scaled-font");
-    tooltip_title.innerHTML = ability.display_name;
-    tooltip.appendChild(tooltip_title);
+    container.innerHTML += "<br/><br/>";
 
-    if ('archetype' in ability && ability.archetype !== "") {
-        let tooltip_archetype = document.createElement('p');
-        tooltip_archetype.classList.add("scaled-font");
-        tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
-        tooltip.appendChild(tooltip_archetype);
+    // description
+    let description = make_elem("p", ["scaled-font-sm", "my-0", "mx-1", "text-wrap", "mc-gray"], {});
+    let numberRegex = /[+-]?\d+(\.\d+)?[%+s]?/g; // +/- (optional), 1 or more digits, period followed by 1 or more digits (optional), %/+/s (optional)
+    description.innerHTML = ability.desc.replaceAll(numberRegex, (m) => { return "<span class = 'mc-white'>" + m + "</span>" });
+    container.appendChild(description);
+
+    container.appendChild(document.createElement("br"));
+
+    // archetype
+    if ("archetype" in ability && ability.archetype !== "") {
+        let archetype = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        archetype.innerHTML = ability.archetype + " Archetype";
+        switch(ability.archetype) {
+            case "Riftwalker":
+            case "Paladin":
+                archetype.classList.add("mc-aqua");
+                break;
+            case "Fallen":
+                archetype.classList.add("mc-red");
+                break;
+            case "Boltslinger":
+            case "Battle Monk":
+                archetype.classList.add("mc-yellow");
+                break;
+            case "Trapper":
+                archetype.classList.add("mc-dark-green");
+                break;
+            case "Trickster":
+            case "Sharpshooter":
+                archetype.classList.add("mc-light-purple");
+                break;
+            case "Arcanist":
+                archetype.classList.add("mc-dark-purple");
+                break;
+            case "Acrobat":
+            case "Light Bender":
+                // already white
+                break;
+            case "Shadestepper":
+                archetype.classList.add("mc-dark-red");
+                break;
+        }
+        container.appendChild(archetype);
+        container.appendChild(document.createElement("br"));
     }
 
-    let tooltip_desc = document.createElement('p');
-    tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-    tooltip_desc.textContent = ability.desc;
-    tooltip.appendChild(tooltip_desc);
+    // calculate if requirements are satisfied
+    let apUsed = 0;
+    let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
+    let archChosen = 0;
+    let blockedBy = [];
+    for (let [id, node_wrap] of atree_map.entries()) {
+        if (!node_wrap.active || id == ability.id) {
+            continue; // we don't want to count abilities that are not selected, and an ability should not count towards itself
+        }
+        apUsed += node_wrap.ability.cost;
+        if (node_wrap.ability.archetype == ability.archetype) {
+            archChosen++;
+        }
+        if (ability.blockers.includes(id)) {
+            blockedBy.push(node_wrap.ability.display_name);
+        }
+    }
 
-    let tooltip_cost = document.createElement('p');
-    tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
-    tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
-    tooltip.appendChild(tooltip_cost);
+    let reqYes = "<span class = 'mc-green'>&#10004;</span>" // green check mark
+    let reqNo = "<span class = 'mc-red'>&#10006;</span>" // red x
 
-    tooltip.style.position = "absolute";
-    tooltip.style.zIndex = "100";
-    tooltip.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
-    tooltip.style.left = UI_elem.getBoundingClientRect().left + "px";
-    tooltip.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
+    // cost
+    let cost = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+    if (apUsed + ability.cost > maxAP) {
+        cost.innerHTML = reqNo;
+    } else {
+        cost.innerHTML = reqYes;
+    }
+    cost.innerHTML += " <span class = 'mc-gray'>Ability Points:</span> " + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
+    container.appendChild(cost);
 
-    UI_elem.appendChild(tooltip);
-    return tooltip;
+    // archetype req
+    if (ability.archetype_req > 0 && ability.archetype != null) {
+        let archReq = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        if (archChosen >= ability.archetype_req) {
+            archReq.innerHTML = reqYes;
+        } else {
+            archReq.innerHTML = reqNo;
+        }
+        archReq.innerHTML += " <span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        container.appendChild(archReq);
+    }
+
+    // blockers
+    for (let i = 0; i < blockedBy.length; i++) {
+        let blocker = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        blocker.innerHTML = reqNo + " <span class = 'mc-gray'>Blocked By:</span> " + blockedBy[i];
+        container.appendChild(blocker);
+    }
+
+    UI_elem.appendChild(container);
+    return container;
 }
 
 // resolve connector conflict, when they occupy the same cell.
