@@ -9262,7 +9262,7 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Total Damage",
                     "hits": {
-                        "Spin Attack": 2
+                        "Spin Attack": 1
                     },
                     "display": "Total Damage"
                 }
@@ -9270,7 +9270,7 @@ const atrees = {
         },
         {
             "display_name": "Poisoned Blade",
-            "desc": "For every 24 or 2 Raw Main Attack Damage you have from items, gain +5/3s Poison Damage (Max 50/3s)",
+            "desc": "For every 2% or 2 Raw Main Attack Damage you have from items, gain +5/3s Poison Damage (Max 50/3s)",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
@@ -9358,7 +9358,7 @@ const atrees = {
         },
         {
             "display_name": "Double Slice",
-            "desc": "Your Main Attack will attack twice, but deal -4% damage per hit.",
+            "desc": "Your Main Attack will attack twice, but deal -40% damage per hit.",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": 999,
@@ -9380,6 +9380,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 0,
+                    "target_part": "Melee",
                     "multipliers": [
                         -40,
                         0,
@@ -9388,6 +9389,13 @@ const atrees = {
                         0,
                         0
                     ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "display": "Total Damage",
+                    "target_part": "Total Damage",
+                    "hits": {"Melee": 2}
                 }
             ]
         },
@@ -10111,7 +10119,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
-                    "target_part": "Per Bomb",
+                    "target_part": "Per Tick",
                     "multipliers": [
                         -20,
                         0,
