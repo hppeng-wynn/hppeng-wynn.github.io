@@ -1473,7 +1473,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Escape",
+                "Cheaper Dash",
                 "Thunder Mastery",
                 "Fire Mastery"
             ],
@@ -10669,7 +10669,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "base_spell": 0,
+                    "base_spell": 3,
                     "target_part": "Total Damage",
                     "hits": {
                         "Per Hit": 3
@@ -10701,7 +10701,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "ws",
+                            "name": "spd",
                             "value": 20
                         },
                         {
@@ -10907,7 +10907,7 @@ const atrees = {
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 33,
                 "col": 6,
