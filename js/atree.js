@@ -79,12 +79,16 @@ stat_scaling: {
   round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
   slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
-                                            //     modify: change existing part. do nothing if not exist
+                                            //     modify: change existing part, by incrementing properties. do nothing if not exist
   slider_max: Optional[float]               // affected by slider_behavior
-  "inputs": Optional[list[scaling_target]],
-  "output": scaling_target | List[scaling_target],
-  "scaling": list[float],
-  "max": float
+  inputs: Optional[list[scaling_target]]    // List of things to scale. Omit this if using slider
+
+  output: Optional[scaling_target | List[scaling_target]] // One of the following:
+                                            // 1. Single output scaling target
+                                            // 2. List of scaling targets (all scaled the same)
+                                            // 3. Omitted. no output (useful for modifying slider only without input or output)
+  scaling: Optional[list[float]]            // One float for each input. Sums into output.
+  max: float
 }
 scaling_target: {
   "type": "stat" | "prop",
