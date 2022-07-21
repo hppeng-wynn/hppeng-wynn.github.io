@@ -7955,7 +7955,7 @@ const atrees = {
             "parents": [
                 "Purification"
             ],
-            "_parents": [
+            "parents": [
                 "Fortitude",
                 "Purification"
             ],
@@ -8716,7 +8716,7 @@ const atrees = {
             "parents": [
                 "Cheaper Meteor II"
             ],
-            "_parents": [
+            "parents": [
                 "Explosive Entrance",
                 "Cheaper Meteor II"
             ],
@@ -8792,7 +8792,7 @@ const atrees = {
             "parents": [
                 "Time Dilation"
             ],
-            "_parents": [
+            "parents": [
                 "Time Dilation",
                 "Dynamic Faith"
             ],
