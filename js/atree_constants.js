@@ -10506,7 +10506,7 @@ const atrees = {
         },
         {
             "display_name": "Marked",
-            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 5, 0.5s Cooldown)",
+            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 5, 0.5s Cooldown) Marked enemies will take +10% damage for each mark they have.",
             "archetype": "Shadestepper",
             "archetype_req": 5,
             "parents": [
@@ -11134,14 +11134,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Marked",
-                    "slider_max": 2,
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "damMult.Marked"
-                        }
-                    ],
-                    "scaling": [10]
+                    "slider_max": 2
                 }
             ]
         },
