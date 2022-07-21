@@ -7956,8 +7956,8 @@ const atrees = {
                 "Purification"
             ],
             "_parents": [
-                "Purification",
-                "Fortitude"
+                "Fortitude",
+                "Purification"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8973,7 +8973,7 @@ const atrees = {
             "display_name": "Arcane Overflow",
             "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits.",
             "archetype": "Arcanist",
-            "archetype_req": 11,
+            "archetype_req": 12,
             "base_abil": "Arcane Transfer",
             "parents": [
                 "Larger Mana Bank III"
@@ -9950,7 +9950,14 @@ const atrees = {
             "properties": {
                 "clone": 3
             },
-            "effects": []
+            "effects": [
+
+                    {
+                        "type": "raw_stat",
+                        "toggle": "Activate Clones",
+                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 70}]
+                    }
+            ]
         },
         {
             "display_name": "Lacerate",
@@ -10557,7 +10564,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Echo",
+                    "toggle": "Activate Clones",
                     "bonuses": [
                         {
                             "type": "stat",
@@ -11162,7 +11169,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Echo",
+                    "toggle": "Activate Clones",
                     "bonuses": [
                         {
                             "type": "stat",
