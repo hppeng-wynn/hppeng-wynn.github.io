@@ -204,7 +204,7 @@ Base64 = (function () {
 
     /** Returns an integer value (if possible) made from the range of bits [start, end). Undefined behavior if the range to read is too big.
      *
-     * @param {Number} start - The index to start slicing from. Inclusive.
+     * @param {Number} start - The index to start slicing from. Inclusive. 
      * @param {Number} end - The index to end slicing at. Exclusive.
      *
      * @returns An integer representation of the sliced bits.
@@ -307,7 +307,7 @@ Base64 = (function () {
 
     /** Appends data to the BitVector.
      *
-     * @param {Number | String} data - The data to append.
+     * @param {Number | String | BitVector} data - The data to append.
      * @param {Number} length - The length, in bits, of the new data. This is ignored if data is a string. Defaults to 32 for numbers.
      */
      append(data, length = 32) {
@@ -318,6 +318,8 @@ Base64 = (function () {
         //actual new data length is needed for resizing purposes 
         if (typeof data === "string") {
             length = data.length * 6;
+        } else if (data instanceof BitVector) {
+            length = data.length;
         }
 
         let new_length = this.length + length;
@@ -369,6 +371,12 @@ Base64 = (function () {
             if (((this.length - 1) % 32 + 1) + length > 32) {
                 this.bits[curr_idx + 1] = (int >>> (32 - this.length));
             }
+        } else if (data instanceof BitVector) {
+            //fill to end of curr int of existing bv
+
+            //fill full ints
+            
+            //fill from "rest of" length/bv 
         } else {
             throw new TypeError("BitVector must be appended with a Number or a B64 String");
         }
