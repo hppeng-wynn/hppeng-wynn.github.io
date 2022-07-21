@@ -1143,6 +1143,7 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
     let apUsed = 0;
     let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
     let archChosen = 0;
+    let satisfiedDependencies = [];
     let blockedBy = [];
     for (let [id, node_wrap] of atree_map.entries()) {
         if (!node_wrap.active || id == ability.id) {
@@ -1151,6 +1152,9 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
         apUsed += node_wrap.ability.cost;
         if (node_wrap.ability.archetype == ability.archetype) {
             archChosen++;
+        }
+        if (ability.dependencies.includes(id)) {
+            satisfiedDependencies.push(id);
         }
         if (ability.blockers.includes(id)) {
             blockedBy.push(node_wrap.ability.display_name);
@@ -1180,6 +1184,19 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
         }
         archReq.innerHTML += " <span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
         container.appendChild(archReq);
+    }
+
+    // dependencies
+    console.log(satisfiedDependencies)
+    for (let i = 0; i < ability.dependencies.length; i++) {
+        let dependency = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        if (satisfiedDependencies.includes(ability.dependencies[i])) {
+            dependency.innerHTML = reqYes;
+        } else {
+            dependency.innerHTML = reqNo;
+        }
+        dependency.innerHTML += " <span class = 'mc-gray'>Required Ability:</span> " + atree_map.get(ability.dependencies[i]).ability.display_name;
+        container.appendChild(dependency);
     }
 
     // blockers
