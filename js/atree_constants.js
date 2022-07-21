@@ -9955,7 +9955,7 @@ const atrees = {
                     {
                         "type": "raw_stat",
                         "toggle": "Activate Clones",
-                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 70}]
+                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 80}]
                     }
             ]
         },
