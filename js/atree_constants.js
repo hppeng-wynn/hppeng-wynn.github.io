@@ -1473,7 +1473,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Dash",
+                "Cheaper Escape",
                 "Thunder Mastery",
                 "Fire Mastery"
             ],
@@ -7954,9 +7954,6 @@ const atrees = {
             "desc": "Reduce the Mana cost of Teleport.",
             "base_abil": "Teleport",
             "parents": [
-                "Purification"
-            ],
-            "parents": [
                 "Fortitude",
                 "Purification"
             ],
@@ -8715,9 +8712,6 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Ophanim",
             "parents": [
-                "Cheaper Meteor II"
-            ],
-            "parents": [
                 "Explosive Entrance",
                 "Cheaper Meteor II"
             ],
@@ -8790,9 +8784,6 @@ const atrees = {
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
-            "parents": [
-                "Time Dilation"
-            ],
             "parents": [
                 "Time Dilation",
                 "Dynamic Faith"
@@ -9642,6 +9633,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": 998,
             "parents": [
+                "Cheaper Dash",
                 "Multihit",
                 "Air Mastery"
             ],
