@@ -1473,7 +1473,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Escape",
+                "Cheaper Dash",
                 "Thunder Mastery",
                 "Fire Mastery"
             ],
@@ -2050,6 +2050,7 @@ const atrees = {
             "display_name": "Homing Shots",
             "desc": "Your Main Attack arrows will follow nearby enemies and not be affected by gravity",
             "archetype": "Sharpshooter",
+            "archetype_req": 2,
             "base_abil": 999,
             "parents": [
                 "Leap",
@@ -3829,7 +3830,7 @@ const atrees = {
 
         {
             "display_name": "Ragnarokkr",
-            "desc": "War Scream become deafening, increasing its range and giving damage bonus to players",
+            "desc": "War Scream become deafening, increasing its duration and giving damage bonus to players",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "War Scream",
@@ -3843,7 +3844,7 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "aoe": 2
+                "duration": 90
             },
             "effects": [
                 {
@@ -7953,6 +7954,9 @@ const atrees = {
             "desc": "Reduce the Mana cost of Teleport.",
             "base_abil": "Teleport",
             "parents": [
+                "Purification"
+            ],
+            "parents": [
                 "Fortitude",
                 "Purification"
             ],
@@ -8711,6 +8715,9 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Ophanim",
             "parents": [
+                "Cheaper Meteor II"
+            ],
+            "parents": [
                 "Explosive Entrance",
                 "Cheaper Meteor II"
             ],
@@ -8783,6 +8790,9 @@ const atrees = {
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
+            "parents": [
+                "Time Dilation"
+            ],
             "parents": [
                 "Time Dilation",
                 "Dynamic Faith"
@@ -9208,7 +9218,7 @@ const atrees = {
         },
         {
             "display_name": "Double Spin",
-            "desc": "Spin Attack will activate twice.",
+            "desc": "Spin Attack will activate a second time with a larger area of effect.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
@@ -9632,7 +9642,6 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": 998,
             "parents": [
-                "Cheaper Dash",
                 "Multihit",
                 "Air Mastery"
             ],
@@ -9724,7 +9733,8 @@ const atrees = {
                 "Multihit"
             ],
             "blockers": [
-                "Stronger Multihit"
+                "Stronger Multihit",
+                "Fatality"
             ],
             "cost": 2,
             "display": {
@@ -9771,7 +9781,7 @@ const atrees = {
             "dependencies": [
                 "Multihit"
             ],
-            "blockers": [],
+            "blockers": ["Backstab"],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -9805,7 +9815,7 @@ const atrees = {
         },
         {
             "display_name": "Vanish",
-            "desc": "Dash will vanish you into the shadows and make you invisible to enemies (10s Cooldown). You cannot heal or gain mana while in that state (Attack or get hit to cancel)",
+            "desc": "Dash will vanish you into the shadows and make you invisible to enemies (5s Cooldown). You cannot heal or gain mana while in that state (Attack or get hit to cancel)",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Dash",
@@ -9824,7 +9834,8 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "duration": 5
+                "duration": 5,
+                "cooldown": 5
             },
             "effects": []
         },
@@ -9953,7 +9964,7 @@ const atrees = {
         },
         {
             "display_name": "Lacerate",
-            "desc": "Spin Attack will lunge you forward, deal 3 strikes, and lunge you backward",
+            "desc": "Spin Attack will lunge you forward, deal 3 strikes and lunge you forward again.",
             "archetype": "Acrobat",
             "archetype_req": 2,
             "base_abil": "Spin Attack",
@@ -9982,7 +9993,7 @@ const atrees = {
                             "name": "Per Hit",
                             "type": "damage",
                             "multipliers": [
-                                40,
+                                50,
                                 0,
                                 0,
                                 10,
@@ -10910,7 +10921,7 @@ const atrees = {
         },
         {
             "display_name": "Wall Jump",
-            "desc": "When you Hop into a wall, bounce backward. (Hold shift to cancel)",
+            "desc": "Reduce Hop's cooldown by 1s. When you Hop into a wall, bounce backward. (Hold shift to cancel)",
             "archetype": "Acrobat",
             "archetype_req": 5,
             "parents": [
@@ -10997,7 +11008,7 @@ const atrees = {
                 "Violent Vortex"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 35,
                 "col": 0,
@@ -11189,7 +11200,7 @@ const atrees = {
         },
         {
             "display_name": "Satsujin",
-            "desc": "If an enemy has 3 Marks and 70% of their health or more, your next hit will deal triple damage. (30s Cooldown, per enemy)",
+            "desc": "If an enemy has 3 Marks and 70% of their health or more, your next Multihit or Main Attack will deal triple damage. (30s Cooldown, per enemy)",
             "archetype": "Shadestepper",
             "archetype_req": 12,
             "parents": [
@@ -11244,7 +11255,7 @@ const atrees = {
             "display_name": "Diversion",
             "desc": "Anytime a Lured enemy gets killed, every nearby ally gets +40% health as extra overflowing health. (3s Cooldown). Decay -4% of the bonus every second.",
             "archetype": "Trickster",
-            "archetype_req": 12,
+            "archetype_req": 11,
             "base_abil": "Smoke Bomb",
             "parents": [
                 "Forbidden Art"
