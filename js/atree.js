@@ -1187,7 +1187,6 @@ function generateTooltip(UI_elem, node_elem, ability, atree_map) {
     }
 
     // dependencies
-    console.log(satisfiedDependencies)
     for (let i = 0; i < ability.dependencies.length; i++) {
         let dependency = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
         if (satisfiedDependencies.includes(ability.dependencies[i])) {
