@@ -1473,7 +1473,7 @@ const atrees = {
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Escape",
+                "Cheaper Dash",
                 "Thunder Mastery",
                 "Fire Mastery"
             ],
@@ -7955,9 +7955,9 @@ const atrees = {
             "parents": [
                 "Purification"
             ],
-            "_parents": [
-                "Purification",
-                "Fortitude"
+            "parents": [
+                "Fortitude",
+                "Purification"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8716,7 +8716,7 @@ const atrees = {
             "parents": [
                 "Cheaper Meteor II"
             ],
-            "_parents": [
+            "parents": [
                 "Explosive Entrance",
                 "Cheaper Meteor II"
             ],
@@ -8792,7 +8792,7 @@ const atrees = {
             "parents": [
                 "Time Dilation"
             ],
-            "_parents": [
+            "parents": [
                 "Time Dilation",
                 "Dynamic Faith"
             ],
@@ -8973,7 +8973,7 @@ const atrees = {
             "display_name": "Arcane Overflow",
             "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits.",
             "archetype": "Arcanist",
-            "archetype_req": 11,
+            "archetype_req": 12,
             "base_abil": "Arcane Transfer",
             "parents": [
                 "Larger Mana Bank III"
@@ -9950,7 +9950,14 @@ const atrees = {
             "properties": {
                 "clone": 3
             },
-            "effects": []
+            "effects": [
+
+                    {
+                        "type": "raw_stat",
+                        "toggle": "Activate Clones",
+                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 80}]
+                    }
+            ]
         },
         {
             "display_name": "Lacerate",
@@ -10557,7 +10564,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Echo",
+                    "toggle": "Activate Clones",
                     "bonuses": [
                         {
                             "type": "stat",
@@ -10662,7 +10669,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "base_spell": 0,
+                    "base_spell": 3,
                     "target_part": "Total Damage",
                     "hits": {
                         "Per Hit": 3
@@ -10694,7 +10701,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "ws",
+                            "name": "spd",
                             "value": 20
                         },
                         {
@@ -10900,7 +10907,7 @@ const atrees = {
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 33,
                 "col": 6,
@@ -11155,7 +11162,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Echo",
+                    "toggle": "Activate Clones",
                     "bonuses": [
                         {
                             "type": "stat",
