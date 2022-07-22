@@ -3843,14 +3843,16 @@ const atrees = {
                 "col": 2,
                 "icon": "node_2"
             },
-            "properties": {
-                "duration": 90
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "cost": 10
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [ {"type": "prop", "abil": "War Scream", "name": "duration", "value": 90} ]
                 }
             ]  
         },

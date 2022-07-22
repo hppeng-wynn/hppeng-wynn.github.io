@@ -620,7 +620,7 @@ class SpellDamageCalcNode extends ComputeNode {
                         }
                     }
                     else {
-                        spell_result.heal_amount += subpart.heal_amount;
+                        spell_result.heal_amount += subpart.heal_amount * hits;
                     }
                 }
                 spell_result.name = part.name;
