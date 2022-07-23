@@ -1008,7 +1008,7 @@ function render_AT(UI_elem, list_elem, tree) {
         }
 
         // create node
-        let node_elem = document.createElement('div');
+        let node_elem = document.getElementById("atree-row-" + ability.display.row).children[ability.display.col];
         node_wrap.img = make_elem("div", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1; background-image: url('../media/atree/icons.png'); background-size: 900% 300%;"})
         node_elem.appendChild(node_wrap.img);
 
@@ -1048,8 +1048,6 @@ function render_AT(UI_elem, list_elem, tree) {
                 delete node_wrap.tooltip_elem;
             }
         });
-
-        document.getElementById("atree-row-" + ability.display.row).children[ability.display.col].appendChild(node_elem);
     };
     atree_render_connection(atree_connectors_map);
 
