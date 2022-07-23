@@ -1070,7 +1070,7 @@ function builder_graph_init() {
     powder_special_input.update();
 
     // Potion boost.
-    pre_scale_agg_node.link_to(boosts_node, 'potion-boost');
+    stat_agg_node.link_to(boosts_node, 'potion-boost');
 
     // Also do something similar for skill points
 

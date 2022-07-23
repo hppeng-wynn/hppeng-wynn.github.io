@@ -2730,7 +2730,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 0,
-                    "target_part": "melee",
+                    "target_part": "Melee",
                     "multipliers": [
                         5,
                         0,
@@ -3590,7 +3590,7 @@ const atrees = {
             "effects": [{
                 "type": "add_spell_prop",
                 "base_spell": 0,
-                "target_part": "melee",
+                "target_part": "Melee",
                 "multipliers": [5, 0, 0, 0, 0, 0]
             }]
         },
