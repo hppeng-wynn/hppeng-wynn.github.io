@@ -644,6 +644,9 @@ const atree_make_interactives = new (class extends ComputeNode {
         const atree_order = input_map.get('atree-order');
         const atree_html = input_map.get('atree-elements');
 
+        document.getElementById("boost-sliders").innerHTML = "";
+        document.getElementById("boost-toggles").innerHTML = "";
+
         /**
          * slider_info 
          *   label_name: str,
@@ -658,7 +661,7 @@ const atree_make_interactives = new (class extends ComputeNode {
         const slider_map = new Map();
         const button_map = new Map();
 
-        // first, pull out all the sliders.
+        // first, pull out all the sliders and toggles.
         for (const [abil_id, ability] of merged_abils.entries()) {
             for (const effect of ability.effects) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
@@ -688,15 +691,15 @@ const atree_make_interactives = new (class extends ComputeNode {
                 }
             }
         }
-        // next, render the sliders onto the abilities.
+        // next, render the sliders and toggles onto the abilities.
         for (const [slider_name, slider_info] of slider_map.entries()) {
             let slider_container = gen_slider_labeled(slider_info);
-            atree_html.get(slider_info.abil.id).appendChild(slider_container);
+            document.getElementById("boost-sliders").appendChild(slider_container);
             slider_info.slider = document.getElementById(slider_info.id);
             slider_info.slider.addEventListener("change", (e) => atree_stats.mark_dirty().update());
         }
         for (const [button_name, button_info] of button_map.entries()) {
-            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm"], {
+            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm", "m-1"], {
                 id: button_info.abil.id,
                 textContent: button_name
             });
@@ -709,7 +712,7 @@ const atree_make_interactives = new (class extends ComputeNode {
                 atree_stats.mark_dirty().update()
             });
             button_info.button = button;
-            atree_html.get(button_info.abil.id).appendChild(button);
+            document.getElementById("boost-toggles").appendChild(button);
         }
         return [slider_map, button_map];
     }
