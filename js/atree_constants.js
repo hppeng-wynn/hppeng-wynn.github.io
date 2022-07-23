@@ -823,8 +823,6 @@ const atrees = {
         {
             "display_name": "Escape Artist",
             "desc": "When casting Escape, release 120 arrows towards the ground.",
-            "archetype": "Boltslinger",
-            "archetype_req": 0,
             "base_abil": "Escape",
             "parents": [
                 "Better Guardian Angels",
