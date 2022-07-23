@@ -372,11 +372,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
+                atree_state.get(abil.id).img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[abil.display.icon], 2], [9, 3]);
             }
             else {
                 atree_not_present.push(abil.id);
-                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
+                atree_state.get(abil.id).img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[abil.display.icon], 0], [9, 3]);
             }
         }
 
@@ -425,7 +425,7 @@ const atree_validate = new (class extends ComputeNode {
             const node = atree_state.get(node_id);
             const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
             if (success) {
-                node.img.src = '../media/atree/'+node.ability.display.icon+'.png';
+                node.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[node.ability.display.icon], 1], [9, 3]);
             }
         }
 
@@ -973,7 +973,6 @@ function render_AT(UI_elem, list_elem, tree) {
             const parent_id = parent_abil.id;
 
             let connect_elem = document.createElement("div");
-            // connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
             connect_elem.style = "width: 112.5%; height: 112.5%; position: absolute; top: -5.55%; left: -5.55%; image-rendering: pixelated; background-image: url('../media/atree/connectors.png'); background-size: 1200% 400%;"
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
@@ -1010,16 +1009,8 @@ function render_AT(UI_elem, list_elem, tree) {
 
         // create node
         let node_elem = document.createElement('div');
-        let icon = ability.display.icon;
-        if (icon === undefined) {
-            icon = "node";
-        }
-        let node_img = document.createElement('img');
-        node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
-        node_elem.appendChild(node_img);
-
-        node_wrap.img = node_img;
+        node_wrap.img = make_elem("div", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1; background-image: url('../media/atree/icons.png'); background-size: 900% 300%;"})
+        node_elem.appendChild(node_wrap.img);
 
         // create hitbox
         // this is necessary since images exceed the size of their square, but should only be interactible within that square
@@ -1242,11 +1233,11 @@ function atree_set_state(node_wrapper, new_state) {
     }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
+        node_wrapper.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[icon], 2], [9, 3]);
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
+        node_wrapper.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[icon], 1], [9, 3]);
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1274,6 +1265,18 @@ const atreeConnectorAtlasPositions = {
     "1110": {"0000": [0, 2], "1110": [1, 2], "1100": [2, 2], "1010": [3, 2], "0110": [4, 2]},
     "1011": {"0000": [5, 2], "1011": [6, 2], "1010": [7, 2], "1001": [8, 2], "0011": [9, 2]},
     "1111": {"0000": [0, 3], "1111": [1, 3], "1110": [2, 3], "1101": [3, 3], "1100": [4, 3], "1011": [5, 3], "1010": [6, 3], "1001": [7, 3], "0111": [8, 3], "0110": [9, 3], "0101": [10, 3], "0011": [11, 3]}
+}
+// just has the x position, y is based on state
+const atreeNodeAtlasPositions = {
+    "node_0": 0,
+    "node_1": 1,
+    "node_2": 2,
+    "node_3": 3,
+    "node_archer": 4,
+    "node_warrior": 5,
+    "node_mage": 6,
+    "node_assassin": 7,
+    "node_shaman": 8
 }
 function atlasBGPositionCalc(pos, atlasSize) {
     // https://css-tricks.com/focusing-background-image-precise-location-percentages/
