@@ -392,10 +392,10 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Guardian Angels",
                     "base_spell": 4,
-                    "display": "Total Damage",
+                    "display": "DPS",
                     "parts": [
                         {
-                            "name": "Single Arrow",
+                            "name": "Single Shot",
                             "type": "damage",
                             "multipliers": [
                                 30,
@@ -410,7 +410,14 @@ const atrees = {
                             "name": "Single Bow",
                             "type": "total",
                             "hits": {
-                                "Single Arrow": 8
+                                "Single Shot": 8
+                            }
+                        },
+                        {
+                            "name": "DPS",
+                            "type": "total",
+                            "hits": {
+                                "Single Shot": 2
                             }
                         },
                         {
@@ -910,16 +917,28 @@ const atrees = {
             "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "target_part": "Hound Damage",
-                    "multipliers": [
-                        40,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
+                    "type": "replace_spell",
+                    "name": "Call of the Hound",
+                    "base_spell": 8,
+                    "display": "DPS",
+                    "parts": [
+                        {
+                            "name": "Single Hit",
+                            "multipliers": [
+                                40,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        {
+                            "name": "DPS",
+                            "hits": {
+                                "Single Hit": 4
+                            }
+                        }
                     ]
                 }
             ]
@@ -1198,7 +1217,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
-                    "target_part": "Single Arrow",
+                    "target_part": "Single Shot",
                     "multipliers": [
                         0,
                         0,
@@ -1213,7 +1232,7 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Single Bow",
                     "hits": {
-                        "Single Arrow": 5
+                        "Single Shot": 5
                     }
                 }
             ]
@@ -1621,6 +1640,15 @@ const atrees = {
                     }
                 },
                 {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "DPS",
+                    "behavior": "modify",
+                    "hits": {
+                        "Single Shot": 2
+                    }
+                },
+                {
                     "type": "raw_stat",
                     "bonuses": [
                         {
@@ -1836,7 +1864,7 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Single Bow",
                     "hits": {
-                        "Single Arrow": 4
+                        "Single Shot": 4
                     }
                 }
             ]
