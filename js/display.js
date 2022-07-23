@@ -1392,14 +1392,15 @@ function getBaseSpellCost(stats, spell) {
 }
     
 
-function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spellIdx, spell_results) {
+function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spellIdx, spell_results) {
     // TODO: remove spellIdx (just used to flag melee and cost)
     // TODO: move cost calc out
     parent_elem.textContent = "";
 
     let title_elem = make_elem("p");
 
-    overallparent_elem.textContent = "";
+    _overallparent_elem.textContent = "";
+    const overallparent_elem = make_elem("div", ['col'])
     let title_elemavg = document.createElement("b");
 
     if ('cost' in spell) {
@@ -1466,7 +1467,6 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
                 if (spellIdx === 0) {
                     let display_attack_speeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
                     let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
-                    console.log(stats);
                     if(adjAtkSpd > 6) {
                         adjAtkSpd = 6;
                     } else if(adjAtkSpd < 0) {
@@ -1510,6 +1510,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     }
 
     addClickableArrow(overallparent_elem, parent_elem);
+    _overallparent_elem.append(overallparent_elem);
 }
 
 /** Displays the ID costs of an item

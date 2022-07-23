@@ -723,7 +723,8 @@ const atree_make_interactives = new (class extends ComputeNode {
  * Collect stats from ability tree.
  * Return StatMap of added stats (incl. cost modifications as raw cost)
  *
- * Signature: AbilityTreeStatsNode(atree-merged: MergedATree, build: Build, atree-interactive: Map<str, slider_info>) => StatMap
+ * Signature: AbilityTreeStatsNode(atree-merged: MergedATree, build: Build,
+ *                                 atree-interactive: [Map<str, slider_info>, Map<str, button_info>]) => StatMap
  */
 const atree_stats = new (class extends ComputeNode {
     constructor() { super('atree-stats-collector'); }
