@@ -789,6 +789,7 @@ const atree_stats = new (class extends ComputeNode {
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
+        const [slider_map, button_map] = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -815,7 +816,7 @@ const atree_stats = new (class extends ComputeNode {
         }
         return ret_effects;
     }
-})().link_to(atree_merge, 'atree-merged');
+})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
 
 /**
  * Construct compute nodes to link builder items and edit IDs to the appropriate display outputs.
