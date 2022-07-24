@@ -739,6 +739,20 @@ const atree_scaling = new (class extends ComputeNode {
 
             for (const effect of abil.effects) {
                 switch (effect.type) {
+                case 'raw_stat':
+                    // TODO: toggles...
+                    if (effect.toggle) {
+                        const button = button_map.get(effect.toggle).button;
+                        if (!button.classList.contains("toggleOn")) { continue; }
+                        for (const bonus of effect.bonuses) {
+                            const { type, name, abil = "", value } = bonus;
+                            // TODO: prop
+                            if (type === "stat") {
+                                merge_stat(ret_effects, name, value);
+                            }
+                        }
+                    }
+                    continue;
                 case 'stat_scaling':
                     let total = 0;
                     const {round = true, slider = false, scaling = [0]} = effect;
@@ -789,7 +803,6 @@ const atree_stats = new (class extends ComputeNode {
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
-        const [slider_map, button_map] = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -798,11 +811,8 @@ const atree_stats = new (class extends ComputeNode {
             for (const effect of abil.effects) {
                 switch (effect.type) {
                 case 'raw_stat':
-                    // TODO: toggles...
-                    if (effect.toggle) {
-                        const button = button_map.get(effect.toggle).button;
-                        if (!button.classList.contains("toggleOn")) { continue; }
-                    }
+                    // toggles are handled in atree_scaling.
+                    if (effect.toggle) { continue; }
                     for (const bonus of effect.bonuses) {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
@@ -816,7 +826,7 @@ const atree_stats = new (class extends ComputeNode {
         }
         return ret_effects;
     }
-})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
+})().link_to(atree_merge, 'atree-merged');
 
 /**
  * Construct compute nodes to link builder items and edit IDs to the appropriate display outputs.
