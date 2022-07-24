@@ -65,7 +65,7 @@ function encodeCustom(custom, verbose) {
                 if (typeof (val) === "string" && val !== "") {
                     if ((damages.includes(id) && val === "0-0") || (!verbose && ["lore", "majorIds", "quest", "materials", "drop", "set"].includes(id))) { continue; }
                     if (id === "type") {
-                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(types.indexOf(val.substring(0, 1).toUpperCase() + val.slice(1)), 1);
+                        hash += Base64.fromIntN(i, 2) + Base64.fromIntN(all_types.indexOf(val.substring(0, 1).toUpperCase() + val.slice(1)), 1);
                     } else if (id === "tier") {
                         hash += Base64.fromIntN(i, 2) + Base64.fromIntN(tiers.indexOf(val), 1);
                     } else if (id === "atkSpd") {
@@ -147,7 +147,7 @@ function getCustomFromHash(hash) {
                             val = tiers[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else if (id === "type") {
-                            val = types[Base64.toInt(tag.charAt(2))];
+                            val = all_types[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else if (id === "atkSpd") {
                             val = attackSpeeds[Base64.toInt(tag.charAt(2))];
@@ -179,7 +179,8 @@ function getCustomFromHash(hash) {
             return new Custom(statMap);
         }
     } catch (error) {
-        //console.log(statMap);
+        console.log(error);
+        console.log(statMap);
         return undefined;
     }
 
