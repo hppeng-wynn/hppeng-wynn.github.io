@@ -7665,21 +7665,14 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Backstab",
                     "base_spell": 3,
-                    "display": "Total Damage",
+                    "display": "Backstab Damage",
                     "parts": [
                         {
-                            "name": "Per Hit",
+                            "name": "Backstab Damage",
                             "type": "damage",
                             "multipliers": [
                                 200, 50, 0, 0, 0, 0
                             ]
-                        },
-                        {
-                            "name": "Total Damage",
-                            "type": "total",
-                            "hits": {
-                                "Per Hit": 1
-                            }
                         }
                     ]
                 }
@@ -9139,8 +9132,23 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "dmgMult.Satsujin",
-                            "value": 300
+                            "name": "damMult.Satsujin:3.Backstab Damage",
+                            "value": 200
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:3.Per Hit",
+                            "value": 200
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:3.Fatality",
+                            "value": 200
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:0.Melee",
+                            "value": 200
                         }
                     ]
                 }
