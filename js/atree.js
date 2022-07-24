@@ -310,7 +310,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     }
     let failed_deps = [];
     for (const dep_id of ability.dependencies) {
-        if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+        if (!reachable.has(dep_id)) { failed_deps.push(dep_id) }
     }
     if (failed_deps.length > 0) {
         const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
@@ -318,7 +318,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     }
     let blocking_ids = [];
     for (const blocker_id of ability.blockers) {
-        if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+        if (reachable.has(blocker_id)) { blocking_ids.push(blocker_id); }
     }
     if (blocking_ids.length > 0) {
         const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
