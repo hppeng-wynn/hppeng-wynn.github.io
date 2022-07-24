@@ -6239,7 +6239,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
-                    "target_part": "Heal Pulse",
+                    "target_part": "Second and Third Pulses",
                     "power": 0.15
                 },
                 {
@@ -6249,7 +6249,7 @@ const atrees = {
                     "target_part": "Total Heal",
                     "hits": {
                         "Heal": 1,
-                        "Heal Pulse": 2
+                        "Second and Third Pulses": 2
                     }
                 }
             ]
@@ -6384,7 +6384,7 @@ const atrees = {
                 "Meteor"
             ],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 26,
                 "col": 7,

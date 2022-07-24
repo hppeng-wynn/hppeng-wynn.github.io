@@ -1066,7 +1066,7 @@ function builder_graph_init() {
     new PowderSpecialDisplayNode().link_to(powder_special_input, 'powder-specials')
         .link_to(stat_agg_node, 'stats').link_to(build_node, 'build');
     pre_scale_agg_node.link_to(powder_special_calc, 'powder-boost');
-    pre_scale_agg_node.link_to(armor_powder_node, 'armor-powder');
+    stat_agg_node.link_to(armor_powder_node, 'armor-powder');
     powder_special_input.update();
 
     // Potion boost.
