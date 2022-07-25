@@ -135,7 +135,7 @@ class ComputeNode {
 }
 
 class ValueCheckComputeNode extends ComputeNode {
-    constructor(name) { super(name); }
+    constructor(name) { super(name); this.valid_val = null; }
 
     /**
      * Request update of this compute node. Pushes updates to children,
@@ -154,14 +154,11 @@ class ValueCheckComputeNode extends ComputeNode {
             calc_inputs.set(this.input_translation.get(input.name), input.value);
         }
         let val = this.compute_func(calc_inputs);
-        if (val !== this.value) {
-            super.mark_dirty(2);
-        }
-        else {
-            console.log("soft update");
+        if (val !== null) {
+            if (val !== this.valid_val) { super.mark_dirty(2); } // don't mark dirty if NULL (no update)
+            this.valid_val = val;
         }
         this.value = val;
-
         this.dirty = 0;
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
