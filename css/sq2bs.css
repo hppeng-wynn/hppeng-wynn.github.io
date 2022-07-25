@@ -106,11 +106,9 @@ input.equipment-input {
     font-size: var(--scaled-fontsize);
 }
 
-.my-container {
-    position: fixed; /* Stay in place */
-    left: var(--sidebar-width);
-    overflow-y: scroll;
-    height: 100%;
+.equipment-input {
+    --bs-gutter-y: 1rem;
+    --bs-gutter-x: 3rem
 }
 
 .text-right {
@@ -176,7 +174,7 @@ input.equipment-input {
 }
 
 .scaled-item-icon img {
-    width: 5.5rem;
+    width: 6rem;
 }
 
 .scaled-bckgrd {
@@ -185,7 +183,7 @@ input.equipment-input {
 }
 
 .scaled-bckgrd img {
-    width: 6.5rem;
+    width: 7rem;
 }
 
 .overall-box {
@@ -199,6 +197,13 @@ input.equipment-input {
     .overall-box {
         padding-left: var(--sidebar-width);
         max-width: 100%;
+    }
+    .equipment-input {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 1.5rem;
+    }
+    .level-input {
+        margin-top: 0
     }
     .scaled-font {
         font-size: 1rem;
@@ -258,7 +263,13 @@ input.equipment-input {
         padding-left: var(--sidebar-width);
         max-width: 100%;
     }
-
+    .equipment-input {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 1.5rem
+    }
+    .level-input {
+        margin-top: 0
+    }
     .scaled-font { 
         font-size: 1rem;
     }
