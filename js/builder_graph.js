@@ -445,7 +445,6 @@ class PowderInputNode extends InputNode {
 
     compute_func(input_map) {
         // TODO: haha improve efficiency to O(n) dumb
-        // also, error handling is missing
         let input = this.input_field.value.trim();
         let powdering = [];
         let errorederrors = [];
@@ -453,12 +452,27 @@ class PowderInputNode extends InputNode {
             let first = input.slice(0, 2);
             let powder = powderIDs.get(first);
             if (powder === undefined) {
-                return null;
+                if (first.length > 0)
+                    errorederrors.push(first);
+                else
+                    break;
             } else {
                 powdering.push(powder);
             }
             input = input.slice(2);
         }
+
+        if (this.input_field.getAttribute("placeholder") != null) {
+            let placeholder = this.input_field.getAttribute("placeholder");
+            if (placeholder.includes(" slots") && parseInt(placeholder[0]) < powdering.length)
+                errorederrors.push("Too many powders: " + powdering.length);
+        }
+
+        if (errorederrors.length)
+            this.input_field.classList.add("is-invalid");
+        else
+            this.input_field.classList.remove("is-invalid");
+
         return powdering;
     }
 }
