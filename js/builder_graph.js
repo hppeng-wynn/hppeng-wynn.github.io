@@ -452,10 +452,11 @@ class PowderInputNode extends InputNode {
             let first = input.slice(0, 2);
             let powder = powderIDs.get(first);
             if (powder === undefined) {
-                if (first.length > 0)
+                if (first.length > 0) {
                     errorederrors.push(first);
-                else
+                } else {
                     break;
+                }
             } else {
                 powdering.push(powder);
             }
@@ -468,10 +469,11 @@ class PowderInputNode extends InputNode {
                 errorederrors.push("Too many powders: " + powdering.length);
         }
 
-        if (errorederrors.length)
+        if (errorederrors.length) {
             this.input_field.classList.add("is-invalid");
-        else
+        } else {
             this.input_field.classList.remove("is-invalid");
+        }
 
         return powdering;
     }
