@@ -373,10 +373,19 @@ Base64 = (function () {
             }
         } else if (data instanceof BitVector) {
             //fill to end of curr int of existing bv
+            let other_pos = (32 - (pos % 32)) % 32;
+            this.bits[curr_idx] |= data.slice(0, other_pos);
+            curr_idx += 1;
 
             //fill full ints
+            while (other_pos + 32 < data.length) {
+                this.bits[curr_idx] = data.slice(other_pos, other_pos + 32);
+                curr_idx += 1;
+                other_pos += 32;
+            }
             
-            //fill from "rest of" length/bv 
+            //fill from "rest of" length/bv
+            this.bits[curr_idx] = data.slice(other_pos, data.length); 
         } else {
             throw new TypeError("BitVector must be appended with a Number or a B64 String");
         }

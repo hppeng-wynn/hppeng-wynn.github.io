@@ -11,17 +11,15 @@ class Build{
      * @description Construct a build.
      * @param {Number} level : Level of the player.
      * @param {String[]} equipment : List of equipment names that make up the build.
-     *                    In order: boots, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Weapon.
-     * @param {Number[]} powders : Powder application. List of lists of integers (powder IDs).
-     *                  In order: boots, Chestplate, Leggings, Boots, Weapon.
-     * @param {Object[]} inputerrors : List of instances of error-like classes.
+     *                    In order: boots, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck
      * 
      * @param {Object[]} tomes: List of tomes.
      *                      In order: 2x Weapon Mastery Tome, 4x Armor Mastery Tome, 1x Guild Tome.
      *                      2x Slaying Mastery Tome, 2x Dungeoneering Mastery Tome, 2x Gathering Mastery Tome are in game, but do not have "useful" stats (those that affect damage calculations or building)
+     *
+     * @param {Object} weapon: Weapon. 
      */
-    constructor(level, items, weapon){
-
+    constructor(level, equipment, tomes, weapon){
         if (level < 1) { //Should these be constants?
             this.level = 1;
         } else if (level > 106) {
@@ -36,9 +34,10 @@ class Build{
         document.getElementById("level-choice").value = this.level;
 
         this.availableSkillpoints = levelToSkillPoints(this.level);
-        this.equipment = items;
+        this.equipment = equipment;
+        this.tomes = tomes;
         this.weapon = weapon;
-        this.items = this.equipment.concat([this.weapon]);
+        this.items = this.equipment.concat(tomes, [this.weapon]);
         // return [equip_order, best_skillpoints, final_skillpoints, best_total];
 
         // calc skillpoints requires statmaps only

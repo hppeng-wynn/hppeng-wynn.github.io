@@ -233,7 +233,15 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
 
         // [flag to indicate if tomes are included (0/1)]
         // [if set: 7 sequential tome IDs, each 6 bits unsigned]
-        
+        if (build.tomes.length > 0) {
+            build_bits.append(1, 1);
+            //decoding will assume that tomes has length of 7.
+            for (const tome of build.tomes) {
+                build_bits.append(tome.id, 6); 
+            }
+        } else {
+            build_bits.append(0, 1);
+        }
 
         // ATREE
 

@@ -397,7 +397,9 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('ring1-input'),
             input_map.get('ring2-input'),
             input_map.get('bracelet-input'),
-            input_map.get('necklace-input'),
+            input_map.get('necklace-input')
+        ];
+        let tomes = [
             input_map.get('weaponTome1-input'),
             input_map.get('weaponTome2-input'),
             input_map.get('armorTome1-input'),
@@ -419,7 +421,7 @@ class BuildAssembleNode extends ComputeNode {
         if (all_none && !location.hash) {
             return null;
         }
-        return new Build(level, equipments, weapon);
+        return new Build(level, equipments, tomes, weapon);
     }
 }
 
