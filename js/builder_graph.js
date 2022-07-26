@@ -431,6 +431,7 @@ class PlayerClassNode extends ValueCheckComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "PlayerClassNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        if (build.weapon.statMap.has('NONE')) { return null; }
         return wep_to_class.get(build.weapon.statMap.get('type'));
     }
 }
@@ -622,7 +623,7 @@ class SpellDamageCalcNode extends ComputeNode {
                         }
                     }
                     else {
-                        spell_result.heal_amount += subpart.heal_amount;
+                        spell_result.heal_amount += subpart.heal_amount * hits;
                     }
                 }
                 spell_result.name = part.name;
@@ -796,7 +797,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
  * Signature: AggregateStatsNode(*args) => StatMap
  */
 class AggregateStatsNode extends ComputeNode {
-    constructor() { super("builder-aggregate-stats"); }
+    constructor(name) { super(name); }
 
     compute_func(input_map) {
         const output_stats = new Map();
@@ -999,7 +1000,8 @@ function builder_graph_init() {
     // Phase 2/3: Set up editable IDs, skill points; use decodeBuild() skill points, calculate damage
 
     // Create one node that will be the "aggregator node" (listen to all the editable id nodes, as well as the build_node (for non editable stats) and collect them into one statmap)
-    stat_agg_node = new AggregateStatsNode();
+    pre_scale_agg_node = new AggregateStatsNode('pre-scale-stats');
+    stat_agg_node = new AggregateStatsNode('final-stats');
     edit_agg_node = new AggregateEditableIDNode();
     edit_agg_node.link_to(build_node, 'build');
     for (const field of editable_item_fields) {
@@ -1023,7 +1025,7 @@ function builder_graph_init() {
         edit_input_nodes.push(node);
         skp_inputs.push(node);
     }
-    stat_agg_node.link_to(edit_agg_node);
+    pre_scale_agg_node.link_to(edit_agg_node);
 
     // Phase 3/3: Set up atree stuff.
 
@@ -1031,8 +1033,10 @@ function builder_graph_init() {
     // These two are defined in `atree.js`
     atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(class_node, 'player-class');
-    atree_stats.link_to(build_node, 'build');
-    stat_agg_node.link_to(atree_stats, 'atree-stats');
+    pre_scale_agg_node.link_to(atree_stats, 'atree-raw-stats');
+    atree_scaling.link_to(pre_scale_agg_node, 'scale-stats');
+    stat_agg_node.link_to(pre_scale_agg_node, 'pre-scaling');
+    stat_agg_node.link_to(atree_scaling, 'atree-scaling');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 
@@ -1064,7 +1068,7 @@ function builder_graph_init() {
     let powder_special_calc = new PowderSpecialCalcNode().link_to(powder_special_input, 'powder-specials');
     new PowderSpecialDisplayNode().link_to(powder_special_input, 'powder-specials')
         .link_to(stat_agg_node, 'stats').link_to(build_node, 'build');
-    stat_agg_node.link_to(powder_special_calc, 'powder-boost');
+    pre_scale_agg_node.link_to(powder_special_calc, 'powder-boost');
     stat_agg_node.link_to(armor_powder_node, 'armor-powder');
     powder_special_input.update();
 

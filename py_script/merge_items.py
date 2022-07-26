@@ -83,6 +83,18 @@ for item in old_items:
         #print(f'Unknown old item: {item["name"]}!!!')
     #old_items_map[item["name"]] = item
 
+for set_name, set_info in old_data['sets'].items():
+    for bonus in set_info['bonuses']:
+        for k, v in mul_keys.items():
+            if k in bonus:
+                # SUPER JANKY ROUNDING
+                tentimes = round(bonus[k] * v)
+                rem = tentimes % 10
+                val = math.floor(round_near(tentimes / 10))
+                if rem >= 5:
+                    val += 1
+                bonus[k] = val
+
 for item in items:
     for key in delete_keys:
         if key in item:

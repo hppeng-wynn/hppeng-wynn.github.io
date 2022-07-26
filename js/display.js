@@ -866,7 +866,7 @@ function displayNextCosts(_stats, spell, spellIdx) {
     let int_needed = document.createElement("b");
     if (init_cost.textContent === "1") {
         int_needed.textContent = ": n/a (+0)";
-    }else { //do math
+    } else { //do math
         let target = getSpellCost(stats, spellIdx, spell.cost) - 1;
         let needed = intel;
         let noUpdate = false;
@@ -1386,21 +1386,21 @@ function getSpellCost(stats, spell) {
 }
 
 function getBaseSpellCost(stats, spell) {
-                            // old intelligence:
-    let cost = Math.ceil(spell.cost * (1 - skillPointsToPercentage(stats.get('int')) * skillpoint_final_mult[2]));
+    let cost = spell.cost * (1 - skillPointsToPercentage(stats.get('int')) * skillpoint_final_mult[2]);
     cost += stats.get("spRaw"+spell.base_spell);
-    return Math.floor(cost * (1 + stats.get("spPct"+spell.base_spell) / 100));
+    return cost * (1 + stats.get("spPct"+spell.base_spell) / 100);
 }
     
 
-function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spellIdx, spell_results) {
+function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spellIdx, spell_results) {
     // TODO: remove spellIdx (just used to flag melee and cost)
     // TODO: move cost calc out
     parent_elem.textContent = "";
 
     let title_elem = make_elem("p");
 
-    overallparent_elem.textContent = "";
+    _overallparent_elem.textContent = "";
+    const overallparent_elem = make_elem("div", ['col'])
     let title_elemavg = document.createElement("b");
 
     if ('cost' in spell) {
@@ -1408,7 +1408,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
         title_elem.appendChild(first.cloneNode(true)); //cloneNode is needed here.
         title_elemavg.appendChild(first);
 
-        let second = make_elem("span", ["Mana"], { textContent: getSpellCost(stats, spell) });
+        let second = make_elem("span", ["Mana"], { textContent: getSpellCost(stats, spell).toFixed(2) });
         title_elem.appendChild(second.cloneNode(true));
         title_elemavg.appendChild(second);
 
@@ -1425,8 +1425,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     overallparent_elem.append(title_elemavg);
 
     // if ('cost' in spell) {
-    // :( ...... ?
-    //     overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
+        // overallparent_elem.append(displayNextCosts(stats, spell, spellIdx));
     // }
 
     let critChance = skillPointsToPercentage(stats.get('dex'));
@@ -1468,7 +1467,6 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
                 if (spellIdx === 0) {
                     let display_attack_speeds = ["Super Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Super Fast"];
                     let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
-                    console.log(stats);
                     if(adjAtkSpd > 6) {
                         adjAtkSpd = 6;
                     } else if(adjAtkSpd < 0) {
@@ -1512,6 +1510,7 @@ function displaySpellDamage(parent_elem, overallparent_elem, stats, spell, spell
     }
 
     addClickableArrow(overallparent_elem, parent_elem);
+    _overallparent_elem.append(overallparent_elem);
 }
 
 /** Displays the ID costs of an item

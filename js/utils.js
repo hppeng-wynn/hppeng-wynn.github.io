@@ -830,12 +830,11 @@ function deepcopy(obj, refs=undefined) {
  */
 function gen_slider_labeled({label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []}) {
     let slider_container = document.createElement("div");
+    slider_container.classList.add("col");
 
     let buf_col = document.createElement("div");
-    buf_col.classList.add("col");
     
     let label = document.createElement("div");
-    label.classList.add("col");
     label.classList.add(...label_classlist);
     label.textContent = label_name + ": " + default_val;
 

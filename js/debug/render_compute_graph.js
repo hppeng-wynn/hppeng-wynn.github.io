@@ -35,6 +35,22 @@ d3.select("#graph_body")
     .classed("svg-content-responsive", true);
 let graph = d3.select("svg");
 let svg = graph.append('g');
+
+// triangle arrow head definition
+graph.append('defs').append('marker')
+    .attr('id', 'arrowhead')
+    .attr('viewBox', '-0 -5 10 10')
+    .attr('refX', 23)
+    .attr('refY', 0)
+    .attr('orient', 'auto')
+    .attr('markerWidth', 13)
+    .attr('markerHeight', 13)
+    .attr('xoverflow', 'visible')
+    .append('svg:path')
+      .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+      .attr('fill', '#aaa')
+      .style('stroke','none');
+
 let margin = {top: 20, right: 20, bottom: 35, left: 40};
 
 function bbox() {
@@ -87,6 +103,7 @@ function create_svg(data, redraw_func) {
       .enter()
       .append("line")
         .style("stroke", "#aaa")
+        .attr('marker-end','url(#arrowhead)');
 
     // Initialize the nodes
     let node = svg
@@ -197,7 +214,7 @@ d3.select(window)
   });
 redraw();
 
-const data = convert_data(all_nodes);
+const data = convert_data(Array.from(all_nodes));
 create_svg(data, redraw);
 
 console.log("render");
