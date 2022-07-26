@@ -1009,7 +1009,7 @@ function render_AT(UI_elem, list_elem, tree) {
 
         // create node
         let node_elem = document.getElementById("atree-row-" + ability.display.row).children[ability.display.col];
-        node_wrap.img = make_elem("div", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1; background-image: url('../media/atree/icons.png'); background-size: 1700% 500%;"})
+        node_wrap.img = make_elem("div", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1; background-image: url('../media/atree/icons.png'); background-size: 900% 300%;"})
         node_elem.appendChild(node_wrap.img);
 
         // create hitbox
@@ -1277,7 +1277,7 @@ const atreeNodeAtlasPositions = {
     "node_assassin": 7,
     "node_shaman": 8
 }
-const atreeNodeAtlasSize = [17, 5]
+const atreeNodeAtlasSize = [9, 3]
 function atlasBGPositionCalc(pos, atlasSize) {
     // https://css-tricks.com/focusing-background-image-precise-location-percentages/
     // p = (c + 0.5/z - 0.5) * z/(z - 1) + 0.5
