@@ -429,6 +429,7 @@ class PlayerClassNode extends ValueCheckComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "PlayerClassNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        if (build.weapon.statMap.has('NONE')) { return null; }
         return wep_to_class.get(build.weapon.statMap.get('type'));
     }
 }

@@ -199,7 +199,6 @@ const atree_node = new (class extends ComputeNode {
 const atree_render = new (class extends ComputeNode {
     constructor() {
         super('builder-atree-render');
-        this.fail_cb = true;
         this.UI_elem = document.getElementById("atree-ui");
         this.list_elem = document.getElementById("atree-header");
     }
