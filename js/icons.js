@@ -21,7 +21,6 @@ function toggleIcons() {
         img.src = img.src.replace("media/icons/" + (newIcons ? "old" : "new"), "media/icons/" + newOrOld);
     }
     for (let i = 0; i < divs.length; i++) {
-        console.log(divs.item(i))
         divs.item(i).style.backgroundImage = "url('../media/items/" + (newIcons ? "new" : "old") + ".png')";
     }
 }
