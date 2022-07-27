@@ -1,3 +1,7 @@
+const itemBGPositions = {"bow": "0 0", "spear": "9.090909090909088% 0", "wand": "18.181818181818183% 0", "dagger": "27.27272727272727% 0", "relik": "36.36363636363637% 0",
+    "helmet": "45.45454545454546% 0", "chestplate": "54.54545454545454% 0", "leggings": "63.63636363636363% 0", "boots": "72.72727272727272% 0",
+    "ring": "81.81818181818181% 0", "bracelet": "90.90909090909092% 0", "necklace": "100% 0",
+    "potion": "25% 0", "scroll": "50% 0", "food": "75% 0"};
 
 function apply_elemental_format(p_elem, id, suffix) {
     suffix = (typeof suffix !== 'undefined') ?  suffix : "";
@@ -286,11 +290,18 @@ function displayExpandedItem(item, parent_id){
                     parent_div.appendChild(nolink_row);
 
                     if (item.has("type")) {
-                        let img = make_elem("img", [], {
-                            src: "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png",
+                        let img = make_elem("div", [], {
                             alt: item.get("type"),
-                            style: " z=index: 1; position: relative;"
+                            style: "z-index: 1; position: relative; image-rendering: pixelated; width: 50%; height: 50%; background-position: " + itemBGPositions[item.get("type")] + ";"
                         });
+                        if (["potion", "scroll", "food"].includes(item.get("type"))) {
+                            img.style.backgroundImage = "url('../media/items/common.png')";
+                            img.style.backgroundSize = "500% 100%";
+                        } else {
+                            img.style.backgroundImage = "url('../media/items/" + (newIcons ? "new.png')" : "old.png')");
+                            img.style.backgroundSize = "1200% 100%";
+                        }
+
                         let container = make_elem("div");
                         
                         let bckgrd = make_elem("div", ["col", "px-0", "d-flex", "align-items-center", "justify-content-center", 'scaled-bckgrd'], { // , "no-collapse"
