@@ -463,3 +463,16 @@ a:hover {
 .ferricles{
     color: #5be553;
 }
+
+.item-display-new-toggleable {
+    image-rendering: pixelated;
+    background-size: 1200% 100%;
+    aspect-ratio: 1/1;
+}
+.tome-image {
+    background-image: url('../media/items/common.png');
+    image-rendering: pixelated;
+    background-size: 500% 100%;
+    background-position: 100% 0;
+    aspect-ratio: 1/1;
+}

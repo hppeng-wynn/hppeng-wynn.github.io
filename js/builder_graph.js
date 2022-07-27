@@ -312,7 +312,8 @@ class WeaponInputDisplayNode extends ComputeNode {
         const [item] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
 
         const type = item.statMap.get('type');
-        this.image.setAttribute('src', '../media/items/new/generic-'+type+'.png');
+        this.image.style.backgroundPosition = itemBGPositions[type];
+        
         let dps = get_base_dps(item.statMap);
         if (isNaN(dps)) {
             dps = dps[1];
