@@ -736,7 +736,7 @@ class DisplayBuildWarningsNode extends ComputeNode {
                 input_map.get('def'),
                 input_map.get('agi')
             ];
-        let skp_effects = ["% more damage dealt.","% chance to crit.","% spell cost reduction.","% less damage taken.","% chance to dodge."];
+        let skp_effects = ["% damage","% crit","% cost red.","% resist","% dodge"];
         let total_assigned = 0;
         for (let i in skp_order){ //big bren
             const assigned = skillpoints[i] - base_totals[i] + min_assigned[i]
@@ -758,20 +758,16 @@ class DisplayBuildWarningsNode extends ComputeNode {
 
         let summarybox = document.getElementById("summary-box");
         summarybox.textContent = "";
-        let skpRow = document.createElement("p");
 
-        let remainingSkp = document.createElement("p");
-        remainingSkp.classList.add("scaled-font");
-        let remainingSkpTitle = document.createElement("b");
-        remainingSkpTitle.textContent = "Assigned " + total_assigned + " skillpoints. Remaining skillpoints: ";
+        let remainingSkp = make_elem("p", ['scaled-font', 'my-0']);
+        let remainingSkpTitle = make_elem("b", [], { textContent: "Assigned " + total_assigned + " skillpoints. Remaining skillpoints: " });
         let remainingSkpContent = document.createElement("b");
         remainingSkpContent.textContent = "" + (levelToSkillPoints(build.level) - total_assigned);
         remainingSkpContent.classList.add(levelToSkillPoints(build.level) - total_assigned < 0 ? "negative" : "positive");
 
-        remainingSkp.appendChild(remainingSkpTitle);
-        remainingSkp.appendChild(remainingSkpContent);
+        remainingSkp.append(remainingSkpTitle);
+        remainingSkp.append(remainingSkpContent);
 
-        summarybox.append(skpRow);
         summarybox.append(remainingSkp);
         if(total_assigned > levelToSkillPoints(build.level)){
             let skpWarning = document.createElement("span");
