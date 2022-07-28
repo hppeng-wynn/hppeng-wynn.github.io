@@ -142,18 +142,9 @@ function toggle_boost_tab(tab) {
     document.getElementById(tab + "-boost-tab").classList.add("selected-btn");
 }
 
-let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
-function show_tab(tab) {
-    //hide all tabs, then show the tab of the div clicked and highlight the correct button
-    for (const i in tabs) {
-        document.querySelector("#" + tabs[i]).style.display = "none";
-        document.getElementById("tab-" + tabs[i].split("-")[0] + "-btn").classList.remove("selected-btn");
-    }
-    document.querySelector("#" + tab).style.display = "";
-    document.getElementById("tab-" + tab.split("-")[0] +  "-btn").classList.add("selected-btn");
-}
+// let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
 
-function show_tab_temp(target, tabs) {
+function show_tab(target, tabs) {
     //console.log(itemFilters)
 
     //hide all tabs, then show the tab of the div clicked and highlight the correct button

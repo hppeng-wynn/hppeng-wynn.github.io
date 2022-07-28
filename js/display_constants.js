@@ -209,7 +209,7 @@ let posModSuffixes = {
 /*
  * Display commands
  */
-let build_all_display_commands = [
+let build_overall_display_commands = [
     "#defense-stats",
     "!spacer",
     "mr", "ms",
@@ -226,8 +226,13 @@ let build_all_display_commands = [
     "gXp", "gSpd",
 ];
 
-let build_offensive_display_commands = [
+let build_detailed_display_commands = [
+    "#defense-stats",
+    "str", "dex", "int", "def", "agi",
+    "!spacer",
+    "mr", "ms",
     "hprRaw", "hprPct",
+    "ls",
     "sdRaw", "sdPct",
     "mdRaw", "mdPct",
     "!elemental",
@@ -235,7 +240,17 @@ let build_offensive_display_commands = [
     "!elemental",
     "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
     "atkTier",
+    "poison",
+    "ref", "thorns",
+    "expd",
+    "spd",
     "rainbowRaw",
+    "sprint", "sprintReg",
+    "jh",
+    "xpb", "lb", "lq",
+    "spRegen",
+    "eSteal",
+    "gXp", "gSpd",
 ];
 
 // full

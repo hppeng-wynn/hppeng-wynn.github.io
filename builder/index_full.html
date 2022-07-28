@@ -43,18 +43,18 @@
         </div>
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-3 py-3 gx-0">
             <div class="col-xl-6">
-                <div class="row my-2 g-5 dark-6 rounded-top d-flex d-lg-none">
-                    <div class="col text-center">
-                        <p class="dark-9 fake-button scaled-font" id="equipment-inputs-btn" onclick="show_tab_temp('equipment-inputs', ['equipment-inputs', 'adjust-id'])">Equipments</p>
+                <div class="row my-2 dark-6 rounded text-center g-0 px-3 d-flex d-lg-none">
+                    <div class="col">
+                        <p class="fake-button scaled-font mb-0 selected-btn" id="equipment-inputs-btn" onclick="show_tab('equipment-inputs', ['equipment-inputs', 'adjust-id'])">Equipments</p>
                     </div>
-                    <div class="col text-center">
-                        <p class="dark-9 fake-button scaled-font" id="adjust-id-btn" onclick="show_tab_temp('adjust-id', ['equipment-inputs', 'adjust-id'])">Boosts</p>
+                    <div class="col">
+                        <p class="fake-button scaled-font mb-0" id="adjust-id-btn" onclick="show_tab('adjust-id', ['equipment-inputs', 'adjust-id'])">Ability Tree</p>
                     </div>
                 </div>
                 <div class="row row-cols-1 mb-3 gy-4" id="equipment-inputs">
                     <div class="col">
-                        <div class="row row-cols-1 row-cols-xl-2 dark-shadow dark-6 justify-content-center equipment-input">
-                            <div class="col-auto rounded order-xl-0 order-0">
+                        <div class="row row-cols-1 row-cols-xl-2 dark-shadow dark-6 justify-content-center equipment-input rounded gy-3 gy-lg-0 mt-auto">
+                            <div class="col-auto rounded order-xl-0 order-0 my-0">
                                 <div class="row h-100 px-1" id="helmet-dropdown">
                                     <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="helmet-img-loc">
                                         <div id="helmet-img" class="img-fluid rounded item-display-new-toggleable" style="background-image: url('../media/items/new.png'); background-position: 45.45454545454546% 0;"></div>
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-auto order-xl-0 order-1">
+                            <div class="col-auto order-xl-0 order-1 my-0">
                                 <div class="row h-100 px-1" id="ring1-dropdown">
                                     <div class="col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon" id="ring1-img-loc">
                                         <div id="ring1-img" class="img-fluid rounded item-display-new-toggleable" style="background-image: url('../media/items/new.png'); background-position: 81.81818181818181% 0;"></div>
@@ -1379,24 +1379,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 mb-3 order-2 order-lg-1">
+            <div class="col-xl-3 mb-3 order-2 order-lg-0">
                 <div class="row row-cols-1 rounded dark-shadow dark-6 scaled-font">
                     <div class="col rounded-top">
                         <div class="row">
-                            <div id="tab-offensive-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7" onclick="show_tab('offensive-stats')">
-                                Offense
+                            <div id="detailed-stats-btn" class="col text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7" onclick="show_tab('detailed-stats', ['detailed-stats', 'summary-stats'])">
+                                Detailed
                             </div>
-                            <div id="tab-defensive-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7" onclick="show_tab('defensive-stats')">
-                                Defense
-                            </div>
-                            <div id="tab-overall-btn" class="col-4 text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7 selected-btn" onclick="show_tab('overall-stats')">
-                                Overall
+                            <div id="summary-stats-btn" class="col text-center fake-button border-bottom border-dark rounded-top dark-4u border border-2 border-dark-7 selected-btn" onclick="show_tab('summary-stats', ['detailed-stats', 'summary-stats'])">
+                                Summary
                             </div>
                         </div>
                     </div>
-                    <div style="display: none;" id="offensive-stats" class="col text-nowrap"></div>
-                    <div style="display: none;" id="defensive-stats" class="col text-nowrap"></div>
-                    <div id="overall-stats" class="col text-nowrap"></div>
+                    <div style="display: none;" id="detailed-stats" class="col text-nowrap"></div>
+                    <div id="summary-stats" class="col text-nowrap"></div>
                 </div>
             </div>
             <div class="col-xl-3 mb-3 px-0">

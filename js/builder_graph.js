@@ -705,11 +705,11 @@ class BuildDisplayNode extends ComputeNode {
     compute_func(input_map) {
         const build = input_map.get('build');
         const stats = input_map.get('stats');
-        displayBuildStats('overall-stats', build, build_all_display_commands, stats);
-        displayBuildStats("offensive-stats", build, build_offensive_display_commands, stats);
+        displayBuildStats('summary-stats', build, build_overall_display_commands, stats);
+        displayBuildStats("detailed-stats", build, build_detailed_display_commands, stats);
         displaySetBonuses("set-info", build);
         // TODO: move weapon out?
-        displayDefenseStats(document.getElementById("defensive-stats"), stats);
+        // displayDefenseStats(document.getElementById("defensive-stats"), stats);
 
         displayPoisonDamage(document.getElementById("build-poison-stats"), build);
         displayEquipOrder(document.getElementById("build-order"), build.equip_order);
