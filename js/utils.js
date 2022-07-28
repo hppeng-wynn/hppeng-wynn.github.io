@@ -788,12 +788,11 @@ function deepcopy(obj, refs=undefined) {
  */
 function gen_slider_labeled({label_name, label_classlist = [], min = 0, max = 100, step = 1, default_val = min, id = undefined, color = "#FFFFFF", classlist = []}) {
     let slider_container = document.createElement("div");
+    slider_container.classList.add("col");
 
     let buf_col = document.createElement("div");
-    buf_col.classList.add("col");
     
     let label = document.createElement("div");
-    label.classList.add("col");
     label.classList.add(...label_classlist);
     label.textContent = label_name + ": " + default_val;
 
@@ -888,4 +887,68 @@ function make_elem(type, classlist = [], args = {}) {
         ret_elem[i] = args[i];
     }
     return ret_elem;
+}
+
+/**
+ * Nodes must have:
+ * node: {
+ *   parents: List[node]
+ *   children: List[node]
+ * }
+ *
+ * This function will define: "visited, assigned, scc" properties
+ * Assuming a connected graph. (only one root)
+ */
+function make_SCC_graph(root_node, nodes) {
+    for (const node of nodes) {
+        node.visited = false;
+        node.assigned = false;
+        node.scc = null;
+    }
+    const res = []
+    /*
+     * SCC graph construction.
+     * https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm
+     */
+    function visit(u, res) {
+        if (u.visited) { return; }
+        u.visited = true;
+        for (const child of u.children) {
+            if (!child.visited) { visit(child, res); }
+        }
+        res.push(u);
+    }
+    visit(root_node, res);
+    res.reverse();
+    const sccs = [];
+    function assign(node, cur_scc) {
+        if (node.assigned) { return; }
+        cur_scc.nodes.push(node);
+        node.scc = cur_scc;
+        node.assigned = true;
+        for (const parent of node.parents) {
+            assign(parent, cur_scc);
+        }
+    }
+    for (const node of res) {
+        if (node.assigned) { continue; }
+        const cur_scc = {
+            nodes: [],
+            children: new Set(),
+            parents: new Set()
+        };
+        assign(node, cur_scc);
+        sccs.push(cur_scc);
+    }
+    for (const scc of sccs) {
+        for (const node of scc.nodes) {
+            for (const child of node.children) {
+                scc.children.add(child.scc);
+            }
+            for (const parent of node.parents) {
+                scc.parents.add(parent.scc);
+            }
+        }
+    }
+    return sccs;
 }

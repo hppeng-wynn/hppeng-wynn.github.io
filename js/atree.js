@@ -41,8 +41,8 @@ add_spell_prop: {
                                     //     If target part does not exist, a new part is created.
     behavior:       Optional[str]   // One of: "merge", "modify". default: merge
                                     //     merge: add if exist, make new part if not exist
-                                    //     modify: change existing part. do nothing if not exist
-    cost:           Optional[int]   // change to spellcost
+                                    //     modify: increment existing part. do nothing if not exist
+    cost:           Optional[int]   // change to spellcost. If the spell is not spell 1-4, this must be left empty.
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
     hits:           Optional[Map[str, float]]   // Additive changes to hits (for total entry)
@@ -62,7 +62,7 @@ raw_stat: {
                                             // string value means bind to (or create) named button
     behavior:       Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
-                                            //     modify: change existing part. do nothing if not exist
+                                            //     modify: increment existing part. do nothing if not exist
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
@@ -79,12 +79,16 @@ stat_scaling: {
   round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
   slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
-                                            //     modify: change existing part. do nothing if not exist
+                                            //     modify: change existing part, by incrementing properties. do nothing if not exist
   slider_max: Optional[float]               // affected by slider_behavior
-  "inputs": Optional[list[scaling_target]],
-  "output": scaling_target | List[scaling_target],
-  "scaling": list[float],
-  "max": float
+  inputs: Optional[list[scaling_target]]    // List of things to scale. Omit this if using slider
+
+  output: Optional[scaling_target | List[scaling_target]] // One of the following:
+                                            // 1. Single output scaling target
+                                            // 2. List of scaling targets (all scaled the same)
+                                            // 3. Omitted. no output (useful for modifying slider only without input or output)
+  scaling: Optional[list[float]]            // One float for each input. Sums into output.
+  max: float
 }
 scaling_target: {
   "type": "stat" | "prop",
@@ -170,39 +174,22 @@ const atree_node = new (class extends ComputeNode {
             }
             node.parents = parents;
         }
-        console.log(atree_map);
 
+        let sccs = make_SCC_graph(atree_head, atree_map.values());
         let atree_topo_sort = [];
-        topological_sort_tree(atree_head, atree_topo_sort, new Map());
-        atree_topo_sort.reverse();
+        for (const scc of sccs) {
+            for (const node of scc.nodes) {
+                delete node.visited;
+                delete node.assigned;
+                delete node.scc;
+                atree_topo_sort.push(node);
+            }
+        }
+        console.log("Approximate topological order ability tree:");
+        console.log(atree_topo_sort);
         return atree_topo_sort;
     }
 })();
-
-/**
- * Create a reverse topological sort of the tree in the result list.
- * NOTE: our structure isn't a tree... it isn't even acyclic... but do it anyway i guess...
- *
- * https://en.wikipedia.org/wiki/Topological_sorting
- * @param tree: Root of tree to sort
- * @param res: Result list (reverse topological order)
- * @param mark_state: Bookkeeping. Call with empty Map()
- */
-function topological_sort_tree(tree, res, mark_state) {
-    const state = mark_state.get(tree);
-    if (state === undefined) {
-        // unmarked.
-        mark_state.set(tree, false);    // temporary mark
-        for (const child of tree.children) {
-            topological_sort_tree(child, res, mark_state);
-        }
-        mark_state.set(tree, true);     // permanent mark
-        res.push(tree);
-    }
-    // these cases are not needed. Case 1 does nothing, case 2 should never happen.
-    // else if (state === true) { return; } // permanent mark.
-    // else if (state === false) { throw "not a DAG"; } // temporary mark.
-}
 
 /**
  * Display ability tree from topologically sorted list.
@@ -212,7 +199,6 @@ function topological_sort_tree(tree, res, mark_state) {
 const atree_render = new (class extends ComputeNode {
     constructor() {
         super('builder-atree-render');
-        this.fail_cb = true;
         this.UI_elem = document.getElementById("atree-ui");
         this.list_elem = document.getElementById("atree-header");
     }
@@ -323,7 +309,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     }
     let failed_deps = [];
     for (const dep_id of ability.dependencies) {
-        if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+        if (!reachable.has(dep_id)) { failed_deps.push(dep_id) }
     }
     if (failed_deps.length > 0) {
         const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
@@ -331,7 +317,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     }
     let blocking_ids = [];
     for (const blocker_id of ability.blockers) {
-        if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+        if (reachable.has(blocker_id)) { blocking_ids.push(blocker_id); }
     }
     if (blocking_ids.length > 0) {
         const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
@@ -385,11 +371,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
+                atree_state.get(abil.id).img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[abil.display.icon], 2], atreeNodeAtlasSize);
             }
             else {
                 atree_not_present.push(abil.id);
-                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
+                atree_state.get(abil.id).img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[abil.display.icon], 0], atreeNodeAtlasSize);
             }
         }
 
@@ -416,6 +402,7 @@ const atree_validate = new (class extends ComputeNode {
                 reachable.add(ability.id);
             }
             if (atree_to_add.length == _add.length) {
+                atree_to_add = _add;
                 break;
             }
             atree_to_add = _add;
@@ -437,7 +424,7 @@ const atree_validate = new (class extends ComputeNode {
             const node = atree_state.get(node_id);
             const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
             if (success) {
-                node.img.src = '../media/atree/'+node.ability.display.icon+'.png';
+                node.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[node.ability.display.icon], 1], atreeNodeAtlasSize);
             }
         }
 
@@ -656,6 +643,9 @@ const atree_make_interactives = new (class extends ComputeNode {
         const atree_order = input_map.get('atree-order');
         const atree_html = input_map.get('atree-elements');
 
+        document.getElementById("boost-sliders").innerHTML = "";
+        document.getElementById("boost-toggles").innerHTML = "";
+
         /**
          * slider_info 
          *   label_name: str,
@@ -670,7 +660,7 @@ const atree_make_interactives = new (class extends ComputeNode {
         const slider_map = new Map();
         const button_map = new Map();
 
-        // first, pull out all the sliders.
+        // first, pull out all the sliders and toggles.
         for (const [abil_id, ability] of merged_abils.entries()) {
             for (const effect of ability.effects) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
@@ -683,7 +673,7 @@ const atree_make_interactives = new (class extends ComputeNode {
                     }
                     else if (slider_behavior === 'merge') {
                         slider_map.set(slider_name, {
-                            label_name: slider_name,
+                            label_name: slider_name+' ('+ability.display_name+')',
                             max: slider_max,
                             step: slider_step,
                             id: "ability-slider"+ability.id,
@@ -700,15 +690,15 @@ const atree_make_interactives = new (class extends ComputeNode {
                 }
             }
         }
-        // next, render the sliders onto the abilities.
+        // next, render the sliders and toggles onto the abilities.
         for (const [slider_name, slider_info] of slider_map.entries()) {
             let slider_container = gen_slider_labeled(slider_info);
-            atree_html.get(slider_info.abil.id).appendChild(slider_container);
+            document.getElementById("boost-sliders").appendChild(slider_container);
             slider_info.slider = document.getElementById(slider_info.id);
-            slider_info.slider.addEventListener("change", (e) => atree_stats.mark_dirty().update());
+            slider_info.slider.addEventListener("change", (e) => atree_scaling.mark_dirty().update());
         }
         for (const [button_name, button_info] of button_map.entries()) {
-            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm"], {
+            let button = make_elem('button', ["button-boost", "border-0", "text-white", "dark-8u", "dark-shadow-sm", "m-1"], {
                 id: button_info.abil.id,
                 textContent: button_name
             });
@@ -718,28 +708,28 @@ const atree_make_interactives = new (class extends ComputeNode {
                 } else {
                     button.classList.add("toggleOn");
                 }
-                atree_stats.mark_dirty().update()
+                atree_scaling.mark_dirty().update()
             });
             button_info.button = button;
-            atree_html.get(button_info.abil.id).appendChild(button);
+            document.getElementById("boost-toggles").appendChild(button);
         }
         return [slider_map, button_map];
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_merge, 'atree-merged').link_to(atree_render_active, 'atree-elements');
 
-
 /**
- * Collect stats from ability tree.
- * Return StatMap of added stats (incl. cost modifications as raw cost)
+ * Scaling stats from ability tree.
+ * Return StatMap of added stats,
  *
- * Signature: AbilityTreeStatsNode(atree-merged: MergedATree, build: Build, atree-interactive: Map<str, slider_info>) => StatMap
+ * Signature: AbilityTreeScalingNode(atree-merged: MergedATree, scale-scats: StatMap,
+ *                                 atree-interactive: [Map<str, slider_info>, Map<str, button_info>]) => StatMap
  */
-const atree_stats = new (class extends ComputeNode {
-    constructor() { super('atree-stats-collector'); }
+const atree_scaling = new (class extends ComputeNode {
+    constructor() { super('atree-scaling-collector'); }
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
-        const item_stats = input_map.get('build').statMap;
+        const pre_scale_stats = input_map.get('scale-stats');
         const [slider_map, button_map] = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
@@ -748,42 +738,41 @@ const atree_stats = new (class extends ComputeNode {
 
             for (const effect of abil.effects) {
                 switch (effect.type) {
-                case 'stat_scaling':
-                    if (effect.slider) {
-                        if ('output' in effect) { // sometimes nodes will modify slider without having effect.
-                            const slider_val = slider_map.get(effect.slider_name).slider.value;
-                            const {round = true} = effect;
-                            let total = parseInt(slider_val) * effect.scaling[0];
-                            if (round) { total = Math.floor(round_near(total)); }
-                            if ('max' in effect && total > effect.max) { total = effect.max; }
-                            if (Array.isArray(effect.output)) {
-                                for (const output of effect.output) {
-                                    if (output.type === 'stat') {   // TODO: prop
-                                        merge_stat(ret_effects, output.name, total);
-                                    }
-                                }
-                            }
-                            else {
-                                if (effect.output.type === 'stat') {
-                                    merge_stat(ret_effects, effect.output.name, total);
-                                }
+                case 'raw_stat':
+                    // TODO: toggles...
+                    if (effect.toggle) {
+                        const button = button_map.get(effect.toggle).button;
+                        if (!button.classList.contains("toggleOn")) { continue; }
+                        for (const bonus of effect.bonuses) {
+                            const { type, name, abil = "", value } = bonus;
+                            // TODO: prop
+                            if (type === "stat") {
+                                merge_stat(ret_effects, name, value);
                             }
                         }
                     }
+                    continue;
+                case 'stat_scaling':
+                    let total = 0;
+                    const {round = true, slider = false, scaling = [0]} = effect;
+                    if (slider) {
+                        const slider_val = slider_map.get(effect.slider_name).slider.value;
+                        total = parseInt(slider_val) * scaling[0];
+                    }
                     else {
                         // TODO: type: prop?
-                        let total = 0;
-                        const {round = true} = effect;
-                        for (const [scaling, input] of zip2(effect.scaling, effect.inputs)) {
-                            total += scaling * item_stats.get(input.name);
+                        for (const [_scaling, input] of zip2(scaling, effect.inputs)) {
+                            total += _scaling * pre_scale_stats.get(input.name);
                         }
+                    }
+
+                    if ('output' in effect) { // sometimes nodes will modify slider without having effect.
                         if (round) { total = Math.floor(round_near(total)); }
                         if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect && total > effect.max) { total = effect.max; }
-                        // TODO: output (list...)
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {
-                                if (output.type === 'stat') {
+                                if (output.type === 'stat') {   // TODO: prop
                                     merge_stat(ret_effects, output.name, total);
                                 }
                             }
@@ -795,12 +784,34 @@ const atree_stats = new (class extends ComputeNode {
                         }
                     }
                     continue;
+                }
+            }
+        }
+        return ret_effects;
+    }
+})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
+
+/**
+ * Collect stats from ability tree.
+ * Return StatMap of added stats.
+ *
+ * Signature: AbilityTreeStatsNode(atree-merged: MergedATree) => StatMap
+ */
+const atree_stats = new (class extends ComputeNode {
+    constructor() { super('atree-stats-collector'); }
+
+    compute_func(input_map) {
+        const atree_merged = input_map.get('atree-merged');
+
+        let ret_effects = new Map();
+        for (const [abil_id, abil] of atree_merged.entries()) {
+            if (abil.effects.length == 0) { continue; }
+
+            for (const effect of abil.effects) {
+                switch (effect.type) {
                 case 'raw_stat':
-                    // TODO: toggles...
-                    if (effect.toggle) {
-                        const button = button_map.get(effect.toggle).button;
-                        if (!button.classList.contains("toggleOn")) { continue; }
-                    }
+                    // toggles are handled in atree_scaling.
+                    if (effect.toggle) { continue; }
                     for (const bonus of effect.bonuses) {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
@@ -809,27 +820,12 @@ const atree_stats = new (class extends ComputeNode {
                         }
                     }
                     continue;
-                case 'add_spell_prop':
-                    continue;
-                    // TODO unjankify....
-                    // costs are converted to raw cost ID
-                    // const { base_spell, cost = 0} = effect;
-                    // if (cost) {
-                    //     const key = "spRaw"+base_spell;
-                    //     if (ret_effects.has(key)) { ret_effects.set(key, ret_effects.get(key) + cost); }
-                    //     else { ret_effects.set(key, cost); }
-                    // }
-                    // continue;
                 }
             }
         }
-        if (ret_effects.has('baseResist')) {
-            merge_stat(ret_effects, "defMult", 1 - (ret_effects.get('baseResist') / 100));
-        }
         return ret_effects;
     }
-})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
-
+})().link_to(atree_merge, 'atree-merged');
 
 /**
  * Construct compute nodes to link builder items and edit IDs to the appropriate display outputs.
@@ -852,16 +848,15 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
         this.build_node = build_node;
         this.stat_agg_node = stat_agg_node;
         // Slight amount of wasted compute to keep internal state non-changing.
-        this.passthrough = new PassThroughNode('atree-make-nodes_internal').link_to(this.build_node, 'build').link_to(this.stat_agg_node, 'stats');
+        this.passthrough = new PassThroughNode('spell-calc-buffer').link_to(this.build_node, 'build').link_to(this.stat_agg_node, 'stats');
         this.spelldmg_nodes = [];   // debugging use
         this.spell_display_elem = document.getElementById("all-spells-display");
     }
 
     compute_func(input_map) {
-        console.log('atree make nodes');
         this.passthrough.remove_link(this.build_node);
         this.passthrough.remove_link(this.stat_agg_node);
-        this.passthrough = new PassThroughNode('atree-make-nodes_internal').link_to(this.build_node, 'build').link_to(this.stat_agg_node, 'stats');
+        this.passthrough = new PassThroughNode('spell-calc-buffer').link_to(this.build_node, 'build').link_to(this.stat_agg_node, 'stats');
         this.spell_display_elem.textContent = "";
         const build_node = this.passthrough.get_node('build');   // aaaaaaaaa performance... savings... help.... 
         const stat_agg_node = this.passthrough.get_node('stats');
@@ -881,10 +876,10 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
             let display_elem = document.createElement('div');
             display_elem.classList.add("col", "pe-0");
             // TODO: just pass these elements into the display node instead of juggling the raw IDs...
-            let spell_summary = document.createElement('div'); spell_summary.setAttribute('id', "spell"+spell.base_spell+"-infoAvg");
-            spell_summary.classList.add("col", "spell-display", "spell-expand", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark");
-            let spell_detail = document.createElement('div'); spell_detail.setAttribute('id', "spell"+spell.base_spell+"-info");
-            spell_detail.classList.add("col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2");
+            let spell_summary = make_elem('div', ["col", "spell-display", "fake-button", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark"],
+                    { id: "spell"+spell.base_spell+"-infoAvg" }); 
+            let spell_detail = make_elem('div', ["col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2"],
+                    { id: "spell"+spell.base_spell+"-info" });
             spell_detail.style.display = "none";
 
             display_elem.appendChild(spell_summary); display_elem.appendChild(spell_detail);
@@ -981,7 +976,7 @@ function render_AT(UI_elem, list_elem, tree) {
             const parent_id = parent_abil.id;
 
             let connect_elem = document.createElement("div");
-            connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
+            connect_elem.style = "width: 112.5%; height: 112.5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); image-rendering: pixelated; background-image: url('../media/atree/connectors.png'); background-size: 1700% 500%;"
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -1016,17 +1011,9 @@ function render_AT(UI_elem, list_elem, tree) {
         }
 
         // create node
-        let node_elem = document.createElement('div');
-        let icon = ability.display.icon;
-        if (icon === undefined) {
-            icon = "node";
-        }
-        let node_img = document.createElement('img');
-        node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
-        node_elem.appendChild(node_img);
-
-        node_wrap.img = node_img;
+        let node_elem = document.getElementById("atree-row-" + ability.display.row).children[ability.display.col];
+        node_wrap.img = make_elem("div", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1; background-image: url('../media/atree/icons.png'); background-size: 900% 300%;"})
+        node_elem.appendChild(node_wrap.img);
 
         // create hitbox
         // this is necessary since images exceed the size of their square, but should only be interactible within that square
@@ -1044,8 +1031,6 @@ function render_AT(UI_elem, list_elem, tree) {
         });
 
         // add tooltip
-        // tooltips are being changed to generate on mouseover for fin444's future style updates
-        // this is being implemented before those updates since it helps with a hotfix
         hitbox.addEventListener('mouseover', function(e) {
             if (e.target !== this) {
                 return;
@@ -1054,7 +1039,7 @@ function render_AT(UI_elem, list_elem, tree) {
                 node_wrap.tooltip_elem.remove();
                 delete node_wrap.tooltip_elem;
             }
-            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability);
+            node_wrap.tooltip_elem = generateTooltip(UI_elem, node_elem, ability, atree_map);
         });
 
         hitbox.addEventListener('mouseout', function(e) {
@@ -1066,50 +1051,160 @@ function render_AT(UI_elem, list_elem, tree) {
                 delete node_wrap.tooltip_elem;
             }
         });
-
-        document.getElementById("atree-row-" + ability.display.row).children[ability.display.col].appendChild(node_elem);
     };
     atree_render_connection(atree_connectors_map);
 
     return atree_map;
 };
 
-function generateTooltip(UI_elem, node_elem, ability) {
-    let tooltip = document.createElement('div');
-    tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
+function generateTooltip(UI_elem, node_elem, ability, atree_map) {
+    let container = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"], {"style": "position: absolute; z-index: 100;"});
+    container.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
+    container.style.left = UI_elem.getBoundingClientRect().left + "px";
+    container.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
 
-    // tooltip text formatting
+    // title
+    let title = make_elem("b", ["scaled-font", "mx-1"], {});
+    title.innerHTML = ability.display_name;
+    switch(ability.display.icon) {
+        case "node_0":
+            // already white
+            break;
+        case "node_1":
+            title.classList.add("mc-gold");
+            break;
+        case "node_2":
+            title.classList.add("mc-light-purple");
+            break;
+        case "node_3":
+            title.classList.add("mc-red");
+            break;
+        case "node_warrior":
+        case "node_archer":
+        case "node_mage":
+        case "node_assassin":
+        case "node_shaman":
+            title.classList.add("mc-green");
+            break;
+    }
+    container.appendChild(title);
 
-    let tooltip_title = document.createElement('b');
-    tooltip_title.classList.add("scaled-font");
-    tooltip_title.innerHTML = ability.display_name;
-    tooltip.appendChild(tooltip_title);
+    container.innerHTML += "<br/><br/>";
 
-    if ('archetype' in ability && ability.archetype !== "") {
-        let tooltip_archetype = document.createElement('p');
-        tooltip_archetype.classList.add("scaled-font");
-        tooltip_archetype.innerHTML = "(Archetype: " + ability.archetype+")";
-        tooltip.appendChild(tooltip_archetype);
+    // description
+    let description = make_elem("p", ["scaled-font-sm", "my-0", "mx-1", "text-wrap", "mc-gray"], {});
+    let numberRegex = /[+-]?\d+(\.\d+)?[%+s]?/g; // +/- (optional), 1 or more digits, period followed by 1 or more digits (optional), %/+/s (optional)
+    description.innerHTML = ability.desc.replaceAll(numberRegex, (m) => { return "<span class = 'mc-white'>" + m + "</span>" });
+    container.appendChild(description);
+
+    container.appendChild(document.createElement("br"));
+
+    // archetype
+    if ("archetype" in ability && ability.archetype !== "") {
+        let archetype = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        archetype.innerHTML = ability.archetype + " Archetype";
+        switch(ability.archetype) {
+            case "Riftwalker":
+            case "Paladin":
+                archetype.classList.add("mc-aqua");
+                break;
+            case "Fallen":
+                archetype.classList.add("mc-red");
+                break;
+            case "Boltslinger":
+            case "Battle Monk":
+                archetype.classList.add("mc-yellow");
+                break;
+            case "Trapper":
+                archetype.classList.add("mc-dark-green");
+                break;
+            case "Trickster":
+            case "Sharpshooter":
+                archetype.classList.add("mc-light-purple");
+                break;
+            case "Arcanist":
+                archetype.classList.add("mc-dark-purple");
+                break;
+            case "Acrobat":
+            case "Light Bender":
+                // already white
+                break;
+            case "Shadestepper":
+                archetype.classList.add("mc-dark-red");
+                break;
+        }
+        container.appendChild(archetype);
+        container.appendChild(document.createElement("br"));
     }
 
-    let tooltip_desc = document.createElement('p');
-    tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-    tooltip_desc.textContent = ability.desc;
-    tooltip.appendChild(tooltip_desc);
+    // calculate if requirements are satisfied
+    let apUsed = 0;
+    let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
+    let archChosen = 0;
+    let satisfiedDependencies = [];
+    let blockedBy = [];
+    for (let [id, node_wrap] of atree_map.entries()) {
+        if (!node_wrap.active || id == ability.id) {
+            continue; // we don't want to count abilities that are not selected, and an ability should not count towards itself
+        }
+        apUsed += node_wrap.ability.cost;
+        if (node_wrap.ability.archetype == ability.archetype) {
+            archChosen++;
+        }
+        if (ability.dependencies.includes(id)) {
+            satisfiedDependencies.push(id);
+        }
+        if (ability.blockers.includes(id)) {
+            blockedBy.push(node_wrap.ability.display_name);
+        }
+    }
 
-    let tooltip_cost = document.createElement('p');
-    tooltip_cost.classList.add("scaled-font-sm", "my-0", "mx-1", "text-start");
-    tooltip_cost.textContent = "Cost: " + ability.cost + " AP";
-    tooltip.appendChild(tooltip_cost);
+    let reqYes = "<span class = 'mc-green'>&#10004;</span>" // green check mark
+    let reqNo = "<span class = 'mc-red'>&#10006;</span>" // red x
 
-    tooltip.style.position = "absolute";
-    tooltip.style.zIndex = "100";
-    tooltip.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
-    tooltip.style.left = UI_elem.getBoundingClientRect().left + "px";
-    tooltip.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
+    // cost
+    let cost = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+    if (apUsed + ability.cost > maxAP) {
+        cost.innerHTML = reqNo;
+    } else {
+        cost.innerHTML = reqYes;
+    }
+    cost.innerHTML += " <span class = 'mc-gray'>Ability Points:</span> " + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
+    container.appendChild(cost);
 
-    UI_elem.appendChild(tooltip);
-    return tooltip;
+    // archetype req
+    if (ability.archetype_req > 0 && ability.archetype != null) {
+        let archReq = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        if (archChosen >= ability.archetype_req) {
+            archReq.innerHTML = reqYes;
+        } else {
+            archReq.innerHTML = reqNo;
+        }
+        archReq.innerHTML += " <span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        container.appendChild(archReq);
+    }
+
+    // dependencies
+    for (let i = 0; i < ability.dependencies.length; i++) {
+        let dependency = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        if (satisfiedDependencies.includes(ability.dependencies[i])) {
+            dependency.innerHTML = reqYes;
+        } else {
+            dependency.innerHTML = reqNo;
+        }
+        dependency.innerHTML += " <span class = 'mc-gray'>Required Ability:</span> " + atree_map.get(ability.dependencies[i]).ability.display_name;
+        container.appendChild(dependency);
+    }
+
+    // blockers
+    for (let i = 0; i < blockedBy.length; i++) {
+        let blocker = make_elem("p", ["scaled-font-sm", "my-0", "mx-1"], {});
+        blocker.innerHTML = reqNo + " <span class = 'mc-gray'>Blocked By:</span> " + blockedBy[i];
+        container.appendChild(blocker);
+    }
+
+    UI_elem.appendChild(container);
+    return container;
 }
 
 // resolve connector conflict, when they occupy the same cell.
@@ -1131,26 +1226,6 @@ function set_connector_type(connector_info) {  // left right up down
     }
 }
 
-// draw the connector onto the screen
-function atree_render_connection(atree_connectors_map) {
-    for (let i of atree_connectors_map.keys()) {
-        let connector_info = atree_connectors_map.get(i);
-        let connector_elem = connector_info.connector;
-        let connector_img = document.createElement('img');
-        set_connector_type(connector_info);
-        connector_img.src = '../media/atree/connect_'+connector_info.type+'.png';
-        connector_img.style = "width: 100%; height: 100%;"
-        connector_elem.replaceChildren(connector_img);
-        connector_info.highlight = [0, 0, 0, 0];
-        let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
-        if (target_elem.children.length != 0) {
-            // janky special case...
-            connector_elem.style.display = 'none';
-        }
-        target_elem.appendChild(connector_elem);
-    };
-};
-
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
     let icon = node_wrapper.ability.display.icon;
@@ -1159,11 +1234,11 @@ function atree_set_state(node_wrapper, new_state) {
     }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
+        node_wrapper.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[icon], 2], atreeNodeAtlasSize);
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
+        node_wrapper.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[icon], 1], atreeNodeAtlasSize);
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1178,6 +1253,62 @@ function atree_set_state(node_wrapper, new_state) {
     }
 };
 
+// first key is connector type, second key is highlight, then [x, y] pair of 0-index positions in the tile atlas
+const atreeConnectorAtlasPositions = {
+    "1100": {"0000": [0, 0], "1100": [1, 0]},
+    "1010": {"0000": [2, 0], "1010": [3, 0]},
+    "0110": {"0000": [4, 0], "0110": [5, 0]},
+    "1001": {"0000": [6, 0], "1001": [7, 0]},
+    "0101": {"0000": [8, 0], "0101": [9, 0]},
+    "0011": {"0000": [10, 0], "0011": [11, 0]},
+    "1101": {"0000": [0, 1], "1101": [1, 1], "1100": [2, 1], "1001": [3, 1], "0101": [4, 1]},
+    "0111": {"0000": [5, 1], "0111": [6, 1], "0110": [7, 1], "0101": [8, 1], "0011": [9, 1]},
+    "1110": {"0000": [0, 2], "1110": [1, 2], "1100": [2, 2], "1010": [3, 2], "0110": [4, 2]},
+    "1011": {"0000": [5, 2], "1011": [6, 2], "1010": [7, 2], "1001": [8, 2], "0011": [9, 2]},
+    "1111": {"0000": [0, 3], "1111": [1, 3], "1110": [2, 3], "1101": [3, 3], "1100": [4, 3], "1011": [5, 3], "1010": [6, 3], "1001": [7, 3], "0111": [8, 3], "0110": [9, 3], "0101": [10, 3], "0011": [11, 3]}
+}
+const atreeConnectorAtlasSize = [17, 5]
+// just has the x position, y is based on state
+const atreeNodeAtlasPositions = {
+    "node_0": 0,
+    "node_1": 1,
+    "node_2": 2,
+    "node_3": 3,
+    "node_archer": 4,
+    "node_warrior": 5,
+    "node_mage": 6,
+    "node_assassin": 7,
+    "node_shaman": 8
+}
+const atreeNodeAtlasSize = [9, 3]
+function atlasBGPositionCalc(pos, atlasSize) {
+    // https://css-tricks.com/focusing-background-image-precise-location-percentages/
+    // p = (c + 0.5/z - 0.5) * z/(z - 1) + 0.5
+    // z = num tiles in direction
+    // c = starting pos of tile in percent of total atlas (equal to index/z)
+    let x = ((pos[0]/atlasSize[0]) + 0.5/atlasSize[0] - 0.5) * atlasSize[0]/(atlasSize[0] - 1) + 0.5
+    let y = ((pos[1]/atlasSize[1]) + 0.5/atlasSize[1] - 0.5) * atlasSize[1]/(atlasSize[1] - 1) + 0.5
+    return (x * 100) + "% " + (y * 100) + "%" // multiply by 100 to convert decimal to percent
+}
+
+// draw the connector onto the screen
+function atree_render_connection(atree_connectors_map) {
+    for (let i of atree_connectors_map.keys()) {
+        let connector_info = atree_connectors_map.get(i);
+        let connector_elem = connector_info.connector;
+        set_connector_type(connector_info);
+        connector_info.highlight = [0, 0, 0, 0];
+        connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[connector_info.type]["0000"], atreeConnectorAtlasSize);
+        let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
+        if (target_elem.children.length != 0) {
+            // janky special case...
+            connector_elem.style.display = 'none';
+        }
+        target_elem.appendChild(connector_elem);
+    };
+};
+
+// update the connector (after being drawn the first time by atree_render_connection)
 function atree_set_edge(atree_connectors_map, parent, child, state) {
     const connectors = child.connectors.get(parent);
     const parent_row = parent.ability.display.row;
@@ -1192,8 +1323,6 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_info = atree_connectors_map.get(connector_label);
         let connector_elem = connector_info.connector;
         let highlight_state = connector_info.highlight; // left right up down
-        let connector_img_elem = document.createElement("img");
-        connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
         let num_1s = 0;
         for (let i = 0; i < 4; i++) {
@@ -1221,23 +1350,16 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
             for (let i = 0; i < 4; i++) {
                 render += highlight_state[i] === 0 ? "0" : "1";
             }
-            if (render == "0000") {
-                connector_img_elem.src = "../media/atree/connect_" + ctype + ".png";
-            } else {
-                connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png";
-            }
-            connector_elem.replaceChildren(connector_img_elem);
+            connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][render], atreeConnectorAtlasSize);
             continue;
-        }
-        // lol bad overloading, [0] is just the whole state
-        highlight_state[0] += state_delta;
-        if (highlight_state[0] > 0) {
-            connector_img_elem.src = '../media/atree/connect_' + ctype + '_1.png';
-            connector_elem.replaceChildren(connector_img_elem);
-        }
-        else {
-            connector_img_elem.src = '../media/atree/connect_'+ctype+'.png';
-            connector_elem.replaceChildren(connector_img_elem);
+        } else {
+            // lol bad overloading, [0] is just the whole state
+            highlight_state[0] += state_delta;
+            if (highlight_state[0] > 0) {
+                connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][ctype], atreeConnectorAtlasSize);
+            } else {
+                connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype]["0000"], atreeConnectorAtlasSize);
+            }
         }
     }
 }

@@ -20,8 +20,8 @@ function init_itempage() {
     //displayExpandedItem(expandItem(itemMap.get(item_url_tag).statMap, []), "item-view");
     try{ 
         item = expandItem(itemMap.get(item_url_tag.replaceAll("%20"," ")), []);
+        item.set('powders', []);
         if (item.get('category') === 'weapon') {
-            item.set('powders', []);
             apply_weapon_powders(item);
         }
         displayExpandedItem(item, "item-view");

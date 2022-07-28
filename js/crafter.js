@@ -345,9 +345,16 @@ function toggleMaterial(buttonId) {
 function updateCraftedImage() {
     let input = document.getElementById("recipe-choice");
     if (all_types.includes(input.value)) {
-        document.getElementById("recipe-img").src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + input.value.toLowerCase() + ".png";
+        let img = document.getElementById("recipe-img");
+        if (["potion", "scroll", "food"].includes(input.value.toLowerCase())) {
+            img.style.backgroundImage = "url('../media/items/common.png')";
+            img.style.backgroundSize = "500% 100%";
+        } else {
+            img.style.backgroundImage = "url('../media/items/" + (newIcons ? "new.png')" : "old.png')");
+            img.style.backgroundSize = "1200% 100%";
+        }
+        img.style.backgroundPosition = itemBGPositions[input.value.toLowerCase()]
     }
-
 }
 
 /* Reset all fields

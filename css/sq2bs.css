@@ -7,7 +7,6 @@
 }
 /* builder containers */
 
-
 .slider {
     -webkit-appearance: none;
     background: #AAAAAA;
@@ -45,7 +44,6 @@
 input[type=range]:focus {
     outline: none; /* Removes the border. */
 }
-
 
 /* equipment field specifics */
 /* inputs and dropdowns */
@@ -102,10 +100,15 @@ input.equipment-input {
     font-weight: bold;
     background-color: hsl(0, 0%, 21%) !important;
     border-radius: 0.375rem !important;
-    border-color: rgba(33, 37, 41, 1) !important;
     min-height: calc(1.2 * var(--scaled-fontsize) + 2px);
     padding: 0rem 0.5rem;
     font-size: var(--scaled-fontsize);
+    --bs-gutter-y: 1rem;
+    --bs-gutter-x: 3rem
+}
+
+input.equipment-input:not(.is-invalid) {
+    border-color: rgba(33, 37, 41, 1) !important;
 }
 
 .my-container {
@@ -130,10 +133,6 @@ input.equipment-input {
 .spell-display b {
     font-size: 3rem;
     font-weight: bold;
-}
-
-.spell-expand {
-    cursor: pointer;
 }
 
 :root {
@@ -178,11 +177,11 @@ input.equipment-input {
 }
 
 .scaled-item-icon {
-    width: 8rem;
+    width: 6rem;
 }
 
 .scaled-item-icon img {
-    width: 6.5rem;
+    width: 6rem;
 }
 
 .scaled-bckgrd {
@@ -191,12 +190,27 @@ input.equipment-input {
 }
 
 .scaled-bckgrd img {
-    width: 6.5rem;
+    width: 7rem;
+}
+
+.overall-box {
+    max-width: 95%;
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
     :root {
         --scaled-fontsize: 1rem;
+    }
+    .overall-box {
+        padding-left: var(--sidebar-width);
+        max-width: 100%;
+    }
+    .equipment-input {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 1.5rem;
+    }
+    .level-input {
+        margin-top: 0
     }
     .scaled-font {
         font-size: 1rem;
@@ -223,11 +237,11 @@ input.equipment-input {
     }
 
     .scaled-item-icon {
-        width: 3.2rem;
+        width: 2.6rem;
     }
 
     .scaled-item-icon img {
-        width: 2.8rem;
+        width: 2.2rem;
     }
 
     .scaled-bckgrd {
@@ -251,6 +265,17 @@ input.equipment-input {
 @media screen and (min-width: 1400px) {
     :root {
         --scaled-fontsize: 1rem;
+    }
+    .overall-box {
+        padding-left: var(--sidebar-width);
+        max-width: 100%;
+    }
+    .equipment-input {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 1.5rem
+    }
+    .level-input {
+        margin-top: 0
     }
     .scaled-font { 
         font-size: 1rem;
@@ -277,11 +302,11 @@ input.equipment-input {
     }
 
     .scaled-item-icon {
-        width: 4rem;
+        width: 3.2rem;
     }
     
     .scaled-item-icon img {
-        width: 3.5rem;
+        width: 2.7rem;
     }
 
     .scaled-bckgrd {
@@ -292,7 +317,6 @@ input.equipment-input {
     .scaled-bckgrd img {
         width: 3.5rem;
     }
-
 
     .warning {
         font-size: .8rem;
@@ -463,4 +487,17 @@ a:hover {
 }
 .ferricles{
     color: #5be553;
+}
+
+.item-display-new-toggleable {
+    image-rendering: pixelated;
+    background-size: 1200% 100%;
+    aspect-ratio: 1/1;
+}
+.tome-image {
+    background-image: url('../media/items/common.png');
+    image-rendering: pixelated;
+    background-size: 500% 100%;
+    background-position: 100% 0;
+    aspect-ratio: 1/1;
 }

@@ -1,5 +1,6 @@
-let all_nodes = [];
+let all_nodes = new Set();
 let node_debug_stack = [];
+let COMPUTE_GRAPH_DEBUG = false;
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -21,7 +22,7 @@ class ComputeNode {
                                 // 0: clean
         this.inputs_dirty = new Map();
         this.inputs_dirty_count = 0;
-        all_nodes.push(this);
+        if (COMPUTE_GRAPH_DEBUG) { all_nodes.add(this); }
     }
 
     /**
@@ -34,7 +35,7 @@ class ComputeNode {
         if (this.dirty === 0) {
             return;
         }
-        node_debug_stack.push(this.name);
+        if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.push(this.name); }
         if (this.dirty == 2) {
             let calc_inputs = new Map();
             for (const input of this.inputs) {
@@ -46,7 +47,7 @@ class ComputeNode {
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
         }
-        node_debug_stack.pop();
+        if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.pop(); }
         return this;
     }
 
@@ -134,7 +135,7 @@ class ComputeNode {
 }
 
 class ValueCheckComputeNode extends ComputeNode {
-    constructor(name) { super(name); }
+    constructor(name) { super(name); this.valid_val = null; }
 
     /**
      * Request update of this compute node. Pushes updates to children,
@@ -153,14 +154,11 @@ class ValueCheckComputeNode extends ComputeNode {
             calc_inputs.set(this.input_translation.get(input.name), input.value);
         }
         let val = this.compute_func(calc_inputs);
-        if (val !== this.value) {
-            super.mark_dirty(2);
-        }
-        else {
-            console.log("soft update");
+        if (val !== null) {
+            if (val !== this.valid_val) { super.mark_dirty(2); } // don't mark dirty if NULL (no update)
+            this.valid_val = val;
         }
         this.value = val;
-
         this.dirty = 0;
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
@@ -190,7 +188,7 @@ function calcSchedule(node, timeout) {
     }
     node.mark_dirty();
     node.update_task = setTimeout(function() {
-        node_debug_stack = [];
+        if (COMPUTE_GRAPH_DEBUG) { node_debug_stack = []; }
         node.update();
         node.update_task = null;
     }, timeout);
