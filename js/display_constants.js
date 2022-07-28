@@ -211,6 +211,7 @@ let posModSuffixes = {
  */
 let build_overall_display_commands = [
     "#defense-stats",
+    "str", "dex", "int", "def", "agi",
     "!spacer",
     "mr", "ms",
     "ls",
