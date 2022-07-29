@@ -371,11 +371,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                atree_state.get(abil.id).img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[abil.display.icon], 2], atreeNodeAtlasSize);
+                drawAtlasImage(atree_state.get(abil.id).img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[abil.display.icon], 2], atreeNodeTileSize);
             }
             else {
                 atree_not_present.push(abil.id);
-                atree_state.get(abil.id).img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[abil.display.icon], 0], atreeNodeAtlasSize);
+                drawAtlasImage(atree_state.get(abil.id).img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[abil.display.icon], 0], atreeNodeTileSize);
             }
         }
 
@@ -424,7 +424,7 @@ const atree_validate = new (class extends ComputeNode {
             const node = atree_state.get(node_id);
             const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
             if (success) {
-                node.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[node.ability.display.icon], 1], atreeNodeAtlasSize);
+                drawAtlasImage(node.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[node.ability.display.icon], 1], atreeNodeTileSize);
             }
         }
 
@@ -975,8 +975,8 @@ function render_AT(UI_elem, list_elem, tree) {
             let parent_abil = parent.ability;
             const parent_id = parent_abil.id;
 
-            let connect_elem = document.createElement("div");
-            connect_elem.style = "width: 112.5%; height: 112.5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); image-rendering: pixelated; background-image: url('../media/atree/connectors.png'); background-size: 1700% 500%;"
+            let connect_elem = make_elem("canvas", [], {style: "width: 112.5%; height: 112.5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); image-rendering: pixelated;", width: "18", height: "18"});
+
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -1012,7 +1012,7 @@ function render_AT(UI_elem, list_elem, tree) {
 
         // create node
         let node_elem = document.getElementById("atree-row-" + ability.display.row).children[ability.display.col];
-        node_wrap.img = make_elem("div", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1; background-image: url('../media/atree/icons.png'); background-size: 900% 300%;"})
+        node_wrap.img = make_elem("canvas", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;", width: "32", height: "32"})
         node_elem.appendChild(node_wrap.img);
 
         // create hitbox
@@ -1234,11 +1234,11 @@ function atree_set_state(node_wrapper, new_state) {
     }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[icon], 2], atreeNodeAtlasSize);
+        drawAtlasImage(node_wrapper.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[icon], 2], atreeNodeTileSize);
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.img.style.backgroundPosition = atlasBGPositionCalc([atreeNodeAtlasPositions[icon], 1], atreeNodeAtlasSize);
+        drawAtlasImage(node_wrapper.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[icon], 1], atreeNodeTileSize);
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1252,6 +1252,8 @@ function atree_set_state(node_wrapper, new_state) {
         }
     }
 };
+
+// atlas vars
 
 // first key is connector type, second key is highlight, then [x, y] pair of 0-index positions in the tile atlas
 const atreeConnectorAtlasPositions = {
@@ -1267,7 +1269,9 @@ const atreeConnectorAtlasPositions = {
     "1011": {"0000": [5, 2], "1011": [6, 2], "1010": [7, 2], "1001": [8, 2], "0011": [9, 2]},
     "1111": {"0000": [0, 3], "1111": [1, 3], "1110": [2, 3], "1101": [3, 3], "1100": [4, 3], "1011": [5, 3], "1010": [6, 3], "1001": [7, 3], "0111": [8, 3], "0110": [9, 3], "0101": [10, 3], "0011": [11, 3]}
 }
-const atreeConnectorAtlasSize = [17, 5]
+const atreeConnectorTileSize = 18;
+const atreeConnectorAtlasImg = make_elem("img", [], {src: "../media/atree/connectors.png"});
+
 // just has the x position, y is based on state
 const atreeNodeAtlasPositions = {
     "node_0": 0,
@@ -1280,15 +1284,13 @@ const atreeNodeAtlasPositions = {
     "node_assassin": 7,
     "node_shaman": 8
 }
-const atreeNodeAtlasSize = [9, 3]
-function atlasBGPositionCalc(pos, atlasSize) {
-    // https://css-tricks.com/focusing-background-image-precise-location-percentages/
-    // p = (c + 0.5/z - 0.5) * z/(z - 1) + 0.5
-    // z = num tiles in direction
-    // c = starting pos of tile in percent of total atlas (equal to index/z)
-    let x = ((pos[0]/atlasSize[0]) + 0.5/atlasSize[0] - 0.5) * atlasSize[0]/(atlasSize[0] - 1) + 0.5
-    let y = ((pos[1]/atlasSize[1]) + 0.5/atlasSize[1] - 0.5) * atlasSize[1]/(atlasSize[1] - 1) + 0.5
-    return (x * 100) + "% " + (y * 100) + "%" // multiply by 100 to convert decimal to percent
+const atreeNodeTileSize = 32;
+const atreeNodeAtlasImg = make_elem("img", [], {src: "../media/atree/icons.png"});
+
+function drawAtlasImage(canvas, img, pos, tileSize) {
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, tileSize, tileSize);
+    ctx.drawImage(img, tileSize * pos[0], tileSize * pos[1], tileSize, tileSize, 0, 0, tileSize, tileSize);
 }
 
 // draw the connector onto the screen
@@ -1298,7 +1300,7 @@ function atree_render_connection(atree_connectors_map) {
         let connector_elem = connector_info.connector;
         set_connector_type(connector_info);
         connector_info.highlight = [0, 0, 0, 0];
-        connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[connector_info.type]["0000"], atreeConnectorAtlasSize);
+        drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[connector_info.type]["0000"], atreeConnectorTileSize);
         let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
         if (target_elem.children.length != 0) {
             // janky special case...
@@ -1350,15 +1352,16 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
             for (let i = 0; i < 4; i++) {
                 render += highlight_state[i] === 0 ? "0" : "1";
             }
-            connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][render], atreeConnectorAtlasSize);
+            drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype][render], atreeConnectorTileSize);
+            // connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][render], atreeConnectorAtlasSize);
             continue;
         } else {
             // lol bad overloading, [0] is just the whole state
             highlight_state[0] += state_delta;
             if (highlight_state[0] > 0) {
-                connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][ctype], atreeConnectorAtlasSize);
+                drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype][ctype], atreeConnectorTileSize);
             } else {
-                connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype]["0000"], atreeConnectorAtlasSize);
+                drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype]["0000"], atreeConnectorTileSize);
             }
         }
     }
