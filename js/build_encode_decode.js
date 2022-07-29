@@ -232,7 +232,13 @@ function shareBuild(build) {
             "> "+build.items[5].statMap.get("displayName")+"\n"+
             "> "+build.items[6].statMap.get("displayName")+"\n"+
             "> "+build.items[7].statMap.get("displayName")+"\n"+
-            "> "+build.items[15].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
+            "> "+build.items[15].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]\n";
+        for (let tomeslots = 8; tomeslots < 15; tomeslots++) {
+            if (!build.items[tomeslots].statMap.has('NONE')) {
+                text += ">"+' (Has Tomes)' ;
+                break;
+            }
+        }
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }
