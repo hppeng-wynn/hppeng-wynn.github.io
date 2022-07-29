@@ -61,6 +61,7 @@ ul.search-box {
     position: absolute;
     padding: 0;
     overflow: auto;
+    z-index: 10;
 }
 
 li.search-item {
