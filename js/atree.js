@@ -1,3 +1,8 @@
+/** 
+ * This file defines computation graph nodes and display code relevant to the ability tree.
+ * TODO: possibly split it up into compute and render... but its a bit complicated :/
+ */
+
 /**
 ATreeNode spec:
 
