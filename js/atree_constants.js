@@ -5387,20 +5387,6 @@ const atrees = {
                         0,
                         0
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Lightning Damage",
-                    "behavior": "modify",
-                    "multipliers": [
-                        30,
-                        90,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
                 }
             ]
         },
