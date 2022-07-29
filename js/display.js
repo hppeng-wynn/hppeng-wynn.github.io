@@ -1510,9 +1510,7 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
             _damage_display("Crit Average: ", critAverage, spell_info.crit_min, spell_info.crit_max);
         } else if (spell_info.type === "heal") {
             let heal_amount = spell_info.heal_amount;
-            let healLabel = document.createElement("p");
-            healLabel.textContent = heal_amount;
-            // healLabel.classList.add("damagep");
+            let healLabel = make_elem("p", ["Set"], {textContent: heal_amount.toFixed(2)});
             part_div.append(healLabel);
             if (spell_info.name === spell.display) {
                 add_summary(spell_info.name+ ": ", heal_amount, "Set");
