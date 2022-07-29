@@ -234,8 +234,9 @@ function init_autocomplete() {
     for (const eq of tome_keys) {
         // build dropdown
         let tome_arr = [];
-        for (const tome of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
-            let tome_obj = tomeMap.get(tome);
+        let tome_aliases = new Map();
+        for (const tome_name of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
+            let tome_obj = tomeMap.get(tome_name);
             if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
                 continue;
             }
@@ -243,8 +244,10 @@ function init_autocomplete() {
             if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
                 continue;
             }
-            let tome_name = tome;
+            let tome_alias = tome_obj['alias'];
             tome_arr.push(tome_name);
+            tome_arr.push(tome_alias);
+            tome_aliases.set(tome_alias, tome_name);
         }
 
         // create dropdown
@@ -279,14 +282,18 @@ function init_autocomplete() {
                 class: "scaled-font search-item",
                 selected: "dark-5",
                 element: (tome, data) => {
-                    tome.classList.add(tomeMap.get(data.value).tier);
+                    let val = data.value;
+                    if (tome_aliases.has(val)) { val = tome_aliases.get(val); }
+                    tome.classList.add(tomeMap.get(val).tier);
                 },
             },
             events: {
                 input: {
                     selection: (event) => {
                         if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
+                            let val = event.detail.selection.value;
+                            if (tome_aliases.has(val)) { val = tome_aliases.get(val); }
+                            event.target.value = val;
                         }
                         event.target.dispatchEvent(new Event('change'));
                     },
