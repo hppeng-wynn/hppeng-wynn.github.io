@@ -3739,7 +3739,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "scaling": [3]
+                    "scaling": [2.2]
                 }
             ]  
         },
@@ -6395,7 +6395,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded",
-            "desc": "Incrase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +5.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6705,7 +6705,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded II",
-            "desc": "Incrase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +5.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
