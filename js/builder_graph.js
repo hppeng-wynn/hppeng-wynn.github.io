@@ -1,3 +1,7 @@
+/**
+ * File containing compute graph structure of the builder page.
+ */
+
 let armor_powder_node = new (class extends ComputeNode {
     constructor() { super('builder-armor-powder-input'); }
 

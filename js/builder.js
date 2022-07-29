@@ -1,3 +1,6 @@
+/**
+ * File containing utility functions relevant to the builder page, as well as the setup code (at the very bottom).
+ */
 
 function populateBuildList() {
     const buildList = document.getElementById("build-choice");
