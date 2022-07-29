@@ -231,8 +231,15 @@ function expandItem(item) {
 }
 
 class Item {
-    constructor(item_obj) {
-        this.statMap = expandItem(item_obj);
+    constructor(item_obj = null) {
+        if (item_obj) { this.statMap = expandItem(item_obj); }
+        else { this.statMap = new Map(); }
+    }
+
+    copy() {
+        const ret = new Item();
+        ret.statMap = new Map(this.statMap);
+        return ret;
     }
 }
 
