@@ -124,7 +124,7 @@ function toggleButton(button_id) {
     }
 }
 
-// toggle tab
+// Toggles display of a certain element, given the ID.
 function toggle_tab(tab) {
     if (document.querySelector("#"+tab).style.display == "none") {
         document.querySelector("#"+tab).style.display = "";
@@ -133,24 +133,16 @@ function toggle_tab(tab) {
     }
 }
 
-function toggle_boost_tab(tab) {
-    for (const i of skp_order) {
-        document.querySelector("#"+i+"-boost").style.display = "none";
-        document.getElementById(i + "-boost-tab").classList.remove("selected-btn");
-    }
-    document.querySelector("#"+tab+"-boost").style.display = "";
-    document.getElementById(tab + "-boost-tab").classList.add("selected-btn");
-}
-
-let tabs = ['overall-stats', 'offensive-stats', 'defensive-stats'];
-function show_tab(tab) {
+// Toggle display of a certain tab, in a group of tabs, given the target tab ID, and a list of associated tabs.
+// Also sets visual display of an element with ID of target + "-btn" to selected.
+function show_tab(target, tabs) {
     //hide all tabs, then show the tab of the div clicked and highlight the correct button
     for (const i in tabs) {
         document.querySelector("#" + tabs[i]).style.display = "none";
-        document.getElementById("tab-" + tabs[i].split("-")[0] + "-btn").classList.remove("selected-btn");
+        document.getElementById(tabs[i] + "-btn").classList.remove("selected-btn");
     }
-    document.querySelector("#" + tab).style.display = "";
-    document.getElementById("tab-" + tab.split("-")[0] +  "-btn").classList.add("selected-btn");
+    document.querySelector("#" + target).style.display = "";
+    document.getElementById(target + "-btn").classList.add("selected-btn");
 }
 
 // autocomplete initialize
