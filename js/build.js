@@ -43,11 +43,11 @@ class Build{
 
         // calc skillpoints requires statmaps only
         let result = calculate_skillpoints(this.equipment.map((x) => x.statMap), this.weapon.statMap);
-        this.equip_order = result[0];
+        this.equip_order = result[0].slice();
         for (let i = 0; i < this.equip_order.length; i++) {
-            if (this.equip_order[i].get("type") === "armorTome") {
-                this.equip_order.pop(i);
-                i--;
+            if (this.equip_order[i].get("category") === "tome" || this.equip_order[i].get("fixID") === true) {
+                this.equip_order.splice(i, 1);
+		i--;
             }
         }
         // How many skillpoints the player had to assign (5 number)
