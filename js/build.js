@@ -1,4 +1,9 @@
-
+/** 
+ * This file defines a class representing the player Build.
+ *
+ * Keeps track of equipment list, equip order, skillpoint assignment (initial),
+ * Aggregates item stats into a statMap to be used in damage calculation.
+ */
 
 const classDefenseMultipliers = new Map([ ["relik",0.50], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.0], ["sword", 1.10]]);
 
@@ -10,15 +15,9 @@ class Build{
     /**
      * @description Construct a build.
      * @param {Number} level : Level of the player.
-     * @param {String[]} equipment : List of equipment names that make up the build.
-     *                    In order: boots, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Weapon.
-     * @param {Number[]} powders : Powder application. List of lists of integers (powder IDs).
-     *                  In order: boots, Chestplate, Leggings, Boots, Weapon.
-     * @param {Object[]} inputerrors : List of instances of error-like classes.
-     * 
-     * @param {Object[]} tomes: List of tomes.
-     *                      In order: 2x Weapon Mastery Tome, 4x Armor Mastery Tome, 1x Guild Tome.
-     *                      2x Slaying Mastery Tome, 2x Dungeoneering Mastery Tome, 2x Gathering Mastery Tome are in game, but do not have "useful" stats (those that affect damage calculations or building)
+     * @param {String[]} items: List of equipment names that make up the build.
+     *                    In order: Helmet, Chestplate, Leggings, Boots, Ring1, Ring2, Brace, Neck, Tomes [x7].
+     * @param {Item} weapon: Weapon that this build is using.
      */
     constructor(level, items, weapon){
 
@@ -39,7 +38,6 @@ class Build{
         this.equipment = items;
         this.weapon = weapon;
         this.items = this.equipment.concat([this.weapon]);
-        // return [equip_order, best_skillpoints, final_skillpoints, best_total];
 
         // calc skillpoints requires statmaps only
         let result = calculate_skillpoints(this.equipment.map((x) => x.statMap), this.weapon.statMap);
@@ -60,7 +58,6 @@ class Build{
     toString(){
         return [this.equipment,this.weapon].flat();
     }
-
 
     /*  Get all stats for this build. Stores in this.statMap.
         @pre The build itself should be valid. No checking of validity of pieces is done here.

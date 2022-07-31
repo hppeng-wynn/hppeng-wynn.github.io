@@ -7,7 +7,6 @@
 }
 /* builder containers */
 
-
 .slider {
     -webkit-appearance: none;
     background: #AAAAAA;
@@ -46,7 +45,6 @@ input[type=range]:focus {
     outline: none; /* Removes the border. */
 }
 
-
 /* equipment field specifics */
 /* inputs and dropdowns */
 .form-control {
@@ -63,6 +61,7 @@ ul.search-box {
     position: absolute;
     padding: 0;
     overflow: auto;
+    z-index: 10;
 }
 
 li.search-item {
@@ -105,6 +104,8 @@ input.equipment-input {
     min-height: calc(1.2 * var(--scaled-fontsize) + 2px);
     padding: 0rem 0.5rem;
     font-size: var(--scaled-fontsize);
+    --bs-gutter-y: 1rem;
+    --bs-gutter-x: 3rem
 }
 
 input.equipment-input:not(.is-invalid) {
@@ -177,11 +178,11 @@ input.equipment-input:not(.is-invalid) {
 }
 
 .scaled-item-icon {
-    width: 8rem;
+    width: 6rem;
 }
 
 .scaled-item-icon img {
-    width: 6.5rem;
+    width: 6rem;
 }
 
 .scaled-bckgrd {
@@ -190,7 +191,11 @@ input.equipment-input:not(.is-invalid) {
 }
 
 .scaled-bckgrd img {
-    width: 6.5rem;
+    width: 7rem;
+}
+
+.overall-box {
+    max-width: 95%;
 }
 
 @media screen and (orientation: landscape) and (max-width: 1199px) {
@@ -251,6 +256,17 @@ input.equipment-input:not(.is-invalid) {
     :root {
         --scaled-fontsize: 1rem;
     }
+    .overall-box {
+        padding-left: var(--sidebar-width);
+        max-width: 100%;
+    }
+    .equipment-input {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 1.5rem;
+    }
+    .level-input {
+        margin-top: 0
+    }
     .scaled-font {
         font-size: 1rem;
     }
@@ -276,11 +292,11 @@ input.equipment-input:not(.is-invalid) {
     }
 
     .scaled-item-icon {
-        width: 3.2rem;
+        width: 2.6rem;
     }
 
     .scaled-item-icon img {
-        width: 2.8rem;
+        width: 2.2rem;
     }
 
     .scaled-bckgrd {
@@ -304,6 +320,17 @@ input.equipment-input:not(.is-invalid) {
 @media screen and (min-width: 1400px) {
     :root {
         --scaled-fontsize: 1rem;
+    }
+    .overall-box {
+        padding-left: var(--sidebar-width);
+        max-width: 100%;
+    }
+    .equipment-input {
+        --bs-gutter-y: 0.5rem;
+        --bs-gutter-x: 1.5rem
+    }
+    .level-input {
+        margin-top: 0
     }
     .scaled-font { 
         font-size: 1rem;
@@ -330,11 +357,11 @@ input.equipment-input:not(.is-invalid) {
     }
 
     .scaled-item-icon {
-        width: 4rem;
+        width: 3.2rem;
     }
     
     .scaled-item-icon img {
-        width: 3.5rem;
+        width: 2.7rem;
     }
 
     .scaled-bckgrd {
@@ -345,7 +372,6 @@ input.equipment-input:not(.is-invalid) {
     .scaled-bckgrd img {
         width: 3.5rem;
     }
-
 
     .warning {
         font-size: .8rem;

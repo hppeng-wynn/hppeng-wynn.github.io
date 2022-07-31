@@ -289,7 +289,7 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Single Arrow",
                     "multipliers": [
-                        -15,
+                        -10,
                         0,
                         0,
                         0,
@@ -3715,7 +3715,7 @@ const atrees = {
 
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +3% (Max 300%)",
+            "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +2.2% (Max 220%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",
@@ -3739,7 +3739,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "scaling": [3]
+                    "scaling": [2.2]
                 }
             ]  
         },
@@ -3966,7 +3966,7 @@ const atrees = {
 
         {
             "display_name": "Intoxicating Blood",
-            "desc": "After leaving Corrupted, gain 2% of the health lost back for each enemy killed while Corrupted",
+            "desc": "After leaving Corrupted, gain 5% of the health lost back for each enemy killed while Corrupted",
             "archetype": "Fallen", 
             "archetype_req": 5, 
             "base_abil": "Bak'al's Grasp",
@@ -4277,7 +4277,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Damage Tick",
-                            "multipliers": [10, 0, 5, 0, 0, 0]
+                            "multipliers": [20, 0, 10, 0, 0, 0]
                         }
                     ]
                 }
@@ -5387,20 +5387,6 @@ const atrees = {
                         0,
                         0
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Lightning Damage",
-                    "behavior": "modify",
-                    "multipliers": [
-                        30,
-                        90,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
                 }
             ]
         },
@@ -6395,7 +6381,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded",
-            "desc": "Incrase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +5.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6705,7 +6691,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded II",
-            "desc": "Incrase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +5.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,

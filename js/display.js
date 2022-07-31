@@ -1,3 +1,8 @@
+/**
+ * File containing generic display code, ex. for displaying items and spell damage.
+ * TODO: split this file into separate parts for each "component".
+ */
+
 const itemBGPositions = {"bow": "0 0", "spear": "9.090909090909088% 0", "wand": "18.181818181818183% 0", "dagger": "27.27272727272727% 0", "relik": "36.36363636363637% 0",
     "helmet": "45.45454545454546% 0", "chestplate": "54.54545454545454% 0", "leggings": "63.63636363636363% 0", "boots": "72.72727272727272% 0",
     "ring": "81.81818181818181% 0", "bracelet": "90.90909090909092% 0", "necklace": "100% 0",
@@ -1510,9 +1515,7 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
             _damage_display("Crit Average: ", critAverage, spell_info.crit_min, spell_info.crit_max);
         } else if (spell_info.type === "heal") {
             let heal_amount = spell_info.heal_amount;
-            let healLabel = document.createElement("p");
-            healLabel.textContent = heal_amount;
-            // healLabel.classList.add("damagep");
+            let healLabel = make_elem("p", ["Set"], {textContent: heal_amount.toFixed(2)});
             part_div.append(healLabel);
             if (spell_info.name === spell.display) {
                 add_summary(spell_info.name+ ": ", heal_amount, "Set");

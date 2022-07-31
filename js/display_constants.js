@@ -209,7 +209,25 @@ let posModSuffixes = {
 /*
  * Display commands
  */
-let build_all_display_commands = [
+let build_overall_display_commands = [
+    "#defense-stats",
+    "str", "dex", "int", "def", "agi",
+    "!spacer",
+    "mr", "ms",
+    "ls",
+    "poison",
+    "ref", "thorns",
+    "expd",
+    "spd",
+    "sprint", "sprintReg",
+    "jh",
+    "xpb", "lb", "lq",
+    "spRegen",
+    "eSteal",
+    "gXp", "gSpd",
+];
+
+let build_detailed_display_commands = [
     "#defense-stats",
     "str", "dex", "int", "def", "agi",
     "!spacer",
@@ -236,23 +254,31 @@ let build_all_display_commands = [
     "gXp", "gSpd",
 ];
 
-let build_offensive_display_commands = [
-    "str", "dex", "int", "def", "agi",
-    "mr", "ms",
-    "sdRaw", "sdPct",
-    "mdRaw", "mdPct",
-    "ref", "thorns",
-    "ls",
-    "poison",
-    "expd",
-    "spd",
-    "atkTier",
-    "rainbowRaw",
-    "!elemental",
-    "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
-    "!elemental",
-    "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
-];
+// full
+//"#defense-stats",
+//"str", "dex", "int", "def", "agi",
+//"!spacer",
+//"mr", "ms",
+//"hprRaw", "hprPct",
+//"ls",
+//"sdRaw", "sdPct",
+//"mdRaw", "mdPct",
+//"!elemental",
+//"fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
+//"!elemental",
+//"spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
+//"atkTier",
+//"poison",
+//"ref", "thorns",
+//"expd",
+//"spd",
+//"rainbowRaw",
+//"sprint", "sprintReg",
+//"jh",
+//"xpb", "lb", "lq",
+//"spRegen",
+//"eSteal",
+//"gXp", "gSpd",
 
 let build_basic_display_commands = [
     '#defense-stats',
