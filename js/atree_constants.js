@@ -7661,6 +7661,17 @@ const atrees = {
                             ]
                         }
                     ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Backstab",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Backstab:3.Backstab Damage",
+                            "value": 100
+                        }
+                    ]
                 }
             ]
         },
