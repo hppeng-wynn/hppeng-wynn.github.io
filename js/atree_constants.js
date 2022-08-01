@@ -5242,7 +5242,9 @@ const atrees = {
                 "Teleport"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Wisdom"
+            ],
             "cost": 1,
             "display": {
                 "row": 6,
@@ -5594,7 +5596,11 @@ const atrees = {
                 "Burning Sigil"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Sunshower",
+                "Larger Heal",
+                "Orphion's Pulse"
+            ],
             "cost": 2,
             "display": {
                 "row": 15,
