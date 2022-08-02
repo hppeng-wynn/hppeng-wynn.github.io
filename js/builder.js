@@ -127,26 +127,6 @@ function toggleButton(button_id) {
     }
 }
 
-// Toggles display of a certain element, given the ID.
-function toggle_tab(tab) {
-    if (document.querySelector("#"+tab).style.display == "none") {
-        document.querySelector("#"+tab).style.display = "";
-    } else {
-        document.querySelector("#"+tab).style.display = "none";
-    }
-}
-
-// Toggle display of a certain tab, in a group of tabs, given the target tab ID, and a list of associated tabs.
-// Also sets visual display of an element with ID of target + "-btn" to selected.
-function show_tab(target, tabs) {
-    //hide all tabs, then show the tab of the div clicked and highlight the correct button
-    for (const i in tabs) {
-        document.querySelector("#" + tabs[i]).style.display = "none";
-        document.getElementById(tabs[i] + "-btn").classList.remove("selected-btn");
-    }
-    document.querySelector("#" + target).style.display = "";
-    document.getElementById(target + "-btn").classList.add("selected-btn");
-}
 
 // autocomplete initialize
 function init_autocomplete() {
@@ -384,18 +364,6 @@ function init() {
             break;
         }
     }
-
-    // navbar appearance control
-    let scrollPos = 0
-    document.addEventListener('scroll', (e) => {
-        if (document.documentElement.scrollTop - scrollPos > 20) {
-            document.getElementById("mobile-navbar").style.display = "none";
-            document.getElementById("mobile-navbar-dropdown").style.display = "none";
-        } else if (document.documentElement.scrollTop - scrollPos < -50) {
-            document.getElementById("mobile-navbar").style.display = "";
-        }
-        scrollPos = document.documentElement.scrollTop;
-    });
 }
 
 window.onerror = function(message, source, lineno, colno, error) {
