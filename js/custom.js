@@ -336,4 +336,7 @@ class Custom {
         this.statMap.set("restrict", "Custom Item")
     }
 
+    copy() {
+        return new Custom(new Map(this.statMap));
+    }
 }

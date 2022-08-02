@@ -1,3 +1,7 @@
+/**
+ * File containing utility functions that are useful for the builder page.
+ */
+
 /*Turns the input amount of skill points into a float precision percentage.
 * @param skp - the integer skillpoint count to be converted
 */
@@ -231,8 +235,15 @@ function expandItem(item) {
 }
 
 class Item {
-    constructor(item_obj) {
-        this.statMap = expandItem(item_obj);
+    constructor(item_obj = null) {
+        if (item_obj) { this.statMap = expandItem(item_obj); }
+        else { this.statMap = new Map(); }
+    }
+
+    copy() {
+        const ret = new Item();
+        ret.statMap = new Map(this.statMap);
+        return ret;
     }
 }
 

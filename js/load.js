@@ -1,4 +1,4 @@
-const DB_VERSION = 101;
+const DB_VERSION = 102;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let db;
@@ -254,5 +254,4 @@ function init_maps() {
             redirectMap.set(item.id, item.remapID);
         }
     }
-    console.log(itemMap);
 }

@@ -1,3 +1,8 @@
+/** 
+ * This file defines computation graph nodes and display code relevant to the ability tree.
+ * TODO: possibly split it up into compute and render... but its a bit complicated :/
+ */
+
 /**
 ATreeNode spec:
 
@@ -74,6 +79,7 @@ stat_bonus: {
 stat_scaling: {
   "type": "stat_scaling",
   "slider": bool,
+  positive: bool                            // True to keep stat above 0. False to ignore floor. Default: True for normal, False for scaling
   "slider_name": Optional[str],
   "slider_step": Optional[float],
   round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
@@ -199,7 +205,6 @@ const atree_node = new (class extends ComputeNode {
 const atree_render = new (class extends ComputeNode {
     constructor() {
         super('builder-atree-render');
-        this.fail_cb = true;
         this.UI_elem = document.getElementById("atree-ui");
         this.list_elem = document.getElementById("atree-header");
     }
@@ -310,7 +315,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     }
     let failed_deps = [];
     for (const dep_id of ability.dependencies) {
-        if (!atree_state.get(dep_id).active) { failed_deps.push(dep_id) }
+        if (!reachable.has(dep_id)) { failed_deps.push(dep_id) }
     }
     if (failed_deps.length > 0) {
         const dep_strings = failed_deps.map(i => '"' + atree_state.get(i).ability.display_name + '"');
@@ -318,7 +323,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     }
     let blocking_ids = [];
     for (const blocker_id of ability.blockers) {
-        if (atree_state.get(blocker_id).active) { blocking_ids.push(blocker_id); }
+        if (reachable.has(blocker_id)) { blocking_ids.push(blocker_id); }
     }
     if (blocking_ids.length > 0) {
         const blockers_strings = blocking_ids.map(i => '"' + atree_state.get(i).ability.display_name + '"');
@@ -372,11 +377,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_selected.png';
+                drawAtlasImage(atree_state.get(abil.id).img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[abil.display.icon], 2], atreeNodeTileSize);
             }
             else {
                 atree_not_present.push(abil.id);
-                atree_state.get(abil.id).img.src = '../media/atree/' + abil.display.icon + '_blocked.png';
+                drawAtlasImage(atree_state.get(abil.id).img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[abil.display.icon], 0], atreeNodeTileSize);
             }
         }
 
@@ -425,7 +430,7 @@ const atree_validate = new (class extends ComputeNode {
             const node = atree_state.get(node_id);
             const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
             if (success) {
-                node.img.src = '../media/atree/'+node.ability.display.icon+'.png';
+                drawAtlasImage(node.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[node.ability.display.icon], 1], atreeNodeTileSize);
             }
         }
 
@@ -739,12 +744,29 @@ const atree_scaling = new (class extends ComputeNode {
 
             for (const effect of abil.effects) {
                 switch (effect.type) {
+                case 'raw_stat':
+                    // TODO: toggles...
+                    if (effect.toggle) {
+                        const button = button_map.get(effect.toggle).button;
+                        if (!button.classList.contains("toggleOn")) { continue; }
+                        for (const bonus of effect.bonuses) {
+                            const { type, name, abil = "", value } = bonus;
+                            // TODO: prop
+                            if (type === "stat") {
+                                merge_stat(ret_effects, name, value);
+                            }
+                        }
+                    }
+                    continue;
                 case 'stat_scaling':
                     let total = 0;
-                    const {round = true, slider = false, scaling = [0]} = effect;
+                    const {slider = false, scaling = [0]} = effect;
+                    let { positive = true, round = true } = effect;
                     if (slider) {
                         const slider_val = slider_map.get(effect.slider_name).slider.value;
                         total = parseInt(slider_val) * scaling[0];
+                        round = false;
+                        positive = false;
                     }
                     else {
                         // TODO: type: prop?
@@ -755,7 +777,7 @@ const atree_scaling = new (class extends ComputeNode {
 
                     if ('output' in effect) { // sometimes nodes will modify slider without having effect.
                         if (round) { total = Math.floor(round_near(total)); }
-                        if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
+                        if (positive && total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect && total > effect.max) { total = effect.max; }
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {
@@ -789,7 +811,6 @@ const atree_stats = new (class extends ComputeNode {
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
-        const [slider_map, button_map] = input_map.get('atree-interactive');
 
         let ret_effects = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -798,11 +819,8 @@ const atree_stats = new (class extends ComputeNode {
             for (const effect of abil.effects) {
                 switch (effect.type) {
                 case 'raw_stat':
-                    // TODO: toggles...
-                    if (effect.toggle) {
-                        const button = button_map.get(effect.toggle).button;
-                        if (!button.classList.contains("toggleOn")) { continue; }
-                    }
+                    // toggles are handled in atree_scaling.
+                    if (effect.toggle) { continue; }
                     for (const bonus of effect.bonuses) {
                         const { type, name, abil = "", value } = bonus;
                         // TODO: prop
@@ -816,7 +834,7 @@ const atree_stats = new (class extends ComputeNode {
         }
         return ret_effects;
     }
-})().link_to(atree_merge, 'atree-merged').link_to(atree_make_interactives, 'atree-interactive');
+})().link_to(atree_merge, 'atree-merged');
 
 /**
  * Construct compute nodes to link builder items and edit IDs to the appropriate display outputs.
@@ -966,8 +984,8 @@ function render_AT(UI_elem, list_elem, tree) {
             let parent_abil = parent.ability;
             const parent_id = parent_abil.id;
 
-            let connect_elem = document.createElement("div");
-            connect_elem.style = "background-size: cover; width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated;";
+            let connect_elem = make_elem("canvas", [], {style: "width: 112.5%; height: 112.5%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); image-rendering: pixelated;", width: "18", height: "18"});
+
             // connect up
             for (let i = ability.display.row - 1; i > parent_abil.display.row; i--) {
                 const coord = i + "," + ability.display.col;
@@ -1002,17 +1020,9 @@ function render_AT(UI_elem, list_elem, tree) {
         }
 
         // create node
-        let node_elem = document.createElement('div');
-        let icon = ability.display.icon;
-        if (icon === undefined) {
-            icon = "node";
-        }
-        let node_img = document.createElement('img');
-        node_img.src = '../media/atree/'+icon+'.png';
-        node_img.style = "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;";
-        node_elem.appendChild(node_img);
-
-        node_wrap.img = node_img;
+        let node_elem = document.getElementById("atree-row-" + ability.display.row).children[ability.display.col];
+        node_wrap.img = make_elem("canvas", [], {style: "width: 200%; height: 200%; position: absolute; top: -50%; left: -50%; image-rendering: pixelated; z-index: 1;", width: "32", height: "32"})
+        node_elem.appendChild(node_wrap.img);
 
         // create hitbox
         // this is necessary since images exceed the size of their square, but should only be interactible within that square
@@ -1050,8 +1060,6 @@ function render_AT(UI_elem, list_elem, tree) {
                 delete node_wrap.tooltip_elem;
             }
         });
-
-        document.getElementById("atree-row-" + ability.display.row).children[ability.display.col].appendChild(node_elem);
     };
     atree_render_connection(atree_connectors_map);
 
@@ -1227,26 +1235,6 @@ function set_connector_type(connector_info) {  // left right up down
     }
 }
 
-// draw the connector onto the screen
-function atree_render_connection(atree_connectors_map) {
-    for (let i of atree_connectors_map.keys()) {
-        let connector_info = atree_connectors_map.get(i);
-        let connector_elem = connector_info.connector;
-        let connector_img = document.createElement('img');
-        set_connector_type(connector_info);
-        connector_img.src = '../media/atree/connect_'+connector_info.type+'.png';
-        connector_img.style = "width: 100%; height: 100%;"
-        connector_elem.replaceChildren(connector_img);
-        connector_info.highlight = [0, 0, 0, 0];
-        let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
-        if (target_elem.children.length != 0) {
-            // janky special case...
-            connector_elem.style.display = 'none';
-        }
-        target_elem.appendChild(connector_elem);
-    };
-};
-
 // toggle the state of a node.
 function atree_set_state(node_wrapper, new_state) {
     let icon = node_wrapper.ability.display.icon;
@@ -1255,11 +1243,11 @@ function atree_set_state(node_wrapper, new_state) {
     }
     if (new_state) {
         node_wrapper.active = true;
-        node_wrapper.elem.children[0].src = "../media/atree/" + icon + "_selected.png";
+        drawAtlasImage(node_wrapper.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[icon], 2], atreeNodeTileSize);
     } 
     else {
         node_wrapper.active = false;
-        node_wrapper.elem.children[0].src = "../media/atree/" + icon + ".png";
+        drawAtlasImage(node_wrapper.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[icon], 1], atreeNodeTileSize);
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1274,6 +1262,64 @@ function atree_set_state(node_wrapper, new_state) {
     }
 };
 
+// atlas vars
+
+// first key is connector type, second key is highlight, then [x, y] pair of 0-index positions in the tile atlas
+const atreeConnectorAtlasPositions = {
+    "1100": {"0000": [0, 0], "1100": [1, 0]},
+    "1010": {"0000": [2, 0], "1010": [3, 0]},
+    "0110": {"0000": [4, 0], "0110": [5, 0]},
+    "1001": {"0000": [6, 0], "1001": [7, 0]},
+    "0101": {"0000": [8, 0], "0101": [9, 0]},
+    "0011": {"0000": [10, 0], "0011": [11, 0]},
+    "1101": {"0000": [0, 1], "1101": [1, 1], "1100": [2, 1], "1001": [3, 1], "0101": [4, 1]},
+    "0111": {"0000": [5, 1], "0111": [6, 1], "0110": [7, 1], "0101": [8, 1], "0011": [9, 1]},
+    "1110": {"0000": [0, 2], "1110": [1, 2], "1100": [2, 2], "1010": [3, 2], "0110": [4, 2]},
+    "1011": {"0000": [5, 2], "1011": [6, 2], "1010": [7, 2], "1001": [8, 2], "0011": [9, 2]},
+    "1111": {"0000": [0, 3], "1111": [1, 3], "1110": [2, 3], "1101": [3, 3], "1100": [4, 3], "1011": [5, 3], "1010": [6, 3], "1001": [7, 3], "0111": [8, 3], "0110": [9, 3], "0101": [10, 3], "0011": [11, 3]}
+}
+const atreeConnectorTileSize = 18;
+const atreeConnectorAtlasImg = make_elem("img", [], {src: "../media/atree/connectors.png"});
+
+// just has the x position, y is based on state
+const atreeNodeAtlasPositions = {
+    "node_0": 0,
+    "node_1": 1,
+    "node_2": 2,
+    "node_3": 3,
+    "node_archer": 4,
+    "node_warrior": 5,
+    "node_mage": 6,
+    "node_assassin": 7,
+    "node_shaman": 8
+}
+const atreeNodeTileSize = 32;
+const atreeNodeAtlasImg = make_elem("img", [], {src: "../media/atree/icons.png"});
+
+function drawAtlasImage(canvas, img, pos, tileSize) {
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, tileSize, tileSize);
+    ctx.drawImage(img, tileSize * pos[0], tileSize * pos[1], tileSize, tileSize, 0, 0, tileSize, tileSize);
+}
+
+// draw the connector onto the screen
+function atree_render_connection(atree_connectors_map) {
+    for (let i of atree_connectors_map.keys()) {
+        let connector_info = atree_connectors_map.get(i);
+        let connector_elem = connector_info.connector;
+        set_connector_type(connector_info);
+        connector_info.highlight = [0, 0, 0, 0];
+        drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[connector_info.type]["0000"], atreeConnectorTileSize);
+        let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
+        if (target_elem.children.length != 0) {
+            // janky special case...
+            connector_elem.style.display = 'none';
+        }
+        target_elem.appendChild(connector_elem);
+    };
+};
+
+// update the connector (after being drawn the first time by atree_render_connection)
 function atree_set_edge(atree_connectors_map, parent, child, state) {
     const connectors = child.connectors.get(parent);
     const parent_row = parent.ability.display.row;
@@ -1288,8 +1334,6 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
         let connector_info = atree_connectors_map.get(connector_label);
         let connector_elem = connector_info.connector;
         let highlight_state = connector_info.highlight; // left right up down
-        let connector_img_elem = document.createElement("img");
-        connector_img_elem.style = "width: 100%; height: 100%;";
         const ctype = connector_info.type;
         let num_1s = 0;
         for (let i = 0; i < 4; i++) {
@@ -1317,23 +1361,17 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
             for (let i = 0; i < 4; i++) {
                 render += highlight_state[i] === 0 ? "0" : "1";
             }
-            if (render == "0000") {
-                connector_img_elem.src = "../media/atree/connect_" + ctype + ".png";
-            } else {
-                connector_img_elem.src = "../media/atree/connect_" + ctype + "_" + render + ".png";
-            }
-            connector_elem.replaceChildren(connector_img_elem);
+            drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype][render], atreeConnectorTileSize);
+            // connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][render], atreeConnectorAtlasSize);
             continue;
-        }
-        // lol bad overloading, [0] is just the whole state
-        highlight_state[0] += state_delta;
-        if (highlight_state[0] > 0) {
-            connector_img_elem.src = '../media/atree/connect_' + ctype + '_1.png';
-            connector_elem.replaceChildren(connector_img_elem);
-        }
-        else {
-            connector_img_elem.src = '../media/atree/connect_'+ctype+'.png';
-            connector_elem.replaceChildren(connector_img_elem);
+        } else {
+            // lol bad overloading, [0] is just the whole state
+            highlight_state[0] += state_delta;
+            if (highlight_state[0] > 0) {
+                drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype][ctype], atreeConnectorTileSize);
+            } else {
+                drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype]["0000"], atreeConnectorTileSize);
+            }
         }
     }
 }
