@@ -604,16 +604,6 @@ function matchType(object, target) {
     return object;
 }
 
-/**
- * Add multiple classes to a html element
- */
-function addClasses(elem, classes) {
-    for (let _class of classes) {
-        elem.classList.add(_class);
-    }
-    return elem;
-}
-
 /** A utility function that reloads the page forcefully.
  *
  */
