@@ -384,6 +384,18 @@ function init() {
             break;
         }
     }
+
+    // navbar appearance control
+    let scrollPos = 0
+    document.addEventListener('scroll', (e) => {
+        if (document.documentElement.scrollTop - scrollPos > 20) {
+            document.getElementById("mobile-navbar").style.display = "none";
+            document.getElementById("mobile-navbar-dropdown").style.display = "none";
+        } else if (document.documentElement.scrollTop - scrollPos < -50) {
+            document.getElementById("mobile-navbar").style.display = "";
+        }
+        scrollPos = document.documentElement.scrollTop;
+    });
 }
 
 window.onerror = function(message, source, lineno, colno, error) {
