@@ -63,6 +63,9 @@ function resetFields(){
     for (const i of equipment_inputs) {
         setValue(i, "");
     }
+    for (const i of tomeInputs) {
+        setValue(i, "");
+    }
     setValue("str-skp", "0");
     setValue("dex-skp", "0");
     setValue("int-skp", "0");
