@@ -1028,29 +1028,24 @@ function render_AT(UI_elem, list_elem, tree) {
         // listeners differ between mobile and desktop since hovering is a bit fucky on mobile
         if (!isMobile) { // desktop
             hitbox.addEventListener('click', function(e) {
-                if (e.target !== this) {return;}
                 atree_set_state(node_wrap, !node_wrap.active);
                 atree_state_node.mark_dirty().update();
             });
 
             // add tooltip
             hitbox.addEventListener('mouseover', function(e) {
-                if (e.target !== this) {return;}
                 if (node_wrap.tooltip_elem) {
                     node_wrap.tooltip_elem.remove();
                     delete node_wrap.tooltip_elem;
                 }
 
-                node_wrap.tooltip_elem = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"], {"style": "position: absolute; z-index: 100;"});
-                node_wrap.tooltip_elem.style.top = (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px";
-                node_wrap.tooltip_elem.style.left = UI_elem.getBoundingClientRect().left + "px";
-                node_wrap.tooltip_elem.style.width = UI_elem.getBoundingClientRect().width * 0.95 + "px";
+                node_wrap.tooltip_elem = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"],
+                    {style: "position: absolute; z-index: 100; top: " + (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px; left: " + UI_elem.getBoundingClientRect().left + "px; width: " + UI_elem.getBoundingClientRect().width * 0.95 + "px;"});
                 generateTooltip(node_wrap.tooltip_elem, node_elem, ability, atree_map);
                 UI_elem.appendChild(node_wrap.tooltip_elem);
             });
 
             hitbox.addEventListener('mouseout', function(e) {
-                if (e.target !== this) {return;}
                 if (node_wrap.tooltip_elem) {
                     node_wrap.tooltip_elem.remove();
                     delete node_wrap.tooltip_elem;
@@ -1059,17 +1054,16 @@ function render_AT(UI_elem, list_elem, tree) {
         } else { // mobile
             // tap to toggle
             // long press to make a popup with the tooltip and a button to turn off/on
-            var touchTimer = null;
-            var didLongPress = false;
+            let touchTimer = null;
+            let didLongPress = false;
 
             hitbox.addEventListener("touchstart", function(e) {
-                if (e.target !== this) {return;}
                 clearTimeout(touchTimer);
                 touchTimer = setTimeout(function() {
                     let popup = make_elem("div", [], {style: "position: fixed; z-index: 10000; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.6); padding-top: 10vh; padding-left: 2.5vw; user-select: none;"});
                     popup.addEventListener("click", function(e) {
                         // close popup if the background is clicked
-                        if (e.target !== this || e.target == this.children[0]) {return;}
+                        if (e.target !== this) {return;} // e.target is the lowest element that was the target of the event
                         popup.remove();
                     });
 
@@ -1079,7 +1073,6 @@ function render_AT(UI_elem, list_elem, tree) {
 
                     let toggleButton = make_elem("button", ["scaled-font", "disable-select"], {innerHTML: (node_wrap.active ? "Unselect Ability" : "Select Ability"), style: "width: 95vw; height: 8vh; margin-top: 2vh; text-align: center;"});
                     toggleButton.addEventListener("click", function(e) {
-                        if (e.target !== this) {return;}
                         atree_set_state(node_wrap, !node_wrap.active);
                         atree_state_node.mark_dirty().update();
                         popup.remove();
@@ -1093,7 +1086,6 @@ function render_AT(UI_elem, list_elem, tree) {
                 }, 500);
             });
             hitbox.addEventListener("touchend", function(e) {
-                if (e.target !== this) {return;}
                 if (!didLongPress) {
                     clearTimeout(touchTimer);
                     touchTimer = null;
