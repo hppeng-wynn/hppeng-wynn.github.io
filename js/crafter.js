@@ -31,16 +31,6 @@ let player_craft;
 
 
 function init_crafter() {
-    //no ing
-    
-    console.log("all ingredients");
-    console.log(ingMap);
-    console.log("all recipes");
-    console.log(recipeMap);
-    /*console.log(ingList);
-    console.log(recipeList);   
-    console.log(ingIDMap);
-    console.log(recipeIDMap);*/
     try {
         document.getElementById("recipe-choice").addEventListener("change", (event) => {
             updateMaterials();
@@ -56,16 +46,15 @@ function init_crafter() {
         });
         
         for (let i = 1; i < 4; ++i) {
-            document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
-            document.getElementById("mat-2-"+i).setAttribute("onclick", document.getElementById("mat-2-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById("mat-1-"+i).addEventListener("click", (e) => calculateCraftSchedule());
+            document.getElementById("mat-2-"+i).addEventListener("click", (e) => calculateCraftSchedule());
         }
         for (let i = 1; i < 7; ++i) {
-            document.getElementById("ing-choice-" + i ).setAttribute("oninput", "calculateCraftSchedule();");
+            document.getElementById("ing-choice-" + i ).addEventListener("oninput", (e) => calculateCraftSchedule());
         }
         for (const str of ["slow", "normal", "fast"]) {
-            document.getElementById(str + "-atk-button").setAttribute("onclick", document.getElementById(str + "-atk-button").getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById(str + "-atk-button").addEventListener("onclick", (e) => calculateCraftSchedule());
         }
-
 
         populateFields();
         decodeCraft(ing_url_tag);
@@ -259,12 +248,10 @@ function populateFields() {
             ing_list.appendChild(el);
         }
     }
-    
-    
 }
 /*
-    Copies the CR Hash (CR-blahblahblah)
-*/
+ *  Copies the CR Hash (CR-blahblahblah)
+ */
 function copyRecipeHash() {
     if (player_craft) {
         copyTextToClipboard("CR-"+location.hash.slice(1));
