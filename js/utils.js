@@ -874,6 +874,17 @@ function make_elem(type, classlist = [], args = {}) {
     const ret_elem = document.createElement(type);
     ret_elem.classList.add(...classlist);
     for (const i in args) {
+        if (i === 'style') {
+            const style_obj = args[i];
+            if (typeof style_obj === 'string' || style_obj instanceof String) {
+                ret_elem.style = style_obj;
+                continue;
+            }
+            for (const k in style_obj) {
+                ret_elem.style[k] = style_obj[k];
+            }
+            continue;
+        }
         ret_elem[i] = args[i];
     }
     return ret_elem;
