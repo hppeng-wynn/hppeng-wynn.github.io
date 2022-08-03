@@ -1048,8 +1048,15 @@ function render_AT(UI_elem, list_elem, tree) {
                     delete node_wrap.tooltip_elem;
                 }
 
-                node_wrap.tooltip_elem = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"],
-                    {style: "position: absolute; z-index: 100; top: " + (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px; left: " + UI_elem.getBoundingClientRect().left + "px; width: " + UI_elem.getBoundingClientRect().width * 0.95 + "px;"});
+                node_wrap.tooltip_elem = make_elem("div", ["rounded-bottom", "dark-4", "border", "mx-2", "my-4", "dark-shadow", "text-start"], {
+                    style: {
+                        position: "absolute",
+                        zIndex: "100",
+                        top: (node_elem.getBoundingClientRect().top + window.pageYOffset + 50) + "px",
+                        left: UI_elem.getBoundingClientRect().left + "px",
+                        width: (UI_elem.getBoundingClientRect().width * 0.95) + "px"
+                    }
+                });
                 generateTooltip(node_wrap.tooltip_elem, node_elem, ability, atree_map);
                 UI_elem.appendChild(node_wrap.tooltip_elem);
             });
