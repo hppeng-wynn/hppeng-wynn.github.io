@@ -102,35 +102,40 @@ const special_mappings = {
     "No Defense Req": "f:defReq=0",
 };
 
-let itemFilters = document.getElementById("filter-items");
-if (itemFilters) {
-    for (let x in translate_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
-    for (let x in special_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
+let item_filters = []
+for (let x in translate_mappings) {
+    item_filters.push(x);
+}
+for (let x in special_mappings) {
+    item_filters.push(x);
 }
 
-let itemCategories = [ "armor", "accessory", "weapon" ];
+let item_categories = [ "armor", "accessory", "weapon" ];
 
 function applyQuery(items, query) {
     return items.filter(query.filter, query).sort(query.compare);
 }
 
-function displayItems(results) {
-    let items_parent = document.getElementById("main");
-    for (let i in results) {
-        let item = results[i].itemExp;
+function displayItems(items_copy) {
+    let items_parent = document.getElementById("search-results");
+    for (let i in items_copy) {
+        if (i > 200) {break;}
+        let item = items_copy[i].itemExp;
         let box = document.createElement("div");
-        box.classList.add("box");
+        box.classList.add("col-lg-3", "col-sm-6", "p-2");
         box.id = "item"+i;
+        //box.addEventListener("dblclick", function() {set_item(item);}); TODO: ??
+
+        let bckgrdbox = document.createElement("div");
+        bckgrdbox.classList.add("dark-7", "rounded", "px-2", "col-auto");
+        box.appendChild(bckgrdbox);
+        bckgrdbox.id = "item"+i+"b";
         items_parent.appendChild(box);
-        displayExpandedItem(item, box.id);
+        item.set("powders", []);
+        if (item.get("category") == "weapon") {
+            apply_weapon_powders(item);
+        }
+        displayExpandedItem(item, bckgrdbox.id, true);
     }
 }
 
@@ -142,10 +147,10 @@ function doItemSearch() {
     queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
 
     let categoryOrType = document.getElementById("item-category-choice").value;
-    if (itemTypes.includes(categoryOrType)) {
+    if (item_types.includes(categoryOrType)) {
         queries.push('f:type="'+categoryOrType+'"');
     }
-    else if (itemCategories.includes(categoryOrType)) {
+    else if (item_categories.includes(categoryOrType)) {
         queries.push('f:cat="'+categoryOrType+'"');
     }
 
@@ -162,7 +167,9 @@ function doItemSearch() {
         }
     }
 
-    let level_dat = document.getElementById("item-level-choice").value.split("-");
+    let level_raw = document.getElementById("item-level-choice").value;
+    if (!level_raw) { level_raw = '1-106'; };
+    const level_dat = level_raw.split("-");
     queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
     
     for (let i = 1; i <= 4; ++i) {
@@ -191,8 +198,7 @@ function doItemSearch() {
             filterQuery = filterQuery + "&" + query.slice(2);
         }
     }
-    console.log(filterQuery);
-    console.log(sortQueries);
+    document.getElementById("search-results").textContent = "";
     let results = [];
     try {
         const filterExpr = exprParser.parse(filterQuery);
@@ -211,8 +217,15 @@ function doItemSearch() {
         document.getElementById("summary").textContent = e.message;
         return;
     }
-    document.getElementById("summary").textContent = results.length + " results."
+    document.getElementById("summary").textContent = results.length + " results:"
     displayItems(results);
+}
+
+function resetItemSearch() {
+    resetFields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
+    for (const field of resetFields) {
+        document.getElementById(field).value = "";
+    }
 }
 
 function init_items() {
@@ -220,4 +233,60 @@ function init_items() {
     exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
 }
 
-load_init(init_items);
+(async function() {
+    await Promise.resolve(load_init());
+    init_items();
+    //init dropdowns
+    let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
+                                ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
+                                ["filter1", item_filters],
+                                ["filter2", item_filters],
+                                ["filter3", item_filters],
+                                ["filter4", item_filters]]);
+    for (const [field, data] of filterInputs) {
+        let field_choice = document.getElementById(field+"-choice");
+        // show dropdown on click
+        field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
+        filterInputs.set(field, new autoComplete({
+            data: {
+                src: data,
+            },  
+            threshold: 0,
+            selector: "#"+ field +"-choice",
+            wrapper: false,
+            resultsList: {
+                maxResults: 100,
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    let position = document.getElementById(field+'-choice').getBoundingClientRect();
+                    list.style.top = position.bottom + window.scrollY +"px";
+                    list.style.left = position.x+"px";
+                    list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 4 +"px";
+
+                    if (!data.results.length) {
+                        message = document.createElement('li');
+                        message.classList.add('scaled-font');
+                        message.textContent = "No results found!";
+                        list.prepend(message);
+                    };
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        };
+                    },
+                },
+            }
+        }));
+    }
+})();

@@ -70,7 +70,7 @@ const tiers = ["Normal", "Unique", "Rare", "Legendary", "Fabled", "Mythic", "Set
 const all_types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(consumableTypes).concat(tome_types).map(x => x.substring(0,1).toUpperCase() + x.substring(1));
 //weaponTypes.push("sword");
 //console.log(types)
-let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(tome_types);
+let item_types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(tome_types);
 
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
