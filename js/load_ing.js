@@ -197,7 +197,7 @@ function init_ing_maps() {
                 posMods: {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0}
             };
             ing.id = 4001 + ing.pid;
-            ing.diplayName = ing.name;
+            ing.displayName = ing.name;
             switch(i) {
                 case 0:
                     ing.itemIDs["strReq"] = powderIng["skpReq"];
