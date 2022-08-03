@@ -231,11 +231,6 @@ function resetItemSearch() {
 function init_items() {
     searchDb = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
     exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
-}
-
-(async function() {
-    await Promise.resolve(load_init());
-    init_items();
     //init dropdowns
     let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
                                 ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
@@ -289,4 +284,9 @@ function init_items() {
             }
         }));
     }
+}
+
+(async function() {
+    await Promise.resolve(load_init());
+    init_items();
 })();
