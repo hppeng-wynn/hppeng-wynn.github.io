@@ -121,15 +121,11 @@ function displayItems(items_copy) {
     for (let i in items_copy) {
         if (i > 200) {break;}
         let item = items_copy[i].itemExp;
-        let box = document.createElement("div");
-        box.classList.add("col-lg-3", "col-sm-6", "p-2");
-        box.id = "item"+i;
+        let box = make_elem('div', ['col-lg-3', 'col-sm-6', 'p-2'], {id: 'item'+i});
         //box.addEventListener("dblclick", function() {set_item(item);}); TODO: ??
 
-        let bckgrdbox = document.createElement("div");
-        bckgrdbox.classList.add("dark-7", "rounded", "px-2", "col-auto");
-        box.appendChild(bckgrdbox);
-        bckgrdbox.id = "item"+i+"b";
+        let bckgrdbox = make_elem("div", ["dark-7", "rounded", "px-2", "col-auto"], {id: 'item'+i+'b'});
+        box.append(bckgrdbox);
         items_parent.appendChild(box);
         item.set("powders", []);
         if (item.get("category") == "weapon") {
@@ -263,9 +259,7 @@ function init_items() {
                     list.style.maxHeight = position.height * 4 +"px";
 
                     if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No results found!";
+                        const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
                         list.prepend(message);
                     };
                 },
