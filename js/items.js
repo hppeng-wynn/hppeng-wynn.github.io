@@ -139,19 +139,20 @@ function displayItems(items_copy) {
     }
 }
 
-let searchDb;
+let search_db;
+let expr_parser;
 
-function doItemSearch() {
+function do_item_search() {
     window.scrollTo(0, 0);
     let queries = [];
     queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
 
-    let categoryOrType = document.getElementById("item-category-choice").value;
-    if (item_types.includes(categoryOrType)) {
-        queries.push('f:type="'+categoryOrType+'"');
+    const cat_or_type = document.getElementById("item-category-choice").value;
+    if (item_types.includes(cat_or_type)) {
+        queries.push('f:type="'+cat_or_type+'"');
     }
-    else if (item_categories.includes(categoryOrType)) {
-        queries.push('f:cat="'+categoryOrType+'"');
+    else if (item_categories.includes(cat_or_type)) {
+        queries.push('f:cat="'+cat_or_type+'"');
     }
 
     let rarity = document.getElementById("item-rarity-choice").value;
@@ -187,27 +188,27 @@ function doItemSearch() {
         }
     }
 
-    let filterQuery = "true";
-    let sortQueries = [];
+    let filter_query = "true";
+    let sort_queries = [];
     console.log(queries);
     for (const query of queries) {
         if (query.startsWith("s:")) {
-            sortQueries.push(query.slice(2));
+            sort_queries.push(query.slice(2));
         }
         else if (query.startsWith("f:")) {
-            filterQuery = filterQuery + "&" + query.slice(2);
+            filter_query = filter_query + "&" + query.slice(2);
         }
     }
     document.getElementById("search-results").textContent = "";
     let results = [];
     try {
-        const filterExpr = exprParser.parse(filterQuery);
-        const sortExprs = sortQueries.map(q => exprParser.parse(q));
-        for (let i = 0; i < searchDb.length; ++i) {
-            const item = searchDb[i][0];
-            const itemExp = searchDb[i][1];
-            if (checkBool(filterExpr.resolve(item, itemExp))) {
-                results.push({ item, itemExp, sortKeys: sortExprs.map(e => e.resolve(item, itemExp)) });
+        const filter_expr = expr_parser.parse(filter_query);
+        const sort_exprs = sort_queries.map(q => expr_parser.parse(q));
+        for (let i = 0; i < search_db.length; ++i) {
+            const item = search_db[i][0];
+            const itemExp = search_db[i][1];
+            if (checkBool(filter_expr.resolve(item, itemExp))) {
+                results.push({ item, itemExp, sortKeys: sort_exprs.map(e => e.resolve(item, itemExp)) });
             }
         }
         results.sort((a, b) => {
@@ -221,28 +222,28 @@ function doItemSearch() {
     displayItems(results);
 }
 
-function resetItemSearch() {
-    resetFields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
-    for (const field of resetFields) {
+function reset_item_search() {
+    const reset_fields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
+    for (const field of reset_fields) {
         document.getElementById(field).value = "";
     }
 }
 
 function init_items() {
-    searchDb = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
-    exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
+    search_db = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
+    expr_parser = new ExprParser(itemQueryProps, itemQueryFuncs);
     //init dropdowns
-    let filterInputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
+    let filter_inputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
                                 ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
                                 ["filter1", item_filters],
                                 ["filter2", item_filters],
                                 ["filter3", item_filters],
                                 ["filter4", item_filters]]);
-    for (const [field, data] of filterInputs) {
+    for (const [field, data] of filter_inputs) {
         let field_choice = document.getElementById(field+"-choice");
         // show dropdown on click
         field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
-        filterInputs.set(field, new autoComplete({
+        filter_inputs.set(field, new autoComplete({
             data: {
                 src: data,
             },  
