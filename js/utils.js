@@ -977,12 +977,14 @@ function show_tab(target, tabs) {
 
 // mobile navbar appearance control
 let scrollPos = 0
-document.addEventListener('scroll', (e) => {
-    if (document.documentElement.scrollTop - scrollPos > 20) {
-        document.getElementById("mobile-navbar").style.display = "none";
-        document.getElementById("mobile-navbar-dropdown").style.display = "none";
-    } else if (document.documentElement.scrollTop - scrollPos < -50) {
-        document.getElementById("mobile-navbar").style.display = "";
-    }
-    scrollPos = document.documentElement.scrollTop;
-});
+if (screen.width < 992) {
+    document.addEventListener('scroll', (e) => {
+        if (document.documentElement.scrollTop - scrollPos > 20) {
+            document.getElementById("mobile-navbar").style.display = "none";
+            document.getElementById("mobile-navbar-dropdown").style.display = "none";
+        } else if (document.documentElement.scrollTop - scrollPos < -50 || scrollPos < 70) {
+            document.getElementById("mobile-navbar").style.display = "";
+        }
+        scrollPos = document.documentElement.scrollTop;
+    });
+}
