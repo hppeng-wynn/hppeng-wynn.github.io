@@ -1,3 +1,7 @@
+/**
+ * File containing utility functions that are useful for the builder page.
+ */
+
 /*Turns the input amount of skill points into a float precision percentage.
 * @param skp - the integer skillpoint count to be converted
 */

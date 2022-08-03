@@ -1,3 +1,8 @@
+/** 
+ * This file defines computation graph nodes and display code relevant to the ability tree.
+ * TODO: possibly split it up into compute and render... but its a bit complicated :/
+ */
+
 /**
 ATreeNode spec:
 
@@ -74,6 +79,7 @@ stat_bonus: {
 stat_scaling: {
   "type": "stat_scaling",
   "slider": bool,
+  positive: bool                            // True to keep stat above 0. False to ignore floor. Default: True for normal, False for scaling
   "slider_name": Optional[str],
   "slider_step": Optional[float],
   round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
@@ -754,10 +760,13 @@ const atree_scaling = new (class extends ComputeNode {
                     continue;
                 case 'stat_scaling':
                     let total = 0;
-                    const {round = true, slider = false, scaling = [0]} = effect;
+                    const {slider = false, scaling = [0]} = effect;
+                    let { positive = true, round = true } = effect;
                     if (slider) {
                         const slider_val = slider_map.get(effect.slider_name).slider.value;
                         total = parseInt(slider_val) * scaling[0];
+                        round = false;
+                        positive = false;
                     }
                     else {
                         // TODO: type: prop?
@@ -768,7 +777,7 @@ const atree_scaling = new (class extends ComputeNode {
 
                     if ('output' in effect) { // sometimes nodes will modify slider without having effect.
                         if (round) { total = Math.floor(round_near(total)); }
-                        if (total < 0) { total = 0; }   // Normal stat scaling will not go negative.
+                        if (positive && total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect && total > effect.max) { total = effect.max; }
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {

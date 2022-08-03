@@ -5242,7 +5242,9 @@ const atrees = {
                 "Teleport"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Wisdom"
+            ],
             "cost": 1,
             "display": {
                 "row": 6,
@@ -5378,20 +5380,6 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Meteor Damage",
-                    "behavior": "modify",
-                    "multipliers": [
-                        30,
-                        90,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Lightning Damage",
                     "behavior": "modify",
                     "multipliers": [
                         30,
@@ -5608,7 +5596,11 @@ const atrees = {
                 "Burning Sigil"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Sunshower",
+                "Larger Heal",
+                "Orphion's Pulse"
+            ],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -7673,6 +7665,17 @@ const atrees = {
                             "multipliers": [
                                 200, 50, 0, 0, 0, 0
                             ]
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Backstab",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Backstab:3.Backstab Damage",
+                            "value": 100
                         }
                     ]
                 }

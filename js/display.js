@@ -1,3 +1,8 @@
+/**
+ * File containing generic display code, ex. for displaying items and spell damage.
+ * TODO: split this file into separate parts for each "component".
+ */
+
 const itemBGPositions = {"bow": "0 0", "spear": "9.090909090909088% 0", "wand": "18.181818181818183% 0", "dagger": "27.27272727272727% 0", "relik": "36.36363636363637% 0",
     "helmet": "45.45454545454546% 0", "chestplate": "54.54545454545454% 0", "leggings": "63.63636363636363% 0", "boots": "72.72727272727272% 0",
     "ring": "81.81818181818181% 0", "bracelet": "90.90909090909092% 0", "necklace": "100% 0",
@@ -388,46 +393,45 @@ function displayExpandedItem(item, parent_id){
         }
     }
     //Show powder specials ;-;
-    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots"];//, "ring", "bracelet", "necklace"];
-    if(nonConsumables.includes(item.get("type"))) {
-        let powder_special = document.createElement("div");
-        powder_special.classList.add("col");
+    let powder_specials_check = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots"];
+    if(powder_specials_check.includes(item.get("type"))) {
+        let powder_special = make_elem("div", ['col']);
         let powders = item.get("powders");
-        let element = "";
-        let power = 0;
+        let element;
+        let power_index;
         for (let i = 0; i < powders.length; i++) {
-            let firstPowderType = skp_elements[Math.floor(powders[i]/6)];
-            if (element !== "") break;
-            else if (powders[i]%6 > 2) { //t4+
+            const firstPowderType = skp_elements[Math.floor(powders[i]/6)];
+            const powder1_power = powders[i] % 6;
+            if (powder1_power > 2) { //t4+
                 for (let j = i+1; j < powders.length; j++) {
-                    let currentPowderType = skp_elements[Math.floor(powders[j]/6)]
-                    if (powders[j] % 6 > 2 && firstPowderType === currentPowderType) {
+                    const currentPowderType = skp_elements[Math.floor(powders[j]/6)]
+                    const powder2_power = powders[j] % 6;
+                    if (powder2_power > 2 && firstPowderType === currentPowderType) {
                         element = currentPowderType;
-                        power = Math.round(((powders[i] % 6 + powders[j] % 6 + 2) / 2 - 4) * 2);
+                        power_index = powder1_power + powder2_power - 6;
                         break;
                     }
                 }
             }
         }
-        if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
-            let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
-            let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
-            let specialTitle = document.createElement("span");
-            let specialEffects = document.createElement("span");
-            addClasses(specialTitle, [damageClasses[skp_elements.indexOf(element) + 1]]);
+        if (element) {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
+            const powderSpecial = powderSpecialStats[skp_elements.indexOf(element)];
+            const specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
+            const specialTitle = make_elem("span", [damageClasses[skp_elements.indexOf(element) + 1]]);
+            const specialEffects = document.createElement("span");
             let effects;
             if (item.get("category") === "weapon") {//weapon
                 effects = powderSpecial["weaponSpecialEffects"];
                 specialTitle.textContent = powderSpecial["weaponSpecialName"];
-            }else if (item.get("category") === "armor") {//armor
+            } else if (item.get("category") === "armor") {//armor
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
             for (const [key,value] of effects.entries()) {
                 if (key !== "Description") {
-                    let effect = document.createElement("p");
-                    effect.classList.add("m-0");
-                    effect.textContent = key + ": " + value[power] + specialSuffixes.get(key);
+                    let effect = make_elem("p", ["m-0"], {
+                        textContent: key + ": " + value[power_index] + specialSuffixes.get(key)
+                    });
                     if(key === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
@@ -435,20 +439,19 @@ function displayExpandedItem(item, parent_id){
                         effect.textContent += " / Mana Used";
                     }
                     specialEffects.appendChild(effect);
-                }else{
+                } else {
                     specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
                 }
             }
-            powder_special.appendChild(specialTitle);
-            powder_special.appendChild(specialEffects);
+            powder_special.append(specialTitle, specialEffects);
             parent_div.appendChild(powder_special);
         }
     }
     
+    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots", "ring", "bracelet", "necklace"];
     if(item.get("tier") && item.get("tier") === "Crafted") {
-        let dura_elem = document.createElement("div");
-        dura_elem.classList.add("col");
-        let dura = [];
+        let dura_elem = make_elem("div", ["col"]);
+        let dura;
         let suffix = "";
         if(nonConsumables.includes(item.get("type"))) {
             dura = item.get("durability");
@@ -457,9 +460,9 @@ function displayExpandedItem(item, parent_id){
             dura = item.get("duration");
             dura_elem.textContent = "Duration: "
             suffix = " sec."
-            let charges = document.createElement("b");
-            charges.textContent = "Charges: " + item.get("charges");
-            parent_div.appendChild(charges);
+            parent_div.appendChild(make_elem('b', [], {
+                textContent: "Charges: " + item.get("charges")
+            }));
         }
 
         if (typeof(dura) === "string") {
@@ -472,9 +475,7 @@ function displayExpandedItem(item, parent_id){
     }
     //Show item tier
     if (item.get("tier") && item.get("tier") !== " ") {
-        let item_desc_elem = document.createElement("div");
-        item_desc_elem.classList.add("col");
-        item_desc_elem.classList.add(item.get("tier"));
+        let item_desc_elem = make_elem("div", ["col", item.get("tier")]);
         if (tome_types.includes(item.get("type"))) {
             tome_type_map = new Map([["weaponTome", "Weapon Tome"],["armorTome", "Armor Tome"],["guildTome", "Guild Tome"]]);
             item_desc_elem.textContent = item.get("tier")+" "+tome_type_map.get(item.get("type"));
@@ -486,20 +487,19 @@ function displayExpandedItem(item, parent_id){
 
     //Show item hash if applicable
     if (item.get("crafted") || item.get("custom")) {
-        let item_desc_elem = document.createElement("p");
-        item_desc_elem.classList.add('itemp');
-        item_desc_elem.style.maxWidth = "100%";
-        item_desc_elem.style.wordWrap = "break-word";
-        item_desc_elem.style.wordBreak = "break-word";
-        item_desc_elem.textContent = item.get("hash");
-        parent_div.append(item_desc_elem);
+        parent_div.append(make_elem('p', ['itemp'], {
+            style: {
+                maxWidth: '100%',
+                wordWrap: 'break-word',
+                wordBreak: 'break-word'
+            },
+            textContent: item.get('hash')
+        }));
     }
 
     if (item.get("category") === "weapon") { 
         let total_damages = item.get("basedps");
-        let base_dps_elem = document.createElement("p");
-        base_dps_elem.classList.add("left");
-        base_dps_elem.classList.add("itemp");
+        let base_dps_elem = make_elem("p", ["left", "itemp"]);
         if (item.get("tier") === "Crafted") {
             let base_dps_min = total_damages[0];
             let base_dps_max = total_damages[1];
@@ -509,8 +509,7 @@ function displayExpandedItem(item, parent_id){
         else {
             base_dps_elem.textContent = "Base DPS: "+(total_damages);
         }
-        parent_div.appendChild(document.createElement("p"));
-        parent_div.appendChild(base_dps_elem);
+        parent_div.append(make_elem("p"), base_dps_elem);
     }
 }
 
@@ -1268,8 +1267,8 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
         //iterate through the special and display its effects.
         let powder_special = make_elem("p", ["pt-3"]);
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
-        let specialTitle = document.createElement("p");
-        let specialEffects = document.createElement("p");
+        let specialTitle = make_elem("p");
+        let specialEffects = make_elem("p");
         specialTitle.classList.add(damageClasses[powderSpecialStats.indexOf(special[0]) + 1]);
         let effects = special[0]["weaponSpecialEffects"];
         let power = special[1];
