@@ -956,10 +956,11 @@ function make_SCC_graph(root_node, nodes) {
 
 // Toggles display of a certain element, given the ID.
 function toggle_tab(tab) {
-    if (document.querySelector("#"+tab).style.display == "none") {
-        document.querySelector("#"+tab).style.display = "";
+    let elem = document.getElementById(tab);
+    if (elem.style.display == "none") {
+        elem.style.display = "";
     } else {
-        document.querySelector("#"+tab).style.display = "none";
+        elem.style.display = "none";
     }
 }
 
@@ -968,10 +969,10 @@ function toggle_tab(tab) {
 function show_tab(target, tabs) {
     //hide all tabs, then show the tab of the div clicked and highlight the correct button
     for (const i in tabs) {
-        document.querySelector("#" + tabs[i]).style.display = "none";
+        document.getElementById(tabs[i]).style.display = "none";
         document.getElementById(tabs[i] + "-btn").classList.remove("selected-btn");
     }
-    document.querySelector("#" + target).style.display = "";
+    document.getElementById(target).style.display = "";
     document.getElementById(target + "-btn").classList.add("selected-btn");
 }
 
