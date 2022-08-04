@@ -190,7 +190,7 @@ async function load_init() {
 }
 
 // List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
-for (const it of itemTypes) {
+for (const it of item_types) {
     itemLists.set(it, []);
 }
 
