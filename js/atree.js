@@ -472,7 +472,7 @@ const atree_render_active = new (class extends ComputeNode {
             const errorbox = make_elem('div', ['rounded-bottom', 'dark-4', 'border', 'p-0', 'mx-2', 'my-4', 'dark-shadow']);
             this.list_elem.append(errorbox);
 
-            const error_title = document.createElement('b', ['warning', 'scaled-font'], { innerHTML: "ATree Error!" });
+            const error_title = make_elem('b', ['warning', 'scaled-font'], { innerHTML: "ATree Error!" });
             errorbox.append(error_title);
 
             for (let i = 0; i < 5 && i < errors.length; ++i) {
