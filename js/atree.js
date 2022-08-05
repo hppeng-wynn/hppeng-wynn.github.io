@@ -947,11 +947,11 @@ function render_AT(UI_elem, list_elem, tree) {
 
     // Setup grid.
     for (let j = 0; j <= max_row; j++) {
-        const row = ('div', ['row'], { id: "atree-row-"+j });
+        const row = make_elem('div', ['row'], { id: "atree-row-"+j });
         for (let k = 0; k < 9; k++) {
-            row.appendChild(make_elem('div', ['col', 'px-0'], { style: "position: relative; aspect-ratio: 1/1;" }));
+            row.append(make_elem('div', ['col', 'px-0'], { style: "position: relative; aspect-ratio: 1/1;" }));
         }
-        UI_elem.appendChild(row);
+        UI_elem.append(row);
     }
 
     for (const _node of tree) {
