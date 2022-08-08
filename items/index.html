@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/sq2bs.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/wynnstyles.css">
+    <link rel="stylesheet" href="../css/items.css">
 </head>
     <body class = "text-light d-flex justify-content-center" id = "body">
         <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
@@ -32,98 +33,82 @@
             <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
         </div>
         <div class = "container py-5 vh-100 mx-0 mx-lg-auto scaled-font">
-            <div class = "col">
+            <div class = "row">
                 <div class = "row">
                     <div class = "col text-end">
                         <a href = "../items_adv/">Advanced Item Search</a>
                     </div>
                 </div>
-                <div class = "row">
+                <div class = "col-auto" style = "width: 12.5%;"></div>
+                <div class = "col-lg-4">
                     <div class = "row">
-                        <div class = "col-lg-3 col-sm-12">
+                        <div class = "col-lg col-sm-12">
                             <div class = "col fw-bold">Name:</div>
-                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="item-name-choice" name="item-name-choice" placeholder="Item name (case insensitive)"/>
-                            <p class="error col"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Category:</div>
-                            <input class="col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="item-category-choice" name="item-category-choice" placeholder="ALL"/>
-                            <datalist id="category-items">
-                                <option value="ALL">
-                                <option value="armor">
-                                <option value="helmet">
-                                <option value="chestplate">
-                                <option value="leggings">
-                                <option value="boots">
-                                <option value="accessory">
-                                <option value="ring">
-                                <option value="bracelet">
-                                <option value="necklace">
-                                <option value="weapon">
-                                <option value="wand">
-                                <option value="spear">
-                                <option value="bow">
-                                <option value="dagger">
-                                <option value="relik">
-                            </datalist>
-                            <p class="error"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Rarity:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="item-rarity-choice" name="item-rarity-choice" placeholder="ANY"/>
-                            <datalist id = "rarity-items">
-                                <option value="ANY">
-                                <option value="Normal">
-                                <option value="Unique">
-                                <option value="Set">
-                                <option value="Rare">
-                                <option value="Legendary">
-                                <option value="Fabled">
-                                <option value="Mythic">
-                                <option value="Sane">
-                            </datalist>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Level Range:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="item-level-choice" name="item-level-choice" placeholder = "1-106"/>
+                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style="width: 100%!important;" type="text" id="item-name-choice" name="item-name-choice" placeholder="Item name (case insensitive)"/>
                             <p class="error col-auto"></p>
                         </div>
                     </div>
                     <div class = "row">
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 1:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter1-choice" name="filter1-choice" placeholder="ANY"/>
+                        <div class = "col-lg col-sm-12">
+                            <div class = "col"><span class = "fw-bold">Type:</span> <span style = "cursor: pointer; float: right;"><span>All</span> &nbsp; <span>None</span></span></div>
+                            <div id = "type-box">
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 0 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 9.09091% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 18.1818% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 27.2727% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 36.3636% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 45.4545% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 54.5455% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 63.6364% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 72.7273% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 81.8182% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 90.9091% 0;"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 100% 0;"></div>
+                            </div>
                             <p class="error col-auto"></p>
                         </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 2:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter2-choice" name="filter2-choice" placeholder="ANY"/>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 3:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter3-choice" name="filter3-choice" placeholder="ANY"/>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 4:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter4-choice" name="filter4-choice" placeholder="ANY"/>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <datalist id = "filter-items"></datalist>
                     </div>
                     <div class = "row">
-                        <div class = "col-auto">
-                            <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "search-button" onclick = "doItemSearch()">
-                                Search!
-                            </button>
+                        <div class = "col-lg col-sm-12">
+                            <div class = "col"><span class = "fw-bold">Rarity:</span> <span style = "cursor: pointer; float: right;"><span>All</span> &nbsp; <span>None</span></span></div>
+                            <div id = "rarity-box">
+                                <!-- unfortunately they must be stacked up like this because newlines are considered spaces and muck up the organization -->
+                                <div id = "rarity-normal"><b>N</b></div><div id = "rarity-unique"><b>U</b></div><div id = "rarity-set"><b>S</b></div><div id = "rarity-rare"><b>R</b></div><div id = "rarity-legendary"><b>L</b></div><div id = "rarity-fabled"><b>F</b></div><div id = "rarity-mythic"><b>M</b></div>
+                            </div>
+                            <p class="error col-auto"></p>
                         </div>
-                        <div class = "col-auto">
-                            <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-button" onclick = "resetItemSearch()">
-                                Reset
-                            </button>
+                    </div>
+                </div>
+                <div class = "col-lg-5">
+                    <div class = "col fw-bold">Filters:</div>
+                    <div class = "row">
+                        <div class = "col">
+                            <img src = "../media/icons/3-lines.svg" class = "reorder-filter" />
+                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style = "width: 25ch!important; display: inline-block;" type="text" placeholder="Filter"/>
+                            <img src = "../media/icons/triangle.svg" class = "asc-icon asc-sel" />
+                            <img src = "../media/icons/triangle.svg" class = "desc-icon" />
+                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style = "width: 6ch!important; display: inline-block;" type="text" placeholder="-&infin;"/>
+                            &nbsp;to&nbsp;
+                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style = "width: 6ch!important; display: inline-block;" type="text" placeholder="&infin;"/>
                         </div>
+                    </div>
+                    <div class = "row">
+                        <div class = "col fw-bold" style = "cursor: pointer; padding-top: 5px;">
+                            + Add Filter
+                        </div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col-auto" style = "width: 12.5%;"></div>
+                    <div class = "col-auto">
+                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "search-button" onclick = "doItemSearch()">
+                            Search!
+                        </button>
+                    </div>
+                    <div class = "col-auto">
+                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-button" onclick = "resetItemSearch()">
+                            Reset
+                        </button>
                     </div>
                 </div>
                 <div class = "row box-title justify-content-center" id = "summary">
