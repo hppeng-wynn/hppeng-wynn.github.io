@@ -9552,7 +9552,10 @@ const atrees = {
         {
             "display_name": "Aura",
             "desc": "Emit an aura from your Totem that damages enemies.",
-            "parents": [],
+            "parents": [
+                "Hand of the Shaman",
+                "Cheaper Haul"
+            ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
