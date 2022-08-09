@@ -46,14 +46,14 @@ for item in items:
 # TEMP wynn2 migration
 # note: 10x'd
 mul_keys_x10 = {
-    "sppct1": 7,
-    "sppct2": 7,
-    "sppct3": 7,
-    "sppct4": 7,
-    "spraw1": 50,
-    "spraw2": 50,
-    "spraw3": 50,
-    "spraw4": 50,
+    "spPct1": 7,
+    "spPct2": 7,
+    "spPct3": 7,
+    "spPct4": 7,
+    "spRaw1": 50,
+    "spRaw2": 50,
+    "spRaw3": 50,
+    "spRaw4": 50,
     "mr": 60,
     "ms": 40
 }
@@ -79,6 +79,8 @@ for item in old_items:
                 if rem >= 5:
                     val += 1
                 item[k] = val
+        if item['name'] == "Gale's Sight":
+            print(item)
         items.append(item)
         #print(f'Unknown old item: {item["name"]}!!!')
     #old_items_map[item["name"]] = item

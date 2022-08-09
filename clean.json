@@ -3743,9 +3743,9 @@
       "dex": 15,
       "int": 10,
       "agi": 12,
-      "spRaw1": 1,
-      "spRaw3": 1,
-      "spRaw4": 1,
+      "spRaw1": 5,
+      "spRaw3": 5,
+      "spRaw4": 5,
       "sprintReg": 13,
       "id": 3629
     },
@@ -3852,7 +3852,7 @@
       "sdRaw": 231,
       "aDefPct": 75,
       "tDefPct": 75,
-      "spRaw3": -1,
+      "spRaw3": -5,
       "id": 3628
     },
     {
@@ -4090,7 +4090,7 @@
       "hprRaw": 108,
       "fDamPct": 15,
       "eDamPct": 15,
-      "spPct2": -67,
+      "spPct2": -47,
       "id": 3555
     },
     {
@@ -4208,10 +4208,10 @@
       "atkSpd": "SLOW",
       "lvl": 99,
       "str": 10,
-      "spRaw1": 11,
-      "spRaw2": -3,
-      "spRaw3": -3,
-      "spRaw4": -3,
+      "spRaw1": 55,
+      "spRaw2": -15,
+      "spRaw3": -15,
+      "spRaw4": -15,
       "id": 35
     },
     {
@@ -6266,7 +6266,7 @@
       "sdRaw": 200,
       "wDamPct": -20,
       "eDamPct": 25,
-      "spPct4": -65,
+      "spPct4": -45,
       "id": 131
     },
     {
@@ -6858,7 +6858,7 @@
       "ms": 4,
       "atkTier": -2,
       "type": "ring",
-      "spPct3": 10,
+      "spPct3": 7,
       "id": 3607
     },
     {
@@ -7219,7 +7219,7 @@
       "ms": 8,
       "hprRaw": -200,
       "fixID": true,
-      "spRaw4": -1,
+      "spRaw4": -5,
       "id": 181
     },
     {
@@ -9772,8 +9772,8 @@
       "agi": 11,
       "def": 11,
       "hpBonus": -300,
-      "spPct2": 35,
-      "spPct4": -35,
+      "spPct2": 25,
+      "spPct4": -24,
       "id": 359
     },
     {
@@ -10379,8 +10379,8 @@
       "str": 8,
       "dex": 8,
       "hprRaw": -150,
-      "spRaw1": -3,
-      "spRaw2": 3,
+      "spRaw1": -15,
+      "spRaw2": 15,
       "id": 384
     },
     {
@@ -10609,7 +10609,7 @@
       "aDamPct": 25,
       "eDamPct": 25,
       "wDefPct": 26,
-      "spRaw4": -1,
+      "spRaw4": -5,
       "id": 3610
     },
     {
@@ -10721,8 +10721,8 @@
       "hpBonus": 3000,
       "fDefPct": 12,
       "aDefPct": 12,
-      "spPct2": -20,
-      "spPct3": -10,
+      "spPct2": -14,
+      "spPct3": -7,
       "id": 399
     },
     {
@@ -10948,9 +10948,9 @@
       "def": 6,
       "spd": 18,
       "wDamPct": -25,
-      "spPct1": -10,
-      "spPct3": -10,
-      "spPct4": -20,
+      "spPct1": -7,
+      "spPct3": -7,
+      "spPct4": -14,
       "id": 446
     },
     {
@@ -11245,7 +11245,7 @@
       "hprRaw": 9,
       "fDamPct": 15,
       "aDefPct": 15,
-      "spRaw1": 1,
+      "spRaw1": 5,
       "id": 428
     },
     {
@@ -12386,9 +12386,9 @@
       "def": -20,
       "atkTier": -1,
       "hprRaw": -200,
-      "spPct2": -46,
-      "spPct3": -30,
-      "spPct4": -35,
+      "spPct2": -32,
+      "spPct3": -21,
+      "spPct4": -24,
       "id": 482
     },
     {
@@ -12458,7 +12458,7 @@
       "spd": -8,
       "hpBonus": 1750,
       "hprRaw": 125,
-      "spPct1": -69,
+      "spPct1": -48,
       "id": 490
     },
     {
@@ -12683,7 +12683,7 @@
       "spd": -20,
       "hprRaw": -20,
       "eDamPct": 25,
-      "spPct3": -30,
+      "spPct3": -21,
       "id": 493
     },
     {
@@ -12925,7 +12925,7 @@
       "wDamPct": 40,
       "fDefPct": 12,
       "aDefPct": 12,
-      "spPct1": -30,
+      "spPct1": -21,
       "id": 507
     },
     {
@@ -14647,7 +14647,7 @@
       "mdRaw": 285,
       "fDamPct": 50,
       "wDefPct": -30,
-      "spRaw3": -1,
+      "spRaw3": -5,
       "id": 589
     },
     {
@@ -14752,7 +14752,7 @@
       "aDamPct": 19,
       "tDamPct": -58,
       "wDefPct": -20,
-      "spRaw4": 1,
+      "spRaw4": 5,
       "id": 3551
     },
     {
@@ -16794,7 +16794,7 @@
       "expd": 30,
       "hprRaw": -10,
       "fDamPct": 15,
-      "spRaw1": 2,
+      "spRaw1": 10,
       "id": 684
     },
     {
@@ -16843,9 +16843,9 @@
       "int": 15,
       "spd": -10,
       "wDamPct": 25,
-      "spRaw1": 1,
-      "spRaw3": -1,
-      "spRaw4": 1,
+      "spRaw1": 5,
+      "spRaw3": -5,
+      "spRaw4": 5,
       "id": 686
     },
     {
@@ -17293,7 +17293,7 @@
       "ref": 30,
       "str": 40,
       "fixID": true,
-      "spPct1": 150,
+      "spPct1": 105,
       "id": 708
     },
     {
@@ -17451,7 +17451,7 @@
       "eDamPct": 30,
       "eDefPct": 30,
       "fixID": true,
-      "spRaw1": -2,
+      "spRaw1": -10,
       "id": 718
     },
     {
@@ -17496,7 +17496,7 @@
       "hpBonus": -1000,
       "aDefPct": -25,
       "fixID": true,
-      "spPct4": 40,
+      "spPct4": 28,
       "rainbowRaw": 1275,
       "id": 720
     },
@@ -17588,7 +17588,7 @@
       "wDamPct": -25,
       "aDamPct": -25,
       "fixID": true,
-      "spPct1": -150,
+      "spPct1": -105,
       "id": 721
     },
     {
@@ -17614,8 +17614,8 @@
       "agi": 21,
       "aDamPct": 21,
       "fixID": true,
-      "spPct2": -77,
-      "spPct3": -49,
+      "spPct2": -54,
+      "spPct3": -34,
       "id": 726
     },
     {
@@ -17642,7 +17642,7 @@
       "spd": 15,
       "hprRaw": -100,
       "fixID": true,
-      "spPct1": -40,
+      "spPct1": -28,
       "id": 730
     },
     {
@@ -17760,7 +17760,7 @@
       "wDefPct": -20,
       "aDefPct": -35,
       "fixID": true,
-      "spRaw3": -2,
+      "spRaw3": -10,
       "id": 733
     },
     {
@@ -17949,7 +17949,7 @@
       "spd": 20,
       "aDamPct": 15,
       "aDefPct": 25,
-      "spRaw2": -3,
+      "spRaw2": -15,
       "jh": 2,
       "id": 2265
     },
@@ -18027,8 +18027,8 @@
       "tDamPct": 30,
       "wDefPct": -45,
       "eDefPct": -55,
-      "spPct2": -20,
-      "spPct3": -15,
+      "spPct2": -14,
+      "spPct3": -10,
       "id": 2264
     },
     {
@@ -18566,7 +18566,7 @@
       "tDamPct": 10,
       "eDamPct": 10,
       "fixID": true,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 770
     },
     {
@@ -18765,7 +18765,7 @@
       "hpBonus": 2250,
       "mdRaw": 550,
       "fixID": true,
-      "spRaw1": -4,
+      "spRaw1": -20,
       "id": 777
     },
     {
@@ -18836,7 +18836,7 @@
       "eSteal": 10,
       "mdRaw": 135,
       "fixID": true,
-      "spRaw4": -3,
+      "spRaw4": -15,
       "id": 779
     },
     {
@@ -18898,7 +18898,7 @@
       "tDefPct": 25,
       "eDefPct": 25,
       "fixID": true,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 783
     },
     {
@@ -18972,10 +18972,10 @@
       "atkTier": -6,
       "mdRaw": 1997,
       "fixID": true,
-      "spPct1": 33,
-      "spPct2": 21,
-      "spPct3": 46,
-      "spPct4": 33,
+      "spPct1": 23,
+      "spPct2": 15,
+      "spPct3": 32,
+      "spPct4": 23,
       "id": 782
     },
     {
@@ -19403,7 +19403,7 @@
       "lvl": 19,
       "agi": 4,
       "fixID": true,
-      "spPct1": 150,
+      "spPct1": 105,
       "id": 805
     },
     {
@@ -20670,10 +20670,10 @@
       "fDamPct": 10,
       "wDamPct": 20,
       "tDamPct": 10,
-      "spPct1": -30,
-      "spPct2": -20,
-      "spPct3": -25,
-      "spPct4": -30,
+      "spPct1": -21,
+      "spPct2": -14,
+      "spPct3": -17,
+      "spPct4": -21,
       "id": 860
     },
     {
@@ -21450,8 +21450,8 @@
       "mdPct": 15,
       "spd": 10,
       "hpBonus": -300,
-      "spPct1": 35,
-      "spPct3": -35,
+      "spPct1": 25,
+      "spPct3": -24,
       "jh": 1,
       "id": 898
     },
@@ -23673,7 +23673,7 @@
       "dex": 16,
       "spd": -16,
       "sdRaw": 140,
-      "spRaw2": -2,
+      "spRaw2": -10,
       "id": 1004
     },
     {
@@ -24885,7 +24885,7 @@
       "fDamPct": 25,
       "wDamPct": -150,
       "fDefPct": 35,
-      "spRaw3": -3,
+      "spRaw3": -15,
       "id": 1062
     },
     {
@@ -25071,10 +25071,10 @@
       "ref": 20,
       "int": -40,
       "spd": 8,
-      "spPct1": -25,
-      "spPct2": -15,
-      "spPct3": -25,
-      "spPct4": -15,
+      "spPct1": -17,
+      "spPct2": -10,
+      "spPct3": -17,
+      "spPct4": -10,
       "id": 1070
     },
     {
@@ -26246,7 +26246,7 @@
       "aDamPct": -33,
       "tDamPct": -33,
       "eDamPct": -33,
-      "spPct3": -33,
+      "spPct3": -23,
       "id": 1143
     },
     {
@@ -26433,7 +26433,7 @@
       "sdRaw": 27,
       "wDamPct": 13,
       "tDamPct": 5,
-      "spPct1": 20,
+      "spPct1": 14,
       "id": 1145
     },
     {
@@ -27635,8 +27635,8 @@
       "spd": -8,
       "hpBonus": 60,
       "hprRaw": 25,
-      "spPct1": 20,
-      "spRaw3": -1,
+      "spPct1": 14,
+      "spRaw3": -5,
       "id": 1197
     },
     {
@@ -28562,7 +28562,7 @@
       "int": 17,
       "hpBonus": 940,
       "hprRaw": 110,
-      "spRaw4": -1,
+      "spRaw4": -5,
       "id": 1243
     },
     {
@@ -28827,7 +28827,7 @@
       "str": 4,
       "dex": 4,
       "mdRaw": 52,
-      "spPct1": 25,
+      "spPct1": 18,
       "id": 1261
     },
     {
@@ -29164,7 +29164,7 @@
       "aDefPct": 25,
       "tDefPct": 25,
       "fixID": true,
-      "spPct3": -40,
+      "spPct3": -28,
       "id": 1272
     },
     {
@@ -29219,8 +29219,8 @@
       "tDefPct": 40,
       "eDefPct": 40,
       "fixID": true,
-      "spPct3": -25,
-      "spPct4": -25,
+      "spPct3": -17,
+      "spPct4": -17,
       "id": 1279
     },
     {
@@ -30095,7 +30095,7 @@
       "ls": 110,
       "hpBonus": -500,
       "sdRaw": 110,
-      "spPct4": -40,
+      "spPct4": -28,
       "id": 3557
     },
     {
@@ -30622,7 +30622,7 @@
       "sdRaw": -45,
       "aDamPct": 11,
       "tDamPct": 11,
-      "spRaw2": -1,
+      "spRaw2": -5,
       "jh": 1,
       "id": 1342
     },
@@ -31034,7 +31034,7 @@
       "aDamPct": -8,
       "tDamPct": -8,
       "eDamPct": 15,
-      "spRaw4": -1,
+      "spRaw4": -5,
       "id": 1361
     },
     {
@@ -32819,8 +32819,8 @@
       "fDamPct": 20,
       "wDamPct": -50,
       "wDefPct": -30,
-      "spRaw1": -1,
-      "spRaw3": -1,
+      "spRaw1": -5,
+      "spRaw3": -5,
       "id": 1457
     },
     {
@@ -32987,7 +32987,7 @@
       "sdRaw": 56,
       "tDamPct": 9,
       "eDefPct": -21,
-      "spRaw3": -1,
+      "spRaw3": -5,
       "id": 1462
     },
     {
@@ -33302,7 +33302,7 @@
       "spd": -20,
       "hpBonus": 2500,
       "hprRaw": 165,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 1477
     },
     {
@@ -34106,7 +34106,7 @@
       "dex": 3,
       "int": 3,
       "spd": -4,
-      "spPct2": -20,
+      "spPct2": -14,
       "id": 1519
     },
     {
@@ -34400,7 +34400,7 @@
       "sdRaw": -25000,
       "mdRaw": -25000,
       "wDamPct": 81,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 1533
     },
     {
@@ -36805,7 +36805,7 @@
       "dex": 4,
       "sdRaw": 13,
       "mdRaw": 13,
-      "spPct1": 25,
+      "spPct1": 18,
       "id": 1658
     },
     {
@@ -37196,7 +37196,7 @@
       "mdRaw": -58,
       "wDamPct": 15,
       "aDamPct": 15,
-      "spRaw3": -1,
+      "spRaw3": -5,
       "id": 1677
     },
     {
@@ -37248,7 +37248,7 @@
       "mdRaw": 169,
       "wDamPct": 40,
       "eDefPct": 20,
-      "spPct3": -31,
+      "spPct3": -22,
       "id": 1680
     },
     {
@@ -37431,7 +37431,7 @@
       "hpBonus": 1850,
       "eDamPct": 20,
       "eDefPct": 20,
-      "spPct4": -40,
+      "spPct4": -28,
       "id": 1684
     },
     {
@@ -37507,7 +37507,7 @@
       "def": 15,
       "fDamPct": 40,
       "wDamPct": 40,
-      "spPct1": -33,
+      "spPct1": -23,
       "id": 1689
     },
     {
@@ -37647,7 +37647,7 @@
       "fDamPct": 10,
       "fDefPct": 100,
       "aDefPct": 50,
-      "spPct4": -50,
+      "spPct4": -35,
       "id": 1706
     },
     {
@@ -37896,7 +37896,7 @@
       "lb": 10,
       "ref": 35,
       "expd": 35,
-      "spRaw2": -1,
+      "spRaw2": -5,
       "id": 1732
     },
     {
@@ -39235,8 +39235,8 @@
       "spd": -10,
       "hpBonus": -185,
       "spRegen": -15,
-      "spRaw1": -1,
-      "spRaw3": -1,
+      "spRaw1": -5,
+      "spRaw3": -5,
       "id": 1794
     },
     {
@@ -39265,7 +39265,7 @@
       "ref": 30,
       "agi": 20,
       "spd": 25,
-      "spPct2": -60,
+      "spPct2": -42,
       "sprintReg": 100,
       "jh": 1,
       "id": 1795
@@ -39400,7 +39400,7 @@
       "expd": 25,
       "tDamPct": 15,
       "eDamPct": 15,
-      "spRaw4": -2,
+      "spRaw4": -10,
       "id": 1798
     },
     {
@@ -39566,8 +39566,8 @@
       "ms": 8,
       "int": -23,
       "eSteal": 10,
-      "spPct1": -20,
-      "spPct3": -10,
+      "spPct1": -14,
+      "spPct3": -7,
       "id": 1803
     },
     {
@@ -40428,7 +40428,7 @@
       "int": 15,
       "spRegen": -14,
       "type": "bracelet",
-      "spRaw2": 1,
+      "spRaw2": 5,
       "id": 1860
     },
     {
@@ -44652,7 +44652,7 @@
       "fDamPct": 45,
       "wDamPct": -25,
       "eDamPct": -25,
-      "spPct3": -33,
+      "spPct3": -23,
       "id": 2063
     },
     {
@@ -47068,8 +47068,8 @@
       "dexReq": 10,
       "defReq": 5,
       "ms": 8,
-      "spRaw1": 2,
-      "spRaw2": -1,
+      "spRaw1": 10,
+      "spRaw2": -5,
       "id": 2168
     },
     {
@@ -47346,7 +47346,7 @@
       "ms": 4,
       "lb": 10,
       "str": -5,
-      "spPct1": -36,
+      "spPct1": -25,
       "id": 2182
     },
     {
@@ -50035,8 +50035,8 @@
       "agi": 7,
       "def": 7,
       "wDamPct": -15,
-      "spPct1": -15,
-      "spPct3": -15,
+      "spPct1": -10,
+      "spPct3": -10,
       "id": 2327
     },
     {
@@ -50485,7 +50485,7 @@
       "int": 3,
       "agi": 3,
       "def": 3,
-      "spRaw4": -1,
+      "spRaw4": -5,
       "id": 2348
     },
     {
@@ -51104,9 +51104,9 @@
       "sdRaw": 130,
       "tDamPct": 35,
       "wDefPct": -40,
-      "spRaw2": -2,
-      "spPct3": 70,
-      "spPct4": -60,
+      "spRaw2": -10,
+      "spPct3": 49,
+      "spPct4": -42,
       "jh": -1,
       "id": 2381
     },
@@ -53464,7 +53464,7 @@
       "spd": -10,
       "wDamPct": 15,
       "fixID": true,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 2509
     },
     {
@@ -53763,7 +53763,7 @@
       "eDamPct": 20,
       "wDefPct": -50,
       "fixID": true,
-      "spPct4": 50,
+      "spPct4": 35,
       "id": 2522
     },
     {
@@ -53787,9 +53787,9 @@
       "eDamPct": 14,
       "aDefPct": -12,
       "fixID": true,
-      "spPct1": -20,
-      "spPct3": -20,
-      "spPct4": 50,
+      "spPct1": -14,
+      "spPct3": -14,
+      "spPct4": 35,
       "id": 2516
     },
     {
@@ -55009,7 +55009,7 @@
       "def": 4,
       "spd": 10,
       "fixID": true,
-      "spPct1": -25,
+      "spPct1": -17,
       "id": 2579
     },
     {
@@ -55049,7 +55049,7 @@
       "spd": -10,
       "hpBonus": 2750,
       "fixID": true,
-      "spRaw2": 3,
+      "spRaw2": 15,
       "id": 2578
     },
     {
@@ -55172,7 +55172,7 @@
       "aDefPct": 15,
       "eDefPct": 15,
       "fixID": true,
-      "spRaw2": -2,
+      "spRaw2": -10,
       "id": 2586
     },
     {
@@ -55987,7 +55987,7 @@
       "tDamPct": 15,
       "tDefPct": 10,
       "fixID": true,
-      "spRaw3": -3,
+      "spRaw3": -15,
       "id": 2624
     },
     {
@@ -58701,7 +58701,7 @@
       "spRegen": 10,
       "aDefPct": 10,
       "fixID": true,
-      "spPct1": -25,
+      "spPct1": -17,
       "id": 2763
     },
     {
@@ -59776,8 +59776,8 @@
       "expd": 25,
       "hpBonus": 1000,
       "fixID": true,
-      "spPct1": 50,
-      "spPct4": -30,
+      "spPct1": 35,
+      "spPct4": -21,
       "id": 2810
     },
     {
@@ -60453,7 +60453,7 @@
       "wDefPct": 15,
       "eDefPct": 15,
       "fixID": true,
-      "spRaw3": -2,
+      "spRaw3": -10,
       "id": 2847
     },
     {
@@ -61993,10 +61993,10 @@
       "mr": 6,
       "sdPct": -25,
       "fixID": true,
-      "spPct1": -25,
-      "spPct2": -25,
-      "spPct3": -25,
-      "spPct4": -25,
+      "spPct1": -17,
+      "spPct2": -17,
+      "spPct3": -17,
+      "spPct4": -17,
       "id": 2900
     },
     {
@@ -62352,7 +62352,7 @@
       "hprRaw": -40,
       "sdRaw": 95,
       "fixID": true,
-      "spPct3": -15,
+      "spPct3": -10,
       "id": 2915
     },
     {
@@ -64297,8 +64297,8 @@
       "hprRaw": -280,
       "wDamPct": 28,
       "eDamPct": 28,
-      "spRaw1": -1,
-      "spRaw4": -1,
+      "spRaw1": -5,
+      "spRaw4": -5,
       "id": 3003
     },
     {
@@ -64387,9 +64387,9 @@
       "ms": 12,
       "dex": 10,
       "hprRaw": -40,
-      "spPct1": 300,
-      "spPct3": -80,
-      "spRaw4": 2,
+      "spPct1": 210,
+      "spPct3": -56,
+      "spRaw4": 10,
       "id": 3051
     },
     {
@@ -64837,7 +64837,7 @@
       "fDamPct": 29,
       "wDamPct": -42,
       "aDamPct": 29,
-      "spRaw3": -2,
+      "spRaw3": -10,
       "id": 3028
     },
     {
@@ -65109,7 +65109,7 @@
       "atkTier": 7,
       "spRegen": -10,
       "mdRaw": 105,
-      "spRaw2": 2,
+      "spRaw2": 10,
       "id": 3040
     },
     {
@@ -65968,7 +65968,7 @@
       "agi": 12,
       "spd": 25,
       "aDamPct": 15,
-      "spPct3": 50,
+      "spPct3": 35,
       "id": 3086
     },
     {
@@ -66079,7 +66079,7 @@
       "wDamPct": -25,
       "aDamPct": 14,
       "eDamPct": 14,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 3087
     },
     {
@@ -66399,9 +66399,9 @@
       "int": -30,
       "def": 8,
       "hprRaw": 150,
-      "spPct1": -10,
-      "spPct2": -20,
-      "spPct3": -15,
+      "spPct1": -7,
+      "spPct2": -14,
+      "spPct3": -10,
       "id": 3094
     },
     {
@@ -66755,8 +66755,8 @@
       "def": 7,
       "spd": 23,
       "wDamPct": -10,
-      "spPct1": -20,
-      "spPct2": -10,
+      "spPct1": -14,
+      "spPct2": -7,
       "sprintReg": 11,
       "id": 3116
     },
@@ -67379,10 +67379,10 @@
       "int": -22,
       "wDefPct": -15,
       "eDefPct": -15,
-      "spPct1": -10,
-      "spPct2": -10,
-      "spPct3": -10,
-      "spPct4": -10,
+      "spPct1": -7,
+      "spPct2": -7,
+      "spPct3": -7,
+      "spPct4": -7,
       "id": 3151
     },
     {
@@ -67647,10 +67647,10 @@
       "int": 15,
       "wDamPct": 55,
       "wDefPct": -20,
-      "spRaw1": 1,
-      "spRaw2": 1,
-      "spRaw3": 1,
-      "spRaw4": 1,
+      "spRaw1": 5,
+      "spRaw2": 5,
+      "spRaw3": 5,
+      "spRaw4": 5,
       "id": 3161
     },
     {
@@ -68837,8 +68837,8 @@
       "sdPct": 40,
       "spd": 20,
       "hprRaw": -245,
-      "spRaw1": 1,
-      "spRaw4": 1,
+      "spRaw1": 5,
+      "spRaw4": 5,
       "id": 3550
     },
     {
@@ -69989,8 +69989,8 @@
       "xpb": 25,
       "lb": 25,
       "hprRaw": -101,
-      "spPct2": -45,
-      "spPct4": -15,
+      "spPct2": -31,
+      "spPct4": -10,
       "jh": 2,
       "id": 3621
     },
@@ -70727,7 +70727,7 @@
       "fDamPct": -30,
       "wDamPct": 20,
       "tDefPct": -25,
-      "spPct3": -35,
+      "spPct3": -24,
       "id": 3309
     },
     {
@@ -71155,9 +71155,9 @@
       "spd": 10,
       "fDamPct": 10,
       "wDamPct": -15,
-      "spPct1": -15,
-      "spPct3": -10,
-      "spPct4": -15,
+      "spPct1": -10,
+      "spPct3": -7,
+      "spPct4": -10,
       "id": 3327
     },
     {
@@ -72366,7 +72366,7 @@
       "hprPct": -100,
       "expd": 50,
       "hpBonus": 1200,
-      "spRaw3": 1,
+      "spRaw3": 5,
       "id": 3386
     },
     {
@@ -72399,9 +72399,9 @@
       "int": -24,
       "agi": 12,
       "spd": 15,
-      "spPct1": -15,
-      "spPct3": -10,
-      "spPct4": -25,
+      "spPct1": -10,
+      "spPct3": -7,
+      "spPct4": -17,
       "id": 3385
     },
     {
@@ -73014,7 +73014,7 @@
       "ms": 4,
       "def": -12,
       "spd": 12,
-      "spPct1": -33,
+      "spPct1": -23,
       "id": 3413
     },
     {
@@ -73239,10 +73239,10 @@
       "dexReq": 43,
       "dex": 25,
       "tDamPct": 45,
-      "spRaw1": 1,
-      "spRaw2": 1,
-      "spRaw3": 1,
-      "spRaw4": 1,
+      "spRaw1": 5,
+      "spRaw2": 5,
+      "spRaw3": 5,
+      "spRaw4": 5,
       "id": 3425
     },
     {
@@ -74016,7 +74016,7 @@
       "aDamPct": 18,
       "eDamPct": 18,
       "fDefPct": -25,
-      "spRaw1": -1,
+      "spRaw1": -5,
       "id": 3462
     },
     {
@@ -75029,10 +75029,10 @@
       "spd": 20,
       "atkTier": 1,
       "hpBonus": -1000,
-      "spRaw1": -1,
-      "spRaw2": -1,
-      "spRaw3": -1,
-      "spRaw4": -1,
+      "spRaw1": -5,
+      "spRaw2": -5,
+      "spRaw3": -5,
+      "spRaw4": -5,
       "id": 3505
     },
     {
@@ -76640,7 +76640,7 @@
           "mdPct": 30,
           "ms": 8,
           "spd": 25,
-          "spPct2": -40
+          "spPct2": -28
         }
       ]
     },
@@ -76665,14 +76665,14 @@
           "mr": 6,
           "xpb": 10,
           "lb": 10,
-          "spRaw2": -1,
+          "spRaw2": -5,
           "hpBonus": 125
         },
         {
           "mr": 6,
           "xpb": 15,
           "lb": 15,
-          "spRaw2": -1,
+          "spRaw2": -5,
           "hpBonus": 425
         },
         {
@@ -76680,25 +76680,25 @@
           "xpb": 35,
           "lb": 35,
           "hpBonus": 1325,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
           "mr": 12,
           "xpb": 55,
           "lb": 55,
           "hpBonus": 2575,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
           "mr": 18,
           "xpb": 80,
           "lb": 80,
           "hpBonus": 4450,
-          "spRaw1": -1,
-          "spRaw2": -1,
-          "spRaw4": -1
+          "spRaw1": -5,
+          "spRaw2": -5,
+          "spRaw4": -5
         },
         {
           "mr": 24,
@@ -76710,10 +76710,10 @@
           "agi": 15,
           "def": 15,
           "hpBonus": 8270,
-          "spRaw1": -1,
-          "spRaw2": -1,
-          "spRaw3": -1,
-          "spRaw4": -1
+          "spRaw1": -5,
+          "spRaw2": -5,
+          "spRaw3": -5,
+          "spRaw4": -5
         }
       ]
     },
@@ -76735,8 +76735,8 @@
           "xpb": 25,
           "spRegen": 10,
           "sdPct": 8,
-          "spPct1": -12,
-          "spPct3": -12
+          "spPct1": -8,
+          "spPct3": -8
         }
       ]
     },
@@ -76781,7 +76781,7 @@
           "sdPct": 15,
           "mdPct": -15,
           "sdRaw": 30,
-          "spPct2": -50
+          "spPct2": -35
         }
       ]
     },
