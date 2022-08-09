@@ -45,17 +45,17 @@ for item in items:
 
 # TEMP wynn2 migration
 # note: 10x'd
-mul_keys = {
-    "spPct1": 7,
-    "spPct2": 7,
-    "spPct3": 7,
-    "spPct4": 7,
-    "spRaw1": 50,
-    "spRaw2": 50,
-    "spRaw3": 50,
-    "spRaw4": 50,
-    "mr": 50,
-    "ms": 50
+mul_keys_x10 = {
+    "sppct1": 7,
+    "sppct2": 7,
+    "sppct3": 7,
+    "sppct4": 7,
+    "spraw1": 50,
+    "spraw2": 50,
+    "spraw3": 50,
+    "spraw4": 50,
+    "mr": 60,
+    "ms": 40
 }
 
 def round_near(x, eps=1e-5):
@@ -67,25 +67,25 @@ remap_items = []
 #old_items_map = dict()
 import math
 for item in old_items:
-    for k, v in mul_keys.items():
-        if k in item:
-            # SUPER JANKY ROUNDING
-            tentimes = round(item[k] * v)
-            rem = tentimes % 10
-            val = math.floor(round_near(tentimes / 10))
-            if rem >= 5:
-                val += 1
-            item[k] = val
     if "remapID" in item:
         remap_items.append(item)
     elif item["name"] not in known_item_names:
+        for k, v in mul_keys_x10.items():
+            if k in item:
+                # SUPER JANKY ROUNDING
+                tentimes = item[k] * v
+                rem = tentimes % 10
+                val = math.floor(round_near(tentimes / 10))
+                if rem >= 5:
+                    val += 1
+                item[k] = val
         items.append(item)
         #print(f'Unknown old item: {item["name"]}!!!')
     #old_items_map[item["name"]] = item
 
 for set_name, set_info in old_data['sets'].items():
     for bonus in set_info['bonuses']:
-        for k, v in mul_keys.items():
+        for k, v in mul_keys_x10.items():
             if k in bonus:
                 # SUPER JANKY ROUNDING
                 tentimes = round(bonus[k] * v)
