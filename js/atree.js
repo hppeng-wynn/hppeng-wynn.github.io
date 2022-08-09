@@ -469,24 +469,18 @@ const atree_render_active = new (class extends ComputeNode {
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
         if (errors.length > 0) {
-            let errorbox = document.createElement('div');
-            errorbox.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-            this.list_elem.appendChild(errorbox);
+            const errorbox = make_elem('div', ['rounded-bottom', 'dark-4', 'border', 'p-0', 'mx-2', 'my-4', 'dark-shadow']);
+            this.list_elem.append(errorbox);
 
-            let error_title = document.createElement('b');
-            error_title.classList.add("warning", "scaled-font");
-            error_title.innerHTML = "ATree Error!";
-            errorbox.appendChild(error_title);
+            const error_title = make_elem('b', ['warning', 'scaled-font'], { innerHTML: "ATree Error!" });
+            errorbox.append(error_title);
 
             for (let i = 0; i < 5 && i < errors.length; ++i) {
-                const error = errors[i];
-                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
-                errorbox.appendChild(atree_warning);
+                errorbox.append(make_elem("p", ["warning", "small-text"], {textContent: errors[i]}));
             }
             if (errors.length > 5) {
                 const error = '... ' + (errors.length-5) + ' errors not shown';
-                const atree_warning = make_elem("p", ["warning", "small-text"], {textContent: error});
-                errorbox.appendChild(atree_warning);
+                errorbox.append(make_elem("p", ["warning", "small-text"], {textContent: error}));
             }
         }
         const ret_map = new Map();
@@ -500,23 +494,15 @@ const atree_render_active = new (class extends ComputeNode {
         for (const id of to_render_id) {
             const abil = merged_abils.get(id);
 
-            let active_tooltip = document.createElement('div');
-            active_tooltip.classList.add("rounded-bottom", "dark-4", "border", "p-0", "mx-2", "my-4", "dark-shadow");
-
-            let active_tooltip_title = document.createElement('b');
-            active_tooltip_title.classList.add("scaled-font");
-            active_tooltip_title.innerHTML = abil.display_name;
-            active_tooltip.appendChild(active_tooltip_title);
+            const active_tooltip = make_elem('div', ['rounded-bottom', 'dark-4', 'border', 'p-0', 'mx-2', 'my-4', 'dark-shadow']);
+            active_tooltip.append(make_elem('b', ['scaled-font'], { innerHTML: abil.display_name }));
 
             for (const desc of abil.desc) {
-                let active_tooltip_desc = document.createElement('p');
-                active_tooltip_desc.classList.add("scaled-font-sm", "my-0", "mx-1", "text-wrap");
-                active_tooltip_desc.textContent = desc;
-                active_tooltip.appendChild(active_tooltip_desc);
+                active_tooltip.append(make_elem('p', ['scaled-font-sm', 'my-0', 'mx-1', 'text-wrap'], { textContent: desc }));
             }
             ret_map.set(abil.id, active_tooltip);
 
-            this.list_elem.appendChild(active_tooltip);
+            this.list_elem.append(active_tooltip);
         }
         return ret_map;
     }
@@ -573,27 +559,29 @@ const atree_collect_spells = new (class extends ComputeNode {
 
                     let found_part = false;
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
-                        if (part.name === target_part) {
-                            if ('multipliers' in effect) {
-                                for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
-                                    part.multipliers[idx] += v;
-                                }
-                            }
-                            else if ('power' in effect) {
-                                part.power += effect.power;
-                            }
-                            else if ('hits' in effect) {
-                                for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
-                                    if (idx in part.hits) { part.hits[idx] += v; }
-                                    else { part.hits[idx] = v; }
-                               }
-                            }
-                            else {
-                                throw "uhh invalid spell add effect";
-                            }
-                            found_part = true;
-                            break;
+                        if (part.name !== target_part) {
+                            continue;
                         }
+
+                        if ('multipliers' in effect) {
+                            for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
+                                part.multipliers[idx] += v;
+                            }
+                        }
+                        else if ('power' in effect) {
+                            part.power += effect.power;
+                        }
+                        else if ('hits' in effect) {
+                            for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
+                                if (idx in part.hits) { part.hits[idx] += v; }
+                                else { part.hits[idx] = v; }
+                            }
+                        }
+                        else {
+                            throw "uhh invalid spell add effect";
+                        }
+                        found_part = true;
+                        break;
                     }
                     if (!found_part && behavior === 'merge') { // add part. if behavior is merge
                         let spell_part = deepcopy(effect);
@@ -874,29 +862,28 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
                                                     // TODO shortcut update path for sliders
 
         for (const [spell_id, spell] of new Map([...spell_map].sort((a, b) => a[0] - b[0])).entries()) {
-            let spell_node = new SpellSelectNode(spell);
-            spell_node.link_to(build_node, 'build');
+            let spell_node = new SpellSelectNode(spell)
+                .link_to(build_node, 'build');
 
-            let calc_node = new SpellDamageCalcNode(spell.base_spell);
-            calc_node.link_to(build_node, 'build').link_to(stat_agg_node, 'stats')
+            let calc_node = new SpellDamageCalcNode(spell.base_spell)
+                .link_to(build_node, 'build')
+                .link_to(stat_agg_node, 'stats')
                 .link_to(spell_node, 'spell-info');
             this.spelldmg_nodes.push(calc_node);
 
-            let display_elem = document.createElement('div');
-            display_elem.classList.add("col", "pe-0");
+            let display_elem = make_elem('div', ["col", "pe-0"]);
             // TODO: just pass these elements into the display node instead of juggling the raw IDs...
             let spell_summary = make_elem('div', ["col", "spell-display", "fake-button", "dark-5", "rounded", "dark-shadow", "pt-2", "border", "border-dark"],
                     { id: "spell"+spell.base_spell+"-infoAvg" }); 
             let spell_detail = make_elem('div', ["col", "spell-display", "dark-5", "rounded", "dark-shadow", "py-2"],
-                    { id: "spell"+spell.base_spell+"-info" });
-            spell_detail.style.display = "none";
+                    { id: "spell"+spell.base_spell+"-info", style: { display: 'none' } });
 
-            display_elem.appendChild(spell_summary); display_elem.appendChild(spell_detail);
+            display_elem.append(spell_summary, spell_detail);
 
-            let display_node = new SpellDisplayNode(spell.base_spell);
-            display_node.link_to(stat_agg_node, 'stats');
-            display_node.link_to(spell_node, 'spell-info');
-            display_node.link_to(calc_node, 'spell-damage');
+            let display_node = new SpellDisplayNode(spell.base_spell)
+                .link_to(stat_agg_node, 'stats')
+                .link_to(spell_node, 'spell-info')
+                .link_to(calc_node, 'spell-damage');
 
             this.spell_display_elem.appendChild(display_elem);
         }
@@ -919,25 +906,25 @@ function render_AT(UI_elem, list_elem, tree) {
     UI_elem.style.paddingTop = "calc(var(--bs-gutter-x) * .5)";
 
     // add in the "Active" title to atree
-    let active_row = make_elem("div", ["row", "item-title", "mx-auto", "justify-content-center"]);
-    let active_word = make_elem("div", ["col-auto"], {textContent: "Active Abilities:"});
+    const active_row = make_elem("div", ["row", "item-title", "mx-auto", "justify-content-center"]);
+    const active_word = make_elem("div", ["col-auto"], {textContent: "Active Abilities:"});
 
-    let active_AP_container = make_elem("div", ["col-auto"]);
-    let active_AP_subcontainer = make_elem("div", ["row"]);
-    let active_AP_cost = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cost", textContent: "0"});
+    const active_AP_container = make_elem("div", ["col-auto"]);
+    const active_AP_subcontainer = make_elem("div", ["row"]);
+    const active_AP_cost = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cost", textContent: "0"});
 
-    let active_AP_slash = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: "/"});
-    let active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap"});
-    let active_AP_end = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: " AP"});
+    const active_AP_slash = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: "/"});
+    const active_AP_cap = make_elem("div", ["col-auto", "mx-0", "px-0"], {id: "active_AP_cap"});
+    const active_AP_end = make_elem("div", ["col-auto", "mx-0", "px-0"], {textContent: " AP"});
 
-    active_AP_container.appendChild(active_AP_subcontainer);
+    active_AP_container.append(active_AP_subcontainer);
     active_AP_subcontainer.append(active_AP_cost, active_AP_slash, active_AP_cap, active_AP_end);
 
     active_row.append(active_word, active_AP_container);
-    list_elem.appendChild(active_row);
+    list_elem.append(active_row);
 
-    let atree_map = new Map();
-    let atree_connectors_map = new Map()
+    const atree_map = new Map();
+    const atree_connectors_map = new Map()
     let max_row = 0;
     for (const i of tree) {
         atree_map.set(i.ability.id, {ability: i.ability, connectors: new Map(), active: false});
@@ -960,17 +947,11 @@ function render_AT(UI_elem, list_elem, tree) {
 
     // Setup grid.
     for (let j = 0; j <= max_row; j++) {
-        let row = document.createElement('div');
-        row.classList.add("row");
-        row.id = "atree-row-" + j;
-
+        const row = make_elem('div', ['row'], { id: "atree-row-"+j });
         for (let k = 0; k < 9; k++) {
-            col = document.createElement('div');
-            col.classList.add('col', 'px-0');
-            col.style = "position: relative; aspect-ratio: 1/1;"
-            row.appendChild(col);
+            row.append(make_elem('div', ['col', 'px-0'], { style: "position: relative; aspect-ratio: 1/1;" }));
         }
-        UI_elem.appendChild(row);
+        UI_elem.append(row);
     }
 
     for (const _node of tree) {
@@ -1026,8 +1007,9 @@ function render_AT(UI_elem, list_elem, tree) {
 
         // create hitbox
         // this is necessary since images exceed the size of their square, but should only be interactible within that square
-        let hitbox = document.createElement("div");
-        hitbox.style = "position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;"
+        let hitbox = make_elem('div', [], {
+            style: 'position: absolute; cursor: pointer; left: 0; top: 0; width: 100%; height: 100%; z-index: 2;'
+        });
         node_elem.appendChild(hitbox);
 
         node_wrap.elem = node_elem;
@@ -1153,7 +1135,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     description.innerHTML = ability.desc.replaceAll(numberRegex, (m) => { return "<span class = 'mc-white'>" + m + "</span>" });
     container.appendChild(description);
 
-    container.appendChild(document.createElement("br"));
+    container.appendChild(make_elem('br'));
 
     // archetype
     if ("archetype" in ability && ability.archetype !== "") {
@@ -1190,7 +1172,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
                 break;
         }
         container.appendChild(archetype);
-        container.appendChild(document.createElement("br"));
+        container.appendChild(make_elem('br'));
     }
 
     // calculate if requirements are satisfied
@@ -1225,7 +1207,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     } else {
         cost.innerHTML = reqYes;
     }
-    cost.innerHTML += " <span class = 'mc-gray'>Ability Points:</span> " + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
+    cost.innerHTML += "<span class = 'mc-gray'>Ability Points:</span>" + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
     container.appendChild(cost);
 
     // archetype req
@@ -1236,7 +1218,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
         } else {
             archReq.innerHTML = reqNo;
         }
-        archReq.innerHTML += " <span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        archReq.innerHTML += "<span class = 'mc-gray'>Min" + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
         container.appendChild(archReq);
     }
 
@@ -1248,14 +1230,14 @@ function generateTooltip(container, node_elem, ability, atree_map) {
         } else {
             dependency.innerHTML = reqNo;
         }
-        dependency.innerHTML += " <span class = 'mc-gray'>Required Ability:</span> " + atree_map.get(ability.dependencies[i]).ability.display_name;
+        dependency.innerHTML += "<span class = 'mc-gray'>Required Ability:</span>" + atree_map.get(ability.dependencies[i]).ability.display_name;
         container.appendChild(dependency);
     }
 
     // blockers
     for (let i = 0; i < blockedBy.length; i++) {
         let blocker = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
-        blocker.innerHTML = reqNo + " <span class = 'mc-gray'>Blocked By:</span> " + blockedBy[i];
+        blocker.innerHTML = reqNo + "<span class = 'mc-gray'>Blocked By:</span>" + blockedBy[i];
         container.appendChild(blocker);
     }
 }
@@ -1356,7 +1338,7 @@ function atree_render_connection(atree_connectors_map) {
         drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[connector_info.type]["0000"], atreeConnectorTileSize);
         let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
         if (target_elem.children.length != 0) {
-            // janky special case...
+            // janky special case... sometimes the ability tree tries to draw a link on top of a node...
             connector_elem.style.display = 'none';
         }
         target_elem.appendChild(connector_elem);

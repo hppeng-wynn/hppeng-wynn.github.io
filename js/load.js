@@ -1,4 +1,4 @@
-const DB_VERSION = 102;
+const DB_VERSION = 104;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let db;
@@ -190,7 +190,7 @@ async function load_init() {
 }
 
 // List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
-for (const it of itemTypes) {
+for (const it of item_types) {
     itemLists.set(it, []);
 }
 
