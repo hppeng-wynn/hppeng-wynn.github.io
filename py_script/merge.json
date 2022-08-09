@@ -67,7 +67,7 @@
       "bonusEarthDamage": 24,
       "bonusAirDamage": 32,
       "attackSpeedBonus": -1,
-      "manaRegen": 8,
+      "manaRegen": 10,
       "reflection": 48,
       "spellCostRaw1": -3,
       "identified": false,
