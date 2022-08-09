@@ -9319,5 +9319,265 @@ const atrees = {
                 }
             ]
         }
+    ],
+    "Shaman": [
+        {
+            "display_name": "Totem",
+            "desc": "Summon a totem that damages enemies around it every 0.4s.",
+            "parents": [],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 0,
+                "col": 4,
+                "icon": "node_shaman"
+            },
+            "properties": {
+                "duration": 20,
+                "rate": 0.4,
+                "aoe": 8
+            },
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Totem",
+                "cost": 35,
+                "base_spell": 1,
+                "display": "DPS",
+                "parts": [
+                    {
+                        "name": "Tick Damage",
+                        "multipliers": [5, 0, 0, 0, 0, 5]
+                    },
+                    {
+                        "name": "DPS",
+                        "hits": { "Tick Damage": 2.5 }
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Relik Proficiency 1",
+            "desc": "Double your Main Attack's beam speed and increase your damage when using a reik.",
+            "base_abil": 999,
+            "parents": ["Totem"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 2,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "damMult.RelikProf:0.Single Beam"
+                        "value": 5
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Cheaper Totem",
+            "desc": "Reduce the Mana cost of Totem.",
+            "base_abil": "Totem",
+            "parents": ["Relik Proficiency 1"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 2,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 1,
+                "cost": -10
+            }]
+        },
+        {
+            "display_name": "Totemic Smash",
+            "desc": "Your Totem will deal damage where it lands.",
+            "base_abil": "Totem",
+            "parents": ["Relik Proficiency 1"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 4,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": { "aoe": 3.5, },
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 1,
+                "target_part": "Smash Damage",
+                "multipliers": [
+                    100,
+                    0,
+                    0,
+                    0,
+                    30,
+                    0
+                ]
+            }]
+        },
+        {
+            "display_name": "Distant Grasp",
+            "desc": "Reduce your Main Attack's spread, and increase its beam speed by +33%.",
+            "base_abil": 1,
+            "archetype": "Summoner",
+            "archetype_req": 0,
+            "parents": ["Totemic Smash"],
+            "dependencies": [],
+            "blockers": ["Hand of the Shaman"],
+            "cost": 1,
+            "display": {
+                "row": 6,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Haul",
+            "desc": "Leap towards your Totem.",
+            "parents": [],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 6,
+                "col": 4,
+                "icon": "node_shaman"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Haul",
+                "cost": 15,
+                "base_spell": 2,
+                "display": "",
+                "parts": []
+            }]
+        },
+        {
+            "display_name": "Hand of the Shaman",
+            "desc": "Your Main Attack will throw +2 beams.",
+            "base_abil": 1,
+            "archetype": "Acolyte",
+            "parents": ["Distant Grasp"],
+            "dependencies": [],
+            "blockers": ["Hand of the Shaman"],
+            "cost": 1,
+            "display": {
+                "row": 6,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 0,
+                "target_part": "Total",
+                "hits": {
+                    "Single Beam": 2
+                }
+            }]
+        },
+        {
+            "display_name": "Uproot",
+            "desc": "Throw a rapid projectile that will explode and knock enemies away. (Hold shift to pull instead)",
+            "parents": [
+                "Distant Grasp",
+                "Cheaper Haul"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 8,
+                "col": 2,
+                "icon": "node_shaman"
+            },
+            "properties": {
+                "range": 18,
+                "aoe": 5
+            },
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Totem",
+                "cost": 30,
+                "base_spell": 4,
+                "display": "Uproot Damage",
+                "parts": [
+                    {
+                        "name": "Uproot Damage",
+                        "multipliers": [80, 30, 20, 0, 0, 0]
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Cheaper Haul",
+            "desc": "Reduce the Mana cost of Haul.",
+            "base_abil": "Totem",
+            "parents": [
+                "Uproot",
+                "Aura"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 8,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 2,
+                "cost": -5
+            }]
+        },
+        {
+            "display_name": "Aura",
+            "desc": "Emit an aura from your Totem that damages enemies.",
+            "parents": [],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 8,
+                "col": 6,
+                "icon": "node_shaman"
+            },
+            "properties": {
+                "range": 16,
+                "aoe": 5
+            },
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Totem",
+                "cost": 40,
+                "base_spell": 3,
+                "display": "Single Wave",
+                "parts": [
+                    {
+                        "name": "Single Wave",
+                        "multipliers": [150, 0, 0, 30, 0, 0]
+                    }
+                ]
+            }]
+        },
     ]
 }
