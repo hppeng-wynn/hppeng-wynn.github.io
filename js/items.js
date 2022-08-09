@@ -102,51 +102,53 @@ const special_mappings = {
     "No Defense Req": "f:defReq=0",
 };
 
-let itemFilters = document.getElementById("filter-items");
-if (itemFilters) {
-    for (let x in translate_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
-    for (let x in special_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
+let item_filters = []
+for (let x in translate_mappings) {
+    item_filters.push(x);
+}
+for (let x in special_mappings) {
+    item_filters.push(x);
 }
 
-let itemCategories = [ "armor", "accessory", "weapon" ];
+let item_categories = [ "armor", "accessory", "weapon" ];
 
 function applyQuery(items, query) {
     return items.filter(query.filter, query).sort(query.compare);
 }
 
-function displayItems(results) {
-    let items_parent = document.getElementById("main");
-    for (let i in results) {
-        let item = results[i].itemExp;
-        let box = document.createElement("div");
-        box.classList.add("box");
-        box.id = "item"+i;
+function displayItems(items_copy) {
+    let items_parent = document.getElementById("search-results");
+    for (let i in items_copy) {
+        if (i > 200) {break;}
+        let item = items_copy[i].itemExp;
+        let box = make_elem('div', ['col-lg-3', 'col-sm-6', 'p-2'], {id: 'item'+i});
+        //box.addEventListener("dblclick", function() {set_item(item);}); TODO: ??
+
+        let bckgrdbox = make_elem("div", ["dark-7", "rounded", "px-2", "col-auto"], {id: 'item'+i+'b'});
+        box.append(bckgrdbox);
         items_parent.appendChild(box);
-        displayExpandedItem(item, box.id);
+        item.set("powders", []);
+        if (item.get("category") == "weapon") {
+            apply_weapon_powders(item);
+        }
+        displayExpandedItem(item, bckgrdbox.id, true);
     }
 }
 
-let searchDb;
+let search_db;
+let expr_parser;
 
-function doItemSearch() {
+function do_item_search() {
     window.scrollTo(0, 0);
     let queries = [];
     queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
 
-    let categoryOrType = document.getElementById("item-category-choice").value;
-    if (itemTypes.includes(categoryOrType)) {
-        queries.push('f:type="'+categoryOrType+'"');
+    const cat_or_type = document.getElementById("item-category-choice").value;
+    if (item_types.includes(cat_or_type)) {
+        queries.push('f:type="'+cat_or_type+'"');
     }
-    else if (itemCategories.includes(categoryOrType)) {
-        queries.push('f:cat="'+categoryOrType+'"');
+    else if (item_categories.includes(cat_or_type)) {
+        queries.push('f:cat="'+cat_or_type+'"');
     }
 
     let rarity = document.getElementById("item-rarity-choice").value;
@@ -162,7 +164,9 @@ function doItemSearch() {
         }
     }
 
-    let level_dat = document.getElementById("item-level-choice").value.split("-");
+    let level_raw = document.getElementById("item-level-choice").value;
+    if (!level_raw) { level_raw = '1-106'; };
+    const level_dat = level_raw.split("-");
     queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
     
     for (let i = 1; i <= 4; ++i) {
@@ -180,28 +184,27 @@ function doItemSearch() {
         }
     }
 
-    let filterQuery = "true";
-    let sortQueries = [];
+    let filter_query = "true";
+    let sort_queries = [];
     console.log(queries);
     for (const query of queries) {
         if (query.startsWith("s:")) {
-            sortQueries.push(query.slice(2));
+            sort_queries.push(query.slice(2));
         }
         else if (query.startsWith("f:")) {
-            filterQuery = filterQuery + "&" + query.slice(2);
+            filter_query = filter_query + "&" + query.slice(2);
         }
     }
-    console.log(filterQuery);
-    console.log(sortQueries);
+    document.getElementById("search-results").textContent = "";
     let results = [];
     try {
-        const filterExpr = exprParser.parse(filterQuery);
-        const sortExprs = sortQueries.map(q => exprParser.parse(q));
-        for (let i = 0; i < searchDb.length; ++i) {
-            const item = searchDb[i][0];
-            const itemExp = searchDb[i][1];
-            if (checkBool(filterExpr.resolve(item, itemExp))) {
-                results.push({ item, itemExp, sortKeys: sortExprs.map(e => e.resolve(item, itemExp)) });
+        const filter_expr = expr_parser.parse(filter_query);
+        const sort_exprs = sort_queries.map(q => expr_parser.parse(q));
+        for (let i = 0; i < search_db.length; ++i) {
+            const item = search_db[i][0];
+            const itemExp = search_db[i][1];
+            if (checkBool(filter_expr.resolve(item, itemExp))) {
+                results.push({ item, itemExp, sortKeys: sort_exprs.map(e => e.resolve(item, itemExp)) });
             }
         }
         results.sort((a, b) => {
@@ -211,13 +214,74 @@ function doItemSearch() {
         document.getElementById("summary").textContent = e.message;
         return;
     }
-    document.getElementById("summary").textContent = results.length + " results."
+    document.getElementById("summary").textContent = results.length + " results:"
     displayItems(results);
 }
 
-function init_items() {
-    searchDb = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
-    exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
+function reset_item_search() {
+    const reset_fields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
+    for (const field of reset_fields) {
+        document.getElementById(field).value = "";
+    }
 }
 
-load_init(init_items);
+function init_items() {
+    search_db = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
+    expr_parser = new ExprParser(itemQueryProps, itemQueryFuncs);
+    //init dropdowns
+    let filter_inputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
+                                ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
+                                ["filter1", item_filters],
+                                ["filter2", item_filters],
+                                ["filter3", item_filters],
+                                ["filter4", item_filters]]);
+    for (const [field, data] of filter_inputs) {
+        let field_choice = document.getElementById(field+"-choice");
+        // show dropdown on click
+        field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
+        filter_inputs.set(field, new autoComplete({
+            data: {
+                src: data,
+            },  
+            threshold: 0,
+            selector: "#"+ field +"-choice",
+            wrapper: false,
+            resultsList: {
+                maxResults: 100,
+                tabSelect: true,
+                noResults: true,
+                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+                element: (list, data) => {
+                    let position = document.getElementById(field+'-choice').getBoundingClientRect();
+                    list.style.top = position.bottom + window.scrollY +"px";
+                    list.style.left = position.x+"px";
+                    list.style.width = position.width+"px";
+                    list.style.maxHeight = position.height * 4 +"px";
+
+                    if (!data.results.length) {
+                        const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
+                        list.prepend(message);
+                    };
+                },
+            },
+            resultItem: {
+                class: "scaled-font search-item",
+                selected: "dark-5",
+            },
+            events: {
+                input: {
+                    selection: (event) => {
+                        if (event.detail.selection.value) {
+                            event.target.value = event.detail.selection.value;
+                        };
+                    },
+                },
+            }
+        }));
+    }
+}
+
+(async function() {
+    await Promise.resolve(load_init());
+    init_items();
+})();

@@ -61,6 +61,7 @@ ul.search-box {
     position: absolute;
     padding: 0;
     overflow: auto;
+    z-index: 10;
 }
 
 li.search-item {
@@ -195,6 +196,60 @@ input.equipment-input:not(.is-invalid) {
 
 .overall-box {
     max-width: 95%;
+}
+
+@media screen and (orientation: landscape) and (max-width: 1199px) {
+    :root {
+        --scaled-fontsize: 1rem;
+    }
+    .scaled-font {
+        font-size: 1rem;
+    }
+
+    .box-title {
+        font-size: 1rem;
+    }
+
+    .item-title {
+        font-size: 1.2rem;
+    }
+
+    .big-title {
+        font-size: 1.5rem;
+    }
+
+    .skp-tooltip {
+        font-size: 1rem;
+    }
+
+    .spellcost-tooltip b {
+        font-size: .625rem !important;
+    }
+
+    .scaled-item-icon {
+        width: 3.2rem;
+    }
+
+    .scaled-item-icon img {
+        width: 2.8rem;
+    }
+
+    .scaled-bckgrd {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .scaled-bckgrd img {
+        width: 2.8rem;
+    }
+
+    .warning {
+        font-size: .7rem;
+    }
+
+    .spell-display b {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1400px) {

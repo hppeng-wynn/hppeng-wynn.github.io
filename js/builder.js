@@ -1,3 +1,6 @@
+/**
+ * File containing utility functions relevant to the builder page, as well as the setup code (at the very bottom).
+ */
 
 function populateBuildList() {
     const buildList = document.getElementById("build-choice");
@@ -58,6 +61,9 @@ function resetFields(){
         setValue(i, "");
     }
     for (const i of equipment_inputs) {
+        setValue(i, "");
+    }
+    for (const i of tomeInputs) {
         setValue(i, "");
     }
     setValue("str-skp", "0");
@@ -124,26 +130,6 @@ function toggleButton(button_id) {
     }
 }
 
-// Toggles display of a certain element, given the ID.
-function toggle_tab(tab) {
-    if (document.querySelector("#"+tab).style.display == "none") {
-        document.querySelector("#"+tab).style.display = "";
-    } else {
-        document.querySelector("#"+tab).style.display = "none";
-    }
-}
-
-// Toggle display of a certain tab, in a group of tabs, given the target tab ID, and a list of associated tabs.
-// Also sets visual display of an element with ID of target + "-btn" to selected.
-function show_tab(target, tabs) {
-    //hide all tabs, then show the tab of the div clicked and highlight the correct button
-    for (const i in tabs) {
-        document.querySelector("#" + tabs[i]).style.display = "none";
-        document.getElementById(tabs[i] + "-btn").classList.remove("selected-btn");
-    }
-    document.querySelector("#" + target).style.display = "";
-    document.getElementById(target + "-btn").classList.add("selected-btn");
-}
 
 // autocomplete initialize
 function init_autocomplete() {
@@ -231,8 +217,9 @@ function init_autocomplete() {
     for (const eq of tome_keys) {
         // build dropdown
         let tome_arr = [];
-        for (const tome of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
-            let tome_obj = tomeMap.get(tome);
+        let tome_aliases = new Map();
+        for (const tome_name of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
+            let tome_obj = tomeMap.get(tome_name);
             if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
                 continue;
             }
@@ -240,8 +227,10 @@ function init_autocomplete() {
             if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
                 continue;
             }
-            let tome_name = tome;
+            let tome_alias = tome_obj['alias'];
             tome_arr.push(tome_name);
+            tome_arr.push(tome_alias);
+            tome_aliases.set(tome_alias, tome_name);
         }
 
         // create dropdown
@@ -276,14 +265,18 @@ function init_autocomplete() {
                 class: "scaled-font search-item",
                 selected: "dark-5",
                 element: (tome, data) => {
-                    tome.classList.add(tomeMap.get(data.value).tier);
+                    let val = data.value;
+                    if (tome_aliases.has(val)) { val = tome_aliases.get(val); }
+                    tome.classList.add(tomeMap.get(val).tier);
                 },
             },
             events: {
                 input: {
                     selection: (event) => {
                         if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
+                            let val = event.detail.selection.value;
+                            if (tome_aliases.has(val)) { val = tome_aliases.get(val); }
+                            event.target.value = val;
                         }
                         event.target.dispatchEvent(new Event('change'));
                     },

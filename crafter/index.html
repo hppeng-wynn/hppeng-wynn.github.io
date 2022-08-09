@@ -31,7 +31,50 @@
             <hr/>
             <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
         </div>
-        <div class="container mt-5">
+        <div id="mobile-navbar" class="navbar dark-5 dark-shadow fixed-top d-lg-none pb-0">
+            <div class="container-fluid scaled-font justify-content-center" style="height: 5vh;">
+                <div class="navbar-brand mx-auto scaled-font" style="height: 100%;">
+                    <img src="../media/icons/new/crafter.png" alt="" style="height: 100%;">
+                    <span>WynnCrafter</span>
+                </div>
+                <button class="btn dropdown-toggle dark-2 px-4 text-white scaled-font border-dark border-3" onclick="toggle_tab('mobile-navbar-dropdown');"></button>
+            </div>
+            <div class="container-fluid scaled-font dark-3 px-3 py-3" id="mobile-navbar-dropdown" style="display: none;">
+                <a href="../builder/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/builder.png" alt="" style="height: 100%;">
+                    <span>WynnBuilder</span>
+                </a>
+                <a href="../crafter/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/crafter.png" alt="" style="height: 100%;">
+                    <span>WynnCrafter</span>
+                </a>
+                <a href="../items/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/searcher.png" alt="" style="height: 100%;">
+                    <span>WynnAtlas</span>
+                </a>
+                <a href="../custom/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/custom.png" alt="" style="height: 100%;">
+                    <span>WynnCustom</span>
+                </a>
+                <a href="../map/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/compass.png" alt="" style="height: 100%;">
+                    <span>WynnGPS</span>
+                </a>
+                <a href="../wynnfo/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/book.png" alt="" style="height: 100%;">
+                    <span>WynnFo</span>
+                </a>
+                <a onclick = "toggleIcons()" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/reload.png" alt="" style="height: 100%;">
+                    <span>Swap Icon Style</span>
+                </a>
+                <a href="https://discord.gg/CGavnAnerv" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/discord.png" alt="" style="height: 100%;">
+                    <span>Discord</span>
+                </a>
+            </div>
+        </div>
+        <div class="container mt-lg-2" style="margin-top: 6vh;">
             <div class="row row-cols-1 row-cols-lg-3 gy-5">
                 <div class="col col-lg-5">
                     <!--crafter ui-->
@@ -39,7 +82,7 @@
                         <div class="col" id="recipe-dropdown">
                             <div class="row dark-shadow dark-5 rounded">
                                 <div id = "recipe-img-loc" class = "col-auto px-lg-1 g-0 dark-7 rounded-end my-auto text-center scaled-item-icon">
-                                    <div id = "recipe-img" class = "img-fluid rounded Crafted-shadow" style = "background-image: url('../media/items/common.png'); image-rendering: pixelated; background-position: 25% 0; aspect-ratio: 1/1;"></div>
+                                    <div id = "recipe-img" class = "img-fluid rounded Crafted-shadow" style = "background-image: url('../media/items/common.png'); background-size: 500% 100%; image-rendering: pixelated; background-position: 25% 0; aspect-ratio: 1/1;"></div>
                                 </div>
                                 <div class = "col ps-3">
                                     <div class = "row row-cols-2 align-items-center">
@@ -279,8 +322,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="../js/query.js"></script>
-        <script type="text/javascript" src="../js/query_2.js"></script>
         <script type="text/javascript" src="../js/utils.js"></script>
         <script type="text/javascript" src="../js/build_utils.js"></script>
         <script type="text/javascript" src="../js/icons.js"></script>       
@@ -293,6 +334,5 @@
         <script type="text/javascript" src="../js/load.js"></script>
         <script type="text/javascript" src="../js/craft.js"></script>
         <script type="text/javascript" src="../js/crafter.js"></script>
-        <script type="text/javascript" src="../js/expr_parser.js"></script>
     </body>
 </html>

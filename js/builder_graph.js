@@ -1,3 +1,7 @@
+/**
+ * File containing compute graph structure of the builder page.
+ */
+
 let armor_powder_node = new (class extends ComputeNode {
     constructor() { super('builder-armor-powder-input'); }
 
@@ -203,8 +207,8 @@ class ItemPowderingNode extends ComputeNode {
 
     compute_func(input_map) {
         const powdering = input_map.get('powdering');
-        const item = {}; 
-        item.statMap = new Map(input_map.get('item').statMap);  // TODO: performance
+        const input_item = input_map.get('item');
+        const item = input_item.copy(); // TODO: performance
 
         const max_slots = item.statMap.get('slots');
         item.statMap.set('powders', powdering.slice(0, max_slots));
@@ -1021,7 +1025,7 @@ function builder_graph_init() {
     let weapon_image = document.getElementById("weapon-img");
     let weapon_dps = document.getElementById("weapon-dps");
     new WeaponInputDisplayNode('weapon-type', weapon_image, weapon_dps).link_to(item_nodes[8]);
-    
+
     // linking to atree verification
     atree_validate.link_to(level_input, 'level');
 

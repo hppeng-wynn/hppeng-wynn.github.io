@@ -36,7 +36,50 @@
         <hr/>
         <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
     </div>
-    <div class="container-fluid overall-box">
+    <div id="mobile-navbar" class="navbar dark-5 dark-shadow fixed-top d-lg-none pb-0">
+        <div class="container-fluid scaled-font justify-content-center" style="height: 5vh;">
+            <div class="navbar-brand mx-auto scaled-font" style="height: 100%;">
+                <img src="../media/icons/new/builder.png" alt="" style="height: 100%;">
+                <span>WynnBuilder</span>
+            </div>
+            <button class="btn dropdown-toggle dark-2 px-4 text-white scaled-font border-dark border-3" onclick="toggle_tab('mobile-navbar-dropdown');"></button>
+        </div>
+        <div class="container-fluid scaled-font dark-3 px-3 py-3" id="mobile-navbar-dropdown" style="display: none;">
+            <a href="../builder/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/builder.png" alt="" style="height: 100%;">
+                <span>WynnBuilder</span>
+            </a>
+            <a href="../crafter/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/crafter.png" alt="" style="height: 100%;">
+                <span>WynnCrafter</span>
+            </a>
+            <a href="../items/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/searcher.png" alt="" style="height: 100%;">
+                <span>WynnAtlas</span>
+            </a>
+            <a href="../custom/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/custom.png" alt="" style="height: 100%;">
+                <span>WynnCustom</span>
+            </a>
+            <a href="../map/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/compass.png" alt="" style="height: 100%;">
+                <span>WynnGPS</span>
+            </a>
+            <a href="../wynnfo/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/book.png" alt="" style="height: 100%;">
+                <span>WynnFo</span>
+            </a>
+            <a onclick = "toggleIcons()" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/reload.png" alt="" style="height: 100%;">
+                <span>Swap Icon Style</span>
+            </a>
+            <a href="https://discord.gg/CGavnAnerv" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/discord.png" alt="" style="height: 100%;">
+                <span>Discord</span>
+            </a>
+        </div>
+    </div>
+    <div class="container-fluid overall-box mt-lg-2" style="margin-top: 6vh;">
         <!-- REMOVE THIS DIV AT SOME POINT. -->
         <div class = "row scaled-font mx-auto" id = "discord-banner-dev">
                 <div class = "col text-center item-title">Join the <a class = "link" href = "https://discord.gg/CGavnAnerv" target = "_blank">discord</a> today to suggest new features, submit bug reports, and hangout/talk to devs!</div>
@@ -414,9 +457,6 @@
                                 Active boosts
                             </div>
                             <div class="col">
-                                <button class="button-boost m-1 border-0 text-white dark-8u dark-shadow-sm" id="vanish-boost" onclick="update_boosts('vanish-boost')">
-                                    Vanish (+80%)
-                                </button>
                                 <button class="button-boost m-1 border-0 text-white dark-8u dark-shadow-sm" id="warscream-boost" onclick="update_boosts('warscream-boost')">
                                     War Scream
                                 </button>

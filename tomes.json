@@ -1,6 +1,5 @@
 {
-  "tomes":
-  [
+  "tomes": [
     {
       "name": "Retaliating Tome of Armour Mastery I",
       "tier": "Fabled",
@@ -14,7 +13,8 @@
       "ref": 6,
       "hpBonus": 120,
       "fixID": false,
-      "id": 0
+      "id": 0,
+      "alias": "Thorns I"
     },
     {
       "name": "Retaliating Tome of Armour Mastery II",
@@ -28,7 +28,8 @@
       "thorns": 8,
       "ref": 8,
       "fixID": false,
-      "id": 1
+      "id": 1,
+      "alias": "Thorns II"
     },
     {
       "name": "Destructive Tome of Armour Mastery I",
@@ -43,7 +44,8 @@
       "mdPct": 5,
       "hpBonus": 120,
       "fixID": false,
-      "id": 2
+      "id": 2,
+      "alias": "Melee I"
     },
     {
       "name": "Destructive Tome of Armour Mastery II",
@@ -57,7 +59,8 @@
       "thorns": 6,
       "reflection": 6,
       "fixID": false,
-      "id": 3
+      "id": 3,
+      "alias": "Melee II"
     },
     {
       "name": "Sorcerer's Tome of Armour Mastery I",
@@ -71,7 +74,8 @@
       "sdPct": 5,
       "hpBonus": 120,
       "fixID": false,
-      "id": 4
+      "id": 4,
+      "alias": "Spell Damage I"
     },
     {
       "name": "Sorcerer's Tome of Armour Mastery II",
@@ -84,7 +88,8 @@
       "defMobs": 5,
       "sdPct": 6,
       "fixID": false,
-      "id": 5
+      "id": 5,
+      "alias": "Spell Damage II"
     },
     {
       "name": "Everlasting Tome of Armour Mastery I",
@@ -98,7 +103,8 @@
       "hprRaw": 15,
       "hpBonus": 120,
       "fixID": false,
-      "id": 6
+      "id": 6,
+      "alias": "Health Regen I"
     },
     {
       "name": "Everlasting Tome of Armour Mastery II",
@@ -111,7 +117,8 @@
       "defMobs": 5,
       "hprRaw": 60,
       "fixID": false,
-      "id": 7
+      "id": 7,
+      "alias": "Health Regen II"
     },
     {
       "name": "Vampiric Tome of Armour Mastery I",
@@ -125,7 +132,8 @@
       "ls": 25,
       "hpBonus": 120,
       "fixID": false,
-      "id": 8
+      "id": 8,
+      "alias": "Life Steal I"
     },
     {
       "name": "Vampiric Tome of Armour Mastery II",
@@ -138,7 +146,8 @@
       "defMobs": 5,
       "ls": 85,
       "fixID": false,
-      "id": 9
+      "id": 9,
+      "alias": "Life Steal II"
     },
     {
       "name": "Greedy Tome of Armour Mastery I",
@@ -152,7 +161,8 @@
       "lb": 5,
       "hpBonus": 120,
       "fixID": false,
-      "id": 10
+      "id": 10,
+      "alias": "Loot Bonus I"
     },
     {
       "name": "Greedy Tome of Armour Mastery II",
@@ -165,7 +175,8 @@
       "defMobs": 5,
       "lb": 6,
       "fixID": false,
-      "id": 11
+      "id": 11,
+      "alias": "Loot Bonus II"
     },
     {
       "name": "Weightless Tome of Armour Mastery I",
@@ -179,7 +190,8 @@
       "spd": 5,
       "hpBonus": 120,
       "fixID": false,
-      "id": 12
+      "id": 12,
+      "alias": "Walk Speed I"
     },
     {
       "name": "Weightless Tome of Armour Mastery II",
@@ -192,7 +204,8 @@
       "defMobs": 5,
       "spd": 6,
       "fixID": false,
-      "id": 13
+      "id": 13,
+      "alias": "Walk Speed II"
     },
     {
       "name": "Blooming Tome of Armour Mastery II",
@@ -206,7 +219,8 @@
       "eDefPct": 10,
       "hpBonus": 150,
       "fixID": false,
-      "id": 14
+      "id": 14,
+      "alias": "Earth Defense II"
     },
     {
       "name": "Pulsing Tome of Armour Mastery II",
@@ -220,7 +234,8 @@
       "tDefPct": 10,
       "hpBonus": 150,
       "fixID": false,
-      "id": 15
+      "id": 15,
+      "alias": "Thunder Defense II"
     },
     {
       "name": "Oceanic Tome of Armour Mastery II",
@@ -234,7 +249,8 @@
       "wDefPct": 10,
       "hpBonus": 150,
       "fixID": false,
-      "id": 16
+      "id": 16,
+      "alias": "Water Defense II"
     },
     {
       "name": "Courageous Tome of Armour Mastery II",
@@ -248,7 +264,8 @@
       "fDefPct": 10,
       "hpBonus": 150,
       "fixID": false,
-      "id": 17
+      "id": 17,
+      "alias": "Fire Defense II"
     },
     {
       "name": "Clouded Tome of Armour Mastery II",
@@ -262,7 +279,8 @@
       "aDefPct": 10,
       "hpBonus": 150,
       "fixID": false,
-      "id": 18
+      "id": 18,
+      "alias": "Air Defense II"
     },
     {
       "name": "Radiant Tome of Armour Mastery II",
@@ -280,7 +298,8 @@
       "aDefPct": 6,
       "hpBonus": 150,
       "fixID": false,
-      "id": 19
+      "id": 19,
+      "alias": "Rainbow Defense II"
     },
     {
       "name": "Tome of Weapon Mastery I",
@@ -292,7 +311,8 @@
       "lvl": 60,
       "damMobs": 6,
       "fixID": false,
-      "id": 20
+      "id": 20,
+      "alias": "Weapon Mastery I"
     },
     {
       "name": "Earthbound Tome of Weapon Mastery I",
@@ -305,7 +325,8 @@
       "damMobs": 7,
       "str": 3,
       "fixID": false,
-      "id": 21
+      "id": 21,
+      "alias": "Strength I"
     },
     {
       "name": "Earthbound Tome of Weapon Mastery II",
@@ -318,7 +339,8 @@
       "damMobs": 8,
       "str": 3,
       "fixID": false,
-      "id": 22
+      "id": 22,
+      "alias": "Strength II"
     },
     {
       "name": "Nimble Tome of Weapon Mastery I",
@@ -331,7 +353,8 @@
       "damMobs": 7,
       "dex": 3,
       "fixID": false,
-      "id": 23
+      "id": 23,
+      "alias": "Dexterity I"
     },
     {
       "name": "Nimble Tome of Weapon Mastery II",
@@ -344,7 +367,8 @@
       "damMobs": 8,
       "dex": 3,
       "fixID": false,
-      "id": 24
+      "id": 24,
+      "alias": "Dexterity II"
     },
     {
       "name": "Mystical Tome of Weapon Mastery I",
@@ -357,7 +381,8 @@
       "damMobs": 7,
       "int": 3,
       "fixID": false,
-      "id": 25
+      "id": 25,
+      "alias": "Intelligence I"
     },
     {
       "name": "Mystical Tome of Weapon Mastery II",
@@ -370,7 +395,8 @@
       "damMobs": 8,
       "int": 3,
       "fixID": false,
-      "id": 26
+      "id": 26,
+      "alias": "Intelligence II"
     },
     {
       "name": "Warding Tome of Weapon Mastery I",
@@ -383,7 +409,8 @@
       "damMobs": 7,
       "def": 3,
       "fixID": false,
-      "id": 27
+      "id": 27,
+      "alias": "Defense I"
     },
     {
       "name": "Warding Tome of Weapon Mastery II",
@@ -396,7 +423,8 @@
       "damMobs": 8,
       "def": 3,
       "fixID": false,
-      "id": 28
+      "id": 28,
+      "alias": "Defense II"
     },
     {
       "name": "Athletic Tome of Weapon Mastery I",
@@ -409,7 +437,8 @@
       "damMobs": 7,
       "agi": 3,
       "fixID": false,
-      "id": 29
+      "id": 29,
+      "alias": "Agility I"
     },
     {
       "name": "Athletic Tome of Weapon Mastery II",
@@ -422,7 +451,8 @@
       "damMobs": 8,
       "agi": 3,
       "fixID": false,
-      "id": 30
+      "id": 30,
+      "alias": "Agility II"
     },
     {
       "name": "Cosmic Tome of Weapon Mastery I",
@@ -439,7 +469,8 @@
       "def": 1,
       "agi": 1,
       "fixID": false,
-      "id": 31
+      "id": 31,
+      "alias": "Rainbow Skillpoint I"
     },
     {
       "name": "Cosmic Tome of Weapon Mastery II",
@@ -456,7 +487,8 @@
       "def": 1,
       "agi": 1,
       "fixID": false,
-      "id": 32
+      "id": 32,
+      "alias": "Rainbow Skillpoint II"
     },
     {
       "name": "Seismic Tome of Weapon Mastery II",
@@ -469,7 +501,8 @@
       "damMobs": 12,
       "eDamPct": 7,
       "fixID": false,
-      "id": 33
+      "id": 33,
+      "alias": "Earth Damage II"
     },
     {
       "name": "Voltaic Tome of Weapon Mastery II",
@@ -482,7 +515,8 @@
       "damMobs": 12,
       "tDamPct": 7,
       "fixID": false,
-      "id": 34
+      "id": 34,
+      "alias": "Thunder Damage II"
     },
     {
       "name": "Abyssal Tome of Weapon Mastery II",
@@ -495,7 +529,8 @@
       "damMobs": 12,
       "wDamPct": 7,
       "fixID": false,
-      "id": 35
+      "id": 35,
+      "alias": "Water Damage II"
     },
     {
       "name": "Infernal Tome of Weapon Mastery II",
@@ -508,7 +543,8 @@
       "damMobs": 12,
       "fDamPct": 7,
       "fixID": false,
-      "id": 36
+      "id": 36,
+      "alias": "Fire Damage II"
     },
     {
       "name": "Cyclonic Tome of Weapon Mastery II",
@@ -521,7 +557,8 @@
       "damMobs": 12,
       "aDamPct": 7,
       "fixID": false,
-      "id": 37
+      "id": 37,
+      "alias": "Air Damage II"
     },
     {
       "name": "Astral Tome of Weapon Mastery II",
@@ -538,7 +575,8 @@
       "fDamPct": 6,
       "aDamPct": 6,
       "fixID": false,
-      "id": 38
+      "id": 38,
+      "alias": "Rainbow Damage II"
     },
     {
       "name": "Brute's Tome of Allegiance",
@@ -551,7 +589,8 @@
       "str": 3,
       "eDamPct": 2,
       "fixID": false,
-      "id": 39
+      "id": 39,
+      "alias": "Strength"
     },
     {
       "name": "Sadist's Tome of Allegiance",
@@ -564,7 +603,8 @@
       "dex": 3,
       "tDamPct": 2,
       "fixID": false,
-      "id": 40
+      "id": 40,
+      "alias": "Dexterity"
     },
     {
       "name": "Mastermind's Tome of Allegiance",
@@ -577,7 +617,8 @@
       "int": 3,
       "wDamPct": 2,
       "fixID": false,
-      "id": 41
+      "id": 41,
+      "alias": "Intelligence"
     },
     {
       "name": "Arsonist's Tome of Allegiance",
@@ -590,7 +631,8 @@
       "def": 3,
       "fDamPct": 2,
       "fixID": false,
-      "id": 42
+      "id": 42,
+      "alias": "Defense"
     },
     {
       "name": "Ghost's Tome of Allegiance",
@@ -603,7 +645,8 @@
       "agi": 3,
       "aDamPct": 2,
       "fixID": false,
-      "id": 43
+      "id": 43,
+      "alias": "Agility"
     },
     {
       "name": "Psychopath's Tome of Allegiance",
@@ -616,7 +659,8 @@
       "str": 2,
       "dex": 2,
       "fixID": false,
-      "id": 44
+      "id": 44,
+      "alias": "ET"
     },
     {
       "name": "Loner's Tome of Allegiance",
@@ -629,7 +673,8 @@
       "str": 2,
       "int": 2,
       "fixID": false,
-      "id": 45
+      "id": 45,
+      "alias": "EW"
     },
     {
       "name": "Warlock's Tome of Allegiance",
@@ -642,7 +687,8 @@
       "dex": 2,
       "int": 2,
       "fixID": false,
-      "id": 46
+      "id": 46,
+      "alias": "TW"
     },
     {
       "name": "Destroyer's Tome of Allegiance",
@@ -655,7 +701,8 @@
       "str": 2,
       "def": 2,
       "fixID": false,
-      "id": 47
+      "id": 47,
+      "alias": "EF"
     },
     {
       "name": "Devil's Tome of Allegiance",
@@ -668,7 +715,8 @@
       "dex": 2,
       "def": 2,
       "fixID": false,
-      "id": 48
+      "id": 48,
+      "alias": "TF"
     },
     {
       "name": "Alchemist's Tome of Allegiance",
@@ -681,7 +729,8 @@
       "int": 2,
       "def": 2,
       "fixID": false,
-      "id": 49
+      "id": 49,
+      "alias": "WF"
     },
     {
       "name": "Barbarian's Tome of Allegiance",
@@ -694,7 +743,8 @@
       "str": 2,
       "agi": 2,
       "fixID": false,
-      "id": 50
+      "id": 50,
+      "alias": "EA"
     },
     {
       "name": "Freelancer's Tome of Allegiance",
@@ -707,7 +757,8 @@
       "dex": 2,
       "agi": 2,
       "fixID": false,
-      "id": 51
+      "id": 51,
+      "alias": "TA"
     },
     {
       "name": "Sycophant's Tome of Allegiance",
@@ -720,7 +771,8 @@
       "int": 2,
       "agi": 2,
       "fixID": false,
-      "id": 52
+      "id": 52,
+      "alias": "WA"
     },
     {
       "name": "Fanatic's Tome of Allegiance",
@@ -733,7 +785,8 @@
       "def": 2,
       "agi": 2,
       "fixID": false,
-      "id": 53
+      "id": 53,
+      "alias": "FA"
     },
     {
       "name": "Assimilator's Tome of Allegiance",
@@ -749,7 +802,8 @@
       "def": 1,
       "agi": 1,
       "fixID": false,
-      "id": 54
+      "id": 54,
+      "alias": "Rainbow"
     }
   ]
 }

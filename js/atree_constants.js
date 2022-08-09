@@ -3739,7 +3739,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "scaling": [3]
+                    "scaling": [2.2]
                 }
             ]  
         },
@@ -5242,7 +5242,9 @@ const atrees = {
                 "Teleport"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Wisdom"
+            ],
             "cost": 1,
             "display": {
                 "row": 6,
@@ -5378,20 +5380,6 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Meteor Damage",
-                    "behavior": "modify",
-                    "multipliers": [
-                        30,
-                        90,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Lightning Damage",
                     "behavior": "modify",
                     "multipliers": [
                         30,
@@ -5608,7 +5596,11 @@ const atrees = {
                 "Burning Sigil"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Sunshower",
+                "Larger Heal",
+                "Orphion's Pulse"
+            ],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -6395,7 +6387,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded",
-            "desc": "Incrase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +5.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6705,7 +6697,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded II",
-            "desc": "Incrase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +5.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -7673,6 +7665,17 @@ const atrees = {
                             "multipliers": [
                                 230, 70, 0, 0, 0, 0
                             ]
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Backstab",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Backstab:3.Backstab Damage",
+                            "value": 100
                         }
                     ]
                 }
