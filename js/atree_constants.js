@@ -9352,6 +9352,10 @@ const atrees = {
                     {
                         "name": "DPS",
                         "hits": { "Tick Damage": 2.5 }
+                    },
+                    {
+                        "name": "Heal Rate",
+                        "hits": { "Heal Tick": 2.5 }
                     }
                 ]
             }]
@@ -9371,13 +9375,15 @@ const atrees = {
             },
             "properties": {},
             "effects": [{
-                "type": "raw_stat",
-                "bonuses": [
-                    {
-                        "type": "stat",
-                        "name": "damMult.RelikProf:0.Single Beam",
-                        "value": 5
-                    }
+                "type": "replace_spell",
+                "name": "Relik Melee",
+                "base_spell": 0,
+                "spell_type": "damage",
+                "scaling": "melee", "use_atkspd": false,
+                "display": "Total",
+                "parts": [
+                    { "name": "Single Beam", "multipliers": [35, 0, 0, 0, 0, 0] },
+                    { "name": "Total", "hits": { "Single Beam": 3 } }
                 ]
             }]
         },
@@ -9434,7 +9440,6 @@ const atrees = {
             "desc": "Reduce your Main Attack's spread, and increase its beam speed by +33%.",
             "base_abil": 1,
             "archetype": "Summoner",
-            "archetype_req": 0,
             "parents": ["Haul"],
             "dependencies": [],
             "blockers": ["Hand of the Shaman"],
@@ -9485,12 +9490,16 @@ const atrees = {
             },
             "properties": {},
             "effects": [{
-                "type": "add_spell_prop",
+                "type": "replace_spell",
+                "name": "Relik Melee",
                 "base_spell": 0,
-                "target_part": "Total",
-                "hits": {
-                    "Single Beam": 2
-                }
+                "spell_type": "damage",
+                "scaling": "melee", "use_atkspd": false,
+                "display": "Total",
+                "parts": [
+                    { "name": "Single Beam", "multipliers": [34, 0, 0, 0, 0, 0] },
+                    { "name": "Total", "hits": { "Single Beam": 5 } }
+                ]
             }]
         },
         {
@@ -9600,7 +9609,6 @@ const atrees = {
             "base_abil": 998,
             "desc": "Increases your base damage from all Earth attacks.",
             "archetype": "Summoner",
-            "archetype_req": 0,
             "parents": [
                 "Uproot"
             ],
@@ -9641,7 +9649,6 @@ const atrees = {
             "base_abil": 998,
             "desc": "Increases your base damage from all Air attacks.",
             "archetype": "Summoner",
-            "archetype_req": 0,
             "parents": [
                 "Earth Mastery",
                 "Uproot",
@@ -9685,7 +9692,6 @@ const atrees = {
             "base_abil": 998,
             "desc": "Increases your base damage from all Water attacks.",
             "archetype": "Ritualist",
-            "archetype_req": 0,
             "parents": [
                 "Cheaper Haul I",
                 "Air Mastery",
@@ -9728,7 +9734,6 @@ const atrees = {
             "base_abil": 998,
             "desc": "Increases base damage from all Thunder attacks.",
             "archetype": "Acolyte",
-            "archetype_req": 0,
             "parents": [
                 "Air Mastery",
                 "Cheaper Haul I",
@@ -9771,7 +9776,6 @@ const atrees = {
             "base_abil": 998,
             "desc": "Increases base damage from all Fire attacks.",
             "archetype": "Acolyte",
-            "archetype_req": 0,
             "parents": ["Aura"],
             "dependencies": [],
             "blockers": [],
@@ -9827,14 +9831,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "target_part": "Nature's Jolt",
                     "base_spell": 2,
-                    "multipliers": [
-                        90,
-                        30,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
+                    "multipliers": [90, 30, 0, 0, 0, 0]
                 },
                 {
                     "type": "add_spell_prop",
@@ -10006,9 +10003,10 @@ const atrees = {
             "effects": [
                 {
                     "type": "replace_spell",
+                    "name": "Puppet Damage",
                     "base_spell": 5,
                     "scaling": "spell",
-                    "display": "Puppet Damage",
+                    "display": "Max Puppet DPS",
                     "parts": [
                         {
                             "name": "Puppet Hit",
@@ -10399,7 +10397,7 @@ const atrees = {
             "desc": "When casting Uproot, instead wear the Mask of the Fanatic. While wearing this mask, gain resistance at the cost of less damage bonus, and reduce the mana cost of Totem.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
-            "archetype_req": 2,
+            "archetype_req": 3,
             "parents": [
                 "Hymn of Hate",
                 "More Blood Pool I"
@@ -10410,7 +10408,7 @@ const atrees = {
             "display": {
                 "row": 21,
                 "col": 5,
-                "icon": "node_3"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -10465,6 +10463,7 @@ const atrees = {
             "display_name": "Masquerade",
             "desc": "After switching from a Mask to another 2 times, gain 30 mana.",
             "base_abil": "Uproot",
+          	"archetype": "Ritualist",
             "parents": ["Mask of the Fanatic"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
@@ -10485,6 +10484,7 @@ const atrees = {
             "desc": "Increase your maximum Totem by +1 and reduce Totem and Aura's damage.",
             "base_abil": "Totem",
             "archetype": "Summoner",
+            "archetype_req": 2,
             "parents": ["Bullwhip", "Cheaper Totem II"],
             "dependencies": ["Aura"],
             "blockers": [],
@@ -10492,7 +10492,7 @@ const atrees = {
             "display": {
                 "row": 23,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -10501,6 +10501,18 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Tick Damage",
                     "multipliers": [-3, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "DPS",
+                    "hits": { "Tick Damage": 2.5 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Heal Rate",
+                    "hits": { "Heal Tick": 2.5 }
                 },
                 {
                     "type": "add_spell_prop",
@@ -10541,6 +10553,7 @@ const atrees = {
             "display_name": "Storm Dance",
             "desc": "Enemies hit by Aura will be pulled towards your totem.",
             "base_abil": "Aura",
+          	"archetype": "Ritualist",
             "parents": ["Cheaper Totem II", "Mask of the Fanatic", "Blood Moon"],
             "dependencies": ["Aura"],
             "blockers": [],
@@ -10551,12 +10564,14 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": [{
+            "effects": [
+              	{
                 "type": "add_spell_prop",
                 "base_spell": 3,
                 "target_part": "Single Wave",
                 "multipliers": [0, 0, 0, 0, 0, 30]
-            }]
+            	}
+            ]
         },
         {
             "display_name": "Blood Moon",
@@ -10612,6 +10627,388 @@ const atrees = {
                 "base_spell": 2,
                 "cost": -5
             }]
+        },
+      	{
+            "display_name": "Cheaper Aura II",
+            "desc": "Reduce the Mana cost of Aura.",
+            "base_abil": "Aura",
+            "parents": [
+                "Double Totem",
+                "Cheaper Totem II",
+              	"Seeking Totem"
+            ],
+            "dependencies": ["Aura"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 26,
+                "col": 1,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 3,
+                "cost": -5
+            }]
+        },
+      	{
+            "display_name": "Seeking Totem",
+            "desc": "When wearing the Mask of the Fanatic, your Totem will move towards the nearest enemy outside of its range.",
+            "base_abil": "Totem",
+          	"archetype": "Ritualist",
+            "parents": [
+                "Storm Dance",
+                "Cheaper Totem II"
+            ],
+            "dependencies": ["Mask of the Fanatic"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 26,
+              	"col": 4,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+      	{
+            "display_name": "Twisted Tether",
+            "desc": "When hitting an enemy with your Main Attack, use 1% from your Blood Pool and add Tether to them. Tethered enemies will take damage for every 2% Health you lose. (Max 10%)",
+          	"archetype": "Acolyte",
+            "archetype_req": 7,
+            "parents": [
+                "Storm Dance",
+                "Blood Moon"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 26,
+              	"col": 7,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+              	{
+                    "type": "replace_spell",
+                    "name": "Twisted Tether",
+                    "base_spell": 6,
+                    "scaling": "spell",
+                    "display": "Tether Tick",
+                    "parts": [
+                        {
+                            "name": "Tether Tick",
+                            "multipliers": [ 15, 0, 0, 0, 0, 10 ]
+                        },
+                        {
+                            "name": "Max Tether Damage",
+                            "hits": { "Tether Tick": 5 }
+                        }
+                    ]
+                }
+            ]
+        },
+      	{
+            "display_name": "Stronger Totem",
+            "desc": "Increase Totem's damage.",
+            "base_abil": "Totem",
+            "parents": [
+                "Cheaper Aura II",
+              	"Seeking Totem"
+            ],
+            "dependencies": ["Totem"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 27,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Tick Damage",
+                    "multipliers": [4, 0, 0, 0, 0, 0]
+            	}
+            ]
+        },
+      	{
+            "display_name": "Depersonalization",
+            "desc": "Masquerade will need -1 Mask switch to trigger. Reduce the mana given by -10.",
+            "archetype": "Ritualist",
+            "archetype_req": 6,
+            "base_abil": "Uproot",
+            "parents": ["Seeking Totem"],
+            "dependencies": ["Masquerade"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 27,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Masquerade",
+                            "name": "switch_count",
+                            "value": -1
+                        },
+                        {
+                            "type": "prop",
+                            "abil": "Masquerade",
+                            "name": "mana_gain",
+                            "value": -10
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Crimson Effigy",
+            "desc": "Hitting your Totem with Uproot will summon an Effigy that will attack enemies and push them towards your totem.",
+            "archetype": "Summoner",
+            "archetype_req": 8,
+            "parents": ["Cheaper Aura II", "Mask of the Coward"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 28,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {
+                "duration": 60
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Crimson Effigy",
+                    "base_spell": 7,
+                    "display": "Total Effigy DPS",
+                    "parts": [
+                        {
+                            "name": "Effigy Hit",
+                            "multipliers": [ 50, 0, 0, 50, 0, 0 ]
+                        },
+                        {
+                            "name": "Single Effigy DPS",
+                            "hits": { "Effigy Hit": 4 }
+                        },
+                        {
+                            "name": "Total Effigy DPS",
+                            "hits": { "Single Effigy DPS": 1 }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Mask of the Coward",
+            "desc": "When casting Uproot, instead wear the Mask of the Coward. While wearing this mask, gain walk speed at the cost of less resistance, and reduce the mana cost of Haul.",
+            "base_abil": "Uproot",
+            "archetype": "Ritualist",
+            "archetype_req": 7,
+            "parents": [
+                "Seeking Totem",
+                "Crimson Effigy",
+                "Fluid Healing"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 28,
+                "col": 4,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Switch Masks",
+                    "base_spell": 4,
+                    "parts": [],
+                    "display": ""
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Mask of the Lunatic",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 60
+                        },
+                        {
+                            "type": "stat",
+                            "name": "defMult.Mask",
+                            "value": -20
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spPct2Final",
+                            "value": -50
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Fluid Healing",
+            "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
+            "parents": ["Twisted Tether", "Mask of the Coward", "More Blood Pool I"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 28,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": false,
+                    "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "wDamPct"
+                        }
+                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "healPct.Fluid:3.Heal Amount"
+                    },
+                    "scaling": [ 0.3 ]
+                }
+            ]
+        },
+        {
+            "display_name": "More Blood Pool II",
+            "desc": "Increase your maximum Blood pool by +30%.",
+            "archetype": "Acolyte",
+            "base_abil": "Sacrificial Shrine",
+            "parents": ["Twisted Tether", "Fluid Healing"],
+            "dependencies": ["Sacrificial Shrine"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 28,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [
+                    {
+                        "type": "prop",
+                        "abil": "Sacrificial Shrine",
+                        "name": "blood_pool",
+                        "value": 30
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Maddening Roots",
+            "desc": "Uproot will slow down enemies.",
+            "base_abil": "Uproot",
+            "archetype": "Summoner",
+            "parents": ["Crimson Effigy"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 29,
+                "col": 0,
+                "icon": "node_1"
+            },
+            "properties": {
+                "effects": 40,
+                "duration": 3
+            },
+            "effects": []
+        },
+        {
+            "display_name": "Regeneration",
+            "desc": "Your Totem will heal yourself and allies standing in its range every 0.4s.",
+            "base_abil": "Totem",
+            "parents": [
+                "Crimson Effigy",
+                "Mask of the Coward"
+            ],
+            "dependencies": [],
+            "blockers": ["Sacrificial Shrine"],
+            "cost": 2,
+            "display": {
+                "row": 29,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Heal Tick",
+                    "power": 1,
+                    "display": "Heal Rate"
+                }
+            ]
+        },
+		{
+            "display_name": "Chant of the Coward",
+            "desc": "When switching to the Mask of the Coward, damage and knockback nearby enemies.",
+            "archetype": "Ritualist",
+          	"archetype_req": 7,
+            "parents": ["Fluid Healing", "Mask of the Coward"],
+            "dependencies": ["Mask of the Coward"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 29,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": { "aoe": 8 },
+            "effects": [
+              	{
+                    "type": "add_spell_prop",
+                    "target_part": "Chant of the Coward",
+                    "base_spell": 4,
+                    "multipliers": [200, 0, 0, 0, 0, 0],
+                    "display": "Chant of the Coward"
+                }
+            ]
+        },     
+		{
+            "display_name": "Blood Rite",
+            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 25% of the damage taken into your Blood Pool. (Max 10%)",
+            "archetype": "Acolyte",
+          	"archetype_req": 9,
+            "parents": ["Fluid Healing", "More Blood Pool II"],
+            "dependencies": ["Sacrificial Shrine"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 29,
+                "col": 7,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
         }
     ]
 }
