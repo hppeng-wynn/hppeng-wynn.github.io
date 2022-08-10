@@ -9382,7 +9382,7 @@ const atrees = {
             }]
         },
         {
-            "display_name": "Cheaper Totem",
+            "display_name": "Cheaper Totem I",
             "desc": "Reduce the Mana cost of Totem.",
             "base_abil": "Totem",
             "parents": ["Relik Proficiency 1"],
@@ -9414,7 +9414,7 @@ const atrees = {
                 "col": 4,
                 "icon": "node_1"
             },
-            "properties": { "aoe": 3.5, },
+            "properties": { "aoe": 3.5 },
             "effects": [{
                 "type": "add_spell_prop",
                 "base_spell": 1,
@@ -9498,7 +9498,7 @@ const atrees = {
             "desc": "Throw a rapid projectile that will explode and knock enemies away. (Hold shift to pull instead)",
             "parents": [
                 "Distant Grasp",
-                "Cheaper Haul"
+                "Cheaper Haul I"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9519,36 +9519,35 @@ const atrees = {
                 "base_spell": 4,
                 "display": "Total Damage",
                 "parts": [
-                      {
-                          "name": "Single Hit",
-                          "multipliers": [
-                              80,
-                              30,
-                              20,
-                              0,
-                              0,
-                              0
-                          ]
-                      },
-                      {
-                          "name": "Total Damage",
-                          "hits": {
-                              "Single Hit": 1
-                          }
-                      }
-                    ]
+                     {
+                         "name": "Single Hit",
+                         "multipliers": [
+                             80,
+                             30,
+                             20,
+                             0,
+                             0,
+                             0
+                         ]
+                     },
+                     {
+                         "name": "Total Damage",
+                         "hits": {
+                             "Single Hit": 1
+                         }
+                     }
                 ]
             }]
         },
         {
-            "display_name": "Cheaper Haul",
+            "display_name": "Cheaper Haul I",
             "desc": "Reduce the Mana cost of Haul.",
-            "base_abil": "Totem",
+            "base_abil": "Haul",
             "parents": [
                 "Uproot",
                 "Aura"
             ],
-            "dependencies": [],
+            "dependencies": ["Haul"],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -9568,7 +9567,7 @@ const atrees = {
             "desc": "Emit an aura from your Totem that damages enemies.",
             "parents": [
                 "Hand of the Shaman",
-                "Cheaper Haul"
+                "Cheaper Haul I"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9646,7 +9645,7 @@ const atrees = {
             "parents": [
                 "Earth Mastery",
                 "Uproot",
-                "Cheaper Haul",
+                "Cheaper Haul I",
                 "Thunder Mastery"
             ],
             "dependencies": [],
@@ -9688,7 +9687,7 @@ const atrees = {
             "archetype": "Ritualist",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Haul",
+                "Cheaper Haul I",
                 "Air Mastery",
                 "Thunder Mastery"
             ],
@@ -9732,7 +9731,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Air Mastery",
-                "Cheaper Haul",
+                "Cheaper Haul I",
                 "Aura"
             ],
             "dependencies": [],
@@ -9773,9 +9772,7 @@ const atrees = {
             "desc": "Increases base damage from all Fire attacks.",
             "archetype": "Acolyte",
             "archetype_req": 0,
-            "parents": [
-                "Aura"
-            ],
+            "parents": ["Aura"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -9816,9 +9813,7 @@ const atrees = {
                 "Air Mastery",
                 "Earth Mastery"
             ],
-            "dependencies": [
-                "Haul"
-            ],
+            "dependencies": ["Haul"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -9856,12 +9851,8 @@ const atrees = {
             "display_name": "Overseer",
             "desc": "Increase Uproot's range, and if you hit your Totem with it, reset its duration.",
             "base_abil": "Uproot",
-            "parents": [
-                "Nature's Jolt"
-            ],
-            "dependencies": [
-                "Uproot"
-            ],
+            "parents": ["Nature's Jolt"],
+            "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -9885,49 +9876,40 @@ const atrees = {
             ]
         },
         {
-      		"display_name": "Rain Dance",
-        	"desc": "While mid-air, your Totem will leave a streak of rain that damages enemies under it every 0.4s.",
-          	"archetype": "Ritualist",
-          	"base_abil": "Totem"
-          	"parents": [
-          		"Water Mastery"
-          	],
-			"dependencies": [
-              	"Totem"
+            "display_name": "Rain Dance",
+            "desc": "While mid-air, your Totem will leave a streak of rain that damages enemies under it every 0.4s.",
+            "archetype": "Ritualist",
+            "base_abil": "Totem",
+            "parents": ["Water Mastery"],
+            "dependencies": [
+                "Totem"
             ],
-			"blockers": [],
-			"cost": 2
-			"display": {
-              	"row": 13
-              	"col": 4
-              	"icon": "node_1"
-            }
-			"properties": { 
-              	"aoe": 2,
-              	"duration": 6
-              	"rate": 0.4
-            }
-			"effects": {
-              	"type": "add_spell_prop"
-              	"base_spell": 1
-              	"target_part": "Rain Dance"
-              	"multipliers": [
-              		30,
-              		0,
-              		0,
-              		30,
-              		0,
-              		0
-                ]
-            }
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 13,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": { 
+                "aoe": 2,
+                "duration": 6,
+                "rate": 0.4
+            },
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 1,
+                "target_part": "Rain Dance",
+                "multipliers": [ 30, 0, 0, 30, 0, 0 ]
+            }]
         },
-      	{
+        {
             "display_name": "Shocking Aura",
             "desc": "Aura will travel at a much greater speed and deal additional damage.",
             "base_abil": "Aura",
             "parents": [
                 "Thunder Mastery",
-              	"Flaming Tongue"
+                "Flaming Tongue"
             ],
             "dependencies": [
                 "Aura"
@@ -9956,17 +9938,15 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Flaming Tongue",
             "desc": "Uproot will not explode or knockback enemies, but will deal damage 3 times. All elemental conversions become Fire.",
             "base_abil": "Uproot",
             "parents": [
                 "Fire Mastery",
-              	"Shocking Aura"
+                "Shocking Aura"
             ],
-            "dependencies": [
-                "Uproot"
-            ],
+            "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -9989,7 +9969,7 @@ const atrees = {
                         0
                     ]
                 },
-              	{
+                {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Total Damage",
@@ -9997,163 +9977,641 @@ const atrees = {
                         "Single Hit": 2
                     }
                 },
-              	{
+                {
                     "type": "convert_spell_conv",
                     "target_part": "all",
                     "base_spell": 4,
                     "conversion": "Fire"
-                },
+                }
             ]
         },
-		{
+        {
             "display_name": "Puppet Master",
             "desc": "Your Totem will summon 1 Puppet every 3s (Max 2). They throw knives at nearby enemies every 0.5s.",
-            "base_abil": "Totem",
-          	"archetype": "Summoner",
-          	"archetype_req": 3,
-            "parents": [
-                "Overseer"
-            ],
-            "dependencies": [
-                "Totem"
-            ],
+            "archetype": "Summoner",
+            "archetype_req": 3,
+            "parents": ["Overseer"],
+            "dependencies": ["Totem"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 15
-              	"col": 2
+                "row": 15,
+                "col": 1,
                 "icon": "node_3"
             },
             "properties": {
-              "duration": 30,
-              "range": 16
+                "duration": 30,
+                "range": 16
             },
             "effects": [
                 {
                     "type": "replace_spell",
                     "base_spell": 5,
                     "scaling": "spell",
-                  	"display": "Puppet Damage",
-                  	"parts": [
-                      {
-                        "name": "Puppet Hit",
-                  		"multipliers": [
-                  			10,
-                  			10,
-                  			0,
-                  			0,
-                  			0,
-                  			10
-                  		]
-                      },
-                      {
-                        "name": "Puppet DPS"
-                        "hits": { "Puppet Hit": 2}
-                      },
-                      {
-                      	"name": "Max Puppet DPS"
-                      	"hits": { "Puppet DPS": 2}
-                      }
-                  		
+                    "display": "Puppet Damage",
+                    "parts": [
+                        {
+                            "name": "Puppet Hit",
+                            "multipliers": [ 10, 10, 0, 0, 0, 10 ]
+                        },
+                        {
+                            "name": "Puppet DPS",
+                            "hits": { "Puppet Hit": 2 }
+                        },
+                        {
+                            "name": "Max Puppet DPS",
+                            "hits": { "Puppet DPS": 2 }
+                        }
                     ]
                 }
             ]
         },
-		{
+        {
             "display_name": "Mask of the Lunatic",
             "desc": "When casting Uproot, instead wear the Mask of the Lunatic. While wearing this mask, gain damage bonus at the cost of less walk speed, and reduce the mana cost of Aura.",
             "base_abil": "Uproot",
-          	"archetype": "Ritualist"
-          	"archetype_req": 2
-            "parents": [
-                "Rain Dance",
-            ],
-            "dependencies": [
-                "Uproot"
-            ],
+            "archetype": "Ritualist",
+            "archetype_req": 2,
+            "parents": ["Rain Dance"],
+            "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 15,
-              	"col": 4,
+                "col": 4,
                 "icon": "node_3"
             },
             "properties": {},
-			"effects": [
-              	{
+            "effects": [
+                {
                     "type": "replace_spell",
                     "name": "Switch Masks",
                     "base_spell": 4,
                     "parts": [],
                     "display": ""
                 },
-              	{
+                {
                     "type": "raw_stat",
                     "toggle": "Mask of the Lunatic",
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "damMult.MaskoftheLunatic",
+                            "name": "damMult.Mask",
                             "value": 50
                         },
-                      	{
+                        {
                             "type": "stat",
                             "name": "spd",
                             "value": -35
                         },
-                      	{
+                        {
                             "type": "stat",
                             "name": "spPct3Final",
                             "value": -30
-                        },
+                        }
                     ]
                 }
             ]
-		},
-		{
-            "display_name": "Sacrifical Shrine",
+        },
+        {
+            "display_name": "Sacrificial Shrine",
             "desc": "Your Totem will siphon 2% of your health every 0.4s and transfer it into a Blood Pool. Aura will use 15% of your Blood Pool to deal +50% damage and heal all allies.",
-            "base_abil": "Aura",
-          	"archetype": "Acolyte",
-          	"archetype_req": 3,
+            "archetype": "Acolyte",
+            "archetype_req": 3,
             "parents": [
                 "Shocking Aura",
-              	"Flaming Tongue"
+                "Flaming Tongue"
             ],
-            "dependencies": [
-                "Totem"
-            ],
+            "dependencies": ["Totem"],
             "blockers": [
-              	"Regeneration"
+                "Regeneration"
             ],
             "cost": 2,
             "display": {
                 "row": 15,
-              	"col": 6,
+                "col": 7,
                 "icon": "node_3"
             },
             "properties": {
-    			"blood_pool_size": 30
+                "blood_pool": 30
             },
             "effects": [
                 {
                     "type": "raw_stat",
-                  	"toggle": "Activate Boosted Aura",
-                  	"bonuses": [
-                      	{
-                            "type": "stat"
+                    "toggle": "Activate Boosted Aura",
+                    "bonuses": [
+                        {
+                            "type": "stat",
                             "name": "damMult.BloodPool:3.Single Wave",
                             "value": 50
-                    	}
+                        }
                     ]
                 },
-              	{
+                {
                     "type": "add_spell_prop",
                     "base_spell": 3,
-                    "target_part": "Heal Amount"
+                    "target_part": "Heal Amount",
                     "power": 0.15
                 }
             ]
         },
+        {
+            "display_name": "More Puppets I",
+            "desc": "Increase your Max Puppets by +1 and reduce their damage.",
+            "base_abil": "Puppet Master",
+            "archetype": "Summoner",
+            "parents": ["Puppet Master"],
+            "dependencies": ["Puppet Master"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 16,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 5,
+                    "target_part": "Puppet Hit",
+                    "multipliers": [0, 0, 0, 0, 0, -5]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 5,
+                    "target_part": "Max Puppet DPS",
+                    "hits": {"Puppet DPS": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Cheaper Uproot I",
+            "desc": "Reduce the Mana cost of Uproot.",
+            "base_abil": "Uproot",
+            "parents": ["Mask of the Lunatic"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 17,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 4,
+                "cost": -5
+            }]
+        },
+        {
+            "display_name": "Rebound",
+            "desc": "Once Aura reaches its maximum range, it will bounce back and deal its effects a second time.",
+            "base_abil": "Aura",
+            "parents": ["Sacrificial Shrine"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 17,
+                "col": 7,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Stagnation",
+            "desc": "Enemies hit by Nature's Jolt will be slowed down.",
+            "base_abil": "Uproot",
+            "parents": ["More Puppets I", "Cheaper Aura I"],
+            "dependencies": ["Nature's Jolt"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 18,
+                "col": 0,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Cheaper Aura I",
+            "desc": "Reduce the Mana cost of Aura.",
+            "base_abil": "Aura",
+            "parents": ["Stagnation", "Cheaper Uproot I"],
+            "dependencies": ["Aura"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 18,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 3,
+                "cost": -5
+            }]
+        },
+        {
+            "display_name": "Better Totem",
+            "desc": "Increase your Totem's area of effect.",
+            "base_abil": "Totem",
+            "parents": [
+                "Cheaper Uproot I",
+                "Rebound"
+            ],
+            "dependencies": ["Totem"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 18,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [
+                    {
+                        "type": "prop",
+                        "abil": "Totem",
+                        "name": "aoe",
+                        "value": 4
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Blood Connection",
+            "desc": "If you are outside your Totem's range, Haul will teleport you to it.",
+            "base_abil": "Haul",
+            "archetype": "Acolyte",
+            "parents": ["Rebound"],
+            "dependencies": ["Haul"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 18,
+                "col": 8,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Exploding Puppets",
+            "desc": "When your Puppets have 3s duration left, they will run towards enemies at high speed to explode and deal damage.",
+            "base_abil": "Puppet Master",
+            "archetype": "Summoner",
+            "parents": ["Stagnation", "Cheaper Aura I"],
+            "dependencies": ["Puppet Master"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 20,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {
+                "aoe": 3
+            },
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 5,
+                "target_part": "Puppet Explosion",
+                "multipliers": [100, 0, 0, 0, 100, 0]
+            }]
+        },
+        {
+            "display_name": "Hymn of Hate",
+            "desc": "When wearing the Mask of the Lunatic, killing an enemy with Aura will cast a new Aura dealing -70% damage at its location.",
+            "base_abil": "Aura",
+            "archetype": "Ritualist",
+            "parents": ["Cheaper Uproot I", "More Blood Pool I"],
+            "dependencies": ["Mask of the Lunatic"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 20,
+                "col": 4,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 3,
+                "target_part": "Hymn of Hate",
+                "hits": { "Single Wave": 0.3 }
+            }]
+        },
+        {
+            "display_name": "More Blood Pool I",
+            "desc": "Increase your maximum Blood pool by +30%.",
+            "archetype": "Acolyte",
+            "base_abil": "Sacrificial Shrine",
+            "parents": ["Rebound", "Hymn of Hate"],
+            "dependencies": ["Sacrificial Shrine"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 20,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [
+                    {
+                        "type": "prop",
+                        "abil": "Sacrificial Shrine",
+                        "name": "blood_pool",
+                        "value": 30
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "Bullwhip",
+            "desc": "Hitting enemies with Uproot will make your Summons focus them and deal additional damage.",
+            "archetype": "Summoner",
+            "parents": ["Exploding Puppets"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 21,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "properties": {
+                "duration": 10
+            },
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": "Activate Bullwhip",
+                "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "damMult.Bullwhip:5.Puppet Hit",
+                        "value": 20
+                    }
+                ]
+            }]
+        },
+        {
+            "display_name": "More Puppets II",
+            "desc": "Increase your Max Puppets by +2 and reduce their damage.",
+            "base_abil": "Puppet Master",
+            "archetype": "Summoner",
+            "parents": ["Exploding Puppets"],
+            "dependencies": ["More Puppets I"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 21,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 5,
+                    "target_part": "Puppet Hit",
+                    "multipliers": [0, -5, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 5,
+                    "target_part": "Max Puppet DPS",
+                    "hits": {"Puppet DPS": 2}
+                }
+            ]
+        },
+        {
+            "display_name": "Mask of the Fanatic",
+            "desc": "When casting Uproot, instead wear the Mask of the Fanatic. While wearing this mask, gain resistance at the cost of less damage bonus, and reduce the mana cost of Totem.",
+            "base_abil": "Uproot",
+            "archetype": "Ritualist",
+            "archetype_req": 2,
+            "parents": [
+                "Hymn of Hate",
+                "More Blood Pool I"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 21,
+                "col": 5,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Switch Masks",
+                    "base_spell": 4,
+                    "parts": [],
+                    "display": ""
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Mask of the Lunatic",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Mask",
+                            "value": -20
+                        },
+                        {
+                            "type": "stat",
+                            "name": "defMult.Mask",
+                            "value": 50
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spPct1Final",
+                            "value": -70
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Vengeful Spirit",
+            "desc": "Your Totem will give damage bonus to yourself and allies standing inside its range.",
+            "base_abil": "Totem",
+            "archetype": "Acolyte",
+            "parents": ["More Blood Pool I"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 21,
+                "col": 8,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Masquerade",
+            "desc": "After switching from a Mask to another 2 times, gain 30 mana.",
+            "base_abil": "Uproot",
+            "parents": ["Mask of the Fanatic"],
+            "dependencies": ["Mask of the Lunatic"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 22,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {
+                "switch_count": 2,
+                "mana_gain": 30
+            },
+            "effects": []
+        },
+        {
+            "display_name": "Double Totem",
+            "desc": "Increase your maximum Totem by +1 and reduce Totem and Aura's damage.",
+            "base_abil": "Totem",
+            "archetype": "Summoner",
+            "parents": ["Bullwhip", "Cheaper Totem II"],
+            "dependencies": ["Aura"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Tick Damage",
+                    "multipliers": [-3, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Single Wave",
+                    "multipliers": [-60, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "First Wave",
+                    "hits": { "Single Wave": 2 },
+                    "display": "First Wave"
+                }
+            ]
+        },
+        {
+            "display_name": "Cheaper Totem II",
+            "desc": "Reduce the Mana cost of Totem.",
+            "base_abil": "Totem",
+            "parents": ["More Puppets II", "Double Totem", "Storm Dance"],
+            "dependencies": ["Totem"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 23,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 1,
+                "cost": -5
+            }]
+        },
+        {
+            "display_name": "Storm Dance",
+            "desc": "Enemies hit by Aura will be pulled towards your totem.",
+            "base_abil": "Aura",
+            "parents": ["Cheaper Totem II", "Mask of the Fanatic", "Blood Moon"],
+            "dependencies": ["Aura"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 3,
+                "target_part": "Single Wave",
+                "multipliers": [0, 0, 0, 0, 0, 30]
+            }]
+        },
+        {
+            "display_name": "Blood Moon",
+            "desc": "For every 1% Soul Point Regen you have from items, gain +5/3s Lifesteal (Max 1000/3s)",
+            "parents": ["Vengeful Spirit", "Storm Dance"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 23,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": false,
+                    "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "spRegen"
+                        }
+                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "ls"
+                    },
+                    "scaling": [ 5 ],
+                    "max": 1000
+                }
+            ]
+        },
+        {
+            "display_name": "Cheaper Haul II",
+            "desc": "Reduce the Mana cost of Haul.",
+            "base_abil": "Haul",
+            "parents": [
+                "Storm Dance",
+                "Blood Moon"
+            ],
+            "dependencies": ["Haul"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 24,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 2,
+                "cost": -5
+            }]
+        }
     ]
 }
