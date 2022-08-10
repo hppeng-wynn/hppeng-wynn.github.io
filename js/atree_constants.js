@@ -9375,7 +9375,7 @@ const atrees = {
                 "bonuses": [
                     {
                         "type": "stat",
-                        "name": "damMult.RelikProf:0.Single Beam"
+                        "name": "damMult.RelikProf:0.Single Beam",
                         "value": 5
                     }
                 ]
@@ -9435,7 +9435,7 @@ const atrees = {
             "base_abil": 1,
             "archetype": "Summoner",
             "archetype_req": 0,
-            "parents": ["Totemic Smash"],
+            "parents": ["Haul"],
             "dependencies": [],
             "blockers": ["Hand of the Shaman"],
             "cost": 1,
@@ -9450,7 +9450,7 @@ const atrees = {
         {
             "display_name": "Haul",
             "desc": "Leap towards your Totem.",
-            "parents": [],
+            "parents": ["Totemic Smash"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -9514,15 +9514,29 @@ const atrees = {
             },
             "effects": [{
                 "type": "replace_spell",
-                "name": "Totem",
+                "name": "Uproot",
                 "cost": 30,
                 "base_spell": 4,
-                "display": "Uproot Damage",
+                "display": "Total Damage",
                 "parts": [
-                    {
-                        "name": "Uproot Damage",
-                        "multipliers": [80, 30, 20, 0, 0, 0]
-                    }
+                      {
+                          "name": "Single Hit",
+                          "multipliers": [
+                              80,
+                              30,
+                              20,
+                              0,
+                              0,
+                              0
+                          ]
+                      },
+                      {
+                          "name": "Total Damage",
+                          "hits": {
+                              "Single Hit": 1
+                          }
+                      }
+                    ]
                 ]
             }]
         },
@@ -9570,7 +9584,7 @@ const atrees = {
             },
             "effects": [{
                 "type": "replace_spell",
-                "name": "Totem",
+                "name": "Aura",
                 "cost": 40,
                 "base_spell": 3,
                 "display": "Single Wave",
@@ -9581,6 +9595,565 @@ const atrees = {
                     }
                 ]
             }]
+        },
+        {
+            "display_name": "Earth Mastery",
+            "base_abil": 998,
+            "desc": "Increases your base damage from all Earth attacks.",
+            "archetype": "Summoner",
+            "archetype_req": 0,
+            "parents": [
+                "Uproot"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 10,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "eDamPct",
+                            "value": 20
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eDamAddMin",
+                            "value": 2
+                        },
+                        {
+                            "type": "stat",
+                            "name": "eDamAddMax",
+                            "value": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Air Mastery",
+            "base_abil": 998,
+            "desc": "Increases your base damage from all Air attacks.",
+            "archetype": "Summoner",
+            "archetype_req": 0,
+            "parents": [
+                "Earth Mastery",
+                "Uproot",
+                "Cheaper Haul",
+                "Thunder Mastery"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 10,
+                "col": 2,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "aDamPct",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aDamAddMin",
+                            "value": 3
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aDamAddMax",
+                            "value": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Water Mastery",
+            "base_abil": 998,
+            "desc": "Increases your base damage from all Water attacks.",
+            "archetype": "Ritualist",
+            "archetype_req": 0,
+            "parents": [
+                "Cheaper Haul",
+                "Air Mastery",
+                "Thunder Mastery"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 11,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "wDamPct",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "wDamAddMin",
+                            "value": 2
+                        },
+                        {
+                            "type": "stat",
+                            "name": "wDamAddMax",
+                            "value": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Thunder Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Thunder attacks.",
+            "archetype": "Acolyte",
+            "archetype_req": 0,
+            "parents": [
+                "Air Mastery",
+                "Cheaper Haul",
+                "Aura"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 10,
+                "col": 6,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "tDamPct",
+                            "value": 10
+                        },
+                        {
+                            "type": "stat",
+                            "name": "tDamAddMin",
+                            "value": 1
+                        },
+                        {
+                            "type": "stat",
+                            "name": "tDamAddMax",
+                            "value": 8
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Fire Mastery",
+            "base_abil": 998,
+            "desc": "Increases base damage from all Fire attacks.",
+            "archetype": "Acolyte",
+            "archetype_req": 0,
+            "parents": [
+                "Aura"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 10,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "fDamPct",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "fDamAddMin",
+                            "value": 3
+                        },
+                        {
+                            "type": "stat",
+                            "name": "fDamAddMax",
+                            "value": 5
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Nature's Jolt",
+            "desc": "When hitting the ground after using Haul, deal damage around you.",
+            "base_abil": "Haul",
+            "parents": [
+                "Air Mastery",
+                "Earth Mastery"
+            ],
+            "dependencies": [
+                "Haul"
+            ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 11,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": { "aoe": 3.5 },
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Nature's Jolt",
+                    "base_spell": 2,
+                    "multipliers": [
+                        90,
+                        30,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Total Damage",
+                    "base_spell": 2,
+                    "display": "Total Damage",
+                    "hits": {
+                        "Nature's Jolt": 1
+                    }
+                }
+            ]
+        },
+        {
+            "display_name": "Overseer",
+            "desc": "Increase Uproot's range, and if you hit your Totem with it, reset its duration.",
+            "base_abil": "Uproot",
+            "parents": [
+                "Nature's Jolt"
+            ],
+            "dependencies": [
+                "Uproot"
+            ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 13,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Uproot",
+                            "name": "range",
+                            "value": 6
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+      		"display_name": "Rain Dance",
+        	"desc": "While mid-air, your Totem will leave a streak of rain that damages enemies under it every 0.4s.",
+          	"archetype": "Ritualist",
+          	"base_abil": "Totem"
+          	"parents": [
+          		"Water Mastery"
+          	],
+			"dependencies": [
+              	"Totem"
+            ],
+			"blockers": [],
+			"cost": 2
+			"display": {
+              	"row": 13
+              	"col": 4
+              	"icon": "node_1"
+            }
+			"properties": { 
+              	"aoe": 2,
+              	"duration": 6
+              	"rate": 0.4
+            }
+			"effects": {
+              	"type": "add_spell_prop"
+              	"base_spell": 1
+              	"target_part": "Rain Dance"
+              	"multipliers": [
+              		30,
+              		0,
+              		0,
+              		30,
+              		0,
+              		0
+                ]
+            }
+        },
+      	{
+            "display_name": "Shocking Aura",
+            "desc": "Aura will travel at a much greater speed and deal additional damage.",
+            "base_abil": "Aura",
+            "parents": [
+                "Thunder Mastery",
+              	"Flaming Tongue"
+            ],
+            "dependencies": [
+                "Aura"
+            ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 12,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Single Wave",
+                    "multipliers": [
+                        0,
+                        0,
+                        20,
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            ]
+        },
+		{
+            "display_name": "Flaming Tongue",
+            "desc": "Uproot will not explode or knockback enemies, but will deal damage 3 times. All elemental conversions become Fire.",
+            "base_abil": "Uproot",
+            "parents": [
+                "Fire Mastery",
+              	"Shocking Aura"
+            ],
+            "dependencies": [
+                "Uproot"
+            ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 12,
+                "col": 8,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Hit",
+                    "multipliers": [
+                        -50,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Single Hit": 2
+                    }
+                },
+              	{
+                    "type": "convert_spell_conv",
+                    "target_part": "all",
+                    "base_spell": 4,
+                    "conversion": "Fire"
+                },
+            ]
+        },
+		{
+            "display_name": "Puppet Master",
+            "desc": "Your Totem will summon 1 Puppet every 3s (Max 2). They throw knives at nearby enemies every 0.5s.",
+            "base_abil": "Totem",
+          	"archetype": "Summoner",
+          	"archetype_req": 3,
+            "parents": [
+                "Overseer"
+            ],
+            "dependencies": [
+                "Totem"
+            ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 15
+              	"col": 2
+                "icon": "node_3"
+            },
+            "properties": {
+              "duration": 30,
+              "range": 16
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "base_spell": 5,
+                    "scaling": "spell",
+                  	"display": "Puppet Damage",
+                  	"parts": [
+                      {
+                        "name": "Puppet Hit",
+                  		"multipliers": [
+                  			10,
+                  			10,
+                  			0,
+                  			0,
+                  			0,
+                  			10
+                  		]
+                      },
+                      {
+                        "name": "Puppet DPS"
+                        "hits": { "Puppet Hit": 2}
+                      },
+                      {
+                      	"name": "Max Puppet DPS"
+                      	"hits": { "Puppet DPS": 2}
+                      }
+                  		
+                    ]
+                }
+            ]
+        },
+		{
+            "display_name": "Mask of the Lunatic",
+            "desc": "When casting Uproot, instead wear the Mask of the Lunatic. While wearing this mask, gain damage bonus at the cost of less walk speed, and reduce the mana cost of Aura.",
+            "base_abil": "Uproot",
+          	"archetype": "Ritualist"
+          	"archetype_req": 2
+            "parents": [
+                "Rain Dance",
+            ],
+            "dependencies": [
+                "Uproot"
+            ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 15,
+              	"col": 4,
+                "icon": "node_3"
+            },
+            "properties": {},
+			"effects": [
+              	{
+                    "type": "replace_spell",
+                    "name": "Switch Masks",
+                    "base_spell": 4,
+                    "parts": [],
+                    "display": ""
+                },
+              	{
+                    "type": "raw_stat",
+                    "toggle": "Mask of the Lunatic",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.MaskoftheLunatic",
+                            "value": 50
+                        },
+                      	{
+                            "type": "stat",
+                            "name": "spd",
+                            "value": -35
+                        },
+                      	{
+                            "type": "stat",
+                            "name": "spPct3Final",
+                            "value": -30
+                        },
+                    ]
+                }
+            ]
+		},
+		{
+            "display_name": "Sacrifical Shrine",
+            "desc": "Your Totem will siphon 2% of your health every 0.4s and transfer it into a Blood Pool. Aura will use 15% of your Blood Pool to deal +50% damage and heal all allies.",
+            "base_abil": "Aura",
+          	"archetype": "Acolyte",
+          	"archetype_req": 3,
+            "parents": [
+                "Shocking Aura",
+              	"Flaming Tongue"
+            ],
+            "dependencies": [
+                "Totem"
+            ],
+            "blockers": [
+              	"Regeneration"
+            ],
+            "cost": 2,
+            "display": {
+                "row": 15,
+              	"col": 6,
+                "icon": "node_3"
+            },
+            "properties": {
+    			"blood_pool_size": 30
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                  	"toggle": "Activate Boosted Aura",
+                  	"bonuses": [
+                      	{
+                            "type": "stat"
+                            "name": "damMult.BloodPool:3.Single Wave",
+                            "value": 50
+                    	}
+                    ]
+                },
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Heal Amount"
+                    "power": 0.15
+                }
+            ]
         },
     ]
 }
