@@ -165,7 +165,7 @@ let rolledIDs = [
     "spPct2", "spRaw2",
     "spPct3", "spRaw3",
     "spPct4", "spRaw4",
-    "pDamRaw",
+    "rSdRaw",
     "sprint",
     "sprintReg",
     "jh",
