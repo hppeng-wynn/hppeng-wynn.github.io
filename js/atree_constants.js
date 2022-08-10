@@ -9847,6 +9847,7 @@ const atrees = {
         {
             "display_name": "Overseer",
             "desc": "Increase Uproot's range, and if you hit your Totem with it, reset its duration.",
+            "archetype": "Summoner",
             "base_abil": "Uproot",
             "parents": ["Nature's Jolt"],
             "dependencies": ["Uproot"],
@@ -10963,7 +10964,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Heal Tick",
-                    "power": 1,
+                    "power": 0.01,
                     "display": "Heal Rate"
                 }
             ]
