@@ -5896,7 +5896,7 @@ const atrees = {
             "desc": "After healing 120% of your max health within 10s, apply a damage bonus to each player you've healed. (15s Cooldown)",
             "base_abil": "Heal",
             "archetype": "Light Bender",
-            "archetype_req": 0,
+            "archetype_req": 2,
             "parents": [
                 "Cheaper Ice Snake",
                 "Cheaper Teleport II"
@@ -7398,7 +7398,7 @@ const atrees = {
                             "name": "Per Hit",
                             "type": "damage",
                             "multipliers": [
-                                25,
+                                30,
                                 0,
                                 0,
                                 10,
@@ -7663,7 +7663,7 @@ const atrees = {
                             "name": "Backstab Damage",
                             "type": "damage",
                             "multipliers": [
-                                200, 50, 0, 0, 0, 0
+                                230, 70, 0, 0, 0, 0
                             ]
                         }
                     ]
@@ -8228,7 +8228,7 @@ const atrees = {
         },
         {
             "display_name": "Weightless",
-            "desc": "When you hit an enemy while airborne, gain +0.5 Mana (1.25+ blocks off the ground to be airborne)",
+            "desc": "When you hit an enemy while airborne, gain +0.7 Mana (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
             "archetype_req": 4,
             "parents": [
@@ -8911,7 +8911,7 @@ const atrees = {
         },
         {
             "display_name": "Stronger Vortex",
-            "desc": "If you deal more damage than 3x of your max health in a single hit, deal 60% of the damage to other nearby enemies",
+            "desc": "If you deal more damage than 3.5x of your max health in a single hit, deal 60% of the damage to other nearby enemies",
             "archetype": "Shadestepper",
             "archetype_req": 4,
             "parents": [
@@ -9203,7 +9203,7 @@ const atrees = {
         },
         {
             "display_name": "Jasmine Bloom",
-            "desc": "After spending 40 Mana, bloom an area under you that damages enemies below it every 0.4s After every bloom, reset the duration and increase the radius (Max 10 Blocks)",
+            "desc": "After spending 40 Mana, bloom an area under you that damages enemies below it every 0.3s After every bloom, reset the duration and increase the radius (Max 10 Blocks)",
             "archetype": "Acrobat",
             "archetype_req": 12,
             "parents": [
