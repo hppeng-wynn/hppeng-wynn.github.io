@@ -10080,8 +10080,8 @@ const atrees = {
             "display_name": "Cheaper Uproot I",
             "desc": "Reduce the Mana cost of Uproot.",
             "base_abil": "Uproot",
-            "parents": ["Mask of the Lunatic"],
-            "dependencies": ["Uproot", "Rebound"],
+            "parents": ["Mask of the Lunatic", "Rebound"],
+            "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 1,
             "display": {
