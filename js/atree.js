@@ -194,8 +194,8 @@ const atree_node = new (class extends ComputeNode {
                 atree_topo_sort.push(node);
             }
         }
-        console.log("Approximate topological order ability tree:");
-        console.log(atree_topo_sort);
+        //console.log("Approximate topological order ability tree:");
+        //console.log(atree_topo_sort);
         return atree_topo_sort;
     }
 })();
@@ -575,7 +575,6 @@ const atree_scaling = new (class extends ComputeNode {
             } else if (type === 'prop') {
                 const merge_abil = atree_edit.get(abil);
                 merge_abil.properties[name] += value;
-                console.log(merge_abil);
             }
         }
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -740,7 +739,8 @@ const atree_collect_spells = new (class extends ComputeNode {
             if (typeof v === 'string') {
                 const [id_str, propname] = v.split('.');
                 const id = parseInt(id_str);
-                return atree_merged.get(id).properties[propname];
+                const ret = atree_merged.get(id).properties[propname];
+                return ret;
             }
             return v;
         }
@@ -819,6 +819,11 @@ const atree_collect_spells = new (class extends ComputeNode {
                     if (!found_part && behavior === 'merge') { // add part. if behavior is merge
                         let spell_part = deepcopy(effect);
                         spell_part.name = target_part;  // has some extra fields but whatever
+                        if ('hits' in spell_part) {
+                            for (const idx in spell_part.hits) {
+                                spell_part.hits[idx] = translate(spell_part.hits[idx]);
+                            }
+                        }
                         ret_spell.parts.push(spell_part);
                     }
                     if ('display' in effect) {

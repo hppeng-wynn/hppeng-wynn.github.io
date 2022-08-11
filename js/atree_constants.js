@@ -9271,14 +9271,14 @@ const atrees = {
                 "name": "Totem",
                 "cost": 35,
                 "base_spell": 1,
-                "display": "DPS",
+                "display": "Tick DPS",
                 "parts": [
                     {
                         "name": "Tick Damage",
                         "multipliers": [5, 0, 0, 0, 0, 5]
                     },
                     {
-                        "name": "DPS",
+                        "name": "Tick DPS",
                         "hits": { "Tick Damage": "Totem.totem_mul" }
                     },
                     {
@@ -9407,9 +9407,9 @@ const atrees = {
             "desc": "Your Main Attack will throw +2 beams.",
             "base_abil": 1,
             "archetype": "Acolyte",
-            "parents": ["Distant Grasp"],
+            "parents": ["Haul"],
             "dependencies": [],
-            "blockers": ["Hand of the Shaman"],
+            "blockers": ["Distant Grasp"],
             "cost": 1,
             "display": {
                 "row": 6,
@@ -9532,6 +9532,10 @@ const atrees = {
                     {
                         "name": "First Wave",
                         "hits": { "Single Wave": "Aura.num_totems" }
+                    },
+                    {
+                        "name": "First Wave Heal",
+                        "hits": { "Heal Amount": "Aura.num_totems" }
                     }
                 ]
             }]
@@ -9837,6 +9841,7 @@ const atrees = {
             "display_name": "Shocking Aura",
             "desc": "Aura will travel at a much greater speed and deal additional damage.",
             "base_abil": "Aura",
+            "archetype": "Acolyte",
             "parents": [
                 "Thunder Mastery",
                 "Flaming Tongue"
@@ -9872,6 +9877,7 @@ const atrees = {
             "display_name": "Flaming Tongue",
             "desc": "Uproot will not explode or knockback enemies, but will deal damage 3 times. All elemental conversions become Fire.",
             "base_abil": "Uproot",
+            "archetype": "Acolyte",
             "parents": [
                 "Fire Mastery",
                 "Shocking Aura"
@@ -10016,9 +10022,7 @@ const atrees = {
                 "Flaming Tongue"
             ],
             "dependencies": ["Totem"],
-            "blockers": [
-                "Regeneration"
-            ],
+            "blockers": [ "Regeneration" ],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -10043,12 +10047,6 @@ const atrees = {
                     "base_spell": 3,
                     "target_part": "Heal Amount",
                     "power": 0.15
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "First Wave Heal",
-                    "hits": { "Heal Amount": "Aura.num_totems" }
                 }
             ]
         },
@@ -10083,7 +10081,7 @@ const atrees = {
             "desc": "Reduce the Mana cost of Uproot.",
             "base_abil": "Uproot",
             "parents": ["Mask of the Lunatic"],
-            "dependencies": ["Uproot"],
+            "dependencies": ["Uproot", "Rebound"],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -10102,7 +10100,7 @@ const atrees = {
             "display_name": "Rebound",
             "desc": "Once Aura reaches its maximum range, it will bounce back and deal its effects a second time.",
             "base_abil": "Aura",
-            "parents": ["Sacrificial Shrine"],
+            "parents": ["Sacrificial Shrine", "Cheaper Uproot I"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
@@ -10792,7 +10790,7 @@ const atrees = {
         {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
-            "parents": ["Twisted Tether", "Mask of the Coward", "More Blood Pool I"],
+            "parents": ["Twisted Tether", "Mask of the Coward", "More Blood Pool II"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,

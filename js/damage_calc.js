@@ -2,8 +2,6 @@
  * File implementing core damage calculation logic.
  */
 
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["warscream", 0.00], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
-
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
     //SUPER JANK @HPP PLS FIX

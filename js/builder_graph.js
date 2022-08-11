@@ -17,6 +17,8 @@ let armor_powder_node = new (class extends ComputeNode {
     }
 })();
 
+const damageMultipliers = new Map([ ["totem", .2], ["warscream", 0.0], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
+
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
 
