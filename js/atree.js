@@ -383,11 +383,11 @@ const atree_validate = new (class extends ComputeNode {
             const abil = node.ability;
             if (atree_state.get(abil.id).active) {
                 atree_to_add.push([node, 'not reachable', false]);
-                drawAtlasImage(atree_state.get(abil.id).img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[abil.display.icon], 2], atreeNodeTileSize);
+                draw_atlas_image(atree_state.get(abil.id).img, atree_node_atlas_img, [atree_node_atlas_positions[abil.display.icon], 2], atree_node_tile_size);
             }
             else {
                 atree_not_present.push(abil.id);
-                drawAtlasImage(atree_state.get(abil.id).img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[abil.display.icon], 0], atreeNodeTileSize);
+                draw_atlas_image(atree_state.get(abil.id).img, atree_node_atlas_img, [atree_node_atlas_positions[abil.display.icon], 0], atree_node_tile_size);
             }
         }
 
@@ -436,7 +436,7 @@ const atree_validate = new (class extends ComputeNode {
             const node = atree_state.get(node_id);
             const [success, hard_error, reason] = abil_can_activate(node, atree_state, reachable, archetype_count, ap_left);
             if (success) {
-                drawAtlasImage(node.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[node.ability.display.icon], 1], atreeNodeTileSize);
+                draw_atlas_image(node.img, atree_node_atlas_img, [atree_node_atlas_positions[node.ability.display.icon], 1], atree_node_tile_size);
             }
         }
 
@@ -1338,11 +1338,11 @@ function atree_set_state(node_wrapper, new_state) {
     }
     if (new_state) {
         node_wrapper.active = true;
-        drawAtlasImage(node_wrapper.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[icon], 2], atreeNodeTileSize);
+        draw_atlas_image(node_wrapper.img, atree_node_atlas_img, [atree_node_atlas_positions[icon], 2], atree_node_tile_size);
     } 
     else {
         node_wrapper.active = false;
-        drawAtlasImage(node_wrapper.img, atreeNodeAtlasImg, [atreeNodeAtlasPositions[icon], 1], atreeNodeTileSize);
+        draw_atlas_image(node_wrapper.img, atree_node_atlas_img, [atree_node_atlas_positions[icon], 1], atree_node_tile_size);
     }
     let atree_connectors_map = node_wrapper.all_connectors_ref;
     for (const parent of node_wrapper.parents) {
@@ -1360,7 +1360,7 @@ function atree_set_state(node_wrapper, new_state) {
 // atlas vars
 
 // first key is connector type, second key is highlight, then [x, y] pair of 0-index positions in the tile atlas
-const atreeConnectorAtlasPositions = {
+const atree_connector_atlas_positions = {
     "1100": {"0000": [0, 0], "1100": [1, 0]},
     "1010": {"0000": [2, 0], "1010": [3, 0]},
     "0110": {"0000": [4, 0], "0110": [5, 0]},
@@ -1373,19 +1373,18 @@ const atreeConnectorAtlasPositions = {
     "1011": {"0000": [5, 2], "1011": [6, 2], "1010": [7, 2], "1001": [8, 2], "0011": [9, 2]},
     "1111": {"0000": [0, 3], "1111": [1, 3], "1110": [2, 3], "1101": [3, 3], "1100": [4, 3], "1011": [5, 3], "1010": [6, 3], "1001": [7, 3], "0111": [8, 3], "0110": [9, 3], "0101": [10, 3], "0011": [11, 3]}
 }
-const atreeConnectorTileSize = 18;
-const atreeConnectorAtlasImg = make_elem("img", [], {src: "../media/atree/connectors.png", loaded: false});
-atreeConnectorAtlasImg.addEventListener("load", () => {
-    atreeConnectorAtlasImg.loaded = true;
-    let drawList = atlasToDraw;
-    atlasToDraw = [];
-    for (const toDraw in drawList) {
-        drawAtlasImage(toDraw[0], toDraw[1], toDraw[2], toDraw[3]);
+const atree_connector_tile_size = 18;
+const atree_connector_atlas_img = make_elem("img", [], {src: "../media/atree/connectors.png", loaded: false});
+atree_connector_atlas_img.addEventListener("load", () => {
+    atree_connector_atlas_img.loaded = true;
+    for (const to_draw of atlas_to_draw.get(atree_connector_atlas_img)) {
+        draw_atlas_image(to_draw[0], atree_connector_atlas_img, to_draw[1], to_draw[2]);
     }
+    atlas_to_draw.set(atree_connector_atlas_img, []);
 });
 
 // just has the x position, y is based on state
-const atreeNodeAtlasPositions = {
+const atree_node_atlas_positions = {
     "node_0": 0,
     "node_1": 1,
     "node_2": 2,
@@ -1396,26 +1395,27 @@ const atreeNodeAtlasPositions = {
     "node_assassin": 7,
     "node_shaman": 8
 }
-const atreeNodeTileSize = 32;
-const atreeNodeAtlasImg = make_elem("img", [], {src: "../media/atree/icons.png", loaded: false});
-atreeNodeAtlasImg.addEventListener("load", () => {
-    atreeNodeAtlasImg.loaded = true;
-    let drawList = atlasToDraw;
-    atlasToDraw = [];
-    for (const toDraw in drawList) {
-        drawAtlasImage(toDraw[0], toDraw[1], toDraw[2], toDraw[3]);
+const atree_node_tile_size = 32;
+const atree_node_atlas_img = make_elem("img", [], {src: "../media/atree/icons.png", loaded: false});
+atree_node_atlas_img.addEventListener("load", () => {
+    atree_node_atlas_img.loaded = true;
+    for (const to_draw of atlas_to_draw.get(atree_node_atlas_img)) {
+        draw_atlas_image(to_draw[0], atree_node_atlas_img, to_draw[1], to_draw[2]);
     }
+    atlas_to_draw.set(atree_node_atlas_img, []);
 });
 
-var atlasToDraw = [];
-function drawAtlasImage(canvas, img, pos, tileSize) {
+const atlas_to_draw = new Map();
+atlas_to_draw.set(atree_connector_atlas_img, []);
+atlas_to_draw.set(atree_node_atlas_img, []);
+function draw_atlas_image(canvas, img, pos, tile_size) {
     if (!img.loaded) {
-        atlasToDraw.push([canvas, img, pos, tileSize]);
+        atlas_to_draw.get(img).push([canvas, pos, tile_size]);
         return;
     }
     let ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, tileSize, tileSize);
-    ctx.drawImage(img, tileSize * pos[0], tileSize * pos[1], tileSize, tileSize, 0, 0, tileSize, tileSize);
+    ctx.clearRect(0, 0, tile_size, tile_size);
+    ctx.drawImage(img, tile_size * pos[0], tile_size * pos[1], tile_size, tile_size, 0, 0, tile_size, tile_size);
 }
 
 // draw the connector onto the screen
@@ -1425,7 +1425,7 @@ function atree_render_connection(atree_connectors_map) {
         let connector_elem = connector_info.connector;
         set_connector_type(connector_info);
         connector_info.highlight = [0, 0, 0, 0];
-        drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[connector_info.type]["0000"], atreeConnectorTileSize);
+        draw_atlas_image(connector_elem, atree_connector_atlas_img, atree_connector_atlas_positions[connector_info.type]["0000"], atree_connector_tile_size);
         let target_elem = document.getElementById("atree-row-" + i.split(",")[0]).children[i.split(",")[1]];
         if (target_elem.children.length != 0) {
             // janky special case... sometimes the ability tree tries to draw a link on top of a node...
@@ -1477,16 +1477,15 @@ function atree_set_edge(atree_connectors_map, parent, child, state) {
             for (let i = 0; i < 4; i++) {
                 render += highlight_state[i] === 0 ? "0" : "1";
             }
-            drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype][render], atreeConnectorTileSize);
-            // connector_elem.style.backgroundPosition = atlasBGPositionCalc(atreeConnectorAtlasPositions[ctype][render], atreeConnectorAtlasSize);
+            draw_atlas_image(connector_elem, atree_connector_atlas_img, atree_connector_atlas_positions[ctype][render], atree_connector_tile_size);
             continue;
         } else {
             // lol bad overloading, [0] is just the whole state
             highlight_state[0] += state_delta;
             if (highlight_state[0] > 0) {
-                drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype][ctype], atreeConnectorTileSize);
+                draw_atlas_image(connector_elem, atree_connector_atlas_img, atree_connector_atlas_positions[ctype][ctype], atree_connector_tile_size);
             } else {
-                drawAtlasImage(connector_elem, atreeConnectorAtlasImg, atreeConnectorAtlasPositions[ctype]["0000"], atreeConnectorTileSize);
+                draw_atlas_image(connector_elem, atree_connector_atlas_img, atree_connector_atlas_positions[ctype]["0000"], atree_connector_tile_size);
             }
         }
     }
