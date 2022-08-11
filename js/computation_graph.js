@@ -15,7 +15,7 @@ class ComputeNode {
         this.value = null;
         this.name = name;
         this.update_task = null;
-        this.fail_cb = false;   // Set to true to force updates even if parent failed.inputs_dirty);
+        this.fail_cb = false;   // Set to true to force updates even if parent failed
         this.dirty = 2;         // 3 states:
                                 // 2: dirty
                                 // 1: possibly dirty

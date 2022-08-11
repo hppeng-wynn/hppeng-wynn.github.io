@@ -50,7 +50,10 @@ add_spell_prop: {
     cost:           Optional[int]   // change to spellcost. If the spell is not spell 1-4, this must be left empty.
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
-    hits:           Optional[Map[str, float]]   // Additive changes to hits (for total entry)
+
+    hits:           Optional[Map[str, Union[str, float]]]   // Additive changes to hits (for total entry)
+                                                            // Can either be a raw value number, or a reference
+                                                            //   of the format <ability_id>.propname
     display:        Optional[str]   // Optional change to the displayed entry. Replaces old
 }
 
@@ -467,8 +470,10 @@ const atree_make_interactives = new (class extends ComputeNode {
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
 
-        document.getElementById("boost-sliders").innerHTML = "";
-        document.getElementById("boost-toggles").innerHTML = "";
+        const boost_slider_parent = document.getElementById("boost-sliders");
+        const boost_toggle_parent = document.getElementById("boost-toggles");
+        boost_slider_parent.innerHTML = "";
+        boost_toggle_parent.innerHTML = "";
 
         /**
          * slider_info 
@@ -517,7 +522,7 @@ const atree_make_interactives = new (class extends ComputeNode {
         // next, render the sliders and toggles onto the abilities.
         for (const [slider_name, slider_info] of slider_map.entries()) {
             let slider_container = gen_slider_labeled(slider_info);
-            document.getElementById("boost-sliders").appendChild(slider_container);
+            boost_slider_parent.appendChild(slider_container);
             slider_info.slider = document.getElementById(slider_info.id);
             slider_info.slider.addEventListener("change", (e) => atree_scaling.mark_dirty().update());
         }
@@ -535,7 +540,7 @@ const atree_make_interactives = new (class extends ComputeNode {
                 atree_scaling.mark_dirty().update()
             });
             button_info.button = button;
-            document.getElementById("boost-toggles").appendChild(button);
+            boost_toggle_parent.appendChild(button);
         }
         return [slider_map, button_map];
     }
@@ -579,7 +584,6 @@ const atree_scaling = new (class extends ComputeNode {
             for (const effect of abil.effects) {
                 switch (effect.type) {
                 case 'raw_stat':
-                    // TODO: toggles...
                     if (effect.toggle) {
                         const button = button_map.get(effect.toggle).button;
                         if (!button.classList.contains("toggleOn")) { continue; }
@@ -726,6 +730,12 @@ const atree_collect_spells = new (class extends ComputeNode {
         const [hard_error, errors] = input_map.get('atree-errors');
         if (hard_error) { return []; }
         
+        /**
+         * Parse out "parametrized entries".
+         * Straight replace.
+         *
+         * Format: ability_id.propname
+         */
         function translate(v) {
             if (typeof v === 'string') {
                 const [id_str, propname] = v.split('.');
@@ -794,10 +804,10 @@ const atree_collect_spells = new (class extends ComputeNode {
                             part.power += effect.power;
                         }
                         else if ('hits' in effect) {
-                            for (const [idx, v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
-                                let _v = translate(v);
-                                if (idx in part.hits) { part.hits[idx] += _v; }
-                                else { part.hits[idx] = _v; }
+                            for (const [idx, _v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
+                                let v = translate(_v);
+                                if (idx in part.hits) { part.hits[idx] += v; }
+                                else { part.hits[idx] = v; }
                             }
                         }
                         else {
