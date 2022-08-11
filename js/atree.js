@@ -1374,7 +1374,16 @@ const atreeConnectorAtlasPositions = {
     "1111": {"0000": [0, 3], "1111": [1, 3], "1110": [2, 3], "1101": [3, 3], "1100": [4, 3], "1011": [5, 3], "1010": [6, 3], "1001": [7, 3], "0111": [8, 3], "0110": [9, 3], "0101": [10, 3], "0011": [11, 3]}
 }
 const atreeConnectorTileSize = 18;
-const atreeConnectorAtlasImg = make_elem("img", [], {src: "../media/atree/connectors.png"});
+const atreeConnectorAtlasImg = make_elem("img", [], {src: "../media/atree/connectors.png", loaded: false});
+atreeConnectorAtlasImg.addEventListener("load", () => {
+    alert("connector load")
+    atreeConnectorAtlasImg.loaded = true;
+    let drawList = atlasToDraw;
+    atlasToDraw = [];
+    for (const toDraw in drawList) {
+        drawAtlasImage(toDraw[0], toDraw[1], toDraw[2], toDraw[3]);
+    }
+});
 
 // just has the x position, y is based on state
 const atreeNodeAtlasPositions = {
@@ -1389,9 +1398,23 @@ const atreeNodeAtlasPositions = {
     "node_shaman": 8
 }
 const atreeNodeTileSize = 32;
-const atreeNodeAtlasImg = make_elem("img", [], {src: "../media/atree/icons.png"});
+const atreeNodeAtlasImg = make_elem("img", [], {src: "../media/atree/icons.png", loaded: false});
+atreeNodeAtlasImg.addEventListener("load", () => {
+    alert("node load")
+    atreeNodeAtlasImg.loaded = true;
+    let drawList = atlasToDraw;
+    atlasToDraw = [];
+    for (const toDraw in drawList) {
+        drawAtlasImage(toDraw[0], toDraw[1], toDraw[2], toDraw[3]);
+    }
+});
 
+var atlasToDraw = [];
 function drawAtlasImage(canvas, img, pos, tileSize) {
+    if (!img.loaded) {
+        atlasToDraw.push([canvas, img, pos, tileSize]);
+        return;
+    }
     let ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, tileSize, tileSize);
     ctx.drawImage(img, tileSize * pos[0], tileSize * pos[1], tileSize, tileSize, 0, 0, tileSize, tileSize);
