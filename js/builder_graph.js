@@ -887,6 +887,17 @@ class EditableIDSetterNode extends ComputeNode {
         }
     }
 
+    /**
+     * Overriding this to bridge the transparent gap.
+     */
+    mark_dirty(dirty_state=2) {
+        super.mark_dirty(dirty_state);
+        for (const node of this.notify_nodes) {
+            node.mark_dirty(dirty_state);
+        }
+        return this;
+    }
+
     notify() {
         this.mark_dirty();
         this.update();
@@ -1068,10 +1079,10 @@ function builder_graph_init() {
     // These two are defined in `atree.js`
     atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(class_node, 'player-class');
-    pre_scale_agg_node.link_to(atree_stats, 'atree-raw-stats');
+    pre_scale_agg_node.link_to(atree_raw_stats, 'atree-raw-stats');
     atree_scaling.link_to(pre_scale_agg_node, 'scale-stats');
     stat_agg_node.link_to(pre_scale_agg_node, 'pre-scaling');
-    stat_agg_node.link_to(atree_scaling, 'atree-scaling');
+    stat_agg_node.link_to(atree_scaling_stats, 'atree-scaling');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 

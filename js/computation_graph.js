@@ -1,6 +1,6 @@
 let all_nodes = new Set();
 let node_debug_stack = [];
-let COMPUTE_GRAPH_DEBUG = false;
+let COMPUTE_GRAPH_DEBUG = true;
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -15,7 +15,7 @@ class ComputeNode {
         this.value = null;
         this.name = name;
         this.update_task = null;
-        this.fail_cb = false;   // Set to true to force updates even if parent failed.
+        this.fail_cb = false;   // Set to true to force updates even if parent failed.inputs_dirty);
         this.dirty = 2;         // 3 states:
                                 // 2: dirty
                                 // 1: possibly dirty
@@ -39,6 +39,13 @@ class ComputeNode {
         if (this.dirty == 2) {
             let calc_inputs = new Map();
             for (const input of this.inputs) {
+                if (input.dirty) {
+                    if (COMPUTE_GRAPH_DEBUG) {
+                        console.log(node_debug_stack);
+                        console.log(this);
+                    }
+                    throw "Invalid compute graph state!";
+                }
                 calc_inputs.set(this.input_translation.get(input.name), input.value);
             }
             this.value = this.compute_func(calc_inputs);
@@ -213,7 +220,7 @@ class PrintNode extends ComputeNode {
  *
  * Signature: InputNode() => str
  */
-class InputNode extends ComputeNode {
+class InputNode extends ValueCheckComputeNode {
     constructor(name, input_field) {
         super(name);
         this.input_field = input_field;

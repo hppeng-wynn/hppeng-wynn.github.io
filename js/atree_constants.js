@@ -44,7 +44,7 @@ const atrees = {
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "Shield Damage": 2
+                                "Shield Damage": "Arrow Shield.charges"
                             }
                         }
                     ]
@@ -384,8 +384,7 @@ const atrees = {
             "properties": {
                 "range": 4,
                 "duration": 60,
-                "shots": 8,
-                "charges": 2
+                "shots": 8
             },
             "effects": [
                 {
@@ -409,22 +408,18 @@ const atrees = {
                         {
                             "name": "Single Bow",
                             "type": "total",
-                            "hits": {
-                                "Single Shot": 8
-                            }
+                            "hits": { "Single Shot": "Arrow Shield.shots" }
                         },
                         {
                             "name": "DPS",
                             "type": "total",
-                            "hits": {
-                                "Single Shot": 2
-                            }
+                            "hits": { "Single Shot": "Arrow Shield.charges" }
                         },
                         {
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "Single Bow": 2
+                                "Single Bow": "Arrow Shield.charges"
                             }
                         }
                     ]
@@ -1226,14 +1221,6 @@ const atrees = {
                         10,
                         0
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "target_part": "Single Bow",
-                    "hits": {
-                        "Single Shot": 5
-                    }
                 }
             ]
         },
@@ -1628,38 +1615,10 @@ const atrees = {
                 "col": 7,
                 "icon": "node_0"
             },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Shield Damage": 2,
-                        "Single Bow": 2
-                    }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "target_part": "DPS",
-                    "behavior": "modify",
-                    "hits": {
-                        "Single Shot": 2
-                    }
-                },
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "prop",
-                            "abil": "Arrow Shield",
-                            "name": "charges",
-                            "value": 2
-                        }
-                    ]
-                }
-            ]
+            "properties": {
+                "charges": 2
+            },
+            "effects": []
         },
         {
             "display_name": "Stormy Feet",
@@ -2673,7 +2632,8 @@ const atrees = {
             },
             "properties": {
                 "aoe": 4,
-                "range": 3
+                "range": 3,
+                "hits": 1
             },
             "effects": [
                 {
@@ -2701,7 +2661,7 @@ const atrees = {
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "Single Hit": 1
+                                "Single Hit": "Bash.hits"
                             }
                         }
                     ]
@@ -2731,14 +2691,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 0,
                     "target_part": "Melee",
-                    "multipliers": [
-                        5,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -2782,31 +2735,16 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 3
+                "range": 3,
+                "hits": 1
             },
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
-                    "target_part": "Total Damage",
-                    "cost": 0,
-                    "hits": {
-                        "Single Hit": 1
-                    }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
                     "target_part": "Single Hit",
                     "cost": 0,
-                    "multipliers": [
-                        -50,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
+                    "multipliers": [ -50, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -3269,17 +3207,10 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 6
+                "range": 6,
+                "hits": 2
             },
             "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Single Hit": 2
-                    }         
-                },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
@@ -9336,7 +9267,8 @@ const atrees = {
             "properties": {
                 "duration": 20,
                 "rate": 0.4,
-                "aoe": 8
+                "aoe": 8,
+                "totem_mul": 2.5
             },
             "effects": [{
                 "type": "replace_spell",
@@ -9351,11 +9283,11 @@ const atrees = {
                     },
                     {
                         "name": "DPS",
-                        "hits": { "Tick Damage": 2.5 }
+                        "hits": { "Tick Damage": "Totem.totem_mul" }
                     },
                     {
                         "name": "Heal Rate",
-                        "hits": { "Heal Tick": 2.5 }
+                        "hits": { "Heal Tick": "Totem.totem_mul" }
                     }
                 ]
             }]
@@ -9588,18 +9520,22 @@ const atrees = {
             },
             "properties": {
                 "range": 16,
-                "aoe": 5
+                "num_totems": 1
             },
             "effects": [{
                 "type": "replace_spell",
                 "name": "Aura",
                 "cost": 40,
                 "base_spell": 3,
-                "display": "Single Wave",
+                "display": "First Wave",
                 "parts": [
                     {
                         "name": "Single Wave",
                         "multipliers": [150, 0, 0, 30, 0, 0]
+                    },
+                    {
+                        "name": "First Wave",
+                        "hits": { "Single Wave": "Aura.num_totems" }
                     }
                 ]
             }]
@@ -9999,7 +9935,9 @@ const atrees = {
             },
             "properties": {
                 "duration": 30,
-                "range": 16
+                "range": 16,
+                "max_puppets": 2,
+                "attack_frequency": 2
             },
             "effects": [
                 {
@@ -10015,11 +9953,11 @@ const atrees = {
                         },
                         {
                             "name": "Puppet DPS",
-                            "hits": { "Puppet Hit": 2 }
+                            "hits": { "Puppet Hit": "Puppet Master.attack_frequency" }
                         },
                         {
                             "name": "Max Puppet DPS",
-                            "hits": { "Puppet DPS": 2 }
+                            "hits": { "Puppet DPS": "Puppet Master.max_puppets" }
                         }
                     ]
                 }
@@ -10091,9 +10029,7 @@ const atrees = {
                 "col": 7,
                 "icon": "node_3"
             },
-            "properties": {
-                "blood_pool": 30
-            },
+            "properties": { "blood_pool": 30 },
             "effects": [
                 {
                     "type": "raw_stat",
@@ -10111,6 +10047,12 @@ const atrees = {
                     "base_spell": 3,
                     "target_part": "Heal Amount",
                     "power": 0.15
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "First Wave Heal",
+                    "hits": { "Heal Amount": "Aura.num_totems" }
                 }
             ]
         },
@@ -10128,19 +10070,15 @@ const atrees = {
                 "col": 0,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+                "max_puppets": 1
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 5,
                     "target_part": "Puppet Hit",
                     "multipliers": [0, 0, 0, 0, 0, -5]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Max Puppet DPS",
-                    "hits": {"Puppet DPS": 1}
                 }
             ]
         },
@@ -10178,7 +10116,20 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Rebound Total Damage",
+                    "hits": { "First Wave": 2 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Rebound Total Heal",
+                    "hits": { "First Wave Heal": 2 }
+                }
+            ]
         },
         {
             "display_name": "Stagnation",
@@ -10322,18 +10273,8 @@ const atrees = {
                 "col": 7,
                 "icon": "node_0"
             },
-            "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [
-                    {
-                        "type": "prop",
-                        "abil": "Sacrificial Shrine",
-                        "name": "blood_pool",
-                        "value": 30
-                    }
-                ]
-            }]
+            "properties": {"blood_pool": 30},
+            "effects": []
         },
         {
             "display_name": "Bullwhip",
@@ -10377,19 +10318,15 @@ const atrees = {
                 "col": 2,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+                "max_puppets": 2
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 5,
                     "target_part": "Puppet Hit",
                     "multipliers": [0, -5, 0, 0, 0, 0]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Max Puppet DPS",
-                    "hits": {"Puppet DPS": 2}
                 }
             ]
         },
@@ -10495,7 +10432,7 @@ const atrees = {
                 "col": 0,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": { "totem_mul": 2.5 },
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -10505,34 +10442,18 @@ const atrees = {
                 },
                 {
                     "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "DPS",
-                    "hits": { "Tick Damage": 2.5 }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Heal Rate",
-                    "hits": { "Heal Tick": 2.5 }
-                },
-                {
-                    "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Single Wave",
                     "multipliers": [-60, 0, 0, 0, 0, 0]
                 },
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "First Wave",
-                    "hits": { "Single Wave": 2 },
-                    "display": "First Wave"
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Heal",
-                    "hits": { "Heal Amount": 2 }
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil": "Aura",
+                        "name": "num_totems",
+                        "value": 1
+                    }]
                 }
             ]
         },
@@ -10794,7 +10715,9 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "duration": 60
+                "duration": 60,
+                "max_effigy": 1,
+                "attack_frequency": 4
             },
             "effects": [
                 {
@@ -10809,11 +10732,11 @@ const atrees = {
                         },
                         {
                             "name": "Single Effigy DPS",
-                            "hits": { "Effigy Hit": 4 }
+                            "hits": { "Effigy Hit": "Crimson Effigy.attack_frequency" }
                         },
                         {
                             "name": "Total Effigy DPS",
-                            "hits": { "Single Effigy DPS": 1 }
+                            "hits": { "Single Effigy DPS": "Crimson Effigy.max_effigy" }
                         }
                     ]
                 }
@@ -10915,18 +10838,8 @@ const atrees = {
                 "col": 8,
                 "icon": "node_0"
             },
-            "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [
-                    {
-                        "type": "prop",
-                        "abil": "Sacrificial Shrine",
-                        "name": "blood_pool",
-                        "value": 30
-                    }
-                ]
-            }]
+            "properties": {"blood_pool": 30},
+            "effects": []
         },
         {
             "display_name": "Maddening Roots",
@@ -11022,6 +10935,7 @@ const atrees = {
             "desc": "Increase your Max Effigies by +1.",
             "archetype": "Summoner",
           	"archetype_req": 8,
+            "base_abil": "Crimson Effigy",
             "parents": ["Maddening Roots"],
             "dependencies": ["Crimson Effigy"],
             "blockers": [],
@@ -11031,15 +10945,10 @@ const atrees = {
                 "col": 1,
                 "icon": "node_1"
             },
-            "properties": {},
-            "effects": [
-              	{
-                    "type": "add_spell_prop",
-                    "base_spell": 7,
-                    "target_part": "Total Effigy DPS",
-                    "hits": {"Single Effigy DPS": 1}
-                }
-            ]
+            "properties": {
+                "max_effigy": 1
+            },
+            "effects": []
         },
         {
             "display_name": "Chant of the Fanatic",
@@ -11097,7 +11006,7 @@ const atrees = {
                 "col": 0,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": { "totem_mul": 2.5 },
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -11107,33 +11016,18 @@ const atrees = {
                 },
                 {
                     "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "DPS",
-                    "hits": { "Tick Damage": 2.5 }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Heal Rate",
-                    "hits": { "Heal Tick": 2.5 }
-                },
-                {
-                    "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Single Wave",
                     "multipliers": [-40, 0, 0, 0, 0, 0]
                 },
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "First Wave",
-                    "hits": { "Single Wave": 1 }
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Heal",
-                    "hits": { "Heal Amount": 1 }
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil": "Aura",
+                        "name": "num_totems",
+                        "value": 1
+                    }]
                 }
             ]
         },
@@ -11160,8 +11054,8 @@ const atrees = {
                     "type": "raw_stat",
                     "toggle": "Invigorate Puppets",
                     "bonuses": [
-                        { "type": "stat", "name": "damMult.SummonSpeed:5.Puppet Hit", "value": 100 },
-                        { "type": "stat", "name": "damMult.SummonSpeed:5.Effigy Hit", "value": 100 }
+                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 2 },
+                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 4 }
                     ]
                 }
             ]
@@ -11260,20 +11154,170 @@ const atrees = {
                 "col": 8,
                 "icon": "node_0"
             },
+            "properties": {"blood_pool": 30},
+            "effects": []
+        },
+		{
+            "display_name": "Shepherd",
+            "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 20s. (Max +10)",
+            "archetype": "Summoner",
+            "archetype_req": 12,
+            "base_abil": "Puppet Master",
+            "parents": ["Triple Totem", "Invigorating Wave"],
+            "dependencies": ["Puppet Master"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 5,
+                    "target_part": "Puppet Hit",
+                    "multipliers": [-5, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Shepherd Kills",
+                    "output": {
+                        "type": "prop",
+                        "abil": "Puppet Master",
+                        "name": "max_puppets"
+                    },
+                    "scaling": [1],
+                    "slider_max": 10
+                }
+            ]
+        },
+      	{
+            "display_name": "Mask of the Awakened",
+            "desc": "After saving 200 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 20s, giving the power of all Masks at once.",
+            "base_abil": "Uproot",
+            "archetype": "Ritualist",
+            "archetype_req": 12,
+            "parents": ["Frog Dance", "Cheaper Uproot II"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 35,
+                "col": 5,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Switch Masks",
+                    "base_spell": 4,
+                    "parts": [],
+                    "display": ""
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Mask of the Awakened",
+                    "bonuses": [
+                      	{
+                            "type": "stat",
+                            "name": "damMult.Mask",
+                            "value": 30
+                        },
+                      	{
+                            "type": "stat",
+                            "name": "defMult.Mask",
+                            "value": 30
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 25
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spPct1Final",
+                            "value": -70
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spPct2Final",
+                            "value": -50
+                        },
+                      	{
+                            "type": "stat",
+                            "name": "spPct3Final",
+                            "value": -30
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Blood Sorrow",
+            "desc": "Uproot will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +3% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
+            "base_abil": "Uproot",
+            "archetype": "Acolyte",
+            "archetype_req": 13,
+            "parents": ["More Blood Pool III"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 7,
+                "icon": "node_3"
+            },
             "properties": {},
             "effects": [
               	{
-                    "type": "raw_stat",
-                    "bonuses": [
+                    "type": "replace_spell",
+                    "name": "Blood Sorrow",
+                    "base_spell": 8,
+                    "display": "Beam DPS",
+                    "parts": [
                         {
-                            "type": "prop",
-                            "abil": "Sacrificial Shrine",
-                            "name": "blood_pool",
-                            "value": 30
+                            "name": "Beam Tick Damage",
+                            "multipliers": [70, 0, 0, 20, 0, 0]
+                        },
+                      	{
+                            "name": "Beam DPS",
+                            "hits": {
+                                "Beam Tick Damage": 5
+                            }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "hits": {
+                                "Beam DPS": 4
+                            }
                         }
                     ]
-           		}
+                }
             ]
+        },
+      	{
+            "display_name": "Cheaper Uproot II",
+            "desc": "Reduce the Mana cost of Uproot.",
+            "base_abil": "Uproot",
+            "parents": ["Shepherd", "Mask of the Awakened"],
+            "dependencies": ["Uproot"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 35,
+                "col": 3,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 4,
+                "cost": -5
+            }]
         }
     ]
 }
