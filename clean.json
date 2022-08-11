@@ -973,7 +973,6 @@
       "ms": 30,
       "xpb": 30,
       "ref": 20,
-      "spRaw3": 6,
       "id": 1711
     },
     {
@@ -2334,7 +2333,7 @@
       "aDamPct": 30,
       "aDefPct": 20,
       "fixID": true,
-      "spRaw1": -5,
+      "spRaw1": -3,
       "id": 2510
     },
     {
@@ -3187,10 +3186,10 @@
       "intReq": 23,
       "agiReq": 23,
       "defReq": 23,
-      "mr": 5,
+      "mr": 9,
       "sdPct": 15,
       "mdPct": 15,
-      "ms": 5,
+      "ms": 9,
       "str": 17,
       "dex": 17,
       "int": 17,
