@@ -39,7 +39,25 @@ def translate_id(id_data, atree_data):
                     for bonus in effect["bonuses"]:
                         if "abil" in bonus and bonus["abil"] in id_data[_class]:
                             bonus["abil"] = id_data[_class][bonus["abil"]]
-
+                elif effect["type"] == "replace_spell":
+                    for part in effect['parts']:
+                        if 'hits' in part:    # Translate parametrized hits...
+                            hits_mapping = part['hits']
+                            keys = list(hits_mapping.keys())
+                            for k in keys:
+                                v = hits_mapping[k]
+                                if isinstance(v, str):
+                                    abil_id, propname = v.split('.')
+                                    hits_mapping[k] = str(id_data[_class][abil_id])+'.'+propname
+                elif effect["type"] == "add_spell_prop":
+                    if 'hits' in effect:    # Translate parametrized hits...
+                        hits_mapping = effect['hits']
+                        keys = list(hits_mapping.keys())
+                        for k in keys:
+                            v = hits_mapping[k]
+                            if isinstance(v, str):
+                                abil_id, propname = v.split('.')
+                                hits_mapping[k] = str(id_data[_class][abil_id])+'.'+propname
                 elif effect["type"] == "stat_scaling":
                     if "inputs" in effect:  # Might not exist for sliders
                         for _input in effect["inputs"]:

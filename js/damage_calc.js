@@ -2,8 +2,6 @@
  * File implementing core damage calculation logic.
  */
 
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["warscream", 0.00], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
-
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
     //SUPER JANK @HPP PLS FIX
@@ -260,8 +258,9 @@ spell_heal: {
 spell_total: {
     name:           str != "total"  Name of the part.
     type:           "total"         [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
-    hits:           Map[str, num]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
-                                        are not the same type of spell. Can only pull from spells defined before it.
+    hits:           Map[str, Union[str, num]]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
+                                                are not the same type of spell. Can only pull from spells defined before it.
+                                                Alternatively, a property reference of the format <ability_id>.propname
 }
 
 
