@@ -11146,8 +11146,8 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 15,
-                "col": 7,
+                "row": 32,
+                "col": 2,
                 "icon": "node_2"
             },
             "properties": {
@@ -11209,7 +11209,7 @@ const atrees = {
             "display": {
                 "row": 33,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
