@@ -1376,7 +1376,6 @@ const atreeConnectorAtlasPositions = {
 const atreeConnectorTileSize = 18;
 const atreeConnectorAtlasImg = make_elem("img", [], {src: "../media/atree/connectors.png", loaded: false});
 atreeConnectorAtlasImg.addEventListener("load", () => {
-    alert("connector load")
     atreeConnectorAtlasImg.loaded = true;
     let drawList = atlasToDraw;
     atlasToDraw = [];
@@ -1400,7 +1399,6 @@ const atreeNodeAtlasPositions = {
 const atreeNodeTileSize = 32;
 const atreeNodeAtlasImg = make_elem("img", [], {src: "../media/atree/icons.png", loaded: false});
 atreeNodeAtlasImg.addEventListener("load", () => {
-    alert("node load")
     atreeNodeAtlasImg.loaded = true;
     let drawList = atlasToDraw;
     atlasToDraw = [];
