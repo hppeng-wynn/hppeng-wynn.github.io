@@ -5670,7 +5670,7 @@ const atrees = {
                             },
                             {
                                 "type": "stat",
-                                "name": "nConvBase:3.Meteor Damage"
+                                "name": "nConvBase:3.Per Orb"
                             },
                             {
                                 "type": "stat",
