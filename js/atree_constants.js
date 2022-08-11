@@ -7065,7 +7065,7 @@ const atrees = {
         },
         {
             "display_name": "Dagger Proficiency I",
-            "desc": "Increase your speed by +5% and improve your Main Attack’s damage when using a dagger.",
+            "desc": "Increase your speed by +5% and improve your Main Attack's damage when using a dagger.",
             "archetype": "",
             "archetype_req": 0,
             "parents": [
@@ -9847,8 +9847,8 @@ const atrees = {
         {
             "display_name": "Overseer",
             "desc": "Increase Uproot's range, and if you hit your Totem with it, reset its duration.",
-            "archetype": "Summoner",
             "base_abil": "Uproot",
+            "archetype": "Summoner",
             "parents": ["Nature's Jolt"],
             "dependencies": ["Uproot"],
             "blockers": [],
@@ -10422,7 +10422,7 @@ const atrees = {
                 },
                 {
                     "type": "raw_stat",
-                    "toggle": "Mask of the Lunatic",
+                    "toggle": "Mask of the Fanatic",
                     "bonuses": [
                         {
                             "type": "stat",
@@ -10527,6 +10527,12 @@ const atrees = {
                     "target_part": "First Wave",
                     "hits": { "Single Wave": 2 },
                     "display": "First Wave"
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Total Heal",
+                    "hits": { "Heal Amount": 2 }
                 }
             ]
         },
@@ -10843,7 +10849,7 @@ const atrees = {
                 },
                 {
                     "type": "raw_stat",
-                    "toggle": "Mask of the Lunatic",
+                    "toggle": "Mask of the Coward",
                     "bonuses": [
                         {
                             "type": "stat",
@@ -11010,6 +11016,263 @@ const atrees = {
             },
             "properties": {},
             "effects": []
+        },
+		{
+            "display_name": "More Effigies",
+            "desc": "Increase your Max Effigies by +1.",
+            "archetype": "Summoner",
+          	"archetype_req": 8,
+            "parents": ["Maddening Roots"],
+            "dependencies": ["Crimson Effigy"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 31,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 7,
+                    "target_part": "Total Effigy DPS",
+                    "hits": {"Single Effigy DPS": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Chant of the Fanatic",
+            "desc": "When switching to Mask of the Fanatic, temporarily give massive resistance to yourself and allies (8s cooldown).",
+            "base_abil": "Uproot",
+            "archetype": "Ritualist",
+            "parents": ["Chant of the Coward", "Stronger Tether"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 31,
+                "col": 5,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
+        },
+		{
+            "display_name": "Stronger Tether",
+            "desc": "Increase Twisted Tether's damage.",
+            "archetype": "Acolyte",
+            "parents": ["Blood Rite"],
+            "dependencies": ["Twisted Tether"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 31,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 6,
+                    "target_part": "Tether Tick",
+                    "multipliers": [10, 0, 0, 0, 0, 0]
+            	}
+            ]
+        },
+        {
+            "display_name": "Triple Totem",
+            "desc": "Increase your maximum Totem by +1 and reduce Totem and Aura's damage.",
+            "base_abil": "Totem",
+            "archetype": "Summoner",
+            "archetype_req": 2,
+            "parents": ["More Effigies", "Invigorating Wave"],
+            "dependencies": ["Double Totem"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 32,
+                "col": 0,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Tick Damage",
+                    "multipliers": [-2, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "DPS",
+                    "hits": { "Tick Damage": 2.5 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Heal Rate",
+                    "hits": { "Heal Tick": 2.5 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Single Wave",
+                    "multipliers": [-40, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "First Wave",
+                    "hits": { "Single Wave": 1 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Total Heal",
+                    "hits": { "Heal Amount": 1 }
+                }
+            ]
+        },
+        {
+            "display_name": "Invigorating Wave",
+            "desc": "Aura will temporarily double your Summon's attack speed. Players hit will gain +3 mana.",
+            "archetype": "Summoner", 
+            "archetype_req": 3, 
+            "parents": ["More Effigies", "Triple Totem", "Mengdu"], 
+            "dependencies": ["Aura"], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 15,
+                "col": 7,
+                "icon": "node_2"
+            },
+            "properties": {
+                "TODO": "Make this not multiply base damage...",
+                "duration": 3
+            },
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Invigorate Puppets",
+                    "bonuses": [
+                        { "type": "stat", "name": "damMult.SummonSpeed:5.Puppet Hit", "value": 100 },
+                        { "type": "stat", "name": "damMult.SummonSpeed:5.Effigy Hit", "value": 100 }
+                    ]
+                }
+            ]
+        },
+		{
+            "display_name": "Mengdu",
+            "desc": "For every 1% Thorns you have from item IDs, gain +1% Water Damage. (Max 100%)",
+            "parents": ["Chant of the Fanatic", "Invigorating Wave"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 32,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": false,
+                    "inputs": [
+                        {
+                            "type": "stat",
+                            "name": "thorns"
+                        }
+                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "wDamPct"
+                    },
+                    "scaling": [ 1 ],
+                    "max": 100
+                }
+            ]
+        },
+		{
+            "display_name": "Frog Dance",
+            "desc": "When wearing the Mask of the Coward, Haul will make you bounce off the ground 3 times at increasing speed and deal damage to nearby enemies.",
+            "archetype": "Ritualist",
+            "base_abil": "Haul",
+            "parents": ["Chant of the Fanatic"],
+            "dependencies": ["Mask of the Coward"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 33,
+                "col": 5,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Hop Damage",
+                    "multipliers": [90, 0, 0, 30, 0, 0]
+            	},
+              	{
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Total Damage",
+                    "hits": { "Hop Damage": 3 },
+                    "display": "Total Damage"
+            	},
+                {
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "stat",
+                        "name": "damMult.Frog:2.Hop Damage",
+                        "value": -100
+                    }]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Mask of the Coward",
+                    "bonuses": [{
+                        "type": "stat",
+                        "name": "damMult.Frog:2.Hop Damage",
+                        "value": 100
+                    }]
+                }
+            ]
+        },
+		{
+            "display_name": "More Blood Pool III",
+            "desc": "Increase your maximum Blood pool by +30%.",
+            "archetype": "Acolyte",
+            "base_abil": "Sacrificial Shrine",
+            "parents": ["Stronger Tether"],
+            "dependencies": ["Sacrificial Shrine"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 33,
+                "col": 8,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+              	{
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Sacrificial Shrine",
+                            "name": "blood_pool",
+                            "value": 30
+                        }
+                    ]
+           		}
+            ]
         }
     ]
 }
