@@ -9366,7 +9366,7 @@ const atrees = {
         {
             "display_name": "Distant Grasp",
             "desc": "Reduce your Main Attack's spread, and increase its beam speed by +33%.",
-            "base_abil": 1,
+            "base_abil": 999,
             "archetype": "Summoner",
             "parents": ["Haul"],
             "dependencies": [],
@@ -9405,7 +9405,7 @@ const atrees = {
         {
             "display_name": "Hand of the Shaman",
             "desc": "Your Main Attack will throw +2 beams.",
-            "base_abil": 1,
+            "base_abil": 999,
             "archetype": "Acolyte",
             "parents": ["Haul"],
             "dependencies": [],
