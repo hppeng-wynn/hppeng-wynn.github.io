@@ -1261,7 +1261,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     } else {
         cost.innerHTML = reqYes;
     }
-    cost.innerHTML += "<span class = 'mc-gray'>Ability Points:</span>" + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
+    cost.innerHTML += "<span class = 'mc-gray'>Ability Points:</span> " + (maxAP - apUsed) + "<span class = 'mc-gray'>/" + ability.cost;
     container.appendChild(cost);
 
     // archetype req
@@ -1272,7 +1272,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
         } else {
             archReq.innerHTML = reqNo;
         }
-        archReq.innerHTML += "<span class = 'mc-gray'>Min" + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        archReq.innerHTML += "<span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
         container.appendChild(archReq);
     }
 
@@ -1284,14 +1284,14 @@ function generateTooltip(container, node_elem, ability, atree_map) {
         } else {
             dependency.innerHTML = reqNo;
         }
-        dependency.innerHTML += "<span class = 'mc-gray'>Required Ability:</span>" + atree_map.get(ability.dependencies[i]).ability.display_name;
+        dependency.innerHTML += "<span class = 'mc-gray'>Required Ability:</span> " + atree_map.get(ability.dependencies[i]).ability.display_name;
         container.appendChild(dependency);
     }
 
     // blockers
     for (let i = 0; i < blockedBy.length; i++) {
         let blocker = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
-        blocker.innerHTML = reqNo + "<span class = 'mc-gray'>Blocked By:</span>" + blockedBy[i];
+        blocker.innerHTML = reqNo + "<span class = 'mc-gray'>Blocked By:</span> " + blockedBy[i];
         container.appendChild(blocker);
     }
 }

@@ -9134,7 +9134,7 @@ const atrees = {
         },
         {
             "display_name": "Jasmine Bloom",
-            "desc": "After spending 40 Mana, bloom an area under you that damages enemies below it every 0.3s After every bloom, reset the duration and increase the radius (Max 10 Blocks)",
+            "desc": "After spending 40 Mana, bloom an area under you that damages enemies below it every 0.3s. After every bloom, reset the duration and increase the radius (Max 10 Blocks)",
             "archetype": "Acrobat",
             "archetype_req": 12,
             "parents": [
@@ -9154,19 +9154,15 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Jasmine Bloom",
                     "base_spell": 7,
-                    "display": "Per Hit",
+                    "display": "DPS",
                     "parts": [
                         {
                             "name": "Per Hit",
-                            "type": "damage",
-                            "multipliers": [
-                                60,
-                                5,
-                                0,
-                                15,
-                                0,
-                                0
-                            ]
+                            "multipliers": [ 60, 5, 0, 15, 0, 0 ]
+                        },
+                        {
+                            "name": "DPS",
+                            "hits": { "Per Hit": 3.333333333 }
                         }
                     ]
                 }
