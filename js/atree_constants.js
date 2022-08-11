@@ -11046,6 +11046,7 @@ const atrees = {
             "desc": "When switching to Mask of the Fanatic, temporarily give massive resistance to yourself and allies (8s cooldown).",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
+            "archetype_req": 10,
             "parents": ["Chant of the Coward", "Stronger Tether"],
             "dependencies": [],
             "blockers": [],
