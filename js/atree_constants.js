@@ -10680,13 +10680,13 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "prop",
-                            "abil": "Masquerade",
+                            "abil": "Uproot",
                             "name": "switch_count",
                             "value": -1
                         },
                         {
                             "type": "prop",
-                            "abil": "Masquerade",
+                            "abil": "Uproot",
                             "name": "mana_gain",
                             "value": -10
                         }
