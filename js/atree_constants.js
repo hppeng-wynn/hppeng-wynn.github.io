@@ -2862,6 +2862,16 @@ const atrees = {
                         2
                     ],
                     "max": 20
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damRaw",
+                            "value": 5
+                        }
+                    ]
                 }
             ]
         },
@@ -7019,13 +7029,14 @@ const atrees = {
                             "type": "stat",
                             "name": "spd",
                             "value": 5
-                        },
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
                         }
                     ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Melee",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -7609,6 +7620,11 @@ const atrees = {
                             "value": 100
                         }
                     ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": -5
                 }
             ]
         },
@@ -10938,11 +10954,11 @@ const atrees = {
             "parents": ["Maddening Roots"],
             "dependencies": ["Crimson Effigy"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 31,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {
                 "max_effigy": 1
