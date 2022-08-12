@@ -10294,6 +10294,11 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Bullwhip:5.Puppet Hit",
                         "value": 20
+                    },
+                    {
+                        "type": "stat",
+                        "name": "damMult.Bullwhip:7.Effigy Hit",
+                        "value": 20
                     }
                 ]
             }]
