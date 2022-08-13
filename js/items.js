@@ -110,11 +110,11 @@ for (let x in special_mappings) {
     item_filters.push(x);
 }
 
-let item_categories = [ "armor", "accessory", "weapon" ];
+let item_categories = ["armor", "accessory", "weapon"];
 
-function applyQuery(items, query) {
-    return items.filter(query.filter, query).sort(query.compare);
-}
+const types = {bow: true, spear: true, wand: true, dagger: true, relik: true, helmet: true, chestplate: true, leggings: true, boots: true, ring: true, bracelet: true, necklace: true};
+const rarities = {normal: true, unique: true, set: true, rare: true, legendary: true, fabled: true, mythic: true};
+const filters = [];
 
 function displayItems(items_copy) {
     let items_parent = document.getElementById("search-results");
@@ -141,48 +141,55 @@ let expr_parser;
 function do_item_search() {
     window.scrollTo(0, 0);
     let queries = [];
-    queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
 
-    const cat_or_type = document.getElementById("item-category-choice").value;
-    if (item_types.includes(cat_or_type)) {
-        queries.push('f:type="'+cat_or_type+'"');
-    }
-    else if (item_categories.includes(cat_or_type)) {
-        queries.push('f:cat="'+cat_or_type+'"');
+    // name
+    if (document.getElementById("item-name-choice").value != "") {
+        queries.push("f:name?=\"" + document.getElementById("item-name-choice").value.trim() + "\"");
     }
 
-    let rarity = document.getElementById("item-rarity-choice").value;
-    if (rarity) {
-        if (rarity === "ANY") {
-
-        }
-        else if (rarity === "Sane") {
-            queries.push('f:tiername!="mythic"');
-        }
-        else {
-            queries.push('f:tiername="'+rarity+'"');
+    // types
+    let allTypes = true;
+    let typeQuery = "f:("
+    for (const type of Object.keys(types)) {
+        if (types[type]) {
+            typeQuery += "type=\"" + type + "\"|";
+        } else {
+            allTypes = false;
         }
     }
+    if (!allTypes) {
+        queries.push(typeQuery.substring(0, typeQuery.length - 1) + ")");
+    }
 
-    let level_raw = document.getElementById("item-level-choice").value;
-    if (!level_raw) { level_raw = '1-106'; };
-    const level_dat = level_raw.split("-");
-    queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
+    // rarities
+    let allRarities = true;
+    let rarityQuery = "f:("
+    for (const rarity of Object.keys(rarities)) {
+        if (rarities[rarity]) {
+            rarityQuery += "tiername=\"" + rarity + "\"|";
+        } else {
+            allRarities = false;
+        }
+    }
+    if (!allRarities) {
+        queries.push(rarityQuery.substring(0, rarityQuery.length - 1) + ")");
+    }
     
-    for (let i = 1; i <= 4; ++i) {
-        let raw_dat = document.getElementById("filter"+i+"-choice").value;
-        let filter_dat = translate_mappings[raw_dat];
-        if (filter_dat !== undefined) {
-            queries.push("s:"+filter_dat);
-            queries.push("f:"+filter_dat+"!=0");
-            continue;
-        }
-        filter_dat = special_mappings[raw_dat];
-        if (filter_dat !== undefined) {
-            queries.push(filter_dat);
-            continue;
-        }
-    }
+    // filters
+    // for (let i = 1; i <= 4; ++i) {
+    //     let raw_dat = document.getElementById("filter"+i+"-choice").value;
+    //     let filter_dat = translate_mappings[raw_dat];
+    //     if (filter_dat !== undefined) {
+    //         queries.push("s:"+filter_dat);
+    //         queries.push("f:"+filter_dat+"!=0");
+    //         continue;
+    //     }
+    //     filter_dat = special_mappings[raw_dat];
+    //     if (filter_dat !== undefined) {
+    //         queries.push(filter_dat);
+    //         continue;
+    //     }
+    // }
 
     let filter_query = "true";
     let sort_queries = [];
@@ -218,67 +225,99 @@ function do_item_search() {
     displayItems(results);
 }
 
-function reset_item_search() {
-    const reset_fields = ["item-name-choice", "item-category-choice", "item-rarity-choice", "item-level-choice", "filter1-choice", "filter2-choice", "filter3-choice", "filter4-choice"]
-    for (const field of reset_fields) {
-        document.getElementById(field).value = "";
-    }
-}
-
 function init_items() {
     search_db = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
     expr_parser = new ExprParser(itemQueryProps, itemQueryFuncs);
-    //init dropdowns
-    let filter_inputs = new Map([["item-category", ["ALL", "armor", "helmet", "chestplate", "leggings", "boots", "accessory", "ring", "bracelet", "necklace", "weapon", "wand", "spear", "bow", "dagger", "relik"]],
-                                ["item-rarity", ["ANY", "Normal", "Unique", "Set", "Rare", "Legendary", "Fabled", "Mythic", "Sane"]],
-                                ["filter1", item_filters],
-                                ["filter2", item_filters],
-                                ["filter3", item_filters],
-                                ["filter4", item_filters]]);
-    for (const [field, data] of filter_inputs) {
-        let field_choice = document.getElementById(field+"-choice");
-        // show dropdown on click
-        field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
-        filter_inputs.set(field, new autoComplete({
-            data: {
-                src: data,
-            },  
-            threshold: 0,
-            selector: "#"+ field +"-choice",
-            wrapper: false,
-            resultsList: {
-                maxResults: 100,
-                tabSelect: true,
-                noResults: true,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    let position = document.getElementById(field+'-choice').getBoundingClientRect();
-                    list.style.top = position.bottom + window.scrollY +"px";
-                    list.style.left = position.x+"px";
-                    list.style.width = position.width+"px";
-                    list.style.maxHeight = position.height * 4 +"px";
 
-                    if (!data.results.length) {
-                        const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
-                        list.prepend(message);
+    // init type buttons
+    for (const type of Object.keys(types)) {
+        document.getElementById("type-" + type).addEventListener("click", function() {
+            types[type] = !types[type];
+            this.classList.toggle("type-selected");
+        });
+    }
+    document.getElementById("all-types").addEventListener("click", function() {
+        for (const type of Object.keys(types)) {
+            types[type] = true;
+            document.getElementById("type-" + type).classList.add("type-selected");
+        }
+    });
+    document.getElementById("none-types").addEventListener("click", function() {
+        for (const type of Object.keys(types)) {
+            types[type] = false;
+            document.getElementById("type-" + type).classList.remove("type-selected");
+        }
+    });
+    
+    // init rarity buttons
+    for (const rarity of Object.keys(rarities)) {
+        document.getElementById("rarity-" + rarity).addEventListener("click", function() {
+            rarities[rarity] = !rarities[rarity];
+            this.classList.toggle("rarity-selected");
+        });
+    }
+    document.getElementById("all-rarities").addEventListener("click", function() {
+        for (const rarity of Object.keys(rarities)) {
+            rarities[rarity] = true;
+            document.getElementById("rarity-" + rarity).classList.add("rarity-selected");
+        }
+    });
+    document.getElementById("none-rarities").addEventListener("click", function() {
+        for (const rarity of Object.keys(rarities)) {
+            rarities[rarity] = false;
+            document.getElementById("rarity-" + rarity).classList.remove("rarity-selected");
+        }
+    });
+}
+
+function reset_item_search() {
+    document.getElementById("item-name-choice").value = "";
+    document.getElementById("all-types").click();
+    document.getElementById("all-rarities").click();
+}
+
+function initFilterDropdown(filter) {
+    let field_choice = filter.input_elem;
+    field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
+    filter.autoComplete = new autoComplete({
+        data: {
+            src: item_filters,
+        },  
+        threshold: 0,
+        selector: "#"+ field +"-choice",
+        wrapper: false,
+        resultsList: {
+            maxResults: 100,
+            tabSelect: true,
+            noResults: true,
+            class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+            element: (list, data) => {
+                let position = document.getElementById(field+'-choice').getBoundingClientRect();
+                list.style.top = position.bottom + window.scrollY +"px";
+                list.style.left = position.x+"px";
+                list.style.width = position.width+"px";
+                list.style.maxHeight = position.height * 4 +"px";
+
+                if (!item_filters.results.length) {
+                    const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
+                    list.prepend(message);
+                };
+            },
+        },
+        resultItem: {
+            class: "scaled-font search-item",
+            selected: "dark-5",
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    if (event.detail.selection.value) {
+                        event.target.value = event.detail.selection.value;
                     };
                 },
             },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
-                        };
-                    },
-                },
-            }
-        }));
-    }
+        }
+    });
 }
 
 (async function() {

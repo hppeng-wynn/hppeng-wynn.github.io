@@ -50,30 +50,30 @@
                     </div>
                     <div class = "row">
                         <div class = "col-lg col-sm-12">
-                            <div class = "col"><span class = "fw-bold">Type:</span> <span style = "cursor: pointer; float: right;"><span>All</span> &nbsp; <span>None</span></span></div>
+                            <div class = "col"><span class = "fw-bold">Type:</span> <span style = "cursor: pointer; float: right;"><span id = "all-types">All</span> &nbsp; <span id = "none-types">None</span></span></div>
                             <div id = "type-box">
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 0 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 9.09091% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 18.1818% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 27.2727% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 36.3636% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 45.4545% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 54.5455% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 63.6364% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 72.7273% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 81.8182% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 90.9091% 0;"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/old.png'); background-position: 100% 0;"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 0 0;" id = "type-bow"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 9.09091% 0;" id = "type-spear"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 18.1818% 0;" id = "type-wand"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 27.2727% 0;" id = "type-dagger"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 36.3636% 0;" id = "type-relik"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 45.4545% 0;" id = "type-helmet"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 54.5455% 0;" id = "type-chestplate"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 63.6364% 0;" id = "type-leggings"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 72.7273% 0;" id = "type-boots"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 81.8182% 0;" id = "type-ring"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 90.9091% 0;" id = "type-bracelet"></div>
+                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/old.png'); background-position: 100% 0;" id = "type-necklace"></div>
                             </div>
                             <p class="error col-auto"></p>
                         </div>
                     </div>
                     <div class = "row">
                         <div class = "col-lg col-sm-12">
-                            <div class = "col"><span class = "fw-bold">Rarity:</span> <span style = "cursor: pointer; float: right;"><span>All</span> &nbsp; <span>None</span></span></div>
+                            <div class = "col"><span class = "fw-bold">Rarity:</span> <span style = "cursor: pointer; float: right;"><span id = "all-rarities">All</span> &nbsp; <span id = "none-rarities">None</span></span></div>
                             <div id = "rarity-box">
                                 <!-- unfortunately they must be stacked up like this because newlines are considered spaces and muck up the organization -->
-                                <div id = "rarity-normal"><b>N</b></div><div id = "rarity-unique"><b>U</b></div><div id = "rarity-set"><b>S</b></div><div id = "rarity-rare"><b>R</b></div><div id = "rarity-legendary"><b>L</b></div><div id = "rarity-fabled"><b>F</b></div><div id = "rarity-mythic"><b>M</b></div>
+                                <div id = "rarity-normal" class = "rarity-selected"><b>N</b></div><div id = "rarity-unique" class = "rarity-selected"><b>U</b></div><div id = "rarity-set" class = "rarity-selected"><b>S</b></div><div id = "rarity-rare" class = "rarity-selected"><b>R</b></div><div id = "rarity-legendary" class = "rarity-selected"><b>L</b></div><div id = "rarity-fabled" class = "rarity-selected"><b>F</b></div><div id = "rarity-mythic" class = "rarity-selected"><b>M</b></div>
                             </div>
                             <p class="error col-auto"></p>
                         </div>
@@ -101,12 +101,12 @@
                 <div class = "row">
                     <div class = "col-auto" style = "width: 12.5%;"></div>
                     <div class = "col-auto">
-                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "search-button" onclick = "doItemSearch()">
+                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "search-button" onclick = "do_item_search()">
                             Search!
                         </button>
                     </div>
                     <div class = "col-auto">
-                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-button" onclick = "resetItemSearch()">
+                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-button" onclick = "reset_item_search()">
                             Reset
                         </button>
                     </div>
