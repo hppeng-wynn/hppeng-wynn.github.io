@@ -1015,7 +1015,7 @@ const atrees = {
                     "bonuses": [
                         {
                             "type": "prop",
-                            "abil": "Fierce Stomp",
+                            "abil": "Escape",
                             "name": "aoe",
                             "value": 1
                         }
