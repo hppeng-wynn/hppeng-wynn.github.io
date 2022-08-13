@@ -1392,11 +1392,12 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
 }
 
 function getSpellCost(stats, spell) {
-    return Math.max(1, getBaseSpellCost(stats, spell));
+    return Math.max(1, getBaseSpellCost(stats, spell) * (1 + stats.get('spPct'+spell.base_spell+'Final')/100));
 }
 
 function getBaseSpellCost(stats, spell) {
     let cost = spell.cost * (1 - skillPointsToPercentage(stats.get('int')) * skillpoint_final_mult[2]);
+    console.log(stats);
     cost += stats.get("spRaw"+spell.base_spell);
     return cost * (1 + stats.get("spPct"+spell.base_spell) / 100);
 }
