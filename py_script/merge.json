@@ -18,7 +18,7 @@
       "category": "armor",
       "displayName": "Keratoconus",
       "bonusThunderDamage": -40,
-      "bonusWaterDamage": 30,
+      "bonusWaterDefense": 30,
       "bonusAirDamage": 35,
       "healthRegen": -50,
       "manaRegen": 10,
