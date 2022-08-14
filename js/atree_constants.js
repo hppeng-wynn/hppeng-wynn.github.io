@@ -11204,7 +11204,7 @@ const atrees = {
                     },
                     "scaling": [1],
                     "slider_max": 10
-                },
+                }
             ]
         },
       	{
