@@ -2947,7 +2947,7 @@ const atrees = {
             },
             "properties": {
                 "aoe": 3,
-                "range": 5
+                "range": 5.5
             },
             "effects": [
                 {
@@ -3281,7 +3281,7 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 4
+                "range": 3
             },
             "effects": [
                 {
@@ -3454,7 +3454,7 @@ const atrees = {
 
         {
             "display_name": "Mantle of the Bovemists",
-            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits (20s cooldown)",
+            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 0.5 seconds. (20s cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 3, 
             "parents": ["Iron Lungs"], 
@@ -3467,7 +3467,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "mantle_charge": 3
+                "duration": 0.5
             },
             "effects": [
                 {
@@ -4324,7 +4324,7 @@ const atrees = {
             ]  
         },{
             "display_name": "Massacre",
-            "desc": "While Corrupted, if your effective attack speed is Slow or lower, hitting an enemy with your Main Attack will add +1% to your Corrupted bar",
+            "desc": "While Corrupted, if your effective attack speed is Slow or lower, hitting an enemy with your Main Attack will add +4% to your Corrupted bar",
             "archetype": "Fallen", 
             "archetype_req": 5, 
             "base_abil": 999,
@@ -4337,7 +4337,9 @@ const atrees = {
                 "col": 1,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "cooldown": 2
+            },
             "effects": []  
         },
         {
@@ -6240,7 +6242,7 @@ const atrees = {
                             "name": "Single Orb",
                             "type": "damage",
                             "multipliers": [
-                                30,
+                                40,
                                 0,
                                 0,
                                 0,
@@ -7605,7 +7607,7 @@ const atrees = {
                             "name": "Backstab Damage",
                             "type": "damage",
                             "multipliers": [
-                                230, 70, 0, 0, 0, 0
+                                200, 50, 0, 0, 0, 0
                             ]
                         }
                     ]
@@ -7853,7 +7855,7 @@ const atrees = {
                             "name": "Per Hit",
                             "type": "damage",
                             "multipliers": [
-                                50,
+                                60,
                                 0,
                                 0,
                                 10,
@@ -8309,7 +8311,9 @@ const atrees = {
                 "col": 0,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "range": 8
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -8369,7 +8373,7 @@ const atrees = {
         },
         {
             "display_name": "Marked",
-            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 5, 0.5s Cooldown) Marked enemies will take +10% damage for each mark they have.",
+            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 5, 0.4s Cooldown) Marked enemies will take +8% damage for each mark they have.",
             "archetype": "Shadestepper",
             "archetype_req": 5,
             "parents": [
@@ -8398,7 +8402,7 @@ const atrees = {
                         }
                     ],
                     "scaling": [
-                        10
+                        8
                     ]
                 }
             ]
@@ -9083,22 +9087,22 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Backstab Damage",
-                            "value": 200
+                            "value": 150
                         },
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Per Hit",
-                            "value": 200
+                            "value": 150
                         },
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Fatality",
-                            "value": 200
+                            "value": 150
                         },
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:0.Melee",
-                            "value": 200
+                            "value": 150
                         }
                     ]
                 }
@@ -9229,7 +9233,7 @@ const atrees = {
         },
         {
             "display_name": "Better Marked",
-            "desc": "Increase Marked's damage bonus by +5%",
+            "desc": "Increase Marked's damage bonus by +4%",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Marked",
@@ -9257,7 +9261,7 @@ const atrees = {
                         }
                     ],
                     "scaling": [
-                        5
+                        4
                     ]
                 }
             ]
@@ -9967,7 +9971,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Puppet Hit",
-                            "multipliers": [ 10, 10, 0, 0, 0, 10 ]
+                            "multipliers": [ 5, 10, 0, 0, 0, 10 ]
                         },
                         {
                             "name": "Puppet DPS",
@@ -10266,7 +10270,7 @@ const atrees = {
                 "type": "add_spell_prop",
                 "base_spell": 3,
                 "target_part": "Hymn of Hate",
-                "hits": { "Single Wave": 0.3 }
+                "hits": { "Single Wave": 0.5 }
             }]
         },
         {
@@ -10389,7 +10393,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "spPct1Final",
-                            "value": -70
+                            "value": -65
                         }
                     ]
                 }
@@ -10792,7 +10796,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "spd",
-                            "value": 60
+                            "value": 80
                         },
                         {
                             "type": "stat",
@@ -10898,7 +10902,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Heal Tick",
-                    "power": 0.01,
+                    "power": 0.005,
                     "display": "Heal Rate"
                 }
             ]
@@ -11048,7 +11052,7 @@ const atrees = {
         },
         {
             "display_name": "Invigorating Wave",
-            "desc": "Aura will temporarily double your Summon's attack speed. Players hit will gain +3 mana.",
+            "desc": "Aura will temporarily +50% your Summon's attack speed. Players hit will gain +3 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
             "parents": ["More Effigies", "Triple Totem", "Mengdu"], 
@@ -11069,8 +11073,8 @@ const atrees = {
                     "type": "raw_stat",
                     "toggle": "Invigorate Puppets",
                     "bonuses": [
-                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 2 },
-                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 4 }
+                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 1.5 },
+                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 3 }
                     ]
                 }
             ]
@@ -11174,7 +11178,7 @@ const atrees = {
         },
 		{
             "display_name": "Shepherd",
-            "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 20s. (Max +10)",
+            "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 15s. (Max +10)",
             "archetype": "Summoner",
             "archetype_req": 12,
             "base_abil": "Puppet Master",
@@ -11190,12 +11194,6 @@ const atrees = {
             "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Puppet Hit",
-                    "multipliers": [-5, 0, 0, 0, 0, 0]
-                },
-                {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Shepherd Kills",
@@ -11206,7 +11204,7 @@ const atrees = {
                     },
                     "scaling": [1],
                     "slider_max": 10
-                }
+                },
             ]
         },
       	{
