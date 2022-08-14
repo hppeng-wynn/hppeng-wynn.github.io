@@ -3454,7 +3454,7 @@ const atrees = {
 
         {
             "display_name": "Mantle of the Bovemists",
-            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 0.5 seconds. (20s cooldown)",
+            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits. (20s cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 3, 
             "parents": ["Iron Lungs"], 
@@ -3467,7 +3467,8 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "duration": 0.5
+                "duration": 0.5,
+                "charges": 3
             },
             "effects": [
                 {
@@ -8373,7 +8374,7 @@ const atrees = {
         },
         {
             "display_name": "Marked",
-            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 5, 0.4s Cooldown) Marked enemies will take +8% damage for each mark they have.",
+            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.4s Cooldown) Marked enemies will take +8% damage for each mark they have.",
             "archetype": "Shadestepper",
             "archetype_req": 5,
             "parents": [
@@ -8394,7 +8395,7 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Marked",
                     "slider_step": 1,
-                    "slider_max": 5,
+                    "slider_max": 4,
                     "output": [
                         {
                             "type": "stat",
@@ -11073,8 +11074,8 @@ const atrees = {
                     "type": "raw_stat",
                     "toggle": "Invigorate Puppets",
                     "bonuses": [
-                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 1.5 },
-                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 3 }
+                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 1 },
+                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 2 }
                     ]
                 }
             ]
@@ -11178,7 +11179,7 @@ const atrees = {
         },
 		{
             "display_name": "Shepherd",
-            "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 15s. (Max +10)",
+            "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 15s. (Max +8)",
             "archetype": "Summoner",
             "archetype_req": 12,
             "base_abil": "Puppet Master",
@@ -11203,7 +11204,7 @@ const atrees = {
                         "name": "max_puppets"
                     },
                     "scaling": [1],
-                    "slider_max": 10
+                    "slider_max": 8
                 }
             ]
         },
