@@ -19,9 +19,9 @@
       "mr": 10,
       "int": 15,
       "def": -10,
-      "wDamPct": 30,
       "aDamPct": 35,
       "tDamPct": -40,
+      "wDefPct": 30,
       "spRaw4": -4,
       "id": 3579
     },
