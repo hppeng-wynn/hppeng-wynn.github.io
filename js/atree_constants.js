@@ -7074,6 +7074,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Spin Attack",
+                    "behavior": "modify",
                     "multipliers": [-40, 0, 0, 0, 0, 0]
                 }
             ]
