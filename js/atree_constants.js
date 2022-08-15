@@ -8941,7 +8941,7 @@ const atrees = {
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
-                "base_spel": 4,
+                "base_spell": 3,
                 "target_part": "Per Hit",
                 "multipliers": [ 0, 0, 10, 0, 0, 0 ]
             }]
