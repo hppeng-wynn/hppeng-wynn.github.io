@@ -234,7 +234,7 @@ function stringify(v) {
     return typeof v === 'number' ? (Math.round(v * 100) / 100).toString() : v;
 }
 
-function init_items2() {
+function init_items_adv() {
     const itemList = document.getElementById('item-list');
     const itemListFooter = document.getElementById('item-list-footer');
 
@@ -397,5 +397,5 @@ function init_items2() {
 
 (async function() {
     await Promise.resolve(load_init());
-    init_items2();
+    init_items_adv();
 })();
