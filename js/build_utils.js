@@ -12,7 +12,7 @@ function skillPointsToPercentage(skp){
         skp = 150;
     }
     const r = 0.9908;
-    return ((1 - Math.pow(r, skp + 1)) / (1 - r) - 1) / 100.0;
+    return (r/(1-r)*(1 - Math.pow(r, skp))) / 100.0;
         //return (-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
         //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
     //return Math.min(Math.max(0.00,(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771)),.808); 
