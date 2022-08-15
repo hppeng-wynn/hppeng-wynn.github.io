@@ -997,9 +997,9 @@ function displayFixedID(active, id, value, elemental_format, style) {
     }
 }
 
-function displayPoisonDamage(overallparent_elem, build) {
+function displayPoisonDamage(overallparent_elem, statMap) {
     overallparent_elem.textContent = "";
-    if (build.statMap.get('poison') <= 0) {
+    if (statMap.get('poison') <= 0) {
         overallparent_elem.style = "display: none";
         return;
     }
@@ -1013,7 +1013,7 @@ function displayPoisonDamage(overallparent_elem, build) {
     title_elemavg.append(make_elem('span', [], { textContent: "Poison Stats" }));
     spell_summary.append(title_elemavg);
 
-    let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct"))/100 /3);
+    let poison_tick = Math.ceil(statMap.get("poison") * (1+skillPointsToPercentage(statMap.get('str'))) * (statMap.get("poisonPct"))/100 /3);
 
     let overallpoisonDamage = make_elem("p");
     overallpoisonDamage.append(
