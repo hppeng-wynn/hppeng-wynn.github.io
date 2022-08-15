@@ -328,7 +328,11 @@ function init_items2() {
         for (let i = 0; i < searchMax; i++) {
             const result = searchResults[i];
             itemEntries[i].classList.add('visible');
-            displaysq2ExpandedItem(result.itemExp, `item-entry-${i}`);
+            result.itemExp.set("powders", []);
+            if (result.itemExp.get("category") == "weapon") {
+                apply_weapon_powders(result.itemExp);
+            }
+            displayExpandedItem(result.itemExp, `item-entry-${i}`);
             if (result.sortKeys.length > 0) {
                 const sortKeyListContainer = document.createElement('div');
                 sortKeyListContainer.classList.add('row');
@@ -391,4 +395,7 @@ function init_items2() {
         .addEventListener('mousedown', e => scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-load_init(init_items2);
+(async function() {
+    await Promise.resolve(load_init());
+    init_items2();
+})();
