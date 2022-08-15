@@ -242,74 +242,6 @@ const atree_state_node = new (class extends ComputeNode {
 })().link_to(atree_render, 'atree-render');
 
 /**
- * Collect abilities and condense them into a list of "final abils".
- * This is just for rendering purposes, and for collecting things that modify spells into one chunk.
- * I stg if wynn makes abils that modify multiple spells
- * ... well we can extend this by making `base_abil` a list instead but annoy
- *
- * Signature: AbilityTreeMergeNode(player-class: WeaponType, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
- */
-const atree_merge = new (class extends ComputeNode {
-    constructor() { super('builder-atree-merge'); }
-
-    compute_func(input_map) {
-        const player_class = input_map.get('player-class');
-        const atree_state = input_map.get('atree-state');
-        const atree_order = input_map.get('atree');
-
-        let abils_merged = new Map();
-        for (const abil of default_abils[player_class]) {
-            let tmp_abil = deepcopy(abil);
-            if (!('desc' in tmp_abil)) {
-                tmp_abil.desc = [];
-            }
-            else if (!Array.isArray(tmp_abil.desc)) {
-                tmp_abil.desc = [tmp_abil.desc];
-            }
-            tmp_abil.subparts = [abil.id];
-            abils_merged.set(abil.id, tmp_abil);
-        }
-
-        for (const node of atree_order) {
-            const abil_id = node.ability.id;
-            if (!atree_state.get(abil_id).active) {
-                continue;
-            }
-            const abil = node.ability;
-
-            if ('base_abil' in abil) {
-                if (abils_merged.has(abil.base_abil)) {
-                    // Merge abilities.
-                    // TODO: What if there is more than one base abil?
-                    let base_abil = abils_merged.get(abil.base_abil);
-                    if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
-                    else { base_abil.desc.push(abil.desc); }
-
-                    base_abil.subparts.push(abil.id);
-                    base_abil.effects = base_abil.effects.concat(abil.effects);
-                    for (let propname in abil.properties) {
-                        if (propname in base_abil.properties) {
-                            base_abil.properties[propname] += abil.properties[propname];
-                        }
-                        else { base_abil.properties[propname] = abil.properties[propname]; }
-                    }
-                }
-                // do nothing otherwise.
-            }
-            else {
-                let tmp_abil = deepcopy(abil);
-                if (!Array.isArray(tmp_abil.desc)) {
-                    tmp_abil.desc = [tmp_abil.desc];
-                }
-                tmp_abil.subparts = [abil.id];
-                abils_merged.set(abil_id, tmp_abil);
-            }
-        }
-        return abils_merged;
-    }
-})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
-
-/**
  * Check if an atree node can be activated.
  *
  * Return: [yes/no, hard error, reason]
@@ -453,6 +385,76 @@ const atree_validate = new (class extends ComputeNode {
         return [hard_error, errors];
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
+
+/**
+ * Collect abilities and condense them into a list of "final abils".
+ * This is just for rendering purposes, and for collecting things that modify spells into one chunk.
+ * I stg if wynn makes abils that modify multiple spells
+ * ... well we can extend this by making `base_abil` a list instead but annoy
+ *
+ * Signature: AbilityTreeMergeNode(player-class: WeaponType, atree: ATree, atree-state: RenderedATree) => Map[id, Ability]
+ */
+const atree_merge = new (class extends ComputeNode {
+    constructor() { super('builder-atree-merge'); }
+
+    compute_func(input_map) {
+        const [hard_error, errors] = input_map.get('atree-errors');
+        if (hard_error) { return null; }
+        const player_class = input_map.get('player-class');
+        const atree_state = input_map.get('atree-state');
+        const atree_order = input_map.get('atree');
+
+        let abils_merged = new Map();
+        for (const abil of default_abils[player_class]) {
+            let tmp_abil = deepcopy(abil);
+            if (!('desc' in tmp_abil)) {
+                tmp_abil.desc = [];
+            }
+            else if (!Array.isArray(tmp_abil.desc)) {
+                tmp_abil.desc = [tmp_abil.desc];
+            }
+            tmp_abil.subparts = [abil.id];
+            abils_merged.set(abil.id, tmp_abil);
+        }
+
+        for (const node of atree_order) {
+            const abil_id = node.ability.id;
+            if (!atree_state.get(abil_id).active) {
+                continue;
+            }
+            const abil = node.ability;
+
+            if ('base_abil' in abil) {
+                if (abils_merged.has(abil.base_abil)) {
+                    // Merge abilities.
+                    // TODO: What if there is more than one base abil?
+                    let base_abil = abils_merged.get(abil.base_abil);
+                    if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
+                    else { base_abil.desc.push(abil.desc); }
+
+                    base_abil.subparts.push(abil.id);
+                    base_abil.effects = base_abil.effects.concat(abil.effects);
+                    for (let propname in abil.properties) {
+                        if (propname in base_abil.properties) {
+                            base_abil.properties[propname] += abil.properties[propname];
+                        }
+                        else { base_abil.properties[propname] = abil.properties[propname]; }
+                    }
+                }
+                // do nothing otherwise.
+            }
+            else {
+                let tmp_abil = deepcopy(abil);
+                if (!Array.isArray(tmp_abil.desc)) {
+                    tmp_abil.desc = [tmp_abil.desc];
+                }
+                tmp_abil.subparts = [abil.id];
+                abils_merged.set(abil_id, tmp_abil);
+            }
+        }
+        return abils_merged;
+    }
+})().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state').link_to(atree_validate, 'atree-errors');
 
 /**
  * Make interactive elements (sliders, buttons)
@@ -655,28 +657,19 @@ const atree_scaling_stats = new (class extends ComputeNode {
     }
 })().link_to(atree_scaling, 'atree-scaling');
 
-/**
- * Render ability tree.
- * Return map of id -> corresponding html element.
- *
- * Signature: AbilityTreeRenderActiveNode(atree-merged: MergedATree, atree-order: ATree, atree-errors: List[str]) => Map[int, ATreeNode]
- */
-const atree_render_active = new (class extends ComputeNode {
+const atree_render_errors = new (class extends ComputeNode {
     constructor() {
-        super('atree-render-active');
-        this.list_elem = document.getElementById("atree-active");
+        super('atree-render-errors');
+        this.list_elem = document.getElementById("atree-warning");
     }
 
     compute_func(input_map) {
-        const merged_abils = input_map.get('atree-merged');
-        const atree_order = input_map.get('atree-order');
-        const [hard_error, _errors] = input_map.get('atree-errors');
-        const errors = deepcopy(_errors);
+        const [hard_error, errors] = input_map.get('atree-errors');
 
         this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         // TODO: move to display?
         if (errors.length > 0) {
-            const errorbox = make_elem('div', ['rounded-bottom', 'dark-4', 'border', 'p-0', 'mx-2', 'my-4', 'dark-shadow']);
+            const errorbox = make_elem('div', ['rounded-bottom', 'dark-4', 'border', 'p-0', 'mx-2', 'mb-0', 'mt-4', 'dark-shadow']);
             this.list_elem.append(errorbox);
 
             const error_title = make_elem('b', ['warning', 'scaled-font'], { innerHTML: "ATree Error!" });
@@ -690,6 +683,27 @@ const atree_render_active = new (class extends ComputeNode {
                 errorbox.append(make_elem("p", ["warning", "small-text"], {textContent: error}));
             }
         }
+    }
+})().link_to(atree_validate, 'atree-errors');
+
+/**
+ * Render ability tree.
+ * Return map of id -> corresponding html element.
+ *
+ * Signature: AbilityTreeRenderActiveNode(atree-merged: MergedATree, atree-order: ATree, atree-errors: List[str]) => Map[int, ATreeNode]
+ */
+const atree_render_active = new (class extends ComputeNode {
+    constructor() {
+        super('atree-render-active');
+        this.list_elem = document.getElementById("atree-active");
+    }
+
+    compute_func(input_map) {
+        console.log("boop");
+        const merged_abils = input_map.get('atree-merged');
+        const atree_order = input_map.get('atree-order');
+
+        this.list_elem.innerHTML = ""; //reset all atree actives - should be done in a more general way later
         const ret_map = new Map();
         const to_render_id = [999, 998];
         for (const node of atree_order) {
@@ -713,7 +727,7 @@ const atree_render_active = new (class extends ComputeNode {
         }
         return ret_map;
     }
-})().link_to(atree_node, 'atree-order').link_to(atree_scaling_tree, 'atree-merged').link_to(atree_validate, 'atree-errors');
+})().link_to(atree_node, 'atree-order').link_to(atree_scaling_tree, 'atree-merged');
 
 
 /**
@@ -726,8 +740,6 @@ const atree_collect_spells = new (class extends ComputeNode {
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
-        const [hard_error, errors] = input_map.get('atree-errors');
-        if (hard_error) { return []; }
         
         /**
          * Parse out "parametrized entries".
@@ -855,7 +867,7 @@ const atree_collect_spells = new (class extends ComputeNode {
         }
         return ret_spells;
     }
-})().link_to(atree_scaling_tree, 'atree-merged').link_to(atree_validate, 'atree-errors');
+})().link_to(atree_scaling_tree, 'atree-merged');
 
 /**
  * Collect raw stats from ability tree.
