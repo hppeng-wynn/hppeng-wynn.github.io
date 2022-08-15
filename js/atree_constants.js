@@ -563,9 +563,7 @@ const atrees = {
                 "col": 5,
                 "icon": "node_2"
             },
-            "properties": {
-                "range": 26
-            },
+            "properties": { "range": 26 },
             "effects": []
         },
         {
@@ -1973,20 +1971,8 @@ const atrees = {
                 "col": 8,
                 "icon": "node_0"
             },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "prop",
-                            "abil": "Grappling Hook",
-                            "name": "range",
-                            "value": 8
-                        }
-                    ]
-                }
-            ]
+            "properties": { "range": 8 },
+            "effects": []
         },
         {
             "display_name": "Cheaper Arrow Bomb (2)",
@@ -2382,9 +2368,7 @@ const atrees = {
                 "col": 8,
                 "icon": "node_1"
             },
-            "properties": {
-                "max": 80
-            },
+            "properties": { "max": 80 },
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -2421,24 +2405,13 @@ const atrees = {
                 "col": 8,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": { "max": 80 },
             "effects": [
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Trap Wait Time",
                     "slider_max": 4
-                },
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "prop",
-                            "abil": "Patient Hunter",
-                            "name": "max",
-                            "value": 80
-                        }
-                    ]
                 }
             ]
         },
@@ -7341,15 +7314,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Per Hit",
-                            "type": "damage",
-                            "multipliers": [
-                                30,
-                                0,
-                                0,
-                                10,
-                                0,
-                                0
-                            ]
+                            "multipliers": [ 30, 0, 0, 10, 0, 0 ]
                         },
                         {
                             "name": "Total Damage",
@@ -8974,7 +8939,12 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": []
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spel": 4,
+                "target_part": "Per Hit",
+                "multipliers": [ 0, 0, 10, 0, 0, 0 ]
+            }]
         },
         {
             "display_name": "More Marks",
