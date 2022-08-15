@@ -6965,7 +6965,7 @@ const atrees = {
                     "display": "Spin Attack",
                     "parts": [
                         {
-                            "name": "Per Hit",
+                            "name": "Spin Attack",
                             "type": "damage",
                             "multipliers": [
                                 120,
@@ -6977,15 +6977,6 @@ const atrees = {
                             ]
                         }
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Per Hit": 1
-                    },
-                    "display": "Total Damage"
                 }
             ]
         },
@@ -7075,14 +7066,14 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Total Damage",
                     "hits": {
-                        "Spin Attack": 1
+                        "Spin Attack": 2
                     },
                     "display": "Total Damage"
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
-                    "target_part": "Per Hit",
+                    "target_part": "Spin Attack",
                     "multipliers": [-40, 0, 0, 0, 0, 0]
                 }
             ]
@@ -8145,6 +8136,14 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Per Hit",
+                    "behavior": "modify",
+                    "multipliers": [0, 0, 0, 0, 20, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Spin Attack",
+                    "behavior": "modify",
                     "multipliers": [0, 0, 0, 0, 20, 0]
                 }
             ]
