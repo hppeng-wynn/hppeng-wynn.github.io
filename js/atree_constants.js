@@ -3240,7 +3240,7 @@ const atrees = {
 
         {
             "display_name": "Half-Moon Swipe",
-            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle. All elemental conversions become Water",
+            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle.",
             "archetype": "Battle Monk", 
             "archetype_req": 1, 
             "base_abil": "Uppercut",
@@ -3630,7 +3630,7 @@ const atrees = {
 
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corriupted, every 1% of Health you lose will increase your damage by +2.2% (Max 220%)",
+            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2.2% (Max 220%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",
