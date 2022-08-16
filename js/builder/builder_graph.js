@@ -603,8 +603,9 @@ class SpellDamageCalcNode extends ComputeNode {
         // TODO: move preprocessing to separate node/node chain
         for (const part of spell_parts) {
             let spell_result;
+            const part_id = spell.base_spell + '.' + part.name
             if ('multipliers' in part) { // damage type spell
-                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed, spell.base_spell + '.' + part.name);
+                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed, part_id);
                 spell_result = {
                     type: "damage",
                     normal_min: results[2].map(x => x[0]),
@@ -617,6 +618,9 @@ class SpellDamageCalcNode extends ComputeNode {
             } else if ('power' in part) {
                 // TODO: wynn2 formula
                 let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
+                if (stats.has('healPct:'+part_id)) {
+                    _heal_amount *= 1+(stats.get('healPct:'+part_id)/100);
+                }
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
