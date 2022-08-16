@@ -576,7 +576,9 @@ const atree_scaling = new (class extends ComputeNode {
                 merge_stat(ret_effects, name, value);
             } else if (type === 'prop') {
                 const merge_abil = atree_edit.get(abil);
-                merge_abil.properties[name] += value;
+                if (merge_abil) {
+                    merge_abil.properties[name] += value;
+                }
             }
         }
         for (const [abil_id, abil] of atree_merged.entries()) {

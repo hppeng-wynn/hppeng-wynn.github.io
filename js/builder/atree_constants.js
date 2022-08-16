@@ -10816,7 +10816,7 @@ const atrees = {
                     ],
                     "output": {
                         "type": "stat",
-                        "name": "healPct.Fluid:3.Heal Amount"
+                        "name": "healPct:3.Heal Amount"
                     },
                     "scaling": [ 0.3 ]
                 }
