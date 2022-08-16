@@ -1078,7 +1078,7 @@ function builder_graph_init() {
     // Phase 3/3: Set up atree stuff.
 
     let class_node = new PlayerClassNode('builder-class').link_to(build_node);
-    // These two are defined in `atree.js`
+    // These two are defined in `builder/atree.js`
     atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(class_node, 'player-class');
     pre_scale_agg_node.link_to(atree_raw_stats, 'atree-raw-stats');

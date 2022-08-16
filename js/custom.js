@@ -188,7 +188,7 @@ function getCustomFromHash(hash) {
 
 /** An object representing a Custom Item. Mostly for vanity purposes.
  * @dep Requires the use of nonRolledIDs and rolledIDs from display_constants.js.
- * @dep Requires the use of attackSpeeds from build.js.   
+ * @dep Requires the use of attackSpeeds from `builder/build.js`.
 */
 class Custom {
     /**
