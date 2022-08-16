@@ -72,7 +72,8 @@ function displayBuildStats(parent_id,build,command_group,stats){
     let active_elem;
     let elemental_format = false;
 
-    //TODO this is put here for readability, consolidate with definition in build.js
+    //TODO this is put here for readability, consolidate with definition in `builder/build.js`
+    // TODO amend: uuhhhhh these two constants have diverged too far...
     let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef"];
 
     for (const command of display_commands) {
