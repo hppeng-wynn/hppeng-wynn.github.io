@@ -3210,6 +3210,7 @@
       "quest": "The Qira Hive",
       "category": "armor",
       "displayName": "Anima-Infused Cuirass",
+      "set": "Master Hive",
       "slots": 2,
       "hp": 3800,
       "fDef": 200,
