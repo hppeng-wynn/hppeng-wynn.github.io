@@ -79,8 +79,6 @@ for item in old_items:
                 if rem >= 5:
                     val += 1
                 item[k] = val
-        if item['name'] == "Gale's Sight":
-            print(item)
         items.append(item)
         #print(f'Unknown old item: {item["name"]}!!!')
     #old_items_map[item["name"]] = item

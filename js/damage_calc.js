@@ -2,8 +2,6 @@
  * File implementing core damage calculation logic.
  */
 
-const damageMultipliers = new Map([ ["allytotem", .15], ["yourtotem", .35], ["warscream", 0.00], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
-
 function get_base_dps(item) {
     const attack_speed_mult = baseDamageMultiplier[attackSpeeds.indexOf(item.get("atkSpd"))];
     //SUPER JANK @HPP PLS FIX
@@ -126,15 +124,18 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
     // These do not count raw damage. I think. Easy enough to change
     let total_min = 0;
     let total_max = 0;
+    let save_prop = [];
     for (let i in damage_elements) {
+        save_prop.push(damages[i].slice());
+        total_min += damages[i][0];
+        total_max += damages[i][1];
+
         let damage_specific = damage_elements[i] + specific_boost_str + 'Pct';
         let damageBoost = 1 + skill_boost[i] + static_boost
                             + ((stats.get(damage_specific) + stats.get(damage_elements[i]+'DamPct')) /100);
         damages[i][0] *= Math.max(damageBoost, 0);
         damages[i][1] *= Math.max(damageBoost, 0);
         // Collect total damage post %boost
-        total_min += damages[i][0];
-        total_max += damages[i][1];
     }
 
     let total_elem_min = total_min - damages[0][0];
@@ -144,6 +145,7 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
     let prop_raw = stats.get(specific_boost_str.toLowerCase()+'Raw') + stats.get('damRaw');
     let rainbow_raw = stats.get('r'+specific_boost_str+'Raw') + stats.get('rDamRaw');
     for (let i in damages) {
+        let save_obj = save_prop[i];
         let damages_obj = damages[i];
         let damage_prefix = damage_elements[i] + specific_boost_str;
         // Normie raw
@@ -157,22 +159,22 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         if (total_max > 0) {    // TODO: what about total negative all raw?
             // TODO: compute actual chance of 0 damage. For now we just copy max ratio
             if (total_min === 0) {
-                min_boost += (damages_obj[1] / total_max) * prop_raw;
+                min_boost += (save_obj[1] / total_max) * prop_raw;
             }
             else {
-                min_boost += (damages_obj[0] / total_min) * prop_raw;
+                min_boost += (save_obj[0] / total_min) * prop_raw;
             }
-            max_boost += (damages_obj[1] / total_max) * prop_raw;
+            max_boost += (save_obj[1] / total_max) * prop_raw;
         }
         if (i != 0 && total_elem_max > 0) {   // rainraw    TODO above
             // TODO: compute actual chance of 0 damage. For now we just copy max ratio
             if (total_elem_min === 0) {
-                min_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
+                min_boost += (save_obj[1] / total_elem_max) * rainbow_raw;
             }
             else {
-                min_boost += (damages_obj[0] / total_elem_min) * rainbow_raw;
+                min_boost += (save_obj[0] / total_elem_min) * rainbow_raw;
             }
-            max_boost += (damages_obj[1] / total_elem_max) * rainbow_raw;
+            max_boost += (save_obj[1] / total_elem_max) * rainbow_raw;
         }
         damages_obj[0] += min_boost * total_convert;
         damages_obj[1] += max_boost * total_convert;
@@ -256,8 +258,9 @@ spell_heal: {
 spell_total: {
     name:           str != "total"  Name of the part.
     type:           "total"         [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
-    hits:           Map[str, num]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
-                                        are not the same type of spell. Can only pull from spells defined before it.
+    hits:           Map[str, Union[str, num]]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
+                                                are not the same type of spell. Can only pull from spells defined before it.
+                                                Alternatively, a property reference of the format <ability_id>.propname
 }
 
 

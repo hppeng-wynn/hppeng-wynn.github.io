@@ -17,6 +17,8 @@ let armor_powder_node = new (class extends ComputeNode {
     }
 })();
 
+const damageMultipliers = new Map([ ["totem", .2], ["warscream", 0.0], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
+
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
 
@@ -601,8 +603,9 @@ class SpellDamageCalcNode extends ComputeNode {
         // TODO: move preprocessing to separate node/node chain
         for (const part of spell_parts) {
             let spell_result;
+            const part_id = spell.base_spell + '.' + part.name
             if ('multipliers' in part) { // damage type spell
-                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed, spell.base_spell + '.' + part.name);
+                let results = calculateSpellDamage(stats, weapon, part.multipliers, use_spell, !use_speed, part_id);
                 spell_result = {
                     type: "damage",
                     normal_min: results[2].map(x => x[0]),
@@ -615,6 +618,9 @@ class SpellDamageCalcNode extends ComputeNode {
             } else if ('power' in part) {
                 // TODO: wynn2 formula
                 let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
+                if (stats.has('healPct:'+part_id)) {
+                    _heal_amount *= 1+(stats.get('healPct:'+part_id)/100);
+                }
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
@@ -715,7 +721,7 @@ class BuildDisplayNode extends ComputeNode {
         // TODO: move weapon out?
         // displayDefenseStats(document.getElementById("defensive-stats"), stats);
 
-        displayPoisonDamage(document.getElementById("build-poison-stats"), build);
+        displayPoisonDamage(document.getElementById("build-poison-stats"), stats);
         displayEquipOrder(document.getElementById("build-order"), build.equip_order);
     }
 }
@@ -885,6 +891,17 @@ class EditableIDSetterNode extends ComputeNode {
             document.getElementById(id).value = val;
             document.getElementById(id+'-base').textContent = 'Original Value: ' + val;
         }
+    }
+
+    /**
+     * Overriding this to bridge the transparent gap.
+     */
+    mark_dirty(dirty_state=2) {
+        super.mark_dirty(dirty_state);
+        for (const node of this.notify_nodes) {
+            node.mark_dirty(dirty_state);
+        }
+        return this;
     }
 
     notify() {
@@ -1065,13 +1082,13 @@ function builder_graph_init() {
     // Phase 3/3: Set up atree stuff.
 
     let class_node = new PlayerClassNode('builder-class').link_to(build_node);
-    // These two are defined in `atree.js`
+    // These two are defined in `builder/atree.js`
     atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(class_node, 'player-class');
-    pre_scale_agg_node.link_to(atree_stats, 'atree-raw-stats');
+    pre_scale_agg_node.link_to(atree_raw_stats, 'atree-raw-stats');
     atree_scaling.link_to(pre_scale_agg_node, 'scale-stats');
     stat_agg_node.link_to(pre_scale_agg_node, 'pre-scaling');
-    stat_agg_node.link_to(atree_scaling, 'atree-scaling');
+    stat_agg_node.link_to(atree_scaling_stats, 'atree-scaling');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');
 

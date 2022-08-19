@@ -12,7 +12,7 @@ function skillPointsToPercentage(skp){
         skp = 150;
     }
     const r = 0.9908;
-    return ((1 - Math.pow(r, skp + 1)) / (1 - r) - 1) / 100.0;
+    return (r/(1-r)*(1 - Math.pow(r, skp))) / 100.0;
         //return (-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
         //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
     //return Math.min(Math.max(0.00,(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771)),.808); 
@@ -86,7 +86,8 @@ let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slot
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
-"critDamPct"
+"critDamPct",
+"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
 ];
 // Extra fake IDs (reserved for use in spell damage calculation) : damMult, defMult, poisonPct, activeMajorIDs
 let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ]
@@ -127,16 +128,7 @@ let nonRolledIDs = [
     "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_",
     "majorIds",
     "damMobs",
-    "defMobs",
-// wynn2 damages.
-"eDamAddMin","eDamAddMax",
-"tDamAddMin","tDamAddMax",
-"wDamAddMin","wDamAddMax",
-"fDamAddMin","fDamAddMax",
-"aDamAddMin","aDamAddMax",
-"nDamAddMin","nDamAddMax",  // neutral which is now an element
-"damAddMin","damAddMax",    // all
-"rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral).
+    "defMobs"
 ];
 let rolledIDs = [
     "hprPct",
@@ -165,7 +157,7 @@ let rolledIDs = [
     "spPct2", "spRaw2",
     "spPct3", "spRaw3",
     "spPct4", "spRaw4",
-    "pDamRaw",
+    "rSdRaw",
     "sprint",
     "sprintReg",
     "jh",
@@ -180,7 +172,8 @@ let rolledIDs = [
 "aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct,"*/"aDamRaw","aDamAddMin","aDamAddMax",
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
-"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
 ];
 let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 

@@ -19,9 +19,9 @@
       "mr": 10,
       "int": 15,
       "def": -10,
-      "wDamPct": 30,
       "aDamPct": 35,
       "tDamPct": -40,
+      "wDefPct": 30,
       "spRaw4": -4,
       "id": 3579
     },
@@ -65,7 +65,7 @@
       "lvl": 104,
       "strReq": 60,
       "agiReq": 60,
-      "mr": 8,
+      "mr": 10,
       "ref": 48,
       "atkTier": -1,
       "aDamPct": 32,
@@ -973,7 +973,6 @@
       "ms": 30,
       "xpb": 30,
       "ref": 20,
-      "spRaw3": 6,
       "id": 1711
     },
     {
@@ -2334,7 +2333,7 @@
       "aDamPct": 30,
       "aDefPct": 20,
       "fixID": true,
-      "spRaw1": -5,
+      "spRaw1": -3,
       "id": 2510
     },
     {
@@ -3187,10 +3186,10 @@
       "intReq": 23,
       "agiReq": 23,
       "defReq": 23,
-      "mr": 5,
+      "mr": 9,
       "sdPct": 15,
       "mdPct": 15,
-      "ms": 5,
+      "ms": 9,
       "str": 17,
       "dex": 17,
       "int": 17,
@@ -3211,6 +3210,7 @@
       "quest": "The Qira Hive",
       "category": "armor",
       "displayName": "Anima-Infused Cuirass",
+      "set": "Master Hive",
       "slots": 2,
       "hp": 3800,
       "fDef": 200,
@@ -17497,7 +17497,7 @@
       "aDefPct": -25,
       "fixID": true,
       "spPct4": 28,
-      "rainbowRaw": 1275,
+      "rSdRaw": 1275,
       "id": 720
     },
     {
