@@ -1,14 +1,10 @@
 const translate_mappings = {
     //"Name": "name",
     //"Display Name": "displayName",
-    //"tier"Tier": ",
+    //"Tier": "tier",
     //"Set": "set",
     "Powder Slots": "slots",
     //"Type": "type",
-    //"armorType", (deleted)
-    //"color", (deleted)
-    //"lore", (deleted)
-    //"material", (deleted)
     "Drop type": "drop",
     "Quest requirement": "quest",
     "Restriction": "restrict",
@@ -91,15 +87,15 @@ const translate_mappings = {
 };
 
 const special_mappings = {
-    "Sum (skill points)": "s:str+dex+int+def+agi",
-    "Sum (Mana Sustain)": "s:mr+ms",
-    "Sum (Life Sustain)": "s:hpr+ls",
-    "Sum (Health + Health Bonus)": "s:hp+hpBonus",
-    "No Strength Req": "f:strReq=0",
-    "No Dexterity Req": "f:dexReq=0",
-    "No Intelligence Req": "f:intReq=0",
-    "No Agility Req": "f:agiReq=0",
-    "No Defense Req": "f:defReq=0",
+    "Sum (skill points)": "str+dex+int+def+agi",
+    "Sum (Mana Sustain)": "mr+ms",
+    "Sum (Life Sustain)": "hpr+ls",
+    "Sum (Health + Health Bonus)": "hp+hpBonus",
+    // "No Strength Req": "strReq=0",
+    // "No Dexterity Req": "dexReq=0",
+    // "No Intelligence Req": "intReq=0",
+    // "No Agility Req": "agiReq=0",
+    // "No Defense Req": "defReq=0",
 };
 
 let item_filters = []
@@ -115,6 +111,7 @@ let item_categories = ["armor", "accessory", "weapon"];
 const types = {bow: true, spear: true, wand: true, dagger: true, relik: true, helmet: true, chestplate: true, leggings: true, boots: true, ring: true, bracelet: true, necklace: true};
 const rarities = {normal: true, unique: true, set: true, rare: true, legendary: true, fabled: true, mythic: true};
 const filters = [];
+let filter_id_counter = 0;
 
 function displayItems(items_copy) {
     let items_parent = document.getElementById("search-results");
@@ -122,7 +119,6 @@ function displayItems(items_copy) {
         if (i > 200) {break;}
         let item = items_copy[i].itemExp;
         let box = make_elem('div', ['col-lg-3', 'col-sm-6', 'p-2'], {id: 'item'+i});
-        //box.addEventListener("dblclick", function() {set_item(item);}); TODO: ??
 
         let bckgrdbox = make_elem("div", ["dark-7", "rounded", "px-2", "col-auto"], {id: 'item'+i+'b'});
         box.append(bckgrdbox);
@@ -176,20 +172,35 @@ function do_item_search() {
     }
     
     // filters
-    // for (let i = 1; i <= 4; ++i) {
-    //     let raw_dat = document.getElementById("filter"+i+"-choice").value;
-    //     let filter_dat = translate_mappings[raw_dat];
-    //     if (filter_dat !== undefined) {
-    //         queries.push("s:"+filter_dat);
-    //         queries.push("f:"+filter_dat+"!=0");
-    //         continue;
-    //     }
-    //     filter_dat = special_mappings[raw_dat];
-    //     if (filter_dat !== undefined) {
-    //         queries.push(filter_dat);
-    //         continue;
-    //     }
-    // }
+    for (const filter of filters) {
+        let min = parseInt(filter.min_elem.value);
+        let max = parseInt(filter.max_elem.value);
+        if (min > max) {
+            continue; // invalid range
+        }
+        let zero_in_min_max = (isNaN(min) || min <= 0) && (isNaN(max) || max >= 0);
+
+        let raw_name = filter.input_elem.value;
+        let filter_name = translate_mappings[raw_name];
+        if (filter_name === undefined) {
+            filter_name = special_mappings[raw_name];
+            if (filter_name === undefined) {
+                continue; // not a valid filter
+            }
+            filter_name = "(" + filter_name + ")";
+        }
+
+        if (!isNaN(min)) {
+            queries.push("f:" + filter_name + ">=" + min);
+        }
+        if (!isNaN(max)) {
+            queries.push("f:" + filter_name + "<=" + max);
+        }
+        if (zero_in_min_max) {
+            queries.push("f:" + filter_name + "!=0");
+        }
+        queries.push("s:" + (filter.ascending ? "0-" : "") + filter_name);
+    }
 
     let filter_query = "true";
     let sort_queries = [];
@@ -268,6 +279,11 @@ function init_items() {
             document.getElementById("rarity-" + rarity).classList.remove("rarity-selected");
         }
     });
+
+    // filters
+    document.getElementById("add-filter").addEventListener("click", create_filter);
+    create_filter();
+    filters[0].input_elem.value = "Combat Level";
 }
 
 function reset_item_search() {
@@ -276,7 +292,63 @@ function reset_item_search() {
     document.getElementById("all-rarities").click();
 }
 
-function initFilterDropdown(filter) {
+function create_filter() {
+    let data = {ascending: false};
+
+    let row = make_elem("div", ["row"], {});
+    let col = make_elem("div", ["col"], {});
+    row.appendChild(col);
+
+    let reorder_img = make_elem("img", ["reorder-filter"], {src: "../media/icons/3-lines.svg"});
+    col.appendChild(reorder_img);
+    init_drag_and_drop(reorder_img);
+
+    let filter_input = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
+        {id: "filter-input-" + filter_id_counter, type: "text", placeholder: "Filter"}
+    );
+    filter_id_counter++;
+    col.appendChild(filter_input);
+    data.input_elem = filter_input;
+
+    let asc_desc = make_elem("div", [], {style: "cursor: pointer; display: inline-block;"});
+    asc_desc.appendChild(make_elem("img", ["desc-icon", "asc-sel"], {src: "../media/icons/triangle.svg"}));
+    asc_desc.appendChild(make_elem("img", ["asc-icon"], {src: "../media/icons/triangle.svg"}));
+    asc_desc.addEventListener("click", function() {
+        data.ascending = !data.ascending;
+        asc_desc.children[0].classList.toggle("asc-sel");
+        asc_desc.children[1].classList.toggle("asc-sel");
+    });
+    col.appendChild(asc_desc);
+
+    let min = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
+        {type: "number", placeholder: "-\u221E"}
+    );
+    col.appendChild(min);
+    data.min_elem = min;
+
+    let to = make_elem("span", [], {innerHTML: "&nbsp;to&nbsp;"});
+    col.appendChild(to);
+
+    let max = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
+        {type: "number", placeholder: "\u221E"}
+    );
+    col.appendChild(max);
+    data.max_elem = max;
+
+    document.getElementById("filter-container").insertBefore(row, document.getElementById("add-filter").parentElement);
+
+    filters.push(data);
+    init_filter_dropdown(data);
+}
+
+function init_drag_and_drop(handle_elem) {
+    // TODO
+}
+
+function init_filter_dropdown(filter) {
     let field_choice = filter.input_elem;
     field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
     filter.autoComplete = new autoComplete({
@@ -284,7 +356,7 @@ function initFilterDropdown(filter) {
             src: item_filters,
         },  
         threshold: 0,
-        selector: "#"+ field +"-choice",
+        selector: "#" + field_choice.id,
         wrapper: false,
         resultsList: {
             maxResults: 100,
@@ -292,13 +364,12 @@ function initFilterDropdown(filter) {
             noResults: true,
             class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
             element: (list, data) => {
-                let position = document.getElementById(field+'-choice').getBoundingClientRect();
+                let position = field_choice.getBoundingClientRect();
                 list.style.top = position.bottom + window.scrollY +"px";
                 list.style.left = position.x+"px";
                 list.style.width = position.width+"px";
                 list.style.maxHeight = position.height * 4 +"px";
-
-                if (!item_filters.results.length) {
+                if (!data.results.length) {
                     const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
                     list.prepend(message);
                 };

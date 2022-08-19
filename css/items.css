@@ -58,17 +58,29 @@
     cursor: pointer;
 }
 
+input.filter-input {
+    width: 27ch!important;
+    display: inline-block;
+}
+
 .asc-icon {
     opacity: 0.25;
     width: 1rem;
-    cursor: pointer;
 }
 .desc-icon {
     opacity: 0.25;
     width: 1rem;
     transform: rotate(180deg);
-    cursor: pointer;
 }
 img.asc-sel {
     opacity: 0.85;
+}
+
+input.min-max-input {
+    width: 6ch!important;
+    display: inline-block;
+}
+
+#filter-container > div > div > * {
+    margin: 0 2px;
 }
