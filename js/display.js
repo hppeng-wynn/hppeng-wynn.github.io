@@ -269,7 +269,7 @@ function displayExpandedItem(item, parent_id){
                     if (item.get("custom")) {
                         item_link = "../custom/#" + item.get("hash");
                     } else if (item.get("crafted")) {
-                        a_item_link = "../crafter/#" + item.get("hash");
+                        item_link = "../crafter/#" + item.get("hash");
                     } else {
                         item_link = "../item/#" + item.get("displayName");
                     }
