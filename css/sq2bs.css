@@ -200,10 +200,10 @@ input.equipment-input:not(.is-invalid) {
 
 @media screen and (orientation: landscape) and (max-width: 1199px) {
     :root {
-        --scaled-fontsize: 1rem;
+        --scaled-fontsize: max(1rem, 16px);
     }
     .scaled-font {
-        font-size: 1rem;
+        font-size: max(1rem, 16px);
     }
 
     .box-title {
