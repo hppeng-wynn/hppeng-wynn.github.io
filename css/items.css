@@ -53,6 +53,13 @@
 #rarity-mythic.rarity-selected { background-color: #AA00AA; }
 
 /* filters */
+.filter-row {
+    border: 1px solid #121212;
+}
+.filter-dragged-over {
+    border: 1px solid white;
+}
+
 .reorder-filter {
     height: 75%;
     cursor: pointer;

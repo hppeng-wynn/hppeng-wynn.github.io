@@ -284,6 +284,7 @@ function init_items() {
     document.getElementById("add-filter").addEventListener("click", create_filter);
     create_filter();
     filters[0].input_elem.value = "Combat Level";
+    init_filter_drag();
 }
 
 function reset_item_search() {
@@ -295,13 +296,13 @@ function reset_item_search() {
 function create_filter() {
     let data = {ascending: false};
 
-    let row = make_elem("div", ["row"], {});
+    let row = make_elem("div", ["row", "filter-row"], {});
     let col = make_elem("div", ["col"], {});
     row.appendChild(col);
+    data.div = row;
 
-    let reorder_img = make_elem("img", ["reorder-filter"], {src: "../media/icons/3-lines.svg"});
+    let reorder_img = make_elem("img", ["reorder-filter"], {src: "../media/icons/3-lines.svg", draggable: "true"});
     col.appendChild(reorder_img);
-    init_drag_and_drop(reorder_img);
 
     let filter_input = make_elem("input",
         ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
@@ -344,8 +345,69 @@ function create_filter() {
     init_filter_dropdown(data);
 }
 
-function init_drag_and_drop(handle_elem) {
-    // TODO
+let currently_dragging = null;
+function init_filter_drag() {
+    let container = document.getElementById("filter-container");
+
+    container.addEventListener("dragstart", function(e) {
+        if (e.path[0].classList.contains("reorder-filter")) {
+            currently_dragging = filters[Array.from(e.path[3].children).indexOf(e.path[2]) - 1];
+        } else {
+            e.preventDefault();
+        }
+    });
+
+    container.addEventListener("dragenter", function(e) {
+        e.preventDefault();
+    });
+
+    container.addEventListener("dragleave", function(e) {
+        e.preventDefault();
+    });
+
+    container.addEventListener("dragend", function(e) {
+        e.preventDefault();
+        for (const el of document.getElementsByClassName("filter-dragged-over")) {
+            el.classList.remove("filter-dragged-over");
+        }
+        currently_dragging = null;
+    });
+
+    container.addEventListener("dragover", function(e) {
+        e.preventDefault();
+        for (const el of document.getElementsByClassName("filter-dragged-over")) {
+            el.classList.remove("filter-dragged-over");
+        }
+        if (!e.path.includes(currently_dragging.div)) {
+            for (let i = 0; i < e.path.length; i++) {
+                if (e.path[i].classList.contains("filter-row")) {
+                    e.path[i].classList.add("filter-dragged-over");
+                    break;
+                }
+            }
+        }
+    });
+
+    container.addEventListener("drop", function(e) {
+        e.preventDefault();
+        for (const el of document.getElementsByClassName("filter-dragged-over")) {
+            el.classList.remove("filter-dragged-over");
+        }
+        if (!e.path.includes(currently_dragging.div)) {
+            for (let i = 0; i < e.path.length; i++) {
+                if (e.path[i].classList.contains("filter-row")) {
+                    let old_index = filters.indexOf(currently_dragging);
+                    let new_index = Array.from(e.path[i + 1].children).indexOf(e.path[i]) - 1;
+                    filters.splice(old_index, 1);
+                    filters.splice(new_index, 0, currently_dragging);
+                    currently_dragging.div.remove();
+                    container.insertBefore(currently_dragging.div, container.children[new_index + 1]);
+                    break;
+                }
+            }
+        }
+        currently_dragging = null;
+    });
 }
 
 function init_filter_dropdown(filter) {
