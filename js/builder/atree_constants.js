@@ -1711,8 +1711,6 @@ const atrees = {
         {
             "display_name": "Better Arrow Shield",
             "desc": "Arrow Shield will gain additional area of effect, knockback and damage.",
-            "archetype": "Sharpshooter",
-            "archetype_req": 0,
             "base_abil": "Arrow Shield",
             "parents": [
                 "Mana Trap",
@@ -1859,6 +1857,7 @@ const atrees = {
                 "Cheaper Arrow Shield",
                 "Arrow Hurricane"
             ],
+            "archetype": "Sharpshooter",
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -6124,6 +6123,7 @@ const atrees = {
             "display_name": "Orphion's Pulse",
             "desc": "Heal will trigger 2 more times, increasing the overall healing.",
             "archetype": "Light Bender",
+            "archetype_req": 5,
             "base_abil": "Heal",
             "parents": [
                 "Healthier Ophanim I",

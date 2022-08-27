@@ -354,7 +354,7 @@
       "displayName": "Forbearance",
       "bonusThunderDamage": -15,
       "bonusWaterDamage": -15,
-      "manaRegen": 5,
+      "manaRegen": 4,
       "lifeSteal": 120,
       "identified": false
     },
@@ -396,7 +396,7 @@
       "displayName": "Breakthrough",
       "spellDamage": 13,
       "spellDamageRaw": 75,
-      "manaSteal": 5,
+      "manaSteal": 6,
       "spellCostRaw2": -4,
       "identified": false
     },
@@ -2932,7 +2932,7 @@
       "identified": false
     },
 {"name":"Deux","type":"chestplate","level":81,"tier":"Unique","sockets":2,"majorIds":[],"dexterity":40,"intelligence":40,"strengthPoints":-4,"dexterityPoints":6,"intelligencePoints":6,"defensePoints":-4,"agilityPoints":-4,"health":1900,"earthDefense":-80,"thunderDefense":150,"waterDefense":150,"fireDefense":-80,"airDefense":-80,"category":"armor","displayName":"Deux","damageBonus":-20,"spellDamage":5,"manaRegen":10,"manaSteal":10,"soulPoints":5,"identified":false},
-{"name":"Soulflare","type":"chestplate","level":99,"tier":"Rare","sockets":2,"majorIds":[],"intelligence":40,"defense":50,"intelligencePoints":10,"defensePoints":10,"health":3800,"thunderDefense":-125,"waterDefense":125,"fireDefense":150,"category":"armor","displayName":"Soulflare","bonusThunderDefense":-25,"bonusWaterDefense":20,"manaRegen":10,"manaSteal":10,"lifeSteal":440,"soulPoints":33,"identified":true},
+{"name":"Soulflare","type":"chestplate","level":99,"tier":"Rare","sockets":2,"majorIds":[],"intelligence":40,"defense":50,"intelligencePoints":10,"defensePoints":10,"health":3800,"thunderDefense":-125,"waterDefense":125,"fireDefense":150,"category":"armor","displayName":"Soulflare","bonusThunderDefense":-25,"bonusWaterDefense":20,"manaRegen":10,"manaSteal":10,"lifeSteal":440,"soulPoints":33,"identified":true,"set":"Fire Hive"},
 {"name":"Bantisu's Approach","type":"leggings","level":86,"tier":"Unique","sockets":3,"majorIds":[],"strengthPoints":1,"dexterityPoints":1,"intelligencePoints":1,"defensePoints":1,"agilityPoints":8,"health":2500,"earthDefense":10,"thunderDefense":10,"waterDefense":10,"fireDefense":10,"airDefense":80,"category":"armor","displayName":"Bantisu's Approach","bonusAirDefense":20,"manaRegen":5,"manaSteal":5,"speed":10,"sprint":10,"sprintRegen":10,"xpBonus":25,"lootBonus":15,"identified":false},
 {"name":"Infused Hive Spear","type":"spear","level":100,"tier":"Legendary","sockets":5,"majorIds":[],"quest":"The Qira Hive","damage":"160-210","earthDamage":"0-0","thunderDamage":"0-0","waterDamage":"0-0","fireDamage":"0-0","airDamage":"0-0","attackSpeed":"FAST","category":"weapon","displayName":"Infused Hive Spear","bonusEarthDamage":20,"bonusThunderDamage":20,"bonusWaterDamage":20,"bonusFireDamage":20,"bonusAirDamage":20,"manaRegen":5,"manaSteal":5,"identified":true},
 {"name":"Infused Hive Wand","type":"wand","level":100,"tier":"Legendary","sockets":5,"majorIds":[],"quest":"The Qira Hive","damage":"125-150","earthDamage":"0-0","thunderDamage":"0-0","waterDamage":"0-0","fireDamage":"0-0","airDamage":"0-0","attackSpeed":"FAST","category":"weapon","displayName":"Infused Hive Wand","bonusEarthDamage":20,"bonusThunderDamage":20,"bonusWaterDamage":20,"bonusFireDamage":20,"bonusAirDamage":20,"manaRegen":5,"manaSteal":5,"identified":true},
@@ -2942,6 +2942,14 @@
 {"name":"Tragedy","type":"wand","level":74,"tier":"Rare","sockets":2,"majorIds":[],"intelligence":25,"strengthPoints":-10,"damage":"50-65","earthDamage":"0-0","thunderDamage":"0-0","waterDamage":"40-85","fireDamage":"0-0","airDamage":"0-0","attackSpeed":"NORMAL","category":"weapon","displayName":"Tragedy","bonusWaterDamage":50,"healthBonus":-100,"manaRegen":-5,"manaSteal":-5,"identified":true},
 {"name":"Scytodidae","type":"bow","level":77,"tier":"Rare","sockets":2,"majorIds":[],"intelligence":40,"defensePoints":-20,"damage":"180-230","earthDamage":"0-0","thunderDamage":"0-0","waterDamage":"130-175","fireDamage":"0-0","airDamage":"0-0","attackSpeed":"SLOW","category":"weapon","displayName":"Scytodidae","spellDamageRaw":130,"bonusFireDefense":-10,"manaRegen":10,"manaSteal":10,"identified":true},
 {"name":"Hard Light","type":"relik","level":96,"tier":"Rare","sockets":3,"majorIds":[],"strength":23,"dexterity":23,"intelligence":23,"defense":23,"agility":23,"strengthPoints":17,"dexterityPoints":17,"intelligencePoints":17,"defensePoints":17,"agilityPoints":17,"damage":"0-0","earthDamage":"51-57","thunderDamage":"51-57","waterDamage":"51-57","fireDamage":"51-57","airDamage":"51-57","attackSpeed":"FAST","category":"weapon","displayName":"Hard Light","damageBonus":15,"spellDamage":15,"bonusEarthDefense":-25,"bonusThunderDefense":-25,"bonusWaterDefense":-25,"bonusFireDefense":-25,"bonusAirDefense":-25,"manaRegen":9,"manaSteal":9,"identified":false},
-{"name":"Boreal-Patterned Aegis","type":"chestplate","level":100,"tier":"Legendary","sockets":2,"majorIds":[],"quest":"The Qira Hive","dexterity":40,"intelligence":40,"defense":40,"strengthPoints":-30,"agilityPoints":-30,"health":3800,"thunderDefense":200,"waterDefense":200,"fireDefense":200,"category":"armor","displayName":"Anima-Infused Cuirass","bonusThunderDamage":20,"bonusWaterDamage":20,"bonusFireDamage":20,"bonusThunderDefense":15,"bonusWaterDefense":15,"bonusFireDefense":15,"manaRegen":10,"spellCostRaw1":-5,"spellCostRaw3":-5,"spellCostRaw4":-5,"identified":true, "set": "Master Hive"}
+{"name":"Boreal-Patterned Aegis","type":"chestplate","level":100,"tier":"Legendary","sockets":2,"majorIds":[],"quest":"The Qira Hive","dexterity":40,"intelligence":40,"defense":40,"strengthPoints":-30,"agilityPoints":-30,"health":3800,"thunderDefense":200,"waterDefense":200,"fireDefense":200,"category":"armor","displayName":"Anima-Infused Cuirass","bonusThunderDamage":20,"bonusWaterDamage":20,"bonusFireDamage":20,"bonusThunderDefense":15,"bonusWaterDefense":15,"bonusFireDefense":15,"manaRegen":10,"spellCostRaw1":-5,"spellCostRaw3":-5,"spellCostRaw4":-5,"identified":true, "set": "Master Hive"},
+{"name":"Dreadnought","type":"helmet","level":99,"tier":"Legendary","defense":110,"health":4200,"fireDefense":110,"airDefense":-110,"identified":true,"category":"armor","displayName":"Dreadnought","bonusFireDamage":20,"attackSpeedBonus":-2,"healthRegen":-40,"exploding":60,"speed":-20,"spellCostRaw1":-4,"spellCostRaw3":-6},
+{"name":"Privateer","type":"bracelet","level":99,"tier":"Rare","identified":true,"category":"accessory","displayName":"Privateer","damageBonusRaw":100,"spellDamage":-10,"lifeSteal":185,"emeraldStealing":5},
+{"name":"Atakebune","type":"chestplate","level":100,"tier":"Legendary","sockets":4,"strength":65,"health":3500,"earthDefense":90,"thunderDefense":60,"waterDefense":120,"fireDefense":90,"airDefense":60,"identified":true,"category":"armor","displayName":"Atakebune","bonusEarthDamage":40,"bonusFireDamage":20,"spellDamageRaw":180,"speed":-20,"spellCostRaw3":4},
+{"name":"Brigantine","type":"chestplate","level":99,"tier":"Rare","sockets":3,"intelligence":75,"intelligencePoints":8,"health":3500,"waterDefense":125,"fireDefense":-100,"identified":true,"category":"armor","displayName":"Brigantine","bonusEarthDamage":-10,"bonusThunderDamage":6,"bonusWaterDamage":10,"spellDamage":20,"manaSteal":12,"lootBonus":25},
+{"name":"Frigate","type":"leggings","level":98,"tier":"Rare","intelligence":60,"agility":45,"health":2500,"earthDefense":-75,"identified":true,"category":"armor","displayName":"Frigate","bonusWaterDamage":35,"bonusAirDamage":30,"attackSpeedBonus":1,"healthRegen":-25,"speed":15,"sprint":15},
+{"name":"Xebec","type":"necklace","level":100,"tier":"Legendary","intelligence":80,"earthDefense":-30,"thunderDefense":-30,"waterDefense":60,"fireDefense":-30,"airDefense":-30,"identified":true,"category":"accessory","displayName":"Xebec","manaRegen":-10,"spellCostRaw1":-2,"spellCostRaw2":-2,"spellCostRaw3":-2,"spellCostRaw4":-2},
+{"name":"Skidbladnir","type":"boots","level":100,"tier":"Legendary","sockets":3,"agility":70,"health":3500,"airDefense":180,"identified":true,"category":"armor","displayName":"Skidbladnir","bonusAirDamage":35,"damageBonus":-35,"spellDamageRaw":200,"healthRegenRaw":200,"speed":35,"sprintRegen":35},
+{"name":"Mistico","type":"boots","level":98,"tier":"Rare","dexterity":45,"agilityPoints":7,"health":2400,"earthDefense":-100,"thunderDefense":100,"identified":true,"category":"armor","displayName":"Mistico","bonusThunderDamage":24,"manaSteal":7,"lifeSteal":240,"speed":24,"emeraldStealing":7}
   ]
 }
