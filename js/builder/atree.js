@@ -701,7 +701,6 @@ const atree_render_active = new (class extends ComputeNode {
     }
 
     compute_func(input_map) {
-        console.log("boop");
         const merged_abils = input_map.get('atree-merged');
         const atree_order = input_map.get('atree-order');
 
