@@ -61,22 +61,23 @@
 }
 
 .reorder-filter {
-    height: 75%;
+    height: 2ch;
     cursor: pointer;
 }
 
 input.filter-input {
     width: 27ch!important;
+    max-width: 90%;
     display: inline-block;
 }
 
 .asc-icon {
     opacity: 0.25;
-    width: 1rem;
+    width: 1.75ch;
 }
 .desc-icon {
     opacity: 0.25;
-    width: 1rem;
+    width: 1.75ch;
     transform: rotate(180deg);
 }
 img.asc-sel {
@@ -90,4 +91,11 @@ input.min-max-input {
 
 #filter-container > div > div > * {
     margin: 0 2px;
+}
+
+/* item display */
+@media (min-width: 576px) and (max-width: 991px) {
+    div.col-sm-6 {
+        width: 100%;
+    }
 }
