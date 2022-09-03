@@ -27657,7 +27657,7 @@
       "aDamPct": {
         "minimum": 5,
         "maximum": 7
-      },
+      }
     },
     "itemIDs": {
       "dura": 0,
