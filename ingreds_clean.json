@@ -1,7 +1,7 @@
 [
   {
     "name": "Acid Magma",
-    "tier": 0,
+    "tier": 0, 
     "skills": [
       "TAILORING",
       "ALCHEMISM"
@@ -24504,16 +24504,16 @@
     "lvl": 49,
     "ids": {
       "sdPct": {
-        "minimum": 6,
-        "maximum": 10
+        "minimum": 4,
+        "maximum": 6
       },
       "int": {
-        "minimum": -10,
-        "maximum": -6
+        "minimum": -6,
+        "maximum": -4
       }
     },
     "itemIDs": {
-      "dura": -85,
+      "dura": -103,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -27006,8 +27006,8 @@
     "lvl": 35,
     "ids": {
       "eSteal": {
-        "minimum": 8,
-        "maximum": 10
+        "minimum": 2,
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -27578,5 +27578,956 @@
       "notTouching": 0
     },
     "id": 679
+  },
+  {
+    "name": "Contraband Absinthe",
+    "tier": 2,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 36,
+    "ids": {
+      "str": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "dex": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "int": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "agi": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "def": {
+        "minimum": 2,
+        "maximum": 4
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -110
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 685
+  },
+  {
+    "name": "Contraband Ink Sac",
+    "tier": 2,
+    "skills": [
+      "SCRIBING"
+    ],
+    "lvl": 36,
+    "ids": {
+      "eDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "tDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "wDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "fDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "aDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      },
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -110
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 686
+  },
+  {
+    "name": "Contraband Miracle Berry",
+    "tier": 2,
+    "skills": [
+      "COOKING"
+    ],
+    "lvl": 36,
+    "ids": {
+      "sdPct": {
+        "minimum": -6,
+        "maximum": -4
+      },
+      "mdPct": {
+        "minimum": -6,
+        "maximum": -4
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 200
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 687
+  },
+  {
+    "name": "Devourer's Maw",
+    "tier": 3,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 68,
+    "ids": {
+      "mr": {
+        "minimum": -3,
+        "maximum": -2
+      },
+      "ms": {
+        "minimum": -7,
+        "maximum": -5
+      },
+      "ls": {
+        "minimum": 150,
+        "maximum": 165
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -230
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 688
+  },
+  {
+    "name": "Faebloom Petal",
+    "tier": 1,
+    "skills": [
+      "JEWELING"
+    ],
+    "lvl": 65,
+    "ids": {
+      "str": {
+        "minimum": 2,
+        "maximum": 2
+      },
+      "eDamPct": {
+        "minimum": 3,
+        "maximum": 4
+      },
+      "fDefPct": {
+        "minimum": -6,
+        "maximum": -5
+      }
+    },
+    "itemIDs": {
+      "dura": -56,
+      "strReq": 8,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 689
+  },
+  {
+    "name": "Feline Claws",
+    "tier": 0,
+    "skills": [
+      "TAILORING"
+    ],
+    "lvl": 62,
+    "ids": {
+      "mdPct": {
+        "minimum": 2,
+        "maximum": 3
+      },
+      "mdRaw": {
+        "minimum": 12,
+        "maximum": 16
+      }
+    },
+    "itemIDs": {
+      "dura": -39,
+      "strReq": 0,
+      "dexReq": 4,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 690
+  },
+  {
+    "name": "Ice Fishing Bait",
+    "tier": 1,
+    "skills": [
+      "COOKING"
+    ],
+    "lvl": 41,
+    "ids": {
+      "wDamPct": {
+        "minimum": 3,
+        "maximum": 5
+      },
+      "aDamPct": {
+        "minimum": 3,
+        "maximum": 5
+      },
+      "ws": {
+        "minimum": 3,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -250
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 691
+  },
+  {
+    "name": "Ice Fishing Hook",
+    "tier": 1,
+    "skills": [
+      "WEAPONSMITHING"
+    ],
+    "lvl": 41,
+    "ids": {
+      "mdRaw": {
+        "minimum": 16,
+        "maximum": 20
+      },
+      "sdRaw": {
+        "minimum": 16,
+        "maximum": 20
+      },
+      "hpBonus": {
+        "minimum": -100,
+        "maximum": -80
+      }
+    },
+    "itemIDs": {
+      "dura": -50,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 692
+  },
+  {
+    "name": "Ice Fishing Net",
+    "tier": 1,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 41,
+    "ids": {
+      "mdRaw": {
+        "minimum": 10,
+        "maximum": 15
+      },
+      "sdRaw": {
+        "minimum": 10,
+        "maximum": 15
+      },
+      "hpBonus": {
+        "minimum": 50,
+        "maximum": 75
+      }
+    },
+    "itemIDs": {
+      "dura": -50,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 693
+  },
+  {
+    "name": "Ice Fishing Twine",
+    "tier": 1,
+    "skills": [
+      "WOODWORKING"
+    ],
+    "lvl": 41,
+    "ids": {
+      "mdRaw": {
+        "minimum": -20,
+        "maximum": -16
+      },
+      "sdRaw": {
+        "minimum": -20,
+        "maximum": -16
+      },
+      "hpBonus": {
+        "minimum": 80,
+        "maximum": 100
+      }
+    },
+    "itemIDs": {
+      "dura": -50,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 694
+  },
+  {
+    "name": "Ignited Faebloom",
+    "tier": 3,
+    "skills": [
+      "ARMOURING",
+      "WEAPONSMITHING",
+      "WOODWORKING"
+    ],
+    "lvl": 67,
+    "ids": {
+      "str": {
+        "minimum": 6,
+        "maximum": 8
+      },
+      "ms": {
+        "minimum": 6,
+        "maximum": 8
+      },
+      "wDamPct": {
+        "minimum": -10,
+        "maximum": -8
+      },
+      "aDamPct": {
+        "minimum": -10,
+        "maximum": -8
+      },
+      "tDamPct": {
+        "minimum": -10,
+        "maximum": -8
+      },
+      "eDamPct": {
+        "minimum": -10,
+        "maximum": -8
+      }
+    },
+    "itemIDs": {
+      "dura": -122,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 695
+  },
+  {
+    "name": "Illicit Hemlock",
+    "tier": 1,
+    "skills": [
+      "TAILORING",
+      "ALCHEMISM"
+    ],
+    "lvl": 33,
+    "ids": {
+      "poison": {
+        "minimum": 20,
+        "maximum": 25
+      },
+      "ls": {
+        "minimum": 12,
+        "maximum": 18
+      }
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -70
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 696
+  },
+  {
+    "name": "Illicit Quince",
+    "tier": 1,
+    "skills": [
+      "WOODWORKING",
+      "ALCHEMISM"
+    ],
+    "lvl": 33,
+    "ids": {
+      "hpBonus": {
+        "minimum": 40,
+        "maximum": 45
+      },
+      "hprPct": {
+        "minimum": 4,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -70
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 697
+  },
+  {
+    "name": "Illicit Tingflower",
+    "tier": 1,
+    "skills": [
+      "JEWELING",
+      "ALCHEMISM"
+    ],
+    "lvl": 33,
+    "ids": {
+      "tDamPct": {
+        "minimum": 2,
+        "maximum": 4
+      },
+      "tDefPct": {
+        "minimum": 2,
+        "maximum": 4
+      }
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -10
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 698
+  },
+  {
+    "name": "Illicit Whitethorn",
+    "tier": 1,
+    "skills": [
+      "WEAPONSMITHING",
+      "ALCHEMISM"
+    ],
+    "lvl": 33,
+    "ids": {
+      "agi": {
+        "minimum": 2,
+        "maximum": 3
+      },
+      "aDamPct": {
+        "minimum": 4,
+        "maximum": 6
+      }
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -70
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 699
+  },
+  {
+    "name": "Illicit Yarrow",
+    "tier": 1,
+    "skills": [
+      "ARMOURING",
+      "ALCHEMISM"
+    ],
+    "lvl": 33,
+    "ids": {
+      "int": {
+        "minimum": 2,
+        "maximum": 3
+      },
+      "sdRaw": {
+        "minimum": 15,
+        "maximum": 20
+      }
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -70
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 700
+  },
+  {
+    "name": "Looted Alloy",
+    "tier": 0,
+    "skills": [
+      "ARMOURING"
+    ],
+    "lvl": 61,
+    "ids": {
+      "hpBonus": {
+        "minimum": 140,
+        "maximum": 160
+      },
+      "fDefPct": {
+        "minimum": 3,
+        "maximum": 4
+      }
+    },
+    "itemIDs": {
+      "dura": -39,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 4,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 701
+  },
+  {
+    "name": "Pilfered Silver",
+    "tier": 1,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 61,
+    "ids": {
+      "mdRaw": {
+        "minimum": 45,
+        "maximum": 45
+      },
+      "lb": {
+        "minimum": 4,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": -54,
+      "strReq": 0,
+      "dexReq": 6,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 702
+  },
+  {
+    "name": "Strange Trinket",
+    "tier": 2,
+    "skills": [
+      "WEAPONSMITHING",
+      "WOODWORKING"
+    ],
+    "lvl": 63,
+    "ids": {
+      "str": {
+        "minimum": 4,
+        "maximum": 5
+      },
+      "dex": {
+        "minimum": 4,
+        "maximum": 5
+      },
+      "int": {
+        "minimum": 4,
+        "maximum": 5
+      },
+      "def": {
+        "minimum": -7,
+        "maximum": -6
+      },
+      "agi": {
+        "minimum": -7,
+        "maximum": -6
+      }
+    },
+    "itemIDs": {
+      "dura": -78,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 4,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 703
+  },
+  {
+    "name": "Terramarine Dust",
+    "tier": 1,
+    "skills": [
+      "WOODWORKING",
+      "SCRIBING"
+    ],
+    "lvl": 62,
+    "ids": {
+      "wDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "eDamPct": {
+        "minimum": 5,
+        "maximum": 7
+      }
+    },
+    "itemIDs": {
+      "dura": -55,
+      "strReq": 6,
+      "dexReq": 0,
+      "intReq": 6,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -100
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 704
+  },
+  {
+    "name": "Windswept Roots",
+    "tier": 2,
+    "skills": [
+      "TAILORING",
+      "WOODWORKING"
+    ],
+    "lvl": 64,
+    "ids": {
+      "agi": {
+        "minimum": 5,
+        "maximum": 7
+      },
+      "mdPct": {
+        "minimum": 6,
+        "maximum": 8
+      },
+      "sdPct": {
+        "minimum": 6,
+        "maximum": 8
+      }
+    },
+    "itemIDs": {
+      "dura": -79,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 15
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 705
+  },
+  {
+    "name": "Yale Leather",
+    "tier": 0,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 63,
+    "ids": {
+      "str": {
+        "minimum": 1,
+        "maximum": 3
+      },
+      "fDefPct": {
+        "minimum": 3,
+        "maximum": 6
+      }
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 5,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 5,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 706
   }
 ]
