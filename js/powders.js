@@ -55,11 +55,11 @@ class PowderSpecial{
 function _ps(a,b,c,d,e) { return new PowderSpecial(a,b,c,d,e); } //bruh moment
 
 let powderSpecialStats = [
-    _ps("Quake",new Map([["Radius",[4.4,4.9,5.4,5.9,6.4]], ["Damage",[155,220,285,350,415]] ]),"Rage",new Map([ ["Damage", [0.3,0.4,0.5,0.7,1.0]],["Description", "% " + "\u2764" + " Missing"] ]), 396), //e
-    _ps("Chain Lightning",new Map([ ["Chains", [5,6,7,8,9]], ["Damage", [200,225,250,275,300]] ]),"Kill Streak",new Map([ ["Damage", [3,4.5,6,7.5,9]],["Duration", [5,5,5,5,5]],["Description", "Mob Killed"] ]),200), //t
-    _ps("Curse",new Map([ ["Duration", [7,7.5,8,8.5,9]],["Damage Boost", [90,120,150,180,210]] ]),"Concentration",new Map([ ["Damage", [1,2,3,4,5]],["Duration",[1,1,1,1,1]],["Description", "Mana Used"] ]),150), //w
-    _ps("Courage",new Map([ ["Duration", [6,6.5,7,7.5,8]],["Damage", [75,87.5,100,112.5,125]],["Damage Boost", [70,90,110,130,150]] ]),"Endurance",new Map([ ["Damage", [2,3,4,5,6]],["Duration", [8,8,8,8,8]],["Description", "Hit Taken"] ]),200), //f
-    _ps("Wind Prison",new Map([ ["Duration", [3,3.5,4,4.5,5]],["Damage Boost", [400,450,500,550,600]],["Knockback", [8,12,16,20,24]] ]),"Dodge",new Map([ ["Damage",[2,3,4,5,6]],["Duration",[2,3,4,5,6]],["Description","Near Mobs"] ]),150) //a
+    _ps("Quake",new Map([["Radius",[4.5,5,5.5,6,6.5]], ["Damage",[240,280,320,360,400]] ]),"Rage",new Map([ ["Damage", [0.2,0.4,0.6,0.8,1.0]],["Description", "% " + "\u2764" + " Missing below 75%"] ]),300), //e
+    _ps("Chain Lightning",new Map([ ["Chains", [5,6,7,8,9]], ["Damage", [200,225,250,275,300]] ]),"Kill Streak",new Map([ ["Damage", [3,4.5,6,7.5,9]],["Duration", [5,5,5,5,5]],["Description", "Mob Killed"] ]),150), //t
+    _ps("Curse",new Map([ ["Duration", [4,4,4,4,4]],["Damage Boost", [10,15,20,25,30]] ]),"Concentration",new Map([ ["Damage", [0.05,0.1,0.15,0.2,0.25]],["Duration",[1,1,1,1,1]],["Description", "Mana Used"] ]),100), //w
+    _ps("Courage",new Map([ ["Duration", [4,4,4,4,4]],["Damage", [60, 70, 80, 90, 100]],["Damage Boost", [10,12.5,15,17.5,20]] ]),"Endurance",new Map([ ["Damage", [2,3,4,5,6]],["Duration", [8,8,8,8,8]],["Description", "Hit Taken"] ]),100), //f
+    _ps("Wind Prison",new Map([ ["Duration", [3,3.5,4,4.5,5]],["Damage Boost", [100,125,150,175,200]],["Knockback", [8,12,16,20,24]] ]),"Dodge",new Map([ ["Damage",[2,3,4,5,6]],["Duration",[2,3,4,5,6]],["Description","Near Mobs"] ]),150) //a
 ];
 
 /**
