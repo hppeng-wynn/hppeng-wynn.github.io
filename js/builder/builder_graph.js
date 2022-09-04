@@ -29,8 +29,7 @@ let boosts_node = new (class extends ComputeNode {
             let elem = document.getElementById(key + "-boost")
             if (elem.classList.contains("toggleOn")) {
                 damage_boost += value;
-                if (key === "warscream") { def_boost += .10 }
-                if (key === "vanish") { def_boost += .15 }
+                if (key === "warscream") { def_boost += .20 }
             }
         }
         let res = new Map();
@@ -629,48 +628,51 @@ class SpellDamageCalcNode extends ComputeNode {
             else {
                 continue;
             }
-            spell_result.name = part.name;
+            const {name, display = true} = part;
+            spell_result.name = name;
+            spell_result.display = display;
             spell_results.push(spell_result);
-            spell_result_map.set(part.name, spell_result);
+            spell_result_map.set(name, spell_result);
         }
         for (const part of spell_parts) {
-            if ('hits' in part) {
-                let spell_result = {
-                    normal_min: [0, 0, 0, 0, 0, 0],
-                    normal_max: [0, 0, 0, 0, 0, 0],
-                    normal_total: [0, 0],
-                    crit_min: [0, 0, 0, 0, 0, 0],
-                    crit_max: [0, 0, 0, 0, 0, 0],
-                    crit_total: [0, 0],
-                    heal_amount: 0
-                }
-                const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
-                for (const [subpart_name, hits] of Object.entries(part.hits)) {
-                    const subpart = spell_result_map.get(subpart_name);
-                    if (!subpart) { continue; }
-                    if (spell_result.type) {
-                        if (subpart.type !== spell_result.type) {
-                            throw "SpellCalc total subpart type mismatch";
-                        }
-                    }
-                    else {
-                        spell_result.type = subpart.type;
-                    }
-                    if (spell_result.type === 'damage') {
-                        for (const key of dam_res_keys) {
-                            for (let i in spell_result.normal_min) {
-                                spell_result[key][i] += subpart[key][i] * hits;
-                            }
-                        }
-                    }
-                    else {
-                        spell_result.heal_amount += subpart.heal_amount * hits;
-                    }
-                }
-                spell_result.name = part.name;
-                spell_results.push(spell_result);
-                spell_result_map.set(part.name, spell_result);
+            if (!('hits' in part)) { continue; }
+            let spell_result = {
+                normal_min: [0, 0, 0, 0, 0, 0],
+                normal_max: [0, 0, 0, 0, 0, 0],
+                normal_total: [0, 0],
+                crit_min: [0, 0, 0, 0, 0, 0],
+                crit_max: [0, 0, 0, 0, 0, 0],
+                crit_total: [0, 0],
+                heal_amount: 0
             }
+            const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
+            for (const [subpart_name, hits] of Object.entries(part.hits)) {
+                const subpart = spell_result_map.get(subpart_name);
+                if (!subpart) { continue; }
+                if (spell_result.type) {
+                    if (subpart.type !== spell_result.type) {
+                        throw "SpellCalc total subpart type mismatch";
+                    }
+                }
+                else {
+                    spell_result.type = subpart.type;
+                }
+                if (spell_result.type === 'damage') {
+                    for (const key of dam_res_keys) {
+                        for (let i in spell_result.normal_min) {
+                            spell_result[key][i] += subpart[key][i] * hits;
+                        }
+                    }
+                }
+                else {
+                    spell_result.heal_amount += subpart.heal_amount * hits;
+                }
+            }
+            const {name, display = true} = part;
+            spell_result.name = name;
+            spell_result.display = display;
+            spell_results.push(spell_result);
+            spell_result_map.set(name, spell_result);
         }
         return spell_results;
     }

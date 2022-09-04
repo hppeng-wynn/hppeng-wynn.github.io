@@ -1,4 +1,4 @@
-const TOME_DB_VERSION = 4;
+const TOME_DB_VERSION = 5;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let tdb;

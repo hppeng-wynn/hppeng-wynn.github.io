@@ -56,8 +56,8 @@
       "restrict": "Soulbound Item",
       "lvl": 100,
       "defMobs": 5,
-      "thorns": 6,
-      "reflection": 6,
+      "exploding": 6,
+      "mdPct": 6,
       "fixID": false,
       "id": 3,
       "alias": "Melee II"
