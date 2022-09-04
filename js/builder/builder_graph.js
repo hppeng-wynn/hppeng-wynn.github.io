@@ -17,7 +17,7 @@ let armor_powder_node = new (class extends ComputeNode {
     }
 })();
 
-const damageMultipliers = new Map([ ["totem", .2], ["warscream", 0.0], ["ragnarokkr", 0.30], ["fortitude", 0.60] ]);
+const damageMultipliers = new Map([ ["totem", 0.2], ["warscream", 0.0], ["ragnarokkr", 0.30], ["fortitude", 0.60], ["radiance", 0.0] ]);
 
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
@@ -99,7 +99,7 @@ class PowderSpecialCalcNode extends ComputeNode {
                 if (name === "Courage" || name === "Curse") { //courage and curse are is universal damage boost
                     stats.set("sdPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                     stats.set("mdPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                    stats.set("poisonPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    //stats.set("poisonPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                 } else if (name === "Wind Prison") {
                     stats.set("aDamPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                 }
@@ -617,7 +617,7 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (stats.get('healPct')/100));
+                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (1+stats.get('healPct')/100));
                 if (stats.has('healPct:'+part_id)) {
                     _heal_amount *= 1+(stats.get('healPct:'+part_id)/100);
                 }
@@ -846,6 +846,57 @@ class AggregateStatsNode extends ComputeNode {
         return output_stats;
     }
 }
+
+let radiance_affected = [ "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref",
+/*"str", "dex", "int", "agi", "def",*/
+"thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd",
+
+// wynn2 damages.
+"eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct,"*/"eDamRaw",//"eDamAddMin","eDamAddMax",
+"tMdPct","tMdRaw","tSdPct","tSdRaw",/*"tDamPct,"*/"tDamRaw",//"tDamAddMin","tDamAddMax",
+"wMdPct","wMdRaw","wSdPct","wSdRaw",/*"wDamPct,"*/"wDamRaw",//"wDamAddMin","wDamAddMax",
+"fMdPct","fMdRaw","fSdPct","fSdRaw",/*"fDamPct,"*/"fDamRaw",//"fDamAddMin","fDamAddMax",
+"aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct,"*/"aDamRaw",//"aDamAddMin","aDamAddMax",
+"nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw",//"nDamAddMin","nDamAddMax",      // neutral which is now an element
+/*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw",//"damAddMin","damAddMax",          // These are the old ids. Become proportional.
+"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw",//"rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"critDamPct",
+//"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
+];
+/**
+ * Scale stats if radiance is enabled.
+ */
+const radiance_node = new (class extends ComputeNode {
+    constructor() { super('radiance-node->:('); }
+
+    compute_func(input_map) {
+        const [statmap] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
+        let elem = document.getElementById('radiance-boost');
+        if (elem.classList.contains("toggleOn")) {
+            const ret = new Map(statmap);
+            for (const val of radiance_affected) {
+                ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
+            }
+            return ret;
+        }
+        else {
+            return statmap;
+        }
+    }
+})();
+
+/* Updates all spell boosts
+*/
+function update_radiance() {
+    let elem = document.getElementById('radiance-boost');
+    if (elem.classList.contains("toggleOn")) {
+        elem.classList.remove("toggleOn");
+    } else {
+        elem.classList.add("toggleOn");
+    }
+    radiance_node.mark_dirty().update();
+}
+
 
 /**
  * Aggregate editable ID stats with build and weapon type.
@@ -1086,8 +1137,9 @@ function builder_graph_init() {
     atree_node.link_to(class_node, 'player-class');
     atree_merge.link_to(class_node, 'player-class');
     pre_scale_agg_node.link_to(atree_raw_stats, 'atree-raw-stats');
-    atree_scaling.link_to(pre_scale_agg_node, 'scale-stats');
-    stat_agg_node.link_to(pre_scale_agg_node, 'pre-scaling');
+    radiance_node.link_to(pre_scale_agg_node, 'stats');
+    atree_scaling.link_to(radiance_node, 'scale-stats');
+    stat_agg_node.link_to(radiance_node, 'pre-scaling');
     stat_agg_node.link_to(atree_scaling_stats, 'atree-scaling');
 
     build_encode_node.link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state');

@@ -111,7 +111,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 if (id === "poison" && id_val > 0) {
-                    id_val = Math.ceil(id_val*stats.get("poisonPct")/100);
+                    id_val = Math.ceil(id_val*(1+stats.get("poisonPct")/100));
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
                 if (id === "poison" && id_val > 0) {
@@ -1014,7 +1014,7 @@ function displayPoisonDamage(overallparent_elem, statMap) {
     title_elemavg.append(make_elem('span', [], { textContent: "Poison Stats" }));
     spell_summary.append(title_elemavg);
 
-    let poison_tick = Math.ceil(statMap.get("poison") * (1+skillPointsToPercentage(statMap.get('str'))) * (statMap.get("poisonPct"))/100 /3);
+    let poison_tick = Math.ceil(statMap.get("poison") * (1+skillPointsToPercentage(statMap.get('str'))) * (1+statMap.get("poisonPct")/100) /3);
 
     let overallpoisonDamage = make_elem("p");
     overallpoisonDamage.append(
