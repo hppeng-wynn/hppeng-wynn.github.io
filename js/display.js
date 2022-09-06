@@ -114,7 +114,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     id_val = Math.ceil(id_val*(1+stats.get("poisonPct")/100));
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
-                if (id === "poison" && id_val > 0) {
+                /*if (id === "poison" && id_val > 0) {
                     let row = make_elem('div', ['row']);
                     let value_elem = make_elem('div', ['col', 'text-end']);
 
@@ -127,7 +127,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     row.appendChild(value_elem);
                     parent_div.appendChild(row);
                 }
-                else if (id === "ls" && id_val != 0) {
+                else */if (id === "ls" && id_val != 0) {
                     let row = make_elem('div', ['row']);
                     let value_elem = make_elem('div', ['col', 'text-end']);
 
@@ -1014,7 +1014,8 @@ function displayPoisonDamage(overallparent_elem, statMap) {
     title_elemavg.append(make_elem('span', [], { textContent: "Poison Stats" }));
     spell_summary.append(title_elemavg);
 
-    let poison_tick = Math.ceil(statMap.get("poison") * (1+skillPointsToPercentage(statMap.get('str'))) * (1+statMap.get("poisonPct")/100) /3);
+    let poison_tick = Math.floor(statMap.get("poison")/3);
+    //let poison_tick = Math.ceil(statMap.get("poison") * (1+skillPointsToPercentage(statMap.get('str'))) * (statMap.get("poisonPct"))/100 /3);
 
     let overallpoisonDamage = make_elem("p");
     overallpoisonDamage.append(
@@ -1456,6 +1457,7 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
 
     for (let i = 0; i < spell_results.length; ++i) {
         const spell_info = spell_results[i];
+        if (!spell_info.display) { continue; }
 
         let part_div = make_elem("p", ["pt-3"]);
         parent_elem.append(part_div);
