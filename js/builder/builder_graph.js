@@ -95,12 +95,10 @@ class PowderSpecialCalcNode extends ComputeNode {
         for (const [special, power] of powder_specials) {
             if (special["weaponSpecialEffects"].has("Damage Boost")) { 
                 let name = special["weaponSpecialName"];
-                if (name === "Courage" || name === "Curse") { //courage and curse are is universal damage boost
-                    stats.set("sdPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                    stats.set("mdPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                if (name === "Courage" || name === "Curse" || name == "Wind Prison") { // Master mod all the way
+                    stats.set("damMult."+name, special.weaponSpecialEffects.get("Damage Boost")[power-1]);
+                    // legacy
                     stats.set("poisonPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
-                } else if (name === "Wind Prison") {
-                    stats.set("aDamPct", special.weaponSpecialEffects.get("Damage Boost")[power-1]);
                 }
             }
         }
