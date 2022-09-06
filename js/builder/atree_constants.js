@@ -73,7 +73,7 @@ const atrees = {
                 {
                     "type": "replace_spell",
                     "name": "Escape",
-                    "cost": 25,
+                    "cost": 20,
                     "base_spell": 2,
                     "display": "",
                     "parts": []
@@ -408,12 +408,19 @@ const atrees = {
                         {
                             "name": "Single Bow",
                             "type": "total",
-                            "hits": { "Single Shot": "Arrow Shield.shots" }
+                            "hits": { "Single Shot": "Arrow Shield.shots" },
+                            "display": false
+                        },
+                        {
+                            "name": "Single Volley",
+                            "type": "total",
+                            "hits": { "Single Shot": "Arrow Shield.charges" },
+                            "display": false
                         },
                         {
                             "name": "DPS",
                             "type": "total",
-                            "hits": { "Single Shot": "Arrow Shield.charges" }
+                            "hits": { "Single Volley": 2 }
                         },
                         {
                             "name": "Total Damage",
@@ -688,12 +695,12 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 2,
-                    "target_part": "Stomp Damage",
+                    "target_part": "Total Damage",
                     "cost": 0,
                     "hits": {
                         "Fierce Stomp": 1
                     },
-                    "display": "Stomp Damage"
+                    "display": "Total Damage"
                 }
             ]
         },
@@ -843,11 +850,11 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 2,
-                    "target_part": "Per Arrow",
+                    "target_part": "Escape Artist Arrow",
                     "multipliers": [
-                        20,
+                        70,
                         0,
-                        10,
+                        30,
                         0,
                         0,
                         0
@@ -856,11 +863,11 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 2,
-                    "target_part": "Max Damage (Escape Artist)",
+                    "target_part": "Total Damage",
                     "hits": {
-                        "Per Arrow": 120
+                        "Escape Artist Arrow": 1
                     },
-                    "display": "Max Damage (Escape Artist)"
+                    "display": "Total Damage"
                 }
             ]
         },
@@ -929,7 +936,7 @@ const atrees = {
                         {
                             "name": "DPS",
                             "hits": {
-                                "Single Hit": 4
+                                "Single Hit": 3.3333333333333
                             }
                         }
                     ]
@@ -1003,7 +1010,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 2,
-                    "target_part": "Stomp Damage",
+                    "target_part": "Total Damage",
                     "hits": {
                         "Geyser Stomp": 1
                     }
@@ -2074,7 +2081,7 @@ const atrees = {
         },
         {
             "display_name": "Elusive",
-            "desc": "If you do not get hit for 8+ seconds, become immune to self-damage and remove Arrow Storm's recoil. (Dodging counts as not getting hit)",
+            "desc": "If you do not get hit for 5+ seconds, become immune to self-damage and remove Arrow Storm's recoil. (Dodging counts as not getting hit)",
             "archetype": "Boltslinger",
             "archetype_req": 0,
             "parents": [
@@ -2531,23 +2538,15 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
-                    "target_part": "Arrow Rain (Per Arrow)",
+                    "target_part": "Arrow Rain",
                     "multipliers": [
-                        80,
+                        100,
                         0,
                         0,
                         0,
                         0,
-                        60
+                        50
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "target_part": "Arrow Rain (Total)",
-                    "hits": {
-                        "Arrow Rain (Per Arrow)": 150
-                    }
                 }
             ]
         },
@@ -4067,7 +4066,7 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 2 
+                "range": 1
             },
             "effects": [
                 {
@@ -4751,7 +4750,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Heal",
-                            "power": 0.1
+                            "power": 0.15
                         }
                     ]
                 }
@@ -5228,7 +5227,7 @@ const atrees = {
         },
         {
             "display_name": "Thunderstorm",
-            "desc": "After casting Meteor, summon 3 lightning strikes and deal additional damage",
+            "desc": "After casting Meteor, summon 4 lightning strikes and deal additional damage",
             "base_abil": "Meteor",
             "parents": [
                 "Wind Slash",
@@ -5253,9 +5252,9 @@ const atrees = {
                     "target_part": "Lightning Damage",
                     "base_spell": 3,
                     "multipliers": [
-                        30,
+                        25,
                         0,
-                        15,
+                        10,
                         0,
                         0,
                         0
@@ -5266,7 +5265,7 @@ const atrees = {
                     "target_part": "Total Damage",
                     "base_spell": 3,
                     "hits": {
-                        "Lightning Damage": 3
+                        "Lightning Damage": 4
                     }
                 }
             ]
@@ -5564,7 +5563,7 @@ const atrees = {
         {
             "display_name": "Purification",
             "desc": "Heal and Arcane Transfer will purify you of all negative effects and fire. (3s Cooldown)",
-            "base_abil": 1,
+            "base_abil": "Heal",
             "parents": [
                 "Ophanim",
                 "Cheaper Heal",
@@ -5662,7 +5661,7 @@ const atrees = {
                                 "name": "nConvBase:3.Lightning Damage"
                             }
                         ],
-                        "scaling": [15]
+                        "scaling": [10]
                     },
                     {
                         "type": "stat_scaling",
@@ -5682,7 +5681,7 @@ const atrees = {
                                 "name": "eConvBase:3.Lightning Damage"
                             }
                         ],
-                    "scaling": [10]
+                    "scaling": [8]
                 }
             ]
         },
@@ -6029,7 +6028,8 @@ const atrees = {
             "archetype": "Riftwalker",
             "archetype_req": 5,
             "parents": [
-                "Cheaper Ice Snake"
+                "Cheaper Ice Snake",
+                "Fluid Healing"
             ],
             "dependencies": [
                 "Ice Snake",
@@ -6149,7 +6149,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Second and Third Pulses",
-                    "power": 0.15
+                    "power": 0.20
                 },
                 {
                     "type": "add_spell_prop",
@@ -6204,7 +6204,9 @@ const atrees = {
                 "col": 4,
                 "icon": "node_3"
             },
-            "properties": {},
+            "properties": {
+                "range": 7
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -6216,11 +6218,11 @@ const atrees = {
                             "name": "Single Orb",
                             "type": "damage",
                             "multipliers": [
-                                40,
+                                70,
                                 0,
                                 0,
                                 0,
-                                20,
+                                30,
                                 0
                             ]
                         },
@@ -6735,7 +6737,8 @@ const atrees = {
             "archetype": "Light Bender",
             "archetype_req": 0,
             "parents": [
-                "Better Ophanim"
+                "Better Ophanim",
+                "Dynamic Faith"
             ],
             "dependencies": [
                 "Healthier Ophanim I"
@@ -6752,7 +6755,7 @@ const atrees = {
         },
         {
             "display_name": "Sunflare",
-            "desc": "After healing 400% of your max health within 10s, your next Heal will make every nearby ally temporarily immune.",
+            "desc": "After healing 300% of your max health within 10s, your next Heal will make every nearby ally temporarily immune. Cooldown: 20s",
             "archetype": "Light Bender",
             "archetype_req": 12,
             "base_abil": "Heal",
@@ -10726,7 +10729,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Effigy Hit",
-                            "multipliers": [ 50, 0, 0, 50, 0, 0 ]
+                            "multipliers": [ 40, 0, 0, 40, 0, 0 ]
                         },
                         {
                             "name": "Single Effigy DPS",
@@ -10913,7 +10916,7 @@ const atrees = {
         },     
         {
             "display_name": "Blood Rite",
-            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 25% of the damage taken into your Blood Pool. (Max 10%)",
+            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 35% of the damage taken into your Blood Pool. (Max 10%)",
             "archetype": "Acolyte",
             "archetype_req": 9,
             "parents": ["Fluid Healing", "More Blood Pool II"],
@@ -10946,7 +10949,14 @@ const atrees = {
             "properties": {
                 "max_effigy": 1
             },
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 7,
+                    "name": "Effigy Hit",
+                    "multipliers": [ -10, 0, 0, -10, 0, 0 ]
+                }
+            ]
         },
         {
             "display_name": "Chant of the Fanatic",
@@ -11060,7 +11070,7 @@ const atrees = {
         },
         {
             "display_name": "Mengdu",
-            "desc": "For every 1% Thorns you have from item IDs, gain +1% Water Damage. (Max 100%)",
+            "desc": "For every 1% Thorns you have from item IDs, gain +1% Water Damage. (Max 40%)",
             "parents": ["Chant of the Fanatic", "Invigorating Wave"],
             "dependencies": [],
             "blockers": [],
@@ -11086,7 +11096,7 @@ const atrees = {
                         "name": "wDamPct"
                     },
                     "scaling": [ 1 ],
-                    "max": 100
+                    "max": 40
                 }
             ]
         },

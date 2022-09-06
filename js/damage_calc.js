@@ -249,11 +249,13 @@ spell_damage: {
     name:           str != "total"  Name of the part.
     type:           "damage"        [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
     multipliers:    array[num, 6]   floating point spellmults (though supposedly wynn only supports integer mults)
+    display:        bool            To show part or not (for some spells there are too many intermediate calc parts). Default: True
 }
 spell_heal: {
     name:           str != "total"  Name of the part.
     type:           "heal"          [TODO: DEPRECATED/REMOVE] flag signaling what type of part it is. Can infer from fields
     power:          num             floating point healing power (1 is 100% of max hp).
+    display:        bool            To show part or not (for some spells there are too many intermediate calc parts). Default: True
 }
 spell_total: {
     name:           str != "total"  Name of the part.
@@ -261,6 +263,7 @@ spell_total: {
     hits:           Map[str, Union[str, num]]   Keys are other part names, numbers are the multipliers. Undefined behavior if subparts
                                                 are not the same type of spell. Can only pull from spells defined before it.
                                                 Alternatively, a property reference of the format <ability_id>.propname
+    display:        bool            To show part or not (for some spells there are too many intermediate calc parts). Default: True
 }
 
 
