@@ -178,7 +178,7 @@ function do_item_search() {
         if (min > max) {
             continue; // invalid range
         }
-        let zero_in_min_max = (isNaN(min) || min <= 0) && (isNaN(max) || max >= 0);
+        let zero_in_min_max = (isNaN(min) || min < 0) && (isNaN(max) || max > 0);
 
         let raw_name = filter.input_elem.value;
         let filter_name = translate_mappings[raw_name];
