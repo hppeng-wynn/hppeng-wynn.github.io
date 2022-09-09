@@ -2511,7 +2511,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
-                    "cost": -10
+                    "cost": -5
                 }
             ]
         },
@@ -11041,7 +11041,7 @@ const atrees = {
         },
         {
             "display_name": "Invigorating Wave",
-            "desc": "Aura will temporarily +50% your Summon's attack speed. Players hit will gain +3 mana.",
+            "desc": "Aura will temporarily increase your Summon's attack speed by +50%. Players hit will gain +3 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
             "parents": ["More Effigies", "Triple Totem", "Mengdu"], 
