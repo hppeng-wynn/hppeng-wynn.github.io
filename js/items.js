@@ -5,9 +5,9 @@ const translate_mappings = {
     //"Set": "set",
     "Powder Slots": "slots",
     //"Type": "type",
-    "Drop type": "drop",
-    "Quest requirement": "quest",
-    "Restriction": "restrict",
+    //"Drop type": "drop",             BROKEN
+    //"Quest requirement": "quest",    BROKEN
+    //"Restriction": "restrict",       BROKEN
     //"Base Neutral Damage": "nDam",
     //"Base Fire Damage": "fDam",
     //"Base Water Damage": "wDam",
@@ -98,7 +98,7 @@ const special_mappings = {
     // "No Defense Req": "defReq=0",
 };
 
-let item_filters = []
+let item_filters = [];
 for (let x in translate_mappings) {
     item_filters.push(x);
 }
@@ -110,7 +110,7 @@ let item_categories = ["armor", "accessory", "weapon"];
 
 const types = {bow: false, spear: false, wand: false, dagger: false, relik: false, helmet: false, chestplate: false, leggings: false, boots: false, ring: false, bracelet: false, necklace: false};
 const rarities = {normal: true, unique: true, set: true, rare: true, legendary: true, fabled: true, mythic: true};
-const filters = [];
+const filters = [], excludes = [];
 let filter_id_counter = 0;
 
 function displayItems(items_copy) {
@@ -135,6 +135,7 @@ let search_db;
 let expr_parser;
 
 function do_item_search() {
+    document.getElementById("summary").style.color = "red"; // to display errors, changed to white if search successful
     window.scrollTo(0, 0);
     let queries = [];
 
@@ -155,7 +156,7 @@ function do_item_search() {
         }
     }
     if (noTypes) {
-        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 type selected!";
+        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 type selected";
         return;
     } else if (!allTypes) {
         queries.push(typeQuery.substring(0, typeQuery.length - 1) + ")");
@@ -173,7 +174,7 @@ function do_item_search() {
         }
     }
     if (noRarities) {
-        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 rarity selected!";
+        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 rarity selected";
         return;
     } else if (!allRarities) {
         queries.push(rarityQuery.substring(0, rarityQuery.length - 1) + ")");
@@ -184,7 +185,7 @@ function do_item_search() {
         let min = parseInt(filter.min_elem.value);
         let max = parseInt(filter.max_elem.value);
         if (min > max) {
-            document.getElementById("summary").innerHTML = "Error: The minimum of filter " + filter.input_elem.value + " (" + min + ") is greater than its maximum (" + max + ")!";
+            document.getElementById("summary").innerHTML = "Error: The minimum of filter " + filter.input_elem.value + " (" + min + ") is greater than its maximum (" + max + ")";
             return;
         }
         let zero_in_min_max = (isNaN(min) || min < 0) && (isNaN(max) || max > 0);
@@ -194,7 +195,8 @@ function do_item_search() {
         if (filter_name === undefined) {
             filter_name = special_mappings[raw_name];
             if (filter_name === undefined) {
-                continue; // not a valid filter
+                document.getElementById("summary").innerHTML = "Error: The filter \"" + filter.input_elem.value + "\" is not recognized";
+                return;
             }
             filter_name = "(" + filter_name + ")";
         }
@@ -209,6 +211,21 @@ function do_item_search() {
             queries.push("f:" + filter_name + "!=0");
         }
         queries.push("s:" + (filter.ascending ? "0-" : "") + filter_name);
+    }
+
+    // excludes
+    for (const exclude of excludes) {
+        let raw_name = exclude.input_elem.value;
+        let filter_name = translate_mappings[raw_name];
+        if (filter_name === undefined) {
+            filter_name = special_mappings[raw_name];
+            if (filter_name === undefined) {
+                document.getElementById("summary").innerHTML = "Error: The excluded filter \"" + exclude.input_elem.value + "\" is not recognized";
+                return;
+            }
+            filter_name = "(" + filter_name + ")";
+        }
+        queries.push("f:" + filter_name + "!=0");
     }
 
     let filter_query = "true";
@@ -241,7 +258,8 @@ function do_item_search() {
         document.getElementById("summary").textContent = e.message;
         return;
     }
-    document.getElementById("summary").textContent = results.length + " results:"
+    document.getElementById("summary").textContent = results.length + " results:";
+    document.getElementById("summary").style.color = "white";
     displayItems(results);
 }
 
@@ -291,6 +309,7 @@ function init_items() {
 
     // filters
     document.getElementById("add-filter").addEventListener("click", create_filter);
+    document.getElementById("add-exclude").addEventListener("click", create_exclude);
     create_filter();
     filters[0].input_elem.value = "Combat Level";
     init_filter_drag();
@@ -356,7 +375,6 @@ function create_filter() {
     col.appendChild(trash);
 
     document.getElementById("filter-container").insertBefore(row, document.getElementById("add-filter").parentElement);
-
     filters.push(data);
     init_filter_dropdown(data);
 }
@@ -424,6 +442,34 @@ function init_filter_drag() {
         }
         currently_dragging = null;
     });
+}
+
+function create_exclude() {
+    let data = {};
+
+    let row = make_elem("div", ["row", "filter-row"], {});
+    let col = make_elem("div", ["col"], {});
+    row.appendChild(col);
+    data.div = row;
+
+    let filter_input = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
+        {id: "filter-input-" + filter_id_counter, type: "text", placeholder: "Excluded Filter"}
+    );
+    filter_id_counter++;
+    col.appendChild(filter_input);
+    data.input_elem = filter_input;
+
+    let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
+    trash.addEventListener("click", function() {
+        excludes.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        row.remove();
+    });
+    col.appendChild(trash);
+
+    document.getElementById("exclude-container").insertBefore(row, document.getElementById("add-exclude").parentElement);
+    excludes.push(data);
+    init_filter_dropdown(data);
 }
 
 function init_filter_dropdown(filter) {
