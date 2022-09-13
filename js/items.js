@@ -108,7 +108,7 @@ for (let x in special_mappings) {
 
 let item_categories = ["armor", "accessory", "weapon"];
 
-const types = {bow: true, spear: true, wand: true, dagger: true, relik: true, helmet: true, chestplate: true, leggings: true, boots: true, ring: true, bracelet: true, necklace: true};
+const types = {bow: false, spear: false, wand: false, dagger: false, relik: false, helmet: false, chestplate: false, leggings: false, boots: false, ring: false, bracelet: false, necklace: false};
 const rarities = {normal: true, unique: true, set: true, rare: true, legendary: true, fabled: true, mythic: true};
 const filters = [];
 let filter_id_counter = 0;
