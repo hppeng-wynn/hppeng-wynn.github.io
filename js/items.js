@@ -144,30 +144,38 @@ function do_item_search() {
     }
 
     // types
-    let allTypes = true;
+    let allTypes = true, noTypes = true;
     let typeQuery = "f:("
     for (const type of Object.keys(types)) {
         if (types[type]) {
             typeQuery += "type=\"" + type + "\"|";
+            noTypes = false;
         } else {
             allTypes = false;
         }
     }
-    if (!allTypes) {
+    if (noTypes) {
+        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 type selected!";
+        return;
+    } else if (!allTypes) {
         queries.push(typeQuery.substring(0, typeQuery.length - 1) + ")");
     }
 
     // rarities
-    let allRarities = true;
+    let allRarities = true, noRarities = true;
     let rarityQuery = "f:("
     for (const rarity of Object.keys(rarities)) {
         if (rarities[rarity]) {
             rarityQuery += "tiername=\"" + rarity + "\"|";
+            noRarities = false;
         } else {
             allRarities = false;
         }
     }
-    if (!allRarities) {
+    if (noRarities) {
+        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 rarity selected!";
+        return;
+    } else if (!allRarities) {
         queries.push(rarityQuery.substring(0, rarityQuery.length - 1) + ")");
     }
     
@@ -176,7 +184,8 @@ function do_item_search() {
         let min = parseInt(filter.min_elem.value);
         let max = parseInt(filter.max_elem.value);
         if (min > max) {
-            continue; // invalid range
+            document.getElementById("summary").innerHTML = "Error: The minimum of filter " + filter.input_elem.value + " (" + min + ") is greater than its maximum (" + max + ")!";
+            return;
         }
         let zero_in_min_max = (isNaN(min) || min < 0) && (isNaN(max) || max > 0);
 
