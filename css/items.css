@@ -89,6 +89,10 @@ input.min-max-input {
     display: inline-block;
 }
 
+.delete-filter {
+    cursor: pointer;
+}
+
 #filter-container > div > div > * {
     margin: 0 2px;
 }

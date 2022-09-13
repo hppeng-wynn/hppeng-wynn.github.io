@@ -348,6 +348,13 @@ function create_filter() {
     col.appendChild(max);
     data.max_elem = max;
 
+    let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
+    trash.addEventListener("click", function() {
+        filters.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        row.remove();
+    });
+    col.appendChild(trash);
+
     document.getElementById("filter-container").insertBefore(row, document.getElementById("add-filter").parentElement);
 
     filters.push(data);
