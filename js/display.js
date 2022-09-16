@@ -110,24 +110,8 @@ function displayBuildStats(parent_id,build,command_group,stats){
                 if (reversedIDs.includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
-                if (id === "poison" && id_val > 0) {
-                    id_val = Math.ceil(id_val*(1+stats.get("poisonPct")/100));
-                }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
-                /*if (id === "poison" && id_val > 0) {
-                    let row = make_elem('div', ['row']);
-                    let value_elem = make_elem('div', ['col', 'text-end']);
-
-                    let prefix_elem = make_elem('b', [], {textContent: "\u279C With Strength: "});
-                    let number_elem = make_elem('b', [style], {
-                        textContent: (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id]
-                    });
-                    value_elem.append(prefix_elem);
-                    value_elem.append(number_elem);
-                    row.appendChild(value_elem);
-                    parent_div.appendChild(row);
-                }
-                else */if (id === "ls" && id_val != 0) {
+                if (id === "ls" && id_val != 0) {
                     let row = make_elem('div', ['row']);
                     let value_elem = make_elem('div', ['col', 'text-end']);
 
