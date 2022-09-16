@@ -100,6 +100,7 @@ const itemQueryProps = (function() {
   rangeAvg(['firedmg', 'firedam', 'fdmg', 'fdam'], (i, ie) => i.fDam);
   rangeAvg(['airdmg', 'airdam', 'admg', 'adam'], (i, ie) => i.aDam);
   sum(['sumdmg', 'sumdam', 'totaldmg', 'totaldam'], props.ndam, props.edam, props.tdam, props.wdam, props.fdam, props.adam);
+  sum(['rainbowraw'], props.edam, props.tdam, props.wdam, props.fdam, props.adam);
 
   maxId(['earthdmg%', 'earthdam%', 'edmg%', 'edam%', 'edampct'], 'eDamPct');
   maxId(['thunderdmg%', 'thunderdam%', 'tdmg%', 'tdam%', 'tdampct'], 'tDamPct');
