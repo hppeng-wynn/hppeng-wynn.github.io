@@ -414,6 +414,7 @@ function displayExpandedItem(item, parent_id){
                     }
                 }
             }
+            if (element) { break; } // terminate early if already found.
         }
         if (element) {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
             const powderSpecial = powderSpecialStats[skp_elements.indexOf(element)];
