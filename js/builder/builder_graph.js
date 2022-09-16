@@ -875,12 +875,14 @@ const radiance_node = new (class extends ComputeNode {
         if (elem.classList.contains("toggleOn")) {
             const ret = new Map(statmap);
             for (const val of radiance_affected) {
-                ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
+                if ((ret.get(val) || 0) > 0) {
+                    ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
+                }
             }
             const dam_mults = new Map(ret.get('damMult'));
             dam_mults.set('tome', dam_mults.get('tome') * 1.2)
             ret.set('damMult', dam_mults)
-            const def_mults = new Map(ret.get('damMult'));
+            const def_mults = new Map(ret.get('defMult'));
             def_mults.set('tome', def_mults.get('tome') * 1.2)
             ret.set('defMult', def_mults)
             return ret;
