@@ -95,18 +95,18 @@
                         <div class = "col-lg col-sm-12">
                             <div class = "col"><span class = "fw-bold">Type:</span> <span style = "cursor: pointer; float: right;"><span id = "all-types">All</span> &nbsp; <span id = "none-types">None</span></span></div>
                             <div id = "type-box">
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 0 0;" id = "type-bow"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 9.09091% 0;" id = "type-spear"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 18.1818% 0;" id = "type-wand"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 27.2727% 0;" id = "type-dagger"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 36.3636% 0;" id = "type-relik"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 45.4545% 0;" id = "type-helmet"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 54.5455% 0;" id = "type-chestplate"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 63.6364% 0;" id = "type-leggings"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 72.7273% 0;" id = "type-boots"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 81.8182% 0;" id = "type-ring"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 90.9091% 0;" id = "type-bracelet"></div>
-                                <div class = "item-display-new-toggleable type-selected" style = "background-image: url('../media/items/new.png'); background-position: 100% 0;" id = "type-necklace"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 0 0;" id = "type-bow"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 9.09091% 0;" id = "type-spear"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 18.1818% 0;" id = "type-wand"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 27.2727% 0;" id = "type-dagger"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 36.3636% 0;" id = "type-relik"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 45.4545% 0;" id = "type-helmet"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 54.5455% 0;" id = "type-chestplate"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 63.6364% 0;" id = "type-leggings"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 72.7273% 0;" id = "type-boots"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 81.8182% 0;" id = "type-ring"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 90.9091% 0;" id = "type-bracelet"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 100% 0;" id = "type-necklace"></div>
                             </div>
                             <p class="error col-auto"></p>
                         </div>
@@ -122,11 +122,22 @@
                         </div>
                     </div>
                 </div>
-                <div id = "filter-container" class = "col-lg-5">
-                    <div class = "col fw-bold">Filters:</div>
-                    <div class = "row">
-                        <div id = "add-filter" class = "col fw-bold" style = "cursor: pointer; padding-top: 5px;">
-                            + Add Filter
+                <div class = "col-lg-5">
+                    <div id = "filter-container" class = "col">
+                        <div class = "col fw-bold">Filters:</div>
+                        <div class = "row">
+                            <div id = "add-filter" class = "col fw-bold" style = "cursor: pointer; padding-top: 5px;">
+                                + Add Filter
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div id = "exclude-container" class = "col">
+                        <div class = "col fw-bold">Excluded Filters:</div>
+                        <div class = "row">
+                            <div id = "add-exclude" class = "col fw-bold" style = "cursor: pointer; padding-top: 5px;">
+                                + Add Excluded Filter
+                            </div>
                         </div>
                     </div>
                 </div>
