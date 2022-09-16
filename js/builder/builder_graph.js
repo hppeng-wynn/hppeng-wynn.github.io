@@ -847,7 +847,7 @@ class AggregateStatsNode extends ComputeNode {
     }
 }
 
-let radiance_affected = [ "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref",
+let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref",
 /*"str", "dex", "int", "agi", "def",*/
 "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd",
 
@@ -875,7 +875,7 @@ const radiance_node = new (class extends ComputeNode {
         if (elem.classList.contains("toggleOn")) {
             const ret = new Map(statmap);
             for (const val of radiance_affected) {
-                if (reversedIDs.includes(id)) {
+                if (reversedIDs.includes(val)) {
                     if ((ret.get(val) || 0) < 0) {
                         ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
                     }
