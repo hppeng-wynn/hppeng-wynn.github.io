@@ -875,8 +875,15 @@ const radiance_node = new (class extends ComputeNode {
         if (elem.classList.contains("toggleOn")) {
             const ret = new Map(statmap);
             for (const val of radiance_affected) {
-                if ((ret.get(val) || 0) > 0) {
-                    ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
+                if (reversedIDs.includes(id)) {
+                    if ((ret.get(val) || 0) < 0) {
+                        ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
+                    }
+                }
+                else {
+                    if ((ret.get(val) || 0) > 0) {
+                        ret.set(val, Math.floor((ret.get(val) || 0) * 1.2));
+                    }
                 }
             }
             const dam_mults = new Map(ret.get('damMult'));
