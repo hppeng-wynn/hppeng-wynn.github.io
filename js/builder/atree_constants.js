@@ -6757,7 +6757,7 @@ const atrees = {
             "display_name": "Sunflare",
             "desc": "After healing 300% of your max health within 10s, your next Heal will make every nearby ally temporarily immune. Cooldown: 20s",
             "archetype": "Light Bender",
-            "archetype_req": 12,
+            "archetype_req": 11,
             "base_abil": "Heal",
             "parents": [
                 "Healthier Ophanim II"
@@ -8998,7 +8998,7 @@ const atrees = {
                 "Blade Fury"
             ],
             "dependencies": [
-                "Mirror Image"
+                "Echo"
             ],
             "blockers": [],
             "cost": 2,
