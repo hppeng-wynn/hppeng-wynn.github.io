@@ -254,4 +254,9 @@ function init_maps() {
             redirectMap.set(item.id, item.remapID);
         }
     }
+    for (const [set_name, set_data] of sets) {
+        for (const item_name of set_data.items) {
+            itemMap.get(item_name).set = set_name;
+        }
+    }
 }
