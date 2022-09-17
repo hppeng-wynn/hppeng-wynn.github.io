@@ -100,7 +100,6 @@ const itemQueryProps = (function() {
   rangeAvg(['firedmg', 'firedam', 'fdmg', 'fdam'], (i, ie) => i.fDam);
   rangeAvg(['airdmg', 'airdam', 'admg', 'adam'], (i, ie) => i.aDam);
   sum(['sumdmg', 'sumdam', 'totaldmg', 'totaldam'], props.ndam, props.edam, props.tdam, props.wdam, props.fdam, props.adam);
-  sum(['rainbowraw'], props.edam, props.tdam, props.wdam, props.fdam, props.adam);
 
   maxId(['earthdmg%', 'earthdam%', 'edmg%', 'edam%', 'edampct'], 'eDamPct');
   maxId(['thunderdmg%', 'thunderdam%', 'tdmg%', 'tdam%', 'tdampct'], 'tDamPct');
@@ -113,6 +112,7 @@ const itemQueryProps = (function() {
   maxId(['mainatkrawdmg', 'mainatkrawdam', 'mainatkneutraldmg', 'mainatkneutraldam', 'meleerawdmg', 'meleerawdam', 'meleeneutraldmg', 'meleeneutraldam', 'mdraw'], 'mdRaw');
   maxId(['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct'], 'sdPct');
   maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
+  maxId(['rainbowraw'], 'rSdRaw');
 
   const atkSpdIndices = { SUPER_SLOW: -3, VERY_SLOW: -2, SLOW: -1, NORMAL: 0, FAST: 1, VERY_FAST: 2, SUPER_FAST: 3 };
   prop(['attackspeed', 'atkspd'], 'string', (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);

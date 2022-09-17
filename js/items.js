@@ -76,7 +76,7 @@ const translate_mappings = {
     "3rd Spell Cost Raw": "-spRaw3",
     "4th Spell Cost %": "-spPct4",
     "4th Spell Cost Raw": "-spRaw4",
-    "Rainbow Spell Damage": "rainbowRaw",
+    "Rainbow Spell Damage Raw": "rainbowRaw",
     "Sprint": "sprint",
     "Sprint Regen": "sprintReg",
     "Jump Height": "jh",
