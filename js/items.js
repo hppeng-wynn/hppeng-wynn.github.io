@@ -1,9 +1,8 @@
-const translate_mappings = {
+// commented out filters
     //"Name": "name",
     //"Display Name": "displayName",
     //"Tier": "tier",
     //"Set": "set",
-    "Powder Slots": "slots",
     //"Type": "type",
     //"Drop type": "drop",             BROKEN
     //"Quest requirement": "quest",    BROKEN
@@ -15,6 +14,13 @@ const translate_mappings = {
     //"Base Thunder Damage": "tDam",
     //"Base Earth Damage": "eDam",
     //"Base Attack Speed": "atkSpd",
+    //"Class Requirement": "classReq",
+    // "Fixed IDs": "fixID",          BROKEN
+    // "Custom Skin": "skin",         BROKEN
+    //"Item Category": "category",
+
+const translate_mappings = {
+    "Powder Slots": "slots",
     "Health": "hp",
     "Raw Fire Defense": "fDef",
     "Raw Water Defense": "wDef",
@@ -22,7 +28,6 @@ const translate_mappings = {
     "Raw Thunder Defense": "tDef",
     "Raw Earth Defense": "eDef",
     "Combat Level": "lvl",
-    //"Class Requirement": "classReq",
     "Req Strength": "strReq",
     "Req Dexterity": "dexReq",
     "Req Intelligence": "intReq",
@@ -63,10 +68,6 @@ const translate_mappings = {
     "% Air Defense": "aDefPct",
     "% Thunder Defense": "tDefPct",
     "% Earth Defense": "eDefPct",
-    "Fixed IDs": "fixID",
-    "Custom Skin": "skin",
-    //"Item Category": "category",
-
     "1st Spell Cost %": "-spPct1",
     "1st Spell Cost Raw": "-spRaw1",
     "2nd Spell Cost %": "-spPct2",
@@ -75,27 +76,20 @@ const translate_mappings = {
     "3rd Spell Cost Raw": "-spRaw3",
     "4th Spell Cost %": "-spPct4",
     "4th Spell Cost Raw": "-spRaw4",
-
-    "Rainbow Spell Damage": "rainbowRaw",
+    "Rainbow Spell Damage Raw": "rainbowRaw",
     "Sprint": "sprint",
     "Sprint Regen": "sprintReg",
     "Jump Height": "jh",
     "Loot Quality": "lq",
-
     "Gather XP Bonus": "gXp",
-    "Gather Speed Bonus": "gSpd",
+    "Gather Speed Bonus": "gSpd"
 };
 
 const special_mappings = {
     "Sum (skill points)": "str+dex+int+def+agi",
     "Sum (Mana Sustain)": "mr+ms",
     "Sum (Life Sustain)": "hpr+ls",
-    "Sum (Health + Health Bonus)": "hp+hpBonus",
-    // "No Strength Req": "strReq=0",
-    // "No Dexterity Req": "dexReq=0",
-    // "No Intelligence Req": "intReq=0",
-    // "No Agility Req": "agiReq=0",
-    // "No Defense Req": "defReq=0",
+    "Sum (Health + Health Bonus)": "hp+hpBonus"
 };
 
 let item_filters = [];
@@ -191,6 +185,9 @@ function do_item_search() {
         let zero_in_min_max = (isNaN(min) || min < 0) && (isNaN(max) || max > 0);
 
         let raw_name = filter.input_elem.value;
+        if (raw_name == "") {
+            continue; // empty
+        }
         let filter_name = translate_mappings[raw_name];
         if (filter_name === undefined) {
             filter_name = special_mappings[raw_name];
@@ -216,16 +213,15 @@ function do_item_search() {
     // excludes
     for (const exclude of excludes) {
         let raw_name = exclude.input_elem.value;
+        if (raw_name == "") {
+            continue; // empty
+        }
         let filter_name = translate_mappings[raw_name];
         if (filter_name === undefined) {
-            filter_name = special_mappings[raw_name];
-            if (filter_name === undefined) {
-                document.getElementById("summary").innerHTML = "Error: The excluded filter \"" + exclude.input_elem.value + "\" is not recognized";
-                return;
-            }
-            filter_name = "(" + filter_name + ")";
+            document.getElementById("summary").innerHTML = "Error: The excluded filter \"" + exclude.input_elem.value + "\" is not recognized";
+            return;
         }
-        queries.push("f:" + filter_name + "!=0");
+        queries.push("f:" + filter_name + "=0");
     }
 
     let filter_query = "true";
