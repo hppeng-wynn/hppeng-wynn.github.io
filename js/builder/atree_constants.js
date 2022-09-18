@@ -4214,7 +4214,7 @@ const atrees = {
             "display_name": "Massive Bash",
             "desc": "While Corrupted, every 3% Health you lose will add +1 AoE to Bash (Max 10)",
             "archetype": "Fallen", 
-            "archetype_req": 8, 
+            "archetype_req": 7, 
             "base_abil": "Bak'al's Grasp",
             "parents": ["Tempest", "Uncontainable Corruption"], 
             "dependencies": [], 
