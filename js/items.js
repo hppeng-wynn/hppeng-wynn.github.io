@@ -218,8 +218,12 @@ function do_item_search() {
         }
         let filter_name = translate_mappings[raw_name];
         if (filter_name === undefined) {
-            document.getElementById("summary").innerHTML = "Error: The excluded filter \"" + exclude.input_elem.value + "\" is not recognized";
-            return;
+            filter_name = special_mappings[raw_name];
+            if (filter_name === undefined) {
+                document.getElementById("summary").innerHTML = "Error: The excluded filter \"" + exclude.input_elem.value + "\" is not recognized";
+                return;
+            }
+            filter_name = "(" + filter_name + ")";
         }
         queries.push("f:" + filter_name + "=0");
     }
