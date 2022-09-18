@@ -766,7 +766,7 @@ const atrees = {
         },
         {
             "display_name": "Shocking Bomb",
-            "desc": "Arrow Bomb will not be affected by gravity.",
+            "desc": "Arrow Bomb will not be affected by gravity and deal additional damage.",
             "archetype": "Sharpshooter",
             "archetype_req": 5,
             "base_abil": "Arrow Bomb",
