@@ -5,7 +5,7 @@
  * Aggregates item stats into a statMap to be used in damage calculation.
  */
 
-const classDefenseMultipliers = new Map([ ["relik",0.50], ["bow",0.60], ["wand", 0.80], ["dagger", 1.0], ["spear",1.0], ["sword", 1.10]]);
+const classDefenseMultipliers = new Map([ ["relik",0.60], ["bow",0.70], ["wand", 0.80], ["dagger", 1.0], ["spear", 1.0]]);
 
 /*
  * Class that represents a wynn player's build.

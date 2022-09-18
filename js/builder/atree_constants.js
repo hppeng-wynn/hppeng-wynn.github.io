@@ -644,7 +644,7 @@ const atrees = {
                             "name": "Single Shot",
                             "type": "damage",
                             "multipliers": [
-                                200,
+                                220,
                                 0,
                                 0,
                                 0,
@@ -766,7 +766,7 @@ const atrees = {
         },
         {
             "display_name": "Shocking Bomb",
-            "desc": "Arrow Bomb will not be affected by gravity, and all damage conversions become Thunder.",
+            "desc": "Arrow Bomb will not be affected by gravity and deal additional damage.",
             "archetype": "Sharpshooter",
             "archetype_req": 5,
             "base_abil": "Arrow Bomb",
@@ -790,10 +790,10 @@ const atrees = {
             },
             "effects": [
                 {
-                    "type": "convert_spell_conv",
-                    "target_part": "all",
+                    "type": "add_spell_prop",
                     "base_spell": 3,
-                    "conversion": "Thunder"
+                    "target_part": "Arrow Bomb",
+                    "multipliers": [0, 0, 40, 0, 0, 0]
                 }
             ]
         },
@@ -873,7 +873,7 @@ const atrees = {
         },
         {
             "display_name": "Initiator",
-            "desc": "If you do not damage an enemy for 5s or more, your next sucessful hit will deal +50% damage and add +1 Focus.",
+            "desc": "If you do not damage an enemy for 4s or more, your next sucessful hit will deal +60% damage and add +1 Focus.",
             "archetype": "Sharpshooter",
             "archetype_req": 5,
             "parents": [
@@ -892,7 +892,19 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Initiator",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Initiator",
+                            "value": 60
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Call of the Hound",
@@ -1057,7 +1069,7 @@ const atrees = {
                         {
                             "name": "Single Arrow",
                             "multipliers": [
-                                20,
+                                30,
                                 0,
                                 0,
                                 5,
@@ -2238,7 +2250,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        40
+                        25
                     ],
                     "slider_max": 3
                 }
@@ -2276,7 +2288,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        -5
+                        0
                     ]
                 }
             ]
@@ -2313,7 +2325,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        -5
+                        0
                     ]
                 }
             ]
@@ -2763,7 +2775,8 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "aoe": 4
+                "range": 4,
+                "angle": 40
             },
             "effects": [
                 {
@@ -3252,7 +3265,8 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 3
+                "range": 3,
+                "angle": 10
             },
             "effects": [
                 {
@@ -4709,7 +4723,7 @@ const atrees = {
                 "icon": "node_mage"
             },
             "properties": {
-                "range": 12
+                "range": 16
             },
             "effects": [
                 {
@@ -5401,7 +5415,7 @@ const atrees = {
         },
         {
             "display_name": "Windsweeper",
-            "desc": "Your Main Attack will add +1 Winded to enemies you hit. (Max 5, 0.5s cooldown) Ice Snake will deal additional damage to enemies for every Winded they have",
+            "desc": "Your Main Attack will add +1 Winded to enemies you hit. (Max 10, 0.5s cooldown) Ice Snake will deal additional damage to enemies for every Winded they have",
             "archetype": "Riftwalker",
             "archetype_req": 3,
             "parents": [
@@ -5419,7 +5433,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "max": 5
+                "max": 10
             },
             "effects": [
                 {
@@ -5431,10 +5445,10 @@ const atrees = {
                         "name": "nConvBase:4.Ice Snake Damage"
                     },
                     "scaling": [
-                        20
+                        10
                     ],
                     "slider_step": 1,
-                    "slider_max": 5
+                    "slider_max": 10
                 },
                 {
                     "type": "stat_scaling",
@@ -5445,7 +5459,7 @@ const atrees = {
                         "name": "wConvBase:4.Ice Snake Damage"
                     },
                     "scaling": [
-                        10
+                        5
                     ]
                 }
             ]
@@ -5661,7 +5675,7 @@ const atrees = {
                                 "name": "nConvBase:3.Lightning Damage"
                             }
                         ],
-                        "scaling": [10]
+                        "scaling": [5]
                     },
                     {
                         "type": "stat_scaling",
@@ -5681,7 +5695,7 @@ const atrees = {
                                 "name": "eConvBase:3.Lightning Damage"
                             }
                         ],
-                    "scaling": [8]
+                    "scaling": [3]
                 }
             ]
         },
@@ -6058,7 +6072,7 @@ const atrees = {
                             "name": "nConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [20]
+                    "scaling": [10]
                 },
                 {
                     "type": "stat_scaling",
@@ -6074,7 +6088,7 @@ const atrees = {
                             "name": "tConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [5]
+                    "scaling": [3]
                 },
                 {
                     "type": "stat_scaling",
@@ -6090,9 +6104,7 @@ const atrees = {
                             "name": "aConvBase:2.Explosion Damage"
                         }
                     ],
-                    "scaling": [
-                        5
-                    ]
+                    "scaling": [3]
                 }
             ]
         },
@@ -6332,7 +6344,7 @@ const atrees = {
                             "type": "prop",
                             "abil": "Windsweeper",
                             "name": "max",
-                            "value": 5
+                            "value": 10
                         }
                     ]
                 },
@@ -6340,7 +6352,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "slider_max": 5
+                    "slider_max": 10
                 }
             ]
         },
@@ -6595,7 +6607,7 @@ const atrees = {
         },
         {
             "display_name": "Devitalize",
-            "desc": "Enemies will deal -2% damage for every Winded they have.",
+            "desc": "Enemies will deal -1% damage for every Winded they have.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 5,
@@ -6612,7 +6624,18 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "defMult.Diffusion"
+                    },
+                    "scaling": [1]
+                }
+            ]
         },
         {
             "display_name": "More Winded II",
@@ -6643,7 +6666,7 @@ const atrees = {
                             "type": "prop",
                             "abil": "Windsweeper",
                             "name": "max",
-                            "value": 5
+                            "value": 10
                         }
                     ]
                 },
@@ -6651,7 +6674,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "slider_max": 5
+                    "slider_max": 10
                 }
             ]
         },
@@ -6897,7 +6920,7 @@ const atrees = {
         },
         {
             "display_name": "Timelock",
-            "desc": "Holding shift and casting Heal will absorb all Winded on nearby enemies and make you Timelocked. While Timelocked, your mana will not be depleted and you become immovable from outside forces. Enemies will recieve Winded damage from all absorbed stacks. (Max 30)",
+            "desc": "Holding shift and casting Heal will absorb all Winded on nearby enemies and make you Timelocked. While Timelocked, your mana will not be depleted and you become immovable from outside forces. Enemies will recieve Winded damage from all absorbed stacks. (Max 60)",
             "archetype": "Riftwalker",
             "archetype_req": 12,
             "parents": [
@@ -7735,7 +7758,7 @@ const atrees = {
         },
         {
             "display_name": "Surprise Strike",
-            "desc": "While using Vanish, your next attack will deal +60% more damage for a single hit only",
+            "desc": "While using Vanish, your next attack will deal +80% more damage for a single hit only",
             "archetype": "Shadestepper",
             "archetype_req": 3,
             "base_abil": "Dash",
@@ -7761,7 +7784,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.SurpriseStrike",
-                            "value": 60
+                            "value": 80
                         }
                     ]
                 }
@@ -8274,7 +8297,7 @@ const atrees = {
         },
         {
             "display_name": "Violent Vortex",
-            "desc": "If you deal more damage than 2x of your max health in a single hit, deal 20% of the damage to other nearby enemies",
+            "desc": "If you deal more damage than 1.5x of your max health in a single hit, deal 30% of the damage to other nearby enemies",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
@@ -8289,7 +8312,8 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 8
+                "range": 10,
+                "cooldown": 2
             },
             "effects": [
                 {
@@ -8839,7 +8863,7 @@ const atrees = {
         },
         {
             "display_name": "Stronger Vortex",
-            "desc": "If you deal more damage than 3.5x of your max health in a single hit, deal 60% of the damage to other nearby enemies",
+            "desc": "If you deal more damage than 2.5x of your max health in a single hit, deal 60% of the damage to other nearby enemies",
             "archetype": "Shadestepper",
             "archetype_req": 4,
             "parents": [
@@ -10370,7 +10394,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "defMult.Mask",
-                            "value": 50
+                            "value": 35
                         },
                         {
                             "type": "stat",
@@ -10974,7 +10998,19 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Chant of the Fanatic",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "defMult.Chant",
+                            "value": 70
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Stronger Tether",
