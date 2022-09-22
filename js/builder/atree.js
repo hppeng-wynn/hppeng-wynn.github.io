@@ -148,7 +148,6 @@ const default_abils = {
     }, elem_mastery_abil ],
 };
 
-
 /**
  * Update ability tree internal representation. (topologically sorted node list)
  *
