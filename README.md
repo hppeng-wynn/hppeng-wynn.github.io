@@ -1,7 +1,7 @@
 # WynnBuilder
 Wynncraft class building calculator & general utility site
 
-![builder screenshot](https://user-images.githubusercontent.com/16601189/111013491-9cc8a080-836d-11eb-86fc-2e6413d0e493.png)
+![Builder Screenshot](https://user-images.githubusercontent.com/110062564/192047798-d8583fe1-b188-4bc4-85a9-0eecbf10aeef.PNG)
 
 ## Features
 
@@ -27,7 +27,7 @@ Crafting recipe calculator
 
 ### WynnAtlas
 
-Fully featured item search
+Fully featured item search!
 
 ### WynnCustom
 
