@@ -133,6 +133,9 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         let damage_specific = damage_elements[i] + specific_boost_str + 'Pct';
         let damageBoost = 1 + skill_boost[i] + static_boost
                             + ((stats.get(damage_specific) + stats.get(damage_elements[i]+'DamPct')) /100);
+        if (i > 0) {
+            damageBoost += stats.get('r'+specific_boost_str+'Pct') / 100;
+        }
         damages[i][0] *= Math.max(damageBoost, 0);
         damages[i][1] *= Math.max(damageBoost, 0);
         // Collect total damage post %boost
