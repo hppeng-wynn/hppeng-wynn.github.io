@@ -485,7 +485,7 @@ const atrees = {
                             "name": "Trap Damage",
                             "type": "damage",
                             "multipliers": [
-                                140,
+                                190,
                                 30,
                                 0,
                                 0,
@@ -3439,7 +3439,7 @@ const atrees = {
 
         {
             "display_name": "Mantle of the Bovemists",
-            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits. (20s cooldown)",
+            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits. (25s cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 3, 
             "parents": ["Iron Lungs"], 
@@ -3452,7 +3452,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "duration": 0.5,
+                "duration": 0.25,
                 "charges": 3
             },
             "effects": [
@@ -3567,7 +3567,7 @@ const atrees = {
 
         {
             "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 5s. Reduce the Mana cost of War Scream",
+            "desc": "Mobs damaged by War Scream will target only you for at least 5s (10s cooldown). Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
             "dependencies": [], 
@@ -3707,7 +3707,7 @@ const atrees = {
 
         {
             "display_name": "Stronger Mantle",
-            "desc": "Add +2 additional charges to Mantle of the Bovemists",
+            "desc": "Add +2 additional charges to Mantle of the Bovemists. Reduce its cooldown by 5s.",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "base_abil": "Mantle of the Bovemists",
@@ -4172,7 +4172,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Damage per Shield",
-                            "multipliers": [60, 0, 20, 0, 0, 0]
+                            "multipliers": [70, 0, 30, 0, 0, 0]
                         }
                     ]
                 }
@@ -4204,7 +4204,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Damage Tick",
-                            "multipliers": [20, 0, 10, 0, 0, 0]
+                            "multipliers": [40, 0, 20, 0, 0, 0]
                         }
                     ]
                 }
@@ -4356,7 +4356,7 @@ const atrees = {
             "display_name": "Radiance",
             "desc": "Bash will buff your allies' positive IDs. (15s Cooldown)",
             "archetype": "Paladin", 
-            "archetype_req": 2, 
+            "archetype_req": 3, 
             "base_abil": "Bash",
             "parents": ["Spirit of the Rabbit", "Cheaper Bash 2"], 
             "dependencies": [], 
