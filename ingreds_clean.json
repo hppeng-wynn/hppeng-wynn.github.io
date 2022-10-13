@@ -28389,7 +28389,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 4,
+      "defReq": 0,
       "agiReq": 0
     },
     "consumableIDs": {
