@@ -181,7 +181,7 @@ function calculateCustom() {
         player_custom_item.setHash(custom_str);
 
         
-        displaysq2ExpandedItem(player_custom_item.statMap, "custom-stats");
+        displayExpandedItem(player_custom_item.statMap, "custom-stats");
 
     }catch (error) {
         //The error elements no longer exist in the page. Add them back if needed.
