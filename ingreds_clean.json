@@ -28033,8 +28033,8 @@
         "maximum": 8
       },
       "ms": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "wDamPct": {
         "minimum": -10,
