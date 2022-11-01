@@ -801,7 +801,7 @@ const atrees = {
         },
         {
             "display_name": "Mana Trap",
-            "desc": "Your Traps will give you 0.5 Mana per second and 10 Mana when they explode.",
+            "desc": "Your Traps will give you 0.5 Mana per second and 20 Mana when they explode.",
             "archetype": "Trapper",
             "archetype_req": 5,
             "base_abil": "Basaltic Trap",
@@ -820,7 +820,7 @@ const atrees = {
             "properties": {
                 "range": 16,
                 "manaRegen": 0.5,
-                "explosionMana": 10
+                "explosionMana": 20
             },
             "effects": [
                 {
@@ -1207,7 +1207,7 @@ const atrees = {
         },
         {
             "display_name": "All-Seeing Panoptes",
-            "desc": "Your bows from Guardian Angels become all-seeing, increasing their range, damage and letting them shoot up to +4 times each.",
+            "desc": "Your bows from Guardian Angels become all-seeing, increasing their range, damage and letting them shoot up to +5 times each.",
             "archetype": "Boltslinger",
             "archetype_req": 11,
             "base_abil": "Arrow Shield",
@@ -1225,8 +1225,8 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "range": 7,
-                "shots": 4
+                "range": 8,
+                "shots": 5
             },
             "effects": [
                 {
@@ -1238,7 +1238,7 @@ const atrees = {
                         0,
                         0,
                         0,
-                        5,
+                        10,
                         0
                     ]
                 }
@@ -2257,7 +2257,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        20
+                        25
                     ],
                     "slider_max": 3
                 }
