@@ -1,7 +1,7 @@
 # WynnBuilder
 Wynncraft class building calculator & general utility site
 
-![builder screenshot](https://user-images.githubusercontent.com/16601189/111013491-9cc8a080-836d-11eb-86fc-2e6413d0e493.png)
+![Builder Screenshot](https://user-images.githubusercontent.com/110062564/192047798-d8583fe1-b188-4bc4-85a9-0eecbf10aeef.PNG)
 
 ## Features
 
@@ -14,6 +14,9 @@ Takes a build's items as input and returns all relevant information
 - Skillpoints required & left over
 - Defensive stats (EHP, EleDefs, etc.)
 
+It also features an ability tree!
+![wynnbuilder ability tree](https://user-images.githubusercontent.com/110062564/192048561-2ec91ba7-1793-4d4f-b4d5-6d7c05cfae99.PNG)
+
 Boosts and Powder specials
 - Spell boosts, such as Vanish and War Scream
 - Powder special buffs
@@ -22,12 +25,18 @@ Boosts and Powder specials
 and more...
 
 ### WynnCrafter
-
+![wynncrafter screenshot](https://user-images.githubusercontent.com/110062564/192048366-5112d334-f44b-4853-b337-4184628e505e.PNG)
 Crafting recipe calculator
 
-### WynnAtlas
 
-Fully featured item search
+### WynnAtlas
+![wynnatlas screenshot](https://user-images.githubusercontent.com/110062564/192048258-23bc0dd7-b417-4c0c-9437-4392315bf85d.PNG)
+Fully featured item search!
+Use different filters based on:
+- Name
+- Rarity
+- IDs
+And more, to find what item suits your build best!
 
 ### WynnCustom
 
