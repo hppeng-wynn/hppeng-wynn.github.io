@@ -216,9 +216,9 @@ for ing in ings:
     ing["id"] = ing_map[ing["name"]]
 
 #save ing ids
-with open("ing_map.json", "w+") as ing_mapfile:
+with open("ing_map.json", "w") as ing_mapfile:
     json.dump(ing_map, ing_mapfile, indent = 2)
 
 #save ings
-with open(outfile, "w+") as out_file:
-    json.dump(ing_data, out_file)
+with open(outfile, "w") as out_file:
+    json.dump(ings, out_file)

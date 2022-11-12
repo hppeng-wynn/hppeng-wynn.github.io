@@ -26,7 +26,7 @@ CURR_WYNN_VERS = 2.0
 response = {} 
 
 if req.lower() == "items":
-    response = requests.get("https://api.wynncraft.com/public_api.php?action=itemDB&category=all")
+    response = requests.get("https://api.wynncraft.com/public_api.php?action=itemDB&category=all").json()
 elif req.lower() == "ings":
     response = {"ings":[]}
     for i in range(4):
@@ -60,7 +60,7 @@ elif req.lower() == "maploc":
 else:
     response = requests.get(req)
 
-data = response.json()
+data = response#.json()
 data['version'] = CURR_WYNN_VERS
 
 json.dump(data, open(outfile, "w+"))
