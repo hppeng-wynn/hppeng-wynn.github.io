@@ -28033,8 +28033,8 @@
         "maximum": 8
       },
       "ms": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "wDamPct": {
         "minimum": -10,
@@ -28389,7 +28389,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 4,
+      "defReq": 0,
       "agiReq": 0
     },
     "consumableIDs": {
