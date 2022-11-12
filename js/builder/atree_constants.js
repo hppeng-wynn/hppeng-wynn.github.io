@@ -836,7 +836,7 @@ const atrees = {
             "base_abil": "Escape",
             "parents": [
                 "Better Guardian Angels",
-                "Leap"
+                "Homing Shots"
             ],
             "dependencies": [],
             "blockers": [
@@ -845,7 +845,7 @@ const atrees = {
             "cost": 2,
             "display": {
                 "row": 31,
-                "col": 0,
+                "col": 2,
                 "icon": "node_1"
             },
             "properties": {},
@@ -966,7 +966,7 @@ const atrees = {
             "base_abil": "Arrow Storm",
             "parents": [
                 "Precise Shot",
-                "Escape Artist"
+                "Better Guardian Angels"
             ],
             "dependencies": [],
             "blockers": [
@@ -1121,11 +1121,11 @@ const atrees = {
                     "base_spell": 3,
                     "target_part": "Grape Bomb",
                     "multipliers": [
-                        30,
+                        60,
                         0,
                         0,
                         0,
-                        10,
+                        20,
                         0
                     ]
                 },
@@ -1823,7 +1823,7 @@ const atrees = {
             "base_abil": "Arrow Shield",
             "parents": [
                 "Escape Artist",
-                "Homing Shots"
+                "Leap"
             ],
             "dependencies": [
                 "Guardian Angels"
@@ -1832,7 +1832,7 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 31,
-                "col": 2,
+                "col": 0,
                 "icon": "node_0"
             },
             "properties": {},
@@ -1876,7 +1876,7 @@ const atrees = {
             "display_name": "Precise Shot",
             "desc": "+30% Critical Hit Damage",
             "parents": [
-                "Better Guardian Angels",
+                "Escape Artist",
                 "Cheaper Arrow Shield",
                 "Arrow Hurricane"
             ],
@@ -3674,7 +3674,8 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "scaling": [2.2]
+                    "max": 160,
+                    "scaling": [2]
                 }
             ]  
         },
