@@ -801,7 +801,7 @@ const atrees = {
         },
         {
             "display_name": "Mana Trap",
-            "desc": "Your Traps will give you 0.5 Mana per second and 20 Mana when they explode.",
+            "desc": "Your Traps will give you 0.5 Mana per second and 10 Mana when they explode.",
             "archetype": "Trapper",
             "archetype_req": 5,
             "base_abil": "Basaltic Trap",
@@ -820,7 +820,7 @@ const atrees = {
             "properties": {
                 "range": 16,
                 "manaRegen": 0.5,
-                "explosionMana": 20
+                "explosionMana": 10
             },
             "effects": [
                 {
@@ -836,7 +836,7 @@ const atrees = {
             "base_abil": "Escape",
             "parents": [
                 "Better Guardian Angels",
-                "Leap"
+                "Homing Shots"
             ],
             "dependencies": [],
             "blockers": [
@@ -845,7 +845,7 @@ const atrees = {
             "cost": 2,
             "display": {
                 "row": 31,
-                "col": 0,
+                "col": 2,
                 "icon": "node_1"
             },
             "properties": {},
@@ -966,7 +966,7 @@ const atrees = {
             "base_abil": "Arrow Storm",
             "parents": [
                 "Precise Shot",
-                "Escape Artist"
+                "Better Guardian Angels"
             ],
             "dependencies": [],
             "blockers": [
@@ -1098,16 +1098,17 @@ const atrees = {
         },
         {
             "display_name": "Grape Bomb",
-            "desc": "Arrow bomb will throw 3 additional smaller bombs when exploding.",
+            "desc": "Arrow bomb will throw 2 additional smaller bombs when exploding.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "Cheaper Escape (2)"
+                "Cheaper Arrow Bomb (2)",
+                "Minefield"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 37,
+                "row": 41,
                 "col": 7,
                 "icon": "node_2"
             },
@@ -1120,11 +1121,11 @@ const atrees = {
                     "base_spell": 3,
                     "target_part": "Grape Bomb",
                     "multipliers": [
-                        30,
+                        60,
                         0,
                         0,
                         0,
-                        10,
+                        20,
                         0
                     ]
                 },
@@ -1145,7 +1146,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Grape Bomb"
+                "Cheaper Escape (2)"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1153,8 +1154,8 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 38,
-                "col": 6,
+                "row": 37,
+                "col": 7,
                 "icon": "node_1"
             },
             "properties": {
@@ -1207,7 +1208,7 @@ const atrees = {
         },
         {
             "display_name": "All-Seeing Panoptes",
-            "desc": "Your bows from Guardian Angels become all-seeing, increasing their range, damage and letting them shoot up to +5 times each.",
+            "desc": "Your bows from Guardian Angels become all-seeing, increasing their range, damage and letting them shoot up to +4 times each.",
             "archetype": "Boltslinger",
             "archetype_req": 11,
             "base_abil": "Arrow Shield",
@@ -1225,8 +1226,8 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "range": 8,
-                "shots": 5
+                "range": 7,
+                "shots": 4
             },
             "effects": [
                 {
@@ -1238,7 +1239,7 @@ const atrees = {
                         0,
                         0,
                         0,
-                        10,
+                        5,
                         0
                     ]
                 }
@@ -1251,8 +1252,7 @@ const atrees = {
             "archetype_req": 10,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Grape Bomb",
-                "Cheaper Arrow Bomb (2)"
+                "Tangled Traps"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1260,7 +1260,7 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 40,
+                "row": 39,
                 "col": 7,
                 "icon": "node_3"
             },
@@ -1272,7 +1272,7 @@ const atrees = {
                     "target_part": "Trap Damage",
                     "cost": 0,
                     "multipliers": [
-                        -80,
+                        -50,
                         0,
                         0,
                         0,
@@ -1287,7 +1287,7 @@ const atrees = {
                             "type": "prop",
                             "abil": "Basaltic Trap",
                             "name": "aoe",
-                            "value": -2
+                            "value": -1
                         },
                         {
                             "type": "prop",
@@ -1823,7 +1823,7 @@ const atrees = {
             "base_abil": "Arrow Shield",
             "parents": [
                 "Escape Artist",
-                "Homing Shots"
+                "Leap"
             ],
             "dependencies": [
                 "Guardian Angels"
@@ -1832,7 +1832,7 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 31,
-                "col": 2,
+                "col": 0,
                 "icon": "node_0"
             },
             "properties": {},
@@ -1876,7 +1876,7 @@ const atrees = {
             "display_name": "Precise Shot",
             "desc": "+30% Critical Hit Damage",
             "parents": [
-                "Better Guardian Angels",
+                "Escape Artist",
                 "Cheaper Arrow Shield",
                 "Arrow Hurricane"
             ],
@@ -2002,13 +2002,13 @@ const atrees = {
             "base_abil": "Arrow Bomb",
             "parents": [
                 "More Focus (2)",
-                "Minefield"
+                "Grape Bomb"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 40,
+                "row": 41,
                 "col": 5,
                 "icon": "node_0"
             },
@@ -2257,7 +2257,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        25
+                        20
                     ],
                     "slider_max": 3
                 }
@@ -2418,7 +2418,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Grape Bomb"
+                "Tangled Traps"
             ],
             "dependencies": [
                 "Patient Hunter"
@@ -2427,7 +2427,7 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 38,
-                "col": 8,
+                "col": 6,
                 "icon": "node_0"
             },
             "properties": { "max": 100 },
@@ -3575,7 +3575,7 @@ const atrees = {
 
         {
             "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 5s (10s cooldown). Reduce the Mana cost of War Scream",
+            "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
             "dependencies": [], 
@@ -3650,7 +3650,7 @@ const atrees = {
 
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2.2% (Max 220%)",
+            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 160%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",
@@ -3674,7 +3674,8 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "scaling": [2.2]
+                    "max": 160,
+                    "scaling": [2]
                 }
             ]  
         },
@@ -10035,7 +10036,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Mask",
-                            "value": 50
+                            "value": 35
                         },
                         {
                             "type": "stat",
@@ -11358,7 +11359,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Beam Tick Damage",
-                            "multipliers": [70, 0, 0, 20, 0, 0]
+                            "multipliers": [100, 0, 0, 20, 0, 0]
                         },
                         {
                             "name": "Beam DPS",
