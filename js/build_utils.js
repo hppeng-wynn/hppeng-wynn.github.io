@@ -197,7 +197,7 @@ function expandItem(item) {
             let val = (item[id] || 0);
             if (val > 0) { // positive rolled IDs
                 if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(val*0.3));
+                    maxRolls.set(id,idRound(val*0.7));
                     minRolls.set(id,idRound(val*1.3));
                 } else {
                     maxRolls.set(id,idRound(val*1.3));
@@ -206,7 +206,7 @@ function expandItem(item) {
             } else if (val < 0) { //negative rolled IDs
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*1.3));
-                    minRolls.set(id,idRound(val*0.7));
+                    minRolls.set(id,idRound(val*0.3));
                 }
                 else {
                     maxRolls.set(id,idRound(val*0.7));
