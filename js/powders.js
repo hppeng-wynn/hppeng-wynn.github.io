@@ -158,7 +158,46 @@ function calc_weapon_powder(weapon, damageBases) {
         neutralRemainingRaw = damages[0].slice();
         neutralBase = damages[0].slice();
     }
-    
+
+    //apply powders to weapon (1.21 fked implementation)
+    let powder_apply_order = [];
+    let powder_apply_map = new Map();
+    for (const powderID of powders) {
+        const powder = powderStats[powderID];
+        // Bitwise to force conversion to integer (integer division).
+        const element = (powderID/6) | 0;
+        const conversion_ratio = powder.convert/100;
+
+        if (powder_apply_map.has(element)) {
+            let apply_info = powder_apply_map.get(element);
+            apply_info.conv += conversion_ratio;
+            apply_info.min += powder.min;
+            apply_info.max += powder.max;
+        }
+        else {
+            let apply_info = {
+                conv: conversion_ratio,
+                min: powder.min,
+                max: powder.max
+            };
+            powder_apply_order.push(element);
+            powder_apply_map.set(element, apply_info);
+        }
+    }
+    for (const element of powder_apply_order) {
+        const apply_info = powder_apply_map.get(element);
+        const conversion_ratio = apply_info.conv;
+        const min_diff = Math.min(neutralRemainingRaw[0], conversion_ratio * neutralRemainingRaw[0]);
+        const max_diff = Math.min(neutralRemainingRaw[1], conversion_ratio * neutralRemainingRaw[1]);
+        neutralRemainingRaw[0] -= min_diff;
+        neutralRemainingRaw[1] -= max_diff;
+        damages[element+1][0] += min_diff;
+        damages[element+1][1] += max_diff;
+        damages[element+1][0] += apply_info.min;
+        damages[element+1][1] += apply_info.max;
+    }
+
+    /*
     //apply powders to weapon
     for (const powderID of powders) {
         const powder = powderStats[powderID];
@@ -181,14 +220,15 @@ function calc_weapon_powder(weapon, damageBases) {
         damages[element+1][0] += powder.min;
         damages[element+1][1] += powder.max;
     }
+    */
+
+    // The ordering of these two blocks decides whether neutral is present when converted away or not.
+    damages[0] = neutralRemainingRaw;
 
     // The ordering of these two blocks decides whether neutral is present when converted away or not.
     let present_elements = []
     for (const damage of damages) {
         present_elements.push(damage[1] > 0);
     }
-
-    // The ordering of these two blocks decides whether neutral is present when converted away or not.
-    damages[0] = neutralRemainingRaw;
     return [damages, present_elements];
 }
