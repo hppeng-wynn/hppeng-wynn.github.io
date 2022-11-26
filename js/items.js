@@ -89,7 +89,8 @@ const special_mappings = {
     "Sum (skill points)": "str+dex+int+def+agi",
     "Sum (Mana Sustain)": "mr+ms",
     "Sum (Life Sustain)": "hpr+ls",
-    "Sum (Health + Health Bonus)": "hp+hpBonus"
+    "Sum (Health + Health Bonus)": "hp+hpBonus",
+    "Base DPS": "(nDam+fDam+wDam+aDam+tDam+eDam) * atkspdmod(atkspd)"
 };
 
 let item_filters = [];
