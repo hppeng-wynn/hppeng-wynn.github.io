@@ -27,6 +27,10 @@ function parsePowdering(powder_info) {
 }
 
 let atree_data = null;
+let wynn_version_str = 'default'; // 1.20.1
+const wynn_version_names = [
+    '1.20.1.2'
+];
 
 /*
  * Populate fields based on url, and calculate build.
@@ -44,6 +48,12 @@ function decodeBuild(url_tag) {
         let level = 106;
 
         let version_number = parseInt(version)
+        let data_str = info[1];
+        if (version_number >= 8) {
+            let wynn_version_id = Base64.toInt(info[1].slice(0, 2));
+            wynn_version_str = wynn_version_names[wynn_version_id];
+            info[1] = info[1].slice(2);
+        }
         //equipment (items)
         // TODO: use filters
         if (version_number < 4) {
@@ -52,10 +62,10 @@ function decodeBuild(url_tag) {
                 let equipment_str = equipments.slice(i*3,i*3+3);
                 equipment[i] = getItemNameFromID(Base64.toInt(equipment_str));
             }
-            info[1] = equipments.slice(27);
+            data_str = equipments.slice(27);
         }
         else if (version_number == 4) { 
-            let info_str = info[1];
+            let info_str = data_str;
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
                 if (info_str.charAt(start_idx) === "-") {
@@ -68,10 +78,10 @@ function decodeBuild(url_tag) {
                     start_idx += 3;
                 }
             }
-            info[1] = info_str.slice(start_idx);
+            data_str = info_str.slice(start_idx);
         }
         else if (version_number <= 7) {
-            let info_str = info[1];
+            let info_str = data_str;
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
                 if (info_str.slice(start_idx,start_idx+3) === "CR-") {
@@ -87,7 +97,7 @@ function decodeBuild(url_tag) {
                     start_idx += 3;
                 }
             }
-            info[1] = info_str.slice(start_idx);
+            data_str = info_str.slice(start_idx);
         }
         //constant in all versions
         for (let i in equipment) {
@@ -96,12 +106,12 @@ function decodeBuild(url_tag) {
 
         //level, skill point assignments, and powdering
         if (version_number == 1) {
-            let powder_info = info[1];
+            let powder_info = data_str;
             let res = parsePowdering(powder_info);
             powdering = res[0];
         } else if (version_number == 2) {
             save_skp = true;
-            let skillpoint_info = info[1].slice(0, 10);
+            let skillpoint_info = data_str.slice(0, 10);
             for (let i = 0; i < 5; ++i ) {
                 skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
             }
@@ -110,7 +120,7 @@ function decodeBuild(url_tag) {
             let res = parsePowdering(powder_info);
             powdering = res[0];
         } else if (version_number <= 7){
-            level = Base64.toInt(info[1].slice(10,12));
+            level = Base64.toInt(data_str.slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
             let skillpoint_info = info[1].slice(0, 10);
@@ -122,10 +132,10 @@ function decodeBuild(url_tag) {
 
             let res = parsePowdering(powder_info);
             powdering = res[0];
-            info[1] = res[1];
+            data_str = res[1];
         }
         // Tomes.
-        if (version >= 6) {
+        if (version_number >= 6) {
             //tome values do not appear in anything before v6.
             for (let i in tomes) {
                 let tome_str = info[1].charAt(i);
@@ -135,7 +145,7 @@ function decodeBuild(url_tag) {
             info[1] = info[1].slice(7);
         }
 
-        if (version >= 7) {
+        if (version_number >= 7) {
             // ugly af. only works since its the last thing. will be fixed with binary decode
             atree_data = new BitVector(info[1]);
         }
