@@ -364,6 +364,7 @@ function init() {
             if (confirm('One or more items failed to load correctly. This could be due to a corrupted build link, or (more likely) a database load failure. Would you like to reload?')) {
                 hardReload();
             }
+            console.log(item_node);
             break;
         }
     }

@@ -107,6 +107,23 @@ scaling_target: {
 */
 
 
+// Space for big json data
+let atrees;
+let atree_load_complete = false;
+/*
+ * Load atree info remote DB (aka a big json file).
+ */
+async function load_atrees() {
+    let getUrl = window.location;
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    // "Random" string to prevent caching!
+    // Nah. let it cache. Since we aren't doing it, let the internet help us (but slower updating possibly.)
+    // let url = baseUrl + "/compress.json?"+new Date();
+    let url = baseUrl + "/compress.json";
+    atrees = await (await fetch(url)).json();
+    atree_load_complete = true;
+}
+
 const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properties: {}, effects: [] };
 
 // TODO: Range numbers

@@ -27,10 +27,13 @@ function parsePowdering(powder_info) {
 }
 
 let atree_data = null;
-let wynn_version_str = 'default'; // 1.20.1
 const wynn_version_names = [
-    '1.20.1.2'
+    '2.0.1.1',
+    '2.0.1.2'
 ];
+const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
+// Default to the newest version.
+let wynn_version_id = WYNN_VERSION_LATEST;
 
 /*
  * Populate fields based on url, and calculate build.
@@ -50,10 +53,18 @@ function decodeBuild(url_tag) {
         let version_number = parseInt(version)
         let data_str = info[1];
         if (version_number >= 8) {
-            let wynn_version_id = Base64.toInt(info[1].slice(0, 2));
-            wynn_version_str = wynn_version_names[wynn_version_id];
-            info[1] = info[1].slice(2);
+            wynn_version_id = parseInt(info[1]);
+            if (wynn_version_id > WYNN_VERSION_LATEST || wynn_version_id < 0) {
+                // NOTE: Failing silently... do we want to raise a loud error?
+                wynn_version_id = WYNN_VERSION_LATEST;
+            }
+            data_str = info[2];
         }
+        else {
+            // Change the default to oldest. (A time before v8)
+            wynn_version_id = 0;
+        }
+
         //equipment (items)
         // TODO: use filters
         if (version_number < 4) {
@@ -80,7 +91,7 @@ function decodeBuild(url_tag) {
             }
             data_str = info_str.slice(start_idx);
         }
-        else if (version_number <= 7) {
+        else if (version_number <= 8) {
             let info_str = data_str;
             let start_idx = 0;
             for (let i = 0; i < 9; ++i ) {
@@ -116,19 +127,19 @@ function decodeBuild(url_tag) {
                 skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
             }
 
-            let powder_info = info[1].slice(10);
+            let powder_info = data_str.slice(10);
             let res = parsePowdering(powder_info);
             powdering = res[0];
-        } else if (version_number <= 7){
+        } else if (version_number <= 8){
             level = Base64.toInt(data_str.slice(10,12));
             setValue("level-choice",level);
             save_skp = true;
-            let skillpoint_info = info[1].slice(0, 10);
+            let skillpoint_info = data_str.slice(0, 10);
             for (let i = 0; i < 5; ++i ) {
                 skillpoints[i] = Base64.toIntSigned(skillpoint_info.slice(i*2,i*2+2));
             }
 
-            let powder_info = info[1].slice(12);
+            let powder_info = data_str.slice(12);
 
             let res = parsePowdering(powder_info);
             powdering = res[0];
@@ -138,16 +149,16 @@ function decodeBuild(url_tag) {
         if (version_number >= 6) {
             //tome values do not appear in anything before v6.
             for (let i in tomes) {
-                let tome_str = info[1].charAt(i);
+                let tome_str = data_str.charAt(i);
                 let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
                 setValue(tomeInputs[i], tome_name);
             }
-            info[1] = info[1].slice(7);
+            data_str = data_str.slice(7);
         }
 
         if (version_number >= 7) {
             // ugly af. only works since its the last thing. will be fixed with binary decode
-            atree_data = new BitVector(info[1]);
+            atree_data = new BitVector(data_str);
         }
         else {
             atree_data = null;
@@ -171,7 +182,8 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
         
         //V6 encoding - Tomes
         //V7 encoding - ATree
-        build_version = 5;
+        //V8 encoding - wynn version
+        build_version = 8;
         build_string = "";
         tome_string = "";
 
@@ -179,14 +191,14 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
             if (item.statMap.get("custom")) {
                 let custom = "CI-"+encodeCustom(item, true);
                 build_string += Base64.fromIntN(custom.length, 3) + custom;
-                build_version = Math.max(build_version, 5);
+                //build_version = Math.max(build_version, 5);
             } else if (item.statMap.get("crafted")) {
                 build_string += "CR-"+encodeCraft(item);
             } else if (item.statMap.get("category") === "tome") {
                 let tome_id = item.statMap.get("id");
                 if (tome_id <= 60) {
                     // valid normal tome. ID 61-63 is for NONE tomes.
-                    build_version = Math.max(build_version, 6);
+                    //build_version = Math.max(build_version, 6);
                 }
                 tome_string += Base64.fromIntN(tome_id, 1);
             } else {
@@ -216,12 +228,12 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
         build_string += tome_string;
 
         if (atree.length > 0 && atree_state.get(atree[0].ability.id).active) {
-            build_version = Math.max(build_version, 7);
+            //build_version = Math.max(build_version, 7);
             const bitvec = encode_atree(atree, atree_state);
             build_string += bitvec.toB64();
         }
 
-        return build_version.toString() + "_" + build_string;
+        return build_version.toString() + "_" + wynn_version_id.toString() + "_" + build_string;
     }
 }
 

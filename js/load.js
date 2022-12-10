@@ -96,7 +96,6 @@ function clean_item(item) {
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
 async function load() {
-
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
     // "Random" string to prevent caching!
