@@ -34,6 +34,21 @@ async function load_tome_local() {
     });
 }
 
+async function load_tome_old_version(version_str) {
+    tload_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    // No random string -- we want to use caching
+    let url = baseUrl + "/data/" + version_str + "/tomes.json"
+    let result = await (await fetch(url)).json();
+    tomes = result.tomes;
+    for (const tome of tomes) {
+        //dependency on clean_item in load.js
+        clean_item(tome);
+    }
+    init_tome_maps();
+    tload_complete = true;
+}
 /*
  * Load tome set from remote DB (json). Calls init() on success.
  */

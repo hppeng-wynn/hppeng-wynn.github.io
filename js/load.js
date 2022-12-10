@@ -92,6 +92,25 @@ function clean_item(item) {
     }
 }
 
+async function load_old_version(version_str) {
+    load_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    // No random string -- we want to use caching
+    let url = baseUrl + "/data/" + version_str + "/items.json"
+    let result = await (await fetch(url)).json();
+    items = result.items;
+    for (const item of items) {
+        clean_item(item);
+    }
+    let sets_ = result.sets;
+    for (const set in sets_) {
+        sets.set(set, sets_[set]);
+    }
+    init_maps();
+    load_complete = true;
+}
+
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
@@ -149,7 +168,7 @@ async function load_init() {
                 console.log("Skipping load...")
             }
             else {
-                load_in_progress = true
+                load_in_progress = true;
                 if (reload) {
                     console.log("Using new data...")
                     await load();

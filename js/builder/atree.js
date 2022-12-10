@@ -113,13 +113,11 @@ let atree_load_complete = false;
 /*
  * Load atree info remote DB (aka a big json file).
  */
-async function load_atrees() {
+async function load_atree_data(version_str) {
     let getUrl = window.location;
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
-    // "Random" string to prevent caching!
-    // Nah. let it cache. Since we aren't doing it, let the internet help us (but slower updating possibly.)
-    // let url = baseUrl + "/compress.json?"+new Date();
-    let url = baseUrl + "/compress.json";
+    // No random string -- we want to use caching
+    let url = baseUrl + "/data/" + version_str + "/atree.json"
     atrees = await (await fetch(url)).json();
     atree_load_complete = true;
 }

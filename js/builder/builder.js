@@ -47,6 +47,7 @@ function loadBuild() {
     let saveName = document.getElementById("build-name").value;
 
     if (Object.keys(savedBuilds).includes(saveName)) { 
+        // NOTE: this is broken since decodeBuild is async func.
         decodeBuild(savedBuilds[saveName])
         document.getElementById("loaded-error").textContent = "";
         document.getElementById("loaded-build").textContent = "Build loaded";
@@ -305,9 +306,8 @@ function collapse_element(elmnt) {
     document.querySelector(elmnt).style.removeProperty('display');
 }
 
-function init() {
+async function init() {
     console.log("builder.js init");
-    init_autocomplete();
 
     // Other "main" stuff
     // Spell dropdowns
@@ -356,7 +356,8 @@ function init() {
         }
         
     });
-    decodeBuild(url_tag);
+    await decodeBuild(url_tag);
+    init_autocomplete();
     builder_graph_init();
     for (const item_node of item_nodes) {
         if (item_node.get_value() === null) {
@@ -376,7 +377,5 @@ window.onerror = function(message, source, lineno, colno, error) {
 };
 
 (async function() {
-    let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];
-    await Promise.all(load_promises);
-    init();
+    await init();
 })();

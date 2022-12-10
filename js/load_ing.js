@@ -59,6 +59,26 @@ function clean_ing(ing) {
     }
 }
 
+async function load_ings_old_version(version_str) {
+    iload_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = getUrl.protocol + "//" + getUrl.host;// + getUrl.pathname.split('/')[1];
+    // No random string -- we want to use caching
+    let url = baseUrl + "/data/" + version_str + "/ingreds.json"
+    let result = await (await fetch(url)).json();
+    ings = result;
+    for (const id in ings) {
+        clean_ing(ings[id]);
+    }
+
+    url = getURL.procol + "//" + getUrl.host + "/recipes_compress.json";
+    result = await (await fetch(url)).json();
+    recipes = result.recipes;
+
+    init_maps();
+    iload_complete = true;
+}
+
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
