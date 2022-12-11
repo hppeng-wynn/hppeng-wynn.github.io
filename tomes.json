@@ -900,7 +900,7 @@
       "damMobs": 13,
       "str": 3,
       "fixID": false,
-      "id": 61,
+      "id": 64,
       "alias": "Strength III"
     },
     {
@@ -914,7 +914,7 @@
       "damMobs": 13,
       "dex": 3,
       "fixID": false,
-      "id": 62,
+      "id": 65,
       "alias": "Dexterity III"
     },
     {
@@ -928,7 +928,7 @@
       "damMobs": 13,
       "int": 3,
       "fixID": false,
-      "id": 63,
+      "id": 66,
       "alias": "Intelligence III"
     },
     {
@@ -942,7 +942,7 @@
       "damMobs": 13,
       "def": 3,
       "fixID": false,
-      "id": 64,
+      "id": 67,
       "alias": "Defense III"
     },
     {
@@ -956,7 +956,7 @@
       "damMobs": 13,
       "agi": 3,
       "fixID": false,
-      "id": 65,
+      "id": 68,
       "alias": "Agility III"
     },
     {
@@ -974,7 +974,7 @@
       "def": 1,
       "agi": 1,
       "fixID": false,
-      "id": 66,
+      "id": 69,
       "alias": "Rainbow Skillpoint III"
     },
     {
@@ -988,7 +988,7 @@
       "damMobs": 16,
       "eDamPct": 8,
       "fixID": false,
-      "id": 67,
+      "id": 70,
       "alias": "Earth Damage III"
     },
     {
@@ -1002,7 +1002,7 @@
       "damMobs": 16,
       "tDamPct": 8,
       "fixID": false,
-      "id": 68,
+      "id": 71,
       "alias": "Thunder Damage III"
     },
     {
@@ -1016,7 +1016,7 @@
       "damMobs": 16,
       "wDamPct": 8,
       "fixID": false,
-      "id": 69,
+      "id": 72,
       "alias": "Water Damage III"
     },
     {
@@ -1030,7 +1030,7 @@
       "damMobs": 16,
       "fDamPct": 8,
       "fixID": false,
-      "id": 70,
+      "id": 73,
       "alias": "Fire Damage III"
     },
     {
@@ -1044,7 +1044,7 @@
       "damMobs": 16,
       "aDamPct": 8,
       "fixID": false,
-      "id": 71,
+      "id": 74,
       "alias": "Air Damage III"
     },
     {
@@ -1062,8 +1062,8 @@
       "fDamPct": 7,
       "aDamPct": 7,
       "fixID": false,
-      "id": 72,
+      "id": 75,
       "alias": "Rainbow Damage III"
-    },
+    }
   ]
 }

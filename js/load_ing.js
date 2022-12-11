@@ -88,13 +88,12 @@ async function load_ings() {
     let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
     // "Random" string to prevent caching!
     let url = baseUrl + "/ingreds_compress.json?"+new Date();
-    url = url.replace(/\w+.html/, "") ; 
     let result = await (await fetch(url)).json();
 
     result = await (await fetch(url)).json();
     ings = result;
 
-    url = url.replace("/ingreds_compress.json", "/recipes_compress.json");
+    url = baseUrl + "/recipes_compress.json?"+new Date();
     result = await (await fetch(url)).json();
     recipes = result.recipes;
 

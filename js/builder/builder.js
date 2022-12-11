@@ -340,8 +340,7 @@ async function init() {
             margin: {
                 x: 20,
                 y: 20,
-            } 
-            
+            }
         });
 
         let search_masonry = Macy({
@@ -355,7 +354,6 @@ async function init() {
                 x: 20,
                 y: 20,
             }
-            
         });
     } catch (e) {
         console.log("Could not initialize macy components. Maybe you're offline?");

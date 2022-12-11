@@ -173,12 +173,23 @@ async function decodeBuild(url_tag) {
         // Tomes.
         if (version_number >= 6) {
             //tome values do not appear in anything before v6.
-            for (let i in tomes) {
-                let tome_str = data_str.charAt(i);
-                let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
-                setValue(tomeInputs[i], tome_name);
+            if (version_number < 8) {
+                for (let i in tomes) {
+                    let tome_str = data_str.charAt(i);
+                    let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
+                    setValue(tomeInputs[i], tome_name);
+                }
+                data_str = data_str.slice(7);
             }
-            data_str = data_str.slice(7);
+            else {
+                // 2chr tome encoding to allow for more tomes.
+                for (let i in tomes) {
+                    let tome_str = data_str.slice(2*i, 2*i+2);
+                    let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
+                    setValue(tomeInputs[i], tome_name);
+                }
+                data_str = data_str.slice(14);
+            }
         }
 
         if (version_number >= 7) {
@@ -225,7 +236,7 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
                     // valid normal tome. ID 61-63 is for NONE tomes.
                     //build_version = Math.max(build_version, 6);
                 }
-                tome_string += Base64.fromIntN(tome_id, 1);
+                tome_string += Base64.fromIntN(tome_id, 2);
             } else {
                 build_string += Base64.fromIntN(item.statMap.get("id"), 3);
             }

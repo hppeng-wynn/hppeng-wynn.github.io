@@ -313,41 +313,6 @@
     "id": 6
   },
   {
-    "name": "Bat Ear",
-    "tier": 0,
-    "skills": [
-      "TAILORING"
-    ],
-    "lvl": 15,
-    "ids": {
-      "spd": {
-        "minimum": 1,
-        "maximum": 2
-      }
-    },
-    "itemIDs": {
-      "dura": -23,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 9
-  },
-  {
     "name": "Bandit Rations",
     "tier": 0,
     "skills": [
@@ -381,6 +346,41 @@
       "notTouching": 0
     },
     "id": 8
+  },
+  {
+    "name": "Bat Ear",
+    "tier": 0,
+    "skills": [
+      "TAILORING"
+    ],
+    "lvl": 15,
+    "ids": {
+      "spd": {
+        "minimum": 1,
+        "maximum": 2
+      }
+    },
+    "itemIDs": {
+      "dura": -23,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 9
   },
   {
     "name": "Big Jawbreaker",
@@ -678,45 +678,6 @@
     "id": 15
   },
   {
-    "name": "Bright Petal",
-    "tier": 0,
-    "skills": [
-      "COOKING"
-    ],
-    "lvl": 73,
-    "ids": {
-      "xpb": {
-        "minimum": 3,
-        "maximum": 6
-      },
-      "ref": {
-        "minimum": 2,
-        "maximum": 4
-      }
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": -240
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 18
-  },
-  {
     "name": "Broken Antic Bead",
     "tier": 0,
     "skills": [
@@ -756,6 +717,45 @@
     "id": 19
   },
   {
+    "name": "Bright Petal",
+    "tier": 0,
+    "skills": [
+      "COOKING"
+    ],
+    "lvl": 73,
+    "ids": {
+      "xpb": {
+        "minimum": 3,
+        "maximum": 6
+      },
+      "ref": {
+        "minimum": 2,
+        "maximum": 4
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -240
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 18
+  },
+  {
     "name": "Broken Helmet",
     "tier": 0,
     "skills": [
@@ -793,6 +793,42 @@
       "notTouching": 0
     },
     "id": 20
+  },
+  {
+    "name": "Broken Ram Horn",
+    "tier": 0,
+    "skills": [
+      "WEAPONSMITHING",
+      "WOODWORKING"
+    ],
+    "lvl": 56,
+    "ids": {
+      "sprint": {
+        "minimum": 4,
+        "maximum": 7
+      }
+    },
+    "itemIDs": {
+      "dura": -33,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 8
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 719
   },
   {
     "name": "Broken Pick",
@@ -1022,6 +1058,46 @@
       "notTouching": 0
     },
     "id": 26
+  },
+  {
+    "name": "Climber's Padding",
+    "tier": 0,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 60,
+    "ids": {
+      "hpBonus": {
+        "minimum": 40,
+        "maximum": 65
+      },
+      "sprintReg": {
+        "minimum": 6,
+        "maximum": 7
+      }
+    },
+    "itemIDs": {
+      "dura": -35,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 6
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 720
   },
   {
     "name": "Coastal Sand",
@@ -1277,6 +1353,45 @@
     "id": 33
   },
   {
+    "name": "Crawler Eye",
+    "tier": 0,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 32,
+    "ids": {
+      "hprPct": {
+        "minimum": -4,
+        "maximum": -2
+      },
+      "spd": {
+        "minimum": 3,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -54
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 34
+  },
+  {
     "name": "Cracked Skin",
     "tier": 0,
     "skills": [
@@ -1315,45 +1430,6 @@
       "notTouching": 0
     },
     "id": 38
-  },
-  {
-    "name": "Crawler Eye",
-    "tier": 0,
-    "skills": [
-      "ALCHEMISM"
-    ],
-    "lvl": 32,
-    "ids": {
-      "hprPct": {
-        "minimum": -4,
-        "maximum": -2
-      },
-      "spd": {
-        "minimum": 3,
-        "maximum": 5
-      }
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": -54
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 34
   },
   {
     "name": "Crawler Sludge",
@@ -2625,45 +2701,6 @@
     "id": 68
   },
   {
-    "name": "Grey Cloud",
-    "tier": 0,
-    "skills": [
-      "ALCHEMISM"
-    ],
-    "lvl": 96,
-    "ids": {
-      "wDefPct": {
-        "minimum": 4,
-        "maximum": 8
-      },
-      "aDefPct": {
-        "minimum": 3,
-        "maximum": 6
-      }
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": -90
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 69
-  },
-  {
     "name": "Gritty Rocks",
     "tier": 0,
     "skills": [
@@ -2701,6 +2738,45 @@
       "notTouching": 0
     },
     "id": 104
+  },
+  {
+    "name": "Grey Cloud",
+    "tier": 0,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 96,
+    "ids": {
+      "wDefPct": {
+        "minimum": 4,
+        "maximum": 8
+      },
+      "aDefPct": {
+        "minimum": 3,
+        "maximum": 6
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -90
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 69
   },
   {
     "name": "Grook Feather",
@@ -4991,6 +5067,45 @@
     "id": 130
   },
   {
+    "name": "Rusty Spurs",
+    "tier": 0,
+    "skills": [
+      "JEWELING"
+    ],
+    "lvl": 36,
+    "ids": {
+      "sprint": {
+        "minimum": 1,
+        "maximum": 3
+      },
+      "sprintReg": {
+        "minimum": 0,
+        "maximum": -2
+      }
+    },
+    "itemIDs": {
+      "dura": -26,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 721
+  },
+  {
     "name": "Salt Water",
     "tier": 0,
     "skills": [
@@ -5293,6 +5408,42 @@
       "notTouching": 0
     },
     "id": 138
+  },
+  {
+    "name": "Sheep Hoof",
+    "tier": 0,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 8,
+    "ids": {
+      "sprint": {
+        "minimum": 3,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": -19,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 722
   },
   {
     "name": "Shining Wool",
@@ -5836,42 +5987,6 @@
     "id": 150
   },
   {
-    "name": "Soft Yellow Wool",
-    "tier": 0,
-    "skills": [
-      "TAILORING",
-      "ARMOURING"
-    ],
-    "lvl": 10,
-    "ids": {
-      "tDefPct": {
-        "minimum": 2,
-        "maximum": 3
-      }
-    },
-    "itemIDs": {
-      "dura": -21,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 152
-  },
-  {
     "name": "Soggy Stone",
     "tier": 0,
     "skills": [
@@ -5910,6 +6025,42 @@
       "notTouching": 0
     },
     "id": 154
+  },
+  {
+    "name": "Soft Yellow Wool",
+    "tier": 0,
+    "skills": [
+      "TAILORING",
+      "ARMOURING"
+    ],
+    "lvl": 10,
+    "ids": {
+      "tDefPct": {
+        "minimum": 2,
+        "maximum": 3
+      }
+    },
+    "itemIDs": {
+      "dura": -21,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 152
   },
   {
     "name": "Soul Essence",
@@ -8447,6 +8598,46 @@
     "id": 222
   },
   {
+    "name": "Consecrated Ivory",
+    "tier": 1,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 60,
+    "ids": {
+      "spRegen": {
+        "minimum": 10,
+        "maximum": 10
+      },
+      "sprint": {
+        "minimum": 8,
+        "maximum": 12
+      }
+    },
+    "itemIDs": {
+      "dura": -47,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 8
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 723
+  },
+  {
     "name": "Corn Husk",
     "tier": 1,
     "skills": [
@@ -9237,41 +9428,6 @@
     "id": 240
   },
   {
-    "name": "Forgotten Axe",
-    "tier": 1,
-    "skills": [
-      "WEAPONSMITHING"
-    ],
-    "lvl": 13,
-    "ids": {
-      "mdRaw": {
-        "minimum": 7,
-        "maximum": 10
-      }
-    },
-    "itemIDs": {
-      "dura": -30,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 241
-  },
-  {
     "name": "Forgotten Pickaxe",
     "tier": 1,
     "skills": [
@@ -9314,25 +9470,20 @@
     "id": 242
   },
   {
-    "name": "Foul Fluid",
+    "name": "Forgotten Axe",
     "tier": 1,
     "skills": [
-      "WOODWORKING",
       "WEAPONSMITHING"
     ],
-    "lvl": 71,
+    "lvl": 13,
     "ids": {
-      "poison": {
-        "minimum": 240,
-        "maximum": 280
-      },
-      "hprRaw": {
-        "minimum": -30,
-        "maximum": -20
+      "mdRaw": {
+        "minimum": 7,
+        "maximum": 10
       }
     },
     "itemIDs": {
-      "dura": -38,
+      "dura": -30,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -9351,7 +9502,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 243
+    "id": 241
   },
   {
     "name": "Fragmentation",
@@ -9392,6 +9543,46 @@
       "notTouching": 0
     },
     "id": 244
+  },
+  {
+    "name": "Foul Fluid",
+    "tier": 1,
+    "skills": [
+      "WOODWORKING",
+      "WEAPONSMITHING"
+    ],
+    "lvl": 71,
+    "ids": {
+      "poison": {
+        "minimum": 240,
+        "maximum": 280
+      },
+      "hprRaw": {
+        "minimum": -30,
+        "maximum": -20
+      }
+    },
+    "itemIDs": {
+      "dura": -38,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 243
   },
   {
     "name": "Frostbitten Flesh",
@@ -10462,6 +10653,47 @@
     "id": 265
   },
   {
+    "name": "Intermittenstirrups",
+    "tier": 1,
+    "skills": [
+      "WEAPONSMITHING",
+      "WOODWORKING",
+      "TAILORING"
+    ],
+    "lvl": 27,
+    "ids": {
+      "sprint": {
+        "minimum": 4,
+        "maximum": 6
+      },
+      "sprintReg": {
+        "minimum": 5,
+        "maximum": 7
+      }
+    },
+    "itemIDs": {
+      "dura": -34,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 3
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 724
+  },
+  {
     "name": "Ivory Tusk",
     "tier": 1,
     "skills": [
@@ -10501,6 +10733,41 @@
     "id": 261
   },
   {
+    "name": "Kaian Scroll",
+    "tier": 1,
+    "skills": [
+      "SCRIBING"
+    ],
+    "lvl": 94,
+    "ids": {
+      "dex": {
+        "minimum": 5,
+        "maximum": 7
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -130
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 262
+  },
+  {
     "name": "Jolting Geode",
     "tier": 1,
     "skills": [
@@ -10538,41 +10805,6 @@
       "notTouching": 0
     },
     "id": 263
-  },
-  {
-    "name": "Kaian Scroll",
-    "tier": 1,
-    "skills": [
-      "SCRIBING"
-    ],
-    "lvl": 94,
-    "ids": {
-      "dex": {
-        "minimum": 5,
-        "maximum": 7
-      }
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": -130
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 262
   },
   {
     "name": "Karl Johan Cap",
@@ -11364,6 +11596,41 @@
     "id": 284
   },
   {
+    "name": "Natural Nitrates",
+    "tier": 1,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 42,
+    "ids": {
+      "sprintReg": {
+        "minimum": 12,
+        "maximum": 12
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 725
+  },
+  {
     "name": "Nightmare Fuel",
     "tier": 1,
     "skills": [
@@ -11632,21 +11899,26 @@
     "id": 291
   },
   {
-    "name": "Pig's Skull",
+    "name": "Pigman Ivory",
     "tier": 1,
     "skills": [
-      "ARMOURING"
+      "WEAPONSMITHING",
+      "WOODWORKING"
     ],
-    "lvl": 78,
+    "lvl": 14,
     "ids": {
-      "str": {
-        "minimum": 2,
-        "maximum": 5
+      "mdRaw": {
+        "minimum": 5,
+        "maximum": 9
+      },
+      "sprintReg": {
+        "minimum": 6,
+        "maximum": 8
       }
     },
     "itemIDs": {
-      "dura": -63,
-      "strReq": 12,
+      "dura": -34,
+      "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
@@ -11664,7 +11936,7 @@
       "touching": 0,
       "notTouching": 0
     },
-    "id": 292
+    "id": 726
   },
   {
     "name": "Pilfered Silver",
@@ -11705,6 +11977,41 @@
       "notTouching": 0
     },
     "id": 702
+  },
+  {
+    "name": "Pig's Skull",
+    "tier": 1,
+    "skills": [
+      "ARMOURING"
+    ],
+    "lvl": 78,
+    "ids": {
+      "str": {
+        "minimum": 2,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": -63,
+      "strReq": 12,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 292
   },
   {
     "name": "Pillaged Fragment",
@@ -12865,51 +13172,6 @@
     "id": 321
   },
   {
-    "name": "Tropical Honeysuckle",
-    "tier": 1,
-    "skills": [
-      "ALCHEMISM"
-    ],
-    "lvl": 53,
-    "ids": {
-      "spd": {
-        "minimum": 4,
-        "maximum": 6
-      },
-      "hprRaw": {
-        "minimum": 18,
-        "maximum": 20
-      },
-      "gSpd": {
-        "minimum": 4,
-        "maximum": 5
-      }
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0,
-      "atkTier": 0,
-      "slotMod": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": -95
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 320
-  },
-  {
     "name": "Ursine Claw",
     "tier": 1,
     "skills": [
@@ -12953,6 +13215,51 @@
       "notTouching": 0
     },
     "id": 322
+  },
+  {
+    "name": "Tropical Honeysuckle",
+    "tier": 1,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 53,
+    "ids": {
+      "spd": {
+        "minimum": 4,
+        "maximum": 6
+      },
+      "hprRaw": {
+        "minimum": 18,
+        "maximum": 20
+      },
+      "gSpd": {
+        "minimum": 4,
+        "maximum": 5
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0,
+      "atkTier": 0,
+      "slotMod": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -95
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 320
   },
   {
     "name": "Waterfall Thyme",
@@ -13351,6 +13658,42 @@
       "notTouching": 0
     },
     "id": 330
+  },
+  {
+    "name": "Runner's Bandages",
+    "tier": 1,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 43,
+    "ids": {
+      "sprintReg": {
+        "minimum": 8,
+        "maximum": 11
+      }
+    },
+    "itemIDs": {
+      "dura": -35,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 727
   },
   {
     "name": "Rusty Axe Head",
@@ -13782,6 +14125,46 @@
     "id": 344
   },
   {
+    "name": "Snake Tooth",
+    "tier": 1,
+    "skills": [
+      "WEAPONSMITHING",
+      "WOODWORKING"
+    ],
+    "lvl": 25,
+    "ids": {
+      "spd": {
+        "minimum": 3,
+        "maximum": 4
+      },
+      "poison": {
+        "minimum": 28,
+        "maximum": 33
+      }
+    },
+    "itemIDs": {
+      "dura": -37,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 343
+  },
+  {
     "name": "Snake Skin",
     "tier": 1,
     "skills": [
@@ -13823,46 +14206,6 @@
       "notTouching": 0
     },
     "id": 342
-  },
-  {
-    "name": "Snake Tooth",
-    "tier": 1,
-    "skills": [
-      "WEAPONSMITHING",
-      "WOODWORKING"
-    ],
-    "lvl": 25,
-    "ids": {
-      "spd": {
-        "minimum": 3,
-        "maximum": 4
-      },
-      "poison": {
-        "minimum": 28,
-        "maximum": 33
-      }
-    },
-    "itemIDs": {
-      "dura": -37,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 343
   },
   {
     "name": "Soapstone",
@@ -15396,45 +15739,6 @@
     "id": 382
   },
   {
-    "name": "Ancient Panel",
-    "tier": 2,
-    "skills": [
-      "WOODWORKING"
-    ],
-    "lvl": 37,
-    "ids": {
-      "hprPct": {
-        "minimum": 7,
-        "maximum": 10
-      },
-      "fDamPct": {
-        "minimum": 6,
-        "maximum": 8
-      }
-    },
-    "itemIDs": {
-      "dura": -60,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 12,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 384
-  },
-  {
     "name": "Ancient Moss",
     "tier": 2,
     "skills": [
@@ -15474,6 +15778,45 @@
       "notTouching": 0
     },
     "id": 383
+  },
+  {
+    "name": "Ancient Panel",
+    "tier": 2,
+    "skills": [
+      "WOODWORKING"
+    ],
+    "lvl": 37,
+    "ids": {
+      "hprPct": {
+        "minimum": 7,
+        "maximum": 10
+      },
+      "fDamPct": {
+        "minimum": 6,
+        "maximum": 8
+      }
+    },
+    "itemIDs": {
+      "dura": -60,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 12,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 384
   },
   {
     "name": "Angelic Gem",
@@ -15727,6 +16070,49 @@
       "notTouching": 0
     },
     "id": 389
+  },
+  {
+    "name": "Blazing Stimulants",
+    "tier": 2,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "lvl": 58,
+    "ids": {
+      "spd": {
+        "minimum": 8,
+        "maximum": 9
+      },
+      "hprRaw": {
+        "minimum": -24,
+        "maximum": -32
+      },
+      "sprintReg": {
+        "minimum": 16,
+        "maximum": 19
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -130
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 728
   },
   {
     "name": "Bloated Artery",
@@ -16431,6 +16817,45 @@
     "id": 402
   },
   {
+    "name": "Curse Gland",
+    "tier": 2,
+    "skills": [
+      "WOODWORKING"
+    ],
+    "lvl": 66,
+    "ids": {
+      "wDefPct": {
+        "minimum": -9,
+        "maximum": -6
+      },
+      "eDamPct": {
+        "minimum": 10,
+        "maximum": 13
+      }
+    },
+    "itemIDs": {
+      "dura": -78,
+      "strReq": 12,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 403
+  },
+  {
     "name": "Cursed Ashes",
     "tier": 2,
     "skills": [
@@ -16584,45 +17009,6 @@
       "notTouching": 0
     },
     "id": 406
-  },
-  {
-    "name": "Curse Gland",
-    "tier": 2,
-    "skills": [
-      "WOODWORKING"
-    ],
-    "lvl": 66,
-    "ids": {
-      "wDefPct": {
-        "minimum": -9,
-        "maximum": -6
-      },
-      "eDamPct": {
-        "minimum": 10,
-        "maximum": 13
-      }
-    },
-    "itemIDs": {
-      "dura": -78,
-      "strReq": 12,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 403
   },
   {
     "name": "Defiled Luxroot",
@@ -17307,42 +17693,6 @@
     "id": 422
   },
   {
-    "name": "Enraged Soul",
-    "tier": 2,
-    "skills": [
-      "WOODWORKING",
-      "WEAPONSMITHING"
-    ],
-    "lvl": 27,
-    "ids": {
-      "fDamPct": {
-        "minimum": 7,
-        "maximum": 9
-      }
-    },
-    "itemIDs": {
-      "dura": -52,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 10,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 424
-  },
-  {
     "name": "Erratic Aspect",
     "tier": 2,
     "skills": [
@@ -17388,6 +17738,42 @@
       "notTouching": 0
     },
     "id": 685
+  },
+  {
+    "name": "Enraged Soul",
+    "tier": 2,
+    "skills": [
+      "WOODWORKING",
+      "WEAPONSMITHING"
+    ],
+    "lvl": 27,
+    "ids": {
+      "fDamPct": {
+        "minimum": 7,
+        "maximum": 9
+      }
+    },
+    "itemIDs": {
+      "dura": -52,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 10,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 424
   },
   {
     "name": "Eternal Flame",
@@ -21550,42 +21936,6 @@
     "id": 519
   },
   {
-    "name": "Scarab Husk",
-    "tier": 2,
-    "skills": [
-      "ARMOURING",
-      "TAILORING"
-    ],
-    "lvl": 32,
-    "ids": {
-      "def": {
-        "minimum": 2,
-        "maximum": 3
-      }
-    },
-    "itemIDs": {
-      "dura": 21,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 5,
-      "agiReq": 0
-    },
-    "consumableIDs": {
-      "charges": 0,
-      "dura": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "id": 520
-  },
-  {
     "name": "Scarred Leather",
     "tier": 2,
     "skills": [
@@ -21625,6 +21975,42 @@
       "notTouching": 0
     },
     "id": 521
+  },
+  {
+    "name": "Scarab Husk",
+    "tier": 2,
+    "skills": [
+      "ARMOURING",
+      "TAILORING"
+    ],
+    "lvl": 32,
+    "ids": {
+      "def": {
+        "minimum": 2,
+        "maximum": 3
+      }
+    },
+    "itemIDs": {
+      "dura": 21,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 5,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 520
   },
   {
     "name": "Scopaesthesia",
@@ -25262,6 +25648,47 @@
     "id": 604
   },
   {
+    "name": "Icy Crampons",
+    "tier": 3,
+    "skills": [
+      "ARMOURING",
+      "TAILORING",
+      "WEAPONSMITHING"
+    ],
+    "lvl": 48,
+    "ids": {
+      "thorns": {
+        "minimum": 8,
+        "maximum": 12
+      },
+      "sprint": {
+        "minimum": 10,
+        "maximum": 15
+      }
+    },
+    "itemIDs": {
+      "dura": -92,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": -5
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 729
+  },
+  {
     "name": "Ignited Faebloom",
     "tier": 3,
     "skills": [
@@ -27837,6 +28264,53 @@
     "id": 664
   },
   {
+    "name": "Sanctified Sheep Soul",
+    "tier": 3,
+    "skills": [
+      "SCRIBING"
+    ],
+    "lvl": 65,
+    "ids": {
+      "fDefPct": {
+        "minimum": 10,
+        "maximum": 12
+      },
+      "wDefPct": {
+        "minimum": 12,
+        "maximum": 14
+      },
+      "sprint": {
+        "minimum": 14,
+        "maximum": 16
+      },
+      "sprintReg": {
+        "minimum": 8,
+        "maximum": 10
+      }
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": -225
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 730
+  },
+  {
     "name": "Serpent's Fang",
     "tier": 3,
     "skills": [
@@ -27875,6 +28349,49 @@
       "notTouching": 0
     },
     "id": 665
+  },
+  {
+    "name": "Solcrystal Horn",
+    "tier": 3,
+    "skills": [
+      "JEWELING"
+    ],
+    "lvl": 62,
+    "ids": {
+      "agi": {
+        "minimum": 2,
+        "maximum": 3
+      },
+      "fDamPct": {
+        "minimum": 5,
+        "maximum": 6
+      },
+      "sprint": {
+        "minimum": 4,
+        "maximum": 6
+      }
+    },
+    "itemIDs": {
+      "dura": -117,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 12,
+      "agiReq": 9
+    },
+    "consumableIDs": {
+      "charges": 0,
+      "dura": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "id": 731
   },
   {
     "name": "Spark of the Oasis",
