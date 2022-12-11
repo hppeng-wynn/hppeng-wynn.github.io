@@ -329,35 +329,43 @@ async function init() {
     }
 
     // Masonry setup
-    let masonry = Macy({
-        container: "#masonry-container",
-        columns: 1,
-        mobileFirst: true,
-        breakAt: {
-            1200: 4,
-        },
-        margin: {
-            x: 20,
-            y: 20,
-        } 
-        
-    });
+    try {
+        let masonry = Macy({
+            container: "#masonry-container",
+            columns: 1,
+            mobileFirst: true,
+            breakAt: {
+                1200: 4,
+            },
+            margin: {
+                x: 20,
+                y: 20,
+            } 
+            
+        });
 
-    let search_masonry = Macy({
-        container: "#search-results",
-        columns: 1,
-        mobileFirst: true,
-        breakAt: {
-            1200: 4,
-        },
-        margin: {
-            x: 20,
-            y: 20,
-        }
-        
-    });
+        let search_masonry = Macy({
+            container: "#search-results",
+            columns: 1,
+            mobileFirst: true,
+            breakAt: {
+                1200: 4,
+            },
+            margin: {
+                x: 20,
+                y: 20,
+            }
+            
+        });
+    } catch (e) {
+        console.log("Could not initialize macy components. Maybe you're offline?");
+    }
     await decodeBuild(url_tag);
-    init_autocomplete();
+    try {
+        init_autocomplete();
+    } catch (e) {
+        console.log("Could not initialize autocomplete. Maybe you're offline?");
+    }
     builder_graph_init();
     for (const item_node of item_nodes) {
         if (item_node.get_value() === null) {

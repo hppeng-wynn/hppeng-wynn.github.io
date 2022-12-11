@@ -69,14 +69,22 @@ async function decodeBuild(url_tag) {
         if (wynn_version_id != WYNN_VERSION_LATEST) {
             // force reload item database and such.
             // TODO MUST: display a warning showing older version!
-            version_name = wynn_version_names[wynn_version_id];
-            load_promises = [ load_atree_data(version_name),
-                              load_old_version(version_name),
-                              load_ings_old_version(version_name),
-                              load_tome_old_version(version_name) ];
-            console.log("Loading old version data...", version_name)
+            const msg = 'This build was created in an older version of wynncraft ('
+                        + wynn_version_names[wynn_version_id] + ' < ' + wynn_version_names[WYNN_VERSION_LATEST]
+                        + '). Would you like to update to the latest version? Updating may break the build and ability tree.';
+            if (confirm(msg)) {
+                wynn_version_id = WYNN_VERSION_LATEST;
+            }
+            else {
+                version_name = wynn_version_names[wynn_version_id];
+                load_promises = [ load_atree_data(version_name),
+                                  load_old_version(version_name),
+                                  load_ings_old_version(version_name),
+                                  load_tome_old_version(version_name) ];
+                console.log("Loading old version data...", version_name)
+            }
         }
-        else {
+        if (wynn_version_id == WYNN_VERSION_LATEST) {
             load_promises = [ load_atree_data(wynn_version_names[WYNN_VERSION_LATEST]),
                               load_init(), load_ing_init(), load_tome_init() ];
         }

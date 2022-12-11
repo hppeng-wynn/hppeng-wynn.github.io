@@ -71,7 +71,7 @@ async function load_ings_old_version(version_str) {
         clean_ing(ings[id]);
     }
 
-    url = getURL.procol + "//" + getUrl.host + "/recipes_compress.json";
+    url = baseUrl + "/recipes_compress.json";
     result = await (await fetch(url)).json();
     recipes = result.recipes;
 
