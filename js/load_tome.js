@@ -1,4 +1,4 @@
-const TOME_DB_VERSION = 5;
+const TOME_DB_VERSION = 6;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let tdb;
@@ -37,9 +37,9 @@ async function load_tome_local() {
 async function load_tome_old_version(version_str) {
     tload_in_progress = true;
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // No random string -- we want to use caching
-    let url = baseUrl + "/data/" + version_str + "/tomes.json"
+    let url = `${baseUrl}/data/${version_str}/tomes.json`;
     let result = await (await fetch(url)).json();
     tomes = result.tomes;
     for (const tome of tomes) {
@@ -53,9 +53,8 @@ async function load_tome_old_version(version_str) {
  * Load tome set from remote DB (json). Calls init() on success.
  */
 async function load_tome() {
-
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/tomes.json?"+new Date();
     let result = await (await fetch(url)).json();

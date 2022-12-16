@@ -95,9 +95,9 @@ function clean_item(item) {
 async function load_old_version(version_str) {
     load_in_progress = true;
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // No random string -- we want to use caching
-    let url = baseUrl + "/data/" + version_str + "/items.json"
+    let url = `${baseUrl}/data/${version_str}/items.json`;
     let result = await (await fetch(url)).json();
     items = result.items;
     for (const item of items) {
@@ -116,7 +116,7 @@ async function load_old_version(version_str) {
  */
 async function load() {
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/compress.json?"+new Date();
     let result = await (await fetch(url)).json();

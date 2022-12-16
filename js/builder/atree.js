@@ -116,9 +116,9 @@ let atree_load_complete = false;
  */
 async function load_atree_data(version_str) {
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // No random string -- we want to use caching
-    let url = baseUrl + "/data/" + version_str + "/atree.json"
+    let url = `${baseUrl}/data/${version_str}/atree.json`;
     atrees = await (await fetch(url)).json();
     atree_load_complete = true;
 }
@@ -293,7 +293,7 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
         return [false, false, 'not reachable'];
     }
     if ('archetype_req' in ability && ability.archetype_req !== 0) {
-        let req_archetype
+        let req_archetype;
         if ('req_archetype' in ability && ability.req_archetype !== "") {
             req_archetype = ability.req_archetype;
         }
@@ -1280,7 +1280,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     // calculate if requirements are satisfied
     let apUsed = 0;
     let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
-    let archChosen = 0;
+    let arch_chosen = 0;
     const node_arch = ability.req_archetype || ability.archetype;
     let satisfiedDependencies = [];
     let blockedBy = [];
@@ -1290,7 +1290,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
         }
         apUsed += node_wrap.ability.cost;
         if (node_wrap.ability.archetype == node_arch) {
-            archChosen++;
+            arch_chosen++;
         }
         if (ability.dependencies.includes(id)) {
             satisfiedDependencies.push(id);
@@ -1315,20 +1315,20 @@ function generateTooltip(container, node_elem, ability, atree_map) {
 
     // archetype req
     if (ability.archetype_req > 0) {
-        let archReq = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
+        let arch_req = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
         if ('req_archetype' in ability && ability.req_archetype !== "") {
             req_archetype = ability.req_archetype;
         }
         else {
             req_archetype = ability.archetype;
         }
-        if (archChosen >= ability.archetype_req) {
-            archReq.innerHTML = reqYes;
+        if (arch_chosen >= ability.archetype_req) {
+            arch_req.innerHTML = reqYes;
         } else {
-            archReq.innerHTML = reqNo;
+            arch_req.innerHTML = reqNo;
         }
-        archReq.innerHTML += "<span class = 'mc-gray'>Min " + req_archetype+ " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
-        container.appendChild(archReq);
+        arch_req.innerHTML += "<span class = 'mc-gray'>Min " + req_archetype+ " Archetype:</span> " + arch_chosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        container.appendChild(arch_req);
     }
 
     // dependencies

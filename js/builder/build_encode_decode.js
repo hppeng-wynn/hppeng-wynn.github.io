@@ -37,8 +37,10 @@ let wynn_version_id = WYNN_VERSION_LATEST;
 
 /*
  * Populate fields based on url, and calculate build.
+ * TODO: THIS CODE IS GOD AWFUL result of being lazy
+ * fix all the slice() and break into functions or do something about it... its inefficient, ugly and error prone
  */
-async function decodeBuild(url_tag) {
+async function parse_hash(url_tag) {
     const default_load_promises = [ load_atree_data(wynn_version_names[WYNN_VERSION_LATEST]),
                                     load_init(), load_ing_init(), load_tome_init() ];
     if (!url_tag) {
@@ -64,6 +66,7 @@ async function decodeBuild(url_tag) {
         const version_id = url_params.get('v');
         wynn_version_id = parseInt(version_id);
         if (isNaN(wynn_version_id) || wynn_version_id > WYNN_VERSION_LATEST || wynn_version_id < 0) {
+            // TODO: maybe make the NAN try to use the human readable version?
             // NOTE: Failing silently... do we want to raise a loud error?
             console.log("Explicit version not found or invalid, using latest version")
             wynn_version_id = WYNN_VERSION_LATEST;
@@ -77,12 +80,15 @@ async function decodeBuild(url_tag) {
         wynn_version_id = 0;
     }
 
+    // the deal with this is because old versions should default to 0 (oldest wynn item version), and v8+ defaults to latest.
+    // its ugly... but i think this is the behavior we want...
     if (wynn_version_id != WYNN_VERSION_LATEST) {
         // force reload item database and such.
         // TODO MUST: display a warning showing older version!
-        const msg = 'This build was created in an older version of wynncraft ('
-                    + wynn_version_names[wynn_version_id] + ' < ' + wynn_version_names[WYNN_VERSION_LATEST]
-                    + '). Would you like to update to the latest version? Updating may break the build and ability tree.';
+        const msg = 'This build was created in an older version of wynncraft '
+                    + `(${wynn_version_names[wynn_version_id]} < ${wynn_version_names[WYNN_VERSION_LATEST]}). `
+                    + 'Would you like to update to the latest version? Updating may break the build and ability tree.';
+
         if (confirm(msg)) {
             wynn_version_id = WYNN_VERSION_LATEST;
         }
@@ -282,8 +288,12 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
     }
 }
 
+function get_full_url() {
+    return `${url_base}?v=${wynn_version_id.toString()}${location.hash}`
+}
+
 function copyBuild() {
-    copyTextToClipboard(url_base+'?v='+wynn_version_id.toString()+location.hash);
+    copyTextToClipboard();
     document.getElementById("copy-button").textContent = "Copied!";
 }
 

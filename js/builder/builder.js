@@ -48,6 +48,7 @@ function loadBuild() {
 
     if (Object.keys(savedBuilds).includes(saveName)) { 
         // NOTE: this is broken since decodeBuild is async func.
+        // Doubly broken because of versioning... lets just kill this for now
         decodeBuild(savedBuilds[saveName])
         document.getElementById("loaded-error").textContent = "";
         document.getElementById("loaded-build").textContent = "Build loaded";
@@ -358,7 +359,7 @@ async function init() {
     } catch (e) {
         console.log("Could not initialize macy components. Maybe you're offline?");
     }
-    await decodeBuild(url_tag);
+    await parse_hash(url_tag);
     try {
         init_autocomplete();
     } catch (e) {

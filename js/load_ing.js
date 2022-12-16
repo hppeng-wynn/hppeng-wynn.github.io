@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 18;
+const ING_DB_VERSION = 19;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -62,9 +62,9 @@ function clean_ing(ing) {
 async function load_ings_old_version(version_str) {
     iload_in_progress = true;
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host;// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // No random string -- we want to use caching
-    let url = baseUrl + "/data/" + version_str + "/ingreds.json"
+    let url = `${baseUrl}/data/${version_str}/ingreds.json`;
     let result = await (await fetch(url)).json();
     ings = result;
     for (const id in ings) {
@@ -85,7 +85,7 @@ async function load_ings_old_version(version_str) {
 async function load_ings() {
 
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/ingreds_compress.json?"+new Date();
     let result = await (await fetch(url)).json();
