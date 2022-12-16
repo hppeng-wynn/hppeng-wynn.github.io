@@ -183,6 +183,28 @@ function encode(tree_data, tree_state):
 
     recursive_traverse(tree_data.root)
     return return_vector
+
+// Decode a binary blob into an ability tree configuration
+//
+// Parameters:
+//   tree_data:  Object containing ability tree structure.
+//   tree_state: Object containing info about which abilities are selected.
+//   tree_bitvector: raw binary data, accessed one bit at a time
+function decode(tree_data, tree_state, tree_bitvector):
+
+    i = 0
+    visited = Set()
+
+    function recursive_traverse(head_node):
+        for each child of head_node, in order:
+            if child is not in visited:
+                add child to visited set
+                if tree_bitvector[i]:
+                    child.active = True
+                    recursive_traverse(child)
+                else:
+                    child.active = False
+                i = i + 1
                     </code>
                 </div>
                 <div class="row section" title="Version 6">
