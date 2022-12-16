@@ -180,6 +180,10 @@ function calculateCustom() {
         player_custom_item.setHash(custom_str);
 
         
+        if (player_custom_item.statMap.get('category') == 'weapon') {
+            // wonkiness needed to set the right fields... this is jank
+            apply_weapon_powders(player_custom_item.statMap);
+        }
         displayExpandedItem(player_custom_item.statMap, "custom-stats");
 
     }catch (error) {
