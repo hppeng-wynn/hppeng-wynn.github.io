@@ -18,7 +18,7 @@ const atrees = {
             "properties": {
                 "charges": 2,
                 "duration": 60,
-                "aoe": 5000
+                "knockback": 1.5
             },
             "effects": [
                 {
@@ -382,7 +382,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "range": 4,
+                "range": 6,
                 "duration": 60,
                 "shots": 8
             },
@@ -570,7 +570,7 @@ const atrees = {
                 "col": 5,
                 "icon": "node_2"
             },
-            "properties": { "range": 26 },
+            "properties": { "range": 30 },
             "effects": []
         },
         {
@@ -685,7 +685,7 @@ const atrees = {
                     "target_part": "Fierce Stomp",
                     "cost": 0,
                     "multipliers": [
-                        100,
+                        120,
                         0,
                         0,
                         0,
@@ -855,9 +855,9 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Escape Artist Arrow",
                     "multipliers": [
-                        70,
+                        100,
                         0,
-                        30,
+                        50,
                         0,
                         0,
                         0
@@ -882,7 +882,7 @@ const atrees = {
             "parents": [
                 "Shocking Bomb",
                 "Better Arrow Shield",
-                "Cheaper Arrow Storm (2)"
+                "Cheaper Arrow Storm II"
             ],
             "dependencies": [
                 "Focus"
@@ -917,7 +917,7 @@ const atrees = {
             "base_abil": "Arrow Shield",
             "parents": [
                 "Initiator",
-                "Cheaper Arrow Storm (2)"
+                "Cheaper Arrow Storm II"
             ],
             "dependencies": [
                 "Arrow Shield"
@@ -1017,7 +1017,7 @@ const atrees = {
                         0,
                         0,
                         0,
-                        50,
+                        80,
                         0,
                         0
                     ]
@@ -1101,7 +1101,7 @@ const atrees = {
             "desc": "Arrow bomb will throw 2 additional smaller bombs when exploding.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "Cheaper Arrow Bomb (2)",
+                "More Focus II",
                 "Minefield"
             ],
             "dependencies": [],
@@ -1146,7 +1146,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Cheaper Escape (2)"
+                "Cheaper Escape II"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1190,7 +1190,7 @@ const atrees = {
             "desc": "Enemies near you will be slowed down.",
             "parents": [
                 "Geyser Stomp",
-                "More Focus (2)"
+                "More Focus II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -1226,7 +1226,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "range": 7,
+                "range": 4,
                 "shots": 4
             },
             "effects": [
@@ -1252,7 +1252,8 @@ const atrees = {
             "archetype_req": 10,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Tangled Traps"
+                "Tangled Traps",
+                "Cheaper Arrow Bomb II"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1638,7 +1639,21 @@ const atrees = {
             "properties": {
                 "charges": 2
             },
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Shot",
+                    "multipliers": [
+                        -15,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Stormy Feet",
@@ -1750,7 +1765,9 @@ const atrees = {
                 "col": 6,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+                "knockback": 0.5
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -1777,6 +1794,20 @@ const atrees = {
                             "value": 1
                         }
                     ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Shot",
+                    "multipliers": [
+                        3,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "behavior": "modify"
                 }
             ]
         },
@@ -1835,7 +1866,9 @@ const atrees = {
                 "col": 0,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+                "range": 2
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -1848,7 +1881,7 @@ const atrees = {
             ]
         },
         {
-            "display_name": "Cheaper Arrow Storm (2)",
+            "display_name": "Cheaper Arrow Storm II",
             "desc": "Reduce the Mana cost of Arrow Storm.",
             "base_abil": "Arrow Storm",
             "parents": [
@@ -1933,7 +1966,7 @@ const atrees = {
             "desc": "Arrow Bomb's self-damage will knockback you farther away.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "Cheaper Arrow Storm (2)",
+                "Cheaper Arrow Storm II",
                 "Initiator"
             ],
             "dependencies": [
@@ -1950,7 +1983,7 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Cheaper Escape (2)",
+            "display_name": "Cheaper Escape II",
             "desc": "Reduce the Mana cost of Escape.",
             "base_abil": "Escape",
             "parents": [
@@ -1981,7 +2014,7 @@ const atrees = {
             "archetype_req": 5,
             "base_abil": "Escape",
             "parents": [
-                "Cheaper Escape (2)"
+                "Cheaper Escape II"
             ],
             "dependencies": [
                 "Grappling Hook"
@@ -1997,19 +2030,20 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Cheaper Arrow Bomb (2)",
+            "display_name": "Cheaper Arrow Bomb II",
             "desc": "Reduce the Mana cost of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "More Focus (2)",
-                "Grape Bomb"
+                "Crepuscular Ray",
+                "Snow Storm",
+                "Minefield"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 41,
-                "col": 5,
+                "row": 39,
+                "col": 4,
                 "icon": "node_0"
             },
             "properties": {},
@@ -2029,8 +2063,8 @@ const atrees = {
                 "More Shields",
                 "Twain's Arc"
             ],
-            "archetype": "Trapper",
             "archetype_req": 3,
+            "req_archetype": "Trapper",
             "dependencies": [],
             "blockers": [],
             "cost": 2,
@@ -2100,7 +2134,7 @@ const atrees = {
         },
         {
             "display_name": "Elusive",
-            "desc": "If you do not get hit for 5+ seconds, become immune to self-damage and remove Arrow Storm's recoil. (Dodging counts as not getting hit)",
+            "desc": "If you do not get hit for 4+ seconds, become immune to self-damage and remove Arrow Storm's recoil. (Dodging counts as not getting hit)",
             "archetype": "Boltslinger",
             "archetype_req": 0,
             "parents": [
@@ -2257,7 +2291,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        20
+                        15
                     ],
                     "slider_max": 3
                 }
@@ -2301,14 +2335,14 @@ const atrees = {
             ]
         },
         {
-            "display_name": "More Focus (2)",
+            "display_name": "More Focus II",
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
             "parents": [
-                "Crepuscular Ray",
-                "Snow Storm"
+                "More Focus II",
+                "Grape Bomb"
             ],
             "dependencies": [
                 "Focus"
@@ -2316,8 +2350,8 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 39,
-                "col": 4,
+                "row": 41,
+                "col": 5,
                 "icon": "node_0"
             },
             "properties": {},
@@ -2560,12 +2594,12 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Arrow Rain",
                     "multipliers": [
-                        100,
+                        150,
                         0,
                         0,
                         0,
                         0,
-                        50
+                        100
                     ]
                 }
             ]
@@ -2578,7 +2612,7 @@ const atrees = {
             "base_abil": "Arrow Storm",
             "parents": [
                 "Cheaper Arrow Shield",
-                "Cheaper Escape (2)"
+                "Cheaper Escape II"
             ],
             "dependencies": [
                 "Phantom Ray"

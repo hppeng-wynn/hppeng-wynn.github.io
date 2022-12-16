@@ -18,6 +18,7 @@ atree_node: {
     desc:           str
     archetype:      Optional[str]   // not present or empty string = no arch
     archetype_req:  Optional[int]   // default: 0
+    req_archetype:  Optional[str]   // what the req is for if no archetype defined... maybe clean up this data format later...?
     base_abil:      Optional[int]   // Modify another abil? poorly defined...
     parents:        List[int]
     dependencies:   List[int]       // Hard reqs
@@ -291,12 +292,17 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     if (!node_reachable) {
         return [false, false, 'not reachable'];
     }
-    if ('archetype' in ability && ability.archetype !== "") {
-        if ('archetype_req' in ability && ability.archetype_req !== 0) {
-            const others = (archetype_count.get(ability.archetype) || 0);
-            if (others < ability.archetype_req) {
-                return [false, false, ability.archetype+': '+others+' < '+ability.archetype_req];
-            }
+    if ('archetype_req' in ability && ability.archetype_req !== 0) {
+        let req_archetype
+        if ('req_archetype' in ability && ability.req_archetype !== "") {
+            req_archetype = ability.req_archetype;
+        }
+        else {
+            req_archetype = ability.archetype;
+        }
+        const others = (archetype_count.get(req_archetype) || 0);
+        if (others < ability.archetype_req) {
+            return [false, false, req_archetype+': '+others+' < '+ability.archetype_req];
         }
     }
     if (ability.cost > points_remain) {
@@ -1275,6 +1281,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     let apUsed = 0;
     let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
     let archChosen = 0;
+    const node_arch = ability.req_archetype || ability.archetype;
     let satisfiedDependencies = [];
     let blockedBy = [];
     for (let [id, node_wrap] of atree_map.entries()) {
@@ -1282,7 +1289,7 @@ function generateTooltip(container, node_elem, ability, atree_map) {
             continue; // we don't want to count abilities that are not selected, and an ability should not count towards itself
         }
         apUsed += node_wrap.ability.cost;
-        if (node_wrap.ability.archetype == ability.archetype) {
+        if (node_wrap.ability.archetype == node_arch) {
             archChosen++;
         }
         if (ability.dependencies.includes(id)) {
@@ -1307,14 +1314,20 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     container.appendChild(cost);
 
     // archetype req
-    if (ability.archetype_req > 0 && ability.archetype != null) {
+    if (ability.archetype_req > 0) {
         let archReq = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
+        if ('req_archetype' in ability && ability.req_archetype !== "") {
+            req_archetype = ability.req_archetype;
+        }
+        else {
+            req_archetype = ability.archetype;
+        }
         if (archChosen >= ability.archetype_req) {
             archReq.innerHTML = reqYes;
         } else {
             archReq.innerHTML = reqNo;
         }
-        archReq.innerHTML += "<span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        archReq.innerHTML += "<span class = 'mc-gray'>Min " + req_archetype+ " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
         container.appendChild(archReq);
     }
 
