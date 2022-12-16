@@ -1,4 +1,4 @@
-const DB_VERSION = 117;
+const DB_VERSION = 118;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let db;
@@ -92,13 +92,31 @@ function clean_item(item) {
     }
 }
 
+async function load_old_version(version_str) {
+    load_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/items.json`;
+    let result = await (await fetch(url)).json();
+    items = result.items;
+    for (const item of items) {
+        clean_item(item);
+    }
+    let sets_ = result.sets;
+    for (const set in sets_) {
+        sets.set(set, sets_[set]);
+    }
+    init_maps();
+    load_complete = true;
+}
+
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
 async function load() {
-
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/compress.json?"+new Date();
     let result = await (await fetch(url)).json();
@@ -150,7 +168,7 @@ async function load_init() {
                 console.log("Skipping load...")
             }
             else {
-                load_in_progress = true
+                load_in_progress = true;
                 if (reload) {
                     console.log("Using new data...")
                     await load();

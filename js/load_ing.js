@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 18;
+const ING_DB_VERSION = 19;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -59,22 +59,41 @@ function clean_ing(ing) {
     }
 }
 
+async function load_ings_old_version(version_str) {
+    iload_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/ingreds.json`;
+    let result = await (await fetch(url)).json();
+    ings = result;
+    for (const id in ings) {
+        clean_ing(ings[id]);
+    }
+
+    url = baseUrl + "/recipes_compress.json";
+    result = await (await fetch(url)).json();
+    recipes = result.recipes;
+
+    init_maps();
+    iload_complete = true;
+}
+
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
 async function load_ings() {
 
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/ingreds_compress.json?"+new Date();
-    url = url.replace(/\w+.html/, "") ; 
     let result = await (await fetch(url)).json();
 
     result = await (await fetch(url)).json();
     ings = result;
 
-    url = url.replace("/ingreds_compress.json", "/recipes_compress.json");
+    url = baseUrl + "/recipes_compress.json?"+new Date();
     result = await (await fetch(url)).json();
     recipes = result.recipes;
 

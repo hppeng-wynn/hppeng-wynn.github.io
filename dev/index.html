@@ -143,11 +143,82 @@
 
                 </div>
                 <p>
-                    All build links will end in "#[version number]_[build hash]".
+                    All build links starting from Version 8 may look like "?v=[wynn version number]#[version number]_[build hash]".
+                    The query section is optional.
                 </p>
+                <p>
+                    All build links older than Version 8 look like "#[version number]_[build hash]".
+                </p>
+                <div class="row section" title="Version 8">
+                    <p>
+                        Version 8 was made to account for an oversight made when designing the tome encoding, and to signal the beginning of versions that support wynn version history. Version 8 and higher links may start with a query indicating the wynn version to use.
+                    </p>
+                    <p>
+                        Additionally, Version 8 uses 2 characters instead of 1 character to encode the ID of each tome. (The IDs representing NONE tomes does not change.)
+                    </p>
+                </div>
+                <div class="row section" title="Version 7">
+                    <p>
+                        Version 7 was made to account for ability trees in wynncraft 2.0. Version 7 introduces a new field at the end of the build hash, for ability tree data. Atree data is compressed using a depth first search algorithm into a binary blob, which is then base-64 encoded and appended to the V6 hash. The binry blob is decompressed by using the corresponding traversal.
+                    </p>
+                    <p>
+                        The tree structure defining the ability tree can be found in a json file (by default, <code>js/builder/atree_constants_min.json</code>). The file defines connections between the ability tree nodes: Each node has an unordered list of parent nodes, and an ordered list of child nodes.
+                    </p>
+                    <p>
+                        A reference implementation of the encoding/decoding algorithms can be found in <code>js/builder/build_encode_decode.js</code>. A pseudocode description of the algorithms is given here:
+                    </p>
+                    <code style="white-space: pre">
+// Encode an ability tree configuration into a binary blob.
+// NOTE: this algorithm only works for "connected" (valid) ability trees.
+// Its behavior is not well defined otherwise.
+//
+// Parameters:
+//   tree_data:  Object containing ability tree structure.
+//   tree_state: Object containing info about which abilities are selected.
+function encode(tree_data, tree_state):
+
+    return_vector = BitVector()
+    visited = Set()
+
+    function recursive_traverse(head_node):
+        for each child of head_node, in order:
+            if child is not in visited:
+                add child to visited set
+                if tree_state.is_active(child):
+                    append bit 1 to return_vector
+                    recursive_traverse(child)
+                else:
+                    append bit 0 to return_vector
+
+    recursive_traverse(tree_data.root)
+    return return_vector
+
+// Decode a binary blob into an ability tree configuration
+//
+// Parameters:
+//   tree_data:  Object containing ability tree structure.
+//   tree_state: Object containing info about which abilities are selected.
+//   tree_bitvector: raw binary data, accessed one bit at a time
+function decode(tree_data, tree_state, tree_bitvector):
+
+    i = 0
+    visited = Set()
+
+    function recursive_traverse(head_node):
+        for each child of head_node, in order:
+            if child is not in visited:
+                add child to visited set
+                if tree_bitvector[i]:
+                    child.active = True
+                    recursive_traverse(child)
+                else:
+                    child.active = False
+                i = i + 1
+                    </code>
+                </div>
                 <div class="row section" title="Version 6">
                     <p>
-                        Version 6 was made to account for the desire to save tomes in a build. As of the last version of this documentation, version 6 is used for encoding whenever there are tomes in the build.
+                        Version 6 was made to account for the desire to save tomes in a build.
                     </p>
                     <div class = "row section" title = "Example 1: With Tomes">
                         <code class="full-width">

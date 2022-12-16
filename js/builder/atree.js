@@ -18,6 +18,7 @@ atree_node: {
     desc:           str
     archetype:      Optional[str]   // not present or empty string = no arch
     archetype_req:  Optional[int]   // default: 0
+    req_archetype:  Optional[str]   // what the req is for if no archetype defined... maybe clean up this data format later...?
     base_abil:      Optional[int]   // Modify another abil? poorly defined...
     parents:        List[int]
     dependencies:   List[int]       // Hard reqs
@@ -106,6 +107,21 @@ scaling_target: {
 }
 */
 
+
+// Space for big json data
+let atrees;
+let atree_load_complete = false;
+/*
+ * Load atree info remote DB (aka a big json file).
+ */
+async function load_atree_data(version_str) {
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/atree.json`;
+    atrees = await (await fetch(url)).json();
+    atree_load_complete = true;
+}
 
 const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properties: {}, effects: [] };
 
@@ -276,12 +292,17 @@ function abil_can_activate(atree_node, atree_state, reachable, archetype_count, 
     if (!node_reachable) {
         return [false, false, 'not reachable'];
     }
-    if ('archetype' in ability && ability.archetype !== "") {
-        if ('archetype_req' in ability && ability.archetype_req !== 0) {
-            const others = (archetype_count.get(ability.archetype) || 0);
-            if (others < ability.archetype_req) {
-                return [false, false, ability.archetype+': '+others+' < '+ability.archetype_req];
-            }
+    if ('archetype_req' in ability && ability.archetype_req !== 0) {
+        let req_archetype;
+        if ('req_archetype' in ability && ability.req_archetype !== "") {
+            req_archetype = ability.req_archetype;
+        }
+        else {
+            req_archetype = ability.archetype;
+        }
+        const others = (archetype_count.get(req_archetype) || 0);
+        if (others < ability.archetype_req) {
+            return [false, false, req_archetype+': '+others+' < '+ability.archetype_req];
         }
     }
     if (ability.cost > points_remain) {
@@ -1259,7 +1280,8 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     // calculate if requirements are satisfied
     let apUsed = 0;
     let maxAP = parseInt(document.getElementById("active_AP_cap").innerHTML);
-    let archChosen = 0;
+    let arch_chosen = 0;
+    const node_arch = ability.req_archetype || ability.archetype;
     let satisfiedDependencies = [];
     let blockedBy = [];
     for (let [id, node_wrap] of atree_map.entries()) {
@@ -1267,8 +1289,8 @@ function generateTooltip(container, node_elem, ability, atree_map) {
             continue; // we don't want to count abilities that are not selected, and an ability should not count towards itself
         }
         apUsed += node_wrap.ability.cost;
-        if (node_wrap.ability.archetype == ability.archetype) {
-            archChosen++;
+        if (node_wrap.ability.archetype == node_arch) {
+            arch_chosen++;
         }
         if (ability.dependencies.includes(id)) {
             satisfiedDependencies.push(id);
@@ -1292,15 +1314,21 @@ function generateTooltip(container, node_elem, ability, atree_map) {
     container.appendChild(cost);
 
     // archetype req
-    if (ability.archetype_req > 0 && ability.archetype != null) {
-        let archReq = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
-        if (archChosen >= ability.archetype_req) {
-            archReq.innerHTML = reqYes;
-        } else {
-            archReq.innerHTML = reqNo;
+    if (ability.archetype_req > 0) {
+        let arch_req = make_elem("p", ["scaled-font", "my-0", "mx-1"], {});
+        if ('req_archetype' in ability && ability.req_archetype !== "") {
+            req_archetype = ability.req_archetype;
         }
-        archReq.innerHTML += "<span class = 'mc-gray'>Min " + ability.archetype + " Archetype:</span> " + archChosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
-        container.appendChild(archReq);
+        else {
+            req_archetype = ability.archetype;
+        }
+        if (arch_chosen >= ability.archetype_req) {
+            arch_req.innerHTML = reqYes;
+        } else {
+            arch_req.innerHTML = reqNo;
+        }
+        arch_req.innerHTML += "<span class = 'mc-gray'>Min " + req_archetype+ " Archetype:</span> " + arch_chosen + "<span class = 'mc-gray'>/" + ability.archetype_req;
+        container.appendChild(arch_req);
     }
 
     // dependencies

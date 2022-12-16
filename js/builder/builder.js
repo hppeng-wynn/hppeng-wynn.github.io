@@ -47,6 +47,8 @@ function loadBuild() {
     let saveName = document.getElementById("build-name").value;
 
     if (Object.keys(savedBuilds).includes(saveName)) { 
+        // NOTE: this is broken since decodeBuild is async func.
+        // Doubly broken because of versioning... lets just kill this for now
         decodeBuild(savedBuilds[saveName])
         document.getElementById("loaded-error").textContent = "";
         document.getElementById("loaded-build").textContent = "Build loaded";
@@ -305,9 +307,8 @@ function collapse_element(elmnt) {
     document.querySelector(elmnt).style.removeProperty('display');
 }
 
-function init() {
+async function init() {
     console.log("builder.js init");
-    init_autocomplete();
 
     // Other "main" stuff
     // Spell dropdowns
@@ -329,34 +330,41 @@ function init() {
     }
 
     // Masonry setup
-    let masonry = Macy({
-        container: "#masonry-container",
-        columns: 1,
-        mobileFirst: true,
-        breakAt: {
-            1200: 4,
-        },
-        margin: {
-            x: 20,
-            y: 20,
-        } 
-        
-    });
+    try {
+        let masonry = Macy({
+            container: "#masonry-container",
+            columns: 1,
+            mobileFirst: true,
+            breakAt: {
+                1200: 4,
+            },
+            margin: {
+                x: 20,
+                y: 20,
+            }
+        });
 
-    let search_masonry = Macy({
-        container: "#search-results",
-        columns: 1,
-        mobileFirst: true,
-        breakAt: {
-            1200: 4,
-        },
-        margin: {
-            x: 20,
-            y: 20,
-        }
-        
-    });
-    decodeBuild(url_tag);
+        let search_masonry = Macy({
+            container: "#search-results",
+            columns: 1,
+            mobileFirst: true,
+            breakAt: {
+                1200: 4,
+            },
+            margin: {
+                x: 20,
+                y: 20,
+            }
+        });
+    } catch (e) {
+        console.log("Could not initialize macy components. Maybe you're offline?");
+    }
+    await parse_hash(url_tag);
+    try {
+        init_autocomplete();
+    } catch (e) {
+        console.log("Could not initialize autocomplete. Maybe you're offline?");
+    }
     builder_graph_init();
     for (const item_node of item_nodes) {
         if (item_node.get_value() === null) {
@@ -364,6 +372,7 @@ function init() {
             if (confirm('One or more items failed to load correctly. This could be due to a corrupted build link, or (more likely) a database load failure. Would you like to reload?')) {
                 hardReload();
             }
+            console.log(item_node);
             break;
         }
     }
@@ -375,7 +384,5 @@ window.onerror = function(message, source, lineno, colno, error) {
 };
 
 (async function() {
-    let load_promises = [ load_init(), load_ing_init(), load_tome_init() ];
-    await Promise.all(load_promises);
-    init();
+    await init();
 })();

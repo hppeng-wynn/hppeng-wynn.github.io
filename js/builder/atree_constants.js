@@ -18,7 +18,7 @@ const atrees = {
             "properties": {
                 "charges": 2,
                 "duration": 60,
-                "aoe": 5000
+                "knockback": 1.5
             },
             "effects": [
                 {
@@ -382,7 +382,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "range": 4,
+                "range": 6,
                 "duration": 60,
                 "shots": 8
             },
@@ -570,7 +570,7 @@ const atrees = {
                 "col": 5,
                 "icon": "node_2"
             },
-            "properties": { "range": 26 },
+            "properties": { "range": 30 },
             "effects": []
         },
         {
@@ -685,7 +685,7 @@ const atrees = {
                     "target_part": "Fierce Stomp",
                     "cost": 0,
                     "multipliers": [
-                        100,
+                        120,
                         0,
                         0,
                         0,
@@ -855,9 +855,9 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Escape Artist Arrow",
                     "multipliers": [
-                        70,
+                        100,
                         0,
-                        30,
+                        50,
                         0,
                         0,
                         0
@@ -882,7 +882,7 @@ const atrees = {
             "parents": [
                 "Shocking Bomb",
                 "Better Arrow Shield",
-                "Cheaper Arrow Storm (2)"
+                "Cheaper Arrow Storm II"
             ],
             "dependencies": [
                 "Focus"
@@ -917,7 +917,7 @@ const atrees = {
             "base_abil": "Arrow Shield",
             "parents": [
                 "Initiator",
-                "Cheaper Arrow Storm (2)"
+                "Cheaper Arrow Storm II"
             ],
             "dependencies": [
                 "Arrow Shield"
@@ -1017,7 +1017,7 @@ const atrees = {
                         0,
                         0,
                         0,
-                        50,
+                        80,
                         0,
                         0
                     ]
@@ -1101,7 +1101,7 @@ const atrees = {
             "desc": "Arrow bomb will throw 2 additional smaller bombs when exploding.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "Cheaper Arrow Bomb (2)",
+                "More Focus II",
                 "Minefield"
             ],
             "dependencies": [],
@@ -1128,14 +1128,6 @@ const atrees = {
                         20,
                         0
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Grape Bomb": 3
-                    }
                 }
             ]
         },
@@ -1146,7 +1138,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Cheaper Escape (2)"
+                "Cheaper Escape II"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1190,7 +1182,7 @@ const atrees = {
             "desc": "Enemies near you will be slowed down.",
             "parents": [
                 "Geyser Stomp",
-                "More Focus (2)"
+                "More Focus II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -1226,7 +1218,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "range": 7,
+                "range": 4,
                 "shots": 4
             },
             "effects": [
@@ -1252,7 +1244,8 @@ const atrees = {
             "archetype_req": 10,
             "base_abil": "Basaltic Trap",
             "parents": [
-                "Tangled Traps"
+                "Tangled Traps",
+                "Cheaper Arrow Bomb II"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1638,7 +1631,21 @@ const atrees = {
             "properties": {
                 "charges": 2
             },
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Shot",
+                    "multipliers": [
+                        -15,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Stormy Feet",
@@ -1750,7 +1757,9 @@ const atrees = {
                 "col": 6,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+                "knockback": 0.5
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -1777,6 +1786,20 @@ const atrees = {
                             "value": 1
                         }
                     ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Shot",
+                    "multipliers": [
+                        3,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "behavior": "modify"
                 }
             ]
         },
@@ -1835,7 +1858,9 @@ const atrees = {
                 "col": 0,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+                "range": 2
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -1848,7 +1873,7 @@ const atrees = {
             ]
         },
         {
-            "display_name": "Cheaper Arrow Storm (2)",
+            "display_name": "Cheaper Arrow Storm II",
             "desc": "Reduce the Mana cost of Arrow Storm.",
             "base_abil": "Arrow Storm",
             "parents": [
@@ -1933,7 +1958,7 @@ const atrees = {
             "desc": "Arrow Bomb's self-damage will knockback you farther away.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "Cheaper Arrow Storm (2)",
+                "Cheaper Arrow Storm II",
                 "Initiator"
             ],
             "dependencies": [
@@ -1950,7 +1975,7 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Cheaper Escape (2)",
+            "display_name": "Cheaper Escape II",
             "desc": "Reduce the Mana cost of Escape.",
             "base_abil": "Escape",
             "parents": [
@@ -1981,7 +2006,7 @@ const atrees = {
             "archetype_req": 5,
             "base_abil": "Escape",
             "parents": [
-                "Cheaper Escape (2)"
+                "Cheaper Escape II"
             ],
             "dependencies": [
                 "Grappling Hook"
@@ -1997,19 +2022,20 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Cheaper Arrow Bomb (2)",
+            "display_name": "Cheaper Arrow Bomb II",
             "desc": "Reduce the Mana cost of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
             "parents": [
-                "More Focus (2)",
-                "Grape Bomb"
+                "Crepuscular Ray",
+                "Snow Storm",
+                "Minefield"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 41,
-                "col": 5,
+                "row": 39,
+                "col": 4,
                 "icon": "node_0"
             },
             "properties": {},
@@ -2029,8 +2055,8 @@ const atrees = {
                 "More Shields",
                 "Twain's Arc"
             ],
-            "archetype": "Trapper",
             "archetype_req": 3,
+            "req_archetype": "Trapper",
             "dependencies": [],
             "blockers": [],
             "cost": 2,
@@ -2100,7 +2126,7 @@ const atrees = {
         },
         {
             "display_name": "Elusive",
-            "desc": "If you do not get hit for 5+ seconds, become immune to self-damage and remove Arrow Storm's recoil. (Dodging counts as not getting hit)",
+            "desc": "If you do not get hit for 4+ seconds, become immune to self-damage and remove Arrow Storm's recoil. (Dodging counts as not getting hit)",
             "archetype": "Boltslinger",
             "archetype_req": 0,
             "parents": [
@@ -2257,7 +2283,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        20
+                        15
                     ],
                     "slider_max": 3
                 }
@@ -2301,14 +2327,14 @@ const atrees = {
             ]
         },
         {
-            "display_name": "More Focus (2)",
+            "display_name": "More Focus II",
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
             "parents": [
-                "Crepuscular Ray",
-                "Snow Storm"
+                "More Focus II",
+                "Grape Bomb"
             ],
             "dependencies": [
                 "Focus"
@@ -2316,8 +2342,8 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 39,
-                "col": 4,
+                "row": 41,
+                "col": 5,
                 "icon": "node_0"
             },
             "properties": {},
@@ -2560,12 +2586,12 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Arrow Rain",
                     "multipliers": [
-                        100,
+                        150,
                         0,
                         0,
                         0,
                         0,
-                        50
+                        100
                     ]
                 }
             ]
@@ -2578,7 +2604,7 @@ const atrees = {
             "base_abil": "Arrow Storm",
             "parents": [
                 "Cheaper Arrow Shield",
-                "Cheaper Escape (2)"
+                "Cheaper Escape II"
             ],
             "dependencies": [
                 "Phantom Ray"
@@ -3273,7 +3299,7 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "range": 3,
+                "range": 1.5,
                 "angle": 10
             },
             "effects": [
@@ -3393,13 +3419,12 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Generalist",
             "desc": "After casting 3 different spells in a row, your next spell will cost 5 mana",
             "archetype": "Battle Monk", 
             "archetype_req": 3, 
-            "parents": ["Counter"], 
+            "parents": ["Air Shout"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -3411,14 +3436,13 @@ const atrees = {
             "properties": {},
             "effects": []  
         },
-
         {
-            "display_name": "Counter",
-            "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
+            "display_name": "Air Shout",
+            "desc": "War Scream will fire a projectile that can go through walls and deal damage multiple times",
             "archetype": "Battle Monk", 
-            "archetype_req": 0, 
+            "base_abil": "War Scream",
             "parents": ["Half-Moon Swipe"], 
-            "dependencies": [], 
+            "dependencies": ["War Scream"], 
             "blockers": [],
             "cost": 2, 
             "display": {
@@ -3426,25 +3450,16 @@ const atrees = {
                 "col": 4,
                 "icon": "node_1"
             },
-            "properties": {
-                "chance": 30
-            },
+            "properties": {"attackRate": 2},
             "effects": [
                 {
-                    "type": "replace_spell",
-                    "name": "Counter",
-                    "base_spell": 5,
-                    "display": "Counter Damage",
-                    "parts": [
-                        {
-                            "name": "Counter Damage",
-                            "multipliers": [60, 0, 20, 0, 0, 20]
-                        }
-                    ]
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Air Shout",
+                    "multipliers": [40, 0, 0, 0, 0, 10]
                 }
             ]  
         },
-
         {
             "display_name": "Mantle of the Bovemists",
             "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits. (25s cooldown)",
@@ -3471,7 +3486,6 @@ const atrees = {
                 }
             ]
         },
-
         {
             "display_name": "Bak'al's Grasp",
             "desc": "After casting War Scream, become Corrupted (15s Cooldown). You cannot heal while in that state. While Corrupted, every 2% of Health you lose will add +4 Raw Damage to your attacks (Max 120)",
@@ -3505,7 +3519,6 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Spear Proficiency 2",
             "desc": "Improve your Main Attack's damage and range w/ spear",
@@ -3529,12 +3542,11 @@ const atrees = {
                 "multipliers": [5, 0, 0, 0, 0, 0]
             }]
         },
-
         {
             "display_name": "Cheaper Uppercut",
             "desc": "Reduce the Mana Cost of Uppercut",
             "base_abil": "Uppercut",
-            "parents": ["Spear Proficiency 2", "Aerodynamics", "Counter"], 
+            "parents": ["Spear Proficiency 2", "Aerodynamics", "Air Shout", "Generalist"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -3553,7 +3565,6 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Aerodynamics",
             "desc": "During Charge, you can steer and change direction",
@@ -3572,7 +3583,6 @@ const atrees = {
             "properties": {},
             "effects": []  
         },
-
         {
             "display_name": "Provoke",
             "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream",
@@ -3595,62 +3605,39 @@ const atrees = {
                 }
             ]  
         },
-
         {
-            "display_name": "Precise Strikes",
-            "desc": "+30% Critical Hit Damage",
-            "parents": ["Cheaper Uppercut", "Spear Proficiency 2"], 
+            "display_name": "Counter",
+            "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
+            "parents": ["Aerodynamics", "Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 1, 
+            "cost": 2, 
             "display": {
                 "row": 18,
-                "col": 2,
-                "icon": "node_0"
+                "col": 4,
+                "icon": "node_1"
             },
             "properties": {
+                "chance": 30
             },
             "effects": [
                 {
-                    "type": "raw_stat",
-                    "bonuses": [
+                    "type": "replace_spell",
+                    "name": "Counter",
+                    "base_spell": 5,
+                    "display": "Counter Damage",
+                    "parts": [
                         {
-                            "type": "stat",
-                            "name": "critDamPct",
-                            "value": 30
+                            "name": "Counter Damage",
+                            "multipliers": [60, 0, 20, 0, 0, 20]
                         }
                     ]
                 }
             ]  
         },
-
-        {
-            "display_name": "Air Shout",
-            "desc": "War Scream will fire a projectile that can go through walls and deal damage multiple times",
-            "base_abil": "War Scream",
-            "parents": ["Aerodynamics", "Provoke"], 
-            "dependencies": ["War Scream"], 
-            "blockers": [],
-            "cost": 2, 
-            "display": {
-                "row": 18,
-                "col": 6,
-                "icon": "node_1"
-            },
-            "properties": {"attackRate": 2},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "target_part": "Air Shout",
-                    "multipliers": [40, 0, 0, 0, 0, 10]
-                }
-            ]  
-        },
-
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 160%)",
+            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 120%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",
@@ -3674,8 +3661,8 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": 160,
-                    "scaling": [2]
+                    "max": 120,
+                    "scaling": [1.5]
                 }
             ]  
         },
@@ -3819,11 +3806,10 @@ const atrees = {
             ]  
         },
         {
-            "display_name": "Ambidextrous",
-            "desc": "Increase your chance to attack with Counter by +30%",
-            "base_abil": "Counter",
+            "display_name": "Precise Strikes",
+            "desc": "+30% Critical Hit Damage",
             "parents": ["Flying Kick", "Stronger Mantle", "Burning Heart"], 
-            "dependencies": ["Counter"], 
+            "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
@@ -3831,15 +3817,21 @@ const atrees = {
                 "col": 4,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {
+            },
             "effects": [
                 {
                     "type": "raw_stat",
-                    "bonuses": [ {"type": "prop", "abil": "Counter", "name": "chance", "value": 30} ]
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "critDamPct",
+                            "value": 30
+                        }
+                    ]
                 }
             ]  
         },
-
         {
             "display_name": "Burning Heart",
             "desc": "For every 100 Health Bonus you have from item IDs, gain +2% Fire Damage (Max 100%)",
@@ -4086,7 +4078,7 @@ const atrees = {
             "display": {
                 "row": 26,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_3"
             },
             "properties": {
                 "range": 1
@@ -4096,7 +4088,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Uppercut",
-                    "multipliers": [0, 0, 0, 0, 0, 50]
+                    "multipliers": [-20, 0, 0, 0, 0, 30]
                 }
             ]  
         },
@@ -4151,10 +4143,29 @@ const atrees = {
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Armor Breaker",
+                    "toggle": "Activate Armour Breaker",
                     "bonuses": [ {"type": "stat", "name": "damMult.ArmorBreaker", "value": 30} ]
                 }
             ]  
+        },
+        {
+            "display_name": "Ambidextrous",
+            "desc": "Increase your chance to attack with Counter by +30%",
+            "base_abil": "Counter",
+            "parents": ["Radiant Devotee", "Whirlwind Strike"], 
+            "dependencies": ["Counter"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 27,
+                "col": 3,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "bonuses": [ {"type": "prop", "abil": "Counter", "name": "chance", "value": 30} ]
+            }]
         },
         {
             "display_name": "Shield Strike",
@@ -4356,8 +4367,8 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Uppercut",
-                    "cost": 10,
-                    "multipliers": [100, 0, 0, 0, 0, 0]
+                    "cost": 15,
+                    "multipliers": [150, 0, 0, 0, 0, 0]
                 }
             ]  
         },
@@ -4465,7 +4476,7 @@ const atrees = {
 
         {
             "display_name": "Thunderclap",
-            "desc": "Bash will cast at the player's position and gain additional AoE.\n\n All elemental conversions become Thunder",
+            "desc": "Bash will cast at the player's position and gain additional AoE.",
             "archetype": "Battle Monk", 
             "archetype_req": 8, 
             "parents": ["Cyclone"], 
@@ -4480,10 +4491,10 @@ const atrees = {
             "properties": {},
             "effects": [
                 {
-                    "type": "convert_spell_conv",
-                    "target_part": "all",
+                    "type": "add_spell_prop",
                     "base_spell": 1,
-                    "conversion": "Thunder"
+                    "target_part": "Single Hit",
+                    "multipliers": [0, 0, 25, 0, 0, 0]
                 },
                 {
                     "type": "raw_stat",
@@ -5250,7 +5261,7 @@ const atrees = {
         },
         {
             "display_name": "Thunderstorm",
-            "desc": "After casting Meteor, summon 4 lightning strikes and deal additional damage",
+            "desc": "After casting Meteor, summon 6 lightning strikes and deal additional damage",
             "base_abil": "Meteor",
             "parents": [
                 "Wind Slash",
@@ -5275,9 +5286,9 @@ const atrees = {
                     "target_part": "Lightning Damage",
                     "base_spell": 3,
                     "multipliers": [
-                        25,
+                        15,
                         0,
-                        10,
+                        8,
                         0,
                         0,
                         0
@@ -5288,7 +5299,7 @@ const atrees = {
                     "target_part": "Total Damage",
                     "base_spell": 3,
                     "hits": {
-                        "Lightning Damage": 4
+                        "Lightning Damage": 6
                     }
                 }
             ]
@@ -5684,7 +5695,7 @@ const atrees = {
                                 "name": "nConvBase:3.Lightning Damage"
                             }
                         ],
-                        "scaling": [5]
+                        "scaling": [4]
                     },
                     {
                         "type": "stat_scaling",
@@ -5704,7 +5715,7 @@ const atrees = {
                                 "name": "eConvBase:3.Lightning Damage"
                             }
                         ],
-                    "scaling": [3]
+                    "scaling": [2]
                 }
             ]
         },
@@ -6262,6 +6273,7 @@ const atrees = {
             "display_name": "Arcane Speed",
             "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 3s. (8s Cooldown)",
             "base_abil": "Heal",
+            "archetype": "Arcanist",
             "parents": [
                 "Lightweaver",
                 "Larger Mana Bank II"
@@ -6327,7 +6339,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded",
-            "desc": "Increase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +10.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6648,7 +6660,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded II",
-            "desc": "Increase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +10.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6809,6 +6821,37 @@ const atrees = {
             "effects": []
         },
         {
+            "display_name": "Better Lightweaver",
+            "desc": "Increase your Max Orbs by +2.",
+            "archetype": "Light Bender",
+            "archetype_req": 0,
+            "base_abil": "Lightweaver",
+            "parents": [
+                "Sunflare"
+            ],
+            "dependencies": [
+                "Lightweaver"
+            ],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 33,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Orb Damage",
+                    "base_spell": 5,
+                    "hits": {
+                        "Single Orb": 2
+                    }
+                }
+            ]
+        },
+        {
             "display_name": "Larger Mana Bank III",
             "desc": "Increase your maximum Mana Bank by +30.",
             "archetype": "Arcanist",
@@ -6855,8 +6898,6 @@ const atrees = {
         {
             "display_name": "Memory Recollection",
             "desc": "Chaos Explosion will cast +2 spells.",
-            "archetype": "Arcanist",
-            "archetype_req": 0,
             "base_abil": "Arcane Transfer",
             "parents": [
                 "Arcane Overflow"
@@ -6878,7 +6919,7 @@ const atrees = {
             "display_name": "Manastorm",
             "desc": "If you have more than 100 Mana, casting a spell will give you +10 mana over 5s.",
             "archetype": "Arcanist",
-            "archetype_req": 1,
+            "archetype_req": 4,
             "parents": [
                 "Cheaper Heal II",
                 "Arcane Overflow",
@@ -6894,38 +6935,6 @@ const atrees = {
             },
             "properties": {},
             "effects": []
-        },
-        {
-            "display_name": "Better Lightweaver",
-            "desc": "Increase your Max Orbs by +2.",
-            "archetype": "Light Bender",
-            "archetype_req": 0,
-            "base_abil": "Lightweaver",
-            "parents": [
-                "Cheaper Heal II",
-                "Manastorm"
-            ],
-            "dependencies": [
-                "Lightweaver"
-            ],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 35,
-                "col": 4,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "target_part": "Orb Damage",
-                    "base_spell": 5,
-                    "hits": {
-                        "Single Orb": 2
-                    }
-                }
-            ]
         },
         {
             "display_name": "Timelock",
@@ -7811,9 +7820,7 @@ const atrees = {
             "dependencies": [
                 "Vanish"
             ],
-            "blockers": [
-                "Lacerate"
-            ],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 19,
@@ -8188,7 +8195,7 @@ const atrees = {
             "display_name": "Weightless",
             "desc": "When you hit an enemy while airborne, gain +0.7 Mana (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
-            "archetype_req": 4,
+            "archetype_req": 3,
             "parents": [
                 "Cheaper Multihit",
                 "Dagger Proficiency II"
@@ -8382,6 +8389,36 @@ const atrees = {
             ]
         },
         {
+            "display_name": "Stronger Multihit",
+            "desc": "Increases Multihit's amount of hits by +3",
+            "base_abil": "Multihit",
+            "parents": [
+                "Sandbagging",
+                "Hop"
+            ],
+            "dependencies": [],
+            "blockers": [
+                "Backstab"
+            ],
+            "cost": 1,
+            "display": {
+                "row": 27,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Per Hit": 3
+                    }
+                }
+            ]
+        },
+        {
             "display_name": "Marked",
             "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.4s Cooldown) Marked enemies will take +8% damage for each mark they have.",
             "archetype": "Shadestepper",
@@ -8430,7 +8467,9 @@ const atrees = {
             "dependencies": [
                 "Mirror Image"
             ],
-            "blockers": [],
+            "blockers": [
+                "Lacerate"
+            ],
             "cost": 2,
             "display": {
                 "row": 28,
@@ -8521,38 +8560,6 @@ const atrees = {
             },
             "properties": {},
             "effects": []
-        },
-        {
-            "display_name": "Stronger Multihit",
-            "desc": "Increases Multihit's amount of hits by +3",
-            "archetype": "",
-            "archetype_req": 0,
-            "base_abil": "Multihit",
-            "parents": [
-                "Echo",
-                "Shurikens"
-            ],
-            "dependencies": [],
-            "blockers": [
-                "Backstab"
-            ],
-            "cost": 1,
-            "display": {
-                "row": 29,
-                "col": 5,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Per Hit": 3
-                    }
-                }
-            ]
         },
         {
             "display_name": "Psithurism",
@@ -9073,11 +9080,11 @@ const atrees = {
                 "Shurikens"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 38,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": []
@@ -9963,7 +9970,7 @@ const atrees = {
         },
         {
             "display_name": "Puppet Master",
-            "desc": "Your Totem will summon 1 Puppet every 3s (Max 2). They throw knives at nearby enemies every 0.5s.",
+            "desc": "Your Totem will summon 1 Puppet every 3s (Max 3). They throw knives at nearby enemies every 0.5s.",
             "archetype": "Summoner",
             "archetype_req": 3,
             "parents": ["Overseer"],
@@ -9978,7 +9985,7 @@ const atrees = {
             "properties": {
                 "duration": 30,
                 "range": 16,
-                "max_puppets": 2,
+                "max_puppets": 3,
                 "attack_frequency": 2
             },
             "effects": [
@@ -9991,7 +9998,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Puppet Hit",
-                            "multipliers": [ 5, 10, 0, 0, 0, 10 ]
+                            "multipliers": [ 12, 3, 0, 0, 0, 3 ]
                         },
                         {
                             "name": "Puppet DPS",
@@ -10078,7 +10085,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.BloodPool:3.Single Wave",
-                            "value": 50
+                            "value": 35
                         }
                     ]
                 },
@@ -10092,7 +10099,7 @@ const atrees = {
         },
         {
             "display_name": "More Puppets I",
-            "desc": "Increase your Max Puppets by +1 and reduce their damage.",
+            "desc": "Increase your Max Puppets by +1.",
             "base_abil": "Puppet Master",
             "archetype": "Summoner",
             "parents": ["Puppet Master"],
@@ -10107,14 +10114,7 @@ const atrees = {
             "properties": {
                 "max_puppets": 1
             },
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Puppet Hit",
-                    "multipliers": [0, 0, 0, 0, 0, -5]
-                }
-            ]
+            "effects": []
         },
         {
             "display_name": "Cheaper Uproot I",
@@ -10345,7 +10345,7 @@ const atrees = {
         },
         {
             "display_name": "More Puppets II",
-            "desc": "Increase your Max Puppets by +2 and reduce their damage.",
+            "desc": "Increase your Max Puppets by +2.",
             "base_abil": "Puppet Master",
             "archetype": "Summoner",
             "parents": ["Exploding Puppets"],
@@ -10360,14 +10360,7 @@ const atrees = {
             "properties": {
                 "max_puppets": 2
             },
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 5,
-                    "target_part": "Puppet Hit",
-                    "multipliers": [0, -5, 0, 0, 0, 0]
-                }
-            ]
+            "effects": []
         },
         {
             "display_name": "Mask of the Fanatic",
@@ -10586,6 +10579,33 @@ const atrees = {
             ]
         },
         {
+            "display_name": "Regeneration",
+            "desc": "Your Totem will heal yourself and allies standing in its range every 0.4s.",
+            "base_abil": "Totem",
+            "parents": [
+                "Cheaper Totem II",
+                "Storm Dance"
+            ],
+            "dependencies": [],
+            "blockers": ["Sacrificial Shrine"],
+            "cost": 2,
+            "display": {
+                "row": 24,
+                "col": 3,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Heal Tick",
+                    "power": 0.01,
+                    "display": "Heal Rate"
+                }
+            ]
+        },
+        {
             "display_name": "Cheaper Haul II",
             "desc": "Reduce the Mana cost of Haul.",
             "base_abil": "Haul",
@@ -10654,7 +10674,7 @@ const atrees = {
         },
         {
             "display_name": "Twisted Tether",
-            "desc": "When hitting an enemy with your Main Attack, use 1% from your Blood Pool and add Tether to them. Tethered enemies will take damage for every 2% Health you lose. (Max 10%)",
+            "desc": "When hitting an enemy with your Main Attack, use 1% from your Blood Pool and add Tether to them. Tethered enemies will take damage for every 2% Health you lose. (Max 20%)",
             "archetype": "Acolyte",
             "archetype_req": 7,
             "parents": [
@@ -10680,11 +10700,11 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Tether Tick",
-                            "multipliers": [ 15, 0, 0, 0, 0, 10 ]
+                            "multipliers": [ 25, 0, 0, 0, 0, 10 ]
                         },
                         {
                             "name": "Max Tether Damage",
-                            "hits": { "Tether Tick": 5 }
+                            "hits": { "Tether Tick": 10 }
                         }
                     ]
                 }
@@ -10780,7 +10800,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Effigy Hit",
-                            "multipliers": [ 40, 0, 0, 40, 0, 0 ]
+                            "multipliers": [ 30, 0, 0, 30, 0, 0 ]
                         },
                         {
                             "name": "Single Effigy DPS",
@@ -10914,33 +10934,6 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Regeneration",
-            "desc": "Your Totem will heal yourself and allies standing in its range every 0.4s.",
-            "base_abil": "Totem",
-            "parents": [
-                "Crimson Effigy",
-                "Mask of the Coward"
-            ],
-            "dependencies": [],
-            "blockers": ["Sacrificial Shrine"],
-            "cost": 2,
-            "display": {
-                "row": 29,
-                "col": 2,
-                "icon": "node_1"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Heal Tick",
-                    "power": 0.01,
-                    "display": "Heal Rate"
-                }
-            ]
-        },
-        {
             "display_name": "Chant of the Coward",
             "desc": "When switching to the Mask of the Coward, damage and knockback nearby enemies.",
             "archetype": "Ritualist",
@@ -11005,7 +10998,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 7,
                     "name": "Effigy Hit",
-                    "multipliers": [ -10, 0, 0, -10, 0, 0 ]
+                    "multipliers": [ -5, 0, 0, -10, 0, 0 ]
                 }
             ]
         },
@@ -11274,7 +11267,7 @@ const atrees = {
         },
         {
             "display_name": "Mask of the Awakened",
-            "desc": "After saving 200 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 20s, giving the power of all Masks at once.",
+            "desc": "After saving 200 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 20s, giving the power of all Masks at once without any downsides.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 12,
@@ -11336,10 +11329,10 @@ const atrees = {
         },
         {
             "display_name": "Blood Sorrow",
-            "desc": "Uproot will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +3% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
+            "desc": "Uproot will use 60% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +3% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
             "base_abil": "Uproot",
             "archetype": "Acolyte",
-            "archetype_req": 13,
+            "archetype_req": 12,
             "parents": ["More Blood Pool III"],
             "dependencies": ["Uproot"],
             "blockers": [],
