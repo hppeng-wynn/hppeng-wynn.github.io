@@ -293,13 +293,13 @@ function get_full_url() {
 }
 
 function copyBuild() {
-    copyTextToClipboard();
+    copyTextToClipboard(get_full_url());
     document.getElementById("copy-button").textContent = "Copied!";
 }
 
 function shareBuild(build) {
     if (build) {
-        let text = url_base+'?v='+wynn_version_id.toString()+location.hash+"\n"+
+        let text = get_full_url()+"\n"+
             "WynnBuilder build:\n"+
             "> "+build.items[0].statMap.get("displayName")+"\n"+
             "> "+build.items[1].statMap.get("displayName")+"\n"+

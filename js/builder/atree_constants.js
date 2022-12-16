@@ -1182,7 +1182,7 @@ const atrees = {
             "desc": "Enemies near you will be slowed down.",
             "parents": [
                 "Geyser Stomp",
-                "More Focus II"
+                "Cheaper Arrow Bomb II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -2333,7 +2333,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Focus",
             "parents": [
-                "More Focus II",
+                "Cheaper Arrow Bomb II",
                 "Grape Bomb"
             ],
             "dependencies": [
@@ -3837,7 +3837,7 @@ const atrees = {
             "desc": "For every 100 Health Bonus you have from item IDs, gain +2% Fire Damage (Max 100%)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Ambidextrous", "Stronger Bash"], 
+            "parents": ["Precise Strikes", "Stronger Bash"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -3953,7 +3953,7 @@ const atrees = {
             "archetype": "Battle Monk", 
             "archetype_req": 4, 
             "base_abil": "Charge",
-            "parents": ["Ambidextrous", "Burning Heart"], 
+            "parents": ["Precise Strikes", "Burning Heart"], 
             "dependencies": ["Flying Kick"], 
             "blockers": [],
             "cost": 2, 
@@ -4071,7 +4071,7 @@ const atrees = {
             "archetype": "Battle Monk", 
             "archetype_req": 5, 
             "base_abil": "Uppercut",
-            "parents": ["Ambidextrous", "Radiant Devotee"], 
+            "parents": ["Precise Strikes", "Radiant Devotee"], 
             "dependencies": ["Uppercut"], 
             "blockers": [],
             "cost": 2, 

@@ -1175,11 +1175,15 @@ function builder_graph_init() {
     if (atree_data !== null && atree_node.value !== null) { // janky check if atree is valid
         const atree_state = atree_state_node.value;
         if (atree_data.length > 0) {
-            const active_nodes = decode_atree(atree_node.value, atree_data);
-            for (const node of active_nodes) {
-                atree_set_state(atree_state.get(node.ability.id), true);
+            try {
+                const active_nodes = decode_atree(atree_node.value, atree_data);
+                for (const node of active_nodes) {
+                    atree_set_state(atree_state.get(node.ability.id), true);
+                }
+                atree_state_node.mark_dirty().update();
+            } catch (e) {
+                console.log("Failed to decode atree. This can happen when updating versions. Give up!")
             }
-            atree_state_node.mark_dirty().update();
         }
     }
 
