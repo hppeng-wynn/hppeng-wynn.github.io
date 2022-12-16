@@ -57,7 +57,7 @@ async function parse_hash(url_tag) {
     let skillpoints = [0, 0, 0, 0, 0];
     let level = 106;
 
-    let version_number = parseInt(version)
+    let version_number = parseInt(version);
     let data_str = info[1];
     if (version_number >= 8) {
         // parse query parameters
@@ -68,11 +68,11 @@ async function parse_hash(url_tag) {
         if (isNaN(wynn_version_id) || wynn_version_id > WYNN_VERSION_LATEST || wynn_version_id < 0) {
             // TODO: maybe make the NAN try to use the human readable version?
             // NOTE: Failing silently... do we want to raise a loud error?
-            console.log("Explicit version not found or invalid, using latest version")
+            console.log("Explicit version not found or invalid, using latest version");
             wynn_version_id = WYNN_VERSION_LATEST;
         }
         else {
-            console.log(`Build link for wynn version ${wynn_version_id} (${wynn_version_names[wynn_version_id]})`)
+            console.log(`Build link for wynn version ${wynn_version_id} (${wynn_version_names[wynn_version_id]})`);
         }
     }
     else {
