@@ -143,7 +143,7 @@
 
                 </div>
                 <p>
-                    All build links starting from Version 8 will look like "#[version number]_[wynn version number]_[build hash]".
+                    All build links starting from Version 8 will look like "?v=[wynn version number]#[version number]_[build hash]".
                 </p>
                 <p>
                     All build links older than Version 8 look like "#[version number]_[build hash]".
@@ -158,7 +158,7 @@
                     <p>
                         A reference implementation of the encoding/decoding algorithms can be found in <code>js/builder/build_encode_decode.js</code>. A pseudocode description of the algorithms is given here:
                     </p>
-                    <code>
+                    <code style="white-space: pre">
 // Encode an ability tree configuration into a binary blob.
 // NOTE: this algorithm only works for "connected" (valid) ability trees.
 // Its behavior is not well defined otherwise.

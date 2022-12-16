@@ -53,12 +53,19 @@ async function decodeBuild(url_tag) {
         let version_number = parseInt(version)
         let data_str = info[1];
         if (version_number >= 8) {
-            wynn_version_id = parseInt(info[1]);
-            if (wynn_version_id > WYNN_VERSION_LATEST || wynn_version_id < 0) {
+            // parse query parameters
+            // https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+            const url_params = new URLSearchParams(window.location.search);
+            const version_id = url_params.get('v');
+            wynn_version_id = parseInt(version_id);
+            if (isNaN(wynn_version_id) || wynn_version_id > WYNN_VERSION_LATEST || wynn_version_id < 0) {
                 // NOTE: Failing silently... do we want to raise a loud error?
+                console.log("Explicit version not found or invalid, using latest version")
                 wynn_version_id = WYNN_VERSION_LATEST;
             }
-            data_str = info[2];
+            else {
+                console.log(`Build link for wynn version ${wynn_version_id} (${wynn_version_names[wynn_version_id]})`)
+            }
         }
         else {
             // Change the default to oldest. (A time before v8)
@@ -269,18 +276,18 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
             build_string += bitvec.toB64();
         }
 
-        return build_version.toString() + "_" + wynn_version_id.toString() + "_" + build_string;
+        return build_version.toString() + "_" + build_string;
     }
 }
 
 function copyBuild() {
-    copyTextToClipboard(url_base+location.hash);
+    copyTextToClipboard(url_base+'?v='+wynn_version_id.toString()+location.hash);
     document.getElementById("copy-button").textContent = "Copied!";
 }
 
 function shareBuild(build) {
     if (build) {
-        let text = url_base+location.hash+"\n"+
+        let text = url_base+'?v='+wynn_version_id.toString()+location.hash+"\n"+
             "WynnBuilder build:\n"+
             "> "+build.items[0].statMap.get("displayName")+"\n"+
             "> "+build.items[1].statMap.get("displayName")+"\n"+
