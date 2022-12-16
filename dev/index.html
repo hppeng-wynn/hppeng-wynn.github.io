@@ -143,11 +143,20 @@
 
                 </div>
                 <p>
-                    All build links starting from Version 8 will look like "?v=[wynn version number]#[version number]_[build hash]".
+                    All build links starting from Version 8 may look like "?v=[wynn version number]#[version number]_[build hash]".
+                    The query section is optional.
                 </p>
                 <p>
                     All build links older than Version 8 look like "#[version number]_[build hash]".
                 </p>
+                <div class="row section" title="Version 8">
+                    <p>
+                        Version 8 was made to account for an oversight made when designing the tome encoding, and to signal the beginning of versions that support wynn version history. Version 8 and higher links may start with a query indicating the wynn version to use.
+                    </p>
+                    <p>
+                        Additionally, Version 8 uses 2 characters instead of 1 character to encode the ID of each tome. (The IDs representing NONE tomes does not change.)
+                    </p>
+                </div>
                 <div class="row section" title="Version 7">
                     <p>
                         Version 7 was made to account for ability trees in wynncraft 2.0. Version 7 introduces a new field at the end of the build hash, for ability tree data. Atree data is compressed using a depth first search algorithm into a binary blob, which is then base-64 encoded and appended to the V6 hash. The binry blob is decompressed by using the corresponding traversal.
