@@ -84460,7 +84460,7 @@
           "mr": 12,
           "xpb": 55,
           "lb": 55,
-          "hpBonus": 2575,
+          "hpBonus": 2275,
           "spRaw2": -5,
           "spRaw4": -5
         },
@@ -84468,7 +84468,7 @@
           "mr": 18,
           "xpb": 80,
           "lb": 80,
-          "hpBonus": 4450,
+          "hpBonus": 3850,
           "spRaw1": -5,
           "spRaw2": -5,
           "spRaw4": -5
@@ -84482,7 +84482,7 @@
           "int": 15,
           "agi": 15,
           "def": 15,
-          "hpBonus": 8270,
+          "hpBonus": 6110,
           "spRaw1": -5,
           "spRaw2": -5,
           "spRaw3": -5,
