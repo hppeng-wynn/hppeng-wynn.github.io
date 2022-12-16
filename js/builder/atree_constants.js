@@ -5250,7 +5250,7 @@ const atrees = {
         },
         {
             "display_name": "Thunderstorm",
-            "desc": "After casting Meteor, summon 4 lightning strikes and deal additional damage",
+            "desc": "After casting Meteor, summon 6 lightning strikes and deal additional damage",
             "base_abil": "Meteor",
             "parents": [
                 "Wind Slash",
@@ -5275,9 +5275,9 @@ const atrees = {
                     "target_part": "Lightning Damage",
                     "base_spell": 3,
                     "multipliers": [
-                        25,
+                        15,
                         0,
-                        10,
+                        8,
                         0,
                         0,
                         0
@@ -5288,7 +5288,7 @@ const atrees = {
                     "target_part": "Total Damage",
                     "base_spell": 3,
                     "hits": {
-                        "Lightning Damage": 4
+                        "Lightning Damage": 6
                     }
                 }
             ]
@@ -5684,7 +5684,7 @@ const atrees = {
                                 "name": "nConvBase:3.Lightning Damage"
                             }
                         ],
-                        "scaling": [5]
+                        "scaling": [4]
                     },
                     {
                         "type": "stat_scaling",
@@ -5704,7 +5704,7 @@ const atrees = {
                                 "name": "eConvBase:3.Lightning Damage"
                             }
                         ],
-                    "scaling": [3]
+                    "scaling": [2]
                 }
             ]
         },
@@ -6262,6 +6262,7 @@ const atrees = {
             "display_name": "Arcane Speed",
             "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 3s. (8s Cooldown)",
             "base_abil": "Heal",
+            "archetype": "Arcanist",
             "parents": [
                 "Lightweaver",
                 "Larger Mana Bank II"
@@ -6327,7 +6328,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded",
-            "desc": "Increase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +10.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6648,7 +6649,7 @@ const atrees = {
         },
         {
             "display_name": "More Winded II",
-            "desc": "Increase your maximum Winded by +5.",
+            "desc": "Increase your maximum Winded by +10.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 0,
@@ -6809,6 +6810,37 @@ const atrees = {
             "effects": []
         },
         {
+            "display_name": "Better Lightweaver",
+            "desc": "Increase your Max Orbs by +2.",
+            "archetype": "Light Bender",
+            "archetype_req": 0,
+            "base_abil": "Lightweaver",
+            "parents": [
+                "Sunflare"
+            ],
+            "dependencies": [
+                "Lightweaver"
+            ],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 33,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Orb Damage",
+                    "base_spell": 5,
+                    "hits": {
+                        "Single Orb": 2
+                    }
+                }
+            ]
+        },
+        {
             "display_name": "Larger Mana Bank III",
             "desc": "Increase your maximum Mana Bank by +30.",
             "archetype": "Arcanist",
@@ -6855,8 +6887,6 @@ const atrees = {
         {
             "display_name": "Memory Recollection",
             "desc": "Chaos Explosion will cast +2 spells.",
-            "archetype": "Arcanist",
-            "archetype_req": 0,
             "base_abil": "Arcane Transfer",
             "parents": [
                 "Arcane Overflow"
@@ -6878,7 +6908,7 @@ const atrees = {
             "display_name": "Manastorm",
             "desc": "If you have more than 100 Mana, casting a spell will give you +10 mana over 5s.",
             "archetype": "Arcanist",
-            "archetype_req": 1,
+            "archetype_req": 4,
             "parents": [
                 "Cheaper Heal II",
                 "Arcane Overflow",
@@ -6894,38 +6924,6 @@ const atrees = {
             },
             "properties": {},
             "effects": []
-        },
-        {
-            "display_name": "Better Lightweaver",
-            "desc": "Increase your Max Orbs by +2.",
-            "archetype": "Light Bender",
-            "archetype_req": 0,
-            "base_abil": "Lightweaver",
-            "parents": [
-                "Cheaper Heal II",
-                "Manastorm"
-            ],
-            "dependencies": [
-                "Lightweaver"
-            ],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 35,
-                "col": 4,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "target_part": "Orb Damage",
-                    "base_spell": 5,
-                    "hits": {
-                        "Single Orb": 2
-                    }
-                }
-            ]
         },
         {
             "display_name": "Timelock",

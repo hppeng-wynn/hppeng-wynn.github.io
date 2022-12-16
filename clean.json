@@ -53210,6 +53210,7 @@
       "name": "Continuum",
       "tier": "Set",
       "type": "wand",
+      "set": "Boundless",
       "material": "269:4",
       "category": "weapon",
       "slots": 2,
@@ -53236,6 +53237,7 @@
       "name": "Divergence",
       "tier": "Set",
       "type": "spear",
+      "set": "Boundless",
       "material": "256:4",
       "category": "weapon",
       "slots": 3,
@@ -53280,6 +53282,7 @@
       "name": "Aleph Null",
       "tier": "Set",
       "type": "leggings",
+      "set": "Boundless",
       "armorType": "Diamond",
       "elementalDamageBonus": 20,
       "category": "armor",
@@ -53306,6 +53309,7 @@
       "name": "Fractal",
       "tier": "Set",
       "type": "relik",
+      "set": "Boundless",
       "material": "273:8",
       "category": "weapon",
       "slots": 4,
@@ -53333,6 +53337,7 @@
       "name": "Nonexistence",
       "tier": "Set",
       "type": "helmet",
+      "set": "Boundless",
       "armorType": "Diamond",
       "category": "armor",
       "slots": 4,
@@ -53357,6 +53362,7 @@
       "name": "Infinitesimal",
       "tier": "Set",
       "type": "dagger",
+      "set": "Boundless",
       "material": "359:10",
       "category": "weapon",
       "slots": 1,
@@ -53425,6 +53431,7 @@
       "name": "Recursion",
       "tier": "Set",
       "type": "bow",
+      "set": "Boundless",
       "material": "261:10",
       "category": "weapon",
       "slots": 3,
@@ -83520,6 +83527,34 @@
   ],
   "version": 2.0,
   "sets": {
+    "Boundless": {
+      "items": [
+        "Continuum",
+        "Divergence",
+        "Aleph Null",
+        "Fractal",
+        "Nonexistence",
+        "Infinitesimal",
+        "Recursion"
+      ],
+      "bonuses": [
+        {},
+        {
+          "eSteal": 10,
+          "ms": 15,
+          "ls": 250,
+          "spd": 25
+        },
+        {
+          "hprPct": 50,
+          "hprRaw": 150,
+          "spd": 35,
+          "spd": 35,
+          "sprintReg": 50,
+          "mr": 25
+        }
+      ]
+    },
     "Ornate Shadow": {
       "items": [
         "Ornate Shadow Cowl",
