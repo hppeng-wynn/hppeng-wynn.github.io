@@ -133,11 +133,13 @@ async function load_tome_init() {
     });
 }
 
-let none_tomes = [
+const none_tomes_info = [
     ["tome", "weaponTome", "No Weapon Tome"],
     ["tome", "armorTome", "No Armor Tome"],
     ["tome", "guildTome", "No Guild Tome"]
 ];
+let none_tomes;
+
 function init_tome_maps() {
     //warp
     tomeMap = new Map();
@@ -149,12 +151,13 @@ function init_tome_maps() {
         tomeLists.set(it, []);
     }
 
+    none_tomes = [];
     for (let i = 0; i < 3; i++) {
         let tome = Object();
         tome.slots = 0;
-        tome.category = none_tomes[i][0];
-        tome.type = none_tomes[i][1];
-        tome.name = none_tomes[i][2];
+        tome.category = none_tomes_info[i][0];
+        tome.type = none_tomes_info[i][1];
+        tome.name = none_tomes_info[i][2];
         tome.displayName = tome.name;
         tome.set = null;
         tome.quest = null;
@@ -173,7 +176,7 @@ function init_tome_maps() {
         //dependency - load.js
         clean_item(tome);
 
-        none_tomes[i] = tome;
+        none_tomes.push(tome);
     }
     tomes = tomes.concat(none_tomes);
     for (const tome of tomes) {
