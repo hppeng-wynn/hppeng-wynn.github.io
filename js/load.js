@@ -104,6 +104,7 @@ async function load_old_version(version_str) {
         clean_item(item);
     }
     let sets_ = result.sets;
+    sets = new Map();
     for (const set in sets_) {
         sets.set(set, sets_[set]);
     }
