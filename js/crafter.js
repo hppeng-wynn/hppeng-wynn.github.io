@@ -32,15 +32,15 @@ let player_craft;
 
 function init_crafter() {
     try {
-        document.getElementById("recipe-choice").addEventListener("change", (event) => {
+        document.getElementById("recipe-choice").addEventListener("input", (event) => {
             updateMaterials();
             updateCraftedImage();
             calculateCraftSchedule();
         });
-        document.getElementById("recipe-choice").addEventListener("oninput", (event) => {
+        document.getElementById("recipe-choice").addEventListener("input", (event) => {
             updateCraftedImage();
         });
-        document.getElementById("level-choice").addEventListener("change", (event) => {
+        document.getElementById("level-choice").addEventListener("input", (event) => {
             updateMaterials();
             calculateCraftSchedule();
         });
@@ -50,10 +50,10 @@ function init_crafter() {
             document.getElementById("mat-2-"+i).addEventListener("click", (e) => calculateCraftSchedule());
         }
         for (let i = 1; i < 7; ++i) {
-            document.getElementById("ing-choice-" + i ).addEventListener("oninput", (e) => calculateCraftSchedule());
+            document.getElementById("ing-choice-" + i ).addEventListener("input", (e) => calculateCraftSchedule());
         }
         for (const str of ["slow", "normal", "fast"]) {
-            document.getElementById(str + "-atk-button").addEventListener("onclick", (e) => calculateCraftSchedule());
+            document.getElementById(str + "-atk-button").addEventListener("click", (e) => calculateCraftSchedule());
         }
 
         populateFields();

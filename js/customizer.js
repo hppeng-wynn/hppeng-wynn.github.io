@@ -12,7 +12,6 @@ let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","p
         
 
 function init_customizer() {
-
     try {
         populateFields();
         decodeCustom(custom_url_tag);
@@ -181,6 +180,10 @@ function calculateCustom() {
         player_custom_item.setHash(custom_str);
 
         
+        if (player_custom_item.statMap.get('category') == 'weapon') {
+            // wonkiness needed to set the right fields... this is jank
+            apply_weapon_powders(player_custom_item.statMap);
+        }
         displayExpandedItem(player_custom_item.statMap, "custom-stats");
 
     }catch (error) {
@@ -266,7 +269,7 @@ function decodeCustom(custom_url_tag) {
                             val = tiers[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else if (id === "type") {
-                            val = types[Base64.toInt(tag.charAt(2))];
+                            val = item_types[Base64.toInt(tag.charAt(2))];
                             len = -1;
                         } else if (id === "atkSpd") {
                             val = attackSpeeds[Base64.toInt(tag.charAt(2))];
@@ -313,7 +316,7 @@ function populateFields() {
        tier_list.appendChild(el);
    }
    let type_list = document.getElementById("type-list");
-   for (const type of types) {
+   for (const type of item_types) {
         let el = document.createElement("option");
         el.value = type;
         type_list.appendChild(el);
@@ -602,10 +605,6 @@ function resetBaseValues() {
     }
 }
 
-function _init_customizer() {
-    load_ing_init(init_customizer);
-}
-
 /** Saves the current user's item as a JSON file.
  *  Starts a JSON download.
  */
@@ -715,4 +714,8 @@ function full_range_to_base(min, max) {
 
 
 
-load_init(_init_customizer);
+(async function() {
+    let load_promises = [ load_init() ];
+    await Promise.all(load_promises);
+    init_customizer();
+})();
