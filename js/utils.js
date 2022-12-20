@@ -172,7 +172,13 @@ Base64 = (function () {
                 }
             }
         } else if (typeof data === "number") {
-            if (typeof length === "undefined")
+            if (typeof length === "undefined") {
+                if (data == 0) {
+                    length = 0;
+                } else {
+                    length = Math.ceil(Math.log(data) / Math.log(2));
+                }
+            }
             if (length < 0) {
                 throw new RangeError("BitVector must have nonnegative length.");
             }
@@ -333,13 +339,9 @@ Base64 = (function () {
         let new_length = this.length + length;
         if (this.bits.length * this.bits.BYTES_PER_ELEMENT * 8 < new_length) {
             //resize the internal repr by a factor of 2 before recursive calling
-            let bit_vec = [];
-            for (const int of this.bits) {
-                bit_vec.push(int);
-            }
-            //effectively double size - TODO 1-line this
-            for (const int of this.bits) {
-                bit_vec.push(0);
+            let bit_vec = Array(2 * this.bits.length).fill(0);
+            for (let i = 0; i < this.bits.length; i++) {
+                bit_vec[i] = this.bits[i];
             }
 
             this.bits = new Uint32Array(bit_vec);
@@ -402,6 +404,18 @@ Base64 = (function () {
         this.length += length;
     }
 };
+
+function test_bv() {
+    //empty array
+    let bv = new BitVector(0);
+    bv.append(10, 4);
+    console.log(bv);
+
+    bv = new BitVector(0);   
+    bv.append(10, 5);
+    console.log(bv);
+
+}
 
 
 /*
@@ -1040,3 +1054,5 @@ if (screen.width < 992) {
         scrollPos = document.documentElement.scrollTop;
     });
 }
+
+test_bv();
