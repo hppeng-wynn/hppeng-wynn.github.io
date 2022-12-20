@@ -208,11 +208,6 @@ async function load_init() {
     });
 }
 
-// List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
-for (const it of item_types) {
-    itemLists.set(it, []);
-}
-
 let none_items = [
     ["armor", "helmet", "No Helmet"],
     ["armor", "chestplate", "No Chestplate"],
@@ -251,7 +246,11 @@ for (let i = 0; i < none_items.length; i++) {
 }
 
 function init_maps() {
-    //warp
+    // List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
+    for (const it of item_types) {
+        itemLists.set(it, []);
+    }
+
     itemMap = new Map();
     /* Mapping from item names to set names. */
     idMap = new Map();
