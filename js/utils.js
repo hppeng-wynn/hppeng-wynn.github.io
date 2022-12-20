@@ -176,7 +176,7 @@ Base64 = (function () {
                 if (data == 0) {
                     length = 0;
                 } else {
-                    length = Math.ceil(Math.log(data) / Math.log(2));
+                    length = Math.ceil(Math.log(data + 1) / Math.log(2)); //+1 to account for powers of 2
                 }
             }
             if (length < 0) {
@@ -211,7 +211,7 @@ Base64 = (function () {
      */
     read_bit(idx) {
         if (idx < 0 || idx >= this.length) {
-            throw new RangeError("Cannot read bit outside the range of the BitVector. ("+idx+" > "+this.length+")");
+            throw new RangeError("Cannot read bit outside the range of the BitVector. ("+idx+" >= "+this.length+")");
         }
         return ((this.bits[Math.floor(idx / 32)] & (1 << idx)) == 0 ? 0 : 1);
     }
@@ -369,7 +369,7 @@ Base64 = (function () {
             }
         } else if (typeof data === "number") {
             //convert to int just in case
-            let int = Math.round(data); 
+            let int = Math.round(data);
                 
             //range of numbers that "could" fit in a uint32 -> [0, 2^32) U [-2^31, 2^31)
             if (data > 2**32 - 1 || data < -(2 ** 31)) {
@@ -377,13 +377,19 @@ Base64 = (function () {
             }
             //could be split between multiple new ints
             //reminder that shifts implicitly mod 32
-            this.bits[curr_idx] |= ((int & ~((~0) << length)) << (this.length));
-            if (((this.length - 1) % 32 + 1) + length > 32) {
+            if (length == 32) {
+                this.bits[curr_idx] |= int << (this.length);
+            } else {
+                this.bits[curr_idx] |= ((int & ~((~0) << length)) << (this.length));
+            }
+
+            //overflow part
+            if ((pos % 32) + length > 32) {
                 this.bits[curr_idx + 1] = (int >>> (32 - this.length));
             }
         } else if (data instanceof BitVector) {
             //fill to end of curr int of existing bv
-            let other_pos = (32 - (pos % 32)) % 32;
+            let other_pos = (32 - (pos % 32));
             this.bits[curr_idx] |= data.slice(0, other_pos);
             curr_idx += 1;
 
@@ -404,18 +410,6 @@ Base64 = (function () {
         this.length += length;
     }
 };
-
-function test_bv() {
-    //empty array
-    let bv = new BitVector(0);
-    bv.append(10, 4);
-    console.log(bv);
-
-    bv = new BitVector(0);   
-    bv.append(10, 5);
-    console.log(bv);
-
-}
 
 
 /*
@@ -1054,5 +1048,3 @@ if (screen.width < 992) {
         scrollPos = document.documentElement.scrollTop;
     });
 }
-
-test_bv();
