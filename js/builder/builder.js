@@ -358,14 +358,16 @@ async function init() {
         });
     } catch (e) {
         console.log("Could not initialize macy components. Maybe you're offline?");
+        console.log(e);
     }
-    await parse_hash(url_tag);
+    const save_skp = await parse_hash(url_tag);
     try {
         init_autocomplete();
     } catch (e) {
         console.log("Could not initialize autocomplete. Maybe you're offline?");
+        console.log(e);
     }
-    builder_graph_init();
+    builder_graph_init(save_skp);
     for (const item_node of item_nodes) {
         if (item_node.get_value() === null) {
             // likely DB load failure...

@@ -30,10 +30,10 @@ class ComputeNode {
      */
     update() {
         if (this.inputs_dirty_count != 0) {
-            return;
+            return this;
         }
         if (this.dirty === 0) {
-            return;
+            return this;
         }
         if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.push(this.name); }
         if (this.dirty == 2) {
@@ -150,10 +150,10 @@ class ValueCheckComputeNode extends ComputeNode {
      */
     update() {
         if (this.inputs_dirty_count != 0) {
-            return;
+            return this;
         }
         if (this.dirty === 0) {
-            return;
+            return this;
         }
 
         let calc_inputs = new Map();
@@ -179,7 +179,6 @@ class ValueCheckComputeNode extends ComputeNode {
     mark_dirty(dirty_state="unused") {
         return super.mark_dirty(1);
     }
-
 }
 
 let graph_live_update = false;
@@ -196,8 +195,10 @@ function calcSchedule(node, timeout) {
     node.mark_dirty();
     node.update_task = setTimeout(function() {
         if (COMPUTE_GRAPH_DEBUG) { node_debug_stack = []; }
+        graph_live_update = false;
         node.update();
         node.update_task = null;
+        graph_live_update = true;
     }, timeout);
 }
 

@@ -865,6 +865,7 @@ let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hpr
 ];
 /**
  * Scale stats if radiance is enabled.
+ * TODO: skillpoints...
  */
 const radiance_node = new (class extends ComputeNode {
     constructor() { super('radiance-node->:('); }
@@ -936,6 +937,7 @@ class AggregateEditableIDNode extends ComputeNode {
 
 let edit_id_output;
 function resetEditableIDs() {
+    edit_id_output.mark_dirty().update();
     edit_id_output.notify();
 }
 /**
@@ -947,6 +949,9 @@ class EditableIDSetterNode extends ComputeNode {
     constructor(notify_nodes) {
         super("builder-id-setter");
         this.notify_nodes = notify_nodes.slice();
+        for (const child of this.notify_nodes) {
+            child.link_to(this);
+        }
     }
 
     compute_func(input_map) {
@@ -959,20 +964,7 @@ class EditableIDSetterNode extends ComputeNode {
         }
     }
 
-    /**
-     * Overriding this to bridge the transparent gap.
-     */
-    mark_dirty(dirty_state=2) {
-        super.mark_dirty(dirty_state);
-        for (const node of this.notify_nodes) {
-            node.mark_dirty(dirty_state);
-        }
-        return this;
-    }
-
     notify() {
-        this.mark_dirty();
-        this.update();
         // NOTE: DO NOT merge these loops for performance reasons!!!
         for (const node of this.notify_nodes) {
             node.mark_dirty();
@@ -993,6 +985,9 @@ class SkillPointSetterNode extends ComputeNode {
     constructor(notify_nodes) {
         super("builder-skillpoint-setter");
         this.notify_nodes = notify_nodes.slice();
+        for (const child of this.notify_nodes) {
+            child.link_to(this);
+        }
     }
 
     compute_func(input_map) {
@@ -1000,13 +995,6 @@ class SkillPointSetterNode extends ComputeNode {
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const [idx, elem] of skp_order.entries()) {
             document.getElementById(elem+'-skp').value = build.total_skillpoints[idx];
-        }
-        // NOTE: DO NOT merge these loops for performance reasons!!!
-        for (const node of this.notify_nodes) {
-            node.mark_dirty();
-        }
-        for (const node of this.notify_nodes) {
-            node.update();
         }
     }
 }
@@ -1052,7 +1040,11 @@ let stat_agg_node;
 let edit_agg_node;
 let atree_graph_creator;
 
-function builder_graph_init() {
+/**
+ * Parameters:
+ *  save_skp:   bool    True if skillpoints are modified away from skp engine defaults.
+ */
+function builder_graph_init(save_skp) {
     // Phase 1/3: Set up item input, propagate updates, etc.
 
     // Level input node.
@@ -1133,6 +1125,7 @@ function builder_graph_init() {
     // Edit IDs setter declared up here to set ids so they will be populated by default.
     edit_id_output = new EditableIDSetterNode(edit_input_nodes);    // Makes shallow copy of list.
     edit_id_output.link_to(build_node);
+    edit_agg_node.link_to(edit_id_output, 'edit-id-setter');
 
     for (const skp of skp_order) {
         const elem = document.getElementById(skp+'-skp');
@@ -1208,8 +1201,11 @@ function builder_graph_init() {
         node.update();
     }
 
-    let skp_output = new SkillPointSetterNode(edit_input_nodes);
+    let skp_output = new SkillPointSetterNode(skp_inputs);
     skp_output.link_to(build_node);
+    if (!save_skp) {
+        skp_output.update().mark_dirty().update();
+    }
 
     let build_warnings_node = new DisplayBuildWarningsNode();
     build_warnings_node.link_to(build_node, 'build');
