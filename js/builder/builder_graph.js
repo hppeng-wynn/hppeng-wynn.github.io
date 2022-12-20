@@ -937,8 +937,7 @@ class AggregateEditableIDNode extends ComputeNode {
 
 let edit_id_output;
 function resetEditableIDs() {
-    edit_id_output.mark_dirty();
-    edit_id_output.update();
+    edit_id_output.mark_dirty().update();
     edit_id_output.notify();
 }
 /**
@@ -998,6 +997,11 @@ class SkillPointSetterNode extends ComputeNode {
         for (const [idx, elem] of skp_order.entries()) {
             document.getElementById(elem+'-skp').value = build.total_skillpoints[idx];
         }
+        for (const child of this.notify_nodes) {
+            console.log(child.inputs_dirty, child.dirty);
+        }
+        console.log("set skp");
+        console.log(build.total_skillpoints);
     }
 }
 
@@ -1042,7 +1046,11 @@ let stat_agg_node;
 let edit_agg_node;
 let atree_graph_creator;
 
-function builder_graph_init() {
+/**
+ * Parameters:
+ *  save_skp:   bool    True if skillpoints are modified away from skp engine defaults.
+ */
+function builder_graph_init(save_skp) {
     // Phase 1/3: Set up item input, propagate updates, etc.
 
     // Level input node.
@@ -1201,6 +1209,9 @@ function builder_graph_init() {
 
     let skp_output = new SkillPointSetterNode(skp_inputs);
     skp_output.link_to(build_node);
+    if (!save_skp) {
+        skp_output.update().mark_dirty().update();
+    }
 
     let build_warnings_node = new DisplayBuildWarningsNode();
     build_warnings_node.link_to(build_node, 'build');

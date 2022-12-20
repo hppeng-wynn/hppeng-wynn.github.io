@@ -53,6 +53,7 @@ async function parse_hash(url_tag) {
     let powdering = ["", "", "", "", ""];
     let info = url_tag.split("_");
     let version = info[0];
+    // Whether skillpoints are manually updated. True if they should be set to something other than default values
     let save_skp = false;
     let skillpoints = [0, 0, 0, 0, 0];
     let level = 106;
@@ -157,7 +158,9 @@ async function parse_hash(url_tag) {
     }
 
     //level, skill point assignments, and powdering
-    if (version_number == 1) {
+    if (version_number == 0) {
+        // do nothing! lol
+    } else if (version_number == 1) {
         let powder_info = data_str;
         let res = parsePowdering(powder_info);
         powdering = res[0];
@@ -222,6 +225,8 @@ async function parse_hash(url_tag) {
     for (let i in skillpoints) {
         setValue(skp_order[i] + "-skp", skillpoints[i]);
     }
+
+    return save_skp;
 }
 
 /*  Stores the entire build in a string using B64 encoding and adds it to the URL.

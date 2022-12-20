@@ -30,10 +30,10 @@ class ComputeNode {
      */
     update() {
         if (this.inputs_dirty_count != 0) {
-            return;
+            return this;
         }
         if (this.dirty === 0) {
-            return;
+            return this;
         }
         if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.push(this.name); }
         if (this.dirty == 2) {
@@ -150,10 +150,10 @@ class ValueCheckComputeNode extends ComputeNode {
      */
     update() {
         if (this.inputs_dirty_count != 0) {
-            return;
+            return this;
         }
         if (this.dirty === 0) {
-            return;
+            return this;
         }
 
         let calc_inputs = new Map();
