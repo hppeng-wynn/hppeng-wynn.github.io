@@ -1,17 +1,12 @@
-const translate_mappings = {
+// commented out filters
     //"Name": "name",
     //"Display Name": "displayName",
-    //"tier"Tier": ",
+    //"Tier": "tier",
     //"Set": "set",
-    "Powder Slots": "slots",
     //"Type": "type",
-    //"armorType", (deleted)
-    //"color", (deleted)
-    //"lore", (deleted)
-    //"material", (deleted)
-    "Drop type": "drop",
-    "Quest requirement": "quest",
-    "Restriction": "restrict",
+    //"Drop type": "drop",             BROKEN
+    //"Quest requirement": "quest",    BROKEN
+    //"Restriction": "restrict",       BROKEN
     //"Base Neutral Damage": "nDam",
     //"Base Fire Damage": "fDam",
     //"Base Water Damage": "wDam",
@@ -19,6 +14,13 @@ const translate_mappings = {
     //"Base Thunder Damage": "tDam",
     //"Base Earth Damage": "eDam",
     //"Base Attack Speed": "atkSpd",
+    //"Class Requirement": "classReq",
+    // "Fixed IDs": "fixID",          BROKEN
+    // "Custom Skin": "skin",         BROKEN
+    //"Item Category": "category",
+
+const translate_mappings = {
+    "Powder Slots": "slots",
     "Health": "hp",
     "Raw Fire Defense": "fDef",
     "Raw Water Defense": "wDef",
@@ -26,7 +28,6 @@ const translate_mappings = {
     "Raw Thunder Defense": "tDef",
     "Raw Earth Defense": "eDef",
     "Combat Level": "lvl",
-    //"Class Requirement": "classReq",
     "Req Strength": "strReq",
     "Req Dexterity": "dexReq",
     "Req Intelligence": "intReq",
@@ -67,10 +68,6 @@ const translate_mappings = {
     "% Air Defense": "aDefPct",
     "% Thunder Defense": "tDefPct",
     "% Earth Defense": "eDefPct",
-    "Fixed IDs": "fixID",
-    "Custom Skin": "skin",
-    //"Item Category": "category",
-
     "1st Spell Cost %": "-spPct1",
     "1st Spell Cost Raw": "-spRaw1",
     "2nd Spell Cost %": "-spPct2",
@@ -79,129 +76,180 @@ const translate_mappings = {
     "3rd Spell Cost Raw": "-spRaw3",
     "4th Spell Cost %": "-spPct4",
     "4th Spell Cost Raw": "-spRaw4",
-
-    "Rainbow Spell Damage": "rainbowRaw",
+    "Rainbow Spell Damage Raw": "rainbowRaw",
     "Sprint": "sprint",
     "Sprint Regen": "sprintReg",
     "Jump Height": "jh",
     "Loot Quality": "lq",
-
     "Gather XP Bonus": "gXp",
-    "Gather Speed Bonus": "gSpd",
+    "Gather Speed Bonus": "gSpd"
 };
 
 const special_mappings = {
-    "Sum (skill points)": "s:str+dex+int+def+agi",
-    "Sum (Mana Sustain)": "s:mr+ms",
-    "Sum (Life Sustain)": "s:hpr+ls",
-    "Sum (Health + Health Bonus)": "s:hp+hpBonus",
-    "No Strength Req": "f:strReq=0",
-    "No Dexterity Req": "f:dexReq=0",
-    "No Intelligence Req": "f:intReq=0",
-    "No Agility Req": "f:agiReq=0",
-    "No Defense Req": "f:defReq=0",
+    "Sum (skill points)": "str+dex+int+def+agi",
+    "Sum (Mana Sustain)": "mr+ms",
+    "Sum (Life Sustain)": "hpr+ls",
+    "Sum (Health + Health Bonus)": "hp+hpBonus",
+    "Base DPS": "(nDam+fDam+wDam+aDam+tDam+eDam) * atkspdmod(atkspd)"
 };
 
-let itemFilters = document.getElementById("filter-items");
-if (itemFilters) {
-    for (let x in translate_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
-    for (let x in special_mappings) {
-        let el = document.createElement("option");
-        el.value = x;
-        itemFilters.appendChild(el);
-    }
+let item_filters = [];
+for (let x in translate_mappings) {
+    item_filters.push(x);
+}
+for (let x in special_mappings) {
+    item_filters.push(x);
 }
 
-let itemCategories = [ "armor", "accessory", "weapon" ];
+let item_categories = ["armor", "accessory", "weapon"];
 
-function applyQuery(items, query) {
-    return items.filter(query.filter, query).sort(query.compare);
-}
+const types = {bow: false, spear: false, wand: false, dagger: false, relik: false, helmet: false, chestplate: false, leggings: false, boots: false, ring: false, bracelet: false, necklace: false};
+const rarities = {normal: true, unique: true, set: true, rare: true, legendary: true, fabled: true, mythic: true};
+const filters = [], excludes = [];
+let filter_id_counter = 0;
 
-function displayItems(results) {
-    let items_parent = document.getElementById("main");
-    for (let i in results) {
-        let item = results[i].itemExp;
-        let box = document.createElement("div");
-        box.classList.add("box");
-        box.id = "item"+i;
+function displayItems(items_copy) {
+    let items_parent = document.getElementById("search-results");
+    for (let i in items_copy) {
+        if (i > 200) {break;}
+        let item = items_copy[i].itemExp;
+        let box = make_elem('div', ['col-lg-3', 'col-sm-6', 'p-2'], {id: 'item'+i});
+
+        let bckgrdbox = make_elem("div", ["dark-7", "rounded", "px-2", "col-auto"], {id: 'item'+i+'b'});
+        box.append(bckgrdbox);
         items_parent.appendChild(box);
-        displayExpandedItem(item, box.id);
+        item.set("powders", []);
+        if (item.get("category") == "weapon") {
+            apply_weapon_powders(item);
+        }
+        displayExpandedItem(item, bckgrdbox.id, true);
     }
 }
 
-let searchDb;
+let search_db;
+let expr_parser;
 
-function doItemSearch() {
+function do_item_search() {
+    document.getElementById("summary").style.color = "red"; // to display errors, changed to white if search successful
     window.scrollTo(0, 0);
     let queries = [];
-    queries.push('f:name?="'+document.getElementById("item-name-choice").value.trim()+'"');
 
-    let categoryOrType = document.getElementById("item-category-choice").value;
-    if (itemTypes.includes(categoryOrType)) {
-        queries.push('f:type="'+categoryOrType+'"');
-    }
-    else if (itemCategories.includes(categoryOrType)) {
-        queries.push('f:cat="'+categoryOrType+'"');
+    // name
+    if (document.getElementById("item-name-choice").value != "") {
+        queries.push("f:name?=\"" + document.getElementById("item-name-choice").value.trim() + "\"");
     }
 
-    let rarity = document.getElementById("item-rarity-choice").value;
-    if (rarity) {
-        if (rarity === "ANY") {
-
-        }
-        else if (rarity === "Sane") {
-            queries.push('f:tiername!="mythic"');
-        }
-        else {
-            queries.push('f:tiername="'+rarity+'"');
+    // types
+    let allTypes = true, noTypes = true;
+    let typeQuery = "f:("
+    for (const type of Object.keys(types)) {
+        if (types[type]) {
+            typeQuery += "type=\"" + type + "\"|";
+            noTypes = false;
+        } else {
+            allTypes = false;
         }
     }
+    if (noTypes) {
+        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 type selected";
+        return;
+    } else if (!allTypes) {
+        queries.push(typeQuery.substring(0, typeQuery.length - 1) + ")");
+    }
 
-    let level_dat = document.getElementById("item-level-choice").value.split("-");
-    queries.push('f:(lvl>='+parseInt(level_dat[0])+'&lvl<='+parseInt(level_dat[1])+')');
+    // rarities
+    let allRarities = true, noRarities = true;
+    let rarityQuery = "f:("
+    for (const rarity of Object.keys(rarities)) {
+        if (rarities[rarity]) {
+            rarityQuery += "tiername=\"" + rarity + "\"|";
+            noRarities = false;
+        } else {
+            allRarities = false;
+        }
+    }
+    if (noRarities) {
+        document.getElementById("summary").innerHTML = "Error: Cannot search without at least 1 rarity selected";
+        return;
+    } else if (!allRarities) {
+        queries.push(rarityQuery.substring(0, rarityQuery.length - 1) + ")");
+    }
     
-    for (let i = 1; i <= 4; ++i) {
-        let raw_dat = document.getElementById("filter"+i+"-choice").value;
-        let filter_dat = translate_mappings[raw_dat];
-        if (filter_dat !== undefined) {
-            queries.push("s:"+filter_dat);
-            queries.push("f:"+filter_dat+"!=0");
-            continue;
+    // filters
+    for (const filter of filters) {
+        let min = parseInt(filter.min_elem.value);
+        let max = parseInt(filter.max_elem.value);
+        if (min > max) {
+            document.getElementById("summary").innerHTML = "Error: The minimum of filter " + filter.input_elem.value + " (" + min + ") is greater than its maximum (" + max + ")";
+            return;
         }
-        filter_dat = special_mappings[raw_dat];
-        if (filter_dat !== undefined) {
-            queries.push(filter_dat);
-            continue;
+        let zero_in_min_max = (isNaN(min) || min < 0) && (isNaN(max) || max > 0);
+
+        let raw_name = filter.input_elem.value;
+        if (raw_name == "") {
+            continue; // empty
         }
+        let filter_name = translate_mappings[raw_name];
+        if (filter_name === undefined) {
+            filter_name = special_mappings[raw_name];
+            if (filter_name === undefined) {
+                document.getElementById("summary").innerHTML = "Error: The filter \"" + filter.input_elem.value + "\" is not recognized";
+                return;
+            }
+            filter_name = "(" + filter_name + ")";
+        }
+
+        if (!isNaN(min)) {
+            queries.push("f:" + filter_name + ">=" + min);
+        }
+        if (!isNaN(max)) {
+            queries.push("f:" + filter_name + "<=" + max);
+        }
+        if (zero_in_min_max) {
+            queries.push("f:" + filter_name + "!=0");
+        }
+        queries.push("s:" + (filter.ascending ? "0-" : "") + filter_name);
     }
 
-    let filterQuery = "true";
-    let sortQueries = [];
+    // excludes
+    for (const exclude of excludes) {
+        let raw_name = exclude.input_elem.value;
+        if (raw_name == "") {
+            continue; // empty
+        }
+        let filter_name = translate_mappings[raw_name];
+        if (filter_name === undefined) {
+            filter_name = special_mappings[raw_name];
+            if (filter_name === undefined) {
+                document.getElementById("summary").innerHTML = "Error: The excluded filter \"" + exclude.input_elem.value + "\" is not recognized";
+                return;
+            }
+            filter_name = "(" + filter_name + ")";
+        }
+        queries.push("f:" + filter_name + "=0");
+    }
+
+    let filter_query = "true";
+    let sort_queries = [];
     console.log(queries);
     for (const query of queries) {
         if (query.startsWith("s:")) {
-            sortQueries.push(query.slice(2));
+            sort_queries.push(query.slice(2));
         }
         else if (query.startsWith("f:")) {
-            filterQuery = filterQuery + "&" + query.slice(2);
+            filter_query = filter_query + "&" + query.slice(2);
         }
     }
-    console.log(filterQuery);
-    console.log(sortQueries);
+    document.getElementById("search-results").textContent = "";
     let results = [];
     try {
-        const filterExpr = exprParser.parse(filterQuery);
-        const sortExprs = sortQueries.map(q => exprParser.parse(q));
-        for (let i = 0; i < searchDb.length; ++i) {
-            const item = searchDb[i][0];
-            const itemExp = searchDb[i][1];
-            if (checkBool(filterExpr.resolve(item, itemExp))) {
-                results.push({ item, itemExp, sortKeys: sortExprs.map(e => e.resolve(item, itemExp)) });
+        const filter_expr = expr_parser.parse(filter_query);
+        const sort_exprs = sort_queries.map(q => expr_parser.parse(q));
+        for (let i = 0; i < search_db.length; ++i) {
+            const item = search_db[i][0];
+            const itemExp = search_db[i][1];
+            if (checkBool(filter_expr.resolve(item, itemExp))) {
+                results.push({ item, itemExp, sortKeys: sort_exprs.map(e => e.resolve(item, itemExp)) });
             }
         }
         results.sort((a, b) => {
@@ -211,13 +259,264 @@ function doItemSearch() {
         document.getElementById("summary").textContent = e.message;
         return;
     }
-    document.getElementById("summary").textContent = results.length + " results."
+    document.getElementById("summary").textContent = results.length + " results:";
+    document.getElementById("summary").style.color = "white";
     displayItems(results);
 }
 
 function init_items() {
-    searchDb = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
-    exprParser = new ExprParser(itemQueryProps, itemQueryFuncs);
+    search_db = items.filter( i => ! i.remapID ).map( i => [i, expandItem(i, [])] );
+    expr_parser = new ExprParser(itemQueryProps, itemQueryFuncs);
+
+    // init type buttons
+    for (const type of Object.keys(types)) {
+        document.getElementById("type-" + type).addEventListener("click", function() {
+            types[type] = !types[type];
+            this.classList.toggle("type-selected");
+        });
+    }
+    document.getElementById("all-types").addEventListener("click", function() {
+        for (const type of Object.keys(types)) {
+            types[type] = true;
+            document.getElementById("type-" + type).classList.add("type-selected");
+        }
+    });
+    document.getElementById("none-types").addEventListener("click", function() {
+        for (const type of Object.keys(types)) {
+            types[type] = false;
+            document.getElementById("type-" + type).classList.remove("type-selected");
+        }
+    });
+    
+    // init rarity buttons
+    for (const rarity of Object.keys(rarities)) {
+        document.getElementById("rarity-" + rarity).addEventListener("click", function() {
+            rarities[rarity] = !rarities[rarity];
+            this.classList.toggle("rarity-selected");
+        });
+    }
+    document.getElementById("all-rarities").addEventListener("click", function() {
+        for (const rarity of Object.keys(rarities)) {
+            rarities[rarity] = true;
+            document.getElementById("rarity-" + rarity).classList.add("rarity-selected");
+        }
+    });
+    document.getElementById("none-rarities").addEventListener("click", function() {
+        for (const rarity of Object.keys(rarities)) {
+            rarities[rarity] = false;
+            document.getElementById("rarity-" + rarity).classList.remove("rarity-selected");
+        }
+    });
+
+    // filters
+    document.getElementById("add-filter").addEventListener("click", create_filter);
+    document.getElementById("add-exclude").addEventListener("click", create_exclude);
+    create_filter();
+    filters[0].input_elem.value = "Combat Level";
+    init_filter_drag();
 }
 
-load_init(init_items);
+function reset_item_search() {
+    document.getElementById("item-name-choice").value = "";
+    document.getElementById("all-types").click();
+    document.getElementById("all-rarities").click();
+}
+
+function create_filter() {
+    let data = {ascending: false};
+
+    let row = make_elem("div", ["row", "filter-row"], {});
+    let col = make_elem("div", ["col"], {});
+    row.appendChild(col);
+    data.div = row;
+
+    let reorder_img = make_elem("img", ["reorder-filter"], {src: "../media/icons/3-lines.svg", draggable: "true"});
+    col.appendChild(reorder_img);
+
+    let filter_input = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
+        {id: "filter-input-" + filter_id_counter, type: "text", placeholder: "Filter"}
+    );
+    filter_id_counter++;
+    col.appendChild(filter_input);
+    data.input_elem = filter_input;
+
+    let asc_desc = make_elem("div", [], {style: "cursor: pointer; display: inline-block;"});
+    asc_desc.appendChild(make_elem("img", ["desc-icon", "asc-sel"], {src: "../media/icons/triangle.svg"}));
+    asc_desc.appendChild(make_elem("img", ["asc-icon"], {src: "../media/icons/triangle.svg"}));
+    asc_desc.addEventListener("click", function() {
+        data.ascending = !data.ascending;
+        asc_desc.children[0].classList.toggle("asc-sel");
+        asc_desc.children[1].classList.toggle("asc-sel");
+    });
+    col.appendChild(asc_desc);
+
+    let min = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
+        {type: "number", placeholder: "-\u221E"}
+    );
+    col.appendChild(min);
+    data.min_elem = min;
+
+    let to = make_elem("span", [], {innerHTML: "&nbsp;to&nbsp;"});
+    col.appendChild(to);
+
+    let max = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
+        {type: "number", placeholder: "\u221E"}
+    );
+    col.appendChild(max);
+    data.max_elem = max;
+
+    let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
+    trash.addEventListener("click", function() {
+        filters.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        row.remove();
+    });
+    col.appendChild(trash);
+
+    document.getElementById("filter-container").insertBefore(row, document.getElementById("add-filter").parentElement);
+    filters.push(data);
+    init_filter_dropdown(data);
+}
+
+let currently_dragging = null;
+function init_filter_drag() {
+    let container = document.getElementById("filter-container");
+
+    container.addEventListener("dragstart", function(e) {
+        if (e.path[0].classList.contains("reorder-filter")) {
+            currently_dragging = filters[Array.from(e.path[3].children).indexOf(e.path[2]) - 1];
+        } else {
+            e.preventDefault();
+        }
+    });
+
+    container.addEventListener("dragenter", function(e) {
+        e.preventDefault();
+    });
+
+    container.addEventListener("dragleave", function(e) {
+        e.preventDefault();
+    });
+
+    container.addEventListener("dragend", function(e) {
+        e.preventDefault();
+        for (const el of document.getElementsByClassName("filter-dragged-over")) {
+            el.classList.remove("filter-dragged-over");
+        }
+        currently_dragging = null;
+    });
+
+    container.addEventListener("dragover", function(e) {
+        e.preventDefault();
+        for (const el of document.getElementsByClassName("filter-dragged-over")) {
+            el.classList.remove("filter-dragged-over");
+        }
+        if (!e.path.includes(currently_dragging.div)) {
+            for (let i = 0; i < e.path.length; i++) {
+                if (e.path[i].classList.contains("filter-row")) {
+                    e.path[i].classList.add("filter-dragged-over");
+                    break;
+                }
+            }
+        }
+    });
+
+    container.addEventListener("drop", function(e) {
+        e.preventDefault();
+        for (const el of document.getElementsByClassName("filter-dragged-over")) {
+            el.classList.remove("filter-dragged-over");
+        }
+        if (!e.path.includes(currently_dragging.div)) {
+            for (let i = 0; i < e.path.length; i++) {
+                if (e.path[i].classList.contains("filter-row")) {
+                    let old_index = filters.indexOf(currently_dragging);
+                    let new_index = Array.from(e.path[i + 1].children).indexOf(e.path[i]) - 1;
+                    filters.splice(old_index, 1);
+                    filters.splice(new_index, 0, currently_dragging);
+                    currently_dragging.div.remove();
+                    container.insertBefore(currently_dragging.div, container.children[new_index + 1]);
+                    break;
+                }
+            }
+        }
+        currently_dragging = null;
+    });
+}
+
+function create_exclude() {
+    let data = {};
+
+    let row = make_elem("div", ["row", "filter-row"], {});
+    let col = make_elem("div", ["col"], {});
+    row.appendChild(col);
+    data.div = row;
+
+    let filter_input = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
+        {id: "filter-input-" + filter_id_counter, type: "text", placeholder: "Excluded Filter"}
+    );
+    filter_id_counter++;
+    col.appendChild(filter_input);
+    data.input_elem = filter_input;
+
+    let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
+    trash.addEventListener("click", function() {
+        excludes.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        row.remove();
+    });
+    col.appendChild(trash);
+
+    document.getElementById("exclude-container").insertBefore(row, document.getElementById("add-exclude").parentElement);
+    excludes.push(data);
+    init_filter_dropdown(data);
+}
+
+function init_filter_dropdown(filter) {
+    let field_choice = filter.input_elem;
+    field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
+    filter.autoComplete = new autoComplete({
+        data: {
+            src: item_filters,
+        },  
+        threshold: 0,
+        selector: "#" + field_choice.id,
+        wrapper: false,
+        resultsList: {
+            maxResults: 100,
+            tabSelect: true,
+            noResults: true,
+            class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+            element: (list, data) => {
+                let position = field_choice.getBoundingClientRect();
+                list.style.top = position.bottom + window.scrollY +"px";
+                list.style.left = position.x+"px";
+                list.style.width = position.width+"px";
+                list.style.maxHeight = position.height * 4 +"px";
+                if (!data.results.length) {
+                    const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
+                    list.prepend(message);
+                };
+            },
+        },
+        resultItem: {
+            class: "scaled-font search-item",
+            selected: "dark-5",
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    if (event.detail.selection.value) {
+                        event.target.value = event.detail.selection.value;
+                    };
+                },
+            },
+        }
+    });
+}
+
+(async function() {
+    await Promise.resolve(load_init());
+    init_items();
+})();

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/sq2bs.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/wynnstyles.css">
+    <link rel="stylesheet" href="../css/items.css">
 </head>
     <body class = "text-light d-flex justify-content-center" id = "body">
         <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
@@ -31,99 +32,126 @@
             <hr/>
             <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
         </div>
+        <div id="mobile-navbar" class="navbar dark-5 dark-shadow fixed-top d-lg-none pb-0">
+            <div class="container-fluid scaled-font justify-content-center" style="height: 5vh;">
+                <div class="navbar-brand mx-auto scaled-font" style="height: 100%;">
+                    <img src="../media/icons/new/searcher.png" alt="" style="height: 100%;">
+                    <span>WynnAtlas</span>
+                </div>
+                <button class="btn dropdown-toggle dark-2 px-4 text-white scaled-font border-dark border-3" onclick="toggle_tab('mobile-navbar-dropdown');"></button>
+            </div>
+            <div class="container-fluid scaled-font dark-3 px-3 py-3" id="mobile-navbar-dropdown" style="display: none;">
+                <a href="../builder/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/builder.png" alt="" style="height: 100%;">
+                    <span>WynnBuilder</span>
+                </a>
+                <a href="../crafter/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/crafter.png" alt="" style="height: 100%;">
+                    <span>WynnCrafter</span>
+                </a>
+                <a href="../items/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/searcher.png" alt="" style="height: 100%;">
+                    <span>WynnAtlas</span>
+                </a>
+                <a href="../custom/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/custom.png" alt="" style="height: 100%;">
+                    <span>WynnCustom</span>
+                </a>
+                <a href="../map/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/compass.png" alt="" style="height: 100%;">
+                    <span>WynnGPS</span>
+                </a>
+                <a href="../wynnfo/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/book.png" alt="" style="height: 100%;">
+                    <span>WynnFo</span>
+                </a>
+                <a onclick = "toggleIcons()" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/reload.png" alt="" style="height: 100%;">
+                    <span>Swap Icon Style</span>
+                </a>
+                <a href="https://discord.gg/CGavnAnerv" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/discord.png" alt="" style="height: 100%;">
+                    <span>Discord</span>
+                </a>
+            </div>
+        </div>
         <div class = "container py-5 vh-100 mx-0 mx-lg-auto scaled-font">
-            <div class = "col">
-                <div class = "row">
+            <div class = "row">
+                <div class = "row" style = "margin-top: 3ch;">
                     <div class = "col text-end">
                         <a href = "../items_adv/">Advanced Item Search</a>
                     </div>
                 </div>
-                <div class = "row">
+                <div class = "col-auto" style = "width: 12.5%;"></div>
+                <div class = "col-lg-4">
                     <div class = "row">
-                        <div class = "col-lg-3 col-sm-12">
+                        <div class = "col-lg col-sm-12">
                             <div class = "col fw-bold">Name:</div>
-                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="item-name-choice" name="item-name-choice" placeholder="Item name (case insensitive)"/>
-                            <p class="error col"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Category:</div>
-                            <input class="col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="item-category-choice" name="item-category-choice" placeholder="ALL"/>
-                            <datalist id="category-items">
-                                <option value="ALL">
-                                <option value="armor">
-                                <option value="helmet">
-                                <option value="chestplate">
-                                <option value="leggings">
-                                <option value="boots">
-                                <option value="accessory">
-                                <option value="ring">
-                                <option value="bracelet">
-                                <option value="necklace">
-                                <option value="weapon">
-                                <option value="wand">
-                                <option value="spear">
-                                <option value="bow">
-                                <option value="dagger">
-                                <option value="relik">
-                            </datalist>
-                            <p class="error"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Rarity:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="item-rarity-choice" name="item-rarity-choice" placeholder="ANY"/>
-                            <datalist id = "rarity-items">
-                                <option value="ANY">
-                                <option value="Normal">
-                                <option value="Unique">
-                                <option value="Set">
-                                <option value="Rare">
-                                <option value="Legendary">
-                                <option value="Fabled">
-                                <option value="Mythic">
-                                <option value="Sane">
-                            </datalist>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Level Range:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" type="text" id="item-level-choice" name="item-level-choice" placeholder = "1-106"/>
+                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style="width: 100%!important;" type="text" id="item-name-choice" name="item-name-choice" placeholder="Item name (case insensitive)"/>
                             <p class="error col-auto"></p>
                         </div>
                     </div>
                     <div class = "row">
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 1:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter1-choice" name="filter1-choice" placeholder="ANY"/>
+                        <div class = "col-lg col-sm-12">
+                            <div class = "col"><span class = "fw-bold">Type:</span> <span style = "cursor: pointer; float: right;"><span id = "all-types">All</span> &nbsp; <span id = "none-types">None</span></span></div>
+                            <div id = "type-box">
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 0 0;" id = "type-bow"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 9.09091% 0;" id = "type-spear"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 18.1818% 0;" id = "type-wand"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 27.2727% 0;" id = "type-dagger"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 36.3636% 0;" id = "type-relik"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 45.4545% 0;" id = "type-helmet"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 54.5455% 0;" id = "type-chestplate"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 63.6364% 0;" id = "type-leggings"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 72.7273% 0;" id = "type-boots"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 81.8182% 0;" id = "type-ring"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 90.9091% 0;" id = "type-bracelet"></div>
+                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 100% 0;" id = "type-necklace"></div>
+                            </div>
                             <p class="error col-auto"></p>
                         </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 2:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter2-choice" name="filter2-choice" placeholder="ANY"/>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 3:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter3-choice" name="filter3-choice" placeholder="ANY"/>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <div class = "col-lg-3 col-sm-12">
-                            <div class = "col fw-bold">Filter 4:</div>
-                            <input class = "border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" id="filter4-choice" name="filter4-choice" placeholder="ANY"/>
-                            <p class="error col-auto"></p>
-                        </div>
-                        <datalist id = "filter-items"></datalist>
                     </div>
                     <div class = "row">
-                        <div class = "col-auto">
-                            <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "search-button" onclick = "doItemSearch()">
-                                Search!
-                            </button>
+                        <div class = "col-lg col-sm-12">
+                            <div class = "col"><span class = "fw-bold">Rarity:</span> <span style = "cursor: pointer; float: right;"><span id = "all-rarities">All</span> &nbsp; <span id = "none-rarities">None</span></span></div>
+                            <div id = "rarity-box">
+                                <!-- unfortunately they must be stacked up like this because newlines are considered spaces and muck up the organization -->
+                                <div id = "rarity-normal" class = "rarity-selected"><b>N</b></div><div id = "rarity-unique" class = "rarity-selected"><b>U</b></div><div id = "rarity-set" class = "rarity-selected"><b>S</b></div><div id = "rarity-rare" class = "rarity-selected"><b>R</b></div><div id = "rarity-legendary" class = "rarity-selected"><b>L</b></div><div id = "rarity-fabled" class = "rarity-selected"><b>F</b></div><div id = "rarity-mythic" class = "rarity-selected"><b>M</b></div>
+                            </div>
+                            <p class="error col-auto"></p>
                         </div>
-                        <div class = "col-auto">
-                            <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-button" onclick = "resetItemSearch()">
-                                Reset
-                            </button>
+                    </div>
+                </div>
+                <div class = "col-lg-5">
+                    <div id = "filter-container" class = "col">
+                        <div class = "col fw-bold">Filters:</div>
+                        <div class = "row">
+                            <div id = "add-filter" class = "col fw-bold" style = "cursor: pointer; padding-top: 5px;">
+                                + Add Filter
+                            </div>
                         </div>
+                    </div>
+                    <br/>
+                    <div id = "exclude-container" class = "col">
+                        <div class = "col fw-bold">Excluded Filters:</div>
+                        <div class = "row">
+                            <div id = "add-exclude" class = "col fw-bold" style = "cursor: pointer; padding-top: 5px;">
+                                + Add Excluded Filter
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col-auto" style = "width: 12.5%;"></div>
+                    <div class = "col-auto">
+                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "search-button" onclick = "do_item_search()">
+                            Search!
+                        </button>
+                    </div>
+                    <div class = "col-auto">
+                        <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-button" onclick = "reset_item_search()">
+                            Reset
+                        </button>
                     </div>
                 </div>
                 <div class = "row box-title justify-content-center" id = "summary">
@@ -134,6 +162,7 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
+        <script type="text/javascript" src="../js/drag_drop_touch.js"></script>
         <script type="text/javascript" src="../js/utils.js"></script>
         <script type="text/javascript" src="../js/build_utils.js"></script>
         <script type="text/javascript" src="../js/icons.js"></script>
@@ -141,10 +170,9 @@
         <script type="text/javascript" src="../js/display_constants.js"></script>
         <script type="text/javascript" src="../js/display.js"></script>
         <script type="text/javascript" src="../js/query.js"></script>
-        <script type="text/javascript" src="../js/query_2.js"></script>
         <script type="text/javascript" src="../js/expr_parser.js"></script>
         <script type="text/javascript" src="../js/load.js"></script>
-        <script type="text/javascript" src="../js/sq2items.js"></script>
+        <script type="text/javascript" src="../js/items.js"></script>
         <script type="text/javascript" src="../js/powders.js"></script>
     </body>
 </html>

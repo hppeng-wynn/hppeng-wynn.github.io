@@ -397,4 +397,8 @@ class Craft{
         statMap.set("crafted", true);
         this.statMap = statMap;
     }
+
+    copy() {
+        return new Craft(this.recipe, this.mat_tiers, this.ingreds, this.atkSpd, this.hash.slice(3));
+    }
 }

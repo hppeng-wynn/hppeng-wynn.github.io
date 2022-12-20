@@ -31,41 +31,30 @@ let player_craft;
 
 
 function init_crafter() {
-    //no ing
-    
-    console.log("all ingredients");
-    console.log(ingMap);
-    console.log("all recipes");
-    console.log(recipeMap);
-    /*console.log(ingList);
-    console.log(recipeList);   
-    console.log(ingIDMap);
-    console.log(recipeIDMap);*/
     try {
-        document.getElementById("recipe-choice").addEventListener("change", (event) => {
+        document.getElementById("recipe-choice").addEventListener("input", (event) => {
             updateMaterials();
             updateCraftedImage();
             calculateCraftSchedule();
         });
-        document.getElementById("recipe-choice").addEventListener("oninput", (event) => {
+        document.getElementById("recipe-choice").addEventListener("input", (event) => {
             updateCraftedImage();
         });
-        document.getElementById("level-choice").addEventListener("change", (event) => {
+        document.getElementById("level-choice").addEventListener("input", (event) => {
             updateMaterials();
             calculateCraftSchedule();
         });
         
         for (let i = 1; i < 4; ++i) {
-            document.getElementById("mat-1-"+i).setAttribute("onclick", document.getElementById("mat-1-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
-            document.getElementById("mat-2-"+i).setAttribute("onclick", document.getElementById("mat-2-"+i).getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById("mat-1-"+i).addEventListener("click", (e) => calculateCraftSchedule());
+            document.getElementById("mat-2-"+i).addEventListener("click", (e) => calculateCraftSchedule());
         }
         for (let i = 1; i < 7; ++i) {
-            document.getElementById("ing-choice-" + i ).setAttribute("oninput", "calculateCraftSchedule();");
+            document.getElementById("ing-choice-" + i ).addEventListener("input", (e) => calculateCraftSchedule());
         }
         for (const str of ["slow", "normal", "fast"]) {
-            document.getElementById(str + "-atk-button").setAttribute("onclick", document.getElementById(str + "-atk-button").getAttribute("onclick") + "; calculateCraftSchedule();");
+            document.getElementById(str + "-atk-button").addEventListener("click", (e) => calculateCraftSchedule());
         }
-
 
         populateFields();
         decodeCraft(ing_url_tag);
@@ -259,12 +248,10 @@ function populateFields() {
             ing_list.appendChild(el);
         }
     }
-    
-    
 }
 /*
-    Copies the CR Hash (CR-blahblahblah)
-*/
+ *  Copies the CR Hash (CR-blahblahblah)
+ */
 function copyRecipeHash() {
     if (player_craft) {
         copyTextToClipboard("CR-"+location.hash.slice(1));
@@ -345,9 +332,16 @@ function toggleMaterial(buttonId) {
 function updateCraftedImage() {
     let input = document.getElementById("recipe-choice");
     if (all_types.includes(input.value)) {
-        document.getElementById("recipe-img").src = "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + input.value.toLowerCase() + ".png";
+        let img = document.getElementById("recipe-img");
+        if (["potion", "scroll", "food"].includes(input.value.toLowerCase())) {
+            img.style.backgroundImage = "url('../media/items/common.png')";
+            img.style.backgroundSize = "500% 100%";
+        } else {
+            img.style.backgroundImage = "url('../media/items/" + (newIcons ? "new.png')" : "old.png')");
+            img.style.backgroundSize = "1200% 100%";
+        }
+        img.style.backgroundPosition = itemBGPositions[input.value.toLowerCase()]
     }
-
 }
 
 /* Reset all fields

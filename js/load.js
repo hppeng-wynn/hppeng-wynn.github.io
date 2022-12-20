@@ -1,4 +1,4 @@
-const DB_VERSION = 101;
+const DB_VERSION = 120;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let db;
@@ -92,13 +92,32 @@ function clean_item(item) {
     }
 }
 
+async function load_old_version(version_str) {
+    load_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/items.json`;
+    let result = await (await fetch(url)).json();
+    items = result.items;
+    for (const item of items) {
+        clean_item(item);
+    }
+    let sets_ = result.sets;
+    sets = new Map();
+    for (const set in sets_) {
+        sets.set(set, sets_[set]);
+    }
+    init_maps();
+    load_complete = true;
+}
+
 /*
  * Load item set from remote DB (aka a big json file). Calls init() on success.
  */
 async function load() {
-
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/compress.json?"+new Date();
     let result = await (await fetch(url)).json();
@@ -150,7 +169,7 @@ async function load_init() {
                 console.log("Skipping load...")
             }
             else {
-                load_in_progress = true
+                load_in_progress = true;
                 if (reload) {
                     console.log("Using new data...")
                     await load();
@@ -190,7 +209,7 @@ async function load_init() {
 }
 
 // List of 'raw' "none" items (No Helmet, etc), in order helmet, chestplate... ring1, ring2, brace, neck, weapon.
-for (const it of itemTypes) {
+for (const it of item_types) {
     itemLists.set(it, []);
 }
 
@@ -254,5 +273,9 @@ function init_maps() {
             redirectMap.set(item.id, item.remapID);
         }
     }
-    console.log(itemMap);
+    for (const [set_name, set_data] of sets) {
+        for (const item_name of set_data.items) {
+            itemMap.get(item_name).set = set_name;
+        }
+    }
 }

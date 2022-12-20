@@ -1,4 +1,4 @@
-const TOME_DB_VERSION = 3;
+const TOME_DB_VERSION = 6;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let tdb;
@@ -34,13 +34,27 @@ async function load_tome_local() {
     });
 }
 
+async function load_tome_old_version(version_str) {
+    tload_in_progress = true;
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/tomes.json`;
+    let result = await (await fetch(url)).json();
+    tomes = result.tomes;
+    for (const tome of tomes) {
+        //dependency on clean_item in load.js
+        clean_item(tome);
+    }
+    init_tome_maps();
+    tload_complete = true;
+}
 /*
  * Load tome set from remote DB (json). Calls init() on success.
  */
 async function load_tome() {
-
     let getUrl = window.location;
-    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // "Random" string to prevent caching!
     let url = baseUrl + "/tomes.json?"+new Date();
     let result = await (await fetch(url)).json();
@@ -119,11 +133,13 @@ async function load_tome_init() {
     });
 }
 
-let none_tomes = [
+const none_tomes_info = [
     ["tome", "weaponTome", "No Weapon Tome"],
     ["tome", "armorTome", "No Armor Tome"],
     ["tome", "guildTome", "No Guild Tome"]
 ];
+let none_tomes;
+
 function init_tome_maps() {
     //warp
     tomeMap = new Map();
@@ -135,12 +151,13 @@ function init_tome_maps() {
         tomeLists.set(it, []);
     }
 
+    none_tomes = [];
     for (let i = 0; i < 3; i++) {
         let tome = Object();
         tome.slots = 0;
-        tome.category = none_tomes[i][0];
-        tome.type = none_tomes[i][1];
-        tome.name = none_tomes[i][2];
+        tome.category = none_tomes_info[i][0];
+        tome.type = none_tomes_info[i][1];
+        tome.name = none_tomes_info[i][2];
         tome.displayName = tome.name;
         tome.set = null;
         tome.quest = null;
@@ -159,7 +176,7 @@ function init_tome_maps() {
         //dependency - load.js
         clean_item(tome);
 
-        none_tomes[i] = tome;
+        none_tomes.push(tome);
     }
     tomes = tomes.concat(none_tomes);
     for (const tome of tomes) {

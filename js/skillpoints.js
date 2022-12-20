@@ -187,8 +187,17 @@ function calculate_skillpoints(equipment, weapon) {
                 permute_check(idx+1, skillpoints_applied, skillpoints, activeSetCounts, has_skillpoint, total_applied, order.concat(permutation.map(x => x.item)));
             }
         }
-        // skip root.
-        permute_check(1, best_skillpoints, final_skillpoints, best_activeSetCounts, allFalse.slice(), 0, []);
+        if (sccs.length === 1) {
+            // Only crafteds. Just do end check (check req first, then apply sp after)
+            const total = check_end(best_skillpoints, final_skillpoints, best_activeSetCounts, allFalse.slice());
+            final_skillpoints = best_skillpoints.slice();
+            best_total = total;
+            best_activeSetCounts = best_activeSetCounts;
+            best = [];
+        } else {
+            // skip root.
+            permute_check(1, best_skillpoints, final_skillpoints, best_activeSetCounts, allFalse.slice(), 0, []);
+        }
 
         // add extra sp bonus
         apply_skillpoints(final_skillpoints, weapon, best_activeSetCounts);

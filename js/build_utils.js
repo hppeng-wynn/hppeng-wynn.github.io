@@ -1,3 +1,7 @@
+/**
+ * File containing utility functions that are useful for the builder page.
+ */
+
 /*Turns the input amount of skill points into a float precision percentage.
 * @param skp - the integer skillpoint count to be converted
 */
@@ -8,7 +12,7 @@ function skillPointsToPercentage(skp){
         skp = 150;
     }
     const r = 0.9908;
-    return ((1 - Math.pow(r, skp + 1)) / (1 - r) - 1) / 100.0;
+    return (r/(1-r)*(1 - Math.pow(r, skp))) / 100.0;
         //return (-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771);
         //return(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771).toFixed(3);
     //return Math.min(Math.max(0.00,(-0.0000000066695* Math.pow(Math.E, -0.00924033 * skp + 18.9) + 1.0771)),.808); 
@@ -66,7 +70,7 @@ const tiers = ["Normal", "Unique", "Rare", "Legendary", "Fabled", "Mythic", "Set
 const all_types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(consumableTypes).concat(tome_types).map(x => x.substring(0,1).toUpperCase() + x.substring(1));
 //weaponTypes.push("sword");
 //console.log(types)
-let itemTypes = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(tome_types);
+let item_types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(tome_types);
 
 let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
@@ -82,14 +86,16 @@ let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slot
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
-"critDamPct"
+"critDamPct",
+"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
 ];
 // Extra fake IDs (reserved for use in spell damage calculation) : damMult, defMult, poisonPct, activeMajorIDs
 let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ]
 
 //File reading for ID translations for JSON purposes
 let reversetranslations = new Map();
-let translations = new Map([["name", "name"], ["displayName", "displayName"], ["tier", "tier"], ["set", "set"], ["sockets", "slots"], ["type", "type"], ["dropType", "drop"], ["quest", "quest"], ["restrictions", "restrict"], ["damage", "nDam"], ["fireDamage", "fDam"], ["waterDamage", "wDam"], ["airDamage", "aDam"], ["thunderDamage", "tDam"], ["earthDamage", "eDam"], ["attackSpeed", "atkSpd"], ["health", "hp"], ["fireDefense", "fDef"], ["waterDefense", "wDef"], ["airDefense", "aDef"], ["thunderDefense", "tDef"], ["earthDefense", "eDef"], ["level", "lvl"], ["classRequirement", "classReq"], ["strength", "strReq"], ["dexterity", "dexReq"], ["intelligence", "intReq"], ["agility", "agiReq"], ["defense", "defReq"], ["healthRegen", "hprPct"], ["manaRegen", "mr"], ["spellDamage", "sdPct"], ["damageBonus", "mdPct"], ["lifeSteal", "ls"], ["manaSteal", "ms"], ["xpBonus", "xpb"], ["lootBonus", "lb"], ["reflection", "ref"], ["strengthPoints", "str"], ["dexterityPoints", "dex"], ["intelligencePoints", "int"], ["agilityPoints", "agi"], ["defensePoints", "def"], ["thorns", "thorns"], ["exploding", "expd"], ["speed", "spd"], ["attackSpeedBonus", "atkTier"], ["poison", "poison"], ["healthBonus", "hpBonus"], ["soulPoints", "spRegen"], ["emeraldStealing", "eSteal"], ["healthRegenRaw", "hprRaw"], ["spellDamageRaw", "sdRaw"], ["damageBonusRaw", "mdRaw"], ["bonusFireDamage", "fDamPct"], ["bonusWaterDamage", "wDamPct"], ["bonusAirDamage", "aDamPct"], ["bonusThunderDamage", "tDamPct"], ["bonusEarthDamage", "eDamPct"], ["bonusFireDefense", "fDefPct"], ["bonusWaterDefense", "wDefPct"], ["bonusAirDefense", "aDefPct"], ["bonusThunderDefense", "tDefPct"], ["bonusEarthDefense", "eDefPct"], ["type", "type"], ["identified", "fixID"], ["skin", "skin"], ["category", "category"], ["spellCostPct1", "spPct1"], ["spellCostRaw1", "spRaw1"], ["spellCostPct2", "spPct2"], ["spellCostRaw2", "spRaw2"], ["spellCostPct3", "spPct3"], ["spellCostRaw3", "spRaw3"], ["spellCostPct4", "spPct4"], ["spellCostRaw4", "spRaw4"], ["rainbowSpellDamageRaw", "rSdRaw"], ["sprint", "sprint"], ["sprintRegen", "sprintReg"], ["jumpHeight", "jh"], ["lootQuality", "lq"], ["gatherXpBonus", "gXp"], ["gatherSpeed", "gSpd"]]);
+let translations = new Map([["name", "name"],["displayName", "displayName"],["tier", "tier"],["set", "set"],["sockets", "slots"],["type", "type"],["armorColor", "color"],["addedLore", "lore"],["dropType", "drop"],["quest", "quest"],["restrictions", "restrict"],["damage", "nDam"],["fireDamage", "fDam"],["waterDamage", "wDam"],["airDamage", "aDam"],["thunderDamage", "tDam"],["earthDamage", "eDam"],["attackSpeed", "atkSpd"],["health", "hp"],["fireDefense", "fDef"],["waterDefense", "wDef"],["airDefense", "aDef"],["thunderDefense", "tDef"],["earthDefense", "eDef"],["level", "lvl"],["classRequirement", "classReq"],["strength", "strReq"],["dexterity", "dexReq"],["intelligence", "intReq"],["agility", "agiReq"],["defense", "defReq"],["healthRegen", "hprPct"],["manaRegen", "mr"],["spellDamageBonus", "sdPct"],["spellElementalDamageBonus", "rSdPct"],["spellNeutralDamageBonus", "nSdPct"],["spellFireDamageBonus", "fSdPct"],["spellWaterDamageBonus", "wSdPct"],["spellAirDamageBonus", "aSdPct"],["spellThunderDamageBonus", "tSdPct"],["spellEarthDamageBonus", "eSdPct"],["mainAttackDamageBonus", "mdPct"],["mainAttackElementalDamageBonus", "rMdPct"],["mainAttackNeutralDamageBonus", "nMdPct"],["mainAttackFireDamageBonus", "fMdPct"],["mainAttackWaterDamageBonus", "wMdPct"],["mainAttackAirDamageBonus", "aMdPct"],["mainAttackThunderDamageBonus", "tMdPct"],["mainAttackEarthDamageBonus", "eMdPct"],["lifeSteal", "ls"],["manaSteal", "ms"],["xpBonus", "xpb"],["lootBonus", "lb"],["reflection", "ref"],["strengthPoints", "str"],["dexterityPoints", "dex"],["intelligencePoints", "int"],["agilityPoints", "agi"],["defensePoints", "def"],["thorns", "thorns"],["exploding", "expd"],["speed", "spd"],["attackSpeedBonus", "atkTier"],["poison", "poison"],["healthBonus", "hpBonus"],["soulPoints", "spRegen"],["emeraldStealing", "eSteal"],["healthRegenRaw", "hprRaw"],["spellDamageBonusRaw", "sdRaw"],["spellElementalDamageBonusRaw", "rSdRaw"],["spellNeutralDamageBonusRaw", "nSdRaw"],["spellFireDamageBonusRaw", "fSdRaw"],["spellWaterDamageBonusRaw", "wSdRaw"],["spellAirDamageBonusRaw", "aSdRaw"],["spellThunderDamageBonusRaw", "tSdRaw"],["spellEarthDamageBonusRaw", "eSdRaw"],["mainAttackDamageBonusRaw", "mdRaw"],["mainAttackElementalDamageBonusRaw", "rMdRaw"],["mainAttackNeutralDamageBonusRaw", "nMdRaw"],["mainAttackFireDamageBonusRaw", "fMdRaw"],["mainAttackWaterDamageBonusRaw", "wMdRaw"],["mainAttackAirDamageBonusRaw", "aMdRaw"],["mainAttackThunderDamageBonusRaw", "tMdRaw"],["mainAttackEarthDamageBonusRaw", "eMdRaw"],["fireDamageBonus", "fDamPct"],["waterDamageBonus", "wDamPct"],["airDamageBonus", "aDamPct"],["thunderDamageBonus", "tDamPct"],["earthDamageBonus", "eDamPct"],["bonusFireDefense", "fDefPct"],["bonusWaterDefense", "wDefPct"],["bonusAirDefense", "aDefPct"],["bonusThunderDefense", "tDefPct"],["bonusEarthDefense", "eDefPct"],["accessoryType", "type"],["identified", "fixID"],["skin", "skin"],["category", "category"],["spellCostPct1", "spPct1"],["spellCostRaw1", "spRaw1"],["spellCostPct2", "spPct2"],["spellCostRaw2", "spRaw2"],["spellCostPct3", "spPct3"],["spellCostRaw3", "spRaw3"],["spellCostPct4", "spPct4"],["spellCostRaw4", "spRaw4"],["sprint", "sprint"],["sprintRegen", "sprintReg"],["jumpHeight", "jh"],["lootQuality", "lq"],["gatherXpBonus", "gXp"],["gatherSpeed", "gSpd"]]);
+
 //does not include damMobs (wep tomes) and defMobs (armor tomes)
 for (const [k, v] of translations) {
     reversetranslations.set(v, k);
@@ -123,16 +129,7 @@ let nonRolledIDs = [
     "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_",
     "majorIds",
     "damMobs",
-    "defMobs",
-// wynn2 damages.
-"eDamAddMin","eDamAddMax",
-"tDamAddMin","tDamAddMax",
-"wDamAddMin","wDamAddMax",
-"fDamAddMin","fDamAddMax",
-"aDamAddMin","aDamAddMax",
-"nDamAddMin","nDamAddMax",  // neutral which is now an element
-"damAddMin","damAddMax",    // all
-"rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral).
+    "defMobs"
 ];
 let rolledIDs = [
     "hprPct",
@@ -161,7 +158,7 @@ let rolledIDs = [
     "spPct2", "spRaw2",
     "spPct3", "spRaw3",
     "spPct4", "spRaw4",
-    "pDamRaw",
+    "rSdRaw",
     "sprint",
     "sprintReg",
     "jh",
@@ -176,7 +173,8 @@ let rolledIDs = [
 "aMdPct","aMdRaw","aSdPct","aSdRaw",/*"aDamPct,"*/"aDamRaw","aDamAddMin","aDamAddMax",
 "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
-"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
 ];
 let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
@@ -199,7 +197,7 @@ function expandItem(item) {
             let val = (item[id] || 0);
             if (val > 0) { // positive rolled IDs
                 if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(val*0.3));
+                    maxRolls.set(id,idRound(val*0.7));
                     minRolls.set(id,idRound(val*1.3));
                 } else {
                     maxRolls.set(id,idRound(val*1.3));
@@ -208,7 +206,7 @@ function expandItem(item) {
             } else if (val < 0) { //negative rolled IDs
                 if (reversedIDs.includes(id)) {
                     maxRolls.set(id,idRound(val*1.3));
-                    minRolls.set(id,idRound(val*0.7));
+                    minRolls.set(id,idRound(val*0.3));
                 }
                 else {
                     maxRolls.set(id,idRound(val*0.7));
@@ -231,8 +229,15 @@ function expandItem(item) {
 }
 
 class Item {
-    constructor(item_obj) {
-        this.statMap = expandItem(item_obj);
+    constructor(item_obj = null) {
+        if (item_obj) { this.statMap = expandItem(item_obj); }
+        else { this.statMap = new Map(); }
+    }
+
+    copy() {
+        const ret = new Item();
+        ret.statMap = new Map(this.statMap);
+        return ret;
     }
 }
 

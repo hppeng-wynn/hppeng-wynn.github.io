@@ -1,32 +1,105 @@
-.searchbox {
-    grid-column: 1;
-    padding: 0%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: 100%;
-    gap: 5px;
+/* type selectors */
+
+#type-box {
+    cursor: pointer;
+    overflow: auto;
+}
+#type-box > div {
+    display: inline-block;
+    width: calc(100% / 12);
+    float: left;
 }
 
-.items {
-    grid-column: 1;
-    padding: 0%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    width: 100%;
-    gap: 5px;
-    grid-template-rows: masonry;
+.type-selected {
+    background-color: #0a0;
 }
 
-.itemsearch {
-    padding: 0%;
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-    gap: 5px;
+/* rarity selectors */
+
+#rarity-box {
+    cursor: pointer;
+    width: 58.33%;
+    text-align: center;
+}
+#rarity-box > div {
+    width: calc(100% / 7);
+    aspect-ratio: 1/1;
+    position: relative;
+    display: inline-block;
+}
+#rarity-box > div > b {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#rarity-box > div.rarity-selected > b {
+    color: black;
 }
 
-.searchinput {
-    width: 100%;
-    max-width: 200px;
+#rarity-normal { color: #FFFFFF; }
+#rarity-normal.rarity-selected { background-color: #FFFFFF; }
+#rarity-unique { color: #FFFF55; }
+#rarity-unique.rarity-selected { background-color: #FFFF55; }
+#rarity-set { color: #55FF55; }
+#rarity-set.rarity-selected { background-color: #55FF55; }
+#rarity-rare { color: #FF55FF; }
+#rarity-rare.rarity-selected { background-color: #FF55FF; }
+#rarity-legendary { color: #55FFFF; }
+#rarity-legendary.rarity-selected { background-color: #55FFFF; }
+#rarity-fabled { color: #FF5555; }
+#rarity-fabled.rarity-selected { background-color: #FF5555; }
+#rarity-mythic { color: #AA00AA; }
+#rarity-mythic.rarity-selected { background-color: #AA00AA; }
+
+/* filters */
+.filter-row {
+    border: 1px solid #121212;
+}
+.filter-dragged-over {
+    border: 1px solid white;
 }
 
+.reorder-filter {
+    height: 2ch;
+    cursor: pointer;
+}
+
+input.filter-input {
+    width: 27ch!important;
+    max-width: 90%;
+    display: inline-block;
+}
+
+.asc-icon {
+    opacity: 0.25;
+    width: 1.75ch;
+}
+.desc-icon {
+    opacity: 0.25;
+    width: 1.75ch;
+    transform: rotate(180deg);
+}
+img.asc-sel {
+    opacity: 0.85;
+}
+
+input.min-max-input {
+    width: 6ch!important;
+    display: inline-block;
+}
+
+.delete-filter {
+    cursor: pointer;
+}
+
+#filter-container > div > div > *, #exclude-container > div > div > * {
+    margin: 0 2px;
+}
+
+/* item display */
+@media (min-width: 576px) and (max-width: 991px) {
+    div.col-sm-6 {
+        width: 100%;
+    }
+}

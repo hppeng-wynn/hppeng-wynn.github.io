@@ -1,3 +1,12 @@
+/**
+ * File containing generic display code, ex. for displaying items and spell damage.
+ * TODO: split this file into separate parts for each "component".
+ */
+
+const itemBGPositions = {"bow": "0 0", "spear": "9.090909090909088% 0", "wand": "18.181818181818183% 0", "dagger": "27.27272727272727% 0", "relik": "36.36363636363637% 0",
+    "helmet": "45.45454545454546% 0", "chestplate": "54.54545454545454% 0", "leggings": "63.63636363636363% 0", "boots": "72.72727272727272% 0",
+    "ring": "81.81818181818181% 0", "bracelet": "90.90909090909092% 0", "necklace": "100% 0",
+    "potion": "25% 0", "scroll": "50% 0", "food": "75% 0"};
 
 function apply_elemental_format(p_elem, id, suffix) {
     suffix = (typeof suffix !== 'undefined') ?  suffix : "";
@@ -63,7 +72,8 @@ function displayBuildStats(parent_id,build,command_group,stats){
     let active_elem;
     let elemental_format = false;
 
-    //TODO this is put here for readability, consolidate with definition in build.js
+    //TODO this is put here for readability, consolidate with definition in `builder/build.js`
+    // TODO amend: uuhhhhh these two constants have diverged too far...
     let staticIDs = ["hp", "eDef", "tDef", "wDef", "fDef", "aDef"];
 
     for (const command of display_commands) {
@@ -100,24 +110,8 @@ function displayBuildStats(parent_id,build,command_group,stats){
                 if (reversedIDs.includes(id)) {
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
-                if (id === "poison" && id_val > 0) {
-                    id_val = Math.ceil(id_val*stats.get("poisonPct")/100);
-                }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
-                if (id === "poison" && id_val > 0) {
-                    let row = make_elem('div', ['row']);
-                    let value_elem = make_elem('div', ['col', 'text-end']);
-
-                    let prefix_elem = make_elem('b', [], {textContent: "\u279C With Strength: "});
-                    let number_elem = make_elem('b', [style], {
-                        textContent: (id_val * (1+skillPointsToPercentage(stats.get('str'))) ).toFixed(0) + idSuffixes[id]
-                    });
-                    value_elem.append(prefix_elem);
-                    value_elem.append(number_elem);
-                    row.appendChild(value_elem);
-                    parent_div.appendChild(row);
-                }
-                else if (id === "ls" && id_val != 0) {
+                if (id === "ls" && id_val != 0) {
                     let row = make_elem('div', ['row']);
                     let value_elem = make_elem('div', ['col', 'text-end']);
 
@@ -259,7 +253,7 @@ function displayExpandedItem(item, parent_id){
                     if (item.get("custom")) {
                         item_link = "../custom/#" + item.get("hash");
                     } else if (item.get("crafted")) {
-                        a_item_link = "../crafter/#" + item.get("hash");
+                        item_link = "../crafter/#" + item.get("hash");
                     } else {
                         item_link = "../item/#" + item.get("displayName");
                     }
@@ -286,11 +280,18 @@ function displayExpandedItem(item, parent_id){
                     parent_div.appendChild(nolink_row);
 
                     if (item.has("type")) {
-                        let img = make_elem("img", [], {
-                            src: "../media/items/" + (newIcons ? "new/":"old/") + "generic-" + item.get("type") + ".png",
+                        let img = make_elem("div", [], {
                             alt: item.get("type"),
-                            style: " z=index: 1; position: relative;"
+                            style: "z-index: 1; position: relative; image-rendering: pixelated; width: 50%; height: 50%; background-position: " + itemBGPositions[item.get("type")] + ";"
                         });
+                        if (["potion", "scroll", "food"].includes(item.get("type"))) {
+                            img.style.backgroundImage = "url('../media/items/common.png')";
+                            img.style.backgroundSize = "500% 100%";
+                        } else {
+                            img.style.backgroundImage = "url('../media/items/" + (newIcons ? "new.png')" : "old.png')");
+                            img.style.backgroundSize = "1200% 100%";
+                        }
+
                         let container = make_elem("div");
                         
                         let bckgrd = make_elem("div", ["col", "px-0", "d-flex", "align-items-center", "justify-content-center", 'scaled-bckgrd'], { // , "no-collapse"
@@ -377,46 +378,46 @@ function displayExpandedItem(item, parent_id){
         }
     }
     //Show powder specials ;-;
-    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots"];//, "ring", "bracelet", "necklace"];
-    if(nonConsumables.includes(item.get("type"))) {
-        let powder_special = document.createElement("div");
-        powder_special.classList.add("col");
+    let powder_specials_check = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots"];
+    if(powder_specials_check.includes(item.get("type"))) {
+        let powder_special = make_elem("div", ['col']);
         let powders = item.get("powders");
-        let element = "";
-        let power = 0;
+        let element;
+        let power_index;
         for (let i = 0; i < powders.length; i++) {
-            let firstPowderType = skp_elements[Math.floor(powders[i]/6)];
-            if (element !== "") break;
-            else if (powders[i]%6 > 2) { //t4+
+            const firstPowderType = skp_elements[Math.floor(powders[i]/6)];
+            const powder1_power = powders[i] % 6;
+            if (powder1_power > 2) { //t4+
                 for (let j = i+1; j < powders.length; j++) {
-                    let currentPowderType = skp_elements[Math.floor(powders[j]/6)]
-                    if (powders[j] % 6 > 2 && firstPowderType === currentPowderType) {
+                    const currentPowderType = skp_elements[Math.floor(powders[j]/6)]
+                    const powder2_power = powders[j] % 6;
+                    if (powder2_power > 2 && firstPowderType === currentPowderType) {
                         element = currentPowderType;
-                        power = Math.round(((powders[i] % 6 + powders[j] % 6 + 2) / 2 - 4) * 2);
+                        power_index = powder1_power + powder2_power - 6;
                         break;
                     }
                 }
             }
+            if (element) { break; } // terminate early if already found.
         }
-        if (element !== "") {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
-            let powderSpecial = powderSpecialStats[ skp_elements.indexOf(element)];
-            let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
-            let specialTitle = document.createElement("span");
-            let specialEffects = document.createElement("span");
-            addClasses(specialTitle, [damageClasses[skp_elements.indexOf(element) + 1]]);
+        if (element) {//powder special is "[e,t,w,f,a]+[0,1,2,3,4]"
+            const powderSpecial = powderSpecialStats[skp_elements.indexOf(element)];
+            const specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
+            const specialTitle = make_elem("span", [damageClasses[skp_elements.indexOf(element) + 1]]);
+            const specialEffects = document.createElement("span");
             let effects;
             if (item.get("category") === "weapon") {//weapon
                 effects = powderSpecial["weaponSpecialEffects"];
                 specialTitle.textContent = powderSpecial["weaponSpecialName"];
-            }else if (item.get("category") === "armor") {//armor
+            } else if (item.get("category") === "armor") {//armor
                 effects = powderSpecial["armorSpecialEffects"];
                 specialTitle.textContent += powderSpecial["armorSpecialName"] + ": ";
             }
             for (const [key,value] of effects.entries()) {
                 if (key !== "Description") {
-                    let effect = document.createElement("p");
-                    effect.classList.add("m-0");
-                    effect.textContent = key + ": " + value[power] + specialSuffixes.get(key);
+                    let effect = make_elem("p", ["m-0"], {
+                        textContent: key + ": " + value[power_index] + specialSuffixes.get(key)
+                    });
                     if(key === "Damage"){
                         effect.textContent += elementIcons[skp_elements.indexOf(element)];
                     }
@@ -424,20 +425,19 @@ function displayExpandedItem(item, parent_id){
                         effect.textContent += " / Mana Used";
                     }
                     specialEffects.appendChild(effect);
-                }else{
+                } else {
                     specialTitle.textContent += "[ " + effects.get("Description") + " ]"; 
                 }
             }
-            powder_special.appendChild(specialTitle);
-            powder_special.appendChild(specialEffects);
+            powder_special.append(specialTitle, specialEffects);
             parent_div.appendChild(powder_special);
         }
     }
     
+    let nonConsumables = ["relik", "wand", "bow", "spear", "dagger", "chestplate", "helmet", "leggings", "boots", "ring", "bracelet", "necklace"];
     if(item.get("tier") && item.get("tier") === "Crafted") {
-        let dura_elem = document.createElement("div");
-        dura_elem.classList.add("col");
-        let dura = [];
+        let dura_elem = make_elem("div", ["col"]);
+        let dura;
         let suffix = "";
         if(nonConsumables.includes(item.get("type"))) {
             dura = item.get("durability");
@@ -446,9 +446,9 @@ function displayExpandedItem(item, parent_id){
             dura = item.get("duration");
             dura_elem.textContent = "Duration: "
             suffix = " sec."
-            let charges = document.createElement("b");
-            charges.textContent = "Charges: " + item.get("charges");
-            parent_div.appendChild(charges);
+            parent_div.appendChild(make_elem('b', [], {
+                textContent: "Charges: " + item.get("charges")
+            }));
         }
 
         if (typeof(dura) === "string") {
@@ -461,9 +461,7 @@ function displayExpandedItem(item, parent_id){
     }
     //Show item tier
     if (item.get("tier") && item.get("tier") !== " ") {
-        let item_desc_elem = document.createElement("div");
-        item_desc_elem.classList.add("col");
-        item_desc_elem.classList.add(item.get("tier"));
+        let item_desc_elem = make_elem("div", ["col", item.get("tier")]);
         if (tome_types.includes(item.get("type"))) {
             tome_type_map = new Map([["weaponTome", "Weapon Tome"],["armorTome", "Armor Tome"],["guildTome", "Guild Tome"]]);
             item_desc_elem.textContent = item.get("tier")+" "+tome_type_map.get(item.get("type"));
@@ -475,20 +473,19 @@ function displayExpandedItem(item, parent_id){
 
     //Show item hash if applicable
     if (item.get("crafted") || item.get("custom")) {
-        let item_desc_elem = document.createElement("p");
-        item_desc_elem.classList.add('itemp');
-        item_desc_elem.style.maxWidth = "100%";
-        item_desc_elem.style.wordWrap = "break-word";
-        item_desc_elem.style.wordBreak = "break-word";
-        item_desc_elem.textContent = item.get("hash");
-        parent_div.append(item_desc_elem);
+        parent_div.append(make_elem('p', ['itemp'], {
+            style: {
+                maxWidth: '100%',
+                wordWrap: 'break-word',
+                wordBreak: 'break-word'
+            },
+            textContent: item.get('hash')
+        }));
     }
 
     if (item.get("category") === "weapon") { 
         let total_damages = item.get("basedps");
-        let base_dps_elem = document.createElement("p");
-        base_dps_elem.classList.add("left");
-        base_dps_elem.classList.add("itemp");
+        let base_dps_elem = make_elem("p", ["left", "itemp"]);
         if (item.get("tier") === "Crafted") {
             let base_dps_min = total_damages[0];
             let base_dps_max = total_damages[1];
@@ -498,8 +495,7 @@ function displayExpandedItem(item, parent_id){
         else {
             base_dps_elem.textContent = "Base DPS: "+(total_damages);
         }
-        parent_div.appendChild(document.createElement("p"));
-        parent_div.appendChild(base_dps_elem);
+        parent_div.append(make_elem("p"), base_dps_elem);
     }
 }
 
@@ -987,9 +983,9 @@ function displayFixedID(active, id, value, elemental_format, style) {
     }
 }
 
-function displayPoisonDamage(overallparent_elem, build) {
+function displayPoisonDamage(overallparent_elem, statMap) {
     overallparent_elem.textContent = "";
-    if (build.statMap.get('poison') <= 0) {
+    if (statMap.get('poison') <= 0) {
         overallparent_elem.style = "display: none";
         return;
     }
@@ -1003,7 +999,8 @@ function displayPoisonDamage(overallparent_elem, build) {
     title_elemavg.append(make_elem('span', [], { textContent: "Poison Stats" }));
     spell_summary.append(title_elemavg);
 
-    let poison_tick = Math.ceil(build.statMap.get("poison") * (1+skillPointsToPercentage(build.total_skillpoints[0])) * (build.statMap.get("poisonPct"))/100 /3);
+    let poison_tick = Math.floor(statMap.get("poison")/3);
+    //let poison_tick = Math.ceil(statMap.get("poison") * (1+skillPointsToPercentage(statMap.get('str'))) * (statMap.get("poisonPct"))/100 /3);
 
     let overallpoisonDamage = make_elem("p");
     overallpoisonDamage.append(
@@ -1257,8 +1254,8 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
         //iterate through the special and display its effects.
         let powder_special = make_elem("p", ["pt-3"]);
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
-        let specialTitle = document.createElement("p");
-        let specialEffects = document.createElement("p");
+        let specialTitle = make_elem("p");
+        let specialEffects = make_elem("p");
         specialTitle.classList.add(damageClasses[powderSpecialStats.indexOf(special[0]) + 1]);
         let effects = special[0]["weaponSpecialEffects"];
         let power = special[1];
@@ -1382,7 +1379,7 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
 }
 
 function getSpellCost(stats, spell) {
-    return Math.max(1, getBaseSpellCost(stats, spell));
+    return Math.max(1, getBaseSpellCost(stats, spell) * (1 + stats.get('spPct'+spell.base_spell+'Final')/100));
 }
 
 function getBaseSpellCost(stats, spell) {
@@ -1445,6 +1442,7 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
 
     for (let i = 0; i < spell_results.length; ++i) {
         const spell_info = spell_results[i];
+        if (!spell_info.display) { continue; }
 
         let part_div = make_elem("p", ["pt-3"]);
         parent_elem.append(part_div);
@@ -1499,9 +1497,7 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
             _damage_display("Crit Average: ", critAverage, spell_info.crit_min, spell_info.crit_max);
         } else if (spell_info.type === "heal") {
             let heal_amount = spell_info.heal_amount;
-            let healLabel = document.createElement("p");
-            healLabel.textContent = heal_amount;
-            // healLabel.classList.add("damagep");
+            let healLabel = make_elem("p", ["Set"], {textContent: heal_amount.toFixed(2)});
             part_div.append(healLabel);
             if (spell_info.name === spell.display) {
                 add_summary(spell_info.name+ ": ", heal_amount, "Set");
@@ -1511,417 +1507,6 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
 
     addClickableArrow(overallparent_elem, parent_elem);
     _overallparent_elem.append(overallparent_elem);
-}
-
-/** Displays the ID costs of an item
- * 
- * @param {String} elemID - the id of the parent element.
- * @param {Map} item - the statMap of an item. 
- */
-function displayIDCosts(elemID, item) {
-    let parent_elem = document.getElementById(elemID);
-    let tier = item.get("tier");
-    if ( (item.has("fixID") && item.get("fixID")) || ["Normal","Crafted","Custom","none", " ",].includes(item.get("tier"))) {
-        return;
-    } else {
-        /** Returns the number of inventory slots minimum an amount of emeralds would take up + the configuration of doing so.
-         * Returns an array of [invSpace, E, EB, LE, Stx LE]
-         * 
-         * @param {number} ems - the total numerical value of emeralds to compact.
-         */
-        function emsToInvSpace(ems) {
-            let stx = Math.floor(ems/262144);
-            ems -= stx*4096*64;
-            let LE = Math.floor(ems/4096);
-            ems -= LE*4096;
-            let EB = Math.floor(ems/64);
-            ems -= EB*64;
-            let e = ems;
-            return [ stx + Math.ceil(LE/64) + Math.ceil(EB/64) + Math.ceil(e/64) , e, EB, LE, stx];
-        }
-        /**
-         * 
-         * @param {String} tier - item tier
-         * @param {Number} lvl - item level 
-         */
-        function getIDCost(tier, lvl) {
-            switch (tier) {
-                case "Unique":
-                    return Math.round(0.5*lvl + 3);
-                case "Rare":
-                    return Math.round(1.2*lvl + 8);
-                case "Legendary":
-                    return Math.round(4.5*lvl + 12);
-                case "Fabled":
-                    return Math.round(12*lvl + 26);
-                case "Mythic":
-                    return Math.round(18*lvl + 90);
-                case "Set":
-                    return Math.round(1.5*lvl + 8)
-                default:
-                    return -1;
-            }
-        }
-
-        parent_elem.style = "display: visible";
-        let lvl = item.get("lvl");
-        if (typeof(lvl) === "string") { lvl = parseFloat(lvl); }
-        
-        let title_elem = document.createElement("p");
-        title_elem.classList.add("smalltitle");
-        title_elem.style.color = "white";
-        title_elem.textContent = "Identification Costs";
-        parent_elem.appendChild(title_elem);
-        parent_elem.appendChild(document.createElement("br"));
-
-        let grid_item = document.createElement("div");
-        grid_item.style.display = "flex";
-        grid_item.style.flexDirection = "rows";
-        grid_item.style.flexWrap = "wrap";
-        grid_item.style.gap = "5px";
-        parent_elem.appendChild(grid_item);
-
-        let IDcost = getIDCost(tier, lvl);
-        let initIDcost = IDcost;
-        let invSpace = emsToInvSpace(IDcost);
-        let rerolls = 0;
-
-        while(invSpace[0] <= 28 && IDcost > 0) {
-            let container = document.createElement("div");
-            container.classList.add("container");
-            container.style = "grid-item-" + (rerolls+1);
-            container.style.maxWidth = "max(120px, 15%)";
-            
-            let container_title = document.createElement("p");
-            container_title.style.color = "white";
-            if (rerolls == 0) {
-                container_title.textContent = "Initial ID Cost: ";
-            } else {
-                container_title.textContent = "Reroll to [" + (rerolls+1) + "] Cost:";
-            }
-            container.appendChild(container_title);
-            let total_cost_container = document.createElement("p");
-            let total_cost_number = document.createElement("b");
-            total_cost_number.classList.add("Set");
-            total_cost_number.textContent = IDcost + " ";
-            let total_cost_suffix = document.createElement("b");
-            total_cost_suffix.textContent = "emeralds."
-            total_cost_container.appendChild(total_cost_number);
-            total_cost_container.appendChild(total_cost_suffix);
-            container.appendChild(total_cost_container);
-
-            let OR = document.createElement("p");
-            OR.classList.add("center");
-            OR.textContent = "OR";
-            container.appendChild(OR);
-
-            let esuffixes = ["", "emeralds.", "EB.", "LE.", "stacks of LE."];
-            for (let i = 4; i > 0; i--) {
-                let n_container = document.createElement("p");
-                let n_number = document.createElement("b");
-                n_number.classList.add("Set");
-                n_number.textContent = invSpace[i] + " ";
-                let n_suffix = document.createElement("b");
-                n_suffix.textContent = esuffixes[i];
-                n_container.appendChild(n_number);
-                n_container.appendChild(n_suffix);
-                container.appendChild(n_container);
-            }
-            grid_item.appendChild(container);
-            
-            rerolls += 1;
-            IDcost = Math.round(initIDcost * (5 ** rerolls));
-            invSpace = emsToInvSpace(IDcost);
-        }
-    }
-}
-
-/** Displays Additional Info for 
- * 
- * @param {String} elemID - the parent element's id 
- * @param {Map} item - the statMap of the item
- * @returns 
- */
-function displayAdditionalInfo(elemID, item) {
-    let parent_elem = document.getElementById(elemID);
-    parent_elem.classList.add("left");
-
-    let droptype_elem = document.createElement("div");
-    droptype_elem.classList.add("container");
-    droptype_elem.style.marginBottom = "5px";
-    droptype_elem.textContent = "Drop type: " + (item.has("drop") ? item.get("drop"): "NEVER");
-    parent_elem.appendChild(droptype_elem);
-
-    let warning_elem = document.createElement("div");
-    warning_elem.classList.add("container");
-    warning_elem.style.marginBottom ="5px";
-    warning_elem.textContent = "This page is incomplete. Will work on it later.";
-    parent_elem.appendChild(warning_elem);
-
-    return;
-}
-
-
-/** Displays the individual probabilities of each possible value of each rollable ID for this item.
- * 
- * @param {String} parent_id the document id of the parent element
- * @param {String} item expandedItem object
- * @param {String} amp the level of corkian amplifier used. 0 means no amp, 1 means Corkian Amplifier I, etc. [0,3]
- */
-function displayIDProbabilities(parent_id, item, amp) {
-    if (item.has("fixID") && item.get("fixID")) {return}
-    let parent_elem = document.getElementById(parent_id);
-    parent_elem.style.display = "";
-    parent_elem.innerHTML = "";
-    let title_elem = document.createElement("p");
-    title_elem.textContent = "Identification Probabilities";
-    title_elem.id = "ID_PROB_TITLE";
-    title_elem.classList.add("Legendary");
-    title_elem.classList.add("title");
-    parent_elem.appendChild(title_elem);
-    
-    let disclaimer_elem = document.createElement("p");
-    disclaimer_elem.textContent = "IDs are rolled on a uniform distribution. A chance of 0% means that either the minimum or maximum possible multiplier must be rolled to get this value."
-    parent_elem.appendChild(disclaimer_elem);
-
-    let amp_row = document.createElement("p");
-    amp_row.id = "amp_row";
-    let amp_text = document.createElement("b");
-    amp_text.textContent = "Corkian Amplifier Used: "
-    amp_row.appendChild(amp_text);
-    let amp_1 = document.createElement("button");
-    amp_1.id = "cork_amp_1";
-    amp_1.textContent = "I";
-    amp_row.appendChild(amp_1);
-    let amp_2 = document.createElement("button");
-    amp_2.id = "cork_amp_2";
-    amp_2.textContent = "II";
-    amp_row.appendChild(amp_2);
-    let amp_3 = document.createElement("button");
-    amp_3.id = "cork_amp_3";
-    amp_3.textContent = "III";
-    amp_row.appendChild(amp_3);
-    amp_1.addEventListener("click", (event) => {toggleAmps(1)});
-    amp_2.addEventListener("click", (event) => {toggleAmps(2)});
-    amp_3.addEventListener("click", (event) => {toggleAmps(3)});
-    parent_elem.appendChild(amp_row);
-    
-    if (amp != 0) {toggleButton("cork_amp_" + amp)}
-
-    let item_name = item.get("displayName");
-    console.log(itemMap.get(item_name))
-    
-    let table_elem = document.createElement("table");
-    parent_elem.appendChild(table_elem);
-    for (const [id,val] of Object.entries(itemMap.get(item_name))) {
-        if (rolledIDs.includes(id)) {
-            if (!item.get("maxRolls").get(id)) { continue; }
-            let min = item.get("minRolls").get(id);
-            let max = item.get("maxRolls").get(id);
-            //Apply corkian amps
-            if (val > 0) {
-                let base = itemMap.get(item_name)[id];
-                if (reversedIDs.includes(id)) {max = Math.max( Math.round((0.3 + 0.05*amp) * base), 1)} 
-                else {min = Math.max( Math.round((0.3 + 0.05*amp) * base), 1)}
-            }
-
-            let row_title = document.createElement("tr");
-            //row_title.style.textAlign = "left";
-            let title_left = document.createElement("td");
-            let left_elem = document.createElement("p");
-            let left_val_title = document.createElement("b");
-            let left_val_elem = document.createElement("b");
-            title_left.style.textAlign = "left";
-            left_val_title.textContent = idPrefixes[id] + "Base ";
-            left_val_elem.textContent = val + idSuffixes[id];
-            if (val > 0 == !reversedIDs.includes(id)) {
-                left_val_elem.classList.add("positive");
-            } else if (val > 0 == reversedIDs.includes(id)) {
-                left_val_elem.classList.add("negative");
-            }
-            left_elem.appendChild(left_val_title);
-            left_elem.appendChild(left_val_elem);
-            title_left.appendChild(left_elem);
-            row_title.appendChild(title_left);
-
-            let title_right = document.createElement("td");
-            let title_right_text = document.createElement("b");
-            title_right.style.textAlign = "left";
-            title_right_text.textContent = "[ " + min + idSuffixes[id] + ", " + max + idSuffixes[id] + " ]";
-            if ( (min > 0 && max > 0 && !reversedIDs.includes(id)) || (min < 0 && max < 0 && reversedIDs.includes(id)) ) {
-                title_right_text.classList.add("positive");
-            } else if ( (min < 0 && max < 0 && !reversedIDs.includes(id)) || (min > 0 && max > 0 && reversedIDs.includes(id)) ) {
-                title_right_text.classList.add("negative");
-            }
-            title_right.appendChild(title_right_text);
-
-            let title_input = document.createElement("td");
-            let title_input_slider = document.createElement("input");
-            title_input_slider.type = "range";
-            title_input_slider.id = id+"-slider";
-            if (!reversedIDs.includes(id)) {
-                title_input_slider.step = 1;
-                title_input_slider.min = `${min}`;
-                title_input_slider.max = `${max}`;
-                title_input_slider.value = `${max}`;
-            } else {
-                title_input_slider.step = 1;
-                title_input_slider.min = `${-1*min}`;
-                title_input_slider.max = `${-1*max}`;
-                title_input_slider.value = `${-1*max}`;
-            }
-            let title_input_textbox = document.createElement("input");
-            title_input_textbox.type = "text";
-            title_input_textbox.value = `${max}`;
-            title_input_textbox.id = id+"-textbox";
-            title_input_textbox.classList.add("small-input");
-            title_input.appendChild(title_input_slider);
-            title_input.appendChild(title_input_textbox);
-            
-            row_title.appendChild(title_left);
-            row_title.appendChild(title_right);
-            row_title.appendChild(title_input);
-
-            let row_chances = document.createElement("tr");
-            let chance_cdf = document.createElement("td");
-            let chance_pdf = document.createElement("td");
-            let cdf_p = document.createElement("p");
-            cdf_p.id = id+"-cdf";
-            let pdf_p = document.createElement("p");
-            pdf_p.id = id+"-pdf";
-
-            chance_cdf.appendChild(cdf_p);
-            chance_pdf.appendChild(pdf_p);
-            row_chances.appendChild(chance_cdf);
-            row_chances.appendChild(chance_pdf);
-
-            table_elem.appendChild(row_title);
-            table_elem.appendChild(row_chances);
-
-            
-
-            stringPDF(id, max, val, amp); //val is base roll
-            stringCDF(id, max, val, amp); //val is base roll
-            title_input_slider.addEventListener("change", (event) => {
-                let id_name = event.target.id.split("-")[0];
-                let textbox_elem = document.getElementById(id_name+"-textbox");
-
-                if (reversedIDs.includes(id_name)) {
-                    if (event.target.value < -1*min) { event.target.value = -1*min}
-                    if (event.target.value > -1*max) { event.target.value = -1*max}
-                    stringPDF(id_name, -1*event.target.value, val, amp); //val is base roll
-                    stringCDF(id_name, -1*event.target.value, val, amp); //val is base roll
-                } else {    
-                    if (event.target.value < min) { event.target.value = min}
-                    if (event.target.value > max) { event.target.value = max}
-                    stringPDF(id_name, 1*event.target.value, val, amp); //val is base roll
-                    stringCDF(id_name, 1*event.target.value, val, amp); //val is base roll
-                }
-
-                if (textbox_elem && textbox_elem.value !== event.target.value) {
-                    if (reversedIDs.includes(id_name)) {
-                        textbox_elem.value = -event.target.value;
-                    } else {
-                        textbox_elem.value = event.target.value;
-                    }
-                }
-                
-                
-            });
-            title_input_textbox.addEventListener("change", (event) => {
-                let id_name = event.target.id.split("-")[0];
-                if (reversedIDs.includes(id_name)) {
-                    if (event.target.value > min) { event.target.value = min}
-                    if (event.target.value < max) { event.target.value = max}
-                } else {    
-                    if (event.target.value < min) { event.target.value = min}
-                    if (event.target.value > max) { event.target.value = max}
-                }
-                let slider_elem = document.getElementById(id_name+"-slider");
-                if (slider_elem.value !== event.target.value) {
-                    slider_elem.value = -event.target.value;    
-                }
-
-                stringPDF(id_name, 1*event.target.value, val, amp); 
-                stringCDF(id_name, 1*event.target.value, val, amp); 
-            });
-        }
-    }
-}
-
-//helper functions. id - the string of the id's name, val - the value of the id, base - the base value of the item for this id
-function stringPDF(id,val,base,amp) {
-    /** [0.3b,1.3b] positive normal
-     *  [1.3b,0.3b] positive reversed
-     *  [1.3b,0.7b] negative normal
-     *  [0.7b,1.3b] negative reversed
-     * 
-     *  [0.3, 1.3] minr, maxr [0.3b, 1.3b] min, max
-     *  the minr/maxr decimal roll that corresponds to val -> minround, maxround
-     */
-    let p; let min; let max; let minr; let maxr; let minround; let maxround;
-    if (base > 0) {
-        minr = 0.3 + 0.05*amp; maxr = 1.3;
-        min = Math.max(1, Math.round(minr*base)); max = Math.max(1, Math.round(maxr*base));
-        minround = (min == max) ? (minr) : ( Math.max(minr, (val-0.5) / base) );
-        maxround = (min == max) ? (maxr) : ( Math.min(maxr, (val+0.5) / base) );
-    } else {
-        minr = 1.3; maxr = 0.7;
-        min = Math.min(-1, Math.round(minr*base)); max = Math.min(-1, Math.round(maxr*base));
-        minround = (min == max) ? (minr) : ( Math.min(minr, (val-0.5) / base) );
-        maxround = (min == max) ? (maxr) : ( Math.max(maxr, (val+0.5) / base) );
-    }
-    
-    p = Math.abs(maxround-minround)/Math.abs(maxr-minr)*100;
-    p = p.toFixed(3);
-
-    let b1 = document.createElement("b");
-    b1.textContent = "Roll exactly ";
-    let b2 = document.createElement("b");
-    b2.textContent = val + idSuffixes[id];
-    if (val > 0 == !reversedIDs.includes(id)) {b2.classList.add("positive")}
-    if (val > 0 == reversedIDs.includes(id)) {b2.classList.add("negative")}
-    let b3 = document.createElement("b");
-    b3.textContent = ": " + p + "%";
-    document.getElementById(id + "-pdf").innerHTML = "";
-    document.getElementById(id + "-pdf").appendChild(b1);
-    document.getElementById(id + "-pdf").appendChild(b2);
-    document.getElementById(id + "-pdf").appendChild(b3);
-}
-
-function stringCDF(id,val,base,amp) {
-    let p; let min; let max; let minr; let maxr; let minround; let maxround;
-    if (base > 0) {
-        minr = 0.3 + 0.05*amp; maxr = 1.3;
-        min = Math.max(1, Math.round(minr*base)); max = Math.max(1, Math.round(maxr*base));
-        minround = (min == max) ? (minr) : ( Math.max(minr, (val-0.5) / base) );
-        maxround = (min == max) ? (maxr) : ( Math.min(maxr, (val+0.5) / base) );
-    } else {
-        minr = 1.3; maxr = 0.7;
-        min = Math.min(-1, Math.round(minr*base)); max = Math.min(-1, Math.round(maxr*base));
-        minround = (min == max) ? (minr) : ( Math.min(minr, (val-0.5) / base) );
-        maxround = (min == max) ? (maxr) : ( Math.max(maxr, (val+0.5) / base) );
-    }
-
-    if (reversedIDs.includes(id)) {
-        p = Math.abs(minr-maxround)/Math.abs(maxr-minr)*100;
-    } else {
-        p = Math.abs(maxr-minround)/Math.abs(maxr-minr)*100;
-    }
-    p = p.toFixed(3);
-    
-    let b1 = document.createElement("b");
-    b1.textContent = "Roll ";
-    let b2 = document.createElement("b");
-    b2.textContent = val + idSuffixes[id];
-    if (val > 0 == !reversedIDs.includes(id)) {b2.classList.add("positive")}
-    if (val > 0 == reversedIDs.includes(id)) {b2.classList.add("negative")}
-    let b3 = document.createElement("b");
-    b3.textContent= " or better: " + p + "%";
-    document.getElementById(id + "-cdf").innerHTML = "";
-    document.getElementById(id + "-cdf").appendChild(b1);
-    document.getElementById(id + "-cdf").appendChild(b2);
-    document.getElementById(id + "-cdf").appendChild(b3);
 }
 
 function addClickableArrow(elem, target) {
