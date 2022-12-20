@@ -955,7 +955,6 @@ class EditableIDSetterNode extends ComputeNode {
     }
 
     compute_func(input_map) {
-        console.log("flush editable IDs");
         if (input_map.size !== 1) { throw "EditableIDSetterNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const id of editable_item_fields) {
@@ -997,11 +996,6 @@ class SkillPointSetterNode extends ComputeNode {
         for (const [idx, elem] of skp_order.entries()) {
             document.getElementById(elem+'-skp').value = build.total_skillpoints[idx];
         }
-        for (const child of this.notify_nodes) {
-            console.log(child.inputs_dirty, child.dirty);
-        }
-        console.log("set skp");
-        console.log(build.total_skillpoints);
     }
 }
 
