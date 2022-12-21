@@ -951,6 +951,8 @@ class EditableIDSetterNode extends ComputeNode {
         this.notify_nodes = notify_nodes.slice();
         for (const child of this.notify_nodes) {
             child.link_to(this);
+            child.fail_cb = true;
+            child.mark_input_clean(this.name, null);
         }
     }
 
@@ -987,6 +989,8 @@ class SkillPointSetterNode extends ComputeNode {
         this.notify_nodes = notify_nodes.slice();
         for (const child of this.notify_nodes) {
             child.link_to(this);
+            child.fail_cb = true;
+            child.mark_input_clean(this.name, null);
         }
     }
 
