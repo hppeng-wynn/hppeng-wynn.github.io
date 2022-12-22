@@ -3414,7 +3414,12 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "War Scream",
-                    "cost": 0,
+                    "multipliers": [30, 0, 0, 0, 0, 30]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Air Shout",
                     "multipliers": [30, 0, 0, 0, 0, 30]
                 }
             ]  
@@ -3457,6 +3462,14 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Air Shout",
                     "multipliers": [40, 0, 0, 0, 0, 10]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Air Shout": 1
+                    }
                 }
             ]  
         },
@@ -10492,13 +10505,15 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Heal Tick",
                     "power": -0.003,
-                    "display": "Heal Rate"
+                    "display": "Heal Rate",
+                    "behavior": "modify"
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Heal Amount",
-                    "power": -0.05
+                    "power": -0.05,
+                    "behavior": "modify"
                 }
             ]
         },
@@ -11098,13 +11113,15 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Heal Tick",
                     "power": -0.002,
-                    "display": "Heal Rate"
+                    "display": "Heal Rate",
+                    "behavior": "modify"
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Heal Amount",
-                    "power": -0.03
+                    "power": -0.03,
+                    "behavior": "modify"
                 }
             ]
         },
