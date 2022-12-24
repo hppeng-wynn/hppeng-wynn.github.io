@@ -398,8 +398,6 @@ class BuildAssembleNode extends ComputeNode {
     constructor() { super("builder-make-build"); }
 
     compute_func(input_map) {
-        console.log('build node update');
-        console.log(node_debug_stack);
         let equipments = [
             input_map.get('helmet'),
             input_map.get('chestplate'),
@@ -419,7 +417,6 @@ class BuildAssembleNode extends ComputeNode {
         ];
         let weapon = input_map.get('weapon');
         let level = parseInt(input_map.get('level-input'));
-        console.log(equipments, weapon, level);
         if (isNaN(level)) {
             level = 106;
         }
@@ -719,11 +716,6 @@ class BuildDisplayNode extends ComputeNode {
     compute_func(input_map) {
         const build = input_map.get('build');
         const stats = input_map.get('stats');
-        console.log('build stats show');
-        console.log(node_debug_stack);
-        console.log(build.weapon.statMap.get('name'));
-        console.log(stats.get('hp'), stats.get('hpBonus'));
-        console.log(getDefenseStats(stats));
         displayBuildStats('summary-stats', build, build_overall_display_commands, stats);
         displayBuildStats("detailed-stats", build, build_detailed_display_commands, stats);
         displaySetBonuses("set-info", build);
@@ -852,8 +844,6 @@ class AggregateStatsNode extends ComputeNode {
                 merge_stat(output_stats, k2, v2);
             }
         }
-        console.log(this.name, output_stats);
-        console.log(node_debug_stack);
         return output_stats;
     }
 }
@@ -934,7 +924,6 @@ class AggregateEditableIDNode extends ComputeNode {
     constructor() { super("builder-aggregate-inputs"); }
 
     compute_func(input_map) {
-        console.log('agg inputs');
         const build = input_map.get('build'); input_map.delete('build');
 
         const output_stats = new Map(build.statMap);
@@ -964,12 +953,10 @@ class EditableIDSetterNode extends ComputeNode {
         for (const child of this.notify_nodes) {
             child.link_to(this);
             child.fail_cb = true;
-            //child.mark_input_clean(this.name, null);
         }
     }
 
     compute_func(input_map) {
-        console.log('set editable IDs');
         if (input_map.size !== 1) { throw "EditableIDSetterNode accepts exactly one input (build)"; }
         const [build] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
         for (const id of editable_item_fields) {
@@ -1003,6 +990,7 @@ class SkillPointSetterNode extends ComputeNode {
         for (const child of this.notify_nodes) {
             child.link_to(this);
             child.fail_cb = true;
+            // This is needed because initially there is a value mismatch possibly... due to setting skillpoints manually
             child.mark_input_clean(this.name, null);
         }
     }
