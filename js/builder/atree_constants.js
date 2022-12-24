@@ -10505,15 +10505,13 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Heal Tick",
                     "power": -0.003,
-                    "display": "Heal Rate",
-                    "behavior": "modify"
+                    "display": "Heal Rate"
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Heal Amount",
-                    "power": -0.05,
-                    "behavior": "modify"
+                    "power": -0.05
                 }
             ]
         },
@@ -11113,15 +11111,13 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Heal Tick",
                     "power": -0.002,
-                    "display": "Heal Rate",
-                    "behavior": "modify"
+                    "display": "Heal Rate"
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Heal Amount",
-                    "power": -0.03,
-                    "behavior": "modify"
+                    "power": -0.03
                 }
             ]
         },
