@@ -550,7 +550,8 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHpr);
     //EHPR
     let ehpr = [totalHpr, totalHpr];
-    ehpr[0] /= (1-def_pct)*(1-agi_pct)*defMult;
+    ehpr[0] = ehpr[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    ehpr[0] /= defMult;
     ehpr[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehpr);
     //skp stats
@@ -952,7 +953,6 @@ class EditableIDSetterNode extends ComputeNode {
         for (const child of this.notify_nodes) {
             child.link_to(this);
             child.fail_cb = true;
-            child.mark_input_clean(this.name, null);
         }
     }
 
@@ -990,6 +990,7 @@ class SkillPointSetterNode extends ComputeNode {
         for (const child of this.notify_nodes) {
             child.link_to(this);
             child.fail_cb = true;
+            // This is needed because initially there is a value mismatch possibly... due to setting skillpoints manually
             child.mark_input_clean(this.name, null);
         }
     }
@@ -1056,8 +1057,6 @@ function builder_graph_init(save_skp) {
 
     // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
     build_node = new BuildAssembleNode();
-    for (const input of item_nodes) {
-    }
     build_node.link_to(level_input);
 
     let build_encode_node = new BuildEncodeNode();

@@ -3414,7 +3414,12 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "War Scream",
-                    "cost": 0,
+                    "multipliers": [30, 0, 0, 0, 0, 30]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Air Shout",
                     "multipliers": [30, 0, 0, 0, 0, 30]
                 }
             ]  
@@ -3457,6 +3462,14 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Air Shout",
                     "multipliers": [40, 0, 0, 0, 0, 10]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Air Shout": 1
+                    }
                 }
             ]  
         },

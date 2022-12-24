@@ -155,6 +155,7 @@ class ValueCheckComputeNode extends ComputeNode {
         if (this.dirty === 0) {
             return this;
         }
+        if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.push(this.name); }
 
         let calc_inputs = new Map();
         for (const input of this.inputs) {
@@ -170,6 +171,7 @@ class ValueCheckComputeNode extends ComputeNode {
         for (const child of this.children) {
             child.mark_input_clean(this.name, this.value);
         }
+        if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.pop(this.name); }
         return this;
     }
 
