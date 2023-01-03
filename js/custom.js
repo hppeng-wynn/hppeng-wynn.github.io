@@ -76,7 +76,7 @@ function encodeCustom(custom, verbose) {
                         hash += Base64.fromIntN(i, 2) + Base64.fromIntN(val.replaceAll(" ", "%20").length, 2) + val.replaceAll(" ", "%20"); //values cannot go above 4096 chars!!!! Is this ok?
                     }
                 } else if (typeof (val) === "number" && val != 0) {
-                    let len = Math.max(1, Math.ceil(log(64, Math.abs(val))));
+                    let len = Math.max(1, Math.ceil(log(64, Math.abs(val) + 1)));
                     let sign = Boolean(val / Math.abs(val) < 0) | 0;
                     //console.log(sign);
                     //hash += Base64.fromIntN(i,2) + Base64.fromIntN(val,Math.max(1,Math.ceil(log(64,Math.abs(val))))) + "_";
