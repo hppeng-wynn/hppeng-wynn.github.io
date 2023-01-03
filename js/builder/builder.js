@@ -89,13 +89,12 @@ function resetFields(){
         }
     }
     for (const elem of skp_order) {
-        console.log(document.getElementById(elem + "_boost_armor").value);
         document.getElementById(elem + "_boost_armor").value = 0;
         document.getElementById(elem + "_boost_armor").style.background = `linear-gradient(to right, #AAAAAA, #AAAAAA 0%, #AAAAAA 100%)`;
         document.getElementById(elem + "_boost_armor_label").textContent = `% ${damageClasses[skp_order.indexOf(elem)+1]} Damage Boost: 0`;
     }
 
-    const nodes_to_reset = item_nodes.concat(powder_nodes).concat(edit_input_nodes).concat([powder_special_input, boosts_node, armor_powder_node]);
+    const nodes_to_reset = equip_inputs.concat(powder_nodes).concat(edit_input_nodes).concat([powder_special_input, boosts_node, armor_powder_node]);
     for (const node of nodes_to_reset) {
         node.mark_dirty();
     }
@@ -368,7 +367,7 @@ async function init() {
         console.log(e);
     }
     builder_graph_init(save_skp);
-    for (const item_node of item_nodes) {
+    for (const item_node of item_final_nodes) {
         if (item_node.get_value() === null) {
             // likely DB load failure...
             if (confirm('One or more items failed to load correctly. This could be due to a corrupted build link, or (more likely) a database load failure. Would you like to reload?')) {

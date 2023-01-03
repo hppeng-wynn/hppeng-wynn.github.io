@@ -2334,7 +2334,8 @@ const atrees = {
             "base_abil": "Focus",
             "parents": [
                 "Cheaper Arrow Bomb II",
-                "Grape Bomb"
+                "Grape Bomb",
+                "Minefield"
             ],
             "dependencies": [
                 "Focus"
@@ -2549,7 +2550,7 @@ const atrees = {
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "Single Arrow": 16
+                                "Single Arrow": 12
                             }
                         }
                     ]

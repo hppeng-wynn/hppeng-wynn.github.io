@@ -183,7 +183,7 @@ class ItemInputNode extends InputNode {
 
             for (const [i, x] of zip2(equipment_inputs, replace_items)) { setValue(i, x); }
 
-            for (const node of item_nodes) { 
+            for (const node of equip_inputs) { 
                 if (node !== this) {
                     // save a tiny bit of compute
                     calcSchedule(node, 10);
@@ -1034,8 +1034,7 @@ class SumNumberInputNode extends InputNode {
     }
 }
 
-let item_nodes = [];
-let item_nodes_map = new Map();
+let item_final_nodes = [];
 let powder_nodes = [];
 let edit_input_nodes = [];
 let skp_inputs = [];
@@ -1079,8 +1078,7 @@ function builder_graph_init(save_skp) {
                     .link_to(powder_node, 'powdering').link_to(item_input, 'item');
             item_input = item_powdering;
         }
-        item_nodes.push(item_input);
-        item_nodes_map.set(eq, item_input);
+        item_final_nodes.push(item_input);
         new ItemInputDisplayNode(eq+'-input-display', eq, item_image).link_to(item_input);
         new ItemDisplayNode(eq+'-item-display', display_elem).link_to(item_input);
         //new PrintNode(eq+'-debug').link_to(item_input);
@@ -1094,7 +1092,7 @@ function builder_graph_init(save_skp) {
 
         let item_input = new ItemInputNode(eq+'-input', input_field, none_item);
         equip_inputs.push(item_input);
-        item_nodes.push(item_input);
+        item_final_nodes.push(item_input);
         new ItemInputDisplayNode(eq+'-input-display', eq, item_image).link_to(item_input);
         build_node.link_to(item_input, eq);
     }
@@ -1102,7 +1100,7 @@ function builder_graph_init(save_skp) {
     // weapon image changer node.
     let weapon_image = document.getElementById("weapon-img");
     let weapon_dps = document.getElementById("weapon-dps");
-    new WeaponInputDisplayNode('weapon-type', weapon_image, weapon_dps).link_to(item_nodes[8]);
+    new WeaponInputDisplayNode('weapon-type', weapon_image, weapon_dps).link_to(item_final_nodes[8]);
 
     // linking to atree verification
     atree_validate.link_to(level_input, 'level');
