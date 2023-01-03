@@ -190,7 +190,6 @@ let graph_live_update = false;
  * @param node : ComputeNode to schedule an update for.
  */
 function calcSchedule(node, timeout) {
-    if (!graph_live_update) return;
     if (node.update_task !== null) {
         clearTimeout(node.update_task);
     }
@@ -227,8 +226,8 @@ class InputNode extends ValueCheckComputeNode {
     constructor(name, input_field) {
         super(name);
         this.input_field = input_field;
-        this.input_field.addEventListener("input", () => calcSchedule(this, 500));
-        this.input_field.addEventListener("change", () => calcSchedule(this, 5));
+        this.input_field.addEventListener("input", () => { if (graph_live_update) calcSchedule(this, 500) } );
+        this.input_field.addEventListener("change", () => { if (graph_live_update) calcSchedule(this, 5) } );
         //calcSchedule(this);  Manually fire first update for better control
     }
 
