@@ -43799,23 +43799,6 @@
       "id": 1859
     },
     {
-      "name": "Bow of Testiness",
-      "tier": "Normal",
-      "type": "bow",
-      "category": "weapon",
-      "slots": 1,
-      "drop": "never",
-      "nDam": "100-100",
-      "fDam": "0-0",
-      "wDam": "0-0",
-      "aDam": "0-0",
-      "tDam": "0-0",
-      "eDam": "0-0",
-      "atkSpd": "NORMAL",
-      "lvl": 1,
-      "id": 3718
-    },
-    {
       "name": "Bob's Mythic Spear",
       "tier": "Legendary",
       "type": "spear",
@@ -45579,29 +45562,6 @@
       "id": 1935
     },
     {
-      "name": "Builder's Boots",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1947
-    },
-    {
       "name": "Royal Dusty Amulet",
       "tier": "Legendary",
       "material": "259:21",
@@ -45646,144 +45606,6 @@
       "id": 1942
     },
     {
-      "name": "Builder's Helmet",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1951
-    },
-    {
-      "name": "Builder's Trousers",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1950
-    },
-    {
-      "name": "Builder's Breastplate",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1944
-    },
-    {
-      "name": "GM's Helmet",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1948
-    },
-    {
-      "name": "GM's Boots",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1949
-    },
-    {
-      "name": "GM's Breastplate",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1953
-    },
-    {
       "name": "Bandit's Locket",
       "tier": "Set",
       "material": "259:22",
@@ -45819,29 +45641,6 @@
       "wDamPct": -15,
       "aDamPct": 7,
       "id": 1952
-    },
-    {
-      "name": "GM's Trousers",
-      "tier": "Set",
-      "type": "helmet",
-      "armorType": "Chain",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 550,
-      "fDef": 10,
-      "wDef": 10,
-      "aDef": 10,
-      "tDef": 10,
-      "eDef": 10,
-      "lvl": 50,
-      "str": 1,
-      "dex": 1,
-      "int": 1,
-      "agi": 1,
-      "def": 1,
-      "id": 1954
     },
     {
       "name": "Santa Boots",
@@ -46070,23 +45869,6 @@
       "lvl": 9,
       "hpBonus": 92,
       "id": 3546
-    },
-    {
-      "name": "Spear of Testiness",
-      "tier": "Normal",
-      "type": "spear",
-      "category": "weapon",
-      "slots": 1,
-      "drop": "never",
-      "nDam": "90-90",
-      "fDam": "1-10",
-      "wDam": "0-0",
-      "aDam": "0-0",
-      "tDam": "0-0",
-      "eDam": "0-0",
-      "atkSpd": "SLOW",
-      "lvl": 1,
-      "id": 3651
     },
     {
       "name": "Sound Proof Earmuff",
@@ -55741,20 +55523,6 @@
       "tDamPct": 10,
       "eDefPct": 5,
       "id": 2370
-    },
-    {
-      "name": "Rounding Test",
-      "tier": "Normal",
-      "type": "chestplate",
-      "armorType": "Leather",
-      "category": "armor",
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "lvl": 1,
-      "xpb": 11,
-      "atkTier": -1,
-      "id": 2371
     },
     {
       "name": "Rubber",
@@ -66345,23 +66113,6 @@
       "id": 2835
     },
     {
-      "name": "Diving Boots I",
-      "tier": "Unique",
-      "type": "boots",
-      "armorType": "Leather",
-      "category": "armor",
-      "color": "160,101,64",
-      "lore": "Just a test item.",
-      "drop": "never",
-      "hp": 300,
-      "wDef": 30,
-      "tDef": -30,
-      "lvl": 40,
-      "spd": 5,
-      "wDefPct": 10,
-      "id": 2843
-    },
-    {
       "name": "Weighted Nimble Fingers",
       "tier": "Unique",
       "material": "259:39",
@@ -66424,23 +66175,6 @@
       "sdRaw": 24,
       "fixID": true,
       "id": 2841
-    },
-    {
-      "name": "Diving Boots III",
-      "tier": "Rare",
-      "type": "boots",
-      "armorType": "Leather",
-      "category": "armor",
-      "color": "160,101,64",
-      "lore": "Just a test item.",
-      "drop": "never",
-      "hp": 1350,
-      "wDef": 90,
-      "tDef": -75,
-      "lvl": 70,
-      "spd": 15,
-      "wDefPct": 20,
-      "id": 2836
     },
     {
       "name": "Harpoon",
@@ -66533,23 +66267,6 @@
       "wDamPct": 15,
       "fixID": true,
       "id": 2839
-    },
-    {
-      "name": "Diving Boots II",
-      "tier": "Unique",
-      "type": "boots",
-      "armorType": "Leather",
-      "category": "armor",
-      "color": "160,101,64",
-      "lore": "Just a test item.",
-      "drop": "never",
-      "hp": 750,
-      "wDef": 65,
-      "tDef": -50,
-      "lvl": 55,
-      "spd": 10,
-      "wDefPct": 15,
-      "id": 2833
     },
     {
       "name": "Sea Legs",
@@ -69105,24 +68822,6 @@
       "id": 2932
     },
     {
-      "name": "Speedyboy",
-      "tier": "Rare",
-      "type": "boots",
-      "armorType": "Leather",
-      "category": "armor",
-      "slots": 1,
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "hp": 105,
-      "lvl": 20,
-      "mdPct": 15,
-      "str": 7,
-      "spd": 200,
-      "eDamPct": 10,
-      "id": 3548
-    },
-    {
       "name": "Salamander",
       "tier": "Unique",
       "type": "wand",
@@ -69148,20 +68847,6 @@
       "id": 2934
     },
     {
-      "name": "ManaTest",
-      "tier": "Legendary",
-      "type": "chestplate",
-      "armorType": "Golden",
-      "category": "armor",
-      "slots": 2,
-      "color": "160,101,64",
-      "drop": "never",
-      "restrict": "Untradable",
-      "lvl": 1,
-      "mr": 60,
-      "id": 3752
-    },
-    {
       "name": "Salience",
       "tier": "Unique",
       "type": "helmet",
@@ -69183,22 +68868,6 @@
       "fDefPct": 9,
       "wDefPct": 9,
       "id": 2931
-    },
-    {
-      "name": "Saltest Spear",
-      "tier": "Normal",
-      "type": "spear",
-      "category": "weapon",
-      "drop": "never",
-      "nDam": "100-100",
-      "fDam": "0-0",
-      "wDam": "0-0",
-      "aDam": "0-0",
-      "tDam": "0-0",
-      "eDam": "0-0",
-      "atkSpd": "VERY_FAST",
-      "lvl": 1,
-      "id": 3549
     },
     {
       "name": "Saltine",
@@ -83483,24 +83152,6 @@
       "id": 3755
     },
     {
-      "name": "default",
-      "tier": "Normal",
-      "type": "wand",
-      "category": "weapon",
-      "lore": "This is a rad weapon yo. Let's make the lore longer so we can test how long it can go. Hi Jumla!",
-      "drop": "never",
-      "nDam": "1-2",
-      "fDam": "0-0",
-      "wDam": "0-0",
-      "aDam": "0-0",
-      "tDam": "0-0",
-      "eDam": "0-0",
-      "atkSpd": "FAST",
-      "lvl": 1,
-      "int": 12,
-      "id": 3543
-    },
-    {
       "name": "Zombie Helm",
       "tier": "Unique",
       "type": "helmet",
@@ -83520,7 +83171,7 @@
       "id": 3538
     }
   ],
-  "version": 2.0,
+  "version": 2,
   "sets": {
     "Boundless": {
       "items": [
@@ -84303,26 +83954,6 @@
         }
       ]
     },
-    "Builder's": {
-      "items": [
-        "Builder's Helmet",
-        "Builder's Boots",
-        "Builder's Trousers",
-        "Builder's Breastplate"
-      ],
-      "bonuses": [
-        {},
-        {
-          "xpb": 5
-        },
-        {
-          "xpb": 10
-        },
-        {
-          "xpb": 15
-        }
-      ]
-    },
     "Silverfish": {
       "items": [
         "Silverfish Helm",
@@ -84595,26 +84226,6 @@
           "eDamPct": 15,
           "sprint": 25,
           "sprintReg": 50
-        }
-      ]
-    },
-    "GM's": {
-      "items": [
-        "GM's Helmet",
-        "GM's Boots",
-        "GM's Trousers",
-        "GM's Breastplate"
-      ],
-      "bonuses": [
-        {},
-        {
-          "xpb": 5
-        },
-        {
-          "xpb": 10
-        },
-        {
-          "xpb": 15
         }
       ]
     },
