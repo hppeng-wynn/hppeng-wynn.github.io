@@ -16,41 +16,49 @@
 
 /* rarity selectors */
 
-#rarity-box {
+#tier-box {
     cursor: pointer;
     width: 58.33%;
-    text-align: center;
 }
-#rarity-box > div {
+#tier-box > div {
     width: calc(100% / 7);
     aspect-ratio: 1/1;
     position: relative;
     display: inline-block;
 }
-#rarity-box > div > b {
+#tier-box > div > b {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#rarity-box > div.rarity-selected > b {
+#tier-box > div.tier-selected > b {
     color: black;
 }
 
-#rarity-normal { color: #FFFFFF; }
-#rarity-normal.rarity-selected { background-color: #FFFFFF; }
-#rarity-unique { color: #FFFF55; }
-#rarity-unique.rarity-selected { background-color: #FFFF55; }
-#rarity-set { color: #55FF55; }
-#rarity-set.rarity-selected { background-color: #55FF55; }
-#rarity-rare { color: #FF55FF; }
-#rarity-rare.rarity-selected { background-color: #FF55FF; }
-#rarity-legendary { color: #55FFFF; }
-#rarity-legendary.rarity-selected { background-color: #55FFFF; }
-#rarity-fabled { color: #FF5555; }
-#rarity-fabled.rarity-selected { background-color: #FF5555; }
-#rarity-mythic { color: #AA00AA; }
-#rarity-mythic.rarity-selected { background-color: #AA00AA; }
+#tier-normal { color: #FFFFFF; }
+#tier-normal.tier-selected { background-color: #FFFFFF; }
+#tier-unique { color: #FFFF55; }
+#tier-unique.tier-selected { background-color: #FFFF55; }
+#tier-set { color: #55FF55; }
+#tier-set.tier-selected { background-color: #55FF55; }
+#tier-rare { color: #FF55FF; }
+#tier-rare.tier-selected { background-color: #FF55FF; }
+#tier-legendary { color: #55FFFF; }
+#tier-legendary.tier-selected { background-color: #55FFFF; }
+#tier-fabled { color: #FF5555; }
+#tier-fabled.tier-selected { background-color: #FF5555; }
+#tier-mythic { color: #AA00AA; }
+#tier-mythic.tier-selected { background-color: #AA00AA; }
+
+#tier-zero { color: #FFFFFF; }
+#tier-zero.tier-selected { background-color: #FFFFFF; }
+#tier-one { color: #FFFFBB; }
+#tier-one.tier-selected { background-color: #FFFFBB; }
+#tier-two { color: #FFFF88; }
+#tier-two.tier-selected { background-color: #FFFF88; }
+#tier-three { color: #FFFF55; }
+#tier-three.tier-selected { background-color: #FFFF55; }
 
 /* filters */
 .filter-row {

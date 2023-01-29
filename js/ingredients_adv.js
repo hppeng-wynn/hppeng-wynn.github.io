@@ -3,7 +3,7 @@ const getQueryIdentifiers = (function() {
     return function() {
         if (identCache === null) {
             const idents = new Set();
-            for (const ident of Object.keys(itemQueryProps)) {
+            for (const ident of Object.keys(ingredientQueryProps)) {
                 idents.add(ident);
             }
             for (const ident of Object.keys(queryFuncs)) {
@@ -18,13 +18,14 @@ const getQueryIdentifiers = (function() {
 function generateEntries(size, itemList, itemEntries) {
     for (let i = 0; i < size; i++) {
         const itemElem = document.createElement('div');
-        itemElem.classList.add('col-lg-3', 'col-sm-auto', "p-2");
+        itemElem.classList.add('col-lg-3', 'col-sm-6', "p-2", "ing-stats");
         // itemElem.setAttribute('id', `item-entry-${i}`);
         itemList.append(itemElem);
         itemEntries.push(itemElem);
 
         const itemElemContained = document.createElement("div");
-        itemElemContained.classList.add("dark-7", "rounded", "px-2", "col-auto");
+        itemElemContained.classList.add("dark-7", "rounded", "p-3", "col-auto", "g-0", "border", "border-dark", "dark-shadow");
+    
         itemElemContained.setAttribute('id', `item-entry-${i}`);
         itemElem.appendChild(itemElemContained);
 
@@ -37,22 +38,17 @@ function generateEntries(size, itemList, itemEntries) {
 
 function init_values() {
     // compile the search db from the item db
-    searchDb = items.filter(i => !i.remapID).map(i => [i, expandItem(i)]);
+    searchDb = ings.filter(i => !i.remapID).map(i => [i, expandIngredient(i)]);
 
     // create the expression parser
-    exprParser = new ExprParser(itemQueryProps, queryFuncs);
+    exprParser = new ExprParser(ingredientQueryProps, queryFuncs);
 }
 
 function display(itemExp, id) {
-    itemExp.set("powders", []);
-    if (itemExp.get("category") == "weapon") {
-        apply_weapon_powders(itemExp);
-    }
-
-    displayExpandedItem(itemExp, id);
+    displayExpandedIngredient(itemExp, id);
 }
 
 (async function() {
-    await Promise.resolve(load_init());
+    await Promise.resolve(load_ing_init());
     init_items_adv();
 })();

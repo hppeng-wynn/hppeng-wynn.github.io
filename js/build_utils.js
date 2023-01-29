@@ -178,6 +178,8 @@ let rolledIDs = [
 ];
 let reversedIDs = [ "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4" ];
 
+let ingFields = ["fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "lq", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "jh", "sprint", "sprintReg", "gXp", "gSpd"];
+
 /**
  * Take an item with id list and turn it into a set of minrolls and maxrolls.
  */
