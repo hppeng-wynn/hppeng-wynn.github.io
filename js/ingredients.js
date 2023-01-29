@@ -1,25 +1,8 @@
 // commented out filters
-    //"Name": "name",
-    //"Display Name": "displayName",
-    //"Tier": "tier",
-    //"Set": "set",
-    //"Type": "type",
-    //"Drop type": "drop",             BROKEN
-    //"Quest requirement": "quest",    BROKEN
-    //"Restriction": "restrict",       BROKEN
-    //"Base Neutral Damage": "nDam",
-    //"Base Fire Damage": "fDam",
-    //"Base Water Damage": "wDam",
-    //"Base Air Damage": "aDam",
-    //"Base Thunder Damage": "tDam",
-    //"Base Earth Damage": "eDam",
-    //"Base Attack Speed": "atkSpd",
-    //"Class Requirement": "classReq",
-    // "Fixed IDs": "fixID",          BROKEN
-    // "Custom Skin": "skin",         BROKEN
-    //"Item Category": "category",
-
-    // "Powder Slots": "slots", dont apply
+    // "Name": "name",
+    // "Display Name": "displayName",
+    // "Tier": "stars",
+    // "Powder Slots": "slots",
     // "Health": "hp",
     // "Raw Fire Defense": "fDef",
     // "Raw Water Defense": "wDef",
