@@ -255,6 +255,11 @@ function init_items_adv() {
         itemElemContained.classList.add("dark-7", "rounded", "px-2", "col-auto");
         itemElemContained.setAttribute('id', `item-entry-${i}`);
         itemElem.appendChild(itemElemContained);
+
+        const sortKeyListContainer = document.createElement('div');
+        sortKeyListContainer.classList.add('row');
+        sortKeyListContainer.setAttribute('id', `item-sort-entry-${i}`);
+        itemEntries[i].append(sortKeyListContainer);
     }
 
     // create the expression parser
@@ -333,9 +338,13 @@ function init_items_adv() {
                 apply_weapon_powders(result.itemExp);
             }
             displayExpandedItem(result.itemExp, `item-entry-${i}`);
-            if (result.sortKeys.length > 0) {
-                const sortKeyListContainer = document.createElement('div');
-                sortKeyListContainer.classList.add('row');
+            
+            // Clear old sort keys
+            setHTML(`item-sort-entry-${i}`, "");
+            const sortKeyListContainer = document.getElementById(`item-sort-entry-${i}`);
+
+            // Add new sort keys if present
+            if (result.sortKeys.length > 0) {            
                 const sortKeyList = document.createElement('ul');
                 sortKeyList.classList.add('item-entry-sort-key', 'itemp', 'T0');
                 sortKeyListContainer.append(sortKeyList);
@@ -344,7 +353,6 @@ function init_items_adv() {
                     sortKeyElem.innerText = stringify(result.sortKeys[j]);
                     sortKeyList.append(sortKeyElem);
                 }
-                itemEntries[i].append(sortKeyListContainer);
             }
         }
         if (searchMax < searchResults.length) {
