@@ -267,6 +267,11 @@ const ingredientQueryProps = (function() {
   prop(['defmin', 'defreq'], 'number', (i, ie) => i["itemIDs"].defReq);
   prop(['agimin', 'agireq'], 'number', (i, ie) => i["itemIDs"].agiReq);
 
+  prop(['durability'], 'number', (i, ie) => i["itemIDs"].dura || 0);
+
+  prop(['charges'], 'number', (i, ie) => i["consumableIDs"].charges || 0);
+  prop(['duration'], 'number', (i, ie) => i["consumableIDs"].dura || 0);
+
   sum(['summin', 'sumreq', 'totalmin', 'totalreq'], props.strmin, props.dexmin, props.intmin, props.defmin, props.agimin);
 
   maxId('str', 'str');

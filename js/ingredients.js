@@ -28,6 +28,9 @@
     // "Raw Earth Defense": "eDef",
 
     const translate_mappings = {
+        "Durability": "durability",
+        "Duration": "duration",
+        "Charges": "charges",
         "Effectiveness Left": "left",
         "Effectiveness Right": "right",
         "Effectiveness Above": "above",
