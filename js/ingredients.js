@@ -82,7 +82,7 @@
         "Sum (skill points)": "str+dex+int+def+agi",
         "Sum (Mana Sustain)": "mr+ms",
         "Sum (Life Sustain)": "hpr+ls",
-        "Sum (Effectiveness)": "7/3 * (touching + notTouching) + 2/3 * (top + bottom) + 1/2 * (left + right)"
+        "Sum (Effectiveness)": "7/3 * touching + 8/3 * nottouching + 2/3 * (top + bottom) + 1/2 * (left + right)"
     };
     
     for (let x in translate_mappings) {
