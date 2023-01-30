@@ -23,8 +23,6 @@ function checkComparable(v) {
   return v;
 }
 
-// TODO merge base
-
 // properties of items that can be looked up
 // each entry is a function `(item, extended item) -> value`
 const itemQueryProps = (function() {
