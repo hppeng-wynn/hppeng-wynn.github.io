@@ -24,7 +24,7 @@
         <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
             <a href = "../builder/"><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
             <a href = "../crafter/"><img src = "../media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
-            <a href = ""><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+            <a href = "../items/"><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
             <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
             <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
             <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
@@ -34,10 +34,6 @@
         </div>
         <div id="mobile-navbar" class="navbar dark-5 dark-shadow fixed-top d-lg-none pb-0">
             <div class="container-fluid scaled-font justify-content-center" style="height: 5vh;">
-                <div class="navbar-brand mx-auto scaled-font" style="height: 100%;">
-                    <img src="../media/icons/new/searcher.png" alt="" style="height: 100%;">
-                    <span>WynnAtlas</span>
-                </div>
                 <button class="btn dropdown-toggle dark-2 px-4 text-white scaled-font border-dark border-3" onclick="toggle_tab('mobile-navbar-dropdown');"></button>
             </div>
             <div class="container-fluid scaled-font dark-3 px-3 py-3" id="mobile-navbar-dropdown" style="display: none;">
@@ -64,7 +60,7 @@
                 <a href="../wynnfo/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
                     <img src="../media/icons/new/book.png" alt="" style="height: 100%;">
                     <span>WynnFo</span>
-                </a>
+                </a>g
                 <a onclick = "toggleIcons()" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
                     <img src="../media/icons/new/reload.png" alt="" style="height: 100%;">
                     <span>Swap Icon Style</span>
@@ -79,10 +75,10 @@
             <div class = "row">
                 <div class = "row" style = "margin-top: 3ch;">
                     <div class = "col text-start" id = "credits">
-                        <a href="../ingredients/" class="link">Ingredient Searching</a>
+                        <a href="../items/" class="link">Item Searching</a>
                     </div>
                     <div class = "col text-end">
-                        <a href = "../items_adv/">Advanced Item Search</a>
+                        <a href = "../ingredients_adv/">Advanced Ingredient Search</a>
                     </div>
                 </div>
                 <div class = "col-auto" style = "width: 12.5%;"></div>
@@ -90,36 +86,32 @@
                     <div class = "row">
                         <div class = "col-lg col-sm-12">
                             <div class = "col fw-bold">Name:</div>
-                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style="width: 100%!important;" type="text" id="item-name-choice" name="item-name-choice" placeholder="Item name (case insensitive)"/>
+                            <input class = "col border-dark text-light dark-5 rounded scaled-font form-control form-control-sm" style="width: 100%!important;" type="text" id="item-name-choice" name="item-name-choice" placeholder="Ingredient name (case insensitive)"/>
                             <p class="error col-auto"></p>
                         </div>
                     </div>
                     <div class = "row">
                         <div class = "col-lg col-sm-12">
-                            <div class = "col"><span class = "fw-bold">Type:</span> <span style = "cursor: pointer; float: right;"><span id = "all-types">All</span> &nbsp; <span id = "none-types">None</span></span></div>
+                            <div class = "col"><span class = "fw-bold">Types:</span> <span style = "cursor: pointer; float: right;"><span id = "all-types">All</span> &nbsp; <span id = "none-types">None</span></span></div>
                             <div id = "type-box">
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 0 0;" id = "type-bow"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 9.09091% 0;" id = "type-spear"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 18.1818% 0;" id = "type-wand"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 27.2727% 0;" id = "type-dagger"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 36.3636% 0;" id = "type-relik"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 45.4545% 0;" id = "type-helmet"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 54.5455% 0;" id = "type-chestplate"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 63.6364% 0;" id = "type-leggings"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 72.7273% 0;" id = "type-boots"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 81.8182% 0;" id = "type-ring"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 90.9091% 0;" id = "type-bracelet"></div>
-                                <div class = "item-display-new-toggleable" style = "background-image: url('../media/items/new.png'); background-position: 100% 0;" id = "type-necklace"></div>
+                                <p id = "type-armouring" style = "margin: 0; ">Armouring</p>
+                                <p id = "type-tailoring" style = "margin: 0;">Tailoring</p>
+                                <p id = "type-weaponsmithing" style = "margin: 0;">Weaponsmithing</p>
+                                <p id = "type-woodworking" style = "margin: 0;">Woodworking</p>
+                                <p id = "type-jeweling" style = "margin: 0;">Jeweling</p>
+                                <p id = "type-cooking" style = "margin: 0;">Cooking</p>
+                                <p id = "type-alchemism" style = "margin: 0;">Alchemism</p>
+                                <p id = "type-scribing" style = "margin: 0;">Scribing</p>
                             </div>
                             <p class="error col-auto"></p>
                         </div>
                     </div>
                     <div class = "row">
                         <div class = "col-lg col-sm-12">
-                            <div class = "col"><span class = "fw-bold">Rarity:</span> <span style = "cursor: pointer; float: right;"><span id = "all-tiers">All</span> &nbsp; <span id = "none-tiers">None</span></span></div>
+                            <div class = "col"><span class = "fw-bold">Stars:</span> <span style = "cursor: pointer; float: right;"><span id = "all-tiers">All</span> &nbsp; <span id = "none-tiers">None</span></span></div>
                             <div id = "tier-box">
                                 <!-- unfortunately they must be stacked up like this because newlines are considered spaces and muck up the organization -->
-                                <div id = "tier-normal" class = "tier-selected"><b>N</b></div><div id = "tier-unique" class = "tier-selected"><b>U</b></div><div id = "tier-set" class = "tier-selected"><b>S</b></div><div id = "tier-rare" class = "tier-selected"><b>R</b></div><div id = "tier-legendary" class = "tier-selected"><b>L</b></div><div id = "tier-fabled" class = "tier-selected"><b>F</b></div><div id = "tier-mythic" class = "tier-selected"><b>M</b></div>
+                                <div id = "tier-zero" class = "tier-selected"><b>0</b></div><div id = "tier-one" class = "tier-selected"><b>1</b></div><div id = "tier-two" class = "tier-selected"><b>2</b></div><div id = "tier-three" class = "tier-selected"><b>3</b></div>
                             </div>
                             <p class="error col-auto"></p>
                         </div>
@@ -174,9 +166,9 @@
         <script type="text/javascript" src="../js/display.js"></script>
         <script type="text/javascript" src="../js/query.js"></script>
         <script type="text/javascript" src="../js/expr_parser.js"></script>
-        <script type="text/javascript" src="../js/load.js"></script>
+        <script type="text/javascript" src="../js/load_ing.js"></script>
         <script type="text/javascript" src="../js/search.js"></script>
-        <script type="text/javascript" src="../js/items.js"></script>
+        <script type="text/javascript" src="../js/ingredients.js"></script>
         <script type="text/javascript" src="../js/powders.js"></script>
     </body>
 </html>

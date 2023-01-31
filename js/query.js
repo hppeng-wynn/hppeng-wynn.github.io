@@ -172,8 +172,174 @@ const itemQueryProps = (function() {
   return props;
 })();
 
+// properties of ingredients that can be looked up
+// each entry is a function `(item, extended item) -> value`
+const ingredientQueryProps = (function() {
+  const props = {};
+
+  function prop(names, type, resolve) {
+    if (Array.isArray(names)) {
+      for (name of names) {
+        props[name] = { type, resolve };
+      }
+    } else {
+      props[names] = { type, resolve };
+    }
+  }
+
+  function typeProp(names, idKey) {
+    prop(names, 'boolean', (i, ie) => ie.get('skills').filter(i => i === idKey).length > 0);
+  }
+
+  function modProp(names, idKey) {
+    prop(names, 'boolean', (i, ie) => ie.get('posMods').get(idKey) || 0);
+  }
+
+  function maxId(names, idKey) {
+    prop(names, 'number', (i, ie) => ie.get("ids").get('maxRolls').get(idKey) || 0);
+  }
+
+  function minId(names, idKey) {
+    prop(names, 'number', (i, ie) => ie.get("ids").get('minRolls').get(idKey) || 0);
+  }
+
+  function rangeAvg(names, getProp) {
+    prop(names, 'number', (i, ie) => {
+      const range = getProp(i, ie);
+      if (!range) return 0;
+      const ndx = range.indexOf('-');
+      return (parseInt(range.substring(0, ndx), 10) + parseInt(range.substring(ndx + 1), 10)) / 2;
+    });
+  }
+
+  function map(names, comps, outType, f) {
+    return prop(names, outType, (i, ie) => {
+      const args = [];
+      for (let k = 0; k < comps.length; k++) args.push(comps[k].resolve(i, ie));
+      return f.apply(null, args);
+    });
+  }
+
+  function sum(names, ...comps) {
+    return map(names, comps, 'number', (...summands) => {
+      let total = 0;
+      for (let i = 0; i < summands.length; i++) total += summands[i];
+      return total;
+    });
+  }
+
+  prop('name', 'string', (i, ie) => i.displayName || i.name);
+  const starIndices = { 0: "zero", 1: "one", 2: "two", 3: "three" };
+  prop(['starsname', 'starsstr', 'tiername', 'tierstr'], 'string', (i, ie) => starIndices[i.tier]);
+  prop(['stars', 'tier'], 'number', (i, ie) => i.tier);
+  prop(['level', 'lvl', 'combatlevel', 'combatlvl'], 'number', (i, ie) => i.lvl);
+
+  // TODO allow specification of item types
+  for (const entry of [
+    ["armouring", "helmet", "chestplate"], 
+    ["tailoring", "leggings", "boots"], 
+    ["weaponsmithing", "spear", "dagger"], 
+    ["woodworking", "bow", "relik", "wand"], 
+    ["jeweling", "ring", "bracelet", "necklace"], 
+    ["cooking", "food"], 
+    ["alchemism", "potion"], 
+    ["scribing", "scroll"]
+  ]) {
+    typeProp(entry, entry[0].toUpperCase());
+  }
+
+  for (const entry of [
+    ["left"], 
+    ["right"], 
+    ["above", "top"], 
+    ["under", "bottom"], 
+    ["touching", "touch"], 
+    ["notTouching", "notTouch"]
+  ]) {
+    modProp(entry.map(i => i.toLowerCase()), entry[0]);
+  }
+
+  prop(['strmin', 'strreq'], 'number', (i, ie) => i["itemIDs"].strReq);
+  prop(['dexmin', 'dexreq'], 'number', (i, ie) => i["itemIDs"].dexReq);
+  prop(['intmin', 'intreq'], 'number', (i, ie) => i["itemIDs"].intReq);
+  prop(['defmin', 'defreq'], 'number', (i, ie) => i["itemIDs"].defReq);
+  prop(['agimin', 'agireq'], 'number', (i, ie) => i["itemIDs"].agiReq);
+
+  prop(['durability'], 'number', (i, ie) => i["itemIDs"].dura || 0);
+
+  prop(['charges'], 'number', (i, ie) => i["consumableIDs"].charges || 0);
+  prop(['duration'], 'number', (i, ie) => i["consumableIDs"].dura || 0);
+
+  sum(['summin', 'sumreq', 'totalmin', 'totalreq'], props.strmin, props.dexmin, props.intmin, props.defmin, props.agimin);
+
+  maxId('str', 'str');
+  maxId('dex', 'dex');
+  maxId('int', 'int');
+  maxId('def', 'def');
+  maxId('agi', 'agi');
+  sum(['skillpoints', 'skillpts', 'attributes', 'attrs'], props.str, props.dex, props.int, props.def, props.agi);
+
+  maxId(['earthdmg%', 'earthdam%', 'edmg%', 'edam%', 'edampct'], 'eDamPct');
+  maxId(['thunderdmg%', 'thunderdam%', 'tdmg%', 'tdam%', 'tdampct'], 'tDamPct');
+  maxId(['waterdmg%', 'waterdam%', 'wdmg%', 'wdam%', 'wdampct'], 'wDamPct');
+  maxId(['firedmg%', 'firedam%', 'fdmg%', 'fdam%', 'fdampct'], 'fDamPct');
+  maxId(['airdmg%', 'airdam%', 'admg%', 'adam%', 'adampct'], 'aDamPct');
+  sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
+
+  maxId(['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct'], 'mdPct');
+  maxId(['mainatkrawdmg', 'mainatkrawdam', 'mainatkneutraldmg', 'mainatkneutraldam', 'meleerawdmg', 'meleerawdam', 'meleeneutraldmg', 'meleeneutraldam', 'mdraw'], 'mdRaw');
+  maxId(['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct'], 'sdPct');
+  maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
+  maxId(['rainbowraw'], 'rSdRaw');
+
+  maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier'], 'atkTier');
+
+  maxId(['earthdef%', 'edef%', 'edefpct'], 'eDefPct');
+  maxId(['thunderdef%', 'tdef%', 'tdefpct'], 'tDefPct');
+  maxId(['waterdef%', 'wdef%', 'wdefpct'], 'wDefPct');
+  maxId(['firedef%', 'fdef%', 'fdefpct'], 'fDefPct');
+  maxId(['airdef%', 'adef%', 'adefpct'], 'aDefPct');
+  sum(['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct'], props.edefpct, props.tdefpct, props.wdefpct, props.fdefpct, props.adefpct);
+
+  maxId(['bonushealth', 'healthid', 'bonushp', 'hpid', 'hpbonus'], 'hpBonus');
+
+  maxId(['hpregen', 'hpr', 'hr', 'hprraw'], 'hprRaw');
+  maxId(['hpregen%', 'hpr%', 'hr%', 'hprpct'], 'hprPct');
+  maxId(['lifesteal', 'ls'], 'ls');
+  maxId(['manaregen', 'mr'], 'mr');
+  maxId(['manasteal', 'ms'], 'ms');
+
+  maxId(['walkspeed', 'movespeed', 'ws', 'spd'], 'spd');
+  maxId('sprint', 'sprint');
+  maxId(['sprintregen', 'sprintreg'], 'sprintReg');
+  maxId(['jumpheight', 'jh'], 'jh');
+
+  maxId(['spellcost1', 'rawspellcost1', 'spcost1', 'spraw1'], 'spRaw1');
+  maxId(['spellcost1%', 'spcost1%', 'sppct1'], 'spPct1');
+  maxId(['spellcost2', 'rawspellcost2', 'spcost2', 'spraw2'], 'spRaw2');
+  maxId(['spellcost2%', 'spcost2%', 'sppct2'], 'spPct2');
+  maxId(['spellcost3', 'rawspellcost3', 'spcost3', 'spraw3'], 'spRaw3');
+  maxId(['spellcost3%', 'spcost3%', 'sppct3'], 'spPct3');
+  maxId(['spellcost4', 'rawspellcost4', 'spcost4', 'spraw4'], 'spRaw4');
+  maxId(['spellcost4%', 'spcost4%', 'sppct4'], 'spPct4');
+  sum(['sumspellcost', 'totalspellcost', 'sumrawspellcost', 'totalrawspellcost', 'sumspcost', 'totalspcost', 'sumspraw', 'totalspraw'], props.spraw1, props.spraw2, props.spraw3, props.spraw4);
+  sum(['sumspellcost%', 'totalspellcost%', 'sumspcost%', 'totalspcost%', 'sumsppct', 'totalsppct'], props.sppct1, props.sppct2, props.sppct3, props.sppct4);
+
+  maxId(['exploding', 'expl', 'expd'], 'expd');
+  maxId('poison', 'poison');
+  maxId('thorns', 'thorns');
+  maxId(['reflection', 'refl', 'ref'], 'ref');
+  maxId(['soulpointregen', 'spr', 'spregen'], 'spRegen');
+  maxId(['lootbonus', 'lb'], 'lb');
+  maxId(['xpbonus', 'xpb', 'xb'], 'xpb');
+  maxId(['stealing', 'esteal'], 'eSteal');
+
+
+  return props;
+})();
+
 // functions that can be called in query expressions
-const itemQueryFuncs = {
+const queryFuncs = {
   max: {
     type: 'number',
     fn: function(item, itemExp, args) {
