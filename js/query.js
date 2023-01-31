@@ -333,7 +333,9 @@ const ingredientQueryProps = (function() {
   maxId(['lootbonus', 'lb'], 'lb');
   maxId(['xpbonus', 'xpb', 'xb'], 'xpb');
   maxId(['stealing', 'esteal'], 'eSteal');
-
+  maxId(['lq', 'quality'], 'lq');
+  maxId('gxp', 'gXp');
+  maxId(['gspd'], 'gSpd');
 
   return props;
 })();
