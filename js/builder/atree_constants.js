@@ -5311,12 +5311,10 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Winded",
                     "behavior": "modify",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Breathless Damage"
-                        }
-                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:3.Breathless Damage"
+                    },
                     "scaling": [-14]
                 },
                 {
@@ -5324,12 +5322,10 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Winded",
                     "behavior": "modify",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Breathless Damage"
-                        }
-                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "eConvBase:3.Breathless Damage"
+                    },
                     "scaling": [-6]
                 }
             ]
@@ -5560,12 +5556,10 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Winded",
                     "behavior": "modify",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Breathless Damage"
-                        }
-                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:3.Breathless Damage"
+                    },
                     "scaling": [-18]
                 },
                 {
@@ -5573,12 +5567,10 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Winded",
                     "behavior": "modify",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Breathless Damage"
-                        }
-                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "eConvBase:3.Breathless Damage"
+                    },
                     "scaling": [-8]
                 }
             ]
@@ -5735,24 +5727,20 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:3.Breathless Damage"
-                        }
-                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "nConvBase:3.Breathless Damage"
+                    },
                     "scaling": [21]
                 },
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "eConvBase:3.Breathless Damage"
-                        }
-                    ],
+                    "output": {
+                        "type": "stat",
+                        "name": "eConvBase:3.Breathless Damage"
+                    },
                     "scaling": [9]
                 },
                 {
