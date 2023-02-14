@@ -4723,19 +4723,13 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Meteor Damage",
-                            "multipliers": [
-                                300,
-                                100,
-                                0,
-                                0,
-                                0,
-                                0
-                            ]
+                            "multipliers": [300, 100, 0, 0, 0, 0 ]
                         },
                         {
                             "name": "Total Damage",
                             "hits": {
-                                "Meteor Damage": 1
+                                "Meteor Damage": 1,
+                                "Breathless Damage": 1
                             }
                         }
                     ]
@@ -5284,7 +5278,9 @@ const atrees = {
             "dependencies": [
                 "Meteor"
             ],
-            "blockers": [],
+            "blockers": [
+                "Ophanim"
+            ],
             "cost": 2,
             "display": {
                 "row": 12,
@@ -5299,22 +5295,42 @@ const atrees = {
                     "type": "add_spell_prop",
                     "target_part": "Lightning Damage",
                     "base_spell": 3,
-                    "multipliers": [
-                        15,
-                        0,
-                        8,
-                        0,
-                        0,
-                        0
-                    ]
+                    "multipliers": [30, 0, 15, 0, 0, 0]
                 },
                 {
                     "type": "add_spell_prop",
                     "target_part": "Total Damage",
                     "base_spell": 3,
                     "hits": {
-                        "Lightning Damage": 6
+                        "Lightning Damage": 3,
+                        "Breathless Damage": 3
                     }
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "behavior": "modify",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Breathless Damage"
+                        }
+                    ],
+                    "scaling": [-14]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "behavior": "modify",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Breathless Damage"
+                        }
+                    ],
+                    "scaling": [-6]
                 }
             ]
         },
@@ -5436,14 +5452,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Sunshower Damage",
-                    "multipliers": [
-                        70,
-                        0,
-                        0,
-                        30,
-                        0,
-                        0
-                    ]
+                    "multipliers": [70, 0, 0, 30, 0, 0]
                 }
             ]
         },
@@ -5507,7 +5516,10 @@ const atrees = {
                 "Sunshower"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": [
+                "Thunderstorm",
+                "Psychokinesis"
+            ],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -5515,7 +5527,8 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "health": 200
+                "health": 200,
+                "num_orbs": 2
             },
             "effects": [
                 {
@@ -5526,19 +5539,13 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Per Orb",
-                            "multipliers": [
-                                50,
-                                0,
-                                30,
-                                20,
-                                0,
-                                0
-                            ]
+                            "multipliers": [60, 0, 30, 30, 0, 0]
                         },
                         {
                             "name": "Per Melee (max)",
                             "hits": {
-                                "Per Orb": 2
+                                "Per Orb": "Ophanim.num_orbs",
+                                "Breathless Damage": "Ophanim.num_orbs"
                             }
                         }
                     ]
@@ -5547,6 +5554,32 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "cost": 30
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "behavior": "modify",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Breathless Damage"
+                        }
+                    ],
+                    "scaling": [-18]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "behavior": "modify",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Breathless Damage"
+                        }
+                    ],
+                    "scaling": [-8]
                 }
             ]
         },
@@ -5647,7 +5680,14 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Ice Snake Damage",
+                    "base_spell": 4,
+                    "multipliers": [20, 0, 0, 10, 0, 0]
+                }
+            ]
         },
         {
             "display_name": "Eye Piercer",
@@ -5691,45 +5731,35 @@ const atrees = {
             },
             "properties": {},
             "effects": [
-                    {
-                        "type": "stat_scaling",
-                        "slider": true,
-                        "slider_name": "Winded",
-                        "output": [
-                            {
-                                "type": "stat",
-                                "name": "nConvBase:3.Meteor Damage"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "nConvBase:3.Per Orb"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "nConvBase:3.Lightning Damage"
-                            }
-                        ],
-                        "scaling": [4]
-                    },
-                    {
-                        "type": "stat_scaling",
-                        "slider": true,
-                        "slider_name": "Winded",
-                        "output": [
-                            {
-                                "type": "stat",
-                                "name": "eConvBase:3.Meteor Damage"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "eConvBase:3.Per Orb"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "eConvBase:3.Lightning Damage"
-                            }
-                        ],
-                    "scaling": [2]
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Breathless Damage"
+                        }
+                    ],
+                    "scaling": [21]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "eConvBase:3.Breathless Damage"
+                        }
+                    ],
+                    "scaling": [9]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Breathless Damage",
+                    "multipliers": [0, 0, 0, 0, 0, 0]
                 }
             ]
         },
@@ -6002,7 +6032,14 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Ice Snake Damage",
+                    "base_spell": 4,
+                    "multipliers": [35, 0, 0, 15, 0, 0]
+                }
+            ]
         },
         {
             "display_name": "Arcane Restoration",
@@ -6037,7 +6074,8 @@ const atrees = {
             "base_abil": "Heal",
             "parents": [
                 "Healthier Ophanim I",
-                "Transonic Warp"
+                "Transonic Warp",
+                "Orphion's Pulse"
             ],
             "dependencies": [],
             "blockers": [],
@@ -6173,7 +6211,8 @@ const atrees = {
             "base_abil": "Heal",
             "parents": [
                 "Healthier Ophanim I",
-                "Snake Nest"
+                "Snake Nest",
+                "Fluid Healing"
             ],
             "dependencies": [
                 "Heal"
@@ -6206,6 +6245,33 @@ const atrees = {
                         "Heal": 1,
                         "Second and Third Pulses": 2
                     }
+                }
+            ]
+        },
+        {
+            "display_name": "Stronger Ophanim",
+            "desc": "Increase the damage of Ophanim.",
+            "base_abil": "Ophanim",
+            "parents": [
+                "Orphion's Pulse"
+            ],
+            "dependencies": [
+                "Ophanim"
+            ],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 24,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Per Orb", 
+                    "multipliers": [20, 0, 0, 0, 0, 10]
                 }
             ]
         },
@@ -6258,25 +6324,18 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Lightweaver",
                     "base_spell": 5,
-                    "display": "Orb Damage",
+                    "display": "Orb DPS",
                     "parts": [
                         {
                             "name": "Single Orb",
                             "type": "damage",
-                            "multipliers": [
-                                70,
-                                0,
-                                0,
-                                0,
-                                30,
-                                0
-                            ]
+                            "multipliers": [150, 0, 0, 0, 50, 0]
                         },
                         {
-                            "name": "Orb Damage",
+                            "name": "Orb DPS",
                             "type": "total",
                             "hits": {
-                                "Single Orb": 3
+                                "Single Orb": 1.5
                             }
                         }
                     ]
@@ -6285,7 +6344,7 @@ const atrees = {
         },
         {
             "display_name": "Arcane Speed",
-            "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 3s. (8s Cooldown)",
+            "desc": "After casting Heal or Arcane Transfer, gain +80% speed for 4s. (8s Cooldown)",
             "base_abil": "Heal",
             "archetype": "Arcanist",
             "parents": [
@@ -6341,7 +6400,9 @@ const atrees = {
             "dependencies": [
                 "Meteor"
             ],
-            "blockers": [],
+            "blockers": [
+                "Ophanim"
+            ],
             "cost": 2,
             "display": {
                 "row": 26,
@@ -6558,14 +6619,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "target_part": "Ice Snake Damage",
                     "base_spell": 4,
-                    "multipliers": [
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        20
-                    ]
+                    "multipliers": [20, 0, 0, 0, 0, 20]
                 }
             ]
         },
@@ -6611,12 +6665,13 @@ const atrees = {
             "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Per Melee (max)",
-                    "hits": {
-                        "Per Orb": 1
-                    }
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil": "Ophanim",
+                        "name": "num_orbs",
+                        "value": 1
+                    }]
                 }
             ]
         },
@@ -6641,8 +6696,36 @@ const atrees = {
             "effects": []
         },
         {
+            "display_name": "Stronger Sunshower",
+            "desc": "Increase the damage of Sunshower.",
+            "base_abil": "Heal",
+            "parents": [
+                "Gust",
+                "Better Ophanim"
+            ],
+            "dependencies": [
+                "Sunshower"
+            ],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 29,
+                "col": 3,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Sunshower Damage", 
+                    "multipliers": [50, 0, 0, 20, 10, 0]
+                }
+            ]
+        },
+        {
             "display_name": "Devitalize",
-            "desc": "Enemies will deal -1% damage for every Winded they have.",
+            "desc": "Enemies will deal -0.5% damage for every Winded they have.",
             "base_abil": "Windsweeper",
             "archetype": "Riftwalker",
             "archetype_req": 5,
@@ -6668,7 +6751,7 @@ const atrees = {
                         "type": "stat",
                         "name": "defMult.Diffusion"
                     },
-                    "scaling": [1]
+                    "scaling": [0.5]
                 }
             ]
         },
@@ -6776,15 +6859,16 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Per Orb", 
-                    "multipliers": [-30, 0, -10, 0, 0, 0]
+                    "multipliers": [-20, 0, -5, -5, 0, 0]
                 },
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Per Melee (max)",
-                    "hits": {
-                        "Per Orb": 3
-                    }
+                    "type": "raw_stat",
+                    "bonuses": [{
+                        "type": "prop",
+                        "abil": "Ophanim",
+                        "name": "num_orbs",
+                        "value": 3
+                    }]
                 }
             ]
         },
@@ -6860,7 +6944,7 @@ const atrees = {
                     "target_part": "Orb Damage",
                     "base_spell": 5,
                     "hits": {
-                        "Single Orb": 2
+                        "Single Orb": 1
                     }
                 }
             ]
