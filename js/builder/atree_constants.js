@@ -960,7 +960,7 @@ const atrees = {
         },
         {
             "display_name": "Arrow Hurricane",
-            "desc": "Arrow Storm will shoot +2 stream of arrows.",
+            "desc": "Arrow Storm will shoot +2 extra streams of arrows.",
             "archetype": "Boltslinger",
             "archetype_req": 8,
             "base_abil": "Arrow Storm",
@@ -980,6 +980,19 @@ const atrees = {
             },
             "properties": {},
             "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Single Arrow",
+                    "multipliers": [
+                        -3,
+                        0,
+                        -4,
+                        0,
+                        0,
+                        2
+                    ]
+                },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
@@ -1014,10 +1027,10 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Geyser Stomp",
                     "multipliers": [
+                        50,
                         0,
                         0,
-                        0,
-                        80,
+                        30,
                         0,
                         0
                     ]
@@ -1045,7 +1058,7 @@ const atrees = {
         },
         {
             "display_name": "Crepuscular Ray",
-            "desc": "If you have 5 Focus, casting Arrow Storm will make you levitate and shoot 20 homing arrows per second until you run out of Focus. While in that state, you will lose 1 Focus per second.",
+            "desc": "If you have 5+ Focus, casting Arrow Storm while 4+ blocks above the ground cause you to levitate and shoot 20 homing arrows per second until you run out of Focus. While in this state, you will lose 1 Focus per second.",
             "archetype": "Sharpshooter",
             "archetype_req": 10,
             "parents": [
@@ -1075,7 +1088,7 @@ const atrees = {
                                 30,
                                 0,
                                 0,
-                                5,
+                                10,
                                 0,
                                 0
                             ]
@@ -1227,7 +1240,7 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Single Shot",
                     "multipliers": [
-                        0,
+                        2,
                         0,
                         0,
                         0,
@@ -1637,7 +1650,7 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Single Shot",
                     "multipliers": [
-                        -15,
+                        -18,
                         0,
                         0,
                         0,
@@ -1899,7 +1912,7 @@ const atrees = {
         },
         {
             "display_name": "Precise Shot",
-            "desc": "+30% Critical Hit Damage",
+            "desc": "+15% Critical Hit Damage",
             "parents": [
                 "Escape Artist",
                 "Cheaper Arrow Shield",
@@ -1922,7 +1935,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "critDamPct",
-                            "value": 30
+                            "value": 15
                         }
                     ]
                 }
@@ -2470,7 +2483,7 @@ const atrees = {
         },
         {
             "display_name": "Frenzy",
-            "desc": "Every time you hit an enemy, briefly gain +6% Walk Speed (Max 200%). Decay -40% of the bonus every second",
+            "desc": "Every time you hit an enemy, briefly gain +5% Walk Speed (Max 120%). Decay -40% of the bonus every second",
             "archetype": "Boltslinger",
             "archetype_req": 0,
             "parents": [
@@ -2496,9 +2509,9 @@ const atrees = {
                         "name": "spd"
                     },
                     "scaling": [
-                        6
+                        5
                     ],
-                    "max": 160
+                    "max": 120
                 }
             ]
         },
@@ -2820,7 +2833,7 @@ const atrees = {
                     "target_part": "Heavy Impact",
                     "cost": 0,
                     "multipliers": [
-                        100,
+                        120,
                         0,
                         0,
                         0,
@@ -3335,7 +3348,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Flyby Jab",
-                    "multipliers": [20, 0, 0, 0, 0, 40]
+                    "multipliers": [100, 0, 0, 0, 0, 20]
                 },
                 {
                     "type": "add_spell_prop",
@@ -3427,7 +3440,7 @@ const atrees = {
         },
         {
             "display_name": "Generalist",
-            "desc": "After casting 3 different spells in a row, your next spell will cost 5 mana",
+            "desc": "After casting 3 different spells in a row, your next spell will cost 1 mana",
             "archetype": "Battle Monk", 
             "archetype_req": 3, 
             "parents": ["Air Shout"], 
@@ -3622,6 +3635,8 @@ const atrees = {
         {
             "display_name": "Counter",
             "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
+            "archetype": "Battle Monk", 
+            "archetype_req": 0, 
             "parents": ["Aerodynamics", "Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -3651,7 +3666,7 @@ const atrees = {
         },
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 120%)",
+            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 80%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",
@@ -3815,20 +3830,20 @@ const atrees = {
                 },
                 {
                     "type": "raw_stat",
-                    "bonuses": [ {"type": "prop", "abil": "War Scream", "name": "duration", "value": 90} ]
+                    "bonuses": [ {"type": "prop", "abil": "War Scream", "name": "duration", "value": 15} ]
                 }
             ]  
         },
         {
             "display_name": "Precise Strikes",
-            "desc": "+30% Critical Hit Damage",
-            "parents": ["Flying Kick", "Stronger Mantle", "Burning Heart"], 
+            "desc": "+15% Critical Hit Damage",
+            "parents": ["Spear Proficiency 2", "Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 22,
-                "col": 4,
+                "row": 18,
+                "col": 1,
                 "icon": "node_0"
             },
             "properties": {
@@ -3840,7 +3855,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "critDamPct",
-                            "value": 30
+                            "value": 15
                         }
                     ]
                 }
@@ -4083,7 +4098,7 @@ const atrees = {
             "display_name": "Whirlwind Strike",
             "desc": "Uppercut will create a strong gust of air, launching you upward with enemies (Hold shift to stay grounded)",
             "archetype": "Battle Monk", 
-            "archetype_req": 5, 
+            "archetype_req": 6, 
             "base_abil": "Uppercut",
             "parents": ["Precise Strikes", "Radiant Devotee"], 
             "dependencies": ["Uppercut"], 
@@ -4166,13 +4181,13 @@ const atrees = {
             "display_name": "Ambidextrous",
             "desc": "Increase your chance to attack with Counter by +30%",
             "base_abil": "Counter",
-            "parents": ["Radiant Devotee", "Whirlwind Strike"], 
+            "parents": ["Stronger Mantle", "Flying Kick"], 
             "dependencies": ["Counter"], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 27,
-                "col": 3,
+                "row": 21,
+                "col": 6,
                 "icon": "node_0"
             },
             "properties": {},
@@ -4431,7 +4446,7 @@ const atrees = {
         },
 
         {
-            "display_name": "Cheaper War Scream",
+            "display_name": "Cheaper War Scream 2",
             "desc": "Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Massive Bash"], 
@@ -4454,8 +4469,31 @@ const atrees = {
         },
 
         {
+            "display_name": "Cheaper War Scream",
+            "desc": "Reduce the Mana cost of War Scream",
+            "base_abil": "War Scream",
+            "parents": ["Stronger Mantle", "Flying Kick", "Burning Heart"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 22,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": -5
+                }
+            ]  
+        },
+
+        {
             "display_name": "Discombobulate",
-            "desc": "Every time you hit an enemy, briefly increase your elemental damage dealt to them by +3 (Additive, Max +80). This bonus decays -5 every second",
+            "desc": "Damaging enemies will inflict them with +5 Discombobulated. (Max 100) You will deal +1 neutral and elemental damage to enemies for every Discombobulated they have. -5 of the bonus decays every second.",
             "archetype": "Battle Monk", 
             "archetype_req": 11, 
             "parents": ["Cyclone"], 
@@ -4476,14 +4514,15 @@ const atrees = {
                     "slider_name": "Hits dealt",
                     "slider_max": 27,
                     "output": [
+                        { "type": "stat", "name": "nDamAddMin" }, { "type": "stat", "name": "nDamAddMax" },
                         { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
                         { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
                         { "type": "stat", "name": "wDamAddMin" }, { "type": "stat", "name": "wDamAddMax" },
                         { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
                         { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
                     ],
-                    "scaling": [3],
-                    "max": 80
+                    "scaling": [5],
+                    "max": 100
                 }
             ]  
         },
@@ -4579,7 +4618,7 @@ const atrees = {
 
         {
             "display_name": "Blood Pact",
-            "desc": "If you do not have enough mana to cast a spell, spend health instead (0.6% health per mana)",
+            "desc": "If you do not have enough mana to cast a spell, spend health instead (0.4% health per mana)",
             "archetype": "Fallen", 
             "archetype_req": 10, 
             "parents": ["Cheaper War Scream"], 
@@ -4592,7 +4631,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "health_cost": 0.6
+                "health_cost": 0.4
             },
             "effects": []  
         },
@@ -4663,7 +4702,7 @@ const atrees = {
         },
         {
             "display_name": "Haemorrhage",
-            "desc": "Reduce Blood Pact's health cost. (0.3% health per mana)",
+            "desc": "Reduce Blood Pact's health cost. (0.25% health per mana)",
             "archetype": "Fallen",
             "archetype_req": 0,
             "base_abil": "Blood Pact",
@@ -4674,11 +4713,11 @@ const atrees = {
                 "Blood Pact"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 35,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -4689,7 +4728,7 @@ const atrees = {
                             "type": "prop",
                             "abil": "Blood Pact",
                             "name": "health_cost",
-                            "value": -0.3
+                            "value": -0.25
                         }
                     ]
                 }
@@ -9408,7 +9447,7 @@ const atrees = {
                 "parts": [
                     {
                         "name": "Tick Damage",
-                        "multipliers": [5, 0, 0, 0, 0, 5]
+                        "multipliers": [6, 0, 0, 0, 0, 6]
                     },
                     {
                         "name": "Tick DPS",
@@ -10008,7 +10047,7 @@ const atrees = {
         },
         {
             "display_name": "Flaming Tongue",
-            "desc": "Uproot will not explode or knockback enemies, but will deal damage 3 times. All elemental conversions become Fire.",
+            "desc": "Uproot will not explode or knockback enemies, but will deal damage 3 times.",
             "base_abil": "Uproot",
             "archetype": "Acolyte",
             "parents": [
@@ -10030,11 +10069,11 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Single Hit",
                     "multipliers": [
-                        -50,
+                        -15,
+                        -30,
+                        -15,
                         0,
-                        0,
-                        0,
-                        0,
+                        10,
                         0
                     ]
                 },
@@ -10106,7 +10145,7 @@ const atrees = {
             "archetype_req": 2,
             "parents": ["Rain Dance"],
             "dependencies": ["Uproot"],
-            "blockers": [],
+            "blockers": ["Blood Sorrow"],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -10456,10 +10495,11 @@ const atrees = {
             "archetype_req": 3,
             "parents": [
                 "Hymn of Hate",
-                "More Blood Pool I"
+                "More Blood Pool I",
+                "Vengeful Spirit"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": ["Blood Sorrow"],
             "cost": 2,
             "display": {
                 "row": 21,
@@ -10503,7 +10543,7 @@ const atrees = {
             "desc": "Your Totem will give damage bonus to yourself and allies standing inside its range.",
             "base_abil": "Totem",
             "archetype": "Acolyte",
-            "parents": ["More Blood Pool I"],
+            "parents": ["More Blood Pool I", "Mask of the Fanatic"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
@@ -10886,7 +10926,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Effigy Hit",
-                            "multipliers": [ 30, 0, 0, 30, 0, 0 ]
+                            "multipliers": [ 55, 0, 0, 30, 0, 0 ]
                         },
                         {
                             "name": "Single Effigy DPS",
@@ -10912,7 +10952,7 @@ const atrees = {
                 "Fluid Healing"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": ["Blood Sorrow"],
             "cost": 2,
             "display": {
                 "row": 28,
@@ -11084,7 +11124,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 7,
                     "name": "Effigy Hit",
-                    "multipliers": [ -5, 0, 0, -10, 0, 0 ]
+                    "multipliers": [ -10, 0, 0, -10, 0, 0 ]
                 }
             ]
         },
@@ -11196,7 +11236,7 @@ const atrees = {
         },
         {
             "display_name": "Invigorating Wave",
-            "desc": "Aura will temporarily increase your Summon's attack speed by +50%. Players hit will gain +3 mana.",
+            "desc": "Aura will temporarily increase your Summon's attack speed by +30%. Players hit will gain +5 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
             "parents": ["More Effigies", "Triple Totem", "Mengdu"], 
@@ -11210,7 +11250,7 @@ const atrees = {
             },
             "properties": {
                 "TODO": "Make this not multiply base damage...",
-                "duration": 3
+                "duration": 2.5
             },
             "effects": [
                 {
@@ -11359,7 +11399,7 @@ const atrees = {
             "archetype_req": 12,
             "parents": ["Frog Dance", "Cheaper Uproot II"],
             "dependencies": ["Uproot"],
-            "blockers": [],
+            "blockers": ["Blood Sorrow"],
             "cost": 2,
             "display": {
                 "row": 35,
@@ -11415,7 +11455,7 @@ const atrees = {
         },
         {
             "display_name": "Blood Sorrow",
-            "desc": "Uproot will use 60% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +3% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
+            "desc": "Uproot will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
             "base_abil": "Uproot",
             "archetype": "Acolyte",
             "archetype_req": 12,
