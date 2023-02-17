@@ -221,4 +221,4 @@ with open("ing_map.json", "w") as ing_mapfile:
 
 #save ings
 with open(outfile, "w") as out_file:
-    json.dump(ings, out_file)
+    json.dump(ings, out_file, ensure_ascii=False, separators=(',', ':'))
