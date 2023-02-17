@@ -96,5 +96,5 @@ with open("id_map.json","w") as id_mapfile:
 
 #write the data back to the outfile
 with open(outfile, "w+") as out_file:
-    json.dump(data, out_file)
+    json.dump(data, out_file, ensure_ascii=False, separators=(',', ':'))
 
