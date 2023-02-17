@@ -302,7 +302,7 @@ function expandRecipe(recipe) {
 function idRound(id){
     rounded = Math.round(id);
     if(rounded == 0){
-        return 1; //this is a hack, will need changing along w/ rest of ID system if anything changes
+        return Math.sign(id); //this is a hack, will need changing along w/ rest of ID system if anything changes
     }else{
         return rounded;
     }

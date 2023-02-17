@@ -707,7 +707,7 @@ const atrees = {
         },
         {
             "display_name": "Scorched Earth",
-            "desc": "Fire Creep become much stronger.",
+            "desc": "Fire Creep becomes much stronger.",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "parents": [
@@ -3865,7 +3865,7 @@ const atrees = {
             "desc": "For every 100 Health Bonus you have from item IDs, gain +2% Fire Damage (Max 100%)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Precise Strikes", "Stronger Bash"], 
+            "parents": ["Cheaper War Scream I", "Stronger Bash"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -3981,7 +3981,7 @@ const atrees = {
             "archetype": "Battle Monk", 
             "archetype_req": 4, 
             "base_abil": "Charge",
-            "parents": ["Precise Strikes", "Burning Heart"], 
+            "parents": ["Cheaper War Scream I", "Burning Heart"], 
             "dependencies": ["Flying Kick"], 
             "blockers": [],
             "cost": 2, 
@@ -4099,7 +4099,7 @@ const atrees = {
             "archetype": "Battle Monk", 
             "archetype_req": 6, 
             "base_abil": "Uppercut",
-            "parents": ["Precise Strikes", "Radiant Devotee"], 
+            "parents": ["Cheaper War Scream I", "Radiant Devotee"], 
             "dependencies": ["Uppercut"], 
             "blockers": [],
             "cost": 2, 
@@ -4186,7 +4186,7 @@ const atrees = {
             "cost": 1, 
             "display": {
                 "row": 21,
-                "col": 6,
+                "col": 5,
                 "icon": "node_0"
             },
             "properties": {},
@@ -4363,7 +4363,7 @@ const atrees = {
             "archetype_req": 5, 
             "base_abil": 999,
             "parents": ["Tempest", "Massive Bash"], 
-            "dependencies": [], 
+            "dependencies": ["Bak'al's Grasp"], 
             "blockers": [],
             "cost": 2, 
             "display": {
@@ -4445,7 +4445,7 @@ const atrees = {
         },
 
         {
-            "display_name": "Cheaper War Scream 2",
+            "display_name": "Cheaper War Scream II",
             "desc": "Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Massive Bash"], 
@@ -4468,7 +4468,7 @@ const atrees = {
         },
 
         {
-            "display_name": "Cheaper War Scream",
+            "display_name": "Cheaper War Scream I",
             "desc": "Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
             "parents": ["Stronger Mantle", "Flying Kick", "Burning Heart"], 
@@ -4477,7 +4477,7 @@ const atrees = {
             "cost": 1, 
             "display": {
                 "row": 22,
-                "col": 5,
+                "col": 4,
                 "icon": "node_0"
             },
             "properties": {},
@@ -4620,7 +4620,7 @@ const atrees = {
             "desc": "If you do not have enough mana to cast a spell, spend health instead (0.4% health per mana)",
             "archetype": "Fallen", 
             "archetype_req": 10, 
-            "parents": ["Cheaper War Scream"], 
+            "parents": ["Cheaper War Scream II"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -8177,7 +8177,7 @@ const atrees = {
                 "Shadow Travel",
                 "Dagger Proficiency II"
             ],
-            "dependencies": [],
+            "dependencies": [ "Multihit" ],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -8845,15 +8845,13 @@ const atrees = {
         {
             "display_name": "Cheaper Multihit 2",
             "desc": "Reduce the Mana cost of Multihit",
-            "archetype": "",
-            "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
                 "Death Magnet",
                 "Nightcloak Knife",
                 "Hoodwink"
             ],
-            "dependencies": [],
+            "dependencies": [ "Multihit" ],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -10772,38 +10770,30 @@ const atrees = {
             "properties": { "totem_mul": 2.5 },
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Tick Damage",
-                    "multipliers": [-3, 0, 0, 0, 0, 0]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Single Wave",
-                    "multipliers": [-60, 0, 0, 0, 0, 0]
-                },
-                {
                     "type": "raw_stat",
-                    "bonuses": [{
-                        "type": "prop",
-                        "abil": "Aura",
-                        "name": "num_totems",
-                        "value": 1
-                    }]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Heal Tick",
-                    "power": -0.003,
-                    "display": "Heal Rate"
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Heal Amount",
-                    "power": -0.05
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Aura",
+                            "name": "num_totems",
+                            "value": 1
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.MultiTotem:3.Single Wave",
+                            "value": -40
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.MultiTotem:1.Tick Damage",
+                            "value": -40
+                        },
+                        {
+                            "type": "stat",
+                            "name": "healPct",
+                            "value": -40
+                        }
+                    ]
                 }
             ]
         },
@@ -11094,7 +11084,7 @@ const atrees = {
             "properties": {
                 "duration": 60,
                 "max_effigy": 1,
-                "attack_frequency": 4
+                "attack_frequency": 2
             },
             "effects": [
                 {
@@ -11378,38 +11368,30 @@ const atrees = {
             "properties": { "totem_mul": 2.5 },
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Tick Damage",
-                    "multipliers": [-2, 0, 0, 0, 0, 0]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Single Wave",
-                    "multipliers": [-40, 0, 0, 0, 0, 0]
-                },
-                {
                     "type": "raw_stat",
-                    "bonuses": [{
-                        "type": "prop",
-                        "abil": "Aura",
-                        "name": "num_totems",
-                        "value": 1
-                    }]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "target_part": "Heal Tick",
-                    "power": -0.002,
-                    "display": "Heal Rate"
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Heal Amount",
-                    "power": -0.03
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Aura",
+                            "name": "num_totems",
+                            "value": 1
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.MultiTotem:3.Single Wave",
+                            "value": -10
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.MultiTotem:1.Tick Damage",
+                            "value": -10
+                        },
+                        {
+                            "type": "stat",
+                            "name": "healPct",
+                            "value": -10
+                        }
+                    ]
                 }
             ]
         },
@@ -11436,8 +11418,8 @@ const atrees = {
                     "type": "raw_stat",
                     "toggle": "Invigorate Puppets",
                     "bonuses": [
-                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 1 },
-                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 2 }
+                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 0.6 },
+                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 0.6 }
                     ]
                 }
             ]
@@ -11640,7 +11622,12 @@ const atrees = {
             "archetype_req": 12,
             "parents": ["More Blood Pool III"],
             "dependencies": ["Uproot"],
-            "blockers": [],
+            "blockers": [
+                "Mask of the Lunatic",
+                "Mask of the Fanatic",
+                "Mask of the Coward",
+                "Mask of the Awakened"
+            ],
             "cost": 2,
             "display": {
                 "row": 34,
