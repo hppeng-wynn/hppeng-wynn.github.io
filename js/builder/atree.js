@@ -668,7 +668,10 @@ const atree_scaling = new (class extends ComputeNode {
                     if ('output' in effect) { // sometimes nodes will modify slider without having effect.
                         if (round) { total = Math.floor(round_near(total)); }
                         if (positive && total < 0) { total = 0; }   // Normal stat scaling will not go negative.
-                        if ('max' in effect && total > effect.max) { total = effect.max; }
+                        if ('max' in effect) {
+                            if (effect.max > 0 && total > effect.max) { total = effect.max; }
+                            if (effect.max < 0 && total < effect.max) { total = effect.max; }
+                        }
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {
                                 apply_bonus(output, total);

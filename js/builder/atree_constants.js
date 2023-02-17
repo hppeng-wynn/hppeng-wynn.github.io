@@ -3692,9 +3692,8 @@ const atrees = {
                     "max": 80,
                     "scaling": [1.5]
                 }
-            ]  
+            ]
         },
-
         {
             "display_name": "Flying Kick",
             "desc": "When using Charge, mobs hit will halt your momentum and get knocked back",
@@ -4443,30 +4442,6 @@ const atrees = {
                 }
             ]  
         },
-
-        {
-            "display_name": "Cheaper War Scream II",
-            "desc": "Reduce the Mana cost of War Scream",
-            "base_abil": "War Scream",
-            "parents": ["Massive Bash"], 
-            "dependencies": [], 
-            "blockers": [],
-            "cost": 1, 
-            "display": {
-                "row": 31,
-                "col": 0,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "cost": -5
-                }
-            ]  
-        },
-
         {
             "display_name": "Cheaper War Scream I",
             "desc": "Reduce the Mana cost of War Scream",
@@ -4489,7 +4464,69 @@ const atrees = {
                 }
             ]  
         },
-
+        {
+            "display_name": "Cheaper War Scream II",
+            "desc": "Reduce the Mana cost of War Scream",
+            "base_abil": "War Scream",
+            "parents": ["Massive Bash"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 31,
+                "col": 0,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": -5
+                }
+            ]  
+        },
+        {
+            "display_name": "Better Enraged Blow",
+            "desc": "Increases the cap of Enraged Blow by +60%.",
+            "archetype": "Fallen", 
+            "base_abil": "Bak'al's Grasp",
+            "parents": ["Cheaper War Scream II"], 
+            "dependencies": ["Bak'al's Grasp"], 
+            "blockers": [],
+            "cost": 1, 
+            "display": {
+                "row": 32,
+                "col": 1,
+                "icon": "node_0"
+            },
+            "properties": {
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider_name": "Corrupted", 
+                    "slider": true,
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Enraged" 
+                    },
+                    "max": -80,
+                    "scaling": [-1.5]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider_name": "Corrupted", 
+                    "slider": true,
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Enraged" 
+                    },
+                    "max": 140,
+                    "scaling": [1.5]
+                }
+            ]
+        },
         {
             "display_name": "Discombobulate",
             "desc": "Damaging enemies will inflict them with +5 Discombobulated. (Max 100) You will deal +1 neutral and elemental damage to enemies for every Discombobulated they have. -5 of the bonus decays every second.",
@@ -4614,7 +4651,6 @@ const atrees = {
             "properties": {},
             "effects": []  
         },
-
         {
             "display_name": "Blood Pact",
             "desc": "If you do not have enough mana to cast a spell, spend health instead (0.4% health per mana)",
@@ -4625,8 +4661,8 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 34,
-                "col": 1,
+                "row": 33,
+                "col": 0,
                 "icon": "node_3"
             },
             "properties": {
@@ -4642,7 +4678,7 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 35,
+                "row": 34,
                 "col": 4,
                 "icon": "node_2"
             },
@@ -4665,7 +4701,7 @@ const atrees = {
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 35,
+                "row": 34,
                 "col": 6,
                 "icon": "node_0"
             },
@@ -4689,7 +4725,7 @@ const atrees = {
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 35,
+                "row": 34,
                 "col": 8,
                 "icon": "node_1"
             },
@@ -4714,7 +4750,7 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 35,
+                "row": 34,
                 "col": 2,
                 "icon": "node_0"
             },
@@ -7375,8 +7411,6 @@ const atrees = {
         {
             "display_name": "Cheaper Dash",
             "desc": "Reduce the Mana cost of Dash",
-            "archetype": "",
-            "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
                 "Smoke Bomb",
@@ -7402,8 +7436,6 @@ const atrees = {
         {
             "display_name": "Multihit",
             "desc": "Unleash a rapid flurry of 8 hits to enemies facing you, dealing overwhelming damage",
-            "archetype": "",
-            "archetype_req": 0,
             "parents": [
                 "Double Slice",
                 "Cheaper Dash"
@@ -7528,7 +7560,6 @@ const atrees = {
             "display_name": "Fire Mastery",
             "desc": "Increases base damage from all Fire attacks",
             "archetype": "Trickster",
-            "archetype_req": 0,
             "base_abil": 998,
             "parents": [
                 "Cheaper Dash",
@@ -7570,7 +7601,6 @@ const atrees = {
             "display_name": "Water Mastery",
             "desc": "Increases base damage from all Water attacks",
             "archetype": "Acrobat",
-            "archetype_req": 0,
             "base_abil": 998,
             "parents": [
                 "Cheaper Dash",
@@ -8171,8 +8201,7 @@ const atrees = {
             "archetype_req": 3,
             "base_abil": "Dash",
             "parents": [
-                "Shadow Travel",
-                "Cheaper Multihit"
+                "Mirror Image"
             ],
             "dependencies": [
                 "Mirror Image"
@@ -8687,13 +8716,12 @@ const atrees = {
             ]
         },
         {
-            "display_name": "Cheaper Dash 2",
+            "display_name": "Cheaper Dash II",
             "desc": "Reduce the Mana cost of Dash",
-            "archetype": "",
-            "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
-                "Echo"
+                "Echo",
+                "Death Magnet"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8765,7 +8793,8 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
-                "Marked"
+                "Marked",
+                "Cheaper Dash II"
             ],
             "dependencies": [
                 "Vanish"
@@ -8781,7 +8810,7 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Cheaper Multihit 2",
+            "display_name": "Cheaper Multihit II",
             "desc": "Reduce the Mana cost of Multihit",
             "base_abil": "Multihit",
             "parents": [
@@ -8813,8 +8842,8 @@ const atrees = {
             "archetype_req": 1,
             "base_abil": "Spin Attack",
             "parents": [
-                "Cheaper Multihit 2",
-                "Cheaper Dash 2",
+                "Cheaper Multihit II",
+                "Cheaper Dash II",
                 "Choke Bomb"
             ],
             "dependencies": [
@@ -8881,8 +8910,8 @@ const atrees = {
             "archetype_req": 8,
             "base_abil": "Spin Attack",
             "parents": [
-                "Death Magnet",
-                "Cheaper Multihit 2"
+                "Nightcloak Knife",
+                "Cheaper Multihit II"
             ],
             "dependencies": [
                 "Marked"
@@ -9412,7 +9441,7 @@ const atrees = {
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Multihit 2",
+                "Cheaper Multihit II",
                 "Ambush"
             ],
             "dependencies": ["Marked"],
@@ -9459,7 +9488,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Vanish",
             "parents": [
-                "Cheaper Multihit 2",
+                "Cheaper Multihit II",
                 "Hoodwink"
             ],
             "dependencies": ["Vanish"],
@@ -9467,7 +9496,7 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 34,
-                "col": 5,
+                "col": 3,
                 "icon": "node_0"
             },
             "effects": [{
