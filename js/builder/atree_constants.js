@@ -7934,7 +7934,7 @@ const atrees = {
         },
         {
             "display_name": "Mirror Image",
-            "desc": "After leaving Vanish, summon 3 Clones that will follow you and protect you (20s Cooldown). When hit, gain a chance to take 80% less damage and lose 1 Clone.",
+            "desc": "After leaving Vanish, summon 3 Clones that will follow you and protect you (15s Cooldown). When hit, gain a chance to take 80% less damage and lose 1 Clone.",
             "archetype": "Trickster",
             "archetype_req": 2,
             "base_abil": "Dash",
@@ -8242,9 +8242,9 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 23,
-                "col": 4,
-                "icon": "node_1"
+                "row": 20,
+                "col": 3,
+                "icon": "node_0"
             },
             "properties": {},
             "effects": []
@@ -8401,11 +8401,12 @@ const atrees = {
         {
             "display_name": "Dancing Blade",
             "desc": "Deal damage to mobs you Dash through",
-            "archetype": "",
+            "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
-                "Weightless"
+                "Far Reach",
+                "Shurikens"
             ],
             "dependencies": [
                 "Dash"
@@ -8413,9 +8414,9 @@ const atrees = {
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 26,
-                "col": 8,
-                "icon": "node_1"
+                "row": 29,
+                "col": 7,
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -8423,14 +8424,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Dancing Blade",
-                    "multipliers": [
-                        70,
-                        0,
-                        0,
-                        0,
-                        0,
-                        10
-                    ],
+                    "multipliers": [70, 0, 0, 0, 0, 10],
                     "display": "Dancing Blade"
                 }
             ]
@@ -8671,7 +8665,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Dancing Blade",
+                "Flow State",
                 "Shurikens"
             ],
             "dependencies": [],
@@ -8691,14 +8685,13 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                "Shurikens",
-                "Far Reach"
+                "Wall of Smoke"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 29,
+                "row": 21,
                 "col": 7,
                 "icon": "node_0"
             },
@@ -8737,7 +8730,7 @@ const atrees = {
             "cost": 1,
             "display": {
                 "row": 31,
-                "col": 1,
+                "col": 0,
                 "icon": "node_0"
             },
             "properties": {},
@@ -8834,8 +8827,7 @@ const atrees = {
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
-                "Cheaper Multihit 2",
-                "Ambush"
+                "Marked"
             ],
             "dependencies": [
                 "Vanish"
@@ -8843,8 +8835,8 @@ const atrees = {
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 33,
-                "col": 0,
+                "row": 31,
+                "col": 2,
                 "icon": "node_1"
             },
             "properties": {},
@@ -8858,7 +8850,7 @@ const atrees = {
             "base_abil": "Multihit",
             "parents": [
                 "Death Magnet",
-                "Ambush",
+                "Nightcloak Knife",
                 "Hoodwink"
             ],
             "dependencies": [],
@@ -9158,7 +9150,7 @@ const atrees = {
         },
         {
             "display_name": "Stronger Clones",
-            "desc": "Improve your damage while your Clones are active by +20%",
+            "desc": "Improve your damage while your Clones are active by +15%",
             "archetype": "Trickster",
             "archetype_req": 7,
             "base_abil": "Dash",
@@ -9174,22 +9166,18 @@ const atrees = {
             "display": {
                 "row": 38,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "toggle": "Activate Clones",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "damMult.Echo",
-                            "value": 15
-                        }
-                    ]
-                }
-            ]
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": "Activate Clones",
+                "bonuses": [{
+                    "type": "stat",
+                    "name": "damMult.Echo",
+                    "value": 15
+                }]
+            }]
         },
         {
             "display_name": "Ricochets",
@@ -9261,7 +9249,7 @@ const atrees = {
         },
         {
             "display_name": "Forbidden Art",
-            "desc": "Summon +3 additional Clones. (+20s Cooldown)",
+            "desc": "Summon +3 additional Clones. (+15s Cooldown)",
             "archetype": "Trickster",
             "archetype_req": 8,
             "base_abil": "Dash",
@@ -9416,6 +9404,198 @@ const atrees = {
                     ]
                 }
             ]
+        },
+        {
+            "display_name": "Bamboozle",
+            "desc": "When Clones are active, casting Multihit while holding shift will instead slay 1 CLone and teleport you forwards with a brutal fiery slash",
+            "archetype": "Trickster",
+            "archetype_req": 0,
+            "base_abil": "Multihit",
+            "parents": [
+                "Cheaper Multihit",
+                "Shadow Travel"
+            ],
+            "dependencies": [ "Mirror Image" ],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 4,
+                "icon": "node_2"
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Bamboozle",
+                    "base_spell": 8,
+                    "display": "Slash Damage",
+                    "parts": [
+                        {
+                            "name": "Slash Damage",
+                            "multipliers": [ 360, 0, 0, 40, 0, 0 ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Distraction",
+            "desc": "When hitting enemies, reduce their damage by -0.1% per hit. (Max -15%) The damage debuff decays at -0.3% per second.",
+            "archetype": "Trickster",
+            "archetype_req": 0,
+            "parents": [
+                "Cheaper Multihit",
+                "Dagger Proficiency II"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 23,
+                "col": 6,
+                "icon": "node_1"
+            },
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Distraction Hits",
+                    "output": {
+                        "type": "stat",
+                        "name": "defMult.Diffusion"
+                    },
+                    "scaling": [0.1],
+                    "slider_step": 1,
+                    "slider_max": 150
+                }
+            ]
+        },
+        {
+            "display_name": "Nightcloak Knife",
+            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will mimic your attacks on enemies within 6 blocks of you, dealing 4% of your damage for every 1 Mark consumed. (Max 10 Marks)\n The Knife will vanish after 8s",
+            "archetype": "Shadestepper",
+            "archetype_req": 0,
+            "parents": [
+                "Cheaper Multihit 2",
+                "Ambush"
+            ],
+            "dependencies": ["Marked"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 33,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "effects": []
+        },
+        {
+            "display_name": "Pirouette",
+            "desc": "When hitting an enemy with Dancing Blade, you will deal extra damage and vault upwards, resetting Dash as if you touched the ground.",
+            "archetype": "Acrobat",
+            "archetype_req": 0,
+            "base_abil": "Dash",
+            "parents": [
+                "Stronger Lacerate",
+                "Choke Bomb",
+                "Hoodwink"
+            ],
+            "dependencies": ["Dancing Blade"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 2,
+                "target_part": "Dancing Blade",
+                "multipliers": [30, 0, 0, 0, 0, 10],
+                "display": "Dancing Blade"
+            }]
+        },
+        {
+            "display_name": "Dissolution",
+            "desc": "When entering Vanish, become immune to knockback and gain resistance for a brief moment.",
+            "archetype": "Shadestepper",
+            "archetype_req": 0,
+            "base_abil": "Vanish",
+            "parents": [
+                "Cheaper Multihit 2",
+                "Hoodwink"
+            ],
+            "dependencies": ["Vanish"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 34,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": "Activate Dissolution",
+                "bonuses": [{
+                    "type": "stat",
+                    "name": "defMult.Dissolution",
+                    "value": 40
+                }]
+            }]
+        },
+        {
+            "display_name": "Flow State",
+            "desc": "Landing 60 hits without stopping for over 2s will greatly increase your damage for a short time. (10s Cooldown)",
+            "archetype": "Acrobat",
+            "archetype_req": 5,
+            "parents": [
+                "Weightless"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 26,
+                "col": 8,
+                "icon": "node_3"
+            },
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": "Flow State",
+                "bonuses": [{
+                    "type": "stat",
+                    "name": "damMult.FlowState",
+                    "value": 50
+                }]
+            }]
+        },
+        {
+            "display_name": "Even Stronger Clones",
+            "desc": "Improves your damage by +10% while your Clones are active.",
+            "archetype": "Trickster",
+            "archetype_req": 0,
+            "base_abil": "Mirror Image",
+            "parents": [
+                "Diversion"
+            ],
+            "dependencies": ["Echo"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 41,
+                "col": 4,
+                "icon": "node_0"
+            },
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": "Activate Clones",
+                "bonuses": [{
+                    "type": "stat",
+                    "name": "damMult.Echo",
+                    "value": 10
+                }]
+            }]
         }
     ],
     "Shaman": [
