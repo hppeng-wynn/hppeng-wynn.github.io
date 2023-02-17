@@ -87,10 +87,10 @@ stat_scaling: {
   "slider_name": Optional[str],
   "slider_step": Optional[float],
   round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
-  slider_behavior:  Optional[str]           // One of: "merge", "modify". default: merge
+  behavior:  Optional[str]                  // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part, by incrementing properties. do nothing if not exist
-  slider_max: Optional[float]               // affected by slider_behavior
+  slider_max: Optional[float]               // affected by behavior
   inputs: Optional[list[scaling_target]]    // List of things to scale. Omit this if using slider
 
   output: Optional[scaling_target | List[scaling_target]] // One of the following:
@@ -511,18 +511,35 @@ const atree_make_interactives = new (class extends ComputeNode {
         const slider_map = new Map();
         const button_map = new Map();
 
-        // first, pull out all the sliders and toggles.
-        for (const [abil_id, ability] of merged_abils.entries()) {
+        let to_process = [];
+        for (const [abil_id, ability] of merged_abils) {
             for (const effect of ability.effects) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-                    const { slider_name, slider_behavior = 'merge', slider_max, slider_step } = effect;
+                    to_process.push([effect, abil_id, ability]);
+                }
+                if (effect['type'] === "raw_stat" && effect['toggle']) {
+                    to_process.push([effect, abil_id, ability]);
+                }
+            }
+        }
+        let unprocessed = [];
+        // first, pull out all the sliders and toggles.
+        let k = to_process.length;
+        for (let i = 0; i < k; ++i) {
+            for (const [effect, abil_id, ability] of to_process) {
+                if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
+                    const { slider_name, behavior = 'merge', slider_max, slider_step } = effect;
                     if (slider_map.has(slider_name)) {
                         if (slider_max !== undefined) {
                             const slider_info = slider_map.get(slider_name);
                             slider_info.max += slider_max;
                         }
+                        else {
+                            unprocessed.push([effect, abil_id, ability]);
+                        }
                     }
-                    else if (slider_behavior === 'merge') {
+                    else if (behavior === 'merge') {
+                        console.log(effect);
                         slider_map.set(slider_name, {
                             label_name: slider_name+' ('+ability.display_name+')',
                             max: slider_max,
@@ -532,6 +549,9 @@ const atree_make_interactives = new (class extends ComputeNode {
                             abil: ability
                         });
                     }
+                    else {
+                        unprocessed.push([effect, abil_id, ability]);
+                    }
                 }
                 if (effect['type'] === "raw_stat" && effect['toggle']) {
                     const { toggle: toggle_name } = effect;
@@ -540,6 +560,9 @@ const atree_make_interactives = new (class extends ComputeNode {
                     });
                 }
             }
+            if (unprocessed.length == to_process.length) { break; }
+            to_process = unprocessed;
+            unprocessed = [];
         }
         // next, render the sliders and toggles onto the abilities.
         for (const [slider_name, slider_info] of slider_map.entries()) {
@@ -623,9 +646,13 @@ const atree_scaling = new (class extends ComputeNode {
                     continue;
                 case 'stat_scaling':
                     let total = 0;
-                    const {slider = false, scaling = [0]} = effect;
+                    const {slider = false, scaling = [0], behavior="merge"} = effect;
                     let { positive = true, round = true } = effect;
                     if (slider) {
+                        if (behavior == "modify" && !slider_map.has(effect.slider_name)) {
+                            // Dangerous control flow.. early continue
+                            continue;
+                        }
                         const slider_val = slider_map.get(effect.slider_name).slider.value;
                         total = parseInt(slider_val) * scaling[0];
                         round = false;

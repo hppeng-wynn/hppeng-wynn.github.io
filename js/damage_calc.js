@@ -67,6 +67,9 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
     // 2.1. First, apply neutral conversion (scale weapon damage). Keep track of total weapon damage here.
     let damages = [];
     const neutral_convert = conversions[0] / 100;
+    if (neutral_convert == 0) {
+        present = [false, false, false, false, false, false]
+    }
     let weapon_min = 0;
     let weapon_max = 0;
     for (const damage of weapon_damages) {
