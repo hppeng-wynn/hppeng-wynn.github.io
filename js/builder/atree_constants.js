@@ -3636,7 +3636,6 @@ const atrees = {
             "display_name": "Counter",
             "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
             "archetype": "Battle Monk", 
-            "archetype_req": 0, 
             "parents": ["Aerodynamics", "Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
@@ -3690,7 +3689,7 @@ const atrees = {
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": 120,
+                    "max": 80,
                     "scaling": [1.5]
                 }
             ]  
@@ -7960,7 +7959,7 @@ const atrees = {
                     {
                         "type": "raw_stat",
                         "toggle": "Activate Clones",
-                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 80}]
+                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 60}]
                     }
             ]
         },
@@ -8110,7 +8109,7 @@ const atrees = {
                     "base_spell": 4,
                     "target_part": "Per Tick",
                     "multipliers": [
-                        -20,
+                        -10,
                         0,
                         0,
                         0,
@@ -8241,7 +8240,7 @@ const atrees = {
                 "Mirror Image"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 23,
                 "col": 4,
@@ -8412,7 +8411,7 @@ const atrees = {
                 "Dash"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 26,
                 "col": 8,
@@ -8425,12 +8424,12 @@ const atrees = {
                     "base_spell": 2,
                     "target_part": "Dancing Blade",
                     "multipliers": [
-                        80,
+                        70,
                         0,
                         0,
                         0,
                         0,
-                        20
+                        10
                     ],
                     "display": "Dancing Blade"
                 }
@@ -8574,7 +8573,7 @@ const atrees = {
                         }
                     ],
                     "scaling": [
-                        8
+                        6
                     ]
                 }
             ]
@@ -8610,7 +8609,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Echo",
-                            "value": -60
+                            "value": -65
                         }
                     ]
                 }
@@ -8689,8 +8688,8 @@ const atrees = {
         {
             "display_name": "Psithurism",
             "desc": "Increase your Walk Speed by +20% and your Jump Height by +1",
-            "archetype": "Acrobat",
-            "archetype_req": 5,
+            "archetype": "",
+            "archetype_req": 0,
             "parents": [
                 "Shurikens",
                 "Far Reach"
@@ -8726,7 +8725,7 @@ const atrees = {
             "display_name": "Ambush",
             "desc": "Increase Surprise Strike's damage by +40%",
             "archetype": "Shadestepper",
-            "archetype_req": 4,
+            "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
                 "Marked"
@@ -8832,7 +8831,7 @@ const atrees = {
             "display_name": "Death Magnet",
             "desc": "After leaving Vanish, pull all nearby Marked mobs towards you",
             "archetype": "Shadestepper",
-            "archetype_req": 5,
+            "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
                 "Cheaper Multihit 2",
@@ -8978,7 +8977,7 @@ const atrees = {
         {
             "display_name": "Stronger Lacerate",
             "desc": "Lacerate will deal +1 slash",
-            "archetype": "Acrobat",
+            "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
             "parents": [
@@ -9186,7 +9185,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Echo",
-                            "value": 20
+                            "value": 15
                         }
                     ]
                 }
@@ -9218,7 +9217,7 @@ const atrees = {
             "display_name": "Satsujin",
             "desc": "If an enemy has 3 Marks and 70% of their health or more, your next Multihit or Main Attack will deal triple damage. (20s Cooldown, per enemy)",
             "archetype": "Shadestepper",
-            "archetype_req": 12,
+            "archetype_req": 13,
             "parents": [
                 "Harvester"
             ],
@@ -9239,22 +9238,22 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Backstab Damage",
-                            "value": 150
+                            "value": 100
                         },
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Per Hit",
-                            "value": 150
+                            "value": 100
                         },
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Fatality",
-                            "value": 150
+                            "value": 100
                         },
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:0.Melee",
-                            "value": 150
+                            "value": 100
                         }
                     ]
                 }
@@ -9286,7 +9285,7 @@ const atrees = {
             "display_name": "Diversion",
             "desc": "Anytime a Lured enemy gets killed, every nearby ally gets +40% health as extra overflowing health. (3s Cooldown). Decay -4% of the bonus every second.",
             "archetype": "Trickster",
-            "archetype_req": 11,
+            "archetype_req": 12,
             "base_abil": "Smoke Bomb",
             "parents": [
                 "Forbidden Art"
@@ -9343,7 +9342,7 @@ const atrees = {
         {
             "display_name": "Better Ricochets",
             "desc": "Add +1 Max Bounce to Ricochets",
-            "archetype": "Acrobat",
+            "archetype": "",
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
@@ -9365,7 +9364,7 @@ const atrees = {
         {
             "display_name": "Devour",
             "desc": "Harvester will give +5 Mana",
-            "archetype": "Shadestepper",
+            "archetype": "",
             "archetype_req": 0,
             "parents": [
                 "Satsujin"
@@ -10458,7 +10457,7 @@ const atrees = {
                     {
                         "type": "stat",
                         "name": "damMult.Bullwhip:5.Puppet Hit",
-                        "value": 20
+                        "value": 15
                     },
                     {
                         "type": "stat",
