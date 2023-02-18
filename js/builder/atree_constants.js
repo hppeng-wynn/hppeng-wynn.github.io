@@ -9481,7 +9481,7 @@ const atrees = {
             "display_name": "Dissolution",
             "desc": "When entering Vanish, become immune to knockback and gain resistance for a brief moment.",
             "archetype": "Shadestepper",
-            "archetype_req": 0,
+            "archetype_req": 2,
             "base_abil": "Vanish",
             "parents": [
                 "Cheaper Multihit II",
