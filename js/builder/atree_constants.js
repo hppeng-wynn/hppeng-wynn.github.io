@@ -8683,8 +8683,6 @@ const atrees = {
         {
             "display_name": "Ambush",
             "desc": "Increase Surprise Strike's damage by +40%",
-            "archetype": "Shadestepper",
-            "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
                 "Marked"
