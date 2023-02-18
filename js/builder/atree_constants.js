@@ -4489,7 +4489,6 @@ const atrees = {
         {
             "display_name": "Better Enraged Blow",
             "desc": "Increases the cap of Enraged Blow by +60%.",
-            "archetype": "Fallen", 
             "base_abil": "Bak'al's Grasp",
             "parents": ["Cheaper War Scream II"], 
             "dependencies": ["Bak'al's Grasp"], 
@@ -8934,8 +8933,7 @@ const atrees = {
         {
             "display_name": "Stronger Lacerate",
             "desc": "Lacerate will deal +1 slash",
-            "archetype": "",
-            "archetype_req": 0,
+            "archetype": "Acrobat",
             "base_abil": "Spin Attack",
             "parents": [
                 "Choke Bomb",
