@@ -4547,7 +4547,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
-                    "slider_max": 27,
+                    "slider_max": 20,
                     "output": [
                         { "type": "stat", "name": "nDamAddMin" }, { "type": "stat", "name": "nDamAddMax" },
                         { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
@@ -9232,7 +9232,7 @@ const atrees = {
         },
         {
             "display_name": "Diversion",
-            "desc": "Anytime a Lured enemy gets killed, every nearby ally gets +40% health as extra overflowing health. (3s Cooldown). Decay -4% of the bonus every second.",
+            "desc": "Grant allies within 15 blocks +15% Overhealth whenever you hit a Lured enemy. (6.5s Cooldown)\nThe bonus health decays over 10s.",
             "archetype": "Trickster",
             "archetype_req": 12,
             "base_abil": "Smoke Bomb",
@@ -9448,13 +9448,22 @@ const atrees = {
                 "col": 0,
                 "icon": "node_2"
             },
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Marks Absorbed",
+                    "slider_max": 10,
+                    "output": [
+                        { "type": "stat", "name": "damMult.Nightcloak" }
+                    ],
+                    "scaling": [4]
+                }
+            ]
         },
         {
             "display_name": "Pirouette",
             "desc": "When hitting an enemy with Dancing Blade, you will deal extra damage and vault upwards, resetting Dash as if you touched the ground.",
-            "archetype": "Acrobat",
-            "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
                 "Stronger Lacerate",
