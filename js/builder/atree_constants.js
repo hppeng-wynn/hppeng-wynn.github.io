@@ -6600,7 +6600,8 @@ const atrees = {
             "archetype_req": 7,
             "parents": [
                 "Cheaper Ice Snake II",
-                "Explosive Entrance"
+                "Explosive Entrance",
+                "Better Ophanim"
             ],
             "dependencies": [
                 "Ice Snake"
@@ -6630,7 +6631,8 @@ const atrees = {
             "base_abil": "Ophanim",
             "parents": [
                 "Explosive Entrance",
-                "Cheaper Meteor II"
+                "Cheaper Meteor II",
+                "Gust"
             ],
             "dependencies": [
                 "Ophanim"
@@ -8569,9 +8571,15 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Echo",
-                            "value": -65
+                            "value": -60
                         }
                     ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 8,
+                    "target_part": "Slash Damage",
+                    "multipliers": [ 690, 0, 0, 110, 0, 0 ]
                 }
             ]
         },
@@ -9368,7 +9376,7 @@ const atrees = {
         },
         {
             "display_name": "Bamboozle",
-            "desc": "When Clones are active, casting Multihit while holding shift will instead slay 1 CLone and teleport you forwards with a brutal fiery slash",
+            "desc": "When Clones are active, casting Multihit while holding shift will instead slay 1 Clone and teleport you forwards with a brutal fiery slash",
             "archetype": "Trickster",
             "archetype_req": 0,
             "base_abil": "Multihit",
