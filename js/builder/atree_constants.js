@@ -8578,6 +8578,7 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 8,
+                    "behavior": "modify",
                     "target_part": "Slash Damage",
                     "multipliers": [ 690, 0, 0, 110, 0, 0 ]
                 }
