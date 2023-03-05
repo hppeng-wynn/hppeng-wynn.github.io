@@ -844,14 +844,20 @@ const atree_collect_spells = new (class extends ComputeNode {
                     continue;
                 case 'add_spell_prop': {
                     const { base_spell, target_part = null, cost = 0, behavior = 'merge'} = effect;
-                    if (target_part === null) {
-                        continue;
-                    }
-
                     if (!ret_spells.has(base_spell)) {
                         continue;
                     }
+
                     const ret_spell = ret_spells.get(base_spell);
+
+                    // :enraged:
+                    // NOTE to hpp: this is out here because:
+                    // target_part doesn't exist for spell cost modification abilities
+                    // except when it does... in which case it should apply exactly once.
+                    if ('cost' in ret_spell) { ret_spell.cost += cost; }
+
+                    // NOTE: see above comment for the weird placement of this code block.
+                    if (target_part === null) { continue; }
 
                     let found_part = false;
                     for (let part of ret_spell.parts) { // TODO: replace with Map? to avoid this linear search... idk prolly good since its not more verbose to type in json
@@ -859,8 +865,6 @@ const atree_collect_spells = new (class extends ComputeNode {
                             continue;
                         }
                         // we found the part. merge or modify it!
-                        if ('cost' in ret_spell) { ret_spell.cost += cost; }
-
                         if ('multipliers' in effect) {
                             for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
                                 part.multipliers[idx] += v;
