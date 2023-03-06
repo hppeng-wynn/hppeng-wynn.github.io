@@ -7943,7 +7943,7 @@ const atrees = {
             ],
             "dependencies": [],
             "blockers": [
-                "Mirror Image"
+                "Echo"
             ],
             "cost": 2,
             "display": {
