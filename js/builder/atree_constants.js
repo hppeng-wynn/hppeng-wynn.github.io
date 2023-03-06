@@ -3665,7 +3665,7 @@ const atrees = {
         },
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 80%)",
+            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +1.5% (Max 80%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",

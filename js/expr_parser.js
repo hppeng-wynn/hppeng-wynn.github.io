@@ -50,6 +50,14 @@ const ExprParser = (function() {
         case '=':
           pushSymbol(exprStr[col]);
           continue;
+        case 'or':
+          tokens.push({ type: '|' });
+          col += 2;
+          continue;
+        case 'and':
+          tokens.push({ type: '&' });
+          col += 2;
+          continue;
         case '>':
           pushSymbol(exprStr[col + 1] === '=' ? '>=' : '>');
           continue;
