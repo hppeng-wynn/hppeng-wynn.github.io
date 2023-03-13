@@ -240,15 +240,31 @@ function construct_scc_graph(items_to_consider) {
         parents: [],
     };
     for (const item of items_to_consider) {
-        nodes.push({item: item, children: [terminal_node], parents: [root_node]});
+        const set_neg = [false, false, false, false, false];
+        const set_pos = [false, false, false, false, false];
+        const set_name = item.set;
+        if (set_name) {
+            const bonuses = sets.get(set_name).bonuses;
+            for (const bonus of bonuses) {
+                for (const i in skp_order) {
+                    if (bonus[skp_order[i]] > 0) { set_pos[i] = true; }
+                    if (bonus[skp_order[i]] < 0) { set_neg[i] = true; }
+                }
+            }
+        }
+        nodes.push({item: item, children: [terminal_node], parents: [root_node], set_pos: set_pos, set_neg: set_neg});
     }
     // Dependency graph construction.
     for (const node_a of nodes) {
-        const {item: a, children: a_children} = node_a;
+        const {item: a, children: a_children, set_pos: a_set_pos} = node_a;
         for (const node_b of nodes) {
-            const {item: b, parents: b_parents} = node_b;
+            const {item: b, parents: b_parents, set_neg: b_set_neg} = node_b;
+
+            const setName = b.set;
+
             for (let i = 0; i < 5; ++i) {
-                if (a.skillpoints[i] > 0 && (a.reqs[i] < b.reqs[i] || b.skillpoints[i] < 0)) {
+                if ((a.skillpoints[i] > 0 || a_set_pos[i] > 0)
+                        && (a.reqs[i] < b.reqs[i] || b.skillpoints[i] < 0 || b_set_neg[i] < 0)) {
                     a_children.push(node_b);
                     b_parents.push(node_a);
                     break;
@@ -259,3 +275,4 @@ function construct_scc_graph(items_to_consider) {
     const sccs = make_SCC_graph(root_node, nodes);
     return [root_node, terminal_node, sccs];
 }
+

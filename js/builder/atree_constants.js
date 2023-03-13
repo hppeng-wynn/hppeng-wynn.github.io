@@ -7906,7 +7906,6 @@ const atrees = {
             "desc": "After leaving Vanish, summon 3 Clones that will follow you and protect you (15s Cooldown). When hit, gain a chance to take 80% less damage and lose 1 Clone.",
             "archetype": "Trickster",
             "archetype_req": 2,
-            "base_abil": "Dash",
             "parents": [
                 "Sticky Bomb"
             ],
@@ -8545,7 +8544,7 @@ const atrees = {
             "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -60% damage.",
             "archetype": "Trickster",
             "archetype_req": 6,
-            "base_abil": "Dash",
+            "base_abil": "Mirror Image",
             "parents": [
                 "Sandbagging",
                 "Shurikens"
@@ -8581,6 +8580,22 @@ const atrees = {
                     "behavior": "modify",
                     "target_part": "Slash Damage",
                     "multipliers": [ 690, 0, 0, 110, 0, 0 ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Spell Copies",
+                    "slider_step": 1,
+                    "slider_max": 3,
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast"
+                        }
+                    ],
+                    "scaling": [
+                        100
+                    ]
                 }
             ]
         },
@@ -9123,7 +9138,7 @@ const atrees = {
             "desc": "Improve your damage while your Clones are active by +15%",
             "archetype": "Trickster",
             "archetype_req": 7,
-            "base_abil": "Dash",
+            "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb 2",
                 "Blade Fury"
@@ -9222,7 +9237,7 @@ const atrees = {
             "desc": "Summon +3 additional Clones. (+15s Cooldown)",
             "archetype": "Trickster",
             "archetype_req": 8,
-            "base_abil": "Dash",
+            "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb 2"
             ],
@@ -9237,7 +9252,14 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Spell Copies",
+                    "slider_max": 3
+                }
+            ]
         },
         {
             "display_name": "Diversion",
