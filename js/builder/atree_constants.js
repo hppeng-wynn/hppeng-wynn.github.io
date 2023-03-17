@@ -6964,7 +6964,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Orb Damage",
+                    "target_part": "Orb DPS",
                     "base_spell": 5,
                     "hits": {
                         "Single Orb": 1
