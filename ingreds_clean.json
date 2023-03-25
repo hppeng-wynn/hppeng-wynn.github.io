@@ -15710,8 +15710,8 @@
         "maximum": 7
       },
       "lq": {
-        "minimum": 3,
-        "maximum": 4
+        "minimum": 4,
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -16169,7 +16169,7 @@
     "lvl": 4,
     "ids": {},
     "itemIDs": {
-      "dura": -70,
+      "dura": -30,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -18451,7 +18451,7 @@
     "posMods": {
       "left": 0,
       "right": 0,
-      "above": 30,
+      "above": 25,
       "under": 0,
       "touching": 0,
       "notTouching": 0
@@ -23923,7 +23923,7 @@
     "lvl": 100,
     "ids": {},
     "itemIDs": {
-      "dura": -175,
+      "dura": -160,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -23934,7 +23934,7 @@
     },
     "consumableIDs": {
       "charges": 0,
-      "dura": -300
+      "dura": -275
     },
     "posMods": {
       "left": 110,
@@ -24214,8 +24214,8 @@
       "right": 0,
       "above": 0,
       "under": 0,
-      "touching": 12,
-      "notTouching": 12
+      "touching": 15,
+      "notTouching": 15
     },
     "id": 569
   },
@@ -24722,7 +24722,7 @@
       "above": 0,
       "under": 0,
       "touching": -100,
-      "notTouching": 75
+      "notTouching": 55
     },
     "id": 582
   },
@@ -24913,8 +24913,8 @@
     "posMods": {
       "left": -100,
       "right": -100,
-      "above": 75,
-      "under": 75,
+      "above": 60,
+      "under": 60,
       "touching": 0,
       "notTouching": 0
     },
@@ -24942,10 +24942,10 @@
       "dura": -300
     },
     "posMods": {
-      "left": -75,
-      "right": -75,
-      "above": -50,
-      "under": -50,
+      "left": -50,
+      "right": -50,
+      "above": -75,
+      "under": -75,
       "touching": 120,
       "notTouching": 0
     },
@@ -25983,7 +25983,7 @@
       "above": 0,
       "under": 0,
       "touching": 0,
-      "notTouching": 65
+      "notTouching": 55
     },
     "id": 610
   },
@@ -26140,8 +26140,8 @@
       "right": 0,
       "above": 0,
       "under": 0,
-      "touching": 33,
-      "notTouching": 33
+      "touching": 25,
+      "notTouching": 25
     },
     "id": 614
   },
@@ -26688,8 +26688,8 @@
       "right": -122,
       "above": 0,
       "under": 0,
-      "touching": -29,
-      "notTouching": -29
+      "touching": -15,
+      "notTouching": -15
     },
     "id": 627
   },
@@ -26846,7 +26846,7 @@
     "posMods": {
       "left": 0,
       "right": 0,
-      "above": -180,
+      "above": -140,
       "under": 0,
       "touching": 0,
       "notTouching": 0
@@ -27433,12 +27433,12 @@
       "dura": 0
     },
     "posMods": {
-      "left": -45,
-      "right": -45,
+      "left": -30,
+      "right": -30,
       "above": 0,
       "under": 0,
-      "touching": 45,
-      "notTouching": 45
+      "touching": 30,
+      "notTouching": 30
     },
     "id": 645
   },
@@ -28657,8 +28657,8 @@
       "right": 0,
       "above": 0,
       "under": 0,
-      "touching": 20,
-      "notTouching": 20
+      "touching": 15,
+      "notTouching": 15
     },
     "id": 691
   },
@@ -28715,7 +28715,7 @@
     "lvl": 80,
     "ids": {},
     "itemIDs": {
-      "dura": -150,
+      "dura": -140,
       "strReq": -25,
       "dexReq": -25,
       "intReq": -25,
@@ -28802,8 +28802,8 @@
       "right": 0,
       "above": 0,
       "under": 0,
-      "touching": 40,
-      "notTouching": 80
+      "touching": 25,
+      "notTouching": 45
     },
     "id": 674
   },
