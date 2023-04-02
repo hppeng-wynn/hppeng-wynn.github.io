@@ -3,13 +3,15 @@ CXXFLAGS=-sENVIRONMENT=web -sSINGLE_FILE -sMODULARIZE -sWASM_ASYNC_COMPILATION=0
 
 all: utils.js powders.js
 
-%.js:
-	$(CXX) $(CXXFLAGS) -sEXPORT_NAME=create_$* -o $@.out $^
+%.js: %.js.out
 	cat $@.out $@.in > ../$@
 
-powders.js: powders.cpp
+%.js.out:
+	$(CXX) $(CXXFLAGS) -sEXPORT_NAME=create_$* -o $@ $^
 
-utils.js: utils.cpp utils/math_utils.cpp utils/base64.cpp utils/bitvector.cpp
+powders.js.out: powders.cpp definitions.cpp
+
+utils.js.out: utils.cpp utils/math_utils.cpp utils/base64.cpp utils/bitvector.cpp
 
 .PHONY: clean
 clean:

@@ -4,6 +4,9 @@
 #include <stdexcept>
 #include <sstream>
 
+BitVector::BitVector() {};
+BitVector::BitVector(const BitVector& other) : data(other.data), length(other.length) {};
+
 BitVector::BitVector(const std::string b64_data) {
     length = b64_data.length() * 6;
     data.reserve(length/bitvec_data_s + 1);

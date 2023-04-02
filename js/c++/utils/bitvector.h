@@ -23,8 +23,8 @@ public:
      *
      * The structure of the Uint32Array should be [[last, ..., first], ..., [last, ..., first], [empty space, last, ..., first]]
      */
-    BitVector() {};
-    BitVector(const BitVector& other) : data(other.data), length(other.length) {};
+    BitVector();
+    BitVector(const BitVector& other);
     BitVector(const std::string b64_data);
     BitVector(bitvec_data_t num, size_t length);
 

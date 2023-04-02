@@ -14,7 +14,7 @@ namespace Base64 {
     //   v       v       v       v       v       v       v       v      v
         "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-";
 
-    const std::map<char, size_t> digitsMap = []{
+    static const std::map<char, size_t> digitsMap = []{
         std::map<char, size_t> m;
         for (size_t i = 0; i < digits.length(); ++i) {
             m[digits[i]] = i;
