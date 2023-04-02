@@ -278,7 +278,7 @@ Base64 = (function () {
         let b64_str = "";
         let i = 0;
         while (i < this.length) {
-            b64_str += Base64.fromIntV(this.slice(i, i + 6), 1);
+            b64_str += Base64.fromIntN(this.slice(i, i + 6), 1);
             i += 6;
         }
 
