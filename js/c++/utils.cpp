@@ -6,7 +6,9 @@ using namespace emscripten;
 #include "utils.h"
 #include "utils/math_utils.h"
 #include "utils/base64.h"
+#include "utils/bitvector.h"
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 namespace utils {
@@ -62,10 +64,28 @@ val __perm_wrap(val a) {
     }
     return return_array;
 }
-#endif
 
+/** Appends data to the BitVector.
+ *
+ * @param {Number | String} data - The data to append.
+ * @param {Number} length - The length, in bits, of the new data. This is ignored if data is a string.
+ */
+void __BitVector_append(BitVector& self, val data, val length) {
+    if (data.typeOf().as<std::string>() == "string") {
+        self.append(data.as<std::string>());
+        return;
+    }
+    if (data.typeOf().as<std::string>() == "number") {
+        size_t num = data.as<size_t>();
+        //if (num >= 1<<bitvec_data_s) {
+        //    throw std::range_error("Numerical data has to fit within a 32-bit integer range to append to a BitVector.");
+        //}
+        self.append(num, length.as<size_t>());
+        return;
+    }
+    throw std::invalid_argument("BitVector must be appended with a Number or a B64 String");
+}
 
-#ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(utils) {
     function("clamp", &clamp);
     function("round_near", &round_near);
@@ -74,6 +94,19 @@ EMSCRIPTEN_BINDINGS(utils) {
     function("b64_toInt", &Base64::toInt);
     function("b64_toIntSigned", &Base64::toIntSigned);
     function("perm", &__perm_wrap);
+    class_<BitVector>("BitVector")
+        .constructor<std::string>()
+        .constructor<size_t, size_t>()
+        .function("read_bit", &BitVector::read_bit)
+        .function("slice", &BitVector::slice)
+        .function("set_bit", &BitVector::set_bit)
+        .function("clear_bit", &BitVector::clear_bit)
+        .function("toB64", &BitVector::toB64)
+        .function("toString", &BitVector::toString)
+        .function("toStringR", &BitVector::toStringR)
+        .function("append", select_overload<void(std::string)>(&BitVector::append))
+        .function("append", select_overload<void(bitvec_data_t, size_t)>(&BitVector::append))
+        ;
 }
 #endif
 

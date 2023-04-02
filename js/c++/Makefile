@@ -9,7 +9,7 @@ all: utils.js powders.js
 
 powders.js: powders.cpp
 
-utils.js: utils.cpp utils/math_utils.cpp utils/base64.cpp
+utils.js: utils.cpp utils/math_utils.cpp utils/base64.cpp utils/bitvector.cpp
 
 .PHONY: clean
 clean:
