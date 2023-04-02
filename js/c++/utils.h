@@ -1,12 +1,11 @@
 #pragma once
 
 /**
- * Clamp number between low and high values.
+ * Generate all permutations of a vector.
  *
- * @param num: value to clamp
- * @param low
- * @param high
+ * @param a:    vector containing the elements to permute.
  *
- * @return clamped value
+ * @return a vector with all permutations of `a`.
  */
-float clamp(float num, float low, float high);
+template<typename T>
+std::vector<std::vector<T>> perm(std::vector<T> a);
