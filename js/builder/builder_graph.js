@@ -117,7 +117,7 @@ class PowderSpecialDisplayNode extends ComputeNode {
         const powder_specials = input_map.get('powder-specials');
         const stats = input_map.get('stats');
         const weapon = input_map.get('build').weapon;
-        displayPowderSpecials(document.getElementById("powder-special-stats"), powder_specials, stats, weapon.statMap, true); 
+        displayPowderSpecials(document.getElementById("powder-special-stats"), powder_specials, stats, weapon.statMap); 
     }
 }
 

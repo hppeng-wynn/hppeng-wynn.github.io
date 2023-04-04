@@ -340,17 +340,3 @@ const default_spells = {
         ]
     }]
 };
-
-const spell_table = {
-    "powder": [ //This is how instant-damage powder specials are implemented. 
-        { title: "Quake", cost: 0, parts:[
-                { subtitle: "Total Damage", type: "damage", multiplier: [155, 220, 285, 350, 415], conversion: [0,100,0,0,0,0], summary: true},
-            ] },
-        { title: "Chain Lightning", cost: 0, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: [200, 225, 250, 275, 300], conversion: [0,0,100,0,0,0], summary: true},
-            ]},
-        { title: "Courage", cost: 0, parts: [
-                { subtitle: "Total Damage", type: "damage", multiplier: [75, 87.5, 100, 112.5, 125], conversion: [0,0,0,0,100,0], summary: true},
-            ]}, //[75, 87.5, 100, 112.5, 125]
-    ]
-};

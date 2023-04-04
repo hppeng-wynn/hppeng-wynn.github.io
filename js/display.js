@@ -1231,7 +1231,7 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
     }
 }
 
-function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overall=false) {
+function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon) {
     parent_elem.textContent = "";
     if (powderSpecials.length === 0) {
         parent_elem.style = "display: none";
@@ -1252,129 +1252,66 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon, overa
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
         //iterate through the special and display its effects.
-        let powder_special = make_elem("p", ["pt-3"]);
+        let powder_special_elem = make_elem("p", ["pt-3"]);
         let specialSuffixes = new Map([ ["Duration", " sec"], ["Radius", " blocks"], ["Chains", ""], ["Damage", "%"], ["Damage Boost", "%"], ["Knockback", " blocks"] ]);
         let specialTitle = make_elem("p");
         let specialEffects = make_elem("p");
-        specialTitle.classList.add(damageClasses[powderSpecialStats.indexOf(special[0]) + 1]);
-        let effects = special[0]["weaponSpecialEffects"];
+        // TODO janky and depends on the order of powder specials being ETWFA. This should be encoded in the powder special object.
+        let element_num = powderSpecialStats.indexOf(special[0]) + 1;
+        specialTitle.classList.add(damageClasses[element_num]);
+        let powder_special = special[0];
         let power = special[1];
-        specialTitle.textContent = special[0]["weaponSpecialName"] + " " + Math.floor((power-1)*0.5 + 4) + (power % 2 == 0 ? ".5" : "");  
+        specialTitle.textContent = powder_special.weaponSpecialName + " " + Math.floor((power-1)*0.5 + 4) + (power % 2 == 0 ? ".5" : "");  
 
-        if (!overall || powderSpecialStats.indexOf(special[0]) == 2 || powderSpecialStats.indexOf(special[0]) == 3 || powderSpecialStats.indexOf(special[0]) == 4) {
-            for (const [key,value] of effects) {
+        for (const [key,value] of powder_special.weaponSpecialEffects) {
+            if(key === "Damage"){
+                //if this special is an instant-damage special (Quake, Chain Lightning, Courage Burst), display the damage.
+                let specialDamage = document.createElement("p");
+                // specialDamage.classList.add("item-margin");
+                let conversions = [0, 0, 0, 0, 0, 0];
+                conversions[element_num] = powder_special.weaponSpecialEffects.get("Damage")[power-1];
+                let _results = calculateSpellDamage(stats, weapon, conversions, false, true, "0.Powder Special");
+
+                let critChance = skillPointsToPercentage(skillpoints[1]);
+                let save_damages = [];
+                
+                let totalDamNormal = _results[0];
+                let totalDamCrit = _results[1];
+                let results = _results[2];
+                for (let i = 0; i < 6; ++i) {
+                    for (let j in results[i]) {
+                        results[i][j] = results[i][j].toFixed(2);
+                    }
+                }
+                let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
+                let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
+                let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
+
+                let averageWrap = document.createElement("p");
+                let averageLabel = document.createElement("span");
+                averageLabel.textContent = "Average: ";
+                
+                let averageLabelDmg = document.createElement("span");
+                averageLabelDmg.classList.add("Damage");
+                averageLabelDmg.textContent = averageDamage.toFixed(2);
+
+                averageWrap.appendChild(averageLabel);
+                averageWrap.appendChild(averageLabelDmg);
+                specialDamage.appendChild(averageWrap);
+                
+                specialEffects.append(specialDamage);
+            }
+            else {
                 let effect = document.createElement("p");
                 effect.textContent += key + ": " + value[power-1] + specialSuffixes.get(key);
-                if(key === "Damage"){
-                    effect.textContent += elementIcons[powderSpecialStats.indexOf(special[0])];
-                }
-                if(special[0]["weaponSpecialName"] === "Wind Prison" && key === "Damage Boost") {
-                    effect.textContent += " (only 1st hit)";
-                }
                 specialEffects.appendChild(effect);
             }
         }
-        powder_special.appendChild(specialTitle);
-        powder_special.appendChild(specialEffects);
 
-        //if this special is an instant-damage special (Quake, Chain Lightning, Courage Burst), display the damage.
-        let specialDamage = document.createElement("p");
-        // specialDamage.classList.add("item-margin");
-        let spells = spell_table["powder"];
-        if (powderSpecialStats.indexOf(special[0]) == 0 || powderSpecialStats.indexOf(special[0]) == 1 || powderSpecialStats.indexOf(special[0]) == 3) { //Quake, Chain Lightning, or Courage
-            let spell = (powderSpecialStats.indexOf(special[0]) == 3 ? spells[2] : spells[powderSpecialStats.indexOf(special[0])]);
-            let part = spell["parts"][0];
+        powder_special_elem.appendChild(specialTitle);
+        powder_special_elem.appendChild(specialEffects);
 
-            let tmp_conv = [];
-            for (let i in part.conversion) {
-                tmp_conv.push(part.conversion[i] * part.multiplier[power-1] / 100);
-            }
-            console.log(tmp_conv);
-            let _results = calculateSpellDamage(stats, weapon, tmp_conv, false, true);
-
-            let critChance = skillPointsToPercentage(skillpoints[1]);
-            let save_damages = [];
-            
-            let totalDamNormal = _results[0];
-            let totalDamCrit = _results[1];
-            let results = _results[2];
-            for (let i = 0; i < 6; ++i) {
-                for (let j in results[i]) {
-                    results[i][j] = results[i][j].toFixed(2);
-                }
-            }
-            let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
-            let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
-            let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
-
-            let averageWrap = document.createElement("p");
-            let averageLabel = document.createElement("span");
-            averageLabel.textContent = "Average: ";
-            
-            let averageLabelDmg = document.createElement("span");
-            averageLabelDmg.classList.add("Damage");
-            averageLabelDmg.textContent = averageDamage.toFixed(2);
-
-            averageWrap.appendChild(averageLabel);
-            averageWrap.appendChild(averageLabelDmg);
-            specialDamage.appendChild(averageWrap);
-            
-            if (!overall) {
-                let nonCritLabel = document.createElement("p");
-                nonCritLabel.textContent = "Non-Crit Average: "+nonCritAverage.toFixed(2);
-                nonCritLabel.classList.add("damageSubtitle");
-                nonCritLabel.classList.add("item-margin");
-                specialDamage.append(nonCritLabel);
-                
-                for (let i = 0; i < 6; i++){
-                    if (results[i][1] > 0){
-                        let p = document.createElement("p");
-                        p.classList.add("damagep");
-                        p.classList.add(damageClasses[i]);
-                        p.textContent = results[i][0]+"-"+results[i][1];
-                        specialDamage.append(p);
-                    }
-                }
-                let normalDamage = document.createElement("p");
-                normalDamage.textContent = "Total: " + totalDamNormal[0].toFixed(2) + "-" + totalDamNormal[1].toFixed(2);
-                normalDamage.classList.add("itemp");
-                specialDamage.append(normalDamage);
-
-                let nonCritChanceLabel = document.createElement("p");
-                nonCritChanceLabel.textContent = "Non-Crit Chance: " + ((1-critChance)*100).toFixed(2)  + "%";
-                specialDamage.append(nonCritChanceLabel);
-
-                let critLabel = document.createElement("p");
-                critLabel.textContent = "Crit Average: "+critAverage.toFixed(2);
-                critLabel.classList.add("damageSubtitle");
-                critLabel.classList.add("item-margin");
-                
-                specialDamage.append(critLabel);
-                for (let i = 0; i < 6; i++){
-                    if (results[i][1] > 0){
-                        let p = document.createElement("p");
-                        p.classList.add("damagep");
-                        p.classList.add(damageClasses[i]);
-                        p.textContent = results[i][2]+"-"+results[i][3];
-                        specialDamage.append(p);
-                    }
-                }
-                let critDamage = document.createElement("p");
-                critDamage.textContent = "Total: " + totalDamCrit[0].toFixed(2) + "-" + totalDamCrit[1].toFixed(2);
-                critDamage.classList.add("itemp");
-                specialDamage.append(critDamage);
-
-                let critChanceLabel = document.createElement("p");
-                critChanceLabel.textContent = "Crit Chance: " + (critChance*100).toFixed(2) + "%";
-                specialDamage.append(critChanceLabel);
-
-                save_damages.push(averageDamage);
-            }
-
-            powder_special.append(specialDamage);
-        } 
-
-        parent_elem.appendChild(powder_special);
+        parent_elem.appendChild(powder_special_elem);
     }
 }
 
