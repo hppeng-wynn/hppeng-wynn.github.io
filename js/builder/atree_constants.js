@@ -9188,7 +9188,7 @@ const atrees = {
         },
         {
             "display_name": "Satsujin",
-            "desc": "If an enemy has 3 Marks and 70% of their health or more, your next Multihit or Main Attack will deal triple damage. (20s Cooldown, per enemy)",
+            "desc": "If an enemy has 3 Marks, your next Multihit or Damaging Powder Special will deal double damage. (20s Cooldown, per enemy)",
             "archetype": "Shadestepper",
             "archetype_req": 13,
             "parents": [
@@ -9225,7 +9225,7 @@ const atrees = {
                         },
                         {
                             "type": "stat",
-                            "name": "damMult.Satsujin:0.Melee",
+                            "name": "damMult.Satsujin:0.Powder Special",
                             "value": 100
                         }
                     ]
