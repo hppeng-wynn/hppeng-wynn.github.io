@@ -33,7 +33,9 @@ BitVector::BitVector(bitvec_data_t num, size_t length) {
     if (length < 0) {
         throw std::range_error("BitVector must have nonnegative length.");
     }
-    data.push_back(num);
+    if (length > 0) {
+        data.push_back(num);
+    }
     this->_length = length;
 }
 
@@ -163,6 +165,7 @@ std::string BitVector::toStringR() const {
     return ret_str.str();
 }
 
+#include <iostream>
 void BitVector::append(const BitVector& other) {
     data.reserve(data.size() + other.data.size());
 
