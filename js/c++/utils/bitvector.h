@@ -84,7 +84,10 @@ public:
     void append(const std::string b64_data);
     void append(bitvec_data_t num, size_t length);
 
+    // length getter.
+    size_t length() const;
+
 private:
     std::vector<bitvec_data_t> data;
-    size_t length;
+    size_t _length;
 };

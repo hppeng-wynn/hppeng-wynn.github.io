@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-extern const std::map<std::string, int> powderIDs;
-extern const std::map<int, std::string> powderNames;
+extern const std::map<std::string, int> powder_IDs;
+extern const std::map<int, std::string> powder_names;
 
 struct Powder {
     int min;
@@ -13,7 +13,8 @@ struct Powder {
     int defPlus;
     int defMinus;
 
+    Powder();
     Powder(int min, int max, int conv, int defPlus, int defMinus);
 };
 
-extern const std::vector<Powder> powderStats;
+extern const std::vector<Powder> powder_stats;

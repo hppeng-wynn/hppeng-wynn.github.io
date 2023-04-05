@@ -24,7 +24,7 @@ namespace Base64 {
 
     std::string fromIntV(unsigned int i);
 
-    std::string fromIntN(unsigned int i, int n);
+    std::string fromIntN(int i, int n);
 
     unsigned int toInt(std::string digitsStr);
 

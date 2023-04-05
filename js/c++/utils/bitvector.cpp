@@ -5,11 +5,11 @@
 #include <sstream>
 
 BitVector::BitVector() {};
-BitVector::BitVector(const BitVector& other) : data(other.data), length(other.length) {};
+BitVector::BitVector(const BitVector& other) : data(other.data), _length(other.length()) {};
 
 BitVector::BitVector(const std::string b64_data) {
-    length = b64_data.length() * 6;
-    data.reserve(length/bitvec_data_s + 1);
+    _length = b64_data.length() * 6;
+    data.reserve(_length/bitvec_data_s + 1);
 
     bitvec_data_t scratch = 0;
     size_t bitvec_index = 0;
@@ -34,7 +34,7 @@ BitVector::BitVector(bitvec_data_t num, size_t length) {
         throw std::range_error("BitVector must have nonnegative length.");
     }
     data.push_back(num);
-    this->length = length;
+    this->_length = length;
 }
 
 /** Return value of bit at index idx.
@@ -44,9 +44,9 @@ BitVector::BitVector(bitvec_data_t num, size_t length) {
  * @returns The bit value at position idx
  */
 bool BitVector::read_bit(size_t idx) const {
-    if (idx < 0 || idx >= length) {
+    if (idx < 0 || idx >= length()) {
         std::stringstream ss;
-        ss << "Cannot read bit outside the range of the BitVector. (" << idx << " > " << length << ")";
+        ss << "Cannot read bit outside the range of the BitVector. (" << idx << " > " << length() << ")";
         throw std::range_error(ss.str());
     }
     return (data[idx / bitvec_data_s] & (1 << (idx % bitvec_data_s))) == 0 ? 0 : 1;
@@ -104,7 +104,7 @@ bitvec_data_t BitVector::slice(size_t start, size_t end) const {
  * @param {Number} idx - The index to set.
  */
 void BitVector::set_bit(size_t idx) {
-    if (idx < 0 || idx >= length) {
+    if (idx < 0 || idx >= length()) {
         throw std::range_error("Cannot set bit outside the range of the BitVector.");
     }
     data[idx / bitvec_data_s] |= (1 << (idx % bitvec_data_s));
@@ -115,7 +115,7 @@ void BitVector::set_bit(size_t idx) {
  * @param {Number} idx - The index to clear.
  */
 void BitVector::clear_bit(size_t idx) {
-    if (idx < 0 || idx >= length) {
+    if (idx < 0 || idx >= length()) {
         throw std::range_error("Cannot clear bit outside the range of the BitVector.");
     }
     data[idx / bitvec_data_s] &= ~(1 << (idx % bitvec_data_s));
@@ -126,12 +126,12 @@ void BitVector::clear_bit(size_t idx) {
  * @returns A b64 string representation of the BitVector.
  */
 std::string BitVector::toB64() const {
-    if (length == 0) {
+    if (length() == 0) {
         return "";
     }
     std::stringstream b64_str;
     size_t i = 0;
-    while (i < length) {
+    while (i < length()) {
         b64_str << Base64::fromIntN(this->slice(i, i + 6), 1);
         i += 6;
     }
@@ -145,7 +145,7 @@ std::string BitVector::toB64() const {
  */
 std::string BitVector::toString() const {
     std::stringstream ret_str;
-    for (size_t i = length; i != 0; --i) {
+    for (size_t i = length(); i != 0; --i) {
         ret_str << (this->read_bit(i-1) ? "1": "0");
     }
     return ret_str.str();
@@ -157,7 +157,7 @@ std::string BitVector::toString() const {
  */
 std::string BitVector::toStringR() const {
     std::stringstream ret_str;
-    for (size_t i = 0; i < length; ++i) {
+    for (size_t i = 0; i < length(); ++i) {
         ret_str << (this->read_bit(i) ? "1": "0");
     }
     return ret_str.str();
@@ -167,22 +167,22 @@ void BitVector::append(const BitVector& other) {
     data.reserve(data.size() + other.data.size());
 
     size_t other_index = 0;
-    if (this->length % bitvec_data_s != 0) {
+    if (this->length() % bitvec_data_s != 0) {
         // fill in the last block.
         bitvec_data_t scratch = data[data.size() - 1];
-        size_t bits_remaining = bitvec_data_s - (this->length % bitvec_data_s);
+        size_t bits_remaining = bitvec_data_s - (this->length() % bitvec_data_s);
 
-        size_t n = std::min(other.length, bits_remaining);
-        scratch |= (other.slice(0, n) << (this->length % bitvec_data_s));
+        size_t n = std::min(other.length(), bits_remaining);
+        scratch |= (other.slice(0, n) << (this->length() % bitvec_data_s));
         data[data.size() - 1] = scratch;
         other_index += n;
     }
-    while (other_index != other.length) {
-        size_t n = std::min(other.length - other_index, (size_t)bitvec_data_s);
+    while (other_index != other.length()) {
+        size_t n = std::min(other.length() - other_index, (size_t)bitvec_data_s);
         data.push_back(other.slice(other_index, other_index + n));
         other_index += n;
     }
-    this->length += other.length;
+    this->_length += other.length();
 }
 
 void BitVector::append(const std::string b64_data) {
@@ -194,3 +194,5 @@ void BitVector::append(bitvec_data_t num, size_t length) {
     BitVector tmp(num, length);
     this->append(tmp);
 }
+
+size_t BitVector::length() const { return this->_length; }

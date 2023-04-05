@@ -1,38 +1,9 @@
 
 const _module_powders = create_powders();
 
-let powderIDs = new Map();
-let powderNames = new Map();
-let _powderID = 0;
-for (const x of skp_elements) {
-    for (let i = 1; i <= 6; ++i) {
-        // Support both upper and lowercase, I guess.
-        powderIDs.set(x.toUpperCase()+i, _powderID);
-        powderIDs.set(x+i, _powderID);
-        powderNames.set(_powderID, x+i);
-        _powderID++;
-    }
-}
-
-// Ordering: [dmgMin, dmgMax, convert, defPlus, defMinus (+6 mod 5)]
-class Powder {
-    constructor(min, max, convert, defPlus, defMinus) {
-        this.min = min;
-        this.max = max;
-        this.convert = convert;
-        this.defPlus = defPlus;
-        this.defMinus = defMinus;
-    }
-}
-function _p(a,b,c,d,e) { return new Powder(a,b,c,d,e); } //bruh moment
-
-let powderStats = [
-    _p(3,6,17,2,1), _p(5,8,21,4,2), _p(6,10,25,8,3), _p(7,10,31,14,5), _p(9,11,38,22,9), _p(11,13,46,30,13),
-    _p(1,8,9,3,1), _p(1,12,11,5,1), _p(2,15,13,9,2), _p(3,15,17,14,4), _p(4,17,22,20,7), _p(5,20,28,28,10),
-    _p(3,4,13,3,1), _p(4,6,15,6,1), _p(5,8,17,11,2), _p(6,8,21,18,4), _p(7,10,26,28,7), _p(9,11,32,40,10),
-    _p(2,5,14,3,1), _p(4,8,16,5,2), _p(5,9,19,9,3), _p(6,9,24,16,5), _p(8,10,30,25,9), _p(10,12,37,36,13),
-    _p(2,6,11,3,1), _p(3,10,14,6,2), _p(4,11,17,10,3), _p(5,11,22,16,5), _p(7,12,28,24,9), _p(8,14,35,34,13)
-];
+const powderIDs = _module_powders.powderIDs();
+const powderNames = _module_powders.powderNames();
+const powderStats = _module_powders.powderStats();
 
 //Ordering: [weapon special name, weapon special effects, armor special name, armor special effects]
 class PowderSpecial{

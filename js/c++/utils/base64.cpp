@@ -12,7 +12,7 @@ namespace Base64 {
         return result;
     }
 
-    std::string fromIntN(unsigned int int32, int n) {
+    std::string fromIntN(int int32, int n) {
         std::string result;
         for (int i = 0; i < n; ++i) {
             result = digits[int32 & 0x3f] + result;

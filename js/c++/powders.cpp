@@ -8,31 +8,32 @@ using namespace emscripten;
 
 #include <cstring>
 
-const std::map<std::string, int> powderIDs = []{
+const std::map<std::string, int> powder_IDs = []{
     std::map<std::string, int> m;
     int powder_id = 0;
     for (const auto& x : skp_elements) {
-        for (int i = 0; i < 6; ++i) {
-            m[x + std::to_string(i)] = i;
-            m[(char)toupper(x[0]) + std::to_string(i)] = i;
+        for (int i = 1; i <= 6; ++i) {
+            m[x + std::to_string(i)] = powder_id;
+            m[(char)toupper(x[0]) + std::to_string(i)] = powder_id;
             powder_id++;
         }
     }
     return m;
 }();
 
-const std::map<int, std::string> powderNames = []{
+const std::map<int, std::string> powder_names = []{
     std::map<int, std::string> m;
-    for (const auto& kv : powderIDs) {
+    for (const auto& kv : powder_IDs) {
         m[kv.second] = kv.first;
     }
     return m;
 }();
 
+Powder::Powder() {}
 Powder::Powder(int min, int max, int conv, int defPlus, int defMinus) :
         min(min), max(max), convert(conv), defPlus(defPlus), defMinus(defMinus) {}
 
-const std::vector<Powder> powderStats = []{
+const std::vector<Powder> powder_stats = []{
     auto p = [](int a, int b, int c, int d, int e){ return Powder(a,b,c,d,e); };
     return std::vector<Powder> {
         p(3,6,17,2,1), p(5,8,21,4,2), p(6,10,25,8,3), p(7,10,31,14,5), p(9,11,38,22,9), p(11,13,46,30,13),
@@ -44,6 +45,24 @@ const std::vector<Powder> powderStats = []{
 }();
 
 #ifdef __EMSCRIPTEN__
+#include "js_helpers.h"
+#include <iostream>
+
+MAP_TO_JS_FUNC(powder_IDs);
+MAP_TO_JS_FUNC(powder_names);
+VEC_TO_JS_FUNC(powder_stats);
+
 EMSCRIPTEN_BINDINGS(powders) {
+    function("powderIDs", &make_powder_IDs);
+    function("powderNames", &make_powder_names);
+    value_object<Powder>("Powder")
+        .field("min", &Powder::min)
+        .field("max", &Powder::max)
+        .field("convert", &Powder::convert)
+        .field("defPlus", &Powder::defPlus)
+        .field("defMinus", &Powder::defMinus)
+        ;
+    function("powderStats", make_powder_stats);
+    
 }
 #endif
