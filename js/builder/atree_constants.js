@@ -11586,17 +11586,17 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Mask",
-                            "value": 30
+                            "value": 35
                         },
                         {
                             "type": "stat",
                             "name": "defMult.Mask",
-                            "value": 30
+                            "value": 35
                         },
                         {
                             "type": "stat",
                             "name": "spd",
-                            "value": 25
+                            "value": 80
                         },
                         {
                             "type": "stat",
