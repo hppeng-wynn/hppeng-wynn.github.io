@@ -72,7 +72,7 @@ const all_types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(c
 //console.log(types)
 let item_types = armorTypes.concat(accessoryTypes).concat(weaponTypes).concat(tome_types);
 
-let elementIcons = ["\u2724","\u2726", "\u2749", "\u2739", "\u274b" ];
+let elementIcons = ["\u2724", "\u2726", "\u2749", "\u2739", "\u274b" ];
 let skpReqs = skp_order.map(x => x + "Req");
 
 let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slots", "type", "material", "drop", "quest", "restrict", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "str", "dex", "int", "agi", "def", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "id", "majorIds", "damMobs", "defMobs",
@@ -90,7 +90,7 @@ let item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "slot
 "spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
 ];
 // Extra fake IDs (reserved for use in spell damage calculation) : damMult, defMult, poisonPct, activeMajorIDs
-let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ]
+let str_item_fields = [ "name", "displayName", "lore", "color", "tier", "set", "type", "material", "drop", "quest", "restrict", "category", "atkSpd" ];
 
 //File reading for ID translations for JSON purposes
 let reversetranslations = new Map();
