@@ -95,6 +95,7 @@ let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.sp
     redraw(current_data);
 }) ();
 
+// color map of rarity to hex
 let colorMap = new Map(
     [
         ["Normal", "#fff"],
@@ -119,6 +120,8 @@ let tiers_mod = new Map(
         ["Set", 1.05]
     ]
 );
+
+// multiply ehp based on class / weapon type
 let weapon_type_mods = new Map(
     [
         ["wand", 0.6],

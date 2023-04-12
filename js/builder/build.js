@@ -58,7 +58,8 @@ class Build{
         this.initBuildStats();
     }  
 
-    /*Returns build in string format
+    /*
+	Returns build in string format
     */
     toString(){
         return [this.equipment,this.weapon].flat();

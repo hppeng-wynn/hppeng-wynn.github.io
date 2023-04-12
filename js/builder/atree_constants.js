@@ -409,13 +409,13 @@ const atrees = {
                             "name": "Single Bow",
                             "type": "total",
                             "hits": { "Single Shot": "Arrow Shield.shots" },
-                            "display": false
+                            "display": true
                         },
                         {
                             "name": "Single Volley",
                             "type": "total",
                             "hits": { "Single Shot": "Arrow Shield.charges" },
-                            "display": false
+                            "display": true
                         },
                         {
                             "name": "DPS",

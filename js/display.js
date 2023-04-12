@@ -56,6 +56,7 @@ function displaySetBonuses(parent_id,build) {
     }
 }
 
+// displays build stats
 function displayBuildStats(parent_id,build,command_group,stats){
     // Commands to "script" the creation of nice formatting.
     // #commands create a new element.
@@ -1047,7 +1048,11 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
             }
         }
     }
-    
+
+	// can we turn these into functions?
+	// debug added by endistic
+	console.log(stats);
+	
     //total HP
     let hpRow = document.createElement("div");
     hpRow.classList.add('row');
@@ -1090,7 +1095,8 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
     } else {
         statsTable.append(ehpRow);
     }
-
+	
+	// ehp no agi
     ehpRow = document.createElement("div");
     ehpRow.classList.add("row");
     ehp = document.createElement("div");
@@ -1153,6 +1159,32 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
         statsTable.appendChild(ehprRow);
     }
 
+	// max mana
+	// uh ok this isnt a defense stat but who asked?
+    let mManaRow = document.createElement("div");
+    mManaRow.classList.add("row")
+    let mMana = document.createElement("div");
+    mMana.classList.add("col");
+    mMana.classList.add("text-start");
+    mMana.textContent = "Maximum Mana: ";
+
+    boost = document.createElement("div");
+	let localIntelligence = parseInt(document.getElementById('int-skp').value);
+    boost.textContent = Math.min((100 + (localIntelligence * 0.6)), 180);
+	if(isNaN(localIntelligence)) {
+		boost.textContent = "Bad intelligence value!";
+	}
+    boost.classList.add("col");
+    boost.classList.add("text-end");
+    mManaRow.appendChild(mMana);
+    mManaRow.append(boost);
+
+    if (insertSummary) {
+        parent_elem.appendChild(mManaRow);
+    } else {
+        statsTable.appendChild(mManaRow);
+    }
+	
     //eledefs
     let eledefs = stats[5];
     for (let i = 0; i < eledefs.length; i++){
@@ -1473,6 +1505,26 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
                     add_summary("Average DPS: ", averageDamage * baseDamageMultiplier[adjAtkSpd], "Damage");
                     add_summary("Attack Speed: ", display_attack_speeds[adjAtkSpd], "Damage");
                     add_summary("Per Attack: ", averageDamage, "Damage");
+					/*
+	 				id === ls
+	 				if (id === "ls" && id_val != 0) {
+                    let row = make_elem('div', ['row']);
+                    let value_elem = make_elem('div', ['col', 'text-end']);
+
+                    let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
+
+                    let defStats = getDefenseStats(stats);
+                    let number_elem = make_elem('b', [style], {
+                        textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
+                    });
+                    value_elem.append(prefix_elem);
+                    value_elem.append(number_elem);
+                    row.appendChild(value_elem);
+                    parent_div.appendChild(row);
+                }
+					also id_val = stats.get(id)
+	 				*/
+					
                 }
                 else {
                     add_summary(spell_info.name+ ": ", averageDamage, "Damage");
@@ -1493,6 +1545,29 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
                     }
                 }
             }
+			/*
+					add_summary("Lifesteal Per Hit: ", Math.round(ls_val), "Health");
+					add_summary("Manasteal Per Hit: ", ms_val, "Mana");
+   			*/
+
+			let atkSpdMap = new Map();
+			atkSpdMap.set("SUPER_SLOW", 0.51);
+			atkSpdMap.set("VERY_SLOW", 0.83);
+			atkSpdMap.set("SLOW", 1.5);
+			atkSpdMap.set("NORMAL", 2.05);
+			atkSpdMap.set("FAST", 2.5);
+			atkSpdMap.set("VERY_FAST", 3.1);
+			atkSpdMap.set("SUPER_FAST", 4.3);
+			
+			let curFromMap = atkSpdMap.get(stats.get("atkSpd"));
+			let ls_val = (stats.get("ls") / 3) / curFromMap;
+			let ms_val = (stats.get("ms") / 3) / curFromMap;
+			
+			if(spellIdx === 0) {
+				_damage_display("Health per Hit: ", ls_val, [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]);
+				_damage_display("Mana per Hit: ", ms_val, [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]);
+			}
+			
             _damage_display("Non-Crit Average: ", nonCritAverage, spell_info.normal_min, spell_info.normal_max);
             _damage_display("Crit Average: ", critAverage, spell_info.crit_min, spell_info.crit_max);
         } else if (spell_info.type === "heal") {

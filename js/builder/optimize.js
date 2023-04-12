@@ -1,3 +1,5 @@
+// this function handles how strength and dex are optimized
+// feature appears to have been removed for now but may come back
 function optimizeStrDex() {
     if (!player_build) {
         return;

@@ -274,3 +274,10 @@ class PassThroughNode extends ComputeNode {
         return ret;
     }
 }
+
+
+function resetSkillPointButton() {
+	console.log("click fired");
+	const event = new Event("input");
+	document.getElementById('int-skp').dispatchEvent(event);
+}

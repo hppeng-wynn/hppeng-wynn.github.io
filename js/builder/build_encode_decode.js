@@ -1,3 +1,7 @@
+/*
+
+*/
+
 let player_build;
 let build_powders;
 
@@ -27,12 +31,16 @@ function parsePowdering(powder_info) {
 }
 
 let atree_data = null;
+
+// this is a list that holds all of the wynn versions
 const wynn_version_names = [
     '2.0.1.1',
     '2.0.1.2',
     '2.0.2.1'
 ];
+// latest wynn version
 const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
+
 // Default to the newest version.
 let wynn_version_id = WYNN_VERSION_LATEST;
 
@@ -230,7 +238,8 @@ async function parse_hash(url_tag) {
     return save_skp;
 }
 
-/*  Stores the entire build in a string using B64 encoding and adds it to the URL.
+/*  
+Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
 function encodeBuild(build, powders, skillpoints, atree, atree_state) {
 
@@ -243,7 +252,7 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
         build_version = 8;
         build_string = "";
         tome_string = "";
-
+		
         for (const item of build.items) {
             if (item.statMap.get("custom")) {
                 let custom = "CI-"+encodeCustom(item, true);
@@ -294,15 +303,18 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
     }
 }
 
+// this gets the url to set the browser url to
 function get_full_url() {
     return `${url_base}?v=${wynn_version_id.toString()}${location.hash}`
 }
 
+// copies the url to clipboard
 function copyBuild() {
     copyTextToClipboard(get_full_url());
     document.getElementById("copy-button").textContent = "Copied!";
 }
 
+// copies the build link for sharing to others
 function shareBuild(build) {
     if (build) {
         let text = get_full_url()+"\n"+
@@ -322,6 +334,7 @@ function shareBuild(build) {
                 break;
             }
         }
+		// now copy all of this to clipboard
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }

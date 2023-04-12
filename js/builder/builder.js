@@ -2,6 +2,7 @@
  * File containing utility functions relevant to the builder page, as well as the setup code (at the very bottom).
  */
 
+// idk what this does
 function populateBuildList() {
     const buildList = document.getElementById("build-choice");
     const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
@@ -13,6 +14,7 @@ function populateBuildList() {
     }
 }
 
+// saves the build to a string
 function saveBuild() {
     if (player_build) {
         const savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
@@ -42,6 +44,7 @@ function saveBuild() {
     }
 }
 
+// loads a build from the URL
 function loadBuild() {
     let savedBuilds = window.localStorage.getItem("builds") === null ? {} : JSON.parse(window.localStorage.getItem("builds"));
     let saveName = document.getElementById("build-name").value;
@@ -58,6 +61,8 @@ function loadBuild() {
     }
 }
 
+// this function clears all fields that the player can put data into
+// powder specials, items, skillpoints, etc.
 function resetFields(){
     for (const i of powder_inputs) {
         setValue(i, "");
@@ -107,6 +112,7 @@ function resetFields(){
     location.hash = "";
 }
 
+// toggle the ID button on/off
 function toggleID() {
     let button = document.getElementById("show-id-button");
     let targetDiv = document.getElementById("id-edit");
@@ -120,6 +126,7 @@ function toggleID() {
     }
 }
 
+// function that toggles on/off a button as an way of interacting with bootstrapcss
 function toggleButton(button_id) {
     let button = document.getElementById(button_id);
     if (button) {
@@ -133,6 +140,7 @@ function toggleButton(button_id) {
 
 
 // autocomplete initialize
+// this code initializes autocompletion for item inputs
 function init_autocomplete() {
     let dropdowns = new Map();
     for (const eq of equipment_keys) {
@@ -384,6 +392,9 @@ window.onerror = function(message, source, lineno, colno, error) {
     document.getElementById('stack-box').textContent = error.stack;
 };
 
+
 (async function() {
     await init();
 })();
+
+

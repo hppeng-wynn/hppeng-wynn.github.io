@@ -50,5 +50,13 @@ Custom item creator
 - Constantly maintained by class builders
 
 ## Documentation
+You can find more precise documentation in each individual folder. Here is some general, over-arching patterns in the code to keep an eye out for.  
 
-ahhhhhhhhhhh
+**Wynn Element Shorthands**
+Internally, every wynncraft element has a shortened version in WynnBuilder:
+- Dexterity => dex
+- Intelligence => int
+- Defense => def
+- Agility => agi
+- Strength => str
+These shorthands are commonly used internally

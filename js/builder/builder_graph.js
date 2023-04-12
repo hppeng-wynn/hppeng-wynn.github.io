@@ -17,7 +17,16 @@ let armor_powder_node = new (class extends ComputeNode {
     }
 })();
 
-const damageMultipliers = new Map([ ["totem", 0.2], ["warscream", 0.0], ["ragnarokkr", 0.20], ["fortitude", 0.60], ["radiance", 0.0] ]);
+const damageMultipliers = new Map(
+	[ 
+		["totem", 0.2], 
+		["warscream", 0.0], 
+		["ragnarokkr", 0.20], 
+		["fortitude", 0.60], 
+		["ssac", 0.30], 
+		["radiance", 0.0] 
+	]
+);
 
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
@@ -39,7 +48,8 @@ let boosts_node = new (class extends ComputeNode {
     }
 })().update();
 
-/* Updates all spell boosts
+/* 
+Updates all spell boosts
 */
 function update_boosts(buttonId) {
     let elem = document.getElementById(buttonId);
@@ -770,6 +780,15 @@ class DisplayBuildWarningsNode extends ComputeNode {
         let summarybox = document.getElementById("summary-box");
         summarybox.textContent = "";
 
+		let skillpointButtonBox = document.getElementById('sp-button-box');
+		skillpointButtonBox.innerHTML = "";
+		let spBChild = document.createElement("button");
+		spBChild.classList.add("button",  "py-0",  "fw-bold", "text-light", "dark-5", "scaled-font", "rounded");
+		spBChild.id = "sp-redo-button"
+		spBChild.onclick = "resetSkillPointButton()";
+		spBChild.textContent = "Redo Skill Points"
+		skillpointButtonBox.appendChild(spBChild);
+		
         let remainingSkp = make_elem("p", ['scaled-font', 'my-0']);
         let remainingSkpTitle = make_elem("b", [], { textContent: "Assigned " + total_assigned + " skillpoints. Remaining skillpoints: " });
         let remainingSkpContent = document.createElement("b");

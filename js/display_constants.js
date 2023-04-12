@@ -1,3 +1,4 @@
+// hex codes for each rarity
 let colorMap = new Map(
     [
         ["Normal", "#fff"],
@@ -11,6 +12,7 @@ let colorMap = new Map(
         ["Set","#5f5"]
     ]
 );
+// prefixes for each ID in the item stats being shown
 let idPrefixes = {"displayName": "",
     "lvl":"Combat Level Min: ",
     "classReq":"Class Req: ",
