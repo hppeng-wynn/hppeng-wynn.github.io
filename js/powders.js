@@ -31,17 +31,6 @@ let powderStats = [
     _p(2,6,11,3,1), _p(3,10,14,6,2), _p(4,11,17,10,3), _p(5,11,22,16,5), _p(7,12,28,24,9), _p(8,14,35,34,13)
 ];
 
-class PowderIngredient {
-    constructor(durability, skpReq) {
-        this.durability = durability;
-        this.skpReq = skpReq;
-    }
-}
-function _pi(a,b) { return new PowderIngredient(a,b)}
-
-let powderIngreds = [
-    _pi(-35,0),_pi(-52.5,0),_pi(-70,10),_pi(-91,20),_pi(-112,28),_pi(-133,36)
-];
 //Ordering: [weapon special name, weapon special effects, armor special name, armor special effects]
 class PowderSpecial{
     constructor(wSpName, wSpEff, aSpName, aSpEff, cap){

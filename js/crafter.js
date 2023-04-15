@@ -136,8 +136,6 @@ function calculateCraft() {
     }
     let ingreds = [];
     for (i = 1; i < 7; i++) {
-        console.log("ing-choice-"+i);
-        // console.log(getValue("ing-choice-"+i));
         getValue("ing-choice-" + i) === "" ? ingreds.push(expandIngredient(ingMap.get("No Ingredient"))) : ingreds.push(expandIngredient(ingMap.get(getValue("ing-choice-" + i))));
     }
     let atkSpd = "NORMAL"; //default attack speed will be normal.

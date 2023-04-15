@@ -246,7 +246,6 @@ class Custom {
             }
         }
         let type = this.statMap.get("type").toLowerCase();
-        console.log(type);
         if (weaponTypes.includes(type)) {
             for (const n of ["nDam", "eDam", "tDam", "wDam", "fDam", "aDam"]) {
                 if (!(this.statMap.has(n) && this.statMap.get(n))) {

@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 20;
+const ING_DB_VERSION = 21;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -201,39 +201,29 @@ function init_ing_maps() {
     ingList.push(ing.displayName);
     ingIDMap.set(ing.id, ing.displayName);
     let numerals = new Map([[1, "I"], [2, "II"], [3, "III"], [4, "IV"], [5, "V"], [6, "VI"]]);
+
+    // pairs of (dura, req)
+    let powder_ing_info = [
+        [-35,0],[-52.5,0],[-70,10],[-91,20],[-112,28],[-133,36]
+    ];
     for (let i = 0; i < 5; i ++) {
-        for (const powderIng of powderIngreds) {
+        for (let powder_tier = 0; powder_tier < 6; ++powder_tier) {
+            powder_info = powder_ing_info[powder_tier];
             let ing = {
-                name: "" + damageClasses[i+1] + " Powder " + numerals.get(powderIngreds.indexOf(powderIng) + 1),
+                name: "" + damageClasses[i+1] + " Powder " + numerals.get(powder_tier + 1),
                 tier: 0,
                 lvl: 0,
                 skills: ["ARMOURING", "TAILORING", "WEAPONSMITHING", "WOODWORKING", "JEWELING"],
                 ids: {},
                 isPowder: true,
-                pid: 6*i + powderIngreds.indexOf(powderIng),
-                itemIDs: {"dura": powderIng["durability"], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0},
+                pid: 6*i + powder_tier,
+                itemIDs: {"dura": powder_info[0], "strReq": 0, "dexReq": 0,"intReq": 0,"defReq": 0,"agiReq": 0},
                 consumableIDs: {"dura": 0, "charges": 0},
                 posMods: {"left": 0, "right": 0, "above": 0, "under": 0, "touching": 0, "notTouching": 0}
             };
             ing.id = 4001 + ing.pid;
             ing.displayName = ing.name;
-            switch(i) {
-                case 0:
-                    ing.itemIDs["strReq"] = powderIng["skpReq"];
-                    break;
-                case 1:
-                    ing.itemIDs["dexReq"] = powderIng["skpReq"];
-                    break;
-                case 2:
-                    ing.itemIDs["intReq"] = powderIng["skpReq"];
-                    break;
-                case 3:
-                    ing.itemIDs["defReq"] = powderIng["skpReq"];
-                    break;
-                case 4:
-                    ing.itemIDs["agiReq"] = powderIng["skpReq"];
-                    break;
-            }
+            ing.itemIDs[skp_order[i] + "Req"] = powder_info[1];
             ingMap.set(ing.displayName, ing);
             ingList.push(ing.displayName);
             ingIDMap.set(ing.id, ing.displayName);

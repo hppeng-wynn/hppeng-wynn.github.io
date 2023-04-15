@@ -3665,7 +3665,7 @@ const atrees = {
         },
         {
             "display_name": "Enraged Blow",
-            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +2% (Max 80%)",
+            "desc": "While Corrupted, every 1% of Health you lose will increase your damage by +1.5% (Max 80%)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Bak'al's Grasp",
@@ -6964,7 +6964,7 @@ const atrees = {
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Orb Damage",
+                    "target_part": "Orb DPS",
                     "base_spell": 5,
                     "hits": {
                         "Single Orb": 1
@@ -7906,7 +7906,6 @@ const atrees = {
             "desc": "After leaving Vanish, summon 3 Clones that will follow you and protect you (15s Cooldown). When hit, gain a chance to take 80% less damage and lose 1 Clone.",
             "archetype": "Trickster",
             "archetype_req": 2,
-            "base_abil": "Dash",
             "parents": [
                 "Sticky Bomb"
             ],
@@ -7943,7 +7942,7 @@ const atrees = {
             ],
             "dependencies": [],
             "blockers": [
-                "Mirror Image"
+                "Echo"
             ],
             "cost": 2,
             "display": {
@@ -8545,7 +8544,7 @@ const atrees = {
             "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -60% damage.",
             "archetype": "Trickster",
             "archetype_req": 6,
-            "base_abil": "Dash",
+            "base_abil": "Mirror Image",
             "parents": [
                 "Sandbagging",
                 "Shurikens"
@@ -8581,6 +8580,22 @@ const atrees = {
                     "behavior": "modify",
                     "target_part": "Slash Damage",
                     "multipliers": [ 690, 0, 0, 110, 0, 0 ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Spell Copies",
+                    "slider_step": 1,
+                    "slider_max": 3,
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast"
+                        }
+                    ],
+                    "scaling": [
+                        100
+                    ]
                 }
             ]
         },
@@ -9123,7 +9138,7 @@ const atrees = {
             "desc": "Improve your damage while your Clones are active by +15%",
             "archetype": "Trickster",
             "archetype_req": 7,
-            "base_abil": "Dash",
+            "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb 2",
                 "Blade Fury"
@@ -9173,7 +9188,7 @@ const atrees = {
         },
         {
             "display_name": "Satsujin",
-            "desc": "If an enemy has 3 Marks and 70% of their health or more, your next Multihit or Main Attack will deal triple damage. (20s Cooldown, per enemy)",
+            "desc": "If an enemy has 3 Marks, your next Multihit or Damaging Powder Special will deal double damage. (20s Cooldown, per enemy)",
             "archetype": "Shadestepper",
             "archetype_req": 13,
             "parents": [
@@ -9210,7 +9225,7 @@ const atrees = {
                         },
                         {
                             "type": "stat",
-                            "name": "damMult.Satsujin:0.Melee",
+                            "name": "damMult.Satsujin:0.Powder Special",
                             "value": 100
                         }
                     ]
@@ -9222,7 +9237,7 @@ const atrees = {
             "desc": "Summon +3 additional Clones. (+15s Cooldown)",
             "archetype": "Trickster",
             "archetype_req": 8,
-            "base_abil": "Dash",
+            "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb 2"
             ],
@@ -9237,7 +9252,14 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Spell Copies",
+                    "slider_max": 3
+                }
+            ]
         },
         {
             "display_name": "Diversion",
@@ -11564,17 +11586,17 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Mask",
-                            "value": 30
+                            "value": 35
                         },
                         {
                             "type": "stat",
                             "name": "defMult.Mask",
-                            "value": 30
+                            "value": 35
                         },
                         {
                             "type": "stat",
                             "name": "spd",
-                            "value": 25
+                            "value": 80
                         },
                         {
                             "type": "stat",
