@@ -478,30 +478,29 @@ function base_to_range(id) {
     let base = parseFloat(getValue(id+"-choice-base"));
     if(base) {
         //This version allows overriding of min and max.
-        if (reversedIDs.includes(id)) {
-            if (base < 0) {
-                setValue(id+"-choice-min", Math.min(Math.round(neg_range[1]*base),-1));
-            } else {
-                setValue(id+"-choice-min", Math.max(Math.round(pos_range[1]*base),1));
+            if (val == 0) {
+                // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
+                maxRolls.set(id,0);
+                minRolls.set(id,0);
+            } else if ((val > 0) != (reversedIDs.includes(id))) { // logical XOR. positive IDs
+                maxRolls.set(id,idRound(val*1.3));
+                minRolls.set(id,idRound(val*0.3));
+            } else { //negative rolled IDs
+                maxRolls.set(id,idRound(val*0.7));
+                minRolls.set(id,idRound(val*1.3));
             }
-            if (base < 0) {
-                setValue(id+"-choice-max", Math.min(Math.round(neg_range[0]*base),-1));
-            } else {
-                setValue(id+"-choice-max", Math.max(Math.round(pos_range[0]*base),1));
-            }
-        } else {
-            if (base < 0) {
-                setValue(id+"-choice-min", Math.min(Math.round(neg_range[0]*base),-1));
-            } else {
-                setValue(id+"-choice-min", Math.max(Math.round(pos_range[0]*base),1));
-            }
-            if (base < 0) {
-                setValue(id+"-choice-max", Math.min(Math.round(neg_range[1]*base),-1));
-            } else {
-                setValue(id+"-choice-max", Math.max(Math.round(pos_range[1]*base),1));
-            }
+        if (base == 0) {
+            // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
+            setValue(id+"-choice-max", 0);
+            setValue(id+"-choice-min", 0);
         }
-
+        else if ((base > 0) != (reversedIDs.includes(id))) { // logical XOR. positive rolled IDs
+            setValue(id+"-choice-max", idRound(Math.round(pos_range[1]*base)));
+            setValue(id+"-choice-min", idRound(Math.round(pos_range[0]*base)));
+        } else { //negative rolled IDs
+            setValue(id+"-choice-max", idRound(Math.round(neg_range[1]*base)));
+            setValue(id+"-choice-min", idRound(Math.round(neg_range[0]*base)));
+        }
 
         /* No overiding min/max version
         if (!getValue(id+"-choice-min")) {
