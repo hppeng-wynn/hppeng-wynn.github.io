@@ -478,17 +478,6 @@ function base_to_range(id) {
     let base = parseFloat(getValue(id+"-choice-base"));
     if(base) {
         //This version allows overriding of min and max.
-            if (val == 0) {
-                // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
-                maxRolls.set(id,0);
-                minRolls.set(id,0);
-            } else if ((val > 0) != (reversedIDs.includes(id))) { // logical XOR. positive IDs
-                maxRolls.set(id,idRound(val*1.3));
-                minRolls.set(id,idRound(val*0.3));
-            } else { //negative rolled IDs
-                maxRolls.set(id,idRound(val*0.7));
-                minRolls.set(id,idRound(val*1.3));
-            }
         if (base == 0) {
             // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
             setValue(id+"-choice-max", 0);
