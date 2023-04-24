@@ -8763,7 +8763,7 @@ const atrees = {
         },
         {
             "display_name": "Parry",
-            "desc": "After dodging damage, if you cast a spell within 1.5s, it will be free. (3s Cooldown)",
+            "desc": "After dodging damage, gain a brief damage buff, and make your next spell within 1.5 free. (3s Cooldown)",
             "archetype": "Acrobat",
             "archetype_req": 5,
             "parents": [
@@ -8778,7 +8778,19 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Parry",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Parry",
+                            "value": 30
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Cheaper Spin Attack 2",
