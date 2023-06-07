@@ -9436,7 +9436,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Slash Damage",
-                            "multipliers": [ 360, 0, 0, 40, 0, 0 ]
+                            "multipliers": [ 360, 0, 0, 0, 40, 0 ]
                         }
                     ]
                 }
