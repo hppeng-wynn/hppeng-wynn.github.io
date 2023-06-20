@@ -1100,7 +1100,7 @@ function builder_graph_init(save_skp) {
     // weapon image changer node.
     let weapon_image = document.getElementById("weapon-img");
     let weapon_dps = document.getElementById("weapon-dps");
-    new WeaponInputDisplayNode('weapon-type', weapon_image, weapon_dps).link_to(item_final_nodes[8]);
+    new WeaponInputDisplayNode('weapon-type-display', weapon_image, weapon_dps).link_to(item_final_nodes[8]);
 
     // linking to atree verification
     atree_validate.link_to(level_input, 'level');
