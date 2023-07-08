@@ -4769,7 +4769,7 @@ const atrees = {
             ]
         }
     ],
-    "Mage": [
+ 	"Mage": [
         {
             "display_name": "Meteor",
             "desc": "Summons a slow but powerful meteor from the sky, dealing massive damage over a large area.",
@@ -4796,7 +4796,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Meteor Damage",
-                            "multipliers": [300, 100, 0, 0, 0, 0 ]
+                            "multipliers": [330, 70, 0, 0, 0, 0 ]
                         },
                         {
                             "name": "Total Damage",
@@ -5320,12 +5320,12 @@ const atrees = {
                     "target_part": "Wind Slash",
                     "base_spell": 2,
                     "multipliers": [
-                        50,
+                        75,
                         0,
                         0,
                         0,
                         0,
-                        50
+                        25
                     ]
                 },
                 {
@@ -5387,7 +5387,7 @@ const atrees = {
                         "type": "stat",
                         "name": "nConvBase:3.Breathless Damage"
                     },
-                    "scaling": [-14]
+                    "scaling": [-17]
                 },
                 {
                     "type": "stat_scaling",
@@ -5398,7 +5398,7 @@ const atrees = {
                         "type": "stat",
                         "name": "eConvBase:3.Breathless Damage"
                     },
-                    "scaling": [-6]
+                    "scaling": [-3]
                 }
             ]
         },
@@ -5430,7 +5430,7 @@ const atrees = {
                 "parts": [
                     {
                         "name": "Tick Damage",
-                        "multipliers": [15, 0, 0, 0, 25, 0]
+                        "multipliers": [25, 0, 0, 0, 15, 0]
                     },
                     {
                         "name": "DPS",
@@ -5450,7 +5450,7 @@ const atrees = {
             "base_abil": "Heal",
             "parents": [ "Water Mastery" ],
             "dependencies": [ "Heal" ],
-            "blockers": [ "Arcane Transfer" ],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 13,
@@ -5488,7 +5488,7 @@ const atrees = {
                 "base_spell": 3,
                 "target_part": "Meteor Damage",
                 "behavior": "modify",
-                "multipliers": [30, 90, 0, 0, 0, 0]
+                "multipliers": [90, 30, 0, 0, 0, 0]
             }]
         },
         {
@@ -5566,7 +5566,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Per Orb",
-                            "multipliers": [60, 0, 30, 30, 0, 0]
+                            "multipliers": [90, 0, 15, 15, 0, 0]
                         },
                         {
                             "name": "Per Melee (max)",
@@ -5591,7 +5591,7 @@ const atrees = {
                         "type": "stat",
                         "name": "nConvBase:3.Breathless Damage"
                     },
-                    "scaling": [-18]
+                    "scaling": [-22]
                 },
                 {
                     "type": "stat_scaling",
@@ -5602,7 +5602,7 @@ const atrees = {
                         "type": "stat",
                         "name": "eConvBase:3.Breathless Damage"
                     },
-                    "scaling": [-8]
+                    "scaling": [-4]
                 }
             ]
         },
@@ -5614,9 +5614,8 @@ const atrees = {
             "parents": [
                 "Burning Sigil"
             ],
-            "dependencies": [],
+            "dependencies": [ "Heal" ],
             "blockers": [
-                "Sunshower",
                 "Larger Heal",
                 "Orphion's Pulse"
             ],
@@ -5762,7 +5761,7 @@ const atrees = {
                         "type": "stat",
                         "name": "nConvBase:3.Breathless Damage"
                     },
-                    "scaling": [21]
+                    "scaling": [25]
                 },
                 {
                     "type": "stat_scaling",
@@ -5772,7 +5771,7 @@ const atrees = {
                         "type": "stat",
                         "name": "eConvBase:3.Breathless Damage"
                     },
-                    "scaling": [9]
+                    "scaling": [5]
                 },
                 {
                     "type": "add_spell_prop",
@@ -6204,6 +6203,7 @@ const atrees = {
             "parents": [
                 "Healthier Ophanim I",
                 "Snake Nest",
+                "Arcane Restoration",
                 "Fluid Healing"
             ],
             "dependencies": [
@@ -6248,7 +6248,8 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Seance",
-                "Snake Nest"
+                "Snake Nest",
+                "Orphion's Pulse"
             ],
             "dependencies": [
                 "Pyrokinesis"
@@ -6270,7 +6271,8 @@ const atrees = {
             "desc": "Increase the damage of Ophanim.",
             "base_abil": "Ophanim",
             "parents": [
-                "Orphion's Pulse"
+                "Orphion's Pulse",
+                "Arcane Restoration"
             ],
             "dependencies": [
                 "Ophanim"
@@ -6313,7 +6315,7 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "aoe": 5
+                "aoe": 8
             },
             "effects": []
         },
@@ -6516,7 +6518,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "target_part": "Explosion Damage",
                     "base_spell": 2,
-                    "multipliers": [50, 0, 0, 0, 30, 0]
+                    "multipliers": [60, 0, 0, 0, 20, 0]
                 },
                 {
                     "type": "add_spell_prop",
