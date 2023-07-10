@@ -901,6 +901,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     }
                     continue;
                 }
+                // NOTE: Legacy support
                 case 'convert_spell_conv':
                     const { base_spell, target_part, conversion } = effect;
                     const ret_spell = ret_spells.get(base_spell);

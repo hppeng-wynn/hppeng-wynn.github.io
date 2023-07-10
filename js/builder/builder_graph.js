@@ -593,7 +593,7 @@ class SpellDamageCalcNode extends ComputeNode {
             stats.get('def'),
             stats.get('agi')
         ];
-        let spell_results = []
+        let display_spell_results = []
         let spell_result_map = new Map();
         const use_speed = (('use_atkspd' in spell) ? spell.use_atkspd : true);
         const use_spell = (('scaling' in spell) ? spell.scaling === 'spell' : true);
@@ -630,7 +630,7 @@ class SpellDamageCalcNode extends ComputeNode {
             const {name, display = true} = part;
             spell_result.name = name;
             spell_result.display = display;
-            spell_results.push(spell_result);
+            display_spell_results.push(spell_result);
             spell_result_map.set(name, spell_result);
         }
         for (const part of spell_parts) {
@@ -670,10 +670,10 @@ class SpellDamageCalcNode extends ComputeNode {
             const {name, display = true} = part;
             spell_result.name = name;
             spell_result.display = display;
-            spell_results.push(spell_result);
+            display_spell_results.push(spell_result);
             spell_result_map.set(name, spell_result);
         }
-        return spell_results;
+        return display_spell_results;
     }
 }
 
