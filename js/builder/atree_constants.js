@@ -8548,7 +8548,7 @@ const atrees = {
         },
         {
             "display_name": "Echo",
-            "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -60% damage.",
+            "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -65% damage.",
             "archetype": "Trickster",
             "archetype_req": 6,
             "base_abil": "Mirror Image",
