@@ -2680,8 +2680,8 @@ const atrees = {
                             "name": "Single Hit",
                             "type": "damage",
                             "multipliers": [
-                                130,
-                                20,
+                                150,
+                                30,
                                 0,
                                 0,
                                 0,
@@ -2775,7 +2775,7 @@ const atrees = {
                     "base_spell": 1,
                     "target_part": "Single Hit",
                     "cost": 0,
-                    "multipliers": [ -50, 0, 0, 0, 0, 0 ]
+                    "multipliers": [ -40, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -3070,11 +3070,11 @@ const atrees = {
                         {
                             "name": "War Scream",
                             "multipliers": [
-                                50,
+                                75,
                                 0,
                                 0,
                                 0,
-                                50,
+                                25,
                                 0
                             ]
                         },
@@ -3326,7 +3326,6 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Flyby Jab",
             "desc": "Damage enemies in your way when using Charge",
@@ -3334,7 +3333,7 @@ const atrees = {
             "parents": ["Air Mastery", "Flaming Uppercut"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 2, 
+            "cost": 1,
             "display": {
                 "row": 12,
                 "col": 6,
@@ -3636,7 +3635,7 @@ const atrees = {
             "display_name": "Counter",
             "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
             "archetype": "Battle Monk", 
-            "parents": ["Aerodynamics", "Cheaper Uppercut"], 
+            "parents": ["Aerodynamics", "Cheaper Uppercut", "Manachism"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -3662,6 +3661,25 @@ const atrees = {
                     ]
                 }
             ]  
+        },
+        {
+            "display_name": "Manachism",
+            "desc": "If you receive a hit that's less than 5% of your max HP, gain 10 Mana (1s Cooldown)",
+            "archetype": "Paladin", 
+            "archetype_req": 3, 
+            "parents": ["Aerodynamics", "Counter", "Provoke"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 18,
+                "col": 6,
+                "icon": "node_2"
+            },
+            "properties": {
+                "cooldown": 1
+            },
+            "effects": []  
         },
         {
             "display_name": "Enraged Blow",
@@ -3727,14 +3745,13 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Stronger Mantle",
             "desc": "Add +2 additional charges to Mantle of the Bovemists. Reduce its cooldown by 5s.",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "base_abil": "Mantle of the Bovemists",
-            "parents": ["Manachism", "Flying Kick"], 
+            "parents": ["Sacred Surge", "Flying Kick"], 
             "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
             "cost": 1, 
@@ -3758,12 +3775,11 @@ const atrees = {
                 }
             ]  
         },
-
         {
-            "display_name": "Manachism",
-            "desc": "If you receive a hit that's less than 5% of your max HP, gain 10 Mana (1s Cooldown)",
+            "display_name": "Sacred Surge",
+            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 15% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
-            "archetype_req": 3, 
+            "archetype_req": 0, 
             "parents": ["Stronger Mantle", "Provoke"], 
             "dependencies": [], 
             "blockers": [],
@@ -3773,23 +3789,33 @@ const atrees = {
                 "col": 8,
                 "icon": "node_2"
             },
-            "properties": {
-                "cooldown": 1
-            },
-            "effects": []  
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Sacred Surge",
+                    "base_spell": 9,
+                    "display": "Smite Damage",
+                    "parts": [
+                        {
+                            "name": "Smite Damage",
+                            "multipliers": [100, 0, 20, 0, 0, 0]
+                        }
+                    ]
+                }
+            ]
         },
-
         {
             "display_name": "Boiling Blood",
             "desc": "Bash leaves a trail of boiling blood behind its first explosion, slowing down and damaging enemies above it every 0.4 seconds",
             "base_abil": "Bash",
-            "parents": ["Enraged Blow", "Ragnarokkr"], 
+            "parents": [ "Enraged Blow", "Ragnarokkr" ],
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 22,
-                "col": 0,
+                "row": 23,
+                "col": 1,
                 "icon": "node_1"
             },
             "properties": {},
@@ -3801,22 +3827,21 @@ const atrees = {
                     "cost": 0,
                     "multipliers": [25, 0, 0, 0, 5, 0]
                 }
-            ]  
+            ]
         },
-
         {
             "display_name": "Ragnarokkr",
             "desc": "War Scream become deafening, increasing its duration and giving damage bonus to players",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "War Scream",
-            "parents": ["Boiling Blood", "Flying Kick"], 
+            "parents": ["Boiling Blood", "Flying Kick", "Cheaper War Scream I"],
             "dependencies": ["War Scream"], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 22,
-                "col": 2,
+                "row": 23,
+                "col": 3,
                 "icon": "node_2"
             },
             "properties": {},
@@ -3860,8 +3885,8 @@ const atrees = {
             ]  
         },
         {
-            "display_name": "Burning Heart",
-            "desc": "For every 100 Health Bonus you have from item IDs, gain +2% Fire Damage (Max 100%)",
+            "display_name": "Cleansing Breeze",
+            "desc": "Charge will cleanse you of all negative effects and fire, as well as any allies you pass through. (3s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["Cheaper War Scream I", "Stronger Bash"], 
@@ -3873,33 +3898,14 @@ const atrees = {
                 "col": 6,
                 "icon": "node_0"
             },
-            "properties": {
-            },
-            "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": false,
-                    "inputs": [
-                        {
-                            "type": "stat",
-                            "name": "hpBonus"
-                        }
-                    ],
-                    "output": {
-                        "type": "stat",
-                        "name": "fDamPct"
-                    },
-                    "scaling": [0.02],
-                    "max": 100
-                }
-            ]  
+            "properties": {},
+            "effects": []
         },
-
         {
             "display_name": "Stronger Bash",
             "desc": "Increase the damage of Bash",
             "base_abil": "Bash",
-            "parents": ["Burning Heart", "Manachism"], 
+            "parents": ["Cleansing Breeze", "Sacred Surge"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -3925,26 +3931,25 @@ const atrees = {
             "archetype": "Fallen", 
             "archetype_req": 5, 
             "base_abil": "Bak'al's Grasp",
-            "parents": ["Ragnarokkr", "Boiling Blood"], 
-            "dependencies": ["Bak'al's Grasp"], 
+            "parents": ["Enraged Blow"],
+            "dependencies": ["Bak'al's Grasp"],
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 23,
-                "col": 1,
+                "row": 22,
+                "col": 0,
                 "icon": "node_1"
             },
             "properties": {},
             "effects": []  
         },
-
         {
             "display_name": "Comet",
             "desc": "After being hit by Fireworks, enemies will crash into the ground and receive more damage",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Uppercut",
-            "parents": ["Ragnarokkr"], 
+            "parents": ["Boiling Blood", "Ragnarokkr"],
             "dependencies": ["Fireworks"], 
             "blockers": [],
             "cost": 2, 
@@ -3980,7 +3985,7 @@ const atrees = {
             "archetype": "Battle Monk", 
             "archetype_req": 4, 
             "base_abil": "Charge",
-            "parents": ["Cheaper War Scream I", "Burning Heart"], 
+            "parents": ["Cheaper War Scream I", "Cleansing Breeze"],
             "dependencies": ["Flying Kick"], 
             "blockers": [],
             "cost": 2, 
@@ -4014,7 +4019,7 @@ const atrees = {
             "desc": "Regain back 30% of the damage you take as healing over 30s",
             "archetype": "Paladin", 
             "archetype_req": 5, 
-            "parents": ["Burning Heart", "Stronger Bash"], 
+            "parents": ["Cleansing Breeze", "Stronger Bash"],
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4176,7 +4181,7 @@ const atrees = {
             ]  
         },
         {
-            "display_name": "Ambidextrous",
+            "display_name": "Riposte",
             "desc": "Increase your chance to attack with Counter by +30%",
             "base_abil": "Counter",
             "parents": ["Stronger Mantle", "Flying Kick"], 
@@ -4446,7 +4451,7 @@ const atrees = {
             "display_name": "Cheaper War Scream I",
             "desc": "Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
-            "parents": ["Stronger Mantle", "Flying Kick", "Burning Heart"], 
+            "parents": ["Stronger Mantle", "Flying Kick", "Cleansing Breeze"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
