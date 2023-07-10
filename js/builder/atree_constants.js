@@ -8541,7 +8541,7 @@ const atrees = {
         },
         {
             "display_name": "Echo",
-            "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -60% damage.",
+            "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -65% damage.",
             "archetype": "Trickster",
             "archetype_req": 6,
             "base_abil": "Mirror Image",
@@ -8570,16 +8570,19 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.Echo",
-                            "value": -60
+                            "value": -65
+                        },
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:8.Slash Damage",
+                            "value": 690
+                        },
+                        {
+                            "type": "stat",
+                            "name": "fConvBase:8.Slash Damage",
+                            "value": 110
                         }
                     ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 8,
-                    "behavior": "modify",
-                    "target_part": "Slash Damage",
-                    "multipliers": [ 690, 0, 0, 110, 0, 0 ]
                 },
                 {
                     "type": "stat_scaling",
@@ -8590,11 +8593,35 @@ const atrees = {
                     "output": [
                         {
                             "type": "stat",
-                            "name": "damMult.EchoCast"
+                            "name": "damMult.EchoCast:1.Spin Attack"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:0.Melee"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:3.Backstab Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:3.Fatality"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:3.Per Hit"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:4.Per Tick"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:6.Per Shuriken"
                         }
                     ],
                     "scaling": [
-                        100
+                        100, 100, 100, 100, 100, 100, 100
                     ]
                 }
             ]
