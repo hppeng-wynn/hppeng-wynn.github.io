@@ -31,7 +31,8 @@ const wynn_version_names = [
     '2.0.1.1',
     '2.0.1.2',
     '2.0.2.1',
-    '2.0.2.3'
+    '2.0.2.3',
+    '2.0.3.1'
 ];
 const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
 // Default to the newest version.
