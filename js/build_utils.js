@@ -199,28 +199,16 @@ function expandItem(item) {
     } else { //The item does not have fixed IDs.
         for (const id of rolledIDs) {
             let val = (item[id] || 0);
-            if (val > 0) { // positive rolled IDs
-                if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(val*0.7));
-                    minRolls.set(id,idRound(val*1.3));
-                } else {
-                    maxRolls.set(id,idRound(val*1.3));
-                    minRolls.set(id,idRound(val*0.3));
-                }
-            } else if (val < 0) { //negative rolled IDs
-                if (reversedIDs.includes(id)) {
-                    maxRolls.set(id,idRound(val*1.3));
-                    minRolls.set(id,idRound(val*0.3));
-                }
-                else {
-                    maxRolls.set(id,idRound(val*0.7));
-                    minRolls.set(id,idRound(val*1.3));
-                }
-            }
-            else { // if val == 0
+            if (val == 0) {
                 // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
                 maxRolls.set(id,0);
                 minRolls.set(id,0);
+            } else if ((val > 0) != (reversedIDs.includes(id))) { // logical XOR. positive IDs
+                maxRolls.set(id,idRound(val*1.3));
+                minRolls.set(id,idRound(val*0.3));
+            } else { //negative rolled IDs
+                maxRolls.set(id,idRound(val*0.7));
+                minRolls.set(id,idRound(val*1.3));
             }
         }
     }
