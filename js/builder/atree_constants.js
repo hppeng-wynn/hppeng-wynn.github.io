@@ -8621,10 +8621,14 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "damMult.EchoCast:4.Per Tick"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoCast:6.Per Shuriken"
                         }
                     ],
                     "scaling": [
-                        100, 100, 100, 100, 100, 100
+                        100, 100, 100, 100, 100, 100, 100
                     ]
                 }
             ]
