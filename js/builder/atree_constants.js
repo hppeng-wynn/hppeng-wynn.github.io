@@ -10374,7 +10374,7 @@ const atrees = {
             "archetype_req": 2,
             "parents": ["Rain Dance"],
             "dependencies": ["Uproot"],
-            "blockers": ["Blood Sorrow"],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 15,
@@ -10415,7 +10415,7 @@ const atrees = {
         },
         {
             "display_name": "Sacrificial Shrine",
-            "desc": "Your Totem will siphon 2% of your health every 0.4s and transfer it into a Blood Pool. Aura will use 15% of your Blood Pool to deal +50% damage and heal all allies.",
+            "desc": "Your Totem will siphon 2% of your health every 0.4s and transfer it into a Blood Pool. Aura will use 15% of your Blood Pool to deal +35% damage and heal all allies.",
             "archetype": "Acolyte",
             "archetype_req": 3,
             "parents": [
@@ -10759,7 +10759,7 @@ const atrees = {
                 "Vengeful Spirit"
             ],
             "dependencies": [],
-            "blockers": ["Blood Sorrow"],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 21,
@@ -10823,11 +10823,11 @@ const atrees = {
             "parents": ["Mask of the Fanatic"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 22,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {
                 "switch_count": 2,
@@ -11152,7 +11152,7 @@ const atrees = {
             "archetype": "Ritualist",
             "archetype_req": 6,
             "base_abil": "Uproot",
-            "parents": ["Seeking Totem"],
+            "parents": ["Stronger Totem"],
             "dependencies": ["Masquerade"],
             "blockers": [],
             "cost": 1,
@@ -11231,12 +11231,12 @@ const atrees = {
             "archetype": "Ritualist",
             "archetype_req": 7,
             "parents": [
-                "Seeking Totem",
+                "Stronger Totem",
                 "Crimson Effigy",
                 "Fluid Healing"
             ],
             "dependencies": [],
-            "blockers": ["Blood Sorrow"],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 28,
@@ -11663,7 +11663,7 @@ const atrees = {
             "archetype_req": 12,
             "parents": ["Frog Dance", "Cheaper Uproot II"],
             "dependencies": ["Uproot"],
-            "blockers": ["Blood Sorrow"],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 35,
@@ -11725,12 +11725,7 @@ const atrees = {
             "archetype_req": 12,
             "parents": ["Larger Blood Pool III"],
             "dependencies": ["Uproot"],
-            "blockers": [
-                "Mask of the Lunatic",
-                "Mask of the Fanatic",
-                "Mask of the Coward",
-                "Awakened"
-            ],
+            "blockers": [],
             "cost": 2,
             "display": {
                 "row": 34,
@@ -11787,3 +11782,4 @@ const atrees = {
         }
     ]
 }
+
