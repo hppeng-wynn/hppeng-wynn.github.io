@@ -200,19 +200,19 @@
     "lvl": 75,
     "ids": {
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 3,
+        "maximum": 3
       },
       "sdPct": {
-        "minimum": -22,
-        "maximum": -16
+        "minimum": -11,
+        "maximum": -8
       }
     },
     "itemIDs": {
       "dura": -44,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 20,
+      "intReq": 10,
       "defReq": 0,
       "agiReq": 0
     },
@@ -503,12 +503,12 @@
     "lvl": 96,
     "ids": {
       "spd": {
-        "minimum": -4,
-        "maximum": -2
+        "minimum": 3,
+        "maximum": 4
       }
     },
     "itemIDs": {
-      "dura": 12,
+      "dura": 22,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -1370,8 +1370,8 @@
         "maximum": -4
       },
       "def": {
-        "minimum": 2,
-        "maximum": 3
+        "minimum": 1,
+        "maximum": 2
       }
     },
     "itemIDs": {
@@ -3389,8 +3389,8 @@
     "lvl": 32,
     "ids": {
       "sdPct": {
-        "minimum": 4,
-        "maximum": 6
+        "minimum": 3,
+        "maximum": 4
       }
     },
     "itemIDs": {
@@ -3424,8 +3424,8 @@
     "lvl": 95,
     "ids": {
       "hpBonus": {
-        "minimum": 480,
-        "maximum": 520
+        "minimum": 380,
+        "maximum": 420
       }
     },
     "itemIDs": {
@@ -4625,8 +4625,8 @@
     "lvl": 70,
     "ids": {
       "mdPct": {
-        "minimum": 3,
-        "maximum": 6
+        "minimum": 5,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -6292,12 +6292,12 @@
     "lvl": 92,
     "ids": {
       "thorns": {
-        "minimum": 8,
-        "maximum": 13
+        "minimum": 4,
+        "maximum": 7
       },
       "eSteal": {
         "minimum": 3,
-        "maximum": 7
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -6971,22 +6971,22 @@
     ],
     "lvl": 92,
     "ids": {
-      "fDefPct": {
+      "fDamPct": {
         "minimum": 1,
         "maximum": 2
       },
-      "wDefPct": {
+      "wDamPct": {
         "minimum": 2,
-        "maximum": 2
+        "maximum": 3
       }
     },
     "itemIDs": {
       "dura": -51,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 8,
+      "intReq": 0,
       "defReq": 0,
-      "agiReq": 8
+      "agiReq": 0
     },
     "consumableIDs": {
       "charges": 0,
@@ -7358,7 +7358,7 @@
       }
     },
     "itemIDs": {
-      "dura": -87,
+      "dura": -42,
       "strReq": 6,
       "dexReq": 0,
       "intReq": 0,
@@ -7659,8 +7659,8 @@
         "maximum": -50
       },
       "fDamPct": {
-        "minimum": 9,
-        "maximum": 12
+        "minimum": 8,
+        "maximum": 10
       }
     },
     "itemIDs": {
@@ -7844,12 +7844,12 @@
     "lvl": 36,
     "ids": {
       "ref": {
-        "minimum": 9,
-        "maximum": 15
+        "minimum": 5,
+        "maximum": 8
       },
       "thorns": {
-        "minimum": 12,
-        "maximum": 18
+        "minimum": 6,
+        "maximum": 10
       }
     },
     "itemIDs": {
@@ -8186,9 +8186,9 @@
     ],
     "lvl": 28,
     "ids": {
-      "mdPct": {
-        "minimum": 7,
-        "maximum": 10
+      "mdRaw": {
+        "minimum": 15,
+        "maximum": 16
       },
       "spd": {
         "minimum": -6,
@@ -8341,12 +8341,12 @@
     "lvl": 100,
     "ids": {
       "hprPct": {
-        "minimum": -10,
-        "maximum": -8
+        "minimum": -6,
+        "maximum": -4
       }
     },
     "itemIDs": {
-      "dura": 45,
+      "dura": 39,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -8461,14 +8461,14 @@
         "maximum": 4
       },
       "hpBonus": {
-        "minimum": 260,
-        "maximum": 320
+        "minimum": 175,
+        "maximum": 210
       }
     },
     "itemIDs": {
       "dura": -56,
       "strReq": 0,
-      "dexReq": 25,
+      "dexReq": 20,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -8571,8 +8571,8 @@
     "lvl": 35,
     "ids": {
       "aDamPct": {
-        "minimum": 6,
-        "maximum": 10
+        "minimum": 5,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -8755,7 +8755,7 @@
     "ids": {
       "sdPct": {
         "minimum": 4,
-        "maximum": 8
+        "maximum": 6
       },
       "spd": {
         "minimum": -5,
@@ -8907,8 +8907,8 @@
     "lvl": 99,
     "ids": {
       "ls": {
-        "minimum": 30,
-        "maximum": 40
+        "minimum": 70,
+        "maximum": 80
       },
       "poison": {
         "minimum": 60,
@@ -8951,7 +8951,7 @@
       },
       "eDamPct": {
         "minimum": 5,
-        "maximum": 6
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -9007,7 +9007,7 @@
     },
     "consumableIDs": {
       "charges": 0,
-      "dura": -400
+      "dura": -350
     },
     "posMods": {
       "left": 0,
@@ -9068,8 +9068,8 @@
     "lvl": 77,
     "ids": {
       "eDefPct": {
-        "minimum": 4,
-        "maximum": 6
+        "minimum": 6,
+        "maximum": 7
       },
       "def": {
         "minimum": 2,
@@ -9081,7 +9081,7 @@
       "strReq": 10,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 8,
+      "defReq": 5,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -9241,12 +9241,12 @@
     "lvl": 64,
     "ids": {
       "sdPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 4,
+        "maximum": 5
       },
       "sdRaw": {
-        "minimum": 25,
-        "maximum": 35
+        "minimum": 17,
+        "maximum": 24
       }
     },
     "itemIDs": {
@@ -9797,12 +9797,12 @@
         "maximum": 8
       },
       "spd": {
-        "minimum": -10,
-        "maximum": -7
+        "minimum": -8,
+        "maximum": -6
       },
       "hpBonus": {
-        "minimum": 750,
-        "maximum": 800
+        "minimum": 500,
+        "maximum": 575
       }
     },
     "itemIDs": {
@@ -9877,8 +9877,8 @@
     "lvl": 37,
     "ids": {
       "expd": {
-        "minimum": 15,
-        "maximum": 20
+        "minimum": 11,
+        "maximum": 16
       }
     },
     "itemIDs": {
@@ -10150,16 +10150,16 @@
     "lvl": 41,
     "ids": {
       "hpBonus": {
-        "minimum": 50,
-        "maximum": 75
+        "minimum": 25,
+        "maximum": 40
       },
       "sdRaw": {
         "minimum": 10,
-        "maximum": 15
+        "maximum": 10
       },
       "mdRaw": {
         "minimum": 10,
-        "maximum": 15
+        "maximum": 10
       }
     },
     "itemIDs": {
@@ -10396,7 +10396,7 @@
     "ids": {
       "ls": {
         "minimum": 12,
-        "maximum": 18
+        "maximum": 16
       },
       "poison": {
         "minimum": 20,
@@ -10515,12 +10515,12 @@
     "lvl": 33,
     "ids": {
       "int": {
-        "minimum": 2,
-        "maximum": 3
+        "minimum": 1,
+        "maximum": 2
       },
       "sdRaw": {
-        "minimum": 15,
-        "maximum": 20
+        "minimum": 10,
+        "maximum": 12
       }
     },
     "itemIDs": {
@@ -10863,7 +10863,7 @@
       }
     },
     "itemIDs": {
-      "dura": -70,
+      "dura": 42,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -10975,24 +10975,24 @@
     "lvl": 70,
     "ids": {
       "fDamPct": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 5
       },
       "wDamPct": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 5
       },
       "aDamPct": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 5
       },
       "tDamPct": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 5
       },
       "eDamPct": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -11223,8 +11223,8 @@
     "lvl": 14,
     "ids": {
       "spRegen": {
-        "minimum": 20,
-        "maximum": 40
+        "minimum": 10,
+        "maximum": 15
       }
     },
     "itemIDs": {
@@ -11375,11 +11375,11 @@
     "ids": {
       "sdPct": {
         "minimum": 3,
-        "maximum": 5
+        "maximum": 4
       },
       "mdPct": {
         "minimum": 3,
-        "maximum": 5
+        "maximum": 4
       }
     },
     "itemIDs": {
@@ -11530,8 +11530,8 @@
     "lvl": 63,
     "ids": {
       "sdPct": {
-        "minimum": 4,
-        "maximum": 5
+        "minimum": 3,
+        "maximum": 3
       }
     },
     "itemIDs": {
@@ -11841,7 +11841,7 @@
       "dura": -58,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 16,
+      "intReq": 10,
       "defReq": 0,
       "agiReq": 0
     },
@@ -12376,7 +12376,7 @@
     "itemIDs": {
       "dura": -58,
       "strReq": 0,
-      "dexReq": 15,
+      "dexReq": 6,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -12565,7 +12565,7 @@
     "ids": {
       "xpb": {
         "minimum": 3,
-        "maximum": 4
+        "maximum": 3
       },
       "eSteal": {
         "minimum": 3,
@@ -13008,7 +13008,7 @@
     "lvl": 25,
     "ids": {
       "def": {
-        "minimum": 2,
+        "minimum": 1,
         "maximum": 2
       },
       "fDamPct": {
@@ -13050,7 +13050,7 @@
     "ids": {
       "sdPct": {
         "minimum": 3,
-        "maximum": 5
+        "maximum": 4
       },
       "hpBonus": {
         "minimum": -175,
@@ -14010,16 +14010,16 @@
     "lvl": 95,
     "ids": {
       "hprPct": {
-        "minimum": 6,
-        "maximum": 14
+        "minimum": 7,
+        "maximum": 9
       },
       "ref": {
-        "minimum": 13,
-        "maximum": 20
+        "minimum": 8,
+        "maximum": 12
       },
       "thorns": {
-        "minimum": 8,
-        "maximum": 15
+        "minimum": 7,
+        "maximum": 11
       }
     },
     "itemIDs": {
@@ -14133,8 +14133,8 @@
     "lvl": 66,
     "ids": {
       "spd": {
-        "minimum": 8,
-        "maximum": 12
+        "minimum": 6,
+        "maximum": 8
       },
       "hpBonus": {
         "minimum": -300,
@@ -14575,8 +14575,8 @@
     "lvl": 3,
     "ids": {
       "mdPct": {
-        "minimum": 2,
-        "maximum": 4
+        "minimum": 1,
+        "maximum": 2
       },
       "mdRaw": {
         "minimum": 3,
@@ -14774,7 +14774,7 @@
       },
       "hpBonus": {
         "minimum": 350,
-        "maximum": 400
+        "maximum": 375
       }
     },
     "itemIDs": {
@@ -15002,11 +15002,11 @@
     "ids": {
       "def": {
         "minimum": 1,
-        "maximum": 3
+        "maximum": 2
       },
       "hpBonus": {
         "minimum": 10,
-        "maximum": 30
+        "maximum": 15
       }
     },
     "itemIDs": {
@@ -15044,11 +15044,11 @@
     "ids": {
       "int": {
         "minimum": 2,
-        "maximum": 4
+        "maximum": 3
       },
       "wDamPct": {
-        "minimum": 5,
-        "maximum": 8
+        "minimum": 4,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -15087,7 +15087,7 @@
       },
       "eDamPct": {
         "minimum": 6,
-        "maximum": 11
+        "maximum": 9
       }
     },
     "itemIDs": {
@@ -15480,16 +15480,16 @@
     "lvl": 76,
     "ids": {
       "ms": {
-        "minimum": 4,
+        "minimum": 3,
         "maximum": 4
       },
       "spd": {
-        "minimum": -12,
-        "maximum": -10
+        "minimum": -10,
+        "maximum": -7
       },
       "fDamPct": {
         "minimum": 8,
-        "maximum": 14
+        "maximum": 11
       }
     },
     "itemIDs": {
@@ -15627,12 +15627,12 @@
     "lvl": 78,
     "ids": {
       "hprPct": {
-        "minimum": 8,
-        "maximum": 12
+        "minimum": 12,
+        "maximum": 16
       },
       "str": {
         "minimum": 5,
-        "maximum": 7
+        "maximum": 8
       }
     },
     "itemIDs": {
@@ -15926,12 +15926,12 @@
         "maximum": 65
       },
       "aDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "tDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -16084,8 +16084,8 @@
     "lvl": 45,
     "ids": {
       "expd": {
-        "minimum": 12,
-        "maximum": 24
+        "minimum": 10,
+        "maximum": 14
       },
       "fDamPct": {
         "minimum": 6,
@@ -16289,8 +16289,8 @@
         "maximum": -4
       },
       "fDamPct": {
-        "minimum": 7,
-        "maximum": 10
+        "minimum": 3,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -16365,8 +16365,8 @@
     "lvl": 28,
     "ids": {
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 3,
+        "maximum": 3
       },
       "xpb": {
         "minimum": -10,
@@ -16490,12 +16490,12 @@
         "maximum": -80
       },
       "fDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "aDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -16576,23 +16576,23 @@
     "ids": {
       "str": {
         "minimum": 2,
-        "maximum": 4
+        "maximum": 2
       },
       "dex": {
         "minimum": 2,
-        "maximum": 4
+        "maximum": 2
       },
       "int": {
         "minimum": 2,
-        "maximum": 4
+        "maximum": 2
       },
       "agi": {
         "minimum": 2,
-        "maximum": 4
+        "maximum": 2
       },
       "def": {
         "minimum": 2,
-        "maximum": 4
+        "maximum": 2
       }
     },
     "itemIDs": {
@@ -16865,7 +16865,7 @@
     "ids": {
       "ms": {
         "minimum": 4,
-        "maximum": 4
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -17139,20 +17139,20 @@
     "lvl": 77,
     "ids": {
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 4,
+        "maximum": 4
       },
       "hpBonus": {
         "minimum": -775,
         "maximum": -775
       },
       "wDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "eDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -17186,12 +17186,12 @@
     "lvl": 98,
     "ids": {
       "sdRaw": {
-        "minimum": 55,
-        "maximum": 60
+        "minimum": 60,
+        "maximum": 75
       },
       "mdRaw": {
-        "minimum": 55,
-        "maximum": 60
+        "minimum": 60,
+        "maximum": 75
       }
     },
     "itemIDs": {
@@ -17372,16 +17372,16 @@
     "lvl": 50,
     "ids": {
       "mr": {
-        "minimum": -6,
-        "maximum": -6
+        "minimum": -4,
+        "maximum": -4
       },
       "sdPct": {
         "minimum": 8,
-        "maximum": 12
+        "maximum": 9
       },
       "mdPct": {
-        "minimum": 6,
-        "maximum": 14
+        "minimum": 7,
+        "maximum": 10
       }
     },
     "itemIDs": {
@@ -17508,7 +17508,7 @@
     },
     "itemIDs": {
       "dura": -98,
-      "strReq": 35,
+      "strReq": 30,
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
@@ -17543,14 +17543,14 @@
         "maximum": 4
       },
       "mdRaw": {
-        "minimum": 50,
-        "maximum": 55
+        "minimum": 65,
+        "maximum": 70
       }
     },
     "itemIDs": {
       "dura": -98,
       "strReq": 0,
-      "dexReq": 35,
+      "dexReq": 30,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -17580,8 +17580,8 @@
     "lvl": 90,
     "ids": {
       "ref": {
-        "minimum": 20,
-        "maximum": 30
+        "minimum": 18,
+        "maximum": 22
       },
       "aDamPct": {
         "minimum": 9,
@@ -17594,7 +17594,7 @@
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
-      "agiReq": 35
+      "agiReq": 30
     },
     "consumableIDs": {
       "charges": 0,
@@ -17634,7 +17634,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 35,
+      "defReq": 30,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -17663,11 +17663,11 @@
     "ids": {
       "sdPct": {
         "minimum": 4,
-        "maximum": 16
+        "maximum": 13
       },
       "mdPct": {
         "minimum": 4,
-        "maximum": 16
+        "maximum": 13
       }
     },
     "itemIDs": {
@@ -17709,12 +17709,12 @@
         "maximum": 70
       },
       "fDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "tDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -17749,8 +17749,8 @@
     "lvl": 27,
     "ids": {
       "fDamPct": {
-        "minimum": 7,
-        "maximum": 9
+        "minimum": 6,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -17793,12 +17793,12 @@
         "maximum": -4
       },
       "fDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "wDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -17879,12 +17879,12 @@
     "lvl": 99,
     "ids": {
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 3,
+        "maximum": 4
       },
       "sdPct": {
-        "minimum": 10,
-        "maximum": 13
+        "minimum": 45,
+        "maximum": 60
       },
       "sdRaw": {
         "minimum": 70,
@@ -17972,7 +17972,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 16,
+      "defReq": 14,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -18008,7 +18008,7 @@
       },
       "mdRaw": {
         "minimum": -100,
-        "maximum": -100
+        "maximum": -70
       }
     },
     "itemIDs": {
@@ -18046,8 +18046,8 @@
         "maximum": 10
       },
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 5,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -18083,11 +18083,11 @@
     "ids": {
       "dex": {
         "minimum": 3,
-        "maximum": 5
+        "maximum": 4
       },
       "tDamPct": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -18122,12 +18122,12 @@
     "lvl": 84,
     "ids": {
       "hpBonus": {
-        "minimum": 600,
-        "maximum": 800
+        "minimum": 550,
+        "maximum": 700
       },
       "hprRaw": {
-        "minimum": 54,
-        "maximum": 72
+        "minimum": 52,
+        "maximum": 66
       }
     },
     "itemIDs": {
@@ -18135,7 +18135,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 35,
+      "defReq": 30,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -18165,8 +18165,8 @@
         "maximum": -90
       },
       "wDamPct": {
-        "minimum": 20,
-        "maximum": 24
+        "minimum": 16,
+        "maximum": 20
       }
     },
     "itemIDs": {
@@ -18511,8 +18511,8 @@
         "maximum": 6
       },
       "hprRaw": {
-        "minimum": 50,
-        "maximum": 55
+        "minimum": 40,
+        "maximum": 45
       }
     },
     "itemIDs": {
@@ -18590,12 +18590,12 @@
     "lvl": 23,
     "ids": {
       "mr": {
-        "minimum": 6,
+        "minimum": 4,
         "maximum": 6
       },
       "ms": {
-        "minimum": 0,
-        "maximum": 4
+        "minimum": 2,
+        "maximum": 3
       }
     },
     "itemIDs": {
@@ -18674,11 +18674,11 @@
         "maximum": -20
       },
       "sdPct": {
-        "minimum": 8,
-        "maximum": 14
+        "minimum": 4,
+        "maximum": 5
       },
       "def": {
-        "minimum": 4,
+        "minimum": 5,
         "maximum": 6
       }
     },
@@ -18687,7 +18687,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 25,
+      "defReq": 16,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -18717,8 +18717,8 @@
         "maximum": 130
       },
       "wDamPct": {
-        "minimum": 12,
-        "maximum": 16
+        "minimum": 9,
+        "maximum": 12
       }
     },
     "itemIDs": {
@@ -18797,16 +18797,16 @@
         "maximum": -10
       },
       "hpBonus": {
-        "minimum": 600,
-        "maximum": 600
+        "minimum": 500,
+        "maximum": 500
       },
       "fDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "eDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -18855,8 +18855,8 @@
     "posMods": {
       "left": 0,
       "right": 0,
-      "above": -45,
-      "under": -45,
+      "above": -25,
+      "under": -25,
       "touching": 0,
       "notTouching": 0
     },
@@ -19075,11 +19075,11 @@
     "ids": {
       "sdPct": {
         "minimum": 0,
-        "maximum": 15
+        "maximum": 6
       },
       "sdRaw": {
         "minimum": 0,
-        "maximum": 100
+        "maximum": 60
       }
     },
     "itemIDs": {
@@ -19157,7 +19157,7 @@
     "ids": {
       "sdPct": {
         "minimum": 5,
-        "maximum": 10
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -19272,14 +19272,14 @@
     "lvl": 26,
     "ids": {
       "tDamPct": {
-        "minimum": 6,
-        "maximum": 10
+        "minimum": 5,
+        "maximum": 8
       }
     },
     "itemIDs": {
       "dura": -52,
       "strReq": 0,
-      "dexReq": 12,
+      "dexReq": 10,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -19352,8 +19352,8 @@
         "maximum": 10
       },
       "def": {
-        "minimum": 3,
-        "maximum": 4
+        "minimum": 4,
+        "maximum": 5
       }
     },
     "itemIDs": {
@@ -19388,8 +19388,8 @@
     "lvl": 25,
     "ids": {
       "sdPct": {
-        "minimum": 3,
-        "maximum": 4
+        "minimum": 2,
+        "maximum": 3
       },
       "xpb": {
         "minimum": 3,
@@ -19434,8 +19434,8 @@
         "maximum": 10
       },
       "hpBonus": {
-        "minimum": 850,
-        "maximum": 900
+        "minimum": 600,
+        "maximum": 660
       },
       "sdRaw": {
         "minimum": -75,
@@ -19517,23 +19517,23 @@
     "ids": {
       "str": {
         "minimum": 3,
-        "maximum": 4
+        "maximum": 3
       },
       "dex": {
         "minimum": 3,
-        "maximum": 4
+        "maximum": 3
       },
       "int": {
         "minimum": 3,
-        "maximum": 4
+        "maximum": 3
       },
       "agi": {
         "minimum": 3,
-        "maximum": 4
+        "maximum": 3
       },
       "def": {
         "minimum": 3,
-        "maximum": 4
+        "maximum": 3
       }
     },
     "itemIDs": {
@@ -19571,15 +19571,15 @@
         "maximum": -4
       },
       "wDamPct": {
-        "minimum": 5,
-        "maximum": 6
+        "minimum": 4,
+        "maximum": 5
       }
     },
     "itemIDs": {
       "dura": -79,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 20,
+      "intReq": 15,
       "defReq": 0,
       "agiReq": 0
     },
@@ -19730,7 +19730,7 @@
       },
       "hpBonus": {
         "minimum": 90,
-        "maximum": 115
+        "maximum": 100
       }
     },
     "itemIDs": {
@@ -19768,16 +19768,16 @@
         "maximum": -100
       },
       "ms": {
-        "minimum": 4,
-        "maximum": 4
+        "minimum": 2,
+        "maximum": 2
       },
       "wDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "tDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -19814,12 +19814,12 @@
     "lvl": 7,
     "ids": {
       "sdPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "mdPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "spd": {
         "minimum": -8,
@@ -20092,7 +20092,7 @@
     "lvl": 29,
     "ids": {
       "mr": {
-        "minimum": 6,
+        "minimum": 5,
         "maximum": 6
       },
       "sdPct": {
@@ -20104,7 +20104,7 @@
       "dura": -54,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 15,
+      "intReq": 20,
       "defReq": 0,
       "agiReq": 0
     },
@@ -20252,7 +20252,7 @@
     "ids": {
       "sdPct": {
         "minimum": 5,
-        "maximum": 7
+        "maximum": 6
       },
       "sdRaw": {
         "minimum": 16,
@@ -20372,7 +20372,7 @@
       },
       "aDamPct": {
         "minimum": 5,
-        "maximum": 13
+        "maximum": 9
       }
     },
     "itemIDs": {
@@ -20906,7 +20906,7 @@
       },
       "aDamPct": {
         "minimum": 5,
-        "maximum": 7
+        "maximum": 6
       },
       "gXp": {
         "minimum": 1,
@@ -21261,8 +21261,8 @@
         "maximum": 14
       },
       "hprRaw": {
-        "minimum": -45,
-        "maximum": -40
+        "minimum": -35,
+        "maximum": -30
       }
     },
     "itemIDs": {
@@ -21393,7 +21393,7 @@
       },
       "def": {
         "minimum": 7,
-        "maximum": 10
+        "maximum": 8
       },
       "gXp": {
         "minimum": 5,
@@ -21581,7 +21581,7 @@
     "ids": {
       "dex": {
         "minimum": 2,
-        "maximum": 3
+        "maximum": 2
       },
       "mdRaw": {
         "minimum": 40,
@@ -21591,7 +21591,7 @@
     "itemIDs": {
       "dura": -94,
       "strReq": 0,
-      "dexReq": 25,
+      "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -21624,8 +21624,8 @@
         "maximum": 3
       },
       "hpBonus": {
-        "minimum": 54,
-        "maximum": 65
+        "minimum": 45,
+        "maximum": 56
       }
     },
     "itemIDs": {
@@ -21707,12 +21707,12 @@
         "maximum": -55
       },
       "tDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "eDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -21747,8 +21747,8 @@
     "lvl": 104,
     "ids": {
       "def": {
-        "minimum": 12,
-        "maximum": 15
+        "minimum": 10,
+        "maximum": 13
       },
       "thorns": {
         "minimum": 15,
@@ -21866,8 +21866,8 @@
     "lvl": 30,
     "ids": {
       "def": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "hpBonus": {
         "minimum": 65,
@@ -22249,7 +22249,7 @@
       },
       "agi": {
         "minimum": 3,
-        "maximum": 5
+        "maximum": 4
       }
     },
     "itemIDs": {
@@ -22292,12 +22292,12 @@
         "maximum": 80
       },
       "aDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "eDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -22373,7 +22373,7 @@
     "ids": {
       "sdPct": {
         "minimum": 6,
-        "maximum": 12
+        "maximum": 10
       },
       "ref": {
         "minimum": 5,
@@ -22411,8 +22411,8 @@
     "lvl": 105,
     "ids": {
       "int": {
-        "minimum": -7,
-        "maximum": -5
+        "minimum": -9,
+        "maximum": -7
       },
       "spd": {
         "minimum": -7,
@@ -22463,9 +22463,9 @@
       }
     },
     "itemIDs": {
-      "dura": -100,
+      "dura": -95,
       "strReq": 0,
-      "dexReq": 18,
+      "dexReq": 14,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -22532,16 +22532,16 @@
     "lvl": 73,
     "ids": {
       "agi": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "spd": {
-        "minimum": 12,
-        "maximum": 14
+        "minimum": 11,
+        "maximum": 12
       },
       "hpBonus": {
-        "minimum": -450,
-        "maximum": -400
+        "minimum": -400,
+        "maximum": -350
       }
     },
     "itemIDs": {
@@ -22575,12 +22575,12 @@
     "lvl": 78,
     "ids": {
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 5,
+        "maximum": 5
       },
       "ms": {
         "minimum": -4,
-        "maximum": -4
+        "maximum": -3
       },
       "wDamPct": {
         "minimum": 5,
@@ -22669,8 +22669,8 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 11,
-      "agiReq": 11
+      "defReq": 8,
+      "agiReq": 8
     },
     "consumableIDs": {
       "charges": 0,
@@ -22740,8 +22740,8 @@
     "lvl": 20,
     "ids": {
       "ms": {
-        "minimum": 4,
-        "maximum": 4
+        "minimum": 2,
+        "maximum": 3
       },
       "sdRaw": {
         "minimum": 8,
@@ -23377,8 +23377,8 @@
         "maximum": -8
       },
       "spd": {
-        "minimum": 6,
-        "maximum": 7
+        "minimum": 5,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -23387,7 +23387,7 @@
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
-      "agiReq": 24
+      "agiReq": 18
     },
     "consumableIDs": {
       "charges": 0,
@@ -23413,16 +23413,16 @@
     "lvl": 64,
     "ids": {
       "sdPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 4,
+        "maximum": 6
       },
       "mdPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 4,
+        "maximum": 6
       },
       "agi": {
-        "minimum": 5,
-        "maximum": 7
+        "minimum": 4,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -23461,12 +23461,12 @@
         "maximum": -6
       },
       "sdPct": {
-        "minimum": 15,
-        "maximum": 15
+        "minimum": 8,
+        "maximum": 8
       },
       "wDamPct": {
-        "minimum": 10,
-        "maximum": 10
+        "minimum": 7,
+        "maximum": 7
       },
       "aDamPct": {
         "minimum": 10,
@@ -23510,7 +23510,7 @@
       },
       "int": {
         "minimum": 5,
-        "maximum": 6
+        "maximum": 7
       }
     },
     "itemIDs": {
@@ -23797,8 +23797,8 @@
     "lvl": 60,
     "ids": {
       "wDamPct": {
-        "minimum": 18,
-        "maximum": 24
+        "minimum": 15,
+        "maximum": 17
       }
     },
     "itemIDs": {
@@ -23832,24 +23832,24 @@
     "lvl": 60,
     "ids": {
       "str": {
-        "minimum": 3,
-        "maximum": 5
+        "minimum": 2,
+        "maximum": 3
       },
       "dex": {
-        "minimum": 1,
-        "maximum": 7
+        "minimum": 2,
+        "maximum": 5
       },
       "int": {
         "minimum": 2,
-        "maximum": 6
+        "maximum": 4
       },
       "agi": {
         "minimum": 2,
         "maximum": 6
       },
       "def": {
-        "minimum": 3,
-        "maximum": 5
+        "minimum": 4,
+        "maximum": 4
       }
     },
     "itemIDs": {
@@ -23883,12 +23883,12 @@
     "lvl": 45,
     "ids": {
       "hprPct": {
-        "minimum": 12,
-        "maximum": 15
+        "minimum": 6,
+        "maximum": 8
       },
       "sdPct": {
-        "minimum": -7,
-        "maximum": -5
+        "minimum": -5,
+        "maximum": -3
       }
     },
     "itemIDs": {
@@ -24152,7 +24152,7 @@
     "lvl": 8,
     "ids": {
       "ms": {
-        "minimum": 4,
+        "minimum": 2,
         "maximum": 4
       },
       "ref": {
@@ -24274,7 +24274,7 @@
       }
     },
     "itemIDs": {
-      "dura": -133,
+      "dura": -120,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -24508,6 +24508,10 @@
       "spRegen": {
         "minimum": -12,
         "maximum": -9
+      },
+      "eMdRaw": {
+        "minimum": 40,
+        "maximum": 50
       }
     },
     "itemIDs": {
@@ -24629,22 +24633,22 @@
     "lvl": 99,
     "ids": {
       "hpBonus": {
-        "minimum": -1000,
-        "maximum": -800
+        "minimum": -650,
+        "maximum": -500
       },
       "tDamPct": {
-        "minimum": 19,
-        "maximum": 25
+        "minimum": 15,
+        "maximum": 18
       },
       "eDamPct": {
-        "minimum": 18,
-        "maximum": 23
+        "minimum": 13,
+        "maximum": 16
       }
     },
     "itemIDs": {
       "dura": -157,
-      "strReq": 28,
-      "dexReq": 28,
+      "strReq": 21,
+      "dexReq": 21,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -24742,18 +24746,18 @@
       },
       "sdPct": {
         "minimum": 8,
-        "maximum": 12
+        "maximum": 10
       },
       "wDamPct": {
-        "minimum": 12,
-        "maximum": 18
+        "minimum": 10,
+        "maximum": 14
       }
     },
     "itemIDs": {
       "dura": -156,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 45,
+      "intReq": 37,
       "defReq": 0,
       "agiReq": 0
     },
@@ -24780,8 +24784,8 @@
     "lvl": 42,
     "ids": {
       "mr": {
-        "minimum": 6,
-        "maximum": 6
+        "minimum": 4,
+        "maximum": 4
       }
     },
     "itemIDs": {
@@ -24794,7 +24798,7 @@
     },
     "consumableIDs": {
       "charges": 0,
-      "dura": 0
+      "dura": 60
     },
     "posMods": {
       "left": 0,
@@ -24820,8 +24824,8 @@
         "maximum": 7
       },
       "int": {
-        "minimum": 7,
-        "maximum": 11
+        "minimum": 8,
+        "maximum": 9
       }
     },
     "itemIDs": {
@@ -24859,12 +24863,12 @@
         "maximum": -2
       },
       "ls": {
-        "minimum": 150,
-        "maximum": 165
+        "minimum": 90,
+        "maximum": 105
       },
       "ms": {
-        "minimum": -6,
-        "maximum": -4
+        "minimum": -3,
+        "maximum": -2
       }
     },
     "itemIDs": {
@@ -25205,8 +25209,8 @@
         "maximum": 40
       },
       "hpBonus": {
-        "minimum": 2250,
-        "maximum": 2500
+        "minimum": 1650,
+        "maximum": 1900
       }
     },
     "itemIDs": {
@@ -25319,12 +25323,12 @@
     "lvl": 43,
     "ids": {
       "mr": {
-        "minimum": -12,
-        "maximum": -12
+        "minimum": -8,
+        "maximum": -7
       },
       "sdPct": {
-        "minimum": 24,
-        "maximum": 28
+        "minimum": 12,
+        "maximum": 16
       }
     },
     "itemIDs": {
@@ -25362,19 +25366,19 @@
     "ids": {
       "fDamPct": {
         "minimum": 8,
-        "maximum": 16
+        "maximum": 12
       },
       "eDamPct": {
-        "minimum": 10,
-        "maximum": 14
+        "minimum": 8,
+        "maximum": 10
       }
     },
     "itemIDs": {
       "dura": -105,
-      "strReq": 8,
+      "strReq": 12,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 8,
+      "defReq": 12,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -25445,18 +25449,18 @@
     "ids": {
       "mr": {
         "minimum": 6,
-        "maximum": 6
+        "maximum": 7
       },
       "sdRaw": {
-        "minimum": 110,
-        "maximum": 110
+        "minimum": 95,
+        "maximum": 105
       }
     },
     "itemIDs": {
       "dura": -149,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 25,
+      "intReq": 21,
       "defReq": 0,
       "agiReq": 0
     },
@@ -25617,8 +25621,8 @@
     "lvl": 30,
     "ids": {
       "sdPct": {
-        "minimum": 5,
-        "maximum": 6
+        "minimum": 1,
+        "maximum": 3
       },
       "dex": {
         "minimum": 1,
@@ -25628,7 +25632,7 @@
     "itemIDs": {
       "dura": -82,
       "strReq": 0,
-      "dexReq": 12,
+      "dexReq": 9,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -25699,8 +25703,8 @@
     "lvl": 67,
     "ids": {
       "ms": {
-        "minimum": 5,
-        "maximum": 6
+        "minimum": 6,
+        "maximum": 7
       },
       "str": {
         "minimum": 6,
@@ -25755,16 +25759,16 @@
     "lvl": 90,
     "ids": {
       "mr": {
-        "minimum": 6,
+        "minimum": 4,
         "maximum": 6
       },
       "spd": {
-        "minimum": 16,
-        "maximum": 20
+        "minimum": 11,
+        "maximum": 14
       },
       "hpBonus": {
-        "minimum": -750,
-        "maximum": -650
+        "minimum": -575,
+        "maximum": -475
       }
     },
     "itemIDs": {
@@ -25773,7 +25777,7 @@
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
-      "agiReq": 60
+      "agiReq": 40
     },
     "consumableIDs": {
       "charges": 0,
@@ -25805,7 +25809,7 @@
       },
       "spd": {
         "minimum": 6,
-        "maximum": 9
+        "maximum": 8
       },
       "eDamPct": {
         "minimum": -10,
@@ -25887,7 +25891,7 @@
     "ids": {
       "sdPct": {
         "minimum": 4,
-        "maximum": 6
+        "maximum": 5
       },
       "int": {
         "minimum": -6,
@@ -25895,7 +25899,7 @@
       }
     },
     "itemIDs": {
-      "dura": -103,
+      "dura": -90,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -25930,8 +25934,8 @@
         "maximum": -10
       },
       "hpBonus": {
-        "minimum": 850,
-        "maximum": 900
+        "minimum": 600,
+        "maximum": 640
       }
     },
     "itemIDs": {
@@ -26042,9 +26046,9 @@
         "minimum": 4,
         "maximum": 6
       },
-      "fDamPct": {
-        "minimum": 8,
-        "maximum": 12
+      "fDamRaw": {
+        "minimum": 12,
+        "maximum": 15
       }
     },
     "itemIDs": {
@@ -26083,8 +26087,8 @@
         "maximum": -780
       },
       "sdRaw": {
-        "minimum": 85,
-        "maximum": 100
+        "minimum": 60,
+        "maximum": 85
       },
       "tDamPct": {
         "minimum": 12,
@@ -26094,7 +26098,7 @@
     "itemIDs": {
       "dura": -150,
       "strReq": 0,
-      "dexReq": 30,
+      "dexReq": 25,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -26194,12 +26198,12 @@
         "maximum": -8
       },
       "mdPct": {
-        "minimum": 10,
-        "maximum": 14
+        "minimum": 8,
+        "maximum": 12
       },
       "str": {
-        "minimum": 5,
-        "maximum": 8
+        "minimum": 4,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -26269,11 +26273,11 @@
     "lvl": 83,
     "ids": {
       "hpBonus": {
-        "minimum": 500,
-        "maximum": 600
+        "minimum": 375,
+        "maximum": 425
       },
       "hprRaw": {
-        "minimum": 40,
+        "minimum": 45,
         "maximum": 50
       },
       "sdRaw": {
@@ -26328,7 +26332,7 @@
       "dura": -124,
       "strReq": 0,
       "dexReq": 0,
-      "intReq": 12,
+      "intReq": 15,
       "defReq": 0,
       "agiReq": 0
     },
@@ -26355,8 +26359,8 @@
     "lvl": 63,
     "ids": {
       "sdPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "mdPct": {
         "minimum": -8,
@@ -26459,24 +26463,24 @@
     "lvl": 98,
     "ids": {
       "fDamPct": {
-        "minimum": 16,
-        "maximum": 20
+        "minimum": 15,
+        "maximum": 18
       },
       "wDamPct": {
-        "minimum": 16,
-        "maximum": 20
+        "minimum": 15,
+        "maximum": 18
       },
       "aDamPct": {
-        "minimum": 16,
-        "maximum": 20
+        "minimum": 15,
+        "maximum": 18
       },
       "tDamPct": {
-        "minimum": 16,
-        "maximum": 20
+        "minimum": 15,
+        "maximum": 18
       },
       "eDamPct": {
-        "minimum": 16,
-        "maximum": 20
+        "minimum": 15,
+        "maximum": 18
       }
     },
     "itemIDs": {
@@ -26525,9 +26529,9 @@
     "itemIDs": {
       "dura": -145,
       "strReq": 0,
-      "dexReq": 14,
+      "dexReq": 12,
       "intReq": 0,
-      "defReq": 14,
+      "defReq": 12,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -26926,8 +26930,8 @@
     "lvl": 1,
     "ids": {
       "spd": {
-        "minimum": 8,
-        "maximum": 10
+        "minimum": 4,
+        "maximum": 5
       },
       "hprRaw": {
         "minimum": 6,
@@ -27096,8 +27100,8 @@
         "maximum": 12
       },
       "fDamPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 5,
+        "maximum": 6
       },
       "gXp": {
         "minimum": 2,
@@ -27141,8 +27145,8 @@
         "maximum": 5
       },
       "eDamPct": {
-        "minimum": 6,
-        "maximum": 8
+        "minimum": 3,
+        "maximum": 4
       },
       "gXp": {
         "minimum": 2,
@@ -27582,7 +27586,7 @@
     "lvl": 87,
     "ids": {
       "mr": {
-        "minimum": 6,
+        "minimum": 5,
         "maximum": 6
       },
       "eDamPct": {
@@ -27592,7 +27596,7 @@
     },
     "itemIDs": {
       "dura": -131,
-      "strReq": 27,
+      "strReq": 17,
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
@@ -27748,11 +27752,11 @@
     "lvl": 67,
     "ids": {
       "sdPct": {
-        "minimum": 12,
-        "maximum": 15
+        "minimum": 10,
+        "maximum": 12
       },
       "wDamPct": {
-        "minimum": -15,
+        "minimum": -10,
         "maximum": -12
       },
       "gXp": {
@@ -27793,12 +27797,12 @@
     "lvl": 102,
     "ids": {
       "sdPct": {
-        "minimum": 13,
-        "maximum": 16
+        "minimum": 7,
+        "maximum": 8
       },
       "agi": {
-        "minimum": 12,
-        "maximum": 14
+        "minimum": 11,
+        "maximum": 12
       }
     },
     "itemIDs": {
@@ -27807,7 +27811,7 @@
       "dexReq": 0,
       "intReq": 0,
       "defReq": 0,
-      "agiReq": 24,
+      "agiReq": 22,
       "atkTier": 0,
       "slotMod": 0
     },
@@ -27835,8 +27839,8 @@
     "lvl": 49,
     "ids": {
       "spd": {
-        "minimum": 5,
-        "maximum": 6
+        "minimum": 3,
+        "maximum": 5
       },
       "gXp": {
         "minimum": 1,
@@ -27876,8 +27880,8 @@
     "lvl": 97,
     "ids": {
       "fDamPct": {
-        "minimum": 17,
-        "maximum": 20
+        "minimum": 15,
+        "maximum": 16
       },
       "gXp": {
         "minimum": 4,
@@ -28071,14 +28075,14 @@
         "maximum": 14
       },
       "tDamPct": {
-        "minimum": 7,
-        "maximum": 11
+        "minimum": 5,
+        "maximum": 7
       }
     },
     "itemIDs": {
       "dura": -70,
       "strReq": 0,
-      "dexReq": 6,
+      "dexReq": 8,
       "intReq": 0,
       "defReq": 0,
       "agiReq": 0
@@ -28146,11 +28150,11 @@
     "ids": {
       "xpb": {
         "minimum": 5,
-        "maximum": 7
+        "maximum": 6
       },
       "lb": {
         "minimum": 5,
-        "maximum": 7
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -28162,7 +28166,7 @@
       "agiReq": 0
     },
     "consumableIDs": {
-      "charges": -1,
+      "charges": 0,
       "dura": 125
     },
     "posMods": {
@@ -28184,8 +28188,8 @@
     "lvl": 88,
     "ids": {
       "str": {
-        "minimum": 12,
-        "maximum": 15
+        "minimum": 11,
+        "maximum": 12
       },
       "spd": {
         "minimum": -14,
@@ -28237,8 +28241,8 @@
         "maximum": -1
       },
       "eDamPct": {
-        "minimum": -22,
-        "maximum": -18
+        "minimum": -10,
+        "maximum": -8
       }
     },
     "itemIDs": {
@@ -28360,12 +28364,12 @@
     "lvl": 31,
     "ids": {
       "sdRaw": {
-        "minimum": 40,
-        "maximum": 40
-      },
-      "mdRaw": {
         "minimum": 32,
         "maximum": 32
+      },
+      "mdRaw": {
+        "minimum": 28,
+        "maximum": 28
       }
     },
     "itemIDs": {
@@ -28403,8 +28407,8 @@
         "maximum": 3
       },
       "fDamPct": {
-        "minimum": 5,
-        "maximum": 6
+        "minimum": 3,
+        "maximum": 3
       },
       "sprint": {
         "minimum": 4,
@@ -28416,8 +28420,8 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 12,
-      "agiReq": 9
+      "defReq": 9,
+      "agiReq": 12
     },
     "consumableIDs": {
       "charges": 0,
@@ -28443,8 +28447,8 @@
     "lvl": 68,
     "ids": {
       "ms": {
-        "minimum": 8,
-        "maximum": 8
+        "minimum": 6,
+        "maximum": 6
       }
     },
     "itemIDs": {
@@ -28483,7 +28487,7 @@
       }
     },
     "itemIDs": {
-      "dura": 60,
+      "dura": 50,
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
@@ -28556,8 +28560,8 @@
     "lvl": 1,
     "ids": {
       "hpBonus": {
-        "minimum": 30,
-        "maximum": 40
+        "minimum": 15,
+        "maximum": 25
       }
     },
     "itemIDs": {
@@ -28592,12 +28596,12 @@
     "lvl": 92,
     "ids": {
       "hpBonus": {
-        "minimum": -1000,
-        "maximum": -800
+        "minimum": -850,
+        "maximum": -700
       },
       "fDamPct": {
-        "minimum": 22,
-        "maximum": 28
+        "minimum": 17,
+        "maximum": 22
       }
     },
     "itemIDs": {
@@ -28645,7 +28649,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 9,
+      "defReq": 16,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -28681,7 +28685,7 @@
       },
       "hpBonus": {
         "minimum": 320,
-        "maximum": 400
+        "maximum": 350
       }
     },
     "itemIDs": {
@@ -28758,7 +28762,7 @@
       "strReq": 0,
       "dexReq": 0,
       "intReq": 0,
-      "defReq": 30,
+      "defReq": 20,
       "agiReq": 0
     },
     "consumableIDs": {
@@ -28803,7 +28807,7 @@
       "above": 0,
       "under": 0,
       "touching": 25,
-      "notTouching": 50
+      "notTouching": 45
     },
     "id": 674
   },
@@ -28856,8 +28860,8 @@
         "maximum": -20
       },
       "eDamPct": {
-        "minimum": 20,
-        "maximum": 24
+        "minimum": 15,
+        "maximum": 2
       }
     },
     "itemIDs": {
