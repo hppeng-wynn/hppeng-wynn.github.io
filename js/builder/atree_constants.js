@@ -3337,7 +3337,7 @@ const atrees = {
             "display": {
                 "row": 12,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {
                 "aoe": 2
@@ -3433,7 +3433,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Air Shout",
-                    "multipliers": [30, 0, 0, 0, 0, 30]
+                    "multipliers": [15, 0, 0, 0, 0, 15]
                 }
             ]  
         },
@@ -8016,14 +8016,15 @@ const atrees = {
             "archetype": "Trickster",
             "archetype_req": 0,
             "parents": [
-                "Mirror Image"
+                "Mirror Image",
+		"Psithurism"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 20,
-                "col": 5,
+                "row": 21,
+                "col": 4,
                 "icon": "node_0"
             },
             "properties": {},
@@ -8291,7 +8292,7 @@ const atrees = {
         },
         {
             "display_name": "Weightless",
-            "desc": "When you hit an enemy while airborne, gain +0.7 Mana (1.25+ blocks off the ground to be airborne)",
+            "desc": "When you hit an enemy while airborne, gain +0.35 Mana (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
             "archetype_req": 3,
             "parents": [
@@ -8709,7 +8710,8 @@ const atrees = {
             "archetype": "",
             "archetype_req": 0,
             "parents": [
-                "Wall of Smoke"
+                "Wall of Smoke",
+		"Shenanigans"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8978,7 +8980,8 @@ const atrees = {
             "base_abil": "Spin Attack",
             "parents": [
                 "Nightcloak Knife",
-                "Cheaper Multihit II"
+                "Cheaper Multihit II",
+		"Dissolution"
             ],
             "dependencies": [
                 "Marked"
@@ -9212,9 +9215,9 @@ const atrees = {
         },
         {
             "display_name": "Ricochets",
-            "desc": "When hitting an enemy with your Shurikens, they will bounce to the nearest enemy",
+            "desc": "Your Shurikens will bounce 2 times between enemies upon impact.",
             "archetype": "Acrobat",
-            "archetype_req": 6,
+            "archetype_req": 8,
             "base_abil": "Dash",
             "parents": [
                 "Blade Fury"
@@ -9236,7 +9239,7 @@ const atrees = {
             "display_name": "Satsujin",
             "desc": "If an enemy has 3 Marks, your next Multihit or Damaging Powder Special will deal double damage. (20s Cooldown, per enemy)",
             "archetype": "Shadestepper",
-            "archetype_req": 13,
+            "archetype_req": 12,
             "parents": [
                 "Harvester"
             ],
@@ -9280,7 +9283,7 @@ const atrees = {
         },
         {
             "display_name": "Forbidden Art",
-            "desc": "Summon +3 additional Clones. (+15s Cooldown)",
+            "desc": "Summon +3 additional Clones, but reduce your damage by -10% while your Clones are active. (+15s Cooldown)",
             "archetype": "Trickster",
             "archetype_req": 8,
             "base_abil": "Mirror Image",
@@ -9303,13 +9306,18 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Spell Copies",
-                    "slider_max": 3
+                    "slider_max": 3,
+		    "bonuses": [{
+                    "type": "stat",
+                    "name": "damMult.Echo",
+                    "value": -10
+		    }]
                 }
             ]
         },
         {
             "display_name": "Diversion",
-            "desc": "Grant allies within 15 blocks +15% Overhealth whenever you hit a Lured enemy. (6.5s Cooldown)\nThe bonus health decays over 10s.",
+            "desc": "Grant allies within 15 blocks +10% Overhealth whenever you hit a Lured enemy. (6.5s Cooldown)\nThe bonus health decays over 10s.",
             "archetype": "Trickster",
             "archetype_req": 12,
             "base_abil": "Smoke Bomb",
@@ -9366,16 +9374,16 @@ const atrees = {
             ]
         },
         {
-            "display_name": "Better Ricochets",
-            "desc": "Add +1 Max Bounce to Ricochets",
+            "display_name": "Better Weightless",
+            "desc": "Weightless will grant +0.25 more mana.",
             "archetype": "",
             "archetype_req": 0,
-            "base_abil": "Dash",
+            "base_abil": "Weightless",
             "parents": [
                 "Jasmine Bloom"
             ],
             "dependencies": [
-                "Ricochets"
+                "Weightless"
             ],
             "blockers": [],
             "cost": 1,
@@ -9549,11 +9557,11 @@ const atrees = {
             ],
             "dependencies": ["Dancing Blade"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 34,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "effects": [{
                 "type": "add_spell_prop",
@@ -9571,7 +9579,8 @@ const atrees = {
             "base_abil": "Vanish",
             "parents": [
                 "Cheaper Multihit II",
-                "Hoodwink"
+                "Hoodwink",
+		"Fatal Spin"
             ],
             "dependencies": ["Vanish"],
             "blockers": [],
@@ -9587,7 +9596,7 @@ const atrees = {
                 "bonuses": [{
                     "type": "stat",
                     "name": "defMult.Dissolution",
-                    "value": 40
+                    "value": 75
                 }]
             }]
         },
@@ -10174,7 +10183,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "target_part": "Nature's Jolt",
                     "base_spell": 2,
-                    "multipliers": [90, 30, 0, 0, 0, 0]
+                    "multipliers": [110, 40, 0, 0, 0, 0]
                 },
                 {
                     "type": "add_spell_prop",
@@ -10653,7 +10662,7 @@ const atrees = {
                 "type": "add_spell_prop",
                 "base_spell": 6,
                 "target_part": "Puppet Explosion",
-                "multipliers": [200, 0, 0, 0, 50, 0]
+                "multipliers": [150, 0, 0, 0, 50, 0]
             }]
         },
         {
@@ -10718,7 +10727,7 @@ const atrees = {
                     {
                         "type": "stat",
                         "name": "damMult.Bullwhip:5.Puppet Hit",
-                        "value": 15
+                        "value": 20
                     },
                     {
                         "type": "stat",
@@ -10764,7 +10773,7 @@ const atrees = {
             "display": {
                 "row": 21,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -10827,7 +10836,7 @@ const atrees = {
             "display": {
                 "row": 22,
                 "col": 4,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "switch_count": 2,
@@ -11241,7 +11250,7 @@ const atrees = {
             "display": {
                 "row": 28,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -11347,7 +11356,7 @@ const atrees = {
             "display_name": "Chant of the Coward",
             "desc": "When switching to the Mask of the Coward, damage and knockback nearby enemies.",
             "archetype": "Ritualist",
-            "archetype_req": 7,
+            "archetype_req": 0,
             "parents": ["Fluid Healing", "Mask of the Coward"],
             "dependencies": ["Mask of the Coward"],
             "blockers": [],
@@ -11417,7 +11426,7 @@ const atrees = {
             "desc": "When switching to Mask of the Fanatic, temporarily give massive resistance to yourself and allies (8s cooldown).",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
-            "archetype_req": 10,
+            "archetype_req": 9,
             "parents": ["Chant of the Coward", "Stronger Tether"],
             "dependencies": [],
             "blockers": [],
@@ -11425,7 +11434,7 @@ const atrees = {
             "display": {
                 "row": 31,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -11461,7 +11470,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 8,
                     "target_part": "Tether Tick",
-                    "multipliers": [10, 0, 0, 0, 0, 0]
+                    "multipliers": [15, 0, 0, 0, 0, 0]
                 }
             ]
         },
@@ -11571,7 +11580,7 @@ const atrees = {
             "display": {
                 "row": 33,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11606,6 +11615,33 @@ const atrees = {
                     }]
                 }
             ]
+        },
+	{
+            "display_name": "Chant of the Lunatic",
+            "desc": "When switching to Mask of the Lunatic, reduce the defenses of nearby enemies. (8s Cooldown)",
+            "archetype": "Ritualist",
+            "base_abil": "Uproot",
+            "parents": ["Frog Dance"],
+            "dependencies": ["Mask of the Lunatic"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 4,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [{
+                "type": "raw_stat",
+                "toggle": "Chant of the Lunatic",
+                "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "damMult.LunaticChant",
+                        "value": 17.647058824
+                    }
+                ]
+            }]
         },
         {
             "display_name": "Larger Blood Pool III",
@@ -11657,10 +11693,10 @@ const atrees = {
         },
         {
             "display_name": "Awakened",
-            "desc": "After saving 200 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 20s, giving the power of all Masks at once without any downsides.",
+            "desc": "After saving 150 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 25s, giving the power of all Masks at once without any downsides.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
-            "archetype_req": 12,
+            "archetype_req": 11,
             "parents": ["Frog Dance", "Cheaper Uproot II"],
             "dependencies": ["Uproot"],
             "blockers": [],
@@ -11668,7 +11704,7 @@ const atrees = {
             "display": {
                 "row": 35,
                 "col": 5,
-                "icon": "node_3"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11701,7 +11737,7 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "spPct1Final",
-                            "value": -70
+                            "value": -65
                         },
                         {
                             "type": "stat",
@@ -11719,7 +11755,7 @@ const atrees = {
         },
         {
             "display_name": "Blood Sorrow",
-            "desc": "Uproot will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
+            "desc": "Uproot or Haunting Memory will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
             "base_abil": "Uproot",
             "archetype": "Acolyte",
             "archetype_req": 12,
@@ -11742,7 +11778,7 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Beam Tick Damage",
-                            "multipliers": [100, 0, 0, 20, 0, 0]
+                            "multipliers": [130, 0, 0, 30, 0, 0]
                         },
                         {
                             "name": "Beam DPS",
@@ -11782,4 +11818,3 @@ const atrees = {
         }
     ]
 }
-
