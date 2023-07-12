@@ -48,7 +48,7 @@ const atrees = {
                 }
             ]
         },
-		        {
+        {
             "display_name": "Bow Proficiency",
             "desc": "Improve your Main Attack's damage and range when using a bow.",
             "base_abil": 999,
@@ -80,7 +80,7 @@ const atrees = {
                 }
             ]
         },
-		        {
+        {
             "display_name": "Cheaper Arrow Bomb",
             "desc": "Reduce the Mana cost of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
@@ -104,7 +104,7 @@ const atrees = {
                 }
             ]
         },
-		        {
+        {
             "display_name": "Heart Shatter",
             "desc": "Hitting a mob directly with Arrow Bomb will shatter its heart and deal additional damage.",
             "base_abil": "Arrow Bomb",
@@ -146,7 +146,7 @@ const atrees = {
         },
         {
             "display_name": "Double Shots",
-            "desc": "Doubles Main Attack arrows and recues their damage by 30%. (harder to hit far enemies)",
+            "desc": "Doubles Main Attack arrows and reduces their damage by 30%. (harder to hit far enemies)",
             "archetype": "Boltslinger",
             "archetype_req": 0,
             "base_abil": 999,
@@ -649,7 +649,7 @@ const atrees = {
         },
 		{
             "display_name": "Arrow Rain",
-            "desc": "When Arrow Shield loses its last charge, spew 200 arrows around you to rain down on enemies.",
+            "desc": "When Arrow Shield loses its last charge, spew 150 arrows around you to rain down on enemies.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Nimble String",
@@ -659,7 +659,7 @@ const atrees = {
                 "Arrow Shield"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 15,
                 "col": 2,
@@ -713,8 +713,8 @@ const atrees = {
                     "target_part": "Bryophyte Roots",
                     "cost": 0,
                     "multipliers": [
-                        40,
-                        20,
+                        30,
+                        10,
                         0,
                         0,
                         0,
@@ -1155,11 +1155,11 @@ const atrees = {
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 21,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -1338,7 +1338,7 @@ const atrees = {
         },
 		{
             "display_name": "Call of the Hound",
-            "desc": "Arrow Shield summons a Hound that will attack and drag aggressive enemies towards your traps.",
+            "desc": "Arrow Shield summons a Hound that will attack aggressive enemies every 0.25s and drag them towards your traps.",
             "archetype": "Trapper",
             "archetype_req": 0,
             "base_abil": "Arrow Shield",
@@ -1365,19 +1365,12 @@ const atrees = {
                     "parts": [
                         {
                             "name": "Single Hit",
-                            "multipliers": [
-                                40,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0
-                            ]
+                            "multipliers": [40, 0, 0, 0, 0, 0]
                         },
                         {
                             "name": "DPS",
                             "hits": {
-                                "Single Hit": 3.3333333333333
+                                "Single Hit": 3.333333333333333
                             }
                         }
                     ]
@@ -1448,11 +1441,11 @@ const atrees = {
             "desc": "Arrow Bomb will bounce once when hitting a block or enemy.",
             "base_abil": "Arrow Bomb",
             "parents": [
-				"Patient Hunter",
+		"Patient Hunter",
                 "Traveler",
                 "Ivyroot Mamba"
             ],
-            "archetype_req": 3,
+            "archetype_req": 0,
             "req_archetype": "Trapper",
             "dependencies": [],
             "blockers": [],
@@ -1473,7 +1466,7 @@ const atrees = {
             "base_abil": "Arrow Storm",
             "parents": [
                 "Bouncing Bomb",
-				"Twain's Arc"
+		"Twain's Arc"
             ],
             "dependencies": [
                 "Bryophyte Roots"
@@ -1489,14 +1482,14 @@ const atrees = {
             "effects": [
                 {
                     "type": "replace_spell",
-                    "name": "Ivyrot Mamba",
+                    "name": "Ivyroot Mamba",
                     "base_spell": 9,
-                    "display": "DPS",
+                    "display": "Total DPS",
                     "parts": [
                         {
                             "name": "Single Hit",
                             "multipliers": [
-                                60,
+                                80,
                                 20,
                                 0,
                                 0,
@@ -1505,9 +1498,15 @@ const atrees = {
                             ]
                         },
                         {
-                            "name": "DPS",
+                            "name": "Per Snake DPS",
                             "hits": {
-                                "Single Hit": 0.3333333333333
+                                "Single Hit": 0.6666666666667
+                            }
+                        },
+                        {
+                            "name": "Total DPS",
+                            "hits": {
+                                "Per Snake DPS": 1
                             }
                         }
                     ]
@@ -2093,7 +2092,7 @@ const atrees = {
         },
 		{
             "display_name": "Murder Flock",
-            "desc": "Basaltic Trap summons a Crow upon detonation that will peck at aggressive enemies. (Max 2) Enemies will be distracted for 0.2s.",
+            "desc": "Basaltic Trap summons a Crow upon detonation that will peck at aggressive enemies every 0.9s. (Max 2) Enemies will be distracted for 0.2s.",
             "archetype": "Trapper",
             "archetype_req": 5,
             "base_abil": "Arrow Shield",
@@ -2118,7 +2117,7 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Murder Flock",
                     "base_spell": 10,
-                    "display": "Max DPS",
+                    "display": "Total DPS",
                     "parts": [
                         {
                             "name": "Single Hit",
@@ -2132,9 +2131,15 @@ const atrees = {
                             ]
                         },
                         {
-                            "name": "Max DPS",
+                            "name": "Crow DPS",
                             "hits": {
-                                "Single Hit": 4
+                                "Single Hit": 1.1111111111
+                            }
+                        },
+                        {
+                            "name": "Total DPS",
+                            "hits": {
+                                "Crow DPS": 2
                             }
                         }
                     ]
@@ -2467,7 +2472,26 @@ const atrees = {
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+				{
+                    "type": "add_spell_prop",
+                    "base_spell": 8,
+                    "target_part": "Single Hit",
+                    "multipliers": [40, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 10,
+                    "target_part": "Total DPS",
+                    "hits": { "Crow DPS": 2 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 9,
+                    "target_part": "Total DPS",
+                    "hits": { "Per Snake DPS": 1 }
+                }
+			]
         },
 		{
             "display_name": "Crepuscular Ray",
@@ -4827,18 +4851,39 @@ const atrees = {
                 }
             ]  
         },
-
-        {
-            "display_name": "Second Chance",
-            "desc": "When you receive a fatal blow, survive and regain 30% of your Health (10m Cooldown)",
+		{
+            "display_name": "Stronger Sacred Surge",
+            "desc": "Increases the damage of Sacred Surge",
             "archetype": "Paladin", 
-            "archetype_req": 12, 
+            "archetype_req": 8, 
             "parents": ["Cheaper Bash 2"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 32,
+                "row": 31,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [{
+            	"type": "add_spell_prop",
+                "base_spell": 9,
+                "target_part": "Smite Damage",
+                "multipliers": [70, 0, 10, 0, 0, 0]
+            }]  
+        },
+        {
+            "display_name": "Second Chance",
+            "desc": "When you receive a fatal blow, survive and regain 30% of your Health (10m Cooldown)",
+            "archetype": "Paladin", 
+            "archetype_req": 12, 
+            "parents": ["Stronger Sacred Surge"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 33,
                 "col": 7,
                 "icon": "node_3"
             },
