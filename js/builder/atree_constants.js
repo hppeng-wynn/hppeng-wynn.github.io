@@ -2356,7 +2356,7 @@ const atrees = {
 				{
                     "type": "raw_stat",
                     "toggle": "Coursing Restraints",
-                    "bonuses": [ {"type": "stat", "name": "damMult.Coursing Restraints", "value": 15} ]
+                    "bonuses": [ {"type": "stat", "name": "damMult.CoursingRestraints", "value": 15} ]
                 }
 			]
         },
@@ -2537,7 +2537,7 @@ const atrees = {
                             }
                         },
                         {
-                            "name": "Total Damage",
+                            "name": "Max Damage",
                             "hits": {
                                 "DPS": 7
                             }
@@ -11873,7 +11873,7 @@ const atrees = {
                     {
                         "type": "stat",
                         "name": "damMult.LunaticChant",
-                        "value": 17.647058824
+                        "value": 15
                     }
                 ]
             }]
