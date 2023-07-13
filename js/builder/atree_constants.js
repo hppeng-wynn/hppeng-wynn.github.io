@@ -1268,7 +1268,7 @@ const atrees = {
             "blockers": [
                 "Escape Artist"
             ],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 22,
                 "col": 6,
@@ -4859,7 +4859,7 @@ const atrees = {
             "parents": ["Cheaper Bash 2"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 2, 
+            "cost": 1, 
             "display": {
                 "row": 31,
                 "col": 7,
@@ -11071,7 +11071,7 @@ const atrees = {
             "display": {
                 "row": 22,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {
                 "switch_count": 2,

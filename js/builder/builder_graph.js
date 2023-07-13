@@ -862,7 +862,8 @@ let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hpr
 /*"mdPct","mdRaw","sdPct","sdRaw",*/"damPct","damRaw",//"damAddMin","damAddMax",          // These are the old ids. Become proportional.
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw",//"rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
 "critDamPct",
-//"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final"
+//"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final",
+"healEff", "kb", "weakenEnemy", "slowEnemy", "rDefPct"
 ];
 /**
  * Scale stats if radiance is enabled.

@@ -32,11 +32,13 @@ elif req.lower() == "ings":
     for i in range(4):
         response['ings'].extend(requests.get("https://api.wynncraft.com/v2/ingredient/search/tier/" + str(i)).json()['data'])
 elif req.lower() == "recipes":
-    temp = requests.get("https://api.wynncraft.com/v2/recipe/list")
+    import time
+    temp = requests.get("https://api.wynncraft.com/v2/recipe/list").json()
     response = {"recipes":[]}
     for i in range(len(temp['data'])):
         response["recipes"].extend(requests.get("https://api.wynncraft.com/v2/recipe/get/" + temp['data'][i]).json()['data'])
         print("" + str(i) + " / " + str(len(temp['data'])))
+        time.sleep(1)
 elif req.lower() == "terrs":
     response = requests.get("https://api.wynncraft.com/public_api.php?action=territoryList").json()['territories']
     delkeys = ["territory","acquired","attacker"]

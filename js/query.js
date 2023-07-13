@@ -299,7 +299,8 @@ const ingredientQueryProps = (function() {
   maxId(['waterdef%', 'wdef%', 'wdefpct'], 'wDefPct');
   maxId(['firedef%', 'fdef%', 'fdefpct'], 'fDefPct');
   maxId(['airdef%', 'adef%', 'adefpct'], 'aDefPct');
-  sum(['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct'], props.edefpct, props.tdefpct, props.wdefpct, props.fdefpct, props.adefpct);
+  maxId(['elementaldef%', 'rdef%', 'rdefpct'], 'rDefPct');
+  sum(['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct'], props.edefpct, props.tdefpct, props.wdefpct, props.fdefpct, props.adefpct, props.rDefPct);
 
   maxId(['bonushealth', 'healthid', 'bonushp', 'hpid', 'hpbonus'], 'hpBonus');
 
@@ -335,7 +336,11 @@ const ingredientQueryProps = (function() {
   maxId(['stealing', 'esteal'], 'eSteal');
   maxId(['lq', 'quality'], 'lq');
   maxId('gxp', 'gXp');
-  maxId(['gspd'], 'gSpd');
+  maxId('gspd', 'gSpd');
+  maxId('healeff', 'healEff');
+  maxId('kb', 'kb');
+  maxId('weakenenemy', 'weakenEnemy');
+  maxId('slowenemy', 'slowEnemy');
 
   return props;
 })();
