@@ -337,7 +337,7 @@ const ingredientQueryProps = (function() {
   maxId(['lq', 'quality'], 'lq');
   maxId('gxp', 'gXp');
   maxId('gspd', 'gSpd');
-  maxId('healeff', 'healEff');
+  maxId(['healeff', 'healpct'], 'healPct');
   maxId('kb', 'kb');
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');

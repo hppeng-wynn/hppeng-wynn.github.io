@@ -126,7 +126,7 @@ const translate_mappings = {
     "Loot Quality": "lq",
     "Gather XP Bonus": "gXp",
     "Gather Speed Bonus": "gSpd",
-    "Healing Efficiency": "healEff",
+    "Healing Efficiency": "healPct",
     "Knockback": "kb",
     "Weaken Enemy": "weakenEnemy",
     "Slow Enemy": "slowEnemy"

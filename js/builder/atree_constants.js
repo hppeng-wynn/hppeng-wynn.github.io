@@ -1920,7 +1920,7 @@ const atrees = {
             "display_name": "Mana Trap",
             "desc": "Your Traps will give you 0.5 Mana per second and 10 Mana when they explode.",
             "archetype": "Trapper",
-            "archetype_req": 5,
+            "archetype_req": 6,
             "base_abil": "Basaltic Trap",
             "parents": [
                 "Fierce Stomp",
@@ -11117,7 +11117,12 @@ const atrees = {
                         },
                         {
                             "type": "stat",
-                            "name": "healPct",
+                            "name": "healMult",
+                            "value": -40
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.MultiTotem:5.Explosion Damage",
                             "value": -40
                         }
                     ]
@@ -11747,7 +11752,12 @@ const atrees = {
                         },
                         {
                             "type": "stat",
-                            "name": "healPct",
+                            "name": "healMult",
+                            "value": -10
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.MultiTotem:5.Explosion Damage",
                             "value": -10
                         }
                     ]

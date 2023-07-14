@@ -615,10 +615,12 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let _heal_amount = (part.power * getDefenseStats(stats)[0] * (1+stats.get('healPct')/100));
+                let heal_additive = stats.get('healPct');
                 if (stats.has('healPct:'+part_id)) {
-                    _heal_amount *= 1+(stats.get('healPct:'+part_id)/100);
+                    heal_additive += stats.get('healPct:'+part_id);
                 }
+                let heal_mult = 1+(stats.get('healMult') / 100)
+                let _heal_amount = part.power * getDefenseStats(stats)[0] * (1 + (heal_additive/100)) * heal_mult;
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
@@ -863,7 +865,7 @@ let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hpr
 "rMdPct","rMdRaw","rSdPct",/*"rSdRaw",*/"rDamPct","rDamRaw",//"rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
 "critDamPct",
 //"spPct1Final", "spPct2Final", "spPct3Final", "spPct4Final",
-"healEff", "kb", "weakenEnemy", "slowEnemy", "rDefPct"
+"healPct", "kb", "weakenEnemy", "slowEnemy", "rDefPct"
 ];
 /**
  * Scale stats if radiance is enabled.
