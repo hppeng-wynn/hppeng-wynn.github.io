@@ -214,14 +214,18 @@ function displayExpandedItem(item, parent_id){
                     parent_div.appendChild(make_elem("div", ["col"], { textContent: "Set: " + item.get(id).toString() }));
                 } else if (id === "majorIds") {
                     //console.log(item.get(id));
-                    for (let majorID of item.get(id)) {
+                    for (let major_id_str of item.get(id)) {
+                        if (major_id_str in major_ids) {
+                            let major_id_info = major_ids[major_id_str];
+                            major_id_str = `+${major_id_info.displayName}: ${major_id_info.description}`;
+                        }
                         let p_elem = make_elem("div", ['col']);
 
                         let title_elem = make_elem("b");
                         let b_elem = make_elem("b");
-                        if (majorID.includes(":")) {   
-                            let name = majorID.substring(0, majorID.indexOf(":")+1);
-                            let mid = majorID.substring(majorID.indexOf(":")+1);
+                        if (major_id_str.includes(":")) {
+                            let name = major_id_str.substring(0, major_id_str.indexOf(":")+1);
+                            let mid = major_id_str.substring(major_id_str.indexOf(":")+1);
                             if (name.charAt(0) !== "+") {name = "+" + name}
                             title_elem.classList.add("Legendary");
                             title_elem.textContent = name;
@@ -230,10 +234,9 @@ function displayExpandedItem(item, parent_id){
                             p_elem.appendChild(title_elem);
                             p_elem.appendChild(b_elem);
                         } else {
-                            let name = item.get(id).toString()
-                            if (name.charAt(0) !== "+") {name = "+" + name}
+                            if (major_id_str.charAt(0) !== "+") {major_id_str = "+" + major_id_str}
                             b_elem.classList.add("Legendary");
-                            b_elem.textContent = name;
+                            b_elem.textContent = major_id_str;
                             p_elem.appendChild(b_elem);
                         }
                         parent_div.appendChild(p_elem);
@@ -1180,7 +1183,7 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
         boost.classList.add("text-end");
 
         let defRaw = statMap.get(skp_elements[i]+"Def");
-        let defPct = statMap.get(skp_elements[i]+"DefPct")/100;
+        let defPct = (statMap.get(skp_elements[i]+"DefPct") + statMap.get('rDefPct'))/100;
         if (defRaw < 0) {
             defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
         } else {

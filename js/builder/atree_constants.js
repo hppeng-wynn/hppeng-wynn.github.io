@@ -905,6 +905,7 @@ const atrees = {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
+                    "slider_max": 24,
                     "output": {
                         "type": "stat",
                         "name": "spd"
@@ -1058,7 +1059,7 @@ const atrees = {
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        15
+                        12
                     ],
                     "slider_max": 3
                 }
@@ -3991,7 +3992,7 @@ const atrees = {
         },
         {
             "display_name": "Sacred Surge",
-            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 15% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
+            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 20% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "parents": ["Stronger Mantle", "Provoke"], 
@@ -6832,7 +6833,19 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {},
-            "effects": []
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": true,
+                "slider_name": "Time Dilated",
+                "slider_max": 30,
+                "output": {
+                    "type": "stat",
+                    "name": "spd"
+                },
+                "scaling": [
+                    10
+                ]
+            }]
         },
         {
             "display_name": "Gust",
@@ -10584,6 +10597,7 @@ const atrees = {
                 "duration": 30,
                 "range": 16,
                 "max_puppets": 3,
+                "num_puppets": 0,
                 "attack_frequency": 2
             },
             "effects": [
@@ -10592,7 +10606,7 @@ const atrees = {
                     "name": "Puppet Damage",
                     "base_spell": 6,
                     "scaling": "spell",
-                    "display": "Max Puppet DPS",
+                    "display": "Total Puppet DPS",
                     "parts": [
                         {
                             "name": "Puppet Hit",
@@ -10603,10 +10617,25 @@ const atrees = {
                             "hits": { "Puppet Hit": "Puppet Master.attack_frequency" }
                         },
                         {
-                            "name": "Max Puppet DPS",
-                            "hits": { "Puppet DPS": "Puppet Master.max_puppets" }
+                            "name": "Total Puppet DPS",
+                            "hits": { "Puppet DPS": "Puppet Master.num_puppets" }
                         }
                     ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Active Puppets",
+                    "slider_step": 1,
+                    "slider_max": 3,
+                    "output": [
+                        {
+                            "type": "prop",
+                            "abil": "Puppet Master",
+                            "name": "num_puppets"
+                        }
+                    ],
+                    "scaling": [1]
                 }
             ]
         },
@@ -10803,7 +10832,20 @@ const atrees = {
             "properties": {
                 "max_puppets": 1
             },
-            "effects": []
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": true,
+                "slider_name": "Active Puppets",
+                "slider_max": 1,
+                "output": [
+                    {
+                        "type": "prop",
+                        "abil": "Puppet Master",
+                        "name": "num_puppets"
+                    }
+                ],
+                "scaling": [0]
+            }]
         },
         {
             "display_name": "Haunting Memory",
@@ -10989,7 +11031,20 @@ const atrees = {
             "properties": {
                 "max_puppets": 2
             },
-            "effects": []
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": true,
+                "slider_name": "Active Puppets",
+                "slider_max": 2,
+                "output": [
+                    {
+                        "type": "prop",
+                        "abil": "Puppet Master",
+                        "name": "num_puppets"
+                    }
+                ],
+                "scaling": [0]
+            }]
         },
         {
             "display_name": "Mask of the Fanatic",
@@ -11920,21 +11975,23 @@ const atrees = {
                 "col": 1,
                 "icon": "node_3"
             },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Shepherd Kills",
-                    "output": {
+            "properties": {
+                "max_puppets": 8
+            },
+            "effects": [{
+                "type": "stat_scaling",
+                "slider": true,
+                "slider_name": "Active Puppets",
+                "slider_max": 8,
+                "output": [
+                    {
                         "type": "prop",
                         "abil": "Puppet Master",
-                        "name": "max_puppets"
-                    },
-                    "scaling": [1],
-                    "slider_max": 8
-                }
-            ]
+                        "name": "num_puppets"
+                    }
+                ],
+                "scaling": [0]
+            }]
         },
         {
             "display_name": "Awakened",

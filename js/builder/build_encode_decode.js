@@ -38,14 +38,26 @@ const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
 // Default to the newest version.
 let wynn_version_id = WYNN_VERSION_LATEST;
 
+let major_ids = null;
+let major_id_load_complete = false;
+async function load_major_id_data(version_str) {
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/majid.json`;
+    major_ids = await (await fetch(url)).json();
+    major_id_load_complete = true;
+}
+
 /*
  * Populate fields based on url, and calculate build.
  * TODO: THIS CODE IS GOD AWFUL result of being lazy
  * fix all the slice() and break into functions or do something about it... its inefficient, ugly and error prone
  */
 async function parse_hash(url_tag) {
-    const default_load_promises = [ load_atree_data(wynn_version_names[WYNN_VERSION_LATEST]),
-                                    load_init(), load_ing_init(), load_tome_init() ];
+    let latest_ver_name = wynn_version_names[WYNN_VERSION_LATEST]
+    const default_load_promises = [ load_atree_data(latest_ver_name), load_major_id_data(latest_ver_name),
+                                    load_init(), load_ing_init(), load_tome_init()];
     if (!url_tag) {
         await Promise.all(default_load_promises);
         return;
@@ -99,6 +111,7 @@ async function parse_hash(url_tag) {
         else {
             version_name = wynn_version_names[wynn_version_id];
             const load_promises = [ load_atree_data(version_name),
+                                    load_major_id_data(version_name),
                                     load_old_version(version_name),
                                     load_ings_old_version(version_name),
                                     load_tome_old_version(version_name) ];

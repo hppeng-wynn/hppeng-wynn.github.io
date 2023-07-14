@@ -500,28 +500,6 @@ class PowderInputNode extends InputNode {
     }
 }
 
-/**
- * Select a spell+spell "variation" based on a build / spell idx.
- * Right now this isn't much logic and is only used to abstract away major id interactions
- * but will become significantly more complex in wynn2.
- *
- * Signature: SpellSelectNode<int>(build: Build) => [Spell, SpellParts]
- */
-class SpellSelectNode extends ComputeNode {
-    constructor(spell) {
-        super("builder-spell"+spell.base_spell+"-select");
-        this.spell = spell;
-    }
-
-    compute_func(input_map) {
-        const build = input_map.get('build');
-        let stats = build.statMap;
-        // TODO: apply major ids... DOOM.....
-
-        return [this.spell, this.spell.parts];
-    }
-}
-
 /*
  * Get all defensive stats for this build.
  */
@@ -576,15 +554,15 @@ function getDefenseStats(stats) {
  *                                spell-info: [Spell, SpellParts]) => List[SpellDamage]
  */
 class SpellDamageCalcNode extends ComputeNode {
-    constructor(spell_num) {
-        super("builder-spell"+spell_num+"-calc");
+    constructor(spell) {
+        super("builder-spell"+spell.base_spell+"-calc");
+        this.spell = spell;
     }
 
     compute_func(input_map) {
         const weapon = input_map.get('build').weapon.statMap;
-        const spell_info = input_map.get('spell-info');
-        const spell = spell_info[0];
-        const spell_parts = spell_info[1];
+        const spell = this.spell;
+        const spell_parts = spell.parts;
         const stats = input_map.get('stats');
         const skillpoints = [
             stats.get('str'),
@@ -689,18 +667,17 @@ class SpellDamageCalcNode extends ComputeNode {
  *                             spell-damage: List[SpellDamage]) => null
  */
 class SpellDisplayNode extends ComputeNode {
-    constructor(spell_num) {
-        super("builder-spell"+spell_num+"-display");
-        this.spell_idx = spell_num;
+    constructor(spell) {
+        super("builder-spell"+spell.base_spell+"-display");
+        this.spell = spell;
     }
 
     compute_func(input_map) {
         const stats = input_map.get('stats');
-        const spell_info = input_map.get('spell-info');
         const damages = input_map.get('spell-damage');
-        const spell = spell_info[0];
+        const spell = this.spell;
 
-        const i = this.spell_idx;
+        const i = this.spell.base_spell;
         let parent_elem = document.getElementById("spell"+i+"-info");
         let overallparent_elem = document.getElementById("spell"+i+"-infoAvg");
         displaySpellDamage(parent_elem, overallparent_elem, stats, spell, i, damages);
@@ -1060,6 +1037,8 @@ function builder_graph_init(save_skp) {
     // "Build" now only refers to equipment and level (no powders). Powders are injected before damage calculation / stat display.
     build_node = new BuildAssembleNode();
     build_node.link_to(level_input);
+    atree_merge.link_to(build_node, "build");
+
 
     let build_encode_node = new BuildEncodeNode();
     build_encode_node.link_to(build_node, 'build');

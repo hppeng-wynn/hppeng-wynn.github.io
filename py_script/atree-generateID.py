@@ -89,6 +89,16 @@ with open("atree_constants.js") as f:
 
     translate_id(abilDict, data)
 
+    with open("major_ids_clean.json") as maj_id_file:
+        maj_id_dat = json.load(maj_id_file)
+        for k, v in maj_id_dat.items():
+            for abil in v['abilities']:
+                clazz = abil['class']
+                base_abil = abil['base_abil']
+                abil['base_abil'] = abilDict[clazz][base_abil]
+        with open("major_ids_min.json", "w", encoding='utf-8') as maj_id_out:
+            json.dump(maj_id_dat, maj_id_out, ensure_ascii=False, separators=(',', ':'))
+
     data_str = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
     data_str = "const atrees=" + data_str
     with open('atree_constants_min.js', 'w', encoding='utf-8') as abil_dest:
