@@ -55,7 +55,7 @@ async function load_major_id_data(version_str) {
  * fix all the slice() and break into functions or do something about it... its inefficient, ugly and error prone
  */
 async function parse_hash(url_tag) {
-    let latest_ver_name = wynn_version_names[WYNN_VERSION_LATEST]
+    let latest_ver_name = wynn_version_names[WYNN_VERSION_LATEST];
     const default_load_promises = [ load_atree_data(latest_ver_name), load_major_id_data(latest_ver_name),
                                     load_init(), load_ing_init(), load_tome_init()];
     if (!url_tag) {

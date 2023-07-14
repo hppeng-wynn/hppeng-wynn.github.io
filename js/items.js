@@ -217,6 +217,6 @@ function init_values() {
 }
 
 (async function() {
-    await Promise.resolve(load_init());
+    await Promise.resolve(load_init(), load_major_id_data(wynn_version_names[WYNN_VERSION_LATEST]));
     init_search();
 })();
