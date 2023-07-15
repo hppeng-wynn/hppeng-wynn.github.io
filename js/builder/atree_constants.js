@@ -8399,7 +8399,8 @@ const atrees = {
             "parents": [
                 "Shenanigans",
                 "Shadow Travel",
-                "Dagger Proficiency II"
+                "Dagger Proficiency II",
+                "Psithurism"
             ],
             "dependencies": [ "Multihit" ],
             "blockers": [],
