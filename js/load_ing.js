@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 22;
+const ING_DB_VERSION = 25;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
@@ -71,7 +71,7 @@ async function load_ings_old_version(version_str) {
         clean_ing(ings[id]);
     }
 
-    url = baseUrl + "/recipes_compress.json";
+    url = `${baseUrl}/data/${version_str}/recipes.json`;
     result = await (await fetch(url)).json();
     recipes = result.recipes;
 

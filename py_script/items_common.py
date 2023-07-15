@@ -128,6 +128,12 @@ translate_mappings = {
 
     "gatherXpBonus": "gXp",
     "gatherSpeed": "gSpd",
+
+    "healingEfficiency": "healPct",
+    "knockback": "kb",
+    "weakenEnemy": "weakenEnemy",
+    "slowEnemy": "slowEnemy",
+    "elementalDefense": "rDefPct",
 }
 
 delete_keys = [

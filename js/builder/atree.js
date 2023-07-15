@@ -45,9 +45,10 @@ add_spell_prop: {
     base_spell:     int             // spell identifier
     target_part:    Optional[str]   // Part of the spell to modify. Can be not present/empty for ex. cost modifier.
                                     //     If target part does not exist, a new part is created.
-    behavior:       Optional[str]   // One of: "merge", "modify". default: merge
+    behavior:       Optional[str]   // One of: "merge", "modify", "overwrite". default: merge
                                     //     merge: add if exist, make new part if not exist
                                     //     modify: increment existing part. do nothing if not exist
+                                    //     overwrite: set part. do nothing if not exist
     cost:           Optional[int]   // change to spellcost. If the spell is not spell 1-4, this must be left empty.
     multipliers:    Optional[array[float, 6]]   // Additive changes to spellmult (for damage spell)
     power:          Optional[float] // Additive change to healing power (for heal spell)
@@ -421,6 +422,7 @@ const atree_merge = new (class extends ComputeNode {
         const [hard_error, errors] = input_map.get('atree-errors');
         if (hard_error) { return null; }
         const player_class = input_map.get('player-class');
+        const build = input_map.get('build');
         const atree_state = input_map.get('atree-state');
         const atree_order = input_map.get('atree');
 
@@ -433,26 +435,20 @@ const atree_merge = new (class extends ComputeNode {
             else if (!Array.isArray(tmp_abil.desc)) {
                 tmp_abil.desc = [tmp_abil.desc];
             }
-            tmp_abil.subparts = [abil.id];
             abils_merged.set(abil.id, tmp_abil);
         }
 
-        for (const node of atree_order) {
-            const abil_id = node.ability.id;
-            if (!atree_state.get(abil_id).active) {
-                continue;
-            }
-            const abil = node.ability;
-
+        function merge_abil(abil) {
             if ('base_abil' in abil) {
                 if (abils_merged.has(abil.base_abil)) {
                     // Merge abilities.
                     // TODO: What if there is more than one base abil?
                     let base_abil = abils_merged.get(abil.base_abil);
-                    if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
-                    else { base_abil.desc.push(abil.desc); }
+                    if (abil.desc) {
+                        if (Array.isArray(abil.desc)) { base_abil.desc = base_abil.desc.concat(abil.desc); }
+                        else { base_abil.desc.push(abil.desc); }
+                    }
 
-                    base_abil.subparts.push(abil.id);
                     base_abil.effects = base_abil.effects.concat(abil.effects);
                     for (let propname in abil.properties) {
                         if (propname in base_abil.properties) {
@@ -468,8 +464,24 @@ const atree_merge = new (class extends ComputeNode {
                 if (!Array.isArray(tmp_abil.desc)) {
                     tmp_abil.desc = [tmp_abil.desc];
                 }
-                tmp_abil.subparts = [abil.id];
-                abils_merged.set(abil_id, tmp_abil);
+                abils_merged.set(abil.id, tmp_abil);
+            }
+        }
+
+        for (const node of atree_order) {
+            const abil_id = node.ability.id;
+            if (!atree_state.get(abil_id).active) {
+                continue;
+            }
+            merge_abil(node.ability);
+        }
+
+        const build_class = wep_to_class.get(build.weapon.statMap.get("type"));
+        for (const major_id_name of build.statMap.get("activeMajorIDs")) {
+            if (major_id_name in major_ids) {
+                for (const abil of major_ids[major_id_name].abilities) {
+                    if (abil["class"] === build_class) { merge_abil(abil); }
+                }
             }
         }
         return abils_merged;
@@ -539,7 +551,6 @@ const atree_make_interactives = new (class extends ComputeNode {
                         }
                     }
                     else if (behavior === 'merge') {
-                        console.log(effect);
                         slider_map.set(slider_name, {
                             label_name: slider_name+' ('+ability.display_name+')',
                             max: slider_max,
@@ -867,17 +878,22 @@ const atree_collect_spells = new (class extends ComputeNode {
                         // we found the part. merge or modify it!
                         if ('multipliers' in effect) {
                             for (const [idx, v] of effect.multipliers.entries()) {  // python: enumerate()
-                                part.multipliers[idx] += v;
+                                if (behavior === 'overwrite') { part.multipliers[idx] = v; }
+                                else { part.multipliers[idx] += v; }
                             }
                         }
                         else if ('power' in effect) {
-                            part.power += effect.power;
+                            if (behavior === 'overwrite') { part.power = effect.power; }
+                            else { part.power += effect.power; }
                         }
                         else if ('hits' in effect) {
                             for (const [idx, _v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
                                 let v = translate(_v);
-                                if (idx in part.hits) { part.hits[idx] += v; }
-                                else { part.hits[idx] = v; }
+                                if (behavior === 'overwrite') { part.hits[idx] = v; }
+                                else {
+                                    if (idx in part.hits) { part.hits[idx] += v; }
+                                    else { part.hits[idx] = v; }
+                                }
                             }
                         }
                         else {
@@ -901,6 +917,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     }
                     continue;
                 }
+                // NOTE: Legacy support
                 case 'convert_spell_conv':
                     const { base_spell, target_part, conversion } = effect;
                     const ret_spell = ret_spells.get(base_spell);
@@ -1001,13 +1018,9 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
                                                     // TODO shortcut update path for sliders
 
         for (const [spell_id, spell] of new Map([...spell_map].sort((a, b) => a[0] - b[0])).entries()) {
-            let spell_node = new SpellSelectNode(spell)
-                .link_to(build_node, 'build');
-
-            let calc_node = new SpellDamageCalcNode(spell.base_spell)
+            let calc_node = new SpellDamageCalcNode(spell)
                 .link_to(build_node, 'build')
-                .link_to(stat_agg_node, 'stats')
-                .link_to(spell_node, 'spell-info');
+                .link_to(stat_agg_node, 'stats');
             this.spelldmg_nodes.push(calc_node);
 
             let display_elem = make_elem('div', ["col", "pe-0"]);
@@ -1019,9 +1032,8 @@ class AbilityTreeEnsureNodesNode extends ComputeNode {
 
             display_elem.append(spell_summary, spell_detail);
 
-            let display_node = new SpellDisplayNode(spell.base_spell)
+            let display_node = new SpellDisplayNode(spell)
                 .link_to(stat_agg_node, 'stats')
-                .link_to(spell_node, 'spell-info')
                 .link_to(calc_node, 'spell-damage');
 
             this.spell_display_elem.appendChild(display_elem);

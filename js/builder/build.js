@@ -10,7 +10,7 @@ const classDefenseMultipliers = new Map([ ["relik",0.60], ["bow",0.70], ["wand",
 /*
  * Class that represents a wynn player's build.
  */
-class Build{
+class Build {
     
     /**
      * @description Construct a build.
@@ -79,7 +79,8 @@ class Build{
             "aMdPct","aMdRaw","aSdPct","aSdRaw","aDamPct","aDamRaw","aDamAddMin","aDamAddMax",
             "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
             "mdPct","mdRaw","sdPct","sdRaw","damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
-            "rMdPct","rMdRaw","rSdPct","rSdRaw","rDamPct","rDamRaw","rDamAddMin","rDamAddMax"   // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+            "rMdPct","rMdRaw","rSdPct","rSdRaw","rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
+            "healPct",
         ]
 
         //Create a map of this build's stats
@@ -131,7 +132,7 @@ class Build{
         }
         statMap.set("poisonPct", 0);
         statMap.set("critDamPct", 0);
-        statMap.set("healPct", 0);
+        statMap.set("healMult", 0);
 
         // The stuff relevant for damage calculation!!! @ferricles
         statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));
