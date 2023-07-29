@@ -277,6 +277,20 @@
           "target_part": "Arrow Bomb",
           "behavior": "modify",
           "multipliers": [-30, 0, 0, 0, 0, 0]
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 8,
+          "target_part": "DPS",
+          "behavior": "modify",
+          "hits": { "Single Hit": 1.666666666666667 }
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 10,
+          "target_part": "Crow DPS",
+          "behavior": "modify",
+          "hits": { "Single Hit": 0.555555555555556 }
         }
       ]
     }]

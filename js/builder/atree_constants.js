@@ -3994,7 +3994,7 @@ const atrees = {
             "display_name": "Sacred Surge",
             "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 20% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
-            "archetype_req": 0, 
+            "archetype_req": 5, 
             "parents": ["Stronger Mantle", "Provoke"], 
             "dependencies": [], 
             "blockers": [],
@@ -6935,6 +6935,7 @@ const atrees = {
         {
             "display_name": "Stronger Sunshower",
             "desc": "Increase the damage of Sunshower.",
+            "archetype": "Light Bender",
             "base_abil": "Heal",
             "parents": [
                 "Gust",
