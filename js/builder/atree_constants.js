@@ -1224,7 +1224,8 @@ const atrees = {
             "base_abil": "Basaltic Trap",
             "parents": [
                 "Cheaper Arrow Storm I",
-				"Implosion"
+				"Implosion",
+                "Grappling Hook"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -2766,7 +2767,8 @@ const atrees = {
             "desc": "Fierce Stomp will create geysers, dealing more damage and pushing enemies away vertically.",
             "base_abil": "Escape",
             "parents": [
-                "Arrow Hurricane"
+                "Arrow Hurricane",
+                "Snow Storm"
             ],
             "dependencies": [
                 "Fierce Stomp"
@@ -6240,7 +6242,8 @@ const atrees = {
             "base_abil": "Ophanim",
             "parents": [
                 "Fortitude",
-                "Cheaper Teleport II"
+                "Cheaper Teleport II",
+                "Snake Nest"
             ],
             "dependencies": [
                 "Ophanim"
@@ -6457,7 +6460,7 @@ const atrees = {
             "display": {
                 "row": 23,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 5
@@ -9567,7 +9570,7 @@ const atrees = {
         },
         {
             "display_name": "Diversion",
-            "desc": "Grant allies within 15 blocks +10% Overhealth whenever you hit a Lured enemy. (6.5s Cooldown)\nThe bonus health decays over 10s.",
+            "desc": "Grant allies within 16 blocks +10% Overhealth whenever you hit a Lured enemy. (9s Cooldown)\nThe bonus health decays over 10s.",
             "archetype": "Trickster",
             "archetype_req": 12,
             "base_abil": "Smoke Bomb",
