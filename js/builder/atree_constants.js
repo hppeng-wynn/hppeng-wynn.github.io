@@ -1316,7 +1316,7 @@ const atrees = {
         },
 		{
             "display_name": "Stormy Feet",
-            "desc": "Windy Feet will last longer and grant a stroner speed buff. (+20% speed, +60s)",
+            "desc": "Windy Feet will last longer and grant a stronger speed buff. (+20% speed, +60s)",
             "archetype": "Boltslinger",
             "base_abil": "Escape",
             "parents": [
@@ -1954,7 +1954,7 @@ const atrees = {
             "desc": "Reduce the Mana cost of Arrow Storm.",
             "base_abil": "Arrow Storm",
             "parents": [
-                "Decimator",
+                "Initiator",
                 "Mana Trap"
             ],
             "dependencies": [],
@@ -1975,39 +1975,35 @@ const atrees = {
             ]
         },
 		{
-            "display_name": "Decimator",
-            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it. (Max 70%)",
+            "display_name": "Initiator",
+            "desc": "If you do not damage an enemy for 4s or more, your next sucessful hit will deal +60% damage and add +1 Focus.",
             "archetype": "Sharpshooter",
-            "archetype_req": 0,
-            "base_abil": "Arrow Storm",
             "parents": [
                 "Cheaper Arrow Storm II",
                 "Better Arrow Shield",
 				"Shocking Bomb"
             ],
             "dependencies": [
-                "Phantom Ray"
+                "Focus"
             ],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 31,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
                 {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Phantom Ray hits",
-                    "slider_max": 7,
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult.Decimator:1.Single Arrow"
-                    },
-                    "scaling": [
-                        10
+                    "type": "raw_stat",
+                    "toggle": "Initiator",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Initiator",
+                            "value": 60
+                        }
                     ]
                 }
             ]
@@ -2148,35 +2144,39 @@ const atrees = {
 			]
 		},
 		{
-            "display_name": "Initiator",
-            "desc": "If you do not damage an enemy for 4s or more, your next sucessful hit will deal +60% damage and add +1 Focus.",
+            "display_name": "Decimator",
+            "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it. (Max 70%)",
             "archetype": "Sharpshooter",
+            "archetype_req": 0,
+            "base_abil": "Arrow Storm",
             "parents": [
-                "Decimator",
+                "Initiator",
                 "Phasing Beam",
                 "Cheaper Arrow Storm II"
             ],
             "dependencies": [
-                "Focus"
+                "Phantom Ray"
             ],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 32,
                 "col": 6,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
                 {
-                    "type": "raw_stat",
-                    "toggle": "Initiator",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "damMult.Initiator",
-                            "value": 60
-                        }
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Phantom Ray hits",
+                    "slider_max": 7,
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Decimator:1.Single Arrow"
+                    },
+                    "scaling": [
+                        10
                     ]
                 }
             ]
@@ -11752,7 +11752,7 @@ const atrees = {
             "display_name": "Stronger Tether",
             "desc": "Increase Twisted Tether's damage.",
             "archetype": "Acolyte",
-            "parents": ["Blood Rite"],
+            "parents": ["Blood Rite", "Chant of the Fanatic"],
             "dependencies": ["Twisted Tether"],
             "blockers": [],
             "cost": 1,
