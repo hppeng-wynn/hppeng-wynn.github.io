@@ -14586,12 +14586,12 @@
         "maximum": 9
       },
       "ref": {
-        "minimum": 8,
-        "maximum": 12
+        "minimum": 10,
+        "maximum": 13
       },
       "thorns": {
-        "minimum": 7,
-        "maximum": 11
+        "minimum": 9,
+        "maximum": 14
       }
     },
     "itemIDs": {
@@ -26456,7 +26456,7 @@
       "above": 0,
       "under": 0,
       "touching": -100,
-      "notTouching": 55
+      "notTouching": 60
     },
     "id": 582
   },
@@ -27773,8 +27773,8 @@
         "maximum": -10
       },
       "hpBonus": {
-        "minimum": 600,
-        "maximum": 640
+        "minimum": 660,
+        "maximum": 700
       }
     },
     "itemIDs": {
@@ -28206,16 +28206,16 @@
         "maximum": 425
       },
       "hprRaw": {
+        "minimum": 50,
+        "maximum": 55
+      },
+      "sdRaw": {
         "minimum": 45,
         "maximum": 50
       },
-      "sdRaw": {
+      "mdRaw": {
         "minimum": 40,
         "maximum": 45
-      },
-      "mdRaw": {
-        "minimum": 35,
-        "maximum": 40
       }
     },
     "itemIDs": {
@@ -28728,7 +28728,7 @@
     "posMods": {
       "left": 0,
       "right": 0,
-      "above": -140,
+      "above": -160,
       "under": 0,
       "touching": 0,
       "notTouching": 0
