@@ -2289,7 +2289,6 @@ const atrees = {
             "desc": "Reduce the Mana cost of Arrow Shield.",
             "base_abil": "Arrow Shield",
             "parents": [
-                "Initiator",
                 "Phasing Beam",
 				"Cheaper Escape II"
             ],
