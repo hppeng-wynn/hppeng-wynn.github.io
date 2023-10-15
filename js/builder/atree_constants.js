@@ -2290,7 +2290,8 @@ const atrees = {
             "base_abil": "Arrow Shield",
             "parents": [
                 "Phasing Beam",
-				"Cheaper Escape II"
+				"Cheaper Escape II",
+                "Decimator"
             ],
             "dependencies": [],
             "blockers": [],
