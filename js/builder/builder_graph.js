@@ -413,8 +413,10 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('armorTome2'),
             input_map.get('armorTome3'),
             input_map.get('armorTome4'),
-            input_map.get('guildTome1')
+            input_map.get('guildTome1'),
+            input_map.get('lootrunTome1')
         ];
+        console.log(equipments);
         let weapon = input_map.get('weapon');
         let level = parseInt(input_map.get('level-input'));
         if (isNaN(level)) {
@@ -537,7 +539,7 @@ function getDefenseStats(stats) {
     //eledefs - TODO POWDERS
     let eledefs = [0, 0, 0, 0, 0];
     for(const i in skp_elements){ //kinda jank but ok
-        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), stats.get(skp_elements[i] + "DefPct")/100.);
+        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), (stats.get(skp_elements[i] + "DefPct") + stats.get("rDefPct"))/100.);
     }
     defenseStats.push(eledefs);
     
@@ -576,8 +578,21 @@ class SpellDamageCalcNode extends ComputeNode {
         const use_speed = (('use_atkspd' in spell) ? spell.use_atkspd : true);
         const use_spell = (('scaling' in spell) ? spell.scaling === 'spell' : true);
 
-        // TODO: move preprocessing to separate node/node chain
         for (const part of spell_parts) {
+            const {name, display=true} = part;
+            spell_result_map.set(name, {type: "need_eval", store_part: part});
+        }
+
+        function eval_part(part_name) {
+            let dat = spell_result_map.get(part_name);
+            if (!dat) {
+                return dat; // return null, or undefined, or whatever it is that this gives
+            }
+            if (dat.type !== "need_eval") {
+                return dat; // Already evaluated. Return it
+            }
+
+            let part = dat.store_part;
             let spell_result;
             const part_id = spell.base_spell + '.' + part.name
             if ('multipliers' in part) { // damage type spell
@@ -593,65 +608,68 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let heal_additive = stats.get('healPct');
-                if (stats.has('healPct:'+part_id)) {
-                    heal_additive += stats.get('healPct:'+part_id);
+                const mult_map = stats.get("healMult");
+                let heal_mult = 1;
+                for (const [k, v] of mult_map.entries()) {
+                    if (k.includes(':')) {
+                        // TODO: fragile... checking for specific part multipliers.
+                        const spell_match = k.split(':')[1];
+                        if (spell_match !== part_id) {
+                            continue;
+                        }
+                    }
+                    heal_mult *= (1 + v/100);
                 }
-                let heal_mult = 1+(stats.get('healMult') / 100)
-                let _heal_amount = part.power * getDefenseStats(stats)[0] * (1 + (heal_additive/100)) * heal_mult;
+                let _heal_amount = part.power * getDefenseStats(stats)[0] * heal_mult;
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount
                 }
-            }
-            else {
-                continue;
-            }
-            const {name, display = true} = part;
-            spell_result.name = name;
-            spell_result.display = display;
-            display_spell_results.push(spell_result);
-            spell_result_map.set(name, spell_result);
-        }
-        for (const part of spell_parts) {
-            if (!('hits' in part)) { continue; }
-            let spell_result = {
-                normal_min: [0, 0, 0, 0, 0, 0],
-                normal_max: [0, 0, 0, 0, 0, 0],
-                normal_total: [0, 0],
-                crit_min: [0, 0, 0, 0, 0, 0],
-                crit_max: [0, 0, 0, 0, 0, 0],
-                crit_total: [0, 0],
-                heal_amount: 0
-            }
-            const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
-            for (const [subpart_name, hits] of Object.entries(part.hits)) {
-                const subpart = spell_result_map.get(subpart_name);
-                if (!subpart) { continue; }
-                if (spell_result.type) {
-                    if (subpart.type !== spell_result.type) {
-                        throw "SpellCalc total subpart type mismatch";
-                    }
+            } else {    // if 'hits' in part
+                spell_result = {
+                    normal_min: [0, 0, 0, 0, 0, 0],
+                    normal_max: [0, 0, 0, 0, 0, 0],
+                    normal_total: [0, 0],
+                    crit_min: [0, 0, 0, 0, 0, 0],
+                    crit_max: [0, 0, 0, 0, 0, 0],
+                    crit_total: [0, 0],
+                    heal_amount: 0
                 }
-                else {
-                    spell_result.type = subpart.type;
-                }
-                if (spell_result.type === 'damage') {
-                    for (const key of dam_res_keys) {
-                        for (let i in spell_result.normal_min) {
-                            spell_result[key][i] += subpart[key][i] * hits;
+                const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
+                for (const [subpart_name, hits] of Object.entries(part.hits)) {
+                    const subpart = eval_part(subpart_name);
+                    if (!subpart) { continue; }
+                    if (spell_result.type) {
+                        if (subpart.type !== spell_result.type) {
+                            throw "SpellCalc total subpart type mismatch";
                         }
                     }
-                }
-                else {
-                    spell_result.heal_amount += subpart.heal_amount * hits;
+                    else {
+                        spell_result.type = subpart.type;
+                    }
+                    if (spell_result.type === 'damage') {
+                        for (const key of dam_res_keys) {
+                            for (let i in spell_result.normal_min) {
+                                spell_result[key][i] += subpart[key][i] * hits;
+                            }
+                        }
+                    }
+                    else {
+                        spell_result.heal_amount += subpart.heal_amount * hits;
+                    }
                 }
             }
             const {name, display = true} = part;
             spell_result.name = name;
             spell_result.display = display;
-            display_spell_results.push(spell_result);
             spell_result_map.set(name, spell_result);
+            return spell_result;
+        }
+
+        // TODO: move preprocessing to separate node/node chain
+        for (const part of spell_parts) {
+            let spell_result = eval_part(part.name);
+            display_spell_results.push(spell_result);
         }
         return display_spell_results;
     }
@@ -827,9 +845,13 @@ class AggregateStatsNode extends ComputeNode {
     }
 }
 
-let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref",
-/*"str", "dex", "int", "agi", "def",*/
-"thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd",
+let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms",
+// "xpb", "lb",
+"ref",
+/*"str", "dex", "int", "agi", "def",*/  // TODO its affected but i have to make it not affect req
+"thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh",
+
+// "lq", "gXp", "gSpd",
 
 // wynn2 damages.
 "eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct,"*/"eDamRaw",//"eDamAddMin","eDamAddMax",
@@ -868,12 +890,12 @@ const radiance_node = new (class extends ComputeNode {
                     }
                 }
             }
-            const dam_mults = new Map(ret.get('damMult'));
-            dam_mults.set('tome', dam_mults.get('tome') * 1.2)
-            ret.set('damMult', dam_mults)
-            const def_mults = new Map(ret.get('defMult'));
-            def_mults.set('tome', def_mults.get('tome') * 1.2)
-            ret.set('defMult', def_mults)
+            // const dam_mults = new Map(ret.get('damMult'));
+            // dam_mults.set('tome', dam_mults.get('tome') * 1.2)
+            // ret.set('damMult', dam_mults)
+            // const def_mults = new Map(ret.get('defMult'));
+            // def_mults.set('tome', def_mults.get('tome') * 1.2)
+            // ret.set('defMult', def_mults)
             return ret;
         }
         else {
@@ -1068,7 +1090,7 @@ function builder_graph_init(save_skp) {
         build_node.link_to(item_input, eq);
     }
 
-    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2]])) {
+    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2], none_tomes[3]])) {
         let input_field = document.getElementById(eq+"-choice");
         let item_image = document.getElementById(eq+"-img");
 

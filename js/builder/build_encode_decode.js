@@ -33,7 +33,9 @@ const wynn_version_names = [
     '2.0.2.1',
     '2.0.2.3',
     '2.0.3.1',
-    '2.0.4.1'
+    '2.0.4.1',
+    '2.0.4.3',
+    '2.0.4.4'
 ];
 const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
 // Default to the newest version.
@@ -65,7 +67,7 @@ async function parse_hash(url_tag) {
     }
     //default values
     let equipment = [null, null, null, null, null, null, null, null, null];
-    let tomes = [null, null, null, null, null, null, null];
+    let tomes = [null, null, null, null, null, null, null, null];
     let powdering = ["", "", "", "", ""];
     let info = url_tag.split("_");
     let version = info[0];
@@ -120,6 +122,7 @@ async function parse_hash(url_tag) {
             await Promise.all(load_promises);
         }
     }
+
     if (wynn_version_id == WYNN_VERSION_LATEST) {
         await Promise.all(default_load_promises);
     }
@@ -150,7 +153,7 @@ async function parse_hash(url_tag) {
         }
         data_str = info_str.slice(start_idx);
     }
-    else if (version_number <= 8) {
+    else if (version_number <= 9) {
         let info_str = data_str;
         let start_idx = 0;
         for (let i = 0; i < 9; ++i ) {
@@ -191,7 +194,7 @@ async function parse_hash(url_tag) {
         let powder_info = data_str.slice(10);
         let res = parsePowdering(powder_info);
         powdering = res[0];
-    } else if (version_number <= 8){
+    } else if (version_number <= 9){
         level = Base64.toInt(data_str.slice(10,12));
         setValue("level-choice",level);
         save_skp = true;
@@ -210,7 +213,7 @@ async function parse_hash(url_tag) {
     if (version_number >= 6) {
         //tome values do not appear in anything before v6.
         if (version_number < 8) {
-            for (let i in tomes) {
+            for (let i = 0; i < 7; ++i) {
                 let tome_str = data_str.charAt(i);
                 let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
                 setValue(tomeInputs[i], tome_name);
@@ -219,12 +222,21 @@ async function parse_hash(url_tag) {
         }
         else {
             // 2chr tome encoding to allow for more tomes.
-            for (let i in tomes) {
+
+            // Lootrun tome was added in v9.
+            let num_tomes = 7;
+            if (version_number <= 8) {
+                num_tomes = 7;
+            }
+            else {
+                num_tomes = 8;
+            }
+            for (let i = 0; i < num_tomes; ++i) {
                 let tome_str = data_str.slice(2*i, 2*i+2);
                 let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
                 setValue(tomeInputs[i], tome_name);
             }
-            data_str = data_str.slice(14);
+            data_str = data_str.slice(num_tomes*2);
         }
     }
 
@@ -256,7 +268,8 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
         //V6 encoding - Tomes
         //V7 encoding - ATree
         //V8 encoding - wynn version
-        build_version = 8;
+        //V9 encoding - lootrun tome
+        build_version = 9;
         build_string = "";
         tome_string = "";
 
@@ -269,10 +282,10 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
                 build_string += "CR-"+encodeCraft(item);
             } else if (item.statMap.get("category") === "tome") {
                 let tome_id = item.statMap.get("id");
-                if (tome_id <= 60) {
+                //if (tome_id <= 60) {
                     // valid normal tome. ID 61-63 is for NONE tomes.
                     //build_version = Math.max(build_version, 6);
-                }
+                //}
                 tome_string += Base64.fromIntN(tome_id, 2);
             } else {
                 build_string += Base64.fromIntN(item.statMap.get("id"), 3);
@@ -331,8 +344,8 @@ function shareBuild(build) {
             "> "+build.items[5].statMap.get("displayName")+"\n"+
             "> "+build.items[6].statMap.get("displayName")+"\n"+
             "> "+build.items[7].statMap.get("displayName")+"\n"+
-            "> "+build.items[15].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]\n";
-        for (let tomeslots = 8; tomeslots < 15; tomeslots++) {
+            "> "+build.items[16].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]\n";
+        for (let tomeslots = 8; tomeslots < 16; tomeslots++) {
             if (!build.items[tomeslots].statMap.has('NONE')) {
                 text += ">"+' (Has Tomes)' ;
                 break;

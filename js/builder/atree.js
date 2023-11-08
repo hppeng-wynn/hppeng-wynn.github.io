@@ -76,22 +76,23 @@ raw_stat: {
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
-  "type": "stat" | "prop",
-  "abil": Optional[int],
-  "name": str,
-  "value": float
+  type: "stat" | "prop",
+  abil: Optional[int],
+  name: str,
+  value: float
 }
 stat_scaling: {
-  "type": "stat_scaling",
-  "slider": bool,
+  type: "stat_scaling",
+  slider: bool,
   positive: bool                            // True to keep stat above 0. False to ignore floor. Default: True for normal, False for scaling
-  "slider_name": Optional[str],
-  "slider_step": Optional[float],
-  round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
-  behavior:  Optional[str]                  // One of: "merge", "modify". default: merge
+  slider_name: Optional[str],
+  slider_step: Optional[float],
+  round:       Optional[bool]               // Control floor behavior. True for stats and false for slider by default
+  behavior:      Optional[str]              // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part, by incrementing properties. do nothing if not exist
-  slider_max: Optional[float]               // affected by behavior
+  slider_max: Optional[int]                 // affected by behavior
+  slider_default: Optional[int]             // affected by behavior
   inputs: Optional[list[scaling_target]]    // List of things to scale. Omit this if using slider
 
   output: Optional[scaling_target | List[scaling_target]] // One of the following:
@@ -99,12 +100,12 @@ stat_scaling: {
                                             // 2. List of scaling targets (all scaled the same)
                                             // 3. Omitted. no output (useful for modifying slider only without input or output)
   scaling: Optional[list[float]]            // One float for each input. Sums into output.
-  max: float
+  max: float                                // Hardcap on this effect (slider value * slider_step). Can be negative if scaling is negative
 }
 scaling_target: {
-  "type": "stat" | "prop",
-  "abil": Optional[int],
-  "name": str
+  type: "stat" | "prop",
+  abil: Optional[int],
+  name: str
 }
 */
 
@@ -166,6 +167,64 @@ const default_abils = {
 };
 
 /**
+ * Given a json of raw atree data, and a wynn class name (ex. Archer, Mage),
+ * sort out their ability tree and return it as a list in roughly topologically
+ * sorted order.
+ *
+ * TODO: Why do we care about the toposort?
+ * This is not a useful representation of the tree.
+ * It's useless.
+ * atree needs a cleanup and anything depending on the ordering of items
+ *   coming out of this function is probably doing something wrong.
+ * NOTE2: Actually this might be more complicated because some nodes do need
+ *   an application ordering and that matters (esp. replace_spell nodes).
+ *
+ * Parameters:
+ * --------------------------
+ * atrees: Raw atree data. This is a parameter to allow oldversion shenanigans
+ * player_class: Wynn class name (string)
+ *
+ * Return:
+ * List of atree nodes.
+ */
+function get_sorted_class_atree(atrees, player_class) {
+    const atree_raw = atrees[player_class];
+    if (!atree_raw) return [];
+
+    let atree_map = new Map();
+    let atree_head;
+    for (const i of atree_raw) {
+        atree_map.set(i.id, {children: [], ability: i});
+        if (i.parents.length == 0) {
+            // Assuming there is only one head.
+            atree_head = atree_map.get(i.id);
+        }
+    }
+    for (const i of atree_raw) {
+        let node = atree_map.get(i.id);
+        let parents = [];
+        for (const parent_id of node.ability.parents) {
+            let parent_node = atree_map.get(parent_id);
+            parent_node.children.push(node);
+            parents.push(parent_node);
+        }
+        node.parents = parents;
+    }
+
+    let sccs = make_SCC_graph(atree_head, atree_map.values());
+    let atree_topo_sort = [];
+    for (const scc of sccs) {
+        for (const node of scc.nodes) {
+            delete node.visited;
+            delete node.assigned;
+            delete node.scc;
+            atree_topo_sort.push(node);
+        }
+    }
+    return atree_topo_sort;
+}
+
+/**
  * Update ability tree internal representation. (topologically sorted node list)
  *
  * Signature: AbilityTreeUpdateNode(player-class: str) => ATree (List of atree nodes in topological order)
@@ -176,43 +235,7 @@ const atree_node = new (class extends ComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (player-class)"; }
         const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-
-        const atree_raw = atrees[player_class];
-        if (!atree_raw) return [];
-
-        let atree_map = new Map();
-        let atree_head;
-        for (const i of atree_raw) {
-            atree_map.set(i.id, {children: [], ability: i});
-            if (i.parents.length == 0) {
-                // Assuming there is only one head.
-                atree_head = atree_map.get(i.id);
-            }
-        }
-        for (const i of atree_raw) {
-            let node = atree_map.get(i.id);
-            let parents = [];
-            for (const parent_id of node.ability.parents) {
-                let parent_node = atree_map.get(parent_id);
-                parent_node.children.push(node);
-                parents.push(parent_node);
-            }
-            node.parents = parents;
-        }
-
-        let sccs = make_SCC_graph(atree_head, atree_map.values());
-        let atree_topo_sort = [];
-        for (const scc of sccs) {
-            for (const node of scc.nodes) {
-                delete node.visited;
-                delete node.assigned;
-                delete node.scc;
-                atree_topo_sort.push(node);
-            }
-        }
-        //console.log("Approximate topological order ability tree:");
-        //console.log(atree_topo_sort);
-        return atree_topo_sort;
+        return get_sorted_class_atree(atrees, player_class);
     }
 })();
 
@@ -476,14 +499,42 @@ const atree_merge = new (class extends ComputeNode {
             merge_abil(node.ability);
         }
 
+        // Apply major IDs.
         const build_class = wep_to_class.get(build.weapon.statMap.get("type"));
         for (const major_id_name of build.statMap.get("activeMajorIDs")) {
+
+            // Sometimes, something silly happens and we haven't implemented a major ID that
+            //   exists. This makes sure we don't try to apply unimplemented major IDs.
+            //
+            // `major_ids` is a global map loaded from data json.
             if (major_id_name in major_ids) {
+
+                // A major ID can have multiple abilities, specified as atree nodes,
+                //   as part of its effects. Apply each of them.
                 for (const abil of major_ids[major_id_name].abilities) {
-                    if (abil["class"] === build_class) { merge_abil(abil); }
+
+                    // But only the ones that match the current class.
+                    if (abil["class"] === build_class) {
+
+                        // Major IDs can have ability dependencies.
+                        // By default they are always on.
+                        if (abil.dependencies !== undefined) {
+
+                            let dep_satisfied = true;
+                            for (const dep_id of abil.dependencies) {
+                                if (!atree_state.get(dep_id).active) {
+                                    dep_satisfied = false;
+                                    break;
+                                }
+                            }
+                            if (!dep_satisfied) { continue; }
+                        }
+                        merge_abil(abil);
+                    }
                 }
             }
         }
+        console.log(abils_merged)
         return abils_merged;
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state').link_to(atree_validate, 'atree-errors');
@@ -540,20 +591,17 @@ const atree_make_interactives = new (class extends ComputeNode {
         for (let i = 0; i < k; ++i) {
             for (const [effect, abil_id, ability] of to_process) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-                    const { slider_name, behavior = 'merge', slider_max, slider_step } = effect;
+                    const { slider_name, behavior = 'merge', slider_max = 0, slider_step, slider_default = 0 } = effect;
                     if (slider_map.has(slider_name)) {
-                        if (slider_max !== undefined) {
-                            const slider_info = slider_map.get(slider_name);
-                            slider_info.max += slider_max;
-                        }
-                        else {
-                            unprocessed.push([effect, abil_id, ability]);
-                        }
+                        const slider_info = slider_map.get(slider_name);
+                        slider_info.max += slider_max;
+                        slider_info.default_val += slider_default;
                     }
                     else if (behavior === 'merge') {
                         slider_map.set(slider_name, {
                             label_name: slider_name+' ('+ability.display_name+')',
                             max: slider_max,
+                            default_val: slider_default,
                             step: slider_step,
                             id: "ability-slider"+ability.id,
                             //color: effect['slider_color'] TODO: add colors to json

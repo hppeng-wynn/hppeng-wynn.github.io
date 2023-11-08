@@ -134,8 +134,9 @@ function calc_weapon_powder(weapon, damageBases) {
     //1st round - apply each as ingred, 2nd round - apply as normal
     if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
         for (const p of powders.concat(weapon.get("ingredPowders"))) {
-            let powder = powderStats[p];  //use min, max, and convert
-            let element = Math.floor((p+0.01)/6); //[0,4], the +0.01 attempts to prevent division error
+            const powder = powderStats[p];  //use min, max, and convert
+            // Bitwise to force conversion to integer (integer division).
+            const element = (p/6) | 0;
             let diff = Math.floor(damageBases[0] * powder.convert/100);
             damageBases[0] -= diff;
             damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );

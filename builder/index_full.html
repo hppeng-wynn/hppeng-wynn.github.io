@@ -34,6 +34,8 @@
         <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
         <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
         <hr/>
+        <a href = "https://nori.fish/wynn/build/" target = "_blank"><img src = "../media/icons/new/nori_build.png" alt = "Build Search" title = "Build Search by Nori-Wynn"><b>Build Search</b></a>
+        <a href = "https://nori.fish/wynn/recipe/" target = "_blank"><img src = "../media/icons/new/nori_recipe.png" alt = "Recipe Search" title = "Recipe Search by Nori-Wynn"><b>Recipe Search</b></a>
         <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
     </div>
     <div id="mobile-navbar" class="navbar dark-5 dark-shadow fixed-top d-lg-none pb-0">
@@ -73,6 +75,14 @@
                 <img src="../media/icons/new/reload.png" alt="" style="height: 100%;">
                 <span>Swap Icon Style</span>
             </a>
+            <a href="https://nori.fish/wynn/build/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/nori_build.png" alt="" style="height: 100%;">
+                <span>Build Search</span>
+            </a>
+            <a href="https://nori.fish/wynn/recipe/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                <img src="../media/icons/new/nori_recipe.png" alt="" style="height: 100%;">
+                <span>Recipe Search</span>
+            </a>
             <a href="https://discord.gg/CGavnAnerv" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
                 <img src="../media/icons/discord.png" alt="" style="height: 100%;">
                 <span>Discord</span>
@@ -82,7 +92,7 @@
     <div class="container-fluid overall-box mt-lg-2" style="margin-top: 6vh;">
         <!-- REMOVE THIS DIV AT SOME POINT. -->
         <div class = "row scaled-font mx-auto" id = "discord-banner-dev">
-                <div class = "col text-center item-title">Join the <a class = "link" href = "https://discord.gg/CGavnAnerv" target = "_blank">discord</a> today to suggest new features, submit bug reports, and hangout/talk to devs!</div>
+                <div id='discord-banner' class = "col text-center item-title">Join the <a class = "link" href = "https://discord.gg/CGavnAnerv" target = "_blank">discord</a> today to suggest new features, submit bug reports, and hangout/talk to devs!</div>
         </div>
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-3 py-3 gx-0">
             <div class="col-xl-6">
@@ -827,6 +837,30 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='lootrunTome1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="lootrunTome1-img-loc">
+                                                        <div id="lootrunTome1-img" class="img-fluid rounded tome-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Lootrun
+                                                            </div>
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Tome
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="lootrunTome1-choice" name="lootrunTome1-choice" placeholder="No Tome" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "atree-dropdown" style = "display:none;">
@@ -1328,5 +1362,11 @@
     <script type="text/javascript" src="../js/builder/builder_graph.js"></script>
     <script type="text/javascript" src="../js/builder/builder.js"></script>
     <!--script type="text/javascript" src="../js/builder/optimize.js"></script-->
+    <!--div id="graph_body" style="max-width: 100%; height: 100vh">
+        <button id="saveButton">JANKY Export SVG</button>
+        <a id="saveLink">savelink</a>
+    </div>
+    <script src="https://d3js.org/d3.v7.js"></script>
+    <script type="text/javascript" src="../js/debug/render_compute_graph.js"></script-->
 </body>
 </html> 

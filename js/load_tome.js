@@ -1,4 +1,4 @@
-const TOME_DB_VERSION = 7;
+const TOME_DB_VERSION = 9;
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let tdb;
@@ -134,9 +134,10 @@ async function load_tome_init() {
 }
 
 const none_tomes_info = [
-    ["tome", "weaponTome", "No Weapon Tome"],
-    ["tome", "armorTome", "No Armor Tome"],
-    ["tome", "guildTome", "No Guild Tome"]
+    ["tome", "weaponTome", "No Weapon Tome", 61],
+    ["tome", "armorTome", "No Armor Tome", 62],
+    ["tome", "guildTome", "No Guild Tome", 63],
+    ["tome", "lootrunTome", "No Lootrun Tome", 93]
 ];
 let none_tomes;
 
@@ -152,7 +153,7 @@ function init_tome_maps() {
     }
 
     none_tomes = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         let tome = Object();
         tome.slots = 0;
         tome.category = none_tomes_info[i][0];
@@ -166,7 +167,7 @@ function init_tome_maps() {
         tome.reqs = [0, 0, 0, 0, 0];
         tome.fixID = true;
         tome.tier = "Normal";
-        tome.id = 61 + i; //special case!
+        tome.id = none_tomes_info[i][3];
         tome.nDam = "0-0";
         tome.eDam = "0-0";
         tome.tDam = "0-0";

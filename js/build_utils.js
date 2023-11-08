@@ -60,7 +60,15 @@ const armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 const accessoryTypes = [ "ring", "bracelet", "necklace" ];
 const weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 const consumableTypes = [ "potion", "scroll", "food"];
-const tome_types = ['weaponTome', 'armorTome', 'guildTome'];
+const tome_types = ['weaponTome', 'armorTome', 'guildTome', 'lootrunTome', 'gatherXpTome', 'dungeonXpTome', 'mobXpTome'];
+const tome_type_map = new Map([["weaponTome", "Weapon Tome"],
+                               ["armorTome", "Armor Tome"],
+                               ["guildTome", "Guild Tome"],
+                               ["gatherXpTome", "Gather XP Tome"],
+                               ["dungeonXpTome", "Dungeon XP Tome"],
+                               ["mobXpTome", "Slaying XP Tome"],
+                              ]);
+
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
 const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 //0.51, 0.82, 1.50, 2.05, 2.50, 3.11, 4.27
@@ -307,8 +315,8 @@ function idRound(id){
  * stupid stupid multiplicative stats
  */
 function merge_stat(stats, name, value) {
-    const start = name.slice(0, 7);
-    if (start === 'damMult' || start === 'defMult') {
+    const start = name.split('.', limit=1)[0];
+    if (start === 'damMult' || start === 'defMult' || start === 'healMult') {
         if (!stats.has(start)) {
             stats.set(start, new Map());
         }
@@ -319,7 +327,7 @@ function merge_stat(stats, name, value) {
             }
             return;
         }
-        merge_stat(map, name.slice(8), value);
+        merge_stat(map, name.slice(name.indexOf('.')+1), value);
         return;
     }
     if (stats.has(name)) { 

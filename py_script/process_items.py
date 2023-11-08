@@ -15,15 +15,16 @@ import sys
 import os
 import base64
 import argparse
-from items_common import translate_mappings, delete_keys
+#from items_common import translate_mappings, delete_keys
 
 parser = argparse.ArgumentParser(description="Process raw pulled item data.")
-parser.add_argument('infile', help='input file to read data from')
+parser.add_argument('infile', help='input file to read data from', default=None, nargs='?')
 parser.add_argument('outfile', help='output file to dump clean data into')
 args = parser.parse_args()
-infile, outfile = args.infile, args.outfile
+if args.infile is None:
+    print("Grabbing json data from wynn api")
 
-with open(infile, "r") as in_file:
+with open(args.infile, "r") as in_file:
     data = json.loads(in_file.read())
 
 
@@ -65,8 +66,9 @@ for item in items:
 
     for k, v in translate_mappings.items():
         if k in item:
-            item[v] = item[k]
+            tmp = item[k]
             del item[k]
+            item[v] = tmp
 
     if not (item["name"] in id_map):
         while max_id in used_ids:
