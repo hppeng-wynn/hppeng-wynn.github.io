@@ -827,9 +827,13 @@ class AggregateStatsNode extends ComputeNode {
     }
 }
 
-let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref",
-/*"str", "dex", "int", "agi", "def",*/
-"thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd",
+let radiance_affected = [ /*"hp"*/, "fDef", "wDef", "aDef", "tDef", "eDef", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms",
+// "xpb", "lb",
+"ref",
+/*"str", "dex", "int", "agi", "def",*/  // TODO its affected but i have to make it not affect req
+"thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "fixID", "category", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rSdRaw", "sprint", "sprintReg", "jh",
+
+// "lq", "gXp", "gSpd",
 
 // wynn2 damages.
 "eMdPct","eMdRaw","eSdPct","eSdRaw",/*"eDamPct,"*/"eDamRaw",//"eDamAddMin","eDamAddMax",
@@ -868,12 +872,12 @@ const radiance_node = new (class extends ComputeNode {
                     }
                 }
             }
-            const dam_mults = new Map(ret.get('damMult'));
-            dam_mults.set('tome', dam_mults.get('tome') * 1.2)
-            ret.set('damMult', dam_mults)
-            const def_mults = new Map(ret.get('defMult'));
-            def_mults.set('tome', def_mults.get('tome') * 1.2)
-            ret.set('defMult', def_mults)
+            // const dam_mults = new Map(ret.get('damMult'));
+            // dam_mults.set('tome', dam_mults.get('tome') * 1.2)
+            // ret.set('damMult', dam_mults)
+            // const def_mults = new Map(ret.get('defMult'));
+            // def_mults.set('tome', def_mults.get('tome') * 1.2)
+            // ret.set('defMult', def_mults)
             return ret;
         }
         else {

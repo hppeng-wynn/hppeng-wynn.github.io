@@ -398,7 +398,7 @@
   },
   "DIVINE_HONOR": {
     "displayName": "Divine Honor",
-    "description": "Increase the bonus from Radiance by 5%. Decrease the Neutral damage of Bash by -15%.",
+    "description": "Increase the bonus from Radiance by 5%. Decrease the Earth damage of Bash by -15%.",
     "abilities": [{
       "class": "Warrior",
       "base_abil": "Bash",
@@ -408,7 +408,7 @@
           "base_spell": 1,
           "target_part": "Single Hit",
           "behavior": "modify",
-          "multipliers": [-15, 0, 0, 0, 0, 0]
+          "multipliers": [0, -15, 0, 0, 0, 0]
         }
       ]
     }]
@@ -453,6 +453,58 @@
           "target_part": "Per Hit",
           "behavior": "modify",
           "multipliers": [ -10, 0, 0, 0, 0, 0 ]
+        }
+      ]
+    }]
+  },
+  "GRUESOME_KNOTS": {
+    "displayName": "Gruesome Knots",
+    "description":"Twisted Tether spends twice as much of your Blood Pool to deal triple damage",
+    "abilities": [{
+      "class": "Shaman",
+      "base_abil": "Twisted Tether",
+      "effects": [{
+        "type": "raw_stat",
+        "bonuses": [
+          {
+            "type": "stat",
+            "name": "damMult.GruesomeKnots:8.Tether Tick",
+            "value": 200
+          }
+        ]
+      }]
+    }]
+  },
+  "COAGULATE": {
+    "displayName": "Coagulate",
+    "description":"Blood Connection launches you further and higher upon teleporting to a nearby Totem",
+    "abilities": []
+  },
+  "DEADWEIGHT": {
+    "displayName": "Dead Weight",
+    "description":"Totem's horizontal velocity is greatly increased at the cost of vertical movement",
+    "abilities": []
+  },
+  "EXPUNGE": {
+    "displayName": "Expunge",
+    "description":"When using Heal, instead cast one instant pulse that heals 20% of your max health",
+    "abilities": [{
+      "class": "Mage",
+      "base_abil": "Heal",
+      "effects": [
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Second and Third Pulses",
+          "behavior": "modify",
+          "power": -0.20
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Heal",
+          "behavior": "modify",
+          "power": 0.05
         }
       ]
     }]

@@ -805,7 +805,6 @@ const atrees = {
                     "name": "Phantom Ray",
                     "base_spell": 1,
                     "spell_type": "damage",
-                    "scaling": "spell",
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -2890,7 +2889,6 @@ const atrees = {
                     "cost": 40,
                     "base_spell": 1,
                     "spell_type": "damage",
-                    "scaling": "spell",
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -3018,7 +3016,6 @@ const atrees = {
                     "cost": 25,
                     "base_spell": 2,
                     "spell_type": "damage",
-                    "scaling": "spell",
                     "display": "",
                     "parts": []
                 }
@@ -3281,7 +3278,6 @@ const atrees = {
                     "cost": 30,
                     "base_spell": 4,
                     "spell_type": "damage",
-                    "scaling": "spell",
                     "display": "Total Damage",
                     "parts": [
                         {
@@ -7361,9 +7357,6 @@ const atrees = {
                     "name": "Spin Attack",
                     "cost": 40,
                     "base_spell": 1,
-                    "spell_type": "damage",
-                    "scaling": "spell",
-                    "use_atkspd": true,
                     "display": "Spin Attack",
                     "parts": [
                         {
@@ -9052,7 +9045,7 @@ const atrees = {
         },
         {
             "display_name": "Parry",
-            "desc": "After dodging damage, gain a brief damage buff, and make your next spell within 1.5 free. (3s Cooldown)",
+            "desc": "After dodging damage, gain a brief damage buff, and make your next spell within 1.5s free. (3s Cooldown)",
             "archetype": "Acrobat",
             "archetype_req": 5,
             "parents": [
@@ -9119,7 +9112,8 @@ const atrees = {
                 "Cheaper Dash II"
             ],
             "dependencies": [
-                "Vanish"
+                "Vanish",
+                "Marked"
             ],
             "blockers": [],
             "cost": 2,
@@ -9771,7 +9765,7 @@ const atrees = {
         },
         {
             "display_name": "Nightcloak Knife",
-            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will mimic your attacks on enemies within 6 blocks of you, dealing 4% of your damage for every 1 Mark consumed. (Max 10 Marks)\n The Knife will vanish after 8s",
+            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will mimic your attacks on enemies within 6 blocks of you, dealing 4% of your damage for every 1 Mark consumed. (Max 10 Marks)\n The Knife will vanish after 15s",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
@@ -9975,8 +9969,8 @@ const atrees = {
                 "type": "replace_spell",
                 "name": "Relik Melee",
                 "base_spell": 0,
-                "spell_type": "damage",
-                "scaling": "melee", "use_atkspd": false,
+                "scaling": "melee",
+                "use_atkspd": false,
                 "display": "Total",
                 "parts": [
                     { "name": "Single Beam", "multipliers": [35, 0, 0, 0, 0, 0] },
@@ -10090,8 +10084,8 @@ const atrees = {
                 "type": "replace_spell",
                 "name": "Relik Melee",
                 "base_spell": 0,
-                "spell_type": "damage",
-                "scaling": "melee", "use_atkspd": false,
+                "scaling": "melee",
+                "use_atkspd": false,
                 "display": "Total",
                 "parts": [
                     { "name": "Single Beam", "multipliers": [34, 0, 0, 0, 0, 0] },
@@ -10610,7 +10604,6 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Puppet Damage",
                     "base_spell": 6,
-                    "scaling": "spell",
                     "display": "Total Puppet DPS",
                     "parts": [
                         {
@@ -11401,7 +11394,6 @@ const atrees = {
                     "type": "replace_spell",
                     "name": "Twisted Tether",
                     "base_spell": 8,
-                    "scaling": "spell",
                     "display": "Tether Tick",
                     "parts": [
                         {
