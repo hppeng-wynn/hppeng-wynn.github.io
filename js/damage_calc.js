@@ -144,8 +144,8 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         // Collect total damage post %boost
     }
 
-    let total_elem_min = total_min - damages[0][0];
-    let total_elem_max = total_max - damages[0][1];
+    let total_elem_min = total_min - save_prop[0][0];
+    let total_elem_max = total_max - save_prop[0][1];
 
     // 5.2: Raw application.
     let prop_raw = stats.get(specific_boost_str.toLowerCase()+'Raw') + stats.get('damRaw');

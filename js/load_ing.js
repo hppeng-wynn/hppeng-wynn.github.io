@@ -72,7 +72,6 @@ async function load_ings_old_version(version_str) {
     }
 
     url = `${baseUrl}/data/${version_str}/recipes.json`;
-    console.log(url);
     result = await (await fetch(url)).json();
     recipes = result.recipes;
 
@@ -95,7 +94,6 @@ async function load_ings() {
     ings = result;
 
     url = baseUrl + "/recipes_compress.json?"+new Date();
-    console.log(url);
     result = await (await fetch(url)).json();
     recipes = result.recipes;
 
