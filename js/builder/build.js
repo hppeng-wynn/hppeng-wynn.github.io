@@ -20,7 +20,6 @@ class Build {
      * @param {Item} weapon: Weapon that this build is using.
      */
     constructor(level, items, weapon){
-
         if (level < 1) { //Should these be constants?
             this.level = 1;
         } else if (level > 106) {

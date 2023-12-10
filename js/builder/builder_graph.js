@@ -428,7 +428,7 @@ class BuildAssembleNode extends ComputeNode {
         if (all_none && !location.hash) {
             return null;
         }
-        return new Build(level, equipments, weapon);
+        return new Build(level, equipments, tomes, weapon);
     }
 }
 

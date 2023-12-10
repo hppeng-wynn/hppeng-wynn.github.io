@@ -172,7 +172,13 @@ Base64 = (function () {
                 }
             }
         } else if (typeof data === "number") {
-            if (typeof length === "undefined")
+            if (typeof length === "undefined") {
+                if (data == 0) {
+                    length = 0;
+                } else {
+                    length = Math.ceil(Math.log(data + 1) / Math.log(2)); //+1 to account for powers of 2
+                }
+            }
             if (length < 0) {
                 throw new RangeError("BitVector must have nonnegative length.");
             }
@@ -189,6 +195,10 @@ Base64 = (function () {
             throw new TypeError("BitVector must be instantiated with a Number or a B64 String");
         }
 
+        if (bit_vec.length == 0) {
+            bit_vec = [0];
+        }
+
         this.length = length;
         this.bits = new Uint32Array(bit_vec);
     }
@@ -201,14 +211,14 @@ Base64 = (function () {
      */
     read_bit(idx) {
         if (idx < 0 || idx >= this.length) {
-            throw new RangeError("Cannot read bit outside the range of the BitVector. ("+idx+" > "+this.length+")");
+            throw new RangeError("Cannot read bit outside the range of the BitVector. ("+idx+" >= "+this.length+")");
         }
         return ((this.bits[Math.floor(idx / 32)] & (1 << idx)) == 0 ? 0 : 1);
     }
 
     /** Returns an integer value (if possible) made from the range of bits [start, end). Undefined behavior if the range to read is too big.
      *
-     * @param {Number} start - The index to start slicing from. Inclusive.
+     * @param {Number} start - The index to start slicing from. Inclusive. 
      * @param {Number} end - The index to end slicing at. Exclusive.
      *
      * @returns An integer representation of the sliced bits.
@@ -311,66 +321,92 @@ Base64 = (function () {
 
     /** Appends data to the BitVector.
      *
-     * @param {Number | String} data - The data to append.
-     * @param {Number} length - The length, in bits, of the new data. This is ignored if data is a string.
+     * @param {Number | String | BitVector} data - The data to append.
+     * @param {Number} length - The length, in bits, of the new data. This is ignored if data is a string. Defaults to 32 for numbers.
      */
-     append(data, length) {
+     append(data, length = 32) {
         if (length < 0) {
             throw new RangeError("BitVector length must increase by a nonnegative number.");
         }
 
-        let bit_vec = [];
-        for (const uint of this.bits) {
-            bit_vec.push(uint);
-        }
+        //actual new data length is needed for resizing purposes 
         if (typeof data === "string") {
-            let int = bit_vec[bit_vec.length - 1];
-            let bv_idx = this.length;
             length = data.length * 6;
-            let updated_curr = false;
-            for (let i = 0; i < data.length; i++) {
-                let char = Base64.toInt(data[i]);
-                let pre_pos = bv_idx % 32;
-                int |= (char << bv_idx);
-                bv_idx += 6;
-                let post_pos = bv_idx % 32;
-                if (post_pos < pre_pos) { //we have to have filled up the integer
-                    if (bit_vec.length == this.bits.length && !updated_curr) {
-                        bit_vec[bit_vec.length - 1] = int;
-                        updated_curr = true;
-                    } else {
-                        bit_vec.push(int);
-                    }
-                    int = (char >>> (6 - post_pos));
+        } else if (data instanceof BitVector) {
+            length = data.length;
+        }
+
+        let new_length = this.length + length;
+        if (this.bits.length * this.bits.BYTES_PER_ELEMENT * 8 < new_length) {
+            //resize the internal repr by a factor of 2 before recursive calling
+            let bit_vec = Array(2 * this.bits.length).fill(0);
+            for (let i = 0; i < this.bits.length; i++) {
+                bit_vec[i] = this.bits[i];
+            }
+
+            this.bits = new Uint32Array(bit_vec);
+            return this.append(data, length);
+        }
+
+        //just write to the original bitvec
+        let curr_idx = Math.floor(this.length / 32);
+        let pos = this.length;
+        
+        if (typeof data === "string") {
+            //daily reminder that shifts are modded by 32
+            for (const character of data) {
+                let char = Base64.toInt(character);
+                this.bits[curr_idx] |= (char << pos);
+
+                //if we go to the "next" char, update it
+                if (Math.floor(pos / 32) < Math.floor((pos + 5) / 32)) {
+                    this.bits[curr_idx + 1] |= (char >>> (6 - (pos + 6) % 32));
                 }
 
-                if (i == data.length - 1) {
-                    if (bit_vec.length == this.bits.length && !updated_curr) {
-                        bit_vec[bit_vec.length - 1] = int;
-                    } else if (post_pos != 0) {
-                        bit_vec.push(int);
-                    }
-                }
+                //update counters
+                pos += 6;
+                curr_idx = Math.floor(pos / 32);
             }
         } else if (typeof data === "number") {
             //convert to int just in case
             let int = Math.round(data);
-
+                
             //range of numbers that "could" fit in a uint32 -> [0, 2^32) U [-2^31, 2^31)
             if (data > 2**32 - 1 || data < -(2 ** 31)) {
                 throw new RangeError("Numerical data has to fit within a 32-bit integer range to instantiate a BitVector.");
             }
             //could be split between multiple new ints
             //reminder that shifts implicitly mod 32
-            bit_vec[bit_vec.length - 1] |= ((int & ~((~0) << length)) << (this.length));
-            if (((this.length - 1) % 32 + 1) + length > 32) {
-                bit_vec.push(int >>> (32 - this.length));
+            if (length == 32) {
+                this.bits[curr_idx] |= int << (this.length);
+            } else {
+                this.bits[curr_idx] |= ((int & ~((~0) << length)) << (this.length));
             }
+
+            //overflow part
+            if ((pos % 32) + length > 32) {
+                this.bits[curr_idx + 1] = (int >>> (32 - this.length));
+            }
+        } else if (data instanceof BitVector) {
+            //fill to end of curr int of existing bv
+            let other_pos = (32 - (pos % 32));
+            this.bits[curr_idx] |= data.slice(0, other_pos);
+            curr_idx += 1;
+
+            //fill full ints
+            while (other_pos + 32 < data.length) {
+                this.bits[curr_idx] = data.slice(other_pos, other_pos + 32);
+                curr_idx += 1;
+                other_pos += 32;
+            }
+            
+            //fill from "rest of" length/bv
+            this.bits[curr_idx] = data.slice(other_pos, data.length); 
         } else {
             throw new TypeError("BitVector must be appended with a Number or a B64 String");
         }
 
-        this.bits = new Uint32Array(bit_vec);
+        //update length
         this.length += length;
     }
 };
@@ -661,6 +697,9 @@ const getScript = url => new Promise((resolve, reject) => {
 /*
 GENERIC TEST FUNCTIONS
 */
+const TEST_SUCCESS = 1;
+const TEST_FAIL = 0;
+
 /** The generic assert function. Fails on all "false-y" values. Useful for non-object equality checks, boolean value checks, and existence checks.
  *
  * @param {*} arg - argument to assert.
@@ -668,8 +707,10 @@ GENERIC TEST FUNCTIONS
  */
  function assert(arg, msg) {
     if (!arg) {
-        throw new Error(msg ? msg : "Assert failed.");
+        console.trace(msg ? msg : "Assert failed.");
+        return TEST_FAIL;
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts object equality of the 2 parameters. For loose and strict asserts, use assert().
@@ -680,8 +721,10 @@ GENERIC TEST FUNCTIONS
  */
 function assert_equals(arg1, arg2, msg) {
     if (!Object.is(arg1, arg2)) {
-        throw new Error(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
+        console.trace(msg ? msg : "Assert Equals failed. " + arg1 + " is not " + arg2 + ".");
+        return TEST_FAIL;
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts object inequality of the 2 parameters. For loose and strict asserts, use assert().
@@ -692,8 +735,10 @@ function assert_equals(arg1, arg2, msg) {
  */
  function assert_not_equals(arg1, arg2, msg) {
     if (Object.is(arg1, arg2)) {
-        throw new Error(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
+        console.trace(msg ? msg : "Assert Not Equals failed. " + arg1 + " is " + arg2 + ".");
+        return TEST_FAIL;
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts proximity between 2 arguments. Should be used for any floating point datatype.
@@ -705,8 +750,10 @@ function assert_equals(arg1, arg2, msg) {
  */
 function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
     if (Math.abs(arg1 - arg2) > epsilon) {
-        throw new Error(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
+        console.trace(msg ? msg : "Assert Near failed. " + arg1 + " is not within " + epsilon + " of " + arg2 + ".");
+        return TEST_FAIL;
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts that the input argument is null.
@@ -716,8 +763,10 @@ function assert_near(arg1, arg2, epsilon = 1E-5, msg) {
  */
 function assert_null(arg, msg) {
     if (arg !== null) {
-        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not null.");
+        console.trace(msg ? msg : "Assert Near failed. " + arg + " is not null.");
+        return TEST_FAIL;
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts that the input argument is undefined.
@@ -727,8 +776,10 @@ function assert_null(arg, msg) {
  */
  function assert_undefined(arg, msg) {
     if (arg !== undefined) {
-        throw new Error(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
+        console.trace(msg ? msg : "Assert Near failed. " + arg + " is not undefined.");
+        return TEST_FAIL;
     }
+    return TEST_SUCCESS;
 }
 
 /** Asserts that there is an error when a callback function is run.
@@ -740,9 +791,10 @@ function assert_error(func_binding, msg) {
     try {
         func_binding();
     } catch (err) {
-        return;
+        return TEST_SUCCESS;
     }
-    throw new Error(msg ? msg : "Function didn't throw an error.");
+    console.trace(msg ? msg : "Function didn't throw an error.");
+    return TEST_FAIL;
 }
 
 /**
@@ -779,8 +831,6 @@ function deepcopy(obj, refs=undefined) {
     }
     return ret;
 }
-
-
 /**
  * 
  */

@@ -249,79 +249,119 @@ async function parse_hash(url_tag) {
 /*  Stores the entire build in a string using B64 encoding and adds it to the URL.
 */
 function encodeBuild(build, powders, skillpoints, atree, atree_state) {
-
+    //currently on version 8 - a unified version for all build types using bit-level encoding
     if (build) {
-        let build_string;
-        
-        //V6 encoding - Tomes
-        //V7 encoding - ATree
-        //V8 encoding - wynn version
+        //final link will be [build_vers]_[len_string]_[build_string]
         build_version = 8;
-        build_string = "";
-        tome_string = "";
+        let len_string = "";
+        let build_string = "";
+        let build_bits = new BitVector(0, 0);
 
+        //ITEMS
         for (const item of build.items) {
-            if (item.statMap.get("custom")) {
-                let custom = "CI-"+encodeCustom(item, true);
-                build_string += Base64.fromIntN(custom.length, 3) + custom;
-                //build_version = Math.max(build_version, 5);
+            if (item.statMap.get("NONE") && item.statMap.get("NONE") === true) {
+                build_bits.append(0, 2); //00
+            } else if (item.statMap.get("custom")) {
+                build_bits.append(3, 2); //11
+                //BitVector CI encoding TODO
+
+                // let custom = "CI-"+encodeCustom(item, true);
+                // build_string += Base64.fromIntN(custom.length, 3) + custom;
+                // build_version = Math.max(build_version, 5);
             } else if (item.statMap.get("crafted")) {
-                build_string += "CR-"+encodeCraft(item);
-            } else if (item.statMap.get("category") === "tome") {
-                let tome_id = item.statMap.get("id");
-                if (tome_id <= 60) {
-                    // valid normal tome. ID 61-63 is for NONE tomes.
-                    //build_version = Math.max(build_version, 6);
-                }
-                tome_string += Base64.fromIntN(tome_id, 2);
+                build_bits.append(2, 2); //10
+                //BitVector CR encoding TODO 
+
+                // build_string += "CR-"+encodeCraft(item);
             } else {
-                build_string += Base64.fromIntN(item.statMap.get("id"), 3);
-            }
-        }
+                if (item.statMap.get("category") === "tome") {
+                    //we will encode tomes later
+                    continue;
+                } else {
+                    build_bits.append(1, 2); //01
+                    build_bits.append(item.statMap.get("id"), 13);
 
-        for (const skp of skillpoints) {
-            build_string += Base64.fromIntN(skp, 2); // Maximum skillpoints: 2048
-        }
-        build_string += Base64.fromIntN(build.level, 2);
-        for (const _powderset of powders) {
-            let n_bits = Math.ceil(_powderset.length / 6);
-            build_string += Base64.fromIntN(n_bits, 1); // Hard cap of 378 powders.
-            // Slice copy.
-            let powderset = _powderset.slice();
-            while (powderset.length != 0) {
-                let firstSix = powderset.slice(0,6).reverse();
-                let powder_hash = 0;
-                for (const powder of firstSix) {
-                    powder_hash = (powder_hash << 5) + 1 + powder; // LSB will be extracted first.
+                    //powderable
+                    if (powderable_keys.includes(item.statMap.get("type"))) {
+                        if (item.statMap.get("powders") && item.statMap.get("powders").length !== 0) {
+                            //has powders
+                            build_bits.append(1, 1);
+                            
+                            //num of powders in 8 bits, then each powder (6 bits)
+                            //Having more than 256 powders on a vanilla item is NOT HANDLED.
+                            build_bits.append(item.statMap.get("powders").length, 8);
+                            for (const powder of item.statMap.get("powders")) {
+                                build_bits.append(powder, 6);
+                            }
+                        } else {
+                            //no powders
+                            build_bits.append(0, 1);
+                        }
+                    }
                 }
-                build_string += Base64.fromIntN(powder_hash, 5);
-                powderset = powderset.slice(6);
             }
         }
-        build_string += tome_string;
 
-        if (atree.length > 0 && atree_state.get(atree[0].ability.id).active) {
-            //build_version = Math.max(build_version, 7);
-            const bitvec = encode_atree(atree, atree_state);
-            build_string += bitvec.toB64();
+        //SKILL POINTS
+        
+        //the original schema included a flag to indicate whether or not skill points are included.
+        //any reason for having a flag isn't implemented yet, so for now every build will have the skill point flag set.
+        build_bits.append(1, 1);
+
+        for (const skp of build.base_skillpoints) {
+            build_bits.append(skp, 8); // Maximum skillpoints: 255 (allows for manual assign up to 150)
         }
 
-        return build_version.toString() + "_" + build_string;
+        //BUILD LEVEL 
+
+        // [flag to indicate if level is not 106 (0/1)]
+        // [else: level (7 bits, allows for lv 1->127)]
+        if (player_build.level != 106) {
+            build_bits.append(1, 1);
+            build_bits.append(player_build.level, 7);
+        } else {
+            build_bits.append(0, 1);
+        }
+
+        // TOMES
+
+        // [flag to indicate if tomes are included (0/1)]
+        // [if set: 7 sequential tome IDs, each 6 bits unsigned]
+        if (build.tomes.length > 0) {
+            build_bits.append(1, 1);
+            //decoding will assume that tomes has length of 7.
+            for (const tome of build.tomes) {
+                build_bits.append(tome.id, 6); 
+            }
+        } else {
+            build_bits.append(0, 1);
+        }
+
+        // ATREE
+
+        // [flag to indicate if atree data is present]
+        // [atree data: see existing encoding impl] //idk the impl
+        if (atree.length > 0 && atree_state.get(atree[0].ability.id).active) {
+            build_bits.append(1, 1);
+            const atree_bitvec = encode_atree(atree, atree_state);
+            build_bits.append(atree_bitvec);
+        } else {
+            build_bits.append(0, 1);
+        }
+
+        //compute length and return final build hash
+        return build_version.toString() + "_" + len_string + "_" + build_string;
     }
 }
 
-function get_full_url() {
-    return `${url_base}?v=${wynn_version_id.toString()}${location.hash}`
-}
-
 function copyBuild() {
-    copyTextToClipboard(get_full_url());
+    copyTextToClipboard(url_base+location.hash);
     document.getElementById("copy-button").textContent = "Copied!";
 }
 
 function shareBuild(build) {
     if (build) {
-        let text = get_full_url()+"\n"+
+        let text = url_base+location.hash+"\n"+
             "WynnBuilder build:\n"+
             "> "+build.items[0].statMap.get("displayName")+"\n"+
             "> "+build.items[1].statMap.get("displayName")+"\n"+
@@ -331,13 +371,7 @@ function shareBuild(build) {
             "> "+build.items[5].statMap.get("displayName")+"\n"+
             "> "+build.items[6].statMap.get("displayName")+"\n"+
             "> "+build.items[7].statMap.get("displayName")+"\n"+
-            "> "+build.items[15].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]\n";
-        for (let tomeslots = 8; tomeslots < 15; tomeslots++) {
-            if (!build.items[tomeslots].statMap.has('NONE')) {
-                text += ">"+' (Has Tomes)' ;
-                break;
-            }
-        }
+            "> "+build.items[15].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]";
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }
