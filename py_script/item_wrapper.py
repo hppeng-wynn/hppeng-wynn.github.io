@@ -110,5 +110,5 @@ def main():
             majorId=args.majorId
         )
 
-
-main()
+if __name__ == "__main__":
+    main()
