@@ -10,37 +10,35 @@ delete_keys = [
     #"material"
 ]
 
-# SELF TEST: compare dict keys with `item_metadata.json`.
-from item_wrapper import Items
-local_metadata_file = "item_metadata.json"
-
 if __name__ == "__main__":
+    # SELF TEST: compare dict keys with `item_metadata.json`.
+    from item_wrapper import Items
+    local_metadata_file = "item_metadata.json"
+
     def debug(*args, **kwargs):
         print(*args, **kwargs)
-else:
-    def debug(*_, **__):
-        pass
-try:
-    debug("updating item metadata...")
-    metadata_check = Items().get_metadata()
-    with open(local_metadata_file, 'w') as outfile:
-        json.dump(metadata_check, outfile, indent=2)
-except:
-    debug("Could not update item metadata. using local wynn metadata")
-    with open(local_metadata_file, 'r') as infile:
-        metadata_check = json.load(infile)
 
-checklist = set(x for x in translate_mappings.keys())
-debug(f"Checking {len(checklist)} identifications")
-n = 0
-for identification in metadata_check['identifications']:
-    if identification in checklist:
-        checklist.remove(identification)
-    else:
-        print(f"WARNING: id not accounted for: {identification}")
-        n += 1
-debug(f"{n} unmapped API identifications.")
+    try:
+        debug("updating item metadata...")
+        metadata_check = Items().get_metadata()
+        with open(local_metadata_file, 'w') as outfile:
+            json.dump(metadata_check, outfile, indent=2)
+    except:
+        debug("Could not update item metadata. using local wynn metadata")
+        with open(local_metadata_file, 'r') as infile:
+            metadata_check = json.load(infile)
 
-for identification in checklist:
-    print(f"WARNING: unused translate map entry {identification}")
-debug(f"{len(checklist)} unused translation entries.")
+    checklist = set(x for x in translate_mappings.keys())
+    debug(f"Checking {len(checklist)} identifications")
+    n = 0
+    for identification in metadata_check['identifications']:
+        if identification in checklist:
+            checklist.remove(identification)
+        else:
+            print(f"WARNING: id not accounted for: {identification}")
+            n += 1
+    debug(f"{n} unmapped API identifications.")
+
+    for identification in checklist:
+        print(f"WARNING: unused translate map entry {identification}")
+    debug(f"{len(checklist)} unused translation entries.")
