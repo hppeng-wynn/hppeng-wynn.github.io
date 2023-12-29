@@ -1,4 +1,40 @@
 {
+    "ingredient": {
+        "name": "displayName",
+        "internalName": "name",
+        "tier": "tier",
+        "material": "DELETE;",
+        "skin": "DELETE;",
+        "itemOnlyIDs": "RECURSE_ingredient.itemIDs;itemIDs",
+        "consumableOnlyIDs": "RECURSE_ingredient.consumableIDs;consumableIDs",
+        "ingredientPositionModifiers": "RECURSE_ingredient.posMods;posMods",
+        "identifications": "RECURSE_identifications;ids",
+        "droppedBy": "DELETE;",
+        "___droppedBy_comment:": "Deleting for now because it is way too large and we cannot use it in a meaningful way. But this is nice data for when wynnatlas ever gets updated",
+        "requirements": "UNWRAP;requirements"
+    },
+    "ingredient.itemIDs": {
+        "durabilityModifier": "dura",
+        "strengthRequirement": "strReq",
+        "dexterityRequirement": "dexReq",
+        "intelligenceRequirement": "intReq",
+        "defenceRequirement": "defReq",
+        "agilityRequirement": "agiReq",
+        "attackSpeedModifier": "atkSpdMod",
+        "powderSlotModifier": "slotMod"
+    },
+    "ingredient.consumableIDs": {
+        "duration": "dura",
+        "charges": "charges"
+    },
+    "ingredient.posMods": {
+        "left": "left",
+        "right": "right",
+        "above": "above",
+        "under": "under",
+        "touching": "touching",
+        "notTouching": "notTouching"
+    },
     "item": {
         "name": "displayName",
         "internalName": "name",
@@ -18,7 +54,7 @@
         "category": "category",
         "attackSpeed": "ALLCAPS;atkSpd",
         "base": "UNWRAP;item.base",
-        "requirements": "UNWRAP;item.requirements",
+        "requirements": "UNWRAP;requirements",
         "identifications": "UNWRAP;identifications"
     },
     "item.base": {
@@ -36,7 +72,7 @@
         "earthDefence": "eDef",
         "averageDPS": "DELETE;"
     },
-    "item.requirements": {
+    "requirements": {
         "level": "lvl",
         "levelRange": "lvRange",
         "classRequirement": "classReq",
