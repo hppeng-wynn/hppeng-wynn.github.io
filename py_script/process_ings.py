@@ -187,7 +187,7 @@ for ing in ings:
                   "notTouching": 0
                 }
         if 'itemIDs' not in ing:
-            ing['consumableIDs'] = {
+            ing['itemIDs'] = {
                   "dura": 0,
                   "strReq": 0,
                   "dexReq": 0,
