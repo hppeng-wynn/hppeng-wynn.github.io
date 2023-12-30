@@ -167,6 +167,14 @@ const itemQueryProps = (function() {
   maxId(['lootbonus', 'lb'], 'lb');
   maxId(['xpbonus', 'xpb', 'xb'], 'xpb');
   maxId(['stealing', 'esteal'], 'eSteal');
+  maxId(['lq', 'quality'], 'lq');
+  maxId('gxp', 'gXp');
+  maxId('gspd', 'gSpd');
+  maxId(['healeff', 'healpct'], 'healPct');
+  maxId('kb', 'kb');
+  maxId('weakenenemy', 'weakenEnemy');
+  maxId('slowenemy', 'slowEnemy');
+
   prop(['powderslots', 'powders', 'slots', 'sockets'], 'number', (i, ie) => i.slots || 0);
 
   return props;
