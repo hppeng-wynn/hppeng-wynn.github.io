@@ -204,6 +204,12 @@ for ingred in ingreds:
     # HACKY ING FIXES!
     ingred['itemIDs']['dura'] = int(ingred['itemIDs']['dura'] / 1000)
     ingred['skills'] = [x.upper() for x in ingred['skills']]
+    if 'ids' not in ingred:
+        ingred['ids'] = dict()
+        print(f"ing missing 'ids': {ingred['name']}")
+    if 'consumableIDs' not in ingred:
+        ingred['consumableIDs'] = {'dura': 0, 'charges': 0}
+        print(f"ing missing 'consumableIDs': {ingred['name']}")
 
     if not (ingred["name"] in ing_map):
         new_id = len(ing_map)

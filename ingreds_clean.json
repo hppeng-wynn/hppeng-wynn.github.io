@@ -407,6 +407,7 @@
       "WEAPONSMITHING"
     ],
     "displayName": "Bob's Tear",
+    "ids": {},
     "id": 391
   },
   {
@@ -1514,6 +1515,7 @@
       "WEAPONSMITHING"
     ],
     "displayName": "Dry Bone",
+    "ids": {},
     "id": 47
   },
   {
@@ -2103,6 +2105,7 @@
       "ALCHEMISM"
     ],
     "displayName": "Pride of the Heights",
+    "ids": {},
     "id": 632
   },
   {
@@ -2387,6 +2390,7 @@
       "WOODWORKING"
     ],
     "displayName": "7-Yottabyte Storage Component",
+    "ids": {},
     "id": 376
   },
   {
@@ -5475,6 +5479,7 @@
       "SCRIBING"
     ],
     "displayName": "Nivlan Honey",
+    "ids": {},
     "id": 621
   },
   {
@@ -8493,6 +8498,10 @@
       }
     },
     "displayName": "Forest Web",
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
     "id": 55
   },
   {
@@ -8607,6 +8616,7 @@
       "SCRIBING"
     ],
     "displayName": "Aspect of the Void",
+    "ids": {},
     "id": 563
   },
   {
@@ -8967,6 +8977,7 @@
       "TAILORING"
     ],
     "displayName": "Plasteel Plating",
+    "ids": {},
     "id": 631
   },
   {
@@ -10041,6 +10052,7 @@
       "COOKING"
     ],
     "displayName": "Death Whistle Leaf",
+    "ids": {},
     "id": 581
   },
   {
@@ -10691,6 +10703,7 @@
       "ALCHEMISM"
     ],
     "displayName": "Major's Badge",
+    "ids": {},
     "id": 617
   },
   {
@@ -14582,6 +14595,7 @@
       "SCRIBING"
     ],
     "displayName": "Draconic Bone Marrow",
+    "ids": {},
     "id": 589
   },
   {
@@ -15469,6 +15483,7 @@
       "SCRIBING"
     ],
     "displayName": "Borange Fluff",
+    "ids": {},
     "id": 569
   },
   {
@@ -15895,6 +15910,7 @@
       "COOKING"
     ],
     "displayName": "Salt",
+    "ids": {},
     "id": 333
   },
   {
@@ -16209,6 +16225,7 @@
       "JEWELING"
     ],
     "displayName": "Obelisk Core",
+    "ids": {},
     "id": 622
   },
   {
@@ -16532,6 +16549,7 @@
       "JEWELING"
     ],
     "displayName": "Lunar Charm",
+    "ids": {},
     "id": 614
   },
   {
@@ -18162,6 +18180,7 @@
       "ARMOURING"
     ],
     "displayName": "Decaying Heart",
+    "ids": {},
     "id": 582
   },
   {
@@ -18193,6 +18212,7 @@
       "SCRIBING"
     ],
     "displayName": "Golden Avia Feather",
+    "ids": {},
     "id": 440
   },
   {
@@ -18608,6 +18628,7 @@
       "ARMOURING"
     ],
     "displayName": "Unicorn Horn",
+    "ids": {},
     "id": 674
   },
   {
@@ -19869,6 +19890,7 @@
       "ARMOURING"
     ],
     "displayName": "Crumbling Skull",
+    "ids": {},
     "id": 401
   },
   {
@@ -20016,6 +20038,7 @@
       "JEWELING"
     ],
     "displayName": "Doom Stone",
+    "ids": {},
     "id": 588
   },
   {
@@ -21140,6 +21163,7 @@
       "WOODWORKING"
     ],
     "displayName": "Primordial Soul",
+    "ids": {},
     "id": 633
   },
   {
@@ -21534,6 +21558,7 @@
       "SCRIBING"
     ],
     "displayName": "Dominant Force",
+    "ids": {},
     "id": 587
   },
   {
@@ -25602,6 +25627,7 @@
       "ALCHEMISM"
     ],
     "displayName": "Coalescence",
+    "ids": {},
     "id": 573
   },
   {
@@ -27216,6 +27242,7 @@
       "COOKING"
     ],
     "displayName": "Etheric Fern",
+    "ids": {},
     "id": 640
   },
   {
@@ -27246,6 +27273,7 @@
       "ARMOURING"
     ],
     "displayName": "Transformativity",
+    "ids": {},
     "id": 694
   },
   {
@@ -27630,6 +27658,7 @@
       "SCRIBING"
     ],
     "displayName": "Infected Mass",
+    "ids": {},
     "id": 449
   },
   {
@@ -27742,6 +27771,7 @@
       "SCRIBING"
     ],
     "displayName": "Lashing Hellfire",
+    "ids": {},
     "id": 610
   },
   {
@@ -28948,6 +28978,7 @@
       "COOKING"
     ],
     "displayName": "Blessed Heart",
+    "ids": {},
     "id": 567
   },
   {
@@ -30329,6 +30360,7 @@
       "ALCHEMISM"
     ],
     "displayName": "Sea Salt",
+    "ids": {},
     "id": 335
   },
   {
