@@ -11580,7 +11580,7 @@ const atrees = {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
             "parents": ["Twisted Tether", "Mask of the Coward", "Larger Blood Pool II"],
-            "dependencies": [],
+            "dependencies": [ "Sacrificial Shrine" ],
             "blockers": [],
             "cost": 2,
             "display": {
