@@ -564,10 +564,9 @@
       "type": "helmet",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Alter Ego",
-        "description": "&b+Alter Ego: &3Awakened can be activated after saving 40% less mana, but its duration is reduced by 25%."
-      },
+      "majorIds": [
+        "ALTEREGO"
+      ],
       "name": "Apex",
       "dropInfo": {
         "coordinates": [
@@ -6910,10 +6909,9 @@
       "tier": "Fabled",
       "drop": "lootchest",
       "type": "bracelet",
-      "majorIds": {
-        "name": "Freerunner",
-        "description": "&b+Freerunner: &3When your sprint bar is under 30% full, increase your sprint speed by +150%"
-      },
+      "majorIds": [
+        "FREERUNNER"
+      ],
       "name": "Panic Attack",
       "hp": -400,
       "lvl": 78,
@@ -8128,10 +8126,9 @@
       "type": "helmet",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Geocentrism",
-        "description": "&b+Geocentrism: &3Aura radiates from you instead of your Totem and can be cast any time"
-      },
+      "majorIds": [
+        "GEOCENTRISM"
+      ],
       "name": "Gnossis",
       "dropInfo": {
         "coordinates": [
@@ -9569,10 +9566,9 @@
       "drop": "never",
       "restrict": "Untradable",
       "atkSpd": "SUPER_FAST",
-      "majorIds": {
-        "name": "Furious Effigy",
-        "description": "&b+Furious Effigy: &3Totem effects are twice as fast, but duration is halved"
-      },
+      "majorIds": [
+        "FURIOUS_EFFIGY"
+      ],
       "name": "Panic Zealot",
       "dropInfo": {
         "coordinates": [
@@ -10654,10 +10650,9 @@
       "type": "leggings",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Expunge",
-        "description": "&b+Expunge: &3When using Heal, cast one instant pulse that heals 20% of your max health"
-      },
+      "majorIds": [
+        "EXPUNGE"
+      ],
       "name": "Psionic Pretense",
       "dropInfo": {
         "coordinates": [
@@ -11775,10 +11770,9 @@
       "lore": "No one knows how this extremely dense chestplate can even logically exist. It is almost paradoxical in nature, and affects its wearers in unfathomable ways.",
       "drop": "normal",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Magnet",
-        "description": "&b+Magnet: &3Pulls items dropped by mobs towards you"
-      },
+      "majorIds": [
+        "MAGNET"
+      ],
       "name": "Gravity",
       "hp": 5500,
       "fDef": 250,
@@ -14119,10 +14113,9 @@
       "lore": "Not knowing what's going on is the best part!",
       "drop": "normal",
       "atkSpd": "SUPER_FAST",
-      "majorIds": {
-        "name": "Juggle",
-        "description": "&b+Juggle: &3Stronger Multihit adds an additional 12 hits. All hits are reduced by &6\u2722 &3-10%."
-      },
+      "majorIds": [
+        "JUGGLE"
+      ],
       "name": "Roiling Ruckus",
       "nDam": "0-63",
       "tDam": "0-142",
@@ -14173,10 +14166,9 @@
       "tier": "Fabled",
       "drop": "never",
       "type": "bracelet",
-      "majorIds": {
-        "name": "Lightweight",
-        "description": "&b+Lightweight: &3You no longer take fall damage"
-      },
+      "majorIds": [
+        "LIGHTWEIGHT"
+      ],
       "name": "Double Vision",
       "hp": -750,
       "aDef": -50,
@@ -14224,10 +14216,9 @@
       "type": "boots",
       "drop": "normal",
       "armorType": "chain",
-      "majorIds": {
-        "name": "Cavalryman",
-        "description": "&b+Cavalryman: &3You may cast spells and attack with a -70% damage penalty while on a horse"
-      },
+      "majorIds": [
+        "CAVALRYMAN"
+      ],
       "name": "Galloping Spurs",
       "hp": 560,
       "eDef": 20,
@@ -15975,10 +15966,9 @@
       "type": "bow",
       "drop": "never",
       "atkSpd": "FAST",
-      "majorIds": {
-        "name": "Forest's Blessing",
-        "description": "&b+Forest's Blessing: &3Your archer summons have increased movement speed, attack speed, and vision. Bomb Arrow's damage is reduced by &6\u2722 &3-30%."
-      },
+      "majorIds": [
+        "FOREST_BLESSING"
+      ],
       "name": "Briars' Embrace",
       "dropInfo": {
         "coordinates": [
@@ -17597,10 +17587,9 @@
       "type": "chestplate",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Soul Eater",
-        "description": "&b+Soul Eater: &3Devour and Harvester grant double mana. Decreases maximum marks by 1."
-      },
+      "majorIds": [
+        "SOUL_EATER"
+      ],
       "name": "Keeper of Souls",
       "dropInfo": {
         "coordinates": [
@@ -17929,10 +17918,9 @@
       "restrict": "Untradable",
       "armorColor": "167,50,38",
       "armorType": "leather",
-      "majorIds": {
-        "name": "Sorcery",
-        "description": "&b+Sorcery: &330% chance for spells and attacks to cast a second time at no additional cost"
-      },
+      "majorIds": [
+        "SORCERY"
+      ],
       "name": "Runebound Chains",
       "hp": 3250,
       "lvl": 85,
@@ -18238,10 +18226,9 @@
       "type": "boots",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Plague",
-        "description": "&b+Plague: &3Poisoned mobs spread their poison to nearby mobs"
-      },
+      "majorIds": [
+        "PLAGUE"
+      ],
       "name": "Cytotoxic Striders",
       "dropInfo": {
         "coordinates": [
@@ -23923,10 +23910,9 @@
       "lore": "Jingle jangle, while shaking your bells. Jingle jangle come the pockets of cash... Catch the trickster, send them to hell,\" their money is gone and off you've dashed! ",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Greed",
-        "description": "&b+Greed: &3Picking up emeralds heals you and nearby players for 15% max health"
-      },
+      "majorIds": [
+        "GREED"
+      ],
       "name": "The Jingling Jester",
       "hp": 2325,
       "fDef": 1,
@@ -29257,10 +29243,9 @@
       "lore": "Bending the fabric of reality to allow the wearer to take massive strides, these boots are rumored to contain rogue djinni to power them.",
       "drop": "normal",
       "armorType": "chain",
-      "majorIds": {
-        "name": "Lightweight",
-        "description": "&b+Lightweight: &3You no longer take fall damage"
-      },
+      "majorIds": [
+        "LIGHTWEIGHT"
+      ],
       "name": "Seven-League Boots",
       "hp": 450,
       "aDef": 30,
@@ -31785,10 +31770,9 @@
       "lore": "Spiritual enlightenment is a goal that many monks hope to one day grasp the barest glimpse of, often thought to be a goal that must be worked towards over a lifetime. Holding this polished, translucent blade will instantly induce that lofty state until it is let go.",
       "drop": "normal",
       "atkSpd": "NORMAL",
-      "majorIds": {
-        "name": "Transcendence",
-        "description": "&b+Transcendence: &330% chance for spells to cost no mana when casted"
-      },
+      "majorIds": [
+        "ARCANES"
+      ],
       "name": "Nirvana",
       "wDam": "320-385",
       "lvl": 97,
@@ -32765,10 +32749,9 @@
       "lore": "Despite the light weight of the weapon, the spearhead has been made from incredibly dense cosmic stone. A strong enough impact can directly destroy matter. Due to this danger, it is sought after to be destroyed.",
       "drop": "normal",
       "atkSpd": "VERY_SLOW",
-      "majorIds": {
-        "name": "Fission",
-        "description": "&b+Fission: &3Explosions from your Exploding ID are twice as big and twice as strong"
-      },
+      "majorIds": [
+        "FISSION"
+      ],
       "name": "Collapse",
       "nDam": "40-65",
       "fDam": "0-310",
@@ -33180,10 +33163,9 @@
       "lore": "A brilliant relic supposedly originating from the Realm of Light, the creators of these strangely shaped boots are completely unknown.",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Lightweight",
-        "description": "&b+Lightweight: &3You no longer take fall damage"
-      },
+      "majorIds": [
+        "LIGHTWEIGHT"
+      ],
       "name": "Passus Lux",
       "hp": 1700,
       "wDef": 120,
@@ -33548,10 +33530,9 @@
       "lore": "No reign lasts forever. Not while your schemes remain unnoticed.",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Cherry Bombs",
-        "description": "&b+Cherry Bombs: &3Your Smoke Bombs explodes instantly, and increase their Neutral Damage by +90%"
-      },
+      "majorIds": [
+        "CHERRY_BOMBS"
+      ],
       "name": "Conspirator's Trickpockets",
       "hp": 2000,
       "fDef": -80,
@@ -33612,10 +33593,9 @@
       "lore": "The mangled body found days too late apparently thought this necklace would let them traverse between geysers into the Upper Heights.",
       "drop": "never",
       "type": "necklace",
-      "majorIds": {
-        "name": "Lunge",
-        "description": "&b+Lunge: &3Hop's horizontal velocity is greatly increased"
-      },
+      "majorIds": [
+        "LUNGE"
+      ],
       "name": "Daredevil",
       "dropInfo": {
         "coordinates": [
@@ -34928,10 +34908,9 @@
       "lore": "Quick, over there!",
       "drop": "normal",
       "atkSpd": "SUPER_FAST",
-      "majorIds": {
-        "name": "Overwhelm",
-        "description": "&b+Overwhelm: &3Bash will hit +2 times"
-      },
+      "majorIds": [
+        "OVERWHELM"
+      ],
       "name": "Overreach",
       "nDam": "5-15",
       "aDam": "1-24",
@@ -39520,10 +39499,9 @@
       "type": "spear",
       "drop": "never",
       "atkSpd": "NORMAL",
-      "majorIds": {
-        "name": "Divine Honor",
-        "description": "&b+Divine Honor: &3Increases the bonus from Radiance by 5%. Bash deals &2\u2724 &3-15% per hit."
-      },
+      "majorIds": [
+        "DIVINE_HONOR"
+      ],
       "name": "Veritas",
       "dropInfo": {
         "coordinates": [
@@ -42392,10 +42370,9 @@
       "lore": "If the depths of hell allows you this, is staying human an equal trade or a fool's choice?",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Rally",
-        "description": "&b+Rally: &3Charge heals you by 10% and nearby allies by 15% on impact, but becomes harmless"
-      },
+      "majorIds": [
+        "RALLY"
+      ],
       "name": "Infernal Impulse",
       "hp": 2300,
       "fDef": 95,
@@ -44219,10 +44196,9 @@
       "lore": "Watch as they receive your gift of imminent disaster and endless fallout.",
       "drop": "normal",
       "atkSpd": "VERY_SLOW",
-      "majorIds": {
-        "name": "Fission",
-        "description": "&b+Fission: &3Explosions from your Exploding ID are twice as big and twice as strong"
-      },
+      "majorIds": [
+        "FISSION"
+      ],
       "name": "Hesperium",
       "nDam": "239-239",
       "fDam": "94-239",
@@ -44592,10 +44568,9 @@
       "lore": "Dwarven folklore tells of this mighty maul, used by gods to break mountains, shape continents, and crack the earth to form caverns.",
       "drop": "normal",
       "atkSpd": "VERY_SLOW",
-      "majorIds": {
-        "name": "Temblor",
-        "description": "&b+Temblor: &3Bash gains +1 Area of Effect and is 20% faster"
-      },
+      "majorIds": [
+        "TEMBLOR"
+      ],
       "name": "Fissure",
       "nDam": "80-140",
       "eDam": "70-170",
@@ -44883,10 +44858,9 @@
       "type": "helmet",
       "drop": "normal",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Freerunner",
-        "description": "&b+Freerunner: &3When your sprint bar is under 30% full, increase your sprint speed by +150%"
-      },
+      "majorIds": [
+        "FREERUNNER"
+      ],
       "name": "Ornithopter",
       "hp": 3300,
       "lvl": 86,
@@ -46356,10 +46330,9 @@
       "lore": "The world revolves around you, after all. It's high time you spread the news!",
       "drop": "normal",
       "atkSpd": "VERY_SLOW",
-      "majorIds": {
-        "name": "Geocentrism",
-        "description": "&b+Geocentrism: &3Aura radiates from you instead of your Totem and can be cast any time"
-      },
+      "majorIds": [
+        "GEOCENTRISM"
+      ],
       "name": "Narcissist",
       "nDam": "225-340",
       "eDam": "600-600",
@@ -47936,10 +47909,9 @@
       "lore": "This bow, used by the dwarves to land the final blow in the slaughter of Garaheth is extremely powerful. Special, fire resistant gloves must be worn at all times to prevent burns to the user.",
       "drop": "normal",
       "atkSpd": "NORMAL",
-      "majorIds": {
-        "name": "Heart of the Pack",
-        "description": "&b+Heart of the Pack: &3Nearby players gain 35% of the health you naturally regenerate"
-      },
+      "majorIds": [
+        "ALTRUISM"
+      ],
       "name": "Ignis",
       "nDam": "150-210",
       "fDam": "160-235",
@@ -48224,10 +48196,9 @@
       "type": "dagger",
       "drop": "never",
       "atkSpd": "SLOW",
-      "majorIds": {
-        "name": "Soul Eater",
-        "description": "&b+Soul Eater: &3Devour and Harvester grant double mana. Decreases maximum marks by 1."
-      },
+      "majorIds": [
+        "SOUL_EATER"
+      ],
       "name": "Ysengrim",
       "dropInfo": {
         "coordinates": [
@@ -48992,10 +48963,9 @@
       "lore": "...I'll finish writing this later.",
       "drop": "normal",
       "atkSpd": "SUPER_SLOW",
-      "majorIds": {
-        "name": "Peaceful Effigy",
-        "description": "&b+Peaceful Effigy: &3Your Totem will last twice as long"
-      },
+      "majorIds": [
+        "PEACEFUL_EFFIGY"
+      ],
       "name": "Procrastination",
       "nDam": "1250-1875",
       "lvl": 85,
@@ -49524,10 +49494,9 @@
       "drop": "never",
       "restrict": "Untradable",
       "atkSpd": "SUPER_FAST",
-      "majorIds": {
-        "name": "Plague",
-        "description": "&b+Plague: &3Poisoned mobs spread their poison to nearby mobs"
-      },
+      "majorIds": [
+        "PLAGUE"
+      ],
       "name": "Plague Staff",
       "dropInfo": {
         "coordinates": [
@@ -50403,10 +50372,9 @@
       "lore": "Enigmatically, this weapon will only show itself to those who believe themselves to be worth nothing, or to be weak. While utilizing this weapon will greatly strengthen one's resolve, it will disappear when it is no longer needed, going to the next wielder.",
       "drop": "normal",
       "atkSpd": "VERY_FAST",
-      "majorIds": {
-        "name": "Saviour\u2019s Sacrifice",
-        "description": "&b+Saviour\u2019s Sacrifice: &3While under 50% maximum health, nearby allies gain 20% bonus damage and defence"
-      },
+      "majorIds": [
+        "HERO"
+      ],
       "name": "Hero",
       "nDam": "50-70",
       "aDam": "120-150",
@@ -52959,10 +52927,9 @@
       "lore": "Every ounce of your suffering must be made worth it. Otherwise, what was the point of it all?",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Gruesome Knots",
-        "description": "&b+Gruesome Knots: &3Twisted Tether spends twice as much of your &bBlood Pool &4&l\u2695 &3to deal triple damage"
-      },
+      "majorIds": [
+        "GRUESOME_KNOTS"
+      ],
       "name": "Pain Cycle",
       "dropInfo": {
         "coordinates": [
@@ -53525,10 +53492,9 @@
       "drop": "never",
       "armorColor": "242,127,165",
       "armorType": "leather",
-      "majorIds": {
-        "name": "Snowy Steps",
-        "description": "&b+Snowy Steps: &3Leaves a trail of snow behind you"
-      },
+      "majorIds": [
+        "DESC_SNOWYSTEPS"
+      ],
       "name": "Snowtread Boots",
       "hp": 300,
       "lvl": 33,
@@ -54370,10 +54336,9 @@
       "type": "spear",
       "drop": "normal",
       "atkSpd": "VERY_FAST",
-      "majorIds": {
-        "name": "Rally",
-        "description": "&b+Rally: &3Charge heals you by 10% and nearby allies by 15% on impact, but becomes harmless"
-      },
+      "majorIds": [
+        "RALLY"
+      ],
       "name": "Rhythm of the Seasons",
       "nDam": "40-50",
       "eDam": "100-140",
@@ -54730,10 +54695,9 @@
       "lore": "You will probably irreversibly harm yourself with this, but when has that ever stopped you?",
       "drop": "normal",
       "atkSpd": "VERY_FAST",
-      "majorIds": {
-        "name": "Furious Effigy",
-        "description": "&b+Furious Effigy: &3Totem effects are twice as fast, but duration is halved"
-      },
+      "majorIds": [
+        "FURIOUS_EFFIGY"
+      ],
       "name": "Tachypsychia",
       "tDam": "85-125",
       "eDam": "85-125",
@@ -56911,10 +56875,9 @@
       "lore": "Power, but at what cost?",
       "drop": "lootchest",
       "type": "bracelet",
-      "majorIds": {
-        "name": "Madness",
-        "description": "&b+Madness: &3Casts a random spell of your class every 3 seconds"
-      },
+      "majorIds": [
+        "MADNESS"
+      ],
       "name": "Pandemonium",
       "hp": -300,
       "fDef": -200,
@@ -62680,10 +62643,9 @@
       "type": "chestplate",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Plague",
-        "description": "&b+Plague: &3Poisoned mobs spread their poison to nearby mobs"
-      },
+      "majorIds": [
+        "PLAGUE"
+      ],
       "name": "Uranium Aegis",
       "hp": 2725,
       "wDef": -60,
@@ -64151,10 +64113,9 @@
       "lore": "What better excuse is there to sit in the shade and think about life?",
       "drop": "normal",
       "armorType": "golden",
-      "majorIds": {
-        "name": "Peaceful Effigy",
-        "description": "&b+Peaceful Effigy: &3Your Totem will last twice as long"
-      },
+      "majorIds": [
+        "PEACEFUL_EFFIGY"
+      ],
       "name": "Philosopher",
       "hp": 525,
       "fDef": 15,
@@ -64303,10 +64264,9 @@
       "drop": "never",
       "armorColor": "250,92,92",
       "armorType": "leather",
-      "majorIds": {
-        "name": "Festive Spirit",
-        "description": "&b+Festive Spirit: &3Plays wintery tunes"
-      },
+      "majorIds": [
+        "DESC_FESTIVESPIRIT"
+      ],
       "name": "Santa Earmuffs",
       "hp": 230,
       "lvl": 30,
@@ -65129,10 +65089,9 @@
       "tier": "Fabled",
       "drop": "never",
       "type": "ring",
-      "majorIds": {
-        "name": "Coagulate",
-        "description": "&b+Coagulate: &3Blood Connection launches you further and higher upon teleporting to a nearby totem"
-      },
+      "majorIds": [
+        "COAGULATE"
+      ],
       "name": "Bloodborne",
       "dropInfo": {
         "coordinates": [
@@ -65766,10 +65725,9 @@
       "tier": "Fabled",
       "drop": "lootchest",
       "type": "necklace",
-      "majorIds": {
-        "name": "Taunt",
-        "description": "&b+Taunt: &3Mobs within 12 blocks target you upon casting War Scream"
-      },
+      "majorIds": [
+        "TAUNT"
+      ],
       "name": "Strobelight",
       "hp": 350,
       "lvl": 54,
@@ -66556,10 +66514,9 @@
       "lore": "Found on the corpse of the oldest shopkeeper of the Gavel province, the engraved text reads 'GREED'.",
       "drop": "lootchest",
       "type": "ring",
-      "majorIds": {
-        "name": "Greed",
-        "description": "&b+Greed: &3Picking up emeralds heals you and nearby players for 15% max health"
-      },
+      "majorIds": [
+        "GREED"
+      ],
       "name": "Old Keeper's Ring",
       "hp": -109,
       "lvl": 82,
@@ -70324,10 +70281,9 @@
       "type": "leggings",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Reckless Abandon",
-        "description": "&b+Reckless Abandon: &3Tempest deals &c\u2739 &3+15% and gains one additional charge. War Scream no longer grants a defence bonus."
-      },
+      "majorIds": [
+        "RECKLESS_ABANDON"
+      ],
       "name": "Anti-Causality",
       "dropInfo": {
         "coordinates": [
@@ -71567,10 +71523,9 @@
       "lore": "Time moves in strange ways around this translucent blade, speeding and slowing, starting and stopping, with no observable reasoning or pattern.",
       "drop": "normal",
       "atkSpd": "SUPER_FAST",
-      "majorIds": {
-        "name": "Sorcery",
-        "description": "&b+Sorcery: &330% chance for spells and attacks to cast a second time at no additional cost"
-      },
+      "majorIds": [
+        "SORCERY"
+      ],
       "name": "Rewind",
       "nDam": "35-50",
       "wDam": "30-50",
@@ -71688,10 +71643,9 @@
       "drop": "never",
       "restrict": "Untradable",
       "atkSpd": "SUPER_FAST",
-      "majorIds": {
-        "name": "Greed",
-        "description": "&b+Greed: &3Picking up emeralds heals you and nearby players for 15% max health"
-      },
+      "majorIds": [
+        "GREED"
+      ],
       "name": "The Exploited",
       "dropInfo": {
         "coordinates": [
@@ -71829,10 +71783,9 @@
       "drop": "never",
       "restrict": "Untradable",
       "atkSpd": "SUPER_SLOW",
-      "majorIds": {
-        "name": "Hawkeye",
-        "description": "&b+Hawkeye: &3Condense Arrow Storm into a tight beam. Arrows deal &6\u2722 &310%, &e\u2726 &31%, and &f\u274b &31%"
-      },
+      "majorIds": [
+        "HAWKEYE"
+      ],
       "name": "Deadeye",
       "dropInfo": {
         "coordinates": [
@@ -72763,10 +72716,9 @@
       "lore": "A relic of the past in Time Valley was weathered down to a dagger by the sheer power of the wind. When used in battle, mysterious intertwined wind and time magic give it no physical presence.",
       "drop": "normal",
       "atkSpd": "VERY_FAST",
-      "majorIds": {
-        "name": "Roving Assassin",
-        "description": "&b+Roving Assassin: &3Vanish will no longer block mana and health regeneration"
-      },
+      "majorIds": [
+        "ROVINGASSASSIN"
+      ],
       "name": "Weathered",
       "nDam": "40-80",
       "aDam": "140-230",
@@ -72910,10 +72862,9 @@
       "type": "relik",
       "drop": "never",
       "atkSpd": "VERY_FAST",
-      "majorIds": {
-        "name": "Strings of Fate",
-        "description": "&b+Strings of Fate: &3Your puppets have a lifetime of 3 seconds, and deal double damage with attacks and explosions."
-      },
+      "majorIds": [
+        "STRINGS_OF_FATE"
+      ],
       "name": "Marionette",
       "dropInfo": {
         "coordinates": [
@@ -73501,10 +73452,9 @@
       "lore": "Everything slowly loses heat, and will eventually stop moving. Are you prepared?",
       "drop": "normal",
       "atkSpd": "VERY_FAST",
-      "majorIds": {
-        "name": "Flashfreeze",
-        "description": "&b+Flashfreeze: &3Ice Snake is instant and freezes for +1s"
-      },
+      "majorIds": [
+        "FLASHFREEZE"
+      ],
       "name": "Heat Death",
       "wDam": "36-38",
       "aDam": "26-48",
@@ -74459,10 +74409,9 @@
       "type": "boots",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Entropy",
-        "description": "&b+Entropy: &3Meteor falls three times faster"
-      },
+      "majorIds": [
+        "ENTROPY"
+      ],
       "name": "Violet-Shift",
       "fDef": -50,
       "lvl": 77,
@@ -74727,10 +74676,9 @@
       "restrict": "Untradable",
       "armorColor": "216,88,0",
       "armorType": "leather",
-      "majorIds": {
-        "name": "Saviour\u2019s Sacrifice",
-        "description": "&b+Saviour\u2019s Sacrifice: &3While under 50% maximum health, nearby allies gain 20% bonus damage and defence"
-      },
+      "majorIds": [
+        "HERO"
+      ],
       "name": "Eleventh Hour",
       "dropInfo": {
         "coordinates": [
@@ -75676,10 +75624,9 @@
       "type": "chestplate",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Divine Honor",
-        "description": "&b+Divine Honor: &3Increases the bonus from Radiance by 5%. Bash deals &2\u2724 &3-15% per hit."
-      },
+      "majorIds": [
+        "DIVINE_HONOR"
+      ],
       "name": "Empyreal Emberplate",
       "dropInfo": {
         "coordinates": [
@@ -76983,10 +76930,9 @@
       "lore": "A rogue inventor stole the plans for a steam jet booster from Corkus and reverse engineered them onto a set of boots. While effective, they are dangerous, prone to catastrophic failure.",
       "drop": "normal",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Lightweight",
-        "description": "&b+Lightweight: &3You no longer take fall damage"
-      },
+      "majorIds": [
+        "LIGHTWEIGHT"
+      ],
       "name": "Steamjet Walkers",
       "hp": 2100,
       "tDef": -80,
@@ -78164,10 +78110,9 @@
       "lore": "A vow of protection hangs over this spear, now inhabited by the spirit of a legendary heroine. Even simply a glimpse of the burning blade will instill a feeling of protection and security, and that feeling will hold true if one is brave enough to wield it.",
       "drop": "normal",
       "atkSpd": "NORMAL",
-      "majorIds": {
-        "name": "Guardian",
-        "description": "&b+Guardian: &320% of damage taken by nearby allies is redirected to you"
-      },
+      "majorIds": [
+        "GUARDIAN"
+      ],
       "name": "Guardian",
       "nDam": "50-90",
       "fDam": "165-205",
@@ -80709,10 +80654,9 @@
       "lore": "Do you think you can survive with a sky choked by snow and ash? More importantly, do you think anything else can?",
       "drop": "normal",
       "armorType": "iron",
-      "majorIds": {
-        "name": "Flashfreeze",
-        "description": "&b+Flashfreeze: &3Ice Snake is instant and freezes for +1s"
-      },
+      "majorIds": [
+        "FLASHFREEZE"
+      ],
       "name": "Impact Winter",
       "hp": 1450,
       "fDef": -90,
@@ -80812,10 +80756,9 @@
       "type": "helmet",
       "drop": "normal",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Hawkeye",
-        "description": "&b+Hawkeye: &3Condense Arrow Storm into a tight beam. Arrows deal &6\u2722 &310%, &e\u2726 &31%, and &f\u274b &31%"
-      },
+      "majorIds": [
+        "HAWKEYE"
+      ],
       "name": "Nighthawk",
       "hp": 3000,
       "tDef": -125,
@@ -81838,10 +81781,9 @@
       "lore": "Feeling the fresh chill of the cold air is all you need to know you're really alive.",
       "drop": "lootchest",
       "type": "ring",
-      "majorIds": {
-        "name": "Flashfreeze",
-        "description": "&b+Flashfreeze: &3Ice Snake is instant and freezes for +1s"
-      },
+      "majorIds": [
+        "FLASHFREEZE"
+      ],
       "name": "Cold Wave",
       "aDef": 20,
       "lvl": 75,
@@ -82380,10 +82322,9 @@
       "lore": "A tag on the inside of the hat reads: \"Do not fly during thunderstorms! The wearer is liable for all injuries sustained while using this product.\"",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Windsurf",
-        "description": "&b+Windsurf: &3Righting Reflex lasts twice as long and is affected stronger by movement speed"
-      },
+      "majorIds": [
+        "WINDSURF"
+      ],
       "name": "Propeller Hat",
       "dropInfo": {
         "coordinates": [
@@ -83245,10 +83186,9 @@
       "lore": "Carved directly from the mysterious rock that hit Gavel 50 years ago, this pure white wand glows with cosmic energy unknown.",
       "drop": "normal",
       "atkSpd": "FAST",
-      "majorIds": {
-        "name": "Gravity Well",
-        "description": "&b+Gravity Well: &3Meteor has increased blast radius and pulls enemies instead"
-      },
+      "majorIds": [
+        "GRAVITYWELL"
+      ],
       "name": "Pure",
       "nDam": "0-5",
       "wDam": "20-45",
@@ -83860,10 +83800,9 @@
       "lore": "You're seeing red... Time to see more of it.",
       "drop": "normal",
       "armorType": "chain",
-      "majorIds": {
-        "name": "Explosive Impact",
-        "description": "&b+Explosive Impact: &3Your Exploding ID can trigger when hitting mobs with your Main Attack"
-      },
+      "majorIds": [
+        "EXPLOSIVE_IMPACT"
+      ],
       "name": "Scarlet Veil",
       "hp": 1000,
       "fDef": -30,
@@ -84469,10 +84408,9 @@
       "lore": "And as the spring bursts, the blossom petals flutter in the wind amongst the ashes of your enemies.",
       "drop": "normal",
       "atkSpd": "FAST",
-      "majorIds": {
-        "name": "Cherry Bombs",
-        "description": "&b+Cherry Bombs: &3Your Smoke Bombs explodes instantly, and increase their Neutral Damage by +90%"
-      },
+      "majorIds": [
+        "CHERRY_BOMBS"
+      ],
       "name": "Blossom Haze",
       "nDam": "55-75",
       "eDam": "145-185",
@@ -84864,10 +84802,9 @@
       "type": "boots",
       "drop": "normal",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Taunt",
-        "description": "&b+Taunt: &3Mobs within 12 blocks target you upon casting War Scream"
-      },
+      "majorIds": [
+        "TAUNT"
+      ],
       "name": "Signal Flare",
       "hp": 3200,
       "fDef": 100,
@@ -88846,10 +88783,9 @@
       "tier": "Fabled",
       "drop": "lootchest",
       "type": "bracelet",
-      "majorIds": {
-        "name": "Entropy",
-        "description": "&b+Entropy: &3Meteor falls three times faster"
-      },
+      "majorIds": [
+        "ENTROPY"
+      ],
       "name": "Lachesism",
       "fDef": -20,
       "wDef": -20,
@@ -89028,10 +88964,9 @@
       "type": "wand",
       "drop": "never",
       "atkSpd": "NORMAL",
-      "majorIds": {
-        "name": "Perfect Recall",
-        "description": "&b+Perfect Recall: &3Memory Recollection adds 1 extra spell. Increases Chaos Explosion's mana bank requirement to 150."
-      },
+      "majorIds": [
+        "PERFECT_RECALL"
+      ],
       "name": "Third Wish",
       "dropInfo": {
         "coordinates": [
@@ -89380,10 +89315,9 @@
       "tier": "Fabled",
       "drop": "never",
       "type": "bracelet",
-      "majorIds": {
-        "name": "Magnet",
-        "description": "&b+Magnet: &3Pulls items dropped by mobs towards you"
-      },
+      "majorIds": [
+        "MAGNET"
+      ],
       "name": "Vindicator",
       "hp": 50,
       "lvl": 30,
@@ -89526,10 +89460,9 @@
       "type": "leggings",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Gentle Glow",
-        "description": "&b+Gentle Glow: &3Orphion's Pulse and Fluid Healing restore more health, especially to allies, but at a slower speed"
-      },
+      "majorIds": [
+        "GENTLE_GLOW"
+      ],
       "name": "Pyrrhic Respite",
       "dropInfo": {
         "coordinates": [
@@ -89565,10 +89498,9 @@
       "type": "boots",
       "drop": "never",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Escape Route",
-        "description": "&b+Escape Route: &3Frenzy and Time Dilation charge twice as fast, but to a halved maximum."
-      },
+      "majorIds": [
+        "ESCAPE_ROUTE"
+      ],
       "name": "Tachyon",
       "dropInfo": {
         "coordinates": [
@@ -93739,10 +93671,9 @@
       "lore": "\\[Community Event Winner\\] You only have limited time. But what if, you could experience that time again? And again, and again...",
       "drop": "normal",
       "armorType": "diamond",
-      "majorIds": {
-        "name": "Sorcery",
-        "description": "&b+Sorcery: &330% chance for spells and attacks to cast a second time at no additional cost"
-      },
+      "majorIds": [
+        "SORCERY"
+      ],
       "name": "Time Rift",
       "hp": 3000,
       "wDef": -250,
@@ -94386,10 +94317,9 @@
       "type": "relik",
       "drop": "never",
       "atkSpd": "SUPER_SLOW",
-      "majorIds": {
-        "name": "Dead Weight",
-        "description": "&b+Dead Weight: &3Totem's horizontal velocity is greatly increased at the cost of vertical movement"
-      },
+      "majorIds": [
+        "DEADWEIGHT"
+      ],
       "name": "Tremorcaller",
       "dropInfo": {
         "coordinates": [

@@ -181,7 +181,17 @@ for ingred in old_ingreds:
     if ingred["name"] not in known_ingred_names:
         print(f'Unknown old ingred: {ingred["name"]}!!!')
 
+# TODO hack pull the major id file
+major_ids_filename = "../js/builder/major_ids_clean.json"
+with open(major_ids_filename, 'r') as major_ids_file:
+    major_ids_map = json.load(major_ids_file)
+    major_ids_reverse_map = { v['displayName'] : k for k, v in major_ids_map.items() }
+
 for item in items:
+    # HACKY ITEM FIXES!
+    if 'majorIds' in item:
+        item['majorIds'] = [ major_ids_reverse_map[item['majorIds']['name']] ]
+
     if not (item["name"] in id_map):
         while max_id in used_ids:
             max_id += 1

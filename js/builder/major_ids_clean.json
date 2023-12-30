@@ -1,4 +1,14 @@
 {
+  "FISSION": {
+    "displayName": "Fission",
+    "description": "Explosions from your Exploding ID are twice as big and twice as strong",
+    "abilities": []
+  },
+  "EXPLOSIVE_IMPACT": {
+    "displayName": "Explosive Impact",
+    "description": "Your Exploding ID can trigger when hitting mobs with your Main Attack",
+    "abilities": []
+  },
   "MAGNET": {
     "displayName": "Magnet",
     "description": "Pulls items within an 8 block radius towards you",
@@ -214,7 +224,7 @@
     "abilities": []
   },
   "DESC_FESTIVESPIRIT": {
-    "displayName": "Festive Spirits",
+    "displayName": "Festive Spirit",
     "description": "Plays wintery tunes",
     "abilities": []
   },
@@ -260,7 +270,7 @@
     }]
   },
   "ALTEREGO": {
-    "displayName": "Alterego",
+    "displayName": "Alter Ego",
     "description": "Awakened can be activated after saving 40% less mana, but its duration is reduced by 25%.",
     "abilities": []
   },
@@ -296,7 +306,7 @@
     }]
   },
   "SOUL_EATER": {
-    "displayName": "Soul eater",
+    "displayName": "Soul Eater",
     "description": "Devour and Harvester grant double mana, but your maximum Marks are decreased by 1.",
     "abilities": [{
       "class": "Assassin",
@@ -508,5 +518,15 @@
         }
       ]
     }]
+  },
+  "LUNGE": {
+    "displayName": "Lunge",
+    "description":"Hop's horizontal velocity is greatly increased",
+    "abilities": []
+  },
+  "WINDSURF": {
+    "displayName": "Windsurf",
+    "description":"Righting Reflex lasts twice as long and is affected stronger by movement speed",
+    "abilities": []
   }
 }
