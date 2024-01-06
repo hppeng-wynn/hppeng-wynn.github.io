@@ -1,7 +1,7 @@
 """
 Description: Quick item save/search with v3 item database
 API Documentation: https://documentation.wynncraft.com/docs/
-Update item db: python item_wrapper.py update-item [file_directory]
+Update item db: python item_wrapper.py update-items [file_directory]
 Item search: python item_wrapper.py search -keyword [War] -itemType [mythic] ...
 """
 
