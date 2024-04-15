@@ -42,6 +42,7 @@
     "airSpellDamage",
     "poison",
     "elementalDamage",
+    "healingEfficiency",
     "raw4thSpellCost",
     "raw2ndSpellCost",
     "sprintRegen",
@@ -51,7 +52,6 @@
     "elementalSpellDamage",
     "rawNeutralSpellDamage",
     "4thSpellCost",
-    "healingEfficiency",
     "knockback",
     "waterSpellDamage",
     "fireSpellDamage",
@@ -72,6 +72,7 @@
     "earthMainAttackDamage",
     "rawFireSpellDamage",
     "rawElementalSpellDamage",
+    "healing",
     "rawElementalMainAttackDamage",
     "airMainAttackDamage",
     "thunderMainAttackDamage",
@@ -86,7 +87,8 @@
     "lootQuality",
     "gatherXpBonus",
     "gatherSpeed",
-    "rawWaterMainAttackDamage"
+    "rawWaterMainAttackDamage",
+    "rawEarthMainAttackDamage"
   ],
   "majorIds": [
     "Divine Honor",
@@ -121,6 +123,7 @@
     "Festive Spirit",
     "Freerunner",
     "Hawkeye",
+    "Temblor",
     "Windsurf",
     "Juggle",
     "Roving Assassin",
@@ -130,8 +133,8 @@
     "Heart of the Pack",
     "Coagulate",
     "Guardian",
+    "Hellfire",
     "Overwhelm",
-    "Temblor",
     "Lunge",
     "Madness"
   ],

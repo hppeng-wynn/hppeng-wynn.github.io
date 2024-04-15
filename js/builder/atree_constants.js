@@ -3589,7 +3589,7 @@ const atrees = {
             },
             "properties": {
                 "duration": 3,
-                "tick": 0.6
+                "rate": 1.66666666666666666666666666666
             },
             "effects": [
                 {
@@ -3604,9 +3604,7 @@ const atrees = {
                         },
                         {
                             "name": "DPS",
-                            "hits": {
-                                "Damage Tick": 1.66666666666666666666666666666
-                            }
+                            "hits": { "Damage Tick": "Flaming Uppercut.rate" }
                         },
                         {
                             "name": "Total Damage",
@@ -3990,7 +3988,7 @@ const atrees = {
         },
         {
             "display_name": "Sacred Surge",
-            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 20% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
+            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 25% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
             "parents": ["Stronger Mantle", "Provoke"], 
@@ -4031,14 +4029,23 @@ const atrees = {
                 "col": 1,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "duration": 3,
+                "rate": 2.5
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
-                    "target_part": "Boiling Blood",
+                    "target_part": "Boiling Blood Tick",
                     "cost": 0,
                     "multipliers": [25, 0, 0, 0, 5, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Boiling Blood DPS",
+                    "hits": { "Boiling Blood Tick": "Boiling Blood.rate" }
                 }
             ]
         },
@@ -11001,7 +11008,7 @@ const atrees = {
                 "bonuses": [
                     {
                         "type": "stat",
-                        "name": "damMult.Bullwhip:5.Puppet Hit",
+                        "name": "damMult.Bullwhip:6.Puppet Hit",
                         "value": 20
                     },
                     {

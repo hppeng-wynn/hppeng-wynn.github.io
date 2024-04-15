@@ -28,7 +28,7 @@ if __name__ == "__main__":
         with open(local_metadata_file, 'r') as infile:
             metadata_check = json.load(infile)
 
-    checklist = set(x for x in translate_mappings.keys())
+    checklist = set(x for x in translate_mappings['identifications'].keys())
     debug(f"Checking {len(checklist)} identifications")
     n = 0
     for identification in metadata_check['identifications']:

@@ -528,5 +528,55 @@
     "displayName": "Windsurf",
     "description":"Righting Reflex lasts twice as long and is affected stronger by movement speed",
     "abilities": []
+  },
+  "HELLFIRE": {
+    "displayName": "Hellfire",
+    "description":"Boiling Blood has no cooldown, is stronger, and does not slow. Cuts Bash's power and disables Discombobulate",
+    "abilities": [{
+      "class": "Warrior",
+      "base_abil": "Bash",
+      "properties": {
+          "rate": 0.8333333333333333333333333333,
+          "num_bloods": 0
+      },
+      "effects": [
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Single Hit",
+          "behavior": "modify",
+          "multipliers": [ -85, -30, 0, 0, 0, 0 ]
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Boiling Blood Tick",
+          "behavior": "modify",
+          "multipliers": [ -25, 0, 0, 0, 30, 0 ]
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Boiling Blood DPS (Total)",
+          "behavior": "merge",
+          "hits": { "Boiling " }
+        },
+        {
+          "type": "stat_scaling",
+          "slider": true,
+          "slider_name": "Boiling Blood Stacks",
+          "slider_step": 1,
+          "slider_max": 3,
+          "output": [
+              {
+                  "type": "prop",
+                  "abil": "Puppet Master",
+                  "name": "num_puppets"
+              }
+          ],
+          "scaling": [1]
+        }
+      ]
+    }]
   }
 }
