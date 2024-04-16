@@ -76,22 +76,23 @@ raw_stat: {
     bonuses:        List[stat_bonus]
 }
 stat_bonus: {
-  "type": "stat" | "prop",
-  "abil": Optional[int],
-  "name": str,
-  "value": float
+  type: "stat" | "prop",
+  abil: Optional[int],
+  name: str,
+  value: float
 }
 stat_scaling: {
-  "type": "stat_scaling",
-  "slider": bool,
+  type: "stat_scaling",
+  slider: bool,
   positive: bool                            // True to keep stat above 0. False to ignore floor. Default: True for normal, False for scaling
-  "slider_name": Optional[str],
-  "slider_step": Optional[float],
-  round:            Optional[bool]          // Control floor behavior. True for stats and false for slider by default
-  behavior:  Optional[str]                  // One of: "merge", "modify". default: merge
+  slider_name: Optional[str],
+  slider_step: Optional[float],
+  round:       Optional[bool]               // Control floor behavior. True for stats and false for slider by default
+  behavior:      Optional[str]              // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part, by incrementing properties. do nothing if not exist
-  slider_max: Optional[float]               // affected by behavior
+  slider_max: Optional[int]                 // affected by behavior
+  slider_default: Optional[int]             // affected by behavior
   inputs: Optional[list[scaling_target]]    // List of things to scale. Omit this if using slider
 
   output: Optional[scaling_target | List[scaling_target]] // One of the following:
@@ -99,12 +100,12 @@ stat_scaling: {
                                             // 2. List of scaling targets (all scaled the same)
                                             // 3. Omitted. no output (useful for modifying slider only without input or output)
   scaling: Optional[list[float]]            // One float for each input. Sums into output.
-  max: float
+  max: float                                // Hardcap on this effect (slider value * slider_step). Can be negative if scaling is negative
 }
 scaling_target: {
-  "type": "stat" | "prop",
-  "abil": Optional[int],
-  "name": str
+  type: "stat" | "prop",
+  abil: Optional[int],
+  name: str
 }
 */
 
@@ -542,20 +543,17 @@ const atree_make_interactives = new (class extends ComputeNode {
         for (let i = 0; i < k; ++i) {
             for (const [effect, abil_id, ability] of to_process) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-                    const { slider_name, behavior = 'merge', slider_max, slider_step } = effect;
+                    const { slider_name, behavior = 'merge', slider_max = 0, slider_step, slider_default = 0 } = effect;
                     if (slider_map.has(slider_name)) {
-                        if (slider_max !== undefined) {
-                            const slider_info = slider_map.get(slider_name);
-                            slider_info.max += slider_max;
-                        }
-                        else {
-                            unprocessed.push([effect, abil_id, ability]);
-                        }
+                        const slider_info = slider_map.get(slider_name);
+                        slider_info.max += slider_max;
+                        slider_info.default_val += slider_default;
                     }
                     else if (behavior === 'merge') {
                         slider_map.set(slider_name, {
                             label_name: slider_name+' ('+ability.display_name+')',
                             max: slider_max,
+                            default_val: slider_default,
                             step: slider_step,
                             id: "ability-slider"+ability.id,
                             //color: effect['slider_color'] TODO: add colors to json

@@ -10633,6 +10633,7 @@ const atrees = {
                     "slider_name": "Active Puppets",
                     "slider_step": 1,
                     "slider_max": 3,
+                    "slider_default": 3,
                     "output": [
                         {
                             "type": "prop",
@@ -10842,6 +10843,7 @@ const atrees = {
                 "slider": true,
                 "slider_name": "Active Puppets",
                 "slider_max": 1,
+                "slider_default": 1,
                 "output": [
                     {
                         "type": "prop",
@@ -11041,6 +11043,7 @@ const atrees = {
                 "slider": true,
                 "slider_name": "Active Puppets",
                 "slider_max": 2,
+                "slider_default": 2,
                 "output": [
                     {
                         "type": "prop",

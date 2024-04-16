@@ -568,6 +568,7 @@
           "slider_name": "Boiling Blood Stacks",
           "slider_step": 1,
           "slider_max": 20,
+          "slider_default": 4,
           "output": [
               {
                   "type": "prop",
@@ -576,6 +577,21 @@
               }
           ],
           "scaling": [1]
+        },
+        {
+          "type": "stat_scaling",
+          "slider": true,
+          "behavior": "modify",
+          "slider_name": "Hits dealt",
+          "output": [
+            { "type": "stat", "name": "nDamAddMin" }, { "type": "stat", "name": "nDamAddMax" },
+            { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
+            { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
+            { "type": "stat", "name": "wDamAddMin" }, { "type": "stat", "name": "wDamAddMax" },
+            { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
+            { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
+          ],
+          "scaling": [-5]
         }
       ]
     }]
