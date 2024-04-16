@@ -537,7 +537,7 @@ function getDefenseStats(stats) {
     //eledefs - TODO POWDERS
     let eledefs = [0, 0, 0, 0, 0];
     for(const i in skp_elements){ //kinda jank but ok
-        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), stats.get(skp_elements[i] + "DefPct")/100.);
+        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), (stats.get(skp_elements[i] + "DefPct") + stats.get("rDefPct"))/100.);
     }
     defenseStats.push(eledefs);
     

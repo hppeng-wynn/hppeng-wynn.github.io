@@ -335,7 +335,9 @@ let build_detailed_display_commands = [
     "fMdPct", "wMdPct", "aMdPct", "tMdPct", "eMdPct",
     "fDamRaw", "wDamRaw", "aDamRaw", "tDamRaw", "eDamRaw",
     "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
+    "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
     "!elemental",
+    "rDefPct",
     "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
     "atkTier",
     "poison",
@@ -429,6 +431,8 @@ let sq2_item_display_commands = [
     "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
     "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
     "!elemental",
+    "rDefPct",
+
     "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
     "sprint", "sprintReg",
     "jh",

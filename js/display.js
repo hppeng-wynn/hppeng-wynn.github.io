@@ -1181,14 +1181,6 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
         boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("col");
         boost.classList.add("text-end");
-
-        let defRaw = statMap.get(skp_elements[i]+"Def");
-        let defPct = (statMap.get(skp_elements[i]+"DefPct") + statMap.get('rDefPct'))/100;
-        if (defRaw < 0) {
-            defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
-        } else {
-            defPct >= 0 ? defPct = "+ " + defPct: defPct = "- " + defPct;
-        }
         eledefElemRow.appendChild(boost);
         
         if (insertSummary) {

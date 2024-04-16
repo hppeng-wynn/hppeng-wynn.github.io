@@ -3844,7 +3844,7 @@ const atrees = {
         },
         {
             "display_name": "Counter",
-            "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
+            "desc": "Gain a 30% chance to take no damage and instantly attack back when dodging an enemy attack with Agility.",
             "archetype": "Battle Monk", 
             "parents": ["Aerodynamics", "Cheaper Uppercut", "Manachism"], 
             "dependencies": [], 
