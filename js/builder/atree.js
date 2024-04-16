@@ -478,12 +478,14 @@ const atree_merge = new (class extends ComputeNode {
 
         const build_class = wep_to_class.get(build.weapon.statMap.get("type"));
         for (const major_id_name of build.statMap.get("activeMajorIDs")) {
+            console.log(major_id_name);
             if (major_id_name in major_ids) {
                 for (const abil of major_ids[major_id_name].abilities) {
-                    if (abil["class"] === build_class) { merge_abil(abil); }
+                    if (abil["class"] === build_class) { console.log(abil); merge_abil(abil); }
                 }
             }
         }
+        console.log(abils_merged)
         return abils_merged;
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state').link_to(atree_validate, 'atree-errors');

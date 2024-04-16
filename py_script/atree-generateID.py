@@ -6,71 +6,73 @@ given [atree_constants.js] .js form of the Ability Tree with reference as string
 """
 import json
 
-def translate_id(id_data, atree_data):
+def translate_spell_part(id_data, part):
+    if 'hits' in part:    # Translate parametrized hits...
+        hits_mapping = part['hits']
+        keys = list(hits_mapping.keys())
+        for k in keys:
+            v = hits_mapping[k]
+            if isinstance(v, str):
+                abil_id, propname = v.split('.')
+                hits_mapping[k] = str(id_data[abil_id])+'.'+propname
+
+def translate_effect(id_data, effect):
+    if effect["type"] == "raw_stat":
+        for bonus in effect["bonuses"]:
+            if "abil" in bonus and bonus["abil"] in id_data:
+                bonus["abil"] = id_data[bonus["abil"]]
+    elif effect["type"] == "replace_spell":
+        for part in effect['parts']:
+            translate_spell_part(id_data, part)
+    elif effect["type"] == "add_spell_prop":
+        translate_spell_part(id_data, effect)
+    elif effect["type"] == "stat_scaling":
+        if "inputs" in effect:  # Might not exist for sliders
+            for _input in effect["inputs"]:
+                if "abil" in _input and _input["abil"] in id_data:
+                    _input["abil"] = id_data[_input["abil"]]
+        if "output" in effect:
+            if isinstance(effect["output"], list):
+                for output in effect["output"]:
+                    if "abil" in output and output["abil"] in id_data:
+                        output["abil"] = id_data[output["abil"]]
+            else:
+                if "abil" in effect["output"] and effect["output"]["abil"] in id_data:
+                    effect["output"]["abil"] = id_data[effect["output"]["abil"]]
+
+def translate_abil(id_data, abil, tree=True):
+    def translate(path, ref):
+        ref_dict = abil
+        for x in path:
+            ref_dict = ref_dict[x]
+        ref_dict[ref] = id_data[ref_dict[ref]]
+
+    if tree:
+        for ref in range(len(abil["parents"])):
+            translate(["parents"], ref)
+        for ref in range(len(abil["dependencies"])):
+            translate(["dependencies"], ref)
+        for ref in range(len(abil["blockers"])):
+            translate(["blockers"], ref)
+
+    if "base_abil" in abil:
+        base_abil_name = abil["base_abil"]
+        if base_abil_name in id_data:
+            translate([], "base_abil")
+
+    if "effects" not in abil:
+        print("WARNING: abil missing 'effects' tag")
+        print(abil)
+        abil["effects"] = []
+    for effect in abil["effects"]:
+        translate_effect(id_data, effect)
+
+def translate_all(id_data, atree_data):
     for _class, info in atree_data.items():
-        def translate(path, ref):
-            ref_dict = info
-            for x in path:
-                ref_dict = ref_dict[x]
-            ref_dict[ref] = id_data[_class][ref_dict[ref]]
-        
-        for abil in range(len(info)):
-            info[abil]["id"] = id_data[_class][info[abil]["display_name"]]
-            for ref in range(len(info[abil]["parents"])):
-                translate([abil, "parents"], ref)
+        for abil in info:
+            abil["id"] = id_data[_class][abil["display_name"]]
+            translate_abil(id_data[_class], abil)
 
-            for ref in range(len(info[abil]["dependencies"])):
-                translate([abil, "dependencies"], ref)
-
-            for ref in range(len(info[abil]["blockers"])):
-                translate([abil, "blockers"], ref)
-
-            if "base_abil" in info[abil]:
-                base_abil_name = info[abil]["base_abil"]
-                if base_abil_name in id_data[_class]:
-                    translate([abil], "base_abil")
-
-            if "effects" not in info[abil]:
-                print("WARNING: abil missing 'effects' tag")
-                print(info[abil])
-                info[abil]["effects"] = []
-            for effect in info[abil]["effects"]:
-                if effect["type"] == "raw_stat":
-                    for bonus in effect["bonuses"]:
-                        if "abil" in bonus and bonus["abil"] in id_data[_class]:
-                            bonus["abil"] = id_data[_class][bonus["abil"]]
-                elif effect["type"] == "replace_spell":
-                    for part in effect['parts']:
-                        if 'hits' in part:    # Translate parametrized hits...
-                            hits_mapping = part['hits']
-                            keys = list(hits_mapping.keys())
-                            for k in keys:
-                                v = hits_mapping[k]
-                                if isinstance(v, str):
-                                    abil_id, propname = v.split('.')
-                                    hits_mapping[k] = str(id_data[_class][abil_id])+'.'+propname
-                elif effect["type"] == "add_spell_prop":
-                    if 'hits' in effect:    # Translate parametrized hits...
-                        hits_mapping = effect['hits']
-                        keys = list(hits_mapping.keys())
-                        for k in keys:
-                            v = hits_mapping[k]
-                            if isinstance(v, str):
-                                abil_id, propname = v.split('.')
-                                hits_mapping[k] = str(id_data[_class][abil_id])+'.'+propname
-                elif effect["type"] == "stat_scaling":
-                    if "inputs" in effect:  # Might not exist for sliders
-                        for _input in effect["inputs"]:
-                            if "abil" in _input and _input["abil"] in id_data[_class]:
-                                _input["abil"] = id_data[_class][_input["abil"]]
-                    if "output" in effect:
-                        if isinstance(effect["output"], list):
-                            for output in effect["output"]:
-                                if "abil" in output and output["abil"] in id_data[_class]:
-                                    output["abil"] = id_data[_class][output["abil"]]
-                        else:
-                            if "abil" in effect["output"] and effect["output"]["abil"] in id_data[_class]:
-                                effect["output"]["abil"] = id_data[_class][effect["output"]["abil"]]
 
 abilDict = {}
 with open("atree_constants.js") as f:
@@ -87,15 +89,14 @@ with open("atree_constants.js") as f:
     with open("atree_ids.json", "w", encoding='utf-8') as id_dest:
         json.dump(abilDict, id_dest, ensure_ascii=False, indent=4)
 
-    translate_id(abilDict, data)
+    translate_all(abilDict, data)
 
     with open("major_ids_clean.json") as maj_id_file:
         maj_id_dat = json.load(maj_id_file)
         for k, v in maj_id_dat.items():
             for abil in v['abilities']:
                 clazz = abil['class']
-                base_abil = abil['base_abil']
-                abil['base_abil'] = abilDict[clazz][base_abil]
+                translate_abil(abilDict[clazz], abil, tree=False)
         with open("major_ids_min.json", "w", encoding='utf-8') as maj_id_out:
             json.dump(maj_id_dat, maj_id_out, ensure_ascii=False, separators=(',', ':'))
 

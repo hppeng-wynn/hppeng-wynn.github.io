@@ -4045,7 +4045,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Boiling Blood DPS",
-                    "hits": { "Boiling Blood Tick": "Boiling Blood.rate" }
+                    "hits": { "Boiling Blood Tick": "Bash.rate" }
                 }
             ]
         },

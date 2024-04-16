@@ -559,19 +559,20 @@
           "base_spell": 1,
           "target_part": "Boiling Blood DPS (Total)",
           "behavior": "merge",
-          "hits": { "Boiling " }
+          "display": "Boiling Blood DPS (Total)",
+          "hits": { "Boiling Blood DPS": "Bash.num_bloods" }
         },
         {
           "type": "stat_scaling",
           "slider": true,
           "slider_name": "Boiling Blood Stacks",
           "slider_step": 1,
-          "slider_max": 3,
+          "slider_max": 20,
           "output": [
               {
                   "type": "prop",
-                  "abil": "Puppet Master",
-                  "name": "num_puppets"
+                  "abil": "Bash",
+                  "name": "num_bloods"
               }
           ],
           "scaling": [1]
