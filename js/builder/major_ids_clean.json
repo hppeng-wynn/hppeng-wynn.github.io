@@ -237,7 +237,7 @@
   },
   "TEMBLOR": {
     "displayName": "Temblor",
-    "description": "Bash gains +1 Area of Effect and is 20% faster.",
+    "description": "Bash gains +1 Area of Effect and is 25% faster.",
     "abilities": [{
       "class": "Warrior",
       "base_abil": "Bash",

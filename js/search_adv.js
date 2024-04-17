@@ -206,6 +206,7 @@ class ExprField {
         try {
             this.output = this.compiler(this.text);
         } catch (e) {
+            console.log(e);
             this.errorText.innerText = e.message;
             this.output = null;
         }
@@ -303,6 +304,7 @@ function init_items_adv() {
                 }
             }
         } catch (e) {
+            console.log(e);
             searchFilterField.errorText.innerText = e.message;
             return;
         }
@@ -320,6 +322,7 @@ function init_items_adv() {
                 }
             });
         } catch (e) {
+            console.log(e);
             searchSortField.errorText.innerText = e.message;
             return;
         }
