@@ -247,10 +247,11 @@
   },
   "RECKLESS_ABANDON": {
     "displayName": "Reckless Abandon",
-    "description": "Tempest deals +15% Fire damage and gains one additional charge. War Scream no longer grants a defence bonus.",
+    "description": "Sacrifice War Scream's defense bonus to give Tempest two extra hits, extra damage, and extra speed",
     "abilities": [{
       "class": "Warrior",
       "base_abil": "War Scream",
+      "dependencies": [ "Tempest" ],
       "effects": [
         {
           "type": "add_spell_prop",
