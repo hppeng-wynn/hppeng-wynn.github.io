@@ -5863,7 +5863,8 @@ const atrees = {
             "dependencies": [ "Heal" ],
             "blockers": [
                 "Larger Heal",
-                "Orphion's Pulse"
+                "Orphion's Pulse",
+                "Timelock"
             ],
             "cost": 2,
             "display": {
@@ -7265,7 +7266,7 @@ const atrees = {
                 "More Winded II"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": ["Arcane Transfer"],
             "cost": 2,
             "display": {
                 "row": 34,
