@@ -395,7 +395,7 @@
       "id": 13
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -413,7 +413,7 @@
       "id": 1405
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -431,7 +431,7 @@
       "id": 335
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "never",
@@ -793,7 +793,7 @@
       "id": 3299
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "normal",
@@ -962,7 +962,7 @@
       "id": 1887
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -1165,7 +1165,7 @@
       "id": 2973
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -1621,7 +1621,7 @@
       "id": 842
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -1640,7 +1640,7 @@
     },
     {
       "material": "359:0",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "never",
@@ -2433,7 +2433,7 @@
       "id": 2395
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "never",
@@ -3080,7 +3080,7 @@
       "id": 3210
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -3396,7 +3396,7 @@
       "id": 2889
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -3436,7 +3436,7 @@
       "id": 410
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -3503,7 +3503,7 @@
       "id": 2081
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -3804,7 +3804,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -4539,7 +4539,7 @@
       "id": 1140
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -4656,7 +4656,7 @@
       "id": 707
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -4908,7 +4908,7 @@
       "id": 2483
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -5620,7 +5620,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -6162,7 +6162,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -6264,7 +6264,7 @@
       "id": 3705
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -6314,7 +6314,7 @@
       "id": 794
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "normal",
@@ -6374,7 +6374,7 @@
       "id": 681
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -6438,7 +6438,7 @@
       "id": 668
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "boots",
       "drop": "normal",
@@ -6521,7 +6521,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -7194,7 +7194,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -7227,7 +7227,7 @@
       "id": 3470
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -7434,7 +7434,7 @@
       "id": 471
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -7562,7 +7562,7 @@
       "id": 2025
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -8099,7 +8099,7 @@
       "id": 698
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -8363,7 +8363,7 @@
       "id": 3070
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -8463,7 +8463,7 @@
       "id": 3750
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -8482,7 +8482,7 @@
     },
     {
       "material": "280:0",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "never",
@@ -8697,7 +8697,7 @@
       "id": 883
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -9157,7 +9157,7 @@
       "id": 874
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -9440,7 +9440,7 @@
       "id": 2862
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -9711,7 +9711,7 @@
       "id": 1919
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "leggings",
       "drop": "normal",
@@ -10077,7 +10077,7 @@
       "id": 555
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -10116,7 +10116,7 @@
       "id": 1464
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -10196,7 +10196,7 @@
       "id": 2513
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "leggings",
       "drop": "normal",
@@ -11007,7 +11007,7 @@
       "id": 2506
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -11190,7 +11190,7 @@
       "id": 684
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -11392,7 +11392,7 @@
       "id": 1147
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -11527,7 +11527,7 @@
       "id": 1507
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "never",
@@ -11698,7 +11698,7 @@
       "id": 2033
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "never",
       "restrict": "Untradable",
@@ -11959,7 +11959,7 @@
       "id": 1833
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -12356,7 +12356,7 @@
       "id": 745
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -12581,7 +12581,7 @@
       "id": 2918
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -13017,7 +13017,7 @@
       "id": 2260
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -13727,7 +13727,7 @@
     },
     {
       "material": "261:8",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "bow",
       "drop": "never",
       "restrict": "Quest Item",
@@ -13891,7 +13891,7 @@
       "id": 3862
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -14123,7 +14123,7 @@
       "id": 1328
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -14370,7 +14370,7 @@
       "id": 1792
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "lore": "I won!",
       "drop": "never",
@@ -14386,7 +14386,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -14404,7 +14404,7 @@
       "id": 2218
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -14470,7 +14470,7 @@
       "id": 1907
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -14544,7 +14544,7 @@
       "id": 3848
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -14557,7 +14557,7 @@
       "id": 212
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -14701,7 +14701,7 @@
       "id": 3337
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "leggings",
       "drop": "normal",
@@ -14715,7 +14715,7 @@
     },
     {
       "material": "273:24",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "relik",
       "drop": "never",
       "restrict": "Quest Item",
@@ -14917,7 +14917,7 @@
       "id": 2631
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "chestplate",
       "drop": "normal",
@@ -15094,7 +15094,7 @@
       "id": 2545
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -15112,7 +15112,7 @@
       "id": 325
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -15784,7 +15784,7 @@
       "id": 772
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -15802,7 +15802,7 @@
       "id": 1409
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -15919,7 +15919,7 @@
       "id": 477
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "never",
       "armorColor": "160,101,64",
@@ -16273,7 +16273,7 @@
       "id": 1968
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "normal",
@@ -16592,7 +16592,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -17241,7 +17241,7 @@
       "id": 3280
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -18062,7 +18062,7 @@
       "id": 2131
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -18391,7 +18391,7 @@
       "id": 3746
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -18544,7 +18544,7 @@
       "id": 3320
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "normal",
@@ -18579,7 +18579,7 @@
       "id": 45
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "spear",
       "drop": "normal",
       "atkSpd": "SLOW",
@@ -19334,7 +19334,7 @@
       "id": 3309
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -19422,7 +19422,7 @@
       "id": 2811
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -19571,7 +19571,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -19998,7 +19998,7 @@
       "id": 2359
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -20043,7 +20043,7 @@
       "id": 3617
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -20269,7 +20269,7 @@
       "id": 2317
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "chestplate",
       "drop": "normal",
@@ -20303,7 +20303,7 @@
       "id": 1204
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -20445,7 +20445,7 @@
       "id": 928
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "boots",
       "drop": "normal",
@@ -20615,7 +20615,7 @@
       "id": 2906
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -21304,7 +21304,7 @@
       "id": 2512
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "wand",
       "drop": "normal",
       "atkSpd": "SLOW",
@@ -21380,7 +21380,7 @@
       "id": 3033
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -21447,7 +21447,7 @@
     },
     {
       "material": "256:8",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "spear",
       "drop": "never",
       "restrict": "Quest Item",
@@ -22220,7 +22220,7 @@
       "id": 2675
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "normal",
@@ -22312,7 +22312,7 @@
       "id": 374
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "never",
@@ -22693,7 +22693,7 @@
       "id": 3123
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "normal",
       "armorType": "golden",
@@ -23473,7 +23473,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -23728,7 +23728,7 @@
       "id": 3780
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -23742,7 +23742,7 @@
     },
     {
       "material": "256:17",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "spear",
       "drop": "never",
       "restrict": "Quest Item",
@@ -24443,7 +24443,7 @@
       "id": 3721
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -24852,7 +24852,7 @@
       "id": 3803
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -25088,7 +25088,7 @@
       "id": 3018
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -25151,7 +25151,7 @@
       "id": 2607
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -25708,7 +25708,7 @@
       "id": 3516
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -25783,7 +25783,7 @@
       "id": 614
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "never",
@@ -25985,7 +25985,7 @@
     },
     {
       "material": "359:8",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "dagger",
       "drop": "never",
       "restrict": "Quest Item",
@@ -26238,7 +26238,7 @@
       "id": 1889
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -26390,7 +26390,7 @@
       "id": 3670
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "normal",
@@ -26653,7 +26653,7 @@
       "id": 1286
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -26753,7 +26753,7 @@
       "id": 1037
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -26772,7 +26772,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -27012,7 +27012,7 @@
       "id": 3417
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "normal",
@@ -27635,7 +27635,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -27833,7 +27833,7 @@
     },
     {
       "material": "261:18",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "bow",
       "drop": "never",
       "restrict": "Quest Item",
@@ -28035,7 +28035,7 @@
       "id": 508
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -28053,7 +28053,7 @@
       "id": 1420
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -28181,7 +28181,7 @@
       "id": 900
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -28396,7 +28396,7 @@
       "id": 3749
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -28565,7 +28565,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -28893,7 +28893,7 @@
       "id": 2747
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Quest Item",
@@ -29422,7 +29422,7 @@
       "id": 2427
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -29566,7 +29566,7 @@
       "id": 3588
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -29744,7 +29744,7 @@
       "id": 3857
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -30041,7 +30041,7 @@
       "id": 1691
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -30059,7 +30059,7 @@
       "id": 1135
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -30099,7 +30099,7 @@
       "id": 2259
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -30293,7 +30293,7 @@
       "id": 729
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "normal",
@@ -30479,7 +30479,7 @@
       "id": 3403
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -30497,7 +30497,7 @@
       "id": 1504
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Quest Item",
@@ -30902,7 +30902,7 @@
       "id": 732
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -31144,7 +31144,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -31515,7 +31515,7 @@
       "id": 3586
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -32024,7 +32024,7 @@
       "id": 3793
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -32763,7 +32763,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -33435,7 +33435,7 @@
       "id": 125
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "chestplate",
       "drop": "normal",
@@ -33835,7 +33835,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -33887,7 +33887,7 @@
       "id": 2753
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "normal",
@@ -34186,7 +34186,7 @@
       "id": 1830
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -34332,7 +34332,7 @@
       "id": 1842
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -34559,7 +34559,7 @@
       "id": 2107
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -34947,7 +34947,7 @@
       "id": 1999
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -35523,7 +35523,7 @@
       "id": 3392
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -35595,7 +35595,7 @@
       "id": 787
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -35703,7 +35703,7 @@
       "id": 1878
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "dagger",
       "drop": "normal",
       "atkSpd": "FAST",
@@ -36309,7 +36309,7 @@
       "id": 2047
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -36345,7 +36345,7 @@
       "id": 3034
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -36363,7 +36363,7 @@
       "id": 1411
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -36790,7 +36790,7 @@
       "id": 144
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -37123,7 +37123,7 @@
       "id": 2043
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -37262,7 +37262,7 @@
       "id": 2114
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -37773,7 +37773,7 @@
       "id": 2786
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -37791,7 +37791,7 @@
       "id": 1082
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -37809,7 +37809,7 @@
       "id": 2191
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -38663,7 +38663,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -38944,7 +38944,7 @@
       "id": 1992
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "helmet",
       "drop": "normal",
@@ -39082,7 +39082,7 @@
       "id": 1029
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -39135,7 +39135,7 @@
       "id": 3427
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "lore": "I found them!",
       "drop": "never",
@@ -39148,7 +39148,7 @@
       "id": 1959
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "never",
@@ -39354,7 +39354,7 @@
       "id": 561
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -39373,7 +39373,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -39392,7 +39392,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -39434,7 +39434,7 @@
       "id": 2968
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -39760,7 +39760,7 @@
       "id": 3160
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "never",
@@ -39959,7 +39959,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -40134,7 +40134,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -40285,7 +40285,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -40323,7 +40323,7 @@
       "id": 449
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -40530,7 +40530,7 @@
       "id": 3362
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "normal",
@@ -40695,7 +40695,7 @@
       "id": 3041
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -40932,7 +40932,7 @@
       "id": 1955
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -41086,7 +41086,7 @@
     },
     {
       "material": "269:8",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "wand",
       "drop": "never",
       "restrict": "Quest Item",
@@ -41292,7 +41292,7 @@
       "id": 2993
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "normal",
       "armorType": "golden",
@@ -41497,7 +41497,7 @@
       "id": 969
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -41515,7 +41515,7 @@
       "id": 2219
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -41611,7 +41611,7 @@
       "id": 2612
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -41862,7 +41862,7 @@
       "id": 2310
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "never",
@@ -41963,7 +41963,7 @@
       "id": 1183
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -42022,7 +42022,7 @@
       "id": 59
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -42496,7 +42496,7 @@
       "id": 396
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "never",
       "armorColor": "160,101,64",
@@ -42700,7 +42700,7 @@
       "id": 2587
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -42804,7 +42804,7 @@
       "id": 370
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -43335,7 +43335,7 @@
       "id": 1484
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -43507,7 +43507,7 @@
       "id": 1306
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -43659,7 +43659,7 @@
       "id": 1679
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -43774,7 +43774,7 @@
       "id": 2895
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -43867,7 +43867,7 @@
       "id": 1885
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -43935,7 +43935,7 @@
       "id": 2689
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "never",
       "armorColor": "160,101,64",
@@ -44329,7 +44329,7 @@
       "id": 582
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "normal",
@@ -44342,7 +44342,7 @@
       "id": 273
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "helmet",
       "drop": "normal",
@@ -44878,7 +44878,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -45366,7 +45366,7 @@
       "id": 2676
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -45414,7 +45414,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -46350,7 +46350,7 @@
       "id": 3021
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -47322,7 +47322,7 @@
       "id": 2026
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -47384,7 +47384,7 @@
       "id": 2067
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "lore": "I helped!",
       "drop": "never",
@@ -47694,7 +47694,7 @@
       "id": 902
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -47877,7 +47877,7 @@
       "id": 1899
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -47962,7 +47962,7 @@
       "id": 3861
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -48062,7 +48062,7 @@
       "id": 2420
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "leggings",
       "drop": "normal",
@@ -48115,7 +48115,7 @@
       "id": 2471
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "never",
@@ -48171,7 +48171,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "never",
@@ -48447,7 +48447,7 @@
       "id": 14
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -48485,7 +48485,7 @@
       "id": 2099
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -48953,7 +48953,7 @@
     },
     {
       "material": "273:15",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "never",
@@ -49085,7 +49085,7 @@
       "id": 2563
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -49104,7 +49104,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -49205,7 +49205,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -49536,7 +49536,7 @@
       "id": 444
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -49774,7 +49774,7 @@
       "id": 3358
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "never",
@@ -50308,7 +50308,7 @@
       "id": 3816
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -50566,7 +50566,7 @@
       "id": 1965
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -50615,7 +50615,7 @@
       "id": 3761
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "never",
@@ -50974,7 +50974,7 @@
       "id": 1222
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -50992,7 +50992,7 @@
       "id": 332
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -51036,7 +51036,7 @@
       "id": 3571
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -51165,7 +51165,7 @@
       "id": 1046
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "never",
@@ -51291,7 +51291,7 @@
       "id": 3493
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -51748,7 +51748,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -51830,7 +51830,7 @@
       "id": 2089
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -52062,7 +52062,7 @@
       "id": 3505
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "normal",
@@ -52372,7 +52372,7 @@
       "id": 1535
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -52907,7 +52907,7 @@
       "id": 1201
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -52980,7 +52980,7 @@
       "id": 2700
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -53051,7 +53051,7 @@
       "id": 2008
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -53270,7 +53270,7 @@
       "id": 2667
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -53832,7 +53832,7 @@
       "id": 2559
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "normal",
@@ -53928,7 +53928,7 @@
       "id": 2476
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -53981,7 +53981,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -54222,7 +54222,7 @@
       "id": 1473
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -54321,7 +54321,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -54760,7 +54760,7 @@
       "id": 75
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -54779,7 +54779,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -54819,7 +54819,7 @@
       "id": 3272
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -55032,7 +55032,7 @@
       "id": 500
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -55572,7 +55572,7 @@
       "id": 366
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "dagger",
       "drop": "normal",
       "atkSpd": "NORMAL",
@@ -55860,7 +55860,7 @@
       "id": 3411
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -56017,7 +56017,7 @@
       "id": 2720
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -56284,7 +56284,7 @@
       "id": 3785
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -56330,7 +56330,7 @@
       "id": 551
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -56468,7 +56468,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -56505,7 +56505,7 @@
       "id": 52
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -56523,7 +56523,7 @@
       "id": 1122
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "boots",
       "drop": "normal",
@@ -56537,7 +56537,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -56555,7 +56555,7 @@
       "id": 358
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -57388,7 +57388,7 @@
     },
     {
       "material": "261:0",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "never",
@@ -57756,7 +57756,7 @@
       "id": 1696
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -57971,7 +57971,7 @@
       "id": 3515
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -58463,7 +58463,7 @@
       "id": 2849
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -58744,7 +58744,7 @@
       "id": 201
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -58926,7 +58926,7 @@
       "id": 2558
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "normal",
@@ -58939,7 +58939,7 @@
       "id": 225
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -59143,7 +59143,7 @@
       "id": 974
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "normal",
       "armorType": "golden",
@@ -59155,7 +59155,7 @@
       "id": 267
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -59173,7 +59173,7 @@
       "id": 3118
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -59210,7 +59210,7 @@
       "id": 3496
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -59556,7 +59556,7 @@
       "id": 1951
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -59689,7 +59689,7 @@
       "id": 1568
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "never",
@@ -60084,7 +60084,7 @@
       "id": 2959
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -60177,7 +60177,7 @@
       "id": 934
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -60418,7 +60418,7 @@
       "id": 3287
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "normal",
       "armorType": "golden",
@@ -60430,7 +60430,7 @@
       "id": 268
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -60548,7 +60548,7 @@
       "id": 3262
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -60605,7 +60605,7 @@
       "id": 3133
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -60702,7 +60702,7 @@
       "id": 599
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "boots",
       "drop": "normal",
@@ -61024,7 +61024,7 @@
       "id": 2083
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -61310,7 +61310,7 @@
       "id": 594
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -61376,7 +61376,7 @@
       "id": 1308
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "never",
@@ -61433,7 +61433,7 @@
       "id": 1969
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -61794,7 +61794,7 @@
       "id": 3284
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "bow",
       "drop": "normal",
       "atkSpd": "SLOW",
@@ -62112,7 +62112,7 @@
       "id": 3687
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "leggings",
       "drop": "normal",
@@ -62862,7 +62862,7 @@
       "id": 3184
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -62934,7 +62934,7 @@
       "id": 1863
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -62978,7 +62978,7 @@
       "id": 109
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -63068,7 +63068,7 @@
       "id": 2805
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -63342,7 +63342,7 @@
       "id": 2257
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -64040,7 +64040,7 @@
       "id": 849
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -64083,7 +64083,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -64342,7 +64342,7 @@
       "id": 2153
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -64443,7 +64443,7 @@
       "id": 3396
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -64575,7 +64575,7 @@
       "id": 2097
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "helmet",
       "drop": "normal",
@@ -64613,7 +64613,7 @@
       "id": 963
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -64657,7 +64657,7 @@
       "id": 3859
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "wand",
       "drop": "normal",
       "atkSpd": "NORMAL",
@@ -64797,7 +64797,7 @@
       "id": 2925
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "never",
@@ -64811,7 +64811,7 @@
       "id": 1072
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -64856,7 +64856,7 @@
       "id": 525
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -64983,7 +64983,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -65265,7 +65265,7 @@
       "id": 1564
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -65742,7 +65742,7 @@
       "id": 906
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -66045,7 +66045,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -66093,7 +66093,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -66445,7 +66445,7 @@
       "id": 3054
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -66477,7 +66477,7 @@
       "id": 2984
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -66628,7 +66628,7 @@
       "id": 781
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -66748,7 +66748,7 @@
     },
     {
       "material": "397:2",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "armorColor": "160,101,64",
@@ -67229,7 +67229,7 @@
       "id": 1664
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -67271,7 +67271,7 @@
       "id": 3098
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -67339,7 +67339,7 @@
       "id": 1376
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -67399,7 +67399,7 @@
       "id": 1057
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -67865,7 +67865,7 @@
       "id": 1171
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -67961,7 +67961,7 @@
       "id": 1994
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "helmet",
       "drop": "normal",
@@ -68439,7 +68439,7 @@
       "id": 1586
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -68692,7 +68692,7 @@
       "id": 3391
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -69198,7 +69198,7 @@
       "id": 1930
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -69636,7 +69636,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -69711,7 +69711,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -69729,7 +69729,7 @@
       "id": 1432
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "never",
@@ -69796,7 +69796,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -69890,7 +69890,7 @@
     },
     {
       "material": "359:17",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "dagger",
       "drop": "never",
       "restrict": "Quest Item",
@@ -70533,7 +70533,7 @@
       "id": 683
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -70611,7 +70611,7 @@
       "id": 3583
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "armorColor": "160,101,64",
@@ -70901,7 +70901,7 @@
       "id": 376
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -71174,7 +71174,7 @@
       "id": 398
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "never",
@@ -71552,7 +71552,7 @@
       "id": 82
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -71970,7 +71970,7 @@
       "id": 1334
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -72018,7 +72018,7 @@
       "id": 3381
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "normal",
@@ -72031,7 +72031,7 @@
       "id": 263
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -72475,7 +72475,7 @@
       "id": 3671
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -72494,7 +72494,7 @@
     },
     {
       "material": "269:17",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "wand",
       "drop": "never",
       "restrict": "Quest Item",
@@ -72608,7 +72608,7 @@
       "id": 3487
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "normal",
@@ -72932,7 +72932,7 @@
       "id": 3781
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -73084,7 +73084,7 @@
       "id": 1214
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "leggings",
       "drop": "normal",
@@ -73147,7 +73147,7 @@
       "id": 763
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "normal",
@@ -73430,7 +73430,7 @@
       "id": 3684
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -73475,7 +73475,7 @@
       "id": 2945
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -74015,7 +74015,7 @@
       "id": 84
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -74139,7 +74139,7 @@
       "id": 2482
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "never",
@@ -74344,7 +74344,7 @@
       "id": 2393
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "leggings",
       "drop": "normal",
@@ -74445,7 +74445,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -74611,7 +74611,7 @@
       "id": 2093
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -74751,7 +74751,7 @@
       "id": 1251
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -74928,7 +74928,7 @@
       "id": 3758
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -74946,7 +74946,7 @@
       "id": 2189
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "dagger",
       "drop": "never",
@@ -75316,7 +75316,7 @@
       "id": 3492
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -75612,7 +75612,7 @@
       "id": 2453
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -75766,7 +75766,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -76318,7 +76318,7 @@
       "id": 189
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "normal",
@@ -76618,7 +76618,7 @@
       "id": 767
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -76706,7 +76706,7 @@
       "id": 3039
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -77225,7 +77225,7 @@
       "id": 3406
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "never",
@@ -77314,7 +77314,7 @@
       "id": 2439
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -77509,7 +77509,7 @@
       "id": 26
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -78181,7 +78181,7 @@
       "id": 3359
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "spear",
       "drop": "normal",
@@ -78199,7 +78199,7 @@
       "id": 1418
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -78309,7 +78309,7 @@
       "id": 2007
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -78743,7 +78743,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -79120,7 +79120,7 @@
       "id": 2250
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -79179,7 +79179,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -79714,7 +79714,7 @@
       "id": 479
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "leggings",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -79848,7 +79848,7 @@
       "id": 3145
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -80111,7 +80111,7 @@
       "id": 1573
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -81393,7 +81393,7 @@
       "id": 96
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Untradable",
@@ -81408,7 +81408,7 @@
       "id": 1898
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "never",
@@ -81472,7 +81472,7 @@
       "id": 1750
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "wand",
       "drop": "normal",
@@ -81490,7 +81490,7 @@
       "id": 1400
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -81608,7 +81608,7 @@
       "id": 2878
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "normal",
@@ -81925,7 +81925,7 @@
       "id": 2879
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "boots",
       "drop": "normal",
@@ -82409,7 +82409,7 @@
       "id": 105
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -82537,7 +82537,7 @@
       "id": 1053
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -83514,7 +83514,7 @@
       "id": 2699
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "boots",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -83793,7 +83793,7 @@
       "id": 3306
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "boots",
       "drop": "normal",
@@ -83806,7 +83806,7 @@
       "id": 295
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -85405,7 +85405,7 @@
       "id": 1572
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -85423,7 +85423,7 @@
       "id": 2220
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "helmet",
       "drop": "normal",
@@ -85459,7 +85459,7 @@
       "id": 2173
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "chestplate",
       "drop": "normal",
@@ -85649,7 +85649,7 @@
     },
     {
       "material": "86",
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "armorColor": "160,101,64",
@@ -85711,7 +85711,7 @@
       "id": 2357
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -86207,7 +86207,7 @@
       "id": 2132
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "chestplate",
       "drop": "normal",
@@ -86487,7 +86487,7 @@
       "id": 2847
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -86574,7 +86574,7 @@
       "id": 726
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -86658,7 +86658,7 @@
       "id": 959
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -86745,7 +86745,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -86788,7 +86788,7 @@
       "id": 1060
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "normal",
@@ -86881,7 +86881,7 @@
       "id": 691
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "spear",
       "drop": "normal",
       "atkSpd": "VERY_SLOW",
@@ -87031,7 +87031,7 @@
       "id": 3831
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "drop": "normal",
       "armorColor": "160,101,64",
@@ -88032,7 +88032,7 @@
       "id": 2021
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -88204,7 +88204,7 @@
       "id": 3239
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "wand",
       "drop": "normal",
@@ -88282,7 +88282,7 @@
       "id": 2544
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "normal",
@@ -88598,7 +88598,7 @@
       "id": 3538
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "chestplate",
       "drop": "normal",
@@ -88726,7 +88726,7 @@
       "id": 3217
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "normal",
@@ -88766,7 +88766,7 @@
       "id": 2964
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "normal",
@@ -89148,7 +89148,7 @@
     },
     {
       "material": "256:0",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "never",
@@ -89238,7 +89238,7 @@
       "id": 1209
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -89294,7 +89294,7 @@
       "id": 95
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "helmet",
       "drop": "never",
       "restrict": "Quest Item",
@@ -89459,7 +89459,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "relik",
       "drop": "normal",
@@ -89478,7 +89478,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "relik",
       "drop": "normal",
@@ -89721,7 +89721,7 @@
       "id": 1711
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "type": "chestplate",
       "lore": "The shirt has the quote \"I went to the Letvus Airbase in Cinfras and all I got was this lousy T-shirt\" printed on it.",
       "drop": "never",
@@ -89892,7 +89892,7 @@
       "id": 3312
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "boots",
       "drop": "normal",
@@ -90030,7 +90030,7 @@
       "id": 3298
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -90256,7 +90256,7 @@
       "id": 1757
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "dagger",
       "drop": "normal",
@@ -90573,7 +90573,7 @@
       "id": 2955
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "bow",
       "drop": "normal",
@@ -91072,7 +91072,7 @@
       "id": 2899
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -91208,7 +91208,7 @@
       "id": 57
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -91353,7 +91353,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "never",
@@ -91406,7 +91406,7 @@
       "id": 801
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "helmet",
       "drop": "normal",
@@ -91443,7 +91443,7 @@
       "id": 2966
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "helmet",
       "drop": "normal",
@@ -91584,7 +91584,7 @@
       "id": 941
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "spear",
       "drop": "normal",
@@ -91602,7 +91602,7 @@
       "id": 1123
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "chestplate",
       "drop": "normal",
@@ -91677,7 +91677,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -92134,7 +92134,7 @@
       "id": 3103
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -92152,7 +92152,7 @@
       "id": 1396
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "boots",
       "drop": "never",
@@ -92284,7 +92284,7 @@
     },
     {
       "material": "273:7",
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "relik",
       "drop": "normal",
@@ -92302,7 +92302,7 @@
       "id": 1502
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "dagger",
       "drop": "normal",
@@ -92698,7 +92698,7 @@
       "id": 804
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "wand",
       "drop": "normal",
@@ -92806,7 +92806,7 @@
       "id": 1981
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "normal",
@@ -93328,7 +93328,7 @@
       "id": 2995
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "leggings",
       "drop": "never",
@@ -93473,7 +93473,7 @@
       "id": 797
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "spear",
       "drop": "never",
@@ -93493,7 +93493,7 @@
       "id": 2041
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 2,
       "type": "bow",
       "drop": "normal",
@@ -94127,7 +94127,7 @@
       "id": 2823
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "bow",
       "drop": "normal",
@@ -94208,7 +94208,7 @@
       "id": 1264
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 1,
       "type": "helmet",
       "drop": "normal",
@@ -95238,7 +95238,7 @@
       "id": 3338
     },
     {
-      "tier": "Common",
+      "tier": "Normal",
       "slots": 3,
       "type": "chestplate",
       "drop": "normal",

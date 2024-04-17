@@ -188,9 +188,11 @@ with open(major_ids_filename, 'r') as major_ids_file:
     major_ids_reverse_map = { v['displayName'] : k for k, v in major_ids_map.items() }
 
 for item in items:
-    # HACKY ITEM FIXES!
+    # NOTE: HACKY ITEM FIXES!
     if 'majorIds' in item:
         item['majorIds'] = [ major_ids_reverse_map[item['majorIds']['name']] ]
+    if item['tier'] == 'Common':
+        item['tier'] = 'Normal'
 
     if not (item["name"] in id_map):
         while max_id in used_ids:
