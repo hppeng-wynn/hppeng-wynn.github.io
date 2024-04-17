@@ -4549,7 +4549,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Total Damage",
-                    "hits": { "Tempest": 3 }
+                    "hits": { "Tempest Total Damage": 1 }
                 }
             ]  
         },
@@ -8095,15 +8095,9 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
+                    "behavior": "modify",
                     "target_part": "Per Tick",
-                    "multipliers": [
-                        0,
-                        0,
-                        0,
-                        0,
-                        10,
-                        0
-                    ]
+                    "multipliers": [0, 0, 0, 0, 10, 0]
                 }
             ]
         },
@@ -8327,23 +8321,16 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
+                    "behavior": "modify",
                     "target_part": "Total Damage",
-                    "hits": {
-                        "Per Bomb": 2
-                    }
+                    "hits": { "Per Bomb": 2 }
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
+                    "behavior": "modify",
                     "target_part": "Per Tick",
-                    "multipliers": [
-                        -10,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
+                    "multipliers": [ -10, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -8878,11 +8865,15 @@ const atrees = {
                         },
                         {
                             "type": "stat",
+                            "name": "damMult.EchoCast:4.Single Bomb"
+                        },
+                        {
+                            "type": "stat",
                             "name": "damMult.EchoCast:6.Per Shuriken"
                         }
                     ],
                     "scaling": [
-                        100, 100, 100, 100, 100, 100, 100
+                        100
                     ]
                 }
             ]

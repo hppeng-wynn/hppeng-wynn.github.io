@@ -47,13 +47,13 @@ def translate_abil(id_data, abil, tree=True):
             ref_dict = ref_dict[x]
         ref_dict[ref] = id_data[ref_dict[ref]]
 
-    if tree:
-        for ref in range(len(abil["parents"])):
-            translate(["parents"], ref)
-        for ref in range(len(abil["dependencies"])):
-            translate(["dependencies"], ref)
-        for ref in range(len(abil["blockers"])):
-            translate(["blockers"], ref)
+    for optional_key in ["parents", "dependencies", "blockers"]:
+        if optional_key not in abil:
+            if tree:
+                print(f"WARNING: atree node missing required key [{optional_key}]")
+            continue
+        for ref in range(len(abil[optional_key])):
+            translate([optional_key], ref)
 
     if "base_abil" in abil:
         base_abil_name = abil["base_abil"]

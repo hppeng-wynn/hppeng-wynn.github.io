@@ -160,24 +160,31 @@
   },
   "CHERRY_BOMBS": {
     "displayName": "Cherry Bombs",
-    "description": "Your Smoke Bombs explode instantly, and increase their Neutral Damage by +90%",
+    "description": "Turn Smoke Bomb into three firecrackers that fly farther, tighter, and deal high damage instantly",
     "abilities": [{
       "class": "Assassin",
       "base_abil": "Smoke Bomb",
-      "effects": [
-        {
-          "type": "add_spell_prop",
-          "base_spell": 4,
-          "target_part": "Per Tick",
-          "multipliers": [ 90, 0, 0, 0, 0, 0 ]
-        },
-        {
-          "type": "add_spell_prop",
-          "base_spell": 4,
-          "target_part": "Per Bomb",
-          "hits": { "Per Tick": -9 }
-        }
-      ]
+      "effects": [{
+        "type": "replace_spell",
+        "name": "Cherry Bomb",
+        "cost": 35,
+        "base_spell": 4,
+        "display": "Total Damage",
+        "parts": [
+          {
+            "name": "Single Bomb",
+            "type": "damage",
+            "multipliers": [95, 40, 0, 0, 0, 40]
+          },
+          {
+            "name": "Total Damage",
+            "type": "total",
+            "hits": {
+              "Single Bomb": 3
+            }
+          }
+        ]
+      }]
     }]
   },
   "FREERUNNER": {
@@ -250,21 +257,14 @@
           "base_spell": 4,
           "target_part": "Tempest",
           "behavior": "modify",
-          "multipliers": [0, 0, 0, 0, 15, 0]
+          "multipliers": [0, 5, 0, 0, 15, 5]
         },
         {
           "type": "add_spell_prop",
           "base_spell": 4,
           "target_part": "Tempest Total Damage",
           "behavior": "modify",
-          "hits": { "Tempest": 1 }
-        },
-        {
-          "type": "add_spell_prop",
-          "base_spell": 4,
-          "target_part": "Total Damage",
-          "behavior": "modify",
-          "hits": { "Tempest": 1 }
+          "hits": { "Tempest": 2 }
         }
       ]
     }]
@@ -535,6 +535,7 @@
     "abilities": [{
       "class": "Warrior",
       "base_abil": "Bash",
+      "dependencies": [ "Boiling Blood" ],
       "properties": {
           "rate": 0.8333333333333333333333333333,
           "num_bloods": 0

@@ -477,12 +477,38 @@ const atree_merge = new (class extends ComputeNode {
             merge_abil(node.ability);
         }
 
+        // Apply major IDs.
         const build_class = wep_to_class.get(build.weapon.statMap.get("type"));
         for (const major_id_name of build.statMap.get("activeMajorIDs")) {
-            console.log(major_id_name);
+
+            // Sometimes, something silly happens and we haven't implemented a major ID that
+            //   exists. This makes sure we don't try to apply unimplemented major IDs.
+            //
+            // `major_ids` is a global map loaded from data json.
             if (major_id_name in major_ids) {
+
+                // A major ID can have multiple abilities, specified as atree nodes,
+                //   as part of its effects. Apply each of them.
                 for (const abil of major_ids[major_id_name].abilities) {
-                    if (abil["class"] === build_class) { console.log(abil); merge_abil(abil); }
+
+                    // But only the ones that match the current class.
+                    if (abil["class"] === build_class) {
+
+                        // Major IDs can have ability dependencies.
+                        // By default they are always on.
+                        if (abil.dependencies !== undefined) {
+
+                            let dep_satisfied = true;
+                            for (const dep_id of abil.dependencies) {
+                                if (!atree_state.get(dep_id).active) {
+                                    dep_satisfied = false;
+                                    break;
+                                }
+                            }
+                            if (!dep_satisfied) { continue; }
+                        }
+                        merge_abil(abil);
+                    }
                 }
             }
         }
