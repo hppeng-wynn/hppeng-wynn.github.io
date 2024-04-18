@@ -3604,7 +3604,7 @@ const atrees = {
                         },
                         {
                             "name": "DPS",
-                            "hits": { "Damage Tick": "Flaming Uppercut.rate" }
+                            "hits": { "Damage Tick": "Uppercut.rate" }
                         },
                         {
                             "name": "Total Damage",
