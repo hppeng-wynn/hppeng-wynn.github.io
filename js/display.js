@@ -496,7 +496,7 @@ function displayExpandedItem(item, parent_id){
             base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
         }
         else {
-            base_dps_elem.textContent = "Base DPS: "+(total_damages);
+            base_dps_elem.textContent = "Base DPS: "+(total_damages.toFixed(3));
         }
         parent_div.append(make_elem("p"), base_dps_elem);
     }
