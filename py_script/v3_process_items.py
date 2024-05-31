@@ -259,7 +259,8 @@ for tome in tomes:
         tome['alias'] = 'NO_ALIAS'
     else:
         old_tome = tome_value_map[tome['name']]
-        tome['alias'] = old_tome['alias']
+        if 'alias' in old_tome:
+            tome['alias'] = old_tome['alias']
     tome['id'] = tome_map[tome['name']]
 
 #write items back into data

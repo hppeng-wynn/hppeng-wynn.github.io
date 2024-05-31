@@ -11,7 +11,7 @@
       "displayName": "Tome of Gathering Mastery III",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Gathering 3",
       "id": 73
     },
     {
@@ -136,7 +136,7 @@
       "displayName": "Mastermind's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Rainbow",
       "id": 74
     },
     {
@@ -151,7 +151,6 @@
       "displayName": "Tome of Armour Mastery I",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
       "id": 75
     },
     {
@@ -242,7 +241,7 @@
       "displayName": "Pickpocket's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Thunder",
       "id": 76
     },
     {
@@ -306,7 +305,7 @@
       "displayName": "Tome of Slaying Mastery III",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Slaying 3",
       "id": 77
     },
     {
@@ -494,7 +493,7 @@
       "displayName": "Tome of Slaying Mastery I",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Slaying 1",
       "id": 78
     },
     {
@@ -508,7 +507,7 @@
       "displayName": "Tome of Gathering Mastery I",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Gathering 1",
       "id": 79
     },
     {
@@ -661,7 +660,7 @@
       "displayName": "Scoundrel's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Air",
       "id": 80
     },
     {
@@ -804,7 +803,7 @@
       "displayName": "Spelunker's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Earth",
       "id": 81
     },
     {
@@ -954,7 +953,7 @@
       "displayName": "Tome of Slaying Mastery II",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Slaying 2",
       "id": 82
     },
     {
@@ -1043,7 +1042,7 @@
       "displayName": "Tome of Dungeoneering Mastery II",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Dungeon 2",
       "id": 83
     },
     {
@@ -1072,7 +1071,7 @@
       "displayName": "Tome of Gathering Mastery II",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Gathering 2",
       "id": 84
     },
     {
@@ -1101,7 +1100,7 @@
       "displayName": "Tome of Dungeoneering Mastery I",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Dungeon 2",
       "id": 85
     },
     {
@@ -1176,7 +1175,7 @@
       "displayName": "Manipulator's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Water",
       "id": 86
     },
     {
@@ -1207,7 +1206,7 @@
       "displayName": "Plunderer's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Fire",
       "id": 87
     },
     {
@@ -1321,7 +1320,7 @@
       "displayName": "Thief's Tome of Lootrun Mastery",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Neutral",
       "id": 88
     },
     {
@@ -1366,7 +1365,7 @@
       "displayName": "Tome of Dungeoneering Mastery III",
       "category": "tome",
       "fixID": false,
-      "alias": "NO_ALIAS",
+      "alias": "Dungeon 3",
       "id": 89
     },
     {
