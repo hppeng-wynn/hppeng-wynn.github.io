@@ -235,7 +235,7 @@ async function parse_hash(url_tag) {
                 let tome_name = getTomeNameFromID(Base64.toInt(tome_str));
                 setValue(tomeInputs[i], tome_name);
             }
-            data_str = data_str.slice(14);
+            data_str = data_str.slice(num_tomes*2);
         }
     }
 
