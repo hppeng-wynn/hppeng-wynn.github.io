@@ -1,5 +1,5 @@
 const atrees = {
-	"Archer": [
+    "Archer": [
         {
             "display_name": "Arrow Bomb",
             "desc": "Shoots a long-ranged arrow that explodes and deals high damage over a large area. (Self-damage for 10% of your DPS)",
@@ -189,7 +189,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Escape",
             "desc": "Throw yourself backward to avoid danger. (Hold shift while escaping to cancel)",
             "parents": [
@@ -240,7 +240,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Arrow Storm",
             "desc": "Shoots a stream of 8 arrows, dealing significant damage to close mobs and pushing them away.",
             "parents": [
@@ -293,8 +293,8 @@ const atrees = {
                     ]
                 }
             ]
-		},
-		{
+        },
+        {
             "display_name": "Cheaper Escape I",
             "desc": "Reduce the Mana cost of Escape.",
             "base_abil": "Escape",
@@ -319,7 +319,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Arrow Shield",
             "desc": "Forms a shield around you that deals damage and knocks away mobs when they touch it. (2 Charges)",
             "parents": [
@@ -370,7 +370,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Windy Feet",
             "desc": "Casting Escape grants a 20% speed buff for 120 seconds to you and nearby players.",
             "base_abil": "Escape",
@@ -391,7 +391,7 @@ const atrees = {
             },
             "effects": []
         },
-		{
+        {
             "display_name": "Air Mastery",
             "base_abil": 998,
             "desc": "Increase your base damage from all Air attacks",
@@ -432,7 +432,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Thunder Mastery",
             "base_abil": 998,
             "desc": "Increase your base damage from all Thunder attacks.",
@@ -475,7 +475,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Fire Mastery",
             "base_abil": 998,
             "desc": "Increase your base damage from all Fire attacks",
@@ -518,7 +518,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Water Mastery",
             "base_abil": 998,
             "desc": "Increases your base damage from all Water attacks",
@@ -559,7 +559,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Earth Mastery",
             "base_abil": 998,
             "desc": "Increase your base damage from all Earth attacks",
@@ -567,8 +567,8 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Thunder Mastery",
-				"Cheaper Escape I",
-				"Fire Mastery"
+                "Cheaper Escape I",
+                "Fire Mastery"
             ],
             "dependencies": [],
             "blockers": [],
@@ -602,7 +602,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Nimble String",
             "desc": "Doubles the speed of Arrow Storm and shoots +6 arrows per stream.",
             "base_abil": "Arrow Storm",
@@ -647,7 +647,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Arrow Rain",
             "desc": "When Arrow Shield loses its last charge, spew 150 arrows around you to rain down on enemies.",
             "base_abil": "Arrow Shield",
@@ -682,7 +682,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Bryophyte Roots",
             "desc": "Hitting an enemy with Arrow Storm will create an area that slows them down and deals damage every 0.4s.",
             "base_abil": "Arrow Storm",
@@ -731,7 +731,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Fire Creep",
             "desc": "Arrow Bomb will leave a trail of fire for 6s. (3s cooldown) Enemies that walk into it take damage every 0.4s.",
             "base_abil": "Arrow Bomb",
@@ -776,7 +776,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Phantom Ray",
             "desc": "Condense Arrow Storm into a single ray that damages enemies 10 times per second",
             "base_abil": "Arrow Storm",
@@ -790,7 +790,7 @@ const atrees = {
             "blockers": [
                 "Windstorm",
                 "Nimble String",
-				"Arrow Hurricane"
+                "Arrow Hurricane"
             ],
             "cost": 2,
             "display": {
@@ -835,7 +835,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Triple Shots",
             "desc": "Triples Main Attack arrows but they deal -20% of normal Main Attack arrow damage.",
             "archetype": "Boltslinger",
@@ -881,7 +881,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Frenzy",
             "desc": "Hitting an enemy will give you a brief buff of +3% Walk Speed. (Max +70%) -10% of the bonus decays every second.",
             "archetype": "Boltslinger",
@@ -916,7 +916,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Guardian Angels",
             "desc": "Your Arrow Shield arrows turn into sentient bows that attack nearby enemies up to 8 times each. (Arrow Shield will no longer knock mobs away)",
             "archetype": "Boltslinger",
@@ -988,7 +988,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Basaltic Trap",
             "desc": "When you hit the ground with Arrow Bomb, leave a Trap that damages enemies. (Max 2 Traps)",
             "archetype": "Trapper",
@@ -1031,7 +1031,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Focus",
             "desc": "When hitting an aggressive enemy 5+ blocks away, gain +1 Focus. (Max 3, 1.1s cooldown, Focus resets if you miss once, +15% damage bonus per focus)",
             "archetype": "Sharpshooter",
@@ -1064,7 +1064,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Windstorm",
             "desc": "Arrow Storm will shoot +1 stream of arrows and +2 extra arrows per stream.",
             "base_abil": "Arrow Storm",
@@ -1116,7 +1116,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Cheaper Arrow Storm I",
             "desc": "Reduce the Mana cost of Arrow Storm.",
             "base_abil": "Arrow Storm",
@@ -1142,7 +1142,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Implosion",
             "desc": "Arrow bomb pulls enemies towards you. If a trap is nearby, it will pull them towards it instead. Increase Heart Shatter's damage.",
             "archetype": "Trapper",
@@ -1150,7 +1150,7 @@ const atrees = {
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Cheaper Arrow Storm I",
-				"Basaltic Trap",
+                "Basaltic Trap",
                 "More Shields"
             ],
             "dependencies": [],
@@ -1178,7 +1178,7 @@ const atrees = {
                 }
             ]
         },
-		        {
+                {
             "display_name": "More Shields",
             "desc": "Gives Arrow Shield and Guardian Angels +2 extra charges. Reduces Guardian Angels' damage.",
             "base_abil": "Arrow Shield",
@@ -1215,7 +1215,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Patient Hunter",
             "desc": "Your Traps will deal +20% more damage for every second it's active. (Max +100%)",
             "archetype": "Trapper",
@@ -1223,7 +1223,7 @@ const atrees = {
             "base_abil": "Basaltic Trap",
             "parents": [
                 "Cheaper Arrow Storm I",
-				"Implosion",
+                "Implosion",
                 "Grappling Hook"
             ],
             "dependencies": [
@@ -1254,7 +1254,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Grappling Hook",
             "base_abil": "Escape",
             "desc": "When casting Escape, throw a hook that pulls you when hitting a block. If you hit an enemy, pull them towards you instead. (Escape will not throw you backward anymore)",
@@ -1278,7 +1278,7 @@ const atrees = {
             "properties": { "range": 30 },
             "effects": []
         },
-		{
+        {
             "display_name": "More Focus I",
             "desc": "Increase your maximum Focus by +2.",
             "archetype": "Sharpshooter",
@@ -1314,7 +1314,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Stormy Feet",
             "desc": "Windy Feet will last longer and grant a stronger speed buff. (+20% speed, +60s)",
             "archetype": "Boltslinger",
@@ -1337,7 +1337,7 @@ const atrees = {
             },
             "effects": []
         },
-		{
+        {
             "display_name": "Call of the Hound",
             "desc": "Arrow Shield summons a Hound that will attack aggressive enemies every 0.25s and drag them towards your traps.",
             "archetype": "Trapper",
@@ -1378,7 +1378,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Leap",
             "desc": "Leap forward when you double jump. (2s Cooldown)",
             "archetype": "Boltslinger",
@@ -1400,7 +1400,7 @@ const atrees = {
             },
             "effects": []
         },
-		{
+        {
             "display_name": "Traveler",
             "desc": "For every 1% Walk Speed you have from items, gain +1 Raw Spell Damage (Max 100)",
             "parents": [
@@ -1437,12 +1437,12 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Bouncing Bomb",
             "desc": "Arrow Bomb will bounce once when hitting a block or enemy.",
             "base_abil": "Arrow Bomb",
             "parents": [
-		"Patient Hunter",
+        "Patient Hunter",
                 "Traveler",
                 "Ivyroot Mamba"
             ],
@@ -1459,7 +1459,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Ivyroot Mamba",
             "desc": "Bryophyte Roots summons a Snake after disappearing that will spit weakening venom at aggressive enemies. (Max 1) Enemies will be weakened for 1.5s.",
             "archetype": "Trapper",
@@ -1467,7 +1467,7 @@ const atrees = {
             "base_abil": "Arrow Storm",
             "parents": [
                 "Bouncing Bomb",
-		"Twain's Arc"
+        "Twain's Arc"
             ],
             "dependencies": [
                 "Bryophyte Roots"
@@ -1514,7 +1514,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Twain's Arc",
             "desc": "When you have 2+ Focus, holding shift will summon the Twain's Arc. Charge it up to shoot a destructive long-range beam. (Damage is dealt as Main Attack Damage)",
             "archetype": "Sharpshooter",
@@ -1562,7 +1562,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Rocket Jump",
             "desc": "Arrow Bomb's recoil is increased and it's self-damage is reduced to 1%.",
             "base_abil": "Arrow Bomb",
@@ -1583,7 +1583,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Scorched Earth",
             "desc": "Fire Creep becomes much stronger.",
             "archetype": "Sharpshooter",
@@ -1622,7 +1622,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "More Traps",
             "desc": "Increase the maximum amount of active Traps you can have by +2.",
             "archetype": "Trapper",
@@ -1630,7 +1630,7 @@ const atrees = {
             "base_abil": "Basaltic Trap",
             "parents": [
                 "Bouncing Bomb",
-				"Traveler"
+                "Traveler"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -1657,13 +1657,13 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Refined Gunpowder",
             "desc": "Increase the damage of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Leap",
-				"Fierce Stomp"
+                "Fierce Stomp"
             ],
             "dependencies": [],
             "blockers": [],
@@ -1690,7 +1690,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Fierce Stomp",
             "desc": "When using Escape, hold shift to quickly drop down and deal damage.",
             "archetype": "Boltslinger",
@@ -1738,14 +1738,14 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Cheaper Arrow Shield I",
             "desc": "Reduce the Mana cost of Arrow Shield.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Fierce Stomp",
                 "Better Arrow Shield",
-				"More Traps"
+                "More Traps"
             ],
             "dependencies": [],
             "blockers": [],
@@ -1764,14 +1764,14 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Better Arrow Shield",
             "desc": "Arrow Shield's radius, knockback, and damage is increased. Guardian Angels' damage is increased.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Ivyroot Mamba",
-				"Cheaper Arrow Shield I",
-				"Shocking Bomb"
+                "Cheaper Arrow Shield I",
+                "Shocking Bomb"
             ],
             "dependencies": [
                 "Arrow Shield"
@@ -1829,7 +1829,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Shocking Bomb",
             "desc": "Arrow Bomb will be unaffected by gravity and increase its explosion damage.",
             "archetype": "Sharpshooter",
@@ -1861,7 +1861,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Better Leap",
             "desc": "Reduce leap's cooldown by 1s.",
             "archetype": "Boltslinger",
@@ -1869,7 +1869,7 @@ const atrees = {
             "base_abil": "Leap",
             "parents": [
                 "Refined Gunpowder",
-				"Fierce Stomp"
+                "Fierce Stomp"
             ],
             "dependencies": [
                 "Leap"
@@ -1896,7 +1896,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Homing Shots",
             "desc": "Your Main Attack arrows will follow nearby enemies and be unaffected by gravity",
             "archetype": "Sharpshooter",
@@ -1917,7 +1917,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Mana Trap",
             "desc": "Your Traps will give you 0.5 Mana per second and 10 Mana when they explode.",
             "archetype": "Trapper",
@@ -1925,7 +1925,7 @@ const atrees = {
             "base_abil": "Basaltic Trap",
             "parents": [
                 "Fierce Stomp",
-				"Cheaper Arrow Shield I",
+                "Cheaper Arrow Shield I",
                 "Cheaper Arrow Storm II"
             ],
             "dependencies": [],
@@ -1949,7 +1949,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Cheaper Arrow Storm II",
             "desc": "Reduce the Mana cost of Arrow Storm.",
             "base_abil": "Arrow Storm",
@@ -1974,14 +1974,14 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Initiator",
             "desc": "If you do not damage an enemy for 4s or more, your next sucessful hit will deal +60% damage and add +1 Focus.",
             "archetype": "Sharpshooter",
             "parents": [
                 "Cheaper Arrow Storm II",
                 "Better Arrow Shield",
-				"Shocking Bomb"
+                "Shocking Bomb"
             ],
             "dependencies": [
                 "Focus"
@@ -2008,7 +2008,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Better Guardian Angels",
             "desc": "Your Guardian Angels gain increased range and can shoot +4 extra arrows before disappearing.",
             "archetype": "Boltslinger",
@@ -2042,14 +2042,14 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Escape Artist",
             "desc": "When casting Escape, release 100 arrows towards the ground.",
             "base_abil": "Escape",
             "parents": [
                 "Better Guardian Angels",
                 "Fierce Stomp",
-				"Murder Flock"
+                "Murder Flock"
             ],
             "dependencies": [],
             "blockers": [
@@ -2087,16 +2087,16 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Murder Flock",
             "desc": "Basaltic Trap summons a Crow upon detonation that will peck at aggressive enemies every 0.9s. (Max 2) Enemies will be distracted for 0.2s.",
             "archetype": "Trapper",
             "archetype_req": 5,
             "base_abil": "Arrow Shield",
-			"parents": [
+            "parents": [
                 "Mana Trap",
-				"Cheaper Arrow Storm II",
-				"Escape Artist"
+                "Cheaper Arrow Storm II",
+                "Escape Artist"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -2141,9 +2141,9 @@ const atrees = {
                         }
                     ]
                 }
-			]
-		},
-		{
+            ]
+        },
+        {
             "display_name": "Decimator",
             "desc": "Phantom Ray will increase its damage by 10% everytime you do not miss with it. (Max 70%)",
             "archetype": "Sharpshooter",
@@ -2181,7 +2181,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Phasing Beam",
             "desc": "Twain's Arc charges 20% faster, and can now pierce through up to 5 enemies, dealing reduced damage after piercing. (Damage is dealt as Main Attack Damage)",
             "archetype": "Sharpshooter",
@@ -2202,7 +2202,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Recycling",
             "desc": "When any of your projectiles miss, gain +0.08 Mana.",
             "archetype": "Boltslinger",
@@ -2221,7 +2221,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Shrapnel Bomb",
             "desc": "Arrow Bomb's explosion will fling 30 shrapnel, dealing damage in a large area",
             "archetype": "Boltslinger",
@@ -2230,7 +2230,7 @@ const atrees = {
             "parents": [
                 "Recycling",
                 "Escape Artist",
-				"Cheaper Escape II"
+                "Cheaper Escape II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -2257,14 +2257,14 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Cheaper Escape II",
             "desc": "Reduce the Mana cost of Escape.",
             "base_abil": "Escape",
             "parents": [
                 "Murder Flock",
                 "Shrapnel Bomb",
-				"Cheaper Arrow Shield II"
+                "Cheaper Arrow Shield II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -2283,13 +2283,13 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Cheaper Arrow Shield II",
             "desc": "Reduce the Mana cost of Arrow Shield.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Phasing Beam",
-				"Cheaper Escape II",
+                "Cheaper Escape II",
                 "Decimator"
             ],
             "dependencies": [],
@@ -2309,7 +2309,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Stronger Hook",
             "desc": "Increase your Grappling Hook's range, speed and strength.",
             "archetype": "Trapper",
@@ -2317,7 +2317,7 @@ const atrees = {
             "base_abil": "Escape",
             "parents": [
                 "Cheaper Escape II",
-				"Cheaper Arrow Shield II"
+                "Cheaper Arrow Shield II"
             ],
             "dependencies": [
                 "Grappling Hook"
@@ -2332,7 +2332,7 @@ const atrees = {
             "properties": { "range": 8 },
             "effects": []
         },
-		{
+        {
             "display_name": "Coursing Restraints",
             "desc": "Shocking Bomb will temporarily shock enemies reducing their defences. (12s cooldown)",
             "archetype": "Sharpshooter",
@@ -2340,8 +2340,8 @@ const atrees = {
                 "Cheaper Arrow Shield II"
             ],
             "dependencies": [
-				"Shocking Bomb"
-			],
+                "Shocking Bomb"
+            ],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -2350,18 +2350,18 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-				"duration": 6,
-				"cooldown": 12
-			},
+                "duration": 6,
+                "cooldown": 12
+            },
             "effects": [ 
-				{
+                {
                     "type": "raw_stat",
                     "toggle": "Coursing Restraints",
                     "bonuses": [ {"type": "stat", "name": "damMult.CoursingRestraints", "value": 15} ]
                 }
-			]
+            ]
         },
-		{
+        {
             "display_name": "Arrow Hurricane",
             "desc": "Arrow Storm will shoot +2 extra streams of arrows.",
             "archetype": "Boltslinger",
@@ -2406,14 +2406,14 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Tangled Traps",
             "desc": "Your Traps will be connected by a rope that deals damage to enemies every 0.2s.",
             "archetype": "Trapper",
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
             "parents": [
-				"Shrapnel Bomb",
+                "Shrapnel Bomb",
                 "Cheaper Escape II"
             ],
             "dependencies": [
@@ -2453,18 +2453,18 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Beast Lore",
             "desc": "Increase your maximum Snakes by +1. Increase your maximum Crows by +2. Increase the damage of your Hound.",
             "base_abil": "Call of the Hound",
             "archetype": "Trapper",
-			"archetype_req": 7,
+            "archetype_req": 7,
             "parents": [
-				"Tangled Traps"
-			],
+                "Tangled Traps"
+            ],
             "dependencies": [
-				"Call of the Hound"
-			],
+                "Call of the Hound"
+            ],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -2474,7 +2474,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [
-				{
+                {
                     "type": "add_spell_prop",
                     "base_spell": 8,
                     "target_part": "Single Hit",
@@ -2492,9 +2492,9 @@ const atrees = {
                     "target_part": "Total DPS",
                     "hits": { "Per Snake DPS": 1 }
                 }
-			]
+            ]
         },
-		{
+        {
             "display_name": "Crepuscular Ray",
             "desc": "If you have 5+ Focus, casting Arrow Storm while 4+ blocks above the ground cause you to levitate and shoot 20 homing arrows per second until you run out of Focus. While in this state, you will lose 1 Focus per second.",
             "archetype": "Sharpshooter",
@@ -2547,7 +2547,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Minefield",
             "desc": "Allow you to place +6 Traps, but with reduced damage and range.",
             "archetype": "Trapper",
@@ -2602,7 +2602,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "All-Seeing Panoptes",
             "desc": "Your bows from Guardian Angels become all-seeing, increasing their range, damage and letting them shoot up to +4 times each.",
             "archetype": "Boltslinger",
@@ -2640,7 +2640,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Stronger Patient Hunter",
             "desc": "Increase Patient Hunter's damage gain per second by +10% and add increase its Max Damage by +100%",
             "archetype": "Trapper",
@@ -2670,7 +2670,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Grape Bomb",
             "desc": "Arrow bomb will throw 2 additional smaller bombs when exploding.",
             "base_abil": "Arrow Bomb",
@@ -2705,7 +2705,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "More Focus II",
             "desc": "Add +2 max Focus",
             "archetype": "Sharpshooter",
@@ -2713,7 +2713,7 @@ const atrees = {
             "base_abil": "Focus",
             "parents": [
                 "Crepuscular Ray",
-				"Grape Bomb"
+                "Grape Bomb"
             ],
             "dependencies": [
                 "Focus"
@@ -2742,7 +2742,7 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Elusive",
             "desc": "If you do not get hit for 4+ seconds, become immune to self-damage and Arrow Storm's loses its recoil. (Dodging counts as not getting hit)",
             "archetype": "Boltslinger",
@@ -2761,7 +2761,7 @@ const atrees = {
             "properties": {},
             "effects": []
         },
-		{
+        {
             "display_name": "Geyser Stomp",
             "desc": "Fierce Stomp will create geysers, dealing more damage and pushing enemies away vertically.",
             "base_abil": "Escape",
@@ -2815,13 +2815,13 @@ const atrees = {
                 }
             ]
         },
-		{
+        {
             "display_name": "Snow Storm",
             "desc": "Enemies near you will be slowed down.",
             "parents": [
                 "Geyser Stomp",
                 "Cheaper Arrow Bomb II",
-				"Stronger Patient Hunter"
+                "Stronger Patient Hunter"
             ],
             "dependencies": [],
             "blockers": [],
@@ -2837,14 +2837,14 @@ const atrees = {
             },
             "effects": []
         },
-		{
+        {
             "display_name": "Cheaper Arrow Bomb II",
             "desc": "Reduce the Mana cost of Arrow Bomb.",
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Grape Bomb",
-				"More Focus II",
-				"Snow Storm"
+                "More Focus II",
+                "Snow Storm"
             ],
             "dependencies": [],
             "blockers": [],
@@ -2863,7 +2863,7 @@ const atrees = {
                 }
             ]
         }
-	],
+    ],
     "Warrior": [
         {
             "display_name": "Bash",
@@ -4857,7 +4857,7 @@ const atrees = {
                 }
             ]  
         },
-		{
+    {
             "display_name": "Stronger Sacred Surge",
             "desc": "Increases the damage of Sacred Surge",
             "archetype": "Paladin", 
@@ -4873,7 +4873,7 @@ const atrees = {
             },
             "properties": {},
             "effects": [{
-            	"type": "add_spell_prop",
+                "type": "add_spell_prop",
                 "base_spell": 9,
                 "target_part": "Smite Damage",
                 "multipliers": [70, 0, 10, 0, 0, 0]
@@ -5015,7 +5015,7 @@ const atrees = {
             ]
         }
     ],
- 	"Mage": [
+     "Mage": [
         {
             "display_name": "Meteor",
             "desc": "Summons a slow but powerful meteor from the sky, dealing massive damage over a large area.",
@@ -6574,7 +6574,7 @@ const atrees = {
             "archetype_req": 7,
             "parents": [
                 "Orphion's Pulse",
-		"Arcane Speed"
+                "Arcane Speed"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8272,7 +8272,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Mirror Image",
-		"Psithurism"
+        "Psithurism"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8964,7 +8964,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Wall of Smoke",
-		"Shenanigans"
+        "Shenanigans"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9235,7 +9235,7 @@ const atrees = {
             "parents": [
                 "Nightcloak Knife",
                 "Cheaper Multihit II",
-		"Dissolution"
+        "Dissolution"
             ],
             "dependencies": [
                 "Marked"
@@ -9561,11 +9561,11 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Spell Copies",
                     "slider_max": 3,
-		    "bonuses": [{
+            "bonuses": [{
                     "type": "stat",
                     "name": "damMult.Echo",
                     "value": -10
-		    }]
+            }]
                 }
             ]
         },
@@ -9834,7 +9834,7 @@ const atrees = {
             "parents": [
                 "Cheaper Multihit II",
                 "Hoodwink",
-		"Fatal Spin"
+        "Fatal Spin"
             ],
             "dependencies": ["Vanish"],
             "blockers": [],
@@ -11923,7 +11923,7 @@ const atrees = {
                 }
             ]
         },
-	{
+        {
             "display_name": "Chant of the Lunatic",
             "desc": "When switching to Mask of the Lunatic, reduce the defenses of nearby enemies. (8s Cooldown)",
             "archetype": "Ritualist",

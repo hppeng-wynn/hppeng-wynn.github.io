@@ -578,8 +578,21 @@ class SpellDamageCalcNode extends ComputeNode {
         const use_speed = (('use_atkspd' in spell) ? spell.use_atkspd : true);
         const use_spell = (('scaling' in spell) ? spell.scaling === 'spell' : true);
 
-        // TODO: move preprocessing to separate node/node chain
         for (const part of spell_parts) {
+            const {name, display=true} = part;
+            spell_result_map.set(name, {type: "need_eval", store_part: part});
+        }
+
+        function eval_part(part_name) {
+            let dat = spell_result_map.get(part_name);
+            if (!dat) {
+                return dat; // return null, or undefined, or whatever it is that this gives
+            }
+            if (dat.type !== "need_eval") {
+                return dat; // Already evaluated. Return it
+            }
+
+            let part = dat.store_part;
             let spell_result;
             const part_id = spell.base_spell + '.' + part.name
             if ('multipliers' in part) { // damage type spell
@@ -605,55 +618,51 @@ class SpellDamageCalcNode extends ComputeNode {
                     type: "heal",
                     heal_amount: _heal_amount
                 }
-            }
-            else {
-                continue;
-            }
-            const {name, display = true} = part;
-            spell_result.name = name;
-            spell_result.display = display;
-            display_spell_results.push(spell_result);
-            spell_result_map.set(name, spell_result);
-        }
-        for (const part of spell_parts) {
-            if (!('hits' in part)) { continue; }
-            let spell_result = {
-                normal_min: [0, 0, 0, 0, 0, 0],
-                normal_max: [0, 0, 0, 0, 0, 0],
-                normal_total: [0, 0],
-                crit_min: [0, 0, 0, 0, 0, 0],
-                crit_max: [0, 0, 0, 0, 0, 0],
-                crit_total: [0, 0],
-                heal_amount: 0
-            }
-            const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
-            for (const [subpart_name, hits] of Object.entries(part.hits)) {
-                const subpart = spell_result_map.get(subpart_name);
-                if (!subpart) { continue; }
-                if (spell_result.type) {
-                    if (subpart.type !== spell_result.type) {
-                        throw "SpellCalc total subpart type mismatch";
-                    }
+            } else {    // if 'hits' in part
+                spell_result = {
+                    normal_min: [0, 0, 0, 0, 0, 0],
+                    normal_max: [0, 0, 0, 0, 0, 0],
+                    normal_total: [0, 0],
+                    crit_min: [0, 0, 0, 0, 0, 0],
+                    crit_max: [0, 0, 0, 0, 0, 0],
+                    crit_total: [0, 0],
+                    heal_amount: 0
                 }
-                else {
-                    spell_result.type = subpart.type;
-                }
-                if (spell_result.type === 'damage') {
-                    for (const key of dam_res_keys) {
-                        for (let i in spell_result.normal_min) {
-                            spell_result[key][i] += subpart[key][i] * hits;
+                const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
+                for (const [subpart_name, hits] of Object.entries(part.hits)) {
+                    const subpart = eval_part(subpart_name);
+                    if (!subpart) { continue; }
+                    if (spell_result.type) {
+                        if (subpart.type !== spell_result.type) {
+                            throw "SpellCalc total subpart type mismatch";
                         }
                     }
-                }
-                else {
-                    spell_result.heal_amount += subpart.heal_amount * hits;
+                    else {
+                        spell_result.type = subpart.type;
+                    }
+                    if (spell_result.type === 'damage') {
+                        for (const key of dam_res_keys) {
+                            for (let i in spell_result.normal_min) {
+                                spell_result[key][i] += subpart[key][i] * hits;
+                            }
+                        }
+                    }
+                    else {
+                        spell_result.heal_amount += subpart.heal_amount * hits;
+                    }
                 }
             }
             const {name, display = true} = part;
             spell_result.name = name;
             spell_result.display = display;
-            display_spell_results.push(spell_result);
             spell_result_map.set(name, spell_result);
+            return spell_result;
+        }
+
+        // TODO: move preprocessing to separate node/node chain
+        for (const part of spell_parts) {
+            let spell_result = eval_part(part.name);
+            display_spell_results.push(spell_result);
         }
         return display_spell_results;
     }
