@@ -6573,7 +6573,8 @@ const atrees = {
             "archetype": "Light Bender",
             "archetype_req": 7,
             "parents": [
-                "Orphion's Pulse"
+                "Orphion's Pulse",
+		"Arcane Speed"
             ],
             "dependencies": [],
             "blockers": [],
