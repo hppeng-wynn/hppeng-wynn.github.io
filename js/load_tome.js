@@ -134,10 +134,10 @@ async function load_tome_init() {
 }
 
 const none_tomes_info = [
-    ["tome", "weaponTome", "No Weapon Tome"],
-    ["tome", "armorTome", "No Armor Tome"],
-    ["tome", "guildTome", "No Guild Tome"],
-    ["tome", "lootrunTome", "No Lootrun Tome"]
+    ["tome", "weaponTome", "No Weapon Tome", 61],
+    ["tome", "armorTome", "No Armor Tome", 62],
+    ["tome", "guildTome", "No Guild Tome", 63],
+    ["tome", "lootrunTome", "No Lootrun Tome", 93]
 ];
 let none_tomes;
 
@@ -167,7 +167,7 @@ function init_tome_maps() {
         tome.reqs = [0, 0, 0, 0, 0];
         tome.fixID = true;
         tome.tier = "Normal";
-        tome.id = 61 + i; //special case!
+        tome.id = none_tomes_info[i][3];
         tome.nDam = "0-0";
         tome.eDam = "0-0";
         tome.tDam = "0-0";
