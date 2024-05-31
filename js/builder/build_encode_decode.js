@@ -281,10 +281,10 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
                 build_string += "CR-"+encodeCraft(item);
             } else if (item.statMap.get("category") === "tome") {
                 let tome_id = item.statMap.get("id");
-                if (tome_id <= 60) {
+                //if (tome_id <= 60) {
                     // valid normal tome. ID 61-63 is for NONE tomes.
                     //build_version = Math.max(build_version, 6);
-                }
+                //}
                 tome_string += Base64.fromIntN(tome_id, 2);
             } else {
                 build_string += Base64.fromIntN(item.statMap.get("id"), 3);

@@ -8100,6 +8100,13 @@ const atrees = {
                     "behavior": "modify",
                     "target_part": "Per Tick",
                     "multipliers": [0, 0, 0, 0, 10, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "behavior": "modify",
+                    "target_part": "Single Bomb",
+                    "multipliers": [0, 0, 0, 0, 10, 0]
                 }
             ]
         },
