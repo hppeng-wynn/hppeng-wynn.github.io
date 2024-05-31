@@ -60,6 +60,7 @@ let tome_fields = [
     "armorTome3",
     "armorTome4",
     "guildTome1",
+    "lootrunTome1"
 ]
 let equipment_names = [
     "Helmet",
@@ -99,7 +100,7 @@ let armor_keys = ['helmet', 'chestplate', 'leggings', 'boots'];
 let accessory_keys= ['ring1', 'ring2', 'bracelet', 'necklace'];
 let powderable_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'weapon'];
 let equipment_keys = ['helmet', 'chestplate', 'leggings', 'boots', 'ring1', 'ring2', 'bracelet', 'necklace', 'weapon'];
-let tome_keys = ['weaponTome1', 'weaponTome2', 'armorTome1', 'armorTome2', 'armorTome3', 'armorTome4', 'guildTome1'];
+let tome_keys = ['weaponTome1', 'weaponTome2', 'armorTome1', 'armorTome2', 'armorTome3', 'armorTome4', 'guildTome1', 'lootrunTome1'];
 
 let spell_disp = ['build-melee-stats', 'spell0-info', 'spell1-info', 'spell2-info', 'spell3-info'];
 let other_disp = ['build-order', 'set-info', 'int-info'];

@@ -1,4 +1,26 @@
 {
+    "tome": {
+        "name": "displayName",
+        "internalName": "name",
+        "tier": "CAPS;tier",
+        "material": "DELETE;",
+        "base": "UNWRAP;tome.base",
+        "dropMeta": "DELETE;",
+        "identifications": "UNWRAP;identifications",
+        "requirements": "UNWRAP;requirements",
+        "raidReward": "DELETE;",
+        "dropRestriction": "drop",
+        "restrictions": "restrict",
+        "tomeType": "type",
+        "tomeVariant": "DELETE;"
+    },
+    "tome.base": {
+        "gatheringXP": "tomeGatherXP",
+        "slayingXP": "tomeXP",
+        "dungeonXP": "tomeDungeonXP",
+        "defenceToMobs": "defMobs",
+        "damageToMobs": "damMobs"
+    },
     "ingredient": {
         "name": "displayName",
         "internalName": "name",
@@ -80,7 +102,8 @@
         "dexterity": "dexReq",
         "intelligence": "intReq",
         "agility": "agiReq",
-        "defence": "defReq"
+        "defence": "defReq",
+        "tomeSeeking": "DELETE;"
     },
     "identifications": {
         "healthRegen": "hprPct",

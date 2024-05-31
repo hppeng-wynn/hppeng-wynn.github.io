@@ -413,8 +413,10 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('armorTome2'),
             input_map.get('armorTome3'),
             input_map.get('armorTome4'),
-            input_map.get('guildTome1')
+            input_map.get('guildTome1'),
+            input_map.get('lootrunTome1')
         ];
+        console.log(equipments);
         let weapon = input_map.get('weapon');
         let level = parseInt(input_map.get('level-input'));
         if (isNaN(level)) {
@@ -537,7 +539,7 @@ function getDefenseStats(stats) {
     //eledefs - TODO POWDERS
     let eledefs = [0, 0, 0, 0, 0];
     for(const i in skp_elements){ //kinda jank but ok
-        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), stats.get(skp_elements[i] + "DefPct")/100.);
+        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), (stats.get(skp_elements[i] + "DefPct") + stats.get("rDefPct"))/100.);
     }
     defenseStats.push(eledefs);
     
@@ -1072,7 +1074,7 @@ function builder_graph_init(save_skp) {
         build_node.link_to(item_input, eq);
     }
 
-    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2]])) {
+    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2], none_tomes[3]])) {
         let input_field = document.getElementById(eq+"-choice");
         let item_image = document.getElementById(eq+"-img");
 

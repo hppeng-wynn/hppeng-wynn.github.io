@@ -466,7 +466,6 @@ function displayExpandedItem(item, parent_id){
     if (item.get("tier") && item.get("tier") !== " ") {
         let item_desc_elem = make_elem("div", ["col", item.get("tier")]);
         if (tome_types.includes(item.get("type"))) {
-            tome_type_map = new Map([["weaponTome", "Weapon Tome"],["armorTome", "Armor Tome"],["guildTome", "Guild Tome"]]);
             item_desc_elem.textContent = item.get("tier")+" "+tome_type_map.get(item.get("type"));
         } else {
             item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
@@ -496,7 +495,7 @@ function displayExpandedItem(item, parent_id){
             base_dps_elem.textContent = "Base DPS: "+base_dps_min.toFixed(3)+"\u279c"+base_dps_max.toFixed(3);
         }
         else {
-            base_dps_elem.textContent = "Base DPS: "+(total_damages);
+            base_dps_elem.textContent = "Base DPS: "+(total_damages.toFixed(3));
         }
         parent_div.append(make_elem("p"), base_dps_elem);
     }
@@ -1181,14 +1180,6 @@ function displayDefenseStats(parent_elem, statMap, insertSummary){
         boost.classList.add(eledefs[i] >= 0 ? "positive" : "negative");
         boost.classList.add("col");
         boost.classList.add("text-end");
-
-        let defRaw = statMap.get(skp_elements[i]+"Def");
-        let defPct = (statMap.get(skp_elements[i]+"DefPct") + statMap.get('rDefPct'))/100;
-        if (defRaw < 0) {
-            defPct >= 0 ? defPct = "- " + defPct: defPct = "+ " + defPct;
-        } else {
-            defPct >= 0 ? defPct = "+ " + defPct: defPct = "- " + defPct;
-        }
         eledefElemRow.appendChild(boost);
         
         if (insertSummary) {

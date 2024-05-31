@@ -3589,7 +3589,7 @@ const atrees = {
             },
             "properties": {
                 "duration": 3,
-                "tick": 0.6
+                "rate": 1.66666666666666666666666666666
             },
             "effects": [
                 {
@@ -3604,9 +3604,7 @@ const atrees = {
                         },
                         {
                             "name": "DPS",
-                            "hits": {
-                                "Damage Tick": 1.66666666666666666666666666666
-                            }
+                            "hits": { "Damage Tick": "Uppercut.rate" }
                         },
                         {
                             "name": "Total Damage",
@@ -3846,7 +3844,7 @@ const atrees = {
         },
         {
             "display_name": "Counter",
-            "desc": "When dodging a nearby enemy attack, get 30% chance to instantly attack back",
+            "desc": "Gain a 30% chance to take no damage and instantly attack back when dodging an enemy attack with Agility.",
             "archetype": "Battle Monk", 
             "parents": ["Aerodynamics", "Cheaper Uppercut", "Manachism"], 
             "dependencies": [], 
@@ -3990,7 +3988,7 @@ const atrees = {
         },
         {
             "display_name": "Sacred Surge",
-            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 20% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
+            "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 25% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
             "parents": ["Stronger Mantle", "Provoke"], 
@@ -4031,14 +4029,23 @@ const atrees = {
                 "col": 1,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "duration": 3,
+                "rate": 2.5
+            },
             "effects": [
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
-                    "target_part": "Boiling Blood",
+                    "target_part": "Boiling Blood Tick",
                     "cost": 0,
                     "multipliers": [25, 0, 0, 0, 5, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Boiling Blood DPS",
+                    "hits": { "Boiling Blood Tick": "Bash.rate" }
                 }
             ]
         },
@@ -4542,7 +4549,7 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Total Damage",
-                    "hits": { "Tempest": 3 }
+                    "hits": { "Tempest Total Damage": 1 }
                 }
             ]  
         },
@@ -5856,7 +5863,8 @@ const atrees = {
             "dependencies": [ "Heal" ],
             "blockers": [
                 "Larger Heal",
-                "Orphion's Pulse"
+                "Orphion's Pulse",
+                "Timelock"
             ],
             "cost": 2,
             "display": {
@@ -7258,7 +7266,7 @@ const atrees = {
                 "More Winded II"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": ["Arcane Transfer"],
             "cost": 2,
             "display": {
                 "row": 34,
@@ -8088,15 +8096,9 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
+                    "behavior": "modify",
                     "target_part": "Per Tick",
-                    "multipliers": [
-                        0,
-                        0,
-                        0,
-                        0,
-                        10,
-                        0
-                    ]
+                    "multipliers": [0, 0, 0, 0, 10, 0]
                 }
             ]
         },
@@ -8320,23 +8322,16 @@ const atrees = {
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
+                    "behavior": "modify",
                     "target_part": "Total Damage",
-                    "hits": {
-                        "Per Bomb": 2
-                    }
+                    "hits": { "Per Bomb": 2 }
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
+                    "behavior": "modify",
                     "target_part": "Per Tick",
-                    "multipliers": [
-                        -10,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
+                    "multipliers": [ -10, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -8871,11 +8866,15 @@ const atrees = {
                         },
                         {
                             "type": "stat",
+                            "name": "damMult.EchoCast:4.Single Bomb"
+                        },
+                        {
+                            "type": "stat",
                             "name": "damMult.EchoCast:6.Per Shuriken"
                         }
                     ],
                     "scaling": [
-                        100, 100, 100, 100, 100, 100, 100
+                        100
                     ]
                 }
             ]
@@ -10626,6 +10625,7 @@ const atrees = {
                     "slider_name": "Active Puppets",
                     "slider_step": 1,
                     "slider_max": 3,
+                    "slider_default": 3,
                     "output": [
                         {
                             "type": "prop",
@@ -10835,6 +10835,7 @@ const atrees = {
                 "slider": true,
                 "slider_name": "Active Puppets",
                 "slider_max": 1,
+                "slider_default": 1,
                 "output": [
                     {
                         "type": "prop",
@@ -11001,7 +11002,7 @@ const atrees = {
                 "bonuses": [
                     {
                         "type": "stat",
-                        "name": "damMult.Bullwhip:5.Puppet Hit",
+                        "name": "damMult.Bullwhip:6.Puppet Hit",
                         "value": 20
                     },
                     {
@@ -11034,6 +11035,7 @@ const atrees = {
                 "slider": true,
                 "slider_name": "Active Puppets",
                 "slider_max": 2,
+                "slider_default": 2,
                 "output": [
                     {
                         "type": "prop",

@@ -77,6 +77,8 @@ const itemQueryProps = (function() {
   const tierIndices = { Normal: 0, Unique: 1, Set: 2, Rare: 3, Legendary: 4, Fabled: 5, Mythic: 6 };
   prop(['rarityname', 'raritystr', 'tiername', 'tierstr'], 'string', (i, ie) => i.tier);
   prop(['rarity', 'tier'], 'number', (i, ie) => tierIndices[i.tier]);
+  prop(['majid', 'majorid'], 'string', (i, ie) => ((i.majorIds || [""])[0] || ""));
+  prop(['majids', 'majorids'], 'number', (i, ie) => (i.majorIds || []).length);
 
   prop(['level', 'lvl', 'combatlevel', 'combatlvl'], 'number', (i, ie) => i.lvl);
   prop(['strmin', 'strreq'], 'number', (i, ie) => i.strReq);
@@ -106,13 +108,43 @@ const itemQueryProps = (function() {
   maxId(['waterdmg%', 'waterdam%', 'wdmg%', 'wdam%', 'wdampct'], 'wDamPct');
   maxId(['firedmg%', 'firedam%', 'fdmg%', 'fdam%', 'fdampct'], 'fDamPct');
   maxId(['airdmg%', 'airdam%', 'admg%', 'adam%', 'adampct'], 'aDamPct');
-  sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
+  //sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
 
   maxId(['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct'], 'mdPct');
+  maxId(['emdpct'], 'eMdPct');
+  maxId(['tmdpct'], 'tMdPct');
+  maxId(['wmdpct'], 'wMdPct');
+  maxId(['fmdpct'], 'fMdPct');
+  maxId(['amdpct'], 'aMdPct');
+  maxId(['nmdpct'], 'nMdPct');
+  maxId(['rmdpct'], 'rMdPct');
+
   maxId(['mainatkrawdmg', 'mainatkrawdam', 'mainatkneutraldmg', 'mainatkneutraldam', 'meleerawdmg', 'meleerawdam', 'meleeneutraldmg', 'meleeneutraldam', 'mdraw'], 'mdRaw');
+  maxId(['emdraw'], 'eMdRaw');
+  maxId(['tmdraw'], 'tMdRaw');
+  maxId(['wmdraw'], 'wMdRaw');
+  maxId(['fmdraw'], 'fMdRaw');
+  maxId(['amdraw'], 'aMdRaw');
+  maxId(['nmdraw'], 'nMdRaw');
+  maxId(['rmdraw'], 'rMdRaw');
+
   maxId(['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct'], 'sdPct');
+  maxId(['esdpct'], 'eSdPct');
+  maxId(['tsdpct'], 'tSdPct');
+  maxId(['wsdpct'], 'wSdPct');
+  maxId(['fsdpct'], 'fSdPct');
+  maxId(['asdpct'], 'aSdPct');
+  maxId(['nsdpct'], 'nSdPct');
+  maxId(['rsdpct'], 'rSdPct');
+
   maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
-  maxId(['rainbowraw'], 'rSdRaw');
+  maxId(['esdraw'], 'eSdRaw');
+  maxId(['tsdraw'], 'tSdRaw');
+  maxId(['wsdraw'], 'wSdRaw');
+  maxId(['fsdraw'], 'fSdRaw');
+  maxId(['asdraw'], 'aSdRaw');
+  maxId(['nsdraw'], 'nSdRaw');
+  maxId(['rainbowraw', 'rsdraw'], 'rSdRaw');
 
   const atkSpdIndices = { SUPER_SLOW: -3, VERY_SLOW: -2, SLOW: -1, NORMAL: 0, FAST: 1, VERY_FAST: 2, SUPER_FAST: 3 };
   prop(['attackspeed', 'atkspd'], 'string', (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);
@@ -131,6 +163,7 @@ const itemQueryProps = (function() {
   maxId(['waterdef%', 'wdef%', 'wdefpct'], 'wDefPct');
   maxId(['firedef%', 'fdef%', 'fdefpct'], 'fDefPct');
   maxId(['airdef%', 'adef%', 'adefpct'], 'aDefPct');
+  maxId(['eledef%', 'rdef%', 'rdefpct'], 'rDefPct');
   sum(['sumdef%', 'totaldef%', 'sumdefpct', 'totaldefpct'], props.edefpct, props.tdefpct, props.wdefpct, props.fdefpct, props.adefpct);
 
   prop(['health', 'hp'], 'number', (i, ie) => i.hp || 0);

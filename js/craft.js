@@ -180,7 +180,6 @@ class Craft{
         /* Change certain IDs based on material tier. 
             healthOrDamage changes.
             duration and durability change. (but not basicDuration)
-
         */
         let matmult = 1;
         let tierToMult = [0,1,1.25,1.4];

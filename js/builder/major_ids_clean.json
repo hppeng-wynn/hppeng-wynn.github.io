@@ -160,24 +160,31 @@
   },
   "CHERRY_BOMBS": {
     "displayName": "Cherry Bombs",
-    "description": "Your Smoke Bombs explode instantly, and increase their Neutral Damage by +90%",
+    "description": "Turn Smoke Bomb into three firecrackers that fly farther, tighter, and deal high damage instantly",
     "abilities": [{
       "class": "Assassin",
       "base_abil": "Smoke Bomb",
-      "effects": [
-        {
-          "type": "add_spell_prop",
-          "base_spell": 4,
-          "target_part": "Per Tick",
-          "multipliers": [ 90, 0, 0, 0, 0, 0 ]
-        },
-        {
-          "type": "add_spell_prop",
-          "base_spell": 4,
-          "target_part": "Per Bomb",
-          "hits": { "Per Tick": -9 }
-        }
-      ]
+      "effects": [{
+        "type": "replace_spell",
+        "name": "Cherry Bomb",
+        "cost": 35,
+        "base_spell": 4,
+        "display": "Total Damage",
+        "parts": [
+          {
+            "name": "Single Bomb",
+            "type": "damage",
+            "multipliers": [95, 40, 0, 0, 0, 40]
+          },
+          {
+            "name": "Total Damage",
+            "type": "total",
+            "hits": {
+              "Single Bomb": 3
+            }
+          }
+        ]
+      }]
     }]
   },
   "FREERUNNER": {
@@ -230,7 +237,7 @@
   },
   "TEMBLOR": {
     "displayName": "Temblor",
-    "description": "Bash gains +1 Area of Effect and is 20% faster.",
+    "description": "Bash gains +1 Area of Effect and is 25% faster.",
     "abilities": [{
       "class": "Warrior",
       "base_abil": "Bash",
@@ -240,31 +247,25 @@
   },
   "RECKLESS_ABANDON": {
     "displayName": "Reckless Abandon",
-    "description": "Tempest deals +15% Fire damage and gains one additional charge. War Scream no longer grants a defence bonus.",
+    "description": "Sacrifice War Scream's defense bonus to give Tempest two extra hits, extra damage, and extra speed",
     "abilities": [{
       "class": "Warrior",
       "base_abil": "War Scream",
+      "dependencies": [ "Tempest" ],
       "effects": [
         {
           "type": "add_spell_prop",
           "base_spell": 4,
           "target_part": "Tempest",
           "behavior": "modify",
-          "multipliers": [0, 0, 0, 0, 15, 0]
+          "multipliers": [0, 5, 0, 0, 15, 5]
         },
         {
           "type": "add_spell_prop",
           "base_spell": 4,
           "target_part": "Tempest Total Damage",
           "behavior": "modify",
-          "hits": { "Tempest": 1 }
-        },
-        {
-          "type": "add_spell_prop",
-          "base_spell": 4,
-          "target_part": "Total Damage",
-          "behavior": "modify",
-          "hits": { "Tempest": 1 }
+          "hits": { "Tempest": 2 }
         }
       ]
     }]
@@ -528,5 +529,73 @@
     "displayName": "Windsurf",
     "description":"Righting Reflex lasts twice as long and is affected stronger by movement speed",
     "abilities": []
+  },
+  "HELLFIRE": {
+    "displayName": "Hellfire",
+    "description":"Boiling Blood has no cooldown, is stronger, and does not slow. Cuts Bash's power and disables Discombobulate",
+    "abilities": [{
+      "class": "Warrior",
+      "base_abil": "Bash",
+      "dependencies": [ "Boiling Blood" ],
+      "properties": {
+          "rate": 0.8333333333333333333333333333,
+          "num_bloods": 0
+      },
+      "effects": [
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Single Hit",
+          "behavior": "modify",
+          "multipliers": [ -85, -30, 0, 0, 0, 0 ]
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Boiling Blood Tick",
+          "behavior": "modify",
+          "multipliers": [ -25, 0, 0, 0, 30, 0 ]
+        },
+        {
+          "type": "add_spell_prop",
+          "base_spell": 1,
+          "target_part": "Boiling Blood DPS (Total)",
+          "behavior": "merge",
+          "display": "Boiling Blood DPS (Total)",
+          "hits": { "Boiling Blood DPS": "Bash.num_bloods" }
+        },
+        {
+          "type": "stat_scaling",
+          "slider": true,
+          "slider_name": "Boiling Blood Stacks",
+          "slider_step": 1,
+          "slider_max": 20,
+          "slider_default": 4,
+          "output": [
+              {
+                  "type": "prop",
+                  "abil": "Bash",
+                  "name": "num_bloods"
+              }
+          ],
+          "scaling": [1]
+        },
+        {
+          "type": "stat_scaling",
+          "slider": true,
+          "behavior": "modify",
+          "slider_name": "Hits dealt",
+          "output": [
+            { "type": "stat", "name": "nDamAddMin" }, { "type": "stat", "name": "nDamAddMax" },
+            { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
+            { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
+            { "type": "stat", "name": "wDamAddMin" }, { "type": "stat", "name": "wDamAddMax" },
+            { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
+            { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
+          ],
+          "scaling": [-5]
+        }
+      ]
+    }]
   }
 }
