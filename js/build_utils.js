@@ -60,7 +60,15 @@ const armorTypes = [ "helmet", "chestplate", "leggings", "boots" ];
 const accessoryTypes = [ "ring", "bracelet", "necklace" ];
 const weaponTypes = [ "wand", "spear", "bow", "dagger", "relik" ];
 const consumableTypes = [ "potion", "scroll", "food"];
-const tome_types = ['weaponTome', 'armorTome', 'guildTome'];
+const tome_types = ['weaponTome', 'armorTome', 'guildTome', 'lootrunTome', 'gatherXpTome', 'dungeonXpTome', 'mobXpTome'];
+const tome_type_map = new Map([["weaponTome", "Weapon Tome"],
+                               ["armorTome", "Armor Tome"],
+                               ["guildTome", "Guild Tome"],
+                               ["gatherXpTome", "Gather XP Tome"],
+                               ["dungeonXpTome", "Dungeon XP Tome"],
+                               ["mobXpTome", "Slaying XP Tome"],
+                              ]);
+
 const attackSpeeds = ["SUPER_SLOW", "VERY_SLOW", "SLOW", "NORMAL", "FAST", "VERY_FAST", "SUPER_FAST"];
 const baseDamageMultiplier = [ 0.51, 0.83, 1.5, 2.05, 2.5, 3.1, 4.3 ];
 //0.51, 0.82, 1.50, 2.05, 2.50, 3.11, 4.27

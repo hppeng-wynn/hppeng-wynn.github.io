@@ -101,6 +101,15 @@ def recursive_translate(entry, result, path, translate_single):
     return result
 
 armor_types = ['helmet', 'chestplate', 'leggings', 'boots']
+tome_type_translation = {
+    'gatheringxp': 'gatherXpTome',
+    'dungeonxp': 'dungeonXpTome',
+    'slayingxp': 'mobXpTome',
+    'guildtome': 'guildTome',
+    'mobdefence': 'armorTome',
+    'mobdamage': 'weaponTome',
+    'lootrun': 'lootrunTome',
+}
 
 def translate_entry(entry):
     """
@@ -133,7 +142,13 @@ def translate_entry(entry):
         #return recursive_translate(entry, {}, "ing"), "ingredient"
     if "tomeType" in entry:
         # only tomes have this field.
-        return None, "tome"
+        print(entry)
+        res = recursive_translate(entry, {}, "tome", translate_single_item)
+        res['category'] = 'tome'
+        res['fixID'] = False
+        res['type'] = tome_type_translation[res['type']]
+        print(res)
+        return res, "tome"
     if "craftable" in entry:
         return None, "material"
     
@@ -144,11 +159,15 @@ with open("id_map.json", "r") as id_map_file:
     id_map = json.load(id_map_file)
 used_ids = set([v for k, v in id_map.items()])
 max_id = 0
+
 with open("ing_map.json","r") as ing_map_file:
     ing_map = json.load(ing_map_file)
+with open("../tome_map.json","r") as tome_map_file:
+    tome_map = json.load(tome_map_file)
 
 items = []
 ingreds = []
+tomes = []
 for name, entry in api_data.items():
     entry['name'] = name
     res, entry_type = translate_entry(entry)
@@ -160,26 +179,39 @@ for name, entry in api_data.items():
         items.append(res)
     elif entry_type == 'ingredient':
         ingreds.append(res)
+    elif entry_type == 'tome':
+        tomes.append(res)
 
 with open("../clean.json", "r") as oldfile:
     old_data = json.load(oldfile)
     old_items = old_data['items']
 with open("../ingreds_clean.json", "r") as ingfile:
     old_ingreds = json.load(ingfile)
+with open("../tomes.json", "r") as tomefile:
+    old_tome_data = json.load(tomefile)
+    old_tomes = old_tome_data['tomes']
 
 known_item_names = set()
 known_ingred_names = set()
+known_tome_names = set()
 for item in items:
     known_item_names.add(item["name"])
 for ingred in ingreds:
     known_ingred_names.add(ingred["name"])
+for tome in tomes:
+    known_tome_names.add(tome["name"])
 
+tome_value_map = {}
 for item in old_items:
     if item["name"] not in known_item_names:
         print(f'Unknown old item: {item["name"]}!!!')
 for ingred in old_ingreds:
     if ingred["name"] not in known_ingred_names:
         print(f'Unknown old ingred: {ingred["name"]}!!!')
+for tome in old_tomes:
+    if tome["name"] not in known_tome_names:
+        print(f'Unknown old tome: {tome["name"]}!!!')
+    tome_value_map[tome['name']] = tome
 
 # TODO hack pull the major id file
 major_ids_filename = "../js/builder/major_ids_clean.json"
@@ -216,8 +248,19 @@ for ingred in ingreds:
     if not (ingred["name"] in ing_map):
         new_id = len(ing_map)
         ing_map[ingred["name"]] = new_id
-        print(f'New item: {item["name"]} (id: {new_id})')
+        print(f'New ingred: {ingred["name"]} (id: {new_id})')
     ingred["id"] = ing_map[ingred["name"]]
+
+for tome in tomes:
+    if not (tome['name'] in tome_map):
+        new_id = len(tome_map)
+        tome_map[tome['name']] = new_id
+        print(f'New tome: {tome["name"]} (id: {new_id})')
+        tome['alias'] = 'NO_ALIAS'
+    else:
+        old_tome = tome_value_map[tome['name']]
+        tome['alias'] = old_tome['alias']
+    tome['id'] = tome_map[tome['name']]
 
 #write items back into data
 old_data["items"] = items
@@ -227,6 +270,8 @@ with open("id_map.json","w") as id_map_file:
     json.dump(id_map, id_map_file, indent=2)
 with open("ing_map.json","w") as ing_map_file:
     json.dump(ing_map, ing_map_file, indent=2)
+with open("../tome_map.json","w") as tome_map_file:
+    json.dump(tome_map, tome_map_file, indent=2)
 
 
 #write the data back to the outfile
@@ -236,3 +281,5 @@ with open('item_out.json', "w+") as out_file:
 with open('ing_out.json', "w+") as out_file:
     json.dump(ingreds, out_file, ensure_ascii=False, separators=(',', ':'))
 
+with open('tome_out.json', "w+") as out_file:
+    json.dump({'tomes': tomes}, out_file, ensure_ascii=False, separators=(',', ':'))

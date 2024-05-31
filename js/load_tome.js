@@ -136,7 +136,8 @@ async function load_tome_init() {
 const none_tomes_info = [
     ["tome", "weaponTome", "No Weapon Tome"],
     ["tome", "armorTome", "No Armor Tome"],
-    ["tome", "guildTome", "No Guild Tome"]
+    ["tome", "guildTome", "No Guild Tome"],
+    ["tome", "lootrunTome", "No Lootrun Tome"]
 ];
 let none_tomes;
 

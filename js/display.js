@@ -466,7 +466,6 @@ function displayExpandedItem(item, parent_id){
     if (item.get("tier") && item.get("tier") !== " ") {
         let item_desc_elem = make_elem("div", ["col", item.get("tier")]);
         if (tome_types.includes(item.get("type"))) {
-            tome_type_map = new Map([["weaponTome", "Weapon Tome"],["armorTome", "Armor Tome"],["guildTome", "Guild Tome"]]);
             item_desc_elem.textContent = item.get("tier")+" "+tome_type_map.get(item.get("type"));
         } else {
             item_desc_elem.textContent = item.get("tier")+" "+item.get("type");
