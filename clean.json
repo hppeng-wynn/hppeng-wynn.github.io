@@ -96743,8 +96743,9 @@
         {},
         {
           "lb": 20,
-          "wDamPct": 35,
-          "wDefPct": 25
+          "wDamPct": 10,
+          "wDefPct": 25,
+      	  "healPct": 27
         }
       ]
     },
