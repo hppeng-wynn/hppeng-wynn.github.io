@@ -8762,7 +8762,7 @@ const atrees = {
         },
         {
             "display_name": "Marked",
-            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.4s Cooldown) Marked enemies will take +8% damage for each mark they have.",
+            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.4s Cooldown) Marked enemies will take +6% damage for each mark they have.",
             "archetype": "Shadestepper",
             "archetype_req": 5,
             "parents": [
@@ -9288,7 +9288,7 @@ const atrees = {
         },
         {
             "display_name": "Stronger Vortex",
-            "desc": "If you deal more damage than 2.5x of your max health in a single hit, deal 60% of the damage to other nearby enemies",
+            "desc": "Increases Violent Vortex's damage by +40% and increases the damage requirement to be 2.5x your max health.",
             "archetype": "Shadestepper",
             "archetype_req": 4,
             "parents": [
@@ -9491,7 +9491,7 @@ const atrees = {
         },
         {
             "display_name": "Satsujin",
-            "desc": "If an enemy has 3 Marks, your next Multihit or Damaging Powder Special will deal double damage. (20s Cooldown, per enemy)",
+            "desc": "If an enemy has 4 Marks, your next Multihit or Powder Special will deal +100% damage. (15s Cooldown, per enemy)",
             "archetype": "Shadestepper",
             "archetype_req": 12,
             "parents": [
@@ -9772,7 +9772,7 @@ const atrees = {
         },
         {
             "display_name": "Nightcloak Knife",
-            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will mimic your attacks on enemies within 6 blocks of you, dealing 4% of your damage for every 1 Mark consumed. (Max 10 Marks)\n The Knife will vanish after 15s",
+            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will copy your attacks on enemies near you, dealing 4% of your damage for every 1 Mark consumed. (Max 10 Marks)",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
@@ -9786,6 +9786,10 @@ const atrees = {
                 "row": 33,
                 "col": 0,
                 "icon": "node_2"
+            },
+            "properties": {
+                "duration": 40,
+                "range": 6
             },
             "effects": [
                 {
@@ -9834,7 +9838,7 @@ const atrees = {
             "parents": [
                 "Cheaper Multihit II",
                 "Hoodwink",
-        "Fatal Spin"
+  	        "Fatal Spin"
             ],
             "dependencies": ["Vanish"],
             "blockers": [],
