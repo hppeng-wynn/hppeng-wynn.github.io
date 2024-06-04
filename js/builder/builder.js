@@ -230,10 +230,13 @@ function init_autocomplete() {
             }
             let tome_alias = tome_obj['alias'];
             tome_arr.push(tome_name);
-            tome_arr.push(tome_alias);
-            tome_aliases.set(tome_alias, tome_name);
+            if (tome_alias) {
+                tome_arr.push(tome_alias);
+                tome_aliases.set(tome_alias, tome_name);
+            }
         }
 
+        console.log(tome_arr);
         // create dropdown
         dropdowns.set(eq, new autoComplete({
             data: {

@@ -63,7 +63,7 @@ const atrees = {
                 "col": 4,
                 "icon": "node_0"
             },
-            "properties": {},
+            "properties": {"range": 6},
             "effects": [
                 {
                     "type": "add_spell_prop",
@@ -337,7 +337,7 @@ const atrees = {
             "properties": {
                 "charges": 2,
                 "duration": 60,
-                "knockback": 1.5
+                "range": 2.3
             },
             "effects": [
                 {
@@ -387,7 +387,8 @@ const atrees = {
             },
             "properties": {
                 "aoe": 8,
-                "duration": 120
+                "duration": 120,
+                "speed": 0.2
             },
             "effects": []
         },
@@ -704,7 +705,8 @@ const atrees = {
             },
             "properties": {
                 "aoe": 2,
-                "duration": 5
+                "duration": 5,
+                "slowness": 0.4
             },
             "effects": [
                 {
@@ -749,7 +751,6 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {
-                "aoe": 0.8,
                 "duration": 6
             },
             "effects": [
@@ -798,7 +799,10 @@ const atrees = {
                 "col": 8,
                 "icon": "node_2"
             },
-            "properties": {"range": 16},
+            "properties": {
+                "range": 16,
+                "duration": 1.2
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -1356,7 +1360,10 @@ const atrees = {
                 "col": 3,
                 "icon": "node_2"
             },
-            "properties": {},
+            "properties": {
+                "vision": 18,
+                "duration": 60
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -1479,7 +1486,10 @@ const atrees = {
                 "col": 6,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "vision": 12,
+                "duration": 18
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -1603,8 +1613,7 @@ const atrees = {
                 "icon": "node_0"
             },
             "properties": {
-                "duration": 2,
-                "aoe": 0.4
+                "duration": 2
             },
             "effects": [
                 {
@@ -2108,7 +2117,10 @@ const atrees = {
                 "col": 4,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "vision": 18,
+                "duration": 12
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -2185,6 +2197,7 @@ const atrees = {
             "display_name": "Phasing Beam",
             "desc": "Twain's Arc charges 20% faster, and can now pierce through up to 5 enemies, dealing reduced damage after piercing. (Damage is dealt as Main Attack Damage)",
             "archetype": "Sharpshooter",
+            "base_abil": "Twain's Arc",
             "parents": [
                 "Decimator",
                 "Initiator"
@@ -2200,7 +2213,19 @@ const atrees = {
                 "icon": "node_1"
             },
             "properties": {},
-            "effects": []
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 5,
+                "target_part": "Pierce Damage",
+                "multipliers": [
+                    110,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            }]
         },
         {
             "display_name": "Recycling",
@@ -2832,7 +2857,7 @@ const atrees = {
                 "icon": "node_2"
             },
             "properties": {
-                "range": 2.5,
+                "range": 3,
                 "slowness": 0.3
             },
             "effects": []
