@@ -46,8 +46,29 @@ const itemQueryProps = (function() {
     prop(names, 'number', (i, ie) => ie.get('minRolls').get(idKey) || 0);
   }
 
-  function rangeAvg(names, getProp) {
+  function rangeAll(names, getProp) {
+    // Max
+    prop(names.map((s) => s+'max'), 'number', (i, ie) => {
+      const range = getProp(i, ie);
+      if (!range) return 0;
+      const ndx = range.indexOf('-');
+      return parseInt(range.substring(ndx + 1), 10);
+    });
+    // Min
+    prop(names.map((s) => s+'min'), 'number', (i, ie) => {
+      const range = getProp(i, ie);
+      if (!range) return 0;
+      const ndx = range.indexOf('-');
+      return parseInt(range.substring(0, ndx), 10);
+    });
+    // Average
     prop(names, 'number', (i, ie) => {
+      const range = getProp(i, ie);
+      if (!range) return 0;
+      const ndx = range.indexOf('-');
+      return (parseInt(range.substring(0, ndx), 10) + parseInt(range.substring(ndx + 1), 10)) / 2;
+    });
+    prop(names.map((s) => s+'avg'), 'number', (i, ie) => {
       const range = getProp(i, ie);
       if (!range) return 0;
       const ndx = range.indexOf('-');
@@ -95,12 +116,12 @@ const itemQueryProps = (function() {
   prop('agi', 'number', (i, ie) => i.agi);
   sum(['skillpoints', 'skillpts', 'attributes', 'attrs'], props.str, props.dex, props.int, props.def, props.agi);
 
-  rangeAvg(['neutraldmg', 'neutraldam', 'ndmg', 'ndam'], (i, ie) => i.nDam);
-  rangeAvg(['earthdmg', 'earthdam', 'edmg', 'edam'], (i, ie) => i.eDam);
-  rangeAvg(['thunderdmg', 'thunderdam', 'tdmg', 'tdam'], (i, ie) => i.tDam);
-  rangeAvg(['waterdmg', 'waterdam', 'wdmg', 'wdam'], (i, ie) => i.wDam);
-  rangeAvg(['firedmg', 'firedam', 'fdmg', 'fdam'], (i, ie) => i.fDam);
-  rangeAvg(['airdmg', 'airdam', 'admg', 'adam'], (i, ie) => i.aDam);
+  rangeAll(['neutraldmg', 'neutraldam', 'ndmg', 'ndam'], (i, ie) => i.nDam);
+  rangeAll(['earthdmg', 'earthdam', 'edmg', 'edam'], (i, ie) => i.eDam);
+  rangeAll(['thunderdmg', 'thunderdam', 'tdmg', 'tdam'], (i, ie) => i.tDam);
+  rangeAll(['waterdmg', 'waterdam', 'wdmg', 'wdam'], (i, ie) => i.wDam);
+  rangeAll(['firedmg', 'firedam', 'fdmg', 'fdam'], (i, ie) => i.fDam);
+  rangeAll(['airdmg', 'airdam', 'admg', 'adam'], (i, ie) => i.aDam);
   sum(['sumdmg', 'sumdam', 'totaldmg', 'totaldam'], props.ndam, props.edam, props.tdam, props.wdam, props.fdam, props.adam);
 
   maxId(['earthdmg%', 'earthdam%', 'edmg%', 'edam%', 'edampct'], 'eDamPct');
