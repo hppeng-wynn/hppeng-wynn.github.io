@@ -309,11 +309,11 @@ function displayExpandedItem(item, parent_id){
                         // TODO: kinda jank but replacing lists with txt at this step
                         let damages = item.get(id);
                         if (item.get("tier") !== "Crafted") {
-                            damages = damages.map(x => Math.round(x));
+                            damages = damages.map(x => Math.floor(x));
                             item.set(id, damages[0]+"-"+damages[1]);
                         }
                         else {
-                            damages = damages.map(x => x.map(y => Math.round(y)));
+                            damages = damages.map(x => x.map(y => Math.floor(y)));
                             item.set(id, damages[0][0]+"-"+damages[0][1]+"\u279c"+damages[1][0]+"-"+damages[1][1]);
                         }
                     }
