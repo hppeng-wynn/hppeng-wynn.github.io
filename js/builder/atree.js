@@ -167,6 +167,64 @@ const default_abils = {
 };
 
 /**
+ * Given a json of raw atree data, and a wynn class name (ex. Archer, Mage),
+ * sort out their ability tree and return it as a list in roughly topologically
+ * sorted order.
+ *
+ * TODO: Why do we care about the toposort?
+ * This is not a useful representation of the tree.
+ * It's useless.
+ * atree needs a cleanup and anything depending on the ordering of items
+ *   coming out of this function is probably doing something wrong.
+ * NOTE2: Actually this might be more complicated because some nodes do need
+ *   an application ordering and that matters (esp. replace_spell nodes).
+ *
+ * Parameters:
+ * --------------------------
+ * atrees: Raw atree data. This is a parameter to allow oldversion shenanigans
+ * player_class: Wynn class name (string)
+ *
+ * Return:
+ * List of atree nodes.
+ */
+function get_sorted_class_atree(atrees, player_class) {
+    const atree_raw = atrees[player_class];
+    if (!atree_raw) return [];
+
+    let atree_map = new Map();
+    let atree_head;
+    for (const i of atree_raw) {
+        atree_map.set(i.id, {children: [], ability: i});
+        if (i.parents.length == 0) {
+            // Assuming there is only one head.
+            atree_head = atree_map.get(i.id);
+        }
+    }
+    for (const i of atree_raw) {
+        let node = atree_map.get(i.id);
+        let parents = [];
+        for (const parent_id of node.ability.parents) {
+            let parent_node = atree_map.get(parent_id);
+            parent_node.children.push(node);
+            parents.push(parent_node);
+        }
+        node.parents = parents;
+    }
+
+    let sccs = make_SCC_graph(atree_head, atree_map.values());
+    let atree_topo_sort = [];
+    for (const scc of sccs) {
+        for (const node of scc.nodes) {
+            delete node.visited;
+            delete node.assigned;
+            delete node.scc;
+            atree_topo_sort.push(node);
+        }
+    }
+    return atree_topo_sort;
+}
+
+/**
  * Update ability tree internal representation. (topologically sorted node list)
  *
  * Signature: AbilityTreeUpdateNode(player-class: str) => ATree (List of atree nodes in topological order)
@@ -177,43 +235,7 @@ const atree_node = new (class extends ComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (player-class)"; }
         const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-
-        const atree_raw = atrees[player_class];
-        if (!atree_raw) return [];
-
-        let atree_map = new Map();
-        let atree_head;
-        for (const i of atree_raw) {
-            atree_map.set(i.id, {children: [], ability: i});
-            if (i.parents.length == 0) {
-                // Assuming there is only one head.
-                atree_head = atree_map.get(i.id);
-            }
-        }
-        for (const i of atree_raw) {
-            let node = atree_map.get(i.id);
-            let parents = [];
-            for (const parent_id of node.ability.parents) {
-                let parent_node = atree_map.get(parent_id);
-                parent_node.children.push(node);
-                parents.push(parent_node);
-            }
-            node.parents = parents;
-        }
-
-        let sccs = make_SCC_graph(atree_head, atree_map.values());
-        let atree_topo_sort = [];
-        for (const scc of sccs) {
-            for (const node of scc.nodes) {
-                delete node.visited;
-                delete node.assigned;
-                delete node.scc;
-                atree_topo_sort.push(node);
-            }
-        }
-        //console.log("Approximate topological order ability tree:");
-        //console.log(atree_topo_sort);
-        return atree_topo_sort;
+        return get_sorted_class_atree(atrees, player_class);
     }
 })();
 

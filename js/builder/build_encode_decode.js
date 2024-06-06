@@ -122,6 +122,7 @@ async function parse_hash(url_tag) {
             await Promise.all(load_promises);
         }
     }
+
     if (wynn_version_id == WYNN_VERSION_LATEST) {
         await Promise.all(default_load_promises);
     }

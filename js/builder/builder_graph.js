@@ -608,12 +608,19 @@ class SpellDamageCalcNode extends ComputeNode {
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
-                let heal_additive = stats.get('healPct');
-                if (stats.has('healPct:'+part_id)) {
-                    heal_additive += stats.get('healPct:'+part_id);
+                const mult_map = stats.get("healMult");
+                let heal_mult = 1;
+                for (const [k, v] of mult_map.entries()) {
+                    if (k.includes(':')) {
+                        // TODO: fragile... checking for specific part multipliers.
+                        const spell_match = k.split(':')[1];
+                        if (spell_match !== part_id) {
+                            continue;
+                        }
+                    }
+                    heal_mult *= (1 + v/100);
                 }
-                let heal_mult = 1+(stats.get('healMult') / 100)
-                let _heal_amount = part.power * getDefenseStats(stats)[0] * (1 + (heal_additive/100)) * heal_mult;
+                let _heal_amount = part.power * getDefenseStats(stats)[0] * heal_mult;
                 spell_result = {
                     type: "heal",
                     heal_amount: _heal_amount

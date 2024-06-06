@@ -315,8 +315,8 @@ function idRound(id){
  * stupid stupid multiplicative stats
  */
 function merge_stat(stats, name, value) {
-    const start = name.slice(0, 7);
-    if (start === 'damMult' || start === 'defMult') {
+    const start = name.split('.', limit=1)[0];
+    if (start === 'damMult' || start === 'defMult' || start === 'healMult') {
         if (!stats.has(start)) {
             stats.set(start, new Map());
         }
@@ -327,7 +327,7 @@ function merge_stat(stats, name, value) {
             }
             return;
         }
-        merge_stat(map, name.slice(8), value);
+        merge_stat(map, name.slice(name.indexOf('.')+1), value);
         return;
     }
     if (stats.has(name)) { 

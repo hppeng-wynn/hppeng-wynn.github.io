@@ -116,8 +116,8 @@ class Build {
         }
         statMap.set('damMult', new Map());
         statMap.set('defMult', new Map());
-        statMap.get('damMult').set('tome', statMap.get('damMobs'))
-        statMap.get('defMult').set('tome', statMap.get('defMobs'))
+        statMap.get('damMult').set('tome', statMap.get('damMobs'));
+        statMap.get('defMult').set('tome', statMap.get('defMobs'));
         statMap.set("activeMajorIDs", major_ids);
         for (const [setName, count] of this.activeSetCounts) {
             const bonus = sets.get(setName).bonuses[count-1];
@@ -132,7 +132,8 @@ class Build {
         }
         statMap.set("poisonPct", 0);
         statMap.set("critDamPct", 0);
-        statMap.set("healMult", 0);
+        statMap.set("healMult", new Map());
+        statMap.get('healMult').set('item', statMap.get('healPct'));
 
         // The stuff relevant for damage calculation!!! @ferricles
         statMap.set("atkSpd", this.weapon.statMap.get("atkSpd"));

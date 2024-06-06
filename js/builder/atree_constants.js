@@ -6459,7 +6459,7 @@ const atrees = {
                     ],
                     "output": {
                         "type": "stat",
-                        "name": "healPct"
+                        "name": "healMult.FluidHealing"
                     },
                     "scaling": [
                         0.3
@@ -11209,7 +11209,7 @@ const atrees = {
                         },
                         {
                             "type": "stat",
-                            "name": "healMult",
+                            "name": "healMult.MultiTotem",
                             "value": -40
                         },
                         {
@@ -11640,7 +11640,7 @@ const atrees = {
                     ],
                     "output": {
                         "type": "stat",
-                        "name": "healPct:3.Heal Amount"
+                        "name": "healMult.FluidHealing:3.Heal Amount"
                     },
                     "scaling": [ 0.3 ]
                 }
@@ -11843,7 +11843,7 @@ const atrees = {
                         },
                         {
                             "type": "stat",
-                            "name": "healMult",
+                            "name": "healMult.MultiTotem",
                             "value": -10
                         },
                         {
