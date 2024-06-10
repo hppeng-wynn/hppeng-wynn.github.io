@@ -107,6 +107,12 @@ main .heart {
     color: #e44078;
 }
 
+.fig {
+    margin: 16px 0 16px;
+}
+div.caption {
+    font-style: italic;
+}
 
 @keyframes scroll-bg {
     0% {

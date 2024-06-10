@@ -59,6 +59,9 @@ function initDropdownSections() {
         let title = document.createElement("div");
         title.classList.add("col-10", "item-title", "text-start", "dropdown-title")
         title.style.margin = "0 0 0";
+        title.style.fontWeight = "bold";
+        title.style.fontSize = 18;
+        title.style.textDecoration = "underline";
         title.textContent = dropdown.title;
         dropdown.textContent = "";
         let indicator = document.createElement("div");
@@ -86,15 +89,15 @@ function initDropdownSections() {
         });
         title.addEventListener("mouseover", function(){
             title.style.color = "#ddd";
-            title.style.fontWeight = "bold";
+            // title.style.fontWeight = "bold";
             indicator.style.color = "#ddd";
-            indicator.style.fontWeight = "bold";
+            // indicator.style.fontWeight = "bold";
         });
         title.addEventListener("mouseleave", function(){
             title.style.color = "";
-            title.style.fontWeight = "normal";
+            // title.style.fontWeight = "normal";
             indicator.style.color = "";
-            indicator.style.fontWeight = "normal";
+            // indicator.style.fontWeight = "normal";
         });
         
 
