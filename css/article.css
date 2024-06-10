@@ -2,6 +2,13 @@ main {
     margin: 24px 0 48px;
 }
 
+main h1 {
+    margin: 0 0 8px;
+    color: #bbb;
+    /* font-size: 24pt; */
+    font-weight: bold;
+}
+
 main h2 {
     margin: 0 0 8px;
     color: #bbb;
@@ -14,6 +21,20 @@ main p {
     line-height: 1.35em;
     text-indent: 2.5em;
     text-align: justify;
+    font-size: 13pt;
+    font-weight: normal;
+}
+
+main span {
+    font-size: 13pt;
+    font-weight: normal;
+}
+main li {
+    margin-left: 6%;
+    font-size: 13pt;
+    font-weight: normal;
+}
+main ul {
     font-size: 13pt;
     font-weight: normal;
 }
@@ -85,6 +106,7 @@ main .math {
 main .heart {
     color: #e44078;
 }
+
 
 @keyframes scroll-bg {
     0% {

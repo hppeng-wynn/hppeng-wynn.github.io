@@ -141,43 +141,43 @@ Wynn-Related CSS
     color: rgb(255, 198, 85)
 }
 
-.nDam, .Neutral {
+.nDam, .Neutral, Neutral {
     color: #FFAA00;
 }
 
-.nDam:before, .Neutral:before { 
+.nDam:before, .Neutral:before, Neutral:before { 
     content: "\2724" ' '; 
 }
 
-.eDam, .Earth, .Earth_powder {
+.eDam, .Earth, .Earth_powder, Earth {
     color: #00AA00;
 }
 
-.eDam:before, .Earth:before, .Earth_powder:before { content: "\2724" ' '; }
+.eDam:before, .Earth:before, .Earth_powder:before, Earth:before { content: "\2724" ' '; }
 
-.tDam, .Thunder, .Thunder_powder {
+.tDam, .Thunder, .Thunder_powder, Thunder{
     color: #FFFF55;
 }
 
-.tDam:before, .Thunder:before, .Thunder_powder:before { content: "\2726" ' '; }
+.tDam:before, .Thunder:before, .Thunder_powder:before, Thunder:before { content: "\2726" ' '; }
 
-.wDam, .Water, .Water_powder {
+.wDam, .Water, .Water_powder, Water {
     color: #55FFFF
 }
 
-.wDam:before, .Water:before, .Water_powder:before { content: "\2749" ' '; }
+.wDam:before, .Water:before, .Water_powder:before, Water:before { content: "\2749" ' '; }
 
-.fDam, .Fire, .Fire_powder {
+.fDam, .Fire, .Fire_powder, Fire {
     color: #FF5555;
 }
 
-.fDam:before, .Fire:before, .Fire_powder:before { content: "\2739" ' '; }
+.fDam:before, .Fire:before, .Fire_powder:before, Fire:before { content: "\2739" ' '; }
 
-.aDam, .Air, .Air_powder {
+.aDam, .Air, .Air_powder, Air {
     color: #FFFFFF
 }
 
-.aDam:before, .Air:before, .Air_powder:before { content: "\274b" ' '; }
+.aDam:before, .Air:before, .Air_powder:before, Air:before { content: "\274b" ' '; }
 
 .restrict {
     color: #ff8180;

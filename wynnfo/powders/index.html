@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+    <head>
+        <title>WynnAtlas Help</title>
+        <link rel="icon" href="/media/icons/new/searcher.png">
+        <link rel="manifest" href="manifest.json">
+
+        <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
+    
+        <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+        <link href="/thirdparty/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+        <link rel="stylesheet" href="/thirdparty/autoComplete.min.css">
+    
+        
+        <link rel="stylesheet" href="/css/article.css"> <!-- This one is the important one for docs -->
+        <link rel="stylesheet" href="/css/docs_home.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/sidebar.css">
+        <link rel="stylesheet" href="/css/wynnstyles.css">
+
+        <script type="text/javascript" src="/js/docs.js"></script>
+        <script text = "text/javascript">document.addEventListener("DOMContentLoaded", (event) => {initDropdownSections();})</script>
+    </head>
+    <body class="all" style="overflow-y: scroll">
+        <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
+            <a href = "/builder/"><img src="/media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
+            <a href = "/crafter/"><img src = "/media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
+            <a href = "/items/"><img src = "/media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+            <a href = "/custom/"><img src = "/media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
+            <a href = "/map/"><img src = "/media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
+            <a href = "/wynnfo/"><img src = "/media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
+            <a onclick = "toggleIcons()"><img src = "/media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
+            <hr/>
+            <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "/media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
+        </div>
+        <main>
+            <div class="full-width text-center">
+                <!-- <img src="./help_photo.png"/> -->
+            </div>
+            <div class="section">
+                <h1>Powder Application Guide</h1>
+                <p>June 5, 2024 (Wynn 2.0)</p>
+            </div>
+
+            <div class="section">
+                <h2>Basics</h2>
+                <p>I assume you know what powders do - you apply them on armor to get elemental defense or on weapons to get extra damage. If you apply multiple high-tier powders of the same type, you get an extra ability on your weapon (powder special). In this post, we'll go over the calculations that get run when powders are applied on weapons.</p>
+                <p>
+                    Here's some terminology that we'll use later:
+                    <li>Base damage range: the low and high damage ranges which are shown in the item display. </li>
+                    <li>Damage type: There are 6 types of damage. There is neutral damage (<buf class = 'Neutral'>N</buf>) and 5 elemental types: earth (<buf class = 'Earth'>E</buf>), thunder (<buf class = 'Thunder'>T</buf>), water (<buf class = 'Water'>W</buf>), fire (<buf class = 'Fire'>F</buf>), and air (<buf class = 'Air'>A</buf>). </li>
+                    <li>Conversion rate (<code>powder.conv_rate</code>): The percentage conversion rate of a powder from neutral to elemental damage.</li>
+                    <li>Powder range (<code>powder.range</code>): The raw boost to the base damage range of an element given by a powder.</li>        
+                </p>
+                <p>Before we get into calculations, one last thing - there are two types of weapons we can powder: non-crafted (regular) and crafted. There are also two corresponding types of powder application which have their own mechanics: applied powders, when a powder master puts powders on your items, and ingredient powders, when you use a powder in the recipe to make a crafted item. We will start with the more common weapon type: regular weapons.</p>
+            </div>
+
+            <div class="section">
+                <h2>Powder Application on Regular Weapons</h2>
+                <p>On regular weapons, only the applied powder mechanic is relevant. The algorithm for this mechanic can be broken down into two steps: the aggregation step and the application step.</p>
+                <p>
+                    Loop one (aggregation step):
+                    <li>Record the order of powders in order of <b>first powder for each type</b>.</li>
+                    <li>Aggregate conversion stats for each element additively.</li>
+                </p>
+                <p>
+                    Loop two (application step):
+                    <li>In the order of elemental types determined in loop one, calculate powder conversion of <b>remaining neutral damage</b>.</li>
+                    <li>Neutral damage range is decreased by the total conversion range</li> 
+                    <li>Elemental damage range is increased by the total conversion range</li> 
+                    <li>Elemental damage range is also increased by the powder range</li> 
+                    <li>At the end of all applications, the damage ranges are floored for display on the weapon. (Note: these values are not floored when performing damage calculations later)</li> 
+                </p>
+                <p>In pseudocode, this process looks like:</p>
+                <pre>
+powders = [] //populated with powders which have a type, a conversion rate, and a range
+order = []
+conversions = {type: {range: [low, high], conv_rate: float }}
+
+for powder in powders:
+    If powder.type not in order:
+    order += powder.type
+    conversions[powder.type][range] += powder.range
+    conversions[powder.type][conv_rate] += powder.conv_rate
+
+for powder_type in order:
+    powder_conversion = conversions[powder_type]
+    neu_conversion = (powder_conversion.conv_rate * weapon_neu_range)
+    weapon_neu_range  -= neu_conversion
+    weapon_elem_range += neu_conversion + powder_conversion.range //the appropriate elemental type</pre>
+                <p>We verified this algorithm by testing in-game. If you're interested, click on this dropdown for a worked example!</p>
+                <span class="dropdown" title="Regular Applied Powder Example">
+                    <div>
+                        <p>We used a <a class = "link" href = "/item/#Crystal Senbon">Crystal Senbon</a> to test. Crystal Senbon has 5 powder slots and a base damage range of <tmp class = 'Neutral'>[77, 77]</tmp>.</p>
+                        <p>The powders we applied, in order: [<Earth>III</Earth>, <Thunder>III</Thunder>, <Water>III</Water>, <Earth>III</Earth>, <Earth>III</Earth>]</p>
+                        <p>And their stats:</p>
+                        <li><Earth>III</Earth>: [8, 14] range, 25% conversion </li>
+                        <li><Thunder>III</Thunder>: [2, 18] range, 13% conversion </li>
+                        <li><Water>III</Water>: [6, 10] range, 17% conversion </li>
+                        <p>We can start running the applied powder algorithm. After the aggregation step, we'd have:</p>
+                        <pre>
+order = [E, T, W]
+conversions: {
+    E: {range: [24, 42], conv_rate: 0.75}, 
+    T: {range: [2, 18], conv_rate: 0.13}, 
+    W: {range: [6, 10], conv_rate: 0.17}
+}</pre>
+                        <p>Then we can run through the application step.</p>
+                        <pre>
+Starting neutral range = <Neutral>[77, 77]</Neutral>
+
+Earth conversion: [77, 77] * .75 = 57.75
+<Neutral></Neutral>= [77, 77] - [57.75, 57.75] = <Neutral>[19.25, 19.25]</Neutral>
+<Earth></Earth>= [57.75, 57.75] + [24, 42] = <Earth>[81.75, 99.75]</Earth>
+
+Thunder conversion: [19.25, 19.25] * .13 = 2.5025
+<Neutral></Neutral>= [19.25, 19.25] - [2.5025, 2.5025] = <Neutral>[16.7475, 16.7475]</Neutral>
+<Thunder></Thunder>= [2.5025, 2.5025] + [2, 18] = <Thunder>[4.5025, 20.5025]</Thunder>
+
+Water conversion: [16.7475, 16.7475] * 0.17 = 2.847075
+<Neutral></Neutral>= [16.7475, 16.7475] - [2.847075, 2.847075] = <Neutral>[13.900425, 13.900425]</Neutral>
+<Water></Water>= [2.847075, 2.847075] + [6, 10] = <Water>[8.847, 12.847]</Water>
+
+Final (displayed) ranges:
+floor(<Neutral>[13.900425, 13.900425]</Neutral>) = <Neutral>[13, 13]</Neutral>
+floor(<Earth>[81.75, 99.75]</Earth>) = <Earth>[81, 99]</Earth>
+floor(<Thunder>[4.5025, 20.5025]</Thunder>) = <Thunder>[4, 20]</Thunder>
+floor(<Water>[8.847, 12.847]</Water>) = <Water>[8, 12]</Water></pre>
+                        <p>After flooring all damage values, the Crystal Senbon should display damage ranges of <Neutral>[13, 13]</Neutral> <Earth>[43, 19]</Earth> <Thunder>[4, 20]</Thunder> <Water>[8, 12]</Water>. However, our weapon display suggests otherwise! This is because it is lying*.</p>
+                        <div class="text-center">
+                            <img src="./media/crystal_senbon_powdered.png" width = "500"/>
+                        </div>
+                        <p>We collected some data samples by melee-ing some combat dummies many times. Showing photo proof for many hits in this post is infeasible (we show one for good measure). We tested this on a character with 0 abilities, 0 external buffs, and only the skill points necessary for holding Crystal Senbon (10 in each).</p>
+                        <p>This is somewhat handwaving damage calculation, but here's the expected ranges of an assassin melee attack using the weapon damages we calculated.</p>
+                        <p>Stat bonuses:
+                            <li>3% earth damage (crystal senbon id)</li>
+                            <li>7% thunder damage (crystal senbon id)</li>
+                            <li>4% water damage (crystal senbon id)</li>
+                            <li>11.3% earth dmg boost (12 str)</li>
+                            <li>11.3% thunder dmg boost (12 dex)</li>
+                            <li>7.0% water dmg boost (12 int)</li>
+                            <li>11.3% total damage (12 strength)</li>
+                        </p>
+                        <p>The damage ranges we would expect to see from using a melee attack using our calculated base damage ranges:</p>
+                        <p><code><Neutral>[13.900425, 13.900425]</Neutral> * (1 + .113) ~= <Neutral>[15.4707, 15.4707]</Neutral></code> </p>
+                        <p><code><Earth>[81.75, 99.75]</Earth> * (1 + 0.03 + 0.113) * (1 + 0.113) ~= <Earth>[103.999, 126.898]</Earth></code></p>
+                        <p><code><Thunder>[4.5025, 20.5025]</Thunder> * (1 + 0.07 + 0.113) * (1 + 0.113) ~= <Thunder>[5.928, 26.995]</Thunder></code></p>
+                        <p><code><Water>[8.847, 12.847]</Water> * (1 + 0.04 + 0.07) * (1 + 0.113) ~= <Water>[10.930, 15.872]</Water></code></p>
+                        <div class="text-center">
+                            <img src="./media/crystal_senbon_attack.png" width = "500"/>
+                            <div>Note: the double damage hit is due to a dexterity crit.</div>
+                        </div>
+                        <p>Evidently, the observed damages match up much more closely the powder/damage calculations we've performed compared to the advertised damages on the weapon. Consider the fact that the weapon display doesn't even show neutral damage...</p>
+                    </div>
+                </span>
+            </div>
+
+            <div class="section">
+                <h2>Powder Application on Crafted Weapons</h2>
+                <p>There are 2 algorithms relevant to powder mechanics on crafted weapons. First, we'll cover the ingredient powder mechanic.</p>
+                <p>The ingredient powder mechanic:</p>
+                <pre>
+powders = [crafting menu powders in order of reading english]
+for powder in powders: 
+    conversion factor = floor(neutral_remaining * powder.conv_rate)
+    Neutral_base_dmg -= conv factor
+    Elem_base_dmg += conv factor + floor((powder.range.low + powder.range.high) / 2)</pre>
+                <p>For those unfamiliar with crafted weapon base damage: crafted weapons have a singular base damage value that is randomly chosen from a range when the item is crafted. The resulting base damage range is calculated using this value: if <code>base</code> is the base damage value, then the corresponding range is <code>[floor(0.9 * base), floor(1.1 * base)]</code>. The ingredient powder mechanic modifies the base damage values of a crafted weapon before they get converted to base damage ranges.</p>
+                <p>If you use a powder as an ingredient in a crafting recipe for a crafted weapon, the above ingredient powder mechanic is applied. However, there's a more complex interaction when using both ingredient and applied powders. Using the ingredient powder mechanic and the applied powder mechanic as subroutines, we can define the algorithm for applying powders on crafted weapons as below:</p>
+                <ul>1) Apply all applied powders with the ingredient powder mechanic.</ul>
+                <ul>2) Apply all ingredient powders with the ingredient powder mechanic.</ul>
+                <ul>3) Use the base damage values of the crafted weapon to get a full damage range.</ul>
+                <ul>4) Apply all applied powders with the applied powder mechanic.</ul>
+                <p>Both the ingredient powder mechanic and the full algorithm for crafted weapon powders were tested and verified in-game. For another worked-out example, expand the following dropdown.</p>
+                <span class="dropdown" title="Crafted Weapon Powder Example">
+                    <div>
+                        <p>We crafted a wand using a <Air>III</Air> powder as an ingredient. Here's a <a href = "/crafter/#1+x+W+W+W+W+W9q10" class = "link">link to the recipe</a>. We then applied these powders, in order: [<Water>I</Water>, <Fire>I</Fire>, <Water>I</Water>]. Powder stats below:</p>
+                        <li><Air>III</Air>: [4, 11] range, 17% conversion rate</li>
+                        <li><Water>I</Water>: [3, 4] range, 13% conversion rate</li>
+                        <li><Fire>I</Fire>: [2, 5] range, 14% conversion rate</li>
+                        <div class="text-center">
+                            <img src="./media/CR_prepowder.png" width = "500"/>
+                            <div>The CR weapon pre-applied powders.</div>
+                        </div>
+                        <p>The CR weapon starts with 181 base (before applying any powders through any mechanic). We will run through the entire crafted weapon powder application process below:</p>
+                        <pre>
+Starting Neutral Base: <Neutral>181</Neutral>
+
+1) Apply applied powders with ingredient powder mechanic
+<Neutral></Neutral>-= floor(.13 * 181) = 181 - 23 = <Neutral>158</Neutral>
+<Water></Water>+= 23 + floor((3+4)/2) = 23 + 3 = <Water>26</Water>
+
+<Neutral></Neutral>-= floor(.14 * 158) = 158 - 22 = <Neutral>136</Neutral>
+<Fire></Fire>+= 22 + floor((2 + 5)/2) = 22 + 3 = <Fire>25</Fire>
+
+<Neutral></Neutral>-= floor(.13 * 136) = 136 - 17 = <Neutral>119</Neutral>
+<Water></Water>+= 17 + floor((3 + 4) / 2) = 26 + 17 + 3 = <Water>46</Water>
+
+2) Apply ingredient powders with ingredient powder mechanic 
+
+<Neutral></Neutral>-= floor(.17 * 119) = 119 - 20 = <Neutral>99</Neutral>
+<Air></Air>+= 20 + floor((4 + 11) / 2) = 20 + 7 = <Air>27</Air>
+
+3) Convert base damage to ranges
+floor(<Neutral>99</Neutral> * [0.9, 1.1]) = <Neutral>[89, 108]</Neutral>
+floor(<Water>46</Water> * [0.9, 1.1]) = <Water>[41, 50]</Water>
+floor(<Fire>25</Fire> * [0.9, 1.1]) = <Fire>[22, 27]</Fire>
+floor(<Air>27</Air> * [0.9, 1.1]) = <Air>[24, 29]</Air>
+
+4) Applied applied powders with applied powder mechanic
+
+Starting base ranges:
+<Neutral>[89, 108]</Neutral>
+<Water>[41, 50]</Water>
+<Fire>[22, 27]</Fire>
+<Air>[24, 29]</Air>
+
+Powders applied: [<Water>I</Water>, <Fire>I</Fire>, <Water>I</Water>]
+
+Aggregation step:
+<Water></Water>[3, 4] *2, 13% * 2 = {range: [6, 8], conv_rate: .26} 
+<Fire></Fire>[2, 5], 14% * 1 = {range: [2, 5], conv_rate: .14}
+
+Application step:
+
+W conversion: [89, 108] * .26 = [23.14, 28.08]
+<Water></Water>= [41, 50] + [23.14, 28.08] + [6, 8] = <Water>[70.16, 86.08]</Water>
+<Neutral></Neutral> = [89, 108] - [23.14, 28.08] = <Neutral>[65.86, 79.92]</Neutral>
+
+F conversion: [65.86, 79.92] * .14 = [9.2204, 11.1888]
+<Fire></Fire> = [22, 27] + [9.2204, 11.1888] + [2, 5] = <Fire>[33.2204, 43.1888]</Fire>
+<Neutral></Neutral> = [65.86, 79.92] - [9.2204, 11.1888] = <Neutral>[56.6396, 68.7312]</Neutral>
+
+Final (displayed) ranges
+floor(<Neutral>[56.6396, 68.7312]</Neutral>) = <Neutral>[56, 68]</Neutral>
+floor(<Water>[70.16, 86.08]</Water>) = <Water>[70, 86]</Water>
+floor(<Fire>[33.2204, 43.1888]</Fire>)= <Fire>[33, 43]</Fire>
+floor(<Air>[24, 29]</Air>) = <Air>[24, 29]</Air></pre>
+                        <p>And, to compare, here's the crafted weapon after applying powders. Again, the numbers are slightly off for the same reasons as they are with the regular weapon example.</p>
+                        <div class="text-center">
+                            <img src="./media/CR_postpowder.png" width = "500"/>
+                            <div>The CR weapon after applied powders.</div>
+                        </div>
+                        <p>We did the same melee attack testing on combat dummies. We leave damage calculation out of this example, but the damages observed more closely match the calculated numbers than the displayed numbers. Here's a screenshot:</p>
+                        <div class="text-center">
+                            <img src="./media/CR_attack.png" width = "500"/>
+                        </div>
+                    </div>
+                </span>
+            </div>
+
+
+            <div class="section">
+                <div class="footer">Written by ferricles and hppeng</div>
+            </div>
+        </main>
+        <script type="text/javascript" src="/thirdparty/katex.js"></script>
+        <script type="text/javascript" src="/js/icons.js"></script>
+    </body>
+</html>

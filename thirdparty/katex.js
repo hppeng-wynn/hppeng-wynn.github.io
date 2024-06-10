@@ -16,7 +16,7 @@ function add_katex() {
     scr_2.setAttribute('integrity', "sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk")
     scr_2.setAttribute('crossorigin', "anonymous")
     scr_2.setAttribute('defer', '')
-    scr_2.setAttribute('onload', "renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true},{left: '\\[', right: '\\]', display: true},{left: '$', right: '$', display: false},{left: '\\(', right: '\\)', display: false}]});")
+    scr_2.setAttribute('onload', "renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});")
 
     head_elem.append(link, scr_1, scr_2);
 }      
