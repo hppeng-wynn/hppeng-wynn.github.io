@@ -416,7 +416,6 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('guildTome1'),
             input_map.get('lootrunTome1')
         ];
-        console.log(equipments);
         let weapon = input_map.get('weapon');
         let level = parseInt(input_map.get('level-input'));
         if (isNaN(level)) {

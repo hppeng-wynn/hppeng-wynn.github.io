@@ -236,7 +236,6 @@ function init_autocomplete() {
             }
         }
 
-        console.log(tome_arr);
         // create dropdown
         dropdowns.set(eq, new autoComplete({
             data: {
