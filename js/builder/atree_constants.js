@@ -7577,8 +7577,8 @@ const atrees = {
                         }
                     ],
                     "scaling": [
-                        2.5,
-                        2.5
+                        2,
+                        2
                     ],
                     "max": 50
                 }
@@ -7751,7 +7751,7 @@ const atrees = {
         },
         {
             "display_name": "Multihit",
-            "desc": "Unleash a rapid flurry of 8 hits to enemies facing you, dealing overwhelming damage",
+            "desc": "Unleash a rapid flurry of 8 hits to enemies facing you, dealing heavy damage.",
             "parents": [
                 "Double Slice",
                 "Cheaper Dash"
@@ -7999,7 +7999,7 @@ const atrees = {
         },
         {
             "display_name": "Backstab",
-            "desc": "Multihit will deal a single devastating hit. If you strike the enemy from behind, deal double damage",
+            "desc": "Makes Multihit a single devastating hit. If you strike an enemy from behind, it deals double the damage.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
             "base_abil": "Multihit",
@@ -8102,7 +8102,7 @@ const atrees = {
         },
         {
             "display_name": "Vanish",
-            "desc": "Dash will vanish you into the shadows and make you invisible to enemies (5s Cooldown). You cannot heal or gain mana while in that state (Attack or get hit to cancel)",
+            "desc": "Dash will vanish you into the shadows. You cannot heal or gain mana while in this state. (Attack or get hit to cancel)",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Dash",
@@ -8166,7 +8166,7 @@ const atrees = {
         },
         {
             "display_name": "Righting Reflex",
-            "desc": "When you hold shift while airborne, slowly glide and become immune to fall damage (Max 5s)",
+            "desc": "When you hold shift while airborne, slowly glide and become immune to fall damage. (Max 5s)",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "parents": [
@@ -8185,7 +8185,7 @@ const atrees = {
         },
         {
             "display_name": "Surprise Strike",
-            "desc": "While using Vanish, your next attack will deal +80% more damage for a single hit only",
+            "desc": "Your first hit after casting Vanish will deal +80% more damage.",
             "archetype": "Shadestepper",
             "archetype_req": 3,
             "base_abil": "Dash",
@@ -8219,7 +8219,7 @@ const atrees = {
         },
         {
             "display_name": "Mirror Image",
-            "desc": "After leaving Vanish, summon 3 Clones that will follow you and protect you (15s Cooldown). When hit, gain a chance to take 80% less damage and lose 1 Clone.",
+            "desc": "Summon 3 Clones after reappearing from Vanish that will follow and protect you. When hit, you take 60% less damage. Clones can take 2 hits before dying.",
             "archetype": "Trickster",
             "archetype_req": 2,
             "parents": [
@@ -8236,7 +8236,8 @@ const atrees = {
                 "icon": "node_3"
             },
             "properties": {
-                "clone": 3
+                "clone": 3,
+                "cooldown": 15
             },
             "effects": [
 
@@ -8249,7 +8250,7 @@ const atrees = {
         },
         {
             "display_name": "Lacerate",
-            "desc": "Spin Attack will lunge you forward, deal 3 strikes and lunge you forward again.",
+            "desc": "Spin Attack will lunge you forward, deal 3 strikes and lunge you upward.",
             "archetype": "Acrobat",
             "archetype_req": 2,
             "base_abil": "Spin Attack",
@@ -8299,7 +8300,7 @@ const atrees = {
         },
         {
             "display_name": "Silent Killer",
-            "desc": "After killing an enemy, reset Vanish's cooldown",
+            "desc": "Resets Vanish's cooldown after killing an enemy.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Dash",
@@ -8326,7 +8327,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Mirror Image",
-        "Psithurism"
+                "Psithurism"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8362,7 +8363,7 @@ const atrees = {
         },
         {
             "display_name": "Wall of Smoke",
-            "desc": "Smoke Bomb will throw +2 bombs, damaging more often in a larger area",
+            "desc": "Smoke Bomb will throw +2 bombs.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -8399,7 +8400,7 @@ const atrees = {
         },
         {
             "display_name": "Better Smoke Bomb",
-            "desc": "Increase the range and area of effect of Smoke Bomb",
+            "desc": "Increase Smoke Bomb's range and area of effect.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -8422,7 +8423,7 @@ const atrees = {
         },
         {
             "display_name": "Shadow Travel",
-            "desc": "Vanish will increase your speed by +120%",
+            "desc": "Increases your Walk Speed by +120% when in Vanish.",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "base_abil": "Dash",
@@ -8504,6 +8505,27 @@ const atrees = {
                     ]
                 }
             ]
+        },
+        {
+            "display_name": "Shadow Siphon",
+            "desc": "Reduces Vanish's cooldown by -1.5s after striking an enemy from behind with Backstab.",
+            "archetype": "",
+            "archetype_req": 0,
+            "base_abil": "Vanish",
+            "parents": [
+                "Better Smoke Bomb",
+                "Shadow Travel"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 23,
+                "col": 1,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": []
         },
         {
             "display_name": "Last Laugh",
@@ -8595,7 +8617,7 @@ const atrees = {
         },
         {
             "display_name": "Weightless",
-            "desc": "When you hit an enemy while airborne, gain +0.35 Mana (1.25+ blocks off the ground to be airborne)",
+            "desc": "You gain +0.35 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
             "archetype_req": 3,
             "parents": [
@@ -8615,7 +8637,7 @@ const atrees = {
         },
         {
             "display_name": "Black Hole",
-            "desc": "Smoke Bomb will pull nearby enemies",
+            "desc": "Smoke Bomb will pull nearby enemies.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -8651,7 +8673,9 @@ const atrees = {
                 "col": 4,
                 "icon": "node_1"
             },
-            "properties": {},
+            "properties": {
+                "cooldown": 1
+            },
             "effects": []
         },
         {
@@ -8709,7 +8733,7 @@ const atrees = {
         },
         {
             "display_name": "Violent Vortex",
-            "desc": "If you deal more damage than 1.5x of your max health in a single hit, deal 30% of the damage to other nearby enemies",
+            "desc": "Dealing over 1.5x of your max health as damage in a single hit will deal 30% of the damage to other nearby enemies.",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
@@ -8752,7 +8776,7 @@ const atrees = {
         },
         {
             "display_name": "Delirious Gas",
-            "desc": "While inside Smoke Bomb, increase your damage by +25% and gain Lure for 20s",
+            "desc": "While you're inside Smoke Bomb, increase your damage by +25% and gain Luring for 20s",
             "archetype": "Trickster",
             "archetype_req": 4,
             "base_abil": "Smoke Bomb",
@@ -8852,7 +8876,7 @@ const atrees = {
         },
         {
             "display_name": "Echo",
-            "desc": "Your Clones will mimic your spells and abilities. While they are active, deal -65% damage. Weightless restores -0.25 less mana per hit",
+            "desc": "Your Clones will mimic your spells and abilities, but you deal -20% damage for every clone that's alive. (Max -65%) Weightless restores -0.25 less mana per hit. Bamboozle becomes significantly stronger.",
             "archetype": "Trickster",
             "archetype_req": 6,
             "base_abil": "Mirror Image",
@@ -8886,12 +8910,12 @@ const atrees = {
                         {
                             "type": "stat",
                             "name": "nConvBase:8.Slash Damage",
-                            "value": 690
+                            "value": 720
                         },
                         {
                             "type": "stat",
                             "name": "fConvBase:8.Slash Damage",
-                            "value": 110
+                            "value": 80
                         }
                     ]
                 },
@@ -8959,7 +8983,9 @@ const atrees = {
                 "col": 6,
                 "icon": "node_2"
             },
-            "properties": {},
+            "properties": {
+                "range": 50
+            },
             "effects": [
                 {
                     "type": "replace_spell",
@@ -9018,7 +9044,7 @@ const atrees = {
             "archetype_req": 0,
             "parents": [
                 "Wall of Smoke",
-        "Shenanigans"
+                "Shenanigans"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9110,7 +9136,7 @@ const atrees = {
             "archetype": "Acrobat",
             "archetype_req": 5,
             "parents": [
-                "Cheaper Spin Attack 2"
+                "Cheaper Spin Attack II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9136,7 +9162,7 @@ const atrees = {
             ]
         },
         {
-            "display_name": "Cheaper Spin Attack 2",
+            "display_name": "Cheaper Spin Attack II",
             "desc": "Reduce the Mana cost of Spin Attack",
             "archetype": "",
             "archetype_req": 0,
@@ -9164,7 +9190,7 @@ const atrees = {
         },
         {
             "display_name": "Death Magnet",
-            "desc": "After leaving Vanish, pull all nearby Marked mobs towards you",
+            "desc": "After leaving Vanish, pull all nearby Marked mobs towards where you entered Vanish.",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "base_abil": "Dash",
@@ -9214,7 +9240,7 @@ const atrees = {
         },
         {
             "display_name": "Hoodwink",
-            "desc": "When hitting enemies with Spin Attack, shorten the duration of your negative effects by 30% and transfer it onto enemies Lure can be transferred to the feeble minded. (Bosses and special enemies are immune)",
+            "desc": "When hitting enemies with Spin Attack, reduce the duration of your negative effects by 30% per hit and transfer them onto enemies. Lure can be transferred to most enemies. (Bosses and special enemies are immune)",
             "archetype": "Trickster",
             "archetype_req": 1,
             "base_abil": "Spin Attack",
@@ -9260,12 +9286,12 @@ const atrees = {
         },
         {
             "display_name": "Wall Jump",
-            "desc": "Reduce Hop's cooldown by 1s. When you Hop into a wall, bounce backward. (Hold shift to cancel)",
+            "desc": "Reduce Hop's cooldown by -1s. Using Hop into a wall will bounce you backward. (Hold shift to cancel)",
             "archetype": "Acrobat",
             "archetype_req": 5,
             "parents": [
                 "Choke Bomb",
-                "Cheaper Spin Attack 2"
+                "Cheaper Spin Attack II"
             ],
             "dependencies": [
                 "Hop"
@@ -9282,14 +9308,14 @@ const atrees = {
         },
         {
             "display_name": "Fatal Spin",
-            "desc": "Spin Attack will add +1 Mark to all enemies it hits and gain additional area of effect",
+            "desc": "Increases Spin Attack and Lacerate's range and damage, and adds +1 Mark to enemies hit.",
             "archetype": "Shadestepper",
             "archetype_req": 8,
             "base_abil": "Spin Attack",
             "parents": [
                 "Nightcloak Knife",
                 "Cheaper Multihit II",
-        "Dissolution"
+                "Dissolution"
             ],
             "dependencies": [
                 "Marked"
@@ -9384,12 +9410,12 @@ const atrees = {
         },
         {
             "display_name": "Harvester",
-            "desc": "After killing an enemy, gain +5 Mana for each leftover Marks it had",
+            "desc": "After killing an enemy, gain +5 Mana for each leftover Mark it had.",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
                 "Fatal Spin",
-                "Cheaper Smoke Bomb 2"
+                "Cheaper Smoke Bomb II"
             ],
             "dependencies": [
                 "Marked"
@@ -9405,7 +9431,7 @@ const atrees = {
             "effects": []
         },
         {
-            "display_name": "Cheaper Smoke Bomb 2",
+            "display_name": "Cheaper Smoke Bomb II",
             "desc": "Reduce the Mana cost of Smoke Bomb",
             "archetype": "",
             "archetype_req": 0,
@@ -9436,13 +9462,13 @@ const atrees = {
         },
         {
             "display_name": "Blade Fury",
-            "desc": "Multihit will be easier to aim and enemies hit will stay locked in front of you",
+            "desc": "While using Multihit on an enemy, lock their position in front of you.",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
                 "Stronger Lacerate",
-                "Cheaper Smoke Bomb 2"
+                "Cheaper Smoke Bomb II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9468,7 +9494,7 @@ const atrees = {
             "base_abil": "Marked",
             "parents": [
                 "Harvester",
-                "Cheaper Smoke Bomb 2"
+                "Cheaper Smoke Bomb II"
             ],
             "dependencies": [
                 "Marked"
@@ -9492,12 +9518,12 @@ const atrees = {
         },
         {
             "display_name": "Stronger Clones",
-            "desc": "Improve your damage while your Clones are active by +15%",
+            "desc": "Improves your damage by +5% per Clone while your Clones are active, and reduce their maximum damage penalty by 5%.",
             "archetype": "Trickster",
             "archetype_req": 7,
             "base_abil": "Mirror Image",
             "parents": [
-                "Cheaper Smoke Bomb 2",
+                "Cheaper Smoke Bomb II",
                 "Blade Fury"
             ],
             "dependencies": [
@@ -9517,7 +9543,7 @@ const atrees = {
                 "bonuses": [{
                     "type": "stat",
                     "name": "damMult.Echo",
-                    "value": 15
+                    "value": 5
                 }]
             }]
         },
@@ -9545,7 +9571,7 @@ const atrees = {
         },
         {
             "display_name": "Satsujin",
-            "desc": "If an enemy has 4 Marks, your next Multihit or Powder Special will deal +100% damage. (15s Cooldown, per enemy)",
+            "desc": "If an enemy has 4+ Marks, your next Multihit or Powder Special will deal +100% damage. (15s Cooldown, per enemy)",
             "archetype": "Shadestepper",
             "archetype_req": 12,
             "parents": [
@@ -9591,12 +9617,12 @@ const atrees = {
         },
         {
             "display_name": "Forbidden Art",
-            "desc": "Summon +3 additional Clones, but reduce your damage by -10% while your Clones are active. (+15s Cooldown)",
+            "desc": "Summon +3 additional Clones, but increase your maximum damage penalty by -5% while Clones are active. (+15s Cooldown)",
             "archetype": "Trickster",
             "archetype_req": 8,
             "base_abil": "Mirror Image",
             "parents": [
-                "Cheaper Smoke Bomb 2"
+                "Cheaper Smoke Bomb II"
             ],
             "dependencies": [
                 "Mirror Image"
@@ -9615,17 +9641,17 @@ const atrees = {
                     "slider": true,
                     "slider_name": "Spell Copies",
                     "slider_max": 3,
-            "bonuses": [{
-                    "type": "stat",
-                    "name": "damMult.Echo",
-                    "value": -10
-            }]
+                    "bonuses": [{
+                        "type": "stat",
+                        "name": "damMult.Echo",
+                        "value": -5
+                    }]
                 }
             ]
         },
         {
             "display_name": "Diversion",
-            "desc": "Grant allies within 16 blocks +10% Overhealth whenever you hit a Lured enemy. (9s Cooldown)\nThe bonus health decays over 10s.",
+            "desc": "Grant allies within 16 blocks +10% Overhealth whenever you hit a Lured enemy. (9s Cooldown) Overhealth decays over 10s.",
             "archetype": "Trickster",
             "archetype_req": 12,
             "base_abil": "Smoke Bomb",
@@ -9647,7 +9673,7 @@ const atrees = {
         },
         {
             "display_name": "Jasmine Bloom",
-            "desc": "After spending 40 Mana, bloom an area under you that damages enemies below it every 0.3s. After every bloom, reset the duration and increase the radius (Max 10 Blocks)",
+            "desc": "After spending 40 Mana, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
             "archetype": "Acrobat",
             "archetype_req": 12,
             "parents": [
@@ -9761,7 +9787,7 @@ const atrees = {
         },
         {
             "display_name": "Bamboozle",
-            "desc": "When Clones are active, casting Multihit while holding shift will instead slay 1 Clone and teleport you forwards with a brutal fiery slash",
+            "desc": "When Clones are active, casting Multihit while holding shift will instead slay 1 Clone and teleport you forwards with a brutal fiery slash.",
             "archetype": "Trickster",
             "archetype_req": 0,
             "base_abil": "Multihit",
@@ -9777,6 +9803,7 @@ const atrees = {
                 "col": 4,
                 "icon": "node_2"
             },
+            "properties": {},
             "effects": [
                 {
                     "type": "replace_spell",
@@ -9809,6 +9836,7 @@ const atrees = {
                 "col": 6,
                 "icon": "node_1"
             },
+            "properties": {},
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -9816,7 +9844,7 @@ const atrees = {
                     "slider_name": "Distraction Hits",
                     "output": {
                         "type": "stat",
-                        "name": "defMult.Diffusion"
+                        "name": "defMult.Distraction"
                     },
                     "scaling": [0.1],
                     "slider_step": 1,
@@ -9845,12 +9873,15 @@ const atrees = {
                 "duration": 40,
                 "range": 6
             },
+            "properties": {
+                "duration": 40
+            },
             "effects": [
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Marks Absorbed",
-                    "slider_max": 5,
+                    "slider_max": 10,
                     "output": [
                         { "type": "stat", "name": "damMult.Nightcloak" }
                     ],
@@ -9875,6 +9906,7 @@ const atrees = {
                 "col": 5,
                 "icon": "node_0"
             },
+            "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
                 "base_spell": 2,
@@ -9885,14 +9917,14 @@ const atrees = {
         },
         {
             "display_name": "Dissolution",
-            "desc": "When entering Vanish, become immune to knockback and gain resistance for a brief moment.",
+            "desc": "When entering and exiting Vanish, become immune to knockback and gain resistance for a brief moment.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
             "base_abil": "Vanish",
             "parents": [
                 "Cheaper Multihit II",
                 "Hoodwink",
-  	        "Fatal Spin"
+  	            "Fatal Spin"
             ],
             "dependencies": ["Vanish"],
             "blockers": [],
@@ -9902,13 +9934,16 @@ const atrees = {
                 "col": 3,
                 "icon": "node_0"
             },
+            "properties": {
+                "duration": 0.5
+            },
             "effects": [{
                 "type": "raw_stat",
                 "toggle": "Activate Dissolution",
                 "bonuses": [{
                     "type": "stat",
                     "name": "defMult.Dissolution",
-                    "value": 60
+                    "value": 75
                 }]
             }]
         },
@@ -9940,7 +9975,7 @@ const atrees = {
         },
         {
             "display_name": "Even Stronger Clones",
-            "desc": "Improves your damage by +10% while your Clones are active.",
+            "desc": "Reduce your maximum damage penalty by -5% while your Clones are active.",
             "archetype": "Trickster",
             "archetype_req": 0,
             "base_abil": "Mirror Image",
