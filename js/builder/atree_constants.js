@@ -1000,6 +1000,17 @@ const atrees = {
                             }
                         }
                     ]
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Arrow Shield",
+                            "name": "charges",
+                            "value": -1
+                        }
+                    ]
                 }
             ]
         },
@@ -1041,6 +1052,13 @@ const atrees = {
                                 20,
                                 0
                             ]
+                        },
+                        {
+                            "name": "Burst Damage",
+                            "type": "total",
+                            "hits": {
+                                "Trap Damage": "Basaltic Trap.traps"
+                            }
                         }
                     ]
                 }
@@ -1256,15 +1274,23 @@ const atrees = {
                 {
                     "type": "stat_scaling",
                     "slider": true,
-                    "slider_name": "Patient Hunter Damage Bonus",
-                    "slider_max": 100,
+                    "slider_name": "Trap Wait Time",
                     "output": {
                         "type": "stat",
                         "name": "damMult.Basaltic:7.Trap Damage"
                     },
-                    "slider_step": 1,
-                    "scaling": [
-                        1
+                    "slider_max": 5,
+                    "scaling": [20]
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Basaltic Trap",
+                            "name": "traps",
+                            "value": 1
+                        }
                     ]
                 }
             ]
@@ -1939,7 +1965,7 @@ const atrees = {
         },
         {
             "display_name": "Mana Trap",
-            "desc": "Your Traps will give you 0.5 Mana per second and 10 Mana when they explode.",
+            "desc": "Your Traps will give you 0.5 Mana per second and 10 Mana when they explode. Increase your maximum Traps by +1.",
             "archetype": "Trapper",
             "archetype_req": 6,
             "base_abil": "Basaltic Trap",
@@ -1966,6 +1992,17 @@ const atrees = {
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "cost": 10
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Basaltic Trap",
+                            "name": "traps",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
@@ -2444,7 +2481,7 @@ const atrees = {
         },
         {
             "display_name": "Tangled Traps",
-            "desc": "Your Traps will be connected by a rope that deals damage to enemies every 0.2s.",
+            "desc": "Your Traps will be connected by a rope that deals damage to enemies every 0.2s. Increase your maximum Traps by +1.",
             "archetype": "Trapper",
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
@@ -2486,6 +2523,17 @@ const atrees = {
                     "hits": {
                         "Line Damage Tick": 5
                     }
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Basaltic Trap",
+                            "name": "traps",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
@@ -2562,7 +2610,7 @@ const atrees = {
                                 35,
                                 0,
                                 0,
-                                0,
+                                15,
                                 0,
                                 0
                             ]
@@ -2694,47 +2742,48 @@ const atrees = {
                 {
                     "type": "stat_scaling",
                     "slider": true,
-                    "slider_name": "Patient Hunter Damage Bonus",
-                    "slider_max": 100,
-                    "scaling": [1]
+                    "slider_name": "Trap Wait Time",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Basaltic:7.Trap Damage"
+                    },
+                    "slider_max": 2,
+                    "scaling": [10],
+                    "max": 60
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "prop",
+                            "abil": "Basaltic Trap",
+                            "name": "traps",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
         {
-            "display_name": "Grape Bomb",
-            "desc": "Arrow bomb will throw 2 additional smaller bombs when exploding.",
-            "base_abil": "Arrow Bomb",
+            "display_name": "Snow Storm",
+            "desc": "Enemies near you will be slowed down.",
             "parents": [
-                "Geyser Stomp",
-                "Stronger Patient Hunter",
-                "Cheaper Arrow Bomb II"
+                "Chilling Snare",
+                "More Focus II"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 41,
-                "col": 3,
+                "row": 39,
+                "col": 5,
                 "icon": "node_0"
             },
             "properties": {
-                "aoe": 2
+                "range": 3,
+                "slowness": 0.3
             },
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Grape Bomb",
-                    "multipliers": [
-                        60,
-                        0,
-                        0,
-                        0,
-                        20,
-                        0
-                    ]
-                }
-            ]
+            "effects": []
         },
         {
             "display_name": "More Focus II",
@@ -2847,25 +2896,40 @@ const atrees = {
             ]
         },
         {
-            "display_name": "Snow Storm",
-            "desc": "Enemies near you will be slowed down.",
+            "display_name": "Grape Bomb",
+            "desc": "Arrow bomb will throw 2 additional smaller bombs when exploding.",
+            "base_abil": "Arrow Bomb",
             "parents": [
-                "Chilling Snare",
-                "More Focus II"
+                "Geyser Stomp",
+                "Stronger Patient Hunter",
+                "Cheaper Arrow Bomb II"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 39,
-                "col": 5,
+                "row": 41,
+                "col": 3,
                 "icon": "node_0"
             },
             "properties": {
-                "range": 3,
-                "slowness": 0.3
+                "aoe": 2
             },
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Grape Bomb",
+                    "multipliers": [
+                        60,
+                        0,
+                        0,
+                        0,
+                        20,
+                        0
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Cheaper Arrow Bomb II",
