@@ -8956,29 +8956,11 @@ const atrees = {
                 "col": 4,
                 "icon": "node_3"
             },
-            "properties": {},
+            "properties": {
+                "penalty_per_clone": -20,
+                "max_penalty": -65
+            },
             "effects": [
-                {
-                    "type": "raw_stat",
-                    "toggle": "Activate Clones",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "damMult.Echo",
-                            "value": -65
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:8.Slash Damage",
-                            "value": 720
-                        },
-                        {
-                            "type": "stat",
-                            "name": "fConvBase:8.Slash Damage",
-                            "value": 80
-                        }
-                    ]
-                },
                 {
                     "type": "stat_scaling",
                     "slider": true,
@@ -9022,6 +9004,47 @@ const atrees = {
                     "scaling": [
                         100
                     ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Spell Copies",
+                    "output": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:1.Spin Attack"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:0.Melee"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:3.Backstab Damage"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:3.Fatality"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:3.Per Hit"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:4.Per Tick"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:4.Single Bomb"
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.EchoPenalty:6.Per Shuriken"
+                        }
+                    ],
+                    "scaling": [ "Mirror Image.penalty_per_clone" ],
+					"max": "Mirror Image.max_penalty"
                 }
             ]
         },
@@ -9596,16 +9619,11 @@ const atrees = {
                 "col": 5,
                 "icon": "node_1"
             },
-            "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "toggle": "Activate Clones",
-                "bonuses": [{
-                    "type": "stat",
-                    "name": "damMult.Echo",
-                    "value": 5
-                }]
-            }]
+            "properties": {
+                "max_penalty": 5,
+                "penalty_per_clone": 5
+            },
+            "effects": []
         },
         {
             "display_name": "Ricochets",
@@ -9694,18 +9712,13 @@ const atrees = {
                 "col": 4,
                 "icon": "node_2"
             },
-            "properties": {},
+            "properties": { "max_penalty": -5 },
             "effects": [
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Spell Copies",
-                    "slider_max": 3,
-                    "bonuses": [{
-                        "type": "stat",
-                        "name": "damMult.Echo",
-                        "value": -5
-                    }]
+                    "slider_max": 3
                 }
             ]
         },
@@ -10050,15 +10063,8 @@ const atrees = {
                 "col": 4,
                 "icon": "node_0"
             },
-            "effects": [{
-                "type": "raw_stat",
-                "toggle": "Activate Clones",
-                "bonuses": [{
-                    "type": "stat",
-                    "name": "damMult.Echo",
-                    "value": 10
-                }]
-            }]
+            "properties": { "max_penalty": 5 },
+            "effects": []
         }
     ],
     "Shaman": [

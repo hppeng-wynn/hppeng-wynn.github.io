@@ -720,7 +720,7 @@ const atree_scaling = new (class extends ComputeNode {
                     else {
                         // TODO: type: prop?
                         for (const [_scaling, input] of zip2(scaling, effect.inputs)) {
-                            total += pre_scale_stats.get(input.name) * atree_translate(_scaling);
+                            total += pre_scale_stats.get(input.name) * atree_translate(atree_merged, _scaling);
                         }
                     }
 

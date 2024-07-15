@@ -39,6 +39,22 @@ def translate_effect(id_data, effect):
             else:
                 if "abil" in effect["output"] and effect["output"]["abil"] in id_data:
                     effect["output"]["abil"] = id_data[effect["output"]["abil"]]
+        if "scaling" in effect:
+            if isinstance(effect["scaling"], list):
+                for i, val in enumerate(effect["scaling"]):
+                    if isinstance(val, str):
+                        abil_id, propname = val.split('.')
+                        effect["scaling"][i] = str(id_data[abil_id])+'.'+propname
+            else:
+                val = effect["scaling"]
+                if isinstance(val, str):
+                    abil_id, propname = val.split('.')
+                    effect["scaling"] = str(id_data[abil_id])+'.'+propname
+        if "max" in effect:
+            val = effect["max"]
+            if isinstance(val, str):
+                abil_id, propname = val.split('.')
+                effect["max"] = str(id_data[abil_id])+'.'+propname
 
 def translate_abil(id_data, abil, tree=True):
     def translate(path, ref):
