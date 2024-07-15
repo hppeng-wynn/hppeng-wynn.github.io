@@ -675,7 +675,7 @@ const atree_scaling = new (class extends ComputeNode {
         function apply_bonus(bonus_info, value) {
             const { type, name, abil = null} = bonus_info;
             if (type === 'stat') {
-                merge_stat(ret_effects, name, value);
+                merge_stat(ret_effects, name, atree_translate(atree_merged, value));
             } else if (type === 'prop') {
                 const merge_abil = atree_edit.get(abil);
                 if (merge_abil) {
@@ -713,14 +713,14 @@ const atree_scaling = new (class extends ComputeNode {
                             continue;
                         }
                         const slider_val = slider_map.get(effect.slider_name).slider.value;
-                        total = parseInt(slider_val) * scaling[0];
+                        total = parseInt(slider_val) * atree_translate(atree_merged, scaling[0]);
                         round = false;
                         positive = false;
                     }
                     else {
                         // TODO: type: prop?
                         for (const [_scaling, input] of zip2(scaling, effect.inputs)) {
-                            total += _scaling * pre_scale_stats.get(input.name);
+                            total += pre_scale_stats.get(input.name) * atree_translate(_scaling);
                         }
                     }
 
@@ -728,8 +728,9 @@ const atree_scaling = new (class extends ComputeNode {
                         if (round) { total = Math.floor(round_near(total)); }
                         if (positive && total < 0) { total = 0; }   // Normal stat scaling will not go negative.
                         if ('max' in effect) {
-                            if (effect.max > 0 && total > effect.max) { total = effect.max; }
-                            if (effect.max < 0 && total < effect.max) { total = effect.max; }
+                            let effect_max = atree_translate(atree_merged, effect.max);
+                            if (effect_max > 0 && total > effect_max) { total = effect.max; }
+                            if (effect_max < 0 && total < effect_max) { total = effect.max; }
                         }
                         if (Array.isArray(effect.output)) {
                             for (const output of effect.output) {
@@ -839,6 +840,21 @@ const atree_render_active = new (class extends ComputeNode {
     }
 })().link_to(atree_node, 'atree-order').link_to(atree_scaling_tree, 'atree-merged');
 
+/**
+ * Parse out "parametrized entries".
+ * Straight replace.
+ *
+ * Format: ability_id.propname
+ */
+function atree_translate(atree_merged, v) {
+    if (typeof v === 'string') {
+        const [id_str, propname] = v.split('.');
+        const id = parseInt(id_str);
+        const ret = atree_merged.get(id).properties[propname];
+        return ret;
+    }
+    return v;
+}
 
 /**
  * Collect spells from abilities.
@@ -850,22 +866,6 @@ const atree_collect_spells = new (class extends ComputeNode {
 
     compute_func(input_map) {
         const atree_merged = input_map.get('atree-merged');
-        
-        /**
-         * Parse out "parametrized entries".
-         * Straight replace.
-         *
-         * Format: ability_id.propname
-         */
-        function translate(v) {
-            if (typeof v === 'string') {
-                const [id_str, propname] = v.split('.');
-                const id = parseInt(id_str);
-                const ret = atree_merged.get(id).properties[propname];
-                return ret;
-            }
-            return v;
-        }
         
         let ret_spells = new Map();
         for (const [abil_id, abil] of atree_merged.entries()) {
@@ -887,7 +887,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                     for (const part of ret_spell.parts) {
                         if ('hits' in part) {
                             for (const idx in part.hits) {
-                                part.hits[idx] = translate(part.hits[idx]);
+                                part.hits[idx] = atree_translate(atree_merged, part.hits[idx]);
                             }
                         }
                     }
@@ -936,7 +936,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                         }
                         else if ('hits' in effect) {
                             for (const [idx, _v] of Object.entries(effect.hits)) { // looks kinda similar to multipliers case... hmm... can we unify all of these three? (make healpower a list)
-                                let v = translate(_v);
+                                let v = atree_translate(atree_merged, _v);
                                 if (behavior === 'overwrite') { part.hits[idx] = v; }
                                 else {
                                     if (idx in part.hits) { part.hits[idx] += v; }
@@ -955,7 +955,7 @@ const atree_collect_spells = new (class extends ComputeNode {
                         spell_part.name = target_part;  // has some extra fields but whatever
                         if ('hits' in spell_part) {
                             for (const idx in spell_part.hits) {
-                                spell_part.hits[idx] = translate(spell_part.hits[idx]);
+                                spell_part.hits[idx] = atree_translate(atree_merged, spell_part.hits[idx]);
                             }
                         }
                         ret_spell.parts.push(spell_part);
