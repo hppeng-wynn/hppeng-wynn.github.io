@@ -5800,48 +5800,6 @@ const atrees = {
             }]
         },
         {
-            "display_name": "Freezing Sigil",
-            "desc": "Ice Snake will leave a sigil of ice beneath you that slows and damages enemies every 0.8s. Allies standing on the sigil will be immune to knockback.",
-            "archetype": "Light Bender",
-            "base_abil": "Ice Snake",
-            "parents": [
-                "Cheaper Teleport II",
-                "Pyrokinesis"
-            ],
-            "dependencies": [],
-            "blockers": [],
-            "cost": 2,
-            "display": {
-                "row": 21,
-                "col": 6,
-                "icon": "node_2"
-            },
-            "properties": {
-                "aoe": 7,
-                "duration": 8
-            },
-            "effects": [{
-                "type": "replace_spell",
-                "name": "Freezing Sigil",
-                "base_spell": 7,
-                "display": "DPS",
-                "parts": [
-                    {
-                        "name": "Tick Damage",
-                        "multipliers": [15, 0, 0, 5, 0, 0]
-                    },
-                    {
-                        "name": "DPS",
-                        "hits": { "Tick Damage": 1.25 }
-                    },
-                    {
-                        "name": "Total Freeze Damage",
-                        "hits": { "Tick Damage": 8 }
-                    }
-                ]
-            }]
-        },
-        {
             "display_name": "Sunshower",
             "desc": "Heal emits a strong light, damaging nearby enemies.",
             "archetype": "Light Bender",
@@ -6391,6 +6349,48 @@ const atrees = {
                     }
                 }
             ]
+        },
+        {
+            "display_name": "Freezing Sigil",
+            "desc": "Ice Snake will leave a sigil of ice beneath you that slows and damages enemies every 0.8s. Allies standing on the sigil will be immune to knockback.",
+            "archetype": "Light Bender",
+            "base_abil": "Ice Snake",
+            "parents": [
+                "Cheaper Teleport II",
+                "Pyrokinesis"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 21,
+                "col": 6,
+                "icon": "node_2"
+            },
+            "properties": {
+                "aoe": 7,
+                "duration": 8
+            },
+            "effects": [{
+                "type": "replace_spell",
+                "name": "Freezing Sigil",
+                "base_spell": 7,
+                "display": "DPS",
+                "parts": [
+                    {
+                        "name": "Tick Damage",
+                        "multipliers": [15, 0, 0, 5, 0, 0]
+                    },
+                    {
+                        "name": "DPS",
+                        "hits": { "Tick Damage": 1.25 }
+                    },
+                    {
+                        "name": "Total Freeze Damage",
+                        "hits": { "Tick Damage": 8 }
+                    }
+                ]
+            }]
         },
         {
             "display_name": "Healthier Ophanim I",
@@ -7186,6 +7186,38 @@ const atrees = {
             ]
         },
         {
+            "display_name": "Devitalize",
+            "desc": "Enemies will deal -0.5% damage for every Winded they have.",
+            "base_abil": "Windsweeper",
+            "archetype": "Riftwalker",
+            "archetype_req": 6,
+            "parents": [
+                "More Winded II",
+                "Healthier Ophanim II"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 31,
+                "col": 2,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Winded",
+                    "output": {
+                        "type": "stat",
+                        "name": "defMult.Diffusion"
+                    },
+                    "scaling": [0.5]
+                }
+            ]
+        },
+        {
             "display_name": "Healthier Ophanim II",
             "desc": "Increase the health of your orbs from Ophanim by +3000.",
             "base_abil": "Ophanim",
@@ -7229,38 +7261,6 @@ const atrees = {
             },
             "properties": {},
             "effects": []
-        },
-        {
-            "display_name": "Devitalize",
-            "desc": "Enemies will deal -0.5% damage for every Winded they have.",
-            "base_abil": "Windsweeper",
-            "archetype": "Riftwalker",
-            "archetype_req": 6,
-            "parents": [
-                "More Winded II",
-                "Healthier Ophanim II"
-            ],
-            "dependencies": [],
-            "blockers": [],
-            "cost": 2,
-            "display": {
-                "row": 31,
-                "col": 2,
-                "icon": "node_1"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Winded",
-                    "output": {
-                        "type": "stat",
-                        "name": "defMult.Diffusion"
-                    },
-                    "scaling": [0.5]
-                }
-            ]
         },
         {
             "display_name": "Divination",
