@@ -89,10 +89,10 @@
             </a>
         </div>
     </div>
-    <div class="container-fluid overall-box mt-lg-2" style="margin-top: 6vh; display: none">
+    <div class="container-fluid overall-box mt-lg-2" style="margin-top: 6vh; display: none;">
         <!-- REMOVE THIS DIV AT SOME POINT. -->
         <div class = "row scaled-font mx-auto" id = "discord-banner-dev">
-                <div class = "col text-center item-title">Join the <a class = "link" href = "https://discord.gg/CGavnAnerv" target = "_blank">discord</a> today to suggest new features, submit bug reports, and hangout/talk to devs!</div>
+                <div id='discord-banner' class = "col text-center item-title">Join the <a class = "link" href = "https://discord.gg/CGavnAnerv" target = "_blank">discord</a> today to suggest new features, submit bug reports, and hangout/talk to devs!</div>
         </div>
         <div class="row h-100 gx-lg-5 gy-3 mx-2 mx-lg-3 py-3 gx-0">
             <div class="col-xl-6">
@@ -474,13 +474,13 @@
                                     War Scream
                                 </button>
                                 <button class="button-boost m-1 border-0 text-white dark-8u dark-shadow-sm" id="ragnarokkr-boost" onclick="update_boosts('ragnarokkr-boost')">
-                                    Ragnarokkr (+20%)
+                                    Ragnarokkr (+10%)
                                 </button>
                                 <button class="button-boost m-1 border-0 text-white dark-8u dark-shadow-sm" id="totem-boost" onclick="update_boosts('totem-boost')">
                                     Vengeful Spirit (+20%)
                                 </button>
                                 <button class="button-boost m-1 border-0 text-white dark-8u dark-shadow-sm" id="fortitude-boost" onclick="update_boosts('fortitude-boost')">
-                                    Fortitude (+60%)
+                                    Fortitude (+50%)
                                 </button>
                             </div>
                             <div class="col" id="boost-toggles">
@@ -832,6 +832,30 @@
                                                         <div class="row row-cols-1 h-100 align-items-center">
                                                             <div class="col d-flex justify-content-end">
                                                                 <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="guildTome1-choice" name="guildTome1-choice" placeholder="No Tome" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='lootrunTome1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="lootrunTome1-img-loc">
+                                                        <div id="lootrunTome1-img" class="img-fluid rounded tome-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Lootrun
+                                                            </div>
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Tome
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="lootrunTome1-choice" name="lootrunTome1-choice" placeholder="No Tome" value=""/>
                                                             </div>
                                                         </div>
                                                     </div>
