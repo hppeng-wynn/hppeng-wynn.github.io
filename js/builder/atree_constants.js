@@ -4884,7 +4884,7 @@ const atrees = {
             "desc": "Bash will cast at the player's position and gain additional AoE.",
             "archetype": "Battle Monk", 
             "archetype_req": 6, 
-            "parents": ["Cyclone"], 
+            "parents": ["Cyclone", "Stronger Sacred Surge"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4949,13 +4949,13 @@ const atrees = {
                 }
             ]  
         },
-    {
+        {
             "display_name": "Stronger Sacred Surge",
             "desc": "Increases the damage of Sacred Surge",
             "archetype": "Paladin", 
-            "archetype_req": 8, 
+            "archetype_req": 9, 
             "parents": ["Cheaper Bash II", "Cyclone"], 
-            "dependencies": [], 
+            "dependencies": [ "Sacred Surge" ], 
             "blockers": [],
             "cost": 1, 
             "display": {
