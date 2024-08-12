@@ -645,24 +645,29 @@
                                 <div class="row row-cols-1 row-cols-1 text-center scaled-font dark-5 rounded dark-shadow">
                                     <div class="col fw-bold dark-4 rounded-top">
                                         <div class = "row">
-                                            <div class = "col-3 py-2">
+                                            <div class = "col py-2">
                                                 <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-tomes" onclick = "toggle_tab('tomes-dropdown'); toggleButton('toggle-tomes')">
                                                     Show Tomes
                                                 </button>
                                             </div>
-                                            <div class = "col-3 py-2">
+                                            <div class = "col py-2">
                                                 <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-atree" onclick = "toggle_tab('atree-dropdown'); toggleButton('toggle-atree')">
                                                     Edit Abilities
                                                 </button>
                                             </div>
-                                            <div class = "col-3 py-2">
+                                            <div class = "col py-2">
+                                                <button class = "col-auto button rounded scaled-font fw-bold text-light dark-5" id = "toggle-aspects" onclick = "toggle_tab('aspects-dropdown'); toggleButton('toggle-aspects')">
+                                                    Edit Aspects
+                                                </button>
+                                            </div>
+                                            <div class = "col py-2">
                                                 <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "toggle_tab('edit_id_tab'); toggleButton('edit-ID-button')">
                                                     Edit IDs
                                                 </button>
                                             </div>
-                                            <div class = "col-3 py-2">
-                                                <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "edit-ID-button" onclick = "resetEditableIDs();">
-                                                    Reset Edited IDs
+                                            <div class = "col py-2">
+                                                <button class = "button rounded scaled-font fw-bold text-light dark-5" id = "reset-edit-ID-button" onclick = "resetEditableIDs();">
+                                                    Reset IDs
                                                 </button>
                                             </div>
                                         </div>
@@ -874,6 +879,115 @@
                                                 <div class="col mx-auto" style="" id="atree-warning">
                                                 </div>
                                                 <div class="col mx-auto" style="overflow-y: auto;" id="atree-active">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col dark-6 rounded-bottom my-3 my-xl-1" id = "aspects-dropdown" style = "display: none;">
+                                        <div class="row h-100 row-cols-1 row-cols-xl-2 gy-2 rounded">
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='aspect1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="aspect1-img-loc">
+                                                        <div id="aspect1-img" class="img-fluid rounded aspect-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Aspect 1
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="aspect1-choice" name="aspect1-choice" placeholder="No Aspect" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='aspect1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="aspect1-img-loc">
+                                                        <div id="aspect1-img" class="img-fluid rounded aspect-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Aspect 2
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="aspect2-choice" name="aspect2-choice" placeholder="No Aspect" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='aspect1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="aspect1-img-loc">
+                                                        <div id="aspect1-img" class="img-fluid rounded aspect-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Aspect 3
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="aspect3-choice" name="aspect3-choice" placeholder="No Aspect" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='aspect1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="aspect1-img-loc">
+                                                        <div id="aspect1-img" class="img-fluid rounded aspect-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Aspect 4
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="aspect4-choice" name="aspect4-choice" placeholder="No Aspect" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto rounded">
+                                                <div class="row h-100 dark-shadow rounded" id='aspect1-dropdown'>
+                                                    <div class="col-auto g-0 rounded-end my-auto text-center scaled-item-icon" id="aspect1-img-loc">
+                                                        <div id="aspect1-img" class="img-fluid rounded myth-aspect-image"></div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col scaled-font fw-bold gx-3">
+                                                                Aspect 5
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col g-0 rounded">
+                                                        <div class="row row-cols-1 h-100 align-items-center">
+                                                            <div class="col d-flex justify-content-end">
+                                                                <input class="equipment-input border-dark text-light dark-10 rounded scaled-font form-control form-control-sm" id="aspect5-choice" name="aspect5-choice" placeholder="No Aspect" value=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
