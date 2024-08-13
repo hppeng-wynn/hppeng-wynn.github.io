@@ -4878,7 +4878,6 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Thunderclap",
             "desc": "Bash will cast at the player's position and gain additional AoE.",
@@ -4912,7 +4911,6 @@ const atrees = {
                 }
             ]  
         },
-
         {
             "display_name": "Cyclone",
             "desc": "After casting War Scream, envelop yourself with a vortex that damages nearby enemies every 0.5s",

@@ -62,6 +62,13 @@ JSON_DIFF_PRINTER = JSONDiffReporter(
     __print_path_diff,
     __custom_input
 )
+JSON_DIFF_PRINTER_KEYLESS = JSONDiffReporter(
+    __print_val_diff,
+    __print_len_diff,
+    __print_type_diff,
+    __print_path_diff,
+    lambda path: ""
+)
 
 def __val_diff(val1, val2, path):
     errmsg = (f"{path}: Value difference\n"
@@ -102,13 +109,16 @@ def list_diff(reporter, list1, list2, path) -> bool:
     if key == "":
         if list1 != list2:
             reporter.val_diff(list1, list2, path)
+            return True
+        return False
     else:
         left = {x[key]: x for x in list1}
         right = {x[key]: x for x in list2}
-        object_diff(reporter, left, right, path)
+        return object_diff(reporter, left, right, path)
 
 def object_diff(reporter, obj1, obj2, path) -> bool:
     """Compute object difference between two objects... kinda"""
+    ret = False
     for (k, val) in obj1.items():
         if k in obj2:
             obj = obj2[k]
@@ -116,28 +126,35 @@ def object_diff(reporter, obj1, obj2, path) -> bool:
             type2 = type(obj)
             if type1 != type2:
                 reporter.type_diff(type1, type2, f"{path}.{k}")
+                ret = True
             elif type1 is list:
                 if len(val) != len(obj):
                     reporter.len_diff(val, obj, f"{path}.{k}")
+                    ret = True
                 elif len(val) == 0:
                     continue
                 elif is_basic(type(val[0])):
                     if val != obj:
                         reporter.val_diff(val, obj, f"{path}.{k}")
+                        ret = True
                     continue
-                list_diff(reporter, val, obj, path+"."+k)
+                ret = ret or list_diff(reporter, val, obj, path+"."+k)
             elif is_basic(type1) or val is None or obj2 is None:
                 if val != obj:
                     reporter.val_diff(val, obj, f"{path}.{k}")
+                    ret = True
             else:
-                object_diff(reporter, val, obj, f"{path}.{k}")
+                ret = ret or object_diff(reporter, val, obj, f"{path}.{k}")
             continue
         reporter.path_diff(obj1, obj2, k, path, False)
+        ret = True
     for k in obj2:
         if k not in obj1:
             reporter.path_diff(obj1, obj2, k, path, True)
+            ret = True
+    return ret
 
-def json_diff(json1, json2, reporter=JSON_DIFF_PRINTER) -> bool:
+def json_diff(json1, json2, reporter=JSON_DIFF_PRINTER_KEYLESS) -> bool:
     """Run the json diff tool on two json objects."""
     if isinstance(json1, list) and isinstance(json2, list):
         return list_diff(reporter, json1, json2, "$")
@@ -157,4 +174,4 @@ if __name__ == "__main__":
         json1 = json.load(file1)
     with open(args.file2, 'r', encoding="utf-8") as file2:
         json2 = json.load(file2)
-    json_diff(json1, json2)
+    json_diff(json1, json2, reporter=JSON_DIFF_PRINTER)

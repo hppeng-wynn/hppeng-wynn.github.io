@@ -6,3 +6,5 @@ sets/
 .idea/
 *.iml
 .editor_log.txt
+
+__pycache__
