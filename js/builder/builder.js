@@ -131,163 +131,124 @@ function toggleButton(button_id) {
     }
 }
 
+function autocomplete_msg(equipment_type) {
+    return (list, data) => {
+        // dynamic result loc
+        let position = document.getElementById(equipment_type+'-dropdown').getBoundingClientRect();
+        list.style.top = position.bottom + window.scrollY +"px";
+        list.style.left = position.x+"px";
+        list.style.width = position.width+"px";
+        list.style.maxHeight = position.height * 2 +"px";
 
-// autocomplete initialize
-function init_autocomplete() {
-    let dropdowns = new Map();
-    for (const eq of equipment_keys) {
-        if (tome_keys.includes(eq)) {
+        if (!data.results.length) {
+            message = document.createElement('li');
+            message.classList.add('scaled-font');
+            message.textContent = "No results found!";
+            list.prepend(message);
+        }
+    }
+}
+
+function create_autocomplete(data, data_map, item_type, translator) {
+    // create dropdown
+    new autoComplete({
+        data: {
+            src: data
+        },
+        selector: "#"+ item_type +"-choice",
+        wrapper: false,
+        resultsList: {
+            maxResults: 1000,
+            tabSelect: true,
+            noResults: true,
+            class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+            element: autocomplete_msg(item_type)
+        },
+        resultItem: {
+            class: "scaled-font search-item",
+            selected: "dark-5",
+            element: (item, data) => {
+                let val = translator(data.value);
+                item.classList.add(data_map.get(val).tier);
+            },
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    if (event.detail.selection.value) {
+                        event.target.value = translator(event.detail.selection.value);
+                    }
+                    event.target.dispatchEvent(new Event('change'));
+                },
+            },
+        }
+    });
+}
+
+function add_tome_autocomplete(tome_type) {
+    // Build the valid choices
+    let tome_arr = [];
+    let tome_aliases = new Map();
+    for (const tome_name of tomeLists.get(tome_type.replace(/[0-9]/g, ''))) {
+        let tome_obj = tomeMap.get(tome_name);
+        if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
             continue;
         }
-        // build dropdown
-        let item_arr = [];
-        if (eq == 'weapon') {
-            for (const weaponType of weapon_keys) {
-                for (const weapon of itemLists.get(weaponType)) {
-                    let item_obj = itemMap.get(weapon);
-                    if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
-                        continue;
-                    }
-                    if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
-                        continue;
-                    }
-                    item_arr.push(weapon);
-                }
-            }
-        } else {
-            for (const item of itemLists.get(eq.replace(/[0-9]/g, ''))) {
-                let item_obj = itemMap.get(item);
+        //this should suffice for tomes - jank
+        if (tome_obj["name"].includes('No ' + tome_type.charAt(0).toUpperCase())) {
+            continue;
+        }
+        let tome_alias = tome_obj['alias'];
+        tome_arr.push(tome_name);
+        if (tome_alias) {
+            tome_arr.push(tome_alias);
+            tome_aliases.set(tome_alias, tome_name);
+        }
+    }
+
+    create_autocomplete(tome_arr, tomeMap, tome_type, (v) => { if (tome_aliases.has(v)) { v = tome_aliases.get(v); }; return v; });
+}
+
+function add_item_autocomplete(item_type) {
+    // Build the valid choices
+    let item_arr = [];
+    if (item_type == 'weapon') {
+        for (const weaponType of weapon_keys) {
+            for (const weapon of itemLists.get(weaponType)) {
+                let item_obj = itemMap.get(weapon);
                 if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
                     continue;
                 }
-                if (item_obj["name"] == 'No '+ eq.charAt(0).toUpperCase() + eq.slice(1)) {
+                if (item_obj["name"] == 'No '+ item_type.charAt(0).toUpperCase() + item_type.slice(1)) {
                     continue;
                 }
-                item_arr.push(item)
+                item_arr.push(weapon);
             }
         }
-
-        // create dropdown
-        dropdowns.set(eq, new autoComplete({
-            data: {
-                src: item_arr
-            },
-            selector: "#"+ eq +"-choice",
-            wrapper: false,
-            resultsList: {
-                maxResults: 1000,
-                tabSelect: true,
-                noResults: true,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    // dynamic result loc
-                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
-                    list.style.top = position.bottom + window.scrollY +"px";
-                    list.style.left = position.x+"px";
-                    list.style.width = position.width+"px";
-                    list.style.maxHeight = position.height * 2 +"px";
-
-                    if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No results found!";
-                        list.prepend(message);
-                    }
-                },
-            },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-                element: (item, data) => {
-                    item.classList.add(itemMap.get(data.value).tier);
-                },
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            event.target.value = event.detail.selection.value;
-                        }
-                        event.target.dispatchEvent(new Event('change'));
-                    },
-                },
+    } else {
+        for (const item of itemLists.get(item_type.replace(/[0-9]/g, ''))) {
+            let item_obj = itemMap.get(item);
+            if (item_obj["restrict"] && item_obj["restrict"] === "DEPRECATED") {
+                continue;
             }
-        }));
+            if (item_obj["name"] == 'No '+ item_type.charAt(0).toUpperCase() + item_type.slice(1)) {
+                continue;
+            }
+            item_arr.push(item)
+        }
     }
 
+    create_autocomplete(item_arr, itemMap, item_type, (v) => { return v; });
+}
+
+// autocomplete initialize
+function init_autocomplete() {
+    for (const eq of equipment_keys) {
+        add_item_autocomplete(eq);
+    }
     for (const eq of tome_keys) {
-        // build dropdown
-        let tome_arr = [];
-        let tome_aliases = new Map();
-        for (const tome_name of tomeLists.get(eq.replace(/[0-9]/g, ''))) {
-            let tome_obj = tomeMap.get(tome_name);
-            if (tome_obj["restrict"] && tome_obj["restrict"] === "DEPRECATED") {
-                continue;
-            }
-            //this should suffice for tomes - jank
-            if (tome_obj["name"].includes('No ' + eq.charAt(0).toUpperCase())) {
-                continue;
-            }
-            let tome_alias = tome_obj['alias'];
-            tome_arr.push(tome_name);
-            if (tome_alias) {
-                tome_arr.push(tome_alias);
-                tome_aliases.set(tome_alias, tome_name);
-            }
-        }
-
-        // create dropdown
-        dropdowns.set(eq, new autoComplete({
-            data: {
-                src: tome_arr
-            },
-            selector: "#"+ eq +"-choice",
-            wrapper: false,
-            resultsList: {
-                maxResults: 1000,
-                tabSelect: true,
-                noResults: false,
-                class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
-                element: (list, data) => {
-                    // dynamic result loc
-                    let position = document.getElementById(eq+'-dropdown').getBoundingClientRect();
-                    list.style.top = position.bottom + window.scrollY +"px";
-                    list.style.left = position.x+"px";
-                    list.style.width = position.width+"px";
-                    list.style.maxHeight = position.height * 2 +"px";
-
-                    if (!data.results.length) {
-                        message = document.createElement('li');
-                        message.classList.add('scaled-font');
-                        message.textContent = "No results found!";
-                        list.prepend(message);
-                    }
-                },
-            },
-            resultItem: {
-                class: "scaled-font search-item",
-                selected: "dark-5",
-                element: (tome, data) => {
-                    let val = data.value;
-                    if (tome_aliases.has(val)) { val = tome_aliases.get(val); }
-                    tome.classList.add(tomeMap.get(val).tier);
-                },
-            },
-            events: {
-                input: {
-                    selection: (event) => {
-                        if (event.detail.selection.value) {
-                            let val = event.detail.selection.value;
-                            if (tome_aliases.has(val)) { val = tome_aliases.get(val); }
-                            event.target.value = val;
-                        }
-                        event.target.dispatchEvent(new Event('change'));
-                    },
-                },
-            }
-        }));
+        add_tome_autocomplete(eq);
     }
-
 }
 
 function collapse_element(elmnt) {
