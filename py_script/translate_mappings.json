@@ -2,7 +2,7 @@
     "tome": {
         "name": "displayName",
         "internalName": "name",
-        "tier": "CAPS;tier",
+        "rarity": "CAPS;tier",
         "material": "DELETE;",
         "base": "UNWRAP;tome.base",
         "dropMeta": "DELETE;",
@@ -60,7 +60,7 @@
     "item": {
         "name": "displayName",
         "internalName": "name",
-        "tier": "CAPS;tier",
+        "rarity": "CAPS;tier",
         "set": "set",
         "powderSlots": "slots",
         "type": "type",

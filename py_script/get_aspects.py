@@ -64,16 +64,17 @@ if __name__ == "__main__":
         "displayName": None,
         "id": 0,
         "class": None,
+        "tier": None,
         "tiers": [
             {
                 "threshold": 0,
                 "description": None,
-                "effects": []
+                "abilities": []
             }
         ]
     }
 
-    with open("../aspects.json", "r") as aspects_data_file:
+    with open("../js/builder/aspects.json", "r") as aspects_data_file:
         old_aspect_data = json.load(aspects_data_file)
     
     try:
@@ -85,7 +86,7 @@ if __name__ == "__main__":
     api_data = {}
 
     aspect_changes = {c: [] for c in classes}
-    all_output = {c: [] for c in classes}
+    all_output_unordered = {c: {} for c in classes}
 
     for wynn_class in classes:
         print(f"Processing aspects for {wynn_class}...")
@@ -108,13 +109,13 @@ if __name__ == "__main__":
                 data = aspect['tiers'][str(i+1)]
 
                 if old_tier_data is not None and len(old_tier_data) > i:
-                    effects = old_tier_data[i]['effects']
+                    abils = old_tier_data[i]['abilities']
                 else:
-                    effects = []
+                    abils = []
                 tier_data.append({
                     'threshold': data['threshold'],
                     'description': clean_description(data['description']),
-                    'effects': effects
+                    'abilities': abils
                 })
 
             if name not in id_map:
@@ -134,9 +135,22 @@ if __name__ == "__main__":
             aspect_info = {
                 "displayName": name,
                 "id": aspect_id,
+                "tier": aspect['rarity'][0].upper() + aspect['rarity'][1:],
                 "tiers": tier_data
             }
-            all_output[wynn_class].append(aspect_info)
+            all_output_unordered[wynn_class][name] = aspect_info
+
+    all_output = {c: [] for c in classes}
+    for wynn_class in classes:
+        known_aspects = old_aspect_data[wynn_class]
+        new_aspects = all_output_unordered[wynn_class]
+        for aspect in known_aspects:
+            aspect_name = aspect['displayName']
+            if aspect_name in new_aspects:
+                all_output[wynn_class].append(new_aspects[aspect_name])
+                del new_aspects[aspect_name]
+
+        all_output[wynn_class].extend(new_aspects.values())
     
     print("Finished processing aspects")
     print("Summary of changed aspects:")
@@ -144,7 +158,7 @@ if __name__ == "__main__":
         print(wynn_class)
         print("---------------------")
         if len(aspect_changes[wynn_class]) > 0:
-            print("\t", "\n".join(aspect_changes[wynn_class]))
+            print("\t", "\n\t".join(aspect_changes[wynn_class]))
         else:
             print("No Changes")
         print("---------------------")
@@ -153,7 +167,7 @@ if __name__ == "__main__":
         json.dump(api_data, api_file, indent=2)
 
     with open("aspects.json", "w") as output_file:
-        json.dump(all_output, output_file, indent=4)
+        json.dump(all_output, output_file, indent=2)
 
     with open("aspect_map.json", "w") as aspect_ids_file:
         json.dump(aspect_ids, aspect_ids_file, indent=2)

@@ -597,5 +597,20 @@
         }
       ]
     }]
+  },
+  "LIFESTREAM": {
+    "displayName": "Lifestream",
+    "description": "idk",
+    "abilities": []
+  },
+  "FIXATE": {
+    "displayName": "Fixate",
+    "description": "idk",
+    "abilities": []
+  },
+  "TWISTING_THREADS": {
+    "displayName": "Twisting Threads",
+    "description": "idk",
+    "abilities": []
   }
 }

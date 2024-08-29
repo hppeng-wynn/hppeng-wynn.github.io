@@ -25,6 +25,7 @@ if args.infile is None:
     print("Grabbing json data from wynn api")
     from item_wrapper import Items
     api_data = Items().get_all_items()
+    #print(api_data)
     json.dump(api_data, open('dump.json', 'w'))
 else:
     with open(args.infile, "r") as in_file:
@@ -47,6 +48,7 @@ def translate_single_item(key, entry, name, directives, accumulate):
         if directive == 'DELETE':
             ret = None
         elif directive == 'CAPS':
+            print(name, accumulate, ret)
             ret = ret[0].upper() + ret[1:]
         elif directive == 'ALLCAPS':
             ret = ret.upper()
@@ -102,13 +104,20 @@ def recursive_translate(entry, result, path, translate_single):
 
 armor_types = ['helmet', 'chestplate', 'leggings', 'boots']
 tome_type_translation = {
-    'gatheringxp': 'gatherXpTome',
-    'dungeonxp': 'dungeonXpTome',
-    'slayingxp': 'mobXpTome',
-    'guildtome': 'guildTome',
-    'mobdefence': 'armorTome',
-    'mobdamage': 'weaponTome',
-    'lootrun': 'lootrunTome',
+    #'gatheringxp': 'gatherXpTome',
+    #'dungeonxp': 'dungeonXpTome',
+    #'slayingxp': 'mobXpTome',
+    #'guildtome': 'guildTome',
+    #'mobdefence': 'armorTome',
+    #'mobdamage': 'weaponTome',
+    #'lootrun': 'lootrunTome',
+    'marathon_tome': 'gatherXpTome',
+    'mysticism_tome': 'dungeonXpTome',
+    'expertise_tome': 'mobXpTome',
+    'guild_tome': 'guildTome',
+    'armour_tome': 'armorTome',
+    'weapon_tome': 'weaponTome',
+    'lootrun_tome': 'lootrunTome',
 }
 
 def translate_entry(entry):
@@ -120,7 +129,7 @@ def translate_entry(entry):
     and converted might be None if the conversion failed.
     """
     # sketchily infer what kind of item we're dealing with, and translate it appropriately.
-    if "type" in entry:
+    if "type" in entry and entry['type'] in ['weapon', 'armor']:
         # only items have this field.
         res = recursive_translate(entry, {}, "item", translate_single_item)
         if res['type'] in armor_types:
@@ -222,7 +231,7 @@ with open(major_ids_filename, 'r') as major_ids_file:
 for item in items:
     # NOTE: HACKY ITEM FIXES!
     if 'majorIds' in item:
-        item['majorIds'] = [ major_ids_reverse_map[item['majorIds']['name']] ]
+        item['majorIds'] = [ major_ids_reverse_map[majid_name] for majid_name in item['majorIds'].keys()]
     if item['tier'] == 'Common':
         item['tier'] = 'Normal'
 
