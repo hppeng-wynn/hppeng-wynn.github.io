@@ -766,21 +766,6 @@
             }
         ]
     },
-    "LIFESTREAM": {
-        "displayName": "Lifestream",
-        "description": "idk",
-        "abilities": []
-    },
-    "FIXATE": {
-        "displayName": "Fixate",
-        "description": "idk",
-        "abilities": []
-    },
-    "TWISTING_THREADS": {
-        "displayName": "Twisting Threads",
-        "description": "idk",
-        "abilities": []
-    },
     "NAPALM": {
         "displayName": "Napalm",
         "description": "Fire Creep increases Arrow Bomb damage and self-damage, but reduces velocity. Fire Creep damage and radius are increased.",
@@ -789,6 +774,21 @@
     "POUNCE": {
         "displayName": "Pounce",
         "description": "Escape becomes a forward lunge.",
+        "abilities": []
+    },
+    "TWISTING_THREADS": {
+        "displayName": "Twisting Threads",
+        "description": "Tangled Trap ropes are much stronger and max traps increase by 12, but trap and bomb effects are weakened.",
+        "abilities": []
+    },
+    "LIFESTREAM": {
+        "displayName": "Lifestream",
+        "description": "Increases Blood Sorrow's damage and overhealth, but shortens its duration by 75%.",
+        "abilities": []
+    },
+    "FIXATE": {
+        "displayName": "Fixate",
+        "description": "All Winded effects are stronger, but Winded applies slowly",
         "abilities": []
     },
     "INSOLUBLE": {
