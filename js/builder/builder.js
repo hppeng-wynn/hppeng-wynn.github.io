@@ -200,7 +200,7 @@ function add_tome_autocomplete(tome_type) {
         }
         let tome_alias = tome_obj['alias'];
         tome_arr.push(tome_name);
-        if (tome_alias) {
+        if (tome_alias && tome_alias !== "NO_ALIAS") {
             tome_arr.push(tome_alias);
             tome_aliases.set(tome_alias, tome_name);
         }

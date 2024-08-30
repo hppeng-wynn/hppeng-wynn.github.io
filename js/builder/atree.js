@@ -111,8 +111,7 @@ scaling_target: {
 
 
 // Space for big json data
-let atrees;
-let atree_load_complete = false;
+let ATREES;
 /*
  * Load atree info remote DB (aka a big json file).
  */
@@ -121,8 +120,8 @@ async function load_atree_data(version_str) {
     let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // No random string -- we want to use caching
     let url = `${baseUrl}/data/${version_str}/atree.json`;
-    atrees = await (await fetch(url)).json();
-    atree_load_complete = true;
+    ATREES = await (await fetch(url)).json();
+    console.log("Loaded ability tree data");
 }
 
 const elem_mastery_abil = { display_name: "Elemental Mastery", id: 998, properties: {}, effects: [] };
@@ -235,7 +234,7 @@ const atree_node = new (class extends ComputeNode {
     compute_func(input_map) {
         if (input_map.size !== 1) { throw "AbilityTreeUpdateNode accepts exactly one input (player-class)"; }
         const [player_class] = input_map.values();  // Extract values, pattern match it into size one list and bind to first element
-        return get_sorted_class_atree(atrees, player_class);
+        return get_sorted_class_atree(ATREES, player_class);
     }
 })();
 
@@ -507,11 +506,11 @@ const atree_merge = new (class extends ComputeNode {
             //   exists. This makes sure we don't try to apply unimplemented major IDs.
             //
             // `major_ids` is a global map loaded from data json.
-            if (major_id_name in major_ids) {
+            if (major_id_name in MAJOR_IDS) {
 
                 // A major ID can have multiple abilities, specified as atree nodes,
                 //   as part of its effects. Apply each of them.
-                for (const abil of major_ids[major_id_name].abilities) {
+                for (const abil of MAJOR_IDS[major_id_name].abilities) {
 
                     // But only the ones that match the current class.
                     if (abil["class"] === build_class) {

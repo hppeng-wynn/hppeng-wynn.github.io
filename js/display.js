@@ -215,8 +215,8 @@ function displayExpandedItem(item, parent_id){
                 } else if (id === "majorIds") {
                     //console.log(item.get(id));
                     for (let major_id_str of item.get(id)) {
-                        if (major_id_str in major_ids) {
-                            let major_id_info = major_ids[major_id_str];
+                        if (major_id_str in MAJOR_IDS) {
+                            let major_id_info = MAJOR_IDS[major_id_str];
                             major_id_str = `+${major_id_info.displayName}: ${major_id_info.description}`;
                         }
                         let p_elem = make_elem("div", ['col']);

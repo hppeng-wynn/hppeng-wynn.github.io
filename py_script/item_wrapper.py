@@ -22,15 +22,15 @@ class Items:
         return response.json()
 
     def get_all_items(self):
-        api_url = "https://api.wynncraft.dev/v3/item/database?fullResult=True"
+        api_url = "https://beta-api.wynncraft.com/v3/item/database?fullResult"
         return self.fetch(api_url)
 
     def get_metadata(self):
-        url = "https://api.wynncraft.dev/v3/item/metadata"
+        url = "https://beta-api.wynncraft.com/v3/item/metadata?static"
         return self.fetch(url)
 
     def item_query(self, data=None):
-        api_url = "https://api.wynncraft.com/v3/item/search?fullResult=True"
+        api_url = "https://api.wynncraft.com/v3/item/search?fullResult"
         return self.post(api_url, data)
 
 

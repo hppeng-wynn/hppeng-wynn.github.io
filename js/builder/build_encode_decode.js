@@ -42,15 +42,30 @@ const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
 // Default to the newest version.
 let wynn_version_id = WYNN_VERSION_LATEST;
 
-let major_ids = null;
-let major_id_load_complete = false;
+let MAJOR_IDS = null;
 async function load_major_id_data(version_str) {
     let getUrl = window.location;
     let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
     // No random string -- we want to use caching
     let url = `${baseUrl}/data/${version_str}/majid.json`;
-    major_ids = await (await fetch(url)).json();
-    major_id_load_complete = true;
+    MAJOR_IDS = await (await fetch(url)).json();
+    console.log("Loaded major id data");
+}
+
+let ASPECTS = null;
+async function load_aspect_data(version_str) {
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/aspects.json`;
+    try {
+        ASPECTS = await (await fetch(url)).json();
+        console.log("Loaded aspects data");
+    } catch (error) {
+        ASPECTS = null;
+        console.log("Could not load aspect data -- maybe an older version?");
+        console.log(error);
+    }
 }
 
 /*
@@ -116,6 +131,7 @@ async function parse_hash(url_tag) {
             version_name = wynn_version_names[wynn_version_id];
             const load_promises = [ load_atree_data(version_name),
                                     load_major_id_data(version_name),
+                                    load_aspect_data(version_name),
                                     load_old_version(version_name),
                                     load_ings_old_version(version_name),
                                     load_tome_old_version(version_name) ];

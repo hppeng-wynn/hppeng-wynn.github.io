@@ -10,11 +10,13 @@ OR
 NOTE: id_map.json is due for change. Should be updated manually when Wynn2.0/corresponding WB version drops.
 """
 
-import json
-import sys
-import os
-import base64
 import argparse
+import base64
+import json
+import os
+import re
+import sys
+
 from items_common import translate_mappings
 
 parser = argparse.ArgumentParser(description="Process raw pulled item data.")
@@ -48,7 +50,6 @@ def translate_single_item(key, entry, name, directives, accumulate):
         if directive == 'DELETE':
             ret = None
         elif directive == 'CAPS':
-            print(name, accumulate, ret)
             ret = ret[0].upper() + ret[1:]
         elif directive == 'ALLCAPS':
             ret = ret.upper()
@@ -129,7 +130,7 @@ def translate_entry(entry):
     and converted might be None if the conversion failed.
     """
     # sketchily infer what kind of item we're dealing with, and translate it appropriately.
-    if "type" in entry and entry['type'] in ['weapon', 'armor']:
+    if "type" in entry and entry['type'] in ['weapon', 'armour']:
         # only items have this field.
         res = recursive_translate(entry, {}, "item", translate_single_item)
         if res['type'] in armor_types:
@@ -151,12 +152,10 @@ def translate_entry(entry):
         #return recursive_translate(entry, {}, "ing"), "ingredient"
     if "tomeType" in entry:
         # only tomes have this field.
-        print(entry)
         res = recursive_translate(entry, {}, "tome", translate_single_item)
         res['category'] = 'tome'
         res['fixID'] = False
         res['type'] = tome_type_translation[res['type']]
-        print(res)
         return res, "tome"
     if "craftable" in entry:
         return None, "material"
@@ -231,7 +230,21 @@ with open(major_ids_filename, 'r') as major_ids_file:
 for item in items:
     # NOTE: HACKY ITEM FIXES!
     if 'majorIds' in item:
-        item['majorIds'] = [ major_ids_reverse_map[majid_name] for majid_name in item['majorIds'].keys()]
+        majorIds = []
+        for majid_name, majid_desc in item['majorIds'].items():
+            if majid_name not in major_ids_reverse_map:
+                desc = re.sub('<[^<]+?>', '', majid_desc).split(':', 2)[1].strip()
+                caps_name = majid_name.upper().replace(' ', '_')
+                caps_name = re.sub('[^0-9A-Z_]', '', caps_name)
+                major_ids_map[caps_name] = {
+                    'displayName': majid_name,
+                    'description': desc,
+                    'abilities': []
+                }
+                print(f'New Major ID: {majid_name} ({caps_name})')
+                major_ids_reverse_map[majid_name] = caps_name
+            majorIds.append(major_ids_reverse_map[majid_name])
+        item['majorIds'] = majorIds
     if item['tier'] == 'Common':
         item['tier'] = 'Normal'
 
@@ -285,11 +298,14 @@ with open("../tome_map.json","w") as tome_map_file:
 
 
 #write the data back to the outfile
-with open('item_out.json', "w+") as out_file:
+with open('item_out.json', "w") as out_file:
     json.dump(old_data, out_file, ensure_ascii=False, separators=(',', ':'))
 
-with open('ing_out.json', "w+") as out_file:
+with open('majid_out.json', 'w') as major_ids_outfile:
+    json.dump(major_ids_map, major_ids_outfile, ensure_ascii=False, indent=4)
+
+with open('ing_out.json', "w") as out_file:
     json.dump(ingreds, out_file, ensure_ascii=False, separators=(',', ':'))
 
-with open('tome_out.json', "w+") as out_file:
+with open('tome_out.json', "w") as out_file:
     json.dump({'tomes': tomes}, out_file, ensure_ascii=False, separators=(',', ':'))
