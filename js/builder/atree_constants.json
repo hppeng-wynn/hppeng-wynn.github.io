@@ -812,7 +812,7 @@
             },
             "properties": {
                 "range": 16,
-                "duration": 1.2
+                "ray_duration": 1.2
             },
             "effects": [
                 {
@@ -845,7 +845,7 @@
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "DPS": "Arrow Storm.duration"
+                                "DPS": "Arrow Storm.ray_duration"
                             }
                         }
                     ]

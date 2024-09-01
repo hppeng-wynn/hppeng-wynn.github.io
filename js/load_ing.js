@@ -1,4 +1,4 @@
-const ING_DB_VERSION = 33;
+const ING_DB_VERSION = 34;
 
 // @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
 
