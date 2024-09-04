@@ -2,7 +2,11 @@ let player_build;
 let build_powders;
 
 function getItemNameFromID(id) { return idMap.get(id); }
-function getTomeNameFromID(id) { return tomeIDMap.get(id); }
+function getTomeNameFromID(id) {
+    let res = tomeIDMap.get(id);
+    if (res === undefined) { console.log('WARN: Deleting unrecognized tome, id='+id); return ""; }
+    return res;
+}
 
 function parsePowdering(powder_info) {
     // TODO: Make this run in linear instead of quadratic time... ew
