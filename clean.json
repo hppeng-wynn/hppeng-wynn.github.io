@@ -929,6 +929,42 @@
       "id": 3655
     },
     {
+      "name": "Brutality",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SUPER_SLOW",
+      "averageDps": 790,
+      "drop": "normal",
+      "lvl": 103,
+      "classReq": "shaman",
+      "strReq": 45,
+      "defReq": 60,
+      "slots": 3,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "389",
+          "name": "relik.fire3"
+        }
+      },
+      "agi": -40,
+      "mdPct": 60,
+      "hprPct": -215,
+      "ls": -435,
+      "spd": -20,
+      "expd": 80,
+      "nDam": "250-450",
+      "eDam": "350-650",
+      "fDam": "450-950",
+      "tier": "Legendary",
+      "displayName": "Brutality",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "0-0",
+      "id": 4023
+    },
+    {
       "name": "Sacrilege",
       "category": "weapon",
       "type": "wand",
@@ -1421,6 +1457,66 @@
       "tier": "Fabled",
       "displayName": "Ornate Shadow Cloud",
       "id": 1916
+    },
+    {
+      "name": "Withstand",
+      "category": "armor",
+      "type": "boots",
+      "armourMaterial": "diamond",
+      "drop": "never",
+      "lvl": 102,
+      "defReq": 55,
+      "agiReq": 55,
+      "slots": 3,
+      "rDamRaw": 185,
+      "hprRaw": 220,
+      "spRaw2": 4,
+      "spRaw4": -4,
+      "spd": -20,
+      "fDefPct": 30,
+      "aDefPct": 30,
+      "hp": 3350,
+      "fDef": 150,
+      "aDef": 150,
+      "tier": "Legendary",
+      "displayName": "Withstand",
+      "id": 4024
+    },
+    {
+      "name": "Consolidate",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "NORMAL",
+      "averageDps": 309,
+      "drop": "normal",
+      "lvl": 102,
+      "classReq": "mage",
+      "strReq": 45,
+      "intReq": 45,
+      "agiReq": 45,
+      "slots": 3,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "329",
+          "name": "wand.water3"
+        }
+      },
+      "rDamRaw": 200,
+      "hprRaw": -200,
+      "ms": 10,
+      "spPct1": -15,
+      "healPct": 15,
+      "nDam": "30-30",
+      "eDam": "40-40",
+      "wDam": "40-40",
+      "aDam": "40-40",
+      "tier": "Legendary",
+      "displayName": "Consolidate",
+      "tDam": "0-0",
+      "fDam": "0-0",
+      "id": 4025
     },
     {
       "name": "Acidosis",
@@ -110007,6 +110103,31 @@
     },
     {
       "category": "accessory",
+      "name": "Diaconate",
+      "type": "necklace",
+      "drop": "never",
+      "lvl": 15,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "167",
+          "name": "necklace.basicCross"
+        }
+      },
+      "mdRaw": -10,
+      "hprPct": 8,
+      "hprRaw": 8,
+      "wDefPct": 8,
+      "hp": 20,
+      "wDef": 3,
+      "fDef": 5,
+      "tier": "Legendary",
+      "displayName": "Diaconate",
+      "id": 4026
+    },
+    {
+      "category": "accessory",
       "name": "Eater",
       "type": "ring",
       "drop": "lootchest",
@@ -120866,6 +120987,106 @@
           "xpb": 24,
           "hpBonus": 480
         }
+      ]
+    },
+    "Desert": {
+      "items": [
+        "Desert Stalker",
+        "Desert Sands",
+        "Desert Sepulcher"
+      ],
+      "bonuses": [
+        {},
+        {
+          "mdPct": 10,
+          "sdPct": 10,
+          "hpBonus": 50
+        },
+        {
+          "mdPct": 15,
+          "sdPct": 15,
+          "spd": 10,
+          "hpBonus": 60
+        },
+        {
+          "mdPct": 20,
+          "sdPct": 20,
+          "sdRaw": 25,
+          "spd": 20,
+          "hpBonus": 75
+        }
+      ]
+    },
+    "Corrupted": {
+      "items": [
+        "Blighted Seraph",
+        "Infernus Aeterna",
+        "Carnage Agglomerate",
+        "Terminal Velocity",
+        "Omnia Mors",
+        "Isostatic Rebound",
+        "Sludge Slicer",
+        "Crumbling Foundation",
+        "Repose",
+        "Molten Fleshmass",
+        "Living Slime",
+        "Scumlord",
+        "Purity Filter",
+        "Jinxed Coif",
+        "Empathy Purge",
+        "Bloodbag",
+        "Jagged Bone Necklace",
+        "Hecatomb",
+        "Cremation",
+        "Rigor Mortis",
+        "Arterial Spray",
+        "Brainbleed",
+        "Woebegone",
+        "Bloodied Wreath",
+        "Inclemency",
+        "Mutilated Corpse",
+        "Dissever",
+        "Dogfight",
+        "Blazing Bangle",
+        "Spinal Estoc",
+        "Treachery",
+        "Nevermore",
+        "Grisly Gauntlet",
+        "Tainted Ruby",
+        "Ancient Jazerant",
+        "Mesoskeleton",
+        "Fractured Lyre",
+        "Glass Skin",
+        "Mummy's Talisman",
+        "Warsong",
+        "Desert Cyclone",
+        "Goredrinker",
+        "Sanguine Spaulder",
+        "Bugbite",
+        "Giant's Kneecap",
+        "Rusted Cog",
+        "Bloodied Chaps",
+        "Fiend",
+        "Zombie Eye Pendant",
+        "Backbiter",
+        "Intestine Lasso",
+        "Brainy Beanie",
+        "Glaring Issue",
+        "Golem's Arm",
+        "Boil Lance",
+        "Cauterizer",
+        "Guard's Garment"
+      ],
+      "bonuses": [
+        { "xpb": 4 },
+        { "xpb": 8, "hpBonus": 40 },
+        { "xpb": 12, "hpBonus": 40 },
+        { "xpb": 16, "hpBonus": 40, "ws": 8, "thorns": 15 },
+        { "xpb": 20, "hpbonus": 125, "ws": 8, "thorns": 15 },
+        { "xpb": 24, "hpbonus": 125, "ws": 8, "thorns": 15, "ms": 8 },
+        { "xpb": 28, "hpbonus": 125, "ws": 8, "thorns": 15, "ms": 8, "mr": 6 },
+        { "xpb": 32, "hpbonus": -400, "ws": 15, "thorns": 30, "ms": 8, "mr": -6, "atkTier": 1 },
+        { "xpb": 36, "hpbonus": -1250, "ws": 20, "thorns": 30, "ms": 8, "mr": -18, "atkTier": 1 }
       ]
     }
   }
