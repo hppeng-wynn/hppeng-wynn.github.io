@@ -1,6 +1,51 @@
 {
   "items": [
     {
+      "name": "Continuum",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "VERY_SLOW",
+      "averageDps": 374,
+      "drop": "never",
+      "lvl": 105,
+      "classReq": "mage",
+      "strReq": 70,
+      "slots": 2,
+      "lore": "From nothing to everything, forever past to forever more, the vastness of eternity is obscured by the sameness of tomorrow.",
+      "dropInfo": {
+        "name": "The Nameless Anomaly",
+        "type": "raid",
+        "coordinates": [
+          1193,
+          64,
+          -947
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "320",
+          "name": "wand.earth3"
+        }
+      },
+      "str": 15,
+      "mdPct": 45,
+      "sdPct": 45,
+      "mr": -14,
+      "spd": -14,
+      "fDefPct": 31,
+      "nDam": "0-100",
+      "eDam": "100-700",
+      "tier": "Set",
+      "displayName": "Continuum",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 3781
+    },
+    {
       "name": "Aleph Null",
       "category": "armor",
       "type": "leggings",
@@ -72,51 +117,6 @@
       "tier": "Fabled",
       "displayName": "Ingress",
       "id": 3666
-    },
-    {
-      "name": "Continuum",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "VERY_SLOW",
-      "averageDps": 374,
-      "drop": "never",
-      "lvl": 105,
-      "classReq": "mage",
-      "strReq": 70,
-      "slots": 2,
-      "lore": "From nothing to everything, forever past to forever more, the vastness of eternity is obscured by the sameness of tomorrow.",
-      "dropInfo": {
-        "name": "The Nameless Anomaly",
-        "type": "raid",
-        "coordinates": [
-          1193,
-          64,
-          -947
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "320",
-          "name": "wand.earth3"
-        }
-      },
-      "str": 15,
-      "mdPct": 23,
-      "sdPct": 23,
-      "mr": -14,
-      "spd": -14,
-      "fDefPct": 31,
-      "nDam": "0-100",
-      "eDam": "100-700",
-      "tier": "Set",
-      "displayName": "Continuum",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 3781
     },
     {
       "name": "Infinitesimal",
@@ -929,6 +929,32 @@
       "id": 3655
     },
     {
+      "category": "accessory",
+      "name": "Swindler's Charm",
+      "type": "necklace",
+      "drop": "lootchest",
+      "lvl": 103,
+      "dexReq": 45,
+      "defReq": 45,
+      "agiReq": 45,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "171",
+          "name": "necklace.air2"
+        }
+      },
+      "hprRaw": -100,
+      "spPct3": -7,
+      "spRaw4": -2,
+      "lb": 15,
+      "eSteal": 5,
+      "tier": "Legendary",
+      "displayName": "Swindler's Charm",
+      "id": 4022
+    },
+    {
       "name": "Brutality",
       "category": "weapon",
       "type": "relik",
@@ -1356,32 +1382,6 @@
       "id": 3863
     },
     {
-      "category": "accessory",
-      "name": "Swindler's Charm",
-      "type": "necklace",
-      "drop": "normal",
-      "lvl": 103,
-      "dexReq": 45,
-      "defReq": 45,
-      "agiReq": 45,
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "171",
-          "name": "necklace.air2"
-        }
-      },
-      "hprRaw": -100,
-      "spPct3": -7,
-      "spRaw4": -2,
-      "lb": 15,
-      "eSteal": 5,
-      "tier": "Legendary",
-      "displayName": "Swindler's Charm",
-      "id": 4022
-    },
-    {
       "name": "Wanderlust",
       "category": "armor",
       "type": "chestplate",
@@ -1457,6 +1457,42 @@
       "tier": "Fabled",
       "displayName": "Ornate Shadow Cloud",
       "id": 1916
+    },
+    {
+      "name": "Flagellant",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SLOW",
+      "averageDps": 870,
+      "drop": "normal",
+      "lvl": 102,
+      "classReq": "shaman",
+      "strReq": 45,
+      "defReq": 45,
+      "agiReq": 45,
+      "slots": 3,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "389",
+          "name": "relik.fire3"
+        }
+      },
+      "hprRaw": -275,
+      "poison": 12500,
+      "ls": 600,
+      "damPct": 30,
+      "spRaw3": 5,
+      "nDam": "55-145",
+      "eDam": "125-195",
+      "fDam": "115-205",
+      "aDam": "105-215",
+      "tier": "Legendary",
+      "displayName": "Flagellant",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "id": 4027
     },
     {
       "name": "Withstand",
@@ -6477,6 +6513,42 @@
       "wDam": "0-0",
       "aDam": "0-0",
       "id": 3532
+    },
+    {
+      "name": "Contrail Shock",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "diamond",
+      "drop": "never",
+      "lvl": 98,
+      "dexReq": 55,
+      "intReq": 55,
+      "agiReq": 50,
+      "slots": 3,
+      "dropInfo": {
+        "name": "Lootrun Rewards",
+        "type": "lootrun",
+        "coordinates": [
+          99999,
+          99999,
+          99999
+        ]
+      },
+      "mdRaw": -14286,
+      "sdPct": 23,
+      "ls": 335,
+      "ms": 14,
+      "atkTier": 6,
+      "expd": 30,
+      "sprint": 19,
+      "hp": 2950,
+      "eDef": -250,
+      "tDef": 100,
+      "wDef": 100,
+      "aDef": 80,
+      "tier": "Legendary",
+      "displayName": "Contrail Shock",
+      "id": 4028
     },
     {
       "name": "Drumstick",
@@ -12120,6 +12192,23 @@
       "id": 2324
     },
     {
+      "name": "Aquarius",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "diamond",
+      "drop": "normal",
+      "lvl": 95,
+      "intReq": 100,
+      "slots": 3,
+      "lore": "\u201cThe symbol of the river\u201d is a name that is often synonymous with this garment, with many water like qualities surrounding it, heavily bathed in magical meaning.",
+      "mdPct": -33,
+      "mr": 42,
+      "hp": 3000,
+      "tier": "Legendary",
+      "displayName": "Aquarius",
+      "id": 126
+    },
+    {
       "name": "Requiem",
       "category": "weapon",
       "type": "wand",
@@ -15913,24 +16002,6 @@
       "tier": "Legendary",
       "displayName": "Black Lily",
       "id": 3976
-    },
-    {
-      "name": "Aquarius",
-      "category": "armor",
-      "type": "chestplate",
-      "armourMaterial": "diamond",
-      "drop": "normal",
-      "lvl": 95,
-      "intReq": 110,
-      "slots": 3,
-      "lore": "\u201cThe symbol of the river\u201d is a name that is often synonymous with this garment, with many water like qualities surrounding it, heavily bathed in magical meaning.",
-      "mdPct": -20,
-      "mr": 40,
-      "hp": 2550,
-      "fDef": -100,
-      "tier": "Legendary",
-      "displayName": "Aquarius",
-      "id": 126
     },
     {
       "category": "accessory",
@@ -28612,6 +28683,34 @@
       "id": 726
     },
     {
+      "name": "Splintered Dawn",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "diamond",
+      "drop": "never",
+      "lvl": 87,
+      "strReq": 35,
+      "dexReq": 25,
+      "intReq": 25,
+      "defReq": 35,
+      "agiReq": 35,
+      "slots": 2,
+      "rDamPct": 31,
+      "ms": 8,
+      "rMdRaw": 942,
+      "spRaw2": -8,
+      "atkTier": -8,
+      "hp": 2575,
+      "eDef": 75,
+      "tDef": 75,
+      "wDef": 75,
+      "fDef": 75,
+      "aDef": 75,
+      "tier": "Rare",
+      "displayName": "Splintered Dawn",
+      "id": 4029
+    },
+    {
       "name": "Ligfamblawende",
       "category": "weapon",
       "type": "wand",
@@ -31785,6 +31884,44 @@
       "tier": "Set",
       "displayName": "Watch Bracelet",
       "id": 2502
+    },
+    {
+      "name": "Shattered Horizon",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 512,
+      "drop": "never",
+      "lvl": 85,
+      "classReq": "mage",
+      "strReq": 55,
+      "intReq": 35,
+      "agiReq": 35,
+      "majorIds": [
+        "ENTROPY"
+      ],
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "317",
+          "name": "wand.air3"
+        }
+      },
+      "sdPct": 15,
+      "hpBonus": -1250,
+      "eSdPct": 15,
+      "spPct3": -19,
+      "healPct": -19,
+      "eDam": "50-80",
+      "wDam": "40-60",
+      "aDam": "40-60",
+      "tier": "Fabled",
+      "displayName": "Shattered Horizon",
+      "nDam": "0-0",
+      "tDam": "0-0",
+      "fDam": "0-0",
+      "id": 4030
     },
     {
       "name": "Flashstep",
@@ -41489,6 +41626,54 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 3895
+    },
+    {
+      "name": "Earthsky Eclipse",
+      "category": "armor",
+      "type": "boots",
+      "armourMaterial": "iron",
+      "drop": "never",
+      "lvl": 80,
+      "strReq": 40,
+      "agiReq": 40,
+      "slots": 3,
+      "str": 10,
+      "agi": 5,
+      "hprPct": -35,
+      "ls": 165,
+      "aDamRaw": 175,
+      "spd": 20,
+      "eDamPct": 25,
+      "hp": 2000,
+      "eDef": 100,
+      "tDef": -50,
+      "aDef": 100,
+      "tier": "Legendary",
+      "displayName": "Earthsky Eclipse",
+      "id": 4031
+    },
+    {
+      "name": "Hollow Virtue",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "iron",
+      "drop": "never",
+      "lvl": 79,
+      "dexReq": 55,
+      "intReq": 40,
+      "dex": 7,
+      "int": 7,
+      "sdPct": 23,
+      "tSdRaw": 154,
+      "hprPct": -70,
+      "ls": -200,
+      "healPct": 19,
+      "hp": 2500,
+      "tDef": 70,
+      "wDef": 70,
+      "tier": "Legendary",
+      "displayName": "Hollow Virtue",
+      "id": 4032
     },
     {
       "name": "Caledonia",
@@ -73283,6 +73468,37 @@
       "displayName": "Paradigm Shift",
       "nDam": "0-0",
       "id": 2096
+    },
+    {
+      "category": "accessory",
+      "name": "Soqueira",
+      "type": "ring",
+      "drop": "never",
+      "lvl": 53,
+      "strReq": 20,
+      "agiReq": 20,
+      "majorIds": [
+        "POWER_FIST"
+      ],
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "142",
+          "name": "ring.earth2"
+        }
+      },
+      "str": 3,
+      "agi": 2,
+      "mdRaw": 35,
+      "spd": 6,
+      "eDamPct": 4,
+      "fDefPct": -6,
+      "eDef": 10,
+      "aDef": 10,
+      "tier": "Legendary",
+      "displayName": "Soqueira",
+      "id": 4033
     },
     {
       "name": "Chasseur",
@@ -121080,15 +121296,62 @@
         "Guard's Garment"
       ],
       "bonuses": [
-        { "xpb": 4 },
-        { "xpb": 8, "hpBonus": 40 },
-        { "xpb": 12, "hpBonus": 40 },
-        { "xpb": 16, "hpBonus": 40, "ws": 8, "thorns": 15 },
-        { "xpb": 20, "hpbonus": 125, "ws": 8, "thorns": 15 },
-        { "xpb": 24, "hpbonus": 125, "ws": 8, "thorns": 15, "ms": 8 },
-        { "xpb": 28, "hpbonus": 125, "ws": 8, "thorns": 15, "ms": 8, "mr": 6 },
-        { "xpb": 32, "hpbonus": -400, "ws": 15, "thorns": 30, "ms": 8, "mr": -6, "atkTier": 1 },
-        { "xpb": 36, "hpbonus": -1250, "ws": 20, "thorns": 30, "ms": 8, "mr": -18, "atkTier": 1 }
+        {
+          "xpb": 4
+        },
+        {
+          "xpb": 8,
+          "hpBonus": 40
+        },
+        {
+          "xpb": 12,
+          "hpBonus": 40
+        },
+        {
+          "xpb": 16,
+          "hpBonus": 40,
+          "ws": 8,
+          "thorns": 15
+        },
+        {
+          "xpb": 20,
+          "hpbonus": 125,
+          "ws": 8,
+          "thorns": 15
+        },
+        {
+          "xpb": 24,
+          "hpbonus": 125,
+          "ws": 8,
+          "thorns": 15,
+          "ms": 8
+        },
+        {
+          "xpb": 28,
+          "hpbonus": 125,
+          "ws": 8,
+          "thorns": 15,
+          "ms": 8,
+          "mr": 6
+        },
+        {
+          "xpb": 32,
+          "hpbonus": -400,
+          "ws": 15,
+          "thorns": 30,
+          "ms": 8,
+          "mr": -6,
+          "atkTier": 1
+        },
+        {
+          "xpb": 36,
+          "hpbonus": -1250,
+          "ws": 20,
+          "thorns": 30,
+          "ms": 8,
+          "mr": -18,
+          "atkTier": 1
+        }
       ]
     }
   }

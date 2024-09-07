@@ -138,7 +138,8 @@ def object_diff(reporter, obj1, obj2, path) -> bool:
                         reporter.val_diff(val, obj, f"{path}.{k}")
                         ret = True
                     continue
-                ret = ret or list_diff(reporter, val, obj, path+"."+k)
+                ret2 = list_diff(reporter, val, obj, path+"."+k)
+                ret = ret or ret2
             elif is_basic(type1) or val is None or obj2 is None:
                 if val != obj:
                     reporter.val_diff(val, obj, f"{path}.{k}")
