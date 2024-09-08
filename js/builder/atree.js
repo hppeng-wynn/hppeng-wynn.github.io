@@ -57,6 +57,7 @@ add_spell_prop: {
                                                             // Can either be a raw value number, or a reference
                                                             //   of the format <ability_id>.propname
     display:        Optional[str]   // Optional change to the displayed entry. Replaces old
+    hide:           Optional[str]   // Modify this part to be hidden.
 }
 
 convert_spell_conv: {
@@ -88,7 +89,7 @@ stat_scaling: {
   slider_name: Optional[str],
   slider_step: Optional[float],
   round:       Optional[bool]               // Control floor behavior. True for stats and false for slider by default
-  behavior:      Optional[str]              // One of: "merge", "modify". default: merge
+  behavior:    Optional[str]                // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part, by incrementing properties. do nothing if not exist
   slider_max: Optional[int]                 // affected by behavior
@@ -946,6 +947,9 @@ const atree_collect_spells = new (class extends ComputeNode {
                         else {
                             throw "uhh invalid spell add effect";
                         }
+                        if ('hide' in effect) {
+                            part.display = false;
+                        }
                         found_part = true;
                         break;
                     }
@@ -956,6 +960,9 @@ const atree_collect_spells = new (class extends ComputeNode {
                             for (const idx in spell_part.hits) {
                                 spell_part.hits[idx] = atree_translate(atree_merged, spell_part.hits[idx]);
                             }
+                        }
+                        if ('hide' in effect) {
+                            spell_part.display = false;
                         }
                         ret_spell.parts.push(spell_part);
                     }

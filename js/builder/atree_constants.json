@@ -28,14 +28,12 @@
                         {
                             "name": "Arrow Bomb",
                             "type": "damage",
-                            "multipliers": [
-                                130,
-                                0,
-                                0,
-                                0,
-                                20,
-                                0
-                            ]
+                            "multipliers": [ 130, 0, 0, 0, 20, 0 ]
+                        },
+                        {
+                            "name": "Self Damage",
+                            "type": "damage",
+                            "multipliers": [ 10, 0, 0, 0, 0, 0 ]
                         },
                         {
                             "name": "Total Damage",
@@ -1518,7 +1516,7 @@
             "base_abil": "Arrow Storm",
             "parents": [
                 "Bouncing Bomb",
-        "Twain's Arc"
+                "Twain's Arc"
             ],
             "dependencies": [
                 "Bryophyte Roots"
@@ -1635,7 +1633,15 @@
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Self Damage",
+                    "behavior": "modify",
+                    "multipliers": [ -5, 0, 0, 0, 0, 0 ]
+                }
+            ]
         },
         {
             "display_name": "Scorched Earth",
@@ -4060,20 +4066,10 @@
                 "col": 6,
                 "icon": "node_0"
             },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "prop",
-                            "abil": "Mantle of the Bovemists",
-                            "name": "mantle_charge",
-                            "value": 2
-                        }
-                    ]
-                }
-            ]  
+            "properties": {
+                "charges": 2
+            },
+            "effects": []  
         },
         {
             "display_name": "Sacred Surge",
@@ -5158,7 +5154,7 @@
                             "name": "Total Damage",
                             "hits": {
                                 "Meteor Damage": 1,
-                                "Breathless Damage": 1
+                                "Winded Damage": 1
                             }
                         }
                     ]
@@ -5183,14 +5179,10 @@
             "properties": {},
             "effects": [
                 {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Melee",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -5258,14 +5250,10 @@
             "properties": {},
             "effects": [
                 {
-                    "type": "raw_stat",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "mdPct",
-                            "value": 5
-                        }
-                    ]
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Melee",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -5293,7 +5281,19 @@
                     "cost": 25,
                     "base_spell": 2,
                     "display": "",
-                    "parts": []
+                    "parts": [
+                        {
+                            "name": "Single Teleport",
+                            "type": "total",
+                            "hits": {},
+                            "display": false
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": { "Single Teleport": 1 }
+                        }
+                    ]
                 }
             ]
         },
@@ -5686,11 +5686,20 @@
                 },
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Total Damage",
+                    "target_part": "Wind Slash Total",
+                    "base_spell": 2,
+                    "hits": {
+                        "Wind Slash": 1
+                    },
+                    "hide": true
+                },
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Single Teleport",
                     "base_spell": 2,
                     "display": "Total Damage",
                     "hits": {
-                        "Wind Slash": 1
+                        "Wind Slash Total": 1
                     }
                 }
             ]
@@ -5732,7 +5741,7 @@
                     "base_spell": 3,
                     "hits": {
                         "Lightning Damage": 3,
-                        "Breathless Damage": 3
+                        "Winded Damage": 3
                     }
                 },
                 {
@@ -5742,7 +5751,7 @@
                     "behavior": "modify",
                     "output": {
                         "type": "stat",
-                        "name": "nConvBase:3.Breathless Damage"
+                        "name": "nConvBase:3.Winded Damage"
                     },
                     "scaling": [-17]
                 },
@@ -5753,7 +5762,7 @@
                     "behavior": "modify",
                     "output": {
                         "type": "stat",
-                        "name": "eConvBase:3.Breathless Damage"
+                        "name": "eConvBase:3.Winded Damage"
                     },
                     "scaling": [-3]
                 }
@@ -5870,12 +5879,28 @@
             },
             "effects": [
                 {
+                    "type": "add_spell_prop",
+                    "target_part": "Winded Damage",
+                    "base_spell": 4,
+                    "multipliers": [0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "target_part": "Total Damage",
+                    "display": "Total Damage",
+                    "base_spell": 4,
+                    "hits": {
+                        "Ice Snake Damage": 1,
+                        "Winded Damage": 1
+                    }
+                },
+                {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
                     "output": {
                         "type": "stat",
-                        "name": "nConvBase:4.Ice Snake Damage"
+                        "name": "nConvBase:4.Winded Damage"
                     },
                     "scaling": [10],
                     "slider_step": 1,
@@ -5887,7 +5912,7 @@
                     "slider_name": "Winded",
                     "output": {
                         "type": "stat",
-                        "name": "wConvBase:4.Ice Snake Damage"
+                        "name": "wConvBase:4.Winded Damage"
                     },
                     "scaling": [5]
                 }
@@ -5929,7 +5954,7 @@
                             "name": "Per Melee (max)",
                             "hits": {
                                 "Per Orb": "Ophanim.num_orbs",
-                                "Breathless Damage": "Ophanim.num_orbs"
+                                "Winded Damage": "Ophanim.num_orbs"
                             }
                         }
                     ]
@@ -5946,7 +5971,7 @@
                     "behavior": "modify",
                     "output": {
                         "type": "stat",
-                        "name": "nConvBase:3.Breathless Damage"
+                        "name": "nConvBase:3.Winded Damage"
                     },
                     "scaling": [-22]
                 },
@@ -5957,7 +5982,7 @@
                     "behavior": "modify",
                     "output": {
                         "type": "stat",
-                        "name": "eConvBase:3.Breathless Damage"
+                        "name": "eConvBase:3.Winded Damage"
                     },
                     "scaling": [-4]
                 }
@@ -6117,7 +6142,7 @@
                     "slider_name": "Winded",
                     "output": {
                         "type": "stat",
-                        "name": "nConvBase:3.Breathless Damage"
+                        "name": "nConvBase:3.Winded Damage"
                     },
                     "scaling": [25]
                 },
@@ -6127,14 +6152,14 @@
                     "slider_name": "Winded",
                     "output": {
                         "type": "stat",
-                        "name": "eConvBase:3.Breathless Damage"
+                        "name": "eConvBase:3.Winded Damage"
                     },
                     "scaling": [5]
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 3,
-                    "target_part": "Breathless Damage",
+                    "target_part": "Winded Damage",
                     "multipliers": [0, 0, 0, 0, 0, 0]
                 }
             ]
@@ -6303,8 +6328,30 @@
                 "icon": "node_2"
             },
             "properties": {},
-            "__TODO": "replace_spell pyrokinesis damage",
-            "effects": []
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Pyrokinesis",
+                    "base_spell": 8,
+                    "scaling": "melee",
+                    "use_atkspd": false,
+                    "display": "Boom!",
+                    "parts": [
+                        {
+                            "name": "Boom!",
+                            "type": "damage",
+                            "multipliers": [
+                                150,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Blink",
@@ -6344,10 +6391,7 @@
                     "behavior": "modify",
                     "target_part": "Total Damage",
                     "base_spell": 2,
-                    "hits": {
-                        "Wind Slash": 1,
-                        "Explosion Damage": 1
-                    }
+                    "hits": { "Single Teleport": 1 }
                 }
             ]
         },
@@ -6507,51 +6551,53 @@
             "properties": {},
             "effects": [
                 {
+                    "type": "add_spell_prop",
+                    "target_part": "Winded Damage",
+                    "base_spell": 2,
+                    "multipliers": [0, 0, 0, 0, 0, 0]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "behavior": "modify",
+                    "target_part": "Wind Slash Total",
+                    "base_spell": 2,
+                    "hits": { "Winded Damage": 1 }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "behavior": "modify",
+                    "target_part": "Explosion Damage Total",
+                    "base_spell": 2,
+                    "hits": { "Winded Damage": 1 }
+                },
+                {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:2.Wind Slash"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "nConvBase:2.Explosion Damage"
-                        }
-                    ],
+                    "output": [{
+                        "type": "stat",
+                        "name": "nConvBase:2.Winded Damage"
+                    }],
                     "scaling": [10]
                 },
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "tConvBase:2.Wind Slash"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "tConvBase:2.Explosion Damage"
-                        }
-                    ],
+                    "output": [{
+                        "type": "stat",
+                        "name": "tConvBase:2.Winded Damage"
+                    }],
                     "scaling": [3]
                 },
                 {
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Winded",
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "aConvBase:2.Wind Slash"
-                        },
-                        {
-                            "type": "stat",
-                            "name": "aConvBase:2.Explosion Damage"
-                        }
-                    ],
+                    "output": [{
+                        "type": "stat",
+                        "name": "aConvBase:2.Winded Damage"
+                    }],
                     "scaling": [3]
                 }
             ]
@@ -6925,10 +6971,20 @@
                 },
                 {
                     "type": "add_spell_prop",
-                    "behavior": "modify",
-                    "target_part": "Total Damage",
+                    "target_part": "Explosion Damage Total",
                     "base_spell": 2,
-                    "hits": { "Explosion Damage": 1 }
+                    "hits": {
+                        "Explosion Damage": 1
+                    },
+                    "hide": true
+                },
+                {
+                    "type": "add_spell_prop",
+                    "behavior": "modify",
+                    "target_part": "Single Teleport",
+                    "base_spell": 2,
+                    "display": "Total Damage",
+                    "hits": { "Explosion Damage Total": 1 }
                 }
             ]
         },
@@ -12198,7 +12254,6 @@
         {
             "display_name": "Blood Sorrow",
             "desc": "Uproot or Haunting Memory will use 80% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
-            "base_abil": "Uproot",
             "archetype": "Acolyte",
             "archetype_req": 12,
             "parents": ["Larger Blood Pool III"],
