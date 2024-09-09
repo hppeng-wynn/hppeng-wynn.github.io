@@ -168,7 +168,7 @@ const itemQueryProps = (function() {
   maxId(['rainbowraw', 'rsdraw'], 'rSdRaw');
 
   const atkSpdIndices = { SUPER_SLOW: -3, VERY_SLOW: -2, SLOW: -1, NORMAL: 0, FAST: 1, VERY_FAST: 2, SUPER_FAST: 3 };
-  prop(['attackspeed', 'atkspd'], 'string', (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);
+  prop(['attackspeed', 'atkspd'], 'number', (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);
   maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier'], 'atkTier');
   sum(['sumattackspeed', 'totalattackspeed', 'sumatkspd', 'totalatkspd', 'sumatktier', 'totalatktier'], props.atkspd, props.atktier);
 
