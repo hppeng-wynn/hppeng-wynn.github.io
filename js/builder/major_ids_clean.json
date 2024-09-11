@@ -1223,5 +1223,10 @@
         "displayName": "Evershot",
         "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and double damage per arrow",
         "abilities": []
+    },
+    "POWER_FIST": {
+        "displayName": "Power Fist",
+        "description": "Striking enemies with an empty hand greatly knocks them back",
+        "abilities": []
     }
 }

@@ -534,7 +534,6 @@ const atree_merge = new (class extends ComputeNode {
                 }
             }
         }
-        console.log(abils_merged)
         return abils_merged;
     }
 })().link_to(atree_node, 'atree').link_to(atree_state_node, 'atree-state').link_to(atree_validate, 'atree-errors');
