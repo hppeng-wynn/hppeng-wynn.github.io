@@ -566,7 +566,7 @@
     },
     "GRUESOME_KNOTS": {
         "displayName": "Gruesome Knots",
-        "description": "Twisted Tether spends twice as much of your Blood Pool to deal triple damage",
+        "description": "Twisted Tether spends three times as much of your Blood Pool to deal double damage",
         "abilities": [
             {
                 "class": "Shaman",
@@ -578,7 +578,7 @@
                             {
                                 "type": "stat",
                                 "name": "damMult.GruesomeKnots:8.Tether Tick",
-                                "value": 200
+                                "value": 100
                             }
                         ]
                     }
@@ -1071,7 +1071,7 @@
                     "base_spell": 1,
                     "target_part": "Smash Damage",
                     "behavior": "modify",
-                    "multipliers": [100, 30, 30, 0, 0, 0]
+                    "multipliers": [200, 90, 90, 0, 60, 0]
                 }]
             }
         ]
@@ -1171,13 +1171,47 @@
     },
     "LUSTRATE": {
         "displayName": "Lustrate",
-        "description": "Heal restores health at a slower rate, but Stronger Sunshower deals  +80%  +40%  +10%",
-        "abilities": []
+        "description": "Heal restores health at a slower rate, but Stronger Sunshower deals +80% Neutral, +40% Water, and +10% Fire damage.",
+        "abilities": [
+            {
+                "class": "Mage",
+                "base_abil": "Heal",
+                "dependencies": [
+                    "Stronger Sunshower"
+                ],
+                "effects": [{
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "target_part": "Sunshower Damage", 
+                    "multipliers": [80, 0, 0, 40, 10, 0]
+                }]
+            }
+        ]
     },
     "ROCK_SHIELD": {
         "displayName": "Rock Shield",
         "description": "Arrow Shield's defense is increased by 10%, but its number of charges is reduced by 1.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Shield",
+                "dependencies": [],
+                "properties": {
+                    "charges": -1
+                },
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Arrow Defense",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "defMult.ArrowShield",
+                            "value": 10
+                        }
+                    ]
+                }]
+            }
+        ]
     },
     "LAST_RESORT": {
         "displayName": "Last Resort",
@@ -1227,6 +1261,16 @@
     "POWER_FIST": {
         "displayName": "Power Fist",
         "description": "Striking enemies with an empty hand greatly knocks them back",
+        "abilities": []
+    },
+    "VEDETTE": {
+        "displayName": "Vedette",
+        "description": "Focus is stronger, and caps at 2. Crepuscular Ray can be cast at 2 Focus with decreased Focus drain, launching you into the air and immobilizing you.",
+        "abilities": []
+    },
+    "HEAT_SHIMMER": {
+        "displayName": "Heat Shimmer",
+        "description": "Your Clones are reduced to a maximum of 1 with no damage penalties and Mirror Image's cooldown is greatly shortened.",
         "abilities": []
     }
 }

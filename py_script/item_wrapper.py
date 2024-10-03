@@ -22,7 +22,7 @@ class Items:
         return response.json()
 
     def get_all_items(self):
-        api_url = "https://api.wynncraft.com/v3/item/database?fullResult"
+        api_url = "https://api.wynncraft.dev/v3/item/database?fullResult"
         return self.fetch(api_url)
 
     def get_metadata(self):
