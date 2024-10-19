@@ -634,7 +634,7 @@
     },
     "HELLFIRE": {
         "displayName": "Hellfire",
-        "description": "Boiling Blood has no cooldown, is stronger, and does not slow. Cuts Bash's power and disables Discombobulate",
+        "description": "Bash becomes one giant 250% damage hit, and Boiling Blood burns faster and stronger but can't slow",
         "abilities": [
             {
                 "class": "Warrior",
@@ -643,21 +643,21 @@
                     "Boiling Blood"
                 ],
                 "properties": {
-                    "rate": 0.8333333333333334,
-                    "num_bloods": 0
+                    "rate": 5,
+                    "duration": 1
                 },
                 "effects": [
                     {
                         "type": "add_spell_prop",
                         "base_spell": 1,
                         "target_part": "Single Hit",
-                        "behavior": "modify",
+                        "behavior": "overwrite",
                         "multipliers": [
-                            -85,
-                            -30,
+                            160,
+                            35,
                             0,
                             0,
-                            0,
+                            55,
                             0
                         ]
                     },
@@ -667,99 +667,12 @@
                         "target_part": "Boiling Blood Tick",
                         "behavior": "modify",
                         "multipliers": [
-                            -25,
-                            0,
-                            0,
-                            0,
                             30,
+                            0,
+                            0,
+                            0,
+                            45,
                             0
-                        ]
-                    },
-                    {
-                        "type": "add_spell_prop",
-                        "base_spell": 1,
-                        "target_part": "Boiling Blood DPS (Total)",
-                        "behavior": "merge",
-                        "display": "Boiling Blood DPS (Total)",
-                        "hits": {
-                            "Boiling Blood DPS": "Bash.num_bloods"
-                        }
-                    },
-                    {
-                        "type": "stat_scaling",
-                        "slider": true,
-                        "slider_name": "Boiling Blood Stacks",
-                        "slider_step": 1,
-                        "slider_max": 20,
-                        "slider_default": 4,
-                        "output": [
-                            {
-                                "type": "prop",
-                                "abil": "Bash",
-                                "name": "num_bloods"
-                            }
-                        ],
-                        "scaling": [
-                            1
-                        ]
-                    },
-                    {
-                        "type": "stat_scaling",
-                        "slider": true,
-                        "behavior": "modify",
-                        "slider_name": "Hits dealt",
-                        "output": [
-                            {
-                                "type": "stat",
-                                "name": "nDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "nDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "eDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "eDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "tDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "tDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "wDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "wDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "fDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "fDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "aDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "aDamAddMax"
-                            }
-                        ],
-                        "scaling": [
-                            -5
                         ]
                     }
                 ]
