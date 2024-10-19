@@ -643,24 +643,10 @@
                     "Boiling Blood"
                 ],
                 "properties": {
-                    "rate": 5,
+                    "rate": 5.0,
                     "duration": 1
                 },
                 "effects": [
-                    {
-                        "type": "add_spell_prop",
-                        "base_spell": 1,
-                        "target_part": "Single Hit",
-                        "behavior": "overwrite",
-                        "multipliers": [
-                            160,
-                            35,
-                            0,
-                            0,
-                            55,
-                            0
-                        ]
-                    },
                     {
                         "type": "add_spell_prop",
                         "base_spell": 1,
