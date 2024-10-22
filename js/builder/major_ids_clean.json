@@ -192,12 +192,12 @@
                                 "name": "Single Bomb",
                                 "type": "damage",
                                 "multipliers": [
-                                    95,
-                                    40,
+                                    85,
+                                    25,
                                     0,
                                     0,
                                     0,
-                                    40
+                                    25
                                 ]
                             },
                             {
@@ -643,10 +643,33 @@
                     "Boiling Blood"
                 ],
                 "properties": {
-                    "rate": 5.0,
-                    "duration": 1
+                    "rate": 2.5,
+                    "duration": -2
                 },
                 "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Single Hit",
+                        "behavior": "overwrite",
+                        "multipliers": [
+                            160,
+                            35,
+                            0,
+                            0,
+                            55,
+                            0
+                        ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "behavior": "overwrite",
+                        "hits": {
+                            "Single Hit": 1
+                        }
+                    },
                     {
                         "type": "add_spell_prop",
                         "base_spell": 1,
@@ -789,7 +812,7 @@
                         "behavior": "modify",
                         "target_part": "Total Damage",
                         "hits": {
-                            "DPS": -3
+                            "Beam DPS": -3
                         }
                     }
                 ]
@@ -970,7 +993,7 @@
                     "base_spell": 1,
                     "target_part": "Smash Damage",
                     "behavior": "modify",
-                    "multipliers": [200, 90, 90, 0, 60, 0]
+                    "multipliers": [125, 90, 90, 0, 60, 0]
                 }]
             }
         ]
@@ -990,7 +1013,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 5,
                     "target_part": "Explosion Heal",
-                    "power": 0.5
+                    "power": 0.05
                 }]
             }
         ]
@@ -1130,12 +1153,83 @@
     "MANGLE": {
         "displayName": "Mangle",
         "description": "Lacerate will deal +1 slash",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Assassin",
+                "base_abil": "Spin Attack",
+                "dependencies": [
+                    "Lacerate"
+                ],
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "hits": {
+                            "Per Hit": 1
+                        }
+                    }
+                ]
+            }
+        ]
     },
     "FRENETIC_SPIRIT": {
         "displayName": "Frenetic Spirit",
         "description": "Guardian Angels deal almost no damage, but shoots faster and expires much slower. Frenzy's cap is increased to 125%.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Shield",
+                "dependencies": ["Guardian Angels"],
+                "properties": {
+                    "shots" : 32
+                },
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 4,
+                        "target_part": "Single Shot",
+                        "multipliers": [
+                            -27,
+                            0,
+                            0,
+                            0,
+                            0,
+                            -9
+                        ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 4,
+                        "display": "DPS",
+                        "target_part": "DPS",
+                        "behavior": "overwrite",
+                        "hits": { "Single Volley": 5 }
+                    }
+                ]
+            },
+            {
+                "class": "Archer",
+                "base_abil": "Frenzy",
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Hits dealt",
+                        "slider_max": 42,
+                        "output": {
+                            "type": "stat",
+                            "name": "spd"
+                        },
+                        "scaling": [
+                            3
+                        ],
+                        "max": 125
+                    }
+                ]
+            }
+        ]
     },
     "DISPLACE": {
         "displayName": "Displace",
@@ -1145,17 +1239,110 @@
     "TACKLE": {
         "displayName": "Tackle",
         "description": "Flying Kick deals much more knockback and Collide deals much more damage on impact.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Charge",
+                "dependencies": ["Collide"],
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 2,
+                        "target_part": "Collide",
+                        "multipliers": [
+                            150,
+                            0,
+                            60,
+                            0,
+                            10,
+                            0
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     "FLURRY_OF_BLOWS": {
         "displayName": "Flurry of Blows",
         "description": "Turn Double Slice into a 10-hit pummeling of 16% damage per hit",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Assassin",
+                "base_abil": 999,
+                "dependencies": ["Double Slice"],
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 0,
+                        "target_part": "Melee",
+                        "multipliers": [
+                            -44,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 0,
+                        "display": "Total Damage",
+                        "target_part": "Total Damage",
+                        "behavior": "overwrite",
+                        "hits": {"Melee": 10}
+                    }
+                ]
+            }
+        ]
     },
     "EVERSHOT": {
         "displayName": "Evershot",
         "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and double damage per arrow",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Storm",
+                "dependencies": ["Arrow Hurricane"],
+                "effects": [
+                    {
+                        "type": "replace_spell",
+                        "name": "Evershot",
+                        "cost": 35,
+                        "base_spell": 1,
+                        "display": "DPS",
+                        "parts": [
+                            {
+                                "name": "Single Arrow",
+                                "type": "damage",
+                                "multipliers": [
+                                    30,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ]
+                            },
+                            {
+                                "name": "DPS",
+                                "type": "total",
+                                "hits": {
+                                    "Single Arrow": 6.6667
+                                }
+                            },
+                            {
+                                "name": "Total Damage",
+                                "type": "total",
+                                "hits": {
+                                    "DPS": 9.6
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     "POWER_FIST": {
         "displayName": "Power Fist",
@@ -1165,11 +1352,140 @@
     "VEDETTE": {
         "displayName": "Vedette",
         "description": "Focus is stronger, and caps at 2. Crepuscular Ray can be cast at 2 Focus with decreased Focus drain, launching you into the air and immobilizing you.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Focus",
+                "dependencies": ["Crepuscular Ray"],
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Focus",
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Focus"
+                        },
+                        "scaling": [
+                            25
+                        ],
+                        "slider_max": 2
+                    }
+                ]
+            }
+        ]
     },
     "HEAT_SHIMMER": {
         "displayName": "Heat Shimmer",
         "description": "Your Clones are reduced to a maximum of 1 with no damage penalties and Mirror Image's cooldown is greatly shortened.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Assassin",
+                "base_abil": "Mirror Image",
+                "dependencies": ["Echo"],
+                "properties": {
+                    "clones": -2,
+                    "penalty_per_clone": 20,
+                    "max_penalty": 65
+                },
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Spell Copies",
+                        "slider_max": 1
+                    }
+                ]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Mirror Image",
+                "dependencies": [ "Stronger Clones" ],
+                "properties": { 
+                    "max_penalty": -5,
+                    "penalty_per_clone": -5 
+                },
+                "effects": []
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Mirror Image",
+                "dependencies": [ "Forbidden Art" ],
+                "properties": { 
+                    "max_penalty": 5
+                },
+                "effects": []
+            }
+        ]
+    },
+    "VITRIOL": {
+        "displayName": "Vitriol",
+        "description": "Uncontainable Corruption decreases Corrupted duration by 75% and gives drastically more damage, but disables Enraged Blow. Massacre has no cooldown.",
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Bak'al's Grasp",
+                "dependencies": ["Uncontainable Corruption"],
+                "properties": {
+                    "clones": -2,
+                    "penalty_per_clone": 20,
+                    "max_penalty": 65
+                },
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Corrupted",
+                        "output": {
+                            "type": "stat",
+                            "name": "damRaw" 
+                        },
+                        "scaling": [80],
+                        "max": 8000
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider_name": "Corrupted", 
+                        "slider": true,
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Enraged" 
+                        },
+                        "max": 0,
+                        "scaling": [0]
+                    }
+                ]
+            }
+        ]
+    },
+    "FAUSTIAN_GAMBIT": {
+        "displayName": "Faustian Gambit",
+        "description": "Frog Dance triggers only once but has increased vertical velocity, damage, and knockback.",
+        "abilities": [
+            {
+                "class": "Shaman",
+                "base_abil": "Haul",
+                "dependencies": ["Mask of the Heretic"],
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 2,
+                        "target_part": "Hop Damage",
+                        "multipliers": [200, 0, 150, 0, 0, 0]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "behavior": "overwrite",
+                        "base_spell": 2,
+                        "target_part": "Total Damage",
+                        "hits": { "Hop Damage": 1 },
+                        "display": "Total Damage"
+                    }
+                ]
+            }
+        ]
     }
 }

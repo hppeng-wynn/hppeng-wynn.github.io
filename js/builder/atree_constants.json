@@ -28,7 +28,7 @@
                         {
                             "name": "Arrow Bomb",
                             "type": "damage",
-                            "multipliers": [ 130, 0, 0, 0, 20, 0 ]
+                            "multipliers": [ 140, 0, 0, 0, 20, 0 ]
                         },
                         {
                             "name": "Self Damage",
@@ -349,7 +349,7 @@
                             "name": "Shield Damage",
                             "type": "damage",
                             "multipliers": [
-                                90,
+                                60,
                                 0,
                                 0,
                                 0,
@@ -1096,7 +1096,7 @@
                         "name": "damMult.Focus"
                     },
                     "scaling": [
-                        12
+                        15
                     ],
                     "slider_max": 3
                 }
@@ -3002,7 +3002,7 @@
                             "name": "Single Hit",
                             "type": "damage",
                             "multipliers": [
-                                150,
+                                170,
                                 30,
                                 0,
                                 0,
@@ -8361,12 +8361,11 @@
                 "cooldown": 15
             },
             "effects": [
-
-                    {
-                        "type": "raw_stat",
-                        "toggle": "Activate Clones",
-                        "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 60}]
-                    }
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Clones",
+                    "bonuses": [{ "type": "stat", "name": "defMult.Clone", "value": 60}]
+                }
             ]
         },
         {
@@ -8388,7 +8387,6 @@
                 "col": 7,
                 "icon": "node_3"
             },
-            "properties": {},
             "effects": [
                 {
                     "type": "replace_spell",
@@ -10704,7 +10702,7 @@
             "desc": "While mid-air, your Totem will leave a streak of rain that damages enemies under it every 0.4s.",
             "archetype": "Ritualist",
             "base_abil": "Totem",
-            "parents": ["Water Mastery"],
+            "parents": ["Water Mastery", "Shocking Aura"],
             "dependencies": [
                 "Totem"
             ],
@@ -10734,7 +10732,8 @@
             "archetype": "Acolyte",
             "parents": [
                 "Thunder Mastery",
-                "Flaming Tongue"
+                "Flaming Tongue",
+                "Rain Dance"
             ],
             "dependencies": [
                 "Aura"
@@ -10742,7 +10741,7 @@
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 12,
+                "row": 13,
                 "col": 6,
                 "icon": "node_1"
             },
@@ -10776,7 +10775,7 @@
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 12,
+                "row": 13,
                 "col": 8,
                 "icon": "node_1"
             },
@@ -10877,7 +10876,7 @@
             "cost": 2,
             "display": {
                 "row": 15,
-                "col": 4,
+                "col": 3,
                 "icon": "node_3"
             },
             "properties": {},
@@ -10918,7 +10917,6 @@
             "archetype": "Acolyte",
             "archetype_req": 3,
             "parents": [
-                "Shocking Aura",
                 "Flaming Tongue"
             ],
             "dependencies": ["Totem"],
@@ -10926,7 +10924,7 @@
             "cost": 2,
             "display": {
                 "row": 15,
-                "col": 7,
+                "col": 8,
                 "icon": "node_3"
             },
             "properties": { "blood_pool": 30 },
@@ -11174,14 +11172,14 @@
             "desc": "When wearing the Mask of the Lunatic, killing an enemy with Aura will cast a new Aura at its location, dealing -50% of its damage.",
             "base_abil": "Aura",
             "archetype": "Ritualist",
-            "parents": ["Cheaper Uproot I", "Larger Blood Pool I"],
+            "parents": ["Mask of the Lunatic"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
-                "row": 20,
-                "col": 4,
-                "icon": "node_2"
+                "row": 15,
+                "col": 6,
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [{
@@ -11196,7 +11194,7 @@
             "desc": "Increase your maximum Blood pool by +30%.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
-            "parents": ["Rebound", "Hymn of Hate"],
+            "parents": ["Rebound"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 1,
@@ -11251,8 +11249,8 @@
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 21,
-                "col": 2,
+                "row": 22,
+                "col": 1,
                 "icon": "node_0"
             },
             "properties": {
@@ -11279,18 +11277,17 @@
             "desc": "When casting Uproot, instead wear the Mask of the Fanatic. While wearing this mask, the mana cost of Totem is decreased and you gain resistance at the cost of reduced walk speed.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
-            "archetype_req": 3,
+            "archetype_req": 2,
             "parents": [
-                "Hymn of Hate",
-                "Larger Blood Pool I",
-                "Vengeful Spirit"
+                "Cheaper Uproot I",
+                "Larger Blood Pool I"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 21,
-                "col": 5,
+                "row": 20,
+                "col": 4,
                 "icon": "node_3"
             },
             "properties": {},
@@ -11330,7 +11327,7 @@
             "desc": "Your Totem will give damage bonus to yourself and allies standing inside its range.",
             "base_abil": "Totem",
             "archetype": "Acolyte",
-            "parents": ["Larger Blood Pool I", "Mask of the Fanatic"],
+            "parents": ["Larger Blood Pool I", "Masquerade"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
@@ -11347,13 +11344,14 @@
             "desc": "After switching from a Mask to another 2 times, gain 30 mana.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
+            "archetype_req": 4,
             "parents": ["Mask of the Fanatic"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 22,
-                "col": 4,
+                "row": 21,
+                "col": 5,
                 "icon": "node_0"
             },
             "properties": {
@@ -11437,7 +11435,7 @@
             "desc": "Enemies hit by Aura will be pulled towards your totem.",
             "base_abil": "Aura",
             "archetype": "Ritualist",
-            "parents": ["Cheaper Totem II", "Mask of the Fanatic", "Cheaper Haul II"],
+            "parents": ["Cheaper Totem II", "Masquerade", "Cheaper Haul II"],
             "dependencies": ["Aura"],
             "blockers": [],
             "cost": 2,
@@ -11517,15 +11515,14 @@
             "desc": "Reduce the Mana cost of Aura.",
             "base_abil": "Aura",
             "parents": [
-                "Double Totem",
-                "Cheaper Totem II",
+                "Crimson Effigy",
                 "Stronger Totem"
             ],
             "dependencies": ["Aura"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 26,
+                "row": 28,
                 "col": 1,
                 "icon": "node_0"
             },
@@ -11541,7 +11538,7 @@
             "desc": "Increase Totem's damage.",
             "base_abil": "Totem",
             "parents": [
-                "Cheaper Aura II",
+                "Mask of the Heretic",
                 "Storm Dance",
                 "Cheaper Totem II"
             ],
@@ -11549,7 +11546,7 @@
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 26,
+                "row": 28,
                 "col": 4,
                 "icon": "node_0"
             },
@@ -11609,13 +11606,13 @@
         {
             "display_name": "Totemic Shatter",
             "desc": "While wearing the Mask of the Fanatic, your Totem will shatter upon impacting the ground, rapidly triggering 8s worth of its effects. Regeneration will only heal 50% of its usual amount.",
-            "parents": ["Cheaper Aura II", "Stronger Totem"],
+            "parents": ["Mask of the Fanatic"],
             "dependencies": ["Mask of the Fanatic"],
             "blockers": [],
             "archetype": "Ritualist",
             "cost": 2,
             "display": {
-                "row": 27,
+                "row": 21,
                 "col": 3,
                 "icon": "node_2"
             },
@@ -11649,14 +11646,14 @@
             "display_name": "Depersonalization",
             "desc": "Masquerade will need -1 Mask switch to trigger. Reduce the mana given by -10.",
             "archetype": "Ritualist",
-            "archetype_req": 6,
+            "archetype_req": 7,
             "base_abil": "Uproot",
-            "parents": ["Stronger Totem"],
+            "parents": ["Fluid Healing", "Stronger Totem"],
             "dependencies": ["Masquerade"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 27,
+                "row": 29,
                 "col": 5,
                 "icon": "node_0"
             },
@@ -11686,12 +11683,12 @@
             "desc": "Hitting your Totem with Uproot will summon an Effigy that will attack enemies and push them towards your totem.",
             "archetype": "Summoner",
             "archetype_req": 8,
-            "parents": ["Cheaper Aura II", "Mask of the Coward"],
+            "parents": ["Double Totem", "Cheaper Totem II", "Mask of the Heretic"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 28,
+                "row": 26,
                 "col": 1,
                 "icon": "node_3"
             },
@@ -11724,21 +11721,21 @@
             ]
         },
         {
-            "display_name": "Mask of the Coward",
-            "desc": "When casting Uproot, instead wear the Mask of the Coward. While wearing this mask, the mana cost of Haul is reduced and you gain walk speed at the cost of reduced damage.",
+            "display_name": "Mask of the Heretic",
+            "desc": "When casting Uproot, instead wear the Mask of the Heretic. While wearing this mask, the mana cost of Haul is reduced and you gain walk speed at the cost of reduced damage.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
-            "archetype_req": 7,
+            "archetype_req": 2,
             "parents": [
-                "Stronger Totem",
+                "Storm Dance",
                 "Crimson Effigy",
-                "Fluid Healing"
+                "Cheaper Totem II"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 28,
+                "row": 26,
                 "col": 4,
                 "icon": "node_3"
             },
@@ -11753,7 +11750,7 @@
                 },
                 {
                     "type": "raw_stat",
-                    "toggle": "Mask of the Coward",
+                    "toggle": "Mask of the Heretic",
                     "bonuses": [
                         {
                             "type": "stat",
@@ -11777,7 +11774,7 @@
         {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
-            "parents": ["Twisted Tether", "Mask of the Coward", "Larger Blood Pool II"],
+            "parents": ["Twisted Tether", "Larger Blood Pool II"],
             "dependencies": [ "Sacrificial Shrine" ],
             "blockers": [],
             "cost": 2,
@@ -11828,7 +11825,7 @@
             "desc": "Uproot will slow down enemies.",
             "base_abil": "Uproot",
             "archetype": "Summoner",
-            "parents": ["Crimson Effigy"],
+            "parents": ["Cheaper Aura II"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
@@ -11844,16 +11841,16 @@
             "effects": []
         },
         {
-            "display_name": "Chant of the Coward",
-            "desc": "When switching to the Mask of the Coward, damage and knockback nearby enemies.",
+            "display_name": "Chant of the Heretic",
+            "desc": "When switching to the Mask of the Heretic, damage and knockback nearby enemies.",
             "archetype": "Ritualist",
             "archetype_req": 0,
-            "parents": ["Fluid Healing", "Mask of the Coward"],
-            "dependencies": ["Mask of the Coward"],
+            "parents": ["Depersonalization", "Stronger Tether"],
+            "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 29,
+                "row": 31,
                 "col": 5,
                 "icon": "node_1"
             },
@@ -11861,10 +11858,10 @@
             "effects": [
                 {
                     "type": "add_spell_prop",
-                    "target_part": "Chant of the Coward",
+                    "target_part": "Chant of the Heretic",
                     "base_spell": 4,
                     "multipliers": [200, 0, 0, 0, 0, 0],
-                    "display": "Chant of the Coward"
+                    "display": "Chant of the Heretic"
                 }
             ]
         },     
@@ -11917,13 +11914,13 @@
             "desc": "When switching to Mask of the Fanatic, temporarily give massive resistance to yourself and allies (8s cooldown).",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
-            "archetype_req": 9,
-            "parents": ["Chant of the Coward", "Stronger Tether"],
+            "archetype_req": 0,
+            "parents": ["Mask of the Heretic"],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 31,
+                "row": 27,
                 "col": 5,
                 "icon": "node_1"
             },
@@ -11946,7 +11943,7 @@
             "display_name": "Stronger Tether",
             "desc": "Increase Twisted Tether's damage.",
             "archetype": "Acolyte",
-            "parents": ["Blood Rite", "Chant of the Fanatic"],
+            "parents": ["Blood Rite", "Chant of the Heretic"],
             "dependencies": ["Twisted Tether"],
             "blockers": [],
             "cost": 1,
@@ -12020,7 +12017,7 @@
             "desc": "Aura will temporarily increase your Summon's attack speed by +30%. Players hit will gain +5 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
-            "parents": ["More Effigies", "Triple Totem", "Seeking Totem"], 
+            "parents": ["More Effigies", "Triple Totem", "Frog Dance"], 
             "dependencies": ["Aura"], 
             "blockers": [],
             "cost": 2, 
@@ -12046,19 +12043,19 @@
         },
         {
             "display_name": "Seeking Totem",
-            "desc": "When wearing the Mask of the Coward, your Totem will move towards you, unless you are within its range.",
+            "desc": "When wearing the Mask of the Heretic, your Totem will move towards you, unless you are within its range.",
             "base_abil": "Totem",
             "archetype": "Ritualist",
             "parents": [
-                "Chant of the Fanatic",
-                "Invigorating Wave"
+                "Mask of the Heretic",
+                "Crimson Effigy"
             ],
             "dependencies": ["Mask of the Fanatic"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 32,
-                "col": 4,
+                "row": 27,
+                "col": 3,
                 "icon": "node_0"
             },
             "properties": {},
@@ -12066,16 +12063,16 @@
         },
         {
             "display_name": "Frog Dance",
-            "desc": "When wearing the Mask of the Coward, Haul will make you bounce off the ground 3 times at increasing speed and deal damage to nearby enemies.",
+            "desc": "When wearing the Mask of the Heretic, Haul will make you bounce off the ground 3 times at increasing speed and deal damage to nearby enemies.",
             "archetype": "Ritualist",
             "base_abil": "Haul",
-            "parents": ["Chant of the Fanatic"],
-            "dependencies": ["Mask of the Coward"],
+            "parents": ["Chant of the Heretic", "Invigorating Wave"],
+            "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 33,
-                "col": 5,
+                "row": 32,
+                "col": 4,
                 "icon": "node_2"
             },
             "properties": {},
@@ -12103,7 +12100,7 @@
                 },
                 {
                     "type": "raw_stat",
-                    "toggle": "Mask of the Coward",
+                    "toggle": "Mask of the Heretic",
                     "bonuses": [{
                         "type": "stat",
                         "name": "damMult.Frog:2.Hop Damage",
@@ -12117,12 +12114,12 @@
             "desc": "When switching to Mask of the Lunatic, reduce the defenses of nearby enemies. (8s Cooldown)",
             "archetype": "Ritualist",
             "base_abil": "Uproot",
-            "parents": ["Frog Dance"],
+            "parents": ["Mask of the Fanatic"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 34,
+                "row": 22,
                 "col": 4,
                 "icon": "node_1"
             },
@@ -12195,7 +12192,7 @@
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 11,
-            "parents": ["Frog Dance", "Cheaper Uproot II"],
+            "parents": ["Chant of the Heretic", "Cheaper Uproot II"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,

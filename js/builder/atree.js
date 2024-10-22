@@ -92,6 +92,7 @@ stat_scaling: {
   behavior:    Optional[str]                // One of: "merge", "modify". default: merge
                                             //     merge: add if exist, make new part if not exist
                                             //     modify: change existing part, by incrementing properties. do nothing if not exist
+                                            //     overwrite: set part. do nothing if not exist
   slider_max: Optional[int]                 // affected by behavior
   slider_default: Optional[int]             // affected by behavior
   inputs: Optional[list[scaling_target]]    // List of things to scale. Omit this if using slider
@@ -590,11 +591,26 @@ const atree_make_interactives = new (class extends ComputeNode {
         for (let i = 0; i < k; ++i) {
             for (const [effect, abil_id, ability] of to_process) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-                    const { slider_name, behavior = 'merge', slider_max = 0, slider_step, slider_default = 0 } = effect;
+                    const { slider_name, behavior = 'merge', slider_max = 0, slider_step, slider_default = 0, scaling = [0]} = effect;
                     if (slider_map.has(slider_name)) {
                         const slider_info = slider_map.get(slider_name);
-                        slider_info.max += slider_max;
-                        slider_info.default_val += slider_default;
+                        if (behavior === 'overwrite') {
+                            if('slider_max' in effect)
+                                slider_info.max = slider_max;
+                            if('slider_default' in effect)
+                                slider_info.default_val = slider_default;
+                            if('scaling' in effect){
+                                for(let j = 0; j < slider_info.abil.effects.length; ++j){
+                                    if('scaling' in slider_info.abil.effects[j] && slider_info.abil.effects[j] !== effect &&slider_info.abil.effects[j].output.name === effect.output.name){ 
+                                        slider_info.abil.effects[j].scaling = [0];
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            slider_info.max += slider_max;
+                            slider_info.default_val += slider_default;
+                        }
                     }
                     else if (behavior === 'merge') {
                         slider_map.set(slider_name, {
