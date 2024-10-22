@@ -11539,8 +11539,8 @@
             "base_abil": "Totem",
             "parents": [
                 "Mask of the Heretic",
-                "Storm Dance",
-                "Cheaper Totem II"
+                "Fluid Healing",
+                "Cheaper Aura II"
             ],
             "dependencies": ["Totem"],
             "blockers": [],
