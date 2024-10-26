@@ -5,7 +5,7 @@
 
 const url_tag = location.hash.slice(1);
 
-const BUILD_VERSION = "7.0.19";
+const BUILD_VERSION = "7.0.20";
 
 
 // THIS IS SUPER DANGEROUS, WE SHOULD NOT BE KEEPING THIS IN SO MANY PLACES

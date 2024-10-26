@@ -1428,11 +1428,6 @@
                 "class": "Warrior",
                 "base_abil": "Bak'al's Grasp",
                 "dependencies": ["Uncontainable Corruption"],
-                "properties": {
-                    "clones": -2,
-                    "penalty_per_clone": 20,
-                    "max_penalty": 65
-                },
                 "effects": [
                     {
                         "type": "stat_scaling",
@@ -1472,6 +1467,7 @@
                 "effects": [
                     {
                         "type": "add_spell_prop",
+                        "behavior": "overwrite",
                         "base_spell": 2,
                         "target_part": "Hop Damage",
                         "multipliers": [200, 0, 150, 0, 0, 0]
