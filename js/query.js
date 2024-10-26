@@ -358,6 +358,8 @@ const ingredientQueryProps = (function() {
   maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
   maxId(['rainbowraw'], 'rSdRaw');
 
+  maxId('critdampct', 'critDamPct');
+
   maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier'], 'atkTier');
 
   maxId(['earthdef%', 'edef%', 'edefpct'], 'eDefPct');
