@@ -106,12 +106,11 @@ function apply_weapon_powders(item) {
  *
  * Params:
  * weapon: Weapon to apply powder to
- * damageBases: used by crafted
  *
  * Return:
  * [damages, damage_present]
  */
-function calc_weapon_powder(weapon, damageBases) {
+function calc_weapon_powder(weapon) {
     let powders = weapon.get("powders").slice();
 
     // Array of neutral + ewtfa damages. Each entry is a pair (min, max).
@@ -132,26 +131,37 @@ function calc_weapon_powder(weapon, damageBases) {
 
     //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
     //1st round - apply each as ingred, 2nd round - apply as normal
+    let powder_apply_order = [];
+    let powder_apply_map = new Map();
+
     if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
-        for (const p of powders.concat(weapon.get("ingredPowders"))) {
-            const powder = powderStats[p];  //use min, max, and convert
+        for (const p of weapon.get("ingredPowders")) {
+            const powder = powderStats[p];
             // Bitwise to force conversion to integer (integer division).
             const element = (p/6) | 0;
-            let diff = Math.floor(damageBases[0] * powder.convert/100);
-            damageBases[0] -= diff;
-            damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
+            const conversion_ratio = powder.convert/200;
+            const powder_max = powder.max/2;
+            const powder_min = powder.min/2;
+    
+            if (powder_apply_map.has(element)) {
+                let apply_info = powder_apply_map.get(element);
+                apply_info.conv += conversion_ratio;
+                apply_info.min += powder_min;
+                apply_info.max += powder_max;
+            }
+            else {
+                let apply_info = {
+                    conv: conversion_ratio,
+                    min: powder_min,
+                    max: powder_max
+                };
+                powder_apply_order.push(element);
+                powder_apply_map.set(element, apply_info);
+            }
         }
-        //update all damages
-        for (let i = 0; i < damages.length; i++) {
-            damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
-        }
-        neutralRemainingRaw = damages[0].slice();
-        neutralBase = damages[0].slice();
     }
 
     //apply powders to weapon (1.21 fked implementation)
-    let powder_apply_order = [];
-    let powder_apply_map = new Map();
     for (const powderID of powders) {
         const powder = powderStats[powderID];
         // Bitwise to force conversion to integer (integer division).
