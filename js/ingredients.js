@@ -95,6 +95,7 @@ const translate_mappings = {
     "Water Damage %": "wDamPct",
     "Fire Damage %": "fDamPct",
     "Air Damage %": "aDamPct",
+    "Critical Damage Bonus %": "critDamPct",
 
     "% Fire Defense": "fDefPct",
     "% Water Defense": "wDefPct",
@@ -121,7 +122,8 @@ const translate_mappings = {
     "Healing Efficiency": "healPct",
     "Knockback": "kb",
     "Weaken Enemy": "weakenEnemy",
-    "Slow Enemy": "slowEnemy"
+    "Slow Enemy": "slowEnemy",
+    "Max Mana": "maxMana"
 };
 
 const special_mappings = {

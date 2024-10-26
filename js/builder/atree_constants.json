@@ -3642,7 +3642,7 @@
                     "base_spell": 3,
                     "target_part": "Uppercut",
                     "cost": -5,
-                    "multipliers": [-70, 0, 0, 30, 0, 0]
+                    "multipliers": [-60, 0, 0, 30, 0, 0]
                 }
             ]  
         },
@@ -4477,7 +4477,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 3,
                     "target_part": "Uppercut",
-                    "multipliers": [-70, 0, 0, 0, 0, 30]
+                    "multipliers": [-30, 0, 0, 0, 0, 30]
                 }
             ]  
         },
@@ -4867,17 +4867,17 @@
                     "type": "stat_scaling",
                     "slider": true,
                     "slider_name": "Hits dealt",
-                    "slider_max": 15,
+                    "slider_max": 30,
                     "output": [
-                        { "type": "stat", "name": "nDamAddMin" }, { "type": "stat", "name": "nDamAddMax" },
-                        { "type": "stat", "name": "eDamAddMin" }, { "type": "stat", "name": "eDamAddMax" },
-                        { "type": "stat", "name": "tDamAddMin" }, { "type": "stat", "name": "tDamAddMax" },
-                        { "type": "stat", "name": "wDamAddMin" }, { "type": "stat", "name": "wDamAddMax" },
-                        { "type": "stat", "name": "fDamAddMin" }, { "type": "stat", "name": "fDamAddMax" },
-                        { "type": "stat", "name": "aDamAddMin" }, { "type": "stat", "name": "aDamAddMax" }
+                        { "type": "stat", "name": "nDamRaw" },
+                        { "type": "stat", "name": "eDamRaw" },
+                        { "type": "stat", "name": "tDamRaw" },
+                        { "type": "stat", "name": "wDamRaw" },
+                        { "type": "stat", "name": "fDamRaw" },
+                        { "type": "stat", "name": "aDamRaw" }
                     ],
-                    "scaling": [4],
-                    "max": 60
+                    "scaling": [5],
+                    "max": 150
                 }
             ]  
         },
@@ -4901,7 +4901,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 1,
                     "target_part": "Single Hit",
-                    "multipliers": [-30, 0, 20, 0, 0, 0]
+                    "multipliers": [0, 0, 20, 0, 0, 0]
                 },
                 {
                     "type": "raw_stat",
@@ -4937,7 +4937,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Cyclone",
-                    "multipliers": [10, 0, 0, 0, 5, 10]
+                    "multipliers": [20, 0, 0, 0, 10, 20]
                 },
                 {
                     "type": "add_spell_prop",
@@ -8736,7 +8736,7 @@
         },
         {
             "display_name": "Weightless",
-            "desc": "You gain +0.35 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
+            "desc": "You gain +0.6 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
             "archetype_req": 3,
             "parents": [
@@ -9841,7 +9841,7 @@
         },
         {
             "display_name": "Better Weightless",
-            "desc": "Weightless will grant +0.25 more mana.",
+            "desc": "Weightless will grant +0.6 more mana.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Weightless",
@@ -11967,7 +11967,7 @@
             "desc": "Increase your maximum Totem by +1 and reduce Totem and Aura's damage.",
             "base_abil": "Totem",
             "archetype": "Summoner",
-            "archetype_req": 2,
+            "archetype_req": 8,
             "parents": ["More Effigies", "Invigorating Wave"],
             "dependencies": ["Double Totem"],
             "blockers": [],
