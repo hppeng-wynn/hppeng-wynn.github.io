@@ -2333,7 +2333,7 @@
                     "base_spell": 3,
                     "target_part": "Shrapnel Bomblet",
                     "multipliers": [
-                        40,
+                        80,
                         0,
                         0,
                         0,
@@ -4095,7 +4095,7 @@
                     "parts": [
                         {
                             "name": "Smite Damage",
-                            "multipliers": [100, 0, 20, 0, 0, 0]
+                            "multipliers": [95, 0, 0, 15, 0, 10]
                         }
                     ]
                 }
@@ -4561,7 +4561,7 @@
                     "parts": [
                         {
                             "name": "Damage per Shield",
-                            "multipliers": [70, 0, 30, 0, 0, 0]
+                            "multipliers": [70, 0, 0, 0, 30, 0]
                         }
                     ]
                 }
@@ -4593,7 +4593,7 @@
                     "parts": [
                         {
                             "name": "Damage Tick",
-                            "multipliers": [40, 0, 20, 0, 0, 0]
+                            "multipliers": [40, 0, 0, 10, 10, 0]
                         }
                     ]
                 }
@@ -4969,7 +4969,7 @@
                 "type": "add_spell_prop",
                 "base_spell": 9,
                 "target_part": "Smite Damage",
-                "multipliers": [70, 0, 10, 0, 0, 0]
+                "multipliers": [70, 0, 0, 5, 0, 5]
             }]  
         },
         {
@@ -6679,6 +6679,12 @@
                 {
                     "type": "add_spell_prop",
                     "base_spell": 1,
+                    "target_part": "Heal",
+                    "power": 0.05
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
                     "display": "Total Heal",
                     "target_part": "Total Heal",
                     "hits": {
@@ -6797,7 +6803,7 @@
                         {
                             "name": "Single Orb",
                             "type": "damage",
-                            "multipliers": [150, 0, 0, 0, 50, 0]
+                            "multipliers": [120, 0, 0, 0, 30, 0]
                         },
                         {
                             "name": "Orb DPS",
@@ -8153,7 +8159,7 @@
                             "name": "Backstab Damage",
                             "type": "damage",
                             "multipliers": [
-                                200, 50, 0, 0, 0, 0
+                                250, 50, 0, 0, 0, 0
                             ]
                         }
                     ]
