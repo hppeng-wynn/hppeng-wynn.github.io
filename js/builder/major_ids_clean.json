@@ -634,7 +634,7 @@
     },
     "HELLFIRE": {
         "displayName": "Hellfire",
-        "description": "Boiling Blood has no cooldown, is stronger, and does not slow. Cuts Bash's power and disables Discombobulate",
+        "description": "Bash becomes one giant 250% damage hit, and Boiling Blood burns faster and stronger but can't slow.",
         "abilities": [
             {
                 "class": "Warrior",
@@ -1195,7 +1195,7 @@
             {
                 "class": "Archer",
                 "base_abil": "Arrow Shield",
-                "dependencies": [],
+                "dependencies": ["Arrow Shield"],
                 "properties": {
                     "charges": -1
                 },
@@ -1215,8 +1215,35 @@
     },
     "LAST_RESORT": {
         "displayName": "Last Resort",
-        "description": "Bloodlust has doubled corrupted scaling and knockback, but deals  -50%  -30%",
-        "abilities": []
+        "description": "Bloodlust has doubled corrupted scaling and knockback, but deals -50% Neutral and -30% Fire damage.",
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Bloodlust",
+                "dependencies": ["Bloodlust"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 10,
+                        "target_part": "Annihilation", 
+                        "behavior": "modify",
+                        "multipliers": [-50, 0, 0, 0, -30, 0]
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "behavior": "modify",
+                        "slider_name": "Corrupted",
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Bloodlust:3.Annihilation"
+                        },
+                        "scaling": [5]
+                    }
+                ]
+            }
+        ]
     },
     "LOCKDOWN": {
         "displayName": "Lockdown",
@@ -1226,17 +1253,82 @@
     "RUSTED_ICHOR": {
         "displayName": "Rusted Ichor",
         "description": "Boiling Blood inflicts increased slowness with a shorter cooldown, but deals no damage",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Boiling Blood",
+                "dependencies": ["Boiling Blood"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Boiling Blood Tick",
+                        "multipliers": [-25, 0, 0, 0, -5, 0]
+                    }
+                ]
+            }
+        ]
     },
     "MANGLE": {
         "displayName": "Mangle",
         "description": "Lacerate will deal +1 slash",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Assassin",
+                "base_abil": "Lacerate",
+                "dependencies": ["Lacerate"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "behavior": "modify",
+                        "target_part": "Total Damage",
+                        "hits": {
+                            "Per Hit": 1
+                        }
+                    }
+                ]
+            }
+        ]
     },
     "FRENETIC_SPIRIT": {
         "displayName": "Frenetic Spirit",
         "description": "Guardian Angels deal almost no damage, but shoots faster and expires much slower. Frenzy's cap is increased to 125%.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Frenzy",
+                "dependencies": ["Frenzy", "Arrow Shield"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Hits dealt",
+                        "output": {
+                            "type": "stat",
+                            "name": "spd"
+                        },
+                        "scaling": [-3],
+                        "max": -70
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Hits dealt",
+                        "slider_max": 18,
+                        "output": {
+                            "type": "stat",
+                            "name": "spd"
+                        },
+                        "scaling": [3],
+                        "max": 125
+                    }
+                ]
+            }
+        ]
     },
     "DISPLACE": {
         "displayName": "Displace",
@@ -1246,17 +1338,88 @@
     "TACKLE": {
         "displayName": "Tackle",
         "description": "Flying Kick deals much more knockback and Collide deals much more damage on impact.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Collide",
+                "dependencies": ["Collide"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 2,
+                        "behavior": "modify",
+                        "target_part": "Collide",
+                        "multipliers": [150, 0, 60, 0, 10, 0]
+                    }
+                ]
+            }
+        ]
     },
     "FLURRY_OF_BLOWS": {
         "displayName": "Flurry of Blows",
         "description": "Turn Double Slice into a 10-hit pummeling of 16% damage per hit",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Assassin",
+                "base_abil": "Double Slice",
+                "dependencies": ["Double Slice"],
+                "properties": {},
+                "effects": [{
+                    "type": "replace_spell",
+                    "name": "Flurry of Blows",
+                    "cost": 0,
+                    "base_spell": 0,
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Per Hit",
+                            "type": "damage",
+                            "multipliers": [ 16, 0, 0, 0, 0, 0 ]
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": {
+                                "Per Hit": 10
+                            }
+                        }
+                    ]
+                }]
+            }
+        ]
     },
     "EVERSHOT": {
         "displayName": "Evershot",
         "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and double damage per arrow",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Storm",
+                "dependencies": ["Arrow Hurricane"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "raw_stat",
+                        "bonuses": [
+                            {
+                                "type": "stat",
+                                "name": "damMult.Evershot:1.Single Arrow",
+                                "value": 100
+                            }
+                        ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "hits": {
+                            "Single Stream": -2
+                        }
+                    }
+                ]
+            }
+        ]
     },
     "POWER_FIST": {
         "displayName": "Power Fist",
