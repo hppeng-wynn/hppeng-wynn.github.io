@@ -1435,5 +1435,15 @@
         "displayName": "Heat Shimmer",
         "description": "Your Clones are reduced to a maximum of 1 with no damage penalties and Mirror Image's cooldown is greatly shortened.",
         "abilities": []
+    },
+    "FAUSTIAN_GAMBIT": {
+        "displayName": "Faustian Gambit",
+        "description": "Frog Dance triggers only once but has increased vertical velocity, damage, and knockback",
+        "abilities": []
+    },
+    "FRIGHT_OR_FLIGHT": {
+        "displayName": "Fright or Flight",
+        "description": "Plays spooky tunes",
+        "abilities": []
     }
 }
