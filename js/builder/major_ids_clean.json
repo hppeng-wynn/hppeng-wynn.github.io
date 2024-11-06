@@ -1455,6 +1455,7 @@
                 "effects": [
                     {
                         "type": "stat_scaling",
+                        "behavior": "overwrite",
                         "slider": true,
                         "slider_name": "Corrupted",
                         "output": {
@@ -1503,6 +1504,36 @@
                         "target_part": "Total Damage",
                         "hits": { "Hop Damage": 1 },
                         "display": "Total Damage"
+                    }
+                ]
+            }
+        ]
+    },
+    "METHODICAL": {
+        "displayName": "Methodical",
+        "description": "Initiator's reset time is reduced by 75%. Arrow Bomb deals less area damage, but more direct hit damage.",
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Bomb",
+                "dependencies": [
+                    "Arrow Bomb"
+                ],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 3,
+                        "target_part": "Arrow Bomb",
+                        "behavior": "modify",
+                        "multipliers": [ -100, 0, 0, 0, 0, 0 ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 3,
+                        "target_part": "Heart Shatter",
+                        "behavior": "modify",
+                        "multipliers": [ 140, 0, 0, 0, 0, 0 ]
                     }
                 ]
             }
