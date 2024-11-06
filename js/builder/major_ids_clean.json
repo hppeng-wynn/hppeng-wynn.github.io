@@ -693,7 +693,8 @@
                         "target_part": "Total Damage",
                         "behavior": "overwrite",
                         "hits": {
-                            "Single Hit": 1
+                            "Single Hit": 1,
+                            "Boiling Blood Tick": 5
                         }
                     },
                     {
