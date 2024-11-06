@@ -11086,7 +11086,7 @@
             "parents": ["Cheaper Aura I", "Cheaper Uproot I"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
-            "cost": 2,
+            "cost": 4,
             "display": {
                 "row": 18,
                 "col": 3,
@@ -11351,7 +11351,7 @@
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 4,
-            "parents": ["Mask of the Fanatic"],
+            "parents": ["Mask of the Fanatic", "Vengeful Spirit", "Larger Blood Pool I"],
             "dependencies": ["Mask of the Lunatic"],
             "blockers": [],
             "cost": 1,
