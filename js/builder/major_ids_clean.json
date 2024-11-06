@@ -779,7 +779,7 @@
                         "target_part": "Trap Damage",
                         "behavior": "modify",
                         "multipliers": [
-                            -100,
+                            -170,
                             0,
                             0,
                             0,
@@ -1213,16 +1213,13 @@
                 },
                 "effects": [
                     {
-                        "type": "add_spell_prop",
-                        "base_spell": 4,
-                        "target_part": "Single Shot",
-                        "multipliers": [
-                            -27,
-                            0,
-                            0,
-                            0,
-                            0,
-                            -9
+                        "type": "raw_stat",
+                        "bonuses": [
+                            {
+                                "type": "stat",
+                                "name": "damMult.FreneticSpirit:4.Single Shot",
+                                "value": -90
+                            }
                         ]
                     },
                     {
