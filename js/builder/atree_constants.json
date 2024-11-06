@@ -5029,18 +5029,31 @@
             "properties": {
                 "aoe": 8
             },
-            "effects": [{
-                "type": "replace_spell",
-                "name": "Bloodlust Damage",
-                "base_spell": 10,
-                "display": "Damage",
-                "parts": [
-                    {
-                        "name": "Damage",
-                        "multipliers": [150, 0, 0, 0, 50, 0]
-                    }
-                ]
-            }]
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Bloodlust Damage",
+                    "base_spell": 10,
+                    "display": "Annihilation",
+                    "parts": [
+                        {
+                            "name": "Annihilation",
+                            "multipliers": [150, 0, 0, 0, 50, 0]
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Corrupted",
+                    "behavior": "modify",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Bloodlust:3.Annihilation"
+                    },
+                    "scaling": [5]
+                }
+            ]
         },
 
         {

@@ -1164,8 +1164,35 @@
     },
     "LAST_RESORT": {
         "displayName": "Last Resort",
-        "description": "Bloodlust has doubled corrupted scaling and knockback, but deals  -50%  -30%",
-        "abilities": []
+        "description": "Bloodlust has doubled corrupted scaling and knockback, but deals -50% Neutral and -30% Fire damage.",
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Bloodlust",
+                "dependencies": ["Bloodlust"],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 10,
+                        "target_part": "Annihilation", 
+                        "behavior": "modify",
+                        "multipliers": [-50, 0, 0, 0, -30, 0]
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "behavior": "modify",
+                        "slider_name": "Corrupted",
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Bloodlust:3.Annihilation"
+                        },
+                        "scaling": [5]
+                    }
+                ]
+            }
+        ]
     },
     "LOCKDOWN": {
         "displayName": "Lockdown",
@@ -1538,5 +1565,10 @@
                 ]
             }
         ]
+    },
+    "FRIGHT_OR_FLIGHT": {
+        "displayName": "Fright or Flight",
+        "description": "Plays spooky tunes",
+        "abilities": []
     }
 }
