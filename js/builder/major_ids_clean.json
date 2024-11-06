@@ -508,7 +508,33 @@
     "GENTLE_GLOW": {
         "displayName": "Gentle Glow",
         "description": "Orphion's Pulse and Fluid Healing restore more health, especially to allies, but at a slower speed.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Mage",
+                "base_abil": "Heal",
+                "dependencies":[
+                    "Fluid Healing",
+                    "Orphion's Pulse"
+                ],
+                "effects":[
+                    {
+                        "type": "stat_scaling",
+                        "slider": false,
+                        "inputs": [
+                            {
+                                "type": "stat",
+                                "name": "wDamPct"
+                            }
+                        ],
+                        "output": {
+                            "type": "stat",
+                            "name": "healMult.FluidHealing"
+                        },
+                        "scaling": [ 0.45]
+                    }
+                ]
+            }
+        ]
     },
     "PERFECT_RECALL": {
         "displayName": "Perfect Recall",
