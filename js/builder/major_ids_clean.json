@@ -1250,12 +1250,14 @@
                         ]
                     },
                     {
-                        "type": "add_spell_prop",
-                        "base_spell": 4,
-                        "display": "DPS",
-                        "target_part": "DPS",
-                        "behavior": "overwrite",
-                        "hits": { "Single Volley": 5 }
+                        "type": "raw_stat",
+                        "bonuses": [
+                            {
+                                "type": "stat",
+                                "name": "damMult.FreneticSpirit:4.DPS",
+                                "value": 150
+                            }
+                        ]
                     }
                 ]
             },
@@ -1265,7 +1267,18 @@
                 "effects": [
                     {
                         "type": "stat_scaling",
-                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Hits dealt",
+                        "slider_max": -24,
+                        "output": {
+                            "type": "stat",
+                            "name": "spd"
+                        },
+                        "max": -70,
+                        "scaling": [-3]  
+                    },
+                    {
+                        "type": "stat_scaling",
                         "slider": true,
                         "slider_name": "Hits dealt",
                         "slider_max": 42,
@@ -1273,10 +1286,8 @@
                             "type": "stat",
                             "name": "spd"
                         },
-                        "scaling": [
-                            3
-                        ],
-                        "max": 125
+                        "max": 125,
+                        "scaling": [3]
                     }
                 ]
             }

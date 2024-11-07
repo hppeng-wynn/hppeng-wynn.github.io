@@ -591,7 +591,7 @@ const atree_make_interactives = new (class extends ComputeNode {
         for (let i = 0; i < k; ++i) {
             for (const [effect, abil_id, ability] of to_process) {
                 if (effect['type'] === "stat_scaling" && effect['slider'] === true) {
-                    const { slider_name, behavior = 'merge', slider_max = 0, slider_step, slider_default = 0, scaling = [0]} = effect;
+                    const { slider_name, behavior = 'merge', slider_max = 0, slider_step, slider_default = 0, scaling = [0], max = 0} = effect;
                     if (slider_map.has(slider_name)) {
                         const slider_info = slider_map.get(slider_name);
                         if (behavior === 'overwrite') {

@@ -187,17 +187,107 @@
         {
           "threshold": 1,
           "description": "Frenzy's maximum walk speed is increased by +15%.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Frenzy",
+              "effects": [
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Hits dealt",
+                  "slider_max": -24,
+                  "output": {
+                      "type": "stat",
+                      "name": "spd"
+                  },
+                  "max": -70,
+                  "scaling": [-3]  
+                },
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Hits dealt",
+                  "slider_max": 29,
+                  "output": {
+                      "type": "stat",
+                      "name": "spd"
+                  },
+                  "max": 85,
+                  "scaling": [3]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Frenzy's maximum walk speed is increased by +30%.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Frenzy",
+              "effects": [
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Hits dealt",
+                  "slider_max": -24,
+                  "output": {
+                      "type": "stat",
+                      "name": "spd"
+                  },
+                  "max": -70,
+                  "scaling": [-3]  
+                },
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Hits dealt",
+                  "slider_max": 34,
+                  "output": {
+                      "type": "stat",
+                      "name": "spd"
+                  },
+                  "max": 100,
+                  "scaling": [3]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 75,
           "description": "Frenzy's maximum walk speed is increased by +40%.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Frenzy",
+              "effects": [
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Hits dealt",
+                  "slider_max": -24,
+                  "output": {
+                      "type": "stat",
+                      "name": "spd"
+                  },
+                  "max": -70,
+                  "scaling": [-3]  
+                },
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Hits dealt",
+                  "slider_max": 37,
+                  "output": {
+                      "type": "stat",
+                      "name": "spd"
+                  },
+                  "max": 110,
+                  "scaling": [3]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -250,22 +340,42 @@
         {
           "threshold": 1,
           "description": "Bryophyte Roots gains +0.5 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Bryophyte Roots" ],
+            "base_abil": "Arrow Storm",
+            "properties": { "aoe": 0.5 },
+            "effects": []
+          }]
         },
         {
           "threshold": 5,
           "description": "Bryophyte Roots gains +0.85 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Bryophyte Roots" ],
+            "base_abil": "Arrow Storm",
+            "properties": { "aoe": 0.85 },
+            "effects": []
+          }]
         },
         {
           "threshold": 30,
           "description": "Bryophyte Roots gains +1.2 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Bryophyte Roots" ],
+            "base_abil": "Arrow Storm",
+            "properties": { "aoe": 1.2 },
+            "effects": []
+          }]
         },
         {
           "threshold": 150,
           "description": "Bryophyte Roots gains +1.5 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Bryophyte Roots" ],
+            "base_abil": "Arrow Storm",
+            "properties": { "aoe": 1.5 },
+            "effects": []
+          }]
         }
       ]
     },
@@ -276,22 +386,38 @@
         {
           "threshold": 1,
           "description": "Snow Storm gains +1 Range.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Snow Storm" ],
+            "properties": { "range": 1 },
+            "effects": []
+          }]
         },
         {
           "threshold": 5,
           "description": "Snow Storm gains +1.75 Range.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Snow Storm" ],
+            "properties": { "range": 1.75 },
+            "effects": []
+          }]
         },
         {
           "threshold": 30,
           "description": "Snow Storm gains +2.5 Range.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Snow Storm" ],
+            "properties": { "range": 2.5 },
+            "effects": []
+          }]
         },
         {
           "threshold": 150,
           "description": "Snow Storm gains +3 Range.",
-          "abilities": []
+          "abilities": [{
+            "dependencies": [ "Snow Storm" ],
+            "properties": { "range": 3 },
+            "effects": []
+          }]
         }
       ]
     },
@@ -328,22 +454,38 @@
         {
           "threshold": 1,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +2 Range.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Storm",
+            "properties": { "range": 2 },
+            "effects": []
+          }]
         },
         {
           "threshold": 5,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +3.5 Range.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Storm",
+            "properties": { "range": 3.5 },
+            "effects": []
+          }]
         },
         {
           "threshold": 30,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +5 Range.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Storm",
+            "properties": { "range": 5 },
+            "effects": []
+          }]
         },
         {
           "threshold": 150,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +6 Range.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Storm",
+            "properties": { "range": 6 },
+            "effects": []
+          }]
         }
       ]
     },
@@ -354,22 +496,42 @@
         {
           "threshold": 1,
           "description": "Fierce Stomp gains +1.25 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Escape",
+            "dependencies": [ "Fierce Stomp" ],
+            "properties": { "aoe": 1.25 },
+            "effects": []
+          }]
         },
         {
           "threshold": 5,
           "description": "Fierce Stomp gains +2.25 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Escape",
+            "dependencies": [ "Fierce Stomp" ],
+            "properties": { "aoe": 2.25 },
+            "effects": []
+          }]
         },
         {
           "threshold": 30,
           "description": "Fierce Stomp gains +3.25 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Escape",
+            "dependencies": [ "Fierce Stomp" ],
+            "properties": { "aoe": 3.25 },
+            "effects": []
+          }]
         },
         {
           "threshold": 150,
           "description": "Fierce Stomp gains +4 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Escape",
+            "dependencies": [ "Fierce Stomp" ],
+            "properties": { "aoe": 4 },
+            "effects": []
+          }]
         }
       ]
     },
@@ -380,22 +542,38 @@
         {
           "threshold": 1,
           "description": "Arrow Bomb gains +0.5 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Bomb",
+            "properties": { "aoe": 0.5 },
+            "effects": []
+          }]
         },
         {
           "threshold": 5,
           "description": "Arrow Bomb gains +0.85 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Bomb",
+            "properties": { "aoe": 0.85 },
+            "effects": []
+          }]
         },
         {
           "threshold": 30,
           "description": "Arrow Bomb gains +1.2 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Bomb",
+            "properties": { "aoe": 1.2 },
+            "effects": []
+          }]
         },
         {
           "threshold": 150,
           "description": "Arrow Bomb gains +1.5 Area of Effect.",
-          "abilities": []
+          "abilities": [{
+            "base_abil": "Arrow Bomb",
+            "properties": { "aoe": 1.5 },
+            "effects": []
+          }]
         }
       ]
     },
@@ -406,22 +584,90 @@
         {
           "threshold": 1,
           "description": "Arrow Shield gains +3% Resistance.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "toggle": "Arrow Defense",
+                  "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "defMult.ArrowShield",
+                        "value": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Arrow Shield gains +6% Resistance.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "toggle": "Arrow Defense",
+                  "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "defMult.ArrowShield",
+                        "value": 6
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 30,
           "description": "Arrow Shield gains +8% Resistance.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "toggle": "Arrow Defense",
+                  "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "defMult.ArrowShield",
+                        "value": 8
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 150,
           "description": "Arrow Shield gains +10% Resistance.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "toggle": "Arrow Defense",
+                  "bonuses": [
+                    {
+                        "type": "stat",
+                        "name": "defMult.ArrowShield",
+                        "value": 10
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -432,17 +678,145 @@
         {
           "threshold": 1,
           "description": "Guardian Angels will shoot +30% faster.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "bonuses": [
+                      {
+                          "type": "stat",
+                          "name": "damMult.BoltslingerAspect:4.DPS",
+                          "value": 30
+                      }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Guardian Angels will shoot +30% faster.  Arrow Storm gains +1 arrow per stream.  Triple Shots gains +2 arrows.  Main Attack Damage: -15%",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "bonuses": [
+                      {
+                          "type": "stat",
+                          "name": "damMult.BoltslingerAspect:4.DPS",
+                          "value": 30
+                      }
+                  ]
+                }
+              ]
+            },
+            {
+              "base_abil": "Arrow Storm",
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Stream",
+                  "behavior": "modify",
+                  "hits": { "Single Arrow": 1 }
+                }
+              ]
+            },
+            {
+              "base_abil": 999,
+              "dependencies": ["Triple Shots"],
+              "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Single Shot",
+                    "multipliers": [
+                        -15,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Single Shot": 2
+                    },
+                    "display": "Total Damage"
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Guardian Angels will shoot +50% faster.  Arrow Storm gains +1 arrow per stream.  Triple Shots gains +2 arrows.  Main Attack Damage: -15%",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "bonuses": [
+                      {
+                          "type": "stat",
+                          "name": "damMult.BoltslingerAspect:4.DPS",
+                          "value": 50
+                      }
+                  ]
+                }
+              ]
+            },
+            {
+              "base_abil": "Arrow Storm",
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Stream",
+                  "behavior": "modify",
+                  "hits": { "Single Arrow": 1 }
+                }
+              ]
+            },
+            {
+              "base_abil": 999,
+              "dependencies": ["Triple Shots"],
+              "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Single Shot",
+                    "multipliers": [
+                        -15,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 0,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Single Shot": 2
+                    },
+                    "display": "Total Damage"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -453,17 +827,74 @@
         {
           "threshold": 1,
           "description": "Increase your maximum Focus by +1.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Focus",
+              "effects": [
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Focus",
+                  "slider_max": 1,
+                  "output": {
+                      "type": "stat",
+                      "name": "damMult.Focus"
+                  },
+                  "scaling": [
+                      0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Increase your maximum Focus by +1.  Twain's Arc requires -1 Focus to activate.  Crepuscular Ray requires -1 Focus to activate.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Focus",
+              "effects": [
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Focus",
+                  "slider_max": 1,
+                  "output": {
+                      "type": "stat",
+                      "name": "damMult.Focus"
+                  },
+                  "scaling": [
+                      0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Increase your maximum Focus by +1.  Twain's Arc requires -1 Focus to activate. Twain's Arc charges 5% faster.  Crepuscular Ray requires -2 Focus to activate.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Focus",
+              "effects": [
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Focus",
+                  "slider_max": 1,
+                  "output": {
+                      "type": "stat",
+                      "name": "damMult.Focus"
+                  },
+                  "scaling": [
+                      0
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -474,17 +905,65 @@
         {
           "threshold": 1,
           "description": "Patient Hunter gains +20% damage per second.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Basaltic Trap",
+              "effects":[
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Trap Wait Time",
+                  "output": {
+                      "type": "stat",
+                      "name": "damMult.Basaltic:7.Trap Damage"
+                  },
+                  "scaling": [20]
+                }
+              ]
+            } 
+          ]
         },
         {
           "threshold": 5,
           "description": "Patient Hunter gains +20% damage per second.  Chilling Snare gains +3s Duration.",
-          "abilities": []
+          "abilities": [
+            {
+              "base_abil": "Basaltic Trap",
+              "effects":[
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Trap Wait Time",
+                  "output": {
+                      "type": "stat",
+                      "name": "damMult.Basaltic:7.Trap Damage"
+                  },
+                  "scaling": [20]
+                }
+              ]
+            } 
+          ]
         },
         {
           "threshold": 15,
-          "description": "Patient Hunter gains +40% damage per second.",
-          "abilities": []
+          "description": "Patient Hunter gains +40% damage per second.  Chilling Snare gains +3s Duration.",
+          "abilities": [
+            {
+              "base_abil": "Basaltic Trap",
+              "effects":[
+                {
+                  "type": "stat_scaling",
+                  "slider": true,
+                  "slider_name": "Trap Wait Time",
+                  "output": {
+                      "type": "stat",
+                      "name": "damMult.Basaltic:7.Trap Damage"
+                  },
+                  "scaling": [40]
+                }
+              ]
+            } 
+          ]
         }
       ]
     }
