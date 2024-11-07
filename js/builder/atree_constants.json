@@ -11097,9 +11097,10 @@
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "parents": ["Cheaper Aura I", "Cheaper Uproot I"],
-            "dependencies": ["Mask of the Lunatic"],
+            "dependencies": [],
             "blockers": [],
-            "cost": 4,
+            "cost": 2,
+            "archetype_req": 4,
             "display": {
                 "row": 18,
                 "col": 3,
