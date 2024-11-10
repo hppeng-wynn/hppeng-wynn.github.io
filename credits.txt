@@ -20,4 +20,5 @@ Additional Contributors, in no particular order:
  - RawFish (and WIM team) (wynn api shenanigans, major IDs, misc.)
  - nbcss (and WIM team) (Crafted Item mechanics reverse engineering, testing)
  - dr_carlos (Hiding UI elements properly, fade animations, proper error handling)
+ - davidwnguyen (Data updates for major ids and aspects, script update for new IDs)
  - Atlas Inc discord (feedback, ideas, damage calc, etc)
