@@ -6292,11 +6292,7 @@
       "mdPct": -99,
       "mr": 25,
       "ref": 33,
-      "maxMana": {
-        "min": 23,
-        "raw": 76,
-        "max": 99
-      },
+      "maxMana": 76,
       "wDefPct": 99,
       "fDefPct": 66,
       "wDam": "250-330",
@@ -9567,11 +9563,7 @@
       "str": 7,
       "agi": 7,
       "ms": 8,
-      "maxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "maxMana": 20,
       "eDamPct": 20,
       "wDamPct": 25,
       "aDamPct": 20,
@@ -14353,11 +14345,7 @@
       "mdPct": -33,
       "mr": 42,
       "wSdPct": 15,
-      "maxMana": {
-        "min": 9,
-        "raw": 31,
-        "max": 40
-      },
+      "maxMana": 31,
       "wDefPct": 65,
       "hp": 3000,
       "tDef": -175,
@@ -23609,11 +23597,7 @@
       "sdRaw": 192,
       "hprRaw": 173,
       "ls": 250,
-      "maxMana": {
-        "min": 6,
-        "raw": 19,
-        "max": 25
-      },
+      "maxMana": 19,
       "hp": -1000,
       "tier": "Fabled",
       "displayName": "Keeper of Souls",
@@ -27082,11 +27066,7 @@
       "hprPct": -18,
       "mr": 9,
       "spd": -12,
-      "maxMana": {
-        "min": 6,
-        "raw": 21,
-        "max": 27
-      },
+      "maxMana": 21,
       "hp": 3375,
       "tDef": -120,
       "wDef": 80,
@@ -56079,11 +56059,7 @@
       "int": -15,
       "def": 3,
       "agi": 3,
-      "maxMana": {
-        "min": -26,
-        "raw": -20,
-        "max": -14
-      },
+      "maxMana": -20,
       "spRaw4": -7,
       "spd": 15,
       "fDefPct": 30,
@@ -69026,11 +69002,7 @@
       "sdRaw": 50,
       "mr": -54,
       "ms": 32,
-      "maxMana": {
-        "min": 14,
-        "raw": 46,
-        "max": 60
-      },
+      "maxMana": 46,
       "hp": 1000,
       "tier": "Rare",
       "displayName": "Recharge",

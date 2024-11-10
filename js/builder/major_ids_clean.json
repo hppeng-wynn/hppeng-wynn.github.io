@@ -192,12 +192,12 @@
                                 "name": "Single Bomb",
                                 "type": "damage",
                                 "multipliers": [
-                                    95,
-                                    40,
+                                    85,
+                                    25,
                                     0,
                                     0,
                                     0,
-                                    40
+                                    25
                                 ]
                             },
                             {
@@ -508,7 +508,33 @@
     "GENTLE_GLOW": {
         "displayName": "Gentle Glow",
         "description": "Orphion's Pulse and Fluid Healing restore more health, especially to allies, but at a slower speed.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Mage",
+                "base_abil": "Heal",
+                "dependencies":[
+                    "Fluid Healing",
+                    "Orphion's Pulse"
+                ],
+                "effects":[
+                    {
+                        "type": "stat_scaling",
+                        "slider": false,
+                        "inputs": [
+                            {
+                                "type": "stat",
+                                "name": "wDamPct"
+                            }
+                        ],
+                        "output": {
+                            "type": "stat",
+                            "name": "healMult.FluidHealing"
+                        },
+                        "scaling": [ 0.45]
+                    }
+                ]
+            }
+        ]
     },
     "PERFECT_RECALL": {
         "displayName": "Perfect Recall",
@@ -634,7 +660,7 @@
     },
     "HELLFIRE": {
         "displayName": "Hellfire",
-        "description": "Bash becomes one giant 250% damage hit, and Boiling Blood burns faster and stronger but can't slow.",
+        "description": "Bash becomes one giant 250% damage hit, and Boiling Blood burns faster and stronger but can't slow",
         "abilities": [
             {
                 "class": "Warrior",
@@ -643,23 +669,33 @@
                     "Boiling Blood"
                 ],
                 "properties": {
-                    "rate": 0.8333333333333334,
-                    "num_bloods": 0
+                    "rate": 2.5,
+                    "duration": -2
                 },
                 "effects": [
                     {
                         "type": "add_spell_prop",
                         "base_spell": 1,
                         "target_part": "Single Hit",
-                        "behavior": "modify",
+                        "behavior": "overwrite",
                         "multipliers": [
-                            -85,
-                            -30,
+                            160,
+                            35,
                             0,
                             0,
-                            0,
+                            55,
                             0
                         ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "behavior": "overwrite",
+                        "hits": {
+                            "Single Hit": 1,
+                            "Boiling Blood Tick": 5
+                        }
                     },
                     {
                         "type": "add_spell_prop",
@@ -667,99 +703,12 @@
                         "target_part": "Boiling Blood Tick",
                         "behavior": "modify",
                         "multipliers": [
-                            -25,
-                            0,
-                            0,
-                            0,
                             30,
+                            0,
+                            0,
+                            0,
+                            45,
                             0
-                        ]
-                    },
-                    {
-                        "type": "add_spell_prop",
-                        "base_spell": 1,
-                        "target_part": "Boiling Blood DPS (Total)",
-                        "behavior": "merge",
-                        "display": "Boiling Blood DPS (Total)",
-                        "hits": {
-                            "Boiling Blood DPS": "Bash.num_bloods"
-                        }
-                    },
-                    {
-                        "type": "stat_scaling",
-                        "slider": true,
-                        "slider_name": "Boiling Blood Stacks",
-                        "slider_step": 1,
-                        "slider_max": 20,
-                        "slider_default": 4,
-                        "output": [
-                            {
-                                "type": "prop",
-                                "abil": "Bash",
-                                "name": "num_bloods"
-                            }
-                        ],
-                        "scaling": [
-                            1
-                        ]
-                    },
-                    {
-                        "type": "stat_scaling",
-                        "slider": true,
-                        "behavior": "modify",
-                        "slider_name": "Hits dealt",
-                        "output": [
-                            {
-                                "type": "stat",
-                                "name": "nDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "nDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "eDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "eDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "tDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "tDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "wDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "wDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "fDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "fDamAddMax"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "aDamAddMin"
-                            },
-                            {
-                                "type": "stat",
-                                "name": "aDamAddMax"
-                            }
-                        ],
-                        "scaling": [
-                            -5
                         ]
                     }
                 ]
@@ -830,7 +779,7 @@
                         "target_part": "Trap Damage",
                         "behavior": "modify",
                         "multipliers": [
-                            -100,
+                            -170,
                             0,
                             0,
                             0,
@@ -890,7 +839,7 @@
                         "behavior": "modify",
                         "target_part": "Total Damage",
                         "hits": {
-                            "DPS": -3
+                            "Beam DPS": -3
                         }
                     }
                 ]
@@ -1071,7 +1020,7 @@
                     "base_spell": 1,
                     "target_part": "Smash Damage",
                     "behavior": "modify",
-                    "multipliers": [200, 90, 90, 0, 60, 0]
+                    "multipliers": [125, 90, 90, 0, 60, 0]
                 }]
             }
         ]
@@ -1091,7 +1040,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 5,
                     "target_part": "Explosion Heal",
-                    "power": 0.5
+                    "power": 0.05
                 }]
             }
         ]
@@ -1276,9 +1225,10 @@
         "abilities": [
             {
                 "class": "Assassin",
-                "base_abil": "Lacerate",
-                "dependencies": ["Lacerate"],
-                "properties": {},
+                "base_abil": "Spin Attack",
+                "dependencies": [
+                    "Lacerate"
+                ],
                 "effects": [
                     {
                         "type": "add_spell_prop",
@@ -1299,9 +1249,37 @@
         "abilities": [
             {
                 "class": "Archer",
+                "base_abil": "Arrow Shield",
+                "dependencies": ["Frenzy", "Guardian Angels"],
+                "properties": {
+                    "shots" : 32
+                },
+                "effects": [
+                    {
+                        "type": "raw_stat",
+                        "bonuses": [
+                            {
+                                "type": "stat",
+                                "name": "damMult.FreneticSpirit:4.Single Shot",
+                                "value": -90
+                            }
+                        ]
+                    },
+                    {
+                        "type": "raw_stat",
+                        "bonuses": [
+                            {
+                                "type": "stat",
+                                "name": "damMult.FreneticSpirit:4.DPS",
+                                "value": 150
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "class": "Archer",
                 "base_abil": "Frenzy",
-                "dependencies": ["Frenzy", "Arrow Shield"],
-                "properties": {},
                 "effects": [
                     {
                         "type": "stat_scaling",
@@ -1416,6 +1394,15 @@
                         "hits": {
                             "Single Stream": -2
                         }
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "DPS",
+                        "display": "DPS",
+                        "hits": {
+                            "Single Arrow": 6.6667
+                        }
                     }
                 ]
             }
@@ -1429,11 +1416,172 @@
     "VEDETTE": {
         "displayName": "Vedette",
         "description": "Focus is stronger, and caps at 2. Crepuscular Ray can be cast at 2 Focus with decreased Focus drain, launching you into the air and immobilizing you.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Focus",
+                "dependencies": ["Crepuscular Ray"],
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Focus",
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Focus"
+                        },
+                        "scaling": [
+                            25
+                        ],
+                        "slider_max": 2
+                    }
+                ]
+            }
+        ]
     },
     "HEAT_SHIMMER": {
         "displayName": "Heat Shimmer",
         "description": "Your Clones are reduced to a maximum of 1 with no damage penalties and Mirror Image's cooldown is greatly shortened.",
+        "abilities": [
+            {
+                "class": "Assassin",
+                "base_abil": "Mirror Image",
+                "dependencies": ["Echo"],
+                "properties": {
+                    "clones": -2,
+                    "penalty_per_clone": 20,
+                    "max_penalty": 65
+                },
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Spell Copies",
+                        "slider_max": 1
+                    }
+                ]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Mirror Image",
+                "dependencies": [ "Stronger Clones" ],
+                "properties": { 
+                    "max_penalty": -5,
+                    "penalty_per_clone": -5 
+                },
+                "effects": []
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Mirror Image",
+                "dependencies": [ "Forbidden Art" ],
+                "properties": { 
+                    "max_penalty": 5
+                },
+                "effects": []
+            }
+        ]
+    },
+    "VITRIOL": {
+        "displayName": "Vitriol",
+        "description": "Uncontainable Corruption decreases Corrupted duration by 75% and gives drastically more damage, but disables Enraged Blow. Massacre has no cooldown.",
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Bak'al's Grasp",
+                "dependencies": ["Uncontainable Corruption"],
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider": true,
+                        "slider_name": "Corrupted",
+                        "output": {
+                            "type": "stat",
+                            "name": "damRaw" 
+                        },
+                        "scaling": [80],
+                        "max": 8000
+                    },
+                    {
+                        "type": "stat_scaling",
+                        "behavior": "overwrite",
+                        "slider_name": "Corrupted", 
+                        "slider": true,
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Enraged" 
+                        },
+                        "max": 0,
+                        "scaling": [0]
+                    }
+                ]
+            }
+        ]
+    },
+    "FAUSTIAN_GAMBIT": {
+        "displayName": "Faustian Gambit",
+        "description": "Frog Dance triggers only once but has increased vertical velocity, damage, and knockback.",
+        "abilities": [
+            {
+                "class": "Shaman",
+                "base_abil": "Haul",
+                "dependencies": ["Mask of the Heretic"],
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "behavior": "overwrite",
+                        "base_spell": 2,
+                        "target_part": "Hop Damage",
+                        "multipliers": [200, 0, 150, 0, 0, 0]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "behavior": "overwrite",
+                        "base_spell": 2,
+                        "target_part": "Total Damage",
+                        "hits": { "Hop Damage": 1 },
+                        "display": "Total Damage"
+                    }
+                ]
+            }
+        ]
+    },
+    "METHODICAL": {
+        "displayName": "Methodical",
+        "description": "Initiator's reset time is reduced by 75%. Arrow Bomb deals less area damage, but more direct hit damage.",
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Bomb",
+                "dependencies": [
+                    "Arrow Bomb"
+                ],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 3,
+                        "target_part": "Arrow Bomb",
+                        "behavior": "modify",
+                        "multipliers": [ -100, 0, 0, 0, 0, 0 ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 3,
+                        "target_part": "Heart Shatter",
+                        "behavior": "modify",
+                        "multipliers": [ 140, 0, 0, 0, 0, 0 ]
+                    }
+                ]
+            }
+        ]
+    },
+    "FRIGHT_OR_FLIGHT": {
+        "displayName": "Fright or Flight",
+        "description": "Plays spooky tunes",
         "abilities": []
     },
     "FAUSTIAN_GAMBIT": {

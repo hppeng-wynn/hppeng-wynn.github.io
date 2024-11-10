@@ -168,6 +168,8 @@ const itemQueryProps = (function() {
   maxId(['nsdraw'], 'nSdRaw');
   maxId(['rainbowraw', 'rsdraw'], 'rSdRaw');
 
+  maxId('critdampct', 'critDamPct');
+
   const atkSpdIndices = { SUPER_SLOW: -3, VERY_SLOW: -2, SLOW: -1, NORMAL: 0, FAST: 1, VERY_FAST: 2, SUPER_FAST: 3 };
   prop(['attackspeed', 'atkspd'], 'number', (i, ie) => i.atkSpd ? atkSpdIndices[i.atkSpd] : 0);
   maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier'], 'atkTier');
@@ -229,6 +231,7 @@ const itemQueryProps = (function() {
   maxId('kb', 'kb');
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');
+  maxId('maxmana', 'maxMana');
 
   prop(['powderslots', 'powders', 'slots', 'sockets'], 'number', (i, ie) => i.slots || 0);
 
@@ -355,6 +358,8 @@ const ingredientQueryProps = (function() {
   maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
   maxId(['rainbowraw'], 'rSdRaw');
 
+  maxId('critdampct', 'critDamPct');
+
   maxId(['bonusattackspeed', 'bonusatkspd', 'attackspeedid', 'atkspdid', 'atktier'], 'atkTier');
 
   maxId(['earthdef%', 'edef%', 'edefpct'], 'eDefPct');
@@ -404,6 +409,7 @@ const ingredientQueryProps = (function() {
   maxId('kb', 'kb');
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');
+  maxId('maxmana', 'maxMana');
 
   return props;
 })();

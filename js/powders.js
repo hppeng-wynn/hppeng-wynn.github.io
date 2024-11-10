@@ -130,16 +130,26 @@ function calc_weapon_powder(weapon, damageBases) {
   
     //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
 
-    //Powder application for Crafted weapons - this implementation is RIGHT YEAAAAAAAAA
+    // This implementation is untested. See TODOs for unsure.
+    // TODO: test davidwnguyen's implementation, and compare.
     //1st round - apply each as ingred, 2nd round - apply as normal
     if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
-        for (const p of powders.concat(weapon.get("ingredPowders"))) {
+        for (const p of weapon.get("ingredPowders")) {
             const powder = powderStats[p];  //use min, max, and convert
             // Bitwise to force conversion to integer (integer division).
             const element = (p/6) | 0;
-            let diff = Math.floor(damageBases[0] * powder.convert/100);
+
+            // TODO: Which part of powder effectiveness is halved by the latest patch?
+            // Is it the raw bonus? Or the conversion?
+
+            // Half the raw bonus.
+            let raw_bonus = Math.floor( (powder.min + powder.max) / 2 / 2 );
+
+            // Half the conversion.
+            let diff = Math.floor(damageBases[0] * powder.convert/100 / 2);
+
             damageBases[0] -= diff;
-            damageBases[element+1] += diff + Math.floor( (powder.min + powder.max) / 2 );
+            damageBases[element+1] += diff + raw_bonus;
         }
         //update all damages
         for (let i = 0; i < damages.length; i++) {

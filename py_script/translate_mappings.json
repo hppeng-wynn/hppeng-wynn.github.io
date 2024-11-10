@@ -179,6 +179,7 @@
         "rawThunderDamage": "tDamRaw",
         "rawEarthDamage": "eDamRaw",
         "rawElementalDamage": "rDamRaw",
+        "critDamPct": "critDamPct",
         "fireDefence": "fDefPct",
         "waterDefence": "wDefPct",
         "airDefence": "aDefPct",
@@ -207,6 +208,8 @@
         "knockback": "kb",
         "weakenEnemy": "weakenEnemy",
         "slowEnemy": "slowEnemy",
+
+        "maxMana": "maxMana",
 
         "damageFromMobs": "selfWeakPct"
     }
