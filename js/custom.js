@@ -1,5 +1,36 @@
-const ci_save_order = ["name", "lore", "tier", "set", "slots", "type", "material", "drop", "quest", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "atkSpd", "hp", "fDef", "wDef", "aDef", "tDef", "eDef", "lvl", "classReq", "strReq", "dexReq", "intReq", "defReq", "agiReq", "str", "dex", "int", "agi", "def", "id", "skillpoints", "reqs", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "majorIds", "hprPct", "mr", "sdPct", "mdPct", "ls", "ms", "xpb", "lb", "ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw", "sdRaw", "mdRaw", "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct", "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct", "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4", "rainbowRaw", "sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "durability", "duration", "charges", "maxMana", "critDamPct"];
-const nonRolled_strings = ["name", "lore", "tier", "set", "type", "material", "drop", "quest", "majorIds", "classReq", "atkSpd", "displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];
+const ci_save_order = ["name", "lore", "tier", "set", "slots", "type",
+"material", "drop", "quest",
+"nDam", "fDam", "wDam", "aDam", "tDam", "eDam",
+"atkSpd", "hp",
+"fDef", "wDef", "aDef", "tDef", "eDef",
+"lvl", "classReq",
+"strReq", "dexReq", "intReq", "defReq", "agiReq",
+"str", "dex", "int", "agi", "def", "id",
+"skillpoints", "reqs",
+// NOTE: THESE ARE UNUSED.
+"nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_",
+"majorIds", "hprPct", "mr",
+"sdPct", "mdPct",
+"ls", "ms", "xpb", "lb",
+"ref", "thorns", "expd", "spd", "atkTier", "poison", "hpBonus", "spRegen", "eSteal", "hprRaw",
+"sdRaw", "mdRaw",
+"fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
+"fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
+"spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
+"rSdRaw",
+"sprint", "sprintReg", "jh", "lq", "gXp", "gSpd", "durability", "duration", "charges", "maxMana", "critDamPct",
+/*"sdRaw", "rSdRaw",*/ "nSdRaw", "eSdRaw", "tSdRaw", "wSdRaw", "fSdRaw", "aSdRaw",
+/*"sdPct",*/ "rSdPct", "nSdPct", "eSdPct", "tSdPct", "wSdPct", "fSdPct", "aSdPct",
+/*"mdRaw",*/ "rMdRaw", "nMdRaw", "eMdRaw", "tMdRaw", "wMdRaw", "fMdRaw", "aMdRaw",
+/*"mdPct",*/ "rMdPct", "nMdPct", "eMdPct", "tMdPct", "wMdPct", "fMdPct", "aMdPct",
+"damRaw", "rDamRaw", "nDamRaw", "eDamRaw", "tDamRaw", "wDamRaw", "fDamRaw", "aDamRaw",
+"damPct", "rDamPct", "nDamPct", /*"eDamPct", "tDamPct", "wDamPct", "fDamPct", "aDamPct",*/
+"healPct",
+"kb", "weakenEnemy", "slowEnemy",
+"rDefPct"
+];
+
+const non_rolled_strings = ["name", "lore", "tier", "set", "type", "material", "drop", "quest", "majorIds", "classReq", "atkSpd", "displayName", "nDam", "fDam", "wDam", "aDam", "tDam", "eDam", "nDam_", "fDam_", "wDam_", "aDam_", "tDam_", "eDam_", "durability", "duration"];
 
 //omitted restrict - it's always "Custom Item"
 //omitted displayName - either it's the same as name (repetitive) or it's "Custom Item"
@@ -142,7 +173,7 @@ function getCustomFromHash(hash) {
                     }
                 } else {
                     let val;
-                    if (nonRolled_strings.includes(id)) {
+                    if (non_rolled_strings.includes(id)) {
                         if (id === "tier") {
                             val = tiers[Base64.toInt(tag.charAt(2))];
                             len = -1;
@@ -187,7 +218,6 @@ function getCustomFromHash(hash) {
 }
 
 /** An object representing a Custom Item. Mostly for vanity purposes.
- * @dep Requires the use of nonRolledIDs and rolledIDs from display_constants.js.
  * @dep Requires the use of attackSpeeds from `builder/build.js`.
 */
 class Custom {

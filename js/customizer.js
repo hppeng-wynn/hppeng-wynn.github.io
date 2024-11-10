@@ -9,7 +9,105 @@ let neg_range = [1.3,0.7];
 
 
 let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","pos_roll_range-choice-min","pos_roll_range-choice-max"];
-        
+
+let custom_field_id_counter = 0;
+
+// Ripped from search.js.
+function create_stat() {
+    let data = {};
+
+    let row = make_elem("div", ["row", "filter-row"], {});
+    let col = make_elem("div", ["col"], {});
+    row.appendChild(col);
+    data.div = row;
+
+    let search_input = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
+        {id: "filter-input-" + custom_field_id_counter, type: "text", placeholder: "ID name"}
+    );
+    custom_field_id_counter++;
+    col.appendChild(search_input);
+    data.input_elem = search_input;
+
+    let min = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
+        {type: "number", placeholder: "-\u221E"}
+    );
+    col.appendChild(min);
+    data.min_elem = min;
+
+    let to = make_elem("span", [], {innerHTML: "&nbsp;to&nbsp;"});
+    col.appendChild(to);
+
+    let max = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
+        {type: "number", placeholder: "\u221E"}
+    );
+    col.appendChild(max);
+    data.max_elem = max;
+
+    let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
+    trash.addEventListener("click", function() {
+        filters.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        row.remove();
+    });
+    col.appendChild(trash);
+
+    document.getElementById("var-stat-container").insertBefore(row, document.getElementById("add-stat").parentElement);
+    filters.push(data);
+    init_stat_dropdown(data);
+}
+
+let var_stats_map = new Map();
+function init_stat_maps() {
+    for (let id in rolledIDs) {
+        var_stats
+    }
+}
+
+function init_stat_dropdown(stat_block) {
+    let field_choice = stat_block.input_elem;
+    field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
+    stat_block.autoComplete = new autoComplete({
+        data: {
+            src: item_filters,
+        },  
+        threshold: 0,
+        selector: "#" + field_choice.id,
+        wrapper: false,
+        resultsList: {
+            maxResults: 100,
+            tabSelect: true,
+            noResults: true,
+            class: "search-box dark-7 rounded-bottom px-2 fw-bold dark-shadow-sm",
+            element: (list, data) => {
+                let position = field_choice.getBoundingClientRect();
+                list.style.top = position.bottom + window.scrollY +"px";
+                list.style.left = position.x+"px";
+                list.style.width = position.width+"px";
+                list.style.maxHeight = position.height * 4 +"px";
+                if (!data.results.length) {
+                    const message = make_elem('li', ['scaled-font'], {textContent: "No results found!"});
+                    list.prepend(message);
+                };
+            },
+        },
+        resultItem: {
+            class: "scaled-font search-item",
+            selected: "dark-5",
+        },
+        events: {
+            input: {
+                selection: (event) => {
+                    if (event.detail.selection.value) {
+                        event.target.value = event.detail.selection.value;
+                    };
+                },
+            },
+        }
+    });
+}
+
 
 function init_customizer() {
     try {
@@ -264,7 +362,7 @@ function decodeCustom(custom_url_tag) {
                 } else {
                     let val;
                     //let elem = document.getElementById(id+"-choice");
-                    if (nonRolled_strings.includes(id)) {
+                    if (non_rolled_strings.includes(id)) {
                         if (id === "tier") {
                             val = tiers[Base64.toInt(tag.charAt(2))];
                             len = -1;
@@ -409,7 +507,7 @@ function useBaseItem(elem) {
         }
 
         //Static IDs
-        for (const id of nonRolledIDs) {
+        for (const id of non_rolledIDs) {
             if (baseItem.get(id) && document.getElementById(id+"-choice")) {
                 setValue(id+"-choice", baseItem.get(id));
             }
