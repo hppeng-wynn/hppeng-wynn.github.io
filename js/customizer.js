@@ -209,7 +209,9 @@ function calculateCustom() {
                     statMap.set(static_id, [val]);
                 }
             } else if (input.classList.contains("string-input")) {
-                statMap.set(static_id, val);
+                if (val) {
+                    statMap.set(static_id, val);
+                }
             }
         }
         let fix_id = document.getElementById("fixID-choice").classList.contains("toggleOn");
