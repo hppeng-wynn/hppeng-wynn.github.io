@@ -135,7 +135,9 @@ function init_customizer() {
 
         // Variable stats.
         document.getElementById("add-stat").addEventListener("click", create_stat);
-        create_stat();
+        if (!custom_url_tag) {
+            create_stat();
+        }
 
         for (const id of rolledIDs) {
             if (document.getElementById(id+"-choice-base")) {
@@ -471,7 +473,7 @@ function useBaseItem(elem) {
         }
 
         //Static IDs
-        for (const id of non_rolledIDs) {
+        for (const id of non_rolled_strings) {
             if (baseItem.get(id) && document.getElementById(id+"-choice")) {
                 setValue(id+"-choice", baseItem.get(id));
             }
@@ -533,7 +535,6 @@ function resetFields() {
         elem.textContent = "no";
         elem.classList.remove("toggleOn");
     }
-    create_stat();
 }
 
 /** Takes the base value for an id and attempts to autofill the corresponding min and maxes.
