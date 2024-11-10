@@ -264,7 +264,7 @@ class Custom {
                     this.statMap.get("maxRolls").set(id, 0);
                 }
             } else {
-                if (nonRolled_strings.includes(id)) {
+                if (non_rolled_strings.includes(id)) {
                     if (!(this.statMap.has(id) && this.statMap.get(id))) {
                         this.statMap.set(id, "");
                     }

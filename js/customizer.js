@@ -12,56 +12,74 @@ let roll_range_ids = ["neg_roll_range-choice-min","neg_roll_range-choice-max","p
 
 let custom_field_id_counter = 0;
 
+let var_stats = []
+
 // Ripped from search.js.
 function create_stat() {
     let data = {};
 
-    let row = make_elem("div", ["row", "filter-row"], {});
+    let row = make_elem("div", ["row"], {style: "padding-bottom: 5px"});
     let col = make_elem("div", ["col"], {});
     row.appendChild(col);
     data.div = row;
 
+    let row1 = make_elem("div", ["row"], {});
     let search_input = make_elem("input",
         ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "filter-input"],
         {id: "filter-input-" + custom_field_id_counter, type: "text", placeholder: "ID name"}
     );
     custom_field_id_counter++;
-    col.appendChild(search_input);
+    row1.appendChild(search_input);
     data.input_elem = search_input;
 
-    let min = make_elem("input",
-        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
-        {type: "number", placeholder: "-\u221E"}
-    );
-    col.appendChild(min);
-    data.min_elem = min;
-
-    let to = make_elem("span", [], {innerHTML: "&nbsp;to&nbsp;"});
-    col.appendChild(to);
-
-    let max = make_elem("input",
-        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "min-max-input"],
-        {type: "number", placeholder: "\u221E"}
-    );
-    col.appendChild(max);
-    data.max_elem = max;
-
-    let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
+    let trash = make_elem("img", ["col-2", "delete-filter"], {src: "../media/icons/trash.svg"});
     trash.addEventListener("click", function() {
-        filters.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        var_stats.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
         row.remove();
     });
-    col.appendChild(trash);
+    row1.appendChild(trash);
+    col.appendChild(row1);
+
+    let row2 = make_elem("div", ["row"], {});
+    let min = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "number-input"],
+        {placeholder: "Min"}
+    );
+    row2.appendChild(min);
+    data.min_elem = min;
+
+    let base = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "number-input"],
+        {placeholder: "Base"}
+    );
+    row2.appendChild(base);
+    data.base_elem = base;
+
+    let max = make_elem("input",
+        ["col", "border-dark", "text-light", "dark-5", "rounded", "scaled-font", "form-control", "form-control-sm", "number-input"],
+        {placeholder: "Max"}
+    );
+    row2.appendChild(max);
+    data.max_elem = max;
+    col.append(row2);
 
     document.getElementById("var-stat-container").insertBefore(row, document.getElementById("add-stat").parentElement);
-    filters.push(data);
+    var_stats.push(data);
     init_stat_dropdown(data);
+    return data;
 }
 
 let var_stats_map = new Map();
-function init_stat_maps() {
-    for (let id in rolledIDs) {
-        var_stats
+let var_stats_rev_map = new Map();
+let var_stats_names = [];
+function init_var_stat_maps() {
+    for (let id of rolledIDs) {
+        if (idPrefixes[id]) {
+            let name = idPrefixes[id].split(':')[0];
+            var_stats_names.push(name);
+            var_stats_map.set(id, name);
+            var_stats_rev_map.set(name, id);
+        }
     }
 }
 
@@ -70,7 +88,7 @@ function init_stat_dropdown(stat_block) {
     field_choice.onclick = function() {field_choice.dispatchEvent(new Event('input', {bubbles:true}));};
     stat_block.autoComplete = new autoComplete({
         data: {
-            src: item_filters,
+            src: var_stats_names,
         },  
         threshold: 0,
         selector: "#" + field_choice.id,
@@ -111,8 +129,13 @@ function init_stat_dropdown(stat_block) {
 
 function init_customizer() {
     try {
-        populateFields();
+        init_var_stat_maps();
         decodeCustom(custom_url_tag);
+        populateFields();
+
+        // Variable stats.
+        document.getElementById("add-stat").addEventListener("click", create_stat);
+        create_stat();
 
         for (const id of rolledIDs) {
             if (document.getElementById(id+"-choice-base")) {
@@ -160,116 +183,54 @@ function calculateCustom() {
         statMap.set("maxRolls", new Map());
         let inputs = document.getElementsByTagName("input");
 
-        if (document.getElementById("fixID-choice").classList.contains("toggleOn")) {//Fixed IDs
-            for (const input of inputs) {
-                if (input.id.includes("-min") || input.id.includes("-max")) {
-                    continue;
-                }
+        for (const static_id of non_rolled_strings) {
+            let input = document.getElementById(static_id + "-choice");
 
-                let id = input.id.replace("-choice", "");
-
-                id = id.replace("-fixed", "");
-                id = id.replace("-min", "");
-                id = id.replace("-max", "");
-
-                if (input.classList.contains("number-input")) {
-                    if (parseFloat(input.value)) {
-                        if(rolledIDs.includes(id)) {
-                            statMap.get("minRolls").set(id,Math.round(parseFloat(input.value)));
-                            statMap.get("maxRolls").set(id,Math.round(parseFloat(input.value)));
-                        } else {
-                            statMap.set(id, Math.round(parseFloat(input.value)));
-                        }
-                    }
-                } else if (input.classList.contains("string-input")) {
-                    if(rolledIDs.includes(id)) {
-                        statMap.get("minRolls").set(id,input.value);
-                        statMap.get("maxRolls").set(id,input.value);
-                    } else {
-                        statMap.set(id, input.value);
-                    }
-                } else if (input.classList.contains("array-input")) {
-                    statMap.set(id, input.value.split("-").map(x=>Math.round(parseFloat(x))));
-                }
-
-                if(input.value === "" && input.placeholder && input.placeholder !== "") {
-                    if (input.classList.contains("number-input") && parseFloat(input.placeholder)) {
-                        statMap.set(id, Math.round(parseFloat(input.placeholder)));
-                    } else if (input.classList.contains("string-input")) {
-                        statMap.set(id, input.placeholder);
-                    } else if (input.classList.contains("array-input")) {
-                        statMap.set(id, input.placeholder.split("-").map(x=>Math.round(parseFloat(x))));
-                    }
-                }
+            if (input === null) {
+                continue;
             }
-            statMap.set("fixID", true);
 
-        } else { //not fixed
-            for (const input of inputs) {
-                if (input.id.includes("-fixed")) {
-                    continue;
-                }
-                let id = input.id.replace("-choice", "");
-                let rollMap = "";
-                let oppMap = "";
+            let val = input.value;
+            if (val === "" && input.placeholder && input.placeholder !== "") {
+                val = input.placeholder;
+            }
 
-                //If it's a minimum, it's -min
-                if(id.includes("-min")) {
-                    rollMap = "minRolls";
+            if (input.classList.contains("number-input")) {
+                val = parseInt(val, 10)
+                if (val) {
+                    statMap.set(static_id, val);
                 }
-                //If it's a maximum, it's -max
-                else if(id.includes("-max")) {
-                    rollMap = "maxRolls";
+            } else if (static_id == "majorIds") {
+                if (val === "") {
+                    statMap.set(static_id, []);
+                } else {
+                    statMap.set(static_id, [val]);
                 }
-
-                id = id.replace("-fixed", "");
-                id = id.replace("-min", "");
-                id = id.replace("-max", "");
-
-                if (input.classList.contains("number-input")) {
-                    if (parseFloat(input.value)) {
-                        if (rolledIDs.includes(id)) {
-                            statMap.get(rollMap).set(id, Math.round(parseFloat(input.value)));
-                        } else {
-                            statMap.set(id, Math.round(parseFloat(input.value)));
-                        }
-                    }
-                } else if (input.classList.contains("string-input")) {
-                    if(rolledIDs.includes(id)) {
-                        statMap.get(rollMap).set(id, input.value);
-                    } else if (id == "majorIds") {
-                        if (input.value === "") {
-                            statMap.set(id, []);
-                        } else {
-                            statMap.set(id, [input.value]);
-                        }
-                    } else {
-                        statMap.set(id, input.value);
-                    }
-                } else if (input.classList.contains("array-input")) {
-                    statMap.set(id, input.value.split("-").map(x=>Math.round(parseFloat(x))));
-                }
- 
-                if(input.value === "" && input.placeholder && input.placeholder !== "") {
-                    if (input.classList.contains("number-input")) {
-                        if (rolledIDs.includes(id)) {
-                            statMap.get(rollMap).set(id, Math.round(parseFloat(input.placeholder)));
-                        } else {
-                            statMap.set(id, Math.round(parseFloat(input.placeholder)));
-                        }
-                    } else if (input.classList.contains("string-input")){
-                        if (rolledIDs.includes(id)) {
-                            statMap.get(rollMap).set(id, input.placeholder);
-                        } else {
-                            statMap.set(id, input.placeholder);
-                        }
-                    } else if (input.classList.contains("array-input")) {
-                        statMap.set(id, input.placeholder.split("-").map(x=>Math.round(parseFloat(x))));
-                    }
-                }
+            } else if (input.classList.contains("string-input")) {
+                statMap.set(static_id, val);
             }
         }
-
+        let fix_id = document.getElementById("fixID-choice").classList.contains("toggleOn");
+        if (fix_id) {//Fixed IDs
+            statMap.set('fixID', true);
+        }
+        for (const stat_box of var_stats) {
+            let id = var_stats_rev_map.get(stat_box.input_elem.value);
+            if (id === undefined) {
+                continue;
+            }
+            if (fix_id) {
+                let val = parseInt(stat_box.base_elem.value, 10);
+                statMap.get("minRolls").set(id, val);
+                statMap.get("maxRolls").set(id, val);
+            }
+            else {
+                let min = parseInt(stat_box.min_elem.value, 10);
+                let max = parseInt(stat_box.max_elem.value, 10);
+                statMap.get("minRolls").set(id, min);
+                statMap.get("maxRolls").set(id, max);
+            }
+        }
 
         player_custom_item = new Custom(statMap);
 
@@ -335,6 +296,8 @@ function decodeCustom(custom_url_tag) {
                 let len = Base64.toInt(tag.slice(2,4));
 
                 if (rolledIDs.includes(id)) {
+                    let stat_box = create_stat();
+                    stat_box.input_elem.value = var_stats_map.get(id);
                     let sign = parseInt(tag.slice(4,5),10);
                     let minRoll = Base64.toInt(tag.slice(5,5+len));
                     if (!fixID) {
@@ -345,8 +308,8 @@ function decodeCustom(custom_url_tag) {
                         if (sign % 2 == 1) {
                             minRoll *= -1;
                         }
-                        setValue(id+"-choice-min", minRoll);
-                        setValue(id+"-choice-max", maxRoll);
+                        stat_box.max_elem.value = maxRoll;
+                        stat_box.min_elem.value = minRoll;
                         statMap.get("minRolls").set(id,minRoll);
                         statMap.get("maxRolls").set(id,maxRoll);
                         tag = tag.slice(5+2*len);
@@ -354,7 +317,7 @@ function decodeCustom(custom_url_tag) {
                         if (sign != 0) {
                             minRoll *= -1;
                         }
-                        setValue(id+"-choice-fixed", minRoll);
+                        stat_box.base_elem.value = minRoll;
                         statMap.get("minRolls").set(id,minRoll);
                         statMap.get("maxRolls").set(id,minRoll);
                         tag = tag.slice(5+len);
@@ -490,18 +453,19 @@ function useBaseItem(elem) {
         //Rolled IDs
         if (document.getElementById("fixID-choice").textContent === "yes") { //fixed IDs
             for (const id of rolledIDs) { //use maxrolls
-                if (baseItem.get("maxRolls").get(id) && document.getElementById(id+"-choice-fixed")) {
-                    setValue(id+"-choice-fixed", baseItem.get("maxRolls").get(id));
-                    setValue(id+"-choice-min", baseItem.get("maxRolls").get(id));
-                    setValue(id+"-choice-max", baseItem.get("maxRolls").get(id));
+                if (baseItem.get("maxRolls").get(id)) {
+                    let stat_box = create_stat();
+                    stat_box.input_elem.value = var_stats_map.get(id);
+                    stat_box.base_elem.value = baseItem.get("maxRolls").get(id);
                 }
             }
         } else { //use both
             for (const id of rolledIDs) {
-                if (baseItem.get("maxRolls").get(id) && document.getElementById(id+"-choice-fixed")) {
-                    setValue(id+"-choice-fixed", baseItem.get("maxRolls").get(id));
-                    setValue(id+"-choice-min", baseItem.get("minRolls").get(id));
-                    setValue(id+"-choice-max", baseItem.get("maxRolls").get(id));
+                if (baseItem.get("maxRolls").get(id)) {
+                    let stat_box = create_stat();
+                    stat_box.input_elem.value = var_stats_map.get(id);
+                    stat_box.min_elem.value = baseItem.get("minRolls").get(id);
+                    stat_box.max_elem.value = baseItem.get("maxRolls").get(id);
                 }
             }
         }
@@ -555,6 +519,9 @@ function copyHash() {
 /* Reset all fields
 */
 function resetFields() {
+    for (const stat_block of var_stats) {
+        stat_block.div.remove();
+    }
     let inputs = document.getElementsByTagName('input');
     for (const input of inputs) {
         input.textContent = "";
@@ -566,6 +533,7 @@ function resetFields() {
         elem.textContent = "no";
         elem.classList.remove("toggleOn");
     }
+    create_stat();
 }
 
 /** Takes the base value for an id and attempts to autofill the corresponding min and maxes.
