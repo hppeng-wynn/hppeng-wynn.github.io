@@ -216,7 +216,7 @@ function create_filter() {
 
     let trash = make_elem("img", ["delete-filter"], {src: "../media/icons/trash.svg"});
     trash.addEventListener("click", function() {
-        filters.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        filters.splice(Array.from(row.parentElement.children).indexOf(row), 1);
         row.remove();
     });
     col.appendChild(trash);

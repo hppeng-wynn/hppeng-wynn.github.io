@@ -34,7 +34,7 @@ function create_stat() {
 
     let trash = make_elem("img", ["col-2", "delete-filter"], {src: "../media/icons/trash.svg"});
     trash.addEventListener("click", function() {
-        var_stats.splice(Array.from(row.parentElement.children).indexOf(row) - 1, 1);
+        var_stats.splice(Array.from(row.parentElement.children).indexOf(row), 1);
         row.remove();
     });
     row1.appendChild(trash);
@@ -218,6 +218,7 @@ function calculateCustom() {
         }
         for (const stat_box of var_stats) {
             let id = var_stats_rev_map.get(stat_box.input_elem.value);
+            console.log(id);
             if (id === undefined) {
                 continue;
             }
@@ -444,7 +445,7 @@ function useBaseItem(elem) {
     //If it starts with CR-, try creating a craft
     if(!baseItem) {
         baseItem = getCraftFromHash(itemName) ? getCraftFromHash(itemName) : (getCustomFromHash(itemName) ? getCustomFromHash(itemName) : null);
-        baseItem = baseItem.statMap;    
+        baseItem = baseItem.statMap;
         console.log(baseItem);
     }
 
