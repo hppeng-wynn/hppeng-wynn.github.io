@@ -63,6 +63,16 @@ function create_stat() {
     data.max_elem = max;
     col.append(row2);
 
+    base.addEventListener("focusout", (event) => {
+        base_to_range(search_input, base, min, max);
+    });
+    min.addEventListener("focusout", (event) => {
+        range_to_base(search_input, min, 'min', base, max);
+    });
+    max.addEventListener("focusout", (event) => {
+        range_to_base(search_input, max, 'max', base, min);
+    });
+
     document.getElementById("var-stat-container").insertBefore(row, document.getElementById("add-stat").parentElement);
     var_stats.push(data);
     init_stat_dropdown(data);
@@ -141,18 +151,6 @@ function init_customizer() {
 
         for (const id of rolledIDs) {
             if (document.getElementById(id+"-choice-base")) {
-                let base_elem = document.getElementById(id+"-choice-base");
-                base_elem.addEventListener("focusout", (event) => {
-                    base_to_range(id);
-                });
-                let min_elem = document.getElementById(id+"-choice-min");
-                min_elem.addEventListener("focusout", (event) => {
-                    range_to_base(id,"min");
-                });
-                let max_elem = document.getElementById(id+"-choice-max");
-                max_elem.addEventListener("focusout", (event) => {
-                    range_to_base(id,"max");
-                });
             }
         }
         for (const id of roll_range_ids) {
@@ -544,39 +542,25 @@ function resetFields() {
  * 
  * @param {String} id - the id to do the math for (ex: hprPct) 
  */
-function base_to_range(id) {
-    let base = parseFloat(getValue(id+"-choice-base"));
-    if(base) {
+function base_to_range(id_elem, base_elem, min_elem, max_elem) {
+    let base = parseFloat(base_elem.value);
+    let id = var_stats_rev_map.get(id_elem.value);
+    if (id === undefined) { return; }
+    if (base) {
         //This version allows overriding of min and max.
         if (base == 0) {
             // NOTE: DO NOT remove this case! idRound behavior does not round to 0!
-            setValue(id+"-choice-max", 0);
-            setValue(id+"-choice-min", 0);
+            min_elem.value = 0;
+            max_elem.value = 0;
         }
         else if ((base > 0) != (reversedIDs.includes(id))) { // logical XOR. positive rolled IDs
-            setValue(id+"-choice-max", idRound(Math.round(pos_range[1]*base)));
-            setValue(id+"-choice-min", idRound(Math.round(pos_range[0]*base)));
+            max_elem.value = idRound(Math.round(pos_range[1]*base));
+            min_elem.value = idRound(Math.round(pos_range[0]*base));
         } else { //negative rolled IDs
-            setValue(id+"-choice-max", idRound(Math.round(neg_range[1]*base)));
-            setValue(id+"-choice-min", idRound(Math.round(neg_range[0]*base)));
+            max_elem.value = idRound(Math.round(neg_range[1]*base));
+            min_elem.value = idRound(Math.round(neg_range[0]*base))
         }
 
-        /* No overiding min/max version
-        if (!getValue(id+"-choice-min")) {
-            if (base < 0) {
-                setValue(id+"-choice-min", Math.min(Math.round(neg_range[0]*base),-1));
-            } else {
-                setValue(id+"-choice-min", Math.max(Math.round(pos_range[0]*base),1));
-            }
-        }
-        if (!getValue(id+"-choice-max")) {
-            if (base < 0) {
-                setValue(id+"-choice-max", Math.min(Math.round(neg_range[1]*base),-1));
-            } else {
-                setValue(id+"-choice-max", Math.max(Math.round(pos_range[1]*base),1));
-            }
-        }
-        */
     }
 }
 
@@ -585,44 +569,51 @@ function base_to_range(id) {
  * @param {String} id - the id to do the math for (ex: hprPct) 
  * @param {String} mode - the tabbed value (min or max)
  */
-function range_to_base(id, mode) {
+function range_to_base(id_elem, source, mode, base, other) {
+    let id = var_stats_rev_map.get(id_elem.value);
+    if (id === undefined) { return; }
+
     let value;
     try {
-        value = parseFloat(getValue(id+"-choice-"+mode));
+        value = parseFloat(source.value);
     } catch (error) {
         console.log("Error in range_to_base.");
         console.log(error);
     }
 
+    let range;
+    let op;
+    if (value == 0) { return; }
+    else if (value > 0) {
+        range = pos_range;
+        op = function(val) {
+            return Math.max(Math.round(val), 1);
+        };
+    }
+    else {
+        range = neg_range;
+        op = function(val) {
+            return Math.min(Math.round(val), -1);
+        };
+    }
+
+    if (reversedIDs.includes(id)) { // logical XOR. positive rolled IDs
+        range = [range[1], range[0]];
+    }
+
     if (mode === "min") { //base and max
-        if (value && !getValue(id+"-choice-base")) {
-            if (value < 0) {
-                setValue(id+"-choice-base", Math.min(Math.round(1/neg_range[0]*value),-1));
-            } else {
-                setValue(id+"-choice-base", Math.max(Math.round(1/pos_range[0]*value),1));
-            }
+        if (!base.value) {
+            base.value = op(1/range[0] * value);
         }
-        if (value && !getValue(id+"-choice-max")) {
-            if (value < 0) {
-                setValue(id+"-choice-max", Math.min(Math.round(neg_range[1]/neg_range[0]*value),-1));
-            } else {
-                setValue(id+"-choice-max", Math.max(Math.round(pos_range[1]/pos_range[0]*value),1));
-            }
+        if (!other.value) {
+            other.value = op(range[1] / range[0] * value);
         }
     } else if (mode === "max") { //min and base
-        if (value && !getValue(id+"-choice-base")) {
-            if (value < 0) {
-                setValue(id+"-choice-base", Math.min(Math.round(1/neg_range[1]*value),-1));
-            } else {
-                setValue(id+"-choice-base", Math.max(Math.round(1/pos_range[1]*value),1));
-            }
+        if (!base.value) {
+            base.value = op(1/range[1] * value);
         }
-        if (value && !getValue(id+"-choice-min")) {
-            if (value < 0) {
-                setValue(id+"-choice-min", Math.min(Math.round(neg_range[0]/neg_range[1]*value),-1));
-            } else {
-                setValue(id+"-choice-min", Math.max(Math.round(pos_range[0]/pos_range[1]*value),1));
-            }
+        if (!other.value) {
+            other.value = op(range[0] / range[1] * value);
         }
     }
 }
