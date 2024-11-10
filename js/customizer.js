@@ -185,7 +185,7 @@ function calculateCustom() {
         statMap.set("maxRolls", new Map());
         let inputs = document.getElementsByTagName("input");
 
-        for (const static_id of non_rolled_strings) {
+        for (const static_id of nonRolledIDs) {
             let input = document.getElementById(static_id + "-choice");
 
             if (input === null) {
@@ -473,7 +473,7 @@ function useBaseItem(elem) {
         }
 
         //Static IDs
-        for (const id of non_rolled_strings) {
+        for (const id of nonRolledIDs) {
             if (baseItem.get(id) && document.getElementById(id+"-choice")) {
                 setValue(id+"-choice", baseItem.get(id));
             }
@@ -524,6 +524,7 @@ function resetFields() {
     for (const stat_block of var_stats) {
         stat_block.div.remove();
     }
+    var_stats = [];
     let inputs = document.getElementsByTagName('input');
     for (const input of inputs) {
         input.textContent = "";
