@@ -122853,6 +122853,20 @@
           "atkTier": 1
         }
       ]
+    },
+    "Conquered Skies": {
+      "items": [
+        "Greatbird Eyrie",
+        "Perch of the Shrouded Sun"
+      ],
+      "bonuses": [
+        {},
+        {
+          "str": 85,
+          "jh": 5,
+          "ls": 250
+        }
+      ]
     }
   }
 }
