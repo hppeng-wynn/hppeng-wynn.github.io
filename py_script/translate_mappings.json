@@ -209,7 +209,7 @@
         "weakenEnemy": "weakenEnemy",
         "slowEnemy": "slowEnemy",
 
-        "maxMana": "maxMana",
+        "rawMaxMana": "rawMaxMana",
 
         "damageFromMobs": "selfWeakPct"
     }

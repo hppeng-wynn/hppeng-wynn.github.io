@@ -231,7 +231,7 @@ const itemQueryProps = (function() {
   maxId('kb', 'kb');
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');
-  maxId('maxmana', 'maxMana');
+  maxId(['maxmana', 'rawmaxmana'], 'rawMaxMana');
 
   prop(['powderslots', 'powders', 'slots', 'sockets'], 'number', (i, ie) => i.slots || 0);
 
@@ -409,7 +409,7 @@ const ingredientQueryProps = (function() {
   maxId('kb', 'kb');
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');
-  maxId('maxmana', 'maxMana');
+  maxId(['maxmana', 'rawmaxmana'], 'rawMaxMana');
 
   return props;
 })();

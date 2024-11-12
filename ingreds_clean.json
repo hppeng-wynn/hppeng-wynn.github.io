@@ -1103,6 +1103,56 @@
     "id": 573
   },
   {
+    "name": "Dernic Sludgebomb",
+    "type": "ingredient",
+    "lvl": 105,
+    "skills": [
+      "WEAPONSMITHING",
+      "WOODWORKING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "245:0"
+    },
+    "ids": {
+      "mr": {
+        "minimum": -3,
+        "maximum": -3
+      },
+      "poison": {
+        "minimum": 3000,
+        "maximum": 3000
+      },
+      "ls": {
+        "minimum": 140,
+        "maximum": 150
+      }
+    },
+    "tier": 2,
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": -120,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Dernic Sludgebomb",
+    "id": 794
+  },
+  {
     "name": "Psych Starfruit",
     "type": "ingredient",
     "lvl": 105,
@@ -1178,56 +1228,6 @@
     },
     "displayName": "Psych Starfruit",
     "id": 789
-  },
-  {
-    "name": "Dernic Sludgebomb",
-    "type": "ingredient",
-    "lvl": 105,
-    "skills": [
-      "WEAPONSMITHING",
-      "WOODWORKING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "245:0"
-    },
-    "ids": {
-      "mr": {
-        "minimum": -3,
-        "maximum": -3
-      },
-      "poison": {
-        "minimum": 3000,
-        "maximum": 3000
-      },
-      "ls": {
-        "minimum": 140,
-        "maximum": 150
-      }
-    },
-    "tier": 2,
-    "consumableIDs": {
-      "dura": 0,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": -120,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Dernic Sludgebomb",
-    "id": 794
   },
   {
     "name": "Giant Teratoma",
@@ -4431,6 +4431,47 @@
     "id": 810
   },
   {
+    "name": "Crystallized Organ",
+    "type": "ingredient",
+    "lvl": 100,
+    "skills": [
+      "COOKING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "432:0"
+    },
+    "ids": {
+      "lq": {
+        "minimum": 2,
+        "maximum": 3
+      }
+    },
+    "tier": 1,
+    "consumableIDs": {
+      "dura": -400,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Crystallized Organ",
+    "id": 226
+  },
+  {
     "name": "Vortex Expulsion",
     "type": "ingredient",
     "lvl": 100,
@@ -4572,47 +4613,6 @@
     },
     "displayName": "Black Hole",
     "id": 565
-  },
-  {
-    "name": "Crystallized Organ",
-    "type": "ingredient",
-    "lvl": 100,
-    "skills": [
-      "COOKING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "432:0"
-    },
-    "ids": {
-      "lq": {
-        "minimum": 2,
-        "maximum": 3
-      }
-    },
-    "tier": 1,
-    "consumableIDs": {
-      "dura": -400,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Crystallized Organ",
-    "id": 226
   },
   {
     "name": "Cursed Wings",
@@ -5989,84 +5989,6 @@
     "id": 751
   },
   {
-    "name": "Ominous Pearl",
-    "type": "ingredient",
-    "lvl": 97,
-    "skills": [
-      "ALCHEMISM"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "368:0"
-    },
-    "ids": {
-      "xpb": {
-        "minimum": 4,
-        "maximum": 6
-      }
-    },
-    "tier": 0,
-    "consumableIDs": {
-      "dura": -94,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Ominous Pearl",
-    "id": 101
-  },
-  {
-    "name": "Plasteel Plating",
-    "type": "ingredient",
-    "lvl": 97,
-    "skills": [
-      "WEAPONSMITHING",
-      "TAILORING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "160:15"
-    },
-    "tier": 3,
-    "consumableIDs": {
-      "dura": 0,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": -160,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": -154,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Plasteel Plating",
-    "ids": {},
-    "id": 631
-  },
-  {
     "name": "Glimmering Beak",
     "type": "ingredient",
     "lvl": 97,
@@ -6110,6 +6032,84 @@
     },
     "displayName": "Glimmering Beak",
     "id": 438
+  },
+  {
+    "name": "Plasteel Plating",
+    "type": "ingredient",
+    "lvl": 97,
+    "skills": [
+      "WEAPONSMITHING",
+      "TAILORING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "160:15"
+    },
+    "tier": 3,
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": -160,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": -154,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Plasteel Plating",
+    "ids": {},
+    "id": 631
+  },
+  {
+    "name": "Ominous Pearl",
+    "type": "ingredient",
+    "lvl": 97,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "368:0"
+    },
+    "ids": {
+      "xpb": {
+        "minimum": 4,
+        "maximum": 6
+      }
+    },
+    "tier": 0,
+    "consumableIDs": {
+      "dura": -94,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Ominous Pearl",
+    "id": 101
   },
   {
     "name": "Broken Pick",
@@ -6515,43 +6515,6 @@
     "id": 141
   },
   {
-    "name": "Draconic Bone Marrow",
-    "type": "ingredient",
-    "lvl": 96,
-    "skills": [
-      "ALCHEMISM",
-      "SCRIBING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "437:0"
-    },
-    "tier": 3,
-    "consumableIDs": {
-      "dura": -300,
-      "charges": 2
-    },
-    "posMods": {
-      "left": 30,
-      "right": 30,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Draconic Bone Marrow",
-    "ids": {},
-    "id": 589
-  },
-  {
     "name": "Calmed Thunder",
     "type": "ingredient",
     "lvl": 96,
@@ -6596,6 +6559,43 @@
     },
     "displayName": "Calmed Thunder",
     "id": 395
+  },
+  {
+    "name": "Draconic Bone Marrow",
+    "type": "ingredient",
+    "lvl": 96,
+    "skills": [
+      "ALCHEMISM",
+      "SCRIBING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "437:0"
+    },
+    "tier": 3,
+    "consumableIDs": {
+      "dura": -300,
+      "charges": 2
+    },
+    "posMods": {
+      "left": 30,
+      "right": 30,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Draconic Bone Marrow",
+    "ids": {},
+    "id": 589
   },
   {
     "name": "Mixed Mineral Deposit",
@@ -7251,47 +7251,6 @@
     "id": 777
   },
   {
-    "name": "Kaian Scroll",
-    "type": "ingredient",
-    "lvl": 94,
-    "skills": [
-      "SCRIBING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "339:0"
-    },
-    "ids": {
-      "dex": {
-        "minimum": 5,
-        "maximum": 7
-      }
-    },
-    "tier": 1,
-    "consumableIDs": {
-      "dura": -130,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Kaian Scroll",
-    "id": 262
-  },
-  {
     "name": "Amber-Encased Fleris",
     "type": "ingredient",
     "lvl": 94,
@@ -7331,6 +7290,47 @@
     },
     "displayName": "Amber-Encased Fleris",
     "id": 756
+  },
+  {
+    "name": "Kaian Scroll",
+    "type": "ingredient",
+    "lvl": 94,
+    "skills": [
+      "SCRIBING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "339:0"
+    },
+    "ids": {
+      "dex": {
+        "minimum": 5,
+        "maximum": 7
+      }
+    },
+    "tier": 1,
+    "consumableIDs": {
+      "dura": -130,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Kaian Scroll",
+    "id": 262
   },
   {
     "name": "Infernal Flesh",
@@ -8743,51 +8743,6 @@
     "id": 89
   },
   {
-    "name": "Pirate Beard",
-    "type": "ingredient",
-    "lvl": 90,
-    "skills": [
-      "ALCHEMISM"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "287:0"
-    },
-    "ids": {
-      "mdRaw": {
-        "minimum": 48,
-        "maximum": 60
-      },
-      "wDamPct": {
-        "minimum": 8,
-        "maximum": 15
-      }
-    },
-    "tier": 1,
-    "consumableIDs": {
-      "dura": -130,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 5,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Pirate Beard",
-    "id": 296
-  },
-  {
     "name": "Turtle Shell",
     "type": "ingredient",
     "lvl": 90,
@@ -9280,6 +9235,51 @@
     },
     "displayName": "Enhanced Behaviour Microchip",
     "id": 418
+  },
+  {
+    "name": "Pirate Beard",
+    "type": "ingredient",
+    "lvl": 90,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "287:0"
+    },
+    "ids": {
+      "mdRaw": {
+        "minimum": 48,
+        "maximum": 60
+      },
+      "wDamPct": {
+        "minimum": 8,
+        "maximum": 15
+      }
+    },
+    "tier": 1,
+    "consumableIDs": {
+      "dura": -130,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 5,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Pirate Beard",
+    "id": 296
   },
   {
     "name": "Overheated Processor",
@@ -16136,6 +16136,47 @@
     "id": 689
   },
   {
+    "name": "Iceberries",
+    "type": "ingredient",
+    "lvl": 75,
+    "skills": [
+      "ALCHEMISM"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "38:1"
+    },
+    "ids": {
+      "mr": {
+        "minimum": 4,
+        "maximum": 5
+      }
+    },
+    "tier": 1,
+    "consumableIDs": {
+      "dura": -110,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Iceberries",
+    "id": 259
+  },
+  {
     "name": "Fish Scales",
     "type": "ingredient",
     "lvl": 75,
@@ -16696,47 +16737,6 @@
     },
     "displayName": "Arcane Anomaly",
     "id": 5
-  },
-  {
-    "name": "Iceberries",
-    "type": "ingredient",
-    "lvl": 75,
-    "skills": [
-      "ALCHEMISM"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "38:1"
-    },
-    "ids": {
-      "mr": {
-        "minimum": 4,
-        "maximum": 5
-      }
-    },
-    "tier": 1,
-    "consumableIDs": {
-      "dura": -110,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Iceberries",
-    "id": 259
   },
   {
     "name": "Wintery Aspect",
@@ -30695,6 +30695,51 @@
     "id": 65
   },
   {
+    "name": "Desert Fossil",
+    "type": "ingredient",
+    "lvl": 30,
+    "skills": [
+      "JEWELING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "406:0"
+    },
+    "ids": {
+      "def": {
+        "minimum": 2,
+        "maximum": 2
+      },
+      "agi": {
+        "minimum": 2,
+        "maximum": 2
+      }
+    },
+    "tier": 2,
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": -58,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 10,
+      "agiReq": 10
+    },
+    "displayName": "Desert Fossil",
+    "id": 410
+  },
+  {
     "name": "Coagulated Soulmass",
     "type": "ingredient",
     "lvl": 30,
@@ -31133,51 +31178,6 @@
     },
     "displayName": "Mashed Insect",
     "id": 90
-  },
-  {
-    "name": "Desert Fossil",
-    "type": "ingredient",
-    "lvl": 30,
-    "skills": [
-      "JEWELING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "406:0"
-    },
-    "ids": {
-      "def": {
-        "minimum": 2,
-        "maximum": 2
-      },
-      "agi": {
-        "minimum": 2,
-        "maximum": 2
-      }
-    },
-    "tier": 2,
-    "consumableIDs": {
-      "dura": 0,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": -58,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 10,
-      "agiReq": 10
-    },
-    "displayName": "Desert Fossil",
-    "id": 410
   },
   {
     "name": "Cracked Skin",
@@ -36571,47 +36571,6 @@
     "id": 4
   },
   {
-    "name": "Boar Meat",
-    "type": "ingredient",
-    "lvl": 9,
-    "skills": [
-      "COOKING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "363:0"
-    },
-    "ids": {
-      "thorns": {
-        "minimum": 1,
-        "maximum": 2
-      }
-    },
-    "tier": 0,
-    "consumableIDs": {
-      "dura": -120,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Boar Meat",
-    "id": 17
-  },
-  {
     "name": "Burnt Skull",
     "type": "ingredient",
     "lvl": 9,
@@ -36655,6 +36614,47 @@
     },
     "displayName": "Burnt Skull",
     "id": 394
+  },
+  {
+    "name": "Boar Meat",
+    "type": "ingredient",
+    "lvl": 9,
+    "skills": [
+      "COOKING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "363:0"
+    },
+    "ids": {
+      "thorns": {
+        "minimum": 1,
+        "maximum": 2
+      }
+    },
+    "tier": 0,
+    "consumableIDs": {
+      "dura": -120,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Boar Meat",
+    "id": 17
   },
   {
     "name": "Assorted Seeds",
@@ -36747,48 +36747,6 @@
     "id": 216
   },
   {
-    "name": "Feather of Grace",
-    "type": "ingredient",
-    "lvl": 8,
-    "skills": [
-      "TAILORING",
-      "JEWELING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "288:0"
-    },
-    "ids": {
-      "spd": {
-        "minimum": 3,
-        "maximum": 3
-      }
-    },
-    "tier": 2,
-    "consumableIDs": {
-      "dura": 0,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": -40,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Feather of Grace",
-    "id": 427
-  },
-  {
     "name": "Lucky Spider Egg",
     "type": "ingredient",
     "lvl": 8,
@@ -36832,6 +36790,48 @@
     },
     "displayName": "Lucky Spider Egg",
     "id": 457
+  },
+  {
+    "name": "Feather of Grace",
+    "type": "ingredient",
+    "lvl": 8,
+    "skills": [
+      "TAILORING",
+      "JEWELING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "288:0"
+    },
+    "ids": {
+      "spd": {
+        "minimum": 3,
+        "maximum": 3
+      }
+    },
+    "tier": 2,
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Feather of Grace",
+    "id": 427
   },
   {
     "name": "Flugsvamp Cap",
@@ -37192,6 +37192,47 @@
     "id": 636
   },
   {
+    "name": "Fungi Spores",
+    "type": "ingredient",
+    "lvl": 7,
+    "skills": [
+      "COOKING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "361:0"
+    },
+    "ids": {
+      "poison": {
+        "minimum": 1,
+        "maximum": 3
+      }
+    },
+    "tier": 0,
+    "consumableIDs": {
+      "dura": -120,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Fungi Spores",
+    "id": 58
+  },
+  {
     "name": "Paralyzing Spores",
     "type": "ingredient",
     "lvl": 7,
@@ -37287,47 +37328,6 @@
     },
     "displayName": "Mana Extract",
     "id": 648
-  },
-  {
-    "name": "Fungi Spores",
-    "type": "ingredient",
-    "lvl": 7,
-    "skills": [
-      "COOKING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "361:0"
-    },
-    "ids": {
-      "poison": {
-        "minimum": 1,
-        "maximum": 3
-      }
-    },
-    "tier": 0,
-    "consumableIDs": {
-      "dura": -120,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Fungi Spores",
-    "id": 58
   },
   {
     "name": "Corruption Shard",
@@ -38591,6 +38591,47 @@
     "id": 295
   },
   {
+    "name": "Rare Potato",
+    "type": "ingredient",
+    "lvl": 1,
+    "skills": [
+      "COOKING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "392:0"
+    },
+    "ids": {
+      "lb": {
+        "minimum": 4,
+        "maximum": 6
+      }
+    },
+    "tier": 2,
+    "consumableIDs": {
+      "dura": -110,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": 0,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Rare Potato",
+    "id": 512
+  },
+  {
     "name": "Therck's Chain",
     "type": "ingredient",
     "lvl": 1,
@@ -38760,47 +38801,6 @@
     },
     "displayName": "Potato",
     "id": 113
-  },
-  {
-    "name": "Rare Potato",
-    "type": "ingredient",
-    "lvl": 1,
-    "skills": [
-      "COOKING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "392:0"
-    },
-    "ids": {
-      "lb": {
-        "minimum": 4,
-        "maximum": 6
-      }
-    },
-    "tier": 2,
-    "consumableIDs": {
-      "dura": -110,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": 0,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Rare Potato",
-    "id": 512
   },
   {
     "name": "Rotten Flesh",

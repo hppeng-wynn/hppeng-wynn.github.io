@@ -812,11 +812,7 @@
       "ls": 327,
       "eMdRaw": 150,
       "tMdRaw": 150,
-      "rawMaxMana": {
-        "min": -38,
-        "raw": -29,
-        "max": -20
-      },
+      "rawMaxMana": -29,
       "kb": 40,
       "wDefPct": -25,
       "hp": 3000,
@@ -6370,11 +6366,7 @@
       "mdPct": -99,
       "mr": 25,
       "ref": 33,
-      "rawMaxMana": {
-        "min": 23,
-        "raw": 76,
-        "max": 99
-      },
+      "rawMaxMana": 76,
       "wDefPct": 99,
       "fDefPct": 66,
       "wDam": "250-330",
@@ -9672,11 +9664,7 @@
       "str": 7,
       "agi": 7,
       "ms": 8,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "eDamPct": 20,
       "wDamPct": 25,
       "aDamPct": 20,
@@ -9700,11 +9688,7 @@
       "int": 10,
       "def": 15,
       "hprRaw": 300,
-      "rawMaxMana": {
-        "min": 12,
-        "raw": 40,
-        "max": 52
-      },
+      "rawMaxMana": 40,
       "wDefPct": 50,
       "hp": 5200,
       "fDef": 180,
@@ -14494,11 +14478,7 @@
       "mdPct": -33,
       "mr": 42,
       "wSdPct": 15,
-      "rawMaxMana": {
-        "min": 9,
-        "raw": 31,
-        "max": 40
-      },
+      "rawMaxMana": 31,
       "wDefPct": 65,
       "hp": 3000,
       "tDef": -175,
@@ -17872,11 +17852,7 @@
       "mr": 30,
       "spPct3": 50,
       "spPct4": 50,
-      "rawMaxMana": {
-        "min": 15,
-        "raw": 50,
-        "max": 65
-      },
+      "rawMaxMana": 50,
       "wDam": "1625-2025",
       "tier": "Mythic",
       "displayName": "Hadal",
@@ -23814,11 +23790,7 @@
       "sdRaw": 192,
       "hprRaw": 173,
       "ls": 250,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 19,
-        "max": 25
-      },
+      "rawMaxMana": 19,
       "hp": -1000,
       "tier": "Fabled",
       "displayName": "Keeper of Souls",
@@ -27288,11 +27260,7 @@
       "hprPct": -18,
       "mr": 9,
       "spd": -12,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 21,
-        "max": 27
-      },
+      "rawMaxMana": 21,
       "hp": 3375,
       "tDef": -120,
       "wDef": 80,
@@ -29722,11 +29690,7 @@
       "hprRaw": -100,
       "ms": 4,
       "atkTier": 7,
-      "rawMaxMana": {
-        "min": -19,
-        "raw": -15,
-        "max": -10
-      },
+      "rawMaxMana": -15,
       "tDam": "104-112",
       "wDam": "104-112",
       "tier": "Legendary",
@@ -33842,11 +33806,7 @@
       "mdRaw": 231,
       "mr": 6,
       "spd": -10,
-      "rawMaxMana": {
-        "min": 11,
-        "raw": 35,
-        "max": 46
-      },
+      "rawMaxMana": 35,
       "eDamPct": 27,
       "wDamPct": 27,
       "tDefPct": -12,
@@ -39576,11 +39536,7 @@
       "hprPct": 25,
       "hprRaw": 100,
       "damPct": -8,
-      "rawMaxMana": {
-        "min": 9,
-        "raw": 31,
-        "max": 40
-      },
+      "rawMaxMana": 31,
       "eDefPct": 15,
       "tDefPct": 25,
       "wDefPct": 15,
@@ -40316,11 +40272,7 @@
       "mdPct": -15,
       "mr": 12,
       "ref": 30,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "wDefPct": 15,
       "hp": 1875,
       "tDef": -90,
@@ -54477,11 +54429,7 @@
       "int": 5,
       "hprRaw": 77,
       "ref": 50,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "xpb": 20,
       "lb": 20,
       "hp": 1800,
@@ -56302,11 +56250,7 @@
       "int": -15,
       "def": 3,
       "agi": 3,
-      "rawMaxMana": {
-        "min": -26,
-        "raw": -20,
-        "max": -14
-      },
+      "rawMaxMana": -20,
       "spRaw4": -7,
       "spd": 15,
       "fDefPct": 30,
@@ -57756,11 +57700,7 @@
       "int": 4,
       "hprPct": 20,
       "hprRaw": 55,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "eDefPct": 12,
       "wDefPct": 12,
       "hp": 1000,
@@ -69254,11 +69194,7 @@
       "sdRaw": 50,
       "mr": -54,
       "ms": 32,
-      "rawMaxMana": {
-        "min": 14,
-        "raw": 46,
-        "max": 60
-      },
+      "rawMaxMana": 46,
       "hp": 1000,
       "tier": "Rare",
       "displayName": "Recharge",
@@ -71152,11 +71088,7 @@
       "damPct": -10,
       "ref": 8,
       "spd": 6,
-      "rawMaxMana": {
-        "min": 11,
-        "raw": 35,
-        "max": 46
-      },
+      "rawMaxMana": 35,
       "xpb": 8,
       "hp": 1000,
       "wDef": 50,
@@ -75512,11 +75444,7 @@
       "hprRaw": 35,
       "mr": 6,
       "damPct": -8,
-      "rawMaxMana": {
-        "min": 9,
-        "raw": 30,
-        "max": 39
-      },
+      "rawMaxMana": 30,
       "tDamPct": -30,
       "hp": 550,
       "wDef": 40,
@@ -75960,11 +75888,7 @@
       "agi": -4,
       "mr": 6,
       "spd": -8,
-      "rawMaxMana": {
-        "min": 9,
-        "raw": 31,
-        "max": 40
-      },
+      "rawMaxMana": 31,
       "eDamPct": 12,
       "wDamPct": 12,
       "aDefPct": -10,
@@ -78346,11 +78270,7 @@
       "slots": 2,
       "hprPct": 13,
       "ref": 17,
-      "rawMaxMana": {
-        "min": 8,
-        "raw": 25,
-        "max": 33
-      },
+      "rawMaxMana": 25,
       "xpb": 11,
       "hp": 450,
       "eDef": -50,
@@ -80339,11 +80259,7 @@
       "sdPct": 8,
       "mr": 6,
       "wSdPct": 8,
-      "rawMaxMana": {
-        "min": 8,
-        "raw": 25,
-        "max": 33
-      },
+      "rawMaxMana": 25,
       "fDamPct": -10,
       "hp": 460,
       "tDef": -20,
@@ -83617,11 +83533,7 @@
       "mdPct": 8,
       "thorns": 10,
       "spd": -12,
-      "rawMaxMana": {
-        "min": 9,
-        "raw": 31,
-        "max": 40
-      },
+      "rawMaxMana": 31,
       "eDamPct": 5,
       "wDamPct": 5,
       "hp": 400,
@@ -89598,11 +89510,7 @@
       "slots": 2,
       "sdPct": -12,
       "mr": 12,
-      "rawMaxMana": {
-        "min": 9,
-        "raw": 30,
-        "max": 39
-      },
+      "rawMaxMana": 30,
       "tDefPct": -10,
       "hp": 400,
       "wDef": 40,
@@ -92575,11 +92483,7 @@
       "slots": 1,
       "sdPct": 19,
       "ms": 12,
-      "rawMaxMana": {
-        "min": 15,
-        "raw": 50,
-        "max": 65
-      },
+      "rawMaxMana": 50,
       "wDefPct": 65,
       "aDefPct": 65,
       "wDef": 15,
@@ -97612,11 +97516,7 @@
       "lvl": 32,
       "slots": 1,
       "healPct": 5,
-      "rawMaxMana": {
-        "min": 5,
-        "raw": 15,
-        "max": 20
-      },
+      "rawMaxMana": 15,
       "wDamPct": 15,
       "hp": 195,
       "tDef": -20,
@@ -100036,11 +99936,7 @@
       "agi": 5,
       "mr": 6,
       "spd": 4,
-      "rawMaxMana": {
-        "min": 8,
-        "raw": 25,
-        "max": 33
-      },
+      "rawMaxMana": 25,
       "xpb": 12,
       "tDefPct": -6,
       "hp": 200,
@@ -102094,11 +101990,7 @@
       "sdRaw": -40,
       "hprPct": 27,
       "hpBonus": 77,
-      "rawMaxMana": {
-        "min": 8,
-        "raw": 27,
-        "max": 35
-      },
+      "rawMaxMana": 27,
       "hp": 235,
       "eDef": 10,
       "wDef": 10,
@@ -106595,11 +106487,7 @@
       "intReq": 5,
       "slots": 2,
       "int": 3,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "lb": 8,
       "wDefPct": 10,
       "hp": 130,
@@ -107156,11 +107044,7 @@
       "int": 4,
       "sdRaw": 15,
       "mr": 6,
-      "rawMaxMana": {
-        "min": 5,
-        "raw": 15,
-        "max": 20
-      },
+      "rawMaxMana": 15,
       "tDamPct": -6,
       "hp": 85,
       "tDef": -10,
@@ -107179,11 +107063,7 @@
       "strReq": 3,
       "intReq": 3,
       "expd": 3,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "wDamPct": 5,
       "eDefPct": 5,
       "hp": 90,
@@ -107820,11 +107700,7 @@
       "int": 1,
       "mdPct": -8,
       "sdPct": 6,
-      "rawMaxMana": {
-        "min": 5,
-        "raw": 15,
-        "max": 20
-      },
+      "rawMaxMana": 15,
       "tier": "Legendary",
       "displayName": "Hex-Master Anchor",
       "id": 4082
@@ -111177,11 +111053,7 @@
       "slots": 1,
       "sdPct": 8,
       "ref": 5,
-      "rawMaxMana": {
-        "min": 5,
-        "raw": 15,
-        "max": 20
-      },
+      "rawMaxMana": 15,
       "xpb": 4,
       "hp": 63,
       "tier": "Unique",
@@ -113873,11 +113745,7 @@
       "lvl": 12,
       "slots": 1,
       "hprPct": 10,
-      "rawMaxMana": {
-        "min": 5,
-        "raw": 15,
-        "max": 20
-      },
+      "rawMaxMana": 15,
       "xpb": 6,
       "hp": 52,
       "tDef": 2,
@@ -117787,11 +117655,7 @@
       "lvl": 6,
       "slots": 1,
       "sdPct": 6,
-      "rawMaxMana": {
-        "min": 5,
-        "raw": 15,
-        "max": 20
-      },
+      "rawMaxMana": 15,
       "lb": 5,
       "hp": 22,
       "tier": "Unique",
@@ -118944,11 +118808,7 @@
       "drop": "normal",
       "lvl": 4,
       "slots": 1,
-      "rawMaxMana": {
-        "min": 6,
-        "raw": 20,
-        "max": 26
-      },
+      "rawMaxMana": 20,
       "hp": 8,
       "tier": "Unique",
       "displayName": "Thinking Helmet",

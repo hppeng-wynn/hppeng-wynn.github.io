@@ -131,7 +131,7 @@ const translate_mappings = {
     "Knockback": "kb",
     "Weaken Enemy": "weakenEnemy",
     "Slow Enemy": "slowEnemy",
-    "Max Mana": "maxMana"
+    "Max Mana": "rawMaxMana"
 };
 
 const special_mappings = {
