@@ -126,7 +126,7 @@ let idPrefixes = {"displayName": "",
     "kb":"Knockback: ",
     "weakenEnemy":"Weaken Enemy: ",
     "slowEnemy":"Slow Enemy: ",
-    "rawMaxMana":"Max Mana: ",
+    "maxMana":"Max Mana: ",
     "slots":"Powder Slots: ",
     "set":"Set: ",
     "quest":"Quest Req: ",
@@ -249,7 +249,7 @@ let idSuffixes = {"displayName": "",
     "kb": "%",
     "weakenEnemy": "%",
     "slowEnemy": "%",
-    "rawMaxMana": "",
+    "maxMana": "",
     "slots":"",
     "set":" set.",
     "quest":"",
@@ -357,7 +357,7 @@ let build_detailed_display_commands = [
     "spRegen",
     "eSteal",
     "gXp", "gSpd",
-    "kb", "weakenEnemy", "slowEnemy","rawMaxMana"
+    "kb", "weakenEnemy", "slowEnemy","maxMana"
 ];
 
 // full
@@ -447,7 +447,7 @@ let sq2_item_display_commands = [
     "spRegen",
     "eSteal",
     "gXp", "gSpd",
-    "kb", "weakenEnemy", "slowEnemy", "rawMaxMana",
+    "kb", "weakenEnemy", "slowEnemy", "maxMana",
     "majorIds",
     "!spacer",
     "slots",
