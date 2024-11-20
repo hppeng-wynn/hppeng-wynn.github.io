@@ -10449,6 +10449,33 @@
             }]
         },
         {
+            "display_name": "Totem Shove",
+            "desc": "Casting Totem while looking at an existing Totem will instead shove it forwards, dealing damage to any enemy it crashes into.",
+            "base_abil": "Totem",
+            "parents": ["Uproot"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 9,
+                "col": 1,
+                "icon": "node_0"
+            },
+            "effects": [{
+                "type": "add_spell_prop",
+                "base_spell": 1,
+                "target_part": "Shove Damage",
+                "multipliers": [
+                    90,
+                    0,
+                    0,
+                    0,
+                    0,
+                    30
+                ]
+            }]
+        },
+        {
             "display_name": "Earth Mastery",
             "base_abil": 998,
             "desc": "Increases your base damage from all Earth attacks.",
@@ -11715,7 +11742,6 @@
             },
             "properties": {
                 "duration": 60,
-                "max_effigy": 1,
                 "attack_frequency": 2
             },
             "effects": [
@@ -11727,7 +11753,7 @@
                     "parts": [
                         {
                             "name": "Effigy Hit",
-                            "multipliers": [ 75, 0, 0, 25, 0, 0 ]
+                            "multipliers": [ 75, 0, 0, 0, 25, 0 ]
                         },
                         {
                             "name": "Single Effigy DPS",
@@ -11735,7 +11761,7 @@
                         },
                         {
                             "name": "Total Effigy DPS",
-                            "hits": { "Single Effigy DPS": "Crimson Effigy.max_effigy" }
+                            "hits": { "Single Effigy DPS": "Totem.num_totems" }
                         }
                     ]
                 }
@@ -11904,13 +11930,12 @@
             "effects": []
         },
         {
-            "display_name": "More Effigies",
-            "desc": "Increase your Max Effigies by +1.",
+            "display_name": "Friendly Fire",
+            "desc": "Hitting your Puppets with Main Attack will cause them to lose 2s of their duration per beam.",
             "archetype": "Summoner",
-            "archetype_req": 8,
-            "base_abil": "Crimson Effigy",
+            "base_abil": 999,
             "parents": ["Maddening Roots"],
-            "dependencies": ["Crimson Effigy"],
+            "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -11918,17 +11943,7 @@
                 "col": 1,
                 "icon": "node_0"
             },
-            "properties": {
-                "max_effigy": 1
-            },
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 7,
-                    "name": "Effigy Hit",
-                    "multipliers": [ -10, 0, 0, -10, 0, 0 ]
-                }
-            ]
+            "effects": []
         },
         {
             "display_name": "Chant of the Fanatic",
@@ -11989,7 +12004,7 @@
             "base_abil": "Totem",
             "archetype": "Summoner",
             "archetype_req": 8,
-            "parents": ["More Effigies", "Invigorating Wave"],
+            "parents": ["Friendly Fire", "Invigorating Wave"],
             "dependencies": ["Double Totem"],
             "blockers": [],
             "cost": 2,
@@ -12038,7 +12053,7 @@
             "desc": "Aura will temporarily increase your Summon's attack speed by +30%. Players hit will gain +5 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
-            "parents": ["More Effigies", "Triple Totem", "Frog Dance"], 
+            "parents": ["Friendly Fire", "Triple Totem", "Frog Dance"], 
             "dependencies": ["Aura"], 
             "blockers": [],
             "cost": 2, 

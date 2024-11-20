@@ -1583,15 +1583,5 @@
         "displayName": "Fright or Flight",
         "description": "Plays spooky tunes",
         "abilities": []
-    },
-    "FAUSTIAN_GAMBIT": {
-        "displayName": "Faustian Gambit",
-        "description": "Frog Dance triggers only once but has increased vertical velocity, damage, and knockback",
-        "abilities": []
-    },
-    "FRIGHT_OR_FLIGHT": {
-        "displayName": "Fright or Flight",
-        "description": "Plays spooky tunes",
-        "abilities": []
     }
 }
