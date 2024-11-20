@@ -124,44 +124,19 @@ function calc_weapon_powder(weapon, damageBases) {
         weapon.get('aDam').split('-').map(Number)
     ];
 
-    // Applying spell conversions
-    let neutralBase = damages[0].slice();
+    //Give crafted weapons a base damage
+    if(damageBases != null)
+        damages[0] = [Math.floor(damageBases[0] * 0.9), Math.floor(damageBases[0] * 1.1)];
+
+    //Applying Spell Conversions
+    //let neutralBase = damages[0].slice();
     let neutralRemainingRaw = damages[0].slice();
-  
-    //powder application for custom crafted weapons is inherently fucked because there is no base. Unsure what to do.
-
-    // This implementation is untested. See TODOs for unsure.
-    // TODO: test davidwnguyen's implementation, and compare.
-    //1st round - apply each as ingred, 2nd round - apply as normal
-    if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
-        for (const p of weapon.get("ingredPowders")) {
-            const powder = powderStats[p];  //use min, max, and convert
-            // Bitwise to force conversion to integer (integer division).
-            const element = (p/6) | 0;
-
-            // TODO: Which part of powder effectiveness is halved by the latest patch?
-            // Is it the raw bonus? Or the conversion?
-
-            // Half the raw bonus.
-            let raw_bonus = Math.floor( (powder.min + powder.max) / 2 / 2 );
-
-            // Half the conversion.
-            let diff = Math.floor(damageBases[0] * powder.convert/100 / 2);
-
-            damageBases[0] -= diff;
-            damageBases[element+1] += diff + raw_bonus;
-        }
-        //update all damages
-        for (let i = 0; i < damages.length; i++) {
-            damages[i] = [Math.floor(damageBases[i] * 0.9), Math.floor(damageBases[i] * 1.1)];
-        }
-        neutralRemainingRaw = damages[0].slice();
-        neutralBase = damages[0].slice();
-    }
 
     //apply powders to weapon (1.21 fked implementation)
     let powder_apply_order = [];
     let powder_apply_map = new Map();
+    
+    //First apply powders from powder master, then ingredients if crafted, then calculate the total change.
     for (const powderID of powders) {
         const powder = powderStats[powderID];
         // Bitwise to force conversion to integer (integer division).
@@ -184,6 +159,39 @@ function calc_weapon_powder(weapon, damageBases) {
             powder_apply_map.set(element, apply_info);
         }
     }
+
+    //New 2.1 calculations for crafted ingredient powders
+    //TODO: more verification that this is correct?
+    //Essentially, ingredient powders now apply after the powder master application.
+    if (weapon.get("tier") === "Crafted" && !weapon.get("custom")) {
+        for (const p of weapon.get("ingredPowders")) {
+            const powder = powderStats[p];  //use min, max, and convert
+            // Bitwise to force conversion to integer (integer division).
+            const element = (p/6) | 0;
+            
+            //Half the normal bonuses for powders
+            let powder_max_bonus = Math.floor(powder.max / 2);
+            let powder_min_bonus = Math.floor(powder.min / 2);
+            let powder_conv_bonus = powder.convert / 100 / 2;
+
+            if (powder_apply_map.has(element)) {
+                let apply_info = powder_apply_map.get(element);
+                apply_info.conv += powder_conv_bonus;
+                apply_info.min += powder_min_bonus;
+                apply_info.max += powder_max_bonus;
+            }
+            else {
+                let apply_info = {
+                    conv: powder_conv_bonus,
+                    min: powder_min_bonus,
+                    max: powder_max_bonus
+                };
+                powder_apply_order.push(element);
+                powder_apply_map.set(element, apply_info);
+            }
+        }
+    }
+
     for (const element of powder_apply_order) {
         const apply_info = powder_apply_map.get(element);
         const conversion_ratio = apply_info.conv;
