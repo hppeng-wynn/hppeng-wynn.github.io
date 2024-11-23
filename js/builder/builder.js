@@ -331,7 +331,7 @@ async function init() {
     }
     builder_graph_init(save_skp);
     for (const item_node of item_final_nodes) {
-        console.log(item_node);
+        // console.log(item_node);
         if (item_node.get_value() === null) {
             // likely DB load failure...
             if (confirm('One or more items failed to load correctly. This could be due to a corrupted build link, or (more likely) a database load failure. Would you like to reload?')) {

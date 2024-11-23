@@ -1242,7 +1242,6 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon) {
     ];
     parent_elem.append(make_elem("b", [], { textContent: "Powder Specials" }));
     let specials = powderSpecials.slice();
-    let expandedStats = new Map();
     //each entry of powderSpecials is [ps, power]
     for (special of specials) {
         //iterate through the special and display its effects.
@@ -1267,16 +1266,19 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon) {
                 let _results = calculateSpellDamage(stats, weapon, conversions, false, true, "0.Powder Special");
 
                 let critChance = skillPointsToPercentage(skillpoints[1]);
-                let save_damages = [];
                 
                 let totalDamNormal = _results[0];
                 let totalDamCrit = _results[1];
-                let results = _results[2];
-                for (let i = 0; i < 6; ++i) {
-                    for (let j in results[i]) {
-                        results[i][j] = results[i][j].toFixed(2);
-                    }
+
+                // NOTE(orgold): This prevents powder specials that have both instant damage and
+                // a damage boost to apply on themselves (i.e Courage). This fix only works because
+                // multiplicative effects are added last.
+                const damage_boost = powder_special.weaponSpecialEffects.get("Damage Boost");
+                if (damage_boost !== undefined) {
+                  totalDamNormal.forEach((_, i, a) => a[i] /= 1 + (damage_boost[power-1]) / 100);
+                  totalDamCrit.forEach((_, i, a) => a[i] /= 1 + (damage_boost[power-1]) / 100);
                 }
+                
                 let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
                 let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
                 let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
