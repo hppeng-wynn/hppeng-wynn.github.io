@@ -857,7 +857,7 @@
         },
         {
             "display_name": "Triple Shots",
-            "desc": "Triples Main Attack arrows but they deal -20% of normal Main Attack arrow damage.",
+            "desc": "Triples Main Attack arrows but they deal -10% of normal Main Attack arrow damage.",
             "archetype": "Boltslinger",
             "archetype_req": 0,
             "base_abil": 999,
@@ -1104,7 +1104,7 @@
         },
         {
             "display_name": "Windstorm",
-            "desc": "Arrow Storm will shoot +1 stream of arrows and +2 extra arrows per stream.",
+            "desc": "Arrow Storm will shoot +1 stream of arrows and +2 extra arrows per stream. \nArrow storm gains recoil.",
             "base_abil": "Arrow Storm",
             "parents": [
                 "Guardian Angels",
@@ -2309,7 +2309,7 @@
         },
         {
             "display_name": "Shrapnel Bomb",
-            "desc": "Arrow Bomb's explosion will fling 30 shrapnel, dealing damage in a large area",
+            "desc": "Arrow Bomb's explosion will fling 25 shrapnel, dealing damage in a large area",
             "archetype": "Boltslinger",
             "archetype_req": 2,
             "base_abil": "Arrow Bomb",
@@ -2449,7 +2449,7 @@
         },
         {
             "display_name": "Arrow Hurricane",
-            "desc": "Arrow Storm will shoot +2 extra streams of arrows.",
+            "desc": "Arrow Storm will shoot +2 extra streams of arrows.\nArrow Storm's recoil is doubled.",
             "archetype": "Boltslinger",
             "archetype_req": 10,
             "base_abil": "Arrow Storm",
@@ -2646,7 +2646,7 @@
         },
         {
             "display_name": "Chilling Snare",
-            "desc": "Attach an icy snare to Basaltic Trap, drastically inhibiting and damaging nearby enemies every 0.2s after it detonates.",
+            "desc": "Attach an icy snare to Basaltic Trap, drastically inhibiting and damaging nearby enemies every 0.2s after it detonates.\nIncrease your maximum traps by +1.",
             "archetype": "Trapper",
             "archetype_req": 11,
             "base_abil": "Basaltic Trap",
@@ -2733,7 +2733,7 @@
         },
         {
             "display_name": "Stronger Patient Hunter",
-            "desc": "Increase Patient Hunter's damage gain per second by +10% and add increase its Max Damage by +100%",
+            "desc": "Increase Patient Hunter's damage gain per second by +10% and add increase its Max Damage by +100%.\nIncrease your maximum traps by +1.",
             "archetype": "Trapper",
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
@@ -3726,7 +3726,7 @@
 
         {
             "display_name": "Iron Lungs",
-            "desc": "War Scream deals more damage",
+            "desc": "War Scream and Air Shout will deal more damage.",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "base_abil": "War Scream",
@@ -4001,7 +4001,7 @@
         },
         {
             "display_name": "Blood Pact",
-            "desc": "If you do not have enough mana to cast a spell, spend health instead (0.35% health per mana)",
+            "desc": "If you do not have enough mana to cast a spell, spend health instead (0.35% health per mana).\nSpells cast using health instead of mana will deal +15% damage.",
             "archetype": "Fallen", 
             "archetype_req": 4, 
             "parents": ["Spear Proficiency II"], 
@@ -4263,7 +4263,7 @@
         },
         {
             "display_name": "Ragnarokkr",
-            "desc": "War Scream become deafening, increasing its duration and giving damage bonus to players",
+            "desc": "War Scream become deafening, increasing its duration and giving damage bonus to players. (Mana Cost: +5)",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "War Scream",
@@ -4373,7 +4373,7 @@
         },
         {
             "display_name": "Rejuvenating Skin",
-            "desc": "Regain back 30% of the damage you take as healing over 30s",
+            "desc": "Regain back 30% of the damage you take as healing over 15s.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
             "parents": ["Cleansing Breeze", "Stronger Bash"],
@@ -4699,7 +4699,7 @@
             ]  
         },{
             "display_name": "Massacre",
-            "desc": "While Corrupted, if your effective attack speed is Slow or lower, hitting an enemy with your Main Attack will add +4% to your Corrupted bar",
+            "desc": "While Corrupted, hitting an enemy with your Main Attack will add +4% to your Corrupted bar. (Cooldown: 2s)",
             "archetype": "Fallen", 
             "archetype_req": 5, 
             "base_abil": 999,
@@ -4848,7 +4848,7 @@
         },
         {
             "display_name": "Discombobulate",
-            "desc": "Damaging enemies will inflict them with +5 Discombobulated. (Max 100) You will deal +1 neutral and elemental damage to enemies for every Discombobulated they have. -5 of the bonus decays every second.",
+            "desc": "Damaging enemies will inflict them with +5 Discombobulated (Max 150). You will deal +1 neutral and elemental damage to enemies for every Discombobulated they have. -5 of the bonus decays every second.",
             "archetype": "Battle Monk", 
             "archetype_req": 11, 
             "parents": ["Cyclone"], 
@@ -4883,7 +4883,7 @@
         },
         {
             "display_name": "Thunderclap",
-            "desc": "Bash will cast at the player's position and gain additional AoE.",
+            "desc": "Bash will cast at the player's position and gain additional AoE.\nBash will be cast twice as fast.",
             "archetype": "Battle Monk", 
             "archetype_req": 6, 
             "parents": ["Cyclone", "Stronger Sacred Surge"], 
@@ -5719,7 +5719,7 @@
         },
         {
             "display_name": "Thunderstorm",
-            "desc": "After casting Meteor, summon 3 lightning strikes and deal additional damage. Meteor will add -3 less Mana to your Mana Bank for every hit",
+            "desc": "After casting Meteor, summon 3 lightning strikes and deal additional damage.",
             "base_abil": "Meteor",
             "parents": [
                 "Wind Slash",
@@ -5783,7 +5783,7 @@
         },
         {
             "display_name": "Burning Sigil",
-            "desc": "Meteor will leave a sigil of fire on the ground that damages enemies every 0.4s.",
+            "desc": "Meteor and Ophanim will leave a sigil of fire on the ground that damages enemies every 0.4s.",
             "base_abil": "Meteor",
             "parents": [
                 "Fire Mastery",
@@ -5824,7 +5824,7 @@
         },
         {
             "display_name": "Sunshower",
-            "desc": "Heal emits a strong light, damaging nearby enemies.",
+            "desc": "Heal emits a strong light, damaging nearby enemies. Arcane Transfer will damage nearby enemies when transferring 30+ Mana.",
             "archetype": "Light Bender",
             "base_abil": "Heal",
             "parents": [ "Water Mastery" ],
@@ -5872,7 +5872,7 @@
         },
         {
             "display_name": "Windsweeper",
-            "desc": "Your Main Attack will add +1 Winded to enemies you hit. (Max 10, 0.5s cooldown) Ice Snake will deal additional damage to enemies for every Winded they have.",
+            "desc": "Your Main Attack will add +1 Winded to enemies you hit. (Max 10, 0.2s cooldown) Ice Snake will deal additional damage to enemies for every Winded they have. Winded will decay once every 5s.",
             "archetype": "Riftwalker",
             "archetype_req": 3,
             "parents": [
@@ -6003,7 +6003,7 @@
         },
         {
             "display_name": "Arcane Transfer",
-            "desc": "Meteor and Ice Snake will add +7 Mana to a Mana Bank for every aggressive enemy you hit. Heal will now transfer the content of your Mana Bank into usable Mana instead of healing.",
+            "desc": "Meteor, Ice Snake and Wind Slash will add +7 Mana to a Mana Bank for every aggressive enemy you hit. Heal will now transfer the content of your Mana Bank into usable Mana instead of healing.",
             "archetype": "Arcanist",
             "archetype_req": 2,
             "parents": [
@@ -6384,7 +6384,7 @@
             "display": {
                 "row": 21,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -6709,7 +6709,7 @@
         },
         {
             "display_name": "Arcane Restoration",
-            "desc": "Pyrokinesis will add +4 Mana every 1s to your Mana Bank when hitting an aggressive enemy.",
+            "desc": "Pyrokinesis will add +1 Mana every 0.25s to your Mana Bank when hitting an aggressive enemy. (Duration: 2.5s)",
             "base_abil": 999,
             "archetype": "Arcanist",
             "archetype_req": 0,
@@ -6726,7 +6726,7 @@
             "display": {
                 "row": 23,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {
                 "duration": 4
@@ -7103,7 +7103,7 @@
             "display": {
                 "row": 28,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -7200,7 +7200,7 @@
         },
         {
             "display_name": "Arcane Power",
-            "desc": "Meteor and Ice Snake will add +3 Mana to your Mana Bank for each aggressive mob you hit.",
+            "desc": "Meteor, Ice Snake and Wind Slash will add +3 Mana to your Mana Bank for each aggressive mob you hit.",
             "base_abil": "Arcane Transfer",
             "archetype": "Arcanist",
             "archetype_req": 0,
@@ -7432,7 +7432,7 @@
         },
         {
             "display_name": "Arcane Overflow",
-            "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits. (Max 400)",
+            "desc": "Arcane Transfer will allow you to overflow your mana over its maximum limits. (Max 300)",
             "archetype": "Arcanist",
             "archetype_req": 12,
             "base_abil": "Arcane Transfer",
@@ -8319,7 +8319,7 @@
             "display": {
                 "row": 16,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": []
@@ -8454,7 +8454,7 @@
             "display": {
                 "row": 20,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": []
@@ -8647,7 +8647,7 @@
         },
         {
             "display_name": "Shadow Siphon",
-            "desc": "Reduces Vanish's cooldown by -1.5s after striking an enemy from behind with Backstab.",
+            "desc": "Reduces Vanish's cooldown by -1.75s after striking an enemy from behind with Backstab.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Vanish",
@@ -8719,7 +8719,7 @@
         },
         {
             "display_name": "Blazing Powder",
-            "desc": "Spin Attack will blind enemies and deal additional damage",
+            "desc": "Spin Attack and Lacarate will blind enemies and deal additional damage",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
@@ -8979,7 +8979,7 @@
         },
         {
             "display_name": "Marked",
-            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.4s Cooldown) Marked enemies will take +6% damage for each mark they have.",
+            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.1s Cooldown) Marked enemies will take +6% damage for each mark they have.",
             "archetype": "Shadestepper",
             "archetype_req": 5,
             "parents": [
@@ -9015,7 +9015,7 @@
         },
         {
             "display_name": "Echo",
-            "desc": "Your Clones will mimic your spells and abilities, but you deal -20% damage for every clone that's alive. (Max -65%) Weightless restores -0.25 less mana per hit. Bamboozle becomes significantly stronger.",
+            "desc": "Your Clones will mimic your spells and abilities, but you deal -20% damage for every clone that's alive. Bamboozle becomes significantly stronger.",
             "archetype": "Trickster",
             "archetype_req": 6,
             "base_abil": "Mirror Image",
@@ -9493,7 +9493,7 @@
             "effects": [{
                 "type": "add_spell_prop",
                 "base_spell": 1,
-                "target_part": "Spin Attack",
+                "target_part": "Per Hit",
                 "multipliers": [ 20, 0, 0, 0, 0, 0 ]
             }]
         },
@@ -9624,7 +9624,7 @@
         },
         {
             "display_name": "Blade Fury",
-            "desc": "While using Multihit on an enemy, lock their position in front of you.",
+            "desc": "While using Multihit on an enemy, lock their position in front of you.\nMultihit gains extra damage and can be aimed in all directions",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": "Multihit",
@@ -9632,7 +9632,7 @@
                 "Stronger Lacerate",
                 "Cheaper Smoke Bomb II"
             ],
-            "dependencies": [],
+            "dependencies": ["Multihit"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -9721,7 +9721,7 @@
             "display": {
                 "row": 38,
                 "col": 8,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -9774,7 +9774,7 @@
         },
         {
             "display_name": "Forbidden Art",
-            "desc": "Summon +3 additional Clones, but increase your maximum damage penalty by -5% while Clones are active. (+15s Cooldown)",
+            "desc": "Summon +3 additional Clones. Improve your damage by +5% per Clone While your Clones are active, and reduce their maximum damage penalty by 5%. (Cooldown: 15s)",
             "archetype": "Trickster",
             "archetype_req": 8,
             "base_abil": "Mirror Image",
@@ -9791,7 +9791,10 @@
                 "col": 4,
                 "icon": "node_2"
             },
-            "properties": { "max_penalty": -5 },
+            "properties": { 
+              "penalty_per_clone": 5,
+              "max_penalty": 5
+            },
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -10717,7 +10720,7 @@
         },
         {
             "display_name": "Overseer",
-            "desc": "Increase Uproot's range, and if you hit your Totem with it, reset its duration.",
+            "desc": "Increases Uproot and Haunting Memory's range. Hitting Totem with either will reset its duration.",
             "base_abil": "Uproot",
             "archetype": "Summoner",
             "parents": ["Nature's Jolt"],
@@ -11242,7 +11245,7 @@
             "desc": "Increase your maximum Blood pool by +30%.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
-            "parents": ["Rebound"],
+            "parents": ["Rebound", "Mask of the Fanatic"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 1,
@@ -11372,7 +11375,7 @@
         },
         {
             "display_name": "Vengeful Spirit",
-            "desc": "Your Totem will give damage bonus to yourself and allies standing inside its range.",
+            "desc": "Your Totem will give all players bonus to yourself and allies standing inside its range.",
             "base_abil": "Totem",
             "archetype": "Acolyte",
             "parents": ["Larger Blood Pool I", "Masquerade"],
@@ -12224,7 +12227,7 @@
         },
         {
             "display_name": "Awakened",
-            "desc": "After saving 150 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 25s, giving the power of all Masks at once without any downsides.",
+            "desc": "After saving 150 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 25s, giving the power of all Masks at once without any downsides. Switcing to an attached Mask while Awakened will immediately recall the Mask back to you.",
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 11,
@@ -12286,7 +12289,7 @@
         },
         {
             "display_name": "Blood Sorrow",
-            "desc": "Uproot or Haunting Memory will use 80% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
+            "desc": "Uproot or Haunting Memory will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
             "archetype": "Acolyte",
             "archetype_req": 12,
             "parents": ["Larger Blood Pool III"],
