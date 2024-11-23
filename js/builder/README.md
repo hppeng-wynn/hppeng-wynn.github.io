@@ -1,6 +1,10 @@
 # Updating Ability tree constants and MajorIds
 
+<<<<<<< HEAD
 Ability tree file: `atree_constants.json` 
+=======
+Ability tree file: `atree_constants_clean.json` 
+>>>>>>> origin/HEAD
 Major IDs file: `major_ids_clean.json`
 
 Make all your change only to those files! All other related files are automatically generated.
