@@ -65,7 +65,7 @@
     },
     "GREED": {
         "displayName": "Greed",
-        "description": "Picking up emeralds heals you and nearby players for 15% max health",
+        "description": "Picking up emeralds heals you and nearby players for 8% max health",
         "abilities": []
     },
     "CAVALRYMAN": {
@@ -80,7 +80,7 @@
     },
     "HERO": {
         "displayName": "Saviour’s Sacrifice",
-        "description": "While under 50% maximum health, nearby allies gain 20% bonus damage and defense",
+        "description": "While under 50% maximum health, nearby allies gain 15% bonus damage and defense",
         "abilities": []
     },
     "ALTRUISM": {
