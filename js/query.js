@@ -132,13 +132,15 @@ const itemQueryProps = (function() {
   maxId(['airdmg%', 'airdam%', 'admg%', 'adam%', 'adampct'], 'aDamPct');
   maxId(['elementaldmg%', 'elementaldam%', 'rdmg%', 'rdam%', 'rdampct'], 'rDamPct');
   //sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
+  maxId(['dmg%', 'dam%', 'dampct'], 'damPct');
 
-  maxId(['earthdmgraw', 'earthdamraw', 'edmgraw', 'edamraw', 'edamraw'], 'eDamRaw');
-  maxId(['thunderdmgraw', 'thunderdamraw', 'tdmgraw', 'tdamraw', 'tdamraw'], 'tDamRaw');
-  maxId(['waterdmgraw', 'waterdamraw', 'wdmgraw', 'wdamraw', 'wdamraw'], 'wDamRaw');
-  maxId(['firedmgraw', 'firedamraw', 'fdmgraw', 'fdamraw', 'fdamraw'], 'fDamRaw');
-  maxId(['airdmgraw', 'airdamraw', 'admgraw', 'adamraw', 'adamraw'], 'aDamRaw');
-  maxId(['elementaldmgraw', 'elementaldamraw', 'rdmgraw', 'rdamraw', 'rdamraw'], 'rDamRaw');
+  maxId(['earthdmgraw', 'earthdamraw', 'edmgraw', 'edamraw'], 'eDamRaw');
+  maxId(['thunderdmgraw', 'thunderdamraw', 'tdmgraw', 'tdamraw'], 'tDamRaw');
+  maxId(['waterdmgraw', 'waterdamraw', 'wdmgraw', 'wdamraw'], 'wDamRaw');
+  maxId(['firedmgraw', 'firedamraw', 'fdmgraw', 'fdamraw'], 'fDamRaw');
+  maxId(['airdmgraw', 'airdamraw', 'admgraw', 'adamraw'], 'aDamRaw');
+  maxId(['elementaldmgraw', 'elementaldamraw', 'rdmgraw', 'rdamraw'], 'rDamRaw');
+  maxId(['dmgraw', 'damraw'], 'damRaw');
 
   maxId(['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct'], 'mdPct');
   maxId(['emdpct'], 'eMdPct');
