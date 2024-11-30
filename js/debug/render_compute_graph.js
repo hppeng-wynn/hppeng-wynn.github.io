@@ -78,10 +78,9 @@ function convert_data(nodes_raw) {
     }
     for (const node of nodes_raw) {
         const to = node_id.get(node);
-        for (const input of node.inputs) {
-            const from = node_id.get(input);
-            let name = input.name;
-            let link_name = node.input_translation.get(name);
+        for (const input of node.inputs.values()) {
+            const from = node_id.get(input.node);
+            let link_name = input.translation;
             edges.push({
                 source: from,
                 target: to,

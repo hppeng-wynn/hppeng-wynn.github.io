@@ -1,6 +1,15 @@
 let all_nodes = new Set();
 let node_debug_stack = [];
 let COMPUTE_GRAPH_DEBUG = true;
+
+class NodeInput {
+    constructor(node, translation=node.name) {
+        this.node = node;
+        this.translation = translation;
+        this.is_dirty = false;
+    }
+}
+
 class ComputeNode {
     /**
      * Make a generic compute node.
@@ -9,8 +18,7 @@ class ComputeNode {
      * @param name : Name of the node (string). Must be unique. Must "fit in" a JS string (terminated by single quotes).
      */
     constructor(name) {
-        this.inputs = [];   // parent nodes
-        this.input_translation = new Map();
+        this.inputs = new Map();   // Map<string, NodeInput> parent nodes
         this.children = [];
         this.value = null;
         this.name = name;
@@ -20,7 +28,6 @@ class ComputeNode {
                                 // 2: dirty
                                 // 1: possibly dirty
                                 // 0: clean
-        this.inputs_dirty = new Map();
         this.inputs_dirty_count = 0;
         if (COMPUTE_GRAPH_DEBUG) { all_nodes.add(this); }
     }
@@ -38,15 +45,15 @@ class ComputeNode {
         if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.push(this.name); }
         if (this.dirty == 2) {
             let calc_inputs = new Map();
-            for (const input of this.inputs) {
-                if (input.dirty) {
+            for (const input of this.inputs.values()) {
+                if (input.node.dirty) {
                     if (COMPUTE_GRAPH_DEBUG) {
                         console.log(node_debug_stack);
                         console.log(this);
                     }
                     throw "Invalid compute graph state!";
                 }
-                calc_inputs.set(this.input_translation.get(input.name), input.value);
+                calc_inputs.set(input.translation, input.node.value);
             }
             this.value = this.compute_func(calc_inputs);
         }
@@ -63,8 +70,9 @@ class ComputeNode {
      */
     mark_input_clean(input_name, value) {
         if (value !== null || this.fail_cb) {
-            if (this.inputs_dirty.get(input_name)) {
-                this.inputs_dirty.set(input_name, false);
+            const input = this.inputs.get(input_name);
+            if (input.is_dirty) {
+                input.is_dirty = false;
                 this.inputs_dirty_count -= 1;
             }
             if (this.inputs_dirty_count === 0) {
@@ -74,8 +82,9 @@ class ComputeNode {
     }
 
     mark_input_dirty(input_name) {
-        if (!this.inputs_dirty.get(input_name)) {
-            this.inputs_dirty.set(input_name, true);
+        const input = this.inputs.get(input_name);
+        if (!input.is_dirty) {
+            input.is_dirty = true;
             this.inputs_dirty_count += 1;
         }
     }
@@ -109,13 +118,12 @@ class ComputeNode {
      * Add link to a parent compute node, optionally with an alias.
      */
     link_to(parent_node, link_name) {
-        this.inputs.push(parent_node)
-        link_name = (link_name !== undefined) ? link_name : parent_node.name;
-        this.input_translation.set(parent_node.name, link_name);
+        const input = new NodeInput(parent_node, link_name);
         if (parent_node.dirty || (parent_node.value === null && !this.fail_cb)) {
             this.inputs_dirty_count += 1;
-            this.inputs_dirty.set(parent_node.name, true);
+            input.is_dirty = true;
         }
+        this.inputs.set(parent_node.name, input);
         parent_node.children.push(this);
         return this;
     }
@@ -125,18 +133,14 @@ class ComputeNode {
      * TODO: time complexity of list deletion (not super relevant but it hurts my soul)
      */
     remove_link(parent_node) {
-        const idx = this.inputs.indexOf(parent_node);   // Get idx
-        this.inputs.splice(idx, 1);                     // remove element
-
-        this.input_translation.delete(parent_node.name);
-        const was_dirty = this.inputs_dirty.get(parent_node.name);
-        this.inputs_dirty.delete(parent_node.name);
+        const was_dirty = this.inputs.get(parent_node.name).is_dirty;
+        this.inputs.delete(parent_node.name);
         if (was_dirty) {
             this.inputs_dirty_count -= 1;
         }
 
-        const idx2 = parent_node.children.indexOf(this);
-        parent_node.children.splice(idx2, 1);
+        const idx = parent_node.children.indexOf(this);
+        parent_node.children.splice(idx, 1);
         return this;
     }
 }
@@ -158,8 +162,8 @@ class ValueCheckComputeNode extends ComputeNode {
         if (COMPUTE_GRAPH_DEBUG) { node_debug_stack.push(this.name); }
 
         let calc_inputs = new Map();
-        for (const input of this.inputs) {
-            calc_inputs.set(this.input_translation.get(input.name), input.value);
+        for (const input of this.inputs.values()) {
+            calc_inputs.set(input.translation, input.node.value);
         }
         let val = this.compute_func(calc_inputs);
         if (val !== null) {
