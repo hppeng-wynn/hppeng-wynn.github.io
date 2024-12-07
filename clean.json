@@ -2194,6 +2194,34 @@
       "id": 4048
     },
     {
+      "category": "accessory",
+      "name": "Lost Seconds",
+      "type": "ring",
+      "drop": "lootchest",
+      "lvl": 102,
+      "dexReq": 60,
+      "defReq": 40,
+      "lore": "This ring is set with a beautiful, mesmerizing gem. You could look at it for hours. Hours and hours and hours.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "153",
+          "name": "ring.thunder2"
+        }
+      },
+      "nMdRaw": 300,
+      "sdPct": -30,
+      "spPct4": -7,
+      "ref": -50,
+      "atkTier": -2,
+      "hp": 600,
+      "tDef": 80,
+      "tier": "Legendary",
+      "displayName": "Lost Seconds",
+      "id": 4076
+    },
+    {
       "name": "Consolidate",
       "category": "weapon",
       "type": "wand",
@@ -2717,38 +2745,6 @@
       "id": 4049
     },
     {
-      "category": "accessory",
-      "name": "Lost Seconds",
-      "type": "ring",
-      "drop": "lootchest",
-      "lvl": 102,
-      "dexReq": 60,
-      "defReq": 40,
-      "lore": "This ring is set with a beautiful, mesmerizing gem. You could look at it for hours. Hours and hours and hours.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "153",
-          "name": "ring.thunder2"
-        }
-      },
-      "mainAttackNeutraDamageBonus": {
-        "min": 90,
-        "raw": 300,
-        "max": 390
-      },
-      "sdPct": -30,
-      "spPct4": -7,
-      "ref": -50,
-      "atkTier": -2,
-      "hp": 600,
-      "tDef": 80,
-      "tier": "Legendary",
-      "displayName": "Lost Seconds",
-      "id": 4076
-    },
-    {
       "name": "Danse Macabre",
       "category": "weapon",
       "type": "relik",
@@ -2821,6 +2817,56 @@
       "id": 4027
     },
     {
+      "name": "Panic Zealot",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SUPER_FAST",
+      "averageDps": 490,
+      "restrict": "untradable",
+      "drop": "never",
+      "lvl": 101,
+      "classReq": "shaman",
+      "agiReq": 85,
+      "majorIds": [
+        "FURIOUS_EFFIGY"
+      ],
+      "slots": 3,
+      "lore": "They must know what you went through. They must suffer the same as you did.",
+      "dropInfo": {
+        "name": "Bottomless Pit",
+        "type": "altar",
+        "coordinates": [
+          1332,
+          11,
+          -516
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "392",
+          "name": "relik.basicWood"
+        }
+      },
+      "hpBonus": -5000,
+      "spPct1": -143,
+      "spPct2": -143,
+      "spPct3": -143,
+      "atkTier": 12,
+      "spd": 30,
+      "tDamPct": -30,
+      "nDam": "54-60",
+      "aDam": "48-66",
+      "tier": "Fabled",
+      "displayName": "Panic Zealot",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 3600
+    },
+    {
       "name": "Revered Silver Mask of Legendary Victory",
       "category": "armor",
       "type": "helmet",
@@ -2861,56 +2907,6 @@
       "tier": "Unique",
       "displayName": "Misalignment",
       "id": 3663
-    },
-    {
-      "name": "Panic Zealot",
-      "category": "weapon",
-      "type": "relik",
-      "atkSpd": "SUPER_FAST",
-      "averageDps": 568,
-      "restrict": "untradable",
-      "drop": "never",
-      "lvl": 101,
-      "classReq": "shaman",
-      "agiReq": 85,
-      "majorIds": [
-        "FURIOUS_EFFIGY"
-      ],
-      "slots": 3,
-      "lore": "They must know what you went through. They must suffer the same as you did.",
-      "dropInfo": {
-        "name": "Bottomless Pit",
-        "type": "altar",
-        "coordinates": [
-          1332,
-          11,
-          -516
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "392",
-          "name": "relik.basicWood"
-        }
-      },
-      "hpBonus": -5000,
-      "spPct1": -143,
-      "spPct2": -143,
-      "spPct3": -143,
-      "atkTier": 12,
-      "spd": 30,
-      "tDamPct": -30,
-      "nDam": "60-72",
-      "aDam": "53-79",
-      "tier": "Fabled",
-      "displayName": "Panic Zealot",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "id": 3600
     },
     {
       "name": "Pyrrhic Respite",
@@ -7493,6 +7489,33 @@
       "id": 129
     },
     {
+      "name": "Chestplate of Ineptitude",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "diamond",
+      "drop": "normal",
+      "lvl": 98,
+      "slots": 3,
+      "str": -2,
+      "dex": -2,
+      "int": -2,
+      "def": -2,
+      "agi": -2,
+      "mdPct": 20,
+      "mdRaw": 200,
+      "sdPct": -30,
+      "atkTier": 1,
+      "mainAttackRange": {
+        "min": 5,
+        "raw": 15,
+        "max": 20
+      },
+      "hp": 3375,
+      "tier": "Rare",
+      "displayName": "Chestplate of Ineptitude",
+      "id": 529
+    },
+    {
       "name": "Impeccable Light Jungle Relik",
       "category": "weapon",
       "type": "relik",
@@ -9169,28 +9192,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 1740
-    },
-    {
-      "name": "Chestplate of Ineptitude",
-      "category": "armor",
-      "type": "chestplate",
-      "armourMaterial": "diamond",
-      "drop": "normal",
-      "lvl": 98,
-      "slots": 3,
-      "str": -2,
-      "dex": -2,
-      "int": -2,
-      "def": -2,
-      "agi": -2,
-      "mdPct": 20,
-      "mdRaw": 200,
-      "sdPct": -30,
-      "atkTier": 1,
-      "hp": 3375,
-      "tier": "Rare",
-      "displayName": "Chestplate of Ineptitude",
-      "id": 529
     },
     {
       "name": "Propeller Hat",
@@ -17770,14 +17771,12 @@
           "name": "spear.multi3"
         }
       },
-      "mdPct": 12,
-      "sdPct": 12,
       "hpBonus": -1200,
       "mr": 6,
       "spRaw2": -12,
       "expd": 24,
-      "wDamPct": 12,
-      "fDamPct": 12,
+      "wDamPct": 28,
+      "fDamPct": 28,
       "tDefPct": -25,
       "nDam": "20-40",
       "wDam": "40-120",
@@ -23243,6 +23242,86 @@
       "id": 3088
     },
     {
+      "name": "Sawtooth",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "SUPER_FAST",
+      "averageDps": 624,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 91,
+      "classReq": "assassin",
+      "strReq": 20,
+      "dexReq": 20,
+      "intReq": 20,
+      "defReq": 20,
+      "agiReq": 20,
+      "slots": 3,
+      "dropInfo": {
+        "name": "Fallen Factory",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -1682,
+          79,
+          -2605
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "256",
+          "name": "dagger.basicGold"
+        }
+      },
+      "damPct": 20,
+      "spPct3": -15,
+      "mainAttackRange": 20,
+      "rDamPct": 10,
+      "rDefPct": -25,
+      "nDam": "20-45",
+      "eDam": "10-35",
+      "tDam": "10-35",
+      "wDam": "10-35",
+      "fDam": "10-35",
+      "aDam": "10-35",
+      "tier": "Legendary",
+      "displayName": "Sawtooth",
+      "id": 736
+    },
+    {
+      "category": "accessory",
+      "name": "Byte",
+      "type": "ring",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 91,
+      "dropInfo": {
+        "name": "Fallen Factory",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -1682,
+          79,
+          -2605
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "141",
+          "name": "ring.basicIron"
+        }
+      },
+      "rDefPct": 20,
+      "hp": 512,
+      "tier": "Legendary",
+      "displayName": "Byte",
+      "id": 727
+    },
+    {
       "name": "Cloud Nine",
       "category": "weapon",
       "type": "spear",
@@ -23489,12 +23568,12 @@
         }
       },
       "agi": 7,
-      "ms": 8,
+      "ms": 12,
+      "aDamRaw": 135,
       "ref": 30,
       "spd": 25,
       "eDamPct": -25,
-      "aDamPct": 15,
-      "tDefPct": 20,
+      "tDefPct": 50,
       "nDam": "58-90",
       "tDam": "20-65",
       "aDam": "30-55",
@@ -23891,37 +23970,6 @@
       "id": 1436
     },
     {
-      "category": "accessory",
-      "name": "Byte",
-      "type": "ring",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 91,
-      "dropInfo": {
-        "name": "Fallen Factory",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -1682,
-          79,
-          -2605
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "141",
-          "name": "ring.basicIron"
-        }
-      },
-      "rDefPct": 14,
-      "hp": 512,
-      "tier": "Legendary",
-      "displayName": "Byte",
-      "id": 727
-    },
-    {
       "name": "Bane of War",
       "category": "weapon",
       "type": "spear",
@@ -24102,53 +24150,6 @@
       "tDam": "0-0",
       "aDam": "0-0",
       "id": 679
-    },
-    {
-      "name": "Sawtooth",
-      "category": "weapon",
-      "type": "dagger",
-      "atkSpd": "SUPER_FAST",
-      "averageDps": 624,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 91,
-      "classReq": "assassin",
-      "strReq": 20,
-      "dexReq": 20,
-      "intReq": 20,
-      "defReq": 20,
-      "agiReq": 20,
-      "slots": 3,
-      "dropInfo": {
-        "name": "Fallen Factory",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -1682,
-          79,
-          -2605
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "256",
-          "name": "dagger.basicGold"
-        }
-      },
-      "mdPct": 20,
-      "sdPct": 20,
-      "rDamPct": 10,
-      "nDam": "20-45",
-      "eDam": "10-35",
-      "tDam": "10-35",
-      "wDam": "10-35",
-      "fDam": "10-35",
-      "aDam": "10-35",
-      "tier": "Legendary",
-      "displayName": "Sawtooth",
-      "id": 736
     },
     {
       "name": "Impeccable Spruce Spear",
@@ -31419,6 +31420,31 @@
       "id": 991
     },
     {
+      "name": "Cessation",
+      "category": "armor",
+      "type": "leggings",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 87,
+      "strReq": 55,
+      "dexReq": 55,
+      "slots": 2,
+      "lore": "Nothing more.",
+      "ls": 250,
+      "mr": 15,
+      "ms": 10,
+      "spRaw1": -4,
+      "spd": 15,
+      "eDef": 100,
+      "tDef": 100,
+      "tier": "Legendary",
+      "displayName": "Cessation",
+      "id": 4085
+    },
+    {
       "name": "Corrupted Uth Belt",
       "category": "armor",
       "type": "leggings",
@@ -34894,6 +34920,47 @@
       "id": 2623
     },
     {
+      "name": "Unsheathed Glaive",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "NORMAL",
+      "averageDps": 345,
+      "drop": "normal",
+      "lvl": 84,
+      "classReq": "warrior",
+      "intReq": 30,
+      "defReq": 30,
+      "slots": 2,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "469",
+          "name": "spear.fire2"
+        }
+      },
+      "int": 8,
+      "def": 8,
+      "mdPct": -10,
+      "ms": 14,
+      "mainAttackRange": {
+        "min": 14,
+        "raw": 46,
+        "max": 60
+      },
+      "wDamPct": 25,
+      "fDamPct": 25,
+      "nDam": "0-5",
+      "wDam": "75-90",
+      "fDam": "75-90",
+      "tier": "Unique",
+      "displayName": "Unsheathed Glaive",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "aDam": "0-0",
+      "id": 3382
+    },
+    {
       "name": "Pride of the Aerie",
       "category": "armor",
       "type": "helmet",
@@ -35563,43 +35630,6 @@
       "tier": "Legendary",
       "displayName": "Conflagrate",
       "id": 589
-    },
-    {
-      "name": "Unsheathed Glaive",
-      "category": "weapon",
-      "type": "spear",
-      "atkSpd": "NORMAL",
-      "averageDps": 340,
-      "drop": "normal",
-      "lvl": 84,
-      "classReq": "warrior",
-      "intReq": 30,
-      "defReq": 30,
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "469",
-          "name": "spear.fire2"
-        }
-      },
-      "int": 8,
-      "def": 8,
-      "mdPct": 10,
-      "sdPct": -30,
-      "wDamPct": 15,
-      "fDamPct": 15,
-      "wDefPct": 10,
-      "fDefPct": 10,
-      "wDam": "75-90",
-      "fDam": "75-90",
-      "tier": "Unique",
-      "displayName": "Unsheathed Glaive",
-      "nDam": "0-0",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "aDam": "0-0",
-      "id": 3382
     },
     {
       "name": "Impeccable Birch Spear",
@@ -36801,31 +36831,6 @@
       "id": 849
     },
     {
-      "category": "accessory",
-      "name": "Jiandan Handwraps",
-      "type": "bracelet",
-      "drop": "lootchest",
-      "lvl": 83,
-      "strReq": 40,
-      "defReq": 40,
-      "lore": "The cloth wraps produced by the canyon Dojo are just that, merely soft cloth. It is left to the users to apply them skillfully in battle, in whatever way they see fit.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "163",
-          "name": "bracelet.earth2"
-        }
-      },
-      "mdPct": 10,
-      "mdRaw": 45,
-      "hpBonus": 827,
-      "xpb": 10,
-      "tier": "Legendary",
-      "displayName": "Jiandan Handwraps",
-      "id": 1489
-    },
-    {
       "name": "Aviform",
       "category": "weapon",
       "type": "dagger",
@@ -37498,6 +37503,31 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 2894
+    },
+    {
+      "category": "accessory",
+      "name": "Jiandan Handwraps",
+      "type": "bracelet",
+      "drop": "lootchest",
+      "lvl": 83,
+      "strReq": 40,
+      "defReq": 40,
+      "lore": "The cloth wraps produced by the canyon Dojo are just that, merely soft cloth. It is left to the users to apply them skillfully in battle, in whatever way they see fit.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "163",
+          "name": "bracelet.earth2"
+        }
+      },
+      "mdPct": 23,
+      "hpBonus": 827,
+      "kb": 19,
+      "xpb": 10,
+      "tier": "Legendary",
+      "displayName": "Jiandan Handwraps",
+      "id": 1489
     },
     {
       "name": "The Visionary's Vice",
@@ -40560,6 +40590,132 @@
       "id": 2170
     },
     {
+      "name": "Earth Sanctuary",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "diamond",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 80,
+      "strReq": 70,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Corrupted Lost Sanctuary",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -861,
+          123,
+          -4896
+        ]
+      },
+      "str": 5,
+      "mdPct": 30,
+      "eDamPct": 90,
+      "eDef": 330,
+      "aDef": -80,
+      "tier": "Legendary",
+      "displayName": "Earth Sanctuary",
+      "id": 603
+    },
+    {
+      "name": "Air Sanctuary",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "diamond",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 80,
+      "agiReq": 70,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Corrupted Lost Sanctuary",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -861,
+          123,
+          -4896
+        ]
+      },
+      "agi": 5,
+      "spd": 25,
+      "aDamPct": 90,
+      "fDef": -50,
+      "aDef": 300,
+      "tier": "Legendary",
+      "displayName": "Air Sanctuary",
+      "id": 602
+    },
+    {
+      "name": "Water Sanctuary",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "diamond",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 80,
+      "intReq": 70,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Corrupted Lost Sanctuary",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -861,
+          123,
+          -4896
+        ]
+      },
+      "int": 5,
+      "mr": 15,
+      "wDamPct": 90,
+      "tDef": -90,
+      "wDef": 340,
+      "tier": "Legendary",
+      "displayName": "Water Sanctuary",
+      "id": 615
+    },
+    {
+      "name": "Rainbow Sanctuary",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "diamond",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 80,
+      "strReq": 40,
+      "dexReq": 40,
+      "intReq": 40,
+      "defReq": 40,
+      "agiReq": 40,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Corrupted Lost Sanctuary",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -861,
+          123,
+          -4896
+        ]
+      },
+      "str": 2,
+      "dex": 2,
+      "int": 2,
+      "def": 2,
+      "agi": 2,
+      "rDamPct": 90,
+      "eDef": 50,
+      "tDef": 50,
+      "wDef": 50,
+      "fDef": 50,
+      "aDef": 50,
+      "tier": "Legendary",
+      "displayName": "Rainbow Sanctuary",
+      "id": 606
+    },
+    {
       "name": "White Craftmas",
       "category": "weapon",
       "type": "relik",
@@ -41024,60 +41180,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 1444
-    },
-    {
-      "name": "Earth Sanctuary",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "diamond",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 80,
-      "strReq": 70,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Corrupted Lost Sanctuary",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -861,
-          123,
-          -4896
-        ]
-      },
-      "eDamPct": 85,
-      "eDef": 330,
-      "aDef": -80,
-      "tier": "Legendary",
-      "displayName": "Earth Sanctuary",
-      "id": 603
-    },
-    {
-      "name": "Fire Sanctuary",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "diamond",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 80,
-      "defReq": 70,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Corrupted Lost Sanctuary",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -861,
-          123,
-          -4896
-        ]
-      },
-      "fDamPct": 85,
-      "wDef": -100,
-      "fDef": 350,
-      "tier": "Legendary",
-      "displayName": "Fire Sanctuary",
-      "id": 608
     },
     {
       "name": "Eleventh Hour",
@@ -42111,33 +42213,6 @@
       "id": 1288
     },
     {
-      "name": "Air Sanctuary",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "diamond",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 80,
-      "agiReq": 70,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Corrupted Lost Sanctuary",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -861,
-          123,
-          -4896
-        ]
-      },
-      "aDamPct": 85,
-      "fDef": -50,
-      "aDef": 300,
-      "tier": "Legendary",
-      "displayName": "Air Sanctuary",
-      "id": 602
-    },
-    {
       "category": "accessory",
       "name": "Ring of Wisdom",
       "type": "ring",
@@ -42408,44 +42483,6 @@
       "id": 4067
     },
     {
-      "name": "Rainbow Sanctuary",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "diamond",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 80,
-      "strReq": 40,
-      "dexReq": 40,
-      "intReq": 40,
-      "defReq": 40,
-      "agiReq": 40,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Corrupted Lost Sanctuary",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -861,
-          123,
-          -4896
-        ]
-      },
-      "eDamPct": 85,
-      "tDamPct": 85,
-      "wDamPct": 85,
-      "fDamPct": 85,
-      "aDamPct": 85,
-      "eDef": 50,
-      "tDef": 50,
-      "wDef": 50,
-      "fDef": 50,
-      "aDef": 50,
-      "tier": "Legendary",
-      "displayName": "Rainbow Sanctuary",
-      "id": 606
-    },
-    {
       "name": "Thunder Sanctuary",
       "category": "armor",
       "type": "leggings",
@@ -42465,7 +42502,9 @@
           -4896
         ]
       },
-      "tDamPct": 85,
+      "dex": 5,
+      "ms": 12,
+      "tDamPct": 90,
       "eDef": -70,
       "tDef": 320,
       "tier": "Legendary",
@@ -42760,33 +42799,6 @@
       "id": 163
     },
     {
-      "name": "Water Sanctuary",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "diamond",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 80,
-      "intReq": 70,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Corrupted Lost Sanctuary",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -861,
-          123,
-          -4896
-        ]
-      },
-      "wDamPct": 85,
-      "tDef": -90,
-      "wDef": 340,
-      "tier": "Legendary",
-      "displayName": "Water Sanctuary",
-      "id": 615
-    },
-    {
       "category": "accessory",
       "name": "Sterling Silver",
       "type": "necklace",
@@ -43025,6 +43037,35 @@
       "tier": "Unique",
       "displayName": "Dragon Horned Helmet",
       "id": 2855
+    },
+    {
+      "name": "Fire Sanctuary",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "diamond",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 80,
+      "defReq": 70,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Corrupted Lost Sanctuary",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -861,
+          123,
+          -4896
+        ]
+      },
+      "def": 5,
+      "hprRaw": 165,
+      "fDamPct": 90,
+      "wDef": -100,
+      "fDef": 350,
+      "tier": "Legendary",
+      "displayName": "Fire Sanctuary",
+      "id": 608
     },
     {
       "name": "Gert Wand",
@@ -43965,8 +44006,12 @@
       "agiReq": 35,
       "slots": 2,
       "icon": {
-        "format": "legacy",
-        "value": "273:7"
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "392",
+          "name": "relik.basicWood"
+        }
       },
       "mdRaw": 410,
       "sdPct": -300,
@@ -61407,6 +61452,143 @@
       "id": 3378
     },
     {
+      "name": "Algaa",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "VERY_SLOW",
+      "averageDps": 270,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 64,
+      "classReq": "warrior",
+      "strReq": 40,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Galleon's Graveyard",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -581,
+          30,
+          -3545
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "466",
+          "name": "spear.earth2"
+        }
+      },
+      "str": 5,
+      "int": 5,
+      "thorns": 20,
+      "maxMana": 50,
+      "lb": 10,
+      "eDamPct": 20,
+      "wDamPct": 30,
+      "nDam": "40-70",
+      "eDam": "210-330",
+      "tier": "Rare",
+      "displayName": "Algaa",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 774
+    },
+    {
+      "name": "Grounder",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "SLOW",
+      "averageDps": 420,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 64,
+      "classReq": "archer",
+      "strReq": 40,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Galleon's Graveyard",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -581,
+          30,
+          -3545
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "195",
+          "name": "bow.earth2"
+        }
+      },
+      "mdPct": 20,
+      "kb": 50,
+      "mainAttackRange": 65,
+      "xpb": 18,
+      "tDefPct": 15,
+      "nDam": "120-140",
+      "eDam": "100-200",
+      "tier": "Rare",
+      "displayName": "Grounder",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 769
+    },
+    {
+      "name": "Rumble",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 215,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 64,
+      "classReq": "mage",
+      "dexReq": 40,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Galleon's Graveyard",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -581,
+          30,
+          -3545
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "336",
+          "name": "wand.thunder2"
+        }
+      },
+      "mdPct": 25,
+      "ls": 125,
+      "tMdRaw": 55,
+      "mainAttackRange": -50,
+      "eSteal": 5,
+      "nDam": "6-39",
+      "tDam": "6-88",
+      "tier": "Rare",
+      "displayName": "Rumble",
+      "eDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 778
+    },
+    {
       "category": "accessory",
       "name": "Call to Concord",
       "type": "bracelet",
@@ -61689,51 +61871,6 @@
       "id": 542
     },
     {
-      "name": "Algaa",
-      "category": "weapon",
-      "type": "spear",
-      "atkSpd": "VERY_SLOW",
-      "averageDps": 270,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 64,
-      "classReq": "warrior",
-      "strReq": 40,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Galleon's Graveyard",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -581,
-          30,
-          -3545
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "466",
-          "name": "spear.earth2"
-        }
-      },
-      "str": 5,
-      "int": 5,
-      "thorns": 20,
-      "lb": 10,
-      "wDamPct": 16,
-      "nDam": "40-70",
-      "eDam": "210-330",
-      "tier": "Rare",
-      "displayName": "Algaa",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 774
-    },
-    {
       "category": "accessory",
       "name": "Whirl",
       "type": "bracelet",
@@ -61837,50 +61974,6 @@
       "tier": "Rare",
       "displayName": "Sublime",
       "id": 3178
-    },
-    {
-      "name": "Grounder",
-      "category": "weapon",
-      "type": "bow",
-      "atkSpd": "SLOW",
-      "averageDps": 420,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 64,
-      "classReq": "archer",
-      "strReq": 40,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Galleon's Graveyard",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -581,
-          30,
-          -3545
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "195",
-          "name": "bow.earth2"
-        }
-      },
-      "mdPct": 10,
-      "sdPct": -5,
-      "xpb": 18,
-      "tDamPct": 10,
-      "nDam": "120-140",
-      "eDam": "100-200",
-      "tier": "Rare",
-      "displayName": "Grounder",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 769
     },
     {
       "name": "Fire Sword Style-2",
@@ -62274,8 +62367,8 @@
           "name": "relik.multi2"
         }
       },
-      "hprRaw": -200,
-      "poison": 250,
+      "hprRaw": -150,
+      "poison": 1500,
       "ls": 140,
       "ms": 8,
       "spRaw4": -5,
@@ -62350,52 +62443,6 @@
       "tier": "Legendary",
       "displayName": "Kelight's Shield",
       "id": 1535
-    },
-    {
-      "name": "Rumble",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "VERY_FAST",
-      "averageDps": 215,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 64,
-      "classReq": "mage",
-      "dexReq": 40,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Galleon's Graveyard",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -581,
-          30,
-          -3545
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "336",
-          "name": "wand.thunder2"
-        }
-      },
-      "mdPct": 10,
-      "ls": 105,
-      "eSteal": 5,
-      "tDamPct": 15,
-      "wDamPct": -10,
-      "fDamPct": -10,
-      "nDam": "6-39",
-      "tDam": "6-88",
-      "tier": "Rare",
-      "displayName": "Rumble",
-      "eDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 778
     },
     {
       "name": "Orc Mask",
@@ -62711,6 +62758,52 @@
       "tier": "Unique",
       "displayName": "Vampire Blocker",
       "id": 2706
+    },
+    {
+      "name": "Ouragan",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "NORMAL",
+      "averageDps": 304,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 63,
+      "classReq": "assassin",
+      "intReq": 35,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Galleon's Graveyard",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -581,
+          30,
+          -3545
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "270",
+          "name": "dagger.water2"
+        }
+      },
+      "agi": 4,
+      "sdPct": 15,
+      "mr": 10,
+      "spRaw1": -5,
+      "spd": 20,
+      "aDamPct": 15,
+      "nDam": "35-50",
+      "wDam": "40-80",
+      "aDam": "30-60",
+      "tier": "Rare",
+      "displayName": "Ouragan",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "fDam": "0-0",
+      "id": 772
     },
     {
       "name": "Pure Andesite Bow",
@@ -63429,51 +63522,6 @@
       "tier": "Unique",
       "displayName": "Cleanshear",
       "id": 554
-    },
-    {
-      "name": "Ouragan",
-      "category": "weapon",
-      "type": "dagger",
-      "atkSpd": "NORMAL",
-      "averageDps": 304,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 63,
-      "classReq": "assassin",
-      "intReq": 35,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Galleon's Graveyard",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -581,
-          30,
-          -3545
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "270",
-          "name": "dagger.water2"
-        }
-      },
-      "agi": 4,
-      "sdPct": 15,
-      "mr": 12,
-      "spd": 5,
-      "aDamPct": 10,
-      "nDam": "35-50",
-      "wDam": "40-80",
-      "aDam": "30-60",
-      "tier": "Rare",
-      "displayName": "Ouragan",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "fDam": "0-0",
-      "id": 772
     },
     {
       "name": "Stranglevine",
@@ -70741,6 +70789,85 @@
       "id": 903
     },
     {
+      "name": "Barbed",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "FAST",
+      "averageDps": 212,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 56,
+      "classReq": "warrior",
+      "dexReq": 50,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Undergrowth Ruins",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -635,
+          61,
+          -864
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "472",
+          "name": "spear.thunder2"
+        }
+      },
+      "def": 5,
+      "mdPct": 15,
+      "thorns": 40,
+      "ref": 40,
+      "tDamPct": 15,
+      "tDefPct": 20,
+      "nDam": "40-50",
+      "tDam": "0-80",
+      "tier": "Rare",
+      "displayName": "Barbed",
+      "eDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 759
+    },
+    {
+      "name": "Molten Greaves",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 56,
+      "defReq": 30,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Undergrowth Ruins",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -635,
+          61,
+          -864
+        ]
+      },
+      "str": 5,
+      "hprPct": 20,
+      "eMdRaw": 135,
+      "fDamPct": 15,
+      "hp": 1100,
+      "eDef": 50,
+      "tDef": 50,
+      "fDef": 80,
+      "aDef": 50,
+      "tier": "Rare",
+      "displayName": "Molten Greaves",
+      "id": 765
+    },
+    {
       "name": "Isostatic Rebound",
       "category": "armor",
       "type": "chestplate",
@@ -70966,52 +71093,6 @@
       "tier": "Unique",
       "displayName": "Deluge",
       "id": 852
-    },
-    {
-      "name": "Barbed",
-      "category": "weapon",
-      "type": "spear",
-      "atkSpd": "FAST",
-      "averageDps": 181,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 56,
-      "classReq": "warrior",
-      "dexReq": 50,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Undergrowth Ruins",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -635,
-          61,
-          -864
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "472",
-          "name": "spear.thunder2"
-        }
-      },
-      "def": 5,
-      "mdPct": 10,
-      "thorns": 50,
-      "ref": 20,
-      "tDamPct": 15,
-      "tDefPct": 10,
-      "nDam": "30-40",
-      "tDam": "5-70",
-      "tier": "Rare",
-      "displayName": "Barbed",
-      "eDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 759
     },
     {
       "name": "Plasma Ray",
@@ -71448,39 +71529,6 @@
       "id": 452
     },
     {
-      "name": "Molten Greaves",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 56,
-      "defReq": 30,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Undergrowth Ruins",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -635,
-          61,
-          -864
-        ]
-      },
-      "str": 4,
-      "hprPct": 10,
-      "eDamPct": 15,
-      "fDamPct": 15,
-      "hp": 1100,
-      "eDef": 50,
-      "tDef": 50,
-      "fDef": 80,
-      "aDef": 50,
-      "tier": "Rare",
-      "displayName": "Molten Greaves",
-      "id": 765
-    },
-    {
       "category": "accessory",
       "name": "Shiny Coin",
       "type": "necklace",
@@ -71606,6 +71654,129 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 662
+    },
+    {
+      "name": "Whirlwind",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "NORMAL",
+      "averageDps": 278,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 55,
+      "classReq": "archer",
+      "agiReq": 40,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Undergrowth Ruins",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -635,
+          61,
+          -864
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "192",
+          "name": "bow.air2"
+        }
+      },
+      "aSdPct": 15,
+      "ref": 40,
+      "spd": 10,
+      "wDefPct": 20,
+      "aDefPct": 20,
+      "nDam": "55-80",
+      "aDam": "50-85",
+      "tier": "Rare",
+      "displayName": "Whirlwind",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 767
+    },
+    {
+      "name": "Jungle Spirit",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "FAST",
+      "averageDps": 138,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 55,
+      "classReq": "mage",
+      "agiReq": 40,
+      "slots": 3,
+      "dropInfo": {
+        "name": "Undergrowth Ruins",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -635,
+          61,
+          -864
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "327",
+          "name": "wand.air2"
+        }
+      },
+      "agi": 5,
+      "aMdRaw": 65,
+      "spd": 15,
+      "jh": 1,
+      "mainAttackRange": 25,
+      "kb": 25,
+      "aDam": "30-80",
+      "tier": "Rare",
+      "displayName": "Jungle Spirit",
+      "nDam": "0-0",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 764
+    },
+    {
+      "name": "Granite Plate",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 55,
+      "strReq": 40,
+      "slots": 1,
+      "dropInfo": {
+        "name": "Undergrowth Ruins",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -635,
+          61,
+          -864
+        ]
+      },
+      "mdPct": 35,
+      "sdPct": -30,
+      "eMdPct": 15,
+      "spd": -15,
+      "kb": 60,
+      "mainAttackRange": -20,
+      "hp": 800,
+      "eDef": 40,
+      "tier": "Rare",
+      "displayName": "Granite Plate",
+      "id": 763
     },
     {
       "name": "Nativitate",
@@ -72060,35 +72231,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 2639
-    },
-    {
-      "name": "Granite Plate",
-      "category": "armor",
-      "type": "chestplate",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 55,
-      "strReq": 40,
-      "slots": 1,
-      "dropInfo": {
-        "name": "Undergrowth Ruins",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -635,
-          61,
-          -864
-        ]
-      },
-      "mdPct": 40,
-      "sdPct": -30,
-      "spd": -15,
-      "eDamPct": 10,
-      "hp": 800,
-      "tier": "Rare",
-      "displayName": "Granite Plate",
-      "id": 763
     },
     {
       "category": "accessory",
@@ -72874,10 +73016,10 @@
       },
       "dex": 5,
       "mdRaw": 90,
-      "poison": 250,
-      "thorns": 10,
+      "poison": 600,
+      "thorns": 20,
       "spd": 5,
-      "tDamPct": 10,
+      "tDamPct": 15,
       "hp": 700,
       "tDef": 30,
       "tier": "Rare",
@@ -73421,49 +73563,6 @@
       "id": 1648
     },
     {
-      "name": "Jungle Spirit",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "FAST",
-      "averageDps": 156,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 55,
-      "classReq": "mage",
-      "agiReq": 45,
-      "slots": 3,
-      "dropInfo": {
-        "name": "Undergrowth Ruins",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -635,
-          61,
-          -864
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "327",
-          "name": "wand.air2"
-        }
-      },
-      "agi": 10,
-      "spd": 10,
-      "aDamPct": 22,
-      "nDam": "55-70",
-      "tier": "Rare",
-      "displayName": "Jungle Spirit",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 764
-    },
-    {
       "name": "Skien Leggings",
       "category": "armor",
       "type": "leggings",
@@ -73480,52 +73579,6 @@
       "tier": "Set",
       "displayName": "Skien Leggings",
       "id": 2465
-    },
-    {
-      "name": "Whirlwind",
-      "category": "weapon",
-      "type": "bow",
-      "atkSpd": "NORMAL",
-      "averageDps": 278,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 55,
-      "classReq": "archer",
-      "agiReq": 40,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Undergrowth Ruins",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -635,
-          61,
-          -864
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "192",
-          "name": "bow.air2"
-        }
-      },
-      "sdPct": 7,
-      "ref": 40,
-      "spd": 10,
-      "aDamPct": 6,
-      "wDefPct": 20,
-      "aDefPct": 20,
-      "nDam": "55-80",
-      "aDam": "50-85",
-      "tier": "Rare",
-      "displayName": "Whirlwind",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "id": 767
     },
     {
       "name": "Vanilla Spade",
@@ -73959,6 +74012,37 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 1111
+    },
+    {
+      "name": "Lobotomy",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 54,
+      "agiReq": 35,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Undergrowth Ruins",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -635,
+          61,
+          -864
+        ]
+      },
+      "int": -20,
+      "agi": 5,
+      "aDamRaw": 85,
+      "spd": 20,
+      "aDamPct": 20,
+      "hp": 640,
+      "aDef": 40,
+      "tier": "Rare",
+      "displayName": "Lobotomy",
+      "id": 768
     },
     {
       "name": "Sightlines",
@@ -74670,36 +74754,6 @@
       "tier": "Legendary",
       "displayName": "Venison",
       "id": 3406
-    },
-    {
-      "name": "Lobotomy",
-      "category": "armor",
-      "type": "helmet",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 54,
-      "agiReq": 35,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Undergrowth Ruins",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -635,
-          61,
-          -864
-        ]
-      },
-      "int": -20,
-      "agi": 5,
-      "spd": 10,
-      "aDamPct": 25,
-      "hp": 640,
-      "aDef": 40,
-      "tier": "Rare",
-      "displayName": "Lobotomy",
-      "id": 768
     },
     {
       "category": "accessory",
@@ -79913,6 +79967,38 @@
       "id": 2616
     },
     {
+      "name": "Iron Foot",
+      "category": "armor",
+      "type": "boots",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 49,
+      "strReq": 40,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Ice Barrows",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          132,
+          85,
+          -660
+        ]
+      },
+      "str": 8,
+      "mdPct": 25,
+      "spd": -10,
+      "mainAttackRange": 25,
+      "eDamPct": 15,
+      "fDefPct": -15,
+      "hp": 650,
+      "eDef": 30,
+      "tier": "Legendary",
+      "displayName": "Iron Foot",
+      "id": 758
+    },
+    {
       "name": "Standard Chain Helmet",
       "category": "armor",
       "type": "helmet",
@@ -80269,37 +80355,6 @@
       "id": 440
     },
     {
-      "name": "Iron Foot",
-      "category": "armor",
-      "type": "boots",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 49,
-      "strReq": 35,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Ice Barrows",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          132,
-          85,
-          -660
-        ]
-      },
-      "str": 8,
-      "mdPct": 25,
-      "spd": -10,
-      "eDamPct": 15,
-      "eDefPct": 20,
-      "fDefPct": -10,
-      "hp": 650,
-      "tier": "Legendary",
-      "displayName": "Iron Foot",
-      "id": 758
-    },
-    {
       "name": "Bibliotek",
       "category": "weapon",
       "type": "relik",
@@ -80604,6 +80659,65 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 3363
+    },
+    {
+      "name": "Hearthfire",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 48,
+      "defReq": 30,
+      "slots": 1,
+      "dropInfo": {
+        "name": "Ice Barrows",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          132,
+          85,
+          -660
+        ]
+      },
+      "def": 7,
+      "ls": 60,
+      "fDefPct": 45,
+      "hp": 900,
+      "fDef": 50,
+      "tier": "Legendary",
+      "displayName": "Hearthfire",
+      "id": 754
+    },
+    {
+      "name": "Shade",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 48,
+      "agiReq": 30,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Ice Barrows",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          132,
+          85,
+          -660
+        ]
+      },
+      "agi": 10,
+      "spd": 20,
+      "aDamPct": 35,
+      "rDamPct": -10,
+      "hp": 450,
+      "aDef": 40,
+      "tier": "Legendary",
+      "displayName": "Shade",
+      "id": 755
     },
     {
       "name": "Fissure",
@@ -81413,68 +81527,6 @@
       "id": 2424
     },
     {
-      "name": "Shade",
-      "category": "armor",
-      "type": "chestplate",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 48,
-      "agiReq": 30,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Ice Barrows",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          132,
-          85,
-          -660
-        ]
-      },
-      "agi": 10,
-      "spd": 20,
-      "eDamPct": -10,
-      "tDamPct": -10,
-      "wDamPct": -10,
-      "fDamPct": -10,
-      "aDamPct": 25,
-      "hp": 450,
-      "aDef": 40,
-      "tier": "Legendary",
-      "displayName": "Shade",
-      "id": 755
-    },
-    {
-      "name": "Hearthfire",
-      "category": "armor",
-      "type": "chestplate",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 48,
-      "defReq": 30,
-      "slots": 1,
-      "dropInfo": {
-        "name": "Ice Barrows",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          132,
-          85,
-          -660
-        ]
-      },
-      "def": 7,
-      "ls": 50,
-      "fDefPct": 45,
-      "hp": 900,
-      "fDef": 50,
-      "tier": "Legendary",
-      "displayName": "Hearthfire",
-      "id": 754
-    },
-    {
       "name": "Battle Staff",
       "category": "weapon",
       "type": "wand",
@@ -82194,6 +82246,34 @@
       "id": 227
     },
     {
+      "name": "Brainfreeze",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "chain",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 46,
+      "slots": 3,
+      "dropInfo": {
+        "name": "Ice Barrows",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          132,
+          85,
+          -660
+        ]
+      },
+      "int": -10,
+      "damPct": 18,
+      "hp": 550,
+      "wDef": 20,
+      "aDef": 20,
+      "tier": "Rare",
+      "displayName": "Brainfreeze",
+      "id": 756
+    },
+    {
       "name": "Nesaak's Will",
       "category": "weapon",
       "type": "spear",
@@ -82523,35 +82603,6 @@
       "id": 565
     },
     {
-      "name": "Brainfreeze",
-      "category": "armor",
-      "type": "helmet",
-      "armourMaterial": "chain",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 46,
-      "slots": 3,
-      "dropInfo": {
-        "name": "Ice Barrows",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          132,
-          85,
-          -660
-        ]
-      },
-      "int": -10,
-      "mdPct": 18,
-      "sdPct": 18,
-      "hp": 550,
-      "wDef": 20,
-      "aDef": 20,
-      "tier": "Rare",
-      "displayName": "Brainfreeze",
-      "id": 756
-    },
-    {
       "name": "Bravery",
       "category": "weapon",
       "type": "dagger",
@@ -82780,6 +82831,39 @@
       "tier": "Legendary",
       "displayName": "Brainbleed",
       "id": 4003
+    },
+    {
+      "category": "accessory",
+      "name": "Vapor",
+      "type": "ring",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 45,
+      "intReq": 25,
+      "dropInfo": {
+        "name": "Ice Barrows",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          132,
+          85,
+          -660
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "154",
+          "name": "ring.water1"
+        }
+      },
+      "wDamPct": -10,
+      "fDamPct": 15,
+      "fDef": 10,
+      "tier": "Rare",
+      "displayName": "Vapor",
+      "id": 760
     },
     {
       "category": "accessory",
@@ -83064,39 +83148,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 2077
-    },
-    {
-      "category": "accessory",
-      "name": "Vapor",
-      "type": "ring",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 45,
-      "intReq": 35,
-      "dropInfo": {
-        "name": "Ice Barrows",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          132,
-          85,
-          -660
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "154",
-          "name": "ring.water1"
-        }
-      },
-      "wDamPct": -10,
-      "fDamPct": 15,
-      "fDefPct": 15,
-      "tier": "Rare",
-      "displayName": "Vapor",
-      "id": 760
     },
     {
       "name": "Sulphurous Sling",
@@ -88490,6 +88541,52 @@
       "id": 1209
     },
     {
+      "name": "Sprout",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "VERY_SLOW",
+      "averageDps": 137,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 40,
+      "classReq": "mage",
+      "strReq": 30,
+      "slots": 2,
+      "lore": "\"The plants loathe to take hold upon the red stone. And so, we must hunt instead.\"  -Caras, Owl Tribesman",
+      "dropInfo": {
+        "name": "Sand-Swept Tomb",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          1390,
+          90,
+          -1835
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "330",
+          "name": "wand.earth2"
+        }
+      },
+      "sdPct": -20,
+      "eMdPct": 25,
+      "eSdPct": 15,
+      "spd": -15,
+      "kb": 50,
+      "nDam": "40-50",
+      "eDam": "110-130",
+      "tier": "Legendary",
+      "displayName": "Sprout",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 786
+    },
+    {
       "name": "Thunder Relic Leggings",
       "category": "armor",
       "type": "leggings",
@@ -89455,51 +89552,6 @@
       "id": 1498
     },
     {
-      "name": "Sprout",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "VERY_SLOW",
-      "averageDps": 137,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 40,
-      "classReq": "mage",
-      "strReq": 30,
-      "slots": 2,
-      "lore": "\"The plants loathe to take hold upon the red stone. And so, we must hunt instead.\"  -Caras, Owl Tribesman",
-      "dropInfo": {
-        "name": "Sand-Swept Tomb",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          1390,
-          90,
-          -1835
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "330",
-          "name": "wand.earth2"
-        }
-      },
-      "mdPct": 25,
-      "sdPct": -25,
-      "spd": -25,
-      "eDamPct": 12,
-      "nDam": "40-50",
-      "eDam": "110-130",
-      "tier": "Legendary",
-      "displayName": "Sprout",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 786
-    },
-    {
       "name": "Kaas' Fur",
       "category": "armor",
       "type": "leggings",
@@ -89906,6 +89958,53 @@
       "id": 560
     },
     {
+      "name": "Clunderthap",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 99,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 39,
+      "classReq": "mage",
+      "dexReq": 20,
+      "slots": 1,
+      "lore": "\"It never rains here, but we hear the thunder echoing in the distance.\"  -Lanu, Almuj Archaeomancer",
+      "dropInfo": {
+        "name": "Sand-Swept Tomb",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          1390,
+          90,
+          -1835
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "336",
+          "name": "wand.thunder2"
+        }
+      },
+      "dex": 5,
+      "hpBonus": -50,
+      "spPct2": -15,
+      "thorns": 15,
+      "xpb": 20,
+      "tDamPct": 20,
+      "nDam": "12-22",
+      "tDam": "1-29",
+      "tier": "Rare",
+      "displayName": "Clunderthap",
+      "eDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 784
+    },
+    {
       "name": "Springtrap",
       "category": "armor",
       "type": "chestplate",
@@ -90127,52 +90226,6 @@
       "tier": "Set",
       "displayName": "Outlaw Cap",
       "id": 2454
-    },
-    {
-      "name": "Clunderthap",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "VERY_FAST",
-      "averageDps": 99,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 39,
-      "classReq": "mage",
-      "dexReq": 20,
-      "slots": 1,
-      "lore": "\"It never rains here, but we hear the thunder echoing in the distance.\"  -Lanu, Almuj Archaeomancer",
-      "dropInfo": {
-        "name": "Sand-Swept Tomb",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          1390,
-          90,
-          -1835
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "336",
-          "name": "wand.thunder2"
-        }
-      },
-      "dex": 5,
-      "hpBonus": -50,
-      "thorns": 15,
-      "xpb": 20,
-      "tDamPct": 20,
-      "nDam": "12-22",
-      "tDam": "1-29",
-      "tier": "Rare",
-      "displayName": "Clunderthap",
-      "eDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 784
     },
     {
       "name": "Stormflash",
@@ -90717,10 +90770,10 @@
           "name": "dagger.thunder2"
         }
       },
-      "sdRaw": 40,
+      "wSdPct": 30,
+      "spPct3": -15,
       "spd": 10,
       "xpb": 10,
-      "wDamPct": 10,
       "nDam": "10-15",
       "tDam": "10-50",
       "tier": "Legendary",
@@ -90909,6 +90962,53 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 2006
+    },
+    {
+      "name": "Jaw Breaker",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "VERY_SLOW",
+      "averageDps": 158,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 38,
+      "classReq": "assassin",
+      "strReq": 25,
+      "slots": 1,
+      "lore": "\"Bandit attacks losing you sleep? Free fighting classes here! Only 10  emeralds- they won't know what hit 'em!\" -Almuj Self-Defense Class Advertisement",
+      "dropInfo": {
+        "name": "Sand-Swept Tomb",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          1390,
+          90,
+          -1835
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "261",
+          "name": "dagger.earth2"
+        }
+      },
+      "str": 8,
+      "mdPct": 10,
+      "spd": -5,
+      "expd": 15,
+      "kb": 25,
+      "xpb": 10,
+      "nDam": "60-80",
+      "eDam": "105-135",
+      "tier": "Rare",
+      "displayName": "Jaw Breaker",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 788
     },
     {
       "name": "Mummy's Rag",
@@ -91684,52 +91784,6 @@
       "id": 1945
     },
     {
-      "name": "Jaw Breaker",
-      "category": "weapon",
-      "type": "dagger",
-      "atkSpd": "VERY_SLOW",
-      "averageDps": 158,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 38,
-      "classReq": "assassin",
-      "strReq": 25,
-      "slots": 1,
-      "lore": "\"Bandit attacks losing you sleep? Free fighting classes here! Only 10  emeralds- they won't know what hit 'em!\" -Almuj Self-Defense Class Advertisement",
-      "dropInfo": {
-        "name": "Sand-Swept Tomb",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          1390,
-          90,
-          -1835
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "261",
-          "name": "dagger.earth2"
-        }
-      },
-      "str": 8,
-      "mdPct": 10,
-      "spd": -5,
-      "expd": 15,
-      "xpb": 10,
-      "nDam": "60-80",
-      "eDam": "105-135",
-      "tier": "Rare",
-      "displayName": "Jaw Breaker",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 788
-    },
-    {
       "name": "Upgraded Whisper",
       "category": "weapon",
       "type": "dagger",
@@ -91810,6 +91864,51 @@
       "tier": "Unique",
       "displayName": "Firecloud",
       "id": 1057
+    },
+    {
+      "name": "Sol",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "NORMAL",
+      "averageDps": 124,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 37,
+      "classReq": "warrior",
+      "defReq": 15,
+      "slots": 1,
+      "lore": "\"The sun and related symbols appear quite often in these ancient glyphs.  Interesting, but unsurprising, no?\" -Svin, Legend Keeper",
+      "dropInfo": {
+        "name": "Sand-Swept Tomb",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          1390,
+          90,
+          -1835
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "469",
+          "name": "spear.fire2"
+        }
+      },
+      "hprRaw": 25,
+      "hpBonus": 360,
+      "fDamRaw": 30,
+      "ref": 10,
+      "nDam": "20-30",
+      "fDam": "30-40",
+      "tier": "Rare",
+      "displayName": "Sol",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "0-0",
+      "id": 794
     },
     {
       "name": "Woljawh",
@@ -92219,52 +92318,6 @@
       "tier": "Rare",
       "displayName": "Gypsum",
       "id": 1250
-    },
-    {
-      "name": "Sol",
-      "category": "weapon",
-      "type": "spear",
-      "atkSpd": "NORMAL",
-      "averageDps": 124,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 37,
-      "classReq": "warrior",
-      "defReq": 15,
-      "slots": 1,
-      "lore": "\"The sun and related symbols appear quite often in these ancient glyphs.  Interesting, but unsurprising, no?\" -Svin, Legend Keeper",
-      "dropInfo": {
-        "name": "Sand-Swept Tomb",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          1390,
-          90,
-          -1835
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "469",
-          "name": "spear.fire2"
-        }
-      },
-      "hprPct": 12,
-      "hprRaw": 21,
-      "hpBonus": 360,
-      "ref": 10,
-      "eDamPct": 10,
-      "nDam": "20-30",
-      "fDam": "30-40",
-      "tier": "Rare",
-      "displayName": "Sol",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "aDam": "0-0",
-      "id": 794
     },
     {
       "category": "accessory",
@@ -98140,6 +98193,38 @@
       "id": 1025
     },
     {
+      "name": "Mud",
+      "category": "armor",
+      "type": "boots",
+      "armourMaterial": "golden",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 31,
+      "strReq": 15,
+      "slots": 1,
+      "lore": "\"Some pigmen snuffle through dirt for things to eat. We dig up that soil to plant our crops in; it's always full of life.\" -Thomas, Ravine Village Resident",
+      "dropInfo": {
+        "name": "Timelost Sanctum",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -254,
+          80,
+          -1046
+        ]
+      },
+      "str": 6,
+      "mdPct": 40,
+      "thorns": 5,
+      "spd": -10,
+      "kb": 25,
+      "hp": 350,
+      "eDef": 20,
+      "tier": "Legendary",
+      "displayName": "Mud",
+      "id": 711
+    },
+    {
       "name": "Enhanced Coalwalkers",
       "category": "armor",
       "type": "boots",
@@ -98592,37 +98677,6 @@
       "tier": "Normal",
       "displayName": "Used Golden Leggings",
       "id": 261
-    },
-    {
-      "name": "Mud",
-      "category": "armor",
-      "type": "boots",
-      "armourMaterial": "golden",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 31,
-      "strReq": 15,
-      "slots": 1,
-      "lore": "\"Some pigmen snuffle through dirt for things to eat. We dig up that soil to plant our crops in; it's always full of life.\" -Thomas, Ravine Village Resident",
-      "dropInfo": {
-        "name": "Timelost Sanctum",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -254,
-          80,
-          -1046
-        ]
-      },
-      "str": 6,
-      "mdPct": 38,
-      "thorns": 5,
-      "spd": -10,
-      "hp": 350,
-      "eDef": 20,
-      "tier": "Legendary",
-      "displayName": "Mud",
-      "id": 711
     },
     {
       "name": "Broken Harp",
@@ -100212,6 +100266,36 @@
       "id": 1138
     },
     {
+      "name": "Garoth's Hope",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "golden",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 29,
+      "defReq": 10,
+      "lore": "\"Strangest thing, it turns out Creepers are incredibly flammable...\" -Garull, Cryptid Researcher ",
+      "dropInfo": {
+        "name": "Timelost Sanctum",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -254,
+          80,
+          -1046
+        ]
+      },
+      "spd": -5,
+      "fDamPct": 30,
+      "fDefPct": 20,
+      "hp": 185,
+      "wDef": -20,
+      "fDef": 15,
+      "tier": "Rare",
+      "displayName": "Garoth's Hope",
+      "id": 713
+    },
+    {
       "name": "Bow Of Wisdom",
       "category": "weapon",
       "type": "bow",
@@ -100470,35 +100554,6 @@
       "id": 2746
     },
     {
-      "name": "Garoth's Hope",
-      "category": "armor",
-      "type": "chestplate",
-      "armourMaterial": "golden",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 29,
-      "lore": "\"Strangest thing, it turns out Creepers are incredibly flammable...\" -Garull, Cryptid Researcher ",
-      "dropInfo": {
-        "name": "Timelost Sanctum",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -254,
-          80,
-          -1046
-        ]
-      },
-      "spd": -5,
-      "fDamPct": 30,
-      "fDefPct": 20,
-      "hp": 185,
-      "wDef": -20,
-      "fDef": 15,
-      "tier": "Rare",
-      "displayName": "Garoth's Hope",
-      "id": 713
-    },
-    {
       "name": "Aeolian",
       "category": "weapon",
       "type": "bow",
@@ -100709,52 +100764,6 @@
       "id": 816
     },
     {
-      "name": "Death's Reach",
-      "category": "weapon",
-      "type": "bow",
-      "atkSpd": "SLOW",
-      "averageDps": 129,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 29,
-      "classReq": "archer",
-      "strReq": 10,
-      "slots": 1,
-      "lore": "\"We'll ensure that under our watch, all your families will be reunited!\" -Haros, of the Banished Legion",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "194",
-          "name": "bow.earth1"
-        }
-      },
-      "str": 4,
-      "mdPct": 20,
-      "sdPct": -20,
-      "spd": -50,
-      "eDamPct": 35,
-      "nDam": "34-50",
-      "eDam": "38-50",
-      "tier": "Rare",
-      "displayName": "Death's Reach",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 822
-    },
-    {
       "name": "Scorch Breath",
       "category": "weapon",
       "type": "bow",
@@ -100833,38 +100842,6 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 1367
-    },
-    {
-      "category": "accessory",
-      "name": "Vitre",
-      "type": "bracelet",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 29,
-      "lore": "\"They say the eyes are the windows to the soul. That's ridiculous, ocular fluids are primarily opaque.\" -Ragon, Elemental Researcher",
-      "dropInfo": {
-        "name": "Timelost Sanctum",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -254,
-          80,
-          -1046
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "168",
-          "name": "bracelet.water1"
-        }
-      },
-      "int": 5,
-      "def": -5,
-      "tier": "Unique",
-      "displayName": "Vitre",
-      "id": 716
     },
     {
       "name": "Avocado",
@@ -101091,6 +101068,130 @@
       "id": 2362
     },
     {
+      "category": "accessory",
+      "name": "Vitre",
+      "type": "bracelet",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 29,
+      "lore": "\"They say the eyes are the windows to the soul. That's ridiculous, ocular fluids are primarily opaque.\" -Ragon, Elemental Researcher",
+      "dropInfo": {
+        "name": "Timelost Sanctum",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -254,
+          80,
+          -1046
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "168",
+          "name": "bracelet.water1"
+        }
+      },
+      "int": 5,
+      "def": -3,
+      "ref": 15,
+      "tier": "Unique",
+      "displayName": "Vitre",
+      "id": 716
+    },
+    {
+      "name": "Death's Reach",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "SLOW",
+      "averageDps": 129,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 29,
+      "classReq": "archer",
+      "strReq": 10,
+      "slots": 1,
+      "lore": "\"We'll ensure that under our watch, all your families will be reunited!\" -Haros, of the Banished Legion",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "194",
+          "name": "bow.earth1"
+        }
+      },
+      "str": 4,
+      "sdPct": -20,
+      "eMdPct": 70,
+      "spd": -40,
+      "nDam": "34-50",
+      "eDam": "38-50",
+      "tier": "Rare",
+      "displayName": "Death's Reach",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 822
+    },
+    {
+      "name": "Thriller",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 174,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 28,
+      "classReq": "shaman",
+      "dexReq": 20,
+      "slots": 2,
+      "lore": "\"And no one's going to save us from the beasts about to strike. We've seen horrors stare us in the eyes, and we're fighting for our lives.\" -Poe, Nemract Sewer Dweller",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "404",
+          "name": "relik.thunder2"
+        }
+      },
+      "hpBonus": -100,
+      "ms": 5,
+      "tSdRaw": 40,
+      "spd": 8,
+      "tDefPct": 15,
+      "nDam": "6-28",
+      "tDam": "28-50",
+      "tier": "Legendary",
+      "displayName": "Thriller",
+      "eDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 824
+    },
+    {
       "name": "Roaming Thief",
       "category": "armor",
       "type": "boots",
@@ -101136,51 +101237,6 @@
       "id": 1129
     },
     {
-      "name": "Sanies",
-      "category": "weapon",
-      "type": "spear",
-      "atkSpd": "SLOW",
-      "averageDps": 80,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 28,
-      "classReq": "warrior",
-      "intReq": 15,
-      "slots": 1,
-      "lore": "\"Can anyone else understand that General Graken? Because I can't.\" -Commander Takan, Nemract Militia",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "475",
-          "name": "spear.water2"
-        }
-      },
-      "sdPct": 40,
-      "ms": -8,
-      "eDamPct": 10,
-      "wDamPct": 5,
-      "nDam": "16-37",
-      "wDam": "16-37",
-      "tier": "Legendary",
-      "displayName": "Sanies",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 821
-    },
-    {
       "name": "Dark Needle",
       "category": "weapon",
       "type": "wand",
@@ -101212,49 +101268,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 839
-    },
-    {
-      "name": "Hymn of the Dead",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "NORMAL",
-      "averageDps": 31,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 28,
-      "classReq": "mage",
-      "slots": 1,
-      "lore": "\"The dead can still hear. I figure a lullaby might help convince them to sleep a bit longer.\" -Merloni, Saint's Row Priest",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "327",
-          "name": "wand.air2"
-        }
-      },
-      "poison": 220,
-      "spd": 10,
-      "aDamPct": 20,
-      "aDam": "12-18",
-      "tier": "Legendary",
-      "displayName": "Hymn of the Dead",
-      "nDam": "0-0",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "id": 823
     },
     {
       "name": "Bombardier",
@@ -101770,34 +101783,6 @@
       "id": 3702
     },
     {
-      "name": "Gold Digger",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "golden",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 28,
-      "slots": 1,
-      "lore": "\"With the corruption seemingly tied to the emeralds dug by the Roots, people thought gold was the next best thing, the idiots.\" -Gerald, Retired Miner ",
-      "dropInfo": {
-        "name": "Timelost Sanctum",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -254,
-          80,
-          -1046
-        ]
-      },
-      "spd": 3,
-      "xpb": 10,
-      "lb": 30,
-      "hp": 145,
-      "tier": "Rare",
-      "displayName": "Gold Digger",
-      "id": 714
-    },
-    {
       "name": "Adventurer's Pants",
       "category": "armor",
       "type": "leggings",
@@ -101898,53 +101883,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 3254
-    },
-    {
-      "name": "Thriller",
-      "category": "weapon",
-      "type": "relik",
-      "atkSpd": "VERY_FAST",
-      "averageDps": 174,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 28,
-      "classReq": "shaman",
-      "dexReq": 20,
-      "slots": 2,
-      "lore": "\"And no one's going to save us from the beasts about to strike. We've seen horrors stare us in the eyes, and we're fighting for our lives.\" -Poe, Nemract Sewer Dweller",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "404",
-          "name": "relik.thunder2"
-        }
-      },
-      "sdRaw": 40,
-      "hpBonus": -100,
-      "ms": 4,
-      "spd": 8,
-      "tDamPct": 13,
-      "tDefPct": 13,
-      "nDam": "6-28",
-      "tDam": "28-50",
-      "tier": "Legendary",
-      "displayName": "Thriller",
-      "eDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 824
     },
     {
       "name": "Flawless Oak Shears",
@@ -102311,9 +102249,10 @@
         }
       },
       "def": 4,
-      "mdRaw": 60,
+      "fMdPct": 60,
+      "expd": 30,
       "xpb": 10,
-      "fDamPct": 32,
+      "fDamPct": 30,
       "nDam": "60-83",
       "tier": "Legendary",
       "displayName": "Damnation",
@@ -102323,6 +102262,123 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 818
+    },
+    {
+      "name": "Sanies",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "SLOW",
+      "averageDps": 105,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 28,
+      "classReq": "warrior",
+      "intReq": 15,
+      "slots": 1,
+      "lore": "\"Can anyone else understand that General Graken? Because I can't.\" -Commander Takan, Nemract Militia",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "475",
+          "name": "spear.water2"
+        }
+      },
+      "ms": -20,
+      "eSdPct": 30,
+      "wSdPct": 15,
+      "spPct1": -10,
+      "nDam": "27-43",
+      "wDam": "27-43",
+      "tier": "Legendary",
+      "displayName": "Sanies",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 821
+    },
+    {
+      "name": "Hymn of the Dead",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "NORMAL",
+      "averageDps": 41,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 28,
+      "classReq": "mage",
+      "slots": 1,
+      "lore": "\"The dead can still hear. I figure a lullaby might help convince them to sleep a bit longer.\" -Merloni, Saint's Row Priest",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "327",
+          "name": "wand.air2"
+        }
+      },
+      "poison": 400,
+      "spd": 20,
+      "aDamPct": 20,
+      "aDam": "18-22",
+      "tier": "Legendary",
+      "displayName": "Hymn of the Dead",
+      "nDam": "0-0",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 823
+    },
+    {
+      "name": "Gold Digger",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "golden",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 28,
+      "slots": 1,
+      "lore": "\"With the corruption seemingly tied to the emeralds dug by the Roots, people thought gold was the next best thing, the idiots.\" -Gerald, Retired Miner ",
+      "dropInfo": {
+        "name": "Timelost Sanctum",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -254,
+          80,
+          -1046
+        ]
+      },
+      "damPct": -5,
+      "spd": 5,
+      "xpb": 10,
+      "lb": 30,
+      "hp": 145,
+      "tier": "Rare",
+      "displayName": "Gold Digger",
+      "id": 714
     },
     {
       "name": "Metal Mask",
@@ -102641,35 +102697,6 @@
       "id": 174
     },
     {
-      "name": "Butterfly",
-      "category": "armor",
-      "type": "helmet",
-      "armourMaterial": "golden",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 27,
-      "agiReq": 10,
-      "slots": 2,
-      "lore": "\"Time travel cares less about small things like a flapping wing, and more about big things, like becoming your own grandfather.\" -Martyn, Time Valley Resident  ",
-      "dropInfo": {
-        "name": "Timelost Sanctum",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -254,
-          80,
-          -1046
-        ]
-      },
-      "agi": 12,
-      "spd": 6,
-      "aDefPct": 10,
-      "hp": 90,
-      "tier": "Unique",
-      "displayName": "Butterfly",
-      "id": 709
-    },
-    {
       "name": "Brise",
       "category": "armor",
       "type": "helmet",
@@ -102820,49 +102847,6 @@
       "tier": "Rare",
       "displayName": "Zombie Eye Pendant",
       "id": 3949
-    },
-    {
-      "name": "Cathedral",
-      "category": "weapon",
-      "type": "spear",
-      "atkSpd": "NORMAL",
-      "averageDps": 76,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 27,
-      "classReq": "warrior",
-      "agiReq": 20,
-      "slots": 2,
-      "lore": "\"The gravestone for the brother of that man, Sayleros? For whatever reason, it didn't have a proper name on it.\" -Sacre, Saint's Row Priest",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "462",
-          "name": "spear.air1"
-        }
-      },
-      "rDamPct": 15,
-      "aDefPct": 10,
-      "nDam": "10-19",
-      "aDam": "18-27",
-      "tier": "Rare",
-      "displayName": "Cathedral",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "id": 817
     },
     {
       "name": "Disco",
@@ -103146,6 +103130,124 @@
       "id": 2530
     },
     {
+      "name": "Cathedral",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 87,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 27,
+      "classReq": "warrior",
+      "agiReq": 20,
+      "slots": 2,
+      "lore": "\"The gravestone for the brother of that man, Sayleros? For whatever reason, it didn't have a proper name on it.\" -Sacre, Saint's Row Priest",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "462",
+          "name": "spear.air1"
+        }
+      },
+      "aMdRaw": 25,
+      "rSdPct": 15,
+      "aDefPct": 15,
+      "nDam": "6-10",
+      "aDam": "14-26",
+      "tier": "Rare",
+      "displayName": "Cathedral",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 817
+    },
+    {
+      "name": "Butterfly",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "golden",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 27,
+      "agiReq": 10,
+      "slots": 2,
+      "lore": "\"Time travel cares less about small things like a flapping wing, and more about big things, like becoming your own grandfather.\" -Martyn, Time Valley Resident  ",
+      "dropInfo": {
+        "name": "Timelost Sanctum",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -254,
+          80,
+          -1046
+        ]
+      },
+      "agi": 12,
+      "spd": 8,
+      "sprintReg": 10,
+      "hp": 90,
+      "aDef": 8,
+      "tier": "Unique",
+      "displayName": "Butterfly",
+      "id": 709
+    },
+    {
+      "name": "Styx's Grab",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "FAST",
+      "averageDps": 95,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 26,
+      "classReq": "assassin",
+      "intReq": 12,
+      "slots": 1,
+      "lore": "\"Never wish to see a dead loved one again. In this day and age, they'll come back to see you.\" -Mylo, Nemract Conscript",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "269",
+          "name": "dagger.water1"
+        }
+      },
+      "ls": 20,
+      "ms": 8,
+      "wSdPct": 25,
+      "nDam": "14-22",
+      "wDam": "18-22",
+      "tier": "Rare",
+      "displayName": "Styx's Grab",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 826
+    },
+    {
       "name": "Life Extractor",
       "category": "weapon",
       "type": "bow",
@@ -103345,50 +103447,6 @@
       "id": 199
     },
     {
-      "name": "Styx's Grab",
-      "category": "weapon",
-      "type": "dagger",
-      "atkSpd": "FAST",
-      "averageDps": 95,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 26,
-      "classReq": "assassin",
-      "intReq": 12,
-      "slots": 1,
-      "lore": "\"Never wish to see a dead loved one again. In this day and age, they'll come back to see you.\" -Mylo, Nemract Conscript",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "269",
-          "name": "dagger.water1"
-        }
-      },
-      "sdPct": 20,
-      "ls": 20,
-      "ms": 8,
-      "nDam": "14-22",
-      "wDam": "18-22",
-      "tier": "Rare",
-      "displayName": "Styx's Grab",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 826
-    },
-    {
       "name": "Stick of Brilliance",
       "category": "weapon",
       "type": "wand",
@@ -103521,49 +103579,6 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 2995
-    },
-    {
-      "name": "Boundary",
-      "category": "weapon",
-      "type": "relik",
-      "atkSpd": "SLOW",
-      "averageDps": 124,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 26,
-      "classReq": "shaman",
-      "strReq": 15,
-      "slots": 2,
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "392",
-          "name": "relik.basicWood"
-        }
-      },
-      "str": 8,
-      "sdPct": -10,
-      "rDefPct": 15,
-      "nDam": "20-30",
-      "eDam": "45-70",
-      "tier": "Rare",
-      "displayName": "Boundary",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 2528
     },
     {
       "name": "The Divide",
@@ -103862,6 +103877,94 @@
       "tier": "Set",
       "displayName": "Adventurer's Cap",
       "id": 2383
+    },
+    {
+      "name": "Boundary",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SLOW",
+      "averageDps": 124,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 26,
+      "classReq": "shaman",
+      "strReq": 15,
+      "slots": 2,
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "392",
+          "name": "relik.basicWood"
+        }
+      },
+      "str": 8,
+      "sdPct": -10,
+      "thorns": 20,
+      "kb": 20,
+      "rDefPct": 20,
+      "nDam": "20-30",
+      "eDam": "45-70",
+      "tier": "Rare",
+      "displayName": "Boundary",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 2528
+    },
+    {
+      "name": "Putrid",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "NORMAL",
+      "averageDps": 65,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 25,
+      "classReq": "mage",
+      "slots": 1,
+      "lore": "\"Leave us down here to die, why don't you all. Just turn us into another statistic and be done, huh?\" -Ragamal, Nemract Sewer Dweller",
+      "dropInfo": {
+        "name": "Underworld Crypt",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          284,
+          18,
+          -1952
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "329",
+          "name": "wand.earth1"
+        }
+      },
+      "hpBonus": 130,
+      "poison": 120,
+      "spd": -3,
+      "eDam": "15-20",
+      "wDam": "12-16",
+      "tier": "Rare",
+      "displayName": "Putrid",
+      "nDam": "0-0",
+      "tDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 825
     },
     {
       "name": "Wind Spine",
@@ -104582,49 +104685,6 @@
       "tier": "Rare",
       "displayName": "The Brigand's Brogues",
       "id": 3259
-    },
-    {
-      "name": "Putrid",
-      "category": "weapon",
-      "type": "wand",
-      "atkSpd": "NORMAL",
-      "averageDps": 65,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 25,
-      "classReq": "mage",
-      "slots": 1,
-      "lore": "\"Leave us down here to die, why don't you all. Just turn us into another statistic and be done, huh?\" -Ragamal, Nemract Sewer Dweller",
-      "dropInfo": {
-        "name": "Underworld Crypt",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          284,
-          18,
-          -1952
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "329",
-          "name": "wand.earth1"
-        }
-      },
-      "hpBonus": 130,
-      "poison": 60,
-      "spd": -3,
-      "eDam": "15-20",
-      "wDam": "12-16",
-      "tier": "Rare",
-      "displayName": "Putrid",
-      "nDam": "0-0",
-      "tDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 825
     },
     {
       "name": "Creeper Mask",
@@ -108082,24 +108142,6 @@
       "id": 1230
     },
     {
-      "name": "Bishop",
-      "category": "armor",
-      "type": "helmet",
-      "armourMaterial": "golden",
-      "drop": "normal",
-      "lvl": 20,
-      "classReq": "mage",
-      "intReq": 30,
-      "int": 5,
-      "mdPct": -10,
-      "sdPct": -10,
-      "healPct": 25,
-      "hp": 120,
-      "tier": "Rare",
-      "displayName": "Bishop",
-      "id": 362
-    },
-    {
       "name": "Blue Team Helmet",
       "category": "armor",
       "type": "helmet",
@@ -108685,34 +108727,6 @@
       "id": 1791
     },
     {
-      "name": "Stingy",
-      "category": "armor",
-      "type": "boots",
-      "armourMaterial": "golden",
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 20,
-      "slots": 1,
-      "lore": "\"You should see when the spiders fight over a meal. It looks ridiculous, legs flailing everywhere!\" -Captain Enduyn, Ragni Legion 1st Division ",
-      "dropInfo": {
-        "name": "Infested Pit",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -157,
-          54,
-          -1819
-        ]
-      },
-      "tDamPct": 17,
-      "wDamPct": -8,
-      "hp": 105,
-      "wDef": -5,
-      "tier": "Rare",
-      "displayName": "Stingy",
-      "id": 813
-    },
-    {
       "name": "Iklaj",
       "category": "weapon",
       "type": "wand",
@@ -108894,6 +108908,53 @@
       "tier": "Set",
       "displayName": "Red Team Leggings",
       "id": 3437
+    },
+    {
+      "name": "Bishop",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "golden",
+      "drop": "normal",
+      "lvl": 20,
+      "classReq": "mage",
+      "intReq": 30,
+      "int": 5,
+      "mdPct": -10,
+      "sdPct": -10,
+      "healPct": 25,
+      "hp": 120,
+      "tier": "Rare",
+      "displayName": "Bishop",
+      "id": 362
+    },
+    {
+      "name": "Stingy",
+      "category": "armor",
+      "type": "boots",
+      "armourMaterial": "golden",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 20,
+      "slots": 1,
+      "lore": "\"You should see when the spiders fight over a meal. It looks ridiculous, legs flailing everywhere!\" -Captain Enduyn, Ragni Legion 1st Division ",
+      "dropInfo": {
+        "name": "Infested Pit",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -157,
+          54,
+          -1819
+        ]
+      },
+      "kb": 15,
+      "tDamPct": 17,
+      "wDamPct": -8,
+      "hp": 105,
+      "wDef": -5,
+      "tier": "Rare",
+      "displayName": "Stingy",
+      "id": 813
     },
     {
       "name": "Jungle Wood Stick",
@@ -109508,49 +109569,6 @@
       "id": 1342
     },
     {
-      "name": "Hourglass",
-      "category": "weapon",
-      "type": "relik",
-      "atkSpd": "SLOW",
-      "averageDps": 1,
-      "restrict": "untradable",
-      "drop": "never",
-      "fixID": true,
-      "lvl": 19,
-      "classReq": "shaman",
-      "lore": "\"I saw that spider queen once. It felt like it was only a matter of time before she found my home, so I moved here.\" -Babhla, Nivla Bowl Merchant",
-      "dropInfo": {
-        "name": "Infested Pit",
-        "type": "dungeonMerchant",
-        "coordinates": [
-          -157,
-          54,
-          -1819
-        ]
-      },
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "403",
-          "name": "relik.thunder1"
-        }
-      },
-      "agi": 4,
-      "poison": 135,
-      "spPct1": 105,
-      "thorns": 18,
-      "nDam": "0-1",
-      "tier": "Rare",
-      "displayName": "Hourglass",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 805
-    },
-    {
       "name": "Mercenary Hood",
       "category": "armor",
       "type": "helmet",
@@ -109799,6 +109817,49 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 1502
+    },
+    {
+      "name": "Hourglass",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SLOW",
+      "averageDps": 2,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 19,
+      "classReq": "shaman",
+      "lore": "\"I saw that spider queen once. It felt like it was only a matter of time before she found my home, so I moved here.\" -Babhla, Nivla Bowl Merchant",
+      "dropInfo": {
+        "name": "Infested Pit",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -157,
+          54,
+          -1819
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "403",
+          "name": "relik.thunder1"
+        }
+      },
+      "agi": 4,
+      "poison": 135,
+      "spPct1": 40,
+      "thorns": 18,
+      "nDam": "1-1",
+      "tier": "Rare",
+      "displayName": "Hourglass",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 805
     },
     {
       "name": "Reticence",
