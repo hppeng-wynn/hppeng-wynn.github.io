@@ -3,6 +3,12 @@ let node_debug_stack = [];
 let COMPUTE_GRAPH_DEBUG = true;
 
 class NodeInput {
+    /**
+    * @property {ComputeNode} node - the actual parent node.
+    * @property {string} translation - translation for some nodes. equals to node.name if no special handling is required.
+    * @property {boolean} is_dirty - flag indicating whether the input was already marked dirty. Important when a node has
+    * multiple simultanious update paths.
+    */
     constructor(node, translation=node.name) {
         this.node = node;
         this.translation = translation;
