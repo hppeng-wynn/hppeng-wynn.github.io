@@ -278,3 +278,60 @@ function init_maps() {
         }
     }
 }
+
+// Aspects and tomes
+const wynn_version_names = [
+    '2.0.1.1',
+    '2.0.1.2',
+    '2.0.2.1',
+    '2.0.2.3',
+    '2.0.3.1',
+    '2.0.4.1',
+    '2.0.4.3',
+    '2.0.4.4',
+    '2.1.0.0',
+    '2.1.0.1',
+    '2.1.1.0'
+];
+
+const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
+// Default to the newest version.
+let wynn_version_id = WYNN_VERSION_LATEST;
+
+/**
+ * A map of all existing major ids.
+ *
+ * @type {Record<string, MajorId> | null}
+ *
+ * @typedef {Object} MajorId
+ * @property {string} displayName - The name of the ID in SCREAMING_CASE
+ * @property {string} description - The description of the ability.
+ * @property {Array<AbilitySpec>} abilities - Affected abilities. see atree.js for spec.
+*/
+let MAJOR_IDS = null;
+
+async function load_major_id_data(version_str) {
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/majid.json`;
+    MAJOR_IDS = await (await fetch(url)).json();
+    console.log("Loaded major id data");
+}
+
+let ASPECTS = null;
+
+async function load_aspect_data(version_str) {
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/aspects.json`;
+    try {
+        ASPECTS = await (await fetch(url)).json();
+        console.log("Loaded aspects data");
+    } catch (error) {
+        ASPECTS = null;
+        console.log("Could not load aspect data -- maybe an older version?");
+        console.log(error);
+    }
+}
