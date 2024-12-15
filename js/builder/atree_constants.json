@@ -10028,9 +10028,6 @@
                 "duration": 40,
                 "range": 6
             },
-            "properties": {
-                "duration": 40
-            },
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -11733,7 +11730,7 @@
             "display_name": "Crimson Effigy",
             "desc": "Hitting your Totem with Uproot will summon an Effigy that will attack enemies and push them towards your totem.",
             "archetype": "Summoner",
-            "archetype_req": 8,
+            "archetype_req": 6,
             "parents": ["Double Totem", "Cheaper Totem II", "Mask of the Heretic"],
             "dependencies": ["Uproot"],
             "blockers": [],
@@ -11875,12 +11872,12 @@
             "desc": "Uproot will slow down enemies.",
             "base_abil": "Uproot",
             "archetype": "Summoner",
-            "parents": ["Cheaper Aura II"],
+            "parents": ["Crimson Effigy"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 29,
+                "row": 27,
                 "col": 0,
                 "icon": "node_1"
             },
@@ -11937,13 +11934,13 @@
             "desc": "Hitting your Puppets with Main Attack will cause them to lose 2s of their duration per beam.",
             "archetype": "Summoner",
             "base_abil": 999,
-            "parents": ["Maddening Roots"],
+            "parents": ["Cheaper Aura II", "Stronger Totem"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 31,
-                "col": 1,
+                "row": 29,
+                "col": 2,
                 "icon": "node_0"
             },
             "effects": []
@@ -12007,7 +12004,7 @@
             "base_abil": "Totem",
             "archetype": "Summoner",
             "archetype_req": 8,
-            "parents": ["Friendly Fire", "Invigorating Wave"],
+            "parents": ["Hummingbirds' Song", "Invigorating Wave"],
             "dependencies": ["Double Totem"],
             "blockers": [],
             "cost": 2,
@@ -12056,7 +12053,7 @@
             "desc": "Aura will temporarily increase your Summon's attack speed by +30%. Players hit will gain +5 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
-            "parents": ["Friendly Fire", "Triple Totem", "Frog Dance"], 
+            "parents": ["Hummingbirds' Song", "Triple Totem", "Frog Dance"], 
             "dependencies": ["Aura"], 
             "blockers": [],
             "cost": 2, 
@@ -12196,16 +12193,15 @@
             "display_name": "Shepherd",
             "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 15s. (Max +8)",
             "archetype": "Summoner",
-            "archetype_req": 12,
             "base_abil": "Puppet Master",
-            "parents": ["Triple Totem", "Invigorating Wave"],
+            "parents": ["Soaring Wingbeats"],
             "dependencies": ["Puppet Master"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 34,
-                "col": 1,
-                "icon": "node_3"
+                "row": 35,
+                "col": 0,
+                "icon": "node_2"
             },
             "properties": {
                 "max_puppets": 8
@@ -12224,6 +12220,108 @@
                 ],
                 "scaling": [0]
             }]
+        },
+        {
+            "display_name": "Commander",
+            "desc": "Casting Uproot while holding shift will rally all puppets, giving them +25% attack speed and improved accuracy. Main attack deals 3% more damage per rallied puppet.",
+            "archetype": "Summoner",
+            "archetype_req": 4,
+            "parents": ["Cheaper Aura II"],
+            "dependencies": ["Haul"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 29,
+                "col": 0,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Soaring Wingbeats",
+            "desc": "Your Hummingbirds' passive effects are improved. +20% walk speed and +2 jump height.",
+            "archetype": "Summoner",
+            "base_abil": "Hummingbirds' Song",
+            "parents": ["Triple Totem", "Invigorating Wave"],
+            "dependencies": ["Hummingbirds' Song"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 1,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Hummingbirds",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "jh",
+                            "value": 2
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 20
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Hummingbirds' Song",
+            "desc": "Summon 2 hummingbirds which fly around you, passively granting a walk speed buff. Casting haul sends the hummingbirds to attack, doing damage every 0.25s.",
+            "archetype": "Summoner",
+            "archetype_req": 10,
+            "parents": ["Commander"],
+            "dependencies": ["Haul"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 31,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {
+                "count": 2
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Hummingbirds' Song",
+                    "base_spell": 10,
+                    "display": "Total Hummingbird DPS",
+                    "parts": [
+                        {
+                            "name": "Hummingbird Hit",
+                            "multipliers": [ 20, 0, 5, 0, 0, 5 ]
+                        },
+                        {
+                            "name": "Single Hummingbird DPS",
+                            "hits": { "Hummingbird Hit": 4 }
+                        },
+                        {
+                            "name": "Total Hummingbird DPS",
+                            "hits": { "Single Hummingbird DPS": "Hummingbirds' Song.count"}
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Hummingbirds",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 40
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Awakened",
@@ -12333,7 +12431,7 @@
             "display_name": "Cheaper Uproot II",
             "desc": "Reduce the Mana cost of Uproot.",
             "base_abil": "Uproot",
-            "parents": ["Shepherd", "Awakened"],
+            "parents": ["Soaring Wingbeats", "Awakened"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 1,

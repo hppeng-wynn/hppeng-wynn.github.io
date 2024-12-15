@@ -1335,6 +1335,9 @@ function generateTooltip(container, node_elem, ability, atree_map) {
             title.classList.add("mc-light-purple");
             break;
         case "node_3":
+            title.classList.add("mc-aqua");
+            break;
+        case "node_4":
             title.classList.add("mc-red");
             break;
         case "node_warrior":
@@ -1547,11 +1550,12 @@ const atree_node_atlas_positions = {
     "node_1": 1,
     "node_2": 2,
     "node_3": 3,
-    "node_archer": 4,
-    "node_warrior": 5,
-    "node_mage": 6,
-    "node_assassin": 7,
-    "node_shaman": 8
+    "node_4": 4,
+    "node_archer": 5,
+    "node_warrior": 6,
+    "node_mage": 7,
+    "node_assassin": 8,
+    "node_shaman": 9
 }
 const atree_node_tile_size = 32;
 const atree_node_atlas_img = make_elem("img", [], {src: "../media/atree/icons.png", loaded: false});
