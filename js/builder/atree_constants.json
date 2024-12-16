@@ -7727,7 +7727,7 @@
             "display": {
                 "row": 7,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -7816,7 +7816,7 @@
             "display": {
                 "row": 7,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -9399,7 +9399,7 @@
                 "Marked"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 31,
                 "col": 2,
@@ -10106,7 +10106,7 @@
             "desc": "When entering and exiting Vanish, become immune to knockback and gain resistance for a brief moment.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
-            "base_abil": "Vanish",
+            "base_abil": "Dash",
             "parents": [
                 "Cheaper Multihit II",
                 "Hoodwink",
