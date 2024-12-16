@@ -5218,6 +5218,12 @@
                     "base_spell": 0,
                     "target_part": "Melee",
                     "multipliers": [ 5, 0, 0, 0, 0, 0 ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 8,
+                    "target_part": "Explosion Damage",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -5288,6 +5294,12 @@
                     "type": "add_spell_prop",
                     "base_spell": 0,
                     "target_part": "Melee",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 8,
+                    "target_part": "Explosion Damage",
                     "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
@@ -6347,7 +6359,7 @@
         {
             "display_name": "Pyrokinesis",
             "desc": "When your Mana Bank reaches 30, your Main Attack will explode upon impact with enemies. (Damage is dealt as Main Attack Damage)",
-            "base_abil": 4,
+            "base_abil": 999,
             "archetype": "Arcanist",
             "archetype_req": 4,
             "parents": [
@@ -6370,10 +6382,10 @@
                     "base_spell": 8,
                     "scaling": "melee",
                     "use_atkspd": false,
-                    "display": "Boom!",
+                    "display": "Explosion Damage",
                     "parts": [
                         {
-                            "name": "Boom!",
+                            "name": "Explosion Damage",
                             "type": "damage",
                             "multipliers": [
                                 150,
