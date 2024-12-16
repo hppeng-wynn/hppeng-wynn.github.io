@@ -11272,8 +11272,8 @@
             }]
         },
         {
-            "display_name": "Larger Blood Pool I",
-            "desc": "Increase your maximum Blood pool by +30%.",
+            "display_name": "Larger Blood Pool",
+            "desc": "Increase your maximum Blood pool by +30 Points.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
             "parents": ["Rebound", "Mask of the Fanatic"],
@@ -11362,7 +11362,7 @@
             "archetype_req": 2,
             "parents": [
                 "Cheaper Uproot I",
-                "Larger Blood Pool I"
+                "Larger Blood Pool"
             ],
             "dependencies": [],
             "blockers": [],
@@ -11405,17 +11405,57 @@
             ]
         },
         {
-            "display_name": "Vengeful Spirit",
-            "desc": "Your Totem will give all players bonus to yourself and allies standing inside its range.",
-            "base_abil": "Totem",
+            "display_name": "Lashing Lance",
+            "desc": "Flaming Tounge gets +1 hit, and now inflicts enemies with Bleeding for +1.5s per hit. Haunting Memory will instead inflict +3s of Bleeding. Bleeding enemies take damage every 0.5s. (Maximum 6s)",
+            "base_abil": "Uproot",
             "archetype": "Acolyte",
-            "parents": ["Larger Blood Pool I", "Masquerade"],
-            "dependencies": [],
+            "archetype_req": "4",
+            "parents": ["Larger Blood Pool", "Masquerade"],
+            "dependencies": ["Flaming Tongue"],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 21,
                 "col": 8,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Bleeding",
+                    "base_spell": 9,
+                    "display": "Bleeding Tick",
+                    "parts": [
+                        { "name": "Bleeding Tick", "multipliers": [ 20, 0, 0, 0, 0, 0 ] }
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Hit",
+                    "multipliers": [ -10, 0, 5, 0, 0, 0 ]
+                },
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 4,
+                  "target_part": "Total Damage",
+                  "hits": {"Single Hit": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Vengeful Spirit",
+            "desc": "Your Totem will give all players bonus to yourself and allies standing inside its range.",
+            "base_abil": "Totem",
+            "archetype": "Acolyte",
+            "parents": ["Masquerade", "Lashing Lance"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 22,
+                "col": 7,
                 "icon": "node_2"
             },
             "properties": {},
@@ -11427,8 +11467,8 @@
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 4,
-            "parents": ["Mask of the Fanatic", "Vengeful Spirit", "Larger Blood Pool I"],
-            "dependencies": ["Mask of the Lunatic"],
+            "parents": ["Mask of the Fanatic", "Lashing Lance", "Larger Blood Pool"],
+            "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
@@ -11575,7 +11615,7 @@
             "base_abil": "Haul",
             "parents": [
                 "Storm Dance",
-                "Vengeful Spirit"
+                "Lashing Lance"
             ],
             "dependencies": ["Haul"],
             "blockers": [],
@@ -11650,14 +11690,14 @@
         },
         {
             "display_name": "Twisted Tether",
-            "desc": "When hitting an enemy with your Main Attack, use 1% from your Blood Pool and add Tether to them. Tethered enemies will take damage for every 2% Health you lose. (Max 20%)",
+            "desc": "Nearby Bleeding enemies will take damage for every 2% health you lose.",
             "archetype": "Acolyte",
             "archetype_req": 7,
             "parents": [
                 "Storm Dance",
                 "Cheaper Haul II"
             ],
-            "dependencies": [],
+            "dependencies": ["Lashing Lance"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -11676,10 +11716,6 @@
                         {
                             "name": "Tether Tick",
                             "multipliers": [ 35, 0, 0, 0, 0, 15 ]
-                        },
-                        {
-                            "name": "Max Tether Damage",
-                            "hits": { "Tether Tick": 10 }
                         }
                     ]
                 }
@@ -11855,7 +11891,7 @@
         {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
-            "parents": ["Twisted Tether", "Larger Blood Pool II"],
+            "parents": ["Twisted Tether", "Bloodier I"],
             "dependencies": [ "Sacrificial Shrine" ],
             "blockers": [],
             "cost": 2,
@@ -11885,8 +11921,8 @@
             ]
         },
         {
-            "display_name": "Larger Blood Pool II",
-            "desc": "Increase your maximum Blood pool by +30%.",
+            "display_name": "Bloodier I",
+            "desc": "Increase your maximum Blood pool by +30 Points. Increase your maximum Bleeding duration by 1.5s.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
             "parents": ["Twisted Tether", "Fluid Healing"],
@@ -11926,7 +11962,7 @@
             "desc": "When switching to the Mask of the Heretic, damage and knockback nearby enemies.",
             "archetype": "Ritualist",
             "archetype_req": 0,
-            "parents": ["Depersonalization", "Stronger Tether"],
+            "parents": ["Depersonalization"],
             "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 2,
@@ -11947,18 +11983,56 @@
             ]
         },     
         {
+            "display_name": "Deeper Wounds",
+            "desc": "Increases Bleeding damage.",
+            "archetype": "Acolyte",
+            "parents": ["Fluid Healing", "Bloodier I"],
+            "dependencies": ["Lashing Lance"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 29,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+              {
+                "type": "add_spell_prop",
+                "base_spell": 9,
+                "target_part": "Bleeding Tick",
+                "multipliers": [20, 0, 0, 0, 0, 0]
+              }
+            ]
+        },
+        {
             "display_name": "Blood Rite",
-            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 35% of the damage taken into your Blood Pool. (Max 10%)",
+            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 35% of the damage taken into your Blood Pool. (Max 10 Points per hit.)",
             "archetype": "Acolyte",
             "archetype_req": 9,
-            "parents": ["Fluid Healing", "Larger Blood Pool II"],
+            "parents": ["Fluid Healing", "Bloodier I"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 29,
+                "row": 31,
                 "col": 7,
                 "icon": "node_3"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Sanguine Strike",
+            "desc": "Slightly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.25 per beam.",
+            "parents": ["Blood Rite", "Chant of the Heretic"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 32,
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -11975,7 +12049,7 @@
             "display": {
                 "row": 29,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "effects": []
         },
@@ -12013,13 +12087,13 @@
             "display_name": "Stronger Tether",
             "desc": "Increase Twisted Tether's damage.",
             "archetype": "Acolyte",
-            "parents": ["Blood Rite", "Chant of the Heretic"],
+            "parents": ["Deeper Wounds"],
             "dependencies": ["Twisted Tether"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 31,
-                "col": 7,
+                "row": 30,
+                "col": 8,
                 "icon": "node_0"
             },
             "properties": {},
@@ -12045,7 +12119,7 @@
             "display": {
                 "row": 32,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "num_totems": 1 },
             "effects": [
@@ -12207,11 +12281,11 @@
             }]
         },
         {
-            "display_name": "Larger Blood Pool III",
-            "desc": "Increase your maximum Blood pool by +30%.",
+            "display_name": "Bloodier II",
+            "desc": "Increase your maximum Blood pool by +30 Points. Increase your maximum Bleeding duration by 1.5s.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
-            "parents": ["Stronger Tether"],
+            "parents": ["Blood Rite"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 1,
@@ -12308,7 +12382,7 @@
         },
         {
             "display_name": "Hummingbirds' Song",
-            "desc": "Summon 2 hummingbirds which fly around you, passively granting a walk speed buff. Casting haul sends the hummingbirds to attack, doing damage every 0.25s.",
+            "desc": "Summon 2 Hummingbird Carvings which fly around you, passively granting a walk speed buff. Casting Haul while holding shift will temporarily send your Hummingbirds to attack nearby enemes, rapidly piercing through them every 0.25s. Casting it again will call them back early. While they are attacking, your Hummingbirds will not apply their passive effects to you. (Duration: 10s)",
             "archetype": "Summoner",
             "archetype_req": 10,
             "parents": ["Commander"],
@@ -12327,7 +12401,7 @@
                 {
                     "type": "replace_spell",
                     "name": "Hummingbirds' Song",
-                    "base_spell": 10,
+                    "base_spell": 11,
                     "display": "Total Hummingbird DPS",
                     "parts": [
                         {
@@ -12424,7 +12498,7 @@
             "desc": "Uproot or Haunting Memory will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
             "archetype": "Acolyte",
             "archetype_req": 12,
-            "parents": ["Larger Blood Pool III"],
+            "parents": ["Bloodier II"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
@@ -12438,7 +12512,7 @@
                 {
                     "type": "replace_spell",
                     "name": "Blood Sorrow",
-                    "base_spell": 9,
+                    "base_spell": 10,
                     "display": "Beam DPS",
                     "parts": [
                         {
