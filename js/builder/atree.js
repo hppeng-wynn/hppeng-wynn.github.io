@@ -1335,10 +1335,10 @@ function generateTooltip(container, node_elem, ability, atree_map) {
             title.classList.add("mc-light-purple");
             break;
         case "node_3":
-            title.classList.add("mc-aqua");
+            title.classList.add("mc-red");
             break;
         case "node_4":
-            title.classList.add("mc-red");
+            title.classList.add("mc-aqua");
             break;
         case "node_warrior":
         case "node_archer":
@@ -1549,8 +1549,8 @@ const atree_node_atlas_positions = {
     "node_0": 0,
     "node_1": 1,
     "node_2": 2,
-    "node_3": 3,
-    "node_4": 4,
+    "node_3": 4,
+    "node_4": 3,
     "node_archer": 5,
     "node_warrior": 6,
     "node_mage": 7,
