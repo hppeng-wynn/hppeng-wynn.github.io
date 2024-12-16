@@ -31,49 +31,6 @@ function parsePowdering(powder_info) {
 }
 
 let atree_data = null;
-const wynn_version_names = [
-    '2.0.1.1',
-    '2.0.1.2',
-    '2.0.2.1',
-    '2.0.2.3',
-    '2.0.3.1',
-    '2.0.4.1',
-    '2.0.4.3',
-    '2.0.4.4',
-    '2.1.0.0',
-    '2.1.0.1',
-    '2.1.1.0',
-    '2.1.1.1'
-];
-const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
-// Default to the newest version.
-let wynn_version_id = WYNN_VERSION_LATEST;
-
-let MAJOR_IDS = null;
-async function load_major_id_data(version_str) {
-    let getUrl = window.location;
-    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
-    // No random string -- we want to use caching
-    let url = `${baseUrl}/data/${version_str}/majid.json`;
-    MAJOR_IDS = await (await fetch(url)).json();
-    console.log("Loaded major id data");
-}
-
-let ASPECTS = null;
-async function load_aspect_data(version_str) {
-    let getUrl = window.location;
-    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
-    // No random string -- we want to use caching
-    let url = `${baseUrl}/data/${version_str}/aspects.json`;
-    try {
-        ASPECTS = await (await fetch(url)).json();
-        console.log("Loaded aspects data");
-    } catch (error) {
-        ASPECTS = null;
-        console.log("Could not load aspect data -- maybe an older version?");
-        console.log(error);
-    }
-}
 
 /*
  * Populate fields based on url, and calculate build.

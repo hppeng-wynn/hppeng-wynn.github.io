@@ -765,7 +765,7 @@ function full_range_to_base(min, max) {
 
 
 (async function() {
-    let load_promises = [ load_init() ];
+    let load_promises = [ load_init(), load_major_id_data(wynn_version_names[WYNN_VERSION_LATEST]) ];
     await Promise.all(load_promises);
     init_customizer();
 })();
