@@ -3211,7 +3211,7 @@
             "display": {
                 "row": 6,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -3266,7 +3266,7 @@
             "display": {
                 "row": 6,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -3588,7 +3588,7 @@
             "display": {
                 "row": 12,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "range": 6,
@@ -3617,7 +3617,7 @@
             "display": {
                 "row": 12,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
             },
@@ -3652,7 +3652,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "range": 1.5,
@@ -3679,7 +3679,7 @@
             "display": {
                 "row": 12,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 2
@@ -3700,7 +3700,6 @@
                 }
             ]  
         },
-
         {
             "display_name": "Flaming Uppercut",
             "desc": "Uppercut will light mobs on fire, dealing damage every 0.6 seconds",
@@ -3714,7 +3713,7 @@
             "display": {
                 "row": 12,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 3,
@@ -3759,7 +3758,7 @@
             "display": {
                 "row": 13,
                 "col": 7,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -3806,7 +3805,7 @@
             "display": {
                 "row": 15,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {"attackRate": 2},
             "effects": [
@@ -3960,7 +3959,7 @@
             "display": {
                 "row": 17,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -3982,7 +3981,7 @@
             "display": {
                 "row": 18,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "chance": 30
@@ -4014,7 +4013,7 @@
             "display": {
                 "row": 18,
                 "col": 6,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "cooldown": 1
@@ -4053,7 +4052,7 @@
             "display": {
                 "row": 20,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
             },
@@ -4105,7 +4104,7 @@
             "display": {
                 "row": 20,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -4136,7 +4135,7 @@
             "display": {
                 "row": 21,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
             },
@@ -4183,7 +4182,7 @@
             "display": {
                 "row": 22,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []  
@@ -4222,7 +4221,7 @@
             "display": {
                 "row": 22,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -4261,7 +4260,7 @@
             "display": {
                 "row": 23,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 3,
@@ -4296,7 +4295,7 @@
             "display": {
                 "row": 23,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -4337,7 +4336,7 @@
             "display": {
                 "row": 24,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4372,7 +4371,7 @@
             "display": {
                 "row": 23,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 4
@@ -4421,7 +4420,7 @@
             "display": {
                 "row": 26,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -4515,7 +4514,7 @@
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4545,7 +4544,7 @@
             "display": {
                 "row": 27,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "duration": 8
@@ -4571,7 +4570,7 @@
             "display": {
                 "row": 27,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4601,7 +4600,7 @@
             "display": {
                 "row": 27,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "aoe": 6
@@ -4634,7 +4633,7 @@
             "display": {
                 "row": 28,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -4664,7 +4663,7 @@
             "display": {
                 "row": 28,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 16
@@ -4719,7 +4718,8 @@
                     "bonuses": [{ "type": "stat", "name": "spd", "value": 20 }]
                 }
             ]  
-        },{
+        },
+        {
             "display_name": "Massacre",
             "desc": "While Corrupted, hitting an enemy with your Main Attack will add +4% to your Corrupted bar. (Cooldown: 2s)",
             "archetype": "Fallen", 
@@ -4732,7 +4732,7 @@
             "display": {
                 "row": 29,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 2
@@ -4750,7 +4750,7 @@
             "display": {
                 "row": 29,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -4776,7 +4776,7 @@
             "display": {
                 "row": 29,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "cooldown": 15
@@ -4915,7 +4915,7 @@
             "display": {
                 "row": 32,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4948,7 +4948,7 @@
             "display": {
                 "row": 31,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 4,
@@ -5021,7 +5021,7 @@
             "display": {
                 "row": 34,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -5113,7 +5113,7 @@
             "display": {
                 "row": 34,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 3,
@@ -5138,7 +5138,7 @@
             "display": {
                 "row": 34,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5280,7 +5280,7 @@
             "display": {
                 "row": 6,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5347,7 +5347,7 @@
             "display": {
                 "row": 6,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5702,7 +5702,7 @@
             "display": {
                 "row": 12,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -5758,7 +5758,7 @@
             "display": {
                 "row": 12,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 2
@@ -5817,7 +5817,7 @@
             "display": {
                 "row": 12,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 7,
@@ -5856,7 +5856,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6096,7 +6096,7 @@
             "display": {
                 "row": 17,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": []
@@ -6117,7 +6117,7 @@
             "display": {
                 "row": 17,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6144,7 +6144,7 @@
             "display": {
                 "row": 18,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -6167,7 +6167,7 @@
             "display": {
                 "row": 18,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6311,7 +6311,7 @@
             "display": {
                 "row": 20,
                 "col": 2,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "duration": 7
@@ -6360,7 +6360,7 @@
             "display": {
                 "row": 20,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -6445,7 +6445,7 @@
             "display": {
                 "row": 21,
                 "col": 6,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "aoe": 7,
@@ -6513,7 +6513,7 @@
             "display": {
                 "row": 22,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6581,7 +6581,7 @@
             "display": {
                 "row": 23,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -6654,7 +6654,7 @@
             "display": {
                 "row": 23,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6699,7 +6699,7 @@
             "display": {
                 "row": 23,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "aoe": 5
@@ -6868,7 +6868,7 @@
             "display": {
                 "row": 25,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -6954,7 +6954,7 @@
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {"range": 20},
             "effects": []
@@ -6998,7 +6998,7 @@
             "display": {
                 "row": 27,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 3
@@ -7089,7 +7089,7 @@
             "display": {
                 "row": 28,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [{
@@ -7125,7 +7125,7 @@
             "display": {
                 "row": 28,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -7186,7 +7186,7 @@
             "display": {
                 "row": 28,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -7237,7 +7237,7 @@
             "display": {
                 "row": 29,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -7299,7 +7299,7 @@
             "display": {
                 "row": 31,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -7378,7 +7378,7 @@
             "display": {
                 "row": 32,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -7534,7 +7534,7 @@
             "display": {
                 "row": 34,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -8808,7 +8808,7 @@
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 26,
                 "col": 1,
@@ -9459,7 +9459,7 @@
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 33,
                 "col": 6,
@@ -10305,7 +10305,7 @@
             "display": {
                 "row": 6,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -10344,7 +10344,7 @@
             "display": {
                 "row": 6,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
@@ -10481,7 +10481,7 @@
             "display": {
                 "row": 9,
                 "col": 1,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "effects": [{
                 "type": "add_spell_prop",
@@ -10716,7 +10716,7 @@
             "display": {
                 "row": 11,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "aoe": 3.5 },
             "effects": [
@@ -10749,7 +10749,7 @@
             "display": {
                 "row": 13,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -10780,7 +10780,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { 
                 "aoe": 2,
@@ -10812,7 +10812,7 @@
             "display": {
                 "row": 13,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -10846,7 +10846,7 @@
             "display": {
                 "row": 13,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11028,7 +11028,7 @@
             "display": {
                 "row": 17,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -11084,7 +11084,7 @@
             "display": {
                 "row": 17,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -11154,7 +11154,7 @@
             "display": {
                 "row": 18,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "range": 14
@@ -11208,7 +11208,7 @@
             "display": {
                 "row": 18,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -11225,7 +11225,7 @@
             "display": {
                 "row": 20,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 3
@@ -11249,7 +11249,7 @@
             "display": {
                 "row": 15,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
@@ -11287,7 +11287,7 @@
             "display": {
                 "row": 21,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "duration": 10
@@ -11404,7 +11404,7 @@
             "display": {
                 "row": 21,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -11422,7 +11422,7 @@
             "display": {
                 "row": 21,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "switch_count": 2,
@@ -11443,7 +11443,7 @@
             "display": {
                 "row": 23,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "num_totems": 1 },
             "effects": [
@@ -11512,7 +11512,7 @@
             "display": {
                 "row": 23,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11538,7 +11538,7 @@
             "display": {
                 "row": 24,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11684,7 +11684,7 @@
             "display": {
                 "row": 21,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -11725,7 +11725,7 @@
             "display": {
                 "row": 29,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -11850,7 +11850,7 @@
             "display": {
                 "row": 28,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11921,7 +11921,7 @@
             "display": {
                 "row": 31,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "aoe": 8 },
             "effects": [
@@ -11946,7 +11946,7 @@
             "display": {
                 "row": 29,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": []
@@ -11980,7 +11980,7 @@
             "display": {
                 "row": 27,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -12082,7 +12082,7 @@
             "display": {
                 "row": 32,
                 "col": 2,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {
                 "TODO": "Make this not multiply base damage...",
@@ -12108,13 +12108,13 @@
                 "Mask of the Heretic",
                 "Crimson Effigy"
             ],
-            "dependencies": ["Mask of the Fanatic"],
+            "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 1,
             "display": {
                 "row": 27,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -12131,7 +12131,7 @@
             "display": {
                 "row": 32,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -12179,7 +12179,7 @@
             "display": {
                 "row": 22,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [{
@@ -12255,7 +12255,7 @@
             "display": {
                 "row": 29,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": []
@@ -12272,7 +12272,7 @@
             "display": {
                 "row": 34,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -12358,7 +12358,7 @@
             "display": {
                 "row": 35,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
