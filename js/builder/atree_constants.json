@@ -2268,7 +2268,7 @@
                     "slider_max": 7,
                     "output": {
                         "type": "stat",
-                        "name": "damMult.Decimator:1.Single Arrow"
+                        "name": "damMult.Phantom Ray:1.Single Tick"
                     },
                     "scaling": [
                         10
