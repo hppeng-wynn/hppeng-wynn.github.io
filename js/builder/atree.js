@@ -1328,16 +1328,16 @@ function generateTooltip(container, node_elem, ability, atree_map) {
         case "node_0":
             // already white
             break;
-        case "node_1":
+        case "node_1": // Yellow nodes
             title.classList.add("mc-gold");
             break;
-        case "node_2":
+        case "node_2": // Purple nodes
             title.classList.add("mc-light-purple");
             break;
-        case "node_3":
+        case "node_3": // Red nodes
             title.classList.add("mc-red");
             break;
-        case "node_4":
+        case "node_4": // Blue nodes
             title.classList.add("mc-aqua");
             break;
         case "node_warrior":
@@ -1549,8 +1549,8 @@ const atree_node_atlas_positions = {
     "node_0": 0,
     "node_1": 1,
     "node_2": 2,
-    "node_3": 4,
-    "node_4": 3,
+    "node_3": 4, // node_3 and node_4 are reversed to maintain backwards compat
+    "node_4": 3, // TODO(orgold): Change sprite sheet so this ugliness does not need to happen
     "node_archer": 5,
     "node_warrior": 6,
     "node_mage": 7,
