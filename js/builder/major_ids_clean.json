@@ -1369,7 +1369,7 @@
     },
     "EVERSHOT": {
         "displayName": "Evershot",
-        "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and double damage per arrow",
+        "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and damage per arrow",
         "abilities": [
             {
                 "class": "Archer",
@@ -1378,30 +1378,42 @@
                 "properties": {},
                 "effects": [
                     {
-                        "type": "raw_stat",
-                        "bonuses": [
-                            {
-                                "type": "stat",
-                                "name": "damMult.Evershot:1.Single Arrow",
-                                "value": 100
-                            }
-                        ]
-                    },
-                    {
                         "type": "add_spell_prop",
                         "base_spell": 1,
-                        "target_part": "Total Damage",
+                        "target_part": "Single Stream",
                         "hits": {
-                            "Single Stream": -2
+                            "Single Arrow": 64
                         }
                     },
                     {
                         "type": "add_spell_prop",
                         "base_spell": 1,
                         "target_part": "DPS",
-                        "display": "DPS",
                         "hits": {
                             "Single Arrow": 6.6667
+                        }
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Single Arrow",
+                        "behavior": "overwrite",
+                        "multipliers": [
+                            45,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "behavior": "overwrite",
+                        "hits": {
+                            "Single Stream": 1
                         }
                     }
                 ]

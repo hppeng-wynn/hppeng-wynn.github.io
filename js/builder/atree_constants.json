@@ -159,7 +159,7 @@
             "display": {
                 "row": 7,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -233,7 +233,7 @@
             "display": {
                 "row": 7,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -630,7 +630,7 @@
             "display": {
                 "row": 15,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -673,7 +673,7 @@
             "display": {
                 "row": 15,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -710,7 +710,7 @@
             "display": {
                 "row": 16,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 2,
@@ -757,7 +757,7 @@
             "display": {
                 "row": 16,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 6
@@ -806,7 +806,7 @@
             "display": {
                 "row": 16,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "range": 16,
@@ -873,7 +873,7 @@
             "display": {
                 "row": 17,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -916,7 +916,7 @@
             "display": {
                 "row": 17,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -1104,7 +1104,7 @@
         },
         {
             "display_name": "Windstorm",
-            "desc": "Arrow Storm will shoot +1 stream of arrows and +2 extra arrows per stream. \nArrow storm gains recoil.",
+            "desc": "Arrow Storm will shoot +1 stream of arrows and +2 extra arrows per stream. \nArrow storm gains recoil while midair.",
             "base_abil": "Arrow Storm",
             "parents": [
                 "Guardian Angels",
@@ -1118,7 +1118,7 @@
             "display": {
                 "row": 21,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -1197,7 +1197,7 @@
             "display": {
                 "row": 21,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -1272,7 +1272,7 @@
             "display": {
                 "row": 22,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "max": 100 },
             "effects": [
@@ -1319,7 +1319,7 @@
             "display": {
                 "row": 22,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": { "range": 30 },
             "effects": []
@@ -1361,6 +1361,28 @@
             ]
         },
         {
+            "display_name": "Phantom Force",
+            "desc": "Phantom Ray gains extra forward range, and becomes wider.",
+            "base_abil": "Arrow Storm",
+            "parents": [
+                "More Focus I"
+            ],
+            "dependencies": [
+                "Phantom Ray"
+            ],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 23,
+                "col": 7,
+                "icon": "node_1"
+            },
+            "properties": {
+                "range": 8
+            },
+            "effects": []
+        },
+        {
             "display_name": "Stormy Feet",
             "desc": "Windy Feet will last longer and grant a stronger speed buff. (+20% speed, +60s)",
             "archetype": "Boltslinger",
@@ -1376,7 +1398,7 @@
             "display": {
                 "row": 23,
                 "col": 1,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "duration": 60
@@ -1400,7 +1422,7 @@
             "display": {
                 "row": 23,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "vision": 18,
@@ -1442,7 +1464,7 @@
             "display": {
                 "row": 25,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 2
@@ -1503,7 +1525,7 @@
             "display": {
                 "row": 25,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []
@@ -1526,7 +1548,7 @@
             "display": {
                 "row": 25,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "vision": 12,
@@ -1583,7 +1605,7 @@
             "display": {
                 "row": 25,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "range": 64,
@@ -1630,7 +1652,7 @@
             "display": {
                 "row": 26,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -1660,7 +1682,7 @@
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "duration": 2
@@ -1760,12 +1782,12 @@
                 "Cheaper Arrow Shield I"
             ],
             "dependencies": [],
-            "blockers": [],
+            "blockers": ["Ghostly Trigger"],
             "cost": 2,
             "display": {
                 "row": 28,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 4
@@ -1906,7 +1928,7 @@
             "display": {
                 "row": 28,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "gravity": 0
@@ -1971,7 +1993,7 @@
             "display": {
                 "row": 29,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []
@@ -2061,7 +2083,7 @@
             "display": {
                 "row": 31,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -2129,7 +2151,7 @@
             "display": {
                 "row": 32,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -2176,7 +2198,7 @@
             "display": {
                 "row": 32,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "vision": 18,
@@ -2235,7 +2257,7 @@
             "display": {
                 "row": 32,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -2246,7 +2268,7 @@
                     "slider_max": 7,
                     "output": {
                         "type": "stat",
-                        "name": "damMult.Decimator:1.Single Arrow"
+                        "name": "damMult.Phantom Ray:1.Single Tick"
                     },
                     "scaling": [
                         10
@@ -2256,7 +2278,7 @@
         },
         {
             "display_name": "Phasing Beam",
-            "desc": "Twain's Arc charges 20% faster, and can now pierce through up to 5 enemies, dealing reduced damage after piercing. (Damage is dealt as Main Attack Damage)",
+            "desc": "Twain's Arc can now pierce through up to 5 enemies, dealing reduced damage after piercing. (Damage is dealt as Main Attack Damage)",
             "archetype": "Sharpshooter",
             "base_abil": "Twain's Arc",
             "parents": [
@@ -2271,7 +2293,7 @@
             "display": {
                 "row": 32,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [{
@@ -2279,7 +2301,7 @@
                 "base_spell": 5,
                 "target_part": "Pierce Damage",
                 "multipliers": [
-                    110,
+                    80,
                     0,
                     0,
                     0,
@@ -2302,7 +2324,7 @@
             "display": {
                 "row": 34,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []
@@ -2324,7 +2346,7 @@
             "display": {
                 "row": 34,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -2433,7 +2455,7 @@
             "display": {
                 "row": 35,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 4,
@@ -2510,7 +2532,7 @@
             "display": {
                 "row": 37,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "attackSpeed": 0.2
@@ -2567,7 +2589,7 @@
             "display": {
                 "row": 37,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -2709,7 +2731,7 @@
             "display": {
                 "row": 39,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "range": 4,
@@ -2790,7 +2812,7 @@
             "display": {
                 "row": 39,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "range": 3,
@@ -2836,6 +2858,24 @@
             ]
         },
         {
+            "display_name": "Ghostly Trigger",
+            "desc": "When using Escape, hold shift to slow your fall, allowing Twain's Arc to be user while airborn. Twain's arc will charge 30% faster while airborn after using Escape.",
+            "archetype": "Sharpshooter",
+            "archetype_req": 0,
+            "base_abil": "Focus",
+            "parents": [ "More Focus II" ],
+            "dependencies": [],
+            "blockers": ["Fierce Stomp"],
+            "cost": 2,
+            "display": {
+                "row": 40,
+                "col": 8,
+                "icon": "node_4"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
             "display_name": "Elusive",
             "desc": "If you do not get hit for 4+ seconds, become immune to self-damage and Arrow Storm's loses its recoil. (Dodging counts as not getting hit)",
             "archetype": "Boltslinger",
@@ -2845,7 +2885,7 @@
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 40,
                 "col": 2,
@@ -2870,7 +2910,7 @@
             "display": {
                 "row": 41,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -2923,7 +2963,7 @@
             "display": {
                 "row": 41,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 2
@@ -3189,7 +3229,7 @@
             "display": {
                 "row": 6,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -3244,7 +3284,7 @@
             "display": {
                 "row": 6,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -3566,7 +3606,7 @@
             "display": {
                 "row": 12,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "range": 6,
@@ -3595,7 +3635,7 @@
             "display": {
                 "row": 12,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
             },
@@ -3630,7 +3670,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "range": 1.5,
@@ -3657,7 +3697,7 @@
             "display": {
                 "row": 12,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "aoe": 2
@@ -3678,7 +3718,6 @@
                 }
             ]  
         },
-
         {
             "display_name": "Flaming Uppercut",
             "desc": "Uppercut will light mobs on fire, dealing damage every 0.6 seconds",
@@ -3692,7 +3731,7 @@
             "display": {
                 "row": 12,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 3,
@@ -3737,7 +3776,7 @@
             "display": {
                 "row": 13,
                 "col": 7,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -3784,7 +3823,7 @@
             "display": {
                 "row": 15,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {"attackRate": 2},
             "effects": [
@@ -3915,7 +3954,7 @@
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
             "base_abil": "Charge",
-            "parents": ["Cheaper Uppercut", "Provoke"], 
+            "parents": ["Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -3928,39 +3967,17 @@
             "effects": []  
         },
         {
-            "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream",
-            "base_abil": "War Scream",
-            "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
-            "dependencies": [], 
-            "blockers": [],
-            "cost": 2, 
-            "display": {
-                "row": 17,
-                "col": 7,
-                "icon": "node_1"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "cost": -5
-                }
-            ]  
-        },
-        {
             "display_name": "Counter",
             "desc": "Gain a 30% chance to take no damage and instantly attack back when dodging an enemy attack with Agility.",
             "archetype": "Battle Monk", 
-            "parents": ["Aerodynamics", "Cheaper Uppercut", "Manachism"], 
+            "parents": ["Aerodynamics", "Cheaper Uppercut"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 18,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "chance": 30
@@ -3985,14 +4002,14 @@
             "desc": "If you receive a hit that's less than 5% of your max HP, gain 10 Mana (1s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 3, 
-            "parents": ["Aerodynamics", "Counter", "Provoke"], 
+            "parents": ["Aerodynamics", "Mantle of the Bovemists"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 18,
-                "col": 6,
-                "icon": "node_2"
+                "row": 17,
+                "col": 7,
+                "icon": "node_4"
             },
             "properties": {
                 "cooldown": 1
@@ -4031,7 +4048,7 @@
             "display": {
                 "row": 20,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
             },
@@ -4076,14 +4093,14 @@
             "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 25% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
-            "parents": ["Stronger Mantle", "Provoke"], 
+            "parents": ["Stronger Mantle", "Manachism"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 20,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -4114,7 +4131,7 @@
             "display": {
                 "row": 21,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
             },
@@ -4161,7 +4178,7 @@
             "display": {
                 "row": 22,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []  
@@ -4200,7 +4217,7 @@
             "display": {
                 "row": 22,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -4239,7 +4256,7 @@
             "display": {
                 "row": 23,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 3,
@@ -4274,7 +4291,7 @@
             "display": {
                 "row": 23,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -4315,7 +4332,7 @@
             "display": {
                 "row": 24,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4350,7 +4367,7 @@
             "display": {
                 "row": 23,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 4
@@ -4399,7 +4416,7 @@
             "display": {
                 "row": 26,
                 "col": 0,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -4493,7 +4510,7 @@
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4523,7 +4540,7 @@
             "display": {
                 "row": 27,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 8
@@ -4549,7 +4566,7 @@
             "display": {
                 "row": 27,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4579,7 +4596,7 @@
             "display": {
                 "row": 27,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 6
@@ -4612,7 +4629,7 @@
             "display": {
                 "row": 28,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -4642,7 +4659,7 @@
             "display": {
                 "row": 28,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 16
@@ -4697,7 +4714,32 @@
                     "bonuses": [{ "type": "stat", "name": "spd", "value": 20 }]
                 }
             ]  
-        },{
+        },
+        {
+            "display_name": "Provoke",
+            "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream",
+            "archetype": "Paladin",
+            "archetype_req": 5,
+            "base_abil": "War Scream",
+            "parents": ["Spirit of the Rabbit", "Cheaper Bash II"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 29,
+                "col": 5,
+                "icon": "node_4"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "cost": -5
+                }
+            ]  
+        },
+        {
             "display_name": "Massacre",
             "desc": "While Corrupted, hitting an enemy with your Main Attack will add +4% to your Corrupted bar. (Cooldown: 2s)",
             "archetype": "Fallen", 
@@ -4710,7 +4752,7 @@
             "display": {
                 "row": 29,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 2
@@ -4728,7 +4770,7 @@
             "display": {
                 "row": 29,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -4747,14 +4789,14 @@
             "archetype": "Paladin", 
             "archetype_req": 3, 
             "base_abil": "Bash",
-            "parents": ["Spirit of the Rabbit", "Cheaper Bash II"], 
+            "parents": ["Cheaper Bash II"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 29,
-                "col": 5,
-                "icon": "node_2"
+                "row": 30,
+                "col": 8,
+                "icon": "node_4"
             },
             "properties": {
                 "cooldown": 15
@@ -4766,7 +4808,7 @@
             "display_name": "Cheaper Bash II",
             "desc": "Reduce the Mana cost of Bash",
             "base_abil": "Bash",
-            "parents": ["Radiance", "Shield Strike", "Sparkling Hope"], 
+            "parents": ["Shield Strike", "Sparkling Hope", "Provoke"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4893,7 +4935,7 @@
             "display": {
                 "row": 32,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -4926,7 +4968,7 @@
             "display": {
                 "row": 31,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 4,
@@ -4999,7 +5041,7 @@
             "display": {
                 "row": 34,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -5091,7 +5133,7 @@
             "display": {
                 "row": 34,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "duration": 3,
@@ -5116,7 +5158,7 @@
             "display": {
                 "row": 34,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5196,6 +5238,12 @@
                     "base_spell": 0,
                     "target_part": "Melee",
                     "multipliers": [ 5, 0, 0, 0, 0, 0 ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 8,
+                    "target_part": "Explosion Damage",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
         },
@@ -5258,7 +5306,7 @@
             "display": {
                 "row": 6,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5266,6 +5314,12 @@
                     "type": "add_spell_prop",
                     "base_spell": 0,
                     "target_part": "Melee",
+                    "multipliers": [ 5, 0, 0, 0, 0, 0 ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 8,
+                    "target_part": "Explosion Damage",
                     "multipliers": [ 5, 0, 0, 0, 0, 0 ]
                 }
             ]
@@ -5325,7 +5379,7 @@
             "display": {
                 "row": 6,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -5680,7 +5734,7 @@
             "display": {
                 "row": 12,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -5736,7 +5790,7 @@
             "display": {
                 "row": 12,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 2
@@ -5795,7 +5849,7 @@
             "display": {
                 "row": 12,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 7,
@@ -5834,7 +5888,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6074,7 +6128,7 @@
             "display": {
                 "row": 17,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []
@@ -6095,7 +6149,7 @@
             "display": {
                 "row": 17,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6122,7 +6176,7 @@
             "display": {
                 "row": 18,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -6145,7 +6199,7 @@
             "display": {
                 "row": 18,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6289,7 +6343,7 @@
             "display": {
                 "row": 20,
                 "col": 2,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 7
@@ -6325,7 +6379,7 @@
         {
             "display_name": "Pyrokinesis",
             "desc": "When your Mana Bank reaches 30, your Main Attack will explode upon impact with enemies. (Damage is dealt as Main Attack Damage)",
-            "base_abil": 4,
+            "base_abil": 999,
             "archetype": "Arcanist",
             "archetype_req": 4,
             "parents": [
@@ -6338,7 +6392,7 @@
             "display": {
                 "row": 20,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -6348,10 +6402,10 @@
                     "base_spell": 8,
                     "scaling": "melee",
                     "use_atkspd": false,
-                    "display": "Boom!",
+                    "display": "Explosion Damage",
                     "parts": [
                         {
-                            "name": "Boom!",
+                            "name": "Explosion Damage",
                             "type": "damage",
                             "multipliers": [
                                 150,
@@ -6423,7 +6477,7 @@
             "display": {
                 "row": 21,
                 "col": 6,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 7,
@@ -6491,7 +6545,7 @@
             "display": {
                 "row": 22,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6559,7 +6613,7 @@
             "display": {
                 "row": 23,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -6632,7 +6686,7 @@
             "display": {
                 "row": 23,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -6677,7 +6731,7 @@
             "display": {
                 "row": 23,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "aoe": 5
@@ -6846,7 +6900,7 @@
             "display": {
                 "row": 25,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -6932,7 +6986,7 @@
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {"range": 20},
             "effects": []
@@ -6976,7 +7030,7 @@
             "display": {
                 "row": 27,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 3
@@ -7067,7 +7121,7 @@
             "display": {
                 "row": 28,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [{
@@ -7103,7 +7157,7 @@
             "display": {
                 "row": 28,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -7164,7 +7218,7 @@
             "display": {
                 "row": 28,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -7215,7 +7269,7 @@
             "display": {
                 "row": 29,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -7277,7 +7331,7 @@
             "display": {
                 "row": 31,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -7356,7 +7410,7 @@
             "display": {
                 "row": 32,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -7512,7 +7566,7 @@
             "display": {
                 "row": 34,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -7693,7 +7747,7 @@
             "display": {
                 "row": 7,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -7782,7 +7836,7 @@
             "display": {
                 "row": 7,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -8159,7 +8213,7 @@
             "display": {
                 "row": 15,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -8214,7 +8268,7 @@
             "display": {
                 "row": 15,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -8259,7 +8313,7 @@
             "display": {
                 "row": 16,
                 "col": 2,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 5,
@@ -8285,7 +8339,7 @@
             "display": {
                 "row": 16,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -8319,7 +8373,7 @@
             "display": {
                 "row": 16,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -8454,7 +8508,7 @@
             "display": {
                 "row": 20,
                 "col": 1,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -8517,7 +8571,7 @@
             "display": {
                 "row": 20,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -8579,7 +8633,7 @@
             "display": {
                 "row": 22,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -8661,7 +8715,7 @@
             "display": {
                 "row": 23,
                 "col": 1,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -8683,7 +8737,7 @@
             "display": {
                 "row": 20,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -8734,7 +8788,7 @@
             "display": {
                 "row": 25,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -8769,7 +8823,7 @@
             "display": {
                 "row": 25,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []
@@ -8786,7 +8840,7 @@
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 26,
                 "col": 1,
@@ -8810,7 +8864,7 @@
             "display": {
                 "row": 26,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 1
@@ -8832,7 +8886,7 @@
             "display": {
                 "row": 26,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "cooldown": 2
@@ -8857,7 +8911,7 @@
             "display": {
                 "row": 29,
                 "col": 7,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -8884,7 +8938,7 @@
             "display": {
                 "row": 27,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "range": 10,
@@ -8930,7 +8984,7 @@
             "display": {
                 "row": 27,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -9143,7 +9197,7 @@
             "display": {
                 "row": 28,
                 "col": 6,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "range": 50
@@ -9365,7 +9419,7 @@
                 "Marked"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 31,
                 "col": 2,
@@ -9437,7 +9491,7 @@
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 33,
                 "col": 6,
@@ -9463,7 +9517,7 @@
             "display": {
                 "row": 33,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -9487,7 +9541,7 @@
             "display": {
                 "row": 34,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [{
@@ -9587,7 +9641,7 @@
             "display": {
                 "row": 37,
                 "col": 1,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []
@@ -9638,7 +9692,7 @@
             "display": {
                 "row": 37,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [{
@@ -9696,7 +9750,7 @@
             "display": {
                 "row": 38,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "max_penalty": 5,
@@ -9789,7 +9843,7 @@
             "display": {
                 "row": 39,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": { 
               "penalty_per_clone": 5,
@@ -9956,7 +10010,7 @@
             "display": {
                 "row": 23,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -9989,7 +10043,7 @@
             "display": {
                 "row": 23,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -10022,14 +10076,11 @@
             "display": {
                 "row": 33,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 40,
                 "range": 6
-            },
-            "properties": {
-                "duration": 40
             },
             "effects": [
                 {
@@ -10059,7 +10110,7 @@
             "display": {
                 "row": 34,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
@@ -10075,7 +10126,7 @@
             "desc": "When entering and exiting Vanish, become immune to knockback and gain resistance for a brief moment.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
-            "base_abil": "Vanish",
+            "base_abil": "Dash",
             "parents": [
                 "Cheaper Multihit II",
                 "Hoodwink",
@@ -10087,7 +10138,7 @@
             "display": {
                 "row": 34,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "duration": 0.5
@@ -10286,7 +10337,7 @@
             "display": {
                 "row": 6,
                 "col": 2,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -10325,7 +10376,7 @@
             "display": {
                 "row": 6,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
@@ -10462,7 +10513,7 @@
             "display": {
                 "row": 9,
                 "col": 1,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "effects": [{
                 "type": "add_spell_prop",
@@ -10697,7 +10748,7 @@
             "display": {
                 "row": 11,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "aoe": 3.5 },
             "effects": [
@@ -10730,7 +10781,7 @@
             "display": {
                 "row": 13,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -10761,7 +10812,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { 
                 "aoe": 2,
@@ -10793,7 +10844,7 @@
             "display": {
                 "row": 13,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -10827,7 +10878,7 @@
             "display": {
                 "row": 13,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11009,7 +11060,7 @@
             "display": {
                 "row": 17,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -11065,7 +11116,7 @@
             "display": {
                 "row": 17,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -11135,7 +11186,7 @@
             "display": {
                 "row": 18,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "range": 14
@@ -11189,7 +11240,7 @@
             "display": {
                 "row": 18,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -11206,7 +11257,7 @@
             "display": {
                 "row": 20,
                 "col": 1,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 3
@@ -11230,7 +11281,7 @@
             "display": {
                 "row": 15,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
@@ -11241,8 +11292,8 @@
             }]
         },
         {
-            "display_name": "Larger Blood Pool I",
-            "desc": "Increase your maximum Blood pool by +30%.",
+            "display_name": "Larger Blood Pool",
+            "desc": "Increase your maximum Blood pool by +30 Points.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
             "parents": ["Rebound", "Mask of the Fanatic"],
@@ -11268,7 +11319,7 @@
             "display": {
                 "row": 21,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 10
@@ -11331,7 +11382,7 @@
             "archetype_req": 2,
             "parents": [
                 "Cheaper Uproot I",
-                "Larger Blood Pool I"
+                "Larger Blood Pool"
             ],
             "dependencies": [],
             "blockers": [],
@@ -11374,18 +11425,58 @@
             ]
         },
         {
-            "display_name": "Vengeful Spirit",
-            "desc": "Your Totem will give all players bonus to yourself and allies standing inside its range.",
-            "base_abil": "Totem",
+            "display_name": "Lashing Lance",
+            "desc": "Flaming Tounge gets +1 hit, and now inflicts enemies with Bleeding for +1.5s per hit. Haunting Memory will instead inflict +3s of Bleeding. Bleeding enemies take damage every 0.5s. (Maximum 6s)",
+            "base_abil": "Uproot",
             "archetype": "Acolyte",
-            "parents": ["Larger Blood Pool I", "Masquerade"],
-            "dependencies": [],
+            "archetype_req": "4",
+            "parents": ["Larger Blood Pool", "Masquerade"],
+            "dependencies": ["Flaming Tongue"],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 21,
                 "col": 8,
-                "icon": "node_1"
+                "icon": "node_4"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Bleeding",
+                    "base_spell": 9,
+                    "display": "Bleeding Tick",
+                    "parts": [
+                        { "name": "Bleeding Tick", "multipliers": [ 20, 0, 0, 0, 0, 0 ] }
+                    ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "target_part": "Single Hit",
+                    "multipliers": [ -10, 0, 5, 0, 0, 0 ]
+                },
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 4,
+                  "target_part": "Total Damage",
+                  "hits": {"Single Hit": 1}
+                }
+            ]
+        },
+        {
+            "display_name": "Vengeful Spirit",
+            "desc": "Your Totem will give all players bonus to yourself and allies standing inside its range.",
+            "base_abil": "Totem",
+            "archetype": "Acolyte",
+            "parents": ["Masquerade", "Lashing Lance"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 22,
+                "col": 7,
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -11396,14 +11487,14 @@
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 4,
-            "parents": ["Mask of the Fanatic", "Vengeful Spirit", "Larger Blood Pool I"],
-            "dependencies": ["Mask of the Lunatic"],
+            "parents": ["Mask of the Fanatic", "Lashing Lance", "Larger Blood Pool"],
+            "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
                 "row": 21,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "switch_count": 2,
@@ -11424,7 +11515,7 @@
             "display": {
                 "row": 23,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "num_totems": 1 },
             "effects": [
@@ -11493,7 +11584,7 @@
             "display": {
                 "row": 23,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11519,7 +11610,7 @@
             "display": {
                 "row": 24,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11544,7 +11635,7 @@
             "base_abil": "Haul",
             "parents": [
                 "Storm Dance",
-                "Vengeful Spirit"
+                "Lashing Lance"
             ],
             "dependencies": ["Haul"],
             "blockers": [],
@@ -11619,14 +11710,14 @@
         },
         {
             "display_name": "Twisted Tether",
-            "desc": "When hitting an enemy with your Main Attack, use 1% from your Blood Pool and add Tether to them. Tethered enemies will take damage for every 2% Health you lose. (Max 20%)",
+            "desc": "Nearby Bleeding enemies will take damage for every 2% health you lose.",
             "archetype": "Acolyte",
             "archetype_req": 7,
             "parents": [
                 "Storm Dance",
                 "Cheaper Haul II"
             ],
-            "dependencies": [],
+            "dependencies": ["Lashing Lance"],
             "blockers": [],
             "cost": 2,
             "display": {
@@ -11645,10 +11736,6 @@
                         {
                             "name": "Tether Tick",
                             "multipliers": [ 35, 0, 0, 0, 0, 15 ]
-                        },
-                        {
-                            "name": "Max Tether Damage",
-                            "hits": { "Tether Tick": 10 }
                         }
                     ]
                 }
@@ -11665,7 +11752,7 @@
             "display": {
                 "row": 21,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -11706,7 +11793,7 @@
             "display": {
                 "row": 29,
                 "col": 5,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -11733,7 +11820,7 @@
             "display_name": "Crimson Effigy",
             "desc": "Hitting your Totem with Uproot will summon an Effigy that will attack enemies and push them towards your totem.",
             "archetype": "Summoner",
-            "archetype_req": 8,
+            "archetype_req": 6,
             "parents": ["Double Totem", "Cheaper Totem II", "Mask of the Heretic"],
             "dependencies": ["Uproot"],
             "blockers": [],
@@ -11824,14 +11911,14 @@
         {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
-            "parents": ["Twisted Tether", "Larger Blood Pool II"],
+            "parents": ["Twisted Tether", "Bloodier I"],
             "dependencies": [ "Sacrificial Shrine" ],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 28,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11854,8 +11941,8 @@
             ]
         },
         {
-            "display_name": "Larger Blood Pool II",
-            "desc": "Increase your maximum Blood pool by +30%.",
+            "display_name": "Bloodier I",
+            "desc": "Increase your maximum Blood pool by +30 Points. Increase your maximum Bleeding duration by 1.5s.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
             "parents": ["Twisted Tether", "Fluid Healing"],
@@ -11875,12 +11962,12 @@
             "desc": "Uproot will slow down enemies.",
             "base_abil": "Uproot",
             "archetype": "Summoner",
-            "parents": ["Cheaper Aura II"],
+            "parents": ["Crimson Effigy"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 29,
+                "row": 27,
                 "col": 0,
                 "icon": "node_1"
             },
@@ -11895,14 +11982,14 @@
             "desc": "When switching to the Mask of the Heretic, damage and knockback nearby enemies.",
             "archetype": "Ritualist",
             "archetype_req": 0,
-            "parents": ["Depersonalization", "Stronger Tether"],
+            "parents": ["Depersonalization"],
             "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 31,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "aoe": 8 },
             "effects": [
@@ -11916,18 +12003,56 @@
             ]
         },     
         {
+            "display_name": "Deeper Wounds",
+            "desc": "Increases Bleeding damage.",
+            "archetype": "Acolyte",
+            "parents": ["Fluid Healing", "Bloodier I"],
+            "dependencies": ["Lashing Lance"],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 29,
+                "col": 7,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+              {
+                "type": "add_spell_prop",
+                "base_spell": 9,
+                "target_part": "Bleeding Tick",
+                "multipliers": [20, 0, 0, 0, 0, 0]
+              }
+            ]
+        },
+        {
             "display_name": "Blood Rite",
-            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 35% of the damage taken into your Blood Pool. (Max 10%)",
+            "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 35% of the damage taken into your Blood Pool. (Max 10 Points per hit.)",
             "archetype": "Acolyte",
             "archetype_req": 9,
-            "parents": ["Fluid Healing", "Larger Blood Pool II"],
+            "parents": ["Fluid Healing", "Bloodier I"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 29,
+                "row": 31,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_4"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Sanguine Strike",
+            "desc": "Slightly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.25 per beam.",
+            "parents": ["Blood Rite", "Chant of the Heretic"],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 32,
+                "col": 6,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -11937,14 +12062,14 @@
             "desc": "Hitting your Puppets with Main Attack will cause them to lose 2s of their duration per beam.",
             "archetype": "Summoner",
             "base_abil": 999,
-            "parents": ["Maddening Roots"],
+            "parents": ["Cheaper Aura II", "Stronger Totem"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 31,
-                "col": 1,
-                "icon": "node_0"
+                "row": 29,
+                "col": 2,
+                "icon": "node_1"
             },
             "effects": []
         },
@@ -11961,7 +12086,7 @@
             "display": {
                 "row": 27,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -11982,13 +12107,13 @@
             "display_name": "Stronger Tether",
             "desc": "Increase Twisted Tether's damage.",
             "archetype": "Acolyte",
-            "parents": ["Blood Rite", "Chant of the Heretic"],
+            "parents": ["Deeper Wounds"],
             "dependencies": ["Twisted Tether"],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 31,
-                "col": 7,
+                "row": 30,
+                "col": 8,
                 "icon": "node_0"
             },
             "properties": {},
@@ -12007,14 +12132,14 @@
             "base_abil": "Totem",
             "archetype": "Summoner",
             "archetype_req": 8,
-            "parents": ["Friendly Fire", "Invigorating Wave"],
+            "parents": ["Hummingbirds' Song", "Invigorating Wave"],
             "dependencies": ["Double Totem"],
             "blockers": [],
             "cost": 2,
             "display": {
                 "row": 32,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": { "num_totems": 1 },
             "effects": [
@@ -12056,14 +12181,14 @@
             "desc": "Aura will temporarily increase your Summon's attack speed by +30%. Players hit will gain +5 mana.",
             "archetype": "Summoner", 
             "archetype_req": 3, 
-            "parents": ["Friendly Fire", "Triple Totem", "Frog Dance"], 
+            "parents": ["Hummingbirds' Song", "Triple Totem", "Frog Dance"], 
             "dependencies": ["Aura"], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 32,
                 "col": 2,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "TODO": "Make this not multiply base damage...",
@@ -12089,13 +12214,13 @@
                 "Mask of the Heretic",
                 "Crimson Effigy"
             ],
-            "dependencies": ["Mask of the Fanatic"],
+            "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 1,
             "display": {
                 "row": 27,
                 "col": 3,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -12112,7 +12237,7 @@
             "display": {
                 "row": 32,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -12160,7 +12285,7 @@
             "display": {
                 "row": 22,
                 "col": 4,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [{
@@ -12176,11 +12301,11 @@
             }]
         },
         {
-            "display_name": "Larger Blood Pool III",
-            "desc": "Increase your maximum Blood pool by +30%.",
+            "display_name": "Bloodier II",
+            "desc": "Increase your maximum Blood pool by +30 Points. Increase your maximum Bleeding duration by 1.5s.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
-            "parents": ["Stronger Tether"],
+            "parents": ["Blood Rite"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 1,
@@ -12196,16 +12321,15 @@
             "display_name": "Shepherd",
             "desc": "When you or your Summons kill an enemy, gain +1 Max Puppets for 15s. (Max +8)",
             "archetype": "Summoner",
-            "archetype_req": 12,
             "base_abil": "Puppet Master",
-            "parents": ["Triple Totem", "Invigorating Wave"],
+            "parents": ["Soaring Wingbeats"],
             "dependencies": ["Puppet Master"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 34,
-                "col": 1,
-                "icon": "node_3"
+                "row": 35,
+                "col": 0,
+                "icon": "node_2"
             },
             "properties": {
                 "max_puppets": 8
@@ -12226,6 +12350,108 @@
             }]
         },
         {
+            "display_name": "Commander",
+            "desc": "Casting Uproot while holding shift will rally all puppets, giving them +25% attack speed and improved accuracy. Main attack deals 3% more damage per rallied puppet.",
+            "archetype": "Summoner",
+            "archetype_req": 4,
+            "parents": ["Cheaper Aura II"],
+            "dependencies": ["Haul"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 29,
+                "col": 0,
+                "icon": "node_4"
+            },
+            "properties": {},
+            "effects": []
+        },
+        {
+            "display_name": "Soaring Wingbeats",
+            "desc": "Your Hummingbirds' passive effects are improved. +20% walk speed and +2 jump height.",
+            "archetype": "Summoner",
+            "base_abil": "Hummingbirds' Song",
+            "parents": ["Triple Totem", "Invigorating Wave"],
+            "dependencies": ["Hummingbirds' Song"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 34,
+                "col": 1,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Hummingbirds",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "jh",
+                            "value": 2
+                        },
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 20
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "display_name": "Hummingbirds' Song",
+            "desc": "Summon 2 Hummingbird Carvings which fly around you, passively granting a walk speed buff. Casting Haul while holding shift will temporarily send your Hummingbirds to attack nearby enemes, rapidly piercing through them every 0.25s. Casting it again will call them back early. While they are attacking, your Hummingbirds will not apply their passive effects to you. (Duration: 10s)",
+            "archetype": "Summoner",
+            "archetype_req": 10,
+            "parents": ["Commander"],
+            "dependencies": ["Haul"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 31,
+                "col": 1,
+                "icon": "node_3"
+            },
+            "properties": {
+                "count": 2
+            },
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Hummingbirds' Song",
+                    "base_spell": 11,
+                    "display": "Total Hummingbird DPS",
+                    "parts": [
+                        {
+                            "name": "Hummingbird Hit",
+                            "multipliers": [ 20, 0, 5, 0, 0, 5 ]
+                        },
+                        {
+                            "name": "Single Hummingbird DPS",
+                            "hits": { "Hummingbird Hit": 4 }
+                        },
+                        {
+                            "name": "Total Hummingbird DPS",
+                            "hits": { "Single Hummingbird DPS": "Hummingbirds' Song.count"}
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Hummingbirds",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 40
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "display_name": "Awakened",
             "desc": "After saving 150 Mana from your Masks' mana reductions, casting Uproot will make you wear the Mask of the Awakened for 25s, giving the power of all Masks at once without any downsides. Switcing to an attached Mask while Awakened will immediately recall the Mask back to you.",
             "base_abil": "Uproot",
@@ -12238,7 +12464,7 @@
             "display": {
                 "row": 35,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -12292,7 +12518,7 @@
             "desc": "Uproot or Haunting Memory will use 70% of your Blood Pool to cast a destructive beam that damages enemies every 0.2s. You cannot attack while in that state. Yourself and allies will receive +2% health as extra overflowing health instead. Decay -1.5% of the bonus health every second.",
             "archetype": "Acolyte",
             "archetype_req": 12,
-            "parents": ["Larger Blood Pool III"],
+            "parents": ["Bloodier II"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
@@ -12306,7 +12532,7 @@
                 {
                     "type": "replace_spell",
                     "name": "Blood Sorrow",
-                    "base_spell": 9,
+                    "base_spell": 10,
                     "display": "Beam DPS",
                     "parts": [
                         {
@@ -12333,7 +12559,7 @@
             "display_name": "Cheaper Uproot II",
             "desc": "Reduce the Mana cost of Uproot.",
             "base_abil": "Uproot",
-            "parents": ["Shepherd", "Awakened"],
+            "parents": ["Soaring Wingbeats", "Awakened"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 1,
