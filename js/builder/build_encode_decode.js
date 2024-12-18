@@ -40,7 +40,7 @@ let atree_data = null;
 async function parse_hash(url_tag) {
     let latest_ver_name = wynn_version_names[WYNN_VERSION_LATEST];
     const default_load_promises = [ load_atree_data(latest_ver_name), load_major_id_data(latest_ver_name),
-                                    load_init(), load_ing_init(), load_tome_init()];
+                                    item_loader.load_init(), ingredient_loader.load_init(), tome_loader.load_init()];
     if (!url_tag) {
         await Promise.all(default_load_promises);
         return;
@@ -92,13 +92,13 @@ async function parse_hash(url_tag) {
             wynn_version_id = WYNN_VERSION_LATEST;
         }
         else {
-            version_name = wynn_version_names[wynn_version_id];
+            const version_name = wynn_version_names[wynn_version_id];
             const load_promises = [ load_atree_data(version_name),
                                     load_major_id_data(version_name),
                                     load_aspect_data(version_name),
-                                    load_old_version(version_name),
-                                    load_ings_old_version(version_name),
-                                    load_tome_old_version(version_name) ];
+                                    item_loader.load_old_version(version_name),
+                                    ingredient_loader.load_old_version(version_name),
+                                    tome_loader.load_old_version(version_name) ];
             console.log("Loading old version data...", version_name)
             await Promise.all(load_promises);
         }

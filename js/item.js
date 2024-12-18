@@ -61,7 +61,7 @@ function toggleAmps(button_id) {
 
 (async function() {
     let latest_ver_name = wynn_version_names[WYNN_VERSION_LATEST];
-    let load_promises = [ load_init(), load_major_id_data(latest_ver_name) ];
+    let load_promises = [ item_loader.load_init(), load_major_id_data(latest_ver_name) ];
     await Promise.all(load_promises);
     init_itempage();
 })();
