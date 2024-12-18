@@ -51,6 +51,7 @@
             "desc": "Improve your Main Attack's damage and range when using a bow.",
             "base_abil": 999,
             "parents": [
+                "Cheaper Arrow Bomb",
                 "Arrow Bomb"
             ],
             "dependencies": [],
@@ -191,6 +192,8 @@
             "display_name": "Escape",
             "desc": "Throw yourself backward to avoid danger. (Hold shift while escaping to cancel)",
             "parents": [
+                "Double Shots",
+                "Power Shots",
                 "Heart Shatter"
             ],
             "dependencies": [],
@@ -1517,7 +1520,6 @@
                 "Traveler",
                 "Ivyroot Mamba"
             ],
-            "archetype_req": 0,
             "req_archetype": "Trapper",
             "dependencies": [],
             "blockers": [],
@@ -2521,6 +2523,7 @@
             "archetype_req": 0,
             "base_abil": "Basaltic Trap",
             "parents": [
+                "Beast Lore",
                 "Shrapnel Bomb",
                 "Cheaper Escape II"
             ],
@@ -3066,6 +3069,7 @@
             "desc": "Improve your Main Attack's damage and range w/ spear",
             "base_abil": 999,
             "parents": [
+                "Cheaper Bash",
                 "Bash"
             ],
             "dependencies": [],
@@ -3145,6 +3149,8 @@
             "display_name": "Charge",
             "desc": "Charge forward at high speed (hold shift to cancel)",
             "parents": [
+                "Vehement",
+                "Tougher Skin",
                 "Double Bash"
             ],
             "dependencies": [],
@@ -3816,7 +3822,7 @@
             "desc": "War Scream will fire a projectile that can go through walls and deal damage multiple times",
             "archetype": "Battle Monk", 
             "base_abil": "War Scream",
-            "parents": ["Half-Moon Swipe"], 
+            "parents": ["Half-Moon Swipe", "Generalist"], 
             "dependencies": ["War Scream"], 
             "blockers": [],
             "cost": 2, 
@@ -3954,14 +3960,14 @@
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
             "base_abil": "Charge",
-            "parents": ["Cheaper Uppercut"], 
+            "parents": ["Cheaper Uppercut", "Manachism"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 17,
                 "col": 5,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []  
@@ -4589,7 +4595,7 @@
             "desc": "Everytime you heal 5% of your max health, deal damage to all nearby enemies",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Mythril Skin"], 
+            "parents": ["Mythril Skin", "Shield Strike"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4961,7 +4967,7 @@
             "desc": "After casting War Scream, envelop yourself with a vortex that damages nearby enemies every 0.5s",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
-            "parents": ["Spirit of the Rabbit", "Stronger Sacred Surge"], 
+            "parents": ["Spirit of the Rabbit", "Stronger Sacred Surge", "Discombobulate"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -5221,7 +5227,8 @@
             "desc": "Improve your Main Attack's damage and range when using a wand.",
             "base_abil": 999,
             "parents": [
-                "Meteor"
+                "Meteor",
+                "Cheaper Meteor"
             ],
             "dependencies": [],
             "blockers": [],
@@ -5328,6 +5335,8 @@
             "display_name": "Teleport",
             "desc": "Instantly teleport in the direction you're facing",
             "parents": [
+                "Wand Proficiency II",
+                "Wisdom",
                 "Shooting Star"
             ],
             "dependencies": [],
@@ -6533,6 +6542,7 @@
             "desc": "Ice Snake will summon 3 snakes.",
             "base_abil": "Ice Snake",
             "parents": [
+                "Pyrokinesis",
                 "Seance",
                 "Cheaper Teleport II",
                 "Healthier Ophanim I"
@@ -7512,6 +7522,7 @@
             "archetype": "Riftwalker",
             "archetype_req": 12,
             "parents": [
+                "Cheaper Heal II",
                 "More Winded II"
             ],
             "dependencies": [],
@@ -7638,6 +7649,7 @@
             "archetype": "",
             "archetype_req": 0,
             "parents": [
+                "Cheaper Spin Attack",
                 "Spin Attack"
             ],
             "dependencies": [],
@@ -7784,6 +7796,8 @@
             "archetype": "",
             "archetype_req": 0,
             "parents": [
+                "Double Slice",
+                "Poisoned Blade",
                 "Double Spin"
             ],
             "dependencies": [],
@@ -9469,7 +9483,7 @@
                 "Spin Attack"
             ],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 33,
                 "col": 4,
@@ -9557,6 +9571,7 @@
             "archetype": "Acrobat",
             "base_abil": "Spin Attack",
             "parents": [
+                "Pirouette",
                 "Choke Bomb",
                 "Wall Jump"
             ],
@@ -10254,7 +10269,7 @@
             "display_name": "Relik Proficiency 1",
             "desc": "Double your Main Attack's beam speed and increase your damage when using a reik.",
             "base_abil": 999,
-            "parents": ["Totem"],
+            "parents": ["Totem", "Cheaper Totem I"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -10345,7 +10360,7 @@
         {
             "display_name": "Haul",
             "desc": "Leap towards your Totem.",
-            "parents": ["Totemic Smash"],
+            "parents": ["Totemic Smash", "Distant Grasp", "Hand of the Shaman"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -10535,6 +10550,7 @@
             "desc": "Increases your base damage from all Earth attacks.",
             "archetype": "Summoner",
             "parents": [
+                "Air Mastery",
                 "Uproot"
             ],
             "dependencies": [],
@@ -10971,7 +10987,7 @@
             "base_abil": "Uproot",
             "archetype": "Ritualist",
             "archetype_req": 2,
-            "parents": ["Rain Dance"],
+            "parents": ["Rain Dance", "Hymn of Hate"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 2,
@@ -11089,7 +11105,7 @@
             "display_name": "Cheaper Uproot I",
             "desc": "Reduce the Mana cost of Uproot.",
             "base_abil": "Uproot",
-            "parents": ["Cheaper Aura I", "Mask of the Lunatic", "Rebound"],
+            "parents": ["Cheaper Aura I", "Mask of the Lunatic", "Rebound", "Hymn of Hate"],
             "dependencies": ["Uproot"],
             "blockers": [],
             "cost": 1,
@@ -11911,7 +11927,7 @@
         {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
-            "parents": ["Twisted Tether", "Bloodier I"],
+            "parents": ["Twisted Tether", "Bloodier I", "Stronger Totem"],
             "dependencies": [ "Sacrificial Shrine" ],
             "blockers": [],
             "cost": 2,
@@ -11969,7 +11985,7 @@
             "display": {
                 "row": 27,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {
                 "effects": 40,
@@ -11982,7 +11998,7 @@
             "desc": "When switching to the Mask of the Heretic, damage and knockback nearby enemies.",
             "archetype": "Ritualist",
             "archetype_req": 0,
-            "parents": ["Depersonalization"],
+            "parents": ["Depersonalization", "Blood Rite"],
             "dependencies": ["Mask of the Heretic"],
             "blockers": [],
             "cost": 2,
@@ -12030,7 +12046,7 @@
             "desc": "When yourself or an ally gets hit while standing in your Totem's range, add 35% of the damage taken into your Blood Pool. (Max 10 Points per hit.)",
             "archetype": "Acolyte",
             "archetype_req": 9,
-            "parents": ["Fluid Healing", "Bloodier I"],
+            "parents": ["Deeper Wounds", "Chant of the Heretic"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 2,
@@ -12374,7 +12390,7 @@
             "parents": ["Triple Totem", "Invigorating Wave"],
             "dependencies": ["Hummingbirds' Song"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 34,
                 "col": 1,
