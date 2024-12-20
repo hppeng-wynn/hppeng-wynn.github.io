@@ -1,5 +1,10 @@
+/**
+ * @module load_tome
+ * 
+ * Depends on `clen_item` from load_item.js
+ */
+
 const TOME_DB_VERSION = 10;
-// @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.jsA
 
 let tomes;
 let tomeMap;
@@ -14,7 +19,6 @@ class TomeLoader extends Loader {
     }
     
     get remote_paths() {
-        // Disable cache
         return "tomes";
     }
 
@@ -33,7 +37,6 @@ class TomeLoader extends Loader {
     process_old_version(data) {
         tomes = data.tomes;
         for (const tome of tomes) {
-            //dependency on clean_item in load.js
             clean_item(tome);
         }
     }
@@ -45,7 +48,6 @@ class TomeLoader extends Loader {
         };
         let tomes_store = tsx.objectStore('tome_db');
         for (const tome of tomes) {
-            //dependency on clean_item in load.js
             clean_item(tome);
             let req = tomes_store.add(tome, tome.name);
             req.onerror = () => {
@@ -93,7 +95,6 @@ class TomeLoader extends Loader {
             tome.wDam = "0-0";
             tome.fDam = "0-0";
             tome.aDam = "0-0";
-            //dependency - load.js
             clean_item(tome);
 
             none_tomes.push(tome);

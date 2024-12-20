@@ -1,7 +1,5 @@
 const ING_DB_VERSION = 36;
 
-// @See https://github.com/mdn/learning-area/blob/master/javascript/apis/client-side-storage/indexeddb/video-store/index.js
-
 let ings;
 let recipes;
 
@@ -15,9 +13,6 @@ let ingIDMap = new Map();
 let recipeIDMap;
 
 class IngredientLoader extends Loader {
-    /*
-     * Load item set from local DB. Calls init() on success.
-     */
     process_local(tsx, reject) {
         let ings_store = tsx.objectStore('ing_db');
         let recipes_store = tsx.objectStore('recipe_db');
@@ -54,7 +49,6 @@ class IngredientLoader extends Loader {
     }
 
     get remote_paths() {
-        // Disable caching
         return [`ingreds_compress`, `recipes_compress`];
     }
 
