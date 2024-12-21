@@ -49,6 +49,6 @@ function display(itemExp, id) {
 }
 
 (async function() {
-    await Promise.resolve(load_ing_init());
+    await Promise.resolve(ingredient_loader.load_init());
     init_items_adv();
 })();
