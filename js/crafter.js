@@ -360,7 +360,7 @@ function resetFields() {
 }
 
 (async function() {
-    let load_promises = [ load_ing_init() ];
+    let load_promises = [ ingredient_loader.load_init() ];
     await Promise.all(load_promises);
     init_crafter();
 })();
