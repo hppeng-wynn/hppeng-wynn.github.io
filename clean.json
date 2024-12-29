@@ -1,6 +1,49 @@
 {
   "items": [
     {
+      "name": "Blunt Force",
+      "category": "weapon",
+      "type": "spear",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 620,
+      "drop": "never",
+      "lvl": 105,
+      "classReq": "warrior",
+      "strReq": 65,
+      "defReq": 45,
+      "agiReq": 45,
+      "majorIds": [
+        "VITRIOL"
+      ],
+      "slots": 1,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "475",
+          "name": "spear.earth3"
+        }
+      },
+      "mdPct": 40,
+      "sdRaw": -12000,
+      "criticalDamageBonus": {
+        "min": -39,
+        "raw": -30,
+        "max": -21
+      },
+      "kb": 20,
+      "weakenEnemy": 10,
+      "nDam": "0-10",
+      "eDam": "50-80",
+      "fDam": "60-70",
+      "aDam": "40-90",
+      "tier": "Fabled",
+      "displayName": "Blunt Force",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "id": 4086
+    },
+    {
       "name": "Nuclear Emesis",
       "category": "armor",
       "type": "helmet",
@@ -1431,6 +1474,36 @@
       "tier": "Legendary",
       "displayName": "Mesmerizing Madness",
       "id": 3968
+    },
+    {
+      "category": "accessory",
+      "name": "Death Grasp",
+      "type": "bracelet",
+      "drop": "never",
+      "lvl": 103,
+      "strReq": 75,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "163",
+          "name": "bracelet.earth2"
+        }
+      },
+      "ls": 192,
+      "eMdPct": 25,
+      "atkTier": -18,
+      "spd": -10,
+      "mainAttackRange": {
+        "min": 7,
+        "raw": 23,
+        "max": 30
+      },
+      "hp": 500,
+      "eDef": 80,
+      "tier": "Legendary",
+      "displayName": "Death Grasp",
+      "id": 4087
     },
     {
       "name": "Renegade",
@@ -13367,6 +13440,90 @@
       "id": 2516
     },
     {
+      "name": "Nullification",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "FAST",
+      "averageDps": 750,
+      "drop": "normal",
+      "lvl": 95,
+      "classReq": "assassin",
+      "strReq": 30,
+      "dexReq": 30,
+      "intReq": 30,
+      "defReq": 30,
+      "agiReq": 30,
+      "majorIds": [
+        "PUNISHMENT"
+      ],
+      "slots": 3,
+      "lore": "The diminutive stature of this item belies its abilities. Absorbing and expelling magical energy in precise bursts, it protects the user from all manner of attacks while punishing those who dare strike.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "258",
+          "name": "dagger.basicGold"
+        }
+      },
+      "def": 40,
+      "poison": -10000,
+      "ls": 465,
+      "ms": 16,
+      "ref": 80,
+      "rDefPct": 154,
+      "eDam": "55-65",
+      "tDam": "15-105",
+      "wDam": "45-75",
+      "fDam": "35-85",
+      "aDam": "25-95",
+      "tier": "Mythic",
+      "displayName": "Nullification",
+      "nDam": "0-0",
+      "id": 1714
+    },
+    {
+      "name": "Voidstone Lersing",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "VERY_SLOW",
+      "averageDps": 685,
+      "drop": "never",
+      "fixID": true,
+      "lvl": 95,
+      "classReq": "archer",
+      "quest": "One Thousand Meters Under",
+      "strReq": 40,
+      "agiReq": 40,
+      "slots": 2,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "189",
+          "name": "bow.basicWood"
+        }
+      },
+      "str": 8,
+      "agi": 8,
+      "sdPct": 20,
+      "hprPct": -20,
+      "hpBonus": -1250,
+      "ls": 305,
+      "ms": 8,
+      "thorns": 20,
+      "spd": 12,
+      "nDam": "130-200",
+      "eDam": "300-360",
+      "aDam": "300-360",
+      "tier": "Rare",
+      "displayName": "Voidstone Lersing",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 4088
+    },
+    {
       "category": "accessory",
       "name": "Diamond Fusion Bracelet",
       "type": "bracelet",
@@ -15063,46 +15220,6 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 1
-    },
-    {
-      "name": "Nullification",
-      "category": "weapon",
-      "type": "dagger",
-      "atkSpd": "FAST",
-      "averageDps": 750,
-      "drop": "normal",
-      "lvl": 95,
-      "classReq": "assassin",
-      "strReq": 30,
-      "dexReq": 30,
-      "intReq": 30,
-      "defReq": 30,
-      "agiReq": 30,
-      "slots": 3,
-      "lore": "The diminutive stature of this item belies its abilities. Absorbing and expelling magical energy in precise bursts, it protects the user from all manner of attacks while punishing those who dare strike.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "256",
-          "name": "dagger.basicGold"
-        }
-      },
-      "def": 40,
-      "poison": -10000,
-      "ls": 465,
-      "ms": 16,
-      "ref": 80,
-      "rDefPct": 154,
-      "eDam": "55-65",
-      "tDam": "15-105",
-      "wDam": "45-75",
-      "fDam": "35-85",
-      "aDam": "25-95",
-      "tier": "Mythic",
-      "displayName": "Nullification",
-      "nDam": "0-0",
-      "id": 1714
     },
     {
       "name": "Fallbreakers",
@@ -17439,47 +17556,6 @@
       "eDam": "0-0",
       "tDam": "0-0",
       "id": 4054
-    },
-    {
-      "name": "Voidstone Lensing",
-      "category": "weapon",
-      "type": "bow",
-      "atkSpd": "VERY_SLOW",
-      "averageDps": 685,
-      "drop": "never",
-      "fixID": true,
-      "lvl": 95,
-      "classReq": "archer",
-      "quest": "One Thousand Meters Under",
-      "strReq": 40,
-      "agiReq": 40,
-      "slots": 2,
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "189",
-          "name": "bow.basicWood"
-        }
-      },
-      "str": 8,
-      "agi": 8,
-      "sdPct": 20,
-      "hprPct": -20,
-      "hpBonus": -1250,
-      "ls": 305,
-      "ms": 8,
-      "thorns": 20,
-      "spd": 12,
-      "nDam": "130-200",
-      "eDam": "300-360",
-      "aDam": "300-360",
-      "tier": "Rare",
-      "displayName": "Voidstone Lensing",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "id": 2918
     },
     {
       "name": "Leictreach Makani",
@@ -21278,6 +21354,7 @@
       "mr": 24,
       "ref": 5,
       "spd": 7,
+      "maxMana": 50,
       "tDamPct": -15,
       "tDefPct": -15,
       "wDefPct": 20,
@@ -24968,6 +25045,93 @@
       "tDam": "0-0",
       "fDam": "0-0",
       "id": 1500
+    },
+    {
+      "name": "Frigg's Vow",
+      "category": "armor",
+      "type": "helmet",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 90,
+      "defReq": 65,
+      "slots": 4,
+      "def": 15,
+      "hprPct": 40,
+      "hprRaw": 185,
+      "damPct": -20,
+      "spPct1": -20,
+      "rDefPct": 40,
+      "hp": 3275,
+      "eDef": 50,
+      "tDef": 75,
+      "wDef": 75,
+      "fDef": 75,
+      "aDef": 75,
+      "tier": "Rare",
+      "displayName": "Frigg's Vow",
+      "id": 4089
+    },
+    {
+      "name": "Quilted Carapace",
+      "category": "armor",
+      "type": "chestplate",
+      "armourColor": "rgb(216,88,0)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 90,
+      "intReq": 85,
+      "defReq": 85,
+      "majorIds": [
+        "ARCANES"
+      ],
+      "slots": 5,
+      "lore": "This patchwork of shells from the Corkian Astrochelys makes for quite the statement sweater; it keeps your neck warm and besides, your foes' fashion fancies feel frivolous, anyway.",
+      "hprPct": 40,
+      "ls": -275,
+      "thorns": 40,
+      "sprint": -25,
+      "rDefPct": 40,
+      "hp": 2750,
+      "eDef": 75,
+      "tDef": 50,
+      "wDef": 100,
+      "fDef": 125,
+      "aDef": 50,
+      "tier": "Fabled",
+      "displayName": "Quilted Carapace",
+      "id": 4090
+    },
+    {
+      "name": "Untimely Demise",
+      "category": "armor",
+      "type": "chestplate",
+      "armourColor": "rgb(156,73,0)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 90,
+      "dexReq": 85,
+      "slots": 2,
+      "lore": "\u201cDeath claims your soul...\u201d",
+      "dex": 10,
+      "hprRaw": -200,
+      "tMdPct": 50,
+      "spRaw2": -5,
+      "spPct3": -20,
+      "spd": 15,
+      "wDefPct": -35,
+      "hp": 2450,
+      "tDef": 200,
+      "wDef": -75,
+      "tier": "Rare",
+      "displayName": "Untimely Demise",
+      "id": 4064
     },
     {
       "name": "Anti-Causality",
@@ -32396,9 +32560,9 @@
       "strReq": 70,
       "slots": 2,
       "lore": "\\[Community Event Winner\\] This battered stone mask is of unknown origin, and has no openings for the eyes whatsoever. Indeed, all that can be seen while wearing it is that which makes you truly angry.",
-      "mdPct": 50,
-      "ls": 210,
-      "eDamPct": 16,
+      "mdPct": 55,
+      "ls": 255,
+      "eDamPct": 30,
       "rDamPct": -20,
       "hp": 3000,
       "eDef": 100,
@@ -33211,6 +33375,91 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 3889
+    },
+    {
+      "name": "Bifrost",
+      "category": "armor",
+      "type": "leggings",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 85,
+      "strReq": 35,
+      "dexReq": 25,
+      "intReq": 25,
+      "defReq": 30,
+      "agiReq": 30,
+      "slots": 2,
+      "rMdPct": 50,
+      "sdPct": -20,
+      "ms": 10,
+      "thorns": 25,
+      "expd": 15,
+      "mainAttackRange": 25,
+      "hp": 3100,
+      "eDef": 100,
+      "tDef": 100,
+      "wDef": 100,
+      "fDef": 100,
+      "aDef": 100,
+      "tier": "Legendary",
+      "displayName": "Bifrost",
+      "id": 4091
+    },
+    {
+      "category": "accessory",
+      "name": "Hinterlands",
+      "type": "necklace",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 85,
+      "strReq": 40,
+      "agiReq": 40,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "178",
+          "name": "necklace.air2"
+        }
+      },
+      "spPct4": -8,
+      "eSdRaw": 30,
+      "aSdRaw": 30,
+      "wDef": 20,
+      "aDef": 30,
+      "tier": "Rare",
+      "displayName": "Hinterlands",
+      "id": 4092
+    },
+    {
+      "category": "accessory",
+      "name": "Pale Sun",
+      "type": "bracelet",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 85,
+      "defReq": 55,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "165",
+          "name": "bracelet.fire2"
+        }
+      },
+      "damPct": -7,
+      "hprRaw": 75,
+      "ref": 12,
+      "healPct": 7,
+      "fDef": 35,
+      "tier": "Rare",
+      "displayName": "Pale Sun",
+      "id": 4093
     },
     {
       "name": "Skysquawk",
@@ -40590,6 +40839,34 @@
       "id": 2170
     },
     {
+      "name": "Arctic Vixen's Pelt",
+      "category": "armor",
+      "type": "leggings",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 80,
+      "defReq": 40,
+      "agiReq": 40,
+      "slots": 2,
+      "int": -8,
+      "hprRaw": 130,
+      "spPct4": -16,
+      "spd": 15,
+      "maxMana": -25,
+      "fDamPct": 15,
+      "aDamPct": 10,
+      "hp": 2500,
+      "wDef": -65,
+      "fDef": 100,
+      "aDef": 100,
+      "tier": "Rare",
+      "displayName": "Arctic Vixen's Pelt",
+      "id": 4094
+    },
+    {
       "name": "Earth Sanctuary",
       "category": "armor",
       "type": "leggings",
@@ -47637,6 +47914,31 @@
       "id": 1610
     },
     {
+      "name": "Wreathbound Boots",
+      "category": "armor",
+      "type": "boots",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 75,
+      "strReq": 50,
+      "slots": 3,
+      "str": 8,
+      "mdPct": 20,
+      "eMdPct": 15,
+      "spPct1": 12,
+      "thorns": 30,
+      "healPct": 12,
+      "aDefPct": -12,
+      "hp": 1935,
+      "eDef": 85,
+      "tier": "Rare",
+      "displayName": "Wreathbound Boots",
+      "id": 4095
+    },
+    {
       "name": "Fuunyet",
       "category": "weapon",
       "type": "spear",
@@ -54488,6 +54790,60 @@
       "id": 1873
     },
     {
+      "category": "accessory",
+      "name": "Afelis's Locket",
+      "type": "necklace",
+      "restrict": "untradable",
+      "drop": "never",
+      "lvl": 70,
+      "defReq": 60,
+      "lore": "A golden locket Afelis always carried with them. Inside is a picture of Afelis embracing a woman in the Detlas square. 'A+E' is inscribed on the front.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "173",
+          "name": "necklace.basicGold"
+        }
+      },
+      "hprRaw": 65,
+      "healPct": 10,
+      "rDefPct": -20,
+      "hp": 375,
+      "fDef": 50,
+      "tier": "Fabled",
+      "displayName": "Afelis's Locket",
+      "id": 4096
+    },
+    {
+      "name": "Bitter Cold",
+      "category": "armor",
+      "type": "leggings",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 70,
+      "intReq": 40,
+      "agiReq": 35,
+      "slots": 2,
+      "int": 8,
+      "agi": 5,
+      "hprPct": -20,
+      "wSdRaw": 85,
+      "aSdRaw": 85,
+      "ref": 25,
+      "spd": -8,
+      "maxMana": -30,
+      "hp": 1500,
+      "wDef": 50,
+      "aDef": 50,
+      "tier": "Rare",
+      "displayName": "Bitter Cold",
+      "id": 4097
+    },
+    {
       "name": "Draken",
       "category": "armor",
       "type": "helmet",
@@ -56308,6 +56664,47 @@
       "id": 4071
     },
     {
+      "name": "Archangel",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "FAST",
+      "averageDps": 556,
+      "drop": "normal",
+      "lvl": 69,
+      "classReq": "assassin",
+      "agiReq": 70,
+      "slots": 3,
+      "lore": "The unwieldy, yet imposing stature of this massive sickle strikes awe into those who view it. Those who have the will to wield it, however, seem to garner respect from all those around them, as though they had become a god.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "472",
+          "name": "spear.air3"
+        }
+      },
+      "def": 10,
+      "agi": 15,
+      "hprPct": 30,
+      "hprRaw": 120,
+      "hpBonus": 1900,
+      "spd": 41,
+      "mainAttackRange": {
+        "min": 38,
+        "raw": 125,
+        "max": 163
+      },
+      "nDam": "20-60",
+      "aDam": "165-200",
+      "tier": "Mythic",
+      "displayName": "Archangel",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 1688
+    },
+    {
       "name": "Stifling Spores",
       "category": "armor",
       "type": "helmet",
@@ -57083,42 +57480,6 @@
       "tier": "Unique",
       "displayName": "Fiery Torc",
       "id": 1047
-    },
-    {
-      "name": "Archangel",
-      "category": "weapon",
-      "type": "dagger",
-      "atkSpd": "FAST",
-      "averageDps": 556,
-      "drop": "normal",
-      "lvl": 69,
-      "classReq": "assassin",
-      "agiReq": 70,
-      "slots": 3,
-      "lore": "The unwieldy, yet imposing stature of this massive sickle strikes awe into those who view it. Those who have the will to wield it, however, seem to garner respect from all those around them, as though they had become a god.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "464",
-          "name": "spear.air3"
-        }
-      },
-      "def": 10,
-      "agi": 15,
-      "hprPct": 30,
-      "hprRaw": 120,
-      "hpBonus": 1900,
-      "spd": 41,
-      "nDam": "20-60",
-      "aDam": "165-200",
-      "tier": "Mythic",
-      "displayName": "Archangel",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "fDam": "0-0",
-      "id": 1688
     },
     {
       "name": "Plated Iron Helmet",
@@ -59756,6 +60117,60 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 1807
+    },
+    {
+      "name": "Elk's Hoof",
+      "category": "armor",
+      "type": "boots",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 65,
+      "strReq": 30,
+      "defReq": 30,
+      "slots": 3,
+      "agi": -5,
+      "hprPct": 30,
+      "spPct2": -18,
+      "eDamPct": 20,
+      "fDamPct": 20,
+      "wDefPct": 30,
+      "aDefPct": 30,
+      "hp": 1450,
+      "wDef": 80,
+      "aDef": 80,
+      "tier": "Set",
+      "displayName": "Elk's Hoof",
+      "id": 4098
+    },
+    {
+      "name": "Rime-Webbed Antlers",
+      "category": "armor",
+      "type": "helmet",
+      "armourColor": "rgb(160,101,64)",
+      "armourMaterial": "leather",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 65,
+      "dexReq": 30,
+      "agiReq": 30,
+      "slots": 3,
+      "def": -5,
+      "ms": 8,
+      "spPct2": -18,
+      "sprint": 30,
+      "sprintReg": 45,
+      "tDamPct": 15,
+      "aDamPct": 15,
+      "hp": 1125,
+      "tDef": 80,
+      "aDef": 80,
+      "tier": "Set",
+      "displayName": "Rime-Webbed Antlers",
+      "id": 4099
     },
     {
       "name": "Pure Light Birch Stick",
@@ -66385,6 +66800,34 @@
       "id": 2190
     },
     {
+      "category": "accessory",
+      "name": "Circlet of Silver Feathers",
+      "type": "bracelet",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 60,
+      "agiReq": 50,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "158",
+          "name": "bracelet.basicIron"
+        }
+      },
+      "mr": 6,
+      "spd": -10,
+      "sprintReg": 20,
+      "jh": 1,
+      "fDefPct": -25,
+      "wDef": 10,
+      "aDef": 12,
+      "tier": "Legendary",
+      "displayName": "Circlet of Silver Feathers",
+      "id": 4100
+    },
+    {
       "name": "Earthquake",
       "category": "weapon",
       "type": "wand",
@@ -71654,6 +72097,46 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 662
+    },
+    {
+      "name": "Attrition",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "SLOW",
+      "averageDps": 450,
+      "drop": "normal",
+      "lvl": 55,
+      "classReq": "archer",
+      "intReq": 40,
+      "defReq": 40,
+      "majorIds": [
+        "METHODICAL"
+      ],
+      "slots": 3,
+      "lore": "Outrun. Outsmart. Outlast.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "198",
+          "name": "bow.fire2"
+        }
+      },
+      "def": 25,
+      "sdPct": -29,
+      "hprRaw": 54,
+      "hpBonus": 500,
+      "mr": -22,
+      "maxMana": 154,
+      "nDam": "65-90",
+      "fDam": "210-235",
+      "tier": "Fabled",
+      "displayName": "Attrition",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "0-0",
+      "id": 4101
     },
     {
       "name": "Whirlwind",
@@ -78164,6 +78647,33 @@
       "tier": "Unique",
       "displayName": "Dust Bowl",
       "id": 939
+    },
+    {
+      "category": "accessory",
+      "name": "Winter Solstice",
+      "type": "ring",
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 50,
+      "dexReq": 20,
+      "intReq": 25,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "154",
+          "name": "ring.water1"
+        }
+      },
+      "sdRaw": 31,
+      "hprRaw": -13,
+      "mr": 4,
+      "ms": 3,
+      "hp": -195,
+      "tier": "Legendary",
+      "displayName": "Winter Solstice",
+      "id": 4102
     },
     {
       "category": "accessory",
@@ -88541,6 +89051,52 @@
       "id": 1209
     },
     {
+      "name": "Dune Kiln",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SUPER_SLOW",
+      "averageDps": 255,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 40,
+      "classReq": "shaman",
+      "defReq": 30,
+      "slots": 2,
+      "lore": "\"You don't really advance much when it comes to ovens. For clay, glass, ceramics...it was perfected a long time ago.\" -Treous, Almuj Glassblower",
+      "dropInfo": {
+        "name": "Sand-Swept Tomb",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          1390,
+          90,
+          -1835
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "407",
+          "name": "relik.fire2"
+        }
+      },
+      "hprRaw": 25,
+      "ms": 10,
+      "spPct1": -25,
+      "spd": -15,
+      "expd": 40,
+      "nDam": "150-250",
+      "fDam": "275-325",
+      "tier": "Legendary",
+      "displayName": "Dune Kiln",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "0-0",
+      "id": 4103
+    },
+    {
       "name": "Sprout",
       "category": "weapon",
       "type": "wand",
@@ -92681,6 +93237,33 @@
       "id": 2369
     },
     {
+      "name": "Philosopher",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "golden",
+      "drop": "normal",
+      "lvl": 36,
+      "classReq": "shaman",
+      "intReq": 20,
+      "majorIds": [
+        "PEACEFUL_EFFIGY"
+      ],
+      "slots": 2,
+      "lore": "What better excuse is there to sit in the shade and think about life?",
+      "def": 4,
+      "mdPct": -12,
+      "sdPct": -8,
+      "hprPct": 15,
+      "healPct": 8,
+      "ref": 45,
+      "spd": -10,
+      "hp": 525,
+      "fDef": 15,
+      "tier": "Fabled",
+      "displayName": "Philosopher",
+      "id": 3552
+    },
+    {
       "name": "Sandshooter",
       "category": "weapon",
       "type": "bow",
@@ -93883,33 +94466,6 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 3373
-    },
-    {
-      "name": "Philosopher",
-      "category": "armor",
-      "type": "leggings",
-      "armourMaterial": "golden",
-      "drop": "normal",
-      "lvl": 36,
-      "classReq": "shaman",
-      "intReq": 20,
-      "majorIds": [
-        "PEACEFUL_EFFIGY"
-      ],
-      "slots": 2,
-      "lore": "What better excuse is there to sit in the shade and think about life?",
-      "def": 4,
-      "mdPct": -12,
-      "sdPct": -8,
-      "hprPct": 15,
-      "healPct": 8,
-      "ref": 45,
-      "spd": -10,
-      "hp": 525,
-      "fDef": 15,
-      "tier": "Fabled",
-      "displayName": "Philosopher",
-      "id": 3552
     },
     {
       "name": "Ancient Jazerant",
@@ -100264,6 +100820,44 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 1138
+    },
+    {
+      "name": "Uncanny Mirage",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 93,
+      "drop": "never",
+      "lvl": 29,
+      "classReq": "assassin",
+      "agiReq": 30,
+      "slots": 2,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "260",
+          "name": "dagger.air2"
+        }
+      },
+      "ms": -8,
+      "aSdRaw": 45,
+      "aMdRaw": 30,
+      "atkTier": 1,
+      "mainAttackRange": {
+        "min": 12,
+        "raw": 40,
+        "max": 52
+      },
+      "nDam": "0-30",
+      "aDam": "0-30",
+      "tier": "Legendary",
+      "displayName": "Uncanny Mirage",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 4104
     },
     {
       "name": "Garoth's Hope",
@@ -107453,6 +108047,93 @@
       "id": 3675
     },
     {
+      "name": "Pyrexia",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "SUPER_FAST",
+      "averageDps": 103,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 21,
+      "classReq": "archer",
+      "dexReq": 10,
+      "lore": "\"I always thought Yahya was venom-addled, but the symptoms don't match...\" -Pyeka, Alekin Herbalist",
+      "dropInfo": {
+        "name": "Infested Pit",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -157,
+          54,
+          -1819
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "200",
+          "name": "bow.thunder1"
+        }
+      },
+      "hprRaw": -10,
+      "tMdRaw": 12,
+      "fDamPct": 15,
+      "nDam": "0-10",
+      "tDam": "3-35",
+      "tier": "Rare",
+      "displayName": "Pyrexia",
+      "eDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 4105
+    },
+    {
+      "name": "Match",
+      "category": "weapon",
+      "type": "wand",
+      "atkSpd": "SLOW",
+      "averageDps": 45,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 21,
+      "classReq": "mage",
+      "defReq": 8,
+      "slots": 1,
+      "lore": "\"Controlled burns are healthy, but it's clear why no one wants to do them.\" -Darek, Alekin Trailblazer",
+      "dropInfo": {
+        "name": "Infested Pit",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -157,
+          54,
+          -1819
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "336",
+          "name": "wand.fire1"
+        }
+      },
+      "fDamRaw": 20,
+      "spd": -8,
+      "fDefPct": 30,
+      "nDam": "8-12",
+      "fDam": "15-25",
+      "tier": "Rare",
+      "displayName": "Match",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "0-0",
+      "id": 4106
+    },
+    {
       "name": "Arcanic",
       "category": "armor",
       "type": "chestplate",
@@ -107944,6 +108625,51 @@
       "wDam": "0-0",
       "fDam": "0-0",
       "id": 2763
+    },
+    {
+      "name": "Silk Slasher",
+      "category": "weapon",
+      "type": "dagger",
+      "atkSpd": "FAST",
+      "averageDps": 75,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 20,
+      "classReq": "assassin",
+      "agiReq": 10,
+      "slots": 1,
+      "lore": "\"Cut a web, and its owner will feel it and come out. That's your chance to strike.\" -Lieutenant Van, Detlas 2nd Regiment",
+      "dropInfo": {
+        "name": "Infested Pit",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -157,
+          54,
+          -1819
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "259",
+          "name": "dagger.air1"
+        }
+      },
+      "agi": 3,
+      "aDamRaw": 16,
+      "spd": 10,
+      "sprint": 20,
+      "nDam": "5-15",
+      "aDam": "10-30",
+      "tier": "Rare",
+      "displayName": "Silk Slasher",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "id": 4107
     },
     {
       "name": "Red Team Chestplate",
@@ -108955,6 +109681,51 @@
       "tier": "Rare",
       "displayName": "Stingy",
       "id": 813
+    },
+    {
+      "name": "Ivy Whip",
+      "category": "weapon",
+      "type": "relik",
+      "atkSpd": "SLOW",
+      "averageDps": 68,
+      "restrict": "untradable",
+      "drop": "never",
+      "fixID": true,
+      "lvl": 19,
+      "classReq": "shaman",
+      "strReq": 5,
+      "slots": 1,
+      "lore": "\"The vines you'll find among the foilage make for great rope!\" -Alekin's Guide to Plant Fiber Cordage",
+      "dropInfo": {
+        "name": "Infested Pit",
+        "type": "dungeonMerchant",
+        "coordinates": [
+          -157,
+          54,
+          -1819
+        ]
+      },
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "403",
+          "name": "relik.earth1"
+        }
+      },
+      "str": 2,
+      "spPct4": -15,
+      "kb": 30,
+      "eDamPct": 8,
+      "nDam": "15-25",
+      "eDam": "25-25",
+      "tier": "Unique",
+      "displayName": "Ivy Whip",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 4108
     },
     {
       "name": "Jungle Wood Stick",
