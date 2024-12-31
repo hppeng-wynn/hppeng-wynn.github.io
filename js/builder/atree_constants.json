@@ -12553,7 +12553,7 @@
                     "parts": [
                         {
                             "name": "Beam Tick Damage",
-                            "multipliers": [100, 0, 0, 20, 0, 0]
+                            "multipliers": [125, 0, 0, 20, 0, 0]
                         },
                         {
                             "name": "Beam DPS",
