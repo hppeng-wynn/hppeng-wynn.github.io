@@ -754,6 +754,39 @@
       "id": 3722
     },
     {
+      "category": "accessory",
+      "name": "Ad Terram",
+      "type": "ring",
+      "drop": "lootchest",
+      "lvl": 104,
+      "strReq": 50,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "149",
+          "name": "ring.earth2"
+        }
+      },
+      "str": 4,
+      "eMdPct": 25,
+      "tDamRaw": -75,
+      "aDamRaw": -75,
+      "atkTier": -8,
+      "mainAttackRange": {
+        "min": 3,
+        "raw": 10,
+        "max": 13
+      },
+      "hp": -500,
+      "eDef": 75,
+      "tDef": -50,
+      "aDef": -50,
+      "tier": "Rare",
+      "displayName": "Ad Terram",
+      "id": 4109
+    },
+    {
       "name": "Tendril Talon",
       "category": "weapon",
       "type": "dagger",
@@ -2571,7 +2604,7 @@
       "category": "weapon",
       "type": "dagger",
       "atkSpd": "SLOW",
-      "averageDps": 675,
+      "averageDps": 712,
       "drop": "normal",
       "lvl": 102,
       "classReq": "assassin",
@@ -2583,7 +2616,7 @@
         "format": "attribute",
         "value": {
           "id": "minecraft:iron_horse_armor",
-          "customModelData": "262",
+          "customModelData": "264",
           "name": "dagger.earth3"
         }
       },
@@ -2592,7 +2625,7 @@
       "rDamPct": 30,
       "spPct1": 20,
       "spPct2": 20,
-      "nDam": "30-150",
+      "nDam": "30-200",
       "eDam": "80-160",
       "tDam": "40-200",
       "wDam": "60-180",
@@ -11532,6 +11565,32 @@
       "id": 863
     },
     {
+      "category": "accessory",
+      "name": "Voltage",
+      "type": "ring",
+      "drop": "lootchest",
+      "lvl": 96,
+      "dexReq": 60,
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "153",
+          "name": "ring.thunder2"
+        }
+      },
+      "dex": 4,
+      "ls": -135,
+      "ms": 4,
+      "tMdRaw": 240,
+      "atkTier": -3,
+      "tDef": 40,
+      "wDef": -60,
+      "tier": "Rare",
+      "displayName": "Voltage",
+      "id": 4110
+    },
+    {
       "name": "Kindled Orchid",
       "category": "armor",
       "type": "helmet",
@@ -13483,7 +13542,7 @@
       "id": 1714
     },
     {
-      "name": "Voidstone Lersing",
+      "name": "Voidstone Lensing",
       "category": "weapon",
       "type": "bow",
       "atkSpd": "VERY_SLOW",
@@ -13521,7 +13580,47 @@
       "tDam": "0-0",
       "wDam": "0-0",
       "fDam": "0-0",
-      "id": 4088
+      "id": 2918
+    },
+    {
+      "name": "Ignis",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "NORMAL",
+      "averageDps": 726,
+      "drop": "normal",
+      "lvl": 95,
+      "classReq": "archer",
+      "defReq": 105,
+      "majorIds": [
+        "ALTRUISM"
+      ],
+      "slots": 3,
+      "lore": "This bow, used by the dwarves to land the final blow in the slaughter of Garaheth is extremely powerful. Special, fire resistant gloves must be worn at all times to prevent burns to the user.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "199",
+          "name": "bow.fire3"
+        }
+      },
+      "def": 20,
+      "hprPct": 40,
+      "hprRaw": 345,
+      "hpBonus": 3000,
+      "spPct4": -35,
+      "fDefPct": 100,
+      "aDefPct": 50,
+      "nDam": "130-210",
+      "fDam": "140-225",
+      "tier": "Mythic",
+      "displayName": "Ignis",
+      "eDam": "0-0",
+      "tDam": "0-0",
+      "wDam": "0-0",
+      "aDam": "0-0",
+      "id": 1706
     },
     {
       "category": "accessory",
@@ -13626,47 +13725,6 @@
       "tier": "Legendary",
       "displayName": "Gemini",
       "id": 1194
-    },
-    {
-      "name": "Ignis",
-      "category": "weapon",
-      "type": "bow",
-      "atkSpd": "NORMAL",
-      "averageDps": 726,
-      "drop": "normal",
-      "lvl": 95,
-      "classReq": "archer",
-      "defReq": 105,
-      "majorIds": [
-        "ALTRUISM"
-      ],
-      "slots": 3,
-      "lore": "This bow, used by the dwarves to land the final blow in the slaughter of Garaheth is extremely powerful. Special, fire resistant gloves must be worn at all times to prevent burns to the user.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "199",
-          "name": "bow.fire3"
-        }
-      },
-      "def": 20,
-      "hprPct": 40,
-      "hprRaw": 345,
-      "hpBonus": 4000,
-      "spPct4": -35,
-      "fDamPct": 10,
-      "fDefPct": 100,
-      "aDefPct": 50,
-      "nDam": "130-210",
-      "fDam": "140-225",
-      "tier": "Mythic",
-      "displayName": "Ignis",
-      "eDam": "0-0",
-      "tDam": "0-0",
-      "wDam": "0-0",
-      "aDam": "0-0",
-      "id": 1706
     },
     {
       "category": "accessory",
@@ -14399,12 +14457,12 @@
       "armourMaterial": "diamond",
       "drop": "never",
       "lvl": 95,
-      "defReq": 85,
+      "defReq": 80,
       "slots": 2,
       "fMdRaw": 254,
       "hprRaw": 165,
-      "mr": -10,
-      "spPct3": -8,
+      "mr": -6,
+      "spPct3": -15,
       "spd": -15,
       "fDamPct": 25,
       "hp": 3800,
@@ -45631,6 +45689,25 @@
       "id": 3210
     },
     {
+      "name": "Mayonnaise",
+      "category": "armor",
+      "type": "leggings",
+      "armourMaterial": "iron",
+      "drop": "normal",
+      "lvl": 77,
+      "dexReq": 30,
+      "agiReq": 30,
+      "nDamRaw": 115,
+      "rDamPct": -18,
+      "sprint": 18,
+      "lb": 15,
+      "rDefPct": -11,
+      "hp": 1700,
+      "tier": "Unique",
+      "displayName": "Mayonnaise",
+      "id": 4111
+    },
+    {
       "name": "Eternity's Edge",
       "category": "weapon",
       "type": "relik",
@@ -58256,6 +58333,47 @@
       "id": 465
     },
     {
+      "name": "Blighted Seraph",
+      "category": "weapon",
+      "type": "bow",
+      "atkSpd": "VERY_FAST",
+      "averageDps": 574,
+      "drop": "never",
+      "lvl": 67,
+      "classReq": "archer",
+      "dexReq": 40,
+      "intReq": 50,
+      "majorIds": [
+        "FRENETIC_SPIRIT"
+      ],
+      "slots": 1,
+      "lore": "...It's pulling towards something.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "204",
+          "name": "bow.water2"
+        }
+      },
+      "dex": 7,
+      "sdPct": 16,
+      "hprRaw": -100,
+      "hpBonus": -600,
+      "mr": 14,
+      "ms": 5,
+      "spd": 10,
+      "nDam": "35-40",
+      "tDam": "40-120",
+      "wDam": "60-75",
+      "tier": "Fabled",
+      "displayName": "Blighted Seraph",
+      "eDam": "0-0",
+      "fDam": "0-0",
+      "aDam": "0-0",
+      "id": 3904
+    },
+    {
       "name": "Reflection",
       "category": "armor",
       "type": "leggings",
@@ -58427,47 +58545,6 @@
       "tier": "Rare",
       "displayName": "Fire Wire",
       "id": 1891
-    },
-    {
-      "name": "Blighted Seraph",
-      "category": "weapon",
-      "type": "bow",
-      "atkSpd": "VERY_FAST",
-      "averageDps": 682,
-      "drop": "never",
-      "lvl": 67,
-      "classReq": "archer",
-      "dexReq": 40,
-      "intReq": 50,
-      "majorIds": [
-        "FRENETIC_SPIRIT"
-      ],
-      "slots": 1,
-      "lore": "...It's pulling towards something.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "204",
-          "name": "bow.water2"
-        }
-      },
-      "dex": 7,
-      "sdPct": 16,
-      "hprRaw": -100,
-      "hpBonus": -600,
-      "mr": 14,
-      "ms": 5,
-      "spd": 10,
-      "nDam": "40-45",
-      "tDam": "55-135",
-      "wDam": "75-90",
-      "tier": "Fabled",
-      "displayName": "Blighted Seraph",
-      "eDam": "0-0",
-      "fDam": "0-0",
-      "aDam": "0-0",
-      "id": 3904
     },
     {
       "name": "Clearwater",
@@ -84981,6 +85058,30 @@
       "id": 2026
     },
     {
+      "name": "Lingering Twilight",
+      "category": "armor",
+      "type": "boots",
+      "armourMaterial": "chain",
+      "drop": "never",
+      "lvl": 44,
+      "strReq": 15,
+      "dexReq": 15,
+      "agiReq": 15,
+      "slots": 2,
+      "lore": "In the harshest reaches of the mountains, dusk brings a gentle magic to the air, prolonging the faintest vestiges of sundown before night truly falls.",
+      "agi": 5,
+      "rDamRaw": 73,
+      "spd": 19,
+      "maxMana": -14,
+      "hp": 515,
+      "eDef": 15,
+      "tDef": 15,
+      "aDef": 15,
+      "tier": "Legendary",
+      "displayName": "Lingering Twilight",
+      "id": 4112
+    },
+    {
       "name": "Syringe",
       "category": "weapon",
       "type": "spear",
@@ -87854,6 +87955,32 @@
       "id": 3384
     },
     {
+      "category": "accessory",
+      "name": "Blazing Bangle",
+      "type": "bracelet",
+      "drop": "never",
+      "lvl": 41,
+      "defReq": 15,
+      "lore": "...It's pulling towards something.",
+      "icon": {
+        "format": "attribute",
+        "value": {
+          "id": "minecraft:iron_horse_armor",
+          "customModelData": "165",
+          "name": "bracelet.fire2"
+        }
+      },
+      "def": 3,
+      "fSdPct": 6,
+      "hprRaw": -12,
+      "xpb": 7,
+      "fDamPct": 6,
+      "fDef": 15,
+      "tier": "Legendary",
+      "displayName": "Blazing Bangle",
+      "id": 3930
+    },
+    {
       "name": "Refined Chainmail Helmet",
       "category": "armor",
       "type": "helmet",
@@ -88068,32 +88195,6 @@
       "wDam": "0-0",
       "aDam": "0-0",
       "id": 1064
-    },
-    {
-      "category": "accessory",
-      "name": "Blazing Bangle",
-      "type": "bracelet",
-      "drop": "never",
-      "lvl": 41,
-      "defReq": 10,
-      "lore": "...It's pulling towards something.",
-      "icon": {
-        "format": "attribute",
-        "value": {
-          "id": "minecraft:iron_horse_armor",
-          "customModelData": "165",
-          "name": "bracelet.fire2"
-        }
-      },
-      "def": 3,
-      "fSdPct": 6,
-      "hprRaw": -12,
-      "xpb": 7,
-      "fDamPct": 6,
-      "fDef": 15,
-      "tier": "Legendary",
-      "displayName": "Blazing Bangle",
-      "id": 3930
     },
     {
       "name": "Unfinished Chain Helmet",
@@ -105920,6 +106021,29 @@
       "fDam": "0-0",
       "aDam": "0-0",
       "id": 3951
+    },
+    {
+      "name": "Coeur Brise",
+      "category": "armor",
+      "type": "chestplate",
+      "armourMaterial": "golden",
+      "drop": "never",
+      "lvl": 24,
+      "defReq": 12,
+      "slots": 2,
+      "lore": "Left to brittle introspection, love unrequited stings the most when it brings down something built to last.",
+      "str": 3,
+      "int": 3,
+      "def": -3,
+      "hprRaw": 8,
+      "mr": 10,
+      "ref": 15,
+      "rDefPct": -15,
+      "hp": 125,
+      "fDef": -5,
+      "tier": "Rare",
+      "displayName": "Coeur Brise",
+      "id": 4113
     },
     {
       "name": "Effervescence",
