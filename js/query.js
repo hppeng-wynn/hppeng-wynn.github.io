@@ -140,6 +140,7 @@ const itemQueryProps = (function() {
   maxId(['firedmgraw', 'firedamraw', 'fdmgraw', 'fdamraw'], 'fDamRaw');
   maxId(['airdmgraw', 'airdamraw', 'admgraw', 'adamraw'], 'aDamRaw');
   maxId(['elementaldmgraw', 'elementaldamraw', 'rdmgraw', 'rdamraw'], 'rDamRaw');
+  maxId(['ndamraw', 'ndmgraw'], 'nDamRaw');
   maxId(['dmgraw', 'damraw'], 'damRaw');
 
   maxId(['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct'], 'mdPct');
@@ -360,13 +361,54 @@ const ingredientQueryProps = (function() {
   maxId(['waterdmg%', 'waterdam%', 'wdmg%', 'wdam%', 'wdampct'], 'wDamPct');
   maxId(['firedmg%', 'firedam%', 'fdmg%', 'fdam%', 'fdampct'], 'fDamPct');
   maxId(['airdmg%', 'airdam%', 'admg%', 'adam%', 'adampct'], 'aDamPct');
-  sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
+  maxId(['elementaldmg%', 'elementaldam%', 'rdmg%', 'rdam%', 'rdampct'], 'rDamPct');
+  //sum(['sumdmg%', 'sumdam%', 'totaldmg%', 'totaldam%', 'sumdampct', 'totaldampct'], props.edampct, props.tdampct, props.wdampct, props.fdampct, props.adampct);
+  maxId(['dmg%', 'dam%', 'dampct'], 'damPct');
+
+  maxId(['earthdmgraw', 'earthdamraw', 'edmgraw', 'edamraw'], 'eDamRaw');
+  maxId(['thunderdmgraw', 'thunderdamraw', 'tdmgraw', 'tdamraw'], 'tDamRaw');
+  maxId(['waterdmgraw', 'waterdamraw', 'wdmgraw', 'wdamraw'], 'wDamRaw');
+  maxId(['firedmgraw', 'firedamraw', 'fdmgraw', 'fdamraw'], 'fDamRaw');
+  maxId(['airdmgraw', 'airdamraw', 'admgraw', 'adamraw'], 'aDamRaw');
+  maxId(['elementaldmgraw', 'elementaldamraw', 'rdmgraw', 'rdamraw'], 'rDamRaw');
+  maxId(['ndamraw', 'ndmgraw'], 'nDamRaw');
+  maxId(['dmgraw', 'damraw'], 'damRaw');
 
   maxId(['mainatkdmg', 'mainatkdam', 'mainatkdmg%', 'mainatkdam%', 'meleedmg', 'meleedam', 'meleedmg%', 'meleedam%', 'mdpct'], 'mdPct');
+  maxId(['emdpct'], 'eMdPct');
+  maxId(['tmdpct'], 'tMdPct');
+  maxId(['wmdpct'], 'wMdPct');
+  maxId(['fmdpct'], 'fMdPct');
+  maxId(['amdpct'], 'aMdPct');
+  maxId(['nmdpct'], 'nMdPct');
+  maxId(['rmdpct'], 'rMdPct');
+
   maxId(['mainatkrawdmg', 'mainatkrawdam', 'mainatkneutraldmg', 'mainatkneutraldam', 'meleerawdmg', 'meleerawdam', 'meleeneutraldmg', 'meleeneutraldam', 'mdraw'], 'mdRaw');
+  maxId(['emdraw'], 'eMdRaw');
+  maxId(['tmdraw'], 'tMdRaw');
+  maxId(['wmdraw'], 'wMdRaw');
+  maxId(['fmdraw'], 'fMdRaw');
+  maxId(['amdraw'], 'aMdRaw');
+  maxId(['nmdraw'], 'nMdRaw');
+  maxId(['rmdraw'], 'rMdRaw');
+
   maxId(['spelldmg', 'spelldam', 'spelldmg%', 'spelldam%', 'sdpct'], 'sdPct');
+  maxId(['esdpct'], 'eSdPct');
+  maxId(['tsdpct'], 'tSdPct');
+  maxId(['wsdpct'], 'wSdPct');
+  maxId(['fsdpct'], 'fSdPct');
+  maxId(['asdpct'], 'aSdPct');
+  maxId(['nsdpct'], 'nSdPct');
+  maxId(['rsdpct'], 'rSdPct');
+
   maxId(['spellrawdmg', 'spellrawdam', 'spellneutraldmg', 'spellneutraldam', 'sdraw'], 'sdRaw');
-  maxId(['rainbowraw'], 'rSdRaw');
+  maxId(['esdraw'], 'eSdRaw');
+  maxId(['tsdraw'], 'tSdRaw');
+  maxId(['wsdraw'], 'wSdRaw');
+  maxId(['fsdraw'], 'fSdRaw');
+  maxId(['asdraw'], 'aSdRaw');
+  maxId(['nsdraw'], 'nSdRaw');
+  maxId(['rainbowraw', 'rsdraw'], 'rSdRaw');
 
   maxId('critdampct', 'critDamPct');
 

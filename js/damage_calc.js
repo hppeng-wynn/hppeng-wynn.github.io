@@ -208,6 +208,9 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
     const crit_mult = 1+(stats.get("critDamPct")/100);
 
     for (const damage of damages) {
+        if(damage[0] < 0) damage[0] = 0;
+        if(damage[1] < 0) damage[1] = 0;
+
         const res = [
             damage[0] * strBoost * damage_mult,       // Normal min
             damage[1] * strBoost * damage_mult,       // Normal max
@@ -220,11 +223,6 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         total_dam_crit[0] += res[2];
         total_dam_crit[1] += res[3];
     }
-
-    if (total_dam_norm[0] < 0) total_dam_norm[0] = 0;
-    if (total_dam_norm[1] < 0) total_dam_norm[1] = 0;
-    if (total_dam_crit[0] < 0) total_dam_crit[0] = 0;
-    if (total_dam_crit[1] < 0) total_dam_crit[1] = 0;
 
     return [total_dam_norm, total_dam_crit, damages_results];
 }
