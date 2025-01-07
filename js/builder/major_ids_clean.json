@@ -1191,7 +1191,7 @@
                         "slider_name": "Corrupted",
                         "output": {
                             "type": "stat",
-                            "name": "damMult.Bloodlust:3.Annihilation"
+                            "name": "damMult.Bloodlust:10.Annihilation"
                         },
                         "scaling": [5]
                     }
