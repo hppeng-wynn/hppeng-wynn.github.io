@@ -4051,22 +4051,12 @@
                         },
                         {
                             "type": "stat",
-                            "name": "damMult.BloodPact:1.Boiling Blood Tick",
-                            "value": 15
-                        },
-                        {
-                            "type": "stat",
-                            "name": "damMult.BloodPact:2.Heavy Impact",
-                            "value": 15
-                        },
-                        {
-                            "type": "stat",
                             "name": "damMult.BloodPact:2.Flying Kick",
                             "value": 15
                         },
                         {
                             "type": "stat",
-                            "name": "damMult.BloodPact:2.Collide",
+                            "name": "damMult.BloodPact:2.Flyby Jab",
                             "value": 15
                         },
                         {
@@ -4087,6 +4077,11 @@
                         {
                             "type": "stat",
                             "name": "damMult.BloodPact:4.War Scream",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:4.Air Shout",
                             "value": 15
                         }
                     ]
