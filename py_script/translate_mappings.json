@@ -179,7 +179,7 @@
         "rawThunderDamage": "tDamRaw",
         "rawEarthDamage": "eDamRaw",
         "rawElementalDamage": "rDamRaw",
-        "critDamPct": "critDamPct",
+        "criticalDamageBonus": "critDamPct",
         "fireDefence": "fDefPct",
         "waterDefence": "wDefPct",
         "airDefence": "aDefPct",

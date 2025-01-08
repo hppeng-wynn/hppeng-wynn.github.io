@@ -136,10 +136,15 @@ const translate_mappings = {
 
 const special_mappings = {
     "Sum (skill points)": "str+dex+int+def+agi",
-    "Sum (Mana Sustain)": "mr+ms",
+    "Sum (Mana Sustain)": "mr/5+ms/3",
     "Sum (Life Sustain)": "hpr+ls",
     "Sum (Health + Health Bonus)": "hp+hpBonus",
-    "Base DPS": "(nDam+fDam+wDam+aDam+tDam+eDam) * atkspdmod(atkspd)"
+    "Base DPS": "(nDam+fDam+wDam+aDam+tDam+eDam) * atkspdmod(atkspd)",
+    "Sum (Melee Damages Raw)": "mdRaw+rMdRaw+nMdRaw+eMdRaw+tMdRaw+wMdRaw+fMdRaw+aMdRaw",
+    "Sum (Spell Damages Raw)": "sdRaw+rSdRaw+nSdRaw+eSdRaw+tSdRaw+wSdRaw+fSdRaw+aSdRaw",
+    "Sum (All Damages Raw)": "damRaw+rDamRaw+nDamRaw+eDamRaw+tDamRaw+wDamRaw+fDamRaw+aDamRaw",
+    "Sum (Spell Damages %)": "sdPct+eSdPct+tSdPct+wSdPct+fSdPct+aSdPct+nSdPct+rSdPct",
+    "Sum (Melee Damages %)": "mdPct+eMdPct+tMdPct+wMdPct+fMdPct+aMdPct+nMdPct+rMdPct"
 };
 
 for (let x in translate_mappings) {

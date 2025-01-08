@@ -4039,7 +4039,54 @@
             "properties": {
                 "health_cost": 0.4
             },
-            "effects": []  
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Blood Pact",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:1.Single Hit",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:2.Flying Kick",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:2.Flyby Jab",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:3.Uppercut",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:3.Fireworks",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:3.Comet",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:4.War Scream",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.BloodPact:4.Air Shout",
+                            "value": 15
+                        }
+                    ]
+                }
+            ]  
         },
         {
             "display_name": "Flying Kick",
@@ -5097,7 +5144,7 @@
                     "behavior": "modify",
                     "output": {
                         "type": "stat",
-                        "name": "damMult.Bloodlust:3.Annihilation"
+                        "name": "damMult.Bloodlust:10.Annihilation"
                     },
                     "scaling": [5]
                 }
