@@ -26,11 +26,7 @@
       },
       "mdPct": 40,
       "sdRaw": -12000,
-      "criticalDamageBonus": {
-        "min": -39,
-        "raw": -30,
-        "max": -21
-      },
+      "critDamPct": -30,
       "kb": 20,
       "weakenEnemy": 10,
       "nDam": "0-10",
