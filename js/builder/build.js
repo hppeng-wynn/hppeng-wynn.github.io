@@ -93,6 +93,7 @@ class Build {
             statMap.set(staticID, 0);
         }
         statMap.set("hp", levelToHPBase(this.level)); 
+        statMap.set("critDamPct", 0);
 
         let major_ids = new Set();
         for (const item of this.items){
@@ -131,7 +132,6 @@ class Build {
             }
         }
         statMap.set("poisonPct", 0);
-        statMap.set("critDamPct", 0);
         statMap.set("healMult", new Map());
         statMap.get('healMult').set('item', statMap.get('healPct'));
 
