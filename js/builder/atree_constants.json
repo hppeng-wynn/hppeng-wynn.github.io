@@ -8641,13 +8641,20 @@
                     "base_spell": 4,
                     "behavior": "modify",
                     "target_part": "Total Damage",
-                    "hits": { "Per Bomb": 2 }
+                    "hits": { "Per Bomb": 2, "Single Bomb": 2 }
                 },
                 {
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "behavior": "modify",
                     "target_part": "Per Tick",
+                    "multipliers": [ -10, 0, 0, 0, 0, 0 ]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 4,
+                    "behavior": "modify",
+                    "target_part": "Single Bomb",
                     "multipliers": [ -10, 0, 0, 0, 0, 0 ]
                 }
             ]
@@ -11489,7 +11496,7 @@
         },
         {
             "display_name": "Lashing Lance",
-            "desc": "Flaming Tounge gets +1 hit, and now inflicts enemies with Bleeding for +1.5s per hit. Haunting Memory will instead inflict +3s of Bleeding. Bleeding enemies take damage every 0.5s. (Maximum 6s)",
+            "desc": "Flaming Tongue gets +1 hit, and now inflicts enemies with Bleeding for +1.5s per hit. Haunting Memory will instead inflict +3s of Bleeding. Bleeding enemies take damage every 0.5s. (Maximum 6s)",
             "base_abil": "Uproot",
             "archetype": "Acolyte",
             "archetype_req": "4",
