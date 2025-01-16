@@ -81,7 +81,27 @@
     "HERO": {
         "displayName": "Saviour’s Sacrifice",
         "description": "While under 50% maximum health, nearby allies gain 15% bonus damage and defence",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Warrior",
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Saviour's Sacrifice",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "defMult.Saviour's Sacrifice",
+                            "value": 15
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Saviour's Sacrifice",
+                            "value": 15
+                        }
+                    ]
+                }]
+            }
+        ]
     },
     "ALTRUISM": {
         "displayName": "Altruism",
@@ -175,7 +195,7 @@
     },
     "CHERRY_BOMBS": {
         "displayName": "Cherry Bombs",
-        "description": "Turn Smoke Bomb into three firecrackers that fly farther, tighter, and deal high damage instantly",
+        "description": "Turn Smoke Bomb into firecrackers that fly farther, tighter, and deal high damage instantly",
         "abilities": [
             {
                 "class": "Assassin",
@@ -204,7 +224,7 @@
                                 "name": "Total Damage",
                                 "type": "total",
                                 "hits": {
-                                    "Single Bomb": 3
+                                    "Single Bomb": 1
                                 }
                             }
                         ]
@@ -629,7 +649,7 @@
     },
     "EXPUNGE": {
         "displayName": "Expunge",
-        "description": "When using Heal, instead cast one instant pulse that heals 20% of your max health",
+        "description": "When using Heal, instead cast one instant pulse that heals 15% of your max health",
         "abilities": [
             {
                 "class": "Mage",
@@ -641,13 +661,6 @@
                         "target_part": "Second and Third Pulses",
                         "behavior": "modify",
                         "power": -0.2
-                    },
-                    {
-                        "type": "add_spell_prop",
-                        "base_spell": 1,
-                        "target_part": "Heal",
-                        "behavior": "modify",
-                        "power": 0.05
                     }
                 ]
             }
@@ -992,7 +1005,7 @@
         "abilities": [
             {
                 "class": "Mage",
-                "base_abil": "Pyrokinesis",
+                "base_abil": 999,
                 "dependencies": [
                     "Pyrokinesis"
                 ],
@@ -1618,6 +1631,107 @@
                                 "name": "damMult.Punishment",
                                 "value": 10
                             }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "ERGOSPHERE": {
+        "displayName": "Ergosphere",
+        "description": "Storm Dance instead lets your Totems pull enemeis within their radius. Totem duration is decreased.",
+        "abilities": []
+    },
+    "INVERSION": {
+        "displayName": "Inversion",
+        "description": "Teleport will grant you 2s of levitation.",
+        "abilities": []
+    },
+    "WORMHOLE": {
+        "displayName": "Wormhole",
+        "description": "Last Laugh instead casts a meteor.",
+        "abilities": [
+            {
+                "class": "Assassin",
+                "dependencies": [
+                    "Last Laugh"
+                ],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "replace_spell",
+                        "name": "Meteor",
+                        "base_spell": 9,
+                        "display": "Meteor Damage",
+                        "parts": [
+                            {
+                                "name": "Meteor Damage",
+                                "multipliers": [330, 70, 0, 0, 0, 0 ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "PIONEERS_ECHO": {
+        "displayName": "Pioneer’s Echo",
+        "description": "Phantom Ray deals two bursts of 150% neutral, 60% water damage over 1.1s. Decimator's increase and cap are raised to 100%.",
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Storm",
+                "dependencies": [
+                    "Phantom Ray"
+                ],
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Single Tick",
+                        "behavior": "modify",
+                        "multipliers": [ 125, 0, 0, 55, 0, 0 ]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "DPS",
+                        "behavior": "overwrite",
+                        "hits": {
+                            "Single Tick": 1.1818
+                        }
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "behavior": "overwrite",
+                        "hits": {
+                            "Single Tick": 2,
+                            "DPS": 0
+                        }
+                    }
+                ]
+            },
+            {
+                "class": "Archer",
+                "base_abil": "Arrow Storm",
+                "dependencies": [
+                    "Decimator"
+                ],
+                "effects": [
+                    {
+                        "type": "stat_scaling",
+                        "slider": true,
+                        "slider_name": "Phantom Ray hits",
+                        "slider_max": 1,
+                        "behavior": "overwrite",
+                        "output": {
+                            "type": "stat",
+                            "name": "damMult.Phantom Ray:1.Single Tick"
+                        },
+                        "scaling": [
+                            100
                         ]
                     }
                 ]

@@ -101,6 +101,8 @@ const itemQueryProps = (function() {
   prop(['rarity', 'tier'], 'number', (i, ie) => tierIndices[i.tier]);
   prop(['majid', 'majorid'], 'string', (i, ie) => ((i.majorIds || [""])[0] || ""));
   prop(['majids', 'majorids'], 'number', (i, ie) => (i.majorIds || []).length);
+  prop(['drop', 'droptype'], 'string', (i, ie) => (i.dropInfo || "").type || (i.drop || "") || "");
+  prop(['restrict', 'restriction'], 'string', (i, ie) => i.restrict);
 
   prop(['level', 'lvl', 'combatlevel', 'combatlvl'], 'number', (i, ie) => i.lvl);
   prop(['strmin', 'strreq'], 'number', (i, ie) => i.strReq);
