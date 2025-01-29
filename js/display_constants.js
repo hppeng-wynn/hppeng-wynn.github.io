@@ -127,6 +127,7 @@ let idPrefixes = {"displayName": "",
     "weakenEnemy":"Weaken Enemy: ",
     "slowEnemy":"Slow Enemy: ",
     "maxMana":"Max Mana: ",
+    "mainAttackRange":"Melee Range %: ",
     "slots":"Powder Slots: ",
     "set":"Set: ",
     "quest":"Quest Req: ",
@@ -250,6 +251,7 @@ let idSuffixes = {"displayName": "",
     "weakenEnemy": "%",
     "slowEnemy": "%",
     "maxMana": "",
+    "mainAttackRange": "%",
     "slots":"",
     "set":" set.",
     "quest":"",
@@ -357,7 +359,8 @@ let build_detailed_display_commands = [
     "spRegen",
     "eSteal",
     "gXp", "gSpd",
-    "kb", "weakenEnemy", "slowEnemy","maxMana"
+    "kb", "weakenEnemy", "slowEnemy","maxMana",
+    "mainAttackRange"
 ];
 
 // full
@@ -448,6 +451,7 @@ let sq2_item_display_commands = [
     "eSteal",
     "gXp", "gSpd",
     "kb", "weakenEnemy", "slowEnemy", "maxMana",
+    "mainAttackRange",
     "majorIds",
     "!spacer",
     "slots",

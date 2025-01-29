@@ -245,6 +245,7 @@ const itemQueryProps = (function() {
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');
   maxId('maxmana', 'maxMana');
+  maxId('mainattackrange', 'mainAttackRange');
 
   prop(['powderslots', 'powders', 'slots', 'sockets'], 'number', (i, ie) => i.slots || 0);
 
@@ -464,6 +465,7 @@ const ingredientQueryProps = (function() {
   maxId('weakenenemy', 'weakenEnemy');
   maxId('slowenemy', 'slowEnemy');
   maxId('maxmana', 'maxMana');
+  maxId('mainAttackRange', 'mainAttackRange');
 
   return props;
 })();
