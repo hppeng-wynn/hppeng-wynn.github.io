@@ -124871,21 +124871,21 @@
           "ls": 130,
           "jh": 1,
           "aMdRaw": 300,
-          "adam": 12,
+          "aDamPct": 12,
           "ms": 5
         },
         {
           "ls": 250,
           "jh": 1,
           "aMdRaw": 500,
-          "adam": 20,
+          "aDamPct": 20,
           "ms": 8
         },
         {
           "ls": 600,
           "jh": 3,
           "aMdRaw": 1500,
-          "adam": 50,
+          "aDamPct": 50,
           "ms": 20
         }
       ]
