@@ -1744,20 +1744,7 @@
         "abilities": [
             {
                 "class": "Any",
-                "effects": [{
-                    "type": "raw_stat",
-                    "toggle": "Activate Dauntless Inferno",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "defMult.Dauntless Inferno",
-                            "value": 20
-                        }
-                    ]
-                }]
-            },
-            {
-                "class": "Any",
+                "base_abil": 999,
                 "effects": [{
                     "type": "replace_spell",
                     "name": "Dauntless Inferno",
@@ -1787,6 +1774,20 @@
                         }
                     ]}
                 ]
+            },
+            {
+                "class": "Any",
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Dauntless Inferno",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "defMult.Dauntless Inferno",
+                            "value": 20
+                        }
+                    ]
+                }]
             }
         ]
     },
@@ -1796,20 +1797,7 @@
         "abilities": [
             {
                 "class": "Any",
-                "effects": [{
-                    "type": "raw_stat",
-                    "toggle": "Activate Superconductor",
-                    "bonuses": [
-                        {
-                            "type": "stat",
-                            "name": "defMult.Superconductor",
-                            "value": -15
-                        }
-                    ]
-                }]
-            },
-            {
-                "class": "Any",
+                "base_abil": 999,
                 "effects": [{
                     "type": "replace_spell",
                     "name": "Superconductor",
@@ -1836,6 +1824,20 @@
                             "hits": {
                                 "Single Lightning Bolt": 3
                             }
+                        }
+                    ]
+                }]
+            },
+            {
+                "class": "Any",
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Superconductor",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "defMult.Superconductor",
+                            "value": -15
                         }
                     ]
                 }]
