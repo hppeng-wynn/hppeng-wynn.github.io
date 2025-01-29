@@ -1754,6 +1754,18 @@
                     "display": "Total Damage",
                     "parts": [
                         {
+                            "name": "First Inferno",
+                            "type": "damage",
+                            "multipliers": [
+                                0,
+                                0,
+                                0,
+                                0,
+                                125,
+                                0
+                            ]
+                        },
+                        {
                             "name": "Single Inferno",
                             "type": "damage",
                             "multipliers": [
@@ -1769,7 +1781,8 @@
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "Single Inferno": 5
+                                "First Inferno": 1,
+                                "Single Inferno": 4
                             }
                         }
                     ]}
@@ -1785,6 +1798,42 @@
                             "type": "stat",
                             "name": "defMult.Dauntless Inferno",
                             "value": 20
+                        }
+                    ]
+                }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Surprise Strike"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.SurpriseStrike:20.Single Inferno",
+                            "value": -44.444
+                        }
+                    ]
+                }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Ambush"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.SurpriseStrike:20.Single Inferno",
+                            "value": -10.101
                         }
                     ]
                 }]
@@ -1807,6 +1856,18 @@
                     "display": "Total Damage",
                     "parts": [
                         {
+                            "name": "First Lightning Bolt",
+                            "type": "damage",
+                            "multipliers": [
+                                0,
+                                0,
+                                225,
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        {
                             "name": "Single Lightning Bolt",
                             "type": "damage",
                             "multipliers": [
@@ -1822,7 +1883,8 @@
                             "name": "Total Damage",
                             "type": "total",
                             "hits": {
-                                "Single Lightning Bolt": 3
+                                "First Lightning Bolt": 1,
+                                "Single Lightning Bolt": 2
                             }
                         }
                     ]
@@ -1838,6 +1900,42 @@
                             "type": "stat",
                             "name": "defMult.Superconductor",
                             "value": -15
+                        }
+                    ]
+                }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Surprise Strike"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.SurpriseStrike:20.Single Lightning Bolt",
+                            "value": -44.444
+                        }
+                    ]
+                }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Ambush"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.SurpriseStrike:20.Single Lightning Bolt",
+                            "value": -10.101
                         }
                     ]
                 }]
