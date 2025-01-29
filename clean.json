@@ -124853,7 +124853,56 @@
         {
           "str": 85,
           "jh": 5,
-          "ls": 250
+          "ls": 250,
+          "slowEnemy": 8
+        }
+      ]
+    },
+    "Voidglass": {
+      "items": [
+        "Voidglass Crown",
+        "Voidglass Cloak",
+        "Voidglass Greaves",
+        "Voidglass Striders"
+      ],
+      "bonuses": [
+        {},
+        {
+          "ls": 130,
+          "jh": 1,
+          "aMdRaw": 300,
+          "adam": 12,
+          "ms": 5
+        },
+        {
+          "ls": 250,
+          "jh": 1,
+          "aMdRaw": 500,
+          "adam": 20,
+          "ms": 8
+        },
+        {
+          "ls": 600,
+          "jh": 3,
+          "aMdRaw": 1500,
+          "adam": 50,
+          "ms": 20
+        }
+      ]
+    },
+    "Darkened": {
+      "items": [
+        "Darkened Mind",
+        "Darkened Heart"
+      ],
+      "bonuses": [
+        {},
+        {
+          "mr": -20,
+          "ms": -20,
+          "maxMana": 175,
+          "tDamRaw": 100,
+          "fDamRaw": 100
         }
       ]
     }
