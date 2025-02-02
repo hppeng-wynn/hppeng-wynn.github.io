@@ -515,7 +515,7 @@ const atree_merge = new (class extends ComputeNode {
                 for (const abil of MAJOR_IDS[major_id_name].abilities) {
 
                     // But only the ones that match the current class.
-                    if (abil["class"] === build_class) {
+                    if (abil["class"] === build_class || abil["class"] === "Any") {
 
                         // Major IDs can have ability dependencies.
                         // By default they are always on.

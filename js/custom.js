@@ -26,7 +26,7 @@ const ci_save_order = ["name", "lore", "tier", "set", "slots", "type",
 "damRaw", "rDamRaw", "nDamRaw", "eDamRaw", "tDamRaw", "wDamRaw", "fDamRaw", "aDamRaw",
 "damPct", "rDamPct", "nDamPct", /*"eDamPct", "tDamPct", "wDamPct", "fDamPct", "aDamPct",*/
 "healPct",
-"kb", "weakenEnemy", "slowEnemy",
+"mainAttackRange", "kb", "weakenEnemy", "slowEnemy",
 "rDefPct"
 ];
 

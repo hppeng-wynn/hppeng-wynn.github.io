@@ -210,6 +210,7 @@
         "slowEnemy": "slowEnemy",
 
         "rawMaxMana": "maxMana",
+        "mainAttackRange": "mainAttackRange",
 
         "damageFromMobs": "selfWeakPct"
     }
