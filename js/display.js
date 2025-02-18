@@ -69,7 +69,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
         setHTML(parent_id, "");
     }
     
-    let active_elem;
+    let last_command;
     let elemental_format = false;
 
     //TODO this is put here for readability, consolidate with definition in `builder/build.js`
@@ -78,16 +78,22 @@ function displayBuildStats(parent_id,build,command_group,stats){
 
     for (const command of display_commands) {
         // style instructions
-        
         if (command.charAt(0) === "#") {
             if (command === "#defense-stats") {
                 displayDefenseStats(parent_div, stats, true);
+                last_command = command;
             }
         }
         if (command.charAt(0) === "!") {
             // TODO: This is sooo incredibly janky.....
             if (command === "!elemental") {
                 elemental_format = !elemental_format;
+            }
+            else if (command === "!spacer" && last_command !== "!spacer") {
+                let spacer = make_elem('hr', ["row", "my-2"], {});
+                parent_div.appendChild(spacer);
+                last_command = command;
+                continue;
             }
         }
 
@@ -126,6 +132,7 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     row.appendChild(value_elem);
                     parent_div.appendChild(row);
                 }
+                last_command = command;
             }
             // sp thingy (WHY IS THIS HANDLED SEPARATELY TODO
             else if (skp_order.includes(id)) {
@@ -166,6 +173,7 @@ function displayExpandedItem(item, parent_id){
     parent_div.classList.add("border", "border-2", "border-dark");
     
     let fix_id = item.has("fixID") && item.get("fixID");
+    let last_command;
     let elemental_format = false;
     for (let i = 0; i < display_commands.length; i++) {
         const command = display_commands[i];
@@ -174,9 +182,10 @@ function displayExpandedItem(item, parent_id){
             if (command === "!elemental") {
                 elemental_format = !elemental_format;
             }
-            else if (command === "!spacer") {
-                let spacer = make_elem('div', ["row", "my-2"], {});
+            else if (command === "!spacer" && last_command !== "!spacer") {
+                let spacer = make_elem('hr', ["row", "my-2"], {});
                 parent_div.appendChild(spacer);
+                last_command = command;
                 continue;
             }
         }
@@ -351,6 +360,7 @@ function displayExpandedItem(item, parent_id){
                         p_elem.classList.add("restrict");
                     }
                 }
+                last_command = id;
             }
             else if ( rolledIDs.includes(id) &&
                         ((item.get("maxRolls") && item.get("maxRolls").get(id))
@@ -375,6 +385,7 @@ function displayExpandedItem(item, parent_id){
                     let row = displayRolledID(item, id, elemental_format);
                     parent_div.appendChild(row);
                 }
+                last_command = id;
             }else{
               // :/  
             }

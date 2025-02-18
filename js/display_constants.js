@@ -305,7 +305,6 @@ let posModSuffixes = {
  */
 let build_overall_display_commands = [
     "#defense-stats",
-    "str", "dex", "int", "def", "agi",
     "!spacer",
     "mr", "ms",
     "ls",
@@ -324,11 +323,11 @@ let build_overall_display_commands = [
 
 let build_detailed_display_commands = [
     "#defense-stats",
-    "str", "dex", "int", "def", "agi",
     "!spacer",
-    "mr", "ms",
+    "mr", "ms", "maxMana",
     "hprRaw", "hprPct", "healPct",
     "ls",
+    "!spacer",
     "sdRaw", "nSdRaw", "rSdRaw",
     "sdPct", "nSdPct", "rSdPct",
     "mdRaw", "nMdRaw", "rMdRaw",
@@ -336,15 +335,16 @@ let build_detailed_display_commands = [
     "damRaw", "nDamRaw", "rDamRaw",
     "damPct", "nDamPct", "rDamPct",
     "!elemental",
-    "fSdRaw", "wSdRaw", "aSdRaw", "tSdRaw", "eSdRaw",
-    "fSdPct", "wSdPct", "aSdPct", "tSdPct", "eSdPct",
-    "fMdRaw", "wMdRaw", "aMdRaw", "tMdRaw", "eMdRaw",
-    "fMdPct", "wMdPct", "aMdPct", "tMdPct", "eMdPct",
-    "fDamRaw", "wDamRaw", "aDamRaw", "tDamRaw", "eDamRaw",
-    "fDamPct", "wDamPct", "aDamPct", "tDamPct", "eDamPct",
-    "fDefPct", "wDefPct", "aDefPct", "tDefPct", "eDefPct",
-    "critDamPct",
+    "eSdRaw", "tSdRaw", "wSdRaw", "fSdRaw", "aSdRaw",
+    "eSdPct", "tSdPct", "wSdPct", "fSdPct", "aSdPct",
+    "eMdRaw", "tMdRaw", "wMdRaw", "fMdRaw", "aMdRaw",
+    "eMdPct", "tMdPct", "wMdPct", "fMdPct", "aMdPct",
+    "eDamRaw", "tDamRaw", "wDamRaw", "fDamRaw", "aDamRaw",
+    "eDamPct", "tDamPct", "wDamPct", "fDamPct", "aDamPct",
+    "eDefPct", "tDefPct", "wDefPct", "fDefPct", "aDefPct",
     "!elemental",
+    "critDamPct",
+    "!spacer",
     "rDefPct",
     "spPct1", "spRaw1", "spPct2", "spRaw2", "spPct3", "spRaw3", "spPct4", "spRaw4",
     "atkTier",
@@ -359,7 +359,7 @@ let build_detailed_display_commands = [
     "spRegen",
     "eSteal",
     "gXp", "gSpd",
-    "kb", "weakenEnemy", "slowEnemy","maxMana",
+    "kb", "weakenEnemy", "slowEnemy",
     "mainAttackRange"
 ];
 

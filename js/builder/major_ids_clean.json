@@ -1639,7 +1639,7 @@
     },
     "ERGOSPHERE": {
         "displayName": "Ergosphere",
-        "description": "Storm Dance instead lets your Totems pull enemeis within their radius. Totem duration is decreased.",
+        "description": "Storm Dance instead lets your Totems pull enemies within their radius. Totem duration is decreased.",
         "abilities": []
     },
     "INVERSION": {
@@ -1842,7 +1842,7 @@
     },
     "SUPERCONDUCTOR": {
         "displayName": "Superconductor",
-        "description": "Chain Lightning channels three massive lightning bolts through you, arcing to enemies within 8 blocks for 225% thunder daamge and stunning them for 1s. You take 15% more damage for 4s.",
+        "description": "Chain Lightning channels three massive lightning bolts through you, arcing to enemies within 8 blocks for 225% thunder damage and stunning them for 1s. You take 15% more damage for 4s.",
         "abilities": [
             {
                 "class": "Any",
