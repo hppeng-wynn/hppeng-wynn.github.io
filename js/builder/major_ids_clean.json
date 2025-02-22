@@ -778,7 +778,7 @@
     },
     "TWISTING_THREADS": {
         "displayName": "Twisting Threads",
-        "description": "Tangled Trap ropes are much stronger and max traps increase by 12, but trap and bomb effects are weakened.",
+        "description": "Tangled Traps ropes gain +1 range, can overlap up to 4 times, and deal 40% neutral damage. Gain +12 traps that cannot be triggered by enemies.",
         "abilities": [
             {
                 "class": "Archer",
@@ -787,45 +787,29 @@
                     "Tangled Traps"
                 ],
                 "properties": {
-                    "traps": 12,
-                    "attackSpeed": 0.2
+                    "traps": 12
                 },
                 "effects": [
-                    {
-                        "type": "add_spell_prop",
-                        "base_spell": 7,
-                        "target_part": "Trap Damage",
-                        "behavior": "modify",
-                        "multipliers": [
-                            -170,
-                            0,
-                            0,
-                            0,
-                            0,
-                            0
-                        ]
-                    },
                     {
                         "type": "add_spell_prop",
                         "base_spell": 7,
                         "target_part": "Line Damage Tick",
                         "behavior": "modify",
                         "multipliers": [
-                            350,
+                            20,
                             0,
                             0,
                             0,
                             0,
-                            0
+                            -20
                         ]
                     },
                     {
                         "type": "add_spell_prop",
                         "base_spell": 7,
-                        "target_part": "DPS",
-                        "behavior": "modify",
+                        "target_part": "Maximum DPS",
                         "hits": {
-                            "Line Damage Tick": -2.5
+                            "DPS": 4
                         }
                     }
                 ]
@@ -1130,7 +1114,7 @@
             {
                 "class": "Warrior",
                 "base_abil": "Shield Strike",
-                "dependencies": [ "Stronger Mantle" ],
+                "dependencies": [ "Blessed Bulwark" ],
                 "properties": { "charges": -2 },
                 "effects": []
             }
@@ -1144,7 +1128,7 @@
                 "class": "Mage",
                 "base_abil": "Heal",
                 "dependencies": [
-                    "Stronger Sunshower"
+                    "Searing Light"
                 ],
                 "effects": [{
                     "type": "add_spell_prop",
@@ -1496,7 +1480,7 @@
             {
                 "class": "Assassin",
                 "base_abil": "Mirror Image",
-                "dependencies": [ "Stronger Clones" ],
+                "dependencies": [ "Deadly Decoys" ],
                 "properties": { 
                     "max_penalty": -5,
                     "penalty_per_clone": -5 

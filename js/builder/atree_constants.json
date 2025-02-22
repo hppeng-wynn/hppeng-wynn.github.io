@@ -1192,7 +1192,7 @@
             "parents": [
                 "Cheaper Arrow Storm I",
                 "Basaltic Trap",
-                "More Shields"
+                "Arrow Wall"
             ],
             "dependencies": [],
             "blockers": [],
@@ -1220,7 +1220,7 @@
             ]
         },
                 {
-            "display_name": "More Shields",
+            "display_name": "Arrow Wall",
             "desc": "Gives Arrow Shield and Guardian Angels +2 extra charges. Reduces Guardian Angels' damage.",
             "base_abil": "Arrow Shield",
             "parents": [
@@ -1291,6 +1291,16 @@
                     "scaling": [20]
                 },
                 {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Trap Wait Time",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Basaltic:7.Line Damage Tick"
+                    },
+                    "scaling": [20]
+                },
+                {
                     "type": "raw_stat",
                     "bonuses": [
                         {
@@ -1311,7 +1321,7 @@
             "archetype_req": 0,
             "parents": [
                 "Implosion",
-                "More Shields",
+                "Arrow Wall",
                 "Patient Hunter"
             ],
             "dependencies": [],
@@ -1334,7 +1344,7 @@
             "archetype_req": 0,
             "base_abil": "Focus",
             "parents": [
-                "More Shields"
+                "Arrow Wall"
             ],
             "dependencies": [
                 "Focus"
@@ -1454,7 +1464,7 @@
         },
         {
             "display_name": "Leap",
-            "desc": "Leap forward when you double jump. (2s Cooldown)",
+            "desc": "Leap forward when you double jump. (4s Cooldown)",
             "archetype": "Boltslinger",
             "archetype_req": 4,
             "parents": [
@@ -1470,7 +1480,7 @@
                 "icon": "node_2"
             },
             "properties": {
-                "cooldown": 2
+                "cooldown": 4
             },
             "effects": []
         },
@@ -1827,7 +1837,7 @@
             "base_abil": "Arrow Shield",
             "parents": [
                 "Fierce Stomp",
-                "Better Arrow Shield",
+                "Honed Shield",
                 "More Traps"
             ],
             "dependencies": [],
@@ -1848,7 +1858,7 @@
             ]
         },
         {
-            "display_name": "Better Arrow Shield",
+            "display_name": "Honed Shield",
             "desc": "Arrow Shield's radius, knockback, and damage is increased. Guardian Angels' damage is increased.",
             "base_abil": "Arrow Shield",
             "parents": [
@@ -1920,7 +1930,7 @@
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Twain's Arc",
-                "Better Arrow Shield"
+                "Honed Shield"
             ],
             "dependencies": [
                 "Arrow Bomb"
@@ -1945,7 +1955,7 @@
             ]
         },
         {
-            "display_name": "Better Leap",
+            "display_name": "Bounding Stride",
             "desc": "Reduce leap's cooldown by 1s.",
             "archetype": "Boltslinger",
             "archetype_req": 0,
@@ -1987,7 +1997,7 @@
             "base_abil": 999,
             "parents": [
                 "Cheaper Arrow Shield I",
-                "Better Arrow Shield"
+                "Honed Shield"
             ],
             "dependencies": [],
             "blockers": [],
@@ -2074,7 +2084,7 @@
             "archetype": "Sharpshooter",
             "parents": [
                 "Cheaper Arrow Storm II",
-                "Better Arrow Shield",
+                "Honed Shield",
                 "Shocking Bomb"
             ],
             "dependencies": [
@@ -2103,7 +2113,7 @@
             ]
         },
         {
-            "display_name": "Better Guardian Angels",
+            "display_name": "Vigilant Sentinels",
             "desc": "Your Guardian Angels gain increased range and can shoot +4 extra arrows before disappearing.",
             "archetype": "Boltslinger",
             "archetype_req": 0,
@@ -2141,7 +2151,7 @@
             "desc": "When casting Escape, release 100 arrows towards the ground.",
             "base_abil": "Escape",
             "parents": [
-                "Better Guardian Angels",
+                "Vigilant Sentinels",
                 "Fierce Stomp",
                 "Murder Flock"
             ],
@@ -2190,7 +2200,8 @@
             "parents": [
                 "Mana Trap",
                 "Cheaper Arrow Storm II",
-                "Escape Artist"
+                "Escape Artist",
+                "Decimator"
             ],
             "dependencies": [
                 "Basaltic Trap"
@@ -2249,7 +2260,8 @@
             "parents": [
                 "Initiator",
                 "Phasing Beam",
-                "Cheaper Arrow Storm II"
+                "Cheaper Arrow Storm II",
+                "Murder Flock"
             ],
             "dependencies": [
                 "Phantom Ray"
@@ -2277,6 +2289,24 @@
                     ]
                 }
             ]
+        },
+        {
+            "display_name": "Spectral Hover",
+            "desc": "Slow Falling is applied upon using Escape. Crouching at any point will cancel this effect.",
+            "parents": [
+                "Murder Flock",
+                "Decimator"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 33,
+                "col": 5,
+                "icon": "node_1"
+            },
+            "properties": {},
+            "effects": []
         },
         {
             "display_name": "Phasing Beam",
@@ -2317,7 +2347,7 @@
             "desc": "When any of your projectiles miss, gain +0.08 Mana.",
             "archetype": "Boltslinger",
             "parents": [
-                "Better Guardian Angels",
+                "Vigilant Sentinels",
                 "Shrapnel Bomb"
             ],
             "dependencies": [],
@@ -2420,14 +2450,14 @@
             ]
         },
         {
-            "display_name": "Stronger Hook",
+            "display_name": "Hookshot",
             "desc": "Increase your Grappling Hook's range, speed and strength.",
             "archetype": "Trapper",
             "archetype_req": 2,
             "base_abil": "Escape",
             "parents": [
                 "Cheaper Escape II",
-                "Cheaper Arrow Shield II"
+                "Shrapnel Bomb"
             ],
             "dependencies": [
                 "Grappling Hook"
@@ -2436,7 +2466,7 @@
             "cost": 1,
             "display": {
                 "row": 35,
-                "col": 5,
+                "col": 3,
                 "icon": "node_0"
             },
             "properties": { "range": 8 },
@@ -2524,7 +2554,7 @@
             "base_abil": "Basaltic Trap",
             "parents": [
                 "Beast Lore",
-                "Shrapnel Bomb",
+                "Cheaper Arrow Shield II",
                 "Cheaper Escape II"
             ],
             "dependencies": [
@@ -2534,7 +2564,7 @@
             "cost": 2,
             "display": {
                 "row": 37,
-                "col": 3,
+                "col": 5,
                 "icon": "node_2"
             },
             "properties": {
@@ -2591,8 +2621,8 @@
             "cost": 1,
             "display": {
                 "row": 37,
-                "col": 5,
-                "icon": "node_1"
+                "col": 3,
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -2757,7 +2787,7 @@
             ]
         },
         {
-            "display_name": "Stronger Patient Hunter",
+            "display_name": "Swift Primer",
             "desc": "Increase Patient Hunter's damage gain per second by +10% and add increase its Max Damage by +100%.\nIncrease your maximum traps by +1.",
             "archetype": "Trapper",
             "archetype_req": 0,
@@ -2786,6 +2816,17 @@
                         "name": "damMult.Basaltic:7.Trap Damage"
                     },
                     "slider_max": 2,
+                    "scaling": [10],
+                    "max": 60
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Trap Wait Time",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Basaltic:7.Line Damage Tick"
+                    },
                     "scaling": [10],
                     "max": 60
                 },
@@ -2862,17 +2903,17 @@
         },
         {
             "display_name": "Ghostly Trigger",
-            "desc": "When using Escape, hold shift to slow your fall, allowing Twain's Arc to be user while airborn. Twain's arc will charge 30% faster while airborn after using Escape.",
+            "desc": "While mid-air after using Escape, Twain's Arc will fire immediately upon using your Main Attack",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
-            "parents": [ "More Focus II" ],
-            "dependencies": [],
+            "parents": [ "Cheaper Arrow Shield II" , "Cheaper Escape II"],
+            "dependencies": ["Twain's Arc"],
             "blockers": ["Fierce Stomp"],
             "cost": 2,
             "display": {
-                "row": 40,
-                "col": 8,
+                "row": 35,
+                "col": 6,
                 "icon": "node_4"
             },
             "properties": {},
@@ -2957,7 +2998,7 @@
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Geyser Stomp",
-                "Stronger Patient Hunter",
+                "Swift Primer",
                 "Cheaper Arrow Bomb II"
             ],
             "dependencies": [],
@@ -3976,7 +4017,7 @@
             "display_name": "Counter",
             "desc": "Gain a 30% chance to take no damage and instantly attack back when dodging an enemy attack with Agility.",
             "archetype": "Battle Monk", 
-            "parents": ["Aerodynamics", "Cheaper Uppercut"], 
+            "parents": ["Aerodynamics", "Cheaper Uppercut", "Shield Strike"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4094,7 +4135,7 @@
             "archetype": "Battle Monk", 
             "archetype_req": 1, 
             "base_abil": "Charge",
-            "parents": ["Cheaper Uppercut", "Stronger Mantle"], 
+            "parents": ["Cheaper Uppercut", "Crushing Blow"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4122,18 +4163,18 @@
             ]  
         },
         {
-            "display_name": "Stronger Mantle",
+            "display_name": "Blessed Bulwark",
             "desc": "Add +2 additional charges to Mantle of the Bovemists. Reduce its cooldown by 5s.",
             "archetype": "Paladin", 
             "archetype_req": 0, 
             "base_abil": "Mantle of the Bovemists",
-            "parents": ["Sacred Surge", "Flying Kick"], 
+            "parents": ["Rejuvenating Skin", "Cleansing Breeze"], 
             "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 20,
-                "col": 6,
+                "row": 22,
+                "col": 8,
                 "icon": "node_0"
             },
             "properties": {
@@ -4146,14 +4187,14 @@
             "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 25% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
-            "parents": ["Stronger Mantle", "Manachism"], 
+            "parents": ["Blessed Bulwark", "Cleansing Breeze"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 20,
-                "col": 8,
-                "icon": "node_4"
+                "row": 23,
+                "col": 7,
+                "icon": "node_3"
             },
             "properties": {},
             "effects": [
@@ -4165,10 +4206,28 @@
                     "parts": [
                         {
                             "name": "Smite Damage",
-                            "multipliers": [95, 0, 0, 15, 0, 10]
+                            "multipliers": [115, 0, 0, 20, 0, 15]
                         }
                     ]
                 }
+            ]
+        },
+        {
+            "display_name": "Emboldening Cry",
+            "desc": "War Scream grants players +8% damage bonus & +5% resistance.",
+            "archetype": "Paladin", 
+            "archetype_req": 0,
+            "parents": ["Sacred Surge"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 24,
+                "col": 8,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
             ]
         },
         {
@@ -4206,7 +4265,7 @@
             "display_name": "Riposte",
             "desc": "Increase your chance to attack with Counter by +30%",
             "base_abil": "Counter",
-            "parents": ["Stronger Mantle", "Flying Kick"], 
+            "parents": ["Crushing Blow", "Flying Kick"], 
             "dependencies": ["Counter"], 
             "blockers": [],
             "cost": 1, 
@@ -4240,7 +4299,7 @@
             "display_name": "Cheaper War Scream I",
             "desc": "Reduce the Mana cost of War Scream",
             "base_abil": "War Scream",
-            "parents": ["Stronger Mantle", "Flying Kick", "Cleansing Breeze"],
+            "parents": ["Crushing Blow", "Flying Kick", "Cleansing Breeze"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4263,7 +4322,7 @@
             "desc": "Charge will cleanse you of all negative effects and fire, as well as any allies you pass through. (3s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Cheaper War Scream I", "Stronger Bash"], 
+            "parents": ["Cheaper War Scream I"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4276,16 +4335,16 @@
             "effects": []
         },
         {
-            "display_name": "Stronger Bash",
+            "display_name": "Crushing Blow",
             "desc": "Increase the damage of Bash",
             "base_abil": "Bash",
-            "parents": ["Cleansing Breeze", "Sacred Surge"],
+            "parents": ["Flying Kick", "Rejuvenating Skin"],
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
-                "row": 22,
-                "col": 8,
+                "row": 20,
+                "col": 6,
                 "icon": "node_0"
             },
             "properties": {},
@@ -4302,7 +4361,7 @@
             "display_name": "Boiling Blood",
             "desc": "Bash leaves a trail of boiling blood behind its first explosion, slowing down and damaging enemies above it every 0.4 seconds",
             "base_abil": "Bash",
-            "parents": [ "Enraged Blow", "Ragnarokkr" ],
+            "parents": [ "Enraged Blow", "Comet" ],
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4332,30 +4391,6 @@
             ]
         },
         {
-            "display_name": "Ragnarokkr",
-            "desc": "War Scream become deafening, increasing its duration and giving damage bonus to players. (Mana Cost: +5)",
-            "archetype": "Fallen", 
-            "archetype_req": 0, 
-            "base_abil": "War Scream",
-            "parents": ["Boiling Blood", "Flying Kick", "Cheaper War Scream I"],
-            "dependencies": ["War Scream"], 
-            "blockers": [],
-            "cost": 2, 
-            "display": {
-                "row": 23,
-                "col": 3,
-                "icon": "node_4"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 4,
-                    "cost": 5
-                }
-            ]  
-        },
-        {
             "display_name": "Intoxicating Blood",
             "desc": "After leaving Corrupted, gain 5% of the health lost back for each enemy killed while Corrupted",
             "archetype": "Fallen", 
@@ -4378,13 +4413,13 @@
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Uppercut",
-            "parents": ["Boiling Blood", "Ragnarokkr"],
+            "parents": ["Boiling Blood", "Flying Kick", "Cheaper War Scream I"],
             "dependencies": ["Fireworks"], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 24,
-                "col": 2,
+                "row": 23,
+                "col": 3,
                 "icon": "node_2"
             },
             "properties": {},
@@ -4446,14 +4481,14 @@
             "desc": "Regain back 30% of the damage you take as healing over 15s.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
-            "parents": ["Cleansing Breeze", "Stronger Bash"],
+            "parents": ["Manachism", "Crushing Blow"],
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 23,
-                "col": 7,
-                "icon": "node_3"
+                "row": 20,
+                "col": 8,
+                "icon": "node_4"
             },
             "properties": {},
             "effects": []  
@@ -4556,7 +4591,7 @@
             "display_name": "Mythril Skin",
             "desc": "Gain +5% Base Resistance and become immune to knockback",
             "archetype": "Paladin", 
-            "parents": ["Rejuvenating Skin"], 
+            "parents": ["Sacred Surge"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4610,14 +4645,14 @@
             "display_name": "Shield Strike",
             "desc": "When your Mantle of the Bovemist loses all charges, deal damage around you for each Mantle individually lost",
             "archetype": "Paladin", 
-            "archetype_req": 0, 
+            "archetype_req": 0,
             "base_abil": "Mantle of the Bovemists",
-            "parents": ["Mythril Skin", "Sparkling Hope"], 
+            "parents": ["Manachism", "Counter", "Aerodynamics"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
-                "row": 27,
+                "row": 18,
                 "col": 6,
                 "icon": "node_2"
             },
@@ -4638,18 +4673,37 @@
             ]  
         },
         {
+            "display_name": "Luster Purge",
+            "desc": "Your Main Attacks are empowered while you have at least 10% holy power, dealing +40% damage and having +25% range.",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "parents": ["Mythril Skin", "Luster Purge"], 
+            "dependencies": [], 
+            "blockers": [],
+            "cost": 2, 
+            "display": {
+                "row": 27,
+                "col": 6,
+                "icon": "node_2"
+            },
+            "properties": {
+            },
+            "effects": [
+            ]  
+        },
+        {
             "display_name": "Sparkling Hope",
             "desc": "Everytime you heal 5% of your max health, deal damage to all nearby enemies",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Mythril Skin", "Shield Strike"], 
+            "parents": ["Mythril Skin", "Luster Purge"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 27,
                 "col": 8,
-                "icon": "node_4"
+                "icon": "node_2"
             },
             "properties": {
                 "aoe": 6
@@ -4861,7 +4915,7 @@
             "display_name": "Cheaper Bash II",
             "desc": "Reduce the Mana cost of Bash",
             "base_abil": "Bash",
-            "parents": ["Shield Strike", "Sparkling Hope", "Provoke"], 
+            "parents": ["Luster Purge", "Sparkling Hope", "Provoke"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4902,7 +4956,7 @@
             ]  
         },
         {
-            "display_name": "Better Enraged Blow",
+            "display_name": "Overwhelming Rage",
             "desc": "Increases the cap of Enraged Blow by +60%.",
             "base_abil": "Bak'al's Grasp",
             "parents": ["Cheaper War Scream II"], 
@@ -4981,7 +5035,7 @@
             "desc": "Bash will cast at the player's position and gain additional AoE.\nBash will be cast twice as fast.",
             "archetype": "Battle Monk", 
             "archetype_req": 6, 
-            "parents": ["Cyclone", "Stronger Sacred Surge"], 
+            "parents": ["Cyclone", "Consecration"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -5014,7 +5068,7 @@
             "desc": "After casting War Scream, envelop yourself with a vortex that damages nearby enemies every 0.5s",
             "archetype": "Battle Monk", 
             "archetype_req": 0, 
-            "parents": ["Spirit of the Rabbit", "Stronger Sacred Surge", "Discombobulate"], 
+            "parents": ["Spirit of the Rabbit", "Consecration", "Discombobulate"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -5046,7 +5100,7 @@
             ]  
         },
         {
-            "display_name": "Stronger Sacred Surge",
+            "display_name": "Consecration",
             "desc": "Increases the damage of Sacred Surge",
             "archetype": "Paladin", 
             "archetype_req": 9, 
@@ -5068,11 +5122,11 @@
             }]  
         },
         {
-            "display_name": "Second Chance",
-            "desc": "When you receive a fatal blow, survive and regain 30% of your Health (10m Cooldown)",
+            "display_name": "Heavenly Trumpet",
+            "desc": "Casting War Scream with at least 25% Holy Power will spend all of it to grant +1% Overhealth for each point of Holy Power.",
             "archetype": "Paladin", 
             "archetype_req": 12, 
-            "parents": ["Stronger Sacred Surge"], 
+            "parents": ["Consecration"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -5155,7 +5209,7 @@
             "display_name": "Cheaper Uppercut 2",
             "desc": "Reduce the Mana cost of Uppercut",
             "base_abil": "Uppercut",
-            "parents": ["Second Chance", "Brink of Madness"], 
+            "parents": ["Heavenly Trumpet", "Brink of Madness"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -5175,18 +5229,18 @@
         },
 
         {
-            "display_name": "Martyr",
-            "desc": "When you receive a fatal blow, all nearby allies become invincible",
+            "display_name": "Second Chance",
+            "desc": "When you receive a fatal blow, survive and regain 30% of your health. Makes all nearby allies invincible for 3s (10m Cooldown).",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Second Chance"], 
+            "parents": ["Heavenly Trumpet"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
             "display": {
                 "row": 34,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "duration": 3,
@@ -5957,7 +6011,7 @@
             ]
         },
         {
-            "display_name": "Stronger Meteor",
+            "display_name": "Crashing Comet",
             "desc": "Increase the damage of Meteor.",
             "base_abil": "Meteor",
             "archetype": "Arcanist",
@@ -6561,7 +6615,7 @@
             }]
         },
         {
-            "display_name": "Healthier Ophanim I",
+            "display_name": "Resilient Light",
             "desc": "Increases the health of Ophanim's orbs by +800 and reduces the damage they take when attacking by -5%.",
             "archetype": "Light Bender",
             "archetype_req": 0,
@@ -6592,7 +6646,7 @@
                 "Pyrokinesis",
                 "Seance",
                 "Cheaper Teleport II",
-                "Healthier Ophanim I"
+                "Resilient Light"
             ],
             "dependencies": [
                 "Ice Snake"
@@ -6733,7 +6787,7 @@
             "archetype_req": 0,
             "base_abil": "Heal",
             "parents": [
-                "Healthier Ophanim I",
+                "Resilient Light",
                 "Transonic Warp",
                 "Orphion's Pulse"
             ],
@@ -6773,7 +6827,7 @@
             "archetype_req": 5,
             "base_abil": "Heal",
             "parents": [
-                "Healthier Ophanim I",
+                "Resilient Light",
                 "Snake Nest",
                 "Arcane Restoration",
                 "Fluid Healing"
@@ -6845,7 +6899,7 @@
             "effects": []
         },
         {
-            "display_name": "Stronger Ophanim",
+            "display_name": "Incandescence",
             "desc": "Increase the damage of Ophanim.",
             "base_abil": "Ophanim",
             "parents": [
@@ -7204,7 +7258,7 @@
             "parents": [
                 "Cheaper Ice Snake II",
                 "Explosive Entrance",
-                "Better Ophanim"
+                "Halo"
             ],
             "dependencies": [
                 "Ice Snake"
@@ -7227,7 +7281,7 @@
             ]
         },
         {
-            "display_name": "Better Ophanim",
+            "display_name": "Halo",
             "desc": "Increase your maximum orbs from Ophanim by +1.",
             "archetype": "Light Bender",
             "archetype_req": 0,
@@ -7281,13 +7335,13 @@
             "effects": []
         },
         {
-            "display_name": "Stronger Sunshower",
+            "display_name": "Searing Light",
             "desc": "Increase the damage of Sunshower.",
             "archetype": "Light Bender",
             "base_abil": "Heal",
             "parents": [
                 "Gust",
-                "Better Ophanim"
+                "Halo"
             ],
             "dependencies": [
                 "Sunshower"
@@ -7380,7 +7434,7 @@
             "archetype_req": 6,
             "parents": [
                 "More Winded II",
-                "Healthier Ophanim II"
+                "Everlasting Light"
             ],
             "dependencies": [],
             "blockers": [],
@@ -7405,17 +7459,17 @@
             ]
         },
         {
-            "display_name": "Healthier Ophanim II",
+            "display_name": "Everlasting Light",
             "desc": "Increase the health of your orbs from Ophanim by +3000.",
             "base_abil": "Ophanim",
             "archetype": "Light Bender",
             "archetype_req": 0,
             "parents": [
-                "Better Ophanim",
+                "Halo",
                 "Devitalize"
             ],
             "dependencies": [
-                "Healthier Ophanim I"
+                "Resilient Light"
             ],
             "blockers": [],
             "cost": 1,
@@ -7457,7 +7511,7 @@
             "archetype_req": 0,
             "parents": [
                 "Devitalize",
-                "Healthier Ophanim II"
+                "Everlasting Light"
             ],
             "dependencies": [
                 "Ophanim"
@@ -7495,7 +7549,7 @@
             "archetype_req": 12,
             "base_abil": "Heal",
             "parents": [
-                "Healthier Ophanim II"
+                "Everlasting Light"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8267,7 +8321,7 @@
                 "Multihit"
             ],
             "blockers": [
-                "Stronger Multihit",
+                "Mutilate",
                 "Fatality"
             ],
             "cost": 2,
@@ -8660,7 +8714,7 @@
             ]
         },
         {
-            "display_name": "Better Smoke Bomb",
+            "display_name": "Rolling Fog",
             "desc": "Increase Smoke Bomb's range and area of effect.",
             "archetype": "",
             "archetype_req": 0,
@@ -8689,7 +8743,7 @@
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
-                "Better Smoke Bomb",
+                "Rolling Fog",
                 "Silent Killer",
                 "Cheaper Multihit"
             ],
@@ -8774,7 +8828,7 @@
             "archetype_req": 0,
             "base_abil": "Vanish",
             "parents": [
-                "Better Smoke Bomb",
+                "Rolling Fog",
                 "Shadow Travel"
             ],
             "dependencies": [],
@@ -8817,7 +8871,7 @@
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
             "parents": [
-                "Better Smoke Bomb",
+                "Rolling Fog",
                 "Blazing Powder"
             ],
             "dependencies": [
@@ -9070,7 +9124,7 @@
             ]
         },
         {
-            "display_name": "Stronger Multihit",
+            "display_name": "Mutilate",
             "desc": "Increases Multihit's amount of hits by +3",
             "base_abil": "Multihit",
             "parents": [
@@ -9101,7 +9155,7 @@
         },
         {
             "display_name": "Marked",
-            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.1s Cooldown) Marked enemies will take +6% damage for each mark they have.",
+            "desc": "Smoke Bomb will add +1 Mark to enemies it hits. (Max 4, 0.1s Cooldown) Marked enemies will take +7% damage for each mark they have.",
             "archetype": "Shadestepper",
             "archetype_req": 5,
             "parents": [
@@ -9130,7 +9184,7 @@
                         }
                     ],
                     "scaling": [
-                        6
+                        7
                     ]
                 }
             ]
@@ -9620,7 +9674,7 @@
             }]
         },
         {
-            "display_name": "Stronger Lacerate",
+            "display_name": "Eviscerate",
             "desc": "Lacerate will deal +1 slash",
             "archetype": "Acrobat",
             "base_abil": "Spin Attack",
@@ -9652,7 +9706,7 @@
             ]
         },
         {
-            "display_name": "Stronger Vortex",
+            "display_name": "Bladestorm",
             "desc": "Increases Violent Vortex's damage by +40% and increases the damage requirement to be 2.5x your max health.",
             "archetype": "Shadestepper",
             "archetype_req": 4,
@@ -9752,7 +9806,7 @@
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Stronger Lacerate",
+                "Eviscerate",
                 "Cheaper Smoke Bomb II"
             ],
             "dependencies": ["Multihit"],
@@ -9802,7 +9856,7 @@
             ]
         },
         {
-            "display_name": "Stronger Clones",
+            "display_name": "Deadly Decoys",
             "desc": "Improves your damage by +5% per Clone while your Clones are active, and reduce their maximum damage penalty by 5%.",
             "archetype": "Trickster",
             "archetype_req": 7,
@@ -9986,7 +10040,7 @@
             ]
         },
         {
-            "display_name": "Better Weightless",
+            "display_name": "Cloudstepper",
             "desc": "Weightless will grant +0.6 more mana.",
             "archetype": "",
             "archetype_req": 0,
@@ -10029,7 +10083,7 @@
             "effects": []
         },
         {
-            "display_name": "Better Marked",
+            "display_name": "Marked for Death",
             "desc": "Increase Marked's damage bonus by +4%",
             "archetype": "",
             "archetype_req": 0,
@@ -10132,7 +10186,7 @@
         },
         {
             "display_name": "Nightcloak Knife",
-            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will copy your attacks on enemies near you, dealing 8% of your damage for every 2 Mark consumed. (Max 10 Marks)",
+            "desc": "If cast while in Vanish, Spin Attack will consume all Marks from nearby enemies to summon the Nightcloak Knife.\n The Knife will copy your attacks on enemies near you, dealing 9% of your damage for every 2 Mark consumed. (Max 10 Marks)",
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
@@ -10160,7 +10214,7 @@
                     "output": [
                         { "type": "stat", "name": "damMult.Nightcloak" }
                     ],
-                    "scaling": [8]
+                    "scaling": [9]
                 }
             ]
         },
@@ -10169,7 +10223,7 @@
             "desc": "When hitting an enemy with Dancing Blade, you will deal extra damage and vault upwards, resetting Dash as if you touched the ground.",
             "base_abil": "Dash",
             "parents": [
-                "Stronger Lacerate",
+                "Eviscerate",
                 "Choke Bomb",
                 "Hoodwink"
             ],
@@ -10249,7 +10303,7 @@
             }]
         },
         {
-            "display_name": "Even Stronger Clones",
+            "display_name": "Lethal Images",
             "desc": "Reduce your maximum damage penalty by -5% while your Clones are active.",
             "archetype": "Trickster",
             "archetype_req": 0,
@@ -11126,7 +11180,7 @@
             "parents": ["Puppet Master", "Cheaper Aura I"],
             "dependencies": ["Nature's Jolt"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 17,
                 "col": 0,
@@ -11270,7 +11324,7 @@
             }]
         },
         {
-            "display_name": "Better Totem",
+            "display_name": "Totemic Reach",
             "desc": "Increase your Totem's area of effect.",
             "base_abil": "Totem",
             "parents": [
@@ -11517,7 +11571,7 @@
                     "base_spell": 9,
                     "display": "Bleeding Tick",
                     "parts": [
-                        { "name": "Bleeding Tick", "multipliers": [ 20, 0, 0, 0, 0, 0 ] }
+                        { "name": "Bleeding Tick", "multipliers": [ 30, 0, 0, 0, 0, 0 ] }
                     ]
                 },
                 {
@@ -11728,7 +11782,7 @@
             "base_abil": "Aura",
             "parents": [
                 "Crimson Effigy",
-                "Stronger Totem"
+                "Imbued Totem"
             ],
             "dependencies": ["Aura"],
             "blockers": [],
@@ -11746,7 +11800,7 @@
             }]
         },
         {
-            "display_name": "Stronger Totem",
+            "display_name": "Imbued Totem",
             "desc": "Increase Totem's damage.",
             "base_abil": "Totem",
             "parents": [
@@ -11791,9 +11845,9 @@
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 26,
-                "col": 7,
-                "icon": "node_3"
+                "row": 24,
+                "col": 6,
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -11856,7 +11910,7 @@
             "archetype": "Ritualist",
             "archetype_req": 7,
             "base_abil": "Uproot",
-            "parents": ["Fluid Healing", "Stronger Totem"],
+            "parents": ["Fluid Healing", "Imbued Totem"],
             "dependencies": ["Masquerade"],
             "blockers": [],
             "cost": 1,
@@ -11979,9 +12033,65 @@
             ]
         },
         {
+            "display_name": "Eldritch Call",
+            "desc": "Casting Totem while holding shift will spend 35 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and -20% weakness. Bleeding enemies will take x2 damage from the tentacles.",
+            "archetype": "Acolyte",
+            "archetype_req": 7,
+            "parents": [
+                "Storm Dance",
+                "Cheaper Haul II"
+            ],
+            "dependencies": ["Lashing Lance"],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 26,
+                "col": 7,
+                "icon": "node_3"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Eldritch Call",
+                    "base_spell": 11,
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Single Hit",
+                            "multipliers": [ 180, 0, 30, 0, 0, 30 ] 
+                        },
+                        {
+                            "name": "Damage per Totem",
+                            "hits": { "Single Hit": 3 }
+                        },
+                        {
+                            "name": "DPS",
+                            "hits": { "Single Hit": 0.5 }
+                        },
+                        {
+                            "name": "Total Damage",
+                            "hits": { "Damage per Totem": "Totem.num_totems" }
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Bleeding",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Eldritch Call:11.Single Hit",
+                            "value": 100
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "display_name": "Fluid Healing",
             "desc": "For every 1% Water Damage you have from items, buff Aura's healing power by +0.3%.",
-            "parents": ["Twisted Tether", "Bloodier I", "Stronger Totem"],
+            "parents": ["Eldritch Call", "Bloodier I", "Imbued Totem"],
             "dependencies": [ "Sacrificial Shrine" ],
             "blockers": [],
             "cost": 2,
@@ -12015,7 +12125,7 @@
             "desc": "Increase your maximum Blood pool by +30 Points. Increase your maximum Bleeding duration by 1.5s.",
             "archetype": "Acolyte",
             "base_abil": "Sacrificial Shrine",
-            "parents": ["Twisted Tether", "Fluid Healing"],
+            "parents": ["Eldritch Call", "Fluid Healing"],
             "dependencies": ["Sacrificial Shrine"],
             "blockers": [],
             "cost": 1,
@@ -12049,7 +12159,7 @@
         },
         {
             "display_name": "Chant of the Heretic",
-            "desc": "When switching to the Mask of the Heretic, damage and knockback nearby enemies.",
+            "desc": "When switching to the Mask of the Heretic, you and nearby allies gain +60% walk speed. -15% of the bonus decays every second.",
             "archetype": "Ritualist",
             "archetype_req": 0,
             "parents": ["Depersonalization", "Blood Rite"],
@@ -12064,11 +12174,15 @@
             "properties": { "aoe": 8 },
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "target_part": "Chant of the Heretic",
-                    "base_spell": 4,
-                    "multipliers": [200, 0, 0, 0, 0, 0],
-                    "display": "Chant of the Heretic"
+                    "type": "raw_stat",
+                    "toggle": "Chant of the Heretic",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "spd",
+                            "value": 60
+                        }
+                    ]
                 }
             ]
         },     
@@ -12114,7 +12228,7 @@
         },
         {
             "display_name": "Sanguine Strike",
-            "desc": "Slightly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.25 per beam.",
+            "desc": "Greatly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.5s per beam.",
             "parents": ["Blood Rite", "Chant of the Heretic"],
             "dependencies": [],
             "blockers": [],
@@ -12132,7 +12246,7 @@
             "desc": "Hitting your Puppets with Main Attack will cause them to lose 2s of their duration per beam.",
             "archetype": "Summoner",
             "base_abil": 999,
-            "parents": ["Cheaper Aura II", "Stronger Totem"],
+            "parents": ["Cheaper Aura II", "Imbued Totem"],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
@@ -12174,7 +12288,7 @@
             ]
         },
         {
-            "display_name": "Stronger Tether",
+            "display_name": "Bloodletting",
             "desc": "Increase Twisted Tether's damage.",
             "archetype": "Acolyte",
             "parents": ["Deeper Wounds"],

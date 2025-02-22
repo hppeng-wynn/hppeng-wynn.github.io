@@ -183,7 +183,7 @@ function displayExpandedItem(item, parent_id){
                 elemental_format = !elemental_format;
             }
             else if (command === "!spacer" && last_command !== "!spacer") {
-                let spacer = make_elem('hr', ["row", "my-2"], {});
+                let spacer = make_elem('div', ["row", "my-2"], {});
                 parent_div.appendChild(spacer);
                 last_command = command;
                 continue;
@@ -708,7 +708,7 @@ function displayExpandedIngredient(ingred, parent_id) {
             }
             else if (command === "!spacer") {
                 let spacer = document.createElement('div');
-                spacer.classList.add("row", "my-2");
+                spacer.classList.add("div", "my-2");
                 parent_elem.appendChild(spacer);
                 continue;
             }
