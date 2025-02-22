@@ -4322,7 +4322,7 @@
             "desc": "Charge will cleanse you of all negative effects and fire, as well as any allies you pass through. (3s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Cheaper War Scream I"], 
+            "parents": ["Cheaper War Scream I", "Blessed Bulwark"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4677,7 +4677,7 @@
             "desc": "Your Main Attacks are empowered while you have at least 10% holy power, dealing +40% damage and having +25% range.",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Mythril Skin", "Luster Purge"], 
+            "parents": ["Mythril Skin", "Sparkling Hope"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -8437,7 +8437,8 @@
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Wall of Smoke"
+                "Wall of Smoke",
+                "Dagger Proficiency II"
             ],
             "dependencies": [
                 "Multihit"
@@ -9524,7 +9525,7 @@
             "base_abil": "Spin Attack",
             "parents": [
                 "Blade Fury",
-                "Aerial Ace"
+                "Wall Jump"
             ],
             "dependencies": [],
             "blockers": [],
