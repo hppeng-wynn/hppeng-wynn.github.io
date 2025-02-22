@@ -4594,11 +4594,11 @@
             "parents": ["Sacred Surge"], 
             "dependencies": [], 
             "blockers": [],
-            "cost": 2, 
+            "cost": 1, 
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [

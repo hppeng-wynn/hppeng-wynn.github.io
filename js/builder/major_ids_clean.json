@@ -678,7 +678,7 @@
     },
     "HELLFIRE": {
         "displayName": "Hellfire",
-        "description": "Bash becomes one giant 250% damage hit, and Boiling Blood burns faster and stronger but can't slow",
+        "description": "Bash becomes one giant 325% damage hit, and Boiling Blood burns faster and stronger but can't slow",
         "abilities": [
             {
                 "class": "Warrior",
