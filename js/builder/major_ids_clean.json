@@ -921,7 +921,7 @@
     },
     "EFFLORESCENCE": {
         "displayName": "Efflorescence",
-        "description": "Jasmine Bloom deals increased damage but has reduced vertical range",
+        "description": "Jasmine Bloom deals increased damage but has reduced vertical range. Swan Dive's Jasmine Bloom explosion deals 270% neutral & 90% in each element.",
         "abilities": [
             {
                 "class": "Assassin",
@@ -932,13 +932,22 @@
                 "properties": {
                     "duration": 2.0
                 },
-                "effects": [{
-                    "type": "add_spell_prop",
-                    "base_spell": 7,
-                    "target_part": "Per Hit",
-                    "behavior": "overwrite",
-                    "multipliers": [15, 15, 15, 15, 15, 15]
-                }]
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 7,
+                        "target_part": "Per Hit",
+                        "behavior": "overwrite",
+                        "multipliers": [15, 15, 15, 15, 15, 15]
+                    },
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 7,
+                        "target_part": "Swan Dive Explosion",
+                        "behavior": "overwrite",
+                        "multipliers": [270, 90, 90, 90, 90, 90]
+                    }
+                ]
             }
         ]
     },
@@ -1179,7 +1188,7 @@
                         "base_spell": 10,
                         "target_part": "Annihilation", 
                         "behavior": "modify",
-                        "multipliers": [-50, 0, 0, 0, -30, 0]
+                        "multipliers": [-100, 0, 0, 0, -60, 0]
                     },
                     {
                         "type": "stat_scaling",
@@ -1190,7 +1199,7 @@
                             "type": "stat",
                             "name": "damMult.Bloodlust:10.Annihilation"
                         },
-                        "scaling": [5]
+                        "scaling": [2.5]
                     }
                 ]
             }

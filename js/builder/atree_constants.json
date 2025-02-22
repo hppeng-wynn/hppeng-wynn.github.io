@@ -998,7 +998,7 @@
                         {
                             "name": "DPS",
                             "type": "total",
-                            "hits": { "Single Volley": 2 }
+                            "hits": { "Single Volley": 2.2 }
                         },
                         {
                             "name": "Total Damage",
@@ -4689,6 +4689,17 @@
             "properties": {
             },
             "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Luster Purge",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Luster Purge:0.Melee",
+                            "value": 40
+                        }
+                    ]
+                }
             ]  
         },
         {
@@ -5118,7 +5129,7 @@
                 "type": "add_spell_prop",
                 "base_spell": 9,
                 "target_part": "Smite Damage",
-                "multipliers": [70, 0, 0, 5, 0, 5]
+                "multipliers": [80, 0, 0, 10, 0, 10]
             }]  
         },
         {
@@ -5187,7 +5198,7 @@
                     "parts": [
                         {
                             "name": "Annihilation",
-                            "multipliers": [150, 0, 0, 0, 50, 0]
+                            "multipliers": [300, 0, 0, 0, 100, 0]
                         }
                     ]
                 },
@@ -5200,7 +5211,7 @@
                         "type": "stat",
                         "name": "damMult.Bloodlust:10.Annihilation"
                     },
-                    "scaling": [5]
+                    "scaling": [2.5]
                 }
             ]
         },
@@ -8322,7 +8333,7 @@
             ],
             "blockers": [
                 "Mutilate",
-                "Fatality"
+                "Finality"
             ],
             "cost": 2,
             "display": {
@@ -8366,14 +8377,67 @@
             ]
         },
         {
-            "display_name": "Fatality",
-            "desc": "Multihit will deal an additional final slash",
+            "display_name": "Stomp",
+            "desc": "Falling 8 blocks or more deals damage around you when you land, and is increased by +10% damage per block over 8, up to 12 additional blocks.",
+            "archetype": "Acrobat",
+            "archetype_req": 0,
+            "parents": [
+                "Water Mastery",
+                "Air Mastery"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 2,
+            "display": {
+                "row": 14,
+                "col": 7,
+                "icon": "node_2"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "replace_spell",
+                    "name": "Stomp",
+                    "base_spell": 9,
+                    "display": "Stomp Damage",
+                    "parts": [
+                        {
+                            "name": "Stomp Damage",
+                            "multipliers": [ 100, 20, 0, 0, 0, 0 ]
+                        }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Blocks Fallen",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Stomp:9.Stomp Damage"
+                    },
+                    "slider_max": 12,
+                    "scaling": [10]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Blocks Fallen",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Stomp:9.Swan Dive Explosion"
+                    },
+                    "scaling": [10]
+                }
+            ]
+        },
+        {
+            "display_name": "Finality",
+            "desc": "Multihit's damage ramps up every hit, dealing additional damage. Damage bonus caps at 8 hits.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Water Mastery",
-                "Air Mastery"
+                "Wall of Smoke"
             ],
             "dependencies": [
                 "Multihit"
@@ -8381,33 +8445,12 @@
             "blockers": ["Backstab"],
             "cost": 2,
             "display": {
-                "row": 15,
-                "col": 7,
+                "row": 22,
+                "col": 8,
                 "icon": "node_2"
             },
             "properties": {},
             "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Fatality",
-                    "multipliers": [
-                        100,
-                        0,
-                        0,
-                        0,
-                        0,
-                        50
-                    ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Fatality": 1
-                    }
-                }
             ]
         },
         {
@@ -8480,17 +8523,20 @@
             "archetype": "Acrobat",
             "archetype_req": 0,
             "parents": [
-                "Fatality"
+                "Sandbagging",
+                "Weightless"
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
-                "row": 16,
+                "row": 26,
                 "col": 6,
-                "icon": "node_1"
+                "icon": "node_2"
             },
-            "properties": {},
+            "properties": {
+                "cooldown": 2
+            },
             "effects": []
         },
         {
@@ -8564,7 +8610,7 @@
             "archetype_req": 2,
             "base_abil": "Spin Attack",
             "parents": [
-                "Fatality"
+                "Hop"
             ],
             "dependencies": [],
             "blockers": [
@@ -8745,7 +8791,7 @@
             "parents": [
                 "Rolling Fog",
                 "Silent Killer",
-                "Cheaper Multihit"
+                "Dagger Proficiency II"
             ],
             "dependencies": [
                 "Vanish"
@@ -8761,50 +8807,23 @@
             "effects": []
         },
         {
-            "display_name": "Cheaper Multihit",
-            "desc": "Reduce the Mana cost of Multihit",
-            "archetype": "",
-            "archetype_req": 0,
-            "base_abil": "Multihit",
-            "parents": [
-                "Shenanigans",
-                "Shadow Travel",
-                "Dagger Proficiency II",
-                "Psithurism"
-            ],
-            "dependencies": [ "Multihit" ],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 22,
-                "col": 5,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 3,
-                    "cost": -5
-                }
-            ]
-        },
-        {
             "display_name": "Dagger Proficiency II",
             "desc": "Increase your Main Attack's range and add +5 raw damage to all attacks",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": 999,
             "parents": [
-                "Cheaper Multihit",
-                "Wall of Smoke"
+                "Shenanigans",
+                "Shadow Travel",
+                "Finality",
+                "Psithurism"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
                 "row": 22,
-                "col": 8,
+                "col": 5,
                 "icon": "node_0"
             },
             "properties": {},
@@ -8902,7 +8921,7 @@
             "parents": [
                 "Cheaper Smoke Bomb",
                 "Shadow Travel",
-                "Cheaper Multihit"
+                "Dagger Proficiency II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8936,7 +8955,7 @@
             "archetype": "Acrobat",
             "archetype_req": 3,
             "parents": [
-                "Cheaper Multihit",
+                "Finality",
                 "Dagger Proficiency II"
             ],
             "dependencies": [],
@@ -8978,7 +8997,7 @@
             "archetype_req": 0,
             "parents": [
                 "Blazing Powder",
-                "Hop"
+                "Righting Reflex"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8999,20 +9018,17 @@
             "archetype": "Acrobat",
             "archetype_req": 0,
             "parents": [
-                "Sandbagging",
-                "Weightless"
+                "Stomp"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 26,
-                "col": 6,
-                "icon": "node_2"
+                "row": 16,
+                "col": 7,
+                "icon": "node_1"
             },
-            "properties": {
-                "cooldown": 2
-            },
+            "properties": {},
             "effects": []
         },
         {
@@ -9022,7 +9038,7 @@
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
-                "Far Reach",
+                "Blade Fury",
                 "Shurikens"
             ],
             "dependencies": [
@@ -9125,11 +9141,11 @@
         },
         {
             "display_name": "Mutilate",
-            "desc": "Increases Multihit's amount of hits by +3",
+            "desc": "Increases Multihit's amount of hits & Finality's damage cap by +3",
             "base_abil": "Multihit",
             "parents": [
                 "Sandbagging",
-                "Hop"
+                "Righting Reflex"
             ],
             "dependencies": [],
             "blockers": [
@@ -9237,10 +9253,6 @@
                         },
                         {
                             "type": "stat",
-                            "name": "damMult.EchoCast:3.Fatality"
-                        },
-                        {
-                            "type": "stat",
                             "name": "damMult.EchoCast:3.Per Hit"
                         },
                         {
@@ -9279,10 +9291,6 @@
                         },
                         {
                             "type": "stat",
-                            "name": "damMult.EchoPenalty:3.Fatality"
-                        },
-                        {
-                            "type": "stat",
                             "name": "damMult.EchoPenalty:3.Per Hit"
                         },
                         {
@@ -9305,13 +9313,13 @@
         },
         {
             "display_name": "Shurikens",
-            "desc": "After using Dash, your next Main Attack will throw 3 shurikens",
+            "desc": "After using Dash, you prepare 3 shurikens. Your next Main Attack will throw all prepared shurikens.",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": "Dash",
             "parents": [
                 "Echo",
-                "Far Reach"
+                "Blade Fury"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9322,7 +9330,8 @@
                 "icon": "node_4"
             },
             "properties": {
-                "range": 50
+                "range": 50,
+                "count": 9
             },
             "effects": [
                 {
@@ -9349,6 +9358,13 @@
                             "hits": {
                                 "Per Shuriken": 3
                             }
+                        },
+                        {
+                            "name": "Maximum Damage",
+                            "type": "total",
+                            "hits": {
+                                "Per Shuriken": "Dash.count"
+                            }
                         }
                     ]
                 }
@@ -9361,15 +9377,15 @@
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Flow State",
-                "Shurikens"
+                "Eviscerate",
+                "Cheaper Smoke Bomb II"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 28,
-                "col": 8,
+                "row": 37,
+                "col": 7,
                 "icon": "node_0"
             },
             "properties": {},
@@ -9469,31 +9485,32 @@
             ]
         },
         {
-            "display_name": "Parry",
-            "desc": "After dodging damage, gain a brief damage buff, and make your next spell within 1.5s free. (3s Cooldown)",
+            "display_name": "Aerial Ace",
+            "desc": "Hitting an enemy with Swan Dive or an empowered Dash gives you a +25% damage boost for 6s.",
             "archetype": "Acrobat",
-            "archetype_req": 5,
+            "archetype_req": 0,
             "parents": [
-                "Cheaper Spin Attack II"
+                "Cheaper Spin Attack II",
+                "Choke Bomb"
             ],
-            "dependencies": [],
+            "dependencies": ["Swan Dive"],
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 31,
-                "col": 6,
-                "icon": "node_2"
+                "row": 33,
+                "col": 8,
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Parry",
+                    "toggle": "Activate Aerial Ace",
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "damMult.Parry",
-                            "value": 30
+                            "name": "damMult.Aerial Ace",
+                            "value": 25
                         }
                     ]
                 }
@@ -9506,8 +9523,8 @@
             "archetype_req": 0,
             "base_abil": "Spin Attack",
             "parents": [
-                "Far Reach",
-                "Parry"
+                "Blade Fury",
+                "Aerial Ace"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9551,7 +9568,7 @@
             "effects": []
         },
         {
-            "display_name": "Cheaper Multihit II",
+            "display_name": "Cheaper Multihit I",
             "desc": "Reduce the Mana cost of Multihit",
             "base_abil": "Multihit",
             "parents": [
@@ -9583,7 +9600,7 @@
             "archetype_req": 1,
             "base_abil": "Spin Attack",
             "parents": [
-                "Cheaper Multihit II",
+                "Cheaper Multihit I",
                 "Cheaper Dash II",
                 "Choke Bomb"
             ],
@@ -9609,7 +9626,7 @@
             "parents": [
                 "Hoodwink",
                 "Wall Jump",
-                "Parry"
+                "Aerial Ace"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9628,7 +9645,6 @@
             "archetype": "Acrobat",
             "archetype_req": 5,
             "parents": [
-                "Choke Bomb",
                 "Cheaper Spin Attack II"
             ],
             "dependencies": [
@@ -9637,8 +9653,8 @@
             "blockers": [],
             "cost": 2,
             "display": {
-                "row": 33,
-                "col": 8,
+                "row": 31,
+                "col": 6,
                 "icon": "node_2"
             },
             "properties": {},
@@ -9652,7 +9668,7 @@
             "base_abil": "Spin Attack",
             "parents": [
                 "Nightcloak Knife",
-                "Cheaper Multihit II",
+                "Cheaper Multihit I",
                 "Dissolution"
             ],
             "dependencies": [
@@ -9679,9 +9695,8 @@
             "archetype": "Acrobat",
             "base_abil": "Spin Attack",
             "parents": [
-                "Pirouette",
                 "Choke Bomb",
-                "Wall Jump"
+                "Aerial Ace"
             ],
             "dependencies": [
                 "Lacerate"
@@ -9778,7 +9793,7 @@
             "parents": [
                 "Harvester",
                 "Hoodwink",
-                "Blade Fury"
+                "Far Reach"
             ],
             "dependencies": [
                 "Smoke Bomb"
@@ -9801,28 +9816,28 @@
         },
         {
             "display_name": "Blade Fury",
-            "desc": "While using Multihit on an enemy, lock their position in front of you.\nMultihit gains extra damage and can be aimed in all directions",
+            "desc": "Multihit gains extra damage and can be aimed in all directions",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Eviscerate",
-                "Cheaper Smoke Bomb II"
+                "Swan Dive",
+                "Shurikens"
             ],
             "dependencies": ["Multihit"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
-                "row": 37,
-                "col": 7,
-                "icon": "node_4"
+                "row": 28,
+                "col": 8,
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [{
                 "type": "add_spell_prop",
                 "base_spell": 3,
                 "target_part": "Per Hit",
-                "multipliers": [ 0, 0, 15, 0, 0, 0 ]
+                "multipliers": [ 0, 0, 10, 0, 0, 0 ]
             }]
         },
         {
@@ -9863,7 +9878,7 @@
             "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb II",
-                "Blade Fury"
+                "Far Reach"
             ],
             "dependencies": [
                 "Echo"
@@ -9888,7 +9903,7 @@
             "archetype_req": 8,
             "base_abil": "Dash",
             "parents": [
-                "Blade Fury"
+                "Far Reach"
             ],
             "dependencies": [
                 "Shurikens"
@@ -9933,11 +9948,6 @@
                         {
                             "type": "stat",
                             "name": "damMult.Satsujin:3.Per Hit",
-                            "value": 100
-                        },
-                        {
-                            "type": "stat",
-                            "name": "damMult.Satsujin:3.Fatality",
                             "value": 100
                         },
                         {
@@ -10005,11 +10015,11 @@
         },
         {
             "display_name": "Jasmine Bloom",
-            "desc": "After spending 40 Mana, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
+            "desc": "After spending 40 Mana or gaining 2 Momentum, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
             "archetype": "Acrobat",
             "archetype_req": 12,
             "parents": [
-                "Blade Fury"
+                "Far Reach"
             ],
             "dependencies": [],
             "blockers": [],
@@ -10034,6 +10044,10 @@
                         {
                             "name": "DPS",
                             "hits": { "Per Hit": 3.333333333 }
+                        },
+                        {
+                            "name": "Swan Dive Explosion",
+                            "multipliers": [ 600, 60, 0, 60, 0, 0 ]
                         }
                     ]
                 }
@@ -10124,7 +10138,7 @@
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Cheaper Multihit",
+                "Dagger Proficiency II",
                 "Shadow Travel"
             ],
             "dependencies": [ "Mirror Image" ],
@@ -10157,7 +10171,7 @@
             "archetype": "Trickster",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Multihit",
+                "Finality",
                 "Dagger Proficiency II"
             ],
             "dependencies": [],
@@ -10190,7 +10204,7 @@
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Multihit II",
+                "Cheaper Multihit I",
                 "Ambush"
             ],
             "dependencies": ["Marked"],
@@ -10219,39 +10233,13 @@
             ]
         },
         {
-            "display_name": "Pirouette",
-            "desc": "When hitting an enemy with Dancing Blade, you will deal extra damage and vault upwards, resetting Dash as if you touched the ground.",
-            "base_abil": "Dash",
-            "parents": [
-                "Eviscerate",
-                "Choke Bomb",
-                "Hoodwink"
-            ],
-            "dependencies": ["Dancing Blade"],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 34,
-                "col": 5,
-                "icon": "node_1"
-            },
-            "properties": {},
-            "effects": [{
-                "type": "add_spell_prop",
-                "base_spell": 2,
-                "target_part": "Dancing Blade",
-                "multipliers": [30, 0, 0, 0, 0, 10],
-                "display": "Dancing Blade"
-            }]
-        },
-        {
             "display_name": "Dissolution",
             "desc": "When entering and exiting Vanish, become immune to knockback and gain resistance for a brief moment.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
             "base_abil": "Dash",
             "parents": [
-                "Cheaper Multihit II",
+                "Cheaper Multihit I",
                 "Hoodwink",
   	            "Fatal Spin"
             ],
@@ -10277,10 +10265,10 @@
             }]
         },
         {
-            "display_name": "Flow State",
-            "desc": "Landing 60 hits without stopping for over 2s will greatly increase your damage for a short time. (10s Cooldown)",
+            "display_name": "Swan Dive",
+            "desc": "Landing 30 hits against an enemy while mid-air grants you +1 Momentum (Max 5). Stomp consumes Momentum for +25% damage per stack. At 3 Momentum, Stomp releases an explosion & Dash's downward velocity increases.",
             "archetype": "Acrobat",
-            "archetype_req": 5,
+            "archetype_req": 6,
             "parents": [
                 "Weightless"
             ],
@@ -10292,15 +10280,52 @@
                 "col": 8,
                 "icon": "node_3"
             },
-            "effects": [{
-                "type": "raw_stat",
-                "toggle": "Flow State",
-                "bonuses": [{
-                    "type": "stat",
-                    "name": "damMult.FlowState",
-                    "value": 35
-                }]
-            }]
+            "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Momentum",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Swan Dive:9.Stomp Damage"
+                    },
+                    "slider_max": 5,
+                    "scaling": [25]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Momentum",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Swan Dive:9.Swan Dive Explosion"
+                    },
+                    "scaling": [25]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Momentum",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Swan Dive:7.Swan Dive Explosion"
+                    },
+                    "scaling": [25]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 9,
+                    "target_part": "Swan Dive Explosion",
+                    "multipliers": [
+                        160,
+                        20,
+                        0,
+                        0,
+                        20,
+                        0
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Lethal Images",
