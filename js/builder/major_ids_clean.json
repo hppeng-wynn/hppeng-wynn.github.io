@@ -299,7 +299,7 @@
     },
     "RECKLESS_ABANDON": {
         "displayName": "Reckless Abandon",
-        "description": "Sacrifice War Scream's defense bonus to give Tempest 3 extra hits and extra damage",
+        "description": "Sacrifice War Scream's defense bonus to give Tempest 2 extra hits and extra damage",
         "abilities": [
             {
                 "class": "Warrior",
@@ -328,7 +328,7 @@
                         "target_part": "Tempest Total Damage",
                         "behavior": "modify",
                         "hits": {
-                            "Tempest": 3
+                            "Tempest": 2
                         }
                     }
                 ]
@@ -697,11 +697,11 @@
                         "target_part": "Single Hit",
                         "behavior": "overwrite",
                         "multipliers": [
-                            160,
-                            35,
+                            225,
+                            40,
                             0,
                             0,
-                            55,
+                            60,
                             0
                         ]
                     },
@@ -721,11 +721,11 @@
                         "target_part": "Boiling Blood Tick",
                         "behavior": "modify",
                         "multipliers": [
-                            30,
+                            40,
                             0,
                             0,
                             0,
-                            45,
+                            60,
                             0
                         ]
                     }
@@ -751,21 +751,24 @@
                         "base_spell": 3,
                         "target_part": "Arrow Bomb",
                         "behavior": "modify",
-                        "multipliers": [ 40, 0, 0, 0, 15, 0 ]
-                    },
-                    {
-                        "type": "add_spell_prop",
-                        "base_spell": 3,
-                        "target_part": "Self Damage",
-                        "behavior": "overwrite",
-                        "multipliers": [ 130, 0, 0, 0, 0, 0 ]
+                        "multipliers": [ 0, 0, 0, 0, 15, 0 ]
                     },
                     {
                         "type": "add_spell_prop",
                         "base_spell": 3,
                         "target_part": "Fire Creep",
                         "behavior": "modify",
-                        "multipliers": [ 30, 0, 0, 0, 0, 0 ]
+                        "multipliers": [ 65, 0, 0, 0, 0, 0 ]
+                    },
+                    {
+                        "type": "raw_stat",
+                        "bonuses": [
+                            {
+                                "type": "stat",
+                                "name": "damMult.Napalm:3.Self Damage",
+                                "value": 1400
+                            }
+                        ]
                     }
                 ]
             }
@@ -832,8 +835,8 @@
                         "type": "add_spell_prop",
                         "base_spell": 10,
                         "target_part": "Beam Tick Damage",
-                        "behavior": "modify",
-                        "multipliers": [375, 0, 0, 0, 0, 0]
+                        "behavior": "overwrite",
+                        "multipliers": [500, 0, 0, 0, 0, 0]
                     },
                     {
                         "type": "add_spell_prop",
@@ -1038,7 +1041,7 @@
     },
     "SUBLIMATION": {
         "displayName": "Sublimation",
-        "description": "Totemic Shatter heals 75% of Regeneration's usual amount, with reduced Totem area of effect",
+        "description": "Totemic Shatter heals 75% of Regeneration's usual amount, at the cost of 2 blocks of radius.",
         "abilities": [
             {
                 "class": "Shaman",
@@ -1934,5 +1937,15 @@
                 }]
             }
         ]
+    },
+    "SCARCE_COMFORT": {
+        "displayName": "Scarce Comfort",
+        "description": "When Generalist acts on Whirlwind Strike, it gains +30% lightning & air damage, and +3 radius. When it acts on Charge, it reduces the vertical velocity decay of Aerodynamics.",
+        "abilities": []
+    },
+    "BRACHIATE": {
+        "displayName": "Brachiate",
+        "description": "Grappling Hook has increased range and velocity, and no longer pulls mobs.",
+        "abilities": []
     }
 }
