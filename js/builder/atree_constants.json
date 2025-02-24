@@ -8415,18 +8415,8 @@
                         "type": "stat",
                         "name": "damMult.Stomp:9.Stomp Damage"
                     },
-                    "slider_max": 12,
-                    "scaling": [10]
-                },
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Blocks Fallen",
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult.Stomp:9.Swan Dive Explosion"
-                    },
-                    "scaling": [10]
+                    "slider_max": 10,
+                    "scaling": [12]
                 }
             ]
         },
@@ -8438,7 +8428,7 @@
             "base_abil": "Multihit",
             "parents": [
                 "Wall of Smoke",
-                "Dagger Proficiency II"
+                "Cheaper Multihit I"
             ],
             "dependencies": [
                 "Multihit"
@@ -8452,6 +8442,20 @@
             },
             "properties": {},
             "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Finality Bonus",
+                    "multipliers": [108, 0, 0, 0, 0, 36]
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Total Damage",
+                    "hits": {
+                        "Finality Bonus": 1
+                    }
+                }
             ]
         },
         {
@@ -8525,15 +8529,15 @@
             "archetype_req": 0,
             "parents": [
                 "Sandbagging",
-                "Weightless"
+                "Mutilate"
             ],
             "dependencies": [],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
-                "row": 26,
-                "col": 6,
-                "icon": "node_2"
+                "row": 27,
+                "col": 5,
+                "icon": "node_1"
             },
             "properties": {
                 "cooldown": 2
@@ -8676,47 +8680,6 @@
             "effects": []
         },
         {
-            "display_name": "Shenanigans",
-            "desc": "For every 2% Stealing you have from items, gain +1/3s Mana Steal (Max 8/3s)",
-            "archetype": "Trickster",
-            "archetype_req": 0,
-            "parents": [
-                "Mirror Image",
-                "Psithurism"
-            ],
-            "dependencies": [],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 21,
-                "col": 4,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "stat_scaling",
-                    "slider": false,
-                    "inputs": [
-                        {
-                            "type": "stat",
-                            "name": "eSteal"
-                        }
-                    ],
-                    "output": [
-                        {
-                            "type": "stat",
-                            "name": "ms"
-                        }
-                    ],
-                    "scaling": [
-                        0.5
-                    ],
-                    "max": 8
-                }
-            ]
-        },
-        {
             "display_name": "Wall of Smoke",
             "desc": "Smoke Bomb will throw +2 bombs.",
             "archetype": "",
@@ -8792,7 +8755,7 @@
             "parents": [
                 "Rolling Fog",
                 "Silent Killer",
-                "Dagger Proficiency II"
+                "Cheaper Multihit I"
             ],
             "dependencies": [
                 "Vanish"
@@ -8814,17 +8777,15 @@
             "archetype_req": 0,
             "base_abil": 999,
             "parents": [
-                "Shenanigans",
-                "Shadow Travel",
-                "Finality",
+                "Mirror Image",
                 "Psithurism"
             ],
             "dependencies": [],
             "blockers": [],
             "cost": 1,
             "display": {
-                "row": 22,
-                "col": 5,
+                "row": 21,
+                "col": 4,
                 "icon": "node_0"
             },
             "properties": {},
@@ -8838,6 +8799,35 @@
                             "value": 5
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "display_name": "Cheaper Multihit I",
+            "desc": "Increase your Main Attack's range and add +5 raw damage to all attacks",
+            "archetype": "",
+            "archetype_req": 0,
+            "base_abil": "Multihit",
+            "parents": [
+                "Shadow Travel",
+                "Finality",
+                "Psithurism",
+                "Dagger Proficiency II"
+            ],
+            "dependencies": [],
+            "blockers": [],
+            "cost": 1,
+            "display": {
+                "row": 22,
+                "col": 5,
+                "icon": "node_0"
+            },
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "cost": -5
                 }
             ]
         },
@@ -8922,7 +8912,7 @@
             "parents": [
                 "Cheaper Smoke Bomb",
                 "Shadow Travel",
-                "Dagger Proficiency II"
+                "Cheaper Multihit I"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8952,12 +8942,12 @@
         },
         {
             "display_name": "Weightless",
-            "desc": "You gain +0.6 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
+            "desc": "You gain +1.2 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
             "archetype_req": 3,
             "parents": [
                 "Finality",
-                "Dagger Proficiency II"
+                "Cheaper Multihit I"
             ],
             "dependencies": [],
             "blockers": [],
@@ -8998,7 +8988,7 @@
             "archetype_req": 0,
             "parents": [
                 "Blazing Powder",
-                "Righting Reflex"
+                "Mutilate"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9034,7 +9024,7 @@
         },
         {
             "display_name": "Dancing Blade",
-            "desc": "Deal damage to mobs you Dash through",
+            "desc": "Deal damage to mobs you Dash through. After using Swan Dive, your next Dash deals additional damage. Hitting an enemy will vault you upwards and reset Dash.",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "base_abil": "Dash",
@@ -9046,11 +9036,11 @@
                 "Dash"
             ],
             "blockers": [],
-            "cost": 1,
+            "cost": 2,
             "display": {
                 "row": 29,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -9058,8 +9048,14 @@
                     "type": "add_spell_prop",
                     "base_spell": 2,
                     "target_part": "Dancing Blade",
-                    "multipliers": [70, 0, 0, 0, 0, 10],
+                    "multipliers": [100, 0, 0, 0, 0, 20],
                     "display": "Dancing Blade"
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 2,
+                    "target_part": "Empowered Damage",
+                    "multipliers": [60, 0, 0, 0, 0, 20]
                 }
             ]
         },
@@ -9146,7 +9142,7 @@
             "base_abil": "Multihit",
             "parents": [
                 "Sandbagging",
-                "Righting Reflex"
+                "Weightless"
             ],
             "dependencies": [],
             "blockers": [
@@ -9154,8 +9150,8 @@
             ],
             "cost": 1,
             "display": {
-                "row": 27,
-                "col": 5,
+                "row": 26,
+                "col": 6,
                 "icon": "node_0"
             },
             "properties": {},
@@ -9167,6 +9163,12 @@
                     "hits": {
                         "Per Hit": 3
                     }
+                },
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 3,
+                    "target_part": "Finality Bonus",
+                    "multipliers": [90, 0, 0, 0, 0, 30]
                 }
             ]
         },
@@ -9210,7 +9212,7 @@
             "display_name": "Echo",
             "desc": "Your Clones will mimic your spells and abilities, but you deal -20% damage for every clone that's alive. Bamboozle becomes significantly stronger.",
             "archetype": "Trickster",
-            "archetype_req": 6,
+            "archetype_req": 5,
             "base_abil": "Mirror Image",
             "parents": [
                 "Sandbagging",
@@ -9399,7 +9401,7 @@
             "archetype_req": 0,
             "parents": [
                 "Wall of Smoke",
-                "Shenanigans"
+                "Dagger Proficiency II"
             ],
             "dependencies": [],
             "blockers": [],
@@ -9487,7 +9489,7 @@
         },
         {
             "display_name": "Aerial Ace",
-            "desc": "Hitting an enemy with Swan Dive or an empowered Dash gives you a +25% damage boost for 6s.",
+            "desc": "Hitting an enemy with Swan Dive or an empowered Dash gives you a +35% damage boost for 7.5s.",
             "archetype": "Acrobat",
             "archetype_req": 0,
             "parents": [
@@ -9511,7 +9513,7 @@
                         {
                             "type": "stat",
                             "name": "damMult.Aerial Ace",
-                            "value": 25
+                            "value": 35
                         }
                     ]
                 }
@@ -9569,7 +9571,7 @@
             "effects": []
         },
         {
-            "display_name": "Cheaper Multihit I",
+            "display_name": "Cheaper Multihit II",
             "desc": "Reduce the Mana cost of Multihit",
             "base_abil": "Multihit",
             "parents": [
@@ -9601,7 +9603,7 @@
             "archetype_req": 1,
             "base_abil": "Spin Attack",
             "parents": [
-                "Cheaper Multihit I",
+                "Cheaper Multihit II",
                 "Cheaper Dash II",
                 "Choke Bomb"
             ],
@@ -9669,7 +9671,7 @@
             "base_abil": "Spin Attack",
             "parents": [
                 "Nightcloak Knife",
-                "Cheaper Multihit I",
+                "Cheaper Multihit II",
                 "Dissolution"
             ],
             "dependencies": [
@@ -9875,7 +9877,7 @@
             "display_name": "Deadly Decoys",
             "desc": "Improves your damage by +5% per Clone while your Clones are active, and reduce their maximum damage penalty by 5%.",
             "archetype": "Trickster",
-            "archetype_req": 7,
+            "archetype_req": 6,
             "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb II",
@@ -9964,7 +9966,7 @@
             "display_name": "Forbidden Art",
             "desc": "Summon +3 additional Clones. Improve your damage by +5% per Clone While your Clones are active, and reduce their maximum damage penalty by 5%. (Cooldown: 15s)",
             "archetype": "Trickster",
-            "archetype_req": 8,
+            "archetype_req": 7,
             "base_abil": "Mirror Image",
             "parents": [
                 "Cheaper Smoke Bomb II"
@@ -9996,7 +9998,7 @@
             "display_name": "Diversion",
             "desc": "Grant allies within 16 blocks +10% Overhealth whenever you hit a Lured enemy. (9s Cooldown) Overhealth decays over 10s.",
             "archetype": "Trickster",
-            "archetype_req": 12,
+            "archetype_req": 11,
             "base_abil": "Smoke Bomb",
             "parents": [
                 "Forbidden Art"
@@ -10047,8 +10049,8 @@
                             "hits": { "Per Hit": 3.333333333 }
                         },
                         {
-                            "name": "Swan Dive Explosion",
-                            "multipliers": [ 600, 60, 0, 60, 0, 0 ]
+                            "name": "Jasmine Bloom Explosion",
+                            "multipliers": [ 1000, 100, 0, 100, 0, 0 ]
                         }
                     ]
                 }
@@ -10139,7 +10141,7 @@
             "archetype_req": 0,
             "base_abil": "Multihit",
             "parents": [
-                "Dagger Proficiency II",
+                "Cheaper Multihit I",
                 "Shadow Travel"
             ],
             "dependencies": [ "Mirror Image" ],
@@ -10173,7 +10175,7 @@
             "archetype_req": 0,
             "parents": [
                 "Finality",
-                "Dagger Proficiency II"
+                "Cheaper Multihit I"
             ],
             "dependencies": [],
             "blockers": [],
@@ -10205,7 +10207,7 @@
             "archetype": "Shadestepper",
             "archetype_req": 0,
             "parents": [
-                "Cheaper Multihit I",
+                "Cheaper Multihit II",
                 "Ambush"
             ],
             "dependencies": ["Marked"],
@@ -10240,7 +10242,7 @@
             "archetype_req": 2,
             "base_abil": "Dash",
             "parents": [
-                "Cheaper Multihit I",
+                "Cheaper Multihit II",
                 "Hoodwink",
   	            "Fatal Spin"
             ],
@@ -10281,6 +10283,9 @@
                 "col": 8,
                 "icon": "node_3"
             },
+            "properties":{
+                "aoe": 8
+            },
             "effects": [
                 {
                     "type": "stat_scaling",
@@ -10294,36 +10299,22 @@
                     "scaling": [25]
                 },
                 {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Momentum",
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult.Swan Dive:9.Swan Dive Explosion"
-                    },
-                    "scaling": [25]
-                },
-                {
-                    "type": "stat_scaling",
-                    "slider": true,
-                    "slider_name": "Momentum",
-                    "output": {
-                        "type": "stat",
-                        "name": "damMult.Swan Dive:7.Swan Dive Explosion"
-                    },
-                    "scaling": [25]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 9,
-                    "target_part": "Swan Dive Explosion",
-                    "multipliers": [
-                        160,
-                        20,
-                        0,
-                        0,
-                        20,
-                        0
+                    "type": "replace_spell",
+                    "name": "Swan Dive",
+                    "base_spell": 10,
+                    "display": "Swan Dive Explosion",
+                    "parts": [
+                        {
+                            "name": "Swan Dive Explosion",
+                            "multipliers": [
+                                400,
+                                40,
+                                0,
+                                0,
+                                40,
+                                0
+                            ]
+                        }
                     ]
                 }
             ]
@@ -12060,7 +12051,7 @@
         },
         {
             "display_name": "Eldritch Call",
-            "desc": "Casting Totem while holding shift will spend 35 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and -20% weakness. Bleeding enemies will take x2 damage from the tentacles.",
+            "desc": "Casting Totem while holding shift will spend 30 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and -20% weakness. Bleeding enemies will take x2 damage from the tentacles.",
             "archetype": "Acolyte",
             "archetype_req": 7,
             "parents": [
@@ -12085,7 +12076,7 @@
                     "parts": [
                         {
                             "name": "Single Hit",
-                            "multipliers": [ 180, 0, 30, 0, 0, 30 ] 
+                            "multipliers": [ 320, 0, 50, 0, 0, 50 ] 
                         },
                         {
                             "name": "Damage per Totem",
