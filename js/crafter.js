@@ -119,6 +119,7 @@ function calculateCraft() {
     //define the fields that will go into crafting the craft.
     let recipe = getValue("recipe-choice") === "" ? "Potion" : getValue("recipe-choice");
     let levelrange = getValue("level-choice") === "" ? "103-105" : getValue("level-choice"); 
+    let maxlevel = levelrange.split("-").slice(1);
     recipe = expandRecipe(recipeMap.get(recipe+"-"+levelrange));
     let mat_tiers = [];
     for (i = 1; i < 3; i++) {
@@ -178,10 +179,16 @@ function calculateCraft() {
     warning_elem.textContent = ""; //refresh warnings
     warning_elem.classList.add("warning");
     let type = player_craft["recipe"].get("skill");
+    console.log(maxlevel)
     for (const ingred of player_craft["ingreds"]) {
         if (!(ingred.get("skills").includes(type))) {
             let p = document.createElement("p");
             p.textContent = "WARNING: " + ingred.get("name") + " cannot be used for " + type.charAt(0) + type.substring(1).toLowerCase() +"!";
+            warning_elem.appendChild(p);
+        }
+        if (ingred.get("lvl") > maxlevel) {
+            let p = document.createElement("p");
+            p.textContent = "WARNING: " + ingred.get("name") + " is too high level for level range " + levelrange +"!";
             warning_elem.appendChild(p);
         }
     }
