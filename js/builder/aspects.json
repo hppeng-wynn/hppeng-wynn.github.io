@@ -3,165 +3,235 @@
     {
       "displayName": "Aspect of Chaotic Demolition",
       "id": 0,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
           "description": "Increase your maximum Traps by +2.",
-          "abilities": [{
-            "base_abil": "Basaltic Trap",
-            "properties": { "traps": 2 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Basaltic Trap",
+              "properties": {
+                "traps": 2
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Increase your maximum Traps by +3.",
-          "abilities": [{
-            "base_abil": "Basaltic Trap",
-            "properties": { "traps": 3 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Basaltic Trap",
+              "properties": {
+                "traps": 3
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 75,
           "description": "Increase your maximum Traps by +4.",
-          "abilities": [{
-            "base_abil": "Basaltic Trap",
-            "properties": { "traps": 4 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Basaltic Trap",
+              "properties": {
+                "traps": 4
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of Extreme Current",
       "id": 1,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
           "description": "Coursing Restraints gains +1s Duration.",
-          "abilities": [{
-            "base_abil": "Coursing Restraints",
-            "properties": { "duration": 1 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Coursing Restraints",
+              "properties": {
+                "duration": 1
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Coursing Restraints gains +1.65s Duration.",
-          "abilities": [{
-            "base_abil": "Coursing Restraints",
-            "properties": { "duration": 1.65 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Coursing Restraints",
+              "properties": {
+                "duration": 1.65
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 75,
           "description": "Coursing Restraints gains +2s Duration.",
-          "abilities": [{
-            "base_abil": "Coursing Restraints",
-            "properties": { "duration": 2 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Coursing Restraints",
+              "properties": {
+                "duration": 2
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of the Inexhaustible Quiver",
       "id": 2,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
           "description": "Arrow Storm gains +1 arrow per stream.",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "effects": [{
-              "type": "add_spell_prop",
-              "base_spell": 1,
-              "target_part": "Single Stream",
-              "behavior": "modify",
-              "hits": { "Single Arrow": 1 }
-            }]
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Stream",
+                  "behavior": "modify",
+                  "hits": {
+                    "Single Arrow": 1
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Arrow Storm gains +2 arrows per stream.",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "effects": [{
-              "type": "add_spell_prop",
-              "base_spell": 1,
-              "target_part": "Single Stream",
-              "behavior": "modify",
-              "hits": { "Single Arrow": 2 }
-            }]
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Stream",
+                  "behavior": "modify",
+                  "hits": {
+                    "Single Arrow": 2
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           "threshold": 75,
-          "description": "Arrow Storm gains +4 arrows per stream.  Total Damage: -1% (of your DPS, per arrow)   (Neutral Damage: -1%)",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "effects": [
-              {
-                "type": "add_spell_prop",
-                "base_spell": 1,
-                "target_part": "Single Stream",
-                "behavior": "modify",
-                "hits": { "Single Arrow": 2 }
-              },
-              {
-                "type": "add_spell_prop",
-                "base_spell": 1,
-                "target_part": "Single Arrow",
-                "behavior": "modify",
-                "multipliers": [ -1, 0, 0, 0, 0, 0 ]
-              }
-            ]
-          }]
+          "description": "Arrow Storm gains +4 arrows per stream.",
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Stream",
+                  "behavior": "modify",
+                  "hits": {
+                    "Single Arrow": 2
+                  }
+                },
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Arrow",
+                  "behavior": "modify",
+                  "multipliers": [
+                    -1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of the Poltergeist",
       "id": 3,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
           "description": "Phantom Ray gains +0.2s Duration.",
-          "abilities": [{
-            "dependencies": [ "Phantom Ray" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "duration": 0.2 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Phantom Ray"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "duration": 0.2
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 15,
           "description": "Phantom Ray gains +0.3s Duration.",
-          "abilities": [{
-            "dependencies": [ "Phantom Ray" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "duration": 0.3 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Phantom Ray"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "duration": 0.3
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 75,
           "description": "Phantom Ray gains +0.4s Duration.",
-          "abilities": [{
-            "dependencies": [ "Phantom Ray" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "duration": 0.4 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Phantom Ray"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "duration": 0.4
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of the Great Escape",
       "id": 4,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -183,6 +253,7 @@
     {
       "displayName": "Aspect of Undercrank",
       "id": 5,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -197,11 +268,13 @@
                   "slider_name": "Hits dealt",
                   "slider_max": -24,
                   "output": {
-                      "type": "stat",
-                      "name": "spd"
+                    "type": "stat",
+                    "name": "spd"
                   },
                   "max": -70,
-                  "scaling": [-3]  
+                  "scaling": [
+                    -3
+                  ]
                 },
                 {
                   "type": "stat_scaling",
@@ -209,11 +282,13 @@
                   "slider_name": "Hits dealt",
                   "slider_max": 29,
                   "output": {
-                      "type": "stat",
-                      "name": "spd"
+                    "type": "stat",
+                    "name": "spd"
                   },
                   "max": 85,
-                  "scaling": [3]
+                  "scaling": [
+                    3
+                  ]
                 }
               ]
             }
@@ -232,11 +307,13 @@
                   "slider_name": "Hits dealt",
                   "slider_max": -24,
                   "output": {
-                      "type": "stat",
-                      "name": "spd"
+                    "type": "stat",
+                    "name": "spd"
                   },
                   "max": -70,
-                  "scaling": [-3]  
+                  "scaling": [
+                    -3
+                  ]
                 },
                 {
                   "type": "stat_scaling",
@@ -244,11 +321,13 @@
                   "slider_name": "Hits dealt",
                   "slider_max": 34,
                   "output": {
-                      "type": "stat",
-                      "name": "spd"
+                    "type": "stat",
+                    "name": "spd"
                   },
                   "max": 100,
-                  "scaling": [3]
+                  "scaling": [
+                    3
+                  ]
                 }
               ]
             }
@@ -267,11 +346,13 @@
                   "slider_name": "Hits dealt",
                   "slider_max": -24,
                   "output": {
-                      "type": "stat",
-                      "name": "spd"
+                    "type": "stat",
+                    "name": "spd"
                   },
                   "max": -70,
-                  "scaling": [-3]  
+                  "scaling": [
+                    -3
+                  ]
                 },
                 {
                   "type": "stat_scaling",
@@ -279,11 +360,13 @@
                   "slider_name": "Hits dealt",
                   "slider_max": 37,
                   "output": {
-                      "type": "stat",
-                      "name": "spd"
+                    "type": "stat",
+                    "name": "spd"
                   },
                   "max": 110,
-                  "scaling": [3]
+                  "scaling": [
+                    3
+                  ]
                 }
               ]
             }
@@ -294,6 +377,7 @@
     {
       "displayName": "Aspect of Fragmentation Rounds",
       "id": 6,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -313,117 +397,147 @@
       ]
     },
     {
-      "displayName": "Aspect of Upkeep Charges",
-      "id": 7,
-      "tiers": [
-        {
-          "threshold": 1,
-          "description": "Bouncing Bomb gains +1 bounces.",
-          "abilities": []
-        },
-        {
-          "threshold": 15,
-          "description": "Bouncing Bomb gains +2 bounces.",
-          "abilities": []
-        },
-        {
-          "threshold": 75,
-          "description": "Bouncing Bomb gains +3 bounces.",
-          "abilities": []
-        }
-      ]
-    },
-    {
       "displayName": "Aspect of Clinging Lichen",
       "id": 8,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
           "description": "Bryophyte Roots gains +0.5 Area of Effect.",
-          "abilities": [{
-            "dependencies": [ "Bryophyte Roots" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "aoe": 0.5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Bryophyte Roots"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "aoe": 0.5
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Bryophyte Roots gains +0.85 Area of Effect.",
-          "abilities": [{
-            "dependencies": [ "Bryophyte Roots" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "aoe": 0.85 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Bryophyte Roots"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "aoe": 0.85
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 30,
           "description": "Bryophyte Roots gains +1.2 Area of Effect.",
-          "abilities": [{
-            "dependencies": [ "Bryophyte Roots" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "aoe": 1.2 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Bryophyte Roots"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "aoe": 1.2
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 150,
           "description": "Bryophyte Roots gains +1.5 Area of Effect.",
-          "abilities": [{
-            "dependencies": [ "Bryophyte Roots" ],
-            "base_abil": "Arrow Storm",
-            "properties": { "aoe": 1.5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Bryophyte Roots"
+              ],
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "aoe": 1.5
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of the North Wind",
       "id": 9,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
           "description": "Snow Storm gains +1 Range.",
-          "abilities": [{
-            "dependencies": [ "Snow Storm" ],
-            "properties": { "range": 1 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Snow Storm"
+              ],
+              "properties": {
+                "range": 1
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Snow Storm gains +1.75 Range.",
-          "abilities": [{
-            "dependencies": [ "Snow Storm" ],
-            "properties": { "range": 1.75 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Snow Storm"
+              ],
+              "properties": {
+                "range": 1.75
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 30,
           "description": "Snow Storm gains +2.5 Range.",
-          "abilities": [{
-            "dependencies": [ "Snow Storm" ],
-            "properties": { "range": 2.5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Snow Storm"
+              ],
+              "properties": {
+                "range": 2.5
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 150,
           "description": "Snow Storm gains +3 Range.",
-          "abilities": [{
-            "dependencies": [ "Snow Storm" ],
-            "properties": { "range": 3 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "dependencies": [
+                "Snow Storm"
+              ],
+              "properties": {
+                "range": 3
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of Bullet Hell",
       "id": 10,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -450,136 +564,196 @@
     {
       "displayName": "Aspect of Further Horizons",
       "id": 11,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +2 Range.",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "properties": { "range": 2 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "range": 2
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +3.5 Range.",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "properties": { "range": 3.5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "range": 3.5
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 30,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +5 Range.",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "properties": { "range": 5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "range": 5
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 150,
           "description": "Arrow Storm gains velocity and slightly reduced spread.  Phantom Ray gains +6 Range.",
-          "abilities": [{
-            "base_abil": "Arrow Storm",
-            "properties": { "range": 6 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Storm",
+              "properties": {
+                "range": 6
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of Dynamic Entry",
       "id": 12,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
           "description": "Fierce Stomp gains +1.25 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Escape",
-            "dependencies": [ "Fierce Stomp" ],
-            "properties": { "aoe": 1.25 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Escape",
+              "dependencies": [
+                "Fierce Stomp"
+              ],
+              "properties": {
+                "aoe": 1.25
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Fierce Stomp gains +2.25 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Escape",
-            "dependencies": [ "Fierce Stomp" ],
-            "properties": { "aoe": 2.25 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Escape",
+              "dependencies": [
+                "Fierce Stomp"
+              ],
+              "properties": {
+                "aoe": 2.25
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 30,
           "description": "Fierce Stomp gains +3.25 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Escape",
-            "dependencies": [ "Fierce Stomp" ],
-            "properties": { "aoe": 3.25 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Escape",
+              "dependencies": [
+                "Fierce Stomp"
+              ],
+              "properties": {
+                "aoe": 3.25
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 150,
           "description": "Fierce Stomp gains +4 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Escape",
-            "dependencies": [ "Fierce Stomp" ],
-            "properties": { "aoe": 4 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Escape",
+              "dependencies": [
+                "Fierce Stomp"
+              ],
+              "properties": {
+                "aoe": 4
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of Extreme Firepower",
       "id": 13,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
           "description": "Arrow Bomb gains +0.5 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Arrow Bomb",
-            "properties": { "aoe": 0.5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Bomb",
+              "properties": {
+                "aoe": 0.5
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 5,
           "description": "Arrow Bomb gains +0.85 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Arrow Bomb",
-            "properties": { "aoe": 0.85 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Bomb",
+              "properties": {
+                "aoe": 0.85
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 30,
           "description": "Arrow Bomb gains +1.2 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Arrow Bomb",
-            "properties": { "aoe": 1.2 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Bomb",
+              "properties": {
+                "aoe": 1.2
+              },
+              "effects": []
+            }
+          ]
         },
         {
           "threshold": 150,
           "description": "Arrow Bomb gains +1.5 Area of Effect.",
-          "abilities": [{
-            "base_abil": "Arrow Bomb",
-            "properties": { "aoe": 1.5 },
-            "effects": []
-          }]
+          "abilities": [
+            {
+              "base_abil": "Arrow Bomb",
+              "properties": {
+                "aoe": 1.5
+              },
+              "effects": []
+            }
+          ]
         }
       ]
     },
     {
       "displayName": "Aspect of Battlement Fortification",
       "id": 14,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -593,9 +767,9 @@
                   "toggle": "Arrow Defense",
                   "bonuses": [
                     {
-                        "type": "stat",
-                        "name": "defMult.ArrowShield",
-                        "value": 3
+                      "type": "stat",
+                      "name": "defMult.ArrowShield",
+                      "value": 3
                     }
                   ]
                 }
@@ -615,9 +789,9 @@
                   "toggle": "Arrow Defense",
                   "bonuses": [
                     {
-                        "type": "stat",
-                        "name": "defMult.ArrowShield",
-                        "value": 6
+                      "type": "stat",
+                      "name": "defMult.ArrowShield",
+                      "value": 6
                     }
                   ]
                 }
@@ -637,9 +811,9 @@
                   "toggle": "Arrow Defense",
                   "bonuses": [
                     {
-                        "type": "stat",
-                        "name": "defMult.ArrowShield",
-                        "value": 8
+                      "type": "stat",
+                      "name": "defMult.ArrowShield",
+                      "value": 8
                     }
                   ]
                 }
@@ -659,9 +833,9 @@
                   "toggle": "Arrow Defense",
                   "bonuses": [
                     {
-                        "type": "stat",
-                        "name": "defMult.ArrowShield",
-                        "value": 10
+                      "type": "stat",
+                      "name": "defMult.ArrowShield",
+                      "value": 10
                     }
                   ]
                 }
@@ -674,10 +848,11 @@
     {
       "displayName": "Boltslinger's Embodiment of Rended Skies",
       "id": 15,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Guardian Angels will shoot +30% faster.",
+          "description": "Guardian Angels will shoot +20% faster.",
           "abilities": [
             {
               "base_abil": "Arrow Shield",
@@ -685,11 +860,11 @@
                 {
                   "type": "raw_stat",
                   "bonuses": [
-                      {
-                          "type": "stat",
-                          "name": "damMult.BoltslingerAspect:4.DPS",
-                          "value": 30
-                      }
+                    {
+                      "type": "stat",
+                      "name": "damMult.BoltslingerAspect:4.DPS",
+                      "value": 30
+                    }
                   ]
                 }
               ]
@@ -698,6 +873,71 @@
         },
         {
           "threshold": 5,
+          "description": "Guardian Angels will shoot +20% faster.  Arrow Storm gains +1 arrow per stream.  Triple Shots gains +2 arrows.  Main Attack Damage: -15%",
+          "abilities": [
+            {
+              "base_abil": "Arrow Shield",
+              "effects": [
+                {
+                  "type": "raw_stat",
+                  "bonuses": [
+                    {
+                      "type": "stat",
+                      "name": "damMult.BoltslingerAspect:4.DPS",
+                      "value": 30
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "base_abil": "Arrow Storm",
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 1,
+                  "target_part": "Single Stream",
+                  "behavior": "modify",
+                  "hits": {
+                    "Single Arrow": 1
+                  }
+                }
+              ]
+            },
+            {
+              "base_abil": 999,
+              "dependencies": [
+                "Triple Shots"
+              ],
+              "effects": [
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 0,
+                  "target_part": "Single Shot",
+                  "multipliers": [
+                    -15,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "type": "add_spell_prop",
+                  "base_spell": 0,
+                  "target_part": "Total Damage",
+                  "hits": {
+                    "Single Shot": 2
+                  },
+                  "display": "Total Damage"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "threshold": 15,
           "description": "Guardian Angels will shoot +30% faster.  Arrow Storm gains +1 arrow per stream.  Triple Shots gains +2 arrows.  Main Attack Damage: -15%",
           "abilities": [
             {
@@ -706,11 +946,11 @@
                 {
                   "type": "raw_stat",
                   "bonuses": [
-                      {
-                          "type": "stat",
-                          "name": "damMult.BoltslingerAspect:4.DPS",
-                          "value": 30
-                      }
+                    {
+                      "type": "stat",
+                      "name": "damMult.BoltslingerAspect:4.DPS",
+                      "value": 50
+                    }
                   ]
                 }
               ]
@@ -723,96 +963,39 @@
                   "base_spell": 1,
                   "target_part": "Single Stream",
                   "behavior": "modify",
-                  "hits": { "Single Arrow": 1 }
+                  "hits": {
+                    "Single Arrow": 1
+                  }
                 }
               ]
             },
             {
               "base_abil": 999,
-              "dependencies": ["Triple Shots"],
-              "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 0,
-                    "target_part": "Single Shot",
-                    "multipliers": [
-                        -15,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
-                },
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 0,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Single Shot": 2
-                    },
-                    "display": "Total Damage"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "threshold": 15,
-          "description": "Guardian Angels will shoot +50% faster.  Arrow Storm gains +1 arrow per stream.  Triple Shots gains +2 arrows.  Main Attack Damage: -15%",
-          "abilities": [
-            {
-              "base_abil": "Arrow Shield",
-              "effects": [
-                {
-                  "type": "raw_stat",
-                  "bonuses": [
-                      {
-                          "type": "stat",
-                          "name": "damMult.BoltslingerAspect:4.DPS",
-                          "value": 50
-                      }
-                  ]
-                }
-              ]
-            },
-            {
-              "base_abil": "Arrow Storm",
+              "dependencies": [
+                "Triple Shots"
+              ],
               "effects": [
                 {
                   "type": "add_spell_prop",
-                  "base_spell": 1,
-                  "target_part": "Single Stream",
-                  "behavior": "modify",
-                  "hits": { "Single Arrow": 1 }
-                }
-              ]
-            },
-            {
-              "base_abil": 999,
-              "dependencies": ["Triple Shots"],
-              "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 0,
-                    "target_part": "Single Shot",
-                    "multipliers": [
-                        -15,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
-                    ]
+                  "base_spell": 0,
+                  "target_part": "Single Shot",
+                  "multipliers": [
+                    -15,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
                 },
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 0,
-                    "target_part": "Total Damage",
-                    "hits": {
-                        "Single Shot": 2
-                    },
-                    "display": "Total Damage"
+                  "type": "add_spell_prop",
+                  "base_spell": 0,
+                  "target_part": "Total Damage",
+                  "hits": {
+                    "Single Shot": 2
+                  },
+                  "display": "Total Damage"
                 }
               ]
             }
@@ -823,10 +1006,11 @@
     {
       "displayName": "Sharpshooter's Embodiment of Laser Precision",
       "id": 16,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Increase your maximum Focus by +1.",
+          "description": "Increase your maximum Focus \ue01a by +1.",
           "abilities": [
             {
               "base_abil": "Focus",
@@ -837,11 +1021,11 @@
                   "slider_name": "Focus",
                   "slider_max": 1,
                   "output": {
-                      "type": "stat",
-                      "name": "damMult.Focus"
+                    "type": "stat",
+                    "name": "damMult.Focus"
                   },
                   "scaling": [
-                      0
+                    0
                   ]
                 }
               ]
@@ -850,7 +1034,7 @@
         },
         {
           "threshold": 5,
-          "description": "Increase your maximum Focus by +1.  Twain's Arc requires -1 Focus to activate.  Crepuscular Ray requires -1 Focus to activate.",
+          "description": "Increase your maximum Focus \ue01a by +1.  Twain's Arc requires -1 Focus \ue01a to activate.  Crepuscular Ray requires -1 Focus \ue01a to activate.",
           "abilities": [
             {
               "base_abil": "Focus",
@@ -861,11 +1045,11 @@
                   "slider_name": "Focus",
                   "slider_max": 1,
                   "output": {
-                      "type": "stat",
-                      "name": "damMult.Focus"
+                    "type": "stat",
+                    "name": "damMult.Focus"
                   },
                   "scaling": [
-                      0
+                    0
                   ]
                 }
               ]
@@ -874,7 +1058,7 @@
         },
         {
           "threshold": 15,
-          "description": "Increase your maximum Focus by +1.  Twain's Arc requires -1 Focus to activate. Twain's Arc charges 5% faster.  Crepuscular Ray requires -2 Focus to activate.",
+          "description": "Increase your maximum Focus \ue01a by +1.  Twain's Arc requires -1 Focus \ue01a to activate. Twain's Arc charges 5% faster.  Crepuscular Ray requires -2 Focus \ue01a to activate.",
           "abilities": [
             {
               "base_abil": "Focus",
@@ -885,11 +1069,11 @@
                   "slider_name": "Focus",
                   "slider_max": 1,
                   "output": {
-                      "type": "stat",
-                      "name": "damMult.Focus"
+                    "type": "stat",
+                    "name": "damMult.Focus"
                   },
                   "scaling": [
-                      0
+                    0
                   ]
                 }
               ]
@@ -901,69 +1085,98 @@
     {
       "displayName": "Trapper's Embodiment of Persistence Predation",
       "id": 17,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Patient Hunter gains +20% damage per second.",
+          "description": "Patient Hunter gains +10% damage per second.",
           "abilities": [
             {
               "base_abil": "Basaltic Trap",
-              "effects":[
+              "effects": [
                 {
                   "type": "stat_scaling",
                   "slider": true,
                   "slider_name": "Trap Wait Time",
                   "output": {
-                      "type": "stat",
-                      "name": "damMult.Basaltic:7.Trap Damage"
+                    "type": "stat",
+                    "name": "damMult.Basaltic:7.Trap Damage"
                   },
-                  "scaling": [20]
+                  "scaling": [
+                    20
+                  ]
                 }
               ]
-            } 
+            }
           ]
         },
         {
           "threshold": 5,
-          "description": "Patient Hunter gains +20% damage per second.  Chilling Snare gains +3s Duration.",
+          "description": "Patient Hunter gains +10% damage per second.  Chilling Snare gains +3s Duration.",
           "abilities": [
             {
               "base_abil": "Basaltic Trap",
-              "effects":[
+              "effects": [
                 {
                   "type": "stat_scaling",
                   "slider": true,
                   "slider_name": "Trap Wait Time",
                   "output": {
-                      "type": "stat",
-                      "name": "damMult.Basaltic:7.Trap Damage"
+                    "type": "stat",
+                    "name": "damMult.Basaltic:7.Trap Damage"
                   },
-                  "scaling": [20]
+                  "scaling": [
+                    20
+                  ]
                 }
               ]
-            } 
+            }
           ]
         },
         {
           "threshold": 15,
-          "description": "Patient Hunter gains +40% damage per second.  Chilling Snare gains +3s Duration.",
+          "description": "Patient Hunter gains +15% damage per second.  Chilling Snare gains +3s Duration.",
           "abilities": [
             {
               "base_abil": "Basaltic Trap",
-              "effects":[
+              "effects": [
                 {
                   "type": "stat_scaling",
                   "slider": true,
                   "slider_name": "Trap Wait Time",
                   "output": {
-                      "type": "stat",
-                      "name": "damMult.Basaltic:7.Trap Damage"
+                    "type": "stat",
+                    "name": "damMult.Basaltic:7.Trap Damage"
                   },
-                  "scaling": [40]
+                  "scaling": [
+                    40
+                  ]
                 }
               ]
-            } 
+            }
           ]
+        }
+      ]
+    },
+    {
+      "displayName": "Aspect of the Beastmaster",
+      "id": 18,
+      "tier": "Fabled",
+      "tiers": [
+        {
+          "threshold": 1,
+          "description": "Increase your Hound's movement speed by +15%.  Increase your Snake's weakness effect by +2%.  Increase your Crow's distraction duration by +0.1s.",
+          "abilities": []
+        },
+        {
+          "threshold": 15,
+          "description": "Increase your Hound's movement speed by +25%.  Increase your Snake's weakness effect by +3%.  Increase your Crow's distraction duration by +0.15s.",
+          "abilities": []
+        },
+        {
+          "threshold": 75,
+          "description": "Increase your Hound's movement speed by +35%.  Increase your Snake's weakness effect by +4%.  Increase your Crow's distraction duration by +0.2s.",
+          "abilities": []
         }
       ]
     }
@@ -972,6 +1185,7 @@
     {
       "displayName": "Aspect of Searing Friction",
       "id": 0,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -993,6 +1207,7 @@
     {
       "displayName": "Aspect of Rallying Fervor",
       "id": 1,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1014,6 +1229,7 @@
     {
       "displayName": "Aspect of Unquenching Flames",
       "id": 2,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1035,6 +1251,7 @@
     {
       "displayName": "Aspect of Hyper-Perception",
       "id": 3,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1056,6 +1273,7 @@
     {
       "displayName": "Aspect of Empowering Fantasy",
       "id": 4,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1077,6 +1295,7 @@
     {
       "displayName": "Aspect of the Anvil Drop",
       "id": 5,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1103,6 +1322,7 @@
     {
       "displayName": "Aspect of Earthshaking",
       "id": 6,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1129,6 +1349,7 @@
     {
       "displayName": "Aspect of Overflowing Hope",
       "id": 7,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1155,25 +1376,26 @@
     {
       "displayName": "Aspect of Steel Chords",
       "id": 8,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
-          "description": "War Scream and Tempest gain +1.25 Area of Effect.",
+          "description": "War Scream, Tempest, and Bloodlust gain +1.25 Area of Effect.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "War Scream and Tempest gain +2.25 Area of Effect.",
+          "description": "War Scream, Tempest, and Bloodlust gain +2.25 Area of Effect.",
           "abilities": []
         },
         {
           "threshold": 30,
-          "description": "War Scream and Tempest gain +3.25 Area of Effect.",
+          "description": "War Scream, Tempest, and Bloodlust gain +3.25 Area of Effect.",
           "abilities": []
         },
         {
           "threshold": 150,
-          "description": "War Scream and Tempest gain +4 Area of Effect.",
+          "description": "War Scream, Tempest, and Bloodlust gain +4 Area of Effect.",
           "abilities": []
         }
       ]
@@ -1181,6 +1403,7 @@
     {
       "displayName": "Aspect of the Returning Javelin",
       "id": 9,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1207,6 +1430,7 @@
     {
       "displayName": "Aspect of Deafening Echoes",
       "id": 10,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1233,6 +1457,7 @@
     {
       "displayName": "Aspect of Turbulence",
       "id": 11,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1259,6 +1484,7 @@
     {
       "displayName": "Aspect of the Megaphone",
       "id": 12,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1285,6 +1511,7 @@
     {
       "displayName": "Aspect of Skyward Strikes",
       "id": 13,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1311,6 +1538,7 @@
     {
       "displayName": "Paladin's Embodiment of Undying Determination",
       "id": 14,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -1319,12 +1547,12 @@
         },
         {
           "threshold": 5,
-          "description": "Mantle of the Bovemists gains +2 charges.  Mythril Skin gains +5% Base Resistence.",
+          "description": "Mantle of the Bovemists gains +2 charges.  Mythril Skin gains +5% Base Resistance.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Mantle of the Bovemists gains +3 charges.  Mythril Skin gains +5% Base Resistence.",
+          "description": "Mantle of the Bovemists gains +3 charges.  Mythril Skin gains +5% Base Resistance.",
           "abilities": []
         }
       ]
@@ -1332,10 +1560,11 @@
     {
       "displayName": "Fallen's Embodiment of Blind Fury",
       "id": 15,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Blood Pact adds +10% more damage to spells cast using health.",
+          "description": "Blood Pact's health cost is reduced by -0.1%.",
           "abilities": []
         },
         {
@@ -1353,20 +1582,21 @@
     {
       "displayName": "Battle Monk's Embodiment of Complete Synchrony",
       "id": 16,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Increase your maximum Discombobulated by +20.",
+          "description": "Increase your maximum Discombobulated by +30.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "Increase your maximum Discombobulated by +20.  Bash gains +1 hit.",
+          "description": "Increase your maximum Discombobulated by +30.  Bash gains +1 hit.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Increase your maximum Discombobulated by +30.  Bash gains +1 hit.",
+          "description": "Increase your maximum Discombobulated by +50.  Bash gains +1 hit.",
           "abilities": []
         }
       ]
@@ -1376,6 +1606,7 @@
     {
       "displayName": "Aspect of Runic Extravagance",
       "id": 0,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1397,6 +1628,7 @@
     {
       "displayName": "Aspect of Mystic Transfer",
       "id": 1,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1418,6 +1650,7 @@
     {
       "displayName": "Aspect of Shining Status",
       "id": 2,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1439,6 +1672,7 @@
     {
       "displayName": "Aspect of Flickering Transmission",
       "id": 3,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1460,6 +1694,7 @@
     {
       "displayName": "Aspect of Burning Providence",
       "id": 4,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1481,20 +1716,21 @@
     {
       "displayName": "Aspect of Fatal Fulguration",
       "id": 5,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Thunderstorm gains +1 strike. Total Damage: -5% (of your DPS, per strike)   (Neutral Damage: -3%)   (Thunder: -2%)  Breathless becomes slightly less effective. Total Damage: -1% (of your DPS, per Winded)   (Neutral Damage: -1%)",
+          "description": "Thunderstorm gains +1 strike, and hits +33% faster. Total Damage: -3% (of your DPS, per strike)   (Neutral Damage: -2%)   (Thunder: -1%)  Breathless becomes slightly less effective. Total Damage: -1% (of your DPS, per Winded)   (Neutral Damage: -1%)",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Thunderstorm gains +2 strikes. Total Damage: -10% (of your DPS, per strike)   (Neutral Damage: -6%)   (Thunder: -4%)  Breathless becomes slightly less effective. Total Damage: -2% (of your DPS, per Winded)   (Neutral Damage: -2%)",
+          "description": "Thunderstorm gains +2 strikes, and hits +33% faster. Total Damage: -7% (of your DPS, per strike)   (Neutral Damage: -4%)   (Thunder: -3%)  Breathless becomes slightly less effective. Total Damage: -2% (of your DPS, per Winded)   (Neutral Damage: -2%)",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Thunderstorm gains +3 strikes. Total Damage: -13% (of your DPS, per strike)   (Neutral Damage: -8%)   (Thunder: -5%)  Breathless becomes slightly less effective. Total Damage: -3% (of your DPS, per Winded)   (Neutral Damage: -2%)   (Earth: -1%)",
+          "description": "Thunderstorm gains +3 strikes, and hits +33% faster. Total Damage: -10% (of your DPS, per strike)   (Neutral Damage: -6%)   (Thunder: -4%)  Breathless becomes slightly less effective. Total Damage: -3% (of your DPS, per Winded)   (Neutral Damage: -2%)   (Earth: -1%)",
           "abilities": []
         }
       ]
@@ -1502,6 +1738,7 @@
     {
       "displayName": "Aspect of the Dimension's Door",
       "id": 6,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1528,6 +1765,7 @@
     {
       "displayName": "Aspect of the Ray of Frost",
       "id": 7,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1554,25 +1792,26 @@
     {
       "displayName": "Aspect of the Magic Missile",
       "id": 8,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Psychokinesis gains +8 Range.",
+          "description": "Psychokinesis gains +4 Range.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "Psychokinesis gains +14 Range.",
+          "description": "Psychokinesis gains +7 Range.",
           "abilities": []
         },
         {
           "threshold": 30,
-          "description": "Psychokinesis gains +18 Range.",
+          "description": "Psychokinesis gains +10 Range.",
           "abilities": []
         },
         {
           "threshold": 150,
-          "description": "Psychokinesis gains +22 Range.",
+          "description": "Psychokinesis gains +12 Range.",
           "abilities": []
         }
       ]
@@ -1580,25 +1819,26 @@
     {
       "displayName": "Aspect of the Comet",
       "id": 9,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Meteor gains +0.65 Area of Effect.  Ophanim gains +2.5 Range.",
+          "description": "Meteor gains +0.65 Area of Effect.  Ophanim gains +2.5 Range. Ophanim's orbs travel 11% faster.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "Meteor gains +1.15 Area of Effect.  Ophanim gains +4.5 Range.",
+          "description": "Meteor gains +1.15 Area of Effect.  Ophanim gains +4.5 Range. Ophanim's orbs travel 21% faster.",
           "abilities": []
         },
         {
           "threshold": 30,
-          "description": "Meteor gains +1.65 Area of Effect.  Ophanim gains +6.5 Range.",
+          "description": "Meteor gains +1.65 Area of Effect.  Ophanim gains +6.5 Range. Ophanim's orbs travel 29% faster.",
           "abilities": []
         },
         {
           "threshold": 150,
-          "description": "Meteor gains +2 Area of Effect.  Ophanim gains +8 Range.",
+          "description": "Meteor gains +2 Area of Effect.  Ophanim gains +8 Range. Ophanim's orbs travel 37% faster.",
           "abilities": []
         }
       ]
@@ -1606,6 +1846,7 @@
     {
       "displayName": "Aspect of Wind Walking",
       "id": 10,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1632,6 +1873,7 @@
     {
       "displayName": "Aspect of the Apprentice's Bolt",
       "id": 11,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1658,6 +1900,7 @@
     {
       "displayName": "Aspect of the Cone of Cold",
       "id": 12,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1684,6 +1927,7 @@
     {
       "displayName": "Aspect of the Savior",
       "id": 13,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1710,20 +1954,21 @@
     {
       "displayName": "Riftwalker's Embodiment of Chronal Control",
       "id": 14,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Timelock gains +0.5s Duration for every 5 Winded absorbed. Timelock gains +3s maximum Duration.",
+          "description": "Timelock gains +0.5s Duration for every 5 Winded \ue035 absorbed. Timelock gains +3s maximum Duration.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "Timelock gains +0.5s Duration for every 5 Winded absorbed. Timelock gains +3s maximum Duration.  Increase your maximum Winded by +5.",
+          "description": "Timelock gains +0.5s Duration for every 5 Winded \ue035 absorbed. Timelock gains +3s maximum Duration.  Increase your maximum Winded \ue035 by +5.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Timelock gains +0.75s Duration for every 5 Winded absorbed. Timelock gains +4.5s maximum Duration.  Increase your maximum Winded by +5.",
+          "description": "Timelock gains +0.75s Duration for every 5 Winded \ue035 absorbed. Timelock gains +4.5s maximum Duration.  Increase your maximum Winded \ue035 by +5.",
           "abilities": []
         }
       ]
@@ -1731,6 +1976,7 @@
     {
       "displayName": "Light Bender's Embodiment of Celestial Brilliance",
       "id": 15,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -1752,6 +1998,7 @@
     {
       "displayName": "Arcanist's Embodiment of Total Obliteration",
       "id": 16,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -1775,6 +2022,7 @@
     {
       "displayName": "Aspect of Seeking Stars",
       "id": 0,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1796,20 +2044,21 @@
     {
       "displayName": "Aspect of Sleight-Of-Hand",
       "id": 1,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Shurikens gains +1 shuriken. Total Damage: -25% (of your DPS, per shuriken)   (Neutral Damage: -20%)   (Fire: -5%)",
+          "description": "Shurikens prepares +1 shuriken per Dash.  Increase the amount of Shurikens you can hold by +3.  Total Damage: -15% (of your DPS, per shuriken)   (Neutral Damage: -10%)   (Fire: -5%)",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Shurikens gains +2 shurikens. Total Damage: -40% (of your DPS, per shuriken)   (Neutral Damage: -30%)   (Fire: -10%)",
+          "description": "Shurikens prepares +2 shurikens per Dash.  Increase the amount of Shurikens you can hold by +6.  Total Damage: -28% (of your DPS, per shuriken)   (Neutral Damage: -19%)   (Fire: -9%)",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Shurikens gains +3 shurikens. Total Damage: -50% (of your DPS, per shuriken)   (Neutral Damage: -35%)   (Fire: -15%)",
+          "description": "Shurikens prepares +3 shurikens per Dash.  Increase the amount of Shurikens you can hold by +9.  Total Damage: -36% (of your DPS, per shuriken)   (Neutral Damage: -24%)   (Fire: -12%)",
           "abilities": []
         }
       ]
@@ -1817,6 +2066,7 @@
     {
       "displayName": "Aspect of False Coercing",
       "id": 2,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1838,20 +2088,21 @@
     {
       "displayName": "Aspect of the Calling Card",
       "id": 3,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Increase your maximum Marks by +1.",
+          "description": "Increase your maximum Marks \ue019 by +1. Decrease your damage per Mark \ue019 by -0.5%.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Increase your maximum Marks by +2.",
+          "description": "Increase your maximum Marks \ue019 by +2. Decrease your damage per Mark \ue019 by -1%.",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Increase your maximum Marks by +3.",
+          "description": "Increase your maximum Marks \ue019 by +3. Decrease your damage per Mark \ue019 by -1.5%.",
           "abilities": []
         }
       ]
@@ -1859,41 +2110,21 @@
     {
       "displayName": "Aspect of the Dagger's Silhouette",
       "id": 4,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Nightcloak Knife's maximum Marks are increased by +2.",
+          "description": "Decrease your maximum Knives by -1. Increase the damage of each Knife by +3%.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Nightcloak Knife's maximum Marks are increased by +4.",
+          "description": "Decrease your maximum Knives by -2. Increase the damage of each Knife by +8.5%.",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Nightcloak Knife's maximum Marks are increased by +6.",
-          "abilities": []
-        }
-      ]
-    },
-    {
-      "displayName": "Aspect of Martial Trance",
-      "id": 5,
-      "tiers": [
-        {
-          "threshold": 1,
-          "description": "Flow State's cooldown is reduced by -1.25s.",
-          "abilities": []
-        },
-        {
-          "threshold": 15,
-          "description": "Flow State's cooldown is reduced by -2.25s.",
-          "abilities": []
-        },
-        {
-          "threshold": 75,
-          "description": "Flow State's cooldown is reduced by -3s.",
+          "description": "Decrease your maximum Knives by -2. Increase the damage of each Knife by +10%.",
           "abilities": []
         }
       ]
@@ -1901,20 +2132,21 @@
     {
       "displayName": "Aspect of the Airborne",
       "id": 6,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Jasmine Bloom gains +2 Area of Effect.",
+          "description": "Jasmine Bloom gains +0.4 Area of Effect per bloom.  Jasmine Bloom's explosion gains +2 Area of Effect.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Jasmine Bloom gains +3 Area of Effect.",
+          "description": "Jasmine Bloom gains +0.6 Area of Effect per bloom.  Jasmine Bloom's explosion gains +3 Area of Effect.",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Jasmine Bloom gains +4 Area of Effect.",
+          "description": "Jasmine Bloom gains +0.8 Area of Effect per bloom.  Jasmine Bloom's explosion gains +4 Area of Effect.",
           "abilities": []
         }
       ]
@@ -1922,6 +2154,7 @@
     {
       "displayName": "Aspect of Unyielding Fate",
       "id": 7,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -1943,6 +2176,7 @@
     {
       "displayName": "Aspect of the Chain Knife",
       "id": 8,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1969,6 +2203,7 @@
     {
       "displayName": "Aspect of the Stellar Flurry",
       "id": 9,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -1995,6 +2230,7 @@
     {
       "displayName": "Aspect of Foul Play",
       "id": 10,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2021,6 +2257,7 @@
     {
       "displayName": "Aspect of Shadow Armor",
       "id": 11,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2047,6 +2284,7 @@
     {
       "displayName": "Aspect of the Pinwheel",
       "id": 12,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2073,6 +2311,7 @@
     {
       "displayName": "Aspect of the Fog Machine",
       "id": 13,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2099,6 +2338,7 @@
     {
       "displayName": "Aspect of Redoublement",
       "id": 14,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2125,6 +2365,7 @@
     {
       "displayName": "Acrobat's Embodiment of Gravity Defiance",
       "id": 15,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -2146,6 +2387,7 @@
     {
       "displayName": "Trickster's Embodiment of the Ultimate Show",
       "id": 16,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -2154,12 +2396,12 @@
         },
         {
           "threshold": 5,
-          "description": "Mirror Image's cooldown is reduced by -5s.  Increase your maximum Clones by 1.",
+          "description": "Mirror Image's cooldown is reduced by -5s.  Increase your maximum Clones \ue030 by 1.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Mirror Image's cooldown is reduced by -7.5s.  Increase your maximum Clones by 1.",
+          "description": "Mirror Image's cooldown is reduced by -7.5s.  Increase your maximum Clones \ue030 by 1.",
           "abilities": []
         }
       ]
@@ -2167,6 +2409,7 @@
     {
       "displayName": "Shadestepper's Embodiment of Unseen Execution",
       "id": 17,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -2184,26 +2427,49 @@
           "abilities": []
         }
       ]
+    },
+    {
+      "displayName": "Aspect of the Agile Blade",
+      "id": 18,
+      "tier": "Fabled",
+      "tiers": [
+        {
+          "threshold": 1,
+          "description": "Aerial Ace gains +1.25s Duration.",
+          "abilities": []
+        },
+        {
+          "threshold": 15,
+          "description": "Aerial Ace gains +2s Duration.",
+          "abilities": []
+        },
+        {
+          "threshold": 75,
+          "description": "Aerial Ace gains +2.5s Duration.",
+          "abilities": []
+        }
+      ]
     }
   ],
   "Shaman": [
     {
       "displayName": "Aspect of Stances",
       "id": 0,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Mask of the Lunatic gains +5% Damage Bonus.  Mask of the Fanatic gains +5% Resistance.  Mask of the Coward gains +10% Walk Speed.",
+          "description": "Mask of the Lunatic gains +5% Damage Bonus.  Mask of the Fanatic gains +5% Resistance.  Mask of the Heretic gains +10% Walk Speed.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Mask of the Lunatic gains +8% Damage Bonus.  Mask of the Fanatic gains +8% Resistance.  Mask of the Coward gains +16% Walk Speed.",
+          "description": "Mask of the Lunatic gains +8% Damage Bonus.  Mask of the Fanatic gains +8% Resistance.  Mask of the Heretic gains +16% Walk Speed.",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Mask of the Lunatic gains +10% Damage Bonus.  Mask of the Fanatic gains +10% Resistance.  Mask of the Coward gains +20% Walk Speed.",
+          "description": "Mask of the Lunatic gains +10% Damage Bonus.  Mask of the Fanatic gains +10% Resistance.  Mask of the Heretic gains +20% Walk Speed.",
           "abilities": []
         }
       ]
@@ -2211,20 +2477,21 @@
     {
       "displayName": "Aspect of Exsanguination",
       "id": 1,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Increase your maximum Blood Pool by +10 points.",
+          "description": "Increase your maximum Blood Pool \ue020 by +10 points.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Increase your maximum Blood Pool by +20 points.",
+          "description": "Increase your maximum Blood Pool \ue020 by +20 points.",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Increase your maximum Blood Pool by +30 points.",
+          "description": "Increase your maximum Blood Pool \ue020 by +30 points.",
           "abilities": []
         }
       ]
@@ -2232,6 +2499,7 @@
     {
       "displayName": "Aspect of Seismic Sense",
       "id": 2,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -2253,6 +2521,7 @@
     {
       "displayName": "Aspect of the Amphibian",
       "id": 3,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
@@ -2274,20 +2543,21 @@
     {
       "displayName": "Aspect of the Channeler",
       "id": 4,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Chant of the Lunatic gains +1.25s Duration.  Chant of the Fanatic gains +0.35s Duration.  Chant of the Coward gains increased knockback.",
+          "description": "Chant of the Lunatic gains +1.25s Duration.  Chant of the Fanatic gains +0.35s Duration.  Chant of the Heretic takes +15% longer to decay.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Chant of the Lunatic gains +2.25s Duration.  Chant of the Fanatic gains +0.7s Duration.  Chant of the Coward gains increased knockback.",
+          "description": "Chant of the Lunatic gains +2.25s Duration.  Chant of the Fanatic gains +0.7s Duration.  Chant of the Heretic takes +25% longer to decay.",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Chant of the Lunatic gains +3s Duration.  Chant of the Fanatic gains +1s Duration.  Chant of the Coward gains increased knockback.",
+          "description": "Chant of the Lunatic gains +3s Duration.  Chant of the Fanatic gains +1s Duration.  Chant of the Heretic takes +35% longer to decay.",
           "abilities": []
         }
       ]
@@ -2295,20 +2565,21 @@
     {
       "displayName": "Aspect of the Beckoned Legion",
       "id": 5,
+      "tier": "Fabled",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Puppet Master gains +1 puppet. Total Damage: -1% (of your DPS)   (Earth: -1%)",
+          "description": "Puppet Master gains +1 Puppets. Total Damage: -1% (of your DPS)   (Earth: -1%)",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Puppet Master gains +2 puppets. Total Damage: -2% (of your DPS)   (Air: -1%)   (Earth: -1%)",
+          "description": "Puppet Master gains +2 Puppets. Total Damage: -2% (of your DPS)   (Air: -1%)   (Earth: -1%)",
           "abilities": []
         },
         {
           "threshold": 75,
-          "description": "Puppet Master gains +3 puppets. Total Damage: -3% (of your DPS)   (Neutral Damage: -1%)   (Air: -1%)   (Earth: -1%)",
+          "description": "Puppet Master gains +3 Puppets. Total Damage: -3% (of your DPS)   (Neutral Damage: -1%)   (Air: -1%)   (Earth: -1%)",
           "abilities": []
         }
       ]
@@ -2316,25 +2587,26 @@
     {
       "displayName": "Aspect of Motivation",
       "id": 6,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Bullwhip gains +5s Damage Bonus to Summons.",
+          "description": "Bullwhip gains +5% Damage Bonus to Summons.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "Bullwhip gains +9s Damage Bonus to Summons.",
+          "description": "Bullwhip gains +9% Damage Bonus to Summons.",
           "abilities": []
         },
         {
           "threshold": 30,
-          "description": "Bullwhip gains +12s Damage Bonus to Summons.",
+          "description": "Bullwhip gains +12% Damage Bonus to Summons.",
           "abilities": []
         },
         {
           "threshold": 150,
-          "description": "Bullwhip gains +15s Damage Bonus to Summons.",
+          "description": "Bullwhip gains +15% Damage Bonus to Summons.",
           "abilities": []
         }
       ]
@@ -2342,6 +2614,7 @@
     {
       "displayName": "Aspect of Emanant Force",
       "id": 7,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2368,6 +2641,7 @@
     {
       "displayName": "Aspect of Surging Presence",
       "id": 8,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2394,6 +2668,7 @@
     {
       "displayName": "Aspect of the Monolith",
       "id": 9,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2420,6 +2695,7 @@
     {
       "displayName": "Aspect of Lashing Fire",
       "id": 10,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2446,6 +2722,7 @@
     {
       "displayName": "Aspect of the Alraune's Roots",
       "id": 11,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2472,6 +2749,7 @@
     {
       "displayName": "Aspect of Reverberation",
       "id": 12,
+      "tier": "Legendary",
       "tiers": [
         {
           "threshold": 1,
@@ -2498,6 +2776,7 @@
     {
       "displayName": "Ritualist's Embodiment of the Ancestral Avatar",
       "id": 13,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -2519,6 +2798,7 @@
     {
       "displayName": "Acolyte's Embodiment of Unwavering Adherence",
       "id": 14,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
@@ -2527,12 +2807,12 @@
         },
         {
           "threshold": 5,
-          "description": "Blood Sorrow gains +2s Duration.  Sacrificial Shrine costs -3 Blood Pool.",
+          "description": "Blood Sorrow gains +2s Duration.  Eldritch Call summons +1 tentacle, and strikes 33% faster.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Blood Sorrow gains +3s Duration.  Sacrificial Shrine costs -3 Blood Pool.",
+          "description": "Blood Sorrow gains +3s Duration.  Eldritch Call summons +1 tentacle, and strikes 33% faster.",
           "abilities": []
         }
       ]
@@ -2540,20 +2820,21 @@
     {
       "displayName": "Summoner's Embodiment of the Omnipotent Overseer",
       "id": 15,
+      "tier": "Mythic",
       "tiers": [
         {
           "threshold": 1,
-          "description": "Triple Totem gains +1 Totem. Totem and Aura will do 45% less damage.  Regeneration and Sacrificial Shrine will heal 45% less health.",
+          "description": "Triple Totem gains +1 Totem. Totem and Aura will do 55% less damage.  Regeneration and Sacrificial Shrine will heal 55% less health.",
           "abilities": []
         },
         {
           "threshold": 5,
-          "description": "Triple Totem gains +1 Totem. Totem and Aura will do 45% less damage.  Regeneration and Sacrificial Shrine will heal 45% less health.  Shepherd gains +1 puppet per kill. Increase Shepherd's maximum puppets by +8.",
+          "description": "Triple Totem gains +1 Totem. Totem and Aura will do 55% less damage.  Regeneration and Sacrificial Shrine will heal 55% less health.  Hummingbird's Song gains +1 Hummingbird.",
           "abilities": []
         },
         {
           "threshold": 15,
-          "description": "Triple Totem gains +1 Totem. Totem and Aura will do 45% less damage.  Regeneration and Sacrificial Shrine will heal 45% less health.  Shepherd gains +2 puppet per kill. Increase Shepherd's maximum puppets by +16.",
+          "description": "Triple Totem gains +1 Totem. Totem and Aura will do 55% less damage.  Regeneration and Sacrificial Shrine will heal 55% less health.  Hummingbird's Song gains +1 Hummingbird. Hummingbirds gain +8 Range.",
           "abilities": []
         }
       ]

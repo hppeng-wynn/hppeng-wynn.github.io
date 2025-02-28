@@ -151,7 +151,7 @@ function autocomplete_msg(equipment_type) {
 
 function create_autocomplete(data, data_map, item_type, translator) {
     // create dropdown
-    new autoComplete({
+    return new autoComplete({
         data: {
             src: data
         },

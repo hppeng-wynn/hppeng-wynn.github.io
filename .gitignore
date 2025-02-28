@@ -7,4 +7,8 @@ sets/
 *.iml
 .editor_log.txt
 
+bin/
+lib/
+pyvenv.cfg
+
 __pycache__

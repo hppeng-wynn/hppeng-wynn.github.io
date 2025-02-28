@@ -1035,6 +1035,42 @@ class SumNumberInputNode extends InputNode {
     }
 }
 
+// JANK(@orgold): The autocomplete package doesn't have any nice API for dynamically
+// populating the result list, therefore we must store the context themselves to avoid
+// recreating them on any weapon input.
+//
+// If the weapon was kept as state somewhere along the way, we could have the data.src
+// be a function that picks off that, but because we don't store build state outside
+// of computegraph we don't have that luxury.
+let aspect_inputs_dropdowns_ctx = new Map();
+let active_aspects = null;
+
+/**
+ * Populate the aspect autocomplete list dynamically based on the choice of weapon.
+ *
+ * Signature: AspectAutocompleteInitNode() => null
+ */
+class AspectAutocompleteInitNode extends InputNode {
+    compute_func(input_map) {
+        for (const key of aspect_fields) {
+            const active_class = wep_to_class.get(input_map.get('weapon').statMap.get('type'));
+            active_aspects = aspect_map.get(active_class);
+            const class_aspect_names = active_aspects.keys().toArray();
+
+            if (!aspect_inputs_dropdowns_ctx.has(key)) {
+                aspect_inputs_dropdowns_ctx.set(key, create_autocomplete(class_aspect_names, active_aspects, key, v => v));
+            } else {
+                // This is a janky way of manually editing the data of the inner to make dynamic autocomplete lists
+                const autocomplete_ctx = aspect_inputs_dropdowns_ctx.get(key);
+                autocomplete_ctx.data.src = class_aspect_names;
+                autocomplete_ctx.resultItem.element = (item, data) => {
+                    item.classList.add(active_aspects.get(data.value).tier);
+                }
+            }
+        }
+    }
+}
+
 let item_final_nodes = [];
 let powder_nodes = [];
 let edit_input_nodes = [];
@@ -1141,6 +1177,9 @@ function builder_graph_init(save_skp) {
         skp_inputs.push(node);
     }
     pre_scale_agg_node.link_to(edit_agg_node);
+
+    aspect_input_node = new AspectAutocompleteInitNode('aspect-input', document.getElementById('aspect1-choice'));
+    aspect_input_node.link_to(equip_inputs[8], 'weapon');
 
     // Phase 3/3: Set up atree stuff.
 

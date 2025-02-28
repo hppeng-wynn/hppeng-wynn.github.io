@@ -17,7 +17,8 @@
     "Aspect of Battlement Fortification": 14,
     "Boltslinger's Embodiment of Rended Skies": 15,
     "Sharpshooter's Embodiment of Laser Precision": 16,
-    "Trapper's Embodiment of Persistence Predation": 17
+    "Trapper's Embodiment of Persistence Predation": 17,
+    "Aspect of the Beastmaster": 18
   },
   "Warrior": {
     "Aspect of Searing Friction": 0,
@@ -75,7 +76,8 @@
     "Aspect of Redoublement": 14,
     "Acrobat's Embodiment of Gravity Defiance": 15,
     "Trickster's Embodiment of the Ultimate Show": 16,
-    "Shadestepper's Embodiment of Unseen Execution": 17
+    "Shadestepper's Embodiment of Unseen Execution": 17,
+    "Aspect of the Agile Blade": 18
   },
   "Shaman": {
     "Aspect of Stances": 0,

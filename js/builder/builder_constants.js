@@ -62,6 +62,14 @@ let tome_fields = [
     "guildTome1",
     "lootrunTome1"
 ]
+
+let aspect_fields = [
+    "aspect1",
+    "aspect2",
+    "aspect3",
+    "aspect4",
+    "aspect5",
+]
 let equipment_names = [
     "Helmet",
     "Chestplate",
