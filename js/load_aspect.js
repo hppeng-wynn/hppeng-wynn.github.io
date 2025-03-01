@@ -54,12 +54,27 @@ class AspectLoader extends Loader {
         for (const c of Object.keys(aspects)) {
             aspect_map.set(c, new Map());
             aspect_id_map.set(c, new Map());
+
+            aspect_map.get(c).set(none_aspect.displayName, none_aspect);
+            aspect_id_map.get(c).set(none_aspect.id, none_aspect);
+
             for (const aspect of aspects[c]) {
+                aspect.NONE = false;
                 aspect_id_map.get(c).set(aspect.id, aspect);
                 aspect_map.get(c).set(aspect.displayName, aspect);
             }
         }
+
     }
 }
 
+const none_aspect = {
+      "displayName": "No Aspect",
+      "id": 256,
+      "tier": "Normal",
+      "tiers": [],
+      "NONE": true,
+} 
+
 const aspect_loader = new AspectLoader('aspect_db', classes, ASPECT_DB_VERSION)
+
