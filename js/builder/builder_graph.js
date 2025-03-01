@@ -1089,14 +1089,15 @@ class AspectInputNode extends InputNode {
 }
 
 /**
- * A node to validate and fetch aspects from a linked aspect input field
+ * Get a specific tier from the aspect given aspect.
+ * defaults to the max tier.
  *
- * Signature: AspectInputNode(input_field) => AspectSpec
+ * Signature: AspectInputNode(input_field) => AspectTierSpec
  */
 class AspectTierInputNode extends InputNode {
     compute_func(input_map) {
         if (input_map.get("aspect_spec") == undefined || input_map.get("aspect_spec").NONE) return none_aspect;
-        else if (this.input_field.value === "") this.input_field.value = 1;
+        else if (this.input_field.value === "") this.input_field.value = input_map.get("aspect_spec").tiers.length;
         else if (this.input_field.value > input_map.get("aspect_spec").tiers.length) {
             throw new Error("Aspect tier out of range!");
         }
@@ -1104,12 +1105,18 @@ class AspectTierInputNode extends InputNode {
     }
 }
 
+/**
+ * Aggregate all aspects into a single array.
+ * The order of the array is irrelevant.
+ *
+ * Signature: AspectAggregateNode() => Array<AspectTierSpec> 
+ */
 class AspectAggregateNode extends ComputeNode {
     compute_func(input_map) {
         const aspects = [];
         for (const [i, field] of Object.entries(aspect_fields)) {
             if (input_map.get(field+"_tiered").NONE) continue;
-            aspects[i] = input_map.get(field+"_tiered");
+            aspects.push(input_map.get(field+"_tiered"));
         }
         console.log(aspects);
         return aspects;
@@ -1241,7 +1248,6 @@ function builder_graph_init(save_skp) {
 
     aspect_agg_node = new AspectAggregateNode('final-aspects');
     for (const field of aspect_fields) {
-        console.log(field);
         new AspectAutocompleteInitNode(field+'-autocomplete', field).link_to(class_node, 'player-class');
         const aspect_input = new AspectInputNode(field+'-input', document.getElementById(field+'-choice'));
         aspect_inputs.push(aspect_input);
@@ -1257,9 +1263,12 @@ function builder_graph_init(save_skp) {
         input_node.update();
     }
 
+    // TODO(@orgold): This is probably not the correct place to trigger aspect inputs, it needs
+    // to happen after atree initialization, this is here cuz I did some dirty testing.
     for (const input_node of aspect_inputs) {
         input_node.update();
     }
+
     armor_powder_node.update();
     level_input.update();
 
