@@ -556,14 +556,21 @@ a:hover {
     background-position: 100% 0;
     aspect-ratio: 1/1;
 }
-.aspect-image {
+.aspect-image-Legendary {
     background-image: url('../media/items/aspects.png');
     image-rendering: pixelated;
     background-size: 500% 100%;
-    background-position: 0 0;
+    background-position: 100% 0;
     aspect-ratio: 1/1;
 }
-.myth-aspect-image {
+.aspect-image-Fabled {
+    background-image: url('../media/items/aspects.png');
+    image-rendering: pixelated;
+    background-size: 500% 100%;
+    background-position: 0% 0;
+    aspect-ratio: 1/1;
+}
+.aspect-image-Mythic {
     background-image: url('../media/items/aspects.png');
     image-rendering: pixelated;
     background-size: 500% 100%;

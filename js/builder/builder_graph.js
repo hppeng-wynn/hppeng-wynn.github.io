@@ -1035,105 +1035,15 @@ class SumNumberInputNode extends InputNode {
     }
 }
 
-// HACK(@orgold): The autocomplete package doesn't have any nice API for dynamically
-// populating the result list, therefore we must store the context themselves to avoid
-// recreating them on any weapon input.
-//
-// If the weapon was kept as state somewhere along the way, we could have the data.src
-// be a function that picks off that, but because we don't tend to store build state outside
-// of computegraph we don't have that luxury.
-let aspect_inputs_dropdowns_ctx = new Map(); // Map<className, autoCompleteJs>
-let active_aspects = null; // Map<AspectName, AspecSpec>
-
-/**
- * Populate the aspect autocomplete list dynamically based on the choice of weapon.
- *
- * Signature: AspectAutocompleteInitNode() => null
- */
-class AspectAutocompleteInitNode extends ComputeNode {
-    constructor(name, input_field) {
-        super(name);
-        this.input_field = input_field;
-    }
-
-    compute_func(input_map) {
-        const active_class = input_map.get("player-class");
-        if (active_class === null) return;
-
-        active_aspects = aspect_map.get(active_class);
-        const class_aspect_names = active_aspects.keys().toArray();
-
-        if (!aspect_inputs_dropdowns_ctx.has(this.name)) {
-            aspect_inputs_dropdowns_ctx.set(this.name, create_autocomplete(class_aspect_names, active_aspects, this.input_field, v => v));
-        } else {
-            // This is a janky way of manually editing the data of the inner to make dynamic autocomplete lists
-            const autocomplete_ctx = aspect_inputs_dropdowns_ctx.get(this.name);
-            autocomplete_ctx.data.src = class_aspect_names;
-            autocomplete_ctx.resultItem.element = (item, data) => {
-                item.classList.add(active_aspects.get(data.value).tier);
-            }
-        }
-    }
-}
-
-/**
- * A node to validate and fetch aspects from a linked aspect input field
- *
- * Signature: AspectInputNode(input_field) => AspectSpec
- */
-class AspectInputNode extends InputNode {
-    compute_func(input_map) {
-        if (this.input_field.value === "") return none_aspect;
-        return active_aspects.get(this.input_field.value);
-    }
-}
-
-/**
- * Get a specific tier from the aspect given aspect.
- * defaults to the max tier.
- *
- * Signature: AspectInputNode(input_field) => AspectTierSpec
- */
-class AspectTierInputNode extends InputNode {
-    compute_func(input_map) {
-        if (input_map.get("aspect_spec") == undefined || input_map.get("aspect_spec").NONE) return none_aspect;
-        else if (this.input_field.value === "") this.input_field.value = input_map.get("aspect_spec").tiers.length;
-        else if (this.input_field.value > input_map.get("aspect_spec").tiers.length) {
-            throw new Error("Aspect tier out of range!");
-        }
-        return input_map.get("aspect_spec").tiers[this.input_field.value - 1];
-    }
-}
-
-/**
- * Aggregate all aspects into a single array.
- * The order of the array is irrelevant.
- *
- * Signature: AspectAggregateNode() => Array<AspectTierSpec> 
- */
-class AspectAggregateNode extends ComputeNode {
-    compute_func(input_map) {
-        const aspects = [];
-        for (const [i, field] of Object.entries(aspect_fields)) {
-            if (input_map.get(field+"_tiered").NONE) continue;
-            aspects.push(input_map.get(field+"_tiered"));
-        }
-        console.log(aspects);
-        return aspects;
-    }
-}
-
 let item_final_nodes = [];
 let powder_nodes = [];
 let edit_input_nodes = [];
 let skp_inputs = [];
 let equip_inputs = [];
-let aspect_inputs = [];
 let build_node;
 let stat_agg_node;
 let edit_agg_node;
 let atree_graph_creator;
-let aspect_agg_node;
 
 /**
  * Parameters:
@@ -1248,11 +1158,15 @@ function builder_graph_init(save_skp) {
 
     aspect_agg_node = new AspectAggregateNode('final-aspects');
     for (const field of aspect_fields) {
+        const aspect_input_field = document.getElementById(field+'-choice');
+        const aspect_tier_input_field = document.getElementById(field+'-tier-choice');
+        const aspect_image_div = document.getElementById(field+'-img');
         new AspectAutocompleteInitNode(field+'-autocomplete', field).link_to(class_node, 'player-class');
-        const aspect_input = new AspectInputNode(field+'-input', document.getElementById(field+'-choice'));
+        const aspect_input = new AspectInputNode(field+'-input', aspect_input_field);
+        new AspectInputDisplayNode(field+'-input', aspect_input_field, aspect_image_div).link_to(aspect_input, "aspect-spec");
         aspect_inputs.push(aspect_input);
-        const aspect_tier_input = new AspectTierInputNode(field+'-tier-input', document.getElementById(field+'-tier-choice')).link_to(aspect_input, 'aspect_spec');
-        aspect_agg_node.link_to(aspect_tier_input, field+'_tiered');
+        const aspect_tier_input = new AspectTierInputNode(field+'-tier-input', aspect_tier_input_field).link_to(aspect_input, 'aspect-spec');
+        aspect_agg_node.link_to(aspect_tier_input, field+'-tiered');
     }
     build_encode_node.link_to(aspect_agg_node);
 
@@ -1263,14 +1177,13 @@ function builder_graph_init(save_skp) {
         input_node.update();
     }
 
-    // TODO(@orgold): This is probably not the correct place to trigger aspect inputs, it needs
-    // to happen after atree initialization, this is here cuz I did some dirty testing.
-    for (const input_node of aspect_inputs) {
-        input_node.update();
-    }
-
     armor_powder_node.update();
     level_input.update();
+
+    // TODO(@orgold): This is probably not the correct place to trigger aspect inputs, it needs this is here cuz I did some dirty testing.
+    for (const aspect_input_node of aspect_inputs) {
+        aspect_input_node.update();
+    }
 
     atree_graph_creator = new AbilityTreeEnsureNodesNode(build_node, stat_agg_node)
                                     .link_to(atree_collect_spells, 'spells');
