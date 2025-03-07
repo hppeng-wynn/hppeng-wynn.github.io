@@ -4256,7 +4256,7 @@
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": 80,
+                    "max": 65,
                     "scaling": [1.5]
                 }
             ]
@@ -4968,7 +4968,7 @@
         },
         {
             "display_name": "Overwhelming Rage",
-            "desc": "Increases the cap of Enraged Blow by +60%.",
+            "desc": "Increases the cap of Enraged Blow by +50%.",
             "base_abil": "Bak'al's Grasp",
             "parents": ["Cheaper War Scream II"], 
             "dependencies": ["Bak'al's Grasp"], 
@@ -4990,7 +4990,7 @@
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": -80,
+                    "max": -65,
                     "scaling": [-1.5]
                 },
                 {
@@ -5001,7 +5001,7 @@
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": 140,
+                    "max": 115,
                     "scaling": [1.5]
                 }
             ]
@@ -8804,7 +8804,7 @@
         },
         {
             "display_name": "Cheaper Multihit I",
-            "desc": "Increase your Main Attack's range and add +5 raw damage to all attacks",
+            "desc": "Reduce the Mana cost of Multihit by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Multihit",
@@ -9572,7 +9572,7 @@
         },
         {
             "display_name": "Cheaper Multihit II",
-            "desc": "Reduce the Mana cost of Multihit",
+            "desc": "Reduce the Mana cost of Multihit by 5.",
             "base_abil": "Multihit",
             "parents": [
                 "Death Magnet",
@@ -10018,7 +10018,7 @@
         },
         {
             "display_name": "Jasmine Bloom",
-            "desc": "After spending 40 Mana or gaining 2 Momentum, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
+            "desc": "After spending 40 Mana or gaining 3 Momentum, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
             "archetype": "Acrobat",
             "archetype_req": 12,
             "parents": [
@@ -10034,6 +10034,16 @@
             },
             "properties": {},
             "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Momentum",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Momentum:7.Jasmine Bloom Explosion"
+                    },
+                    "scaling": [25]
+                },
                 {
                     "type": "replace_spell",
                     "name": "Jasmine Bloom",
@@ -10055,28 +10065,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "display_name": "Cloudstepper",
-            "desc": "Weightless will grant +0.6 more mana.",
-            "archetype": "",
-            "archetype_req": 0,
-            "base_abil": "Weightless",
-            "parents": [
-                "Jasmine Bloom"
-            ],
-            "dependencies": [
-                "Weightless"
-            ],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 40,
-                "col": 8,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": []
         },
         {
             "display_name": "Devour",
@@ -10269,7 +10257,7 @@
         },
         {
             "display_name": "Swan Dive",
-            "desc": "Landing 30 hits against an enemy while mid-air grants you +1 Momentum (Max 5). Stomp consumes Momentum for +25% damage per stack. At 3 Momentum, Stomp releases an explosion & Dash's downward velocity increases.",
+            "desc": "Landing 30 hits against an enemy while mid-air grants you +1 Momentum (Max 5). Stomp consumes Momentum for +25% damage per stack. At 1 Momentum, Stomp releases an explosion & Dash's downward velocity increases.",
             "archetype": "Acrobat",
             "archetype_req": 6,
             "parents": [
@@ -10293,7 +10281,7 @@
                     "slider_name": "Momentum",
                     "output": {
                         "type": "stat",
-                        "name": "damMult.Swan Dive:9.Stomp Damage"
+                        "name": "damMult.Momentum:10.Swan Dive Explosion"
                     },
                     "slider_max": 5,
                     "scaling": [25]
@@ -11377,11 +11365,11 @@
             "parents": ["Rebound"],
             "dependencies": ["Haul"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 18,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -12051,7 +12039,7 @@
         },
         {
             "display_name": "Eldritch Call",
-            "desc": "Casting Totem while holding shift will spend 30 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and -20% weakness. Bleeding enemies will take x2 damage from the tentacles.",
+            "desc": "Casting Totem while holding shift will spend 30 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and +20% vulnerability. Bleeding enemies will take x2 damage from the tentacles.",
             "archetype": "Acolyte",
             "archetype_req": 7,
             "parents": [
@@ -12076,11 +12064,11 @@
                     "parts": [
                         {
                             "name": "Single Hit",
-                            "multipliers": [ 320, 0, 50, 0, 0, 50 ] 
+                            "multipliers": [ 640, 0, 100, 0, 0, 100 ] 
                         },
                         {
                             "name": "Damage per Totem",
-                            "hits": { "Single Hit": 3 }
+                            "hits": { "Single Hit": 4 }
                         },
                         {
                             "name": "DPS",
@@ -12094,12 +12082,17 @@
                 },
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Bleeding",
+                    "toggle": "Activate Eldritch Call",
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "damMult.Eldritch Call:11.Single Hit",
+                            "name": "damMult.Eldritch Call:9.Bleeding Tick",
                             "value": 100
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Eldritch Call",
+                            "value": 20
                         }
                     ]
                 }
@@ -12245,7 +12238,7 @@
         },
         {
             "display_name": "Sanguine Strike",
-            "desc": "Greatly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.5s per beam.",
+            "desc": "Greatly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.25s per beam.",
             "parents": ["Blood Rite", "Chant of the Heretic"],
             "dependencies": [],
             "blockers": [],

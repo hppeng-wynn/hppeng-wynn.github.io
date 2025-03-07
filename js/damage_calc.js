@@ -205,7 +205,7 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         damage_mult *= (1 + v/100);
     }
 
-    const crit_mult = Math.max(0, 1+(stats.get("critDamPct")/100));
+    const crit_mult = 1+(stats.get("critDamPct")/100);
 
     for (const damage of damages) {
         if(damage[0] < 0) damage[0] = 0;

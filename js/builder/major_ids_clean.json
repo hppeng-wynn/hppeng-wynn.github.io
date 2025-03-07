@@ -1947,11 +1947,40 @@
     "SCARCE_COMFORT": {
         "displayName": "Scarce Comfort",
         "description": "When Generalist acts on Whirlwind Strike, it gains +30% lightning & air damage, and +3 radius. When it acts on Charge, it reduces the vertical velocity decay of Aerodynamics.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Uppercut",
+                "dependencies": [
+                    "Whirlwind Strike"
+                ],
+                "properties": {
+                    "range": 3
+                },
+                "effects": [                
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 3,
+                        "target_part": "Uppercut",
+                        "multipliers": [0, 0, 30, 0, 0, 30]
+                    }
+                ]
+            }
+        ]
     },
     "BRACHIATE": {
         "displayName": "Brachiate",
         "description": "Grappling Hook has increased range and velocity, and no longer pulls mobs.",
-        "abilities": []
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Escape",
+                "dependencies": [
+                    "Grappling Hook"
+                ],
+                "properties": { "range": 16 },
+                "effects": []
+            }
+        ]
     }
 }

@@ -38,12 +38,12 @@
       "notTouching": 0
     },
     "itemIDs": {
-      "dura": -180,
-      "strReq": 40,
-      "dexReq": 40,
-      "intReq": 40,
-      "defReq": 40,
-      "agiReq": 40
+      "dura": -160,
+      "strReq": 14,
+      "dexReq": 14,
+      "intReq": 14,
+      "defReq": 14,
+      "agiReq": 14
     },
     "displayName": "Vortexian Event Horizon",
     "id": 678
@@ -10766,6 +10766,52 @@
     "id": 369
   },
   {
+    "name": "Razor-Sharp Tooth",
+    "type": "ingredient",
+    "lvl": 86,
+    "skills": [
+      "WEAPONSMITHING",
+      "TAILORING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "409:0"
+    },
+    "ids": {
+      "mdRaw": {
+        "minimum": 40,
+        "maximum": 60
+      },
+      "dex": {
+        "minimum": 2,
+        "maximum": 2
+      }
+    },
+    "tier": 2,
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": -94,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Razor-Sharp Tooth",
+    "id": 511
+  },
+  {
     "name": "Ivory Tusk",
     "type": "ingredient",
     "lvl": 86,
@@ -10945,52 +10991,6 @@
     },
     "displayName": "Sliver of Sunrise",
     "id": 822
-  },
-  {
-    "name": "Razor-Sharp Tooth",
-    "type": "ingredient",
-    "lvl": 86,
-    "skills": [
-      "WEAPONSMITHING",
-      "TAILORING"
-    ],
-    "icon": {
-      "format": "legacy",
-      "value": "409:0"
-    },
-    "ids": {
-      "mdRaw": {
-        "minimum": 40,
-        "maximum": 60
-      },
-      "dex": {
-        "minimum": 2,
-        "maximum": 2
-      }
-    },
-    "tier": 2,
-    "consumableIDs": {
-      "dura": 0,
-      "charges": 0
-    },
-    "posMods": {
-      "left": 0,
-      "right": 0,
-      "above": 0,
-      "under": 0,
-      "touching": 0,
-      "notTouching": 0
-    },
-    "itemIDs": {
-      "dura": -94,
-      "strReq": 0,
-      "dexReq": 0,
-      "intReq": 0,
-      "defReq": 0,
-      "agiReq": 0
-    },
-    "displayName": "Razor-Sharp Tooth",
-    "id": 511
   },
   {
     "name": "Parasitic Chitin",
@@ -18619,6 +18619,47 @@
     },
     "displayName": "Large Titanium Chunk",
     "id": 608
+  },
+  {
+    "name": "Broken Amulet",
+    "type": "ingredient",
+    "lvl": 70,
+    "skills": [
+      "JEWELING"
+    ],
+    "icon": {
+      "format": "legacy",
+      "value": "371:0"
+    },
+    "ids": {
+      "hprPct": {
+        "minimum": 1,
+        "maximum": 1
+      }
+    },
+    "tier": 0,
+    "consumableIDs": {
+      "dura": 0,
+      "charges": 0
+    },
+    "posMods": {
+      "left": 0,
+      "right": 0,
+      "above": 0,
+      "under": 0,
+      "touching": 0,
+      "notTouching": 0
+    },
+    "itemIDs": {
+      "dura": -40,
+      "strReq": 0,
+      "dexReq": 0,
+      "intReq": 0,
+      "defReq": 0,
+      "agiReq": 0
+    },
+    "displayName": "Broken Amulet",
+    "id": 856
   },
   {
     "name": "Severed Heart",
