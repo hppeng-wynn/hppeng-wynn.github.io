@@ -4026,9 +4026,7 @@
                 "col": 4,
                 "icon": "node_2"
             },
-            "properties": {
-                "chance": 30
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "replace_spell",
@@ -4039,6 +4037,16 @@
                         {
                             "name": "Counter Damage",
                             "multipliers": [60, 0, 20, 0, 0, 20]
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "agiDef",
+                            "value": 3
                         }
                     ]
                 }
@@ -4264,7 +4272,6 @@
         {
             "display_name": "Riposte",
             "desc": "Increase your chance to attack with Counter by +30%",
-            "base_abil": "Counter",
             "parents": ["Crushing Blow", "Flying Kick"], 
             "dependencies": ["Counter"], 
             "blockers": [],
@@ -4275,10 +4282,18 @@
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [ {"type": "prop", "abil": "Counter", "name": "chance", "value": 30} ]
-            }]
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "agiDef",
+                            "value": 3
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Exhilarate",

@@ -519,8 +519,10 @@ function getDefenseStats(stats) {
     for (const [k, v] of stats.get("defMult").entries()) {
         defMult *= (1 - v/100);
     }
-    // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
-    ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    // agility bonuses
+    let agi_reduction = (100-stats.get("agiDef"))/100;
+    // newehp = oldehp / [A'(x) * A(x) + (1 - A(x)) * (1 - D(x))]
+    ehp[0] = ehp[0] / (agi_reduction*agi_pct + (1-agi_pct) * (1-def_pct));
     ehp[0] /= defMult;
     // ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
@@ -530,7 +532,7 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHpr);
     //EHPR
     let ehpr = [totalHpr, totalHpr];
-    ehpr[0] = ehpr[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    ehpr[0] = ehpr[0] / (agi_reduction*agi_pct + (1-agi_pct) * (1-def_pct));
     ehpr[0] /= defMult;
     ehpr[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehpr);

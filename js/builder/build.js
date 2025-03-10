@@ -80,7 +80,7 @@ class Build {
             "nMdPct","nMdRaw","nSdPct","nSdRaw","nDamPct","nDamRaw","nDamAddMin","nDamAddMax",      // neutral which is now an element
             "mdPct","mdRaw","sdPct","sdRaw","damPct","damRaw","damAddMin","damAddMax",          // These are the old ids. Become proportional.
             "rMdPct","rMdRaw","rSdPct","rSdRaw","rDamPct","rDamRaw","rDamAddMin","rDamAddMax",  // rainbow (the "element" of all minus neutral). rSdRaw is rainraw
-            "healPct",
+            "healPct", "critDamPct"
         ]
 
         //Create a map of this build's stats
@@ -93,7 +93,7 @@ class Build {
             statMap.set(staticID, 0);
         }
         statMap.set("hp", levelToHPBase(this.level)); 
-        statMap.set("critDamPct", 0);
+        statMap.set("agiDef", 90);
 
         let major_ids = new Set();
         for (const item of this.items){
