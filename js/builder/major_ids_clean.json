@@ -1946,7 +1946,7 @@
     },
     "SCARCE_COMFORT": {
         "displayName": "Scarce Comfort",
-        "description": "When Generalist acts on Whirlwind Strike, it gains +30% lightning & air damage, and +3 radius. When it acts on Charge, it reduces the vertical velocity decay of Aerodynamics.",
+        "description": "When Generalist acts on Whirlwind Strike, it gains +30% thunder & air damage, and +3 radius. When it acts on Charge, it reduces the vertical velocity decay of Aerodynamics.",
         "abilities": [
             {
                 "class": "Warrior",
