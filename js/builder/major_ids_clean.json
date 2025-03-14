@@ -1982,5 +1982,10 @@
                 "effects": []
             }
         ]
+    },
+    "PHOENIXBORN": {
+        "displayName": "Phoenix-Born",
+        "description": "Health Regeneration is increased by 1% for every 1% Health missing.",
+        "abilities": []
     }
 }
