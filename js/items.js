@@ -132,7 +132,8 @@ const translate_mappings = {
     "Weaken Enemy": "weakenEnemy",
     "Slow Enemy": "slowEnemy",
     "Max Mana": "maxMana",
-    "Main Attack Range": "mainAttackRange"
+    "Main Attack Range": "mainAttackRange",
+    "Release Order": "id"
 };
 
 const special_mappings = {
