@@ -11598,7 +11598,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Single Hit",
-                    "multipliers": [ -10, 0, 5, 0, 0, 0 ]
+                    "multipliers": [ -5, 0, 5, 0, 0, 0 ]
                 },
                 {
                   "type": "add_spell_prop",

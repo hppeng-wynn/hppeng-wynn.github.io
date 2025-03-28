@@ -1987,5 +1987,15 @@
         "displayName": "Phoenix-Born",
         "description": "Health Regeneration is increased by 1% for every 1% Health missing.",
         "abilities": []
+    },
+    "SUN_EATER": {
+        "displayName": "Sun Eater",
+        "description": "Failing to backstab an enemy from behind blinds them for 2s and slows them by 20% for 5s.",
+        "abilities": []
+    },
+    "SELFSUFFICIENT": {
+        "displayName": "Self-sufficient",
+        "description": "Powder Specials can no longer be charged manually, but accumulate 7% charge every second.",
+        "abilities": []
     }
 }
