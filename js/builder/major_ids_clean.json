@@ -260,7 +260,7 @@
     },
     "FLASHFREEZE": {
         "displayName": "Flashfreeze",
-        "description": "Ice Snake is instant but has a reduced range",
+        "description": "Ice Snake is instant and freezes for +1s.",
         "abilities": []
     },
     "GRAVITYWELL": {
@@ -1677,7 +1677,7 @@
         ]
     },
     "PIONEERS_ECHO": {
-        "displayName": "Pioneer’s Echo",
+        "displayName": "Pioneer's Echo",
         "description": "Phantom Ray deals two bursts of 150% neutral, 60% water damage over 1.1s. Decimator's increase and cap are raised to 100%.",
         "abilities": [
             {
@@ -1901,7 +1901,7 @@
                         {
                             "type": "stat",
                             "name": "defMult.Superconductor",
-                            "value": -15
+                            "value": -10
                         }
                     ]
                 }]
@@ -1996,6 +1996,46 @@
     "SELFSUFFICIENT": {
         "displayName": "Self-sufficient",
         "description": "Powder Specials can no longer be charged manually, but accumulate 7% charge every second.",
+        "abilities": []
+    },
+    "ORBITAL_CHAIN": {
+        "displayName": "Orbital Chain",
+        "description": "Chain Lightning hits slower, rebounds, adds 6 chains, and pulls mobs closer for a 750% neutral damage explosion spell.",
+        "abilities": [
+            {
+                "class": "Any",
+                "base_abil": 999,
+                "effects": [{
+                    "type": "replace_spell",
+                    "name": "Orbital Chain",
+                    "base_spell": 20,
+                    "display": "Explosion Damage",
+                    "parts": [
+                        {
+                            "name": "Explosion Damage",
+                            "type": "damage",
+                            "multipliers": [
+                                750,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    ]
+                }]
+            }
+        ]
+    },
+    "FLASHFREEZE2": {
+        "displayName": "Flashfreeze2",
+        "description": "",
+        "abilities": []
+    },
+    "CANNULATE": {
+        "displayName": "Cannulate",
+        "description": "Sacrificial Shrine costs -5 Blood Pool to cast, but health drain is reduced by half.",
         "abilities": []
     }
 }

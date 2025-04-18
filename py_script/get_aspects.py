@@ -4,7 +4,7 @@ import re
 
 from json_diff import json_diff
 
-api_base_url = "https://beta-api.wynncraft.com/v3/aspects/"
+api_base_url = "https://api.wynncraft.com/v3/ability/aspects/"
 def get_aspect_data(wynn_class):
     url = api_base_url + wynn_class.lower()
     aspect_data = requests.get(url).json()

@@ -5634,10 +5634,10 @@
                         {
                             "name": "Ice Snake Damage",
                             "multipliers": [
-                                70,
+                                120,
                                 0,
                                 0,
-                                30,
+                                55,
                                 0,
                                 0
                             ]
@@ -6293,7 +6293,7 @@
                     "type": "add_spell_prop",
                     "target_part": "Ice Snake Damage",
                     "base_spell": 4,
-                    "multipliers": [20, 0, 0, 10, 0, 0]
+                    "multipliers": [25, 0, 0, 15, 0, 0]
                 }
             ]
         },
@@ -7302,7 +7302,7 @@
                     "type": "add_spell_prop",
                     "target_part": "Ice Snake Damage",
                     "base_spell": 4,
-                    "multipliers": [20, 0, 0, 0, 0, 20]
+                    "multipliers": [15, 0, 0, 0, 0, 15]
                 }
             ]
         },
