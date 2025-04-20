@@ -818,7 +818,7 @@
                         "base_spell": 7,
                         "target_part": "Maximum DPS",
                         "hits": {
-                            "DPS": 4
+                            "DPS": 3
                         }
                     }
                 ]
@@ -1839,6 +1839,24 @@
                         }
                     ]
                 }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Satsujin"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:20.Single Inferno",
+                            "value": 100
+                        }
+                    ]
+                }]
             }
         ]
     },
@@ -1941,6 +1959,24 @@
                         }
                     ]
                 }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Satsujin"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:20.Single Lightning Bolt",
+                            "value": 100
+                        }
+                    ]
+                }]
             }
         ]
     },
@@ -2008,7 +2044,7 @@
                 "effects": [{
                     "type": "replace_spell",
                     "name": "Orbital Chain",
-                    "base_spell": 20,
+                    "base_spell": 21,
                     "display": "Explosion Damage",
                     "parts": [
                         {
@@ -2036,6 +2072,11 @@
     "CANNULATE": {
         "displayName": "Cannulate",
         "description": "Sacrificial Shrine costs -5 Blood Pool to cast, but health drain is reduced by half.",
+        "abilities": []
+    },
+    "INTANGIBLE": {
+        "displayName": "Intangible",
+        "description": "The knockback you take is drastically reduced, and reflected damage deals large knockback.",
         "abilities": []
     }
 }

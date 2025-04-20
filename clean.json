@@ -51017,7 +51017,6 @@
       "lvl": 75,
       "intReq": 40,
       "majorIds": [
-        "FLASHFREEZE2",
         "FLASHFREEZE"
       ],
       "lore": "Feeling the fresh chill of the cold air is all you need to know you're really alive.",
@@ -62115,7 +62114,6 @@
       "strReq": 40,
       "intReq": 25,
       "majorIds": [
-        "FLASHFREEZE2",
         "FLASHFREEZE"
       ],
       "slots": 3,
@@ -73504,7 +73502,6 @@
       "intReq": 55,
       "agiReq": 35,
       "majorIds": [
-        "FLASHFREEZE2",
         "FLASHFREEZE"
       ],
       "lore": "Everything slowly loses heat, and will eventually stop moving. Are you prepared?",
@@ -95377,6 +95374,33 @@
       "tier": "Fabled",
       "displayName": "Phlebotomy",
       "id": 4208
+    },
+    {
+      "name": "Dark Matter",
+      "category": "armor",
+      "type": "helmet",
+      "armourMaterial": "diamond",
+      "drop": "never",
+      "lvl": 100,
+      "strReq": 45,
+      "dexReq": 45,
+      "intReq": 55,
+      "defReq": 50,
+      "agiReq": 55,
+      "majorIds": [
+        "INTANGIBLE"
+      ],
+      "slots": 4,
+      "hp": 3000,
+      "ms": -24,
+      "ref": 40,
+      "thorns": 40,
+      "nDamRaw": -200,
+      "sdPct": 23,
+      "rSdRaw": 269,
+      "tier": "Fabled",
+      "displayName": "Dark Matter",
+      "id": 4210
     },
     {
       "name": "Vampire Stick",
@@ -125661,7 +125685,7 @@
           "agi": -5,
           "thorns": 10,
           "spd": -5,
-          "poison": 5280,
+          "poison": 9500,
           "hpBonus": 1100,
           "hprRaw": 125
         },
@@ -125670,7 +125694,7 @@
           "agi": -10,
           "thorns": 20,
           "spd": -10,
-          "poison": 15900,
+          "poison": 29000,
           "hpBonus": 2675,
           "hprRaw": 275
         },
@@ -125679,7 +125703,7 @@
           "agi": -15,
           "thorns": 40,
           "spd": -15,
-          "poison": 33000,
+          "poison": 80000,
           "hpBonus": 5500,
           "hprRaw": 575
         }
@@ -125845,14 +125869,14 @@
           "dex": 2,
           "agi": 2,
           "spd": 7,
-          "poison": 35
+          "poison": 60
         },
         {
           "xpb": 25,
           "dex": 6,
           "agi": 6,
           "spd": 19,
-          "poison": 130
+          "poison": 250
         }
       ]
     },
@@ -125962,7 +125986,7 @@
           "agi": 10,
           "thorns": 20,
           "spd": 20,
-          "poison": 290
+          "poison": 1500
         }
       ]
     },
@@ -126222,7 +126246,7 @@
         {
           "ls": 20,
           "expd": 20,
-          "poison": 70
+          "poison": 315
         }
       ]
     },
@@ -126868,7 +126892,7 @@
           "hprPct": 35,
           "thorns": 15,
           "spd": -6,
-          "poison": 300,
+          "poison": 4500,
           "hpBonus": 600,
           "jh": 1
         }
@@ -127114,6 +127138,33 @@
           "maxMana": 175,
           "tDamRaw": 100,
           "fDamRaw": 100
+        }
+      ]
+    },
+    "Cosmic Foundations": {
+      "items": [
+        "Dark Matter",
+        "Gravity",
+        "Neutrino",
+        "Fermion"
+      ],
+      "bonuses": [
+        {},
+        {},
+        {},
+        {
+          "str": 15,
+          "dex": 15,
+          "int": 15,
+          "agi": 15,
+          "def": 15,
+          "ms": 24,
+          "thorns": 20,
+          "ref": 20,
+          "rDefPct": 50,
+          "hpBonus": 1500,
+          "rSdPct": 40,
+          "rSdRaw": 200
         }
       ]
     }

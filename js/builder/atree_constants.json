@@ -81,7 +81,7 @@
         },
         {
             "display_name": "Cheaper Arrow Bomb",
-            "desc": "Reduce the Mana cost of Arrow Bomb.",
+            "desc": "Reduce the Mana cost of Arrow Bomb by 10.",
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Bow Proficiency"
@@ -297,7 +297,7 @@
         },
         {
             "display_name": "Cheaper Escape I",
-            "desc": "Reduce the Mana cost of Escape.",
+            "desc": "Reduce the Mana cost of Escape by 5.",
             "base_abil": "Escape",
             "parents": [
                 "Arrow Storm",
@@ -1159,7 +1159,7 @@
         },
         {
             "display_name": "Cheaper Arrow Storm I",
-            "desc": "Reduce the Mana cost of Arrow Storm.",
+            "desc": "Reduce the Mana cost of Arrow Storm by 5.",
             "base_abil": "Arrow Storm",
             "parents": [
                 "Implosion",
@@ -1486,7 +1486,7 @@
         },
         {
             "display_name": "Traveler",
-            "desc": "For every 1% Walk Speed you have from items, gain +1 Raw Spell Damage (Max 100)",
+            "desc": "For every 1% Walk Speed you have from items, gain +1 Raw Spell Damage (Max 100).",
             "parents": [
                 "Leap",
                 "Bouncing Bomb"
@@ -1833,7 +1833,7 @@
         },
         {
             "display_name": "Cheaper Arrow Shield I",
-            "desc": "Reduce the Mana cost of Arrow Shield.",
+            "desc": "Reduce the Mana cost of Arrow Shield by 5.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Fierce Stomp",
@@ -1991,7 +1991,7 @@
         },
         {
             "display_name": "Homing Shots",
-            "desc": "Your Main Attack arrows will follow nearby enemies and be unaffected by gravity",
+            "desc": "Your Main Attack arrows will follow nearby enemies and be unaffected by gravity.",
             "archetype": "Sharpshooter",
             "archetype_req": 2,
             "base_abil": 999,
@@ -2055,7 +2055,7 @@
         },
         {
             "display_name": "Cheaper Arrow Storm II",
-            "desc": "Reduce the Mana cost of Arrow Storm.",
+            "desc": "Reduce the Mana cost of Arrow Storm by 5.",
             "base_abil": "Arrow Storm",
             "parents": [
                 "Initiator",
@@ -2363,7 +2363,7 @@
         },
         {
             "display_name": "Shrapnel Bomb",
-            "desc": "Arrow Bomb's explosion will fling 25 shrapnel, dealing damage in a large area",
+            "desc": "Arrow Bomb's explosion will fling 25 shrapnel, dealing damage in a large area.",
             "archetype": "Boltslinger",
             "archetype_req": 2,
             "base_abil": "Arrow Bomb",
@@ -2399,7 +2399,7 @@
         },
         {
             "display_name": "Cheaper Escape II",
-            "desc": "Reduce the Mana cost of Escape.",
+            "desc": "Reduce the Mana cost of Escape by 5.",
             "base_abil": "Escape",
             "parents": [
                 "Murder Flock",
@@ -2425,7 +2425,7 @@
         },
         {
             "display_name": "Cheaper Arrow Shield II",
-            "desc": "Reduce the Mana cost of Arrow Shield.",
+            "desc": "Reduce the Mana cost of Arrow Shield by 5.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Phasing Beam",
@@ -2866,7 +2866,7 @@
         },
         {
             "display_name": "More Focus II",
-            "desc": "Add +2 max Focus",
+            "desc": "Add +2 max Focus.",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
@@ -2903,7 +2903,7 @@
         },
         {
             "display_name": "Ghostly Trigger",
-            "desc": "While mid-air after using Escape, Twain's Arc will fire immediately upon using your Main Attack",
+            "desc": "While mid-air after using Escape, Twain's Arc will fire immediately upon using your Main Attack.",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
@@ -3030,7 +3030,7 @@
         },
         {
             "display_name": "Cheaper Arrow Bomb II",
-            "desc": "Reduce the Mana cost of Arrow Bomb.",
+            "desc": "Reduce the Mana cost of Arrow Bomb by 5.",
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Grape Bomb",
@@ -3135,7 +3135,7 @@
         },
         {
             "display_name": "Cheaper Bash",
-            "desc": "Reduce the Mana cost of Bash",
+            "desc": "Reduce the Mana cost of Bash by 10.",
             "base_abil": "Bash",
             "parents": [
                 "Spear Proficiency 1"
@@ -3422,7 +3422,7 @@
         },
         {
             "display_name": "Cheaper Charge",
-            "desc": "Reduce the Mana cost of Charge",
+            "desc": "Reduce the Mana cost of Charge by 5.",
             "base_abil": "Charge",
             "parents": [
                 "Uppercut",
@@ -3706,7 +3706,7 @@
 
         {
             "display_name": "Half-Moon Swipe",
-            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle.",
+            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle. Reduces the Mana cost of Uppercut by 5.",
             "archetype": "Battle Monk", 
             "archetype_req": 1, 
             "base_abil": "Uppercut",
@@ -3974,7 +3974,7 @@
         },
         {
             "display_name": "Cheaper Uppercut",
-            "desc": "Reduce the Mana Cost of Uppercut",
+            "desc": "Reduce the Mana Cost of Uppercut by 5.",
             "base_abil": "Uppercut",
             "parents": ["Spear Proficiency II", "Aerodynamics", "Air Shout", "Generalist"],
             "dependencies": [], 
@@ -4312,7 +4312,7 @@
         },
         {
             "display_name": "Cheaper War Scream I",
-            "desc": "Reduce the Mana cost of War Scream",
+            "desc": "Reduce the Mana cost of War Scream by 5.",
             "base_abil": "War Scream",
             "parents": ["Crushing Blow", "Flying Kick", "Cleansing Breeze"],
             "dependencies": [], 
@@ -4822,7 +4822,7 @@
         },
         {
             "display_name": "Spirit of the Rabbit",
-            "desc": "Reduce the Mana cost of Charge and increase your Walk Speed by +20%",
+            "desc": "Reduce the Mana cost of Charge by 5 and increase your Walk Speed by +20%",
             "archetype": "Battle Monk", 
             "archetype_req": 5, 
             "base_abil": "Charge",
@@ -4850,7 +4850,7 @@
         },
         {
             "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream",
+            "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream by 5.",
             "archetype": "Paladin",
             "archetype_req": 5,
             "base_abil": "War Scream",
@@ -4939,7 +4939,7 @@
 
         {
             "display_name": "Cheaper Bash II",
-            "desc": "Reduce the Mana cost of Bash",
+            "desc": "Reduce the Mana cost of Bash by 5.",
             "base_abil": "Bash",
             "parents": ["Luster Purge", "Sparkling Hope", "Provoke"], 
             "dependencies": [], 
@@ -4961,7 +4961,7 @@
         },
         {
             "display_name": "Cheaper War Scream II",
-            "desc": "Reduce the Mana cost of War Scream",
+            "desc": "Reduce the Mana cost of War Scream by 5.",
             "base_abil": "War Scream",
             "parents": ["Massive Bash"], 
             "dependencies": [], 
@@ -5233,7 +5233,7 @@
 
         {
             "display_name": "Cheaper Uppercut 2",
-            "desc": "Reduce the Mana cost of Uppercut",
+            "desc": "Reduce the Mana cost of Uppercut by 5.",
             "base_abil": "Uppercut",
             "parents": ["Heavenly Trumpet", "Brink of Madness"], 
             "dependencies": [], 
@@ -5383,7 +5383,7 @@
         },
         {
             "display_name": "Cheaper Meteor",
-            "desc": "Reduce the Mana cost of Meteor.",
+            "desc": "Reduce the Mana cost of Meteor by 10.",
             "base_abil": "Meteor",
             "parents": [
                 "Wand Proficiency I"
@@ -5580,7 +5580,7 @@
         },
         {
             "display_name": "Cheaper Teleport",
-            "desc": "Reduce the Mana cost of Teleport.",
+            "desc": "Reduce the Mana cost of Teleport by 5.",
             "base_abil": "Teleport",
             "parents": [
                 "Heal",
@@ -6226,7 +6226,7 @@
         },
         {
             "display_name": "Cheaper Heal",
-            "desc": "Reduce the Mana cost of Heal.",
+            "desc": "Reduce the Mana cost of Heal by 5.",
             "base_abil": "Heal",
             "parents": [
                 "Windsweeper",
@@ -6440,7 +6440,7 @@
         },
         {
             "display_name": "Cheaper Ice Snake",
-            "desc": "Reduce the Mana cost of Ice Snake.",
+            "desc": "Reduce the Mana cost of Ice Snake by 5.",
             "base_abil": "Ice Snake",
             "parents": [
                 "Eye Piercer",
@@ -6488,7 +6488,7 @@
         },
         {
             "display_name": "Cheaper Teleport II",
-            "desc": "Reduce the Mana cost of Teleport.",
+            "desc": "Reduce the Mana cost of Teleport by 5.",
             "base_abil": "Teleport",
             "parents": [
                 "Fortitude",
@@ -7130,7 +7130,7 @@
         },
         {
             "display_name": "Cheaper Ice Snake II",
-            "desc": "Reduce the Mana cost of Ice Snake.",
+            "desc": "Reduce the Mana cost of Ice Snake by 5.",
             "base_abil": "Ice Snake",
             "parents": [
                 "Diffusion",
@@ -7200,7 +7200,7 @@
         },
         {
             "display_name": "Cheaper Meteor II",
-            "desc": "Reduce the Mana cost of Meteor.",
+            "desc": "Reduce the Mana cost of Meteor by 5.",
             "base_abil": "Meteor",
             "parents": [
                 "Explosive Entrance",
@@ -7665,7 +7665,7 @@
         },
         {
             "display_name": "Cheaper Heal II",
-            "desc": "Reduce the Mana cost of Heal.",
+            "desc": "Reduce the Mana cost of Heal by 5.",
             "base_abil": "Heal",
             "parents": [
                 "Timelock",
@@ -7809,7 +7809,7 @@
         },
         {
             "display_name": "Cheaper Spin Attack",
-            "desc": "Reduce the Mana cost of Spin Attack.",
+            "desc": "Reduce the Mana cost of Spin Attack by 10.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
@@ -8062,7 +8062,7 @@
         },
         {
             "display_name": "Cheaper Dash",
-            "desc": "Reduce the Mana cost of Dash",
+            "desc": "Reduce the Mana cost of Dash by 5.",
             "base_abil": "Dash",
             "parents": [
                 "Smoke Bomb",
@@ -8335,7 +8335,7 @@
         },
         {
             "display_name": "Backstab",
-            "desc": "Makes Multihit a single devastating hit. If you strike an enemy from behind, it deals double the damage.",
+            "desc": "Makes Multihit a single devastating hit. If you strike an enemy from behind, it deals double the damage. Reduce the Mana cost of Multihit by 5.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
             "base_abil": "Multihit",
@@ -8891,7 +8891,7 @@
         },
         {
             "display_name": "Cheaper Smoke Bomb",
-            "desc": "Reduce the Mana cost of Smoke Bomb",
+            "desc": "Reduce the Mana cost of Smoke Bomb by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -9479,7 +9479,7 @@
         },
         {
             "display_name": "Cheaper Dash II",
-            "desc": "Reduce the Mana cost of Dash",
+            "desc": "Reduce the Mana cost of Dash by 5.",
             "base_abil": "Dash",
             "parents": [
                 "Echo",
@@ -9536,7 +9536,7 @@
         },
         {
             "display_name": "Cheaper Spin Attack II",
-            "desc": "Reduce the Mana cost of Spin Attack",
+            "desc": "Reduce the Mana cost of Spin Attack by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
@@ -9804,7 +9804,7 @@
         },
         {
             "display_name": "Cheaper Smoke Bomb II",
-            "desc": "Reduce the Mana cost of Smoke Bomb",
+            "desc": "Reduce the Mana cost of Smoke Bomb by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -10422,7 +10422,7 @@
         },
         {
             "display_name": "Cheaper Totem I",
-            "desc": "Reduce the Mana cost of Totem.",
+            "desc": "Reduce the Mana cost of Totem by 10.",
             "base_abil": "Totem",
             "parents": ["Relik Proficiency 1"],
             "dependencies": ["Totem"],
@@ -10583,7 +10583,7 @@
         },
         {
             "display_name": "Cheaper Haul I",
-            "desc": "Reduce the Mana cost of Haul.",
+            "desc": "Reduce the Mana cost of Haul by 5.",
             "base_abil": "Haul",
             "parents": [
                 "Uproot",
@@ -11211,7 +11211,7 @@
         },
         {
             "display_name": "Cheaper Aura I",
-            "desc": "Reduce the Mana cost of Aura.",
+            "desc": "Reduce the Mana cost of Aura by 5.",
             "base_abil": "Aura",
             "parents": ["Stagnation", "Cheaper Uproot I"],
             "dependencies": ["Aura"],
@@ -11231,7 +11231,7 @@
         },
         {
             "display_name": "Cheaper Uproot I",
-            "desc": "Reduce the Mana cost of Uproot.",
+            "desc": "Reduce the Mana cost of Uproot by 5.",
             "base_abil": "Uproot",
             "parents": ["Cheaper Aura I", "Mask of the Lunatic", "Rebound", "Hymn of Hate"],
             "dependencies": ["Uproot"],
@@ -11698,7 +11698,7 @@
         },
         {
             "display_name": "Cheaper Totem II",
-            "desc": "Reduce the Mana cost of Totem.",
+            "desc": "Reduce the Mana cost of Totem by 5.",
             "base_abil": "Totem",
             "parents": ["More Puppets II", "Double Totem", "Storm Dance"],
             "dependencies": ["Totem"],
@@ -11775,7 +11775,7 @@
         },
         {
             "display_name": "Cheaper Haul II",
-            "desc": "Reduce the Mana cost of Haul.",
+            "desc": "Reduce the Mana cost of Haul by 5.",
             "base_abil": "Haul",
             "parents": [
                 "Storm Dance",
@@ -11798,7 +11798,7 @@
         },
         {
             "display_name": "Cheaper Aura II",
-            "desc": "Reduce the Mana cost of Aura.",
+            "desc": "Reduce the Mana cost of Aura by 5.",
             "base_abil": "Aura",
             "parents": [
                 "Crimson Effigy",
@@ -12560,7 +12560,7 @@
         },
         {
             "display_name": "Commander",
-            "desc": "Casting Uproot while holding shift will rally all puppets, giving them +25% attack speed and improved accuracy. Main attack deals 3% more damage per rallied puppet.",
+            "desc": "Casting Uproot while holding shift will rally all puppets, giving them +25% attack speed and improved accuracy. Main attack deals +3% more damage per rallied puppet.",
             "archetype": "Summoner",
             "archetype_req": 4,
             "parents": ["Cheaper Aura II"],
@@ -12573,7 +12573,27 @@
                 "icon": "node_4"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Commander",
+                    "bonuses": [
+                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 0.5 }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Active Puppets",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Commander:0.Single Beam"
+                    },
+                    "scaling": [
+                        3
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Soaring Wingbeats",
@@ -12766,7 +12786,7 @@
         },
         {
             "display_name": "Cheaper Uproot II",
-            "desc": "Reduce the Mana cost of Uproot.",
+            "desc": "Reduce the Mana cost of Uproot by 5.",
             "base_abil": "Uproot",
             "parents": ["Soaring Wingbeats", "Awakened"],
             "dependencies": ["Uproot"],
