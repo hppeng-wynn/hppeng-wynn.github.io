@@ -138,15 +138,22 @@ function displayAdditionalInfo(elemID, item) {
     let droptype_elem = document.createElement("div");
     droptype_elem.classList.add("container");
     droptype_elem.style.marginBottom = "5px";
-    droptype_elem.textContent = "Drop type: " + (item.has("drop") ? item.get("drop"): "NEVER");
+    droptype_elem.style.whiteSpace = "pre";
+
+    let item_clone = itemMap.get(item.get("displayName"));
+
+    if(item_clone.dropInfo === undefined){
+        droptype_elem.textContent = "Drop type: " + (item.has("drop") ? item.get("drop") : "NEVER");
+    }
+    else{
+        console.log(item_clone.dropInfo);
+        droptype_elem.textContent = "Drops from: " + item_clone.dropInfo.name;
+        if(item_clone.dropInfo.type !== undefined)
+            droptype_elem.textContent += "\nType: " + item_clone.dropInfo.type;
+        if(item_clone.dropInfo.coordinates !== undefined)
+            droptype_elem.textContent += "\nCoordinates: " + item_clone.dropInfo.coordinates;
+    }
     parent_elem.appendChild(droptype_elem);
-
-    let warning_elem = document.createElement("div");
-    warning_elem.classList.add("container");
-    warning_elem.style.marginBottom ="5px";
-    warning_elem.textContent = "This page is incomplete. Will work on it later.";
-    parent_elem.appendChild(warning_elem);
-
     return;
 }
 
@@ -196,10 +203,9 @@ function displayIDProbabilities(parent_id, item, amp) {
     parent_elem.appendChild(amp_row);
     
     if (amp != 0) {toggleButton("cork_amp_" + amp)}
-
-    let item_name = item.get("displayName");
-    console.log(itemMap.get(item_name))
     
+    let item_name = item.get("displayName");
+
     let table_elem = document.createElement("table");
     parent_elem.appendChild(table_elem);
     for (const [id,val] of Object.entries(itemMap.get(item_name))) {

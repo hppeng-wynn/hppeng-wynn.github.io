@@ -12079,7 +12079,7 @@
                     "parts": [
                         {
                             "name": "Single Hit",
-                            "multipliers": [ 640, 0, 100, 0, 0, 100 ] 
+                            "multipliers": [ 640, 0, 100, 0, 100, 0 ] 
                         },
                         {
                             "name": "Damage per Totem",

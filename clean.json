@@ -125802,8 +125802,7 @@
           "xpb": 10,
           "lb": 5,
           "spd": 2,
-          "hpBonus": 15,
-          "spRegen": 5
+          "hpBonus": 15
         },
         {
           "sdPct": 12,
@@ -125811,8 +125810,7 @@
           "xpb": 20,
           "lb": 10,
           "spd": 5,
-          "hpBonus": 40,
-          "spRegen": 15
+          "hpBonus": 40
         },
         {
           "mr": 12,
@@ -125821,8 +125819,7 @@
           "xpb": 50,
           "lb": 30,
           "spd": 15,
-          "hpBonus": 175,
-          "spRegen": 50
+          "hpBonus": 175
         }
       ]
     },
@@ -126164,13 +126161,7 @@
         },
         {
           "hpBonus": 325,
-          "str": 0,
-          "dex": 0,
-          "int": 0,
-          "def": 0,
-          "agi": 0,
           "xpb": 25,
-          "spRegen": 10,
           "sdPct": 8,
           "spPct1": -8,
           "spPct3": -8
@@ -126231,7 +126222,6 @@
         {},
         {
           "xpb": 15,
-          "spRegen": 10,
           "eSteal": 5
         }
       ]
@@ -126543,7 +126533,6 @@
           "sdPct": -10,
           "mdPct": -15,
           "def": 7,
-          "spRegen": 10,
           "wDamPct": 15,
           "aDamPct": 15
         },
@@ -126552,7 +126541,6 @@
           "sdPct": -20,
           "mdPct": -40,
           "def": 15,
-          "spRegen": 25,
           "wDamPct": 40,
           "aDamPct": 40
         },
@@ -126561,7 +126549,6 @@
           "sdPct": -40,
           "mdPct": -85,
           "def": 40,
-          "spRegen": 100,
           "wDamPct": 85,
           "aDamPct": 85
         }
