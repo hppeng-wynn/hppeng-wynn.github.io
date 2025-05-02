@@ -117,20 +117,66 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
-                if (id === "ls" && id_val != 0) {
-                    let row = make_elem('div', ['row']);
-                    let value_elem = make_elem('div', ['col', 'text-end']);
+                if (id_val != 0) {
+                    if(id === "ls"){
+                        {
+                            let row = make_elem('div', ['row']);
+                            let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
+                            let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
 
-                    let defStats = getDefenseStats(stats);
-                    let number_elem = make_elem('b', [style], {
-                        textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
-                    });
-                    value_elem.append(prefix_elem);
-                    value_elem.append(number_elem);
-                    row.appendChild(value_elem);
-                    parent_div.appendChild(row);
+                            let defStats = getDefenseStats(stats);
+                            let number_elem = make_elem('b', [style], {
+                                textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
+                            });
+                            value_elem.append(prefix_elem);
+                            value_elem.append(number_elem);
+                            row.appendChild(value_elem);
+                            parent_div.appendChild(row);
+                        }
+                        {
+                            let row = make_elem('div', ['row']);
+                            let value_elem = make_elem('div', ['col', 'text-end']);
+        
+                            let prefix_elem = make_elem('b', [], {textContent: "\u279C Life per hit: "});
+        
+                            let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+                            if(adjAtkSpd > 6) {
+                                adjAtkSpd = 6;
+                            } else if(adjAtkSpd < 0) {
+                                adjAtkSpd = 0;
+                            }
+
+                            let number_elem = make_elem('b', [style], {
+                                textContent: Math.round(id_val/3.0/baseDamageMultiplier[adjAtkSpd])
+                            });
+                            value_elem.append(prefix_elem);
+                            value_elem.append(number_elem);
+                            row.appendChild(value_elem);
+                            parent_div.appendChild(row);
+                        }
+                    }
+                    else if (id == "ms"){
+                        let row = make_elem('div', ['row']);
+                        let value_elem = make_elem('div', ['col', 'text-end']);
+    
+                        let prefix_elem = make_elem('b', [], {textContent: "\u279C Mana per hit: "});
+    
+                        let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+                        if(adjAtkSpd > 6) {
+                            adjAtkSpd = 6;
+                        } else if(adjAtkSpd < 0) {
+                            adjAtkSpd = 0;
+                        }
+
+                        let number_elem = make_elem('b', [style], {
+                            textContent: Math.round(id_val/3.0/baseDamageMultiplier[adjAtkSpd]*10)/10
+                        });
+                        value_elem.append(prefix_elem);
+                        value_elem.append(number_elem);
+                        row.appendChild(value_elem);
+                        parent_div.appendChild(row);
+                    }
                 }
                 last_command = command;
             }
@@ -226,7 +272,8 @@ function displayExpandedItem(item, parent_id){
                     for (let major_id_str of item.get(id)) {
                         if (major_id_str in MAJOR_IDS) {
                             let major_id_info = MAJOR_IDS[major_id_str];
-                            major_id_str = `+${major_id_info.displayName}: ${major_id_info.description}`;
+                            if(!MAJOR_IDS[major_id_str].hidden)
+                                major_id_str = `+${major_id_info.displayName}: ${major_id_info.description}`;
                         }
                         let p_elem = make_elem("div", ['col']);
 
