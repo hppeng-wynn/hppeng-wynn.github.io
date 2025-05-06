@@ -287,6 +287,13 @@ function displayExpandedItem(item, parent_id){
                             title_elem.textContent = name;
                             b_elem.classList.add("Crafted");
                             b_elem.textContent = mid;
+                            b_elem.innerHTML = b_elem.innerHTML
+                                .replaceAll("[neutral]", "<span class='Neutral'></span>")
+                                .replaceAll("[earth]", "<span class='Earth'></span>")
+                                .replaceAll("[thunder]", "<span class='Thunder'></span>")
+                                .replaceAll("[water]", "<span class='Water'></span>")
+                                .replaceAll("[fire]", "<span class='Fire'></span>")
+                                .replaceAll("[air]", "<span class='Air'></span>");
                             p_elem.appendChild(title_elem);
                             p_elem.appendChild(b_elem);
                         } else {
@@ -1403,17 +1410,18 @@ function displayPowderSpecials(parent_elem, powderSpecials, stats, weapon) {
                 let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
                 let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
 
-                let averageWrap = document.createElement("p");
-                let averageLabel = document.createElement("span");
-                averageLabel.textContent = "Average: ";
-                
-                let averageLabelDmg = document.createElement("span");
-                averageLabelDmg.classList.add("Damage");
-                averageLabelDmg.textContent = averageDamage.toFixed(2);
+                let averageLabel = document.createElement("p");
+                averageLabel.innerHTML = "Average: <span class='Damage'>" + averageDamage.toFixed(2) + "</span>";
 
-                averageWrap.appendChild(averageLabel);
-                averageWrap.appendChild(averageLabelDmg);
-                specialDamage.appendChild(averageWrap);
+                let critAverageLabel = document.createElement("p");
+                critAverageLabel.innerHTML = "Crit Average: <span class='Damage'>" + critAverage.toFixed(2) + "</span>";
+
+                let nonCritAverageLabel = document.createElement("p");
+                nonCritAverageLabel.innerHTML = "Non-Crit Average: <span class='Damage'>" + nonCritAverage.toFixed(2) + "</span>";
+
+                specialDamage.appendChild(averageLabel);
+                specialDamage.appendChild(critAverageLabel);
+                specialDamage.appendChild(nonCritAverageLabel);
                 
                 specialEffects.append(specialDamage);
             }
@@ -1509,6 +1517,23 @@ function displaySpellDamage(parent_elem, _overallparent_elem, stats, spell, spel
             let nonCritAverage = (totalDamNormal[0]+totalDamNormal[1])/2 || 0;
             let critAverage = (totalDamCrit[0]+totalDamCrit[1])/2 || 0;
             let averageDamage = (1-critChance)*nonCritAverage+critChance*critAverage || 0;
+
+            if ('multipliers' in spell_info) {
+                let multipliersLabel = make_elem("p", [], {});
+                let totalMultiplier = 0;
+                for (let i = 0; i < 6; i++) {
+                    if (spell_info.multipliers[i] <= 0)
+                        continue;
+
+                    totalMultiplier += spell_info.multipliers[i]
+                    multipliersLabel.innerHTML += "<span class='" + damageClasses[i] + "'>" + Math.round(spell_info.multipliers[i]*10)/10 +"%</span> "
+                }
+                multipliersLabel.innerHTML += "<span class='mc-gray'>(" + Math.round(totalMultiplier*10)/10 +"%)</span> "
+
+                if ('is_spell' in spell_info)
+                    multipliersLabel.innerHTML += spell_info.is_spell ? " Spell" : " Melee"
+                part_div.append(multipliersLabel);
+            }
 
             let averageLabel = make_elem("p", [], { textContent: "Average: "+averageDamage.toFixed(2) });
             // averageLabel.classList.add("damageSubtitle");
