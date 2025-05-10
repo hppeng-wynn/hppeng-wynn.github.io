@@ -3516,7 +3516,8 @@
                         {
                             "name": "Total Damage",
                             "hits": {
-                                "Uppercut": 1
+                                "Uppercut": 1,
+                                "Smite Damage": 1
                             }
                         }
                     ]
@@ -3885,7 +3886,8 @@
                     "base_spell": 3,
                     "target_part": "Total Damage",
                     "hits": {
-                        "Fireworks": 1
+                        "Fireworks": 1,
+                        "Smite Damage": 1
                     }
                 }
             ]
@@ -4533,21 +4535,36 @@
             "properties": {},
             "effects": [
                 {
-                    "type": "replace_spell",
-                    "name": "Sacred Surge",
-                    "base_spell": 9,
-                    "display": "Smite Damage",
-                    "parts": [
+                    "type": "add_spell_prop",
+                    "target_part": "Smite Damage",
+                    "base_spell": 3,
+                    "multipliers": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "toggle": "Activate Sacred Surge",
+                    "bonuses": [
                         {
-                            "name": "Smite Damage",
-                            "multipliers": [
-                                115,
-                                0,
-                                0,
-                                20,
-                                0,
-                                15
-                            ]
+                            "type": "stat",
+                            "name": "nConvBase:3.Smite Damage",
+                            "value": 115
+                        },
+                        {
+                            "type": "stat",
+                            "name": "wConvBase:3.Smite Damage",
+                            "value": 20
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aConvBase:3.Smite Damage",
+                            "value": 15
                         }
                     ]
                 }
@@ -4847,7 +4864,8 @@
                     "target_part": "Total Damage",
                     "cost": 0,
                     "hits": {
-                        "Comet": 1
+                        "Comet": 1,
+                        "Smite Damage": 1
                     }
                 }
             ]
@@ -5737,16 +5755,24 @@
             "properties": {},
             "effects": [
                 {
-                    "type": "add_spell_prop",
-                    "base_spell": 9,
-                    "target_part": "Smite Damage",
-                    "multipliers": [
-                        80,
-                        0,
-                        0,
-                        10,
-                        0,
-                        10
+                    "type": "raw_stat",
+                    "toggle": "Activate Sacred Surge",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "nConvBase:3.Smite Damage",
+                            "value": 80
+                        },
+                        {
+                            "type": "stat",
+                            "name": "wConvBase:3.Smite Damage",
+                            "value": 10
+                        },
+                        {
+                            "type": "stat",
+                            "name": "aConvBase:3.Smite Damage",
+                            "value": 10
+                        }
                     ]
                 }
             ]

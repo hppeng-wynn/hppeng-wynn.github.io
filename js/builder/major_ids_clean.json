@@ -1535,38 +1535,58 @@
         "abilities": [
             {
                 "class": "Assassin",
-                "base_abil": "Double Slice",
+                "base_abil": 999,
                 "dependencies": [
                     "Double Slice"
                 ],
                 "properties": {},
                 "effects": [
                     {
-                        "type": "replace_spell",
-                        "name": "Flurry of Blows",
-                        "cost": 0,
+                        "type": "add_spell_prop",
+                        "base_spell": 0,
+                        "target_part": "Melee",
+                        "behavior": "overwrite",
+                        "multipliers": [
+                            16,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "type": "add_spell_prop",
                         "base_spell": 0,
                         "display": "Total Damage",
-                        "parts": [
-                            {
-                                "name": "Per Hit",
-                                "type": "damage",
-                                "multipliers": [
-                                    16,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0
-                                ]
-                            },
-                            {
-                                "name": "Total Damage",
-                                "type": "total",
-                                "hits": {
-                                    "Per Hit": 10
-                                }
-                            }
+                        "target_part": "Total Damage",
+                        "behavior": "overwrite",
+                        "hits": {
+                            "Melee": 10
+                        }
+                    }
+                ]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": 999,
+                "dependencies": [
+                    "Dagger Proficiency I"
+                ],
+                "properties": {},
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 0,
+                        "target_part": "Melee",
+                        "behavior": "modify",
+                        "multipliers": [
+                            -5,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     }
                 ]
@@ -1607,12 +1627,12 @@
                         "target_part": "Single Arrow",
                         "behavior": "overwrite",
                         "multipliers": [
-                            45,
+                            39,
+                            0,
+                            3,
                             0,
                             0,
-                            0,
-                            0,
-                            0
+                            3
                         ]
                     },
                     {
@@ -1768,7 +1788,7 @@
                 "effects": [
                     {
                         "type": "add_spell_prop",
-                        "behavior": "overwrite",
+                        "behavior": "modify",
                         "base_spell": 2,
                         "target_part": "Hop Damage",
                         "multipliers": [
