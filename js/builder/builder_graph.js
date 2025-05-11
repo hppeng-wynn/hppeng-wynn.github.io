@@ -17,7 +17,7 @@ let armor_powder_node = new (class extends ComputeNode {
     }
 })();
 
-const damageMultipliers = new Map([ ["totem", 0.2], ["warscream", 0.0], ["ragnarokkr", 0.10], ["fortitude", 0.50], ["radiance", 0.0] ]);
+const damageMultipliers = new Map([ ["totem", 0.2], ["warscream", 0.0], ["emboldeningcry", 0.08], ["fortitude", 0.40], ["radiance", 0.0] ]);
 
 let boosts_node = new (class extends ComputeNode {
     constructor() { super('builder-boost-input'); }
@@ -30,6 +30,7 @@ let boosts_node = new (class extends ComputeNode {
             if (elem.classList.contains("toggleOn")) {
                 damage_boost += value;
                 if (key === "warscream") { def_boost += .20 }
+                else if (key === "emboldeningcry") { def_boost += .05 }
             }
         }
         let res = new Map();
@@ -414,7 +415,13 @@ class BuildAssembleNode extends ComputeNode {
             input_map.get('armorTome3'),
             input_map.get('armorTome4'),
             input_map.get('guildTome1'),
-            input_map.get('lootrunTome1')
+            input_map.get('lootrunTome1'),
+            input_map.get('gatherXpTome1'),
+            input_map.get('gatherXpTome2'),
+            input_map.get('dungeonXpTome1'),
+            input_map.get('dungeonXpTome2'),
+            input_map.get('mobXpTome1'),
+            input_map.get('mobXpTome2'),
         ];
         let weapon = input_map.get('weapon');
         let level = parseInt(input_map.get('level-input'));
@@ -518,8 +525,10 @@ function getDefenseStats(stats) {
     for (const [k, v] of stats.get("defMult").entries()) {
         defMult *= (1 - v/100);
     }
-    // newehp = oldehp / [0.1 * A(x) + (1 - A(x)) * (1 - D(x))]
-    ehp[0] = ehp[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    // agility bonuses
+    let agi_reduction = (100-stats.get("agiDef"))/100;
+    // newehp = oldehp / [A'(x) * A(x) + (1 - A(x)) * (1 - D(x))]
+    ehp[0] = ehp[0] / (agi_reduction*agi_pct + (1-agi_pct) * (1-def_pct));
     ehp[0] /= defMult;
     // ehp[0] /= (1-def_pct)*(1-agi_pct)*defMult;
     ehp[1] /= (1-def_pct)*defMult;
@@ -529,7 +538,7 @@ function getDefenseStats(stats) {
     defenseStats.push(totalHpr);
     //EHPR
     let ehpr = [totalHpr, totalHpr];
-    ehpr[0] = ehpr[0] / (0.1*agi_pct + (1-agi_pct) * (1-def_pct));
+    ehpr[0] = ehpr[0] / (agi_reduction*agi_pct + (1-agi_pct) * (1-def_pct));
     ehpr[0] /= defMult;
     ehpr[1] /= (1-def_pct)*defMult;
     defenseStats.push(ehpr);
@@ -538,7 +547,7 @@ function getDefenseStats(stats) {
     //eledefs - TODO POWDERS
     let eledefs = [0, 0, 0, 0, 0];
     for(const i in skp_elements){ //kinda jank but ok
-        eledefs[i] = rawToPct(stats.get(skp_elements[i] + "Def"), (stats.get(skp_elements[i] + "DefPct") + stats.get("rDefPct"))/100.);
+        eledefs[i] = rawToPctUncapped(stats.get(skp_elements[i] + "Def"), (stats.get(skp_elements[i] + "DefPct") + stats.get("rDefPct"))/100.);
     }
     defenseStats.push(eledefs);
     
@@ -1089,7 +1098,7 @@ function builder_graph_init(save_skp) {
         build_node.link_to(item_input, eq);
     }
 
-    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2], none_tomes[3]])) {
+    for (const [eq, none_item] of zip2(tome_fields, [none_tomes[0], none_tomes[0], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[1], none_tomes[2], none_tomes[3], none_tomes[4], none_tomes[4], none_tomes[5], none_tomes[5], none_tomes[6], none_tomes[6]])) {
         let input_field = document.getElementById(eq+"-choice");
         let item_image = document.getElementById(eq+"-img");
 

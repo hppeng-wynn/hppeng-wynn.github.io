@@ -10,7 +10,7 @@ import numpy as np
 #baselines_known_y = np.array([ 341.53, 358.29, 374.68, 383.35, 394.06, 410.75, 432.14, 453.45, 469.94, 480.93, 491.21, 524.26, 536.69, 546.26, 569.78, 592.45, 615.65, 626.75, 648.21 ]) / 2.05
 
 item_type = "bow"
-items_file = "../clean.json"
+items_file = "../../data/2.1.1.6/items.json"
 items_new_file = "../clean3.json"
 
 min_level = 70

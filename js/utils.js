@@ -404,6 +404,19 @@ function rawToPct(raw, pct){
 }
 
 /*
+    Turns a raw stat and a % stat into a final stat on the basis that - raw and >= 100% becomes positive and + raw and <=-100% becomes negative.
+*/
+function rawToPctUncapped(raw, pct){
+    final = 0;
+    if (raw < 0){
+        final = raw - (raw * pct);
+    }else if(raw > 0){
+        final = raw + (raw * pct);
+    }
+    return final;
+}
+
+/*
  * Clipboard utilities
  * From: https://stackoverflow.com/a/30810322
  */

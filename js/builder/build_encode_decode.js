@@ -137,7 +137,7 @@ async function parse_hash(url_tag) {
         }
         data_str = info_str.slice(start_idx);
     }
-    else if (version_number <= 9) {
+    else if (version_number <= 10) {
         let info_str = data_str;
         let start_idx = 0;
         for (let i = 0; i < 9; ++i ) {
@@ -178,7 +178,7 @@ async function parse_hash(url_tag) {
         let powder_info = data_str.slice(10);
         let res = parsePowdering(powder_info);
         powdering = res[0];
-    } else if (version_number <= 9){
+    } else if (version_number <= 10){
         level = Base64.toInt(data_str.slice(10,12));
         setValue("level-choice",level);
         save_skp = true;
@@ -212,8 +212,12 @@ async function parse_hash(url_tag) {
             if (version_number <= 8) {
                 num_tomes = 7;
             }
-            else {
+            //Marathon, Mysticism, & Expertise tomes were added in v10.
+            else if (version_number <= 9) {
                 num_tomes = 8;
+            }
+            else {
+                num_tomes = 14;
             }
             for (let i = 0; i < num_tomes; ++i) {
                 let tome_str = data_str.slice(2*i, 2*i+2);
@@ -253,7 +257,8 @@ function encodeBuild(build, powders, skillpoints, atree, atree_state) {
         //V7 encoding - ATree
         //V8 encoding - wynn version
         //V9 encoding - lootrun tome
-        build_version = 9;
+        //V10 encoding - marathon, mysticism, and expertise tomes
+        build_version = 10;
         build_string = "";
         tome_string = "";
 
@@ -328,13 +333,14 @@ function shareBuild(build) {
             "> "+build.items[5].statMap.get("displayName")+"\n"+
             "> "+build.items[6].statMap.get("displayName")+"\n"+
             "> "+build.items[7].statMap.get("displayName")+"\n"+
-            "> "+build.items[16].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]\n";
-        for (let tomeslots = 8; tomeslots < 16; tomeslots++) {
+            "> "+build.items[22].statMap.get("displayName")+" ["+build_powders[4].map(x => powderNames.get(x)).join("")+"]\n";
+        for (let tomeslots = 8; tomeslots < 22; tomeslots++) {
             if (!build.items[tomeslots].statMap.has('NONE')) {
                 text += ">"+' (Has Tomes)' ;
                 break;
             }
         }
+        console.log(build.items);
         copyTextToClipboard(text);
         document.getElementById("share-button").textContent = "Copied!";
     }

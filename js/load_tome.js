@@ -4,7 +4,7 @@
  * Depends on `clen_item` from load_item.js
  */
 
-const TOME_DB_VERSION = 10;
+const TOME_DB_VERSION = 11;
 
 let tomes;
 let tomeMap;
@@ -61,7 +61,10 @@ class TomeLoader extends Loader {
             ["tome", "weaponTome", "No Weapon Tome", 61],
             ["tome", "armorTome", "No Armor Tome", 62],
             ["tome", "guildTome", "No Guild Tome", 63],
-            ["tome", "lootrunTome", "No Lootrun Tome", 93]
+            ["tome", "lootrunTome", "No Lootrun Tome", 93],
+            ["tome", "gatherXpTome", "No Marathon Tome", 162],
+            ["tome", "dungeonXpTome", "No Mysticism Tome", 163],
+            ["tome", "mobXpTome", "No Expertise Tome", 164]
         ];
 
         //warp
@@ -74,7 +77,7 @@ class TomeLoader extends Loader {
             tomeLists.set(it, []);
         }
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < none_tomes_info.length; i++) {
             let tome = Object();
             tome.slots = 0;
             tome.category = none_tomes_info[i][0];

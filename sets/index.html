@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html scroll-behavior="smooth">
+<head>
+    <title>WynnAtlas</title>
+    <link rel="icon" href="../media/icons/new/searcher.png" type="image/icon type">
+
+    <meta name="viewport" content="width=device-width, initial-scale=.45, user-scalable=no">
+
+    <!-- nunito font, copying wynnbuilder, which is copying wynndata -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="/thirdparty/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/thirdparty/autoComplete.min.css">
+
+    
+    <link rel="stylesheet" href="../css/sq2bs.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/wynnstyles.css">
+    <link rel="stylesheet" href="../css/search.css">
+</head>
+    <body class = "text-light d-flex justify-content-center" id = "body">
+        <div id="main-sidebar" class="sidebar dark-7 dark-shadow">
+            <a href = "../builder/"><img src="../media/icons/new/builder.png" alt = "WynnBuilder" title = "WynnBuilder"><b>WynnBuilder</b></a>
+            <a href = "../crafter/"><img src = "../media/icons/new/crafter.png" alt = "WynnCrafter" title = "WynnCrafter"><b>WynnCrafter</b></a>
+            <a href = "../items/"><img src = "../media/icons/new/searcher.png" alt = "WynnAtlas" title = "WynnAtlas"><b>WynnAtlas</b></a>
+            <a href = "../custom/"><img src = "../media/icons/new/custom.png" alt = "WynnCustom" title = "WynnCustom"><b>WynnCustom</b></a>
+            <a href = "../map/"><img src = "../media/icons/new/compass.png" alt = "WynnGPS" title = "WynnGPS"><b>WynnGPS</b></a>
+            <a href = "../wynnfo/"><img src = "../media/icons/new/book.png" alt = "Wynnfo" title = "Wynnfo"><b>Wynnfo</b></a>
+            <a onclick = "toggleIcons()"><img src = "../media/icons/new/reload.png" alt = "" title = "Swap items on page"><b>Swap Icon Style</b></a>
+            <hr/>
+            <a href = "https://nori.fish/wynn/build/" target = "_blank"><img src = "../media/icons/new/nori_build.png" alt = "Build Search" title = "Build Search by Nori-Wynn"><b>Build Search</b></a>
+            <a href = "https://nori.fish/wynn/recipe/" target = "_blank"><img src = "../media/icons/new/nori_recipe.png" alt = "Recipe Search" title = "Recipe Search by Nori-Wynn"><b>Recipe Search</b></a>
+            <a href = "https://discord.gg/CGavnAnerv" target = "_blank"><img src = "../media/icons/discord.png" alt = "WB Discord" title = "WB Discord"><b>WB Discord</b></a>
+        </div>
+        <div id="mobile-navbar" class="navbar dark-5 dark-shadow fixed-top d-lg-none pb-0">
+            <div class="container-fluid scaled-font justify-content-center" style="height: 5vh;">
+                <button class="btn dropdown-toggle dark-2 px-4 text-white scaled-font border-dark border-3" onclick="toggle_tab('mobile-navbar-dropdown');"></button>
+            </div>
+            <div class="container-fluid scaled-font dark-3 px-3 py-3" id="mobile-navbar-dropdown" style="display: none;">
+                <a href="../builder/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/builder.png" alt="" style="height: 100%;">
+                    <span>WynnBuilder</span>
+                </a>
+                <a href="../crafter/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/crafter.png" alt="" style="height: 100%;">
+                    <span>WynnCrafter</span>
+                </a>
+                <a href="../items/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/searcher.png" alt="" style="height: 100%;">
+                    <span>WynnAtlas</span>
+                </a>
+                <a href="../custom/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/custom.png" alt="" style="height: 100%;">
+                    <span>WynnCustom</span>
+                </a>
+                <a href="../map/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/compass.png" alt="" style="height: 100%;">
+                    <span>WynnGPS</span>
+                </a>
+                <a href="../wynnfo/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/book.png" alt="" style="height: 100%;">
+                    <span>WynnFo</span>
+                </a>
+                <a onclick = "toggleIcons()" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/reload.png" alt="" style="height: 100%;">
+                    <span>Swap Icon Style</span>
+                </a>
+                <a href="https://nori.fish/wynn/build/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/nori_build.png" alt="" style="height: 100%;">
+                    <span>Build Search</span>
+                </a>
+                <a href="https://nori.fish/wynn/recipe/" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/new/nori_recipe.png" alt="" style="height: 100%;">
+                    <span>Recipe Search</span>
+                </a>
+                <a href="https://discord.gg/CGavnAnerv" class="w-100 mb-3 text-white" style="height: 5vh; text-decoration: none;">
+                    <img src="../media/icons/discord.png" alt="" style="height: 100%;">
+                    <span>Discord</span>
+                </a>
+            </div>
+        </div>
+        <div class = "container py-5 vh-100 mx-0 mx-lg-auto scaled-font">
+            <div class = "row">
+                <div class = "row" style = "margin-top: 3ch;">
+                    <div class = "col text-start" id = "credits">
+                        <a href="../items/" class="link">Item Searching</a>
+                    </div>
+                    <div class = "col text-end">
+                        <a href = "../ingredients/">Ingredient Search</a>
+                    </div>
+                </div>
+                <div class = "row box-title justify-content-center" id = "summary">
+                </div>
+                <div class = "row" id = "search-results">
+                    
+                </div>
+            </div>
+        </div>
+        <script src="/thirdparty/autoComplete.min.js"></script>
+        <script type="text/javascript" src="../js/drag_drop_touch.js"></script>
+        <script type="text/javascript" src="../js/utils.js"></script>
+        <script type="text/javascript" src="../js/build_utils.js"></script>
+        <script type="text/javascript" src="../js/icons.js"></script>
+        <script type="text/javascript" src="../js/damage_calc.js"></script>
+        <script type="text/javascript" src="../js/display_constants.js"></script>
+        <script type="text/javascript" src="../js/display.js"></script>
+        <script type="text/javascript" src="../js/query.js"></script>
+        <script type="text/javascript" src="../js/expr_parser.js"></script>
+        <script type="text/javascript" src="../js/loader.js"></script>
+        <script type="text/javascript" src="../js/load_item.js"></script>
+        <script type="text/javascript" src="../js/sets.js"></script>
+        <script type="text/javascript" src="../js/powders.js"></script>
+    </body>
+</html>

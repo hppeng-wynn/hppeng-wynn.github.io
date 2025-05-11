@@ -352,7 +352,6 @@ let build_detailed_display_commands = [
     "ref", "thorns",
     "expd",
     "spd",
-    "rSdRaw",
     "sprint", "sprintReg",
     "jh",
     "xpb", "lb", "lq",

@@ -135,28 +135,31 @@
     },
     "SORCERY": {
         "displayName": "Sorcery",
-        "description": "30% chance for spells and attacks to cast a second time at no additional cost",
+        "description": "25% chance for spells and attacks to cast a second time at no additional cost",
         "abilities": []
     },
     "TAUNT": {
         "displayName": "Taunt",
-        "description": "Mobs within 12 blocks target you upon casting War Scream",
+        "description": "Provoke's Cooldown is lowered by -3s.",
         "abilities": []
     },
     "RALLY": {
         "displayName": "Rally",
-        "description": "Charge heals you by 10% and nearby allies by 15% on impact, but becomes harmless",
+        "description": "Cleansing Breeze causes Charge to heal you for 7.5% and nearby allies for 15% on impact, but becomes harmless.",
         "abilities": [
             {
                 "class": "Warrior",
                 "base_abil": "Charge",
+                "dependencies": [
+                    "Cleansing Breeze"
+                ],
                 "effects": [
                     {
                         "type": "add_spell_prop",
                         "base_spell": 2,
                         "display": "Rally Self Heal",
                         "target_part": "Rally Self Heal",
-                        "power": 0.1
+                        "power": 0.075
                     },
                     {
                         "type": "add_spell_prop",
@@ -195,7 +198,7 @@
     },
     "CHERRY_BOMBS": {
         "displayName": "Cherry Bombs",
-        "description": "Turn Smoke Bomb into firecrackers that fly farther, tighter, and deal high damage instantly",
+        "description": "Turns Smoke Bomb into firecrackers that fly farther, tighter, and deal 85% neutral, 25% earth, and 25% air damage instantly.",
         "abilities": [
             {
                 "class": "Assassin",
@@ -260,7 +263,7 @@
     },
     "FLASHFREEZE": {
         "displayName": "Flashfreeze",
-        "description": "Ice Snake is instant but has a reduced range",
+        "description": "Ice Snake is instant and freezes for +1s.",
         "abilities": []
     },
     "GRAVITYWELL": {
@@ -299,7 +302,7 @@
     },
     "RECKLESS_ABANDON": {
         "displayName": "Reckless Abandon",
-        "description": "Sacrifice War Scream's defense bonus to give Tempest 2 extra hits and extra damage",
+        "description": "Sacrifice War Scream's defense bonus to give Tempest +5% earth, +15% fire, 5% air damage and 2 extra hits.",
         "abilities": [
             {
                 "class": "Warrior",
@@ -684,18 +687,11 @@
     },
     "HELLFIRE": {
         "displayName": "Hellfire",
-        "description": "Bash becomes one giant 325% damage hit, and Boiling Blood burns faster and stronger but can't slow",
+        "description": "Bash is replaced by a single hit, gaining +3 radius and dealing 225% neutral, 40% earth, and 60% fire damage. Boiling Blood burns faster for +40% neutral and +50% fire damage but can't slow.",
         "abilities": [
             {
                 "class": "Warrior",
                 "base_abil": "Bash",
-                "dependencies": [
-                    "Boiling Blood"
-                ],
-                "properties": {
-                    "rate": 2.5,
-                    "duration": -2
-                },
                 "effects": [
                     {
                         "type": "add_spell_prop",
@@ -717,7 +713,27 @@
                         "target_part": "Total Damage",
                         "behavior": "overwrite",
                         "hits": {
-                            "Single Hit": 1,
+                            "Single Hit": 1
+                        }
+                    }
+                ]
+            },
+            {
+                "class": "Warrior",
+                "base_abil": "Bash",
+                "dependencies": [
+                    "Boiling Blood"
+                ],
+                "properties": {
+                    "rate": 2.5,
+                    "duration": -2
+                },
+                "effects": [
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 1,
+                        "target_part": "Total Damage",
+                        "hits": {
                             "Boiling Blood Tick": 5
                         }
                     },
@@ -741,7 +757,7 @@
     },
     "NAPALM": {
         "displayName": "Napalm",
-        "description": "Fire Creep increases Arrow Bomb damage and self-damage, but reduces velocity. Fire Creep damage and radius are increased.",
+        "description": "Fire Creep increases Arrow Bomb damage by +15% fire damage, but deals 15 times the self-damage and lowers velocity. Scorched Earth radius is increased and deals +65% neutral damage.",
         "abilities": [
             {
                 "class": "Archer",
@@ -787,7 +803,7 @@
     },
     "TWISTING_THREADS": {
         "displayName": "Twisting Threads",
-        "description": "Tangled Traps ropes gain +1 range, can overlap up to 4 times, and deal 40% neutral damage. Gain +12 traps that cannot be triggered by enemies.",
+        "description": "Tangled Traps ropes gain +1 range, can overlap up to 3 times, and deal 40% neutral damage. Gain +12 traps that cannot be triggered by enemies.",
         "abilities": [
             {
                 "class": "Archer",
@@ -818,7 +834,7 @@
                         "base_spell": 7,
                         "target_part": "Maximum DPS",
                         "hits": {
-                            "DPS": 4
+                            "DPS": 3
                         }
                     }
                 ]
@@ -827,7 +843,7 @@
     },
     "LIFESTREAM": {
         "displayName": "Lifestream",
-        "description": "Increases Blood Sorrow's damage and overhealth, but shortens its duration by 75%.",
+        "description": "Blood Sorrow deals 500% neutral damage and grants 4 times the overhealth, but shortens its duration by 75%.",
         "abilities": [
             {
                 "class": "Shaman",
@@ -859,7 +875,7 @@
     },
     "FIXATE": {
         "displayName": "Fixate",
-        "description": "All Winded effects are stronger, but Winded applies slowly",
+        "description": "Devitalize causes Winded damage effects to be multiplied by 1.33 and gain 0.5% weaken per stack. Winded cooldown is increased by 0.25s.",
         "abilities": [
             {
                 "class": "Mage",
@@ -930,7 +946,7 @@
     },
     "EFFLORESCENCE": {
         "displayName": "Efflorescence",
-        "description": "Jasmine Bloom deals increased damage but has reduced vertical range. Swan Dive's Jasmine Bloom explosion deals 400% neutral & 150% in each element.",
+        "description": "Jasmine Bloom deals 15% neutral and 15% damage in all elements at the cost of 6 blocks of vertical range. Swan Dive with a maximum size Jasmine Bloom deals 90% neutral and 30% in all elements over 5 hits.",
         "abilities": [
             {
                 "class": "Assassin",
@@ -980,7 +996,7 @@
     },
     "METEOR_CRASH": {
         "displayName": "Meteor Crash",
-        "description": "Burning Sigil deals more damage in a massively increased radius, but lasts half as long.",
+        "description": "Burning Sigil deals +15% neutral, +10% fire damage and gains +6 radius, but lasts half as long.",
         "abilities": [
             {
                 "class": "Mage",
@@ -1024,7 +1040,7 @@
     },
     "TOTEMIC_FUSE": {
         "displayName": "Totemic Fuse",
-        "description": "Totemic Smash doubles in radius and deals extra damage but Totem lasts half as long.",
+        "description": "Totemic Smash deals +40% neutral, +90% earth, +90% thunder, and +60% fire damage at the cost of half of Totem's duration.",
         "abilities": [
             {
                 "class": "Shaman",
@@ -1072,7 +1088,7 @@
     },
     "FALLOUT": {
         "displayName": "Fallout",
-        "description": "Bomb Arrow's blast becomes giant. Damage, self-damage, and recoil are severely increased",
+        "description": "Bomb Arrow gains +7.5 range, +50% fire damage, severely increased recoil, and 25% neutral self-damage.",
         "abilities": [
             {
                 "class": "Archer",
@@ -1107,7 +1123,7 @@
     },
     "PARAGON": {
         "displayName": "Paragon",
-        "description": "Shield Strike deals 300% Neutral damage. Mantle of the Bovemist's cooldown is significantly reduced, but is limited to one shield charge.",
+        "description": "Shield Strike deals 300% Neutral damage. Mantle of the Bovemist's cooldown is reduced by 15s, but is limited to one shield charge.",
         "abilities": [
             {
                 "class": "Warrior",
@@ -1184,7 +1200,7 @@
     },
     "LAST_RESORT": {
         "displayName": "Last Resort",
-        "description": "Bloodlust has doubled corrupted scaling and knockback, but deals -50% Neutral and -30% Fire damage.",
+        "description": "Bloodlust has doubled corrupted scaling and knockback, but deals -100% Neutral and -60% Fire damage.",
         "abilities": [
             {
                 "class": "Warrior",
@@ -1265,7 +1281,7 @@
     },
     "FRENETIC_SPIRIT": {
         "displayName": "Frenetic Spirit",
-        "description": "Guardian Angels deal almost no damage, but shoots faster and expires much slower. Frenzy's cap is increased to 125%.",
+        "description": "Guardian Angels damage is set to 10%, but shoot 40% faster and last 5 times longer. Frenzy's cap is increased by 55.",
         "abilities": [
             {
                 "class": "Archer",
@@ -1335,7 +1351,7 @@
     },
     "TACKLE": {
         "displayName": "Tackle",
-        "description": "Flying Kick deals much more knockback and Collide deals much more damage on impact.",
+        "description": "Flying Kick deals much more knockback and increases Collide damage by an additional 150% neutral, 60% thunder, and 10% fire damage.",
         "abilities": [
             {
                 "class": "Warrior",
@@ -1389,7 +1405,7 @@
     },
     "EVERSHOT": {
         "displayName": "Evershot",
-        "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and damage per arrow",
+        "description": "Arrow Hurricane becomes a consistent, straight stream of arrows with a slower fire rate, dealing greater knockback and triple damage per arrow.",
         "abilities": [
             {
                 "class": "Archer",
@@ -1447,7 +1463,7 @@
     },
     "VEDETTE": {
         "displayName": "Vedette",
-        "description": "Focus is stronger, and caps at 2. Crepuscular Ray can be cast at 2 Focus with decreased Focus drain, launching you into the air and immobilizing you.",
+        "description": "Focus gets +10% damage per stack, but caps at 2. Crepuscular Ray can be cast at 2 Focus with decreased Focus drain, launching you into the air and immobilizing you.",
         "abilities": [
             {
                 "class": "Archer",
@@ -1464,7 +1480,7 @@
                             "name": "damMult.Focus"
                         },
                         "scaling": [
-                            25
+                            10
                         ],
                         "slider_max": 2
                     }
@@ -1555,7 +1571,7 @@
     },
     "FAUSTIAN_GAMBIT": {
         "displayName": "Faustian Gambit",
-        "description": "Frog Dance triggers only once but has increased vertical velocity, damage, and knockback.",
+        "description": "Frog Dance triggers once with increased vertical velocity and knockback, and deals +400% thunder damage.",
         "abilities": [
             {
                 "class": "Shaman",
@@ -1583,7 +1599,7 @@
     },
     "METHODICAL": {
         "displayName": "Methodical",
-        "description": "Initiator's reset time is reduced by 75%. Arrow Bomb deals less area damage, but more direct hit damage.",
+        "description": "Initiator's reset time is reduced by 75%. Arrow Bomb area damage is halved, but direct hit damage is doubled.",
         "abilities": [
             {
                 "class": "Archer",
@@ -1677,7 +1693,7 @@
         ]
     },
     "PIONEERS_ECHO": {
-        "displayName": "Pioneer’s Echo",
+        "displayName": "Pioneer's Echo",
         "description": "Phantom Ray deals two bursts of 150% neutral, 60% water damage over 1.1s. Decimator's increase and cap are raised to 100%.",
         "abilities": [
             {
@@ -1839,6 +1855,24 @@
                         }
                     ]
                 }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Satsujin"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:20.Single Inferno",
+                            "value": 100
+                        }
+                    ]
+                }]
             }
         ]
     },
@@ -1901,7 +1935,7 @@
                         {
                             "type": "stat",
                             "name": "defMult.Superconductor",
-                            "value": -15
+                            "value": -10
                         }
                     ]
                 }]
@@ -1941,17 +1975,214 @@
                         }
                     ]
                 }]
+            },
+            {
+                "class": "Assassin",
+                "base_abil": "Dash",
+                "dependencies": [
+                    "Satsujin"
+                ],
+                "effects": [{
+                    "type": "raw_stat",
+                    "toggle": "Activate Surprise Strike",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "damMult.Satsujin:20.Single Lightning Bolt",
+                            "value": 100
+                        }
+                    ]
+                }]
             }
         ]
     },
     "SCARCE_COMFORT": {
         "displayName": "Scarce Comfort",
-        "description": "When Generalist acts on Whirlwind Strike, it gains +30% lightning & air damage, and +3 radius. When it acts on Charge, it reduces the vertical velocity decay of Aerodynamics.",
-        "abilities": []
+        "description": "When Generalist acts on Whirlwind Strike, it gains +30% thunder & air damage, and +3 radius. When it acts on Charge, it reduces the vertical velocity decay of Aerodynamics.",
+        "abilities": [
+            {
+                "class": "Warrior",
+                "base_abil": "Uppercut",
+                "dependencies": [
+                    "Whirlwind Strike"
+                ],
+                "properties": {
+                    "range": 3
+                },
+                "effects": [                
+                    {
+                        "type": "add_spell_prop",
+                        "base_spell": 3,
+                        "target_part": "Uppercut",
+                        "multipliers": [0, 0, 30, 0, 0, 30]
+                    }
+                ]
+            }
+        ]
     },
     "BRACHIATE": {
         "displayName": "Brachiate",
         "description": "Grappling Hook has increased range and velocity, and no longer pulls mobs.",
+        "abilities": [
+            {
+                "class": "Archer",
+                "base_abil": "Escape",
+                "dependencies": [
+                    "Grappling Hook"
+                ],
+                "properties": { "range": 16 },
+                "effects": []
+            }
+        ]
+    },
+    "PHOENIXBORN": {
+        "displayName": "Phoenix-Born",
+        "description": "Health Regeneration is increased by 1% for every 1% Health missing.",
+        "abilities": []
+    },
+    "SUN_EATER": {
+        "displayName": "Sun Eater",
+        "description": "Failing to backstab an enemy from behind blinds them for 2s and slows them by 20% for 5s.",
+        "abilities": []
+    },
+    "SELFSUFFICIENT": {
+        "displayName": "Self-sufficient",
+        "description": "Powder Specials can no longer be charged manually, but accumulate 7% charge every second.",
+        "abilities": []
+    },
+    "ORBITAL_CHAIN": {
+        "displayName": "Orbital Chain",
+        "description": "Chain Lightning hits slower, rebounds, adds 6 chains, and pulls mobs closer for a 750% neutral damage explosion spell.",
+        "abilities": [
+            {
+                "class": "Any",
+                "base_abil": 999,
+                "effects": [{
+                    "type": "replace_spell",
+                    "name": "Orbital Chain",
+                    "base_spell": 21,
+                    "display": "Explosion Damage",
+                    "parts": [
+                        {
+                            "name": "Explosion Damage",
+                            "type": "damage",
+                            "multipliers": [
+                                750,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    ]
+                }]
+            }
+        ]
+    },
+    "FLASHFREEZE2": {
+        "displayName": "Flashfreeze2",
+        "description": "",
+        "hidden": true,
+        "abilities": []
+    },
+    "CANNULATE": {
+        "displayName": "Cannulate",
+        "description": "Sacrificial Shrine costs -5 Blood Pool to cast, but health drain is reduced by half.",
+        "abilities": []
+    },
+    "INTANGIBLE": {
+        "displayName": "Intangible",
+        "description": "The knockback you take is drastically reduced, and reflected damage deals large knockback.",
+        "abilities": []
+    },
+    "EARTHEN_SPLINTER": {
+        "displayName": "Earthen Splinter",
+        "description": "Quake channels nature energy into a powerful root, travelling underground and emerging under the nearest mob for 1200% neutral melee damage",
+        "abilities": [
+            {
+                "class": "Any",
+                "base_abil": 999,
+                "effects": [{
+                    "type": "replace_spell",
+                    "name": "Earthen Splinter",
+                    "base_spell": 22,
+                    "scaling": "melee",
+                    "use_atkspd": false,
+                    "display": "Quake Root Damage",
+                    "parts": [
+                        {
+                            "name": "Quake Root Damage",
+                            "type": "damage",
+                            "multipliers": [
+                                1200,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    ]
+                }]
+            }
+        ]
+    },
+    "TROLL_BARGE": {
+        "displayName": "Troll Barge",
+        "description": "Quake allows you to charge forth, dealing 80% neutral and 20% earth damage to any mobs hit, and ending with a powerful stomp for 400% neutral and 150% earth damage. This will leave you vulnerable.",
+        "abilities": [
+            {
+                "class": "Any",
+                "base_abil": 999,
+                "effects": [{
+                    "type": "replace_spell",
+                    "name": "Troll Barge",
+                    "base_spell": 22,
+                    "scaling": "melee",
+                    "use_atkspd": false,
+                    "display": "Total Damage",
+                    "parts": [
+                        {
+                            "name": "Quake Charge Damage",
+                            "type": "damage",
+                            "multipliers": [
+                                80,
+                                20,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        {
+                            "name": "Quake Stomp Damage",
+                            "type": "damage",
+                            "multipliers": [
+                                400,
+                                150,
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        {
+                            "name": "Total Damage",
+                            "type": "total",
+                            "hits": {
+                                "Quake Charge Damage": 1,
+                                "Quake Stomp Damage": 1
+                            }
+                        }
+                    ]
+                }]
+            }
+        ]
+    },
+    "COMBO_STOMP": {
+        "displayName": "Combo Stomp",
+        "description": "Landing directly on an enemy with Fierce Stomp sends you back into the air and resets Escape.",
         "abilities": []
     }
 }

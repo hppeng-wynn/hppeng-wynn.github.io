@@ -132,7 +132,8 @@ const translate_mappings = {
     "Weaken Enemy": "weakenEnemy",
     "Slow Enemy": "slowEnemy",
     "Max Mana": "maxMana",
-    "Main Attack Range": "mainAttackRange"
+    "Main Attack Range": "mainAttackRange",
+    "Release Order": "id"
 };
 
 const special_mappings = {
@@ -140,7 +141,8 @@ const special_mappings = {
     "Sum (Mana Sustain)": "mr/5+ms/3",
     "Sum (Life Sustain)": "hpr+ls",
     "Sum (Health + Health Bonus)": "hp+hpBonus",
-    "Base DPS": "(nDam+fDam+wDam+aDam+tDam+eDam) * atkspdmod(atkspd)",
+    "Base DPS (Pre-Powder)": "(nDam+fDam+wDam+aDam+tDam+eDam) * atkspdmod(atkspd)",
+    "Base DPS (Post-Powder)": "(nDam+fDam+wDam+aDam+tDam+eDam+powders*12.5) * atkspdmod(atkspd)",
     "Sum (Melee Damages Raw)": "mdRaw+rMdRaw+nMdRaw+eMdRaw+tMdRaw+wMdRaw+fMdRaw+aMdRaw",
     "Sum (Spell Damages Raw)": "sdRaw+rSdRaw+nSdRaw+eSdRaw+tSdRaw+wSdRaw+fSdRaw+aSdRaw",
     "Sum (All Damages Raw)": "damRaw+rDamRaw+nDamRaw+eDamRaw+tDamRaw+wDamRaw+fDamRaw+aDamRaw",

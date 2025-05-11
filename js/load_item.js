@@ -1,4 +1,4 @@
-const ITEM_DB_VERSION = 154;
+const ITEM_DB_VERSION = 162;
 
 let items;
 let sets = new Map();
@@ -214,7 +214,9 @@ const wynn_version_names = [
     '2.1.1.2',
     '2.1.1.3',
     '2.1.1.4',
-    '2.1.1.5'
+    '2.1.1.5',
+    '2.1.1.6',
+    '2.1.1.7'
 ];
 
 const WYNN_VERSION_LATEST = wynn_version_names.length - 1;
@@ -240,4 +242,21 @@ async function load_major_id_data(version_str) {
     let url = `${baseUrl}/data/${version_str}/majid.json`;
     MAJOR_IDS = await (await fetch(url)).json();
     console.log("Loaded major id data");
+}
+
+let ASPECTS = null;
+
+async function load_aspect_data(version_str) {
+    let getUrl = window.location;
+    let baseUrl = `${getUrl.protocol}//${getUrl.host}/`;
+    // No random string -- we want to use caching
+    let url = `${baseUrl}/data/${version_str}/aspects.json`;
+    try {
+        ASPECTS = await (await fetch(url)).json();
+        console.log("Loaded aspects data");
+    } catch (error) {
+        ASPECTS = null;
+        console.log("Could not load aspect data -- maybe an older version?");
+        console.log(error);
+    }
 }

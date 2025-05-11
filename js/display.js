@@ -37,7 +37,7 @@ function displaySetBonuses(parent_id,build) {
         
         const bonus = active_set.bonuses[count-1];
         let mock_item = new Map([["fixID", true],
-                                 ["displayName", setName+" Set: "+count+"/"+sets.get(setName).items.length]]);
+                                 ["displayName", setName+" Set: "+count+"/"+sets.get(setName).bonuses.length]]);
         let mock_minRolls = new Map();
         let mock_maxRolls = new Map();
         mock_item.set("minRolls", mock_minRolls);
@@ -117,20 +117,66 @@ function displayBuildStats(parent_id,build,command_group,stats){
                     style === "positive" ? style = "negative" : style = "positive"; 
                 }
                 displayFixedID(parent_div, id, id_val, elemental_format, style);
-                if (id === "ls" && id_val != 0) {
-                    let row = make_elem('div', ['row']);
-                    let value_elem = make_elem('div', ['col', 'text-end']);
+                if (id_val != 0) {
+                    if(id === "ls"){
+                        {
+                            let row = make_elem('div', ['row']);
+                            let value_elem = make_elem('div', ['col', 'text-end']);
 
-                    let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
+                            let prefix_elem = make_elem('b', [], {textContent: "\u279C Effective LS: "});
 
-                    let defStats = getDefenseStats(stats);
-                    let number_elem = make_elem('b', [style], {
-                        textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
-                    });
-                    value_elem.append(prefix_elem);
-                    value_elem.append(number_elem);
-                    row.appendChild(value_elem);
-                    parent_div.appendChild(row);
+                            let defStats = getDefenseStats(stats);
+                            let number_elem = make_elem('b', [style], {
+                                textContent: Math.round(defStats[1][0]*id_val/defStats[0]) + "/3s"
+                            });
+                            value_elem.append(prefix_elem);
+                            value_elem.append(number_elem);
+                            row.appendChild(value_elem);
+                            parent_div.appendChild(row);
+                        }
+                        {
+                            let row = make_elem('div', ['row']);
+                            let value_elem = make_elem('div', ['col', 'text-end']);
+        
+                            let prefix_elem = make_elem('b', [], {textContent: "\u279C Life per hit: "});
+        
+                            let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+                            if(adjAtkSpd > 6) {
+                                adjAtkSpd = 6;
+                            } else if(adjAtkSpd < 0) {
+                                adjAtkSpd = 0;
+                            }
+
+                            let number_elem = make_elem('b', [style], {
+                                textContent: Math.round(id_val/3.0/baseDamageMultiplier[adjAtkSpd])
+                            });
+                            value_elem.append(prefix_elem);
+                            value_elem.append(number_elem);
+                            row.appendChild(value_elem);
+                            parent_div.appendChild(row);
+                        }
+                    }
+                    else if (id == "ms"){
+                        let row = make_elem('div', ['row']);
+                        let value_elem = make_elem('div', ['col', 'text-end']);
+    
+                        let prefix_elem = make_elem('b', [], {textContent: "\u279C Mana per hit: "});
+    
+                        let adjAtkSpd = attackSpeeds.indexOf(stats.get("atkSpd")) + stats.get("atkTier");
+                        if(adjAtkSpd > 6) {
+                            adjAtkSpd = 6;
+                        } else if(adjAtkSpd < 0) {
+                            adjAtkSpd = 0;
+                        }
+
+                        let number_elem = make_elem('b', [style], {
+                            textContent: Math.round(id_val/3.0/baseDamageMultiplier[adjAtkSpd]*10)/10
+                        });
+                        value_elem.append(prefix_elem);
+                        value_elem.append(number_elem);
+                        row.appendChild(value_elem);
+                        parent_div.appendChild(row);
+                    }
                 }
                 last_command = command;
             }
@@ -226,7 +272,8 @@ function displayExpandedItem(item, parent_id){
                     for (let major_id_str of item.get(id)) {
                         if (major_id_str in MAJOR_IDS) {
                             let major_id_info = MAJOR_IDS[major_id_str];
-                            major_id_str = `+${major_id_info.displayName}: ${major_id_info.description}`;
+                            if(!MAJOR_IDS[major_id_str].hidden)
+                                major_id_str = `+${major_id_info.displayName}: ${major_id_info.description}`;
                         }
                         let p_elem = make_elem("div", ['col']);
 
@@ -856,6 +903,68 @@ function displayExpandedIngredient(ingred, parent_id) {
             parent_elem.appendChild(div);
         }
     }    
+}
+
+function displayExpandedSet(set_name, set_value, parent_id, shown_tier){
+    let display_commands = sq2_item_display_commands;
+
+    // Clear the parent div.
+    setHTML(parent_id, "");
+    let parent_div = document.getElementById(parent_id);
+    parent_div.classList.add("border", "border-2", "border-dark");
+    
+    let last_command;
+    let elemental_format = false;
+
+    for (let i = 0; i < display_commands.length; i++) {
+        const command = display_commands[i];
+        if (command.charAt(0) === "!") {
+            if (command === "!elemental") {
+                elemental_format = !elemental_format;
+            }
+            else if (command === "!spacer" && last_command !== "!spacer") {
+                let spacer = make_elem('div', ["row", "my-2"], {});
+                parent_div.appendChild(spacer);
+                last_command = command;
+                continue;
+            }
+        }
+        else {
+            let id = command;
+            let div = document.createElement("div");
+            div.classList.add("row");
+
+            if (command === "displayName") {
+                div.classList.add("box-title", "justify-content-center");
+                let title_elem = document.createElement("a");
+                title_elem.classList.add("col-auto", "text-center", "justify-content-center", "pr-1");
+                title_elem.textContent = set_name + " Set: " + (shown_tier + 1) + "/" + set_value.bonuses.length;
+                title_elem.href = "../items_adv/?f=set=\""+set_name+"\"";
+                div.appendChild(title_elem);
+            }
+            else if (nonRolledIDs.includes(id) || rolledIDs.includes(id)) {
+                if (set_value.bonuses[shown_tier] === undefined || set_value.bonuses[shown_tier][id] === undefined)
+                    continue;
+
+                let style = "positive";
+                if (set_value.bonuses[shown_tier][id] < 0) {
+                    style = "negative";
+                }
+                if(reversedIDs.includes(id)){
+                    style === "positive" ? style = "negative" : style = "positive"; 
+                }
+                p_elem = document.createElement("div");
+                p_elem.classList.add("col", "text-nowrap");
+                displayFixedID(p_elem, id, set_value.bonuses[shown_tier][id], elemental_format, style);
+                parent_div.appendChild(p_elem);
+                last_command = id;
+            }
+            parent_div.appendChild(div);
+        }
+    }
+    let change_tier = make_elem('button', ["button", "row", "row-cols-1", "rounded", "dark-5", "text-light", "fw-bold"], {textContent:"Next Tier"});
+    change_tier.onclick = function() {displayExpandedSet(set_name, set_value, parent_id, (shown_tier+1) % set_value.bonuses.length)};
+    parent_div.appendChild(change_tier);
 }
 
 function displayNextCosts(_stats, spell, spellIdx) { 

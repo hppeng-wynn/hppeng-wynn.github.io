@@ -81,7 +81,7 @@
         },
         {
             "display_name": "Cheaper Arrow Bomb",
-            "desc": "Reduce the Mana cost of Arrow Bomb.",
+            "desc": "Reduce the Mana cost of Arrow Bomb by 10.",
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Bow Proficiency"
@@ -297,7 +297,7 @@
         },
         {
             "display_name": "Cheaper Escape I",
-            "desc": "Reduce the Mana cost of Escape.",
+            "desc": "Reduce the Mana cost of Escape by 5.",
             "base_abil": "Escape",
             "parents": [
                 "Arrow Storm",
@@ -1159,7 +1159,7 @@
         },
         {
             "display_name": "Cheaper Arrow Storm I",
-            "desc": "Reduce the Mana cost of Arrow Storm.",
+            "desc": "Reduce the Mana cost of Arrow Storm by 5.",
             "base_abil": "Arrow Storm",
             "parents": [
                 "Implosion",
@@ -1486,7 +1486,7 @@
         },
         {
             "display_name": "Traveler",
-            "desc": "For every 1% Walk Speed you have from items, gain +1 Raw Spell Damage (Max 100)",
+            "desc": "For every 1% Walk Speed you have from items, gain +1 Raw Spell Damage (Max 100).",
             "parents": [
                 "Leap",
                 "Bouncing Bomb"
@@ -1560,7 +1560,7 @@
             "display": {
                 "row": 25,
                 "col": 6,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "vision": 12,
@@ -1694,7 +1694,7 @@
             "display": {
                 "row": 26,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {
                 "duration": 2
@@ -1833,7 +1833,7 @@
         },
         {
             "display_name": "Cheaper Arrow Shield I",
-            "desc": "Reduce the Mana cost of Arrow Shield.",
+            "desc": "Reduce the Mana cost of Arrow Shield by 5.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Fierce Stomp",
@@ -1991,7 +1991,7 @@
         },
         {
             "display_name": "Homing Shots",
-            "desc": "Your Main Attack arrows will follow nearby enemies and be unaffected by gravity",
+            "desc": "Your Main Attack arrows will follow nearby enemies and be unaffected by gravity.",
             "archetype": "Sharpshooter",
             "archetype_req": 2,
             "base_abil": 999,
@@ -2055,7 +2055,7 @@
         },
         {
             "display_name": "Cheaper Arrow Storm II",
-            "desc": "Reduce the Mana cost of Arrow Storm.",
+            "desc": "Reduce the Mana cost of Arrow Storm by 5.",
             "base_abil": "Arrow Storm",
             "parents": [
                 "Initiator",
@@ -2095,7 +2095,7 @@
             "display": {
                 "row": 31,
                 "col": 7,
-                "icon": "node_4"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": [
@@ -2211,7 +2211,7 @@
             "display": {
                 "row": 32,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "vision": 18,
@@ -2356,14 +2356,14 @@
             "display": {
                 "row": 34,
                 "col": 0,
-                "icon": "node_4"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
         },
         {
             "display_name": "Shrapnel Bomb",
-            "desc": "Arrow Bomb's explosion will fling 25 shrapnel, dealing damage in a large area",
+            "desc": "Arrow Bomb's explosion will fling 25 shrapnel, dealing damage in a large area.",
             "archetype": "Boltslinger",
             "archetype_req": 2,
             "base_abil": "Arrow Bomb",
@@ -2399,7 +2399,7 @@
         },
         {
             "display_name": "Cheaper Escape II",
-            "desc": "Reduce the Mana cost of Escape.",
+            "desc": "Reduce the Mana cost of Escape by 5.",
             "base_abil": "Escape",
             "parents": [
                 "Murder Flock",
@@ -2425,7 +2425,7 @@
         },
         {
             "display_name": "Cheaper Arrow Shield II",
-            "desc": "Reduce the Mana cost of Arrow Shield.",
+            "desc": "Reduce the Mana cost of Arrow Shield by 5.",
             "base_abil": "Arrow Shield",
             "parents": [
                 "Phasing Beam",
@@ -2866,7 +2866,7 @@
         },
         {
             "display_name": "More Focus II",
-            "desc": "Add +2 max Focus",
+            "desc": "Add +2 max Focus.",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
@@ -2903,7 +2903,7 @@
         },
         {
             "display_name": "Ghostly Trigger",
-            "desc": "While mid-air after using Escape, Twain's Arc will fire immediately upon using your Main Attack",
+            "desc": "While mid-air after using Escape, Twain's Arc will fire immediately upon using your Main Attack.",
             "archetype": "Sharpshooter",
             "archetype_req": 0,
             "base_abil": "Focus",
@@ -3030,7 +3030,7 @@
         },
         {
             "display_name": "Cheaper Arrow Bomb II",
-            "desc": "Reduce the Mana cost of Arrow Bomb.",
+            "desc": "Reduce the Mana cost of Arrow Bomb by 5.",
             "base_abil": "Arrow Bomb",
             "parents": [
                 "Grape Bomb",
@@ -3135,7 +3135,7 @@
         },
         {
             "display_name": "Cheaper Bash",
-            "desc": "Reduce the Mana cost of Bash",
+            "desc": "Reduce the Mana cost of Bash by 10.",
             "base_abil": "Bash",
             "parents": [
                 "Spear Proficiency 1"
@@ -3317,7 +3317,7 @@
         },
         {
             "display_name": "Tougher Skin",
-            "desc": "Harden your skin and become permanently +5% more resistant. For every 1% or 1 Raw Heath Regen you have from items, gain +10 Health (Max 100)",
+            "desc": "Harden your skin and become permanently +5% more resistant. For every 1% or 1 Raw Health Regen you have from items, gain +10 Health (Max 100)",
             "archetype": "Paladin",
             "archetype_req": 0,
             "parents": [
@@ -3422,7 +3422,7 @@
         },
         {
             "display_name": "Cheaper Charge",
-            "desc": "Reduce the Mana cost of Charge",
+            "desc": "Reduce the Mana cost of Charge by 5.",
             "base_abil": "Charge",
             "parents": [
                 "Uppercut",
@@ -3706,7 +3706,7 @@
 
         {
             "display_name": "Half-Moon Swipe",
-            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle.",
+            "desc": "Uppercut will deal a footsweep attack at a longer and wider angle. Reduces the Mana cost of Uppercut by 5.",
             "archetype": "Battle Monk", 
             "archetype_req": 1, 
             "base_abil": "Uppercut",
@@ -3717,7 +3717,7 @@
             "display": {
                 "row": 13,
                 "col": 4,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
                 "range": 1.5,
@@ -3892,7 +3892,7 @@
         },
         {
             "display_name": "Mantle of the Bovemists",
-            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits. (25s cooldown)",
+            "desc": "When casting War Scream, create a holy shield around you that reduces all incoming damage by 70% for 3 hits. (20s cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 3, 
             "parents": ["Iron Lungs"], 
@@ -3974,7 +3974,7 @@
         },
         {
             "display_name": "Cheaper Uppercut",
-            "desc": "Reduce the Mana Cost of Uppercut",
+            "desc": "Reduce the Mana Cost of Uppercut by 5.",
             "base_abil": "Uppercut",
             "parents": ["Spear Proficiency II", "Aerodynamics", "Air Shout", "Generalist"],
             "dependencies": [], 
@@ -4026,9 +4026,7 @@
                 "col": 4,
                 "icon": "node_2"
             },
-            "properties": {
-                "chance": 30
-            },
+            "properties": {},
             "effects": [
                 {
                     "type": "replace_spell",
@@ -4039,6 +4037,16 @@
                         {
                             "name": "Counter Damage",
                             "multipliers": [60, 0, 20, 0, 0, 20]
+                        }
+                    ]
+                },
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "agiDef",
+                            "value": 3
                         }
                     ]
                 }
@@ -4142,7 +4150,7 @@
             "display": {
                 "row": 20,
                 "col": 3,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {
             },
@@ -4163,13 +4171,11 @@
             ]  
         },
         {
-            "display_name": "Blessed Bulwark",
-            "desc": "Add +2 additional charges to Mantle of the Bovemists. Reduce its cooldown by 5s.",
-            "archetype": "Paladin", 
-            "archetype_req": 0, 
-            "base_abil": "Mantle of the Bovemists",
+            "display_name": "Cheaper Bash II",
+            "desc": "Reduce the Mana cost of Bash by 5.",
+            "base_abil": "Bash",
             "parents": ["Rejuvenating Skin", "Cleansing Breeze"], 
-            "dependencies": ["Mantle of the Bovemists"], 
+            "dependencies": [], 
             "blockers": [],
             "cost": 1, 
             "display": {
@@ -4177,17 +4183,21 @@
                 "col": 8,
                 "icon": "node_0"
             },
-            "properties": {
-                "charges": 2
-            },
-            "effects": []  
+            "properties": {},
+            "effects": [
+                {
+                    "type": "add_spell_prop",
+                    "base_spell": 1,
+                    "cost": -5
+                }
+            ]  
         },
         {
             "display_name": "Sacred Surge",
             "desc": "Gain the ability to unleash a Sacred Surge. Whenever any of your spells or abilities are triggered, increase your holy power by 1%. Bash and Uppercut will spend 25% of Sacred Surge to smite enemies with holy energy, dealing extra damage.",
             "archetype": "Paladin", 
             "archetype_req": 5, 
-            "parents": ["Blessed Bulwark", "Cleansing Breeze"], 
+            "parents": ["Cheaper Bash II", "Cleansing Breeze"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4256,7 +4266,7 @@
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": 80,
+                    "max": 65,
                     "scaling": [1.5]
                 }
             ]
@@ -4264,7 +4274,6 @@
         {
             "display_name": "Riposte",
             "desc": "Increase your chance to attack with Counter by +30%",
-            "base_abil": "Counter",
             "parents": ["Crushing Blow", "Flying Kick"], 
             "dependencies": ["Counter"], 
             "blockers": [],
@@ -4275,10 +4284,18 @@
                 "icon": "node_0"
             },
             "properties": {},
-            "effects": [{
-                "type": "raw_stat",
-                "bonuses": [ {"type": "prop", "abil": "Counter", "name": "chance", "value": 30} ]
-            }]
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "bonuses": [
+                        {
+                            "type": "stat",
+                            "name": "agiDef",
+                            "value": 3
+                        }
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Exhilarate",
@@ -4297,7 +4314,7 @@
         },
         {
             "display_name": "Cheaper War Scream I",
-            "desc": "Reduce the Mana cost of War Scream",
+            "desc": "Reduce the Mana cost of War Scream by 5.",
             "base_abil": "War Scream",
             "parents": ["Crushing Blow", "Flying Kick", "Cleansing Breeze"],
             "dependencies": [], 
@@ -4322,7 +4339,7 @@
             "desc": "Charge will cleanse you of all negative effects and fire, as well as any allies you pass through. (3s Cooldown)",
             "archetype": "Paladin", 
             "archetype_req": 0, 
-            "parents": ["Cheaper War Scream I", "Blessed Bulwark"], 
+            "parents": ["Cheaper War Scream I", "Cheaper Bash II"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 1, 
@@ -4504,7 +4521,7 @@
             "display": {
                 "row": 26,
                 "col": 0,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -4617,7 +4634,7 @@
 
         {
             "display_name": "Armour Breaker",
-            "desc": "While Corrupted, losing 30% Health will make your next Uppercut destroy enemies' defense, rendering them weaker to damage",
+            "desc": "While Corrupted, losing 30% Health will make your next Uppercut destroy enemies' defense, rendering them weaker to damage (12s cooldown).",
             "archetype": "Fallen", 
             "archetype_req": 0, 
             "base_abil": "Uppercut",
@@ -4643,7 +4660,7 @@
         },
         {
             "display_name": "Shield Strike",
-            "desc": "When your Mantle of the Bovemist loses all charges, deal damage around you for each Mantle individually lost",
+            "desc": "You gain a broken mantle whenever Mantle of the Bovemist loses a charge. Hitting an enemy with Bash sends all broken mantles at them, dealing damage to nearby enemies.",
             "archetype": "Paladin", 
             "archetype_req": 0,
             "base_abil": "Mantle of the Bovemists",
@@ -4662,11 +4679,17 @@
                     "type": "replace_spell",
                     "name": "Shield Strike",
                     "base_spell": 6,
-                    "display": "Damage per Shield",
+                    "display": "Total Damage",
                     "parts": [
                         {
                             "name": "Damage per Shield",
-                            "multipliers": [70, 0, 0, 0, 30, 0]
+                            "multipliers": [90, 0, 0, 0, 30, 0]
+                        },
+                        {
+                            "name": "Total Damage",
+                            "hits": {
+                                "Damage per Shield": "Mantle of the Bovemists.charges"
+                            }
                         }
                     ]
                 }
@@ -4696,6 +4719,11 @@
                         {
                             "type": "stat",
                             "name": "damMult.Luster Purge:0.Melee",
+                            "value": 40
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Luster Purge:0.Powder Special",
                             "value": 40
                         }
                     ]
@@ -4807,7 +4835,7 @@
         },
         {
             "display_name": "Spirit of the Rabbit",
-            "desc": "Reduce the Mana cost of Charge and increase your Walk Speed by +20%",
+            "desc": "Reduce the Mana cost of Charge by 5 and increase your Walk Speed by +20%",
             "archetype": "Battle Monk", 
             "archetype_req": 5, 
             "base_abil": "Charge",
@@ -4835,11 +4863,11 @@
         },
         {
             "display_name": "Provoke",
-            "desc": "Mobs damaged by War Scream will target only you for at least 8s (10s cooldown). Reduce the Mana cost of War Scream",
+            "desc": "Mobs damaged by War Scream will target only you for at least 8s (15s cooldown). Reduce the Mana cost of War Scream by 5.",
             "archetype": "Paladin",
             "archetype_req": 5,
             "base_abil": "War Scream",
-            "parents": ["Spirit of the Rabbit", "Cheaper Bash II"], 
+            "parents": ["Spirit of the Rabbit", "Blessed Bulwark"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4888,7 +4916,7 @@
             "display": {
                 "row": 29,
                 "col": 3,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -4907,7 +4935,7 @@
             "archetype": "Paladin", 
             "archetype_req": 3, 
             "base_abil": "Bash",
-            "parents": ["Cheaper Bash II"], 
+            "parents": ["Blessed Bulwark"], 
             "dependencies": [], 
             "blockers": [],
             "cost": 2, 
@@ -4921,13 +4949,14 @@
             },
             "effects": []  
         },
-
         {
-            "display_name": "Cheaper Bash II",
-            "desc": "Reduce the Mana cost of Bash",
-            "base_abil": "Bash",
+            "display_name": "Blessed Bulwark",
+            "desc": "Add +2 additional charges to Mantle of the Bovemists.",
+            "archetype": "Paladin", 
+            "archetype_req": 0, 
+            "base_abil": "Mantle of the Bovemists",
             "parents": ["Luster Purge", "Sparkling Hope", "Provoke"], 
-            "dependencies": [], 
+            "dependencies": ["Mantle of the Bovemists"], 
             "blockers": [],
             "cost": 1, 
             "display": {
@@ -4935,18 +4964,14 @@
                 "col": 7,
                 "icon": "node_0"
             },
-            "properties": {},
-            "effects": [
-                {
-                    "type": "add_spell_prop",
-                    "base_spell": 1,
-                    "cost": -5
-                }
-            ]  
+            "properties": {
+                "charges": 2
+            },
+            "effects": []  
         },
         {
             "display_name": "Cheaper War Scream II",
-            "desc": "Reduce the Mana cost of War Scream",
+            "desc": "Reduce the Mana cost of War Scream by 5.",
             "base_abil": "War Scream",
             "parents": ["Massive Bash"], 
             "dependencies": [], 
@@ -4968,7 +4993,7 @@
         },
         {
             "display_name": "Overwhelming Rage",
-            "desc": "Increases the cap of Enraged Blow by +60%.",
+            "desc": "Increases the cap of Enraged Blow by +50%.",
             "base_abil": "Bak'al's Grasp",
             "parents": ["Cheaper War Scream II"], 
             "dependencies": ["Bak'al's Grasp"], 
@@ -4990,7 +5015,7 @@
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": -80,
+                    "max": -65,
                     "scaling": [-1.5]
                 },
                 {
@@ -5001,7 +5026,7 @@
                         "type": "stat",
                         "name": "damMult.Enraged" 
                     },
-                    "max": 140,
+                    "max": 115,
                     "scaling": [1.5]
                 }
             ]
@@ -5053,7 +5078,7 @@
             "display": {
                 "row": 32,
                 "col": 5,
-                "icon": "node_2"
+                "icon": "node_4"
             },
             "properties": {},
             "effects": [
@@ -5115,7 +5140,7 @@
             "desc": "Increases the damage of Sacred Surge",
             "archetype": "Paladin", 
             "archetype_req": 9, 
-            "parents": ["Cheaper Bash II", "Cyclone"], 
+            "parents": ["Blessed Bulwark", "Cyclone"], 
             "dependencies": [ "Sacred Surge" ], 
             "blockers": [],
             "cost": 1, 
@@ -5218,7 +5243,7 @@
 
         {
             "display_name": "Cheaper Uppercut 2",
-            "desc": "Reduce the Mana cost of Uppercut",
+            "desc": "Reduce the Mana cost of Uppercut by 5.",
             "base_abil": "Uppercut",
             "parents": ["Heavenly Trumpet", "Brink of Madness"], 
             "dependencies": [], 
@@ -5276,7 +5301,7 @@
             "display": {
                 "row": 34,
                 "col": 2,
-                "icon": "node_1"
+                "icon": "node_0"
             },
             "properties": {},
             "effects": [
@@ -5368,7 +5393,7 @@
         },
         {
             "display_name": "Cheaper Meteor",
-            "desc": "Reduce the Mana cost of Meteor.",
+            "desc": "Reduce the Mana cost of Meteor by 10.",
             "base_abil": "Meteor",
             "parents": [
                 "Wand Proficiency I"
@@ -5565,7 +5590,7 @@
         },
         {
             "display_name": "Cheaper Teleport",
-            "desc": "Reduce the Mana cost of Teleport.",
+            "desc": "Reduce the Mana cost of Teleport by 5.",
             "base_abil": "Teleport",
             "parents": [
                 "Heal",
@@ -5619,10 +5644,10 @@
                         {
                             "name": "Ice Snake Damage",
                             "multipliers": [
-                                70,
+                                120,
                                 0,
                                 0,
-                                30,
+                                55,
                                 0,
                                 0
                             ]
@@ -6211,7 +6236,7 @@
         },
         {
             "display_name": "Cheaper Heal",
-            "desc": "Reduce the Mana cost of Heal.",
+            "desc": "Reduce the Mana cost of Heal by 5.",
             "base_abil": "Heal",
             "parents": [
                 "Windsweeper",
@@ -6278,7 +6303,7 @@
                     "type": "add_spell_prop",
                     "target_part": "Ice Snake Damage",
                     "base_spell": 4,
-                    "multipliers": [20, 0, 0, 10, 0, 0]
+                    "multipliers": [25, 0, 0, 15, 0, 0]
                 }
             ]
         },
@@ -6425,7 +6450,7 @@
         },
         {
             "display_name": "Cheaper Ice Snake",
-            "desc": "Reduce the Mana cost of Ice Snake.",
+            "desc": "Reduce the Mana cost of Ice Snake by 5.",
             "base_abil": "Ice Snake",
             "parents": [
                 "Eye Piercer",
@@ -6473,7 +6498,7 @@
         },
         {
             "display_name": "Cheaper Teleport II",
-            "desc": "Reduce the Mana cost of Teleport.",
+            "desc": "Reduce the Mana cost of Teleport by 5.",
             "base_abil": "Teleport",
             "parents": [
                 "Fortitude",
@@ -6559,7 +6584,7 @@
             "display": {
                 "row": 21,
                 "col": 1,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": [
@@ -6902,7 +6927,7 @@
             "display": {
                 "row": 23,
                 "col": 6,
-                "icon": "node_0"
+                "icon": "node_1"
             },
             "properties": {
                 "duration": 4
@@ -7115,7 +7140,7 @@
         },
         {
             "display_name": "Cheaper Ice Snake II",
-            "desc": "Reduce the Mana cost of Ice Snake.",
+            "desc": "Reduce the Mana cost of Ice Snake by 5.",
             "base_abil": "Ice Snake",
             "parents": [
                 "Diffusion",
@@ -7185,7 +7210,7 @@
         },
         {
             "display_name": "Cheaper Meteor II",
-            "desc": "Reduce the Mana cost of Meteor.",
+            "desc": "Reduce the Mana cost of Meteor by 5.",
             "base_abil": "Meteor",
             "parents": [
                 "Explosive Entrance",
@@ -7262,7 +7287,7 @@
         },
         {
             "display_name": "Gust",
-            "desc": "Ice Snake will add +1 Winded to enemies and deal more damage.",
+            "desc": "Ice Snake will add +3 Winded to enemies and deal more damage.",
             "base_abil": "Ice Snake",
             "archetype": "Riftwalker",
             "archetype_req": 5,
@@ -7287,7 +7312,7 @@
                     "type": "add_spell_prop",
                     "target_part": "Ice Snake Damage",
                     "base_spell": 4,
-                    "multipliers": [20, 0, 0, 0, 0, 20]
+                    "multipliers": [15, 0, 0, 0, 0, 15]
                 }
             ]
         },
@@ -7650,7 +7675,7 @@
         },
         {
             "display_name": "Cheaper Heal II",
-            "desc": "Reduce the Mana cost of Heal.",
+            "desc": "Reduce the Mana cost of Heal by 5.",
             "base_abil": "Heal",
             "parents": [
                 "Timelock",
@@ -7794,7 +7819,7 @@
         },
         {
             "display_name": "Cheaper Spin Attack",
-            "desc": "Reduce the Mana cost of Spin Attack.",
+            "desc": "Reduce the Mana cost of Spin Attack by 10.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
@@ -8047,7 +8072,7 @@
         },
         {
             "display_name": "Cheaper Dash",
-            "desc": "Reduce the Mana cost of Dash",
+            "desc": "Reduce the Mana cost of Dash by 5.",
             "base_abil": "Dash",
             "parents": [
                 "Smoke Bomb",
@@ -8320,7 +8345,7 @@
         },
         {
             "display_name": "Backstab",
-            "desc": "Makes Multihit a single devastating hit. If you strike an enemy from behind, it deals double the damage.",
+            "desc": "Makes Multihit a single devastating hit. If you strike an enemy from behind, it deals double the damage. Reduce the Mana cost of Multihit by 5.",
             "archetype": "Shadestepper",
             "archetype_req": 2,
             "base_abil": "Multihit",
@@ -8804,7 +8829,7 @@
         },
         {
             "display_name": "Cheaper Multihit I",
-            "desc": "Increase your Main Attack's range and add +5 raw damage to all attacks",
+            "desc": "Reduce the Mana cost of Multihit by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Multihit",
@@ -8876,7 +8901,7 @@
         },
         {
             "display_name": "Cheaper Smoke Bomb",
-            "desc": "Reduce the Mana cost of Smoke Bomb",
+            "desc": "Reduce the Mana cost of Smoke Bomb by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -8942,7 +8967,7 @@
         },
         {
             "display_name": "Weightless",
-            "desc": "You gain +1.2 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
+            "desc": "You gain +1 Mana if you hit an enemy while airborne. (1.25+ blocks off the ground to be airborne)",
             "archetype": "Acrobat",
             "archetype_req": 3,
             "parents": [
@@ -9017,7 +9042,7 @@
             "display": {
                 "row": 16,
                 "col": 7,
-                "icon": "node_1"
+                "icon": "node_2"
             },
             "properties": {},
             "effects": []
@@ -9464,7 +9489,7 @@
         },
         {
             "display_name": "Cheaper Dash II",
-            "desc": "Reduce the Mana cost of Dash",
+            "desc": "Reduce the Mana cost of Dash by 5.",
             "base_abil": "Dash",
             "parents": [
                 "Echo",
@@ -9521,7 +9546,7 @@
         },
         {
             "display_name": "Cheaper Spin Attack II",
-            "desc": "Reduce the Mana cost of Spin Attack",
+            "desc": "Reduce the Mana cost of Spin Attack by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Spin Attack",
@@ -9572,7 +9597,7 @@
         },
         {
             "display_name": "Cheaper Multihit II",
-            "desc": "Reduce the Mana cost of Multihit",
+            "desc": "Reduce the Mana cost of Multihit by 5.",
             "base_abil": "Multihit",
             "parents": [
                 "Death Magnet",
@@ -9789,7 +9814,7 @@
         },
         {
             "display_name": "Cheaper Smoke Bomb II",
-            "desc": "Reduce the Mana cost of Smoke Bomb",
+            "desc": "Reduce the Mana cost of Smoke Bomb by 5.",
             "archetype": "",
             "archetype_req": 0,
             "base_abil": "Smoke Bomb",
@@ -10018,7 +10043,7 @@
         },
         {
             "display_name": "Jasmine Bloom",
-            "desc": "After spending 40 Mana or gaining 2 Momentum, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
+            "desc": "After spending 40 Mana or gaining 3 Momentum, an area underneath you blooms and damages enemies below it every 0.3s. The duration is reset and the radius is increased after every bloom. (Max 10 blocks)",
             "archetype": "Acrobat",
             "archetype_req": 12,
             "parents": [
@@ -10034,6 +10059,16 @@
             },
             "properties": {},
             "effects": [
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Momentum",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Momentum:7.Jasmine Bloom Explosion"
+                    },
+                    "scaling": [25]
+                },
                 {
                     "type": "replace_spell",
                     "name": "Jasmine Bloom",
@@ -10055,28 +10090,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "display_name": "Cloudstepper",
-            "desc": "Weightless will grant +0.6 more mana.",
-            "archetype": "",
-            "archetype_req": 0,
-            "base_abil": "Weightless",
-            "parents": [
-                "Jasmine Bloom"
-            ],
-            "dependencies": [
-                "Weightless"
-            ],
-            "blockers": [],
-            "cost": 1,
-            "display": {
-                "row": 40,
-                "col": 8,
-                "icon": "node_0"
-            },
-            "properties": {},
-            "effects": []
         },
         {
             "display_name": "Devour",
@@ -10269,7 +10282,7 @@
         },
         {
             "display_name": "Swan Dive",
-            "desc": "Landing 30 hits against an enemy while mid-air grants you +1 Momentum (Max 5). Stomp consumes Momentum for +25% damage per stack. At 3 Momentum, Stomp releases an explosion & Dash's downward velocity increases.",
+            "desc": "Landing 30 hits against an enemy while mid-air grants you +1 Momentum (Max 5). Stomp consumes Momentum for +25% damage per stack. At 1 Momentum, Stomp releases an explosion & Dash's downward velocity increases.",
             "archetype": "Acrobat",
             "archetype_req": 6,
             "parents": [
@@ -10293,7 +10306,7 @@
                     "slider_name": "Momentum",
                     "output": {
                         "type": "stat",
-                        "name": "damMult.Swan Dive:9.Stomp Damage"
+                        "name": "damMult.Momentum:10.Swan Dive Explosion"
                     },
                     "slider_max": 5,
                     "scaling": [25]
@@ -10419,7 +10432,7 @@
         },
         {
             "display_name": "Cheaper Totem I",
-            "desc": "Reduce the Mana cost of Totem.",
+            "desc": "Reduce the Mana cost of Totem by 10.",
             "base_abil": "Totem",
             "parents": ["Relik Proficiency 1"],
             "dependencies": ["Totem"],
@@ -10580,7 +10593,7 @@
         },
         {
             "display_name": "Cheaper Haul I",
-            "desc": "Reduce the Mana cost of Haul.",
+            "desc": "Reduce the Mana cost of Haul by 5.",
             "base_abil": "Haul",
             "parents": [
                 "Uproot",
@@ -11201,14 +11214,14 @@
             "display": {
                 "row": 17,
                 "col": 0,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
         },
         {
             "display_name": "Cheaper Aura I",
-            "desc": "Reduce the Mana cost of Aura.",
+            "desc": "Reduce the Mana cost of Aura by 5.",
             "base_abil": "Aura",
             "parents": ["Stagnation", "Cheaper Uproot I"],
             "dependencies": ["Aura"],
@@ -11228,7 +11241,7 @@
         },
         {
             "display_name": "Cheaper Uproot I",
-            "desc": "Reduce the Mana cost of Uproot.",
+            "desc": "Reduce the Mana cost of Uproot by 5.",
             "base_abil": "Uproot",
             "parents": ["Cheaper Aura I", "Mask of the Lunatic", "Rebound", "Hymn of Hate"],
             "dependencies": ["Uproot"],
@@ -11377,11 +11390,11 @@
             "parents": ["Rebound"],
             "dependencies": ["Haul"],
             "blockers": [],
-            "cost": 2,
+            "cost": 1,
             "display": {
                 "row": 18,
                 "col": 8,
-                "icon": "node_2"
+                "icon": "node_1"
             },
             "properties": {},
             "effects": []
@@ -11595,7 +11608,7 @@
                     "type": "add_spell_prop",
                     "base_spell": 4,
                     "target_part": "Single Hit",
-                    "multipliers": [ -10, 0, 5, 0, 0, 0 ]
+                    "multipliers": [ -5, 0, 5, 0, 0, 0 ]
                 },
                 {
                   "type": "add_spell_prop",
@@ -11695,7 +11708,7 @@
         },
         {
             "display_name": "Cheaper Totem II",
-            "desc": "Reduce the Mana cost of Totem.",
+            "desc": "Reduce the Mana cost of Totem by 5.",
             "base_abil": "Totem",
             "parents": ["More Puppets II", "Double Totem", "Storm Dance"],
             "dependencies": ["Totem"],
@@ -11772,7 +11785,7 @@
         },
         {
             "display_name": "Cheaper Haul II",
-            "desc": "Reduce the Mana cost of Haul.",
+            "desc": "Reduce the Mana cost of Haul by 5.",
             "base_abil": "Haul",
             "parents": [
                 "Storm Dance",
@@ -11795,7 +11808,7 @@
         },
         {
             "display_name": "Cheaper Aura II",
-            "desc": "Reduce the Mana cost of Aura.",
+            "desc": "Reduce the Mana cost of Aura by 5.",
             "base_abil": "Aura",
             "parents": [
                 "Crimson Effigy",
@@ -12051,7 +12064,7 @@
         },
         {
             "display_name": "Eldritch Call",
-            "desc": "Casting Totem while holding shift will spend 30 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and -20% weakness. Bleeding enemies will take x2 damage from the tentacles.",
+            "desc": "Casting Totem while holding shift will spend 30 Blood Pool per Totem to set all Totem durations to 8s, fabricating 4 tentacles that strike and apply +40% slowness and +20% vulnerability. Bleeding enemies will take x2 damage from the tentacles.",
             "archetype": "Acolyte",
             "archetype_req": 7,
             "parents": [
@@ -12076,11 +12089,11 @@
                     "parts": [
                         {
                             "name": "Single Hit",
-                            "multipliers": [ 320, 0, 50, 0, 0, 50 ] 
+                            "multipliers": [ 640, 0, 100, 0, 100, 0 ] 
                         },
                         {
                             "name": "Damage per Totem",
-                            "hits": { "Single Hit": 3 }
+                            "hits": { "Single Hit": 4 }
                         },
                         {
                             "name": "DPS",
@@ -12094,12 +12107,17 @@
                 },
                 {
                     "type": "raw_stat",
-                    "toggle": "Activate Bleeding",
+                    "toggle": "Activate Eldritch Call",
                     "bonuses": [
                         {
                             "type": "stat",
-                            "name": "damMult.Eldritch Call:11.Single Hit",
+                            "name": "damMult.Eldritch Call:9.Bleeding Tick",
                             "value": 100
+                        },
+                        {
+                            "type": "stat",
+                            "name": "damMult.Eldritch Call",
+                            "value": 20
                         }
                     ]
                 }
@@ -12245,7 +12263,7 @@
         },
         {
             "display_name": "Sanguine Strike",
-            "desc": "Greatly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.5s per beam.",
+            "desc": "Greatly reduce Main Attack spread. Your Main Attack will now inflict enemies with Bleeding for +0.25s per beam.",
             "parents": ["Blood Rite", "Chant of the Heretic"],
             "dependencies": [],
             "blockers": [],
@@ -12401,7 +12419,9 @@
                     "toggle": "Invigorate Puppets",
                     "bonuses": [
                         { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 0.6 },
-                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 0.6 }
+                        { "type": "prop", "abil": "Crimson Effigy", "name": "attack_frequency", "value": 0.6 },
+                        { "type": "prop", "abil": "Hummingbirds' Song", "name": "attack_frequency", "value": 1.2 },
+                        { "type": "prop", "abil": "Totem", "name": "rate", "value": -0.12 }
                     ]
                 }
             ]
@@ -12552,7 +12572,7 @@
         },
         {
             "display_name": "Commander",
-            "desc": "Casting Uproot while holding shift will rally all puppets, giving them +25% attack speed and improved accuracy. Main attack deals 3% more damage per rallied puppet.",
+            "desc": "Casting Uproot while holding shift will rally all puppets, giving them +25% attack speed and improved accuracy. Main attack deals +3% more damage per rallied puppet.",
             "archetype": "Summoner",
             "archetype_req": 4,
             "parents": ["Cheaper Aura II"],
@@ -12565,7 +12585,27 @@
                 "icon": "node_4"
             },
             "properties": {},
-            "effects": []
+            "effects": [
+                {
+                    "type": "raw_stat",
+                    "toggle": "Commander",
+                    "bonuses": [
+                        { "type": "prop", "abil": "Puppet Master", "name": "attack_frequency", "value": 0.5 }
+                    ]
+                },
+                {
+                    "type": "stat_scaling",
+                    "slider": true,
+                    "slider_name": "Active Puppets",
+                    "output": {
+                        "type": "stat",
+                        "name": "damMult.Commander:0.Single Beam"
+                    },
+                    "scaling": [
+                        3
+                    ]
+                }
+            ]
         },
         {
             "display_name": "Soaring Wingbeats",
@@ -12616,7 +12656,8 @@
                 "icon": "node_3"
             },
             "properties": {
-                "count": 2
+                "count": 2,
+                "attack_frequency": 4
             },
             "effects": [
                 {
@@ -12631,7 +12672,7 @@
                         },
                         {
                             "name": "Single Hummingbird DPS",
-                            "hits": { "Hummingbird Hit": 4 }
+                            "hits": { "Hummingbird Hit": "Hummingbirds' Song.attack_frequency" }
                         },
                         {
                             "name": "Total Hummingbird DPS",
@@ -12758,7 +12799,7 @@
         },
         {
             "display_name": "Cheaper Uproot II",
-            "desc": "Reduce the Mana cost of Uproot.",
+            "desc": "Reduce the Mana cost of Uproot by 5.",
             "base_abil": "Uproot",
             "parents": ["Soaring Wingbeats", "Awakened"],
             "dependencies": ["Uproot"],

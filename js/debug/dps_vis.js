@@ -80,8 +80,14 @@ let baseline_x = [];
 let baseline_y = [];
 
 let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.split('/')[1];
-(async function() {
-    dps_data = await (await fetch(baseUrl + "/dps_data_compress.json")).json();
+wynn_version_id = 0;
+
+async function plotData() {
+    if(isNaN(wynn_version_id) || wynn_version_id > WYNN_VERSION_LATEST || wynn_version_id < 0){
+        wynn_version_id = 0;
+    }
+    
+    dps_data = await (await fetch(baseUrl + "/data/" + wynn_version_names[wynn_version_id] + "/" + "dps_data.json")).json();
 
     dps_getter_func = d => d[4];
     current_data = dps_data.wand;
@@ -93,7 +99,13 @@ let baseUrl = getUrl.protocol + "//" + getUrl.host + "/";// + getUrl.pathname.sp
             redraw(current_data);
       });
     redraw(current_data);
-}) ();
+}
+plotData();
+
+let versionDropdown = document.getElementById("versionDropdown");
+for(let i = 0; i < wynn_version_names.length; i++){
+    versionDropdown.append(make_elem('option', [], {value: i, label: wynn_version_names[i]}));
+}
 
 let colorMap = new Map(
     [
@@ -275,4 +287,9 @@ function togglePowder() {
     d3.select("#powderToggle").text("prepowder ("+prepowder+")");
     setGetterFunc();
     redraw(current_data);
+}
+
+function changeVersion(){
+    wynn_version_id = document.getElementById("versionDropdown").value;
+    plotData();
 }
