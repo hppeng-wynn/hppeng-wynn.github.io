@@ -224,7 +224,8 @@ function calculateSpellDamage(stats, weapon, _conversions, use_spell_damage, ign
         total_dam_crit[1] += res[3];
     }
 
-    return [total_dam_norm, total_dam_crit, damages_results];
+    let finalMultipliers = conversions.map(function(x) {return x * damage_mult})
+    return [total_dam_norm, total_dam_crit, damages_results, finalMultipliers];
 }
 
 /*

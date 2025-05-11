@@ -227,13 +227,25 @@ with open(major_ids_filename, 'r') as major_ids_file:
     major_ids_map = json.load(major_ids_file)
     major_ids_reverse_map = { v['displayName'] : k for k, v in major_ids_map.items() }
 
+replace_strings = {
+    "\ue005": "[neutral]", # Neutral just says "Damage"
+    "\ue004": "[water]", # Water
+    "\ue003": "[thunder]", # Thunder
+    "\ue002": "[fire]", # Fire
+    "\ue001": "[earth]", # Earth
+    "\ue000": "[air]", # Air
+}
+
 for item in items:
     # NOTE: HACKY ITEM FIXES!
     if 'majorIds' in item:
         majorIds = []
         for majid_name, majid_desc in item['majorIds'].items():
+            desc = re.sub('<[^<]+?>', '', majid_desc).split(':', 2)[1].strip()
+            for k, v in replace_strings.items():
+                desc = re.sub(k, v, desc)
+
             if majid_name not in major_ids_reverse_map:
-                desc = re.sub('<[^<]+?>', '', majid_desc).split(':', 2)[1].strip()
                 caps_name = majid_name.upper().replace(' ', '_')
                 caps_name = re.sub('[^0-9A-Z_]', '', caps_name)
                 major_ids_map[caps_name] = {
@@ -243,6 +255,8 @@ for item in items:
                 }
                 print(f'New Major ID: {majid_name} ({caps_name})')
                 major_ids_reverse_map[majid_name] = caps_name
+            else:
+                major_ids_map[major_ids_reverse_map[majid_name]]['description'] = desc
             majorIds.append(major_ids_reverse_map[majid_name])
         item['majorIds'] = majorIds
     if item['tier'] == 'Common':
@@ -301,7 +315,7 @@ with open("../tome_map.json","w") as tome_map_file:
 with open('item_out.json', "w") as out_file:
     json.dump(old_data, out_file, ensure_ascii=False, separators=(',', ':'))
 
-with open('majid_out.json', 'w') as major_ids_outfile:
+with open('../js/builder/major_ids_clean.json', 'w') as major_ids_outfile:
     json.dump(major_ids_map, major_ids_outfile, ensure_ascii=False, indent=4)
 
 with open('ing_out.json', "w") as out_file:

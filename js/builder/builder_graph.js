@@ -613,6 +613,8 @@ class SpellDamageCalcNode extends ComputeNode {
                     crit_min: results[2].map(x => x[2]),
                     crit_max: results[2].map(x => x[3]),
                     crit_total: results[1],
+                    is_spell: use_spell,
+                    multipliers: results[3]
                 }
             } else if ('power' in part) {
                 // TODO: wynn2 formula
@@ -641,9 +643,10 @@ class SpellDamageCalcNode extends ComputeNode {
                     crit_min: [0, 0, 0, 0, 0, 0],
                     crit_max: [0, 0, 0, 0, 0, 0],
                     crit_total: [0, 0],
-                    heal_amount: 0
+                    heal_amount: 0,
+                    multipliers: [0, 0, 0, 0, 0, 0]
                 }
-                const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total'];
+                const dam_res_keys = ['normal_min', 'normal_max', 'normal_total', 'crit_min', 'crit_max', 'crit_total', 'multipliers'];
                 for (const [subpart_name, hits] of Object.entries(part.hits)) {
                     const subpart = eval_part(subpart_name);
                     if (!subpart) { continue; }

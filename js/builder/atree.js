@@ -845,7 +845,7 @@ const atree_render_active = new (class extends ComputeNode {
             active_tooltip.append(make_elem('b', ['scaled-font'], { innerHTML: abil.display_name }));
 
             for (const desc of abil.desc) {
-                active_tooltip.append(make_elem('p', ['scaled-font-sm', 'my-0', 'mx-1', 'text-wrap'], { textContent: desc }));
+                active_tooltip.append(make_elem('p', ['scaled-font-sm', 'my-0', 'mx-1', 'text-wrap'], { innerHTML: desc }));
             }
             ret_map.set(abil.id, active_tooltip);
 
