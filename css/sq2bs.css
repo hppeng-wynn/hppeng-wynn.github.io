@@ -112,6 +112,22 @@ input.equipment-input:not(.is-invalid) {
     border-color: rgba(33, 37, 41, 1) !important;
 }
 
+input.aspect-input {
+    font-weight: bold;
+    background-color: hsl(0, 0%, 21%) !important;
+    border-radius: 0.375rem !important;
+    min-height: calc(1.2 * var(--scaled-fontsize) + 2px);
+    padding: 0rem 0.5rem;
+    font-size: var(--scaled-fontsize);
+    --bs-gutter-y: 1rem;
+    --bs-gutter-x: 0rem;
+    border: 0
+}
+
+input.aspect-input:not(.is-invalid) {
+    border-color: rgba(33, 37, 41, 1) !important;
+}
+
 .my-container {
     position: fixed; /* Stay in place */
     left: var(--sidebar-width);
@@ -559,21 +575,28 @@ a:hover {
 .aspect-image-Legendary {
     background-image: url('../media/items/aspects.png');
     image-rendering: pixelated;
-    background-size: 500% 100%;
-    background-position: 100% 0;
+    background-size: 600% 100%;
+    background-position: 80% 0;
     aspect-ratio: 1/1;
 }
 .aspect-image-Fabled {
     background-image: url('../media/items/aspects.png');
     image-rendering: pixelated;
-    background-size: 500% 100%;
+    background-size: 600% 100%;
     background-position: 0% 0;
     aspect-ratio: 1/1;
 }
 .aspect-image-Mythic {
     background-image: url('../media/items/aspects.png');
     image-rendering: pixelated;
-    background-size: 500% 100%;
-    background-position: 25% 0;
+    background-size: 600% 100%;
+    background-position: 20% 0;
+    aspect-ratio: 1/1;
+}
+.aspect-image-None{
+    background-image: url('../media/items/aspects.png');
+    image-rendering: pixelated;
+    background-size: 600% 100%;
+    background-position: 100% 0;
     aspect-ratio: 1/1;
 }

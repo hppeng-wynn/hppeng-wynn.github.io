@@ -50,7 +50,7 @@ class AspectAutocompleteInitNode extends ComputeNode {
  */
 class AspectInputNode extends InputNode {
     compute_func(input_map) {
-        if (this.input_field.value === "") return none_aspect;
+        if (this.input_field.value === "" || active_aspects === null) return none_aspect;
         return active_aspects.get(this.input_field.value);
     }
 }
@@ -110,11 +110,14 @@ class AspectInputDisplayNode extends ComputeNode {
     compute_func(input_map) {
         const aspect = input_map.get("aspect-spec");
         this.input_field.classList.remove(...aspect_tiers); 
-        this.image_div.classList.remove(...["aspect-image-Legendary", "aspect-image-Fabled", "aspect-image-Mythic", "Legendary-shadow", "Fabled-shadow", "Mythic-shadow"]);
+        this.image_div.classList.remove(...["aspect-image-Legendary", "aspect-image-Fabled", "aspect-image-Mythic", "aspect-image-None", "Legendary-shadow", "Fabled-shadow", "Mythic-shadow"]);
         if (aspect && !aspect.NONE) { 
             this.input_field.classList.add(aspect.tier); 
             this.image_div.classList.add("aspect-image-" + aspect.tier);
             this.image_div.classList.add(aspect.tier + "-shadow");
+        }
+        else {
+            this.image_div.classList.add("aspect-image-None");
         }
     }
 }
